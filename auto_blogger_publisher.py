@@ -236,23 +236,23 @@ JSON-LD URL INTEGRITY VERIFICATION:
 {json.dumps(json_ld, indent=2)}
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {{
   var metaDesc = document.querySelector('meta[name="description"]');
-  if (!metaDesc) {
+  if (!metaDesc) {{
     metaDesc = document.createElement("meta");
     metaDesc.name = "description";
     document.head.appendChild(metaDesc);
-  }
+  }}
   metaDesc.content = "{meta_desc}";
   
   var ogDesc = document.querySelector('meta[property="og:description"]');
-  if (!ogDesc) {
+  if (!ogDesc) {{
     ogDesc = document.createElement("meta");
     ogDesc.setAttribute("property", "og:description");
     document.head.appendChild(ogDesc);
-  }
+  }}
   ogDesc.content = "{meta_desc}";
-});
+}});
 </script>
 
 <style>
