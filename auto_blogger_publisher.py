@@ -1,3 +1,54 @@
+
+from PIL import Image, ImageDraw
+import io
+import base64
+
+def generate_hero_image_base64(title, category):
+    w, h = 960, 520
+    img = Image.new("RGB", (w, h), color="#241610")
+    draw = ImageDraw.Draw(img)
+    
+    # Elegant double border matching blog theme
+    draw.rectangle([18, 18, w-18, h-18], outline="#EADCC8", width=2)
+    draw.rectangle([28, 28, w-28, h-28], outline="#BC5B33", width=1)
+    
+    # Top badge
+    draw.rectangle([45, 45, 380, 85], fill="#BC5B33")
+    draw.text((60, 56), "FINANCE BY CA KUSHAL", fill="#FFFDF8")
+    
+    # Category tag
+    draw.text((45, 115), f"FORENSIC ARCHITECTURE · {category.upper()}", fill="#EADCC8")
+    
+    # Center accent bar
+    draw.rectangle([45, 160, 120, 164], fill="#BC5B33")
+    
+    # Title display
+    # Wrap title if long
+    words = title.split()
+    lines = []
+    cur = ""
+    for word in words:
+        if len(cur + " " + word) < 38:
+            cur = (cur + " " + word).strip()
+        else:
+            lines.append(cur)
+            cur = word
+    if cur:
+        lines.append(cur)
+        
+    y = 200
+    for line in lines[:3]:
+        draw.text((45, y), line, fill="#FFFDF8")
+        y += 40
+        
+    # Footer metadata
+    draw.line([(45, h-90), (w-45, h-90)], fill="#7A6A58", width=1)
+    draw.text((45, h-70), "GLOBAL FINANCIAL INTEGRITY · 2026 STATUTORY COMPLIANCE BENCHMARK", fill="#7A6A58")
+    
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG", quality=85)
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
+
 import csv
 import json
 import os
@@ -208,6 +259,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
 
     svg_diag1 = generate_svg_diagram_1(title, category)
     svg_diag2 = generate_svg_diagram_2()
+    hero_b64 = generate_hero_image_base64(title, category)
 
     # Clean HTML conforming strictly to blog aesthetics, animations, and standards
     html = f"""<!--
@@ -501,11 +553,8 @@ document.addEventListener("DOMContentLoaded", function() {{
   </header>
 
   <figure class="kushal-hero-figure" style="margin: 24px 0 32px; text-align: center;">
-    <div style="background: linear-gradient(135deg, #241610 0%, #3D2214 50%, #BC5B33 100%); border-radius: 8px; padding: 40px 24px; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3); border: 1px solid #EADCC8;">
-      <div style="font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.2vw, 36px); color: #F8F0E3; font-weight: 700; line-height: 1.25; margin-bottom: 12px;">{title}</div>
-      <div style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F6E3D3;">Forensic Financial Architecture · {category}</div>
-    </div>
-    <figcaption style="font-size: 12.5px; color: #7A6A58; margin-top: 10px; font-style: italic;">Figure 1.0: Editorial Hero Illustration — Forensic Strategic Model for {title}</figcaption>
+    <img src="data:image/jpeg;base64,{hero_b64}" alt="Figure 1.0: Editorial Hero Illustration — {title}" width="960" height="520" loading="eager" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #EADCC8; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3);" />
+    <figcaption style="font-size: 12.5px; color: #7A6A58; margin-top: 10px; font-style: italic;">Figure 1.0: Editorial Hero Illustration — Strategic Model for {title}</figcaption>
   </figure>
 
 
