@@ -1,0 +1,46 @@
+name: Autonomous Blogger Daily Publishing Engine (5x Daily)
+
+on:
+  schedule:
+    # 5 Daily Publishing Times in IST (UTC+5:30)
+    - cron: '30 2 * * *'   # 08:00 AM IST (Slot 1: Morning Commute & Asian Market Open)
+    - cron: '0 6 * * *'    # 11:30 AM IST (Slot 2: Mid-Morning Deep Dive)
+    - cron: '0 9 * * *'    # 02:30 PM IST (Slot 3: Afternoon Case Study)
+    - cron: '15 12 * * *'  # 05:45 PM IST (Slot 4: Market Close & US Morning)
+    - cron: '0 15 * * *'   # 08:30 PM IST (Slot 5: Prime-Time Reader's Digest)
+  workflow_dispatch:      # Allows manual trigger anytime for testing
+
+jobs:
+  publish_next_article:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2 pillow matplotlib beautifulsoup4
+
+      - name: Run Autonomous Blogger Publisher
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          python auto_blogger_publisher.py
+
+      - name: Commit Publishing Tracker Log
+        run: |
+          git config --global user.name "CA Kushal Autonomous Bot"
+          git config --global user.email "bot@financebycakushal.blogspot.com"
+          git add published_tracker.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-published next scheduled article [$(date -u)]" && git push)
