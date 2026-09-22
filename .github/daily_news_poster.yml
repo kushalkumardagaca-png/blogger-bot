@@ -1,0 +1,61 @@
+name: Daily News Publisher - 20 Independent Slots
+
+on:
+  schedule:
+    # Every hour from 08:00 IST through 03:00 IST, next day.
+    - cron: '30 2 * * *'   # 08:00 IST Global News
+    - cron: '30 3 * * *'   # 09:00 IST US
+    - cron: '30 4 * * *'   # 10:00 IST China
+    - cron: '30 5 * * *'   # 11:00 IST Germany
+    - cron: '30 6 * * *'   # 12:00 IST India
+    - cron: '30 7 * * *'   # 13:00 IST Japan
+    - cron: '30 8 * * *'   # 14:00 IST UK
+    - cron: '30 9 * * *'   # 15:00 IST France
+    - cron: '30 10 * * *'  # 16:00 IST Italy
+    - cron: '30 11 * * *'  # 17:00 IST Russia
+    - cron: '30 12 * * *'  # 18:00 IST Canada
+    - cron: '30 13 * * *'  # 19:00 IST Brazil
+    - cron: '30 14 * * *'  # 20:00 IST Spain
+    - cron: '30 15 * * *'  # 21:00 IST Mexico
+    - cron: '30 16 * * *'  # 22:00 IST Australia
+    - cron: '30 17 * * *'  # 23:00 IST South Korea
+    - cron: '30 18 * * *'  # 00:00 IST Market and Trading
+    - cron: '30 19 * * *'  # 01:00 IST Economy and Macro Policy
+    - cron: '30 20 * * *'  # 02:00 IST Corporate Finance and Industry
+    - cron: '30 21 * * *'  # 03:00 IST Personal Finance
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-news-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish-daily-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Blogger dependencies
+        run: python -m pip install google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2
+      - name: Create and publish the current topic article
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python auto_news_publisher.py
+      - name: Save only the Daily News tracker
+        run: |
+          git config user.name "CA Kushal Daily News Bot"
+          git config user.email "bot@financebycakushal.blogspot.com"
+          git add daily_news_tracker.json
+          git diff --cached --quiet || (git commit -m "Track Daily News slot [$(date -u +%F-%H%M)]" && git push)
