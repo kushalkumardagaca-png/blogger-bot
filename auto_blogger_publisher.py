@@ -235,6 +235,25 @@ JSON-LD URL INTEGRITY VERIFICATION:
 <script type="application/ld+json">
 {json.dumps(json_ld, indent=2)}
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) {
+    metaDesc = document.createElement("meta");
+    metaDesc.name = "description";
+    document.head.appendChild(metaDesc);
+  }
+  metaDesc.content = "{meta_desc}";
+  
+  var ogDesc = document.querySelector('meta[property="og:description"]');
+  if (!ogDesc) {
+    ogDesc = document.createElement("meta");
+    ogDesc.setAttribute("property", "og:description");
+    document.head.appendChild(ogDesc);
+  }
+  ogDesc.content = "{meta_desc}";
+});
+</script>
 
 <style>
 :root {{
@@ -480,6 +499,15 @@ JSON-LD URL INTEGRITY VERIFICATION:
     <h1 class="kushal-title">{title}</h1>
     <p class="kushal-lead">{desc}</p>
   </header>
+
+  <figure class="kushal-hero-figure" style="margin: 24px 0 32px; text-align: center;">
+    <div style="background: linear-gradient(135deg, #241610 0%, #3D2214 50%, #BC5B33 100%); border-radius: 8px; padding: 40px 24px; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3); border: 1px solid #EADCC8;">
+      <div style="font-family: 'Playfair Display', serif; font-size: clamp(24px, 3.2vw, 36px); color: #F8F0E3; font-weight: 700; line-height: 1.25; margin-bottom: 12px;">{title}</div>
+      <div style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F6E3D3;">Forensic Financial Architecture · {category}</div>
+    </div>
+    <figcaption style="font-size: 12.5px; color: #7A6A58; margin-top: 10px; font-style: italic;">Figure 1.0: Editorial Hero Illustration — Forensic Strategic Model for {title}</figcaption>
+  </figure>
+
 
   <div class="kushal-stat-grid">
     <div class="kushal-stat-card">
