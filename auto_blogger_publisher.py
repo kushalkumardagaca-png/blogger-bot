@@ -3,51 +3,62 @@ from PIL import Image, ImageDraw
 import io
 import base64
 
-def generate_hero_image_base64(title, category):
-    w, h = 960, 520
-    img = Image.new("RGB", (w, h), color="#241610")
-    draw = ImageDraw.Draw(img)
-    
-    # Elegant double border matching blog theme
-    draw.rectangle([18, 18, w-18, h-18], outline="#EADCC8", width=2)
-    draw.rectangle([28, 28, w-28, h-28], outline="#BC5B33", width=1)
-    
-    # Top badge
-    draw.rectangle([45, 45, 380, 85], fill="#BC5B33")
-    draw.text((60, 56), "FINANCE BY CA KUSHAL", fill="#FFFDF8")
-    
-    # Category tag
-    draw.text((45, 115), f"FORENSIC ARCHITECTURE · {category.upper()}", fill="#EADCC8")
-    
-    # Center accent bar
-    draw.rectangle([45, 160, 120, 164], fill="#BC5B33")
-    
-    # Title display
-    # Wrap title if long
-    words = title.split()
-    lines = []
-    cur = ""
-    for word in words:
-        if len(cur + " " + word) < 38:
-            cur = (cur + " " + word).strip()
-        else:
-            lines.append(cur)
-            cur = word
-    if cur:
-        lines.append(cur)
-        
-    y = 200
-    for line in lines[:3]:
-        draw.text((45, y), line, fill="#FFFDF8")
-        y += 40
-        
-    # Footer metadata
-    draw.line([(45, h-90), (w-45, h-90)], fill="#7A6A58", width=1)
-    draw.text((45, h-70), "GLOBAL FINANCIAL INTEGRITY · 2026 STATUTORY COMPLIANCE BENCHMARK", fill="#7A6A58")
-    
-    buf = io.BytesIO()
-    img.save(buf, format="JPEG", quality=85)
-    return base64.b64encode(buf.getvalue()).decode("utf-8")
+import io
+import base64
+import urllib.request
+from PIL import Image, ImageOps
+
+CATEGORY_PHOTOS = {
+    "Contrarian Hooks": "photo-1518186285589-2f7649de83e0",
+    "Age and Wealth Milestones": "photo-1434030216411-0b793f4b4173",
+    "Passive Income Reality": "photo-1486406146926-c627a92ad1ab",
+    "Middle Class Survival": "photo-1526304640581-d334cdbbf45e",
+    "Money Audits and Case Studies": "photo-1454165804606-c3d57bc86b40",
+    "Housing Cars and Big Buys": "photo-1503376780353-7e6692767b70",
+    "Automation and Money Systems": "photo-1518770660439-4636190af475",
+    "Credit Debt and Optimization": "photo-1563013544-824ae1b704d3",
+    "AI Fintech and Future Money": "photo-1618005182384-a83a8bd57fbe",
+    "Money Psychology and Mindset": "photo-1506126613408-eca07ce68773",
+    "Investing Strategies": "photo-1611974789855-9c2a0a7236a3",
+    "Retirement Pensions and FIRE": "photo-1532619675605-1ede6c2ed2b0",
+    "Taxes and Account Optimization": "photo-1554224155-8d04cb21cd6c",
+    "Career Salary and Raises": "photo-1573496359142-b8d87734a5a2",
+    "Side Hustles That Work": "photo-1522202176988-66273c2fd55f",
+    "Insurance and Protection": "photo-1450133064473-71024230f91b",
+    "Couples Family and Kids": "photo-1516589178581-6cd7833ae3b2",
+    "Starters Students and First Jobs": "photo-1523240795612-9a054b0db644",
+    "Spending Lifestyle and Frugality": "photo-1559526324-4b87b5e36e44",
+    "Rich Habits vs Broke Habits": "photo-1507679799987-c73779587ccf",
+    "Recessions Crashes and Defense": "photo-1590283603385-17ffb3a7f29f",
+    "Cash Savings and Emergency Funds": "photo-1579621970563-ebec7560ff3e",
+    "Real Estate Investing": "photo-1560518883-ce09059eeffa",
+    "Myths Scams and Bad Advice": "photo-1563986768609-322da13575f3",
+    "2026 Money Moves": "photo-1460925895917-afdab827c52f"
+}
+
+def generate_hero_image_figure(title, category):
+    photo_id = CATEGORY_PHOTOS.get(category, "photo-1611974789855-9c2a0a7236a3")
+    url = f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=900&h=506&q=85"
+    img_src = url
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            data = resp.read()
+            im = Image.open(io.BytesIO(data))
+            if im.mode in ("RGBA", "P"):
+                im = im.convert("RGB")
+            fitted = ImageOps.fit(im, (900, 506), method=Image.Resampling.LANCZOS)
+            buf = io.BytesIO()
+            fitted.save(buf, format="JPEG", quality=85, optimize=True)
+            b64_str = base64.b64encode(buf.getvalue()).decode("utf-8")
+            img_src = f"data:image/jpeg;base64,{b64_str}"
+    except Exception as e:
+        print(f"Network photo fetch note: {e}, falling back to direct CDN URL")
+
+    return f"""  <figure class="kushal-hero-figure" style="margin: 24px 0 32px; text-align: center;">
+    <img src="{img_src}" alt="Figure 1.0: Editorial Photography — {title}" width="900" height="506" loading="eager" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #EADCC8; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3);" />
+    <figcaption style="font-size: 12.5px; color: #7A6A58; margin-top: 10px; font-style: italic;">Figure 1.0: Editorial Photography — Forensic Strategic Framework for {title}</figcaption>
+  </figure>"""
 
 import csv
 import json
@@ -259,7 +270,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
 
     svg_diag1 = generate_svg_diagram_1(title, category)
     svg_diag2 = generate_svg_diagram_2()
-    hero_b64 = generate_hero_image_base64(title, category)
+    hero_figure = generate_hero_image_figure(title, category)
 
     # Clean HTML conforming strictly to blog aesthetics, animations, and standards
     html = f"""<!--
@@ -552,10 +563,7 @@ document.addEventListener("DOMContentLoaded", function() {{
     <p class="kushal-lead">{desc}</p>
   </header>
 
-  <figure class="kushal-hero-figure" style="margin: 24px 0 32px; text-align: center;">
-    <img src="data:image/jpeg;base64,{hero_b64}" alt="Figure 1.0: Editorial Hero Illustration — {title}" width="960" height="520" loading="eager" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #EADCC8; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3);" />
-    <figcaption style="font-size: 12.5px; color: #7A6A58; margin-top: 10px; font-style: italic;">Figure 1.0: Editorial Hero Illustration — Strategic Model for {title}</figcaption>
-  </figure>
+{hero_figure}
 
 
   <div class="kushal-stat-grid">
