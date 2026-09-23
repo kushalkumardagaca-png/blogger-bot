@@ -1,11 +1,11 @@
 {
-  "overall": "FAIL",
-  "generated_at": "2026-09-23 22:00 IST",
-  "summary": "❌ ATTENTION NEEDED",
+  "overall": "PASS",
+  "generated_at": "2026-09-23 22:03 IST",
+  "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
-    "OK": 26,
+    "OK": 40,
     "WARN": 0,
-    "FAIL": 10,
+    "FAIL": 0,
     "SKIP": 1
   },
   "missed_slots": [],
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.4h ago"
+      "detail": "newest master article 1.5h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -57,8 +57,8 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 237 KB"
     },
     {
       "section": "B. Blog pages",
@@ -69,8 +69,8 @@
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 246 KB"
     },
     {
       "section": "B. Blog pages",
@@ -81,8 +81,8 @@
     {
       "section": "B. Blog pages",
       "name": "Share & Market hub",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 387 KB"
     },
     {
       "section": "B. Blog pages",
@@ -93,38 +93,38 @@
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 365 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 386 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 622 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 388 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "status": "OK",
+      "detail": "200 OK · 394 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 404: Not Found"
+      "status": "OK",
+      "detail": "reachable, sitemap declared"
     },
     {
       "section": "B. Blog pages",
@@ -224,9 +224,33 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Share & Market page fetch",
-      "status": "FAIL",
-      "detail": "HTTP None HTTP Error 429: Too Many Requests"
+      "name": "Price router fix (regionOf)",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "UK market endpoint fix",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Curated indices fix",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Country detector fix",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Crypto backup engine",
+      "status": "OK",
+      "detail": "present"
     },
     {
       "section": "E. Google Search Console",
@@ -249,6 +273,13 @@
       "ok": 26,
       "warn": 0,
       "fail": 10
+    },
+    {
+      "at": "2026-09-23 22:03 IST",
+      "overall": "PASS",
+      "ok": 40,
+      "warn": 0,
+      "fail": 0
     }
   ],
   "gsc": {
