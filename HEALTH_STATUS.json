@@ -1,11 +1,11 @@
 {
-  "overall": "PASS",
-  "generated_at": "2026-09-23 22:03 IST",
-  "summary": "✅ ALL SYSTEMS OPERATIONAL",
+  "overall": "FAIL",
+  "generated_at": "2026-09-23 22:04 IST",
+  "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 40,
+    "OK": 39,
     "WARN": 0,
-    "FAIL": 0,
+    "FAIL": 1,
     "SKIP": 1
   },
   "missed_slots": [],
@@ -57,8 +57,8 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 237 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
@@ -280,6 +280,13 @@
       "ok": 40,
       "warn": 0,
       "fail": 0
+    },
+    {
+      "at": "2026-09-23 22:04 IST",
+      "overall": "FAIL",
+      "ok": 39,
+      "warn": 0,
+      "fail": 1
     }
   ],
   "gsc": {

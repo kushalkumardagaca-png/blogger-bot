@@ -1,8 +1,8 @@
 # 🩺 Blog Health Report — Finance by CA Kushal
 
-**Checked:** 2026-09-23 22:03 IST · **Overall:** ✅ ALL SYSTEMS OPERATIONAL
+**Checked:** 2026-09-23 22:04 IST · **Overall:** ❌ ATTENTION NEEDED
 
-**Scoreboard:** 40 OK · 0 warnings · 0 failures · 1 skipped
+**Scoreboard:** 39 OK · 0 warnings · 1 failures · 1 skipped
 
 
 ## A. Publishing engine
@@ -21,7 +21,7 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ✅ OK | 200 OK · 237 KB |
+| Homepage | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
 | Daily Article hub | ✅ OK | 200 OK · 346 KB |
 | Daily News hub | ✅ OK | 200 OK · 246 KB |
 | Calculator hub | ✅ OK | 200 OK · 377 KB |
