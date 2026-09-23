@@ -1,7 +1,5 @@
 import os
 import sys
-from datetime import datetime, timedelta
-import pytz
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
