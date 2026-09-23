@@ -1,19 +1,19 @@
 # 🩺 Blog Health Report — Finance by CA Kushal
 
-**Checked:** 2026-09-23 21:31 IST · **Overall:** ✅ ALL SYSTEMS OPERATIONAL
+**Checked:** 2026-09-23 22:00 IST · **Overall:** ❌ ATTENTION NEEDED
 
-**Scoreboard:** 40 OK · 0 warnings · 0 failures
+**Scoreboard:** 26 OK · 0 warnings · 10 failures · 1 skipped
 
 
 ## A. Publishing engine
 
 | Component | Status | Detail |
 |---|---|---|
-| Blogger feed reachable | ✅ OK | 11 recent posts |
-| Daily publishing slots | ✅ OK | 4 slot(s) due so far today — all published; 5 master articles + 5 news roundups today |
+| Blogger feed reachable | ✅ OK | 7 recent posts |
+| Daily publishing slots | ✅ OK | 5 slot(s) due so far today — all published; 5 master articles + 1 news roundups today |
 | No duplicate articles today | ✅ OK | all unique |
 | Newest master article quality | ✅ OK | 2229 words, hero image + schema OK (What Quiet Rich People Do on Payday) |
-| Publishing freshness | ✅ OK | newest master article 0.9h ago |
+| Publishing freshness | ✅ OK | newest master article 1.4h ago |
 | Topic tracker state | ✅ OK | next topic #20, 10 published, last at 2026-09-23 15:04 UTC |
 | Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
 
@@ -21,19 +21,19 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ✅ OK | 200 OK · 238 KB |
-| Daily Article hub | ✅ OK | 200 OK · 347 KB |
-| Daily News hub | ✅ OK | 200 OK · 247 KB |
-| Calculator hub | ✅ OK | 200 OK · 378 KB |
-| Share & Market hub | ✅ OK | 200 OK · 388 KB |
+| Homepage | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| Daily Article hub | ✅ OK | 200 OK · 346 KB |
+| Daily News hub | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| Calculator hub | ✅ OK | 200 OK · 377 KB |
+| Share & Market hub | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
 | Money Atlas hub | ✅ OK | 200 OK · 307 KB |
-| For Corporate hub | ✅ OK | 200 OK · 365 KB |
-| About Us | ✅ OK | 200 OK · 387 KB |
-| Contact Us | ✅ OK | 200 OK · 623 KB |
-| Disclaimer | ✅ OK | 200 OK · 389 KB |
-| Privacy Policy | ✅ OK | 200 OK · 394 KB |
-| robots.txt | ✅ OK | reachable, sitemap declared |
-| sitemap.xml | ✅ OK | 26 URLs indexed |
+| For Corporate hub | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| About Us | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| Contact Us | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| Disclaimer | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| Privacy Policy | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+| robots.txt | ❌ FAIL | HTTP None HTTP Error 404: Not Found |
+| sitemap.xml | ✅ OK | 21 URLs indexed |
 
 ## C. Market data
 
@@ -59,11 +59,13 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Price router fix (regionOf) | ✅ OK | present |
-| UK market endpoint fix | ✅ OK | present |
-| Curated indices fix | ✅ OK | present |
-| Country detector fix | ✅ OK | present |
-| Crypto backup engine | ✅ OK | present |
+| Share & Market page fetch | ❌ FAIL | HTTP None HTTP Error 429: Too Many Requests |
+
+## E. Google Search Console
+
+| Component | Status | Detail |
+|---|---|---|
+| Search Console automation | ⏭️ SKIP | awaiting one-time owner authorization — everything else runs normally |
 
 ---
 *Auto-checked every 4 hours by the blog health watchdog. This file is machine-written — no human action required.*

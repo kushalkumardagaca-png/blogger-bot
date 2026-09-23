@@ -1,12 +1,12 @@
 {
-  "overall": "PASS",
-  "generated_at": "2026-09-23 21:31 IST",
-  "summary": "✅ ALL SYSTEMS OPERATIONAL",
+  "overall": "FAIL",
+  "generated_at": "2026-09-23 22:00 IST",
+  "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 40,
+    "OK": 26,
     "WARN": 0,
-    "FAIL": 0,
-    "SKIP": 0
+    "FAIL": 10,
+    "SKIP": 1
   },
   "missed_slots": [],
   "auto_heal_actions": [],
@@ -16,13 +16,13 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "11 recent posts"
+      "detail": "7 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "4 slot(s) due so far today — all published; 5 master articles + 5 news roundups today"
+      "detail": "5 slot(s) due so far today — all published; 5 master articles + 1 news roundups today"
     },
     {
       "section": "A. Publishing engine",
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 0.9h ago"
+      "detail": "newest master article 1.4h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -57,32 +57,32 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 238 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
       "status": "OK",
-      "detail": "200 OK · 347 KB"
+      "detail": "200 OK · 346 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "OK",
-      "detail": "200 OK · 247 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 378 KB"
+      "detail": "200 OK · 377 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Share & Market hub",
-      "status": "OK",
-      "detail": "200 OK · 388 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
@@ -93,44 +93,44 @@
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "OK",
-      "detail": "200 OK · 365 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 387 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "OK",
-      "detail": "200 OK · 623 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "OK",
-      "detail": "200 OK · 389 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "OK",
-      "detail": "200 OK · 394 KB"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "OK",
-      "detail": "reachable, sitemap declared"
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 404: Not Found"
     },
     {
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "26 URLs indexed"
+      "detail": "21 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -224,33 +224,15 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Price router fix (regionOf)",
-      "status": "OK",
-      "detail": "present"
+      "name": "Share & Market page fetch",
+      "status": "FAIL",
+      "detail": "HTTP None HTTP Error 429: Too Many Requests"
     },
     {
-      "section": "D. Page integrity",
-      "name": "UK market endpoint fix",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Curated indices fix",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Country detector fix",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Crypto backup engine",
-      "status": "OK",
-      "detail": "present"
+      "section": "E. Google Search Console",
+      "name": "Search Console automation",
+      "status": "SKIP",
+      "detail": "awaiting one-time owner authorization — everything else runs normally"
     }
   ],
   "history": [
@@ -260,6 +242,17 @@
       "ok": 40,
       "warn": 0,
       "fail": 0
+    },
+    {
+      "at": "2026-09-23 22:00 IST",
+      "overall": "FAIL",
+      "ok": 26,
+      "warn": 0,
+      "fail": 10
     }
-  ]
+  ],
+  "gsc": {
+    "latest": null,
+    "history": []
+  }
 }
