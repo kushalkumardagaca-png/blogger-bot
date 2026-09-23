@@ -10,6 +10,11 @@ on:
     - cron: '0 15 * * *'   # 08:30 PM IST (Slot 5: Prime-Time Reader's Digest)
   workflow_dispatch:      # Allows manual trigger anytime for testing
 
+# Safety: never allow two publisher runs to overlap (prevents double-publishing)
+concurrency:
+  group: blogger-publisher
+  cancel-in-progress: false
+
 jobs:
   publish_next_article:
     runs-on: ubuntu-latest
