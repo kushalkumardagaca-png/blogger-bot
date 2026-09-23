@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -103,6 +104,20 @@ def try_fetch(url, timeout=15, headers=None, data=None, method=None):
         return None, None, str(e)
 
 
+def fetch_blog_url(path, tries=3):
+    """Fetch a blogspot URL with retries + backoff.
+    Blogspot throttles datacenter IPs (HTTP 429); a 429 means the site is
+    ALIVE but pacing us - never an outage."""
+    last = (None, None, "")
+    for attempt in range(tries):
+        if attempt:
+            time.sleep(15 if attempt == 2 else 6)
+        last = try_fetch(BLOG + path, timeout=20)
+        if last[0] == 200:
+            return last
+    return last
+
+
 # ---------------------------------------------------------------------------
 # A. PUBLISHING ENGINE
 # ---------------------------------------------------------------------------
@@ -112,6 +127,9 @@ print("-" * 60)
 # A1 - Blogger feed
 feed_posts = []
 st, body, err = try_fetch(BLOG + "/feeds/posts/default?alt=json&max-results=25", timeout=20)
+if st == 429:
+    time.sleep(15)
+    st, body, err = try_fetch(BLOG + "/feeds/posts/default?alt=json&max-results=25", timeout=20)
 if st == 200:
     try:
         entries = json.loads(body.decode())["feed"].get("entry", [])
@@ -134,6 +152,9 @@ if st == 200:
             f"{len(feed_posts)} recent posts")
     except Exception as e:
         add("A. Publishing engine", "Blogger feed parse", "FAIL", str(e)[:120])
+elif st == 429:
+    add("A. Publishing engine", "Blogger feed reachable", "WARN",
+        "Blogspot throttled the checker (site alive) — slot check skipped this round")
 else:
     add("A. Publishing engine", "Blogger feed reachable", "FAIL", (err or "")[:120])
 
@@ -145,7 +166,7 @@ news_today = [p for p in feed_posts
               if p["published"].date() == today and p["is_news"]]
 
 missed_slots = []
-for slot, label in SLOTS:
+for slot, label in ([] if not feed_posts else SLOTS):
     hh, mm = map(int, slot.split(":"))
     slot_dt = datetime.combine(today, datetime.strptime(slot, "%H:%M").time(), IST)
     if NOW < slot_dt + timedelta(minutes=SLOT_GRACE_MIN):
@@ -239,7 +260,7 @@ else:
 # AUTO-HEAL: re-dispatch the publisher if a slot was genuinely missed
 # ---------------------------------------------------------------------------
 healed = False
-if missed_slots and TOKEN and wf_runs:
+if missed_slots and feed_posts and TOKEN and wf_runs:
     latest = wf_runs[0]
     should_heal = latest.get("conclusion") == "failure" or latest.get("status") != "completed"
     # cooldown guard from previous status file
@@ -270,28 +291,40 @@ if missed_slots and TOKEN and wf_runs:
 # ---------------------------------------------------------------------------
 print("\nB. BLOG PAGES")
 print("-" * 60)
+page_bodies = {}
 for name, path in STATIC_PAGES:
-    st, body, err = try_fetch(BLOG + path, timeout=20)
+    if page_bodies:
+        time.sleep(1.5)  # pace requests — Blogspot throttles datacenter IPs
+    st, body, err = fetch_blog_url(path)
+    if st == 200 and body:
+        page_bodies[path] = body
     if st == 200 and body and len(body) > 20000:
         add("B. Blog pages", name, "OK", f"200 OK · {len(body) // 1024} KB")
     elif st == 200:
         add("B. Blog pages", name, "WARN", f"200 but only {len(body or b'')//1024} KB")
+    elif st == 429:
+        add("B. Blog pages", name, "WARN",
+            "Blogspot throttled the checker — site is alive, checker-side pacing")
     else:
         add("B. Blog pages", name, "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
-st, body, err = try_fetch(BLOG + "/robots.txt", timeout=15)
+st, body, err = fetch_blog_url("/robots.txt")
 if st == 200 and b"sitemap" in (body or b"").lower():
     add("B. Blog pages", "robots.txt", "OK", "reachable, sitemap declared")
+elif st == 429:
+    add("B. Blog pages", "robots.txt", "WARN", "throttled by Blogspot (checker-side)")
 else:
     add("B. Blog pages", "robots.txt", "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
-st, body, err = try_fetch(BLOG + "/sitemap.xml", timeout=20)
+st, body, err = fetch_blog_url("/sitemap.xml")
 if st == 200:
     urls = re.findall(r"<loc>(.*?)</loc>", (body or b"").decode("utf-8", "replace"))
     if len(urls) >= 20:
         add("B. Blog pages", "sitemap.xml", "OK", f"{len(urls)} URLs indexed")
     else:
         add("B. Blog pages", "sitemap.xml", "WARN", f"only {len(urls)} URLs")
+elif st == 429:
+    add("B. Blog pages", "sitemap.xml", "WARN", "throttled by Blogspot (checker-side)")
 else:
     add("B. Blog pages", "sitemap.xml", "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
@@ -379,14 +412,22 @@ if geo_ok == 0:
 # ---------------------------------------------------------------------------
 print("\nD. SHARE & MARKET PAGE INTEGRITY")
 print("-" * 60)
-st, body, err = try_fetch(BLOG + "/p/share-market_0718113516.html", timeout=25)
-if st == 200:
-    html = (body or b"").decode("utf-8", "replace")
+SM_PATH = "/p/share-market_0718113516.html"
+sm_body = page_bodies.get(SM_PATH)
+sm_st = 200 if sm_body else None
+if not sm_body:
+    sm_st, sm_body, sm_err = fetch_blog_url(SM_PATH)
+if sm_st == 200 and sm_body:
+    html = sm_body.decode("utf-8", "replace")
     for name, marker in SM_MARKERS.items():
         add("D. Page integrity", name, "OK" if marker in html else "FAIL",
             "present" if marker in html else "MISSING from live page")
+elif sm_st == 429:
+    add("D. Page integrity", "Share & Market page fetch", "WARN",
+        "throttled by Blogspot (checker-side)")
 else:
-    add("D. Page integrity", "Share & Market page fetch", "FAIL", f"HTTP {st} {(err or '')[:60]}")
+    add("D. Page integrity", "Share & Market page fetch", "FAIL",
+        f"HTTP {sm_st}")
 
 # ---------------------------------------------------------------------------
 # E. GOOGLE SEARCH CONSOLE
