@@ -100,6 +100,8 @@ def try_fetch(url, timeout=15, headers=None, data=None, method=None):
     try:
         s, b = fetch(url, timeout=timeout, headers=headers, data=data, method=method)
         return s, b, None
+    except urllib.error.HTTPError as e:
+        return e.code, None, str(e)
     except Exception as e:
         return None, None, str(e)
 
@@ -111,7 +113,7 @@ def fetch_blog_url(path, tries=3):
     last = (None, None, "")
     for attempt in range(tries):
         if attempt:
-            time.sleep(15 if attempt == 2 else 6)
+            time.sleep(20 if attempt == 2 else 8)
         last = try_fetch(BLOG + path, timeout=20)
         if last[0] == 200:
             return last
