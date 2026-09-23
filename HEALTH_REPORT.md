@@ -1,8 +1,8 @@
 # 🩺 Blog Health Report — Finance by CA Kushal
 
-**Checked:** 2026-09-23 22:28 IST · **Overall:** ✅ ALL SYSTEMS OPERATIONAL
+**Checked:** 2026-09-24 03:18 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
 
-**Scoreboard:** 40 OK · 0 warnings · 0 failures · 1 skipped
+**Scoreboard:** 39 OK · 1 warnings · 0 failures · 1 skipped
 
 
 ## A. Publishing engine
@@ -10,10 +10,10 @@
 | Component | Status | Detail |
 |---|---|---|
 | Blogger feed reachable | ✅ OK | 7 recent posts |
-| Daily publishing slots | ✅ OK | 5 slot(s) due so far today — all published; 5 master articles + 1 news roundups today |
+| Daily publishing slots | ✅ OK | 0 slot(s) due so far today — all published; 0 master articles + 0 news roundups today |
 | No duplicate articles today | ✅ OK | all unique |
 | Newest master article quality | ✅ OK | 2229 words, hero image + schema OK (What Quiet Rich People Do on Payday) |
-| Publishing freshness | ✅ OK | newest master article 1.9h ago |
+| Publishing freshness | ✅ OK | newest master article 6.7h ago |
 | Topic tracker state | ✅ OK | next topic #20, 10 published, last at 2026-09-23 15:04 UTC |
 | Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
 
@@ -21,7 +21,7 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ✅ OK | 200 OK · 237 KB |
+| Homepage | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
 | Daily Article hub | ✅ OK | 200 OK · 346 KB |
 | Daily News hub | ✅ OK | 200 OK · 246 KB |
 | Calculator hub | ✅ OK | 200 OK · 377 KB |
