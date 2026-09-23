@@ -122,6 +122,8 @@ if st == 200:
             is_news = ("News" in labels) or ("News Roundup" in e["title"]["$t"])
             feed_posts.append({
                 "title": e["title"]["$t"],
+                "url": next((l.get("href") for l in e.get("link", [])
+                             if l.get("rel") == "alternate"), ""),
                 "published": datetime.fromisoformat(e["published"]["$t"]).astimezone(IST),
                 "words": len(text.split()),
                 "has_img": ("<img" in content) or ("<figure" in content.lower()),
@@ -387,6 +389,157 @@ else:
     add("D. Page integrity", "Share & Market page fetch", "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
 # ---------------------------------------------------------------------------
+# E. GOOGLE SEARCH CONSOLE
+#    Activates automatically once the GSC_REFRESH_TOKEN secret exists
+#    (one-time authorization by the blog owner). Until then: clean SKIP.
+#    Once active: submits the sitemap if missing (self-heal), reports sitemap
+#    health, tracks Google search impressions/clicks with history, and
+#    inspects the index status of the newest articles.
+# ---------------------------------------------------------------------------
+print("\nE. GOOGLE SEARCH CONSOLE")
+print("-" * 60)
+
+gsc_payload = None
+gsc_history = []
+try:
+    with open("HEALTH_STATUS.json", encoding="utf-8") as f:
+        gsc_history = json.load(f).get("gsc", {}).get("history", [])
+except Exception:
+    pass
+
+GSC_ACCESS = None
+GSC_SITE = None
+
+
+def gsc_call(method, path, body=None):
+    url = path if path.startswith("http") else \
+        "https://www.googleapis.com/webmasters/v3/" + path
+    data = json.dumps(body).encode() if body is not None else None
+    req = urllib.request.Request(url, data=data, method=method,
+                                 headers={"Authorization": "Bearer " + GSC_ACCESS,
+                                          "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+GSC_RT = os.environ.get("GSC_REFRESH_TOKEN")
+if not (GSC_RT and os.environ.get("BLOGGER_CLIENT_ID")
+        and os.environ.get("BLOGGER_CLIENT_SECRET")):
+    add("E. Google Search Console", "Search Console automation", "SKIP",
+        "awaiting one-time owner authorization — everything else runs normally")
+else:
+    # E1 - authorize
+    try:
+        form = urllib.parse.urlencode({
+            "client_id": os.environ["BLOGGER_CLIENT_ID"],
+            "client_secret": os.environ["BLOGGER_CLIENT_SECRET"],
+            "refresh_token": GSC_RT,
+            "grant_type": "refresh_token",
+        }).encode()
+        req = urllib.request.Request("https://oauth2.googleapis.com/token",
+                                     data=form, method="POST")
+        with urllib.request.urlopen(req, timeout=30) as r:
+            GSC_ACCESS = json.load(r)["access_token"]
+        add("E. Google Search Console", "API connection", "OK", "authorized")
+    except Exception as e:
+        add("E. Google Search Console", "API connection", "WARN",
+            f"token exchange failed: {str(e)[:100]}")
+
+    # E2 - find the verified property
+    if GSC_ACCESS:
+        try:
+            sites = gsc_call("GET", "sites")
+            GSC_SITE = next((s["siteUrl"] for s in sites.get("siteEntry", [])
+                             if "financebycakushal" in s.get("siteUrl", "")), None)
+            add("E. Google Search Console", "Blog property in Search Console",
+                "OK" if GSC_SITE else "WARN",
+                GSC_SITE or "property not visible to this token")
+        except Exception as e:
+            add("E. Google Search Console", "Blog property in Search Console",
+                "WARN", str(e)[:100])
+
+    if GSC_ACCESS and GSC_SITE:
+        enc = urllib.parse.quote(GSC_SITE, safe="")
+
+        # E3 - sitemap: auto-submit if missing, then report status
+        try:
+            sm = gsc_call("GET", f"sites/{enc}/sitemaps")
+            entry = next((m for m in sm.get("sitemap", [])
+                          if m.get("path", "").endswith("sitemap.xml")), None)
+            if not entry:
+                gsc_call("PUT", f"sites/{enc}/sitemaps/sitemap.xml")
+                actions.append("Search Console sitemap was missing -> "
+                               "submitted automatically via API.")
+                sm = gsc_call("GET", f"sites/{enc}/sitemaps")
+                entry = next((m for m in sm.get("sitemap", [])
+                              if m.get("path", "").endswith("sitemap.xml")), None)
+            if entry:
+                add("E. Google Search Console", "Sitemap in Search Console", "OK",
+                    f"submitted {str(entry.get('lastSubmitted', '?'))[:10]} · "
+                    f"errors {entry.get('errors', 0)} · warnings "
+                    f"{entry.get('warnings', 0)}")
+            else:
+                add("E. Google Search Console", "Sitemap in Search Console",
+                    "WARN", "not found after submit attempt")
+        except Exception as e:
+            add("E. Google Search Console", "Sitemap in Search Console",
+                "WARN", str(e)[:100])
+
+        # E4 - Google search presence (last 7 days; GSC data lags ~2 days)
+        try:
+            end = (NOW - timedelta(days=2)).strftime("%Y-%m-%d")
+            start = (NOW - timedelta(days=8)).strftime("%Y-%m-%d")
+            q = gsc_call("POST", f"sites/{enc}/searchAnalytics/query",
+                         {"startDate": start, "endDate": end,
+                          "rowLimit": 1})
+            rows = q.get("rows", [])
+            imp = rows[0].get("impressions", 0) if rows else 0
+            clk = rows[0].get("clicks", 0) if rows else 0
+            pos = round(rows[0].get("position", 0), 1) if rows else 0
+            add("E. Google Search Console", "Google search presence (7 days)",
+                "OK", f"{imp} impressions · {clk} clicks · avg position {pos}")
+            gsc_payload = {"date": end, "impressions": imp, "clicks": clk,
+                           "position": pos, "at": NOW_ISO}
+            gsc_history = [h for h in gsc_history if h.get("date") != end]
+            gsc_history.append(gsc_payload)
+            gsc_history = gsc_history[-60:]
+        except Exception as e:
+            add("E. Google Search Console", "Google search presence (7 days)",
+                "WARN", str(e)[:100])
+
+        # E5 - index status of the 3 newest articles
+        try:
+            newest3 = sorted([p for p in feed_posts
+                              if p.get("url") and not p["is_news"]],
+                             key=lambda p: p["published"], reverse=True)[:3]
+            for p in newest3:
+                try:
+                    insp = gsc_call(
+                        "POST",
+                        "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
+                        {"inspectionUrl": p["url"], "siteUrl": GSC_SITE})
+                    st8 = (insp.get("inspectionResult", {})
+                              .get("indexStatus", {})
+                              .get("status", "UNKNOWN"))
+                    label = {"INDEXED": "OK",
+                             "DISCOVERED": "WARN",
+                             "CRAWLED_NOT_INDEXED": "WARN",
+                             "NOT_INDEXED": "WARN"}.get(st8, "WARN")
+                    note = {"INDEXED": "in Google's library",
+                            "DISCOVERED": "known to Google, waiting to be crawled",
+                            "CRAWLED_NOT_INDEXED": "crawled, being evaluated",
+                            "NOT_INDEXED": "not indexed yet"}.get(st8, st8)
+                    add("E. Google Search Console",
+                        f"Google index · {p['title'][:38]}", label, note)
+                except Exception as e:
+                    add("E. Google Search Console",
+                        f"Google index · {p['title'][:38]}", "WARN",
+                        f"inspection failed: {str(e)[:80]}")
+        except Exception as e:
+            add("E. Google Search Console", "Google index inspection", "WARN",
+                str(e)[:100])
+
+# ---------------------------------------------------------------------------
 # REPORT
 # ---------------------------------------------------------------------------
 order = {"FAIL": 0, "WARN": 1, "OK": 2, "SKIP": 3}
@@ -429,6 +582,7 @@ status = {
     "last_heal_dispatch": NOW.isoformat() if healed else prev_heal,
     "results": results,
     "history": history,
+    "gsc": {"latest": gsc_payload, "history": gsc_history},
 }
 
 with open("HEALTH_STATUS.json", "w", encoding="utf-8") as f:
@@ -444,6 +598,13 @@ lines = [
     + (f" · {counts['SKIP']} skipped" if counts["SKIP"] else ""),
     "",
 ]
+if gsc_payload:
+    lines += [
+        f"**Google search (7 days to {gsc_payload['date']}):** "
+        f"{gsc_payload['impressions']} impressions · {gsc_payload['clicks']} clicks · "
+        f"average position {gsc_payload['position']}",
+        "",
+    ]
 if actions:
     lines += ["## 🔧 Self-healing actions taken", ""]
     lines += [f"- {a}" for a in actions]
