@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-24 22:20 IST",
+  "generated_at": "2026-09-24 22:23 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 55,
-    "WARN": 5,
+    "OK": 56,
+    "WARN": 4,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.7h ago"
+      "detail": "newest master article 1.8h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -87,8 +87,8 @@
     {
       "section": "B. Blog pages",
       "name": "Market Explorer",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 380 KB"
     },
     {
       "section": "B. Blog pages",
@@ -111,14 +111,14 @@
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "OK",
-      "detail": "200 OK · 616 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 382 KB"
     },
     {
       "section": "B. Blog pages",
@@ -129,8 +129,8 @@
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "WARN",
-      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
+      "status": "OK",
+      "detail": "reachable, sitemap declared"
     },
     {
       "section": "B. Blog pages",
@@ -184,7 +184,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,000 instruments · sample OHLC populated"
+      "detail": "457,007 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -231,8 +231,8 @@
     {
       "section": "C. Market data",
       "name": "Mutual fund NAV (mfapi.in)",
-      "status": "OK",
-      "detail": "live"
+      "status": "WARN",
+      "detail": "unavailable (HTTP None)"
     },
     {
       "section": "C. Market data",
@@ -490,6 +490,13 @@
       "overall": "WARN",
       "ok": 55,
       "warn": 5,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 22:23 IST",
+      "overall": "WARN",
+      "ok": 56,
+      "warn": 4,
       "fail": 0
     }
   ],
