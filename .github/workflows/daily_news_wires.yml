@@ -1,35 +1,38 @@
-name: Daily News Wires
+name: Daily Yield News Wires (20 Daily)
 on:
   schedule:
-    - cron: "35 22 * * *"   # 04:05 IST — Australia 04:30, South Korea 04:35
-    - cron: "35 0 * * *"    # 06:05 IST — Global 06:30, India 06:45
-    - cron: "5 3 * * *"     # 08:35 IST — Market 09:00, Macro 09:05
-    - cron: "35 4 * * *"    # 10:05 IST — Germany 10:30, France 10:35
-    - cron: "5 6 * * *"     # 11:35 IST — UK 12:00, Japan 12:05
-    - cron: "5 7 * * *"     # 12:35 IST — China 13:00, Spain 13:05
-    - cron: "50 9 * * *"    # 15:20 IST — Corporate 15:45, Italy 15:50
-    - cron: "5 11 * * *"    # 16:35 IST — Brazil 17:00
-    - cron: "5 12 * * *"    # 17:35 IST — US 18:00, Canada 18:05
-    - cron: "35 13 * * *"   # 19:05 IST — Mexico 19:30
-    - cron: "5 15 * * *"    # 20:35 IST — Personal 21:00
-    - cron: "5 16 * * *"    # 21:35 IST — Russia 22:00
+    # Each cluster starts 45 minutes before its first editorial slot (IST).
+    # A paired second desk receives 50–60 minutes of runway and runs sequentially.
+    - cron: "15 22 * * *"   # 03:45 IST → Australia 04:30, South Korea 04:35
+    - cron: "15 0 * * *"    # 05:45 IST → Global 06:30, India 06:45
+    - cron: "45 2 * * *"    # 08:15 IST → Market 09:00, Macro 09:05
+    - cron: "15 4 * * *"    # 09:45 IST → Germany 10:30, France 10:35
+    - cron: "45 5 * * *"    # 11:15 IST → UK 12:00, Japan 12:05
+    - cron: "45 6 * * *"    # 12:15 IST → China 13:00, Spain 13:05
+    - cron: "30 9 * * *"    # 15:00 IST → Corporate 15:45, Italy 15:50
+    - cron: "45 10 * * *"   # 16:15 IST → Brazil 17:00
+    - cron: "45 11 * * *"   # 17:15 IST → US 18:00, Canada 18:05
+    - cron: "15 13 * * *"   # 18:45 IST → Mexico 19:30
+    - cron: "45 14 * * *"   # 20:15 IST → Personal Finance 21:00
+    - cron: "45 15 * * *"   # 21:15 IST → Russia 22:00
   workflow_dispatch:
     inputs:
       desks:
-        description: "desk slugs (comma-sep) or blank for --due"
+        description: "desk slugs (comma-separated), or blank for desks due in the preflight window"
         required: false
         default: ""
 permissions:
   contents: write
 concurrency:
-  group: news-wires
+  group: daily-yield-news-wires
+  cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-      - name: Run news pipeline
+      - name: Run Daily Yield news pipeline
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
@@ -41,11 +44,16 @@ jobs:
           else
             python3 news_pipeline.py --due
           fi
-      - name: Commit tracker
+      - name: Commit news tracker
         if: always()
         run: |
-          git config user.name "Finance Bot" && git config user.email "bot@dailyyield.local"
+          git config user.name "Daily Yield News Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
           git add news_tracker.json || true
-          git commit -m "chore: news tracker update" -q || echo "no tracker change"
-          git pull --rebase origin main -q || true
-          git push origin main || echo "tracker push skipped"
+          if git diff --staged --quiet; then
+            echo "No tracker change."
+          else
+            git commit -m "Update Daily Yield news tracker [$(date -u)]"
+            git pull --rebase origin main
+            git push origin main
+          fi

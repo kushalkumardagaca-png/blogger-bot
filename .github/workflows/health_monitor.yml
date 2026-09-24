@@ -32,6 +32,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Audit publishing automation invariants
+        run: python audit_publishing_automation.py --check-only
+
       - name: Run Health Monitor
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

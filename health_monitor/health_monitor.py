@@ -195,7 +195,7 @@ for slot, label in ([] if not feed_posts else SLOTS):
     slot_dt = datetime.combine(today, datetime.strptime(slot, "%H:%M").time(), IST)
     if NOW < slot_dt + timedelta(minutes=SLOT_GRACE_MIN):
         continue  # slot not due yet (or still within grace)
-    hit = any(slot_dt - timedelta(minutes=20) <= p["published"] <= slot_dt + timedelta(minutes=SLOT_GRACE_MIN)
+    hit = any(slot_dt - timedelta(minutes=50) <= p["published"] <= slot_dt + timedelta(minutes=SLOT_GRACE_MIN)
               for p in masters_today)
     if not hit:
         missed_slots.append(label)

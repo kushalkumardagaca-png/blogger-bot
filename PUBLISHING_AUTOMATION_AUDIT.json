@@ -1,0 +1,184 @@
+{
+  "checked_at_ist": "2026-09-24T23:13:54+05:30",
+  "summary": {
+    "pass": 35,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "Five master-article triggers",
+      "status": "PASS",
+      "detail": "['45 1 * * *', '15 5 * * *', '15 8 * * *', '30 11 * * *', '15 14 * * *']"
+    },
+    {
+      "name": "Twelve news preflight clusters",
+      "status": "PASS",
+      "detail": "['15 22 * * *', '15 0 * * *', '45 2 * * *', '15 4 * * *', '45 5 * * *', '45 6 * * *', '30 9 * * *', '45 10 * * *', '45 11 * * *', '15 13 * * *', '45 14 * * *', '45 15 * * *']"
+    },
+    {
+      "name": "Every master trigger is exactly 45 minutes early",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master runs cannot overlap",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News runs cannot overlap",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master publisher uses IST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master tracker advances only after live URL",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master duplicate recovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master canonical repaired to live URL",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master packages always rebuilt fresh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master byline is current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master publisher brand is Daily Yield",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master links both market desks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master posts cannot enter News hub",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Exactly 20 news desks",
+      "status": "PASS",
+      "detail": "20"
+    },
+    {
+      "name": "News desk numbers are 1\u201320",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News labels are unique",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Each news preflight selects its intended desk cluster",
+      "status": "PASS",
+      "detail": "[['australia', 'south-korea'], ['global', 'india'], ['macro', 'market'], ['france', 'germany'], ['japan', 'uk'], ['china', 'spain'], ['corporate', 'italy'], ['brazil'], ['canada', 'us'], ['mexico'], ['personal'], ['russia']]"
+    },
+    {
+      "name": "News labels exactly two per post",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News launch gate is 2026-09-25",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News cluster selector covers paired desks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News duplicate recovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News source policy is current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News finance filter enabled",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News safety floor enforced",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News byline is current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News publisher brand is Daily Yield",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News schema uses actual build/publish time",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News meta description capped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News links both market desks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Trusted links disclose source type",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master tracker ready for next topic",
+      "status": "PASS",
+      "detail": "next index 25"
+    },
+    {
+      "name": "News tracker clean for launch",
+      "status": "PASS",
+      "detail": "{\"desks\": {}}"
+    },
+    {
+      "name": "No obsolete blog URL in production engines",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No obsolete market page in production engines",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

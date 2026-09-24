@@ -1,23 +1,25 @@
-name: Autonomous Blogger Daily Publishing Engine (5x Daily)
+name: Autonomous Daily Yield Publishing Engine (5x Daily)
 
 on:
   schedule:
-    # 5 Daily Publishing Times in IST (UTC+5:30)
-    - cron: '30 2 * * *'   # 08:00 AM IST (Slot 1: Morning Commute & Asian Market Open)
-    - cron: '0 6 * * *'    # 11:30 AM IST (Slot 2: Mid-Morning Deep Dive)
-    - cron: '0 9 * * *'    # 02:30 PM IST (Slot 3: Afternoon Case Study)
-    - cron: '15 12 * * *'  # 05:45 PM IST (Slot 4: Market Close & US Morning)
-    - cron: '0 15 * * *'   # 08:30 PM IST (Slot 5: Prime-Time Reader's Digest)
-  workflow_dispatch:      # Allows manual trigger anytime for testing
+    # Start each production run 45 minutes before its editorial target (IST, UTC+5:30).
+    # This reserves up to 15 minutes for build/publish and 30 minutes for feed/search discovery.
+    - cron: '45 1 * * *'   # Start 07:15 IST → editorial target 08:00
+    - cron: '15 5 * * *'   # Start 10:45 IST → editorial target 11:30
+    - cron: '15 8 * * *'   # Start 13:45 IST → editorial target 14:30
+    - cron: '30 11 * * *'  # Start 17:00 IST → editorial target 17:45
+    - cron: '15 14 * * *'  # Start 19:45 IST → editorial target 20:30
+  workflow_dispatch:
 
-# Safety: never allow two publisher runs to overlap (prevents double-publishing)
+# Never allow two master-article runs to overlap or advance the tracker twice.
 concurrency:
-  group: blogger-publisher
+  group: daily-yield-master-publisher
   cancel-in-progress: false
 
 jobs:
   publish_next_article:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
 
@@ -31,21 +33,25 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: |
-          pip install google-api-python-client google-auth google-auth-oauthlib google-auth-httplib2 pillow matplotlib beautifulsoup4
+        run: pip install google-api-python-client google-auth pillow
 
-      - name: Run Autonomous Blogger Publisher
+      - name: Run Daily Yield master-article publisher
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: |
-          python auto_blogger_publisher.py
+        run: python auto_blogger_publisher.py
 
-      - name: Commit Publishing Tracker Log
+      - name: Commit publishing tracker
         run: |
-          git config --global user.name "Daily Yield Autonomous Bot"
-          git config --global user.email "bot@dailyyield.blogspot.com"
+          git config user.name "Daily Yield Autonomous Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
           git add published_tracker.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-published next scheduled article [$(date -u)]" && git pull --rebase origin main && git push)
+          if git diff --staged --quiet; then
+            echo "No tracker change."
+          else
+            git commit -m "Auto-published next Daily Yield article [$(date -u)]"
+            git pull --rebase origin main
+            git push origin main
+          fi

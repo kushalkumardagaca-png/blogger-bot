@@ -53,7 +53,9 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+
+IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 
 # Blogger Blog ID for "Daily Yield"
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -204,7 +206,6 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 "publisher": {
                     "@type": "Organization",
                     "name": "Daily Yield",
-                    "alternateName": "Finance by Kushal",
                     "url": "https://dailyyield.blogspot.com/"
                 },
                 "datePublished": f"{pub_date_str}T{pub_time_str}:00+05:30",
@@ -758,6 +759,11 @@ document.addEventListener("DOMContentLoaded", function() {{
     </div>
   </section>
 
+  <section style="margin-top:36px;padding:22px;border:1px solid var(--line);border-radius:8px;background:var(--surface);">
+    <h2 style="margin-top:0;">Continue across Daily Yield</h2>
+    <p>Use <a href="https://dailyyield.blogspot.com/p/markets-today.html">Markets Today</a> for the complete global analytical workspace, or open <a href="https://dailyyield.blogspot.com/p/global-snapshot.html">Global Snapshot</a> for the concise cross-asset summary. These tools provide market context; they do not replace the article’s educational framework.</p>
+  </section>
+
   <section style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 20px;">
     <p style="font-size: 13.5px; color: var(--muted); font-style: italic;"><strong>Professional Accounting Disclaimer:</strong> This article is authored and published strictly for educational, research, and financial analysis purposes by Kushal K. Daga. It does not constitute individual, personalized financial, tax, or legal advisory services. Because statutory tax provisions and market regulations vary significantly across jurisdictions (US, UK, Canada, Australia, and India), readers must consult a certified financial planner, licensed CPA, or Certified Accountant in their home jurisdiction before executing significant capital transactions.</p>
   </section>
@@ -766,40 +772,43 @@ document.addEventListener("DOMContentLoaded", function() {{
     return title, slug, meta_desc, labels, html
 
 def publish_to_blogger(title, content, labels):
+    """Publish once, recover safely on retries, and align canonical URLs to Blogger."""
     client_id = os.environ.get("BLOGGER_CLIENT_ID")
     client_secret = os.environ.get("BLOGGER_CLIENT_SECRET")
     refresh_token = os.environ.get("BLOGGER_REFRESH_TOKEN")
-
     if not all([client_id, client_secret, refresh_token]):
-        print("Note: Google Blogger API credentials not present. Running in Local Staging Mode.")
-        return None
+        raise RuntimeError("Blogger credentials are absent; tracker will not advance")
 
-    try:
-        from google.oauth2.credentials import Credentials
-        from googleapiclient.discovery import build
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
 
-        creds = Credentials(
-            None,
-            refresh_token=refresh_token,
-            token_uri="https://oauth2.googleapis.com/token",
-            client_id=client_id,
-            client_secret=client_secret
-        )
-        service = build("blogger", "v3", credentials=creds)
+    creds = Credentials(None, refresh_token=refresh_token,
+        token_uri="https://oauth2.googleapis.com/token", client_id=client_id,
+        client_secret=client_secret)
+    service = build("blogger", "v3", credentials=creds, cache_discovery=False)
 
-        body = {
-            "kind": "blogger#post",
-            "blog": {"id": BLOG_ID},
-            "title": title,
-            "content": content,
-            "labels": labels
-        }
-        res = service.posts().insert(blogId=BLOG_ID, body=body, isDraft=False).execute()
-        print(f"Successfully published live to Blogger! Post ID: {res.get('id')} | URL: {res.get('url')}")
-        return res
-    except Exception as e:
-        print(f"Error calling Blogger API: {e}")
-        return None
+    # If Blogger accepted a prior attempt but the tracker push failed, recover it
+    # instead of publishing a duplicate copy.
+    found = service.posts().search(blogId=BLOG_ID, q=title, fetchBodies=False).execute()
+    for post in found.get("items", []):
+        if post.get("title", "").strip() == title.strip():
+            print(f"Existing exact-title post recovered; no duplicate published: {post.get('url')}")
+            return post
+
+    body = {"kind": "blogger#post", "blog": {"id": BLOG_ID},
+            "title": title, "content": content, "labels": labels}
+    res = service.posts().insert(blogId=BLOG_ID, body=body, isDraft=False).execute()
+    live_url = res.get("url", "")
+    # The generated canonical is deterministic, but Blogger can suffix a slug.
+    # Patch every predicted post URL to the actual URL after insertion.
+    predicted = re.search(r'https://dailyyield\.blogspot\.com/\d{4}/\d{2}/[a-z0-9-]+\.html', content)
+    if live_url and predicted and predicted.group(0) != live_url:
+        patched = content.replace(predicted.group(0), live_url)
+        res = service.posts().update(blogId=BLOG_ID, postId=res["id"], body={
+            "kind": "blogger#post", "id": res["id"], "title": title,
+            "content": patched, "labels": labels}).execute()
+    print(f"Successfully published live to Blogger! Post ID: {res.get('id')} | URL: {res.get('url', live_url)}")
+    return res
 
 def main():
     tracker = load_tracker()
@@ -811,29 +820,26 @@ def main():
         return
 
     topic = topics[current_idx]
-    now = datetime.now()
+    now = datetime.now(IST)
     pub_date_str = now.strftime("%Y-%m-%d")
     pub_time_str = now.strftime("%H:%M")
 
     print(f"Processing Topic #{topic['#']} (Index {current_idx}): {topic['Punchy Title']} [{topic['Category']}]")
     title, slug, meta_desc, labels, html = generate_article_content(topic, pub_date_str, pub_time_str)
 
-    # Check if pre-compiled master article with full photos exists
+    # Always rebuild with the current date, identity and schema. Old precompiled
+    # packages are never reused because their dates or branding may be stale.
     os.makedirs("scheduled_ready", exist_ok=True)
     local_path = f"scheduled_ready/topic_{topic['#']}_{slug}.html"
-    if os.path.exists(local_path) and os.path.getsize(local_path) > 50000:
-        print(f"Loading pre-compiled master package with full photos from {local_path}...")
-        with open(local_path, "r", encoding="utf-8") as f:
-            html = f.read()
-    else:
-        with open(local_path, "w", encoding="utf-8") as f:
-            f.write(html)
-        print(f"Saved local post package to {local_path}")
+    with open(local_path, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Built fresh Daily Yield package at {local_path}")
 
-    # Attempt Blogger API publish if cloud secrets configured
     api_res = publish_to_blogger(title, html, labels)
+    if not api_res or not api_res.get("url"):
+        raise RuntimeError("Blogger did not return a live URL; tracker will not advance")
 
-    # Update tracker
+    # Update tracker only after Blogger confirms a live or recovered post.
     tracker["next_topic_index"] = current_idx + 1
     tracker["last_published_timestamp"] = f"{pub_date_str} {pub_time_str}"
     tracker["published_posts"].append({

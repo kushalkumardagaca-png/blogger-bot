@@ -2,9 +2,9 @@
 """
 DAILY YIELD — Daily News Wires Engine (20 desks, 1 article/day each)
 ================================================================================
-Per-desk rolling 24-hour window anchored to the desk's IST slot. Official
-sources only (central banks, ministries, stats offices, regulators, exchanges).
-Structure: fbk-* template (verbatim from reference articles).
+Per-desk rolling window anchored to the desk's IST editorial slot. Sources are
+official institutions plus established, reputable newsrooms, with finance-only
+filtering and source disclosure. Structure: the compact fbk-* wire template.
 3-pass publish: draft(slug-title) -> publish -> update(real title + canonical).
 Stdlib only. CLI:
   python3 news_pipeline.py --due            # publish all desks due now (catch-up safe)
@@ -38,6 +38,9 @@ UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
       "Accept-Language": "en-US,en;q=0.9"}
 CTX = ssl.create_default_context()
 TRACKER = os.environ.get("NEWS_TRACKER", "news_tracker.json")
+# Cluster starts 45 minutes before its first desk; paired desks can be 5–15
+# minutes later, so the selector includes the full 60-minute cluster runway.
+PREFLIGHT_MINUTES = 60
 HERO_W, HERO_H = 1600, 900
 
 # desk -> (num, label, slug, slot IST "HH:MM", hero unsplash id, hero alt)
@@ -326,7 +329,7 @@ def fetch_source(source):
     if trust:  # feed rebuilt continuously; undated items count as current
         for i in items:
             if i["date"] is None:
-                i["date"] = dt.date.today() - dt.timedelta(days=1)
+                i["date"] = dt.datetime.now(IST).date() - dt.timedelta(days=1)
     for i in items:
         i["media"] = i.get("media", media)
     return name, items
@@ -602,7 +605,7 @@ def compose_item(it, win_end):
         desc = ""
     day = fmt_day(it["date"]) if it["date"] else "Window"
     etitle, eagency = htmlmod.escape(title), htmlmod.escape(it["agency"])
-    core = desc if desc else etitle
+    core = htmlmod.escape(desc) if desc else etitle
     body = f"<strong>{eagency}</strong> — {core}."
     if not desc:
         body = f"<strong>{eagency}</strong> — published {day}: {etitle}."
@@ -638,8 +641,10 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     span_h = (win_end - win_start).total_seconds() / 3600
     span_txt = "the last 24 hours" if span_h <= 24.5 else f"the last {max(2, round(span_h / 24))} days"
     title = f"{desk_title_prefix(desk)} — {headline_bits} | {edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}"
-    meta = (f"{desk_title_prefix(desk).lower()}, {span_txt[4:]} only ({win_str}): "
-            + "; ".join(t.lower() for t in top[:4])[:280]).strip()
+    meta = (f"{desk_title_prefix(desk)}, {span_txt} ({win_str}): "
+            + "; ".join(t for t in top[:3])).strip()
+    if len(meta) > 158:
+        meta = meta[:155].rsplit(" ", 1)[0].rstrip(" ,;:.") + "..."
 
     flag = {"us": "🇺🇸", "china": "🇨🇳", "germany": "🇩🇪", "india": "🇮🇳", "japan": "🇯🇵",
             "uk": "🇬🇧", "france": "🇫🇷", "italy": "🇮🇹", "russia": "🇷🇺", "canada": "🇨🇦",
@@ -725,7 +730,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   </div>
 
   <h1 class="fbk-h1">{htmlmod.escape(desk_title_prefix(desk))}: {htmlmod.escape(headline_bits)}</h1>
-  <p class="fbk-lede">{len(items)} official items from the {label} desk, all inside {span_txt} — the primary releases, the reference levels, and what they mean. Read the source, not the noise.</p>
+  <p class="fbk-lede">{len(items)} verified, finance-focused items from the {label} desk, all inside {span_txt} — primary releases, established reporting, reference levels and what they mean. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
@@ -740,13 +745,12 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "@context": "https://schema.org", "@type": "NewsArticle",
         "mainEntityOfPage": {"@id": canonical}, "@id": canonical,
         "headline": title[:110], "description": meta, "inLanguage": "en",
-        "datePublished": f"{edition_date.isoformat()}T{slot}:00+05:30",
-        "dateModified": f"{edition_date.isoformat()}T{slot}:00+05:30",
+        "datePublished": win_end.isoformat(timespec="seconds"),
+        "dateModified": win_end.isoformat(timespec="seconds"),
         "author": {"@type": "Person", "name": "Kushal K. Daga",
                    "alternateName": PERSON_ALIASES,
                    "url": f"{BLOG}/p/about-us_02080501126.html"},
-        "publisher": {"@type": "Organization", "name": "Daily Yield",
-                      "alternateName": "Finance by Kushal", "url": BLOG + "/"},
+        "publisher": {"@type": "Organization", "name": "Daily Yield", "url": BLOG + "/"},
         "about": {"@type": "Place", "name": label} if desk not in CATEGORY_DESKS | {"global"} else {"@type": "Thing", "name": label},
         "keywords": ", ".join([
             f"{label.lower()} finance news today", span_txt[4:], "trusted sources",
@@ -765,7 +769,11 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 def fetch_related(desk, prev_url):
     rel = []
     if prev_url:
-        rel.append((f"Yesterday's {DESKS[desk][1]} Wire — the previous 24 hours", prev_url))
+        rel.append((f"Yesterday's {DESKS[desk][1]} Wire — the previous window", prev_url))
+    rel.extend([
+        ("Markets Today — complete global analysis", BLOG + "/p/markets-today.html"),
+        ("Global Snapshot — concise cross-asset summary", BLOG + "/p/global-snapshot.html"),
+    ])
     try:
         feed = json.loads(http_get(f"{BLOG}/feeds/posts/default?alt=json&max-results=25"))
         kws = {"market": ["market", "invest", "trading"], "macro": ["inflation", "economy", "recession", "gdp"],
@@ -779,11 +787,11 @@ def fetch_related(desk, prev_url):
             tl = t.lower()
             if (desk not in CATEGORY_DESKS and label.split()[0] in tl) or any(k in tl for k in kws):
                 rel.append((t, link))
-            if len(rel) >= 3:
+            if len(rel) >= 4:
                 break
     except Exception:
         pass
-    return rel[:3]
+    return rel[:4]
 
 # ---------------------------------------------------------------- publisher
 def blogger_token():
@@ -806,6 +814,15 @@ def blogger_call(path, token, method="GET", body=None):
         "Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.loads(r.read())
+
+def live_post_exists(url):
+    try:
+        req = urllib.request.Request(url, headers=UA, method="HEAD")
+        with urllib.request.urlopen(req, timeout=20, context=CTX) as response:
+            return response.status == 200
+    except Exception:
+        return False
+
 
 def publish_post(art, token, dry=False):
     if dry:
@@ -849,6 +866,14 @@ def run_desk(desk, tracker, dry=False, token=None):
     if prev.get("edition") == now.date().isoformat():
         print(f"  [{desk}] already published today ({prev.get('url','?')}) — skip")
         return False
+    # Recover safely if Blogger published successfully but a previous tracker push failed.
+    expected_url = f"{BLOG}/{now:%Y/%m}/{slug}-{now.date().isoformat()}.html"
+    if not dry and live_post_exists(expected_url):
+        tracker["desks"][desk] = {"edition": now.date().isoformat(),
+                                  "window_end": now.isoformat(), "url": expected_url}
+        save_tracker(tracker)
+        print(f"  [{desk}] recovered existing live edition; no duplicate: {expected_url}")
+        return True
     # rolling window: previous edition end -> now (24h on first run)
     win_end = now
     win_start = dt.datetime.fromisoformat(prev["window_end"]) if prev.get("window_end") \
@@ -893,8 +918,8 @@ def due_desks():
         slot_dt = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
         if tracker["desks"].get(desk, {}).get("edition") == now.date().isoformat():
             continue
-        if slot_dt <= now + dt.timedelta(minutes=45):
-            due.append(desk)  # due now or missed earlier today -> catch-up
+        if slot_dt <= now + dt.timedelta(minutes=PREFLIGHT_MINUTES):
+            due.append(desk)  # preflight window or missed earlier today -> catch-up
     return due
 
 LAUNCH_DATE = dt.date(2026, 9, 25)   # news section starts Sept 25 (user instruction)
