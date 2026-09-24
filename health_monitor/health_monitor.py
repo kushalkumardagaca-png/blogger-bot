@@ -515,6 +515,24 @@ check_market_page("/p/share-market_0718113516.html", "Global Snapshot", {
     "Legacy transition · Markets Today destination": "/p/markets-today.html",
 })
 
+# Every active static page carries the same compact family directory.
+family_pages = [
+    ("Daily Article", "/p/article.html"), ("Daily News", "/p/daily-news.html"),
+    ("Calculators", "/p/calculator_0908148622.html"), ("Markets Today", "/p/markets-today.html"),
+    ("Global Snapshot", "/p/global-snapshot.html"), ("Money Atlas", "/p/money-atlas_01486068069.html"),
+    ("For Corporate", "/p/for-corporate_01804417406.html"), ("About", "/p/about-us_02080501126.html"),
+    ("Contact", "/p/contact-us_01883938366.html"), ("Disclaimer", "/p/disclaimer.html"),
+    ("Privacy", "/p/privacy-policy.html"),
+]
+for family_name, family_path in family_pages:
+    family_body = page_bodies.get(family_path)
+    family_html = family_body.decode("utf-8", "replace") if family_body else ""
+    family_ok = ('id="dyPageFamily"' in family_html and
+                 "/p/markets-today.html" in family_html and
+                 "/p/global-snapshot.html" in family_html)
+    add("D. Page integrity", f"{family_name} · Daily Yield family directory",
+        "OK" if family_ok else "FAIL", "present with both market desks" if family_ok else "missing or incomplete")
+
 # ---------------------------------------------------------------------------
 # E. GOOGLE SEARCH CONSOLE - FULL SEO AUTOMATION
 #    Activates automatically once the GSC_REFRESH_TOKEN secret exists

@@ -2,10 +2,11 @@
 """Create or update Markets Today without mutating Global Snapshot."""
 from pathlib import Path
 import json, os, requests
+from page_family import ensure_family
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID']
 BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
-HTML=Path(__file__).with_name('markets_today_page.html').read_text(encoding='utf-8')
+HTML=ensure_family(Path(__file__).with_name('markets_today_page.html').read_text(encoding='utf-8'), '/p/markets-today.html')
 
 def headers():
  r=requests.post('https://oauth2.googleapis.com/token',data={

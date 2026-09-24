@@ -2,6 +2,7 @@
 """Create Global Snapshot at a new Blogger URL and retire the former Market Explorer page."""
 from pathlib import Path
 import json, os, requests
+from page_family import ensure_family
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID']
 BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
@@ -37,7 +38,7 @@ def snapshot_content(content,new_url):
  marker='data-global-snapshot-nav="1"'
  if marker not in content:
   content+='''\n<script data-global-snapshot-nav="1">(function(){var u=%s;document.querySelectorAll('a[href*="share-market_0718113516"]').forEach(function(a){a.href=u;var s=a.querySelector('span');if(s)s.textContent='Global Snapshot';else if(a.textContent.trim())a.textContent='Global Snapshot';a.setAttribute('aria-label','Global Snapshot');a.setAttribute('title','Global Snapshot')})})();</script>''' % json.dumps(new_url)
- return content
+ return ensure_family(content, '/p/global-snapshot.html')
 
 def transition_content(new_url):
  return '''<div id="dyGlobalSnapshotTransition" style="max-width:760px;margin:40px auto;padding:clamp(28px,6vw,64px);border:1px solid #eadcc8;border-radius:20px;background:#fffdf8;color:#241610;text-align:center;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"><div style="font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#9c4522">Daily Yield</div><h1 style="margin:14px 0 10px;font:700 clamp(34px,7vw,58px)/1.05 Georgia,serif">Global Snapshot has moved.</h1><p style="max-width:560px;margin:0 auto 22px;color:#6e5d4b;line-height:1.7">The compact cross-asset summary now has its own address. Markets Today remains the complete global research command centre.</p><p style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px"><a href="NEW_URL" style="padding:12px 17px;border-radius:9px;background:#241610;color:#fff;text-decoration:none;font-weight:800">Open Global Snapshot</a><a href="https://dailyyield.blogspot.com/p/markets-today.html" style="padding:12px 17px;border:1px solid #eadcc8;border-radius:9px;color:#241610;text-decoration:none;font-weight:800">Open Markets Today</a></p><small style="color:#6e5d4b">Redirecting to Global Snapshot…</small></div><script data-global-snapshot-transition="1">(function(){var u='NEW_URL';document.querySelectorAll('a[href*="share-market_0718113516"]').forEach(function(a){a.href=u;var s=a.querySelector('span');if(s)s.textContent='Global Snapshot'});setTimeout(function(){location.replace(u)},2200)})();</script>'''.replace('NEW_URL',new_url)
