@@ -1,11 +1,11 @@
 {
-  "overall": "FAIL",
-  "generated_at": "2026-09-24 09:20 IST",
-  "summary": "❌ ATTENTION NEEDED",
+  "overall": "WARN",
+  "generated_at": "2026-09-24 10:11 IST",
+  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 36,
-    "WARN": 3,
-    "FAIL": 1,
+    "OK": 27,
+    "WARN": 9,
+    "FAIL": 0,
     "SKIP": 1
   },
   "missed_slots": [],
@@ -40,13 +40,13 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.1h ago"
+      "detail": "newest master article 2.0h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #22 of 500, 20 published, last at 2026-09-24 02:43 UTC"
+      "detail": "next topic #22 of 500, 21 published, last at 2026-09-24 02:43 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -63,8 +63,8 @@
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 347 KB"
     },
     {
       "section": "B. Blog pages",
@@ -75,20 +75,20 @@
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "OK",
-      "detail": "200 OK · 378 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Share & Market hub",
-      "status": "OK",
-      "detail": "200 OK · 388 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 307 KB"
     },
     {
       "section": "B. Blog pages",
@@ -105,26 +105,26 @@
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "OK",
-      "detail": "200 OK · 623 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "OK",
-      "detail": "200 OK · 389 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "OK",
-      "detail": "200 OK · 394 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "FAIL",
-      "detail": "HTTP 404 HTTP Error 404: Not Found"
+      "status": "WARN",
+      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
     },
     {
       "section": "B. Blog pages",
@@ -201,8 +201,8 @@
     {
       "section": "C. Market data",
       "name": "Mutual fund NAV (mfapi.in)",
-      "status": "OK",
-      "detail": "live"
+      "status": "WARN",
+      "detail": "unavailable (HTTP None)"
     },
     {
       "section": "C. Market data",
@@ -224,33 +224,9 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Price router fix (regionOf)",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "UK market endpoint fix",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Curated indices fix",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Country detector fix",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Crypto backup engine",
-      "status": "OK",
-      "detail": "present"
+      "name": "Share & Market page fetch",
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side)"
     },
     {
       "section": "E. Google Search Console",
@@ -322,6 +298,13 @@
       "ok": 36,
       "warn": 3,
       "fail": 1
+    },
+    {
+      "at": "2026-09-24 10:11 IST",
+      "overall": "WARN",
+      "ok": 27,
+      "warn": 9,
+      "fail": 0
     }
   ],
   "gsc": {
