@@ -23,6 +23,7 @@ REPL=[
  ('CA Kushal Daga','Kushal K. Daga'),
  ('Kushal Kumar Daga','Kushal K. Daga'),
  ('CA Kushal','Kushal K. Daga'),
+ ('CHARTERED ACCOUNTANT','CERTIFIED ACCOUNTANT'),
  ('Chartered Accountant','Certified Accountant'),
  ('chartered accountant','Certified Accountant'),
  ('https://financebycakushal.blogspot.com','https://dailyyield.blogspot.com'),
