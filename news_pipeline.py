@@ -313,7 +313,11 @@ def fetch_source(source):
         text = http_get(url)
     except Exception as e:
         return name, []
-    items = parse_rss(text, source) if kind == "rss" else parse_html_listing(text, source)
+    if kind == "gnr":
+        items = parse_gnr(text, source)
+        media = True
+    else:
+        items = parse_rss(text, source) if kind == "rss" else parse_html_listing(text, source)
     if media:  # newsrooms cover everything; keep only finance/economy stories
         items = [i for i in items if FINANCE_RE.search(i["title"])]
     if trust:  # feed rebuilt continuously; undated items count as current
@@ -321,7 +325,7 @@ def fetch_source(source):
             if i["date"] is None:
                 i["date"] = dt.date.today() - dt.timedelta(days=1)
     for i in items:
-        i["media"] = media
+        i["media"] = i.get("media", media)
     return name, items
 
 # Verified-rich official sources used to top up every desk (own items still lead).
@@ -360,9 +364,13 @@ MEDIA = {
  "germany": [("Deutsche Welle", "https://rss.dw.com/xml/rss-en-all", "rss", 3)],
  "france": [("Le Monde", "https://www.lemonde.fr/en/rss/une.xml", "rss", 2)],
  "india": [("The Economic Times", "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms", "rss", 2)],
- "brazil": [("MercoPress", "https://en.mercopress.com/rss", "rss", 2)],
+ "brazil": [("ANBA", "https://www.anba.com.br/en/rss", "rss", 1),
+           ("The Rio Times", "https://www.riotimesonline.com/feed/", "rss", 1),
+           ("MercoPress", "https://en.mercopress.com/rss", "rss", 2)],
  "global": [("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "rss", 2),
             ("France 24 Business", "https://www.france24.com/en/business/rss", "rss", 3)],
+ "spain": [("El País (English)", "https://english.elpais.com/arc/outboundfeeds/rss/?outputType=xml", "rss", 1),
+           ("The Corner", "https://thecorner.eu/feed/", "rss", 2)],
  "personal": [("The Guardian Money", "https://www.theguardian.com/uk/money/rss", "rss", 1)],
 }
 GLOBAL_MEDIA = [
@@ -372,6 +380,34 @@ GLOBAL_MEDIA = [
     ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "rss", 4),
 ]
 MEDIA_NAMES = {s[0] for lst in MEDIA.values() for s in lst} | {s[0] for s in GLOBAL_MEDIA}
+
+def resolve_url(u, timeout=8):
+    """Follow redirects to the final publisher URL (best effort)."""
+    try:
+        req = urllib.request.Request(u, headers=UA)
+        with urllib.request.urlopen(req, timeout=timeout, context=CTX) as r:
+            return r.geturl() or u
+    except Exception:
+        return u
+
+def parse_gnr(xml_text, source):
+    """Google News RSS: split 'Headline - Publisher', link straight to publisher."""
+    items = parse_rss(xml_text, source)
+    out = []
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        urls = list(ex.map(resolve_url, [i["url"] for i in items[:25]]))
+    for i, u in zip(items[:25], urls):
+        t = i["title"]
+        if " - " in t:
+            head, pub = t.rsplit(" - ", 1)
+            head, pub = head.strip(), pub.strip()
+        else:
+            head, pub = t, "Google News"
+        if not pub or len(pub) > 40:
+            pub = "Google News"
+        out.append({"title": head, "url": u, "desc": i["desc"], "date": i["date"],
+                    "agency": pub, "prio": source[3], "media": True})
+    return out
 # own-country relevance hints for media items on country desks
 COUNTRY_HINTS = {
  "us": r"\b(us|u\.s\.|united states|america|dollar|wall street|fed|nyse|nasdaq|s&p|washington)\b",
@@ -399,7 +435,7 @@ FINANCE_RE = re.compile(r"\b(rate|inflation|cpi|gdp|growth|recession|econom|mark
                         r"fund|loan|credit|mortgage|housing|rent|pension|retirement|insurance|"
                         r"consumer|spending|retail|industrial|export|import|compan|corporate|"
                         r"business|industr|sanction|fine|penalt|startup|crypt|bitcoin|wealth|"
-                        r"money|cash|payment|income|cost|fee|million|billion|trillion)\b", re.I)
+                        r"money|cash|payment|income|cost|fee|million|billion|trillion)", re.I)
 
 def fetch_desk_items(desk):
     if desk in CATEGORY_DESKS or desk == "global":
@@ -442,7 +478,7 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"debt|budget|tax|pension|deposit|mortgage|housing|market|bond|yield|"
                      r"equit|currency|rupee|dollar|euro|yen|yuan|won|ruble|real|peso|loonie|"
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
-                     r"reserve|liquidity|repo|policy)\b", re.I)
+                     r"reserve|liquidity|repo|policy)", re.I)
 
 def select_items(all_items, win_start, win_end, desk, target=22, own_off=None, own_med=None):
     own_off = own_off or set()
@@ -467,7 +503,7 @@ def select_items(all_items, win_start, win_end, desk, target=22, own_off=None, o
             elif i["agency"] in own_med:
                 s += 40        # own-country trusted newsrooms next
                 if hint and not hint.search(i["title"]):
-                    s -= 20    # own outlet but a foreign story — rank it lower
+                    s -= 50    # own outlet but a foreign story — rank it like context
             else:
                 s -= 25        # international context fills
         s += (i["date"] - win_start.date()).days * 2
@@ -852,9 +888,15 @@ def due_desks():
             due.append(desk)  # due now or missed earlier today -> catch-up
     return due
 
+LAUNCH_DATE = dt.date(2026, 9, 25)   # news section starts Sept 25 (user instruction)
+
 def main():
     args = sys.argv[1:]
     dry = "--dry-run" in args
+    today = dt.datetime.now(IST).date()
+    if today < LAUNCH_DATE:
+        print(f"News section starts {LAUNCH_DATE.isoformat()} — today is {today.isoformat()}; nothing published.")
+        return
     if "--list" in args:
         for d, (n, label, slug, slot, _, _) in sorted(DESKS.items(), key=lambda x: x[1][0]):
             print(f"  {n:02d} {d:12s} {slot} IST  {label}")
