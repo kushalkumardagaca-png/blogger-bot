@@ -42,6 +42,16 @@ SLOTS = [
 ]
 SLOT_GRACE_MIN = 75          # minutes after slot before a miss is declared
 HEAL_COOLDOWN_MIN = 120      # min time between auto-heal dispatches
+NEWS_LAUNCH_DATE = datetime(2026, 9, 25, tzinfo=IST).date()
+NEWS_TARGETS = [
+    ("04:30", "Australia"), ("04:35", "South Korea"), ("06:30", "Global News"),
+    ("06:45", "India"), ("09:00", "Market and Trading"),
+    ("09:05", "Economy and Macro Policy"), ("10:30", "Germany"), ("10:35", "France"),
+    ("12:00", "UK"), ("12:05", "Japan"), ("13:00", "China"), ("13:05", "Spain"),
+    ("15:45", "Corporate Finance and Industry"), ("15:50", "Italy"), ("17:00", "Brazil"),
+    ("18:00", "US"), ("18:05", "Canada"), ("19:30", "Mexico"),
+    ("21:00", "Personal Finance"), ("22:00", "Russia"),
+]
 
 STATIC_PAGES = [
     ("Homepage", "/"),
@@ -171,6 +181,7 @@ if st == 200:
                 "has_img": ("<img" in content) or ("<figure" in content.lower()),
                 "has_schema": ("schema.org" in content) or ("ld+json" in content),
                 "is_news": is_news,
+                "labels": labels,
             })
         add("A. Publishing engine", "Blogger feed reachable", "OK",
             f"{len(feed_posts)} recent posts")
@@ -210,7 +221,28 @@ if feed_posts:
                   + timedelta(minutes=SLOT_GRACE_MIN))
         add("A. Publishing engine", "Daily publishing slots", "OK",
             f"{due} slot(s) due so far today — all published; "
-            f"{len(masters_today)} master articles + {len(news_today)} news roundups today")
+            f"{len(masters_today)} master articles + {len(news_today)} news wires today")
+
+# News desks due today, plus a complete previous-day sweep during the overnight run.
+if feed_posts and today >= NEWS_LAUNCH_DATE:
+    due_news_labels = []
+    for news_slot, news_label in NEWS_TARGETS:
+        due_dt = datetime.combine(today, datetime.strptime(news_slot, "%H:%M").time(), IST)
+        if NOW >= due_dt + timedelta(minutes=SLOT_GRACE_MIN):
+            due_news_labels.append(news_label)
+    live_news_labels = {label for p in news_today for label in p.get("labels", []) if label != "News"}
+    missing_news = [label for label in due_news_labels if label not in live_news_labels]
+    add("A. Publishing engine", "Daily news desks due so far", "FAIL" if missing_news else "OK",
+        ("missing: " + ", ".join(missing_news)) if missing_news else
+        f"{len(due_news_labels)} due desk(s) present; {len(news_today)} news wires today")
+    if NOW.hour < 4 and today > NEWS_LAUNCH_DATE:
+        yesterday = today - timedelta(days=1)
+        yesterday_news = [p for p in feed_posts if p["published"].date() == yesterday and p["is_news"]]
+        yesterday_labels = {label for p in yesterday_news for label in p.get("labels", []) if label != "News"}
+        missing_yesterday = [label for _, label in NEWS_TARGETS if label not in yesterday_labels]
+        add("A. Publishing engine", "Previous-day 20-news completion",
+            "FAIL" if missing_yesterday else "OK",
+            ("missing: " + ", ".join(missing_yesterday)) if missing_yesterday else "all 20 desks published")
 
 # A3 - duplicates today
 if feed_posts:
@@ -279,6 +311,23 @@ if TOKEN:
 else:
     add("A. Publishing engine", "Publisher workflow (GitHub Actions)", "SKIP",
         "no token (local run)")
+
+# News workflow health is monitored separately from the master-article tracker.
+if TOKEN:
+    st, body, err = try_fetch(
+        f"https://api.github.com/repos/{REPO}/actions/workflows/daily_news_wires.yml/runs?per_page=12",
+        headers={"Authorization": "Bearer " + TOKEN, "Accept": "application/vnd.github+json"}, timeout=15)
+    if st == 200:
+        news_runs = json.loads(body.decode()).get("workflow_runs", [])
+        completed = [r for r in news_runs if r.get("status") == "completed"]
+        failures = [r for r in completed if r.get("conclusion") == "failure"]
+        add("A. Publishing engine", "News workflow (GitHub Actions)", "FAIL" if failures else "OK",
+            f"{len(failures)} failure(s) among {len(completed)} recent completed runs" if failures
+            else f"last {len(completed)} completed runs successful")
+    else:
+        add("A. Publishing engine", "News workflow (GitHub Actions)", "WARN", f"API {st}")
+else:
+    add("A. Publishing engine", "News workflow (GitHub Actions)", "SKIP", "no token (local run)")
 
 # ---------------------------------------------------------------------------
 # AUTO-HEAL: re-dispatch the publisher if a slot was genuinely missed
