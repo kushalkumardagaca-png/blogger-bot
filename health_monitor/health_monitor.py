@@ -106,14 +106,15 @@ def try_fetch(url, timeout=15, headers=None, data=None, method=None):
         return None, None, str(e)
 
 
-def fetch_blog_url(path, tries=3):
-    """Fetch a blogspot URL with retries + backoff.
+def fetch_blog_url(path, tries=2):
+    """Fetch a blogspot URL with one bounded retry.
     Blogspot throttles datacenter IPs (HTTP 429); a 429 means the site is
-    ALIVE but pacing us - never an outage."""
+    ALIVE but pacing us - never an outage. Two attempts with a single 8s
+    backoff keep every run fast and well inside the free Actions budget."""
     last = (None, None, "")
     for attempt in range(tries):
         if attempt:
-            time.sleep(20 if attempt == 2 else 8)
+            time.sleep(8)
         last = try_fetch(BLOG + path, timeout=20)
         if last[0] == 200:
             return last
