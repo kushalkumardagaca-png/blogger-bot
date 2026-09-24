@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-24 10:11 IST",
+  "generated_at": "2026-09-24 10:18 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 27,
-    "WARN": 9,
+    "OK": 30,
+    "WARN": 10,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.0h ago"
+      "detail": "newest master article 2.1h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -57,20 +57,20 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 231 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 347 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "OK",
-      "detail": "200 OK · 247 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -81,20 +81,20 @@
     {
       "section": "B. Blog pages",
       "name": "Share & Market hub",
+      "status": "OK",
+      "detail": "200 OK · 388 KB"
+    },
+    {
+      "section": "B. Blog pages",
+      "name": "Money Atlas hub",
       "status": "WARN",
       "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
-      "name": "Money Atlas hub",
-      "status": "OK",
-      "detail": "200 OK · 307 KB"
-    },
-    {
-      "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "OK",
-      "detail": "200 OK · 365 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -117,8 +117,8 @@
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 394 KB"
     },
     {
       "section": "B. Blog pages",
@@ -201,8 +201,8 @@
     {
       "section": "C. Market data",
       "name": "Mutual fund NAV (mfapi.in)",
-      "status": "WARN",
-      "detail": "unavailable (HTTP None)"
+      "status": "OK",
+      "detail": "live"
     },
     {
       "section": "C. Market data",
@@ -224,9 +224,33 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Share & Market page fetch",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side)"
+      "name": "Price router fix (regionOf)",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "UK market endpoint fix",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Curated indices fix",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Country detector fix",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Crypto backup engine",
+      "status": "OK",
+      "detail": "present"
     },
     {
       "section": "E. Google Search Console",
@@ -304,6 +328,13 @@
       "overall": "WARN",
       "ok": 27,
       "warn": 9,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 10:18 IST",
+      "overall": "WARN",
+      "ok": 30,
+      "warn": 10,
       "fail": 0
     }
   ],
