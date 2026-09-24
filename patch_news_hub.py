@@ -35,35 +35,36 @@ page = call(f"/pages/{target['id']}", tok)
 content = page["content"]
 orig_len = len(content)
 
-# ---- surgical replacements (each must appear exactly once) ----
-REPL = [
- # 1. parseFeed: extract first <img> from post content
- ("""out.push({title:title,labels:cats,flag:flag,published:published,link:link});""",
-  """var img='';var im=/<img[^>]+src=\\"([^\\"]+)\\"/.exec((e.content&&e.content.$t)||'');if(im)img=im[1]; out.push({title:title,labels:cats,flag:flag,published:published,link:link,img:img});"""),
- # 2. fillTrack: build image HTML for the card
- ("""var h=hoursAgo(it.published);var badge=""",
-  """var h=hoursAgo(it.published);var imgHTML=(it.img?'<div class=\\"kn-cimg\\"><img src=\\"'+it.img+'\\" alt=\\"\\" loading=\\"lazy\\" decoding=\\"async\\"/></div>':'');var badge="""),
- # 3. fillTrack: render image at top of card
- ("""'<div class=\\"kn-cmeta\\">'""",
-  """imgHTML+'<div class=\\"kn-cmeta\\">'"""),
-]
-for old, new in REPL:
+PUSH_OLD = "out.push({title:title,labels:cats,flag:flag,published:published,link:link});"
+PUSH_NEW = ("var img='';var im=/<img[^>]+src=\"([^\"]+)\"/.exec((e.content&&e.content.$t)||'');"
+            "if(im)img=im[1]; "
+            "out.push({title:title,labels:cats,flag:flag,published:published,link:link,img:img});")
+
+BADGE_OLD = "var h=hoursAgo(it.published);var badge="
+BADGE_NEW = ("var h=hoursAgo(it.published);"
+             "var imgHTML=(it.img?'<div class=\"kn-cimg\"><img src=\"'+it.img+'\" alt=\"\" "
+             "loading=\"lazy\" decoding=\"async\"/></div>':'');var badge=")
+
+META_OLD = "'<div class=\"kn-cmeta\">'"
+META_NEW = "imgHTML+'<div class=\"kn-cmeta\">'"
+
+for old, new, name in [(PUSH_OLD, PUSH_NEW, "parseFeed-img"),
+                       (BADGE_OLD, BADGE_NEW, "fillTrack-imgHTML"),
+                       (META_OLD, META_NEW, "fillTrack-render")]:
     n = content.count(old)
     if n != 1:
-        print(f"ABORT: pattern found {n} times (need exactly 1): {old[:70]}...")
+        print(f"ABORT: {name}: pattern found {n} times (need exactly 1)")
         sys.exit(1)
     content = content.replace(old, new)
 
-# 4. CSS for the image (append style block at end of content)
-css = ('<style>.kn-cimg{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:10px;'
-       'background:#F1E5D3;flex:0 0 auto}.kn-cimg img{width:100%;height:100%;object-fit:cover;'
-       'display:block}</style>')
-if ".kn-cimg{" not in content:  # only add once
-    content = content + "\n" + css
+if ".kn-cimg{" not in content:
+    content += ("\n<style>.kn-cimg{width:100%;aspect-ratio:16/9;overflow:hidden;"
+                "border-radius:10px;background:#F1E5D3;flex:0 0 auto}"
+                ".kn-cimg img{width:100%;height:100%;object-fit:cover;display:block}</style>")
 
 call(f"/pages/{target['id']}", tok, "PUT", {
     "kind": "blogger#page", "id": target["id"], "title": page["title"],
     "content": content})
 print(f"PATCHED: {orig_len} -> {len(content)} chars")
-print("verify markers:", content.count("kn-cimg"), "kn-cimg refs |",
-      "img:img" in content, "img field |", "imgHTML" in content, "imgHTML")
+print("markers:", content.count("kn-cimg"), "kn-cimg refs |",
+      "img:img" in content, "img field |", "imgHTML+" in content, "render")
