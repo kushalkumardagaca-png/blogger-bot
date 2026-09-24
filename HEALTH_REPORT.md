@@ -1,8 +1,8 @@
 # 🩺 Blog Health Report — Daily Yield
 
-**Checked:** 2026-09-24 22:57 IST · **Overall:** ❌ ATTENTION NEEDED
+**Checked:** 2026-09-24 23:01 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
 
-**Scoreboard:** 52 OK · 12 warnings · 8 failures · 1 skipped
+**Scoreboard:** 43 OK · 15 warnings · 0 failures · 1 skipped
 
 
 ## A. Publishing engine
@@ -22,18 +22,18 @@
 | Component | Status | Detail |
 |---|---|---|
 | Homepage | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Daily Article hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Daily News hub | ✅ OK | 200 OK · 245 KB |
-| Calculator hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Daily Article hub | ✅ OK | 200 OK · 344 KB |
+| Daily News hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Calculator hub | ✅ OK | 200 OK · 375 KB |
 | Markets Today | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
 | Global Snapshot | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Global Snapshot legacy transition | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Money Atlas hub | ✅ OK | 200 OK · 305 KB |
-| For Corporate hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| About Us | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Global Snapshot legacy transition | ✅ OK | 200 OK · 202 KB |
+| Money Atlas hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| For Corporate hub | ✅ OK | 200 OK · 363 KB |
+| About Us | ✅ OK | 200 OK · 385 KB |
 | Contact Us | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
 | Disclaimer | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Privacy Policy | ✅ OK | 200 OK · 392 KB |
+| Privacy Policy | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
 | robots.txt | ⚠️ WARN | Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan |
 | sitemap.xml | ✅ OK | 25 URLs indexed |
 
@@ -48,7 +48,7 @@
 | Stocks · Germany board (TradingView) | ✅ OK | 2/2 quotes live |
 | World indices & metals (TradingView) | ✅ OK | 3/3 quotes live |
 | Commodities futures (TradingView) | ✅ OK | 2/2 quotes live |
-| Markets Today · global instrument directory | ✅ OK | 457,026 instruments · sample OHLC populated |
+| Markets Today · global instrument directory | ✅ OK | 457,027 instruments · sample OHLC populated |
 | Crypto prices · primary (CoinGecko) | ✅ OK | live |
 | Crypto prices · Global Snapshot backup (Binance) | ✅ OK | live |
 | Crypto fields · Markets Today fallback (Kraken) | ✅ OK | live |
@@ -66,35 +66,21 @@
 | Component | Status | Detail |
 |---|---|---|
 | Global Snapshot · page fetch | ⚠️ WARN | throttled by Blogspot (checker-side) |
-| Markets Today · live page name | ✅ OK | DAILY YIELD: MARKETS TODAY |
-| Markets Today · command-centre root | ✅ OK | present |
-| Markets Today · global search | ✅ OK | present |
-| Markets Today · moving categories | ✅ OK | present |
-| Markets Today · ranked instrument list | ✅ OK | present |
-| Markets Today · universal analysis | ✅ OK | present |
-| Markets Today · current page heading | ✅ OK | present |
-| Markets Today · 85 subcategories | ✅ OK | present |
-| Markets Today · field-level fallback engine | ✅ OK | present |
-| Markets Today · CORS-safe scanner | ✅ OK | present |
-| Markets Today · CoinGecko fallback | ✅ OK | present |
-| Markets Today · Kraken fallback | ✅ OK | present |
-| Markets Today · metals fallback | ✅ OK | present |
-| Markets Today · forex fallback | ✅ OK | present |
-| Markets Today · Global Snapshot navigation patch | ✅ OK | present |
+| Markets Today · page fetch | ⚠️ WARN | throttled by Blogspot (checker-side) |
 | Global Snapshot · live page name | ✅ OK | DAILY YIELD: GLOBAL SNAPSHOT &#8212; MOVED |
 | Legacy transition · transition panel | ✅ OK | present |
 | Legacy transition · Global Snapshot destination | ✅ OK | present |
 | Legacy transition · Markets Today destination | ✅ OK | present |
-| Daily Article · Daily Yield family directory | ❌ FAIL | missing or incomplete |
-| Daily News · Daily Yield family directory | ✅ OK | present with both market desks |
-| Calculators · Daily Yield family directory | ❌ FAIL | missing or incomplete |
-| Markets Today · Daily Yield family directory | ❌ FAIL | missing or incomplete |
-| Global Snapshot · Daily Yield family directory | ❌ FAIL | missing or incomplete |
+| Daily Article · Daily Yield family directory | ✅ OK | present with both market desks |
+| Daily News · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
+| Calculators · Daily Yield family directory | ✅ OK | present with both market desks |
+| Markets Today · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
+| Global Snapshot · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
 | Money Atlas · Daily Yield family directory | ✅ OK | present with both market desks |
-| For Corporate · Daily Yield family directory | ❌ FAIL | missing or incomplete |
-| About · Daily Yield family directory | ❌ FAIL | missing or incomplete |
-| Contact · Daily Yield family directory | ❌ FAIL | missing or incomplete |
-| Disclaimer · Daily Yield family directory | ❌ FAIL | missing or incomplete |
+| For Corporate · Daily Yield family directory | ✅ OK | present with both market desks |
+| About · Daily Yield family directory | ✅ OK | present with both market desks |
+| Contact · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
+| Disclaimer · Daily Yield family directory | ✅ OK | present with both market desks |
 | Privacy · Daily Yield family directory | ✅ OK | present with both market desks |
 
 ## E. Google Search Console
