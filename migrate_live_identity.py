@@ -46,6 +46,12 @@ def text_rewrite(s):
           r'\1\n        "alternateName": ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"],', s)
  s=re.sub(r'("name": "Daily Yield",)(?!\s*\n\s*"alternateName")',
           r'\1\n        "alternateName": "Finance by Kushal",', s)
+ # The legacy-name cleanup above is intentionally reversed only in declared SEO
+ # aliases/explanation; the canonical name and every byline remain unchanged.
+ s=s.replace('"alternateName": ["Kushal Daga", "Kushal K. Daga", "Kushal Jain", "Finance by Kushal"]',
+             '"alternateName": ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"]')
+ s=s.replace('“Kushal K. Daga” refers to Certified Accountant Kushal K. Daga',
+             '“CA Kushal” refers to Certified Accountant Kushal K. Daga')
  return s
 
 def slim_images(s, stat):
