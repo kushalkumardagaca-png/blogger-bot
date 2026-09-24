@@ -58,7 +58,7 @@ for old, new in REPL:
 css = ('<style>.kn-cimg{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:10px;'
        'background:#F1E5D3;flex:0 0 auto}.kn-cimg img{width:100%;height:100%;object-fit:cover;'
        'display:block}</style>')
-if "kn-cimg{" not in content.split("fillTrack")[0][:1000]:  # only add once
+if ".kn-cimg{" not in content:  # only add once
     content = content + "\n" + css
 
 call(f"/pages/{target['id']}", tok, "PUT", {
