@@ -43,7 +43,7 @@ def main():
   fixed=HTML.replace('https://dailyyield.blogspot.com/p/markets-today.html',url)
   result=put(H,result['id'],'MARKETS TODAY',fixed);actions.append('aligned structured canonical to '+url)
  check=requests.get(f"{BASE}/pages/{result['id']}",headers=H,params={'fetchBody':'true'},timeout=30);check.raise_for_status();got=check.json()
- assert got.get('title')=='MARKETS TODAY' and 'id="dyMarkets"' in got.get('content','')
+ assert got.get('title')=='MARKETS TODAY' and ('id="dyMarkets"' in got.get('content','') or 'id="dyMarketWall"' in got.get('content',''))
  refreshed=pages(H);explore=next(p for p in refreshed if p['id']==old['id'])
  assert explore['title']=='MARKET EXPLORER'
  report={'actions':actions,'markets_today':{'id':result['id'],'url':result.get('url')},'market_explorer':{'id':old['id'],'url':explore.get('url')},'verified':True}
