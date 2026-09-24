@@ -723,7 +723,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 
   <h1 class="fbk-h1">{htmlmod.escape(desk_title_prefix(desk))}: {htmlmod.escape(headline_bits)}</h1>
   <p class="fbk-lede">{len(items)} official items from the {label} desk, all inside {span_txt} — the primary releases, the reference levels, and what they mean. Read the source, not the noise.</p>
-  <div class="fbk-byline"><strong>By CA Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
+  <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
 {fx_html}
@@ -739,7 +739,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "headline": title[:110], "description": meta, "inLanguage": "en",
         "datePublished": f"{edition_date.isoformat()}T{slot}:00+05:30",
         "dateModified": f"{edition_date.isoformat()}T{slot}:00+05:30",
-        "author": {"@type": "Person", "name": "CA Kushal K. Daga",
+        "author": {"@type": "Person", "name": "Kushal K. Daga",
                    "url": f"{BLOG}/p/about.html"},
         "publisher": {"@type": "Organization", "name": "Daily Yield",
                       "url": BLOG + "/"},

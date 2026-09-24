@@ -1,0 +1,35 @@
+name: Daily Yield identity migration (manual, coordinated)
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Type APPLY only after the classic Daily Yield theme is live"
+        required: true
+        default: "AUDIT"
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pillow
+      - name: Audit or apply exact identity migration
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          APPLY_IDENTITY_MIGRATION: ${{ inputs.apply == 'APPLY' && '1' || '0' }}
+        run: python migrate_live_identity.py
+      - name: Preserve rollback backup
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: identity-migration-backup
+          path: identity_migration_backup.json
+          if-no-files-found: ignore
+          retention-days: 30

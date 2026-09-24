@@ -159,11 +159,11 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
     post_url = f"https://dailyyield.blogspot.com/{year_month}/{slug}.html"
     
     # Construct exact 25-taxonomy labels + SEO/GEO tags
-    labels = [category, "2026 Money Moves", title, f"{category} Strategy", "CA Kushal K. Daga"]
+    labels = [category, "2026 Money Moves", title, f"{category} Strategy", "Kushal K. Daga"]
     labels_str = ", ".join(labels)
     
     # Meta description under 160 chars
-    meta_desc = f"{desc[:145].rstrip('.')}." if len(desc) <= 145 else f"{desc[:140].rstrip('.')} - Analysis by CA Kushal."
+    meta_desc = f"{desc[:145].rstrip('.')}." if len(desc) <= 145 else f"{desc[:140].rstrip('.')} - Analysis by Kushal K. Daga."
     if len(meta_desc) > 158:
         meta_desc = meta_desc[:155].rstrip('.') + "..."
 
@@ -186,7 +186,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 "inLanguage": "en",
                 "author": {
                     "@type": "Person",
-                    "name": "CA Kushal Daga",
+                    "name": "Kushal K. Daga",
                     "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
                     "sameAs": [
                         "https://x.com/CAKUSHAL2509",
@@ -279,7 +279,7 @@ JSON-LD URL INTEGRITY VERIFICATION:
 [x] @id = {post_url}#article
 [x] url = {post_url}
 [x] mainEntityOfPage = {post_url}
-[x] Author: CA Kushal Daga (https://dailyyield.blogspot.com/p/about-us_02080501126.html)
+[x] Author: Kushal K. Daga (https://dailyyield.blogspot.com/p/about-us_02080501126.html)
 [x] Single clean BlogPosting graph, zero duplicate schemas
 ================================================================================
 -->
@@ -542,7 +542,7 @@ document.addEventListener("DOMContentLoaded", function() {{
       <span class="kushal-pill">Global Edition</span>
     </div>
     <div class="kushal-meta-line">
-      <span>By <strong>CA Kushal Daga</strong></span> · 
+      <span>By <strong>Kushal K. Daga</strong></span> · 
       <span>Published: <strong>{pub_date_str}</strong></span> · 
       <span>Reading Time: <strong>18 Mins</strong></span> · 
       <span>Audited: <strong>September 2026 Standards</strong></span>
@@ -750,7 +750,7 @@ document.addEventListener("DOMContentLoaded", function() {{
   </section>
 
   <section style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 20px;">
-    <p style="font-size: 13.5px; color: var(--muted); font-style: italic;"><strong>Professional Accounting Disclaimer:</strong> This article is authored and published strictly for educational, research, and financial analysis purposes by CA Kushal Daga. It does not constitute individual, personalized financial, tax, or legal advisory services. Because statutory tax provisions and market regulations vary significantly across jurisdictions (US, UK, Canada, Australia, and India), readers must consult a certified financial planner, licensed CPA, or Chartered Accountant in their home jurisdiction before executing significant capital transactions.</p>
+    <p style="font-size: 13.5px; color: var(--muted); font-style: italic;"><strong>Professional Accounting Disclaimer:</strong> This article is authored and published strictly for educational, research, and financial analysis purposes by Kushal K. Daga. It does not constitute individual, personalized financial, tax, or legal advisory services. Because statutory tax provisions and market regulations vary significantly across jurisdictions (US, UK, Canada, Australia, and India), readers must consult a certified financial planner, licensed CPA, or Certified Accountant in their home jurisdiction before executing significant capital transactions.</p>
   </section>
 </article>
 """
