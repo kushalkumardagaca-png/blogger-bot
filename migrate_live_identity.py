@@ -88,7 +88,8 @@ def main():
   r=requests.put(f"{BASE}/{kind}/{item['id']}",headers=H,json=body,timeout=90);r.raise_for_status()
   chk=requests.get(f"{BASE}/{kind}/{item['id']}",headers=H,params={'fetchBody':'true'},timeout=30);chk.raise_for_status()
   got=chk.json()
-  labels_ok = kind != 'posts' or got.get('labels',[]) == new_labels
+  # Blogger may alphabetize labels on write; identity, not order, is the invariant.
+  labels_ok = kind != 'posts' or set(got.get('labels',[])) == set(new_labels)
   if got.get('title')!=nt or got.get('content')!=nc or not labels_ok:
    raise RuntimeError('verification failed: '+item['id'])
  if not APPLY:
