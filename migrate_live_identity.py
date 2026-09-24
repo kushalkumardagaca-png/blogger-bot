@@ -25,6 +25,8 @@ REPL=[
  ('CA Kushal','Kushal K. Daga'),
  ('Chartered Accountant','Certified Accountant'),
  ('chartered accountant','Certified Accountant'),
+ ('https://financebycakushal.blogspot.com','https://dailyyield.blogspot.com'),
+ ('http://financebycakushal.blogspot.com','https://dailyyield.blogspot.com'),
 ]
 
 def headers():
@@ -69,23 +71,26 @@ def main():
   for item in all_items(H,kind):
    title=item.get('title','');content=item.get('content',''); stat={'images':0,'bytes':0}
    nt=text_rewrite(title);nc=slim_images(text_rewrite(content),stat)
-   if nt==title and nc==content:continue
+   old_labels=item.get('labels',[]); new_labels=[text_rewrite(x) for x in old_labels]
+   if nt==title and nc==content and new_labels==old_labels:continue
    backup.append({'kind':kind,'id':item['id'],'title':title,'content':content,
-                  'labels':item.get('labels'),'published':item.get('published')})
-   planned.append((kind,item,nt,nc,stat))
+                  'labels':old_labels,'published':item.get('published')})
+   planned.append((kind,item,nt,nc,new_labels,stat))
  Path('identity_migration_backup.json').write_text(json.dumps(backup,ensure_ascii=False))
  print(f"Mode: {'APPLY' if APPLY else 'AUDIT ONLY'}; items requiring update: {len(planned)}")
- for kind,item,nt,nc,st in planned:
+ for kind,item,nt,nc,new_labels,st in planned:
   print(f"{kind[:-1]:4} {item['id']} | {item.get('title','')[:58]} | images {st['images']}, saved ~{st['bytes']//1024} KB")
   if not APPLY:continue
   body={'kind':'blogger#'+kind[:-1],'id':item['id'],'title':nt,'content':nc}
   if kind=='posts':
-   body['labels']=item.get('labels',[])
+   body['labels']=new_labels
    if item.get('published'):body['published']=item['published']
   r=requests.put(f"{BASE}/{kind}/{item['id']}",headers=H,json=body,timeout=90);r.raise_for_status()
   chk=requests.get(f"{BASE}/{kind}/{item['id']}",headers=H,params={'fetchBody':'true'},timeout=30);chk.raise_for_status()
   got=chk.json()
-  if got.get('title')!=nt or got.get('content')!=nc:raise RuntimeError('verification failed: '+item['id'])
+  labels_ok = kind != 'posts' or got.get('labels',[]) == new_labels
+  if got.get('title')!=nt or got.get('content')!=nc or not labels_ok:
+   raise RuntimeError('verification failed: '+item['id'])
  if not APPLY:
   print('No live content changed. Set APPLY_IDENTITY_MIGRATION=1 only at the coordinated theme flip.')
  else:print(f'Verified {len(planned)} live updates.')
