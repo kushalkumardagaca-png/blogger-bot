@@ -711,9 +711,10 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
       <p>Financial education, not personalised advice. Figures as reported {win_str} by the trusted sources linked above.</p>
     </div>'''
 
-    body = f'''<style>{CSS}</style>
-<div class="fbk-wrap">
+    body = f'''<div class="fbk-wrap">
   <figure class="fbk-hero"><img src="{hero_url}" alt="{hero_alt}" width="{HERO_W}" height="{HERO_H}" loading="eager" decoding="async" fetchpriority="high" style="display:block;width:100%;height:auto;max-width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px"></figure>
+
+  <style>{CSS}</style>
 
   <div class="fbk-kicker">
     <span class="fbk-tag">{tag}</span>
