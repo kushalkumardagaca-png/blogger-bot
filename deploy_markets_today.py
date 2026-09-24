@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create/update Markets Today and rename Share & Market to Market Explorer."""
+"""Create or update Markets Today without mutating Global Snapshot."""
 from pathlib import Path
 import json, os, requests
 
@@ -27,11 +27,6 @@ def put(H,pid,title,content):
 
 def main():
  H=headers();allp=pages(H);actions=[]
- old=next((p for p in allp if p.get('title','').strip().upper() in ('SHARE & MARKET','MARKET EXPLORER')),None)
- if not old:raise RuntimeError('Share & Market page not found')
- if old.get('title')!='MARKET EXPLORER':
-  put(H,old['id'],'MARKET EXPLORER',old.get('content',''));actions.append('renamed existing page to MARKET EXPLORER')
- else:actions.append('MARKET EXPLORER already named')
  current=next((p for p in allp if p.get('title','').strip().upper()=='MARKETS TODAY'),None)
  if current:
   result=put(H,current['id'],'MARKETS TODAY',HTML);actions.append('updated MARKETS TODAY')
@@ -44,8 +39,6 @@ def main():
   result=put(H,result['id'],'MARKETS TODAY',fixed);actions.append('aligned structured canonical to '+url)
  check=requests.get(f"{BASE}/pages/{result['id']}",headers=H,params={'fetchBody':'true'},timeout=30);check.raise_for_status();got=check.json()
  assert got.get('title')=='MARKETS TODAY' and ('id="dyMarkets"' in got.get('content','') or 'id="dyMarketWall"' in got.get('content',''))
- refreshed=pages(H);explore=next(p for p in refreshed if p['id']==old['id'])
- assert explore['title']=='MARKET EXPLORER'
- report={'actions':actions,'markets_today':{'id':result['id'],'url':result.get('url')},'market_explorer':{'id':old['id'],'url':explore.get('url')},'verified':True}
+ report={'actions':actions,'markets_today':{'id':result['id'],'url':result.get('url')},'verified':True}
  Path('markets_today_deploy_result.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
 if __name__=='__main__':main()

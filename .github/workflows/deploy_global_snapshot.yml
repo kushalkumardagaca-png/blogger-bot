@@ -1,4 +1,4 @@
-name: Deploy Markets Today page
+name: Deploy Global Snapshot page
 on:
   workflow_dispatch:
 
@@ -11,15 +11,15 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests
-      - name: Create and verify Markets Today
+      - name: Create Global Snapshot and retire the legacy URL
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python deploy_markets_today.py
+        run: python deploy_global_snapshot.py
       - uses: actions/upload-artifact@v4
         with:
-          name: markets-today-deployment
-          path: markets_today_deploy_result.json
+          name: global-snapshot-deployment
+          path: global_snapshot_deploy_result.json
           retention-days: 30

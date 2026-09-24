@@ -10,7 +10,7 @@ Check groups:
   A. Publishing engine   (slots, tracker, workflow runs, article quality)
   B. Blog pages          (homepage, static pages, robots, sitemap)
   C. Market data         (global directory, regional feeds, fallback providers)
-  D. Page integrity      (Market Explorer + Markets Today names and structures)
+  D. Page integrity      (Global Snapshot + Markets Today + legacy transition)
 
 No external pip dependencies (urllib only). Never crashes: every check
 is individually guarded.
@@ -49,7 +49,8 @@ STATIC_PAGES = [
     ("Daily News hub", "/p/daily-news.html"),
     ("Calculator hub", "/p/calculator_0908148622.html"),
     ("Markets Today", "/p/markets-today.html"),
-    ("Market Explorer", "/p/share-market_0718113516.html"),
+    ("Global Snapshot", "/p/global-snapshot.html"),
+    ("Global Snapshot legacy transition", "/p/share-market_0718113516.html"),
     ("Money Atlas hub", "/p/money-atlas_01486068069.html"),
     ("For Corporate hub", "/p/for-corporate_01804417406.html"),
     ("About Us", "/p/about-us_02080501126.html"),
@@ -68,12 +69,12 @@ MARKET_CHECKS = [
     ("Commodities futures (TradingView)", "futures", ["COMEX:GC1!", "NYMEX:CL1!"]),
 ]
 
-ME_MARKERS = {
-    "Market Explorer · price router": "regionOf",
-    "Market Explorer · UK endpoint": "isUK ? 'uk'",
-    "Market Explorer · curated indices": "TASE:TA35",
-    "Market Explorer · country detector": "api.country.is",
-    "Market Explorer · crypto backup": "data-api.binance.vision",
+GS_MARKERS = {
+    "Global Snapshot · price router": "regionOf",
+    "Global Snapshot · UK endpoint": "isUK ? 'uk'",
+    "Global Snapshot · curated indices": "TASE:TA35",
+    "Global Snapshot · country detector": "api.country.is",
+    "Global Snapshot · crypto backup": "data-api.binance.vision",
 }
 
 MT_MARKERS = {
@@ -356,7 +357,7 @@ else:
     add("B. Blog pages", "sitemap.xml", "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
 # ---------------------------------------------------------------------------
-# C. MARKET DATA SERVICES (Market Explorer + Markets Today)
+# C. MARKET DATA SERVICES (Global Snapshot + Markets Today)
 # ---------------------------------------------------------------------------
 print("\nC. MARKET DATA SERVICES")
 print("-" * 60)
@@ -421,7 +422,7 @@ syms = urllib.parse.quote(json.dumps(["BTCUSDT", "ETHUSDT"], separators=(",", ":
 st, body, err = try_fetch("https://data-api.binance.vision/api/v3/ticker/24hr?symbols=" + syms,
                           timeout=15)
 bn_ok = st == 200 and body and b"BTCUSDT" in (body or b"")
-add("C. Market data", "Crypto prices · Market Explorer backup (Binance)", "OK" if bn_ok else "WARN",
+add("C. Market data", "Crypto prices · Global Snapshot backup (Binance)", "OK" if bn_ok else "WARN",
     "live" if bn_ok else f"unavailable (HTTP {st})")
 
 st, body, err = try_fetch("https://api.kraken.com/0/public/Ticker?pair=XBTUSD", timeout=15)
@@ -505,8 +506,13 @@ def check_market_page(path, expected_name, markers):
     else:
         add("D. Page integrity", f"{expected_name} · page fetch", "FAIL", f"HTTP {st}")
 
-check_market_page("/p/share-market_0718113516.html", "Market Explorer", ME_MARKERS)
+check_market_page("/p/global-snapshot.html", "Global Snapshot", GS_MARKERS)
 check_market_page("/p/markets-today.html", "Markets Today", MT_MARKERS)
+check_market_page("/p/share-market_0718113516.html", "Global Snapshot", {
+    "Legacy transition · transition panel": 'id="dyGlobalSnapshotTransition"',
+    "Legacy transition · Global Snapshot destination": "/p/global-snapshot.html",
+    "Legacy transition · Markets Today destination": "/p/markets-today.html",
+})
 
 # ---------------------------------------------------------------------------
 # E. GOOGLE SEARCH CONSOLE - FULL SEO AUTOMATION
