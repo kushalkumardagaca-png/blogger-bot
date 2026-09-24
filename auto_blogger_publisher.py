@@ -55,7 +55,7 @@ import re
 import sys
 from datetime import datetime
 
-# Blogger Blog ID for "Finance by CA Kushal"
+# Blogger Blog ID for "Daily Yield"
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
 TRACKER_FILE = "published_tracker.json"
 CSV_FILE = "500_topics_evenly_mixed.csv"
@@ -195,7 +195,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 },
                 "publisher": {
                     "@type": "Organization",
-                    "name": "Finance by CA Kushal",
+                    "name": "Daily Yield",
                     "url": "https://dailyyield.blogspot.com/"
                 },
                 "datePublished": f"{pub_date_str}T{pub_time_str}:00+05:30",

@@ -35,7 +35,7 @@ SCOPES = ['https://www.googleapis.com/auth/webmasters']
 
 def main():
     print("=" * 65)
-    print("  FINANCE BY CA KUSHAL - 1-TIME SEARCH CONSOLE LINK SETUP")
+    print("  DAILY YIELD - 1-TIME SEARCH CONSOLE LINK SETUP")
     print("=" * 65)
     client_id = input("Enter your OAuth Client ID: ").strip()
     client_secret = input("Enter your OAuth Client Secret: ").strip()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FINANCE BY CA KUSHAL — Daily News Wires Engine (20 desks, 1 article/day each)
+DAILY YIELD — Daily News Wires Engine (20 desks, 1 article/day each)
 ================================================================================
 Per-desk rolling 24-hour window anchored to the desk's IST slot. Official
 sources only (central banks, ministries, stats offices, regulators, exchanges).
@@ -700,7 +700,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         related_html = f'''
     <div class="fbk-related">
       <span class="fbk-chip">From the blog</span>
-      <p><strong>Related reading on Finance by CA Kushal:</strong></p>{links}
+      <p><strong>Related reading on Daily Yield:</strong></p>{links}
     </div>'''
 
     signoff = f'''
@@ -741,7 +741,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "dateModified": f"{edition_date.isoformat()}T{slot}:00+05:30",
         "author": {"@type": "Person", "name": "CA Kushal K. Daga",
                    "url": f"{BLOG}/p/about.html"},
-        "publisher": {"@type": "Organization", "name": "Finance by CA Kushal",
+        "publisher": {"@type": "Organization", "name": "Daily Yield",
                       "url": BLOG + "/"},
         "about": {"@type": "Place", "name": label} if desk not in CATEGORY_DESKS | {"global"} else {"@type": "Thing", "name": label},
         "keywords": f"{label.lower()} finance news today, {span_txt[4:]}, trusted sources, {', '.join(t.lower() for t in top[:4])[:150]}, {edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}",

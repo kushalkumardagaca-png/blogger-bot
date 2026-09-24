@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FINANCE BY CA KUSHAL - 24/7 Blog Health Monitor
+DAILY YIELD - 24/7 Blog Health Monitor
 ================================================
 Runs on GitHub Actions every 4 hours (plus after each publishing slot).
 Checks every critical component of the blog and its data services,
@@ -729,7 +729,7 @@ with open("HEALTH_STATUS.json", "w", encoding="utf-8") as f:
 
 # human-readable markdown
 lines = [
-    "# 🩺 Blog Health Report — Finance by CA Kushal",
+    "# 🩺 Blog Health Report — Daily Yield",
     "",
     f"**Checked:** {NOW_ISO} · **Overall:** {icon[overall]}",
     "",

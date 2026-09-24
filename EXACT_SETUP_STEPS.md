@@ -1,5 +1,5 @@
 # STEP-BY-STEP SETUP GUIDE: AUTONOMOUS BLOGGER PUBLISHING BOT
-### For "Finance by CA Kushal" (Blog ID: 8911514070006792465)
+### For "Daily Yield" (Blog ID: 8911514070006792465)
 
 This guide is designed for a helper, family member, or friend with a computer. It takes **under 7 minutes total**, requires **zero coding knowledge**, and only needs to be performed **once**. After these steps, the system runs 100% autonomously in the cloud 5 times every day for the entire 6 months.
 
