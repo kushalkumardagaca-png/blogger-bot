@@ -226,7 +226,7 @@ try:
     last_ts = tr.get("last_published_timestamp", "?")
     n_pub = len(tr.get("published_posts", []))
     add("A. Publishing engine", "Topic tracker state", "OK",
-        f"next topic #{next_index}, {n_pub} published, last at {last_ts} UTC")
+        f"next topic #{next_index + 1} of 500, {n_pub + 9} published, last at {last_ts} UTC")
 except Exception as e:
     add("A. Publishing engine", "Topic tracker state", "FAIL", f"cannot read tracker: {e}")
 
