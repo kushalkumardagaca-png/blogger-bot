@@ -125,7 +125,7 @@ This guide is designed for a helper, family member, or friend with a computer. I
 2. In the left column, click **Autonomous Blogger Daily Publishing Engine (5x Daily)**.
 3. On the right side, click **Run workflow** > green **Run workflow** button.
 4. Refresh after 20-30 seconds. A green checkmark (`✔`) will appear.
-5. Open **[https://financebycakushal.blogspot.com/](https://financebycakushal.blogspot.com/)**.
+5. Open **[https://dailyyeild.blogspot.com/](https://dailyyeild.blogspot.com/)**.
 6. You will see Topic #11 published live, complete with all SEO tags, schema, styling, and categories!
 
 ---

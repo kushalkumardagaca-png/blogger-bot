@@ -31,7 +31,7 @@ BLOG_ID = os.environ["BLOGGER_BLOG_ID"]
 ASSETS_PAT = os.environ["ASSETS_PAT"]
 ASSETS_REPO = "kushalkumardagaca-png/blog-assets"
 CDN_BASE = f"https://cdn.jsdelivr.net/gh/{ASSETS_REPO}@main"
-BLOG_URL = "https://financebycakushal.blogspot.com/"
+BLOG_URL = "https://dailyyeild.blogspot.com/"
 
 B64_IMG_RE = re.compile(
     r'<img\b[^>]*?\bsrc=(["\'])data:image/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/=]+)\1[^>]*>',

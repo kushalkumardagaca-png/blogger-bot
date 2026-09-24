@@ -25,7 +25,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
-BLOG = "https://financebycakushal.blogspot.com"
+BLOG = "https://dailyyeild.blogspot.com"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 NOW_ISO = NOW.strftime("%Y-%m-%d %H:%M IST")
@@ -509,7 +509,7 @@ else:
         try:
             sites = gsc_call("GET", "sites")
             GSC_SITE = next((s["siteUrl"] for s in sites.get("siteEntry", [])
-                             if "financebycakushal" in s.get("siteUrl", "")), None)
+                             if "dailyyeild" in s.get("siteUrl", "")), None)
             add("E. Google Search Console", "Blog property in Search Console",
                 "OK" if GSC_SITE else "WARN",
                 GSC_SITE or "property not visible to this token")
