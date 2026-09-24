@@ -1,12 +1,12 @@
 {
-  "overall": "PASS",
-  "generated_at": "2026-09-24 22:37 IST",
-  "summary": "✅ ALL SYSTEMS OPERATIONAL",
+  "overall": "WARN",
+  "generated_at": "2026-09-24 22:38 IST",
+  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 65,
-    "WARN": 0,
+    "OK": 56,
+    "WARN": 10,
     "FAIL": 0,
-    "SKIP": 2
+    "SKIP": 1
   },
   "missed_slots": [],
   "auto_heal_actions": [],
@@ -51,32 +51,32 @@
     {
       "section": "A. Publishing engine",
       "name": "Publisher workflow (GitHub Actions)",
-      "status": "SKIP",
-      "detail": "no token (local run)"
+      "status": "OK",
+      "detail": "last 8 runs all successful"
     },
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 244 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 339 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "OK",
-      "detail": "200 OK · 241 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "OK",
-      "detail": "200 OK · 371 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -87,8 +87,8 @@
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
-      "status": "OK",
-      "detail": "200 OK · 380 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -111,26 +111,26 @@
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 380 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "OK",
-      "detail": "200 OK · 616 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "OK",
-      "detail": "200 OK · 382 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "OK",
-      "detail": "200 OK · 387 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -190,7 +190,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,016 instruments · sample OHLC populated"
+      "detail": "457,017 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -213,8 +213,8 @@
     {
       "section": "C. Market data",
       "name": "Metals fields · Markets Today fallback (Gold-API)",
-      "status": "OK",
-      "detail": "live"
+      "status": "WARN",
+      "detail": "unavailable (HTTP None)"
     },
     {
       "section": "C. Market data",
@@ -540,6 +540,13 @@
       "overall": "PASS",
       "ok": 65,
       "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 22:38 IST",
+      "overall": "WARN",
+      "ok": 56,
+      "warn": 10,
       "fail": 0
     }
   ],
