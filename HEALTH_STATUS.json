@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-24 23:01 IST",
+  "generated_at": "2026-09-24 23:14 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 43,
-    "WARN": 15,
+    "OK": 35,
+    "WARN": 23,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.4h ago"
+      "detail": "newest master article 2.6h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -63,8 +63,8 @@
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 344 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -75,8 +75,8 @@
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "OK",
-      "detail": "200 OK · 375 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -105,14 +105,14 @@
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "OK",
-      "detail": "200 OK · 363 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 385 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -135,8 +135,8 @@
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "WARN",
-      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
+      "status": "OK",
+      "detail": "reachable, sitemap declared"
     },
     {
       "section": "B. Blog pages",
@@ -190,7 +190,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,027 instruments · sample OHLC populated"
+      "detail": "457,047 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -309,8 +309,8 @@
     {
       "section": "D. Page integrity",
       "name": "Calculators · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
@@ -321,26 +321,26 @@
     {
       "section": "D. Page integrity",
       "name": "Global Snapshot · Daily Yield family directory",
+      "status": "OK",
+      "detail": "present with both market desks"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Money Atlas · Daily Yield family directory",
       "status": "WARN",
       "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
-      "name": "Money Atlas · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
-    },
-    {
-      "section": "D. Page integrity",
       "name": "For Corporate · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
       "name": "About · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
@@ -351,14 +351,14 @@
     {
       "section": "D. Page integrity",
       "name": "Disclaimer · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
       "name": "Privacy · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "E. Google Search Console",
@@ -368,13 +368,6 @@
     }
   ],
   "history": [
-    {
-      "at": "2026-09-23 22:03 IST",
-      "overall": "PASS",
-      "ok": 40,
-      "warn": 0,
-      "fail": 0
-    },
     {
       "at": "2026-09-23 22:04 IST",
       "overall": "FAIL",
@@ -506,6 +499,13 @@
       "overall": "WARN",
       "ok": 43,
       "warn": 15,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 23:14 IST",
+      "overall": "WARN",
+      "ok": 35,
+      "warn": 23,
       "fail": 0
     }
   ],
