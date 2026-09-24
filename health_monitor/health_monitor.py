@@ -8,9 +8,9 @@ attempts safe auto-healing, and writes a status report to the repo.
 
 Check groups:
   A. Publishing engine   (slots, tracker, workflow runs, article quality)
-  B. Blog pages          (homepage, 10 static pages, robots, sitemap)
-  C. Market data         (7 TradingView endpoints, crypto, FX, funds, geo)
-  D. Page integrity      (Share & Market page fix markers)
+  B. Blog pages          (homepage, static pages, robots, sitemap)
+  C. Market data         (global directory, regional feeds, fallback providers)
+  D. Page integrity      (Market Explorer + Markets Today names and structures)
 
 No external pip dependencies (urllib only). Never crashes: every check
 is individually guarded.
@@ -48,7 +48,8 @@ STATIC_PAGES = [
     ("Daily Article hub", "/p/article.html"),
     ("Daily News hub", "/p/daily-news.html"),
     ("Calculator hub", "/p/calculator_0908148622.html"),
-    ("Share & Market hub", "/p/share-market_0718113516.html"),
+    ("Markets Today", "/p/markets-today.html"),
+    ("Market Explorer", "/p/share-market_0718113516.html"),
     ("Money Atlas hub", "/p/money-atlas_01486068069.html"),
     ("For Corporate hub", "/p/for-corporate_01804417406.html"),
     ("About Us", "/p/about-us_02080501126.html"),
@@ -67,12 +68,28 @@ MARKET_CHECKS = [
     ("Commodities futures (TradingView)", "futures", ["COMEX:GC1!", "NYMEX:CL1!"]),
 ]
 
-SM_MARKERS = {
-    "Price router fix (regionOf)": "regionOf",
-    "UK market endpoint fix": "isUK ? 'uk'",
-    "Curated indices fix": "TASE:TA35",
-    "Country detector fix": "api.country.is",
-    "Crypto backup engine": "data-api.binance.vision",
+ME_MARKERS = {
+    "Market Explorer · price router": "regionOf",
+    "Market Explorer · UK endpoint": "isUK ? 'uk'",
+    "Market Explorer · curated indices": "TASE:TA35",
+    "Market Explorer · country detector": "api.country.is",
+    "Market Explorer · crypto backup": "data-api.binance.vision",
+}
+
+MT_MARKERS = {
+    "Markets Today · command-centre root": 'id="dyMarketWall"',
+    "Markets Today · global search": 'id="dywSearch"',
+    "Markets Today · moving categories": 'id="dywCategories"',
+    "Markets Today · ranked instrument list": 'id="dywCategoryList"',
+    "Markets Today · universal analysis": 'id="dywAnalysis"',
+    "Markets Today · current page heading": "World markets. One command centre.",
+    "Markets Today · 85 subcategories": "85 country, asset, size, sector, commodity, currency and fund subcategories",
+    "Markets Today · field-level fallback engine": "loadFallbackData",
+    "Markets Today · CORS-safe scanner": "text/plain;charset=UTF-8",
+    "Markets Today · CoinGecko fallback": "api.coingecko.com",
+    "Markets Today · Kraken fallback": "api.kraken.com",
+    "Markets Today · metals fallback": "api.gold-api.com",
+    "Markets Today · forex fallback": "api.frankfurter.app",
 }
 
 results = []   # list of dicts: section, name, status(OK/WARN/FAIL/SKIP), detail
@@ -337,7 +354,7 @@ else:
     add("B. Blog pages", "sitemap.xml", "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
 # ---------------------------------------------------------------------------
-# C. MARKET DATA SERVICES (Share & Market page)
+# C. MARKET DATA SERVICES (Market Explorer + Markets Today)
 # ---------------------------------------------------------------------------
 print("\nC. MARKET DATA SERVICES")
 print("-" * 60)
@@ -364,6 +381,33 @@ for name, ep, tickers in MARKET_CHECKS:
 if scanner_ok == 0:
     add("C. Market data", "TradingView scanner overall", "FAIL", "all endpoints down")
 
+# Markets Today global directory: count + a populated core quote
+st, body, err = try_fetch(
+    "https://scanner.tradingview.com/global/scan", timeout=30,
+    data={"filter": [], "options": {"lang": "en"},
+          "symbols": {"query": {"types": []}, "tickers": []},
+          "columns": ["name", "close", "open", "high", "low"],
+          "range": [0, 1]})
+dir_total = 0
+dir_quote_ok = False
+if st == 200 and body:
+    try:
+        dj = json.loads(body.decode())
+        dir_total = int(dj.get("totalCount") or 0)
+        row = (dj.get("data") or [{}])[0].get("d", [])
+        dir_quote_ok = len(row) >= 5 and any(v is not None for v in row[1:5])
+    except Exception:
+        pass
+if dir_total >= 400000 and dir_quote_ok:
+    add("C. Market data", "Markets Today · global instrument directory", "OK",
+        f"{dir_total:,} instruments · sample OHLC populated")
+elif dir_total > 0:
+    add("C. Market data", "Markets Today · global instrument directory", "WARN",
+        f"only {dir_total:,} instruments or sample quote incomplete")
+else:
+    add("C. Market data", "Markets Today · global instrument directory", "FAIL",
+        f"unavailable (HTTP {st})")
+
 # crypto primary + backup
 st, body, err = try_fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
                           "&order=market_cap_desc&per_page=5&page=1", timeout=15)
@@ -375,15 +419,31 @@ syms = urllib.parse.quote(json.dumps(["BTCUSDT", "ETHUSDT"], separators=(",", ":
 st, body, err = try_fetch("https://data-api.binance.vision/api/v3/ticker/24hr?symbols=" + syms,
                           timeout=15)
 bn_ok = st == 200 and body and b"BTCUSDT" in (body or b"")
-add("C. Market data", "Crypto prices · backup (Binance)", "OK" if bn_ok else "WARN",
+add("C. Market data", "Crypto prices · Market Explorer backup (Binance)", "OK" if bn_ok else "WARN",
     "live" if bn_ok else f"unavailable (HTTP {st})")
-if not cg_ok and not bn_ok:
-    add("C. Market data", "Crypto desk overall", "FAIL", "primary and backup both down")
 
-# FX primary + backup
+st, body, err = try_fetch("https://api.kraken.com/0/public/Ticker?pair=XBTUSD", timeout=15)
+kr_ok = st == 200 and body and b"result" in (body or b"") and b"error" in (body or b"")
+add("C. Market data", "Crypto fields · Markets Today fallback (Kraken)",
+    "OK" if kr_ok else "WARN", "live" if kr_ok else f"unavailable (HTTP {st})")
+if not cg_ok and not bn_ok and not kr_ok:
+    add("C. Market data", "Crypto desk overall", "FAIL", "all connected providers down")
+
+# precious-metals field fallback
+st, body, err = try_fetch("https://api.gold-api.com/price/XAU", timeout=15)
+gold_ok = st == 200 and body and b"price" in (body or b"") and b"XAU" in (body or b"")
+add("C. Market data", "Metals fields · Markets Today fallback (Gold-API)",
+    "OK" if gold_ok else "WARN", "live" if gold_ok else f"unavailable (HTTP {st})")
+
+# FX source chain used across the two market pages
+st, body, err = try_fetch("https://api.frankfurter.app/latest?from=USD&to=INR", timeout=15)
+fr_ok = st == 200 and body and b"INR" in (body or b"")
+add("C. Market data", "Exchange rates · Markets Today primary fallback (Frankfurter)",
+    "OK" if fr_ok else "WARN", "live" if fr_ok else f"unavailable (HTTP {st})")
+
 st, body, err = try_fetch("https://open.er-api.com/v6/latest/USD", timeout=15)
 fx_ok = st == 200 and body and b"INR" in (body or b"")
-add("C. Market data", "Exchange rates · primary (ER-API)", "OK" if fx_ok else "WARN",
+add("C. Market data", "Exchange rates · secondary (ER-API)", "OK" if fx_ok else "WARN",
     "live" if fx_ok else f"unavailable (HTTP {st})")
 
 st, body, err = try_fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json",
@@ -391,8 +451,8 @@ st, body, err = try_fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-ap
 jv_ok = st == 200 and body and b"inr" in (body or b"")
 add("C. Market data", "Exchange rates · backup (jsDelivr)", "OK" if jv_ok else "WARN",
     "live" if jv_ok else f"unavailable (HTTP {st})")
-if not fx_ok and not jv_ok:
-    add("C. Market data", "FX conversion overall", "FAIL", "primary and backup both down")
+if not fr_ok and not fx_ok and not jv_ok:
+    add("C. Market data", "FX conversion overall", "FAIL", "all connected providers down")
 
 # mutual funds
 st, body, err = try_fetch("https://api.mfapi.in/mf/search?q=blue", timeout=20)
@@ -416,26 +476,35 @@ if geo_ok == 0:
         "all providers down — world board shown by default")
 
 # ---------------------------------------------------------------------------
-# D. SHARE & MARKET PAGE INTEGRITY
+# D. MARKET PAGE NAMES + STRUCTURAL INTEGRITY
 # ---------------------------------------------------------------------------
-print("\nD. SHARE & MARKET PAGE INTEGRITY")
+print("\nD. MARKET PAGE NAMES + STRUCTURAL INTEGRITY")
 print("-" * 60)
-SM_PATH = "/p/share-market_0718113516.html"
-sm_body = page_bodies.get(SM_PATH)
-sm_st = 200 if sm_body else None
-if not sm_body:
-    sm_st, sm_body, sm_err = fetch_blog_url(SM_PATH)
-if sm_st == 200 and sm_body:
-    html = sm_body.decode("utf-8", "replace")
-    for name, marker in SM_MARKERS.items():
-        add("D. Page integrity", name, "OK" if marker in html else "FAIL",
-            "present" if marker in html else "MISSING from live page")
-elif sm_st == 429:
-    add("D. Page integrity", "Share & Market page fetch", "WARN",
-        "throttled by Blogspot (checker-side)")
-else:
-    add("D. Page integrity", "Share & Market page fetch", "FAIL",
-        f"HTTP {sm_st}")
+
+def check_market_page(path, expected_name, markers):
+    body = page_bodies.get(path)
+    st = 200 if body else None
+    if not body:
+        st, body, _ = fetch_blog_url(path)
+    if st == 200 and body:
+        html = body.decode("utf-8", "replace")
+        title = re.search(r"<title>(.*?)</title>", html, re.I | re.S)
+        title_text = re.sub(r"\s+", " ", title.group(1)).strip() if title else ""
+        title_ok = expected_name.upper() in title_text.upper()
+        add("D. Page integrity", f"{expected_name} · live page name",
+            "OK" if title_ok else "FAIL",
+            title_text if title_ok else f"expected {expected_name}; got {title_text or 'no title'}")
+        for name, marker in markers.items():
+            add("D. Page integrity", name, "OK" if marker in html else "FAIL",
+                "present" if marker in html else "MISSING from live page")
+    elif st == 429:
+        add("D. Page integrity", f"{expected_name} · page fetch", "WARN",
+            "throttled by Blogspot (checker-side)")
+    else:
+        add("D. Page integrity", f"{expected_name} · page fetch", "FAIL", f"HTTP {st}")
+
+check_market_page("/p/share-market_0718113516.html", "Market Explorer", ME_MARKERS)
+check_market_page("/p/markets-today.html", "Markets Today", MT_MARKERS)
 
 # ---------------------------------------------------------------------------
 # E. GOOGLE SEARCH CONSOLE - FULL SEO AUTOMATION
