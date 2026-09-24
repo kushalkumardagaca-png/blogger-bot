@@ -1,6 +1,7 @@
 name: Slug Test (disposable)
 on: workflow_dispatch
-permissions: {}
+permissions:
+  contents: read
 concurrency:
   group: slug-test
 jobs:
