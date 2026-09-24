@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Performance Retrofit — Finance by CA Kushal (2026-09-24)
+Performance Retrofit — Daily Yield (2026-09-24)
 ZERO VISUAL CHANGES — one surgical, provably-invisible operation:
 
   Extract base64-embedded photos (>= 20 KB) from stored POST content, upload the

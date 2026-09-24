@@ -1,4 +1,4 @@
-# 🩺 Blog Health Report — Finance by CA Kushal
+# 🩺 Blog Health Report — Daily Yield
 
 **Checked:** 2026-09-23 22:27 IST · **Overall:** ❌ ATTENTION NEEDED
 
