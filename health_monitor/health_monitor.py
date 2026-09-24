@@ -316,7 +316,7 @@ print("-" * 60)
 page_bodies = {}
 for name, path in STATIC_PAGES:
     if page_bodies:
-        time.sleep(1.5)  # pace requests — Blogspot throttles datacenter IPs
+        time.sleep(3.5)  # stay below Blogspot's datacenter request-rate threshold
     st, body, err = fetch_blog_url(path)
     if st == 200 and body:
         page_bodies[path] = body
@@ -330,6 +330,7 @@ for name, path in STATIC_PAGES:
     else:
         add("B. Blog pages", name, "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
+time.sleep(3.5)
 st, body, err = fetch_blog_url("/robots.txt")
 if st == 200 and b"sitemap" in (body or b"").lower():
     add("B. Blog pages", "robots.txt", "OK", "reachable, sitemap declared")
@@ -341,6 +342,7 @@ elif st in (429, 404):
 else:
     add("B. Blog pages", "robots.txt", "FAIL", f"HTTP {st} {(err or '')[:60]}")
 
+time.sleep(3.5)
 st, body, err = fetch_blog_url("/sitemap.xml")
 if st == 200:
     urls = re.findall(r"<loc>(.*?)</loc>", (body or b"").decode("utf-8", "replace"))
