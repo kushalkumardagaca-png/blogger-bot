@@ -1,12 +1,12 @@
 {
-  "overall": "WARN",
-  "generated_at": "2026-09-24 23:14 IST",
-  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
+  "overall": "PASS",
+  "generated_at": "2026-09-24 23:19 IST",
+  "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
-    "OK": 35,
-    "WARN": 23,
+    "OK": 76,
+    "WARN": 0,
     "FAIL": 0,
-    "SKIP": 1
+    "SKIP": 3
   },
   "missed_slots": [],
   "auto_heal_actions": [],
@@ -22,7 +22,7 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "5 slot(s) due so far today — all published; 5 master articles + 0 news roundups today"
+      "detail": "5 slot(s) due so far today — all published; 5 master articles + 0 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.6h ago"
+      "detail": "newest master article 2.7h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -51,44 +51,50 @@
     {
       "section": "A. Publishing engine",
       "name": "Publisher workflow (GitHub Actions)",
-      "status": "OK",
-      "detail": "last 8 runs all successful"
+      "status": "SKIP",
+      "detail": "no token (local run)"
+    },
+    {
+      "section": "A. Publishing engine",
+      "name": "News workflow (GitHub Actions)",
+      "status": "SKIP",
+      "detail": "no token (local run)"
     },
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 244 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 344 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 245 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 375 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Markets Today",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 273 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 385 KB"
     },
     {
       "section": "B. Blog pages",
@@ -99,38 +105,38 @@
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 305 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 363 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 385 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 620 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 386 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 392 KB"
     },
     {
       "section": "B. Blog pages",
@@ -190,7 +196,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,047 instruments · sample OHLC populated"
+      "detail": "457,048 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -260,15 +266,129 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Global Snapshot · page fetch",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side)"
+      "name": "Global Snapshot · live page name",
+      "status": "OK",
+      "detail": "DAILY YIELD: GLOBAL SNAPSHOT"
     },
     {
       "section": "D. Page integrity",
-      "name": "Markets Today · page fetch",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side)"
+      "name": "Global Snapshot · price router",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Global Snapshot · UK endpoint",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Global Snapshot · curated indices",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Global Snapshot · country detector",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Global Snapshot · crypto backup",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · live page name",
+      "status": "OK",
+      "detail": "DAILY YIELD: MARKETS TODAY"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · command-centre root",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · global search",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · moving categories",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · ranked instrument list",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · universal analysis",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · current page heading",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · 85 subcategories",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · field-level fallback engine",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · CORS-safe scanner",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · CoinGecko fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · Kraken fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · metals fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · forex fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · Global Snapshot navigation patch",
+      "status": "OK",
+      "detail": "present"
     },
     {
       "section": "D. Page integrity",
@@ -303,20 +423,20 @@
     {
       "section": "D. Page integrity",
       "name": "Daily News · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "Calculators · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "Markets Today · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
@@ -327,38 +447,38 @@
     {
       "section": "D. Page integrity",
       "name": "Money Atlas · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "For Corporate · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "About · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "Contact · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "Disclaimer · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "D. Page integrity",
       "name": "Privacy · Daily Yield family directory",
-      "status": "WARN",
-      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
+      "status": "OK",
+      "detail": "present with both market desks"
     },
     {
       "section": "E. Google Search Console",
@@ -368,13 +488,6 @@
     }
   ],
   "history": [
-    {
-      "at": "2026-09-23 22:04 IST",
-      "overall": "FAIL",
-      "ok": 39,
-      "warn": 0,
-      "fail": 1
-    },
     {
       "at": "2026-09-23 22:07 IST",
       "overall": "PASS",
@@ -506,6 +619,13 @@
       "overall": "WARN",
       "ok": 35,
       "warn": 23,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 23:19 IST",
+      "overall": "PASS",
+      "ok": 76,
+      "warn": 0,
       "fail": 0
     }
   ],
