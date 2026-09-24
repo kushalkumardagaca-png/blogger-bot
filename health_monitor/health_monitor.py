@@ -91,6 +91,7 @@ MT_MARKERS = {
     "Markets Today · Kraken fallback": "api.kraken.com",
     "Markets Today · metals fallback": "api.gold-api.com",
     "Markets Today · forex fallback": "api.frankfurter.app",
+    "Markets Today · Global Snapshot navigation patch": "data-global-snapshot-nav",
 }
 
 results = []   # list of dicts: section, name, status(OK/WARN/FAIL/SKIP), detail
