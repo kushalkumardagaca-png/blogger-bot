@@ -41,11 +41,11 @@ def headers():
 def text_rewrite(s):
  for a,b in REPL: s=s.replace(a,b)
  # Entity aliases belong in structured data, while the visible byline stays exact.
- if '"alternateName"' not in s:
-  s=s.replace('"name": "Kushal K. Daga",\n        "url":',
-              '"name": "Kushal K. Daga",\n        "alternateName": ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"],\n        "url":')
-  s=s.replace('"name": "Daily Yield",\n        "url":',
-              '"name": "Daily Yield",\n        "alternateName": "Finance by Kushal",\n        "url":')
+ # Independent negative lookaheads support both old and new JSON-LD layouts.
+ s=re.sub(r'("name": "Kushal K\. Daga",)(?!\s*\n\s*"alternateName")',
+          r'\1\n        "alternateName": ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"],', s)
+ s=re.sub(r'("name": "Daily Yield",)(?!\s*\n\s*"alternateName")',
+          r'\1\n        "alternateName": "Finance by Kushal",', s)
  return s
 
 def slim_images(s, stat):
