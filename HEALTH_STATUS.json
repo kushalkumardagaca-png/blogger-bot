@@ -1,10 +1,10 @@
 {
-  "overall": "WARN",
-  "generated_at": "2026-09-24 16:21 IST",
-  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
+  "overall": "PASS",
+  "generated_at": "2026-09-24 19:22 IST",
+  "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
-    "OK": 35,
-    "WARN": 5,
+    "OK": 40,
+    "WARN": 0,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -16,13 +16,13 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "23 recent posts"
+      "detail": "24 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "3 slot(s) due so far today — all published; 3 master articles + 0 news roundups today"
+      "detail": "4 slot(s) due so far today — all published; 4 master articles + 0 news roundups today"
     },
     {
       "section": "A. Publishing engine",
@@ -34,19 +34,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2167 words, hero image + schema OK (House-Hack Before You Landlord)"
+      "detail": "2234 words, hero image + schema OK (15 Money Myths Your Uncle Repeats)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.7h ago"
+      "detail": "newest master article 1.3h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #24 of 500, 23 published, last at 2026-09-24 09:07 UTC"
+      "detail": "next topic #25 of 500, 24 published, last at 2026-09-24 12:34 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -57,68 +57,68 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 243 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
       "status": "OK",
-      "detail": "200 OK · 348 KB"
+      "detail": "200 OK · 339 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 240 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 379 KB"
+      "detail": "200 OK · 370 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Share & Market hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 380 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
       "status": "OK",
-      "detail": "200 OK · 308 KB"
+      "detail": "200 OK · 299 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 357 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 379 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
       "status": "OK",
-      "detail": "200 OK · 624 KB"
+      "detail": "200 OK · 615 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
       "status": "OK",
-      "detail": "200 OK · 390 KB"
+      "detail": "200 OK · 381 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
       "status": "OK",
-      "detail": "200 OK · 395 KB"
+      "detail": "200 OK · 386 KB"
     },
     {
       "section": "B. Blog pages",
@@ -130,7 +130,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "23 URLs indexed"
+      "detail": "24 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -356,6 +356,13 @@
       "overall": "WARN",
       "ok": 35,
       "warn": 5,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 19:22 IST",
+      "overall": "PASS",
+      "ok": 40,
+      "warn": 0,
       "fail": 0
     }
   ],
