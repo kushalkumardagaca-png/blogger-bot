@@ -37,26 +37,14 @@ CATEGORY_PHOTOS = {
 }
 
 def generate_hero_image_figure(title, category):
+    # Performance: direct Unsplash CDN URL (same photo, same 900x506 crop, q=85).
+    # No download/PIL re-encode/base64 embedding — keeps article HTML ~100 KB lighter
+    # and lets the hero load in parallel from Unsplash's global image CDN.
     photo_id = CATEGORY_PHOTOS.get(category, "photo-1611974789855-9c2a0a7236a3")
-    url = f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=900&h=506&q=85"
-    img_src = url
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=12) as resp:
-            data = resp.read()
-            im = Image.open(io.BytesIO(data))
-            if im.mode in ("RGBA", "P"):
-                im = im.convert("RGB")
-            fitted = ImageOps.fit(im, (900, 506), method=Image.Resampling.LANCZOS)
-            buf = io.BytesIO()
-            fitted.save(buf, format="JPEG", quality=85, optimize=True)
-            b64_str = base64.b64encode(buf.getvalue()).decode("utf-8")
-            img_src = f"data:image/jpeg;base64,{b64_str}"
-    except Exception as e:
-        print(f"Network photo fetch note: {e}, falling back to direct CDN URL")
+    img_src = f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=900&h=506&q=85"
 
     return f"""  <figure class="kushal-hero-figure" style="margin: 24px 0 32px; text-align: center;">
-    <img src="{img_src}" alt="Figure 1.0: Editorial Photography — {title}" width="900" height="506" loading="eager" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #EADCC8; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3);" />
+    <img src="{img_src}" alt="Figure 1.0: Editorial Photography — {title}" width="900" height="506" loading="eager" decoding="async" fetchpriority="high" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #EADCC8; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3);" />
     <figcaption style="font-size: 12.5px; color: #7A6A58; margin-top: 10px; font-style: italic;">Figure 1.0: Editorial Photography — Forensic Strategic Framework for {title}</figcaption>
   </figure>"""
 
