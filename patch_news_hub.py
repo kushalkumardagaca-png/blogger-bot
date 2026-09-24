@@ -44,8 +44,8 @@ REPL = [
  ("""var h=hoursAgo(it.published);var badge=""",
   """var h=hoursAgo(it.published);var imgHTML=(it.img?'<div class=\\"kn-cimg\\"><img src=\\"'+it.img+'\\" alt=\\"\\" loading=\\"lazy\\" decoding=\\"async\\"/></div>':'');var badge="""),
  # 3. fillTrack: render image at top of card
- ("""a.innerHTML= '<div class=\\"kn-cmeta\\">'""",
-  """a.innerHTML= imgHTML+'<div class=\\"kn-cmeta\\">'"""),
+ ("""'<div class=\\"kn-cmeta\\">'""",
+  """imgHTML+'<div class=\\"kn-cmeta\\">'"""),
 ]
 for old, new in REPL:
     n = content.count(old)
