@@ -1,10 +1,10 @@
 {
-  "overall": "PASS",
-  "generated_at": "2026-09-24 19:22 IST",
-  "summary": "✅ ALL SYSTEMS OPERATIONAL",
+  "overall": "WARN",
+  "generated_at": "2026-09-24 22:20 IST",
+  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 40,
-    "WARN": 0,
+    "OK": 55,
+    "WARN": 5,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -16,13 +16,13 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "24 recent posts"
+      "detail": "25 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "4 slot(s) due so far today — all published; 4 master articles + 0 news roundups today"
+      "detail": "5 slot(s) due so far today — all published; 5 master articles + 0 news roundups today"
     },
     {
       "section": "A. Publishing engine",
@@ -34,19 +34,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2234 words, hero image + schema OK (15 Money Myths Your Uncle Repeats)"
+      "detail": "2265 words, hero image + schema OK (12 Money Moves for the Next 12 Months)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.3h ago"
+      "detail": "newest master article 1.7h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #25 of 500, 24 published, last at 2026-09-24 12:34 UTC"
+      "detail": "next topic #26 of 500, 25 published, last at 2026-09-24 15:05 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -58,7 +58,7 @@
       "section": "B. Blog pages",
       "name": "Homepage",
       "status": "OK",
-      "detail": "200 OK · 243 KB"
+      "detail": "200 OK · 244 KB"
     },
     {
       "section": "B. Blog pages",
@@ -70,67 +70,73 @@
       "section": "B. Blog pages",
       "name": "Daily News hub",
       "status": "OK",
-      "detail": "200 OK · 240 KB"
+      "detail": "200 OK · 241 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 370 KB"
+      "detail": "200 OK · 371 KB"
     },
     {
       "section": "B. Blog pages",
-      "name": "Share & Market hub",
-      "status": "OK",
-      "detail": "200 OK · 380 KB"
+      "name": "Markets Today",
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+    },
+    {
+      "section": "B. Blog pages",
+      "name": "Market Explorer",
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
       "status": "OK",
-      "detail": "200 OK · 299 KB"
+      "detail": "200 OK · 300 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
       "status": "OK",
-      "detail": "200 OK · 357 KB"
+      "detail": "200 OK · 358 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 379 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
       "status": "OK",
-      "detail": "200 OK · 615 KB"
+      "detail": "200 OK · 616 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "OK",
-      "detail": "200 OK · 381 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
       "status": "OK",
-      "detail": "200 OK · 386 KB"
+      "detail": "200 OK · 387 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "OK",
-      "detail": "reachable, sitemap declared"
+      "status": "WARN",
+      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
     },
     {
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "24 URLs indexed"
+      "detail": "25 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -176,19 +182,43 @@
     },
     {
       "section": "C. Market data",
+      "name": "Markets Today · global instrument directory",
+      "status": "OK",
+      "detail": "457,000 instruments · sample OHLC populated"
+    },
+    {
+      "section": "C. Market data",
       "name": "Crypto prices · primary (CoinGecko)",
       "status": "OK",
       "detail": "live"
     },
     {
       "section": "C. Market data",
-      "name": "Crypto prices · backup (Binance)",
+      "name": "Crypto prices · Market Explorer backup (Binance)",
       "status": "OK",
       "detail": "live"
     },
     {
       "section": "C. Market data",
-      "name": "Exchange rates · primary (ER-API)",
+      "name": "Crypto fields · Markets Today fallback (Kraken)",
+      "status": "OK",
+      "detail": "live"
+    },
+    {
+      "section": "C. Market data",
+      "name": "Metals fields · Markets Today fallback (Gold-API)",
+      "status": "OK",
+      "detail": "live"
+    },
+    {
+      "section": "C. Market data",
+      "name": "Exchange rates · Markets Today primary fallback (Frankfurter)",
+      "status": "OK",
+      "detail": "live"
+    },
+    {
+      "section": "C. Market data",
+      "name": "Exchange rates · secondary (ER-API)",
       "status": "OK",
       "detail": "live"
     },
@@ -224,31 +254,121 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Price router fix (regionOf)",
+      "name": "Market Explorer · live page name",
+      "status": "OK",
+      "detail": "DAILY YIELD: MARKET EXPLORER"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Market Explorer · price router",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "UK market endpoint fix",
+      "name": "Market Explorer · UK endpoint",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "Curated indices fix",
+      "name": "Market Explorer · curated indices",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "Country detector fix",
+      "name": "Market Explorer · country detector",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "Crypto backup engine",
+      "name": "Market Explorer · crypto backup",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · live page name",
+      "status": "OK",
+      "detail": "DAILY YIELD: MARKETS TODAY"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · command-centre root",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · global search",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · moving categories",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · ranked instrument list",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · universal analysis",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · current page heading",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · 85 subcategories",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · field-level fallback engine",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · CORS-safe scanner",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · CoinGecko fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · Kraken fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · metals fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · forex fallback",
       "status": "OK",
       "detail": "present"
     },
@@ -363,6 +483,13 @@
       "overall": "PASS",
       "ok": 40,
       "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 22:20 IST",
+      "overall": "WARN",
+      "ok": 55,
+      "warn": 5,
       "fail": 0
     }
   ],

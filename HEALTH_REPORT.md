@@ -1,39 +1,40 @@
 # 🩺 Blog Health Report — Daily Yield
 
-**Checked:** 2026-09-24 19:22 IST · **Overall:** ✅ ALL SYSTEMS OPERATIONAL
+**Checked:** 2026-09-24 22:20 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
 
-**Scoreboard:** 40 OK · 0 warnings · 0 failures · 1 skipped
+**Scoreboard:** 55 OK · 5 warnings · 0 failures · 1 skipped
 
 
 ## A. Publishing engine
 
 | Component | Status | Detail |
 |---|---|---|
-| Blogger feed reachable | ✅ OK | 24 recent posts |
-| Daily publishing slots | ✅ OK | 4 slot(s) due so far today — all published; 4 master articles + 0 news roundups today |
+| Blogger feed reachable | ✅ OK | 25 recent posts |
+| Daily publishing slots | ✅ OK | 5 slot(s) due so far today — all published; 5 master articles + 0 news roundups today |
 | No duplicate articles today | ✅ OK | all unique |
-| Newest master article quality | ✅ OK | 2234 words, hero image + schema OK (15 Money Myths Your Uncle Repeats) |
-| Publishing freshness | ✅ OK | newest master article 1.3h ago |
-| Topic tracker state | ✅ OK | next topic #25 of 500, 24 published, last at 2026-09-24 12:34 UTC |
+| Newest master article quality | ✅ OK | 2265 words, hero image + schema OK (12 Money Moves for the Next 12 Months) |
+| Publishing freshness | ✅ OK | newest master article 1.7h ago |
+| Topic tracker state | ✅ OK | next topic #26 of 500, 25 published, last at 2026-09-24 15:05 UTC |
 | Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
 
 ## B. Blog pages
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ✅ OK | 200 OK · 243 KB |
+| Homepage | ✅ OK | 200 OK · 244 KB |
 | Daily Article hub | ✅ OK | 200 OK · 339 KB |
-| Daily News hub | ✅ OK | 200 OK · 240 KB |
-| Calculator hub | ✅ OK | 200 OK · 370 KB |
-| Share & Market hub | ✅ OK | 200 OK · 380 KB |
-| Money Atlas hub | ✅ OK | 200 OK · 299 KB |
-| For Corporate hub | ✅ OK | 200 OK · 357 KB |
-| About Us | ✅ OK | 200 OK · 379 KB |
-| Contact Us | ✅ OK | 200 OK · 615 KB |
-| Disclaimer | ✅ OK | 200 OK · 381 KB |
-| Privacy Policy | ✅ OK | 200 OK · 386 KB |
-| robots.txt | ✅ OK | reachable, sitemap declared |
-| sitemap.xml | ✅ OK | 24 URLs indexed |
+| Daily News hub | ✅ OK | 200 OK · 241 KB |
+| Calculator hub | ✅ OK | 200 OK · 371 KB |
+| Markets Today | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Market Explorer | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Money Atlas hub | ✅ OK | 200 OK · 300 KB |
+| For Corporate hub | ✅ OK | 200 OK · 358 KB |
+| About Us | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Contact Us | ✅ OK | 200 OK · 616 KB |
+| Disclaimer | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Privacy Policy | ✅ OK | 200 OK · 387 KB |
+| robots.txt | ⚠️ WARN | Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan |
+| sitemap.xml | ✅ OK | 25 URLs indexed |
 
 ## C. Market data
 
@@ -46,9 +47,13 @@
 | Stocks · Germany board (TradingView) | ✅ OK | 2/2 quotes live |
 | World indices & metals (TradingView) | ✅ OK | 3/3 quotes live |
 | Commodities futures (TradingView) | ✅ OK | 2/2 quotes live |
+| Markets Today · global instrument directory | ✅ OK | 457,000 instruments · sample OHLC populated |
 | Crypto prices · primary (CoinGecko) | ✅ OK | live |
-| Crypto prices · backup (Binance) | ✅ OK | live |
-| Exchange rates · primary (ER-API) | ✅ OK | live |
+| Crypto prices · Market Explorer backup (Binance) | ✅ OK | live |
+| Crypto fields · Markets Today fallback (Kraken) | ✅ OK | live |
+| Metals fields · Markets Today fallback (Gold-API) | ✅ OK | live |
+| Exchange rates · Markets Today primary fallback (Frankfurter) | ✅ OK | live |
+| Exchange rates · secondary (ER-API) | ✅ OK | live |
 | Exchange rates · backup (jsDelivr) | ✅ OK | live |
 | Mutual fund NAV (mfapi.in) | ✅ OK | live |
 | Visitor country detector · ipwho.is | ✅ OK | live |
@@ -59,11 +64,26 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Price router fix (regionOf) | ✅ OK | present |
-| UK market endpoint fix | ✅ OK | present |
-| Curated indices fix | ✅ OK | present |
-| Country detector fix | ✅ OK | present |
-| Crypto backup engine | ✅ OK | present |
+| Market Explorer · live page name | ✅ OK | DAILY YIELD: MARKET EXPLORER |
+| Market Explorer · price router | ✅ OK | present |
+| Market Explorer · UK endpoint | ✅ OK | present |
+| Market Explorer · curated indices | ✅ OK | present |
+| Market Explorer · country detector | ✅ OK | present |
+| Market Explorer · crypto backup | ✅ OK | present |
+| Markets Today · live page name | ✅ OK | DAILY YIELD: MARKETS TODAY |
+| Markets Today · command-centre root | ✅ OK | present |
+| Markets Today · global search | ✅ OK | present |
+| Markets Today · moving categories | ✅ OK | present |
+| Markets Today · ranked instrument list | ✅ OK | present |
+| Markets Today · universal analysis | ✅ OK | present |
+| Markets Today · current page heading | ✅ OK | present |
+| Markets Today · 85 subcategories | ✅ OK | present |
+| Markets Today · field-level fallback engine | ✅ OK | present |
+| Markets Today · CORS-safe scanner | ✅ OK | present |
+| Markets Today · CoinGecko fallback | ✅ OK | present |
+| Markets Today · Kraken fallback | ✅ OK | present |
+| Markets Today · metals fallback | ✅ OK | present |
+| Markets Today · forex fallback | ✅ OK | present |
 
 ## E. Google Search Console
 
