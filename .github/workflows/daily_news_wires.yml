@@ -1,0 +1,51 @@
+name: Daily News Wires
+on:
+  schedule:
+    - cron: "35 22 * * *"   # 04:05 IST — Australia 04:30, South Korea 04:35
+    - cron: "35 0 * * *"    # 06:05 IST — Global 06:30, India 06:45
+    - cron: "5 3 * * *"     # 08:35 IST — Market 09:00, Macro 09:05
+    - cron: "35 4 * * *"    # 10:05 IST — Germany 10:30, France 10:35
+    - cron: "5 6 * * *"     # 11:35 IST — UK 12:00, Japan 12:05
+    - cron: "5 7 * * *"     # 12:35 IST — China 13:00, Spain 13:05
+    - cron: "50 9 * * *"    # 15:20 IST — Corporate 15:45, Italy 15:50
+    - cron: "5 11 * * *"    # 16:35 IST — Brazil 17:00
+    - cron: "5 12 * * *"    # 17:35 IST — US 18:00, Canada 18:05
+    - cron: "35 13 * * *"   # 19:05 IST — Mexico 19:30
+    - cron: "5 15 * * *"    # 20:35 IST — Personal 21:00
+    - cron: "5 16 * * *"    # 21:35 IST — Russia 22:00
+  workflow_dispatch:
+    inputs:
+      desks:
+        description: "desk slugs (comma-sep) or blank for --due"
+        required: false
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: news-wires
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run news pipeline
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          if [ -n "${{ github.event.inputs.desks }}" ]; then
+            python3 news_pipeline.py --desks "${{ github.event.inputs.desks }}"
+          else
+            python3 news_pipeline.py --due
+          fi
+      - name: Commit tracker
+        if: always()
+        run: |
+          git config user.name "Finance Bot" && git config user.email "bot@financebycakushal.local"
+          git add news_tracker.json || true
+          git commit -m "chore: news tracker update" -q || echo "no tracker change"
+          git pull --rebase origin main -q || true
+          git push origin main || echo "tracker push skipped"
