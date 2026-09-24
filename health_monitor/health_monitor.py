@@ -526,12 +526,22 @@ family_pages = [
 ]
 for family_name, family_path in family_pages:
     family_body = page_bodies.get(family_path)
-    family_html = family_body.decode("utf-8", "replace") if family_body else ""
-    family_ok = ('id="dyPageFamily"' in family_html and
-                 "/p/markets-today.html" in family_html and
-                 "/p/global-snapshot.html" in family_html)
-    add("D. Page integrity", f"{family_name} · Daily Yield family directory",
-        "OK" if family_ok else "FAIL", "present with both market desks" if family_ok else "missing or incomplete")
+    family_status = 200 if family_body else None
+    if not family_body:
+        family_status, family_body, _ = fetch_blog_url(family_path)
+    if family_status == 200 and family_body:
+        family_html = family_body.decode("utf-8", "replace")
+        family_ok = ('id="dyPageFamily"' in family_html and
+                     "/p/markets-today.html" in family_html and
+                     "/p/global-snapshot.html" in family_html)
+        add("D. Page integrity", f"{family_name} · Daily Yield family directory",
+            "OK" if family_ok else "FAIL", "present with both market desks" if family_ok else "missing or incomplete")
+    elif family_status == 429:
+        add("D. Page integrity", f"{family_name} · Daily Yield family directory", "WARN",
+            "throttled by Blogspot (checker-side); verified by deployment and next scan")
+    else:
+        add("D. Page integrity", f"{family_name} · Daily Yield family directory", "FAIL",
+            f"page unavailable (HTTP {family_status})")
 
 # ---------------------------------------------------------------------------
 # E. GOOGLE SEARCH CONSOLE - FULL SEO AUTOMATION
