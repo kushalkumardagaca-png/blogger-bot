@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-24 10:18 IST",
+  "generated_at": "2026-09-24 11:37 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 30,
-    "WARN": 10,
+    "OK": 29,
+    "WARN": 11,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -16,13 +16,13 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "7 recent posts"
+      "detail": "22 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "1 slot(s) due so far today — all published; 1 master articles + 0 news roundups today"
+      "detail": "1 slot(s) due so far today — all published; 2 master articles + 0 news roundups today"
     },
     {
       "section": "A. Publishing engine",
@@ -34,19 +34,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2230 words, hero image + schema OK (Run the Recession Checklist While Employ)"
+      "detail": "2217 words, hero image + schema OK (Emergency Fund Size by Job Type)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.1h ago"
+      "detail": "newest master article 0.1h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #22 of 500, 21 published, last at 2026-09-24 02:43 UTC"
+      "detail": "next topic #23 of 500, 22 published, last at 2026-09-24 06:03 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -99,8 +99,8 @@
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 387 KB"
     },
     {
       "section": "B. Blog pages",
@@ -117,8 +117,8 @@
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "OK",
-      "detail": "200 OK · 394 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -130,7 +130,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "21 URLs indexed"
+      "detail": "22 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -201,8 +201,8 @@
     {
       "section": "C. Market data",
       "name": "Mutual fund NAV (mfapi.in)",
-      "status": "OK",
-      "detail": "live"
+      "status": "WARN",
+      "detail": "unavailable (HTTP None)"
     },
     {
       "section": "C. Market data",
@@ -335,6 +335,13 @@
       "overall": "WARN",
       "ok": 30,
       "warn": 10,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 11:37 IST",
+      "overall": "WARN",
+      "ok": 29,
+      "warn": 11,
       "fail": 0
     }
   ],
