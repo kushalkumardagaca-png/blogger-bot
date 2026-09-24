@@ -29,6 +29,9 @@ from concurrent.futures import ThreadPoolExecutor
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 BLOG = "https://dailyyield.blogspot.com"
+SEO_QUERY_TERMS = ["Daily Yield", "Kushal Daga", "CA Kushal", "Kushal Jain",
+                   "Kushal K. Daga", "Finance", "Finance by Kushal"]
+PERSON_ALIASES = ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"]
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -740,11 +743,16 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "datePublished": f"{edition_date.isoformat()}T{slot}:00+05:30",
         "dateModified": f"{edition_date.isoformat()}T{slot}:00+05:30",
         "author": {"@type": "Person", "name": "Kushal K. Daga",
-                   "url": f"{BLOG}/p/about.html"},
+                   "alternateName": PERSON_ALIASES,
+                   "url": f"{BLOG}/p/about-us_02080501126.html"},
         "publisher": {"@type": "Organization", "name": "Daily Yield",
-                      "url": BLOG + "/"},
+                      "alternateName": "Finance by Kushal", "url": BLOG + "/"},
         "about": {"@type": "Place", "name": label} if desk not in CATEGORY_DESKS | {"global"} else {"@type": "Thing", "name": label},
-        "keywords": f"{label.lower()} finance news today, {span_txt[4:]}, trusted sources, {', '.join(t.lower() for t in top[:4])[:150]}, {edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}",
+        "keywords": ", ".join([
+            f"{label.lower()} finance news today", span_txt[4:], "trusted sources",
+            ', '.join(t.lower() for t in top[:4])[:150],
+            f"{edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}",
+            *SEO_QUERY_TERMS]),
     }
     full_html = body + f'''
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'''

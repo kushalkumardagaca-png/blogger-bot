@@ -26,6 +26,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 
 BLOG = "https://dailyyield.blogspot.com"
+SEO_TARGET_QUERIES = ["daily yield", "kushal daga", "ca kushal", "kushal jain",
+                      "kushal k. daga", "finance", "finance by kushal"]
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
 NOW_ISO = NOW.strftime("%Y-%m-%d %H:%M IST")
@@ -599,17 +601,29 @@ else:
             add("E. Google Search Console", "Google search presence (7 days)",
                 "OK", f"{imp} impressions · {clk} clicks · avg position {pos}")
             top_queries = []
+            target_queries = []
             try:
                 qq = gsc_call("POST", f"sites/{enc}/searchAnalytics/query",
                               {"startDate": start, "endDate": end,
                                "dimensions": ["query"], "rowLimit": 5})
                 top_queries = [(r["keys"][0], r.get("impressions", 0))
                                for r in qq.get("rows", [])[:5]]
+                target_rx = "^(" + "|".join(re.escape(x) for x in SEO_TARGET_QUERIES) + ")$"
+                tq = gsc_call("POST", f"sites/{enc}/searchAnalytics/query", {
+                    "startDate": start, "endDate": end, "dimensions": ["query"],
+                    "dimensionFilterGroups": [{"filters": [{"dimension": "query",
+                        "operator": "includingRegex", "expression": target_rx}]}],
+                    "rowLimit": 50})
+                target_queries = [{"query": r["keys"][0],
+                                   "impressions": r.get("impressions", 0),
+                                   "clicks": r.get("clicks", 0),
+                                   "position": round(r.get("position", 0), 1)}
+                                  for r in tq.get("rows", [])]
             except Exception:
                 pass
             gsc_payload = {"date": end, "impressions": imp, "clicks": clk,
                            "position": pos, "top_queries": top_queries,
-                           "at": NOW_ISO}
+                           "target_queries": target_queries, "at": NOW_ISO}
             gsc_history = [h for h in gsc_history if h.get("date") != end]
             gsc_history.append(gsc_payload)
             gsc_history = gsc_history[-60:]
@@ -749,6 +763,14 @@ if gsc_payload:
         lines += [
             "**Top Google searches finding the blog:** "
             + " · ".join(f"\"{q}\" ({imp})" for q, imp in tq),
+            "",
+        ]
+    targets = gsc_payload.get("target_queries") or []
+    if targets:
+        lines += [
+            "**Priority-query performance:** " + " · ".join(
+                f"\"{x['query']}\" {x['impressions']} imp / {x['clicks']} clicks / pos {x['position']}"
+                for x in targets),
             "",
         ]
 if actions:

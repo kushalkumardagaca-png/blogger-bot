@@ -60,6 +60,12 @@ BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
 TRACKER_FILE = "published_tracker.json"
 CSV_FILE = "500_topics_evenly_mixed.csv"
 
+# Permanent entity SEO map. Topic intent remains primary; these variants identify
+# the same publication/person without changing the visible author byline.
+SEO_QUERY_TERMS = ["Daily Yield", "Kushal Daga", "CA Kushal", "Kushal Jain",
+                   "Kushal K. Daga", "Finance", "Finance by Kushal"]
+PERSON_ALIASES = ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"]
+
 # Exact 25 Master Categories Taxonomy (No commas within categories)
 CATEGORIES_25 = [
     "Contrarian Hooks", "Age and Wealth Milestones", "Passive Income Reality",
@@ -161,6 +167,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
     # Construct exact 25-taxonomy labels + SEO/GEO tags
     labels = [category, "2026 Money Moves", title, f"{category} Strategy", "Kushal K. Daga"]
     labels_str = ", ".join(labels)
+    schema_keywords = ", ".join(dict.fromkeys(labels + SEO_QUERY_TERMS))
     
     # Meta description under 160 chars
     meta_desc = f"{desc[:145].rstrip('.')}." if len(desc) <= 145 else f"{desc[:140].rstrip('.')} - Analysis by Kushal K. Daga."
@@ -181,12 +188,13 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 },
                 "headline": title,
                 "description": meta_desc,
-                "keywords": labels_str,
+                "keywords": schema_keywords,
                 "articleSection": category,
                 "inLanguage": "en",
                 "author": {
                     "@type": "Person",
                     "name": "Kushal K. Daga",
+                    "alternateName": PERSON_ALIASES,
                     "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
                     "sameAs": [
                         "https://x.com/CAKUSHAL2509",
@@ -196,6 +204,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 "publisher": {
                     "@type": "Organization",
                     "name": "Daily Yield",
+                    "alternateName": "Finance by Kushal",
                     "url": "https://dailyyield.blogspot.com/"
                 },
                 "datePublished": f"{pub_date_str}T{pub_time_str}:00+05:30",
