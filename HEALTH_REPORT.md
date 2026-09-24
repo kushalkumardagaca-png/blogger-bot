@@ -1,8 +1,8 @@
 # 🩺 Blog Health Report — Finance by CA Kushal
 
-**Checked:** 2026-09-24 03:18 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
+**Checked:** 2026-09-24 09:20 IST · **Overall:** ❌ ATTENTION NEEDED
 
-**Scoreboard:** 39 OK · 1 warnings · 0 failures · 1 skipped
+**Scoreboard:** 36 OK · 3 warnings · 1 failures · 1 skipped
 
 
 ## A. Publishing engine
@@ -10,29 +10,29 @@
 | Component | Status | Detail |
 |---|---|---|
 | Blogger feed reachable | ✅ OK | 7 recent posts |
-| Daily publishing slots | ✅ OK | 0 slot(s) due so far today — all published; 0 master articles + 0 news roundups today |
+| Daily publishing slots | ✅ OK | 1 slot(s) due so far today — all published; 1 master articles + 0 news roundups today |
 | No duplicate articles today | ✅ OK | all unique |
-| Newest master article quality | ✅ OK | 2229 words, hero image + schema OK (What Quiet Rich People Do on Payday) |
-| Publishing freshness | ✅ OK | newest master article 6.7h ago |
-| Topic tracker state | ✅ OK | next topic #20, 10 published, last at 2026-09-23 15:04 UTC |
+| Newest master article quality | ✅ OK | 2230 words, hero image + schema OK (Run the Recession Checklist While Employ) |
+| Publishing freshness | ✅ OK | newest master article 1.1h ago |
+| Topic tracker state | ✅ OK | next topic #22 of 500, 20 published, last at 2026-09-24 02:43 UTC |
 | Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
 
 ## B. Blog pages
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Daily Article hub | ✅ OK | 200 OK · 346 KB |
-| Daily News hub | ✅ OK | 200 OK · 246 KB |
-| Calculator hub | ✅ OK | 200 OK · 377 KB |
-| Share & Market hub | ✅ OK | 200 OK · 387 KB |
-| Money Atlas hub | ✅ OK | 200 OK · 307 KB |
+| Homepage | ✅ OK | 200 OK · 231 KB |
+| Daily Article hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Daily News hub | ✅ OK | 200 OK · 247 KB |
+| Calculator hub | ✅ OK | 200 OK · 378 KB |
+| Share & Market hub | ✅ OK | 200 OK · 388 KB |
+| Money Atlas hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
 | For Corporate hub | ✅ OK | 200 OK · 365 KB |
-| About Us | ✅ OK | 200 OK · 386 KB |
-| Contact Us | ✅ OK | 200 OK · 622 KB |
-| Disclaimer | ✅ OK | 200 OK · 388 KB |
+| About Us | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Contact Us | ✅ OK | 200 OK · 623 KB |
+| Disclaimer | ✅ OK | 200 OK · 389 KB |
 | Privacy Policy | ✅ OK | 200 OK · 394 KB |
-| robots.txt | ✅ OK | reachable, sitemap declared |
+| robots.txt | ❌ FAIL | HTTP 404 HTTP Error 404: Not Found |
 | sitemap.xml | ✅ OK | 21 URLs indexed |
 
 ## C. Market data

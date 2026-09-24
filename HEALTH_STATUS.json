@@ -1,11 +1,11 @@
 {
-  "overall": "WARN",
-  "generated_at": "2026-09-24 03:18 IST",
-  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
+  "overall": "FAIL",
+  "generated_at": "2026-09-24 09:20 IST",
+  "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 39,
-    "WARN": 1,
-    "FAIL": 0,
+    "OK": 36,
+    "WARN": 3,
+    "FAIL": 1,
     "SKIP": 1
   },
   "missed_slots": [],
@@ -22,7 +22,7 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "0 slot(s) due so far today — all published; 0 master articles + 0 news roundups today"
+      "detail": "1 slot(s) due so far today — all published; 1 master articles + 0 news roundups today"
     },
     {
       "section": "A. Publishing engine",
@@ -34,19 +34,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2229 words, hero image + schema OK (What Quiet Rich People Do on Payday)"
+      "detail": "2230 words, hero image + schema OK (Run the Recession Checklist While Employ)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 6.7h ago"
+      "detail": "newest master article 1.1h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #20, 10 published, last at 2026-09-23 15:04 UTC"
+      "detail": "next topic #22 of 500, 20 published, last at 2026-09-24 02:43 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -57,38 +57,38 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
+      "status": "OK",
+      "detail": "200 OK · 231 KB"
+    },
+    {
+      "section": "B. Blog pages",
+      "name": "Daily Article hub",
       "status": "WARN",
       "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
-      "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 346 KB"
-    },
-    {
-      "section": "B. Blog pages",
       "name": "Daily News hub",
       "status": "OK",
-      "detail": "200 OK · 246 KB"
+      "detail": "200 OK · 247 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 377 KB"
+      "detail": "200 OK · 378 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Share & Market hub",
       "status": "OK",
-      "detail": "200 OK · 387 KB"
+      "detail": "200 OK · 388 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "OK",
-      "detail": "200 OK · 307 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -99,20 +99,20 @@
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 386 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
       "status": "OK",
-      "detail": "200 OK · 622 KB"
+      "detail": "200 OK · 623 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
       "status": "OK",
-      "detail": "200 OK · 388 KB"
+      "detail": "200 OK · 389 KB"
     },
     {
       "section": "B. Blog pages",
@@ -123,8 +123,8 @@
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "OK",
-      "detail": "reachable, sitemap declared"
+      "status": "FAIL",
+      "detail": "HTTP 404 HTTP Error 404: Not Found"
     },
     {
       "section": "B. Blog pages",
@@ -315,6 +315,13 @@
       "ok": 39,
       "warn": 1,
       "fail": 0
+    },
+    {
+      "at": "2026-09-24 09:20 IST",
+      "overall": "FAIL",
+      "ok": 36,
+      "warn": 3,
+      "fail": 1
     }
   ],
   "gsc": {
