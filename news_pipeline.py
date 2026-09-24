@@ -308,15 +308,20 @@ def parse_html_listing(page_text, source):
 def fetch_source(source):
     name, url, kind, prio = source[0], source[1], source[2], source[3]
     trust = len(source) > 4 and source[4]
+    media = name in MEDIA_NAMES
     try:
         text = http_get(url)
     except Exception as e:
         return name, []
     items = parse_rss(text, source) if kind == "rss" else parse_html_listing(text, source)
+    if media:  # newsrooms cover everything; keep only finance/economy stories
+        items = [i for i in items if FINANCE_RE.search(i["title"])]
     if trust:  # feed rebuilt continuously; undated items count as current
         for i in items:
             if i["date"] is None:
                 i["date"] = dt.date.today() - dt.timedelta(days=1)
+    for i in items:
+        i["media"] = media
     return name, items
 
 # Verified-rich official sources used to top up every desk (own items still lead).
@@ -337,17 +342,79 @@ GLOBAL_POOL = [
     ("Financial Conduct Authority", "https://www.fca.org.uk/news", "html", 3),
 ]
 
+# Trusted newsrooms (user-approved 2026-09-24: "any genuine and trustworthy sources").
+# Media items must pass FINANCE_RE to stay on-topic for a finance wire.
+MEDIA = {
+ "us": [("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", "rss", 1),
+        ("MarketWatch", "https://feeds.content.dowjones.io/public/rss/mw_topstories", "rss", 2)],
+ "uk": [("BBC Business", "https://feeds.bbci.co.uk/news/business/rss.xml", "rss", 1),
+        ("The Guardian Business", "https://www.theguardian.com/uk/business/rss", "rss", 1)],
+ "russia": [("TASS", "https://tass.com/rss/v2.xml", "rss", 1),
+            ("The Moscow Times", "https://www.themoscowtimes.com/rss/news", "rss", 1)],
+ "south-korea": [("Yonhap News Agency", "https://en.yna.co.kr/RSS/news.xml", "rss", 1)],
+ "japan": [("The Japan Times", "https://www.japantimes.co.jp/feed/", "rss", 2)],
+ "china": [("South China Morning Post", "https://www.scmp.com/rss/4/feed", "rss", 1)],
+ "australia": [("ABC News Australia", "https://www.abc.net.au/news/feed/51120/rss.xml", "rss", 1)],
+ "canada": [("CBC Business", "https://www.cbc.ca/webfeed/rss/rss-business", "rss", 1)],
+ "mexico": [("Mexico News Daily", "https://mexiconewsdaily.com/feed/", "rss", 1)],
+ "germany": [("Deutsche Welle", "https://rss.dw.com/xml/rss-en-all", "rss", 3)],
+ "france": [("Le Monde", "https://www.lemonde.fr/en/rss/une.xml", "rss", 2)],
+ "india": [("The Economic Times", "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms", "rss", 2)],
+ "brazil": [("MercoPress", "https://en.mercopress.com/rss", "rss", 2)],
+ "global": [("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "rss", 2),
+            ("France 24 Business", "https://www.france24.com/en/business/rss", "rss", 3)],
+ "personal": [("The Guardian Money", "https://www.theguardian.com/uk/money/rss", "rss", 1)],
+}
+GLOBAL_MEDIA = [
+    ("BBC Business", "https://feeds.bbci.co.uk/news/business/rss.xml", "rss", 3),
+    ("The Guardian Business", "https://www.theguardian.com/uk/business/rss", "rss", 3),
+    ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", "rss", 3),
+    ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "rss", 4),
+]
+MEDIA_NAMES = {s[0] for lst in MEDIA.values() for s in lst} | {s[0] for s in GLOBAL_MEDIA}
+# own-country relevance hints for media items on country desks
+COUNTRY_HINTS = {
+ "us": r"\b(us|u\.s\.|united states|america|dollar|wall street|fed|nyse|nasdaq|s&p|washington)\b",
+ "china": r"\b(china|chinese|yuan|renminbi|beijing|shanghai|shenzhen|hang seng|alibaba|tencent|byd)\b",
+ "germany": r"\b(germany|german|frankfurt|bundesbank|dax|berlin)\b",
+ "india": r"\b(india|indian|rupee|mumbai|sensex|nifty|reliance|adani|tata|rbi|sebi|gst|bharat)\b",
+ "japan": r"\b(japan|japanese|yen|tokyo|nikkei|toyota|sony|boj)\b",
+ "uk": r"\b(uk|britain|british|pound|sterling|london|ftse|bank of england)\b",
+ "france": r"\b(france|french|paris|cac |macron)\b",
+ "italy": r"\b(italy|italian|milan|ftse mib|italia)\b",
+ "russia": r"\b(russia|russian|ruble|rouble|moscow|kremlin|putin|gazprom|rosneft|sberbank)\b",
+ "canada": r"\b(canada|canadian|loonie|toronto|ottawa|bank of canada)\b",
+ "brazil": r"\b(brazil|brazilian|brasil|bovespa|sao paulo|petrobras|vale|lula|real )\b",
+ "spain": r"\b(spain|spanish|madrid|ibex|espana)\b",
+ "mexico": r"\b(mexico|mexican|peso|banxico|sheinbaum|cemex|amlo)\b",
+ "australia": r"\b(australia|australian|aussie|sydney|asx|rba|canberra)\b",
+ "south-korea": r"\b(korea|korean|won |seoul|kospi|samsung|hyundai|chaebol)\b",
+}
+HINT_RE = {d: re.compile(p, re.I) for d, p in COUNTRY_HINTS.items()}
+FINANCE_RE = re.compile(r"\b(rate|inflation|cpi|gdp|growth|recession|econom|market|bank|trade|tariff|"
+                        r"tax|budget|deficit|debt|currency|rupee|yen|yuan|euro|dollar|pound|ruble|"
+                        r"rouble|won|peso|oil|gas|energy|gold|commodit|pric|merger|acquisition|ipo|"
+                        r"earnings|revenue|profit|jobs|employ|unemploy|wage|salary|stimulus|fiscal|"
+                        r"monetary|central bank|regulat|securit|bond|equit|stock|share|investor|"
+                        r"fund|loan|credit|mortgage|housing|rent|pension|retirement|insurance|"
+                        r"consumer|spending|retail|industrial|export|import|compan|corporate|"
+                        r"business|industr|sanction|fine|penalt|startup|crypt|bitcoin|wealth|"
+                        r"money|cash|payment|income|cost|fee|million|billion|trillion)\b", re.I)
+
 def fetch_desk_items(desk):
     if desk in CATEGORY_DESKS or desk == "global":
-        srcs = [s for d, lst in SOURCES.items() for s in lst]
-        own = set()
+        srcs = [s for d, lst in SOURCES.items() for s in lst] + \
+               [s for d, lst in MEDIA.items() for s in lst] + GLOBAL_POOL + GLOBAL_MEDIA
+        own_off, own_med = set(), set()
     else:
-        srcs = list(SOURCES.get(desk, []))
-        own = {s[0] for s in srcs}
-        have = {s[1] for s in srcs}
-        srcs += [s for s in GLOBAL_POOL if s[1] not in have]
+        off = list(SOURCES.get(desk, []))
+        med = list(MEDIA.get(desk, []))
+        have = {s[1] for s in off + med}
+        srcs = off + med + [s for s in GLOBAL_POOL + GLOBAL_MEDIA if s[1] not in have]
+        own_off = {s[0] for s in off}
+        own_med = {s[0] for s in med}
     seen, seen_urls, out = set(), set(), []
-    with ThreadPoolExecutor(max_workers=10) as ex:
+    with ThreadPoolExecutor(max_workers=12) as ex:
         for name, items in ex.map(fetch_source, srcs):
             for it in items:
                 if it["date"] is None:
@@ -359,7 +426,7 @@ def fetch_desk_items(desk):
                 seen_urls.add(it["url"])
                 it["desk_pool"] = name
                 out.append(it)
-    return out
+    return out, own_off, own_med
 
 # ECB official reference rates (JSON, official source)
 def ecb_reference_rates():
@@ -377,7 +444,9 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
                      r"reserve|liquidity|repo|policy)\b", re.I)
 
-def select_items(all_items, win_start, win_end, desk, target=22):
+def select_items(all_items, win_start, win_end, desk, target=22, own_off=None, own_med=None):
+    own_off = own_off or set()
+    own_med = own_med or set()
     lo = win_start.date()
     floor = win_end.date() - dt.timedelta(days=3)   # extend back max 72h when thin
     while True:
@@ -388,20 +457,25 @@ def select_items(all_items, win_start, win_end, desk, target=22):
         if len(fresh) >= 15 or lo <= floor:
             break
         lo -= dt.timedelta(days=1)
-    own_agencies = {s[0] for s in SOURCES.get(desk, [])} if desk not in CATEGORY_DESKS else set()
-    if desk == "global":
-        own_agencies = set()
+    hint = HINT_RE.get(desk)
     def score(i):
         s = 100 - i["prio"] * 10
         s += 25 if SALIENT.search(i["title"]) else 0
-        if own_agencies:
-            s += 60 if i["agency"] in own_agencies else -25   # own country leads, supplements fill
+        if own_off or own_med:
+            if i["agency"] in own_off:
+                s += 60        # own-country official releases lead
+            elif i["agency"] in own_med:
+                s += 40        # own-country trusted newsrooms next
+                if hint and not hint.search(i["title"]):
+                    s -= 20    # own outlet but a foreign story — rank it lower
+            else:
+                s -= 25        # international context fills
         s += (i["date"] - win_start.date()).days * 2
         return -s
     fresh.sort(key=score)
     agency_count, capped = {}, []
     for i in fresh:
-        cap = 12 if i["agency"] in own_agencies else 6
+        cap = 12 if i["agency"] in own_off else (8 if i["agency"] in own_med else 5)
         if agency_count.get(i["agency"], 0) >= cap:
             continue
         agency_count[i["agency"]] = agency_count.get(i["agency"], 0) + 1
@@ -492,13 +566,13 @@ def compose_item(it, win_end):
     core = desc if desc else etitle
     body = f"<strong>{eagency}</strong> — {core}."
     if not desc:
-        body = f"<strong>{eagency}</strong> — official release of {day}: {etitle}."
+        body = f"<strong>{eagency}</strong> — published {day}: {etitle}."
     body += f" <em>{why}</em>"
     return f'''    <div class="fbk-item">
       <span class="fbk-chip">{day}</span>
       <h3>{etitle}</h3>
       <p>{body}</p>
-      <a class="fbk-src" href="{htmlmod.escape(it['url'])}" target="_blank" rel="noopener">Official: {eagency}</a>
+      <a class="fbk-src" href="{htmlmod.escape(it['url'])}" target="_blank" rel="noopener">{"Source:" if it.get("media") else "Official:"} {eagency}</a>
     </div>'''
 
 # ---------------------------------------------------------------- template
@@ -539,7 +613,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     # sections: group items into 3 thematic blocks + tape
     third = max(1, len(items) // 3)
     secs = [
-        ("01", "The Tape — What Officially Moved", "Every item below is an official release or reference inside the window.", items[:third]),
+        ("01", "The Tape — What Moved and Who Reported It", "Every item below is an official release or reporting from an established, trusted newsroom, inside the window.", items[:third]),
         ("02", "Policy, Data and the Official Record", "Central banks, ministries and statistics offices — the primary releases.", items[third:2*third]),
         ("03", "Regulation, Markets and the Small Print", "Circulars, filings, enforcement and market plumbing.", items[2*third:]),
     ]
@@ -596,9 +670,9 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     signoff = f'''
     <div class="fbk-signoff">
       <span class="fbk-script">Read it? Question it. &#9999;</span>
-      <p>Every item above happened inside {span_txt} ({win_str}). Where an item refers to an earlier fact, it is marked as background. The Week Ahead section looks forward only. Every item links to an official source.</p>
+      <p>Every item above happened inside {span_txt} ({win_str}). Where an item refers to an earlier fact, it is marked as background. The Week Ahead section looks forward only. Every item links to a genuine, trustworthy source — official or an established newsroom.</p>
       <p><strong>Education only, not personalised investment advice.</strong> This is not a recommendation or a promise of profit.</p>
-      <p>Financial education, not personalised advice. Figures as reported {win_str} by the official sources linked above.</p>
+      <p>Financial education, not personalised advice. Figures as reported {win_str} by the trusted sources linked above.</p>
     </div>'''
 
     body = f'''<style>{CSS}</style>
@@ -613,7 +687,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   <h1 class="fbk-h1">{htmlmod.escape(desk_title_prefix(desk))}: {htmlmod.escape(headline_bits)}</h1>
   <p class="fbk-lede">{len(items)} official items from the {label} desk, all inside {span_txt} — the primary releases, the reference levels, and what they mean. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By CA Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
-  <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to an <em>official</em> source — central banks, ministries, statistical offices, regulators, exchanges. No news channels.</p>
+  <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
 {fx_html}
 {week_html}
@@ -633,7 +707,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "publisher": {"@type": "Organization", "name": "Finance by CA Kushal",
                       "url": BLOG + "/"},
         "about": {"@type": "Place", "name": label} if desk not in CATEGORY_DESKS | {"global"} else {"@type": "Thing", "name": label},
-        "keywords": f"{label.lower()} finance news today, {span_txt[4:]}, official sources, {', '.join(t.lower() for t in top[:4])[:150]}, {edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}",
+        "keywords": f"{label.lower()} finance news today, {span_txt[4:]}, trusted sources, {', '.join(t.lower() for t in top[:4])[:150]}, {edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}",
     }
     full_html = body + f'''
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'''
@@ -739,8 +813,9 @@ def run_desk(desk, tracker, dry=False, token=None):
     edition_date = now.date()
     print(f"  [{desk}] window {win_start:%d %b %H:%M} -> {win_end:%d %b %H:%M} IST")
 
-    items_raw = fetch_desk_items(desk)
-    items, upcoming, eff_lo = select_items(items_raw, win_start, win_end, desk)
+    items_raw, own_off, own_med = fetch_desk_items(desk)
+    items, upcoming, eff_lo = select_items(items_raw, win_start, win_end, desk,
+                                           own_off=own_off, own_med=own_med)
     eff_start = dt.datetime.combine(eff_lo, dt.time.min, IST)
     span_h = (win_end - eff_start).total_seconds() / 3600
     print(f"  [{desk}] {len(items_raw)} raw items -> {len(items)} selected "
