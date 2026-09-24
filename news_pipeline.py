@@ -28,7 +28,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
-BLOG = "https://dailyyeild.blogspot.com"
+BLOG = "https://dailyyield.blogspot.com"
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -732,7 +732,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 {signoff}
 </div>'''
 
-    canonical = "https://dailyyeild.blogspot.com/PLACEHOLDER-CANONICAL"
+    canonical = "https://dailyyield.blogspot.com/PLACEHOLDER-CANONICAL"
     jsonld = {
         "@context": "https://schema.org", "@type": "NewsArticle",
         "mainEntityOfPage": {"@id": canonical}, "@id": canonical,

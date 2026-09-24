@@ -44,7 +44,7 @@ jobs:
       - name: Commit tracker
         if: always()
         run: |
-          git config user.name "Finance Bot" && git config user.email "bot@dailyyeild.local"
+          git config user.name "Finance Bot" && git config user.email "bot@dailyyield.local"
           git add news_tracker.json || true
           git commit -m "chore: news tracker update" -q || echo "no tracker change"
           git pull --rebase origin main -q || true

@@ -156,7 +156,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
     idea = topic["Video Idea"]
     slug = clean_slug(title)
     year_month = pub_date_str[:7].replace('-', '/')
-    post_url = f"https://dailyyeild.blogspot.com/{year_month}/{slug}.html"
+    post_url = f"https://dailyyield.blogspot.com/{year_month}/{slug}.html"
     
     # Construct exact 25-taxonomy labels + SEO/GEO tags
     labels = [category, "2026 Money Moves", title, f"{category} Strategy", "CA Kushal K. Daga"]
@@ -187,7 +187,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 "author": {
                     "@type": "Person",
                     "name": "CA Kushal Daga",
-                    "url": "https://dailyyeild.blogspot.com/p/about-us_02080501126.html",
+                    "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
                     "sameAs": [
                         "https://x.com/CAKUSHAL2509",
                         "https://www.linkedin.com/in/finance-by-kushal/"
@@ -196,7 +196,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                 "publisher": {
                     "@type": "Organization",
                     "name": "Finance by CA Kushal",
-                    "url": "https://dailyyeild.blogspot.com/"
+                    "url": "https://dailyyield.blogspot.com/"
                 },
                 "datePublished": f"{pub_date_str}T{pub_time_str}:00+05:30",
                 "dateModified": f"{pub_date_str}T{pub_time_str}:00+05:30"
@@ -208,13 +208,13 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                         "@type": "ListItem",
                         "position": 1,
                         "name": "Home",
-                        "item": "https://dailyyeild.blogspot.com/"
+                        "item": "https://dailyyield.blogspot.com/"
                     },
                     {
                         "@type": "ListItem",
                         "position": 2,
                         "name": category,
-                        "item": "https://dailyyeild.blogspot.com/p/article.html"
+                        "item": "https://dailyyield.blogspot.com/p/article.html"
                     },
                     {
                         "@type": "ListItem",
@@ -279,7 +279,7 @@ JSON-LD URL INTEGRITY VERIFICATION:
 [x] @id = {post_url}#article
 [x] url = {post_url}
 [x] mainEntityOfPage = {post_url}
-[x] Author: CA Kushal Daga (https://dailyyeild.blogspot.com/p/about-us_02080501126.html)
+[x] Author: CA Kushal Daga (https://dailyyield.blogspot.com/p/about-us_02080501126.html)
 [x] Single clean BlogPosting graph, zero duplicate schemas
 ================================================================================
 -->
@@ -651,7 +651,7 @@ document.addEventListener("DOMContentLoaded", function() {{
       </table>
     </div>
 
-    <p>For custom modeling and calculating your exact personal figures under varying savings rates, run your numbers directly on our interactive <a href="https://dailyyeild.blogspot.com/p/calculator_0908148622.html" target="_blank" rel="noopener">Personal Financial Calculators (14 Tools)</a>.</p>
+    <p>For custom modeling and calculating your exact personal figures under varying savings rates, run your numbers directly on our interactive <a href="https://dailyyield.blogspot.com/p/calculator_0908148622.html" target="_blank" rel="noopener">Personal Financial Calculators (14 Tools)</a>.</p>
   </section>
 
   <section>
@@ -718,7 +718,7 @@ document.addEventListener("DOMContentLoaded", function() {{
       </table>
     </div>
 
-    <p>To inspect regional sovereign macroeconomic data and comparative inflation sheets, explore our live <a href="https://dailyyeild.blogspot.com/p/money-atlas_01486068069.html" target="_blank" rel="noopener">Money Atlas Desk</a>.</p>
+    <p>To inspect regional sovereign macroeconomic data and comparative inflation sheets, explore our live <a href="https://dailyyield.blogspot.com/p/money-atlas_01486068069.html" target="_blank" rel="noopener">Money Atlas Desk</a>.</p>
   </section>
 
   <section>
@@ -833,7 +833,7 @@ def main():
         "slug": slug,
         "category": topic["Category"],
         "published_at": f"{pub_date_str} {pub_time_str}",
-        "blogger_url": api_res.get("url") if api_res else f"https://dailyyeild.blogspot.com/{pub_date_str[:7].replace('-', '/')}/{slug}.html"
+        "blogger_url": api_res.get("url") if api_res else f"https://dailyyield.blogspot.com/{pub_date_str[:7].replace('-', '/')}/{slug}.html"
     })
     save_tracker(tracker)
     print(f"Tracker successfully updated! Next topic index: {tracker['next_topic_index']}")
