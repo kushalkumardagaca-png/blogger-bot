@@ -1,12 +1,12 @@
 {
-  "overall": "WARN",
-  "generated_at": "2026-09-24 22:23 IST",
-  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
+  "overall": "PASS",
+  "generated_at": "2026-09-24 22:37 IST",
+  "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
-    "OK": 56,
-    "WARN": 4,
+    "OK": 65,
+    "WARN": 0,
     "FAIL": 0,
-    "SKIP": 1
+    "SKIP": 2
   },
   "missed_slots": [],
   "auto_heal_actions": [],
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.8h ago"
+      "detail": "newest master article 2.0h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -51,8 +51,8 @@
     {
       "section": "A. Publishing engine",
       "name": "Publisher workflow (GitHub Actions)",
-      "status": "OK",
-      "detail": "last 8 runs all successful"
+      "status": "SKIP",
+      "detail": "no token (local run)"
     },
     {
       "section": "B. Blog pages",
@@ -81,14 +81,20 @@
     {
       "section": "B. Blog pages",
       "name": "Markets Today",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 268 KB"
     },
     {
       "section": "B. Blog pages",
-      "name": "Market Explorer",
+      "name": "Global Snapshot",
       "status": "OK",
       "detail": "200 OK · 380 KB"
+    },
+    {
+      "section": "B. Blog pages",
+      "name": "Global Snapshot legacy transition",
+      "status": "OK",
+      "detail": "200 OK · 203 KB"
     },
     {
       "section": "B. Blog pages",
@@ -105,14 +111,14 @@
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 380 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 616 KB"
     },
     {
       "section": "B. Blog pages",
@@ -184,7 +190,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,007 instruments · sample OHLC populated"
+      "detail": "457,016 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -194,7 +200,7 @@
     },
     {
       "section": "C. Market data",
-      "name": "Crypto prices · Market Explorer backup (Binance)",
+      "name": "Crypto prices · Global Snapshot backup (Binance)",
       "status": "OK",
       "detail": "live"
     },
@@ -231,8 +237,8 @@
     {
       "section": "C. Market data",
       "name": "Mutual fund NAV (mfapi.in)",
-      "status": "WARN",
-      "detail": "unavailable (HTTP None)"
+      "status": "OK",
+      "detail": "live"
     },
     {
       "section": "C. Market data",
@@ -254,37 +260,37 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Market Explorer · live page name",
+      "name": "Global Snapshot · live page name",
       "status": "OK",
-      "detail": "DAILY YIELD: MARKET EXPLORER"
+      "detail": "DAILY YIELD: GLOBAL SNAPSHOT"
     },
     {
       "section": "D. Page integrity",
-      "name": "Market Explorer · price router",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Market Explorer · UK endpoint",
+      "name": "Global Snapshot · price router",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "Market Explorer · curated indices",
+      "name": "Global Snapshot · UK endpoint",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "Market Explorer · country detector",
+      "name": "Global Snapshot · curated indices",
       "status": "OK",
       "detail": "present"
     },
     {
       "section": "D. Page integrity",
-      "name": "Market Explorer · crypto backup",
+      "name": "Global Snapshot · country detector",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Global Snapshot · crypto backup",
       "status": "OK",
       "detail": "present"
     },
@@ -369,6 +375,36 @@
     {
       "section": "D. Page integrity",
       "name": "Markets Today · forex fallback",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Markets Today · Global Snapshot navigation patch",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Global Snapshot · live page name",
+      "status": "OK",
+      "detail": "DAILY YIELD: GLOBAL SNAPSHOT &#8212; MOVED"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Legacy transition · transition panel",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Legacy transition · Global Snapshot destination",
+      "status": "OK",
+      "detail": "present"
+    },
+    {
+      "section": "D. Page integrity",
+      "name": "Legacy transition · Markets Today destination",
       "status": "OK",
       "detail": "present"
     },
@@ -497,6 +533,13 @@
       "overall": "WARN",
       "ok": 56,
       "warn": 4,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-24 22:37 IST",
+      "overall": "PASS",
+      "ok": 65,
+      "warn": 0,
       "fail": 0
     }
   ],
