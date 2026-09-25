@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T11:06:05+05:30",
+  "checked_at_ist": "2026-09-25T11:47:26+05:30",
   "summary": {
-    "pass": 40,
+    "pass": 44,
     "fail": 0
   },
   "checks": [
@@ -72,6 +72,26 @@
     },
     {
       "name": "Master posts cannot enter News hub",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master articles include related-reading shelf",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master articles include continuous gesture motion",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News editions include related-reading shelf",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News editions include continuous gesture motion",
       "status": "PASS",
       "detail": ""
     },
@@ -193,7 +213,7 @@
     {
       "name": "News tracker launch/state is valid",
       "status": "PASS",
-      "detail": "8 desk edition(s) recorded"
+      "detail": "9 desk edition(s) recorded"
     },
     {
       "name": "No obsolete blog URL in production engines",

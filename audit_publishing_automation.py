@@ -36,6 +36,10 @@ check('Master byline is current','By <strong>Kushal K. Daga</strong>' in ap and 
 check('Master publisher brand is Daily Yield','"name": "Daily Yield"' in ap and '"name": "Finance by CA Kushal"' not in ap)
 check('Master links both market desks','/p/markets-today.html' in ap and '/p/global-snapshot.html' in ap)
 check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))
+check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)
+check('Master articles include continuous gesture motion','ensure_continuous_motion' in ap)
+check('News editions include related-reading shelf','ensure_related_articles' in np and 'fetch_public_posts' in np)
+check('News editions include continuous gesture motion','ensure_continuous_motion' in np)
 
 # Literal DESKS inventory without executing network code.
 tree=ast.parse(np); desks=None
