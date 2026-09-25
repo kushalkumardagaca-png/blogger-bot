@@ -816,10 +816,16 @@ def blogger_call(path, token, method="GET", body=None):
         return json.loads(r.read())
 
 def live_post_exists(url):
+    """Confirm a real rendered Blogger post; Blogger can return 200 to HEAD on 404 URLs."""
     try:
-        req = urllib.request.Request(url, headers=UA, method="HEAD")
-        with urllib.request.urlopen(req, timeout=20, context=CTX) as response:
-            return response.status == 200
+        req = urllib.request.Request(url, headers=UA, method="GET")
+        with urllib.request.urlopen(req, timeout=25, context=CTX) as response:
+            page = response.read().decode("utf-8", errors="replace")
+            canonical = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', page, re.I)
+            if not canonical:  # tolerate reversed attribute order
+                canonical = re.search(r'<link[^>]+href=["\']([^"\']+)["\'][^>]+rel=["\']canonical["\']', page, re.I)
+            canonical_url = htmlmod.unescape(canonical.group(1)) if canonical else ""
+            return response.status == 200 and canonical_url.rstrip("/") == url.rstrip("/") and "Page not found" not in page
     except Exception:
         return False
 

@@ -62,7 +62,8 @@ check('Each news preflight selects its intended desk cluster',actual_clusters==e
 check('News labels exactly two per post','"labels": ["News", label]' in np)
 check('News launch gate is 2026-09-25','LAUNCH_DATE = dt.date(2026, 9, 25)' in np)
 check('News cluster selector covers paired desks','PREFLIGHT_MINUTES = 60' in np)
-check('News duplicate recovery','live_post_exists(expected_url)' in np)
+check('News duplicate recovery uses rendered GET, not unreliable HEAD',
+      'live_post_exists(expected_url)' in np and 'method="GET"' in np and 'method="HEAD"' not in np)
 check('News source policy is current','official institutions plus established, reputable newsrooms' in np)
 check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News safety floor enforced','if len(items) < 8' in np)

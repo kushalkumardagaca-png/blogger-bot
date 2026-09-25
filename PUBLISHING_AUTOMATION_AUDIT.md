@@ -25,7 +25,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News labels exactly two per post**
 - ✅ **News launch gate is 2026-09-25**
 - ✅ **News cluster selector covers paired desks**
-- ✅ **News duplicate recovery**
+- ✅ **News duplicate recovery uses rendered GET, not unreliable HEAD**
 - ✅ **News source policy is current**
 - ✅ **News finance filter enabled**
 - ✅ **News safety floor enforced**

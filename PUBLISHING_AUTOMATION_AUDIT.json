@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-09-24T23:13:54+05:30",
+  "checked_at_ist": "2026-09-25T06:23:33+05:30",
   "summary": {
     "pass": 35,
     "fail": 0
@@ -111,7 +111,7 @@
       "detail": ""
     },
     {
-      "name": "News duplicate recovery",
+      "name": "News duplicate recovery uses rendered GET, not unreliable HEAD",
       "status": "PASS",
       "detail": ""
     },
