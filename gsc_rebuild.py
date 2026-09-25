@@ -20,7 +20,7 @@ def fetch_json(url,headers=None,method='GET',body=None):
  with urllib.request.urlopen(req,timeout=60) as r:
   raw=r.read();return json.loads(raw) if raw else {}
 def token():
- form=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['GSC_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
+ form=urllib.parse.urlencode({'client_id':os.environ.get('GSC_CLIENT_ID') or os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ.get('GSC_CLIENT_SECRET') or os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['GSC_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
  req=urllib.request.Request('https://oauth2.googleapis.com/token',data=form,method='POST')
  with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)['access_token']
 def gsc(access,method,path,body=None):

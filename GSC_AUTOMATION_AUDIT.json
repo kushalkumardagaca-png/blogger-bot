@@ -1,5 +1,5 @@
 {
-  "pass": 20,
+  "pass": 21,
   "fail": 0,
   "checks": [
     {
@@ -68,6 +68,10 @@
     },
     {
       "name": "Workflow uses secret without exposing it",
+      "status": "PASS"
+    },
+    {
+      "name": "Dedicated browser OAuth client is supported",
       "status": "PASS"
     },
     {

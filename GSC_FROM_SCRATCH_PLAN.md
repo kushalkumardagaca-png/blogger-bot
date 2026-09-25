@@ -19,13 +19,17 @@ Google does not provide a control or API to erase historical Search Console perf
 
 The repository currently has no `GSC_REFRESH_TOKEN`. Search Console automation has therefore never run; watchdog reports correctly show `SKIP`.
 
-One owner action is required:
+One owner authorization is required. For the browser-only OAuth Playground route:
 
-1. Authorize the existing Google Cloud OAuth client for `https://www.googleapis.com/auth/webmasters` using `get_gsc_token.py`.
-2. Add the resulting refresh token to GitHub Actions secrets as `GSC_REFRESH_TOKEN`.
-3. Confirm that the authorizing Google account is an owner/full user of `https://dailyyield.blogspot.com/` in Search Console.
+1. In Google Cloud Console, enable **Google Search Console API** in the selected project.
+2. Configure the OAuth consent screen and publish it to Production (or understand that Testing-mode refresh tokens can expire after seven days).
+3. Create a **Web application** OAuth client with this authorized redirect URI: `https://developers.google.com/oauthplayground`.
+4. In Google OAuth Playground settings, enable **Use your own OAuth credentials**, enter that client ID and secret, and authorize `https://www.googleapis.com/auth/webmasters` with the Google account that owns Daily Yield.
+5. Exchange the authorization code for tokens and copy the refresh token.
+6. Add three GitHub Actions secrets: `GSC_CLIENT_ID`, `GSC_CLIENT_SECRET`, and `GSC_REFRESH_TOKEN`.
+7. Confirm that the authorizing Google account is an owner/full user of `https://dailyyield.blogspot.com/` in Search Console.
 
-Never send the refresh token in chat or commit it to the repository.
+Never send any client secret or refresh token in chat, and never commit one to the repository.
 
 ## First authorized rebuild
 

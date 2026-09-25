@@ -1,6 +1,6 @@
 # Search Console Automation Audit
 
-**20 PASS · 0 FAIL**
+**21 PASS · 0 FAIL**
 
 - ✅ Exact URL-prefix property required
 - ✅ Current Post sitemap submitted
@@ -19,6 +19,7 @@
 - ✅ Fresh baseline file generated
 - ✅ Reports generated
 - ✅ Workflow uses secret without exposing it
+- ✅ Dedicated browser OAuth client is supported
 - ✅ Health monitor inventories Pages and Posts
 - ✅ Health monitor maintains both sitemaps
 - ✅ Health monitor parses current inspection response

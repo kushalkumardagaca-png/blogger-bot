@@ -634,10 +634,10 @@ def gsc_call(method, path, body=None):
         return json.load(r)
 
 
-def oauth_token(refresh_token):
+def oauth_token(refresh_token, client_id=None, client_secret=None):
     form = urllib.parse.urlencode({
-        "client_id": os.environ["BLOGGER_CLIENT_ID"],
-        "client_secret": os.environ["BLOGGER_CLIENT_SECRET"],
+        "client_id": client_id or os.environ["BLOGGER_CLIENT_ID"],
+        "client_secret": client_secret or os.environ["BLOGGER_CLIENT_SECRET"],
         "refresh_token": refresh_token,
         "grant_type": "refresh_token",
     }).encode()
@@ -655,7 +655,11 @@ if not (GSC_RT and os.environ.get("BLOGGER_CLIENT_ID")
 else:
     # E1 - authorize Search Console
     try:
-        GSC_ACCESS = oauth_token(GSC_RT)
+        GSC_ACCESS = oauth_token(
+            GSC_RT,
+            os.environ.get("GSC_CLIENT_ID") or os.environ.get("BLOGGER_CLIENT_ID"),
+            os.environ.get("GSC_CLIENT_SECRET") or os.environ.get("BLOGGER_CLIENT_SECRET"),
+        )
         add("E. Google Search Console", "API connection", "OK", "authorized")
     except Exception as e:
         add("E. Google Search Console", "API connection", "WARN",

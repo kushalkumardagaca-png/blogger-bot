@@ -20,6 +20,7 @@ ck('No unsupported indexing API call','indexing.googleapis.com' not in setup and
 ck('Fresh baseline file generated','GSC_BASELINE.json' in setup)
 ck('Reports generated','GSC_REBUILD_REPORT.json' in setup and 'GSC_REBUILD_REPORT.md' in setup)
 ck('Workflow uses secret without exposing it','secrets.GSC_REFRESH_TOKEN' in workflow and 'GSC_REFRESH_TOKEN' in workflow)
+ck('Dedicated browser OAuth client is supported','GSC_CLIENT_ID' in workflow and 'GSC_CLIENT_SECRET' in workflow and "os.environ.get('GSC_CLIENT_ID')" in setup)
 ck('Health monitor inventories Pages and Posts','for resource in ("pages", "posts")' in health)
 ck('Health monitor maintains both sitemaps','sitemap-pages.xml' in health and 'sitemap.xml' in health)
 ck('Health monitor parses current inspection response','indexStatusResult' in health and 'coverage_state' in health)
