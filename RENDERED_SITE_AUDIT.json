@@ -1,6 +1,6 @@
 {
-  "urls": 49,
-  "rendered_checks": 147,
+  "urls": 50,
+  "rendered_checks": 150,
   "failures": 0,
   "results": [
     {
@@ -19,7 +19,7 @@
             "DIV",
             "kdNewsRow",
             "kd-mq",
-            "4738"
+            "5266"
           ]
         ],
         "shelves": [],
@@ -68,7 +68,7 @@
             "DIV",
             "kdNewsRow",
             "kd-mq",
-            "4738"
+            "5266"
           ],
           [
             "SPAN",
@@ -105,7 +105,7 @@
             "DIV",
             "kdNewsRow",
             "kd-mq",
-            "4738"
+            "5266"
           ],
           [
             "SPAN",
@@ -3496,6 +3496,85 @@
         ],
         "badHrefs": [],
         "title": "DAILY YIELD: The Payday Waterfall: 7 Automatic Transfers That Run Your Entire Financial Life",
+        "byline": true
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: UK Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Minutes of the Market Participants Group meeting \u2013 24 September 2026",
+        "byline": true
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "375"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "375"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "375"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: UK Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Minutes of the Market Participants Group meeting \u2013 24 September 2026",
+        "byline": true
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: UK Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Minutes of the Market Participants Group meeting \u2013 24 September 2026",
         "byline": true
       }
     },

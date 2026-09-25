@@ -6,14 +6,14 @@ Audit date: 25 September 2026 (IST)
 
 - Homepage: 1
 - Blogger Pages: 12
-- Posts and News articles: 36
-- Total public URLs rendered: 49
+- Posts and News articles: 37
+- Total public URLs rendered: 50
 - Viewports per URL: mobile 360×800, tablet 768×1024, desktop 1440×1000
-- Total rendered-browser checks: 147
+- Total rendered-browser checks: 150
 
 ## Final result
 
-**147 PASS · 0 FAIL**
+**150 PASS · 0 FAIL**
 
 Every URL was loaded in Chromium with JavaScript enabled and evaluated after dynamic components had time to render.
 
