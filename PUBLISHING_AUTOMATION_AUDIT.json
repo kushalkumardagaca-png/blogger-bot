@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T06:25:48+05:30",
+  "checked_at_ist": "2026-09-25T07:22:46+05:30",
   "summary": {
-    "pass": 35,
+    "pass": 36,
     "fail": 0
   },
   "checks": [
@@ -147,6 +147,11 @@
     },
     {
       "name": "News meta description capped",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News titles lead with publication date and exact coverage window",
       "status": "PASS",
       "detail": ""
     },

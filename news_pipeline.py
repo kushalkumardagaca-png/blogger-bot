@@ -624,9 +624,9 @@ CSS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fbk_styles.
 def desk_title_prefix(desk):
     n, label, slug, slot, _, _ = DESKS[desk]
     if desk == "global":
-        return "Global Finance Wire: The Last 24 Hours"
+        return "Global Finance Wire"
     if desk in CATEGORY_DESKS:
-        return f"{label}: The Last 24 Hours"
+        return f"{label} News"
     return f"{label} Finance News"
 
 def weekday_name(d):
@@ -639,6 +639,16 @@ def clip_words(text, limit):
     cut = text[:limit + 1].rsplit(" ", 1)[0].rstrip(" ,;:–—-")
     return (cut or text[:limit]).rstrip() + "…"
 
+def compact_coverage_window(start, end):
+    """Human-readable exact date range for the front of every news title."""
+    if start.date() == end.date():
+        return f"{MONTHS[end.month-1]} {end.day}"
+    if start.year == end.year and start.month == end.month:
+        return f"{MONTHS[start.month-1]} {start.day}–{end.day}"
+    if start.year == end.year:
+        return f"{MONTHS[start.month-1]} {start.day}–{MONTHS[end.month-1]} {end.day}"
+    return f"{MONTHS[start.month-1]} {start.day} {start.year}–{MONTHS[end.month-1]} {end.day} {end.year}"
+
 def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related):
     n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
     top = [clean_title(i["title"]) for i in items[:3]]
@@ -647,7 +657,9 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     win_str = f"{fmt_day(win_start.date())}–{fmt_day(win_end.date())} {win_end.year}"
     span_h = (win_end - win_start).total_seconds() / 3600
     span_txt = "the last 24 hours" if span_h <= 24.5 else f"the last {max(2, round(span_h / 24))} days"
-    title = f"{desk_title_prefix(desk)} — {headline_bits} | {edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}"
+    publish_lead = f"{edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}"
+    coverage_lead = compact_coverage_window(win_start, win_end)
+    title = f"{publish_lead} · Coverage {coverage_lead} | {desk_title_prefix(desk)} — {headline_bits}"
     meta = (f"{desk_title_prefix(desk)}, {span_txt} ({win_str}): "
             + "; ".join(t for t in top[:3])).strip()
     if len(meta) > 158:
@@ -736,7 +748,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     <span class="fbk-date">{date_long} · IST</span>
   </div>
 
-  <h1 class="fbk-h1">{htmlmod.escape(desk_title_prefix(desk))}: {htmlmod.escape(headline_bits)}</h1>
+  <h1 class="fbk-h1">{htmlmod.escape(title)}</h1>
   <p class="fbk-lede">{len(items)} verified, finance-focused items from the {label} desk, all inside {span_txt} — primary releases, established reporting, reference levels and what they mean. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>

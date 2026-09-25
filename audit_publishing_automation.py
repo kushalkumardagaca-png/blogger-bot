@@ -71,6 +71,8 @@ check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Da
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
 check('News meta description capped','if len(meta) > 158' in np)
+check('News titles lead with publication date and exact coverage window',
+      'title = f"{publish_lead} · Coverage {coverage_lead}' in np and 'compact_coverage_window' in np)
 check('News links both market desks','/p/markets-today.html' in np and '/p/global-snapshot.html' in np)
 check('Trusted links disclose source type','"Source:" if it.get("media") else "Official:"' in np)
 
