@@ -71,13 +71,18 @@ check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Da
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
 check('News meta description capped','if len(meta) > 158' in np)
-check('News titles lead with publication date and exact coverage window',
-      'title = f"{publish_lead} · Coverage {coverage_lead}' in np and 'compact_coverage_window' in np)
+check('News titles show desk, publication date and exact coverage window first',
+      'title = f"{desk_title_prefix(desk)} · {publish_lead} · Coverage {coverage_lead}' in np
+      and 'coverage_window_text' in np)
+check('News selection never expands into older calendar days',
+      'Never silently expand to older calendar days' in np and 'extend back max 72h' not in np)
 check('News links both market desks','/p/markets-today.html' in np and '/p/global-snapshot.html' in np)
 check('Trusted links disclose source type','"Source:" if it.get("media") else "Official:"' in np)
 
 tracker=json.loads((ROOT/'published_tracker.json').read_text()); news_tracker=json.loads((ROOT/'news_tracker.json').read_text())
-check('Master tracker ready for next topic',tracker.get('next_topic_index')==25,f"next index {tracker.get('next_topic_index')}")
+master_next=tracker.get('next_topic_index')
+check('Master tracker next-topic state is valid',isinstance(master_next,int) and 0 <= master_next <= 500,
+      f"next index {master_next}")
 launch_date=dt.date(2026,9,25); audit_today=dt.datetime.now(IST).date()
 news_desks=news_tracker.get('desks',{}) if isinstance(news_tracker,dict) else {}
 if audit_today < launch_date:

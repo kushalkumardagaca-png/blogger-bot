@@ -489,16 +489,13 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
 def select_items(all_items, win_start, win_end, desk, target=22, own_off=None, own_med=None):
     own_off = own_off or set()
     own_med = own_med or set()
+    # Strict current coverage: use only the dates touched by the rolling window.
+    # Never silently expand to older calendar days to fill a thin edition.
     lo = win_start.date()
-    floor = win_end.date() - dt.timedelta(days=3)   # extend back max 72h when thin
-    while True:
-        fresh = [i for i in all_items if lo <= i["date"] <= win_end.date()]
-        if desk in CATEGORY_DESKS:
-            flt = CATEGORY_FILTERS[desk]
-            fresh = [i for i in fresh if any(k in i["title"].lower() for k in flt)]
-        if len(fresh) >= 15 or lo <= floor:
-            break
-        lo -= dt.timedelta(days=1)
+    fresh = [i for i in all_items if lo <= i["date"] <= win_end.date()]
+    if desk in CATEGORY_DESKS:
+        flt = CATEGORY_FILTERS[desk]
+        fresh = [i for i in fresh if any(k in i["title"].lower() for k in flt)]
     hint = HINT_RE.get(desk)
     def score(i):
         s = 100 - i["prio"] * 10
@@ -639,15 +636,17 @@ def clip_words(text, limit):
     cut = text[:limit + 1].rsplit(" ", 1)[0].rstrip(" ,;:–—-")
     return (cut or text[:limit]).rstrip() + "…"
 
-def compact_coverage_window(start, end):
-    """Human-readable exact date range for the front of every news title."""
+def coverage_window_text(start, end):
+    """Full-month exact range for the front of every news title."""
+    names = ["January", "February", "March", "April", "May", "June",
+             "July", "August", "September", "October", "November", "December"]
     if start.date() == end.date():
-        return f"{MONTHS[end.month-1]} {end.day}"
+        return f"{names[end.month-1]} {end.day}"
     if start.year == end.year and start.month == end.month:
-        return f"{MONTHS[start.month-1]} {start.day}–{end.day}"
+        return f"{names[start.month-1]} {start.day} to {end.day}"
     if start.year == end.year:
-        return f"{MONTHS[start.month-1]} {start.day}–{MONTHS[end.month-1]} {end.day}"
-    return f"{MONTHS[start.month-1]} {start.day} {start.year}–{MONTHS[end.month-1]} {end.day} {end.year}"
+        return f"{names[start.month-1]} {start.day} to {names[end.month-1]} {end.day}"
+    return f"{names[start.month-1]} {start.day} {start.year} to {names[end.month-1]} {end.day} {end.year}"
 
 def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related):
     n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
@@ -655,12 +654,10 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     headline_bits = clip_words("; ".join(top[:2]), 90)
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
     win_str = f"{fmt_day(win_start.date())}–{fmt_day(win_end.date())} {win_end.year}"
-    span_h = (win_end - win_start).total_seconds() / 3600
-    span_txt = "the last 24 hours" if span_h <= 24.5 else f"the last {max(2, round(span_h / 24))} days"
-    publish_lead = f"{edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}"
-    coverage_lead = compact_coverage_window(win_start, win_end)
-    title = f"{publish_lead} · Coverage {coverage_lead} | {desk_title_prefix(desk)} — {headline_bits}"
-    meta = (f"{desk_title_prefix(desk)}, {span_txt} ({win_str}): "
+    coverage_lead = coverage_window_text(win_start, win_end)
+    publish_lead = f"{edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
+    title = f"{desk_title_prefix(desk)} · {publish_lead} · Coverage {coverage_lead} — {headline_bits}"
+    meta = (f"{desk_title_prefix(desk)}, coverage {coverage_lead}: "
             + "; ".join(t for t in top[:3])).strip()
     if len(meta) > 158:
         meta = meta[:155].rsplit(" ", 1)[0].rstrip(" ,;:.") + "..."
@@ -733,7 +730,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     signoff = f'''
     <div class="fbk-signoff">
       <span class="fbk-script">Read it? Question it. &#9999;</span>
-      <p>Every item above happened inside {span_txt} ({win_str}). Where an item refers to an earlier fact, it is marked as background. The Week Ahead section looks forward only. Every item links to a genuine, trustworthy source — official or an established newsroom.</p>
+      <p>Every news item above is dated inside the stated coverage period, <strong>{coverage_lead}</strong>. Where an item refers to an earlier fact, it is marked as background. The Week Ahead section looks forward only. Every item links to a genuine, trustworthy source — official or an established newsroom.</p>
       <p><strong>Education only, not personalised investment advice.</strong> This is not a recommendation or a promise of profit.</p>
       <p>Financial education, not personalised advice. Figures as reported {win_str} by the trusted sources linked above.</p>
     </div>'''
@@ -749,7 +746,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   </div>
 
   <h1 class="fbk-h1">{htmlmod.escape(title)}</h1>
-  <p class="fbk-lede">{len(items)} verified, finance-focused items from the {label} desk, all inside {span_txt} — primary releases, established reporting, reference levels and what they mean. Read the source, not the noise.</p>
+  <p class="fbk-lede">{len(items)} verified, finance-focused items from the {label} desk, dated within the stated coverage period <strong>{coverage_lead}</strong> — primary releases, established reporting, reference levels and what they mean. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
@@ -772,7 +769,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "publisher": {"@type": "Organization", "name": "Daily Yield", "url": BLOG + "/"},
         "about": {"@type": "Place", "name": label} if desk not in CATEGORY_DESKS | {"global"} else {"@type": "Thing", "name": label},
         "keywords": ", ".join([
-            f"{label.lower()} finance news today", span_txt[4:], "trusted sources",
+            f"{label.lower()} finance news today", f"coverage {coverage_lead}", "trusted sources",
             ', '.join(t.lower() for t in top[:4])[:150],
             f"{edition_date.day} {MONTHS[edition_date.month-1]} {edition_date.year}",
             *SEO_QUERY_TERMS]),
@@ -911,11 +908,9 @@ def run_desk(desk, tracker, dry=False, token=None):
     items_raw, own_off, own_med = fetch_desk_items(desk)
     items, upcoming, eff_lo = select_items(items_raw, win_start, win_end, desk,
                                            own_off=own_off, own_med=own_med)
-    eff_start = dt.datetime.combine(eff_lo, dt.time.min, IST)
-    span_h = (win_end - eff_start).total_seconds() / 3600
+    eff_start = win_start
     print(f"  [{desk}] {len(items_raw)} raw items -> {len(items)} selected "
-          f"({len(upcoming)} upcoming, window extended to {span_h:.0f}h)" if span_h > 25 else
-          f"  [{desk}] {len(items_raw)} raw items -> {len(items)} selected ({len(upcoming)} upcoming)")
+          f"({len(upcoming)} upcoming; no older-day extension)")
     if len(items) < 8:
         print(f"  [{desk}] ONLY {len(items)} ITEMS — below safety floor, edition SKIPPED")
         return False

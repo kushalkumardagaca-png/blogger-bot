@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T07:22:46+05:30",
+  "checked_at_ist": "2026-09-25T07:28:49+05:30",
   "summary": {
-    "pass": 36,
+    "pass": 37,
     "fail": 0
   },
   "checks": [
@@ -151,7 +151,12 @@
       "detail": ""
     },
     {
-      "name": "News titles lead with publication date and exact coverage window",
+      "name": "News titles show desk, publication date and exact coverage window first",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News selection never expands into older calendar days",
       "status": "PASS",
       "detail": ""
     },
@@ -166,9 +171,9 @@
       "detail": ""
     },
     {
-      "name": "Master tracker ready for next topic",
+      "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 25"
+      "detail": "next index 26"
     },
     {
       "name": "News tracker launch/state is valid",
