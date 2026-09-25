@@ -6,8 +6,13 @@ from contextual_links import STYLE, card
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
 APPLY=os.environ.get('APPLY','false').lower()=='true'
-BROKEN='https://images.unsplash.com/photo-1611974748038-1e8768f0db4a?auto=format&fit=crop&w=1600&h=900&q=85'
-REPLACEMENT='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85'
+MARKET_FALLBACK='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85'
+PERSONAL_FALLBACK='https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&h=900&q=85'
+BROKEN_MAP={
+ 'https://images.unsplash.com/photo-1611974748038-1e8768f0db4a?auto=format&fit=crop&w=1600&h=900&q=85':MARKET_FALLBACK,
+ 'https://images.unsplash.com/photo-1513326738677-b964603b3d50?auto=format&fit=crop&w=1600&h=900&q=85':MARKET_FALLBACK,
+ 'https://images.unsplash.com/photo-1554224155-6726d3519c1d?auto=format&fit=crop&w=1600&h=900&q=85':PERSONAL_FALLBACK,
+}
 
 def token():
  data=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
@@ -57,11 +62,14 @@ def main():
  tok=token();posts=collect(tok);changes=[]
  Path('contextual_links_backup.json').write_text(json.dumps({'posts':posts},ensure_ascii=False))
  for post in posts:
-  old=post.get('content','');new=old.replace(BROKEN,REPLACEMENT);is_news='News' in post.get('labels',[])
+  old=post.get('content','');new=old;repaired=[]
+  for broken,replacement in BROKEN_MAP.items():
+   if broken in new:new=new.replace(broken,replacement);repaired.append(broken)
+  is_news='News' in post.get('labels',[])
   new=add_news_cards(new) if is_news else add_article_card(new,post.get('title',''))
   if 'class="dy-context"' in new and 'id="dyContextStyle"' not in new:new=STYLE+'\n'+new
   if new==old:continue
-  detail={'url':post.get('url'),'news':is_news,'cards':new.count('class="dy-context"'),'hero_repaired':BROKEN in old}
+  detail={'url':post.get('url'),'news':is_news,'cards':new.count('class="dy-context"'),'hero_repaired':bool(repaired),'images_replaced':len(repaired)}
   changes.append(detail)
   if APPLY:
    body={'kind':'blogger#post','id':post['id'],'title':post['title'],'content':new,'labels':post.get('labels',[])}

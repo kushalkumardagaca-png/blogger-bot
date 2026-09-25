@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T11:55:48+05:30",
+  "checked_at_ist": "2026-09-25T22:13:14+05:30",
   "summary": {
-    "pass": 44,
+    "pass": 46,
     "fail": 0
   },
   "checks": [
@@ -82,6 +82,16 @@
     },
     {
       "name": "Master articles include continuous gesture motion",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master hero image is preflight-validated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News hero image is preflight-validated",
       "status": "PASS",
       "detail": ""
     },
@@ -213,7 +223,7 @@
     {
       "name": "News tracker launch/state is valid",
       "status": "PASS",
-      "detail": "9 desk edition(s) recorded"
+      "detail": "10 desk edition(s) recorded"
     },
     {
       "name": "No obsolete blog URL in production engines",

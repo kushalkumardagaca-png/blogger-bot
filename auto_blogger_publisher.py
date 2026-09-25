@@ -7,6 +7,7 @@ import io
 import base64
 import urllib.request
 from PIL import Image, ImageOps
+from image_safety import FALLBACK_MARKET, safe_image
 
 CATEGORY_PHOTOS = {
     "Contrarian Hooks": "photo-1518186285589-2f7649de83e0",
@@ -41,7 +42,9 @@ def generate_hero_image_figure(title, category):
     # No download/PIL re-encode/base64 embedding — keeps article HTML ~100 KB lighter
     # and lets the hero load in parallel from Unsplash's global image CDN.
     photo_id = CATEGORY_PHOTOS.get(category, "photo-1611974789855-9c2a0a7236a3")
-    img_src = f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=900&h=506&q=85"
+    candidate = f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=900&h=506&q=85"
+    fallback = FALLBACK_MARKET.replace('w=1600&h=900', 'w=900&h=506')
+    img_src = safe_image(candidate, fallback)
 
     return f"""  <figure class="kushal-hero-figure" style="margin: 24px 0 32px; text-align: center;">
     <img src="{img_src}" alt="Figure 1.0: Editorial Photography — {title}" width="900" height="506" loading="eager" decoding="async" fetchpriority="high" style="width: 100%; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #EADCC8; box-shadow: 0 16px 36px -16px rgba(36,22,16,0.3);" />

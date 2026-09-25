@@ -38,6 +38,8 @@ check('Master links both market desks','/p/markets-today.html' in ap and '/p/glo
 check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))
 check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)
 check('Master articles include continuous gesture motion','ensure_continuous_motion' in ap)
+check('Master hero image is preflight-validated','safe_image' in ap and 'FALLBACK_MARKET' in ap)
+check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News editions include related-reading shelf','ensure_related_articles' in np and 'fetch_public_posts' in np)
 check('News editions include continuous gesture motion','ensure_continuous_motion' in np)
 

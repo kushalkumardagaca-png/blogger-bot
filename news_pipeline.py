@@ -28,6 +28,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
+from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -58,7 +59,7 @@ DESKS = {
  "uk":      (7, "UK", "uk", "12:00", "photo-1518186285589-2f7649de83e0", "Bank of England and City of London skyline"),
  "france":  (8, "France", "france", "10:35", "photo-1502602898657-3e91760cbb34", "Paris La Défense business district"),
  "italy":   (9, "Italy", "italy", "15:50", "photo-1516483638261-f4dbaf036963", "Milan financial district, Italy"),
- "russia":  (10, "Russia", "russia", "22:00", "photo-1513326738677-b964603b3d50", "Moscow City international business centre"),
+ "russia":  (10, "Russia", "russia", "22:00", "photo-1460925895917-afdab827c52f", "Financial market data and economic analysis desk"),
  "canada":  (11, "Canada", "canada", "18:05", "photo-1449824913935-59a10b8d2000", "Toronto financial district skyline"),
  "brazil":  (12, "Brazil", "brazil", "17:00", "photo-1496307653780-42ee777d4833", "São Paulo financial district, Brazil"),
  "spain":   (13, "Spain", "spain", "13:05", "photo-1509845350455-fc3f10b16bac", "Madrid financial street, Spain"),
@@ -68,7 +69,7 @@ DESKS = {
  "market":  (17, "Market and Trading", "category-market-and-trading", "09:00", "photo-1460925895917-afdab827c52f", "Trading screens and market data in a modern dealing room"),
  "macro":   (18, "Economy and Macro Policy", "category-economy-and-macro-policy", "09:05", "photo-1554224155-8d04cb21cd6c", "Official economic statistics documents and charts"),
  "corporate": (19, "Corporate Finance and Industry", "category-corporate-finance-and-industry", "15:45", "photo-1486406146926-c627a92ad1ab", "Modern corporate headquarters offices"),
- "personal": (20, "Personal Finance", "category-personal-finance", "21:00", "photo-1554224155-6726d3519c1d", "Household budget planning with calculator and notes"),
+ "personal": (20, "Personal Finance", "category-personal-finance", "21:00", "photo-1579621970563-ebec7560ff3e", "Household savings and personal financial planning"),
 }
 
 # keyword filters for category desks (applied to pooled items)
@@ -766,7 +767,8 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
             "south-korea": "🇰🇷"}.get(desk, "🌍")
     tag = f"Daily News · {flag} {label} Wire" if desk not in CATEGORY_DESKS else f"Daily News · 📑 {label}"
 
-    hero_url = f"https://images.unsplash.com/{hero_id}?auto=format&fit=crop&w={HERO_W}&h={HERO_H}&q=85"
+    hero_candidate = f"https://images.unsplash.com/{hero_id}?auto=format&fit=crop&w={HERO_W}&h={HERO_H}&q=85"
+    hero_url = safe_image(hero_candidate, FALLBACK_PERSONAL if desk == "personal" else FALLBACK_MARKET)
 
     # Current items form the numbered news sections. Older context is isolated below.
     third = max(1, len(current_items) // 3)
