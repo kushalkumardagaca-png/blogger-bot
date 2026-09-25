@@ -1,11 +1,11 @@
 {
-  "overall": "WARN",
-  "generated_at": "2026-09-25 13:21 IST",
-  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
+  "overall": "FAIL",
+  "generated_at": "2026-09-25 16:21 IST",
+  "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 78,
+    "OK": 77,
     "WARN": 1,
-    "FAIL": 0,
+    "FAIL": 1,
     "SKIP": 1
   },
   "missed_slots": [],
@@ -22,13 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "2 slot(s) due so far today — all published; 2 master articles + 10 news wires today"
+      "detail": "3 slot(s) due so far today — all published; 3 master articles + 11 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
-      "status": "OK",
-      "detail": "10 due desk(s) present; 10 news wires today"
+      "status": "FAIL",
+      "detail": "missing: China, Spain"
     },
     {
       "section": "A. Publishing engine",
@@ -40,7 +40,7 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2580 words, hero image + schema OK ($10k at 22 vs $10k at 32)"
+      "detail": "2556 words, hero image + schema OK (Covered-Call ETFs: Income or Trap?)"
     },
     {
       "section": "A. Publishing engine",
@@ -52,7 +52,7 @@
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #28 of 500, 27 published, last at 2026-09-25 10:56 UTC"
+      "detail": "next topic #29 of 500, 28 published, last at 2026-09-25 13:54 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -69,14 +69,14 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 240 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
       "status": "OK",
-      "detail": "200 OK · 347 KB"
+      "detail": "200 OK · 348 KB"
     },
     {
       "section": "B. Blog pages",
@@ -94,13 +94,13 @@
       "section": "B. Blog pages",
       "name": "Markets Today",
       "status": "OK",
-      "detail": "200 OK · 278 KB"
+      "detail": "200 OK · 279 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
       "status": "OK",
-      "detail": "200 OK · 388 KB"
+      "detail": "200 OK · 389 KB"
     },
     {
       "section": "B. Blog pages",
@@ -111,20 +111,20 @@
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "OK",
-      "detail": "200 OK · 308 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
       "status": "OK",
-      "detail": "200 OK · 366 KB"
+      "detail": "200 OK · 367 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
       "status": "OK",
-      "detail": "200 OK · 387 KB"
+      "detail": "200 OK · 388 KB"
     },
     {
       "section": "B. Blog pages",
@@ -142,7 +142,7 @@
       "section": "B. Blog pages",
       "name": "Privacy Policy",
       "status": "OK",
-      "detail": "200 OK · 397 KB"
+      "detail": "200 OK · 398 KB"
     },
     {
       "section": "B. Blog pages",
@@ -154,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "37 URLs indexed"
+      "detail": "39 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,350 instruments · sample OHLC populated"
+      "detail": "456,491 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 09:20 IST",
-      "overall": "FAIL",
-      "ok": 36,
-      "warn": 3,
-      "fail": 1
-    },
-    {
       "at": "2026-09-24 10:11 IST",
       "overall": "WARN",
       "ok": 27,
@@ -633,6 +626,13 @@
       "ok": 78,
       "warn": 1,
       "fail": 0
+    },
+    {
+      "at": "2026-09-25 16:21 IST",
+      "overall": "FAIL",
+      "ok": 77,
+      "warn": 1,
+      "fail": 1
     }
   ],
   "gsc": {
