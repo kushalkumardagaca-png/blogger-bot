@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T07:28:49+05:30",
+  "checked_at_ist": "2026-09-25T07:32:38+05:30",
   "summary": {
-    "pass": 37,
+    "pass": 39,
     "fail": 0
   },
   "checks": [
@@ -126,7 +126,17 @@
       "detail": ""
     },
     {
-      "name": "News safety floor enforced",
+      "name": "News requires at least one genuinely current item",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News editions cap reported items at ten",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Older context is capped at three and explicitly labelled",
       "status": "PASS",
       "detail": ""
     },
@@ -156,7 +166,7 @@
       "detail": ""
     },
     {
-      "name": "News selection never expands into older calendar days",
+      "name": "Older dates never alter the stated current coverage window",
       "status": "PASS",
       "detail": ""
     },

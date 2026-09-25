@@ -486,43 +486,67 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
                      r"reserve|liquidity|repo|policy)", re.I)
 
-def select_items(all_items, win_start, win_end, desk, target=22, own_off=None, own_med=None):
+def select_items(all_items, win_start, win_end, desk, target=10, own_off=None, own_med=None):
+    """Select at most 10 items: current first, then no more than 3 labelled background items."""
     own_off = own_off or set()
     own_med = own_med or set()
-    # Strict current coverage: use only the dates touched by the rolling window.
-    # Never silently expand to older calendar days to fill a thin edition.
     lo = win_start.date()
-    fresh = [i for i in all_items if lo <= i["date"] <= win_end.date()]
-    if desk in CATEGORY_DESKS:
-        flt = CATEGORY_FILTERS[desk]
-        fresh = [i for i in fresh if any(k in i["title"].lower() for k in flt)]
+    hi = win_end.date()
     hint = HINT_RE.get(desk)
+
+    def desk_match(i):
+        if desk not in CATEGORY_DESKS:
+            return True
+        return any(k in i["title"].lower() for k in CATEGORY_FILTERS[desk])
+
     def score(i):
         s = 100 - i["prio"] * 10
         s += 25 if SALIENT.search(i["title"]) else 0
         if own_off or own_med:
             if i["agency"] in own_off:
-                s += 60        # own-country official releases lead
+                s += 60
             elif i["agency"] in own_med:
-                s += 40        # own-country trusted newsrooms next
+                s += 40
                 if hint and not hint.search(i["title"]):
-                    s -= 50    # own outlet but a foreign story — rank it like context
+                    s -= 50
             else:
-                s -= 25        # international context fills
-        s += (i["date"] - win_start.date()).days * 2
+                s -= 25
+        s += (i["date"] - lo).days * 2
         return -s
-    fresh.sort(key=score)
-    agency_count, capped = {}, []
-    for i in fresh:
-        cap = 12 if i["agency"] in own_off else (8 if i["agency"] in own_med else 5)
-        if agency_count.get(i["agency"], 0) >= cap:
-            continue
-        agency_count[i["agency"]] = agency_count.get(i["agency"], 0) + 1
-        capped.append(i)
-    fresh = capped
+
+    def cap_agencies(items):
+        counts, result = {}, []
+        for item in sorted(items, key=score):
+            cap = 6 if item["agency"] in own_off else (4 if item["agency"] in own_med else 3)
+            if counts.get(item["agency"], 0) >= cap:
+                continue
+            counts[item["agency"]] = counts.get(item["agency"], 0) + 1
+            result.append(item)
+        return result
+
+    current = [i for i in all_items if i.get("date") and lo <= i["date"] <= hi and desk_match(i)]
+    current = cap_agencies(current)[:target]
+
+    # Background is a transparent context supplement, never disguised as current news.
+    # Search only the preceding three calendar days and add at most three items.
+    background = []
+    if len(current) < target:
+        floor = lo - dt.timedelta(days=3)
+        current_keys = {(clean_title(i["title"]).lower(), i.get("url", "")) for i in current}
+        older = [i for i in all_items if i.get("date") and floor <= i["date"] < lo and desk_match(i)]
+        for item in cap_agencies(older):
+            key = (clean_title(item["title"]).lower(), item.get("url", ""))
+            if key in current_keys:
+                continue
+            framed = dict(item)
+            framed["background"] = True
+            background.append(framed)
+            if len(background) >= min(3, target - len(current)):
+                break
+
     upcoming = [i for i in all_items
-                if i["date"] and win_end.date() < i["date"] <= win_end.date() + dt.timedelta(days=7)][:6]
-    return fresh[:target], upcoming, lo
+                if i.get("date") and hi < i["date"] <= hi + dt.timedelta(days=7)][:6]
+    return current + background, upcoming, lo
 
 # ---------------------------------------------------------------- composition
 def clean_title(t):
@@ -601,15 +625,25 @@ def compose_item(it, win_end):
     else:
         desc = ""
     day = fmt_day(it["date"]) if it["date"] else "Window"
+    is_background = bool(it.get("background"))
     etitle, eagency = htmlmod.escape(title), htmlmod.escape(it["agency"])
     core = htmlmod.escape(desc) if desc else etitle
-    body = f"<strong>{eagency}</strong> — {core}."
-    if not desc:
-        body = f"<strong>{eagency}</strong> — published {day}: {etitle}."
-    body += f" <em>{why}</em>"
-    return f'''    <div class="fbk-item">
-      <span class="fbk-chip">{day}</span>
-      <h3>{etitle}</h3>
+    if is_background:
+        chip = f"Background · originally {day}"
+        display_title = f"Background context: {etitle}"
+        body = (f"<strong>Background—not current-window news.</strong> Originally published by "
+                f"<strong>{eagency}</strong> on {day}: {core}. This item is included only to provide "
+                f"context for the current desk. <em>{why}</em>")
+    else:
+        chip = day
+        display_title = etitle
+        body = f"<strong>{eagency}</strong> — {core}."
+        if not desc:
+            body = f"<strong>{eagency}</strong> — published {day}: {etitle}."
+        body += f" <em>{why}</em>"
+    return f'''    <div class="fbk-item{' fbk-background' if is_background else ''}">
+      <span class="fbk-chip">{chip}</span>
+      <h3>{display_title}</h3>
       <p>{body}</p>
       <a class="fbk-src" href="{htmlmod.escape(it['url'])}" target="_blank" rel="noopener">{"Source:" if it.get("media") else "Official:"} {eagency}</a>
     </div>'''
@@ -650,7 +684,9 @@ def coverage_window_text(start, end):
 
 def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related):
     n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
-    top = [clean_title(i["title"]) for i in items[:3]]
+    current_items = [i for i in items if not i.get("background")]
+    background_items = [i for i in items if i.get("background")]
+    top = [clean_title(i["title"]) for i in current_items[:3]]
     headline_bits = clip_words("; ".join(top[:2]), 90)
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
     win_str = f"{fmt_day(win_start.date())}–{fmt_day(win_end.date())} {win_end.year}"
@@ -670,12 +706,12 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 
     hero_url = f"https://images.unsplash.com/{hero_id}?auto=format&fit=crop&w={HERO_W}&h={HERO_H}&q=85"
 
-    # sections: group items into 3 thematic blocks + tape
-    third = max(1, len(items) // 3)
+    # Current items form the numbered news sections. Older context is isolated below.
+    third = max(1, len(current_items) // 3)
     secs = [
-        ("01", "The Tape — What Moved and Who Reported It", "Every item below is an official release or reporting from an established, trusted newsroom, inside the window.", items[:third]),
-        ("02", "Policy, Data and the Official Record", "Central banks, ministries and statistics offices — the primary releases.", items[third:2*third]),
-        ("03", "Regulation, Markets and the Small Print", "Circulars, filings, enforcement and market plumbing.", items[2*third:]),
+        ("01", "The Tape — What Moved and Who Reported It", "Current-period releases and reporting from established, trusted sources.", current_items[:third]),
+        ("02", "Policy, Data and the Official Record", "Current-period central-bank, ministry and statistics releases.", current_items[third:2*third]),
+        ("03", "Regulation, Markets and the Small Print", "Current-period circulars, filings, enforcement and market plumbing.", current_items[2*third:]),
     ]
     sections_html = ""
     for num, name, sub, its in secs:
@@ -684,6 +720,14 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         sections_html += f'\n    <h2 class="fbk-h2"><b>{num}</b> {name}</h2>\n    <p class="fbk-sub">{sub}</p>'
         for it in its:
             sections_html += "\n" + compose_item(it, win_end)
+
+    background_html = ""
+    if background_items:
+        background_html = '''
+    <h2 class="fbk-h2"><b>BG</b> Background Context — Not Current-Period News</h2>
+    <p class="fbk-sub">At most three older items, each retaining its original date and source, reframed only to explain current context.</p>'''
+        for it in background_items:
+            background_html += "\n" + compose_item(it, win_end)
 
     # FX reference block (ECB official)
     fx_html = ""
@@ -746,10 +790,11 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   </div>
 
   <h1 class="fbk-h1">{htmlmod.escape(title)}</h1>
-  <p class="fbk-lede">{len(items)} verified, finance-focused items from the {label} desk, dated within the stated coverage period <strong>{coverage_lead}</strong> — primary releases, established reporting, reference levels and what they mean. Read the source, not the noise.</p>
+  <p class="fbk-lede">{len(current_items)} current, verified finance items from the {label} desk for <strong>{coverage_lead}</strong>{f', plus {len(background_items)} clearly labelled background item(s)' if background_items else ''}. Maximum ten reported items; current coverage always leads. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
+{background_html}
 {fx_html}
 {week_html}
 {related_html}
@@ -909,10 +954,12 @@ def run_desk(desk, tracker, dry=False, token=None):
     items, upcoming, eff_lo = select_items(items_raw, win_start, win_end, desk,
                                            own_off=own_off, own_med=own_med)
     eff_start = win_start
-    print(f"  [{desk}] {len(items_raw)} raw items -> {len(items)} selected "
-          f"({len(upcoming)} upcoming; no older-day extension)")
-    if len(items) < 8:
-        print(f"  [{desk}] ONLY {len(items)} ITEMS — below safety floor, edition SKIPPED")
+    current_count = sum(1 for item in items if not item.get("background"))
+    background_count = sum(1 for item in items if item.get("background"))
+    print(f"  [{desk}] {len(items_raw)} raw items -> {current_count} current + "
+          f"{background_count} background selected ({len(upcoming)} upcoming)")
+    if current_count == 0:
+        print(f"  [{desk}] NO CURRENT ITEMS — edition SKIPPED rather than recycling old news")
         return False
     fx = ecb_reference_rates()
     related = fetch_related(desk, prev.get("url"))

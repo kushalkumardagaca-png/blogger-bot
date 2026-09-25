@@ -66,7 +66,12 @@ check('News duplicate recovery uses rendered GET, not unreliable HEAD',
       'live_post_exists(expected_url)' in np and 'method="GET"' in np and 'method="HEAD"' not in np)
 check('News source policy is current','official institutions plus established, reputable newsrooms' in np)
 check('News finance filter enabled','FINANCE_RE.search' in np)
-check('News safety floor enforced','if len(items) < 8' in np)
+check('News requires at least one genuinely current item','if current_count == 0' in np)
+check('News editions cap reported items at ten','def select_items(all_items, win_start, win_end, desk, target=10' in np)
+check('Older context is capped at three and explicitly labelled',
+      'len(background) >= min(3, target - len(current))' in np
+      and 'Background—not current-window news.' in np
+      and 'Background Context — Not Current-Period News' in np)
 check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Daga' not in np)
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
@@ -74,8 +79,10 @@ check('News meta description capped','if len(meta) > 158' in np)
 check('News titles show desk, publication date and exact coverage window first',
       'title = f"{desk_title_prefix(desk)} · {publish_lead} · Coverage {coverage_lead}' in np
       and 'coverage_window_text' in np)
-check('News selection never expands into older calendar days',
-      'Never silently expand to older calendar days' in np and 'extend back max 72h' not in np)
+check('Older dates never alter the stated current coverage window',
+      'background_items = [i for i in items if i.get("background")]' in np
+      and 'coverage_lead = coverage_window_text(win_start, win_end)' in np
+      and 'extend back max 72h' not in np)
 check('News links both market desks','/p/markets-today.html' in np and '/p/global-snapshot.html' in np)
 check('Trusted links disclose source type','"Source:" if it.get("media") else "Official:"' in np)
 
