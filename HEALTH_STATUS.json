@@ -1,10 +1,10 @@
 {
   "overall": "FAIL",
-  "generated_at": "2026-09-25 22:22 IST",
+  "generated_at": "2026-09-26 03:20 IST",
   "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 76,
-    "WARN": 2,
+    "OK": 78,
+    "WARN": 1,
     "FAIL": 1,
     "SKIP": 1
   },
@@ -16,17 +16,23 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "25 recent posts"
+      "detail": "43 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "5 slot(s) due so far today — all published; 5 master articles + 16 news wires today"
+      "detail": "0 slot(s) due so far today — all published; 0 master articles + 0 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
+      "status": "OK",
+      "detail": "0 due desk(s) present; 0 news wires today"
+    },
+    {
+      "section": "A. Publishing engine",
+      "name": "Previous-day 20-news completion",
       "status": "FAIL",
       "detail": "missing: Spain, Italy, Canada, Mexico"
     },
@@ -46,7 +52,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.4h ago"
+      "detail": "newest master article 7.4h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -75,8 +81,8 @@
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 349 KB"
     },
     {
       "section": "B. Blog pages",
@@ -202,7 +208,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,627 instruments · sample OHLC populated"
+      "detail": "457,021 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +501,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 11:37 IST",
-      "overall": "WARN",
-      "ok": 29,
-      "warn": 11,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 13:21 IST",
       "overall": "WARN",
       "ok": 38,
@@ -632,6 +631,13 @@
       "overall": "FAIL",
       "ok": 76,
       "warn": 2,
+      "fail": 1
+    },
+    {
+      "at": "2026-09-26 03:20 IST",
+      "overall": "FAIL",
+      "ok": 78,
+      "warn": 1,
       "fail": 1
     }
   ],
