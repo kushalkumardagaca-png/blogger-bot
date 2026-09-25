@@ -42,6 +42,7 @@ TRACKER = os.environ.get("NEWS_TRACKER", "news_tracker.json")
 # minutes later, so the selector includes the full 60-minute cluster runway.
 PREFLIGHT_MINUTES = 60
 HERO_W, HERO_H = 1600, 900
+SESSION_USED_TITLES, SESSION_USED_URLS = set(), set()
 
 # desk -> (num, label, slug, slot IST "HH:MM", hero unsplash id, hero alt)
 DESKS = {
@@ -572,6 +573,41 @@ def clean_title(t):
     t = re.sub(r"\s+", " ", t).strip(" .:-–|")
     return t
 
+def story_title_key(title):
+    """Stable exact-headline key shared across every desk in an edition."""
+    return re.sub(r"[^a-z0-9]+", " ", clean_title(htmlmod.unescape(strip_tags(title or ""))).casefold()).strip()
+
+def load_today_story_keys(day):
+    """Inventory already-live News stories so later desks cannot republish them."""
+    titles, urls = set(), set()
+    try:
+        feed = json.loads(http_get(
+            f"{BLOG}/feeds/posts/default/-/News?alt=json&max-results=100", timeout=20))
+        for entry in feed.get("feed", {}).get("entry", []):
+            published = dt.datetime.fromisoformat(entry["published"]["$t"]).astimezone(IST)
+            if published.date() != day:
+                continue
+            body = (entry.get("content") or entry.get("summary") or {}).get("$t", "")
+            # Items appear before reference/week-ahead sections; do not reserve
+            # the shared ECB reference card as though it were a news headline.
+            body = re.split(r"<h2[^>]*class=[\"'][^\"']*fbk-h2[^\"']*[\"'][^>]*>\s*<b>\s*(?:04|05|BG)",
+                            body, maxsplit=1, flags=re.I)[0]
+            for block in re.findall(r"<div[^>]+class=[\"'][^\"']*fbk-item[^\"']*[\"'][^>]*>(.*?)</div>",
+                                    body, flags=re.I | re.S):
+                match = re.search(r"<h3[^>]*>(.*?)</h3>", block, flags=re.I | re.S)
+                if match:
+                    key = story_title_key(match.group(1))
+                    if key:
+                        titles.add(key)
+                match = re.search(r"<a[^>]+class=[\"'][^\"']*fbk-src[^\"']*[\"'][^>]+href=[\"']([^\"']+)",
+                                  block, flags=re.I)
+                if match:
+                    urls.add(htmlmod.unescape(match.group(1)).strip())
+    except Exception as exc:
+        # A feed outage must not stop a desk; in-process reservation still protects pairs.
+        print(f"  [dedupe] live News inventory unavailable: {exc}")
+    return titles, urls
+
 def item_type(title):
     tl = title.lower()
     for key, typ in [("cpi", "inflation"), ("inflation", "inflation"), ("price index", "inflation"),
@@ -973,6 +1009,14 @@ def run_desk(desk, tracker, dry=False, token=None):
     print(f"  [{desk}] window {win_start:%d %b %H:%M} -> {win_end:%d %b %H:%M} IST")
 
     items_raw, own_off, own_med = fetch_desk_items(desk)
+    # A story belongs to one Daily Yield desk only. Exclude headlines/source URLs
+    # already live today or reserved by an earlier desk in this same process.
+    before_dedupe = len(items_raw)
+    items_raw = [item for item in items_raw
+                 if story_title_key(item.get("title", "")) not in SESSION_USED_TITLES
+                 and item.get("url", "").strip() not in SESSION_USED_URLS]
+    if before_dedupe != len(items_raw):
+        print(f"  [{desk}] cross-desk duplicate guard excluded {before_dedupe - len(items_raw)} items")
     items, upcoming, eff_lo = select_items(items_raw, win_start, win_end, desk,
                                            own_off=own_off, own_med=own_med)
     eff_start = win_start
@@ -989,6 +1033,14 @@ def run_desk(desk, tracker, dry=False, token=None):
     print(f"  [{desk}] article built: {art['n_items']} items, '{art['title'][:70]}…'")
     url = publish_post(art, token, dry)
     if url or dry:
+        # Reserve only stories that actually made the article. This protects the
+        # second desk in a paired workflow even before Blogger's feed refreshes.
+        for item in items:
+            key = story_title_key(item.get("title", ""))
+            if key:
+                SESSION_USED_TITLES.add(key)
+            if item.get("url"):
+                SESSION_USED_URLS.add(item["url"].strip())
         if not dry:
             tracker["desks"][desk] = {"edition": edition_date.isoformat(),
                                       "window_end": win_end.isoformat(),
@@ -1031,6 +1083,10 @@ def main():
     else:
         print("usage: --due | --desks a,b | --dry-run | --list"); return
     tracker = load_tracker()
+    global SESSION_USED_TITLES, SESSION_USED_URLS
+    SESSION_USED_TITLES, SESSION_USED_URLS = load_today_story_keys(today)
+    print(f"Cross-desk guard: {len(SESSION_USED_TITLES)} live headlines, "
+          f"{len(SESSION_USED_URLS)} source URLs already used today")
     token = None
     if not dry:
         token = blogger_token()
