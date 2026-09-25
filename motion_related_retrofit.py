@@ -24,6 +24,16 @@ def update(kind,tok,item,content):
  if kind=='posts':body['labels']=item.get('labels',[])
  if APPLY:call('/'+kind+'/'+item['id'],tok,'PUT',body=body)
 
+def repair_external_runtime(content):
+ """Remove copied anti-bot scripts and repair the Money Atlas FX fallback chain."""
+ old=content
+ content=re.sub(r'<script\b[^>]*src=["\'][^"\']*cdn-cgi/challenge-platform/scripts/jsd/main\.js[^"\']*["\'][^>]*>\s*</script\s*>','',content,flags=re.I)
+ content=re.sub(r'<script\b[^>]*>[^<]*cdn-cgi/challenge-platform/scripts/jsd/main\.js[^<]*</script\s*>','',content,flags=re.I|re.S)
+ broken="fetch('https://api.frankfurter.app/latest?from=USD').then(function(r){return r.json();}).then(function(j){fx=j;paintFx();}).catch(function(){fx=null;});"
+ fixed="fetch('https://api.frankfurter.app/latest?from=USD').then(function(r){if(!r.ok)throw new Error('Frankfurter '+r.status);return r.json();}).catch(function(){return fetch('https://open.er-api.com/v6/latest/USD').then(function(r){if(!r.ok)throw new Error('ER API '+r.status);return r.json();}).then(function(j){return {rates:j.rates,date:j.time_last_update_utc?j.time_last_update_utc.slice(5,16):'latest'};});}).then(function(j){fx=j;paintFx();}).catch(function(){fx=null;});"
+ content=content.replace(broken,fixed)
+ return content,content!=old
+
 def remove_duplicate_article_package(content):
  """Remove an accidentally repeated schema/style/article package, preserving the first."""
  articles=list(re.finditer(r'<article\b',content,re.I))
@@ -62,10 +72,10 @@ def repair_article_schema(content,url):
 def main():
  tok=token();pages=collect('pages',tok);posts=collect('posts',tok);Path('motion_related_backup.json').write_text(json.dumps({'pages':pages,'posts':posts},ensure_ascii=False));changes=[]
  for p in pages:
-  old=p.get('content','');new=old.replace('if(!s.visible||s.hover||s.focus||s.touchUntil>Date.now())return;','if(!s.visible)return;');new=ensure_motion(new)
-  if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;')})
+  old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new=new.replace('if(!s.visible||s.hover||s.focus||s.touchUntil>Date.now())return;','if(!s.visible)return;');new=ensure_motion(new)
+  if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed})
  for p in posts:
-  old=p.get('content','');new,deduped=remove_duplicate_article_package(old);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts);new=ensure_motion(new)
-  if new!=old:update('posts',tok,p,new);changes.append({'kind':'post','url':p.get('url'),'related':new.count('class="dy-related-card"')//2,'duplicate_package_removed':deduped,'schema_fixed':schema_fixed})
+  old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new,deduped=remove_duplicate_article_package(new);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts);new=ensure_motion(new)
+  if new!=old:update('posts',tok,p,new);changes.append({'kind':'post','url':p.get('url'),'related':new.count('class="dy-related-card"')//2,'duplicate_package_removed':deduped,'schema_fixed':schema_fixed,'runtime_fixed':runtime_fixed})
  result={'apply':APPLY,'pages_scanned':len(pages),'posts_scanned':len(posts),'changes':changes,'related_shelves':sum(x['kind']=='post' and x['related']>=3 for x in changes)};Path('MOTION_RELATED_AUDIT.json').write_text(json.dumps(result,indent=2));print(json.dumps({'apply':APPLY,'pages':len(pages),'posts':len(posts),'changes':len(changes),'shelves':result['related_shelves']},indent=2))
 if __name__=='__main__':main()

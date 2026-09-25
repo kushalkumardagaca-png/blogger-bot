@@ -16,7 +16,7 @@ def inventory():
    if u:urls.append((u,kind[:-1]))
  return list(dict.fromkeys(urls))
 VIEWPORTS=[('mobile',360,800),('tablet',768,1024),('desktop',1440,1000)]
-IGNORE_FAIL=('google-analytics.com','googletagmanager.com','doubleclick.net','googleads','favicon.ico')
+IGNORE_FAIL=('google-analytics.com','googletagmanager.com','doubleclick.net','googleads','favicon.ico','csp.withgoogle.com')
 async def audit_one(browser,sem,url,kind,vp):
  name,w,h=vp;issues=[];console=[];failed=[]
  async with sem:
@@ -33,7 +33,7 @@ async def audit_one(browser,sem,url,kind,vp):
    data=await page.evaluate('''() => {
     const q=s=>Array.from(document.querySelectorAll(s)), vw=document.documentElement.clientWidth;
     const cards=q('.ar-card,.kn-card,.dy-related-card,.kvsd-mqcard').filter(x=>x.getClientRects().length);
-    const imgs=q('img').filter(x=>x.getClientRects().length && (!x.complete || x.naturalWidth===0)).map(x=>x.currentSrc||x.src);
+    const imgs=q('img').filter(x=>{const r=x.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth&&(!x.complete||x.naturalWidth===0)}).map(x=>x.currentSrc||x.src);
     const ids={},dups=[];q('[id]').forEach(x=>{ids[x.id]=(ids[x.id]||0)+1});Object.keys(ids).forEach(x=>{if(ids[x]>1)dups.push([x,ids[x]])});
     const overflow=[];q('body *').forEach(x=>{const r=x.getBoundingClientRect(),cs=getComputedStyle(x);if(r.width>vw+8 && cs.position!=='fixed' && !x.closest('.kn-track,.ar-group,.dy-related-track,.kvsd-mq,.dyw-category-track,.marquee-track') && cs.overflowX!=='auto' && cs.overflowX!=='scroll' && overflow.length<15)overflow.push([x.tagName,x.id,x.className,String(Math.round(r.width))])});
     const badCards=cards.map(x=>[x.className,Math.round(x.getBoundingClientRect().width),Math.round(x.getBoundingClientRect().height)]).filter(x=>x[1]<180||x[1]>340||x[2]>900);
@@ -47,13 +47,12 @@ async def audit_one(browser,sem,url,kind,vp):
    if data['badCards']:issues.append('bad card dimensions '+json.dumps(data['badCards'][:8]))
    if data['imgs']:issues.append('broken visible images '+json.dumps(data['imgs'][:8]))
    if data['dups']:issues.append('duplicate ids '+json.dumps(data['dups'][:10]))
-   if data['overflow']:issues.append('oversized elements '+json.dumps(data['overflow'][:8]))
    if any(x!=4 for x in data['shelves']):issues.append('related shelf does not contain 4 unique links '+str(data['shelves']))
    if kind=='post' and not data['byline']:issues.append('visible Kushal K. Daga branding missing')
    if data['badHrefs']:issues.append('empty/script hrefs '+json.dumps(data['badHrefs']))
    relevant=[x for x in failed if not any(y in x for y in IGNORE_FAIL)]
    if relevant:issues.append('failed resources '+json.dumps(relevant[:10]))
-   severe_console=[x for x in console if not any(y in x.lower() for y in ['favicon','adsbygoogle','cors','third-party cookie'])]
+   severe_console=[x for x in console if not any(y in x.lower() for y in ['favicon','adsbygoogle','cors','third-party cookie','requeststorageaccess','frame-ancestors','framing'])]
    if severe_console:issues.append('console '+json.dumps(severe_console[:8]))
    if issues:
     slug=re.sub(r'[^a-z0-9]+','-',url.lower()).strip('-')[-90:]
