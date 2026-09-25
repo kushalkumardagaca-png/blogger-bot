@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-09-25T06:23:33+05:30",
+  "checked_at_ist": "2026-09-25T06:25:48+05:30",
   "summary": {
     "pass": 35,
     "fail": 0
@@ -166,9 +166,9 @@
       "detail": "next index 25"
     },
     {
-      "name": "News tracker clean for launch",
+      "name": "News tracker launch/state is valid",
       "status": "PASS",
-      "detail": "{\"desks\": {}}"
+      "detail": "4 desk edition(s) recorded"
     },
     {
       "name": "No obsolete blog URL in production engines",

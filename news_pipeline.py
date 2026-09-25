@@ -632,10 +632,17 @@ def desk_title_prefix(desk):
 def weekday_name(d):
     return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][d.weekday()]
 
+def clip_words(text, limit):
+    """Limit display text at a word boundary instead of cutting words or numbers."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit + 1].rsplit(" ", 1)[0].rstrip(" ,;:–—-")
+    return (cut or text[:limit]).rstrip() + "…"
+
 def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related):
     n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
     top = [clean_title(i["title"]) for i in items[:3]]
-    headline_bits = "; ".join(top[:2])[:90]
+    headline_bits = clip_words("; ".join(top[:2]), 90)
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
     win_str = f"{fmt_day(win_start.date())}–{fmt_day(win_end.date())} {win_end.year}"
     span_h = (win_end - win_start).total_seconds() / 3600
@@ -744,7 +751,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     jsonld = {
         "@context": "https://schema.org", "@type": "NewsArticle",
         "mainEntityOfPage": {"@id": canonical}, "@id": canonical,
-        "headline": title[:110], "description": meta, "inLanguage": "en",
+        "headline": clip_words(title, 110), "description": meta, "inLanguage": "en",
         "datePublished": win_end.isoformat(timespec="seconds"),
         "dateModified": win_end.isoformat(timespec="seconds"),
         "author": {"@type": "Person", "name": "Kushal K. Daga",

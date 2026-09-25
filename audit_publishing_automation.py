@@ -76,7 +76,15 @@ check('Trusted links disclose source type','"Source:" if it.get("media") else "O
 
 tracker=json.loads((ROOT/'published_tracker.json').read_text()); news_tracker=json.loads((ROOT/'news_tracker.json').read_text())
 check('Master tracker ready for next topic',tracker.get('next_topic_index')==25,f"next index {tracker.get('next_topic_index')}")
-check('News tracker clean for launch',news_tracker=={'desks':{}},json.dumps(news_tracker))
+launch_date=dt.date(2026,9,25); audit_today=dt.datetime.now(IST).date()
+news_desks=news_tracker.get('desks',{}) if isinstance(news_tracker,dict) else {}
+if audit_today < launch_date:
+ tracker_ok = news_tracker == {'desks':{}}
+else:
+ tracker_ok = (set(news_desks).issubset(set(desks)) and all(
+     isinstance(v,dict) and v.get('edition','') <= audit_today.isoformat()
+     and v.get('url','').startswith('https://dailyyield.blogspot.com/') for v in news_desks.values()))
+check('News tracker launch/state is valid',tracker_ok,f"{len(news_desks)} desk edition(s) recorded")
 check('No obsolete blog URL in production engines','financebycakushal.blogspot.com' not in ap+np)
 check('No obsolete market page in production engines','share-market_0718113516' not in ap+np and 'Market Explorer' not in ap+np)
 

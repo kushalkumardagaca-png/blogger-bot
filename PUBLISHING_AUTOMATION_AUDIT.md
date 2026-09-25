@@ -36,6 +36,6 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
 - ✅ **Master tracker ready for next topic** — next index 25
-- ✅ **News tracker clean for launch** — {"desks": {}}
+- ✅ **News tracker launch/state is valid** — 4 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
