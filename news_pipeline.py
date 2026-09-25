@@ -22,7 +22,7 @@ import ssl
 import sys
 import time
 import urllib.request
-from urllib.parse import urljoin
+from urllib.parse import urljoin, quote_plus
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor
 from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
@@ -62,8 +62,8 @@ DESKS = {
  "russia":  (10, "Russia", "russia", "22:00", "photo-1460925895917-afdab827c52f", "Financial market data and economic analysis desk"),
  "canada":  (11, "Canada", "canada", "18:05", "photo-1449824913935-59a10b8d2000", "Toronto financial district skyline"),
  "brazil":  (12, "Brazil", "brazil", "17:00", "photo-1496307653780-42ee777d4833", "São Paulo financial district, Brazil"),
- "spain":   (13, "Spain", "spain", "13:05", "photo-1509845350455-fc3f10b16bac", "Madrid financial street, Spain"),
- "mexico":  (14, "Mexico", "mexico", "19:30", "photo-1518391846015-5589253858ba", "Mexico City financial district"),
+ "spain":   (13, "Spain", "spain", "13:05", "photo-1460925895917-afdab827c52f", "Financial market analysis for Spain"),
+ "mexico":  (14, "Mexico", "mexico", "19:30", "photo-1460925895917-afdab827c52f", "Financial market analysis for Mexico"),
  "australia": (15, "Australia", "australia", "04:30", "photo-1506973035872-a4ec16b8e8d9", "Sydney harbour financial district"),
  "south-korea": (16, "South Korea", "south-korea", "04:35", "photo-1538485399081-7191377e8241", "Seoul financial district skyline"),
  "market":  (17, "Market and Trading", "category-market-and-trading", "09:00", "photo-1460925895917-afdab827c52f", "Trading screens and market data in a modern dealing room"),
@@ -370,8 +370,11 @@ MEDIA = {
  "japan": [("The Japan Times", "https://www.japantimes.co.jp/feed/", "rss", 2)],
  "china": [("South China Morning Post", "https://www.scmp.com/rss/4/feed", "rss", 1)],
  "australia": [("ABC News Australia", "https://www.abc.net.au/news/feed/51120/rss.xml", "rss", 1)],
- "canada": [("CBC Business", "https://www.cbc.ca/webfeed/rss/rss-business", "rss", 1)],
- "mexico": [("Mexico News Daily", "https://mexiconewsdaily.com/feed/", "rss", 1)],
+ "canada": [("CBC Business", "https://www.cbc.ca/webfeed/rss/rss-business", "rss", 1),
+            ("BNN Bloomberg Canada", "https://www.bnnbloomberg.ca/", "html", 1)],
+ "mexico": [("Mexico News Daily", "https://mexiconewsdaily.com/feed/", "rss", 1),
+            ("The Rio Times", "https://www.riotimesonline.com/feed/", "rss", 1),
+            ("Google News: Mexico Finance", "https://news.google.com/rss/search?q=Mexico+finance+when:1d&hl=en-US&gl=US&ceid=US:en", "gnr", 2)],
  "germany": [("Deutsche Welle", "https://rss.dw.com/xml/rss-en-all", "rss", 3)],
  "france": [("Le Monde", "https://www.lemonde.fr/en/rss/une.xml", "rss", 2)],
  "india": [("The Economic Times", "https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms", "rss", 2)],
@@ -381,7 +384,10 @@ MEDIA = {
  "global": [("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "rss", 2),
             ("France 24 Business", "https://www.france24.com/en/business/rss", "rss", 3)],
  "spain": [("El País (English)", "https://english.elpais.com/arc/outboundfeeds/rss/?outputType=xml", "rss", 1),
-           ("The Corner", "https://thecorner.eu/feed/", "rss", 2)],
+           ("The Corner", "https://thecorner.eu/feed/", "rss", 2),
+           ("Google News: Spain Finance", "https://news.google.com/rss/search?q=Spain+finance+when:1d&hl=en-US&gl=US&ceid=US:en", "gnr", 2)],
+ "italy": [("ANSA English", "https://www.ansa.it/english/news/english_rss.xml", "rss", 1),
+           ("Google News: Italy Finance", "https://news.google.com/rss/search?q=Italy+finance+when:1d&hl=en-US&gl=US&ceid=US:en", "gnr", 2)],
  "personal": [("The Guardian Money", "https://www.theguardian.com/uk/money/rss", "rss", 1)],
 }
 GLOBAL_MEDIA = [
@@ -401,23 +407,37 @@ def resolve_url(u, timeout=8):
     except Exception:
         return u
 
+GNR_ALLOWED_PUBLISHERS = {
+    "Reuters", "Associated Press", "AP News", "Bloomberg", "BNN Bloomberg",
+    "CNBC", "BBC", "The Guardian", "Deutsche Welle", "France 24",
+    "Yahoo Finance", "Yahoo News UK", "Il Sole 24 ORE", "ANSA",
+    "El País", "The Economic Times", "Mexico Business News", "Mexico News Daily",
+    "Financial Times", "The New York Times", "The Telegraph", "The Globe and Mail",
+    "CTV News", "South China Morning Post", "RFI", "WSJ", "Yonhap News Agency",
+    "Yahoo News Canada", "Yahoo News New Zealand", "Yahoo! Finance Canada",
+    "Investing.com", "Investing.com UK", "Investing.com India", "The Local Italy",
+    "Olive Press News Spain", "Sur in English", "Idealista", "The Straits Times",
+    "Toronto Star", "Business Standard", "Global Banking & Finance Review",
+}
+
 def parse_gnr(xml_text, source):
-    """Google News RSS: split 'Headline - Publisher', link straight to publisher."""
+    """Google News RSS: retain only approved publishers and their source link."""
     items = parse_rss(xml_text, source)
     out = []
     with ThreadPoolExecutor(max_workers=8) as ex:
-        urls = list(ex.map(resolve_url, [i["url"] for i in items[:25]]))
-    for i, u in zip(items[:25], urls):
+        urls = list(ex.map(resolve_url, [i["url"] for i in items[:40]]))
+    for i, u in zip(items[:40], urls):
         t = i["title"]
         if " - " in t:
             head, pub = t.rsplit(" - ", 1)
             head, pub = head.strip(), pub.strip()
         else:
             head, pub = t, "Google News"
-        if not pub or len(pub) > 40:
-            pub = "Google News"
+        if not pub or len(pub) > 40 or pub not in GNR_ALLOWED_PUBLISHERS:
+            continue
         out.append({"title": head, "url": u, "desc": i["desc"], "date": i["date"],
-                    "agency": pub, "prio": source[3], "media": True})
+                    "agency": pub, "prio": source[3], "media": True,
+                    "country_discovery": True})
     return out
 # own-country relevance hints for media items on country desks
 COUNTRY_HINTS = {
@@ -438,6 +458,19 @@ COUNTRY_HINTS = {
  "south-korea": r"\b(korea|korean|won |seoul|kospi|samsung|hyundai|chaebol)\b",
 }
 HINT_RE = {d: re.compile(p, re.I) for d, p in COUNTRY_HINTS.items()}
+# Broad lawful discovery fallback. Google News RSS supplies discovery only; the
+# edition retains the named original publisher and its source link. Country
+# relevance, finance relevance, date, publisher trust and duplicate checks still apply.
+def discovery_sources(desk):
+    label = DESKS[desk][1]
+    out = []
+    for term in ("finance", "economy", "business", "markets"):
+        query = quote_plus(f'{label} {term} when:1d')
+        out.append((f'Google News: {label} {term.title()}',
+                    f'https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en',
+                    'gnr', 2))
+    return out
+
 FINANCE_RE = re.compile(r"\b(rate|inflation|cpi|gdp|growth|recession|econom|market|bank|trade|tariff|"
                         r"tax|budget|deficit|debt|currency|rupee|yen|yuan|euro|dollar|pound|ruble|"
                         r"rouble|won|peso|oil|gas|energy|gold|commodit|pric|merger|acquisition|ipo|"
@@ -456,6 +489,11 @@ def fetch_desk_items(desk):
     else:
         off = list(SOURCES.get(desk, []))
         med = list(MEDIA.get(desk, []))
+        have_media = {s[1] for s in med}
+        for discovery in discovery_sources(desk):
+            if discovery[1] not in have_media:
+                med.append(discovery)
+                have_media.add(discovery[1])
         have = {s[1] for s in off + med}
         srcs = off + med + [s for s in GLOBAL_POOL + GLOBAL_MEDIA if s[1] not in have]
         shared_official = {"European Central Bank", "European Commission"}
@@ -492,8 +530,13 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
                      r"reserve|liquidity|repo|policy)", re.I)
 
-def select_items(all_items, win_start, win_end, desk, fallback_target=10, own_off=None, own_med=None):
-    """Publish all 13+ significant current items; otherwise curate up to ten."""
+def select_items(all_items, win_start, win_end, desk, selection_cap=15, own_off=None, own_med=None):
+    """Rank the complete relevant current pool and publish its best 12–15 items.
+
+    Significance controls ordering, never whether a desk edition exists. If a
+    genuinely small pool has fewer than 12 current items, publish all of them;
+    only below ten may up to three clearly dated background items supplement it.
+    """
     own_off = own_off or set()
     own_med = own_med or set()
     lo = win_start.date()
@@ -536,36 +579,38 @@ def select_items(all_items, win_start, win_end, desk, fallback_target=10, own_of
         return result
 
     ranked = curate([i for i in all_items if i.get("date") and lo <= i["date"] <= hi and desk_match(i)])
-    finance_significant = [i for i in ranked if SALIENT.search(i["title"])]
     if desk not in CATEGORY_DESKS and desk != "global":
         # A country wire must actually be about that country or come from its
         # local official record. Generic international pool items do not fill it.
-        significant = [i for i in finance_significant
-                       if i["agency"] in own_off or (hint and hint.search(i["title"]))]
+        relevant = [i for i in ranked
+                    if i["agency"] in own_off or i["agency"] in own_med
+                    or i.get("country_discovery")
+                    or (hint and hint.search(i["title"]))]
     else:
-        significant = finance_significant
+        relevant = ranked
 
-    # Ten is only the curation target when the desk has no more than 12
-    # significant current items. At 13+, every significant item is reported.
-    current = significant if len(significant) > 12 else significant[:fallback_target]
+    # Significance is represented by the score/order. It is not an exclusion
+    # threshold. The strongest fifteen from the complete current pool lead.
+    current = relevant[:selection_cap]
 
     # Background is a transparent context supplement, never disguised as current news.
     # It is used only below ten current items and is always capped at three.
     background = []
-    if len(current) < fallback_target:
+    if len(current) < 10:
         floor = lo - dt.timedelta(days=3)
         current_titles = {clean_title(i["title"]).lower() for i in current}
         older = [i for i in all_items if i.get("date") and floor <= i["date"] < lo
                  and desk_match(i) and SALIENT.search(i["title"])]
         if desk not in CATEGORY_DESKS and desk != "global":
-            older = [i for i in older if i["agency"] in own_off or (hint and hint.search(i["title"]))]
+            older = [i for i in older if i["agency"] in own_off or i["agency"] in own_med
+                     or (hint and hint.search(i["title"]))]
         for item in curate(older):
             if clean_title(item["title"]).lower() in current_titles:
                 continue
             framed = dict(item)
             framed["background"] = True
             background.append(framed)
-            if len(background) >= min(3, fallback_target - len(current)):
+            if len(background) >= min(3, 10 - len(current)):
                 break
 
     upcoming = [i for i in all_items
@@ -746,9 +791,9 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
     current_items = [i for i in items if not i.get("background")]
     background_items = [i for i in items if i.get("background")]
-    volume_note = (f"All {len(current_items)} significant current items are included."
-                   if len(current_items) > 12 else
-                   f"The strongest {len(current_items)} current item(s) are included.")
+    volume_note = (f"The strongest {len(current_items)} relevant current items were selected from the complete desk pool."
+                   if len(current_items) >= 12 else
+                   f"All {len(current_items)} relevant current item(s) available to this desk are included.")
     top = [clean_title(i["title"]) for i in current_items[:3]]
     headline_bits = clip_words("; ".join(top[:2]), 90)
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"

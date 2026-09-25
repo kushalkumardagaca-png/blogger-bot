@@ -160,10 +160,10 @@ print("-" * 60)
 
 # A1 - Blogger feed
 feed_posts = []
-st, body, err = try_fetch(BLOG + "/feeds/posts/default?alt=json&max-results=25", timeout=20)
+st, body, err = try_fetch(BLOG + "/feeds/posts/default?alt=json&max-results=100", timeout=20)
 if st == 429:
     time.sleep(15)
-    st, body, err = try_fetch(BLOG + "/feeds/posts/default?alt=json&max-results=25", timeout=20)
+    st, body, err = try_fetch(BLOG + "/feeds/posts/default?alt=json&max-results=100", timeout=20)
 if st == 200:
     try:
         entries = json.loads(body.decode())["feed"].get("entry", [])

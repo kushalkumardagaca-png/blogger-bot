@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 46 PASS · 0 FAIL
+**Result:** 48 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -35,8 +35,10 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News source policy is current**
 - ✅ **News finance filter enabled**
 - ✅ **News requires at least one genuinely current item**
-- ✅ **News reports every significant item when more than twelve exist**
-- ✅ **Ten is a fallback curation target, not a universal ceiling**
+- ✅ **Significance ranks rather than cancels a desk edition**
+- ✅ **News selection is capped at the strongest fifteen current items**
+- ✅ **Every country desk has broad current-news discovery fallback**
+- ✅ **Discovery fallback retains only approved named publishers**
 - ✅ **Older context is capped at three and explicitly labelled**
 - ✅ **News byline is current**
 - ✅ **News publisher brand is Daily Yield**
@@ -46,7 +48,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 27
-- ✅ **News tracker launch/state is valid** — 10 desk edition(s) recorded
+- ✅ **Master tracker next-topic state is valid** — next index 30
+- ✅ **News tracker launch/state is valid** — 16 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

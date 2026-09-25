@@ -73,12 +73,16 @@ check('News duplicate recovery uses rendered GET, not unreliable HEAD',
 check('News source policy is current','official institutions plus established, reputable newsrooms' in np)
 check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News requires at least one genuinely current item','if current_count == 0' in np)
-check('News reports every significant item when more than twelve exist',
-      'current = significant if len(significant) > 12 else significant[:fallback_target]' in np)
-check('Ten is a fallback curation target, not a universal ceiling',
-      'fallback_target=10' in np and 'if len(significant) > 12' in np)
+check('Significance ranks rather than cancels a desk edition',
+      'current = relevant[:selection_cap]' in np and 'finance_significant' not in np)
+check('News selection is capped at the strongest fifteen current items',
+      'selection_cap=15' in np and 'current = relevant[:selection_cap]' in np)
+check('Every country desk has broad current-news discovery fallback',
+      'def discovery_sources(desk)' in np and "med.append(discovery)" in np and "when:1d" in np)
+check('Discovery fallback retains only approved named publishers',
+      'GNR_ALLOWED_PUBLISHERS' in np and 'pub not in GNR_ALLOWED_PUBLISHERS' in np)
 check('Older context is capped at three and explicitly labelled',
-      'len(background) >= min(3, fallback_target - len(current))' in np
+      'len(background) >= min(3, 10 - len(current))' in np
       and 'Background—not current-window news.' in np
       and 'Background Context — Not Current-Period News' in np)
 check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Daga' not in np)

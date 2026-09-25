@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T22:13:14+05:30",
+  "checked_at_ist": "2026-09-25T23:50:52+05:30",
   "summary": {
-    "pass": 46,
+    "pass": 48,
     "fail": 0
   },
   "checks": [
@@ -161,12 +161,22 @@
       "detail": ""
     },
     {
-      "name": "News reports every significant item when more than twelve exist",
+      "name": "Significance ranks rather than cancels a desk edition",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Ten is a fallback curation target, not a universal ceiling",
+      "name": "News selection is capped at the strongest fifteen current items",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every country desk has broad current-news discovery fallback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Discovery fallback retains only approved named publishers",
       "status": "PASS",
       "detail": ""
     },
@@ -218,12 +228,12 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 27"
+      "detail": "next index 30"
     },
     {
       "name": "News tracker launch/state is valid",
       "status": "PASS",
-      "detail": "10 desk edition(s) recorded"
+      "detail": "16 desk edition(s) recorded"
     },
     {
       "name": "No obsolete blog URL in production engines",
