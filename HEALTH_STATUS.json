@@ -1,12 +1,12 @@
 {
   "overall": "PASS",
-  "generated_at": "2026-09-25 06:26 IST",
+  "generated_at": "2026-09-25 09:20 IST",
   "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
-    "OK": 77,
+    "OK": 79,
     "WARN": 0,
     "FAIL": 0,
-    "SKIP": 3
+    "SKIP": 1
   },
   "missed_slots": [],
   "auto_heal_actions": [],
@@ -22,13 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "0 slot(s) due so far today — all published; 0 master articles + 4 news wires today"
+      "detail": "1 slot(s) due so far today — all published; 1 master articles + 6 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "2 due desk(s) present; 4 news wires today"
+      "detail": "4 due desk(s) present; 6 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -40,37 +40,37 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2265 words, hero image + schema OK (12 Money Moves for the Next 12 Months)"
+      "detail": "2328 words, hero image + schema OK (Stop Splitting Bills 50/50)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 9.8h ago"
+      "detail": "newest master article 2.0h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #26 of 500, 25 published, last at 2026-09-24 15:05 UTC"
+      "detail": "next topic #27 of 500, 26 published, last at 2026-09-25 07:18 UTC"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publisher workflow (GitHub Actions)",
-      "status": "SKIP",
-      "detail": "no token (local run)"
+      "status": "OK",
+      "detail": "last 8 runs all successful"
     },
     {
       "section": "A. Publishing engine",
       "name": "News workflow (GitHub Actions)",
-      "status": "SKIP",
-      "detail": "no token (local run)"
+      "status": "OK",
+      "detail": "last 12 completed runs successful"
     },
     {
       "section": "B. Blog pages",
       "name": "Homepage",
       "status": "OK",
-      "detail": "200 OK · 246 KB"
+      "detail": "200 OK · 240 KB"
     },
     {
       "section": "B. Blog pages",
@@ -94,13 +94,13 @@
       "section": "B. Blog pages",
       "name": "Markets Today",
       "status": "OK",
-      "detail": "200 OK · 273 KB"
+      "detail": "200 OK · 274 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
       "status": "OK",
-      "detail": "200 OK · 385 KB"
+      "detail": "200 OK · 386 KB"
     },
     {
       "section": "B. Blog pages",
@@ -112,7 +112,7 @@
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
       "status": "OK",
-      "detail": "200 OK · 305 KB"
+      "detail": "200 OK · 306 KB"
     },
     {
       "section": "B. Blog pages",
@@ -124,7 +124,7 @@
       "section": "B. Blog pages",
       "name": "About Us",
       "status": "OK",
-      "detail": "200 OK · 385 KB"
+      "detail": "200 OK · 386 KB"
     },
     {
       "section": "B. Blog pages",
@@ -142,7 +142,7 @@
       "section": "B. Blog pages",
       "name": "Privacy Policy",
       "status": "OK",
-      "detail": "200 OK · 392 KB"
+      "detail": "200 OK · 393 KB"
     },
     {
       "section": "B. Blog pages",
@@ -154,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "29 URLs indexed"
+      "detail": "32 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,191 instruments · sample OHLC populated"
+      "detail": "457,000 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-23 22:28 IST",
-      "overall": "PASS",
-      "ok": 40,
-      "warn": 0,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 03:18 IST",
       "overall": "WARN",
       "ok": 39,
@@ -631,6 +624,13 @@
       "at": "2026-09-25 06:26 IST",
       "overall": "PASS",
       "ok": 77,
+      "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-25 09:20 IST",
+      "overall": "PASS",
+      "ok": 79,
       "warn": 0,
       "fail": 0
     }
