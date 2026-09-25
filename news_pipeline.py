@@ -25,6 +25,7 @@ import urllib.request
 from urllib.parse import urljoin
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor
+from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -62,7 +63,7 @@ DESKS = {
  "mexico":  (14, "Mexico", "mexico", "19:30", "photo-1518391846015-5589253858ba", "Mexico City financial district"),
  "australia": (15, "Australia", "australia", "04:30", "photo-1506973035872-a4ec16b8e8d9", "Sydney harbour financial district"),
  "south-korea": (16, "South Korea", "south-korea", "04:35", "photo-1538485399081-7191377e8241", "Seoul financial district skyline"),
- "market":  (17, "Market and Trading", "category-market-and-trading", "09:00", "photo-1611974748038-1e8768f0db4a", "Trading screens in a modern dealing room"),
+ "market":  (17, "Market and Trading", "category-market-and-trading", "09:00", "photo-1460925895917-afdab827c52f", "Trading screens and market data in a modern dealing room"),
  "macro":   (18, "Economy and Macro Policy", "category-economy-and-macro-policy", "09:05", "photo-1554224155-8d04cb21cd6c", "Official economic statistics documents and charts"),
  "corporate": (19, "Corporate Finance and Industry", "category-corporate-finance-and-industry", "15:45", "photo-1486406146926-c627a92ad1ab", "Modern corporate headquarters offices"),
  "personal": (20, "Personal Finance", "category-personal-finance", "21:00", "photo-1554224155-6726d3519c1d", "Household budget planning with calculator and notes"),
@@ -701,6 +702,7 @@ def compose_item(it, win_end):
       <h3>{display_title}</h3>
       <p>{body}</p>
       <a class="fbk-src" href="{htmlmod.escape(it['url'])}" target="_blank" rel="noopener">{"Source:" if it.get("media") else "Official:"} {eagency}</a>
+      {contextual_card(etitle + ' ' + desc)}
     </div>'''
 
 # ---------------------------------------------------------------- template
@@ -841,6 +843,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   <figure class="fbk-hero"><img src="{hero_url}" alt="{hero_alt}" width="{HERO_W}" height="{HERO_H}" loading="eager" decoding="async" fetchpriority="high" style="display:block;width:100%;height:auto;max-width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px"></figure>
 
   <style>{CSS}</style>
+  {CONTEXT_STYLE}
 
   <div class="fbk-kicker">
     <span class="fbk-tag">{tag}</span>

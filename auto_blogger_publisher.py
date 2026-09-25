@@ -54,6 +54,7 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
+from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 
@@ -563,6 +564,8 @@ document.addEventListener("DOMContentLoaded", function() {{
 
 {hero_figure}
 
+{CONTEXT_STYLE}
+{contextual_card(title + ' ' + desc)}
 
   <div class="kushal-stat-grid">
     <div class="kushal-stat-card">
