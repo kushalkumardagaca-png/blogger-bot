@@ -1,10 +1,10 @@
 {
   "overall": "FAIL",
-  "generated_at": "2026-09-25 19:22 IST",
+  "generated_at": "2026-09-25 22:22 IST",
   "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 78,
-    "WARN": 0,
+    "OK": 76,
+    "WARN": 2,
     "FAIL": 1,
     "SKIP": 1
   },
@@ -22,13 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "4 slot(s) due so far today — all published; 4 master articles + 13 news wires today"
+      "detail": "5 slot(s) due so far today — all published; 5 master articles + 16 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "FAIL",
-      "detail": "missing: Spain, Italy, Brazil, Canada"
+      "detail": "missing: Spain, Italy, Canada, Mexico"
     },
     {
       "section": "A. Publishing engine",
@@ -40,19 +40,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2582 words, hero image + schema OK ($90k Broke: The New Middle Class)"
+      "detail": "2567 words, hero image + schema OK (Nurse, Two Kids, £18k Debt: Fixed)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.2h ago"
+      "detail": "newest master article 2.4h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #30 of 500, 29 published, last at 2026-09-25 17:09 UTC"
+      "detail": "next topic #31 of 500, 30 published, last at 2026-09-25 19:56 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -69,20 +69,20 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 248 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 348 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
       "status": "OK",
-      "detail": "200 OK · 250 KB"
+      "detail": "200 OK · 251 KB"
     },
     {
       "section": "B. Blog pages",
@@ -94,19 +94,19 @@
       "section": "B. Blog pages",
       "name": "Markets Today",
       "status": "OK",
-      "detail": "200 OK · 279 KB"
+      "detail": "200 OK · 280 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
       "status": "OK",
-      "detail": "200 OK · 389 KB"
+      "detail": "200 OK · 390 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot legacy transition",
       "status": "OK",
-      "detail": "200 OK · 209 KB"
+      "detail": "200 OK · 210 KB"
     },
     {
       "section": "B. Blog pages",
@@ -118,13 +118,13 @@
       "section": "B. Blog pages",
       "name": "For Corporate hub",
       "status": "OK",
-      "detail": "200 OK · 367 KB"
+      "detail": "200 OK · 368 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
       "status": "OK",
-      "detail": "200 OK · 388 KB"
+      "detail": "200 OK · 389 KB"
     },
     {
       "section": "B. Blog pages",
@@ -142,7 +142,7 @@
       "section": "B. Blog pages",
       "name": "Privacy Policy",
       "status": "OK",
-      "detail": "200 OK · 398 KB"
+      "detail": "200 OK · 399 KB"
     },
     {
       "section": "B. Blog pages",
@@ -154,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "42 URLs indexed"
+      "detail": "46 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,344 instruments · sample OHLC populated"
+      "detail": "456,627 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 10:18 IST",
-      "overall": "WARN",
-      "ok": 30,
-      "warn": 10,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 11:37 IST",
       "overall": "WARN",
       "ok": 29,
@@ -632,6 +625,13 @@
       "overall": "FAIL",
       "ok": 78,
       "warn": 0,
+      "fail": 1
+    },
+    {
+      "at": "2026-09-25 22:22 IST",
+      "overall": "FAIL",
+      "ok": 76,
+      "warn": 2,
       "fail": 1
     }
   ],
