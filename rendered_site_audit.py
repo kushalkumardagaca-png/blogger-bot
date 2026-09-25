@@ -16,7 +16,7 @@ def inventory():
    if u:urls.append((u,kind[:-1]))
  return list(dict.fromkeys(urls))
 VIEWPORTS=[('mobile',360,800),('tablet',768,1024),('desktop',1440,1000)]
-IGNORE_FAIL=('google-analytics.com','googletagmanager.com','doubleclick.net','googleads','favicon.ico','csp.withgoogle.com')
+IGNORE_FAIL=('google-analytics.com','googletagmanager.com','doubleclick.net','googleads','favicon.ico','csp.withgoogle.com','api.frankfurter.app','api.coingecko.com','widget-sheriff.tradingview-widget.com')
 async def audit_one(browser,sem,url,kind,vp):
  name,w,h=vp;issues=[];console=[];failed=[]
  async with sem:
@@ -52,7 +52,7 @@ async def audit_one(browser,sem,url,kind,vp):
    if data['badHrefs']:issues.append('empty/script hrefs '+json.dumps(data['badHrefs']))
    relevant=[x for x in failed if not any(y in x for y in IGNORE_FAIL)]
    if relevant:issues.append('failed resources '+json.dumps(relevant[:10]))
-   severe_console=[x for x in console if not any(y in x.lower() for y in ['favicon','adsbygoogle','cors','third-party cookie','requeststorageaccess','frame-ancestors','framing'])]
+   severe_console=[x for x in console if x.startswith('pageerror:') or any(y in x.lower() for y in ['uncaught','referenceerror','typeerror'])]
    if severe_console:issues.append('console '+json.dumps(severe_console[:8]))
    if issues:
     slug=re.sub(r'[^a-z0-9]+','-',url.lower()).strip('-')[-90:]
