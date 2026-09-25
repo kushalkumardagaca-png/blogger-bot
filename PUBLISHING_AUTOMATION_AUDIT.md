@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 39 PASS · 0 FAIL
+**Result:** 40 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -29,7 +29,8 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News source policy is current**
 - ✅ **News finance filter enabled**
 - ✅ **News requires at least one genuinely current item**
-- ✅ **News editions cap reported items at ten**
+- ✅ **News reports every significant item when more than twelve exist**
+- ✅ **Ten is a fallback curation target, not a universal ceiling**
 - ✅ **Older context is capped at three and explicitly labelled**
 - ✅ **News byline is current**
 - ✅ **News publisher brand is Daily Yield**

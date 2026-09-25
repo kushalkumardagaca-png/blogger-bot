@@ -486,8 +486,8 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
                      r"reserve|liquidity|repo|policy)", re.I)
 
-def select_items(all_items, win_start, win_end, desk, target=10, own_off=None, own_med=None):
-    """Select at most 10 items: current first, then no more than 3 labelled background items."""
+def select_items(all_items, win_start, win_end, desk, fallback_target=10, own_off=None, own_med=None):
+    """Publish all 13+ significant current items; otherwise curate up to ten."""
     own_off = own_off or set()
     own_med = own_med or set()
     lo = win_start.date()
@@ -514,34 +514,42 @@ def select_items(all_items, win_start, win_end, desk, target=10, own_off=None, o
         s += (i["date"] - lo).days * 2
         return -s
 
-    def cap_agencies(items):
-        counts, result = {}, []
+    def curate(items):
+        """Rank, de-duplicate and limit source domination without a total ceiling."""
+        counts, result, seen = {}, [], set()
         for item in sorted(items, key=score):
-            cap = 6 if item["agency"] in own_off else (4 if item["agency"] in own_med else 3)
+            key = clean_title(item["title"]).lower()
+            if key in seen:
+                continue
+            cap = 12 if item["agency"] in own_off else (8 if item["agency"] in own_med else 5)
             if counts.get(item["agency"], 0) >= cap:
                 continue
             counts[item["agency"]] = counts.get(item["agency"], 0) + 1
+            seen.add(key)
             result.append(item)
         return result
 
-    current = [i for i in all_items if i.get("date") and lo <= i["date"] <= hi and desk_match(i)]
-    current = cap_agencies(current)[:target]
+    ranked = curate([i for i in all_items if i.get("date") and lo <= i["date"] <= hi and desk_match(i)])
+    significant = [i for i in ranked if SALIENT.search(i["title"]) or i["agency"] in own_off or i["agency"] in own_med]
+
+    # Ten is only the curation target when the desk has no more than 12
+    # significant current items. At 13+, every significant item is reported.
+    current = significant if len(significant) > 12 else ranked[:fallback_target]
 
     # Background is a transparent context supplement, never disguised as current news.
-    # Search only the preceding three calendar days and add at most three items.
+    # It is used only below ten current items and is always capped at three.
     background = []
-    if len(current) < target:
+    if len(current) < fallback_target:
         floor = lo - dt.timedelta(days=3)
-        current_keys = {(clean_title(i["title"]).lower(), i.get("url", "")) for i in current}
+        current_titles = {clean_title(i["title"]).lower() for i in current}
         older = [i for i in all_items if i.get("date") and floor <= i["date"] < lo and desk_match(i)]
-        for item in cap_agencies(older):
-            key = (clean_title(item["title"]).lower(), item.get("url", ""))
-            if key in current_keys:
+        for item in curate(older):
+            if clean_title(item["title"]).lower() in current_titles:
                 continue
             framed = dict(item)
             framed["background"] = True
             background.append(framed)
-            if len(background) >= min(3, target - len(current)):
+            if len(background) >= min(3, fallback_target - len(current)):
                 break
 
     upcoming = [i for i in all_items
@@ -686,6 +694,9 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
     current_items = [i for i in items if not i.get("background")]
     background_items = [i for i in items if i.get("background")]
+    volume_note = (f"All {len(current_items)} significant current items are included."
+                   if len(current_items) > 12 else
+                   f"The strongest {len(current_items)} current item(s) are included.")
     top = [clean_title(i["title"]) for i in current_items[:3]]
     headline_bits = clip_words("; ".join(top[:2]), 90)
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
@@ -790,7 +801,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   </div>
 
   <h1 class="fbk-h1">{htmlmod.escape(title)}</h1>
-  <p class="fbk-lede">{len(current_items)} current, verified finance items from the {label} desk for <strong>{coverage_lead}</strong>{f', plus {len(background_items)} clearly labelled background item(s)' if background_items else ''}. Maximum ten reported items; current coverage always leads. Read the source, not the noise.</p>
+  <p class="fbk-lede">{len(current_items)} current, verified finance items from the {label} desk for <strong>{coverage_lead}</strong>{f', plus {len(background_items)} clearly labelled background item(s)' if background_items else ''}. {volume_note} Current coverage always leads. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
