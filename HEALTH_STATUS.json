@@ -1,10 +1,10 @@
 {
   "overall": "FAIL",
-  "generated_at": "2026-09-25 16:21 IST",
+  "generated_at": "2026-09-25 19:22 IST",
   "summary": "❌ ATTENTION NEEDED",
   "counts": {
-    "OK": 77,
-    "WARN": 1,
+    "OK": 78,
+    "WARN": 0,
     "FAIL": 1,
     "SKIP": 1
   },
@@ -22,13 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "3 slot(s) due so far today — all published; 3 master articles + 11 news wires today"
+      "detail": "4 slot(s) due so far today — all published; 4 master articles + 13 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "FAIL",
-      "detail": "missing: China, Spain"
+      "detail": "missing: Spain, Italy, Brazil, Canada"
     },
     {
       "section": "A. Publishing engine",
@@ -40,19 +40,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2556 words, hero image + schema OK (Covered-Call ETFs: Income or Trap?)"
+      "detail": "2582 words, hero image + schema OK ($90k Broke: The New Middle Class)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.4h ago"
+      "detail": "newest master article 2.2h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #29 of 500, 28 published, last at 2026-09-25 13:54 UTC"
+      "detail": "next topic #30 of 500, 29 published, last at 2026-09-25 17:09 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -70,7 +70,7 @@
       "section": "B. Blog pages",
       "name": "Homepage",
       "status": "OK",
-      "detail": "200 OK · 240 KB"
+      "detail": "200 OK · 248 KB"
     },
     {
       "section": "B. Blog pages",
@@ -82,13 +82,13 @@
       "section": "B. Blog pages",
       "name": "Daily News hub",
       "status": "OK",
-      "detail": "200 OK · 249 KB"
+      "detail": "200 OK · 250 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 379 KB"
+      "detail": "200 OK · 380 KB"
     },
     {
       "section": "B. Blog pages",
@@ -106,13 +106,13 @@
       "section": "B. Blog pages",
       "name": "Global Snapshot legacy transition",
       "status": "OK",
-      "detail": "200 OK · 208 KB"
+      "detail": "200 OK · 209 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 309 KB"
     },
     {
       "section": "B. Blog pages",
@@ -130,13 +130,13 @@
       "section": "B. Blog pages",
       "name": "Contact Us",
       "status": "OK",
-      "detail": "200 OK · 626 KB"
+      "detail": "200 OK · 627 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
       "status": "OK",
-      "detail": "200 OK · 392 KB"
+      "detail": "200 OK · 393 KB"
     },
     {
       "section": "B. Blog pages",
@@ -154,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "39 URLs indexed"
+      "detail": "42 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,491 instruments · sample OHLC populated"
+      "detail": "456,344 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 10:11 IST",
-      "overall": "WARN",
-      "ok": 27,
-      "warn": 9,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 10:18 IST",
       "overall": "WARN",
       "ok": 30,
@@ -632,6 +625,13 @@
       "overall": "FAIL",
       "ok": 77,
       "warn": 1,
+      "fail": 1
+    },
+    {
+      "at": "2026-09-25 19:22 IST",
+      "overall": "FAIL",
+      "ok": 78,
+      "warn": 0,
       "fail": 1
     }
   ],
