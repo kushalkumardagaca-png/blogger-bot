@@ -1,10 +1,10 @@
 {
-  "overall": "PASS",
-  "generated_at": "2026-09-25 09:20 IST",
-  "summary": "✅ ALL SYSTEMS OPERATIONAL",
+  "overall": "WARN",
+  "generated_at": "2026-09-25 13:21 IST",
+  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 79,
-    "WARN": 0,
+    "OK": 78,
+    "WARN": 1,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -22,13 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "1 slot(s) due so far today — all published; 1 master articles + 6 news wires today"
+      "detail": "2 slot(s) due so far today — all published; 2 master articles + 10 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "4 due desk(s) present; 6 news wires today"
+      "detail": "10 due desk(s) present; 10 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -40,19 +40,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2328 words, hero image + schema OK (Stop Splitting Bills 50/50)"
+      "detail": "2580 words, hero image + schema OK ($10k at 22 vs $10k at 32)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 2.0h ago"
+      "detail": "newest master article 2.4h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #27 of 500, 26 published, last at 2026-09-25 07:18 UTC"
+      "detail": "next topic #28 of 500, 27 published, last at 2026-09-25 10:56 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -69,80 +69,80 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 240 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
       "status": "OK",
-      "detail": "200 OK · 345 KB"
+      "detail": "200 OK · 347 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
       "status": "OK",
-      "detail": "200 OK · 246 KB"
+      "detail": "200 OK · 249 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 376 KB"
+      "detail": "200 OK · 379 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Markets Today",
       "status": "OK",
-      "detail": "200 OK · 274 KB"
+      "detail": "200 OK · 278 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
       "status": "OK",
-      "detail": "200 OK · 386 KB"
+      "detail": "200 OK · 388 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot legacy transition",
       "status": "OK",
-      "detail": "200 OK · 203 KB"
+      "detail": "200 OK · 208 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
       "status": "OK",
-      "detail": "200 OK · 306 KB"
+      "detail": "200 OK · 308 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
       "status": "OK",
-      "detail": "200 OK · 364 KB"
+      "detail": "200 OK · 366 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
       "status": "OK",
-      "detail": "200 OK · 386 KB"
+      "detail": "200 OK · 387 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
       "status": "OK",
-      "detail": "200 OK · 621 KB"
+      "detail": "200 OK · 626 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
       "status": "OK",
-      "detail": "200 OK · 387 KB"
+      "detail": "200 OK · 392 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
       "status": "OK",
-      "detail": "200 OK · 393 KB"
+      "detail": "200 OK · 397 KB"
     },
     {
       "section": "B. Blog pages",
@@ -154,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "32 URLs indexed"
+      "detail": "37 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,000 instruments · sample OHLC populated"
+      "detail": "456,350 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 03:18 IST",
-      "overall": "WARN",
-      "ok": 39,
-      "warn": 1,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 09:20 IST",
       "overall": "FAIL",
       "ok": 36,
@@ -632,6 +625,13 @@
       "overall": "PASS",
       "ok": 79,
       "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-25 13:21 IST",
+      "overall": "WARN",
+      "ok": 78,
+      "warn": 1,
       "fail": 0
     }
   ],
