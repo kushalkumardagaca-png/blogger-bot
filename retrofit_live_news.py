@@ -2,7 +2,7 @@
 """Retrofit today's already-live news posts to the current title/coverage policy."""
 from pathlib import Path
 import datetime as dt, html, json, os, re, urllib.parse, urllib.request
-from news_pipeline import BLOG, DESKS, IST, clip_words, coverage_window_text, desk_title_prefix
+from news_pipeline import BLOG, DESKS, HINT_RE, IST, clip_words, coverage_window_text, desk_title_prefix
 
 BLOG_ID=os.environ.get('BLOGGER_BLOG_ID',''); BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
 
@@ -33,7 +33,11 @@ def retrofit(post):
  current_area=re.split(r'<h2 class="fbk-h2"><b>(?:BG|04|05)</b>',content,maxsplit=1)[0]
  heads=[plain(x) for x in re.findall(r'<h3>(.*?)</h3>',current_area,re.S|re.I)]
  if not heads:raise RuntimeError('no current headlines in '+post.get('url',''))
- bits=clip_words('; '.join(heads[:2]),90)
+ # Country-specific headlines lead the post title when available deeper in the article.
+ hint=HINT_RE.get(desk)
+ ordered_heads=([h for h in heads if hint and hint.search(h)] +
+                [h for h in heads if not (hint and hint.search(h))])
+ bits=clip_words('; '.join(ordered_heads[:2]),90)
  title=f"{desk_title_prefix(desk)} · {publish_date} · Coverage {coverage} — {bits}"
  current_count=len(heads);background_count=len(re.findall(r'class="fbk-item fbk-background"',content))
  volume=(f"All {current_count} significant current items are included." if current_count>12 else f"The strongest {current_count} current item(s) are included.")
@@ -48,7 +52,9 @@ def retrofit(post):
  content,n3=re.subn(r'(<div class="fbk-signoff">\s*<span class="fbk-script">.*?</span>\s*)<p>.*?</p>',lambda m:m.group(1)+sign,content,count=1,flags=re.S)
  def patch_schema(m):
   obj=json.loads(m.group(1));obj['headline']=clip_words(title,110)
-  obj['description']=clip_words(f"{desk_title_prefix(desk)}, coverage {coverage}: {'; '.join(heads[:3])}",158)
+  obj['description']=clip_words(f"{desk_title_prefix(desk)}, coverage {coverage}: {'; '.join(ordered_heads[:3])}",158)
+  obj['mainEntityOfPage']={'@id':post['url']};obj['@id']=post['url']
+  obj['author']={'@type':'Person','name':'Kushal K. Daga','url':BLOG+'/p/about-us_02080501126.html'}
   obj['publisher']={'@type':'Organization','name':'Daily Yield','url':BLOG+'/'}
   kws=str(obj.get('keywords',''));obj['keywords']=re.sub(r'last \d+ (?:hours|days)',f'coverage {coverage}',kws,flags=re.I)
   return '<script type="application/ld+json">'+json.dumps(obj,ensure_ascii=False)+'</script>'

@@ -453,7 +453,8 @@ def fetch_desk_items(desk):
         med = list(MEDIA.get(desk, []))
         have = {s[1] for s in off + med}
         srcs = off + med + [s for s in GLOBAL_POOL + GLOBAL_MEDIA if s[1] not in have]
-        own_off = {s[0] for s in off}
+        shared_official = {"European Central Bank", "European Commission"}
+        own_off = {s[0] for s in off if s[0] not in shared_official}
         own_med = {s[0] for s in med}
     seen, seen_urls, out = set(), set(), []
     with ThreadPoolExecutor(max_workers=12) as ex:
@@ -530,11 +531,18 @@ def select_items(all_items, win_start, win_end, desk, fallback_target=10, own_of
         return result
 
     ranked = curate([i for i in all_items if i.get("date") and lo <= i["date"] <= hi and desk_match(i)])
-    significant = [i for i in ranked if SALIENT.search(i["title"]) or i["agency"] in own_off or i["agency"] in own_med]
+    finance_significant = [i for i in ranked if SALIENT.search(i["title"])]
+    if desk not in CATEGORY_DESKS and desk != "global":
+        # A country wire must actually be about that country or come from its
+        # local official record. Generic international pool items do not fill it.
+        significant = [i for i in finance_significant
+                       if i["agency"] in own_off or (hint and hint.search(i["title"]))]
+    else:
+        significant = finance_significant
 
     # Ten is only the curation target when the desk has no more than 12
     # significant current items. At 13+, every significant item is reported.
-    current = significant if len(significant) > 12 else ranked[:fallback_target]
+    current = significant if len(significant) > 12 else significant[:fallback_target]
 
     # Background is a transparent context supplement, never disguised as current news.
     # It is used only below ten current items and is always capped at three.
@@ -542,7 +550,10 @@ def select_items(all_items, win_start, win_end, desk, fallback_target=10, own_of
     if len(current) < fallback_target:
         floor = lo - dt.timedelta(days=3)
         current_titles = {clean_title(i["title"]).lower() for i in current}
-        older = [i for i in all_items if i.get("date") and floor <= i["date"] < lo and desk_match(i)]
+        older = [i for i in all_items if i.get("date") and floor <= i["date"] < lo
+                 and desk_match(i) and SALIENT.search(i["title"])]
+        if desk not in CATEGORY_DESKS and desk != "global":
+            older = [i for i in older if i["agency"] in own_off or (hint and hint.search(i["title"]))]
         for item in curate(older):
             if clean_title(item["title"]).lower() in current_titles:
                 continue

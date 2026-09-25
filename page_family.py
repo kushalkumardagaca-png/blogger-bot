@@ -46,8 +46,53 @@ def family_block(current_path=""):
 """ + END
 
 
+def _remove_balanced_element(content, start, tag):
+    """Remove one raw HTML element without reparsing or rewriting surrounding content."""
+    token_re = re.compile(rf"</?{tag}\b[^>]*>", re.I)
+    depth = 0
+    for match in token_re.finditer(content, start):
+        closing = match.group(0).lstrip().startswith("</")
+        depth += -1 if closing else 1
+        if depth == 0:
+            end = match.end()
+            # Remove the obsolete insertion anchor when it immediately precedes the block.
+            prefix = content[:start]
+            prefix = re.sub(r'<span id=["\']enh-added-start["\']></span>\s*$', '', prefix, flags=re.I)
+            return prefix + content[end:]
+    return content
+
+
+def remove_legacy_explore_blocks(content):
+    """Delete the older small connected-desk cards while preserving dyPageFamily."""
+    while True:
+        found = None
+        # Most pages use explicit IDs.
+        for rx, tag in [
+            (r'<section\b[^>]*id=["\']enh-connected-desks["\'][^>]*>', 'section'),
+            (r'<section\b[^>]*id=["\']enh-new-chapter["\'][^>]*>', 'section'),
+        ]:
+            m = re.search(rx, content, re.I)
+            if m and (found is None or m.start() < found[0]):
+                found = (m.start(), tag)
+        # Daily News used an un-ID'd module beginning with this exact kicker.
+        marker = re.search(r'<span\b[^>]*class=["\']enh-kicker["\'][^>]*>\s*Continue exploring\s*</span>', content, re.I)
+        if marker:
+            opener = list(re.finditer(r'<div\b[^>]*class=["\'][^"\']*\benh-module\b[^"\']*["\'][^>]*>', content[:marker.start()], re.I))
+            if opener:
+                candidate = (opener[-1].start(), 'div')
+                if found is None or candidate[0] < found[0]:
+                    found = candidate
+        if found is None:
+            return content
+        updated = _remove_balanced_element(content, found[0], found[1])
+        if updated == content:
+            return content
+        content = updated
+
+
 def ensure_family(content, current_path=""):
-    """Replace our prior block or append it once; also retire obsolete market links."""
+    """Keep one full family directory and retire obsolete smaller card blocks."""
+    content = remove_legacy_explore_blocks(content)
     content = content.replace("/p/share-market_0718113516.html", "/p/global-snapshot.html")
     content = content.replace("MARKET EXPLORER", "GLOBAL SNAPSHOT").replace("Market Explorer", "Global Snapshot")
     content = content.replace("SHARE &amp; MARKET", "GLOBAL SNAPSHOT").replace("Share &amp; Market", "Global Snapshot")

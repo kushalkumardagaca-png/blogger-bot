@@ -68,7 +68,7 @@ check('News source policy is current','official institutions plus established, r
 check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News requires at least one genuinely current item','if current_count == 0' in np)
 check('News reports every significant item when more than twelve exist',
-      'current = significant if len(significant) > 12 else ranked[:fallback_target]' in np)
+      'current = significant if len(significant) > 12 else significant[:fallback_target]' in np)
 check('Ten is a fallback curation target, not a universal ceiling',
       'fallback_target=10' in np and 'if len(significant) > 12' in np)
 check('Older context is capped at three and explicitly labelled',

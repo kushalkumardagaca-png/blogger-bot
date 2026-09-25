@@ -1,0 +1,38 @@
+name: Audit news and remove duplicate explore blocks
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Apply repairs (false performs an audit-only dry run)"
+        required: true
+        type: choice
+        options: ['false','true']
+        default: 'false'
+permissions:
+  contents: read
+jobs:
+  audit-cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Audit all news and site content
+        env:
+          APPLY: ${{ inputs.apply }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python site_content_audit_cleanup.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-content-audit-${{ inputs.apply }}
+          path: |
+            SITE_CONTENT_AUDIT.json
+            SITE_CONTENT_AUDIT.md
+            site_content_backup.json
+          retention-days: 30
