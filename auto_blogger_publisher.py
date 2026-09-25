@@ -60,6 +60,7 @@ from datetime import datetime, timedelta, timezone
 from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
+from publication_preflight import assert_publishable
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 
@@ -837,6 +838,7 @@ def main():
     current_post = {"id": "pending", "title": title, "labels": labels, "content": html}
     html = ensure_related_articles(html, current_post, fetch_public_posts())
     html = ensure_continuous_motion(html)
+    assert_publishable(title, html, labels)
 
     # Always rebuild with the current date, identity and schema. Old precompiled
     # packages are never reused because their dates or branding may be stale.

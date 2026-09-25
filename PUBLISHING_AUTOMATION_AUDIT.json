@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T23:50:52+05:30",
+  "checked_at_ist": "2026-09-25T23:51:50+05:30",
   "summary": {
-    "pass": 48,
+    "pass": 50,
     "fail": 0
   },
   "checks": [
@@ -92,6 +92,16 @@
     },
     {
       "name": "News hero image is preflight-validated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master structure passes fail-closed publication preflight",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News structure passes fail-closed publication preflight",
       "status": "PASS",
       "detail": ""
     },

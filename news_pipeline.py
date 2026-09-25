@@ -29,6 +29,7 @@ from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
+from publication_preflight import assert_publishable
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -1085,6 +1086,7 @@ def run_desk(desk, tracker, dry=False, token=None):
     current_post = {"id": "pending", "title": art["title"], "labels": art["labels"], "content": art["html"]}
     art["html"] = ensure_related_articles(art["html"], current_post, fetch_public_posts())
     art["html"] = ensure_continuous_motion(art["html"])
+    assert_publishable(art["title"], art["html"], art["labels"])
     print(f"  [{desk}] article built: {art['n_items']} items, '{art['title'][:70]}…'")
     url = publish_post(art, token, dry)
     if url or dry:
