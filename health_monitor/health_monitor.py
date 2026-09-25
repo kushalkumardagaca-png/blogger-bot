@@ -674,73 +674,70 @@ else:
             add("E. Google Search Console", "Blog property in Search Console",
                 "WARN", str(e)[:100])
 
-    # E2b - post inventory from the last 14 days (Daily Article + Daily News)
+    # E2b - complete current URL inventory: homepage + every live Page and Post.
     post_inventory = []
     if GSC_ACCESS and GSC_SITE and os.environ.get("BLOGGER_BLOG_ID") \
             and os.environ.get("BLOGGER_REFRESH_TOKEN"):
         try:
             BLOGGER_ACCESS = oauth_token(os.environ["BLOGGER_REFRESH_TOKEN"])
-            page_token = ""
-            start_date = (NOW - timedelta(days=14)).strftime("%Y-%m-%dT%H:%M:%SZ")
-            while len(post_inventory) < 150:
-                params = {"status": "live", "maxResults": "50", "startDate": start_date,
-                          "fields": "items(title,url,published),nextPageToken"}
-                if page_token:
-                    params["pageToken"] = page_token
-                qs = urllib.parse.urlencode(params)
-                req = urllib.request.Request(
-                    f"https://www.googleapis.com/blogger/v3/blogs/"
-                    f"{os.environ['BLOGGER_BLOG_ID']}/posts?{qs}",
-                    headers={"Authorization": "Bearer " + BLOGGER_ACCESS})
-                with urllib.request.urlopen(req, timeout=30) as r:
-                    pj = json.load(r)
-                for it in pj.get("items", []):
-                    if it.get("url"):
-                        post_inventory.append({"title": it.get("title", ""),
-                                               "url": it.get("url")})
-                page_token = pj.get("nextPageToken", "")
-                if not page_token:
-                    break
-            add("E. Google Search Console", "Post inventory (14 days)",
-                "OK", f"{len(post_inventory)} posts from Daily Article + Daily News")
+            post_inventory.append({"title": "Daily Yield", "url": BLOG + "/"})
+            for resource in ("pages", "posts"):
+                page_token = ""
+                while len(post_inventory) < 500:
+                    params = {"status": "live", "maxResults": "50",
+                              "fields": "items(title,url,published),nextPageToken"}
+                    if page_token:
+                        params["pageToken"] = page_token
+                    qs = urllib.parse.urlencode(params)
+                    req = urllib.request.Request(
+                        f"https://www.googleapis.com/blogger/v3/blogs/"
+                        f"{os.environ['BLOGGER_BLOG_ID']}/{resource}?{qs}",
+                        headers={"Authorization": "Bearer " + BLOGGER_ACCESS})
+                    with urllib.request.urlopen(req, timeout=30) as r:
+                        pj = json.load(r)
+                    for it in pj.get("items", []):
+                        url = it.get("url", "")
+                        if url and not url.endswith("/p/share-market_0718113516.html"):
+                            post_inventory.append({"title": it.get("title", ""), "url": url})
+                    page_token = pj.get("nextPageToken", "")
+                    if not page_token:
+                        break
+            # Stable order and no duplicate aliases.
+            post_inventory = list({x["url"]: x for x in post_inventory}.values())
+            add("E. Google Search Console", "Complete URL inventory",
+                "OK", f"{len(post_inventory)} indexable homepage/Page/Post URLs")
         except Exception as e:
-            add("E. Google Search Console", "Post inventory (14 days)", "WARN",
+            add("E. Google Search Console", "Complete URL inventory", "WARN",
                 str(e)[:100])
 
     if GSC_ACCESS and GSC_SITE:
         enc = urllib.parse.quote(GSC_SITE, safe="")
 
-        # E3 - sitemap: auto-submit if missing, resubmit if stale (self-heal)
+        # E3 - maintain both Blogger sitemaps: Posts and static Pages.
         try:
+            wanted = [BLOG + "/sitemap.xml", BLOG + "/sitemap-pages.xml"]
             sm = gsc_call("GET", f"sites/{enc}/sitemaps")
-            entry = next((m for m in sm.get("sitemap", [])
-                          if m.get("path", "").endswith("sitemap.xml")), None)
-            if not entry:
-                gsc_call("PUT", f"sites/{enc}/sitemaps/sitemap.xml")
-                actions.append("Search Console sitemap was missing -> "
-                               "submitted automatically via API.")
-                sm = gsc_call("GET", f"sites/{enc}/sitemaps")
-                entry = next((m for m in sm.get("sitemap", [])
-                              if m.get("path", "").endswith("sitemap.xml")), None)
-            last_sub = str(entry.get("lastSubmitted", ""))[:10] if entry else ""
-            if entry and (not last_sub or last_sub <
-                          (NOW - timedelta(days=14)).strftime("%Y-%m-%d")):
-                gsc_call("PUT", f"sites/{enc}/sitemaps/sitemap.xml")
-                actions.append("Sitemap last submitted to Google over 14 days ago "
-                               "-> automatically resubmitted for freshness.")
-                sm = gsc_call("GET", f"sites/{enc}/sitemaps")
-                entry = next((m for m in sm.get("sitemap", [])
-                              if m.get("path", "").endswith("sitemap.xml")), None)
-            if entry:
-                add("E. Google Search Console", "Sitemap in Search Console", "OK",
-                    f"submitted {str(entry.get('lastSubmitted', '?'))[:10]} · "
-                    f"errors {entry.get('errors', 0)} · warnings "
-                    f"{entry.get('warnings', 0)}")
+            entries = sm.get("sitemap", [])
+            for path in wanted:
+                entry = next((m for m in entries if m.get("path") == path), None)
+                last_sub = str(entry.get("lastSubmitted", ""))[:10] if entry else ""
+                stale = not last_sub or last_sub < (NOW - timedelta(days=14)).strftime("%Y-%m-%d")
+                if not entry or stale:
+                    feed_enc = urllib.parse.quote(path, safe="")
+                    gsc_call("PUT", f"sites/{enc}/sitemaps/{feed_enc}")
+                    actions.append(f"Search Console submitted {path} via official API.")
+            entries = gsc_call("GET", f"sites/{enc}/sitemaps").get("sitemap", [])
+            current = [m for m in entries if m.get("path") in wanted]
+            if len(current) == 2:
+                errors = sum(int(m.get("errors", 0)) for m in current)
+                warnings = sum(int(m.get("warnings", 0)) for m in current)
+                add("E. Google Search Console", "Post + Page sitemaps", "OK",
+                    f"2/2 submitted · errors {errors} · warnings {warnings}")
             else:
-                add("E. Google Search Console", "Sitemap in Search Console",
-                    "WARN", "not found after submit attempt")
+                add("E. Google Search Console", "Post + Page sitemaps", "WARN",
+                    f"{len(current)}/2 visible after submission")
         except Exception as e:
-            add("E. Google Search Console", "Sitemap in Search Console",
+            add("E. Google Search Console", "Post + Page sitemaps",
                 "WARN", str(e)[:100])
 
         # E4 - Google search presence (7 days; GSC data lags ~2 days) + top queries
@@ -809,13 +806,25 @@ else:
                             "urlInspection/index:inspect",
                             {"inspectionUrl": url, "siteUrl": GSC_SITE,
                              "languageCode": "en"})
-                        st8 = ((insp.get("inspectionResult", {}) or {})
-                               .get("indexStatus", {}) or {}).get("status", "UNKNOWN")
-                        rec["last_checked"] = NOW_ISO
-                        if st8 == "INDEXED" and rec.get("status") != "INDEXED":
+                        index_result = ((insp.get("inspectionResult", {}) or {})
+                                        .get("indexStatusResult", {}) or {})
+                        verdict = index_result.get("verdict", "UNKNOWN")
+                        st8 = "INDEXED" if verdict == "PASS" else verdict
+                        rec.update({
+                            "last_checked": NOW_ISO,
+                            "status": st8,
+                            "verdict": verdict,
+                            "coverage_state": index_result.get("coverageState", ""),
+                            "page_fetch_state": index_result.get("pageFetchState", ""),
+                            "indexing_state": index_result.get("indexingState", ""),
+                            "robots_state": index_result.get("robotsTxtState", ""),
+                            "last_crawl": index_result.get("lastCrawlTime", ""),
+                            "google_canonical": index_result.get("googleCanonical", ""),
+                            "user_canonical": index_result.get("userCanonical", ""),
+                        })
+                        if st8 == "INDEXED" and rec.get("indexed_at") is None:
                             rec["indexed_at"] = NOW_ISO
                             newly_indexed.append(p["title"][:34])
-                        rec["status"] = st8
                         gsc_tracker[url] = rec
                         inspected += 1
                         time.sleep(0.15)  # stay well under the 600/min quota

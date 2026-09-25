@@ -1,0 +1,46 @@
+name: Rebuild Google Search Console baseline
+on:
+  workflow_dispatch:
+    inputs:
+      reset_old_sitemaps:
+        description: Delete obsolete sitemap submissions before submitting the two current Blogger sitemaps
+        required: true
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rebuild Search Console baseline
+        env:
+          RESET_OLD_SITEMAPS: ${{ inputs.reset_old_sitemaps }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python gsc_rebuild.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gsc-rebuild
+          retention-days: 30
+          path: |
+            GSC_BASELINE.json
+            GSC_REBUILD_REPORT.json
+            GSC_REBUILD_REPORT.md
+      - name: Commit Search Console baseline and report
+        if: success()
+        run: |
+          git config user.name "gsc-monitor-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add GSC_BASELINE.json GSC_REBUILD_REPORT.json GSC_REBUILD_REPORT.md
+          git commit -m "Rebuild Search Console baseline [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push

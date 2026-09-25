@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import json
+R=Path(__file__).parent;setup=(R/'gsc_rebuild.py').read_text();health=(R/'health_monitor/health_monitor.py').read_text();workflow=(R/'.github/workflows/gsc_rebuild.yml').read_text();checks=[]
+def ck(name,ok):checks.append({'name':name,'status':'PASS' if ok else 'FAIL'})
+ck('Exact URL-prefix property required',"SITE=BLOG+'/'" in setup and 'if not exact' in setup)
+ck('Current Post sitemap submitted','/sitemap.xml' in setup)
+ck('Current Page sitemap submitted','/sitemap-pages.xml' in setup)
+ck('Obsolete sitemap cleanup is explicit','RESET_OLD_SITEMAPS' in setup and "gsc(access,'DELETE'" in setup)
+ck('Homepage inventory included',"'kind':'home'" in setup)
+ck('Every Page inventory included',"feed('pages')" in setup)
+ck('Every Post inventory included',"feed('posts')" in setup)
+ck('Intentional legacy redirect excluded','share-market_0718113516.html' in setup)
+ck('Official indexed-version Inspection endpoint used','urlInspection/index:inspect' in setup)
+ck('Current indexStatusResult parsed','indexStatusResult' in setup and 'coverageState' in setup)
+ck('Canonical states captured','googleCanonical' in setup and 'userCanonical' in setup)
+ck('Crawl/fetch/robots states captured','lastCrawlTime' in setup and 'pageFetchState' in setup and 'robotsTxtState' in setup)
+ck('Manual live-test queue generated','manualLiveTestQueue' in setup and 'Test Live URL' in setup)
+ck('No unsupported indexing API call','indexing.googleapis.com' not in setup and 'publishUrlNotification' not in setup)
+ck('Fresh baseline file generated','GSC_BASELINE.json' in setup)
+ck('Reports generated','GSC_REBUILD_REPORT.json' in setup and 'GSC_REBUILD_REPORT.md' in setup)
+ck('Workflow uses secret without exposing it','secrets.GSC_REFRESH_TOKEN' in workflow and 'GSC_REFRESH_TOKEN' in workflow)
+ck('Health monitor inventories Pages and Posts','for resource in ("pages", "posts")' in health)
+ck('Health monitor maintains both sitemaps','sitemap-pages.xml' in health and 'sitemap.xml' in health)
+ck('Health monitor parses current inspection response','indexStatusResult' in health and 'coverage_state' in health)
+out={'pass':sum(x['status']=='PASS' for x in checks),'fail':sum(x['status']=='FAIL' for x in checks),'checks':checks};(R/'GSC_AUTOMATION_AUDIT.json').write_text(json.dumps(out,indent=2));(R/'GSC_AUTOMATION_AUDIT.md').write_text('# Search Console Automation Audit\n\n'+f"**{out['pass']} PASS · {out['fail']} FAIL**\n\n"+'\n'.join(f"- {'✅' if x['status']=='PASS' else '❌'} {x['name']}" for x in checks)+'\n');print(json.dumps({'pass':out['pass'],'fail':out['fail']}));raise SystemExit(1 if out['fail'] else 0)

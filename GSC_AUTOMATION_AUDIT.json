@@ -1,0 +1,86 @@
+{
+  "pass": 20,
+  "fail": 0,
+  "checks": [
+    {
+      "name": "Exact URL-prefix property required",
+      "status": "PASS"
+    },
+    {
+      "name": "Current Post sitemap submitted",
+      "status": "PASS"
+    },
+    {
+      "name": "Current Page sitemap submitted",
+      "status": "PASS"
+    },
+    {
+      "name": "Obsolete sitemap cleanup is explicit",
+      "status": "PASS"
+    },
+    {
+      "name": "Homepage inventory included",
+      "status": "PASS"
+    },
+    {
+      "name": "Every Page inventory included",
+      "status": "PASS"
+    },
+    {
+      "name": "Every Post inventory included",
+      "status": "PASS"
+    },
+    {
+      "name": "Intentional legacy redirect excluded",
+      "status": "PASS"
+    },
+    {
+      "name": "Official indexed-version Inspection endpoint used",
+      "status": "PASS"
+    },
+    {
+      "name": "Current indexStatusResult parsed",
+      "status": "PASS"
+    },
+    {
+      "name": "Canonical states captured",
+      "status": "PASS"
+    },
+    {
+      "name": "Crawl/fetch/robots states captured",
+      "status": "PASS"
+    },
+    {
+      "name": "Manual live-test queue generated",
+      "status": "PASS"
+    },
+    {
+      "name": "No unsupported indexing API call",
+      "status": "PASS"
+    },
+    {
+      "name": "Fresh baseline file generated",
+      "status": "PASS"
+    },
+    {
+      "name": "Reports generated",
+      "status": "PASS"
+    },
+    {
+      "name": "Workflow uses secret without exposing it",
+      "status": "PASS"
+    },
+    {
+      "name": "Health monitor inventories Pages and Posts",
+      "status": "PASS"
+    },
+    {
+      "name": "Health monitor maintains both sitemaps",
+      "status": "PASS"
+    },
+    {
+      "name": "Health monitor parses current inspection response",
+      "status": "PASS"
+    }
+  ]
+}
