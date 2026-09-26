@@ -1,88 +1,60 @@
-name: Blog Health Monitor (12x Daily Full-Site Watchdog)
+name: Blog Health Monitor (12x Daily Zero-View Watchdog)
 
 on:
-  # Run the same complete watchdog 12 times per day, once every two hours.
-  # Minute 15 avoids GitHub Actions' busiest top-of-hour scheduling window.
   schedule:
+    # Twelve independent API/source checks daily. No public Daily Yield URL is opened.
     - cron: '15 */2 * * *'
   workflow_dispatch:
 
 concurrency:
-  group: full-site-watchdog
+  group: zero-view-full-site-watchdog
   cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: read
 
 jobs:
   health-check:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-    permissions:
-      contents: write
-      actions: write
-
+    timeout-minutes: 30
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
-      - name: Audit publishing automation invariants
+      - name: Verify publishing automation invariants
         run: python audit_publishing_automation.py --check-only
 
-      - name: Run operational and live-data monitor
-        continue-on-error: true
+      - name: Enforce zero-synthetic-view policy
+        run: python audit_zero_view_policy.py
+
+      - name: Audit complete site through APIs without opening the blog
         env:
-          WATCHDOG_STRICT_EXIT: "false"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
-        run: python health_monitor/health_monitor.py
+        run: python zero_view_watchdog.py
 
-      - name: Audit SEO GEO content images and links on every URL
-        continue-on-error: true
-        run: python comprehensive_site_audit.py
-
-      - name: Cool down before rendered crawl
-        run: sleep 90
-
-      - name: Install rendered-browser auditor
-        run: |
-          python -m pip install --disable-pip-version-check playwright
-          python -m playwright install --with-deps chromium
-
-      - name: Render every Page and Post at mobile tablet and desktop
-        continue-on-error: true
-        run: python rendered_site_audit.py
-
-      - name: Build watchdog verdict
-        if: always()
-        run: |
-          python - <<'PY'
-          import json,pathlib
-          operational=json.load(open('HEALTH_STATUS.json')) if pathlib.Path('HEALTH_STATUS.json').exists() else {'overall':'ERROR'}
-          content=json.load(open('COMPREHENSIVE_SITE_AUDIT.json')) if pathlib.Path('COMPREHENSIVE_SITE_AUDIT.json').exists() else {'hard_failures':-1}
-          rendered=json.load(open('RENDERED_SITE_AUDIT.json')) if pathlib.Path('RENDERED_SITE_AUDIT.json').exists() else {'failures':-1}
-          verdict='PASS' if operational.get('overall')!='FAIL' and content.get('hard_failures')==0 and rendered.get('failures')==0 else 'ATTENTION'
-          summary={'verdict':verdict,'operational':operational.get('overall'),'content_failures':content.get('hard_failures'),'rendered_failures':rendered.get('failures'),'rendered_transient_checks':rendered.get('transient_checks',0),'urls':content.get('urls'),'rendered_checks':rendered.get('rendered_checks')}
-          pathlib.Path('WATCHDOG_VERDICT.json').write_text(json.dumps(summary,indent=2))
-          pathlib.Path('WATCHDOG_VERDICT.md').write_text('# Daily Yield Full-Site Watchdog\n\n'+''.join(f'- **{k.replace("_"," ").title()}:** {v}\n' for k,v in summary.items()))
-          print(json.dumps(summary))
-          PY
-
-      - name: Upload full evidence
+      - name: Upload zero-view evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: full-site-watchdog-${{ github.run_id }}
+          name: zero-view-watchdog-${{ github.run_id }}
+          retention-days: 30
           path: |
+            ZERO_VIEW_WATCHDOG.json
+            ZERO_VIEW_WATCHDOG.md
             HEALTH_STATUS.json
             HEALTH_REPORT.md
             COMPREHENSIVE_SITE_AUDIT.json
@@ -90,19 +62,17 @@ jobs:
             RENDERED_SITE_AUDIT.json
             WATCHDOG_VERDICT.json
             WATCHDOG_VERDICT.md
-            rendered_audit/*.png
-          retention-days: 30
 
       - name: Commit watchdog status
         if: always()
         run: |
           git config user.name "health-monitor-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add HEALTH_STATUS.json HEALTH_REPORT.md COMPREHENSIVE_SITE_AUDIT.json COMPREHENSIVE_SITE_AUDIT.md RENDERED_SITE_AUDIT.json WATCHDOG_VERDICT.json WATCHDOG_VERDICT.md || true
+          git add ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md HEALTH_STATUS.json HEALTH_REPORT.md COMPREHENSIVE_SITE_AUDIT.json COMPREHENSIVE_SITE_AUDIT.md RENDERED_SITE_AUDIT.json WATCHDOG_VERDICT.json WATCHDOG_VERDICT.md || true
           if git diff --quiet && git diff --staged --quiet; then
             echo "No watchdog status changes to commit."
           else
-            git commit -m "Full-site watchdog report [skip ci]"
+            git commit -m "Zero-view watchdog report [skip ci]"
             git pull --rebase origin main
             git push
           fi

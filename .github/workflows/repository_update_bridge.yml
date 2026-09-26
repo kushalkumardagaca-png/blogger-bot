@@ -1,0 +1,63 @@
+name: Apply repository-scoped automation update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.agent-updates/*.patch'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repository-update-bridge
+  cancel-in-progress: false
+
+jobs:
+  apply-update:
+    if: github.actor == 'kushalkumardagaca-png'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout with encrypted repository deployment credential
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.ASSETS_PAT }}
+
+      - name: Validate and apply queued patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          patches=(.agent-updates/*.patch)
+          if (( ${#patches[@]} == 0 )); then
+            echo "No queued repository patch."
+            exit 0
+          fi
+          for patch in "${patches[@]}"; do
+            test "$(wc -c < "$patch")" -le 1048576
+            if grep -Eq '^((--- a|\+\+\+ b)/)?\.github/workflows/repository_update_bridge\.yml' "$patch"; then
+              echo "The deployment bridge cannot modify itself."
+              exit 1
+            fi
+            git apply --check "$patch"
+            git apply "$patch"
+            rm "$patch"
+          done
+
+      - name: Commit approved repository update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "daily-yield-repository-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "No repository change to commit."
+          else
+            git commit -m "Apply approved repository update [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi

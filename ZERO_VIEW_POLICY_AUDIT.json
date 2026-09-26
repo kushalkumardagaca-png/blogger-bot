@@ -1,0 +1,47 @@
+{
+  "policy": "ZERO_SYNTHETIC_VIEWS",
+  "pass": 10,
+  "fail": 0,
+  "checks": [
+    {
+      "name": "Watchdog invokes the zero-view auditor",
+      "status": "PASS"
+    },
+    {
+      "name": "Watchdog does not install or launch a browser",
+      "status": "PASS"
+    },
+    {
+      "name": "Watchdog does not invoke legacy live crawlers",
+      "status": "PASS"
+    },
+    {
+      "name": "Zero-view auditor blocks own public host",
+      "status": "PASS"
+    },
+    {
+      "name": "Zero-view auditor blocks redirects to own host",
+      "status": "PASS"
+    },
+    {
+      "name": "Zero-view auditor reads content through Blogger API",
+      "status": "PASS"
+    },
+    {
+      "name": "Rendered compatibility script cannot navigate",
+      "status": "PASS"
+    },
+    {
+      "name": "News duplicate recovery uses Blogger API",
+      "status": "PASS"
+    },
+    {
+      "name": "News engine does not read Daily Yield public feeds",
+      "status": "PASS"
+    },
+    {
+      "name": "Related shelf uses Blogger API",
+      "status": "PASS"
+    }
+  ]
+}
