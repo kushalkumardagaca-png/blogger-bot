@@ -78,12 +78,12 @@ def main():
   if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed})
  for p in posts:
   old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new,deduped=remove_duplicate_article_package(new);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts)
-  if 'News' in p.get('labels',[]):
+  if 'News' in p.get('labels',[]) or not any(k in new for k in ('SEARCH DESCRIPTION:','DY_SEO_META_START','metaDesc')):
    desc='';sm=re.search(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',new,re.I|re.S)
    if sm:
     try:desc=json.loads(sm.group(1)).get('description','')
     except Exception:pass
-   if not desc:desc=re.sub(r'<[^>]+>',' ',new)[:158]
+   if not desc:desc=re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',new)).strip()[:158]
    im=re.search(r'<img[^>]+src=["\']([^"\']+)',new,re.I)
    new=ensure_seo_meta(new,p.get('title',''),desc,im.group(1) if im else '')
   new=ensure_family(new);new=ensure_motion(new)

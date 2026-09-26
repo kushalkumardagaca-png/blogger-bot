@@ -10,10 +10,16 @@ def get_json(url):
 def inventory():
  urls=[(BLOG+'/', 'home')]
  for kind in ('pages','posts'):
-  data=get_json(f'{BLOG}/feeds/{kind}/default?alt=json&max-results=100')
-  for e in data.get('feed',{}).get('entry',[]):
-   u=next((x['href'] for x in e.get('link',[]) if x.get('rel')=='alternate'),'')
-   if u:urls.append((u,kind[:-1]))
+  start=1;seen=0
+  while True:
+   data=get_json(f'{BLOG}/feeds/{kind}/default?alt=json&max-results=50&start-index={start}')
+   feed=data.get('feed',{});batch=feed.get('entry',[])
+   for e in batch:
+    u=next((x['href'] for x in e.get('link',[]) if x.get('rel')=='alternate'),'')
+    if u:urls.append((u,kind[:-1]))
+   seen+=len(batch);total=int(feed.get('openSearch$totalResults',{}).get('$t',seen))
+   if not batch or seen>=total:break
+   start+=len(batch)
  return list(dict.fromkeys(urls))
 VIEWPORTS=[('mobile',360,800),('tablet',768,1024),('desktop',1440,1000)]
 IGNORE_FAIL=('google-analytics.com','googletagmanager.com','doubleclick.net','googleads','favicon.ico','csp.withgoogle.com','api.frankfurter.app','api.coingecko.com','widget-sheriff.tradingview-widget.com')

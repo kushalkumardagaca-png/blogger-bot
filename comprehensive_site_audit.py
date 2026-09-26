@@ -20,9 +20,15 @@ def fetch(url,timeout=25):
  return last
 
 def feed(kind):
- st,_,raw,_=fetch(f'{BLOG}/feeds/{kind}/default?alt=json&max-results=100')
- if st!=200:raise RuntimeError(f'{kind} feed HTTP {st}')
- return json.loads(raw).get('feed',{}).get('entry',[])
+ out=[];start=1
+ while True:
+  st,_,raw,_=fetch(f'{BLOG}/feeds/{kind}/default?alt=json&max-results=50&start-index={start}')
+  if st!=200:raise RuntimeError(f'{kind} feed HTTP {st}')
+  f=json.loads(raw).get('feed',{});batch=f.get('entry',[]);out+=batch
+  total=int(f.get('openSearch$totalResults',{}).get('$t',len(out)))
+  if not batch or len(out)>=total:break
+  start+=len(batch)
+ return out
 
 def alt(e):return next((x.get('href','') for x in e.get('link',[]) if x.get('rel')=='alternate'),'')
 def clean(s):return re.sub(r'<[^>]+>',' ',html.unescape(s or ''))
