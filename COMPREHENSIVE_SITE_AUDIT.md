@@ -1,12 +1,12 @@
 # Comprehensive Post-Publication Site Audit
 
-**Checked:** 2026-09-26T11:54:52+05:30
-**Inventory:** 71 URLs · 58 Posts · 12 Pages
+**Checked:** 2026-09-26T12:27:49+05:30
+**Inventory:** 73 URLs · 60 Posts · 12 Pages
 **Result:** PASS · 0 hard failure(s)
 
 Images: 95 checked · 0 broken  
-Internal links: 53 checked · 0 broken  
-External links: 324 checked · 0 confirmed 404/410  
+Internal links: 54 checked · 0 broken  
+External links: 352 checked · 0 confirmed 404/410  
 Restricted/rate-limited external checks (not classified broken): 16
 
 - ✅ **home · DAILY YIELD**
@@ -22,6 +22,8 @@ Restricted/rate-limited external checks (not classified broken): 16
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Spain Finance News · 26 September 2026 · Coverage September 25 to 26 — Statistics on Transfer of Property Rights (STPR); Industrial Price Index. 2021 Baseline**
+- ✅ **post · China Finance News · 26 September 2026 · Coverage September 25 to 26 — China set to decide if Costa Rican or Guyanese diplomat becomes first woman UN chief; The…**
 - ✅ **post · UK Finance News · 26 September 2026 · Coverage September 25 to 26 — Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader…**
 - ✅ **post · Japan Finance News · 26 September 2026 · Coverage September 25 to 26 — International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)…**
 - ✅ **post · Freelance Money on Autopilot**

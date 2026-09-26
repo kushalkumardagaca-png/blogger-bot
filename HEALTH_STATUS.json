@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-26 11:43 IST",
+  "generated_at": "2026-09-26 12:23 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 79,
-    "WARN": 6,
+    "OK": 77,
+    "WARN": 8,
     "FAIL": 0,
     "SKIP": 0
   },
@@ -16,19 +16,19 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "45 recent posts"
+      "detail": "46 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "1 slot(s) due so far today — all published; 2 master articles + 10 news wires today"
+      "detail": "1 slot(s) due so far today — all published; 2 master articles + 12 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "6 due desk(s) present; 10 news wires today"
+      "detail": "8 due desk(s) present; 12 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -46,7 +46,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 0.8h ago"
+      "detail": "newest master article 1.5h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -69,26 +69,26 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 242 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 351 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 253 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 383 KB"
     },
     {
       "section": "B. Blog pages",
@@ -111,32 +111,32 @@
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "OK",
-      "detail": "200 OK · 311 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "OK",
-      "detail": "200 OK · 370 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 391 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "OK",
-      "detail": "200 OK · 629 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "OK",
-      "detail": "200 OK · 396 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -147,14 +147,14 @@
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "OK",
-      "detail": "reachable, sitemap declared"
+      "status": "WARN",
+      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
     },
     {
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "58 URLs indexed"
+      "detail": "60 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -502,7 +502,7 @@
       "section": "E. Google Search Console",
       "name": "Complete URL inventory",
       "status": "OK",
-      "detail": "70 indexable homepage/Page/Post URLs"
+      "detail": "72 indexable homepage/Page/Post URLs"
     },
     {
       "section": "E. Google Search Console",
@@ -520,17 +520,10 @@
       "section": "E. Google Search Console",
       "name": "Google index · tracked posts",
       "status": "OK",
-      "detail": "0/70 recent posts in Google's index · 70 inspected this run"
+      "detail": "0/72 recent posts in Google's index · 2 inspected this run"
     }
   ],
   "history": [
-    {
-      "at": "2026-09-24 22:57 IST",
-      "overall": "FAIL",
-      "ok": 52,
-      "warn": 12,
-      "fail": 8
-    },
     {
       "at": "2026-09-24 23:01 IST",
       "overall": "WARN",
@@ -663,6 +656,13 @@
       "ok": 79,
       "warn": 6,
       "fail": 0
+    },
+    {
+      "at": "2026-09-26 12:23 IST",
+      "overall": "WARN",
+      "ok": 77,
+      "warn": 8,
+      "fail": 0
     }
   ],
   "gsc": {
@@ -673,7 +673,7 @@
       "position": 0,
       "top_queries": [],
       "target_queries": [],
-      "at": "2026-09-26 11:43 IST"
+      "at": "2026-09-26 12:23 IST"
     },
     "history": [
       {
@@ -683,7 +683,7 @@
         "position": 0,
         "top_queries": [],
         "target_queries": [],
-        "at": "2026-09-26 11:43 IST"
+        "at": "2026-09-26 12:23 IST"
       }
     ],
     "index_tracker": {
@@ -1660,6 +1660,34 @@
         "last_checked": "2026-09-26 11:43 IST",
         "verdict": "NEUTRAL",
         "coverage_state": "Discovered - currently not indexed",
+        "page_fetch_state": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "indexing_state": "INDEXING_STATE_UNSPECIFIED",
+        "robots_state": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "last_crawl": "",
+        "google_canonical": "",
+        "user_canonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/spain-2026-09-26.html": {
+        "title": "Spain Finance News · 26 September 2026 · Coverage September 25 to 26 — Statistics on Transfer of Property Rights (STPR); Industrial Price Index. 2021 Baseline",
+        "first_seen": "2026-09-26 12:23 IST",
+        "status": "NEUTRAL",
+        "last_checked": "2026-09-26 12:23 IST",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL is unknown to Google",
+        "page_fetch_state": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "indexing_state": "INDEXING_STATE_UNSPECIFIED",
+        "robots_state": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "last_crawl": "",
+        "google_canonical": "",
+        "user_canonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/china-2026-09-26.html": {
+        "title": "China Finance News · 26 September 2026 · Coverage September 25 to 26 — China set to decide if Costa Rican or Guyanese diplomat becomes first woman UN chief; The…",
+        "first_seen": "2026-09-26 12:23 IST",
+        "status": "NEUTRAL",
+        "last_checked": "2026-09-26 12:23 IST",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL is unknown to Google",
         "page_fetch_state": "PAGE_FETCH_STATE_UNSPECIFIED",
         "indexing_state": "INDEXING_STATE_UNSPECIFIED",
         "robots_state": "ROBOTS_TXT_STATE_UNSPECIFIED",
