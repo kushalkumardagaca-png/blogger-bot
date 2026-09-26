@@ -7,6 +7,7 @@ from related_articles import ensure as ensure_related
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
 from brand_identity import ensure_brand_identity
+from social_identity import ensure_social_identity
 PAGE_DESCRIPTIONS={
  'GLOBAL SNAPSHOT':'Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.',
  'MARKETS TODAY':'Daily Yield Markets Today: search and analyse global stocks, indices, currencies, commodities and digital assets with transparent data fallbacks.',
@@ -99,8 +100,8 @@ def main():
   if 'MOVED' not in p.get('title','').upper():
    desc=PAGE_DESCRIPTIONS.get(p.get('title','').upper(),f"{p.get('title','')} from Daily Yield by Kushal K. Daga: finance information, tools and transparent analysis.")
    im=re.search(r'<img[^>]+src=["\']([^"\']+)',new,re.I);new=ensure_seo_meta(new,'Daily Yield: '+p.get('title','').title(),desc,im.group(1) if im else '')
-  new=ensure_brand_identity(new);new=ensure_motion(new)
-  if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed,'seo_meta':True,'brand_identity':True})
+  new=ensure_social_identity(new);new=ensure_brand_identity(new);new=ensure_motion(new)
+  if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed,'seo_meta':True,'brand_identity':True,'social_identity':True})
  for p in posts:
   old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new,deduped=remove_duplicate_article_package(new);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts)
   if 'News' in p.get('labels',[]) or not any(k in new for k in ('DY_SEO_META_START','metaDesc')):

@@ -2,6 +2,7 @@
 import html
 import re
 from brand_identity import ensure_brand_identity
+from social_identity import ensure_social_identity
 
 BLOG = "https://dailyyield.blogspot.com"
 FAMILY = [
@@ -93,6 +94,7 @@ def remove_legacy_explore_blocks(content):
 
 def ensure_family(content, current_path=""):
     """Keep one full family directory, favicon identity and no obsolete cards."""
+    content = ensure_social_identity(content)
     content = ensure_brand_identity(content)
     content = remove_legacy_explore_blocks(content)
     content = content.replace("/p/share-market_0718113516.html", "/p/global-snapshot.html")

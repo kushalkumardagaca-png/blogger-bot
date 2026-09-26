@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 55 PASS · 0 FAIL
+**Result:** 56 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -16,6 +16,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Master packages always rebuilt fresh**
 - ✅ **Master byline is current**
 - ✅ **Master publisher brand is Daily Yield**
+- ✅ **Canonical social identity uses new LinkedIn and omits closed X**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include related-reading shelf**
@@ -55,7 +56,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 34
-- ✅ **News tracker launch/state is valid** — 19 desk edition(s) recorded
+- ✅ **Master tracker next-topic state is valid** — next index 35
+- ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

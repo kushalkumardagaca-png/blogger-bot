@@ -207,8 +207,7 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
                     "alternateName": PERSON_ALIASES,
                     "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
                     "sameAs": [
-                        "https://x.com/CAKUSHAL2509",
-                        "https://www.linkedin.com/in/finance-by-kushal/"
+                        "https://www.linkedin.com/in/dailyyeild"
                     ]
                 },
                 "publisher": {
