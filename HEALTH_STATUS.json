@@ -15,6 +15,9 @@
   "gsc": {
     "connection": "WARN",
     "detail": "exact property not visible",
+    "visibleProperties": [
+      "sc-domain:dailyyield.blogspot.com"
+    ],
     "tracker": {},
     "summary": {}
   },
