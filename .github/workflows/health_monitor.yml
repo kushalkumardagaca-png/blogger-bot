@@ -61,6 +61,9 @@ jobs:
         continue-on-error: true
         run: python comprehensive_site_audit.py
 
+      - name: Cool down before rendered crawl
+        run: sleep 90
+
       - name: Install rendered-browser auditor
         run: |
           python -m pip install --disable-pip-version-check playwright
@@ -79,7 +82,7 @@ jobs:
           content=json.load(open('COMPREHENSIVE_SITE_AUDIT.json')) if pathlib.Path('COMPREHENSIVE_SITE_AUDIT.json').exists() else {'hard_failures':-1}
           rendered=json.load(open('RENDERED_SITE_AUDIT.json')) if pathlib.Path('RENDERED_SITE_AUDIT.json').exists() else {'failures':-1}
           verdict='PASS' if operational.get('overall')!='FAIL' and content.get('hard_failures')==0 and rendered.get('failures')==0 else 'ATTENTION'
-          summary={'verdict':verdict,'operational':operational.get('overall'),'content_failures':content.get('hard_failures'),'rendered_failures':rendered.get('failures'),'urls':content.get('urls'),'rendered_checks':rendered.get('rendered_checks')}
+          summary={'verdict':verdict,'operational':operational.get('overall'),'content_failures':content.get('hard_failures'),'rendered_failures':rendered.get('failures'),'rendered_transient_checks':rendered.get('transient_checks',0),'urls':content.get('urls'),'rendered_checks':rendered.get('rendered_checks')}
           pathlib.Path('WATCHDOG_VERDICT.json').write_text(json.dumps(summary,indent=2))
           pathlib.Path('WATCHDOG_VERDICT.md').write_text('# Daily Yield Full-Site Watchdog\n\n'+''.join(f'- **{k.replace("_"," ").title()}:** {v}\n' for k,v in summary.items()))
           print(json.dumps(summary))

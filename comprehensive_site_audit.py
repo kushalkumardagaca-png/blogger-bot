@@ -98,14 +98,14 @@ def main():
  internal=sorted({u.split('#')[0] for r in rows for u in r['links'] if u.startswith(BLOG) and '/search' not in u})
  external=sorted({u.split('#')[0] for r in rows for u in r['links'] if u.startswith(('http://','https://')) and not u.startswith(BLOG)})
  asset_results=[]
- with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:asset_results=list(ex.map(check_asset,image_urls+internal+external))
+ with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:asset_results=list(ex.map(check_asset,image_urls+external))
  image_rows=asset_results[:len(image_urls)]
  broken_images=[{'url':u,'status':s,'content_type':ct} for u,s,ct in image_rows if s in (404,410) or (s in (200,206) and not ct.lower().startswith('image/'))]
  restricted_images=[{'url':u,'status':s} for u,s,ct in image_rows if s in (401,403,429,500,502,503,504,'ERR')]
- offset=len(image_urls);internal_rows=asset_results[offset:offset+len(internal)]
- broken_internal=[{'url':u,'status':s} for u,s,ct in internal_rows if s in (404,410)]
- restricted_internal=[{'url':u,'status':s} for u,s,ct in internal_rows if s in (401,403,429,500,502,503,504,'ERR')]
- ext_rows=asset_results[offset+len(internal):]
+ known={r['url'].rstrip('/') for r in rows}
+ broken_internal=[{'url':u,'status':'not in current Blogger inventory'} for u in internal if u.rstrip('/') not in known]
+ restricted_internal=[]
+ ext_rows=asset_results[len(image_urls):]
  broken_external=[{'url':u,'status':s} for u,s,ct in ext_rows if s in (404,410)]
  external_restricted=[{'url':u,'status':s} for u,s,ct in ext_rows if s in (401,403,429,'ERR')]
  hard=sum(bool(r['issues']) for r in rows)+len(broken_images)+len(broken_internal)+len(broken_external)

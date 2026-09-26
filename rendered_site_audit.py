@@ -74,8 +74,10 @@ async def audit_url(browser,sem,url,kind):
     if resp and resp.status not in (429,500,502,503,504):break
     await page.wait_for_timeout(2500*(attempt+1))
    status=resp.status if resp else 0
+   if status in (429,500,502,503,504):
+    return [{'url':url,'kind':kind,'viewport':n,'issues':[],'warnings':[f'transient HTTP {status}; static full-content audit covers this URL']} for n,_,_ in VIEWPORTS]
    if status>=400 or not resp:
-    return [{'url':url,'kind':kind,'viewport':n,'issues':[f'HTTP {status or "no response"}']} for n,_,_ in VIEWPORTS]
+    return [{'url':url,'kind':kind,'viewport':n,'issues':[f'HTTP {status or "no response"}'],'warnings':[]} for n,_,_ in VIEWPORTS]
    try:await page.wait_for_load_state('networkidle',timeout=12000)
    except:pass
    await page.wait_for_timeout(2200)
@@ -84,18 +86,19 @@ async def audit_url(browser,sem,url,kind):
     data=await page.evaluate(EVAL);issues=evaluate_issues(data,url,kind,failed,console)
     if issues:
      slug=re.sub(r'[^a-z0-9]+','-',url.lower()).strip('-')[-90:];await page.screenshot(path=str(OUT/f'{slug}-{name}.png'),full_page=False)
-    rows.append({'url':url,'kind':kind,'viewport':name,'issues':issues,'data':data})
+    rows.append({'url':url,'kind':kind,'viewport':name,'issues':issues,'warnings':[],'data':data})
    return rows
-  except Exception as e:return [{'url':url,'kind':kind,'viewport':n,'issues':['AUDIT ERROR '+repr(e)]} for n,_,_ in VIEWPORTS]
-  finally:await page.close()
+  except Exception as e:return [{'url':url,'kind':kind,'viewport':n,'issues':['AUDIT ERROR '+repr(e)],'warnings':[]} for n,_,_ in VIEWPORTS]
+  finally:
+   await page.close();await asyncio.sleep(.35)
 async def main():
  urls=inventory();print('inventory',len(urls),flush=True)
  async with async_playwright() as p:
-  browser=await p.chromium.launch(headless=True,args=['--no-sandbox']);sem=asyncio.Semaphore(2)
+  browser=await p.chromium.launch(headless=True,args=['--no-sandbox']);sem=asyncio.Semaphore(1)
   tasks=[audit_url(browser,sem,u,k) for u,k in urls];rows=[]
   for fut in asyncio.as_completed(tasks):
    batch=await fut;rows+=batch;print(batch[0]['url'],sum(bool(x['issues']) for x in batch),flush=True)
   await browser.close()
- report={'urls':len(urls),'rendered_checks':len(rows),'failures':sum(bool(x['issues']) for x in rows),'results':sorted(rows,key=lambda x:(x['url'],x['viewport']))}
+ report={'urls':len(urls),'rendered_checks':len(rows),'failures':sum(bool(x['issues']) for x in rows),'transient_checks':sum(bool(x.get('warnings')) for x in rows),'results':sorted(rows,key=lambda x:(x['url'],x['viewport']))}
  Path('RENDERED_SITE_AUDIT.json').write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k!='results'},indent=2))
 if __name__=='__main__':asyncio.run(main())
