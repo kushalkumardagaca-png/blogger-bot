@@ -4,6 +4,6 @@
 - **Operational:** WARN
 - **Content Failures:** 0
 - **Rendered Failures:** 0
-- **Rendered Transient Checks:** 42
+- **Rendered Transient Checks:** 0
 - **Urls:** 74
-- **Rendered Checks:** 222
+- **Rendered Checks:** 0
