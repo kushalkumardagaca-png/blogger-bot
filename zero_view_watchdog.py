@@ -249,10 +249,12 @@ def gsc_checks(inventory):
     token = oauth(os.environ["GSC_CLIENT_ID"], os.environ["GSC_CLIENT_SECRET"], os.environ["GSC_REFRESH_TOKEN"])
     headers = {"Authorization": "Bearer " + token, "Content-Type": "application/json"}
     sites = request_json("https://www.googleapis.com/webmasters/v3/sites", headers)
-    exact = next((item for item in sites.get("siteEntry", []) if item.get("siteUrl") == SITE), None)
+    visible = sites.get("siteEntry", [])
+    exact = next((item for item in visible if item.get("siteUrl", "").rstrip("/") == SITE.rstrip("/")), None)
     if not exact:
-        return {"connection": "WARN", "detail": "exact property not visible", "tracker": {}, "summary": {}}
-    enc = urllib.parse.quote(SITE, safe="")
+        return {"connection": "WARN", "detail": "exact property not visible", "visibleProperties": [item.get("siteUrl", "") for item in visible], "tracker": {}, "summary": {}}
+    property_url = exact.get("siteUrl", SITE)
+    enc = urllib.parse.quote(property_url, safe="")
     sitemap_rows = request_json(f"https://www.googleapis.com/webmasters/v3/sites/{enc}/sitemaps", headers).get("sitemap", [])
     current = [row for row in sitemap_rows if row.get("path") in EXPECTED_SITEMAPS]
     previous_tracker = {}
@@ -272,7 +274,7 @@ def gsc_checks(inventory):
         try:
             result = request_json(
                 "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
-                headers, "POST", {"inspectionUrl": item["url"], "siteUrl": SITE, "languageCode": "en-US"},
+                headers, "POST", {"inspectionUrl": item["url"], "siteUrl": property_url, "languageCode": "en-US"},
             )
             state = result.get("inspectionResult", {}).get("indexStatusResult", {})
             tracker[item["url"]] = {
@@ -294,7 +296,7 @@ def gsc_checks(inventory):
     tracker = {url: row for url, row in tracker.items() if url in live_urls}
     passed = sum(row.get("verdict") == "PASS" for row in tracker.values())
     return {
-        "connection": "OK", "property": SITE, "permission": exact.get("permissionLevel"),
+        "connection": "OK", "property": property_url, "permission": exact.get("permissionLevel"),
         "sitemaps": current, "tracker": tracker,
         "summary": {"inventory": len(live_urls), "tracked": len(tracker), "pass": passed, "notPass": len(tracker) - passed, "inspectedThisRun": inspected, "inspectionErrors": errors, "sitemapsVisible": len(current)},
     }
