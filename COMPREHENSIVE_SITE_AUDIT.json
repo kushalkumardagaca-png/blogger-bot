@@ -1,110 +1,53 @@
 {
-  "checked_at_ist": "2026-09-26T08:27:22+05:30",
+  "checked_at_ist": "2026-09-26T08:34:32+05:30",
   "urls": 66,
   "posts": 53,
   "pages": 12,
-  "hard_failures": 28,
-  "url_failures": 5,
+  "hard_failures": 0,
+  "url_failures": 0,
   "images_checked": 94,
   "broken_images": [],
   "internal_links_checked": 47,
-  "broken_internal_links": [
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-25.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-25.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/p/article.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/p/markets-today.html",
-      "status": 429
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
-      "status": 429
-    }
-  ],
+  "broken_internal_links": [],
   "external_links_checked": 273,
   "broken_external_links": [],
   "external_restricted_not_broken": [
+    {
+      "url": "https://www.abc.net.au/news/2026-09-25/asx-markets-business-news-live-updates-sept-25/107184538",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-25/cenagen-kandos-cement-works-energy-waste-dispute/107175614",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-25/costly-outback-airfares-unreasonable-as-review-delayed/107190336",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-25/qld-police-stop-man-lying-next-to-fridge/107194510",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-25/wallace-and-gromit-and-aardman-puppets-auctioned/107194580",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-26/afl-grand-final-fremantle-brisbane-lachie-neale-history-analysis/107190640",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-26/card-surcharge-fees-change-october-1-small-businesses-impact-sa/107180202",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-26/european-leaders-warn-of-russian-threat/107192690",
+      "status": 403
+    },
+    {
+      "url": "https://www.abc.net.au/news/2026-09-26/partner-visa-delays-for-offshore-applicants/107185444",
+      "status": 403
+    },
     {
       "url": "https://www.ato.gov.au/",
       "status": 403
@@ -163,10 +106,6 @@
     },
     {
       "url": "https://www.sec.gov/investor/alerts/teachers403b.pdf",
-      "status": 403
-    },
-    {
-      "url": "https://x.com/CAKUSHAL2509",
       "status": 403
     }
   ],
@@ -1470,9 +1409,7 @@
       "kind": "post",
       "title": "Corporate Finance and Industry News · 25 September 2026 · Coverage September 24 to 25 — Japanese Government Bonds Held by the Bank of Japan[XLSX 29KB]; Capital gains tax: how it…",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
-      "issues": [
-        "page HTTP 429"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [
         "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&h=900&q=85",
@@ -1644,9 +1581,7 @@
       "kind": "post",
       "title": "Japan Finance News · 25 September 2026 · Coverage September 24 to 25 — (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese…",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
-      "issues": [
-        "page HTTP 429"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [
         "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
@@ -2971,9 +2906,7 @@
       "kind": "post",
       "title": "Three-Fund Portfolio: Why 3 Core Index Funds Beat 12-ETF Portfolios",
       "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
-      "issues": [
-        "page HTTP 429"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [
         "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-2758262234277933362-0.jpg",
@@ -3125,9 +3058,7 @@
       "kind": "post",
       "title": "The Payday Waterfall: 7 Automatic Transfers That Run Your Entire Financial Life",
       "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
-      "issues": [
-        "page HTTP 429"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [
         "https://blogger.googleusercontent.com/img/a/AVvXsEjk846T9Oi0HOafXBU44nu-XZiefbV_BTL0P0KDc17fnXNC4JjfJNh9nm2qPE3KvqPY2kLHzMT8fkhIkraYAr6MJfS_QDbkaK5hxhvS3tsunWnEVNXnN10UgFjYqtfdZVuc3SOK-8tgt9Hp_ezZOW5-iv_oWOIwWdxoDVCbL1yuMTdkgF0jDNTfTIkDxCI",
@@ -3459,9 +3390,7 @@
       "kind": "post",
       "title": "Stop Maxing Your 401(k) or Pension",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-      "issues": [
-        "page HTTP 429"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [
         "https://blogger.googleusercontent.com/img/a/AVvXsEip7PslF5pLpAdCIL9Vevu6siUHi-dcOA9-oEh5Q0m5YC_0KGymwEtwUUVyf3_RsA-4VNdPV4bZWN0Oni06oQns58wKKhE_nUneKXYdYBnhNrSVtORasm6zP9DPeXW3NO479naH-1ffE1QXtgJbZdiYDfPmVvPTbwgfFRK-J6ANF9_QYqEih0VWXgpYINw",

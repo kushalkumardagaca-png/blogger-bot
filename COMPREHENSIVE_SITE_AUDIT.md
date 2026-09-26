@@ -1,13 +1,13 @@
 # Comprehensive Post-Publication Site Audit
 
-**Checked:** 2026-09-26T08:27:22+05:30
+**Checked:** 2026-09-26T08:34:32+05:30
 **Inventory:** 66 URLs · 53 Posts · 12 Pages
-**Result:** FAIL · 28 hard failure(s)
+**Result:** PASS · 0 hard failure(s)
 
 Images: 94 checked · 0 broken  
-Internal links: 47 checked · 23 broken  
+Internal links: 47 checked · 0 broken  
 External links: 273 checked · 0 confirmed 404/410  
-Restricted/rate-limited external checks (not classified broken): 16
+Restricted/rate-limited external checks (not classified broken): 24
 
 - ✅ **home · DAILY YIELD**
 - ✅ **page · GLOBAL SNAPSHOT**
@@ -36,10 +36,10 @@ Restricted/rate-limited external checks (not classified broken): 16
 - ✅ **post · China Finance News · 25 September 2026 · Coverage September 24 to 25 — Trump hails WWII ‘ally’ China as Xi tells of bonds ‘forged in blood and fire’; Details on…**
 - ✅ **post · US Finance News · 25 September 2026 · Coverage September 24 to 25 — ‘We were wrong.’ Why Morgan Stanley changed its tune on the U.S. dollar — and what it…**
 - ✅ **post · $90k Broke: The New Middle Class**
-- ❌ **post · Corporate Finance and Industry News · 25 September 2026 · Coverage September 24 to 25 — Japanese Government Bonds Held by the Bank of Japan[XLSX 29KB]; Capital gains tax: how it…** — page HTTP 429
+- ✅ **post · Corporate Finance and Industry News · 25 September 2026 · Coverage September 24 to 25 — Japanese Government Bonds Held by the Bank of Japan[XLSX 29KB]; Capital gains tax: how it…**
 - ✅ **post · Covered-Call ETFs: Income or Trap?**
 - ✅ **post · UK Finance News · 25 September 2026 · Coverage September 24 to 25 — Minutes of the Market Participants Group meeting – 24 September 2026**
-- ❌ **post · Japan Finance News · 25 September 2026 · Coverage September 24 to 25 — (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese…** — page HTTP 429
+- ✅ **post · Japan Finance News · 25 September 2026 · Coverage September 24 to 25 — (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese…**
 - ✅ **post · $10k at 22 vs $10k at 32**
 - ✅ **post · France Finance News · 25 September 2026 · Coverage September 24 to 25 — France to send 'military means' to protect Saudi oil port, Macron says; France says EU’s…**
 - ✅ **post · Germany Finance News · 25 September 2026 · Coverage September 24 to 25 — After several difficult years, economists now expect German economy to grow; Opening…**
@@ -64,14 +64,14 @@ Restricted/rate-limited external checks (not classified broken): 16
 - ✅ **post · Ask for the Raise That Beats Budgeting**
 - ✅ **post · W-2 Tax Tricks You're Allowed to Use: The High-Earner Playbook**
 - ✅ **post · FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras**
-- ❌ **post · Three-Fund Portfolio: Why 3 Core Index Funds Beat 12-ETF Portfolios** — page HTTP 429
+- ✅ **post · Three-Fund Portfolio: Why 3 Core Index Funds Beat 12-ETF Portfolios**
 - ✅ **post · AI Found £1,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes**
 - ✅ **post · 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire**
-- ❌ **post · The Payday Waterfall: 7 Automatic Transfers That Run Your Entire Financial Life** — page HTTP 429
+- ✅ **post · The Payday Waterfall: 7 Automatic Transfers That Run Your Entire Financial Life**
 - ✅ **post · Your Mortgage Is Not the Real Cost: The True Monthly Cost of a £300,000 House Unmasked**
 - ✅ **post · Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It**
 - ✅ **post · The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap**
 - ✅ **post · Why Dual-Income Couples Still Feel One Month from Broke: Unmasking the Global Two-Income Trap**
 - ✅ **post · The Portfolio That Pays Your Rent: How Much You Really Need Invested to Cover Housing Costs Globally**
 - ✅ **post · Real Net Worth Targets by Age for Median Earners**
-- ❌ **post · Stop Maxing Your 401(k) or Pension** — page HTTP 429
+- ✅ **post · Stop Maxing Your 401(k) or Pension**
