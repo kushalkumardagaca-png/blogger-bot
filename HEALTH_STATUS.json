@@ -3,11 +3,11 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 81,
-    "posts": 68,
+    "urls": 82,
+    "posts": 69,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 534,
+    "externalDestinationsChecked": 535,
     "confirmedExternal404or410": 0,
     "transientExternalResponses": 24,
     "syntheticDailyYieldViews": 0
@@ -23,7 +23,7 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-09-25T16:49:55.090Z",
+        "lastDownloaded": "2026-09-26T14:32:40.281Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
@@ -932,13 +932,24 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/why-your-budget-dies-in-week-two.html": {
+        "title": "Why Your Budget Dies in Week Two",
+        "checkedAt": "2026-09-26T20:04:11.761298+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 80,
-      "tracked": 80,
+      "inventory": 81,
+      "tracked": 81,
       "pass": 0,
-      "notPass": 80,
+      "notPass": 81,
       "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
