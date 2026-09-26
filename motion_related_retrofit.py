@@ -6,6 +6,19 @@ from continuous_motion import ensure as ensure_motion
 from related_articles import ensure as ensure_related
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
+PAGE_DESCRIPTIONS={
+ 'GLOBAL SNAPSHOT':'Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.',
+ 'MARKETS TODAY':'Daily Yield Markets Today: search and analyse global stocks, indices, currencies, commodities and digital assets with transparent data fallbacks.',
+ 'DAILY ARTICLE':'Original financial explainers, practical money guides and evidence-led analysis by Kushal K. Daga at Daily Yield.',
+ 'DAILY NEWS':'Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.',
+ 'CALCULATOR':'Daily Yield financial calculators for loans, investing, tax, savings, retirement and practical money planning.',
+ 'MONEY ATLAS':'Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.',
+ 'FOR CORPORATE':'Daily Yield resources and financial analysis for corporate decision-makers, professionals and business teams.',
+ 'ABOUT US':'About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.',
+ 'CONTACT US':'Contact Daily Yield regarding financial education, editorial feedback, corrections and corporate enquiries.',
+ 'DISCLAIMER':'Daily Yield financial-information disclaimer covering educational content, market data, external sources and investment risk.',
+ 'PRIVACY POLICY':'Daily Yield privacy policy explaining data handling, cookies, external services and visitor choices.',
+}
 BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}';APPLY=os.environ.get('APPLY','false').lower()=='true'
 def token():
  data=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
@@ -81,11 +94,15 @@ def repair_article_schema(content,url):
 def main():
  tok=token();pages=collect('pages',tok);posts=collect('posts',tok);Path('motion_related_backup.json').write_text(json.dumps({'pages':pages,'posts':posts},ensure_ascii=False));changes=[]
  for p in pages:
-  old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new=new.replace('if(!s.visible||s.hover||s.focus||s.touchUntil>Date.now())return;','if(!s.visible)return;');new=ensure_motion(new)
-  if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed})
+  old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new=new.replace('if(!s.visible||s.hover||s.focus||s.touchUntil>Date.now())return;','if(!s.visible)return;')
+  if 'MOVED' not in p.get('title','').upper():
+   desc=PAGE_DESCRIPTIONS.get(p.get('title','').upper(),f"{p.get('title','')} from Daily Yield by Kushal K. Daga: finance information, tools and transparent analysis.")
+   im=re.search(r'<img[^>]+src=["\']([^"\']+)',new,re.I);new=ensure_seo_meta(new,'Daily Yield: '+p.get('title','').title(),desc,im.group(1) if im else '')
+  new=ensure_motion(new)
+  if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed,'seo_meta':True})
  for p in posts:
   old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new,deduped=remove_duplicate_article_package(new);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts)
-  if 'News' in p.get('labels',[]) or not any(k in new for k in ('SEARCH DESCRIPTION:','DY_SEO_META_START','metaDesc')):
+  if 'News' in p.get('labels',[]) or not any(k in new for k in ('DY_SEO_META_START','metaDesc')):
    desc='';sm=re.search(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',new,re.I|re.S)
    if sm:
     try:desc=json.loads(sm.group(1)).get('description','')

@@ -83,7 +83,7 @@ def audit_item(x):
   canonical=re.search(r'<link\b(?=[^>]*\brel=["\']canonical["\'])(?=[^>]*\bhref=["\']([^"\']+))[^>]*>',page,re.I)
   if not canonical:issues.append('canonical link missing')
   elif canonical.group(1).rstrip('/')!=url.rstrip('/') and 'share-market_0718113516' not in url:issues.append('canonical mismatch')
-  if kind=='post' and not any(k in c for k in ('SEARCH DESCRIPTION:','DY_SEO_META_START','metaDesc')):issues.append('SEO meta-description package missing')
+  if kind=='post' and not any(k in c for k in ('DY_SEO_META_START','metaDesc')):issues.append('SEO meta-description package missing')
  return {'kind':kind,'title':x['title'],'url':url,'issues':issues,'warnings':warn,'images':imgs(c),'links':hrefs(c)}
 
 def check_asset(url):
