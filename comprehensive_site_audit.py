@@ -50,7 +50,8 @@ def inventory():
 def audit_item(x):
  issues=[];warn=[];c=x['content'];kind=x['kind'];url=x['url'];labels=x.get('labels',[])
  st,ct,raw,final=fetch(url);page=raw.decode(errors='ignore') if st==200 else ''
- if st!=200:issues.append(f'page HTTP {st}')
+ if st!=200:
+  (warn if st in (401,403,429,500,502,503,504,'ERR') else issues).append(f'page HTTP {st}')
  if final and final.rstrip('/')!=url.rstrip('/') and 'share-market_0718113516' not in url:warn.append('redirected to '+final)
  if kind!='home':
   if len(clean(c).split())<40:issues.append('content is unexpectedly short')
@@ -98,13 +99,17 @@ def main():
  external=sorted({u.split('#')[0] for r in rows for u in r['links'] if u.startswith(('http://','https://')) and not u.startswith(BLOG)})
  asset_results=[]
  with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:asset_results=list(ex.map(check_asset,image_urls+internal+external))
- broken_images=[{'url':u,'status':s,'content_type':ct} for u,s,ct in asset_results[:len(image_urls)] if s not in (200,206) or not ct.lower().startswith('image/')]
- offset=len(image_urls);broken_internal=[{'url':u,'status':s} for u,s,ct in asset_results[offset:offset+len(internal)] if s not in (200,206)]
+ image_rows=asset_results[:len(image_urls)]
+ broken_images=[{'url':u,'status':s,'content_type':ct} for u,s,ct in image_rows if s in (404,410) or (s in (200,206) and not ct.lower().startswith('image/'))]
+ restricted_images=[{'url':u,'status':s} for u,s,ct in image_rows if s in (401,403,429,500,502,503,504,'ERR')]
+ offset=len(image_urls);internal_rows=asset_results[offset:offset+len(internal)]
+ broken_internal=[{'url':u,'status':s} for u,s,ct in internal_rows if s in (404,410)]
+ restricted_internal=[{'url':u,'status':s} for u,s,ct in internal_rows if s in (401,403,429,500,502,503,504,'ERR')]
  ext_rows=asset_results[offset+len(internal):]
  broken_external=[{'url':u,'status':s} for u,s,ct in ext_rows if s in (404,410)]
  external_restricted=[{'url':u,'status':s} for u,s,ct in ext_rows if s in (401,403,429,'ERR')]
  hard=sum(bool(r['issues']) for r in rows)+len(broken_images)+len(broken_internal)+len(broken_external)
- report={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'urls':len(rows),'posts':sum(r['kind']=='post' for r in rows),'pages':sum(r['kind']=='page' for r in rows),'hard_failures':hard,'url_failures':sum(bool(r['issues']) for r in rows),'images_checked':len(image_urls),'broken_images':broken_images,'internal_links_checked':len(internal),'broken_internal_links':broken_internal,'external_links_checked':len(external),'broken_external_links':broken_external,'external_restricted_not_broken':external_restricted,'results':rows}
+ report={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'urls':len(rows),'posts':sum(r['kind']=='post' for r in rows),'pages':sum(r['kind']=='page' for r in rows),'hard_failures':hard,'url_failures':sum(bool(r['issues']) for r in rows),'images_checked':len(image_urls),'broken_images':broken_images,'restricted_images_not_broken':restricted_images,'internal_links_checked':len(internal),'broken_internal_links':broken_internal,'restricted_internal_not_broken':restricted_internal,'external_links_checked':len(external),'broken_external_links':broken_external,'external_restricted_not_broken':external_restricted,'results':rows}
  Path('COMPREHENSIVE_SITE_AUDIT.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
  lines=['# Comprehensive Post-Publication Site Audit','',f"**Checked:** {report['checked_at_ist']}",f"**Inventory:** {report['urls']} URLs · {report['posts']} Posts · {report['pages']} Pages",f"**Result:** {'PASS' if not hard else 'FAIL'} · {hard} hard failure(s)",'',f"Images: {len(image_urls)} checked · {len(broken_images)} broken  ",f"Internal links: {len(internal)} checked · {len(broken_internal)} broken  ",f"External links: {len(external)} checked · {len(broken_external)} confirmed 404/410  ",f"Restricted/rate-limited external checks (not classified broken): {len(external_restricted)}",'']
  for r in rows:

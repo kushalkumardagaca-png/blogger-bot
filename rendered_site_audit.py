@@ -31,7 +31,11 @@ async def audit_one(browser,sem,url,kind,vp):
   page.on('console',lambda m:console.append(m.type+': '+m.text) if m.type=='error' else None)
   page.on('requestfailed',lambda r:failed.append(r.url+' :: '+str(r.failure)))
   try:
-   resp=await page.goto(url,wait_until='domcontentloaded',timeout=45000)
+   resp=None
+   for attempt in range(3):
+    resp=await page.goto(url,wait_until='domcontentloaded',timeout=45000)
+    if resp and resp.status not in (429,500,502,503,504):break
+    await page.wait_for_timeout(1800*(attempt+1))
    if not resp or resp.status>=400:issues.append(f'HTTP {resp.status if resp else "no response"}')
    try:await page.wait_for_load_state('networkidle',timeout=12000)
    except:pass
@@ -86,7 +90,7 @@ async def audit_one(browser,sem,url,kind,vp):
 async def main():
  urls=inventory();print('inventory',len(urls),flush=True)
  async with async_playwright() as p:
-  browser=await p.chromium.launch(headless=True,args=['--no-sandbox']);sem=asyncio.Semaphore(6)
+  browser=await p.chromium.launch(headless=True,args=['--no-sandbox']);sem=asyncio.Semaphore(3)
   tasks=[audit_one(browser,sem,u,k,v) for u,k in urls for v in VIEWPORTS]
   rows=[]
   for fut in asyncio.as_completed(tasks):
