@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-26 12:23 IST",
+  "generated_at": "2026-09-26 13:54 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 77,
-    "WARN": 8,
+    "OK": 55,
+    "WARN": 13,
     "FAIL": 0,
     "SKIP": 0
   },
@@ -22,13 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "1 slot(s) due so far today — all published; 2 master articles + 12 news wires today"
+      "detail": "2 slot(s) due so far today — all published; 3 master articles + 12 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "8 due desk(s) present; 12 news wires today"
+      "detail": "10 due desk(s) present; 12 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -40,19 +40,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2667 words, hero image + schema OK (Freelance Money on Autopilot)"
+      "detail": "2694 words, hero image + schema OK (Don't Panic-Pay Cheap Student Loans)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.5h ago"
+      "detail": "newest master article 0.0h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #33 of 500, 32 published, last at 2026-09-26 10:55 UTC"
+      "detail": "next topic #34 of 500, 33 published, last at 2026-09-26 13:53 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -69,26 +69,26 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 242 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 351 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "OK",
-      "detail": "200 OK · 253 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "OK",
-      "detail": "200 OK · 383 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -99,8 +99,8 @@
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
-      "status": "OK",
-      "detail": "200 OK · 392 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -111,32 +111,32 @@
     {
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 312 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "For Corporate hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 371 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 392 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 630 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 396 KB"
     },
     {
       "section": "B. Blog pages",
@@ -147,14 +147,14 @@
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "WARN",
-      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
+      "status": "OK",
+      "detail": "reachable, sitemap declared"
     },
     {
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "60 URLs indexed"
+      "detail": "61 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,765 instruments · sample OHLC populated"
+      "detail": "456,675 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -308,141 +308,39 @@
     },
     {
       "section": "D. Page integrity",
-      "name": "Markets Today · live page name",
-      "status": "OK",
-      "detail": "DAILY YIELD: MARKETS TODAY"
+      "name": "Markets Today · page fetch",
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side)"
     },
     {
       "section": "D. Page integrity",
-      "name": "Markets Today · command-centre root",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · global search",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · moving categories",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · ranked instrument list",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · universal analysis",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · current page heading",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · 85 subcategories",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · field-level fallback engine",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · CORS-safe scanner",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · CoinGecko fallback",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · Kraken fallback",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · metals fallback",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · forex fallback",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Markets Today · Global Snapshot navigation patch",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Global Snapshot · live page name",
-      "status": "OK",
-      "detail": "DAILY YIELD: GLOBAL SNAPSHOT &#8212; MOVED"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Legacy transition · transition panel",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Legacy transition · Global Snapshot destination",
-      "status": "OK",
-      "detail": "present"
-    },
-    {
-      "section": "D. Page integrity",
-      "name": "Legacy transition · Markets Today destination",
-      "status": "OK",
-      "detail": "present"
+      "name": "Global Snapshot · page fetch",
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side)"
     },
     {
       "section": "D. Page integrity",
       "name": "Daily Article · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
       "name": "Daily News · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
       "name": "Calculators · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
       "name": "Markets Today · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
@@ -502,7 +400,7 @@
       "section": "E. Google Search Console",
       "name": "Complete URL inventory",
       "status": "OK",
-      "detail": "72 indexable homepage/Page/Post URLs"
+      "detail": "73 indexable homepage/Page/Post URLs"
     },
     {
       "section": "E. Google Search Console",
@@ -520,17 +418,10 @@
       "section": "E. Google Search Console",
       "name": "Google index · tracked posts",
       "status": "OK",
-      "detail": "0/72 recent posts in Google's index · 2 inspected this run"
+      "detail": "0/73 recent posts in Google's index · 1 inspected this run"
     }
   ],
   "history": [
-    {
-      "at": "2026-09-24 23:01 IST",
-      "overall": "WARN",
-      "ok": 43,
-      "warn": 15,
-      "fail": 0
-    },
     {
       "at": "2026-09-24 23:14 IST",
       "overall": "WARN",
@@ -663,6 +554,13 @@
       "ok": 77,
       "warn": 8,
       "fail": 0
+    },
+    {
+      "at": "2026-09-26 13:54 IST",
+      "overall": "WARN",
+      "ok": 55,
+      "warn": 13,
+      "fail": 0
     }
   ],
   "gsc": {
@@ -673,7 +571,7 @@
       "position": 0,
       "top_queries": [],
       "target_queries": [],
-      "at": "2026-09-26 12:23 IST"
+      "at": "2026-09-26 13:54 IST"
     },
     "history": [
       {
@@ -683,7 +581,7 @@
         "position": 0,
         "top_queries": [],
         "target_queries": [],
-        "at": "2026-09-26 12:23 IST"
+        "at": "2026-09-26 13:54 IST"
       }
     ],
     "index_tracker": {
@@ -1686,6 +1584,20 @@
         "first_seen": "2026-09-26 12:23 IST",
         "status": "NEUTRAL",
         "last_checked": "2026-09-26 12:23 IST",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL is unknown to Google",
+        "page_fetch_state": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "indexing_state": "INDEXING_STATE_UNSPECIFIED",
+        "robots_state": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "last_crawl": "",
+        "google_canonical": "",
+        "user_canonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html": {
+        "title": "Don't Panic-Pay Cheap Student Loans",
+        "first_seen": "2026-09-26 13:54 IST",
+        "status": "NEUTRAL",
+        "last_checked": "2026-09-26 13:54 IST",
         "verdict": "NEUTRAL",
         "coverage_state": "URL is unknown to Google",
         "page_fetch_state": "PAGE_FETCH_STATE_UNSPECIFIED",
