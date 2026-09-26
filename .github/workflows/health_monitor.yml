@@ -1,17 +1,10 @@
-name: Blog Health Monitor (Post-Publication Full-Site Watchdog)
+name: Blog Health Monitor (12x Daily Full-Site Watchdog)
 
 on:
-  # Run after every master-article or news publishing workflow. A paired news
-  # run may publish two editions; the resulting audit still checks both new
-  # editions and every older Page/Post in the same complete inventory.
-  workflow_run:
-    workflows:
-      - "Autonomous Daily Yield Publishing Engine (5x Daily)"
-      - "Daily Yield News Wires (20 Daily)"
-    types: [completed]
+  # Run the same complete watchdog 12 times per day, once every two hours.
+  # Minute 15 avoids GitHub Actions' busiest top-of-hour scheduling window.
   schedule:
-    # Independent overnight verification even when no publisher event occurs.
-    - cron: '45 21 * * *'
+    - cron: '15 */2 * * *'
   workflow_dispatch:
 
 concurrency:
@@ -37,10 +30,6 @@ jobs:
 
       - name: Audit publishing automation invariants
         run: python audit_publishing_automation.py --check-only
-
-      - name: Wait for Blogger feed and template propagation
-        if: github.event_name == 'workflow_run'
-        run: sleep 75
 
       - name: Run operational and live-data monitor
         continue-on-error: true
