@@ -1,13 +1,13 @@
 # Comprehensive Post-Publication Site Audit
 
-**Checked:** 2026-09-26T08:34:32+05:30
+**Checked:** 2026-09-26T08:44:09+05:30
 **Inventory:** 66 URLs · 53 Posts · 12 Pages
 **Result:** PASS · 0 hard failure(s)
 
 Images: 94 checked · 0 broken  
 Internal links: 47 checked · 0 broken  
 External links: 273 checked · 0 confirmed 404/410  
-Restricted/rate-limited external checks (not classified broken): 24
+Restricted/rate-limited external checks (not classified broken): 16
 
 - ✅ **home · DAILY YIELD**
 - ✅ **page · GLOBAL SNAPSHOT**

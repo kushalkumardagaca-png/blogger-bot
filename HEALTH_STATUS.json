@@ -1,12 +1,12 @@
 {
   "overall": "PASS",
-  "generated_at": "2026-09-26 08:38 IST",
+  "generated_at": "2026-09-26 08:41 IST",
   "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
-    "OK": 77,
+    "OK": 79,
     "WARN": 0,
     "FAIL": 0,
-    "SKIP": 3
+    "SKIP": 1
   },
   "missed_slots": [],
   "auto_heal_actions": [],
@@ -46,7 +46,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.3h ago"
+      "detail": "newest master article 1.4h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -57,14 +57,14 @@
     {
       "section": "A. Publishing engine",
       "name": "Publisher workflow (GitHub Actions)",
-      "status": "SKIP",
-      "detail": "no token (local run)"
+      "status": "OK",
+      "detail": "last 8 runs all successful"
     },
     {
       "section": "A. Publishing engine",
       "name": "News workflow (GitHub Actions)",
-      "status": "SKIP",
-      "detail": "no token (local run)"
+      "status": "OK",
+      "detail": "last 12 completed runs successful"
     },
     {
       "section": "B. Blog pages",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 16:21 IST",
-      "overall": "WARN",
-      "ok": 35,
-      "warn": 5,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 19:22 IST",
       "overall": "PASS",
       "ok": 40,
@@ -631,6 +624,13 @@
       "at": "2026-09-26 08:38 IST",
       "overall": "PASS",
       "ok": 77,
+      "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-26 08:41 IST",
+      "overall": "PASS",
+      "ok": 79,
       "warn": 0,
       "fail": 0
     }

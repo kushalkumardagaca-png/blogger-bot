@@ -1,7 +1,7 @@
 {
   "urls": 66,
   "rendered_checks": 198,
-  "failures": 0,
+  "failures": 27,
   "results": [
     {
       "url": "https://dailyyield.blogspot.com/",
@@ -269,7 +269,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -422,7 +424,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -471,7 +475,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html",
         "ogTitle": "12 Money Moves for the Next 12 Months",
         "ogDesc": "A year-plan video: fund, fees, insurance, beneficiaries, and one raise ask. A map, not a vibe.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uiyHUBxJIZ4DO3t0GMI4Vz96hr39aKxlJnUWHUIy-VJtzXcXc9NkWwEldIiq1R31J3T8UAcGFyBhyKoY_7DgM0M5Ys0g_UoUFuW_4eJjcjPFt4I0VdKv3eE8AlZ6e3hTDVQocXWWICIR562St0F9WYNP3e7p07hqEGgqYOvIn6hpgB4kI=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_v8JgOlslQOIvWcMEyroVbb3JMYbOut52aTyw3VsrAiOayevmdzrvqkGaT_KFSYc5YGddF4DmEyS2W2Osy3MgHIoBqrDM8f3rgZ6eSVaC5Nql11XOCKcSPDZ_WdcX-fKKwsv39QIvQ-pnbzI0Bs12YN5iyW_RGLaFt9q9PNLsxTeTET544=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -593,7 +597,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html",
         "ogTitle": "12 Money Moves for the Next 12 Months",
         "ogDesc": "A year-plan video: fund, fees, insurance, beneficiaries, and one raise ask. A map, not a vibe.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uiyHUBxJIZ4DO3t0GMI4Vz96hr39aKxlJnUWHUIy-VJtzXcXc9NkWwEldIiq1R31J3T8UAcGFyBhyKoY_7DgM0M5Ys0g_UoUFuW_4eJjcjPFt4I0VdKv3eE8AlZ6e3hTDVQocXWWICIR562St0F9WYNP3e7p07hqEGgqYOvIn6hpgB4kI=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_v8JgOlslQOIvWcMEyroVbb3JMYbOut52aTyw3VsrAiOayevmdzrvqkGaT_KFSYc5YGddF4DmEyS2W2Osy3MgHIoBqrDM8f3rgZ6eSVaC5Nql11XOCKcSPDZ_WdcX-fKKwsv39QIvQ-pnbzI0Bs12YN5iyW_RGLaFt9q9PNLsxTeTET544=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -624,7 +628,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html",
         "ogTitle": "12 Money Moves for the Next 12 Months",
         "ogDesc": "A year-plan video: fund, fees, insurance, beneficiaries, and one raise ask. A map, not a vibe.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uiyHUBxJIZ4DO3t0GMI4Vz96hr39aKxlJnUWHUIy-VJtzXcXc9NkWwEldIiq1R31J3T8UAcGFyBhyKoY_7DgM0M5Ys0g_UoUFuW_4eJjcjPFt4I0VdKv3eE8AlZ6e3hTDVQocXWWICIR562St0F9WYNP3e7p07hqEGgqYOvIn6hpgB4kI=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_v8JgOlslQOIvWcMEyroVbb3JMYbOut52aTyw3VsrAiOayevmdzrvqkGaT_KFSYc5YGddF4DmEyS2W2Osy3MgHIoBqrDM8f3rgZ6eSVaC5Nql11XOCKcSPDZ_WdcX-fKKwsv39QIvQ-pnbzI0Bs12YN5iyW_RGLaFt9q9PNLsxTeTET544=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -852,7 +856,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
@@ -1602,7 +1608,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -1714,7 +1722,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -2560,57 +2570,52 @@
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "HTTP 429",
+        "visible Kushal K. Daga branding missing",
+        "empty/script hrefs [\"#\"]",
+        "meta description length 0, expected 50\u2013180",
+        "canonical mismatch ",
+        "Open Graph title/description missing",
+        "Open Graph image missing",
+        "visible H1 missing",
+        "contextual internal-link card missing",
+        "only 0 unique internal links",
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
         "badCards": [],
         "imgs": [],
         "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ]
+        "overflow": [],
+        "shelves": [],
+        "badHrefs": [
+          "#"
         ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Market and Trading News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 EU\u2019s reaction to corruption in Ukraine shows Europeans involved in it \u2014 envoy; Europe to\u2026",
-        "byline": true,
-        "desc": "Market and Trading News, coverage September 25 to 26: EU&#8217;s reaction to corruption in Ukraine shows Europeans involved in it &#8212; envoy; Europe to gain from...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
-        "ogTitle": "Market and Trading News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; EU&#8217;s reaction to corruption in Ukraine shows Europeans involved in it &#8212; envoy; Europe to&#8230;",
-        "ogDesc": "Market and Trading News, coverage September 25 to 26: EU&#8217;s reaction to corruption in Ukraine shows Europeans involved in it &#8212; envoy; Europe to gain from...",
-        "ogImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85",
+        "title": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
+        "byline": false,
+        "desc": "",
+        "canonical": "",
+        "ogTitle": "",
+        "ogDesc": "",
+        "ogImage": "",
         "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 15,
-        "sourceLinks": 19,
-        "internalLinks": 118,
-        "externalLinks": 25
+        "h1": 0,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 0,
+        "externalLinks": 3
       }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -2834,7 +2839,19 @@
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-25.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "HTTP 429",
+        "visible Kushal K. Daga branding missing",
+        "empty/script hrefs [\"#\"]",
+        "meta description length 0, expected 50\u2013180",
+        "canonical mismatch ",
+        "Open Graph title/description missing",
+        "Open Graph image missing",
+        "visible H1 missing",
+        "contextual internal-link card missing",
+        "only 0 unique internal links",
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -2842,30 +2859,32 @@
         "imgs": [],
         "dups": [],
         "overflow": [],
-        "shelves": [
-          4
+        "shelves": [],
+        "badHrefs": [
+          "#"
         ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: China Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Trump hails WWII \u2018ally\u2019 China as Xi tells of bonds \u2018forged in blood and fire\u2019; Details on\u2026",
-        "byline": true,
-        "desc": "China Finance News, coverage September 24 to 25: Trump hails WWII &#8216;ally&#8217; China as Xi tells of bonds &#8216;forged in blood and fire&#8217;; Details on U.S.-China...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/china-2026-09-25.html",
-        "ogTitle": "China Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Trump hails WWII &#8216;ally&#8217; China as Xi tells of bonds &#8216;forged in blood and fire&#8217;; Details on&#8230;",
-        "ogDesc": "China Finance News, coverage September 24 to 25: Trump hails WWII &#8216;ally&#8217; China as Xi tells of bonds &#8216;forged in blood and fire&#8217;; Details on U.S.-China...",
-        "ogImage": "https://images.unsplash.com/photo-1494522855154-9297ac14b55f?auto=format&fit=crop&w=1600&h=900&q=85",
+        "title": "https://dailyyield.blogspot.com/2026/09/china-2026-09-25.html",
+        "byline": false,
+        "desc": "",
+        "canonical": "",
+        "ogTitle": "",
+        "ogDesc": "",
+        "ogImage": "",
         "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 2,
-        "sourceLinks": 5,
-        "internalLinks": 117,
-        "externalLinks": 12
+        "h1": 0,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 0,
+        "externalLinks": 3
       }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -3107,7 +3126,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html",
         "ogTitle": "Covered-Call ETFs: Income or Trap?",
         "ogDesc": "JEPI, JEPQ, and UK equivalents decoded. Total return vs. yield, tax drag, and who these products actually help.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vgqU3kKwapO6T1Htglwuw5QEAKm6SNC8aPtsQjoYkvwE0IzSDxSh2RISBL5EYVKg_70D3D5ACalmWPbdlU9PccEQdT8WB3LHKfumM2It-wT7Fg9x6OcUm2Mjn3JBHE-sByiZD1-n7Njm4obd73O7e_m7WCNPdSeP-ZzF4GzQ-mkC_-HNyZ=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sTy36xtdVgoF1U9qdQHcUkm1yq9xrCky_PmQC9XnVSMDlESna2DcROf1_Iydk-516PEo92VYy8H0PYQf6LhdG3v3dYxdg4lKIwNtpcAFvR2IfsSqcFwUK3GXjj-7jsVZING0GXDZ22lwJwIq0F9_LuoIgjNe0-TVundgh8AolIy5Eg2_1y=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3229,7 +3248,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html",
         "ogTitle": "Covered-Call ETFs: Income or Trap?",
         "ogDesc": "JEPI, JEPQ, and UK equivalents decoded. Total return vs. yield, tax drag, and who these products actually help.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vgqU3kKwapO6T1Htglwuw5QEAKm6SNC8aPtsQjoYkvwE0IzSDxSh2RISBL5EYVKg_70D3D5ACalmWPbdlU9PccEQdT8WB3LHKfumM2It-wT7Fg9x6OcUm2Mjn3JBHE-sByiZD1-n7Njm4obd73O7e_m7WCNPdSeP-ZzF4GzQ-mkC_-HNyZ=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sTy36xtdVgoF1U9qdQHcUkm1yq9xrCky_PmQC9XnVSMDlESna2DcROf1_Iydk-516PEo92VYy8H0PYQf6LhdG3v3dYxdg4lKIwNtpcAFvR2IfsSqcFwUK3GXjj-7jsVZING0GXDZ22lwJwIq0F9_LuoIgjNe0-TVundgh8AolIy5Eg2_1y=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3260,7 +3279,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html",
         "ogTitle": "Covered-Call ETFs: Income or Trap?",
         "ogDesc": "JEPI, JEPQ, and UK equivalents decoded. Total return vs. yield, tax drag, and who these products actually help.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vgqU3kKwapO6T1Htglwuw5QEAKm6SNC8aPtsQjoYkvwE0IzSDxSh2RISBL5EYVKg_70D3D5ACalmWPbdlU9PccEQdT8WB3LHKfumM2It-wT7Fg9x6OcUm2Mjn3JBHE-sByiZD1-n7Njm4obd73O7e_m7WCNPdSeP-ZzF4GzQ-mkC_-HNyZ=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sTy36xtdVgoF1U9qdQHcUkm1yq9xrCky_PmQC9XnVSMDlESna2DcROf1_Iydk-516PEo92VYy8H0PYQf6LhdG3v3dYxdg4lKIwNtpcAFvR2IfsSqcFwUK3GXjj-7jsVZING0GXDZ22lwJwIq0F9_LuoIgjNe0-TVundgh8AolIy5Eg2_1y=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3273,7 +3292,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -3457,7 +3478,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -3641,7 +3664,19 @@
       "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "HTTP 429",
+        "visible Kushal K. Daga branding missing",
+        "empty/script hrefs [\"#\"]",
+        "meta description length 0, expected 50\u2013180",
+        "canonical mismatch ",
+        "Open Graph title/description missing",
+        "Open Graph image missing",
+        "visible H1 missing",
+        "contextual internal-link card missing",
+        "only 0 unique internal links",
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -3649,23 +3684,23 @@
         "imgs": [],
         "dups": [],
         "overflow": [],
-        "shelves": [
-          4
+        "shelves": [],
+        "badHrefs": [
+          "#"
         ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
-        "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
-        "ogTitle": "FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+        "title": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+        "byline": false,
+        "desc": "",
+        "canonical": "",
+        "ogTitle": "",
+        "ogDesc": "",
+        "ogImage": "",
         "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
+        "h1": 0,
+        "contextCards": 0,
         "sourceLinks": 0,
-        "internalLinks": 118,
-        "externalLinks": 9
+        "internalLinks": 0,
+        "externalLinks": 3
       }
     },
     {
@@ -3832,7 +3867,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
@@ -4769,7 +4806,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/most-side-hustles-fail-this-filter.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -4800,7 +4839,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/most-side-hustles-fail-this-filter.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
@@ -5415,7 +5456,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -5446,7 +5489,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
@@ -5630,7 +5675,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
@@ -5823,7 +5870,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
       "kind": "post",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,
@@ -6150,7 +6199,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
@@ -6200,7 +6251,9 @@
       "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -6670,50 +6723,43 @@
       "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "HTTP 429",
+        "visible Kushal K. Daga branding missing",
+        "empty/script hrefs [\"#\"]",
+        "meta description length 0, expected 50\u2013180",
+        "canonical mismatch ",
+        "Open Graph title/description missing",
+        "Open Graph image missing",
+        "visible H1 missing",
+        "contextual internal-link card missing",
+        "only 0 unique internal links",
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
         "badCards": [],
         "imgs": [],
         "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ]
+        "overflow": [],
+        "shelves": [],
+        "badHrefs": [
+          "#"
         ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: US Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 \u2018We were wrong.\u2019 Why Morgan Stanley changed its tune on the U.S. dollar \u2014 and what it\u2026",
-        "byline": true,
-        "desc": "US Finance News, coverage September 24 to 25: &#8216;We were wrong.&#8217; Why Morgan Stanley changed its tune on the U.S. dollar &#8212; and what it expects now",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/us-2026-09-25.html",
-        "ogTitle": "US Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; &#8216;We were wrong.&#8217; Why Morgan Stanley changed its tune on the U.S. dollar &#8212; and what it&#8230;",
-        "ogDesc": "US Finance News, coverage September 24 to 25: &#8216;We were wrong.&#8217; Why Morgan Stanley changed its tune on the U.S. dollar &#8212; and what it expects now",
-        "ogImage": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&h=900&q=85",
+        "title": "https://dailyyield.blogspot.com/2026/09/us-2026-09-25.html",
+        "byline": false,
+        "desc": "",
+        "canonical": "",
+        "ogTitle": "",
+        "ogDesc": "",
+        "ogImage": "",
         "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 3,
-        "sourceLinks": 7,
-        "internalLinks": 117,
-        "externalLinks": 13
+        "h1": 0,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 0,
+        "externalLinks": 3
       }
     },
     {
@@ -7126,129 +7172,52 @@
       "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
       "kind": "post",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "HTTP 429",
+        "visible Kushal K. Daga branding missing",
+        "empty/script hrefs [\"#\"]",
+        "meta description length 0, expected 50\u2013180",
+        "canonical mismatch ",
+        "Open Graph title/description missing",
+        "Open Graph image missing",
+        "visible H1 missing",
+        "contextual internal-link card missing",
+        "only 0 unique internal links",
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
         "badCards": [],
         "imgs": [],
         "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "SPAN",
-            "",
-            "byline post-labels",
-            "452"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "445"
-          ]
+        "overflow": [],
+        "shelves": [],
+        "badHrefs": [
+          "#"
         ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: What to Do With Your First Paycheck",
-        "byline": true,
-        "desc": "50% bills, 20% future, 20% fun, 10% buffer &#8212; then open the accounts the same week.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
-        "ogTitle": "What to Do With Your First Paycheck",
-        "ogDesc": "50% bills, 20% future, 20% fun, 10% buffer &#8212; then open the accounts the same week.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_utwfLUhsbCjjhvna8moz7znDmXaEGjBTU0ROVyd6mlM9dyF0VwQ-u-r-7R_0suMJ6kS5J2rIasNv4UAP9OxqiqbUv_xU1wkTrZuJhZNabDc6yHVTljni6MBff4BIu0eAhNR4u-82kcQrcWVaWYy8AQ5fW7vbOoXV8LdSxyona4HX19S3uWUxVdK6w7=w1200-h630-p-k-no-nu",
+        "title": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
+        "byline": false,
+        "desc": "",
+        "canonical": "",
+        "ogTitle": "",
+        "ogDesc": "",
+        "ogImage": "",
         "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
+        "h1": 0,
+        "contextCards": 0,
         "sourceLinks": 0,
-        "internalLinks": 116,
-        "externalLinks": 9
+        "internalLinks": 0,
+        "externalLinks": 3
       }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
       "kind": "post",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -8004,7 +7973,9 @@
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
       "kind": "page",
       "viewport": "tablet",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 768,
         "bodyScroll": 768,
@@ -8274,48 +8245,39 @@
       "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
       "kind": "page",
       "viewport": "mobile",
-      "issues": [],
+      "issues": [
+        "HTTP 429",
+        "empty/script hrefs [\"#\"]",
+        "meta description length 0, expected 50\u2013180",
+        "canonical mismatch ",
+        "Open Graph title/description missing",
+        "visible H1 missing",
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 360,
         "bodyScroll": 360,
         "badCards": [],
         "imgs": [],
         "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "375"
-          ]
-        ],
+        "overflow": [],
         "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
+        "badHrefs": [
+          "#"
+        ],
+        "title": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "byline": false,
+        "desc": "",
+        "canonical": "",
+        "ogTitle": "",
+        "ogDesc": "",
         "ogImage": "",
         "schemaErrors": [],
-        "h1": 1,
+        "h1": 0,
         "contextCards": 0,
         "sourceLinks": 0,
-        "internalLinks": 124,
-        "externalLinks": 9
+        "internalLinks": 0,
+        "externalLinks": 3
       }
     },
     {
@@ -8817,7 +8779,9 @@
       "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
       "kind": "page",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "console [\"pageerror: solveSimpleChallenge is not defined\", \"pageerror: solveSimpleChallenge is not defined\"]"
+      ],
       "data": {
         "vw": 1440,
         "bodyScroll": 1440,

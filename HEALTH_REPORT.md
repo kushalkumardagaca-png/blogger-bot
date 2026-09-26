@@ -1,8 +1,8 @@
 # 🩺 Blog Health Report — Daily Yield
 
-**Checked:** 2026-09-26 08:38 IST · **Overall:** ✅ ALL SYSTEMS OPERATIONAL
+**Checked:** 2026-09-26 08:41 IST · **Overall:** ✅ ALL SYSTEMS OPERATIONAL
 
-**Scoreboard:** 77 OK · 0 warnings · 0 failures · 3 skipped
+**Scoreboard:** 79 OK · 0 warnings · 0 failures · 1 skipped
 
 
 ## A. Publishing engine
@@ -14,10 +14,10 @@
 | Daily news desks due so far | ✅ OK | 4 due desk(s) present; 6 news wires today |
 | No duplicate articles today | ✅ OK | all unique |
 | Newest master article quality | ✅ OK | 2743 words, hero image + schema OK (5% Down in 2026: Ladder or Trap?) |
-| Publishing freshness | ✅ OK | newest master article 1.3h ago |
+| Publishing freshness | ✅ OK | newest master article 1.4h ago |
 | Topic tracker state | ✅ OK | next topic #32 of 500, 31 published, last at 2026-09-26 07:19 UTC |
-| Publisher workflow (GitHub Actions) | ⏭️ SKIP | no token (local run) |
-| News workflow (GitHub Actions) | ⏭️ SKIP | no token (local run) |
+| Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
+| News workflow (GitHub Actions) | ✅ OK | last 12 completed runs successful |
 
 ## B. Blog pages
 
