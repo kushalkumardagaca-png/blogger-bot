@@ -1,104 +1,88 @@
-# 🩺 Blog Health Report — Daily Yield
+# Daily Yield Zero-View Watchdog
 
-**Checked:** 2026-09-26 13:54 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
+- **Checked:** 2026-09-26T15:11:03.089772+05:30
+- **Verdict:** ATTENTION
+- **Synthetic Daily Yield views:** 0
+- **Inventory:** 75 URLs · 62 Posts · 12 Pages
+- **Content failures:** 0
+- **Confirmed external 404/410:** 0
+- **Search Console:** WARN · 0/0 tracked PASS
 
-**Scoreboard:** 55 OK · 13 warnings · 0 failures
+> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
-**Google search (7 days to 2026-09-24):** 0 impressions · 0 clicks · average position 0
-
-
-## A. Publishing engine
-
-| Component | Status | Detail |
-|---|---|---|
-| Blogger feed reachable | ✅ OK | 46 recent posts |
-| Daily publishing slots | ✅ OK | 2 slot(s) due so far today — all published; 3 master articles + 12 news wires today |
-| Daily news desks due so far | ✅ OK | 10 due desk(s) present; 12 news wires today |
-| No duplicate articles today | ✅ OK | all unique |
-| Newest master article quality | ✅ OK | 2694 words, hero image + schema OK (Don't Panic-Pay Cheap Student Loans) |
-| Publishing freshness | ✅ OK | newest master article 0.0h ago |
-| Topic tracker state | ✅ OK | next topic #34 of 500, 33 published, last at 2026-09-26 13:53 UTC |
-| Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
-| News workflow (GitHub Actions) | ✅ OK | last 12 completed runs successful |
-
-## B. Blog pages
-
-| Component | Status | Detail |
-|---|---|---|
-| Homepage | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Daily Article hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Daily News hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Calculator hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Markets Today | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Global Snapshot | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Global Snapshot legacy transition | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Money Atlas hub | ✅ OK | 200 OK · 312 KB |
-| For Corporate hub | ✅ OK | 200 OK · 371 KB |
-| About Us | ✅ OK | 200 OK · 392 KB |
-| Contact Us | ✅ OK | 200 OK · 630 KB |
-| Disclaimer | ✅ OK | 200 OK · 396 KB |
-| Privacy Policy | ✅ OK | 200 OK · 401 KB |
-| robots.txt | ✅ OK | reachable, sitemap declared |
-| sitemap.xml | ✅ OK | 61 URLs indexed |
-
-## C. Market data
-
-| Component | Status | Detail |
-|---|---|---|
-| Stocks · US board (TradingView) | ✅ OK | 2/2 quotes live |
-| Stocks · India board (TradingView) | ✅ OK | 2/2 quotes live |
-| Stocks · UK board (TradingView) | ✅ OK | 2/2 quotes live |
-| Stocks · Japan board (TradingView) | ✅ OK | 2/2 quotes live |
-| Stocks · Germany board (TradingView) | ✅ OK | 2/2 quotes live |
-| World indices & metals (TradingView) | ✅ OK | 3/3 quotes live |
-| Commodities futures (TradingView) | ✅ OK | 2/2 quotes live |
-| Markets Today · global instrument directory | ✅ OK | 456,675 instruments · sample OHLC populated |
-| Crypto prices · primary (CoinGecko) | ✅ OK | live |
-| Crypto prices · Global Snapshot backup (Binance) | ✅ OK | live |
-| Crypto fields · Markets Today fallback (Kraken) | ✅ OK | live |
-| Metals fields · Markets Today fallback (Gold-API) | ✅ OK | live |
-| Exchange rates · Markets Today primary fallback (Frankfurter) | ✅ OK | live |
-| Exchange rates · secondary (ER-API) | ✅ OK | live |
-| Exchange rates · backup (jsDelivr) | ✅ OK | live |
-| Mutual fund NAV (mfapi.in) | ✅ OK | live |
-| Visitor country detector · ipwho.is | ✅ OK | live |
-| Visitor country detector · geojs.io | ✅ OK | live |
-| Visitor country detector · country.is | ✅ OK | live |
-
-## D. Page integrity
-
-| Component | Status | Detail |
-|---|---|---|
-| Global Snapshot · live page name | ✅ OK | DAILY YIELD: GLOBAL SNAPSHOT |
-| Global Snapshot · price router | ✅ OK | present |
-| Global Snapshot · UK endpoint | ✅ OK | present |
-| Global Snapshot · curated indices | ✅ OK | present |
-| Global Snapshot · country detector | ✅ OK | present |
-| Global Snapshot · crypto backup | ✅ OK | present |
-| Markets Today · page fetch | ⚠️ WARN | throttled by Blogspot (checker-side) |
-| Global Snapshot · page fetch | ⚠️ WARN | throttled by Blogspot (checker-side) |
-| Daily Article · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
-| Daily News · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
-| Calculators · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
-| Markets Today · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
-| Global Snapshot · Daily Yield family directory | ✅ OK | present with both market desks |
-| Money Atlas · Daily Yield family directory | ✅ OK | present with both market desks |
-| For Corporate · Daily Yield family directory | ✅ OK | present with both market desks |
-| About · Daily Yield family directory | ✅ OK | present with both market desks |
-| Contact · Daily Yield family directory | ✅ OK | present with both market desks |
-| Disclaimer · Daily Yield family directory | ✅ OK | present with both market desks |
-| Privacy · Daily Yield family directory | ✅ OK | present with both market desks |
-
-## E. Google Search Console
-
-| Component | Status | Detail |
-|---|---|---|
-| API connection | ✅ OK | authorized |
-| Blog property in Search Console | ✅ OK | sc-domain:dailyyield.blogspot.com |
-| Complete URL inventory | ✅ OK | 73 indexable homepage/Page/Post URLs |
-| Post + Page sitemaps | ✅ OK | 2/2 submitted · errors 0 · warnings 0 |
-| Google search presence (7 days) | ✅ OK | 0 impressions · 0 clicks · avg position 0 |
-| Google index · tracked posts | ✅ OK | 0/73 recent posts in Google's index · 1 inspected this run |
-
----
-*Auto-checked every 4 hours by the blog health watchdog. This file is machine-written — no human action required.*
+## Content inventory
+- ✅ **home · DAILY YIELD**
+- ✅ **page · GLOBAL SNAPSHOT**
+- ✅ **page · MARKETS TODAY**
+- ✅ **page · GLOBAL SNAPSHOT — MOVED**
+- ✅ **page · PRIVACY POLICY**
+- ✅ **page · DAILY NEWS**
+- ✅ **page · MONEY ATLAS**
+- ✅ **page · FOR CORPORATE**
+- ✅ **page · DISCLAIMER**
+- ✅ **page · CONTACT US**
+- ✅ **page · CALCULATOR**
+- ✅ **page · DAILY ARTICLE**
+- ✅ **page · ABOUT US**
+- ✅ **post · Corporate Finance and Industry News · 26 September 2026 · Coverage September 25 to 26 — (3rd LD) Lee calls for resumption of trade pact negotiations with Mexico to elevate…**
+- ✅ **post · Don't Panic-Pay Cheap Student Loans**
+- ✅ **post · Spain Finance News · 26 September 2026 · Coverage September 25 to 26 — Statistics on Transfer of Property Rights (STPR); Industrial Price Index. 2021 Baseline**
+- ✅ **post · China Finance News · 26 September 2026 · Coverage September 25 to 26 — China set to decide if Costa Rican or Guyanese diplomat becomes first woman UN chief; The…**
+- ✅ **post · UK Finance News · 26 September 2026 · Coverage September 25 to 26 — Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader…**
+- ✅ **post · Japan Finance News · 26 September 2026 · Coverage September 25 to 26 — International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)…**
+- ✅ **post · Freelance Money on Autopilot**
+- ✅ **post · France Finance News · 26 September 2026 · Coverage September 25 to 26 — France can't count on ECB to fix debt woes, central bank chief says; Five French market…**
+- ✅ **post · Germany Finance News · 26 September 2026 · Coverage September 25 to 26 — Germany news: Parliament approves fuel tax cut; Volkswagen, Audi to recall almost 1…**
+- ✅ **post · Economy and Macro Policy News · 26 September 2026 · Coverage September 25 to 26 — (2nd LD) Lee calls for resumption of trade pact negotiations with Mexico to elevate…**
+- ✅ **post · Market and Trading News · 26 September 2026 · Coverage September 25 to 26 — EU’s reaction to corruption in Ukraine shows Europeans involved in it — envoy; Europe to…**
+- ✅ **post · 5% Down in 2026: Ladder or Trap?**
+- ✅ **post · India Finance News · 26 September 2026 · Coverage September 25 to 26 — Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India…**
+- ✅ **post · Global Finance Wire · 26 September 2026 · Coverage September 25 to 26 — Federal Reserve Board announces approval of application by Peoples Bancorp Inc; Japanese…**
+- ✅ **post · South Korea Finance News · 26 September 2026 · Coverage September 25 to 26 — (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends…**
+- ✅ **post · Australia Finance News · 26 September 2026 · Coverage September 25 to 26 — A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming…**
+- ✅ **post · Brazil Finance News · 25 September 2026 · Coverage September 24 to 25 — Brazil Plans to Buy Up Old Household Debts at Up to 95% Off Before Vote; Brazil’s Lula…**
+- ✅ **post · Russia Finance News · 25 September 2026 · Coverage September 24 to 25 — Kiev’s 'top brass' continues to trade sovereignty for Western handouts — Russian MFA…**
+- ✅ **post · Personal Finance News · 25 September 2026 · Coverage September 24 to 25 — Iran war drives UK diesel price to near record high, and makes interest rate rise ‘hard to…**
+- ✅ **post · Nurse, Two Kids, £18k Debt: Fixed**
+- ✅ **post · China Finance News · 25 September 2026 · Coverage September 24 to 25 — Trump hails WWII ‘ally’ China as Xi tells of bonds ‘forged in blood and fire’; Details on…**
+- ✅ **post · US Finance News · 25 September 2026 · Coverage September 24 to 25 — ‘We were wrong.’ Why Morgan Stanley changed its tune on the U.S. dollar — and what it…**
+- ✅ **post · $90k Broke: The New Middle Class**
+- ✅ **post · Corporate Finance and Industry News · 25 September 2026 · Coverage September 24 to 25 — Japanese Government Bonds Held by the Bank of Japan[XLSX 29KB]; Capital gains tax: how it…**
+- ✅ **post · Covered-Call ETFs: Income or Trap?**
+- ✅ **post · UK Finance News · 25 September 2026 · Coverage September 24 to 25 — Minutes of the Market Participants Group meeting – 24 September 2026**
+- ✅ **post · Japan Finance News · 25 September 2026 · Coverage September 24 to 25 — (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese…**
+- ✅ **post · $10k at 22 vs $10k at 32**
+- ✅ **post · France Finance News · 25 September 2026 · Coverage September 24 to 25 — France to send 'military means' to protect Saudi oil port, Macron says; France says EU’s…**
+- ✅ **post · Germany Finance News · 25 September 2026 · Coverage September 24 to 25 — After several difficult years, economists now expect German economy to grow; Opening…**
+- ✅ **post · Economy and Macro Policy News · 25 September 2026 · Coverage September 24 to 25 — Bank of Japan Accounts (September 20); The Results of BIS International Locational Banking…**
+- ✅ **post · Market and Trading News · 25 September 2026 · Coverage September 24 to 25 — Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe…**
+- ✅ **post · Stop Splitting Bills 50/50**
+- ✅ **post · South Korea Finance News · 25 September 2026 · Coverage September 24 to 25 — Lee says combining S. Korea's technology with Mexico's industrial base can create new…**
+- ✅ **post · Australia Finance News · 25 September 2026 · Coverage September 24 to 25 — Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build…**
+- ✅ **post · India Finance News · 25 September 2026 · Coverage September 24 to 25 — Inox Clean Energy likely to file Rs 10,000 crore IPO with Sebi; Reliance to raise Rs…**
+- ✅ **post · Global Finance Wire · 25 September 2026 · Coverage September 24 to 25 — Original Wallace & Gromit puppets auctioned to raise funds for 'emerging filmmakers'; Dow…**
+- ✅ **post · 12 Money Moves for the Next 12 Months**
+- ✅ **post · 15 Money Myths Your Uncle Repeats**
+- ✅ **post · House-Hack Before You Landlord**
+- ✅ **post · Emergency Fund Size by Job Type**
+- ✅ **post · Run the Recession Checklist While Employed**
+- ✅ **post · What Quiet Rich People Do on Payday**
+- ✅ **post · Find £200/Month in 10 Minutes**
+- ✅ **post · What to Do With Your First Paycheck**
+- ✅ **post · The First Couples Money Meeting Agenda**
+- ✅ **post · Only These Insurance Policies Matter: The Forensic Risk-Transfer Filter**
+- ✅ **post · Most Side Hustles Fail This Filter**
+- ✅ **post · Ask for the Raise That Beats Budgeting**
+- ✅ **post · W-2 Tax Tricks You're Allowed to Use: The High-Earner Playbook**
+- ✅ **post · FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras**
+- ✅ **post · Three-Fund Portfolio: Why 3 Core Index Funds Beat 12-ETF Portfolios**
+- ✅ **post · AI Found £1,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes**
+- ✅ **post · 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire**
+- ✅ **post · The Payday Waterfall: 7 Automatic Transfers That Run Your Entire Financial Life**
+- ✅ **post · Your Mortgage Is Not the Real Cost: The True Monthly Cost of a £300,000 House Unmasked**
+- ✅ **post · Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It**
+- ✅ **post · The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap**
+- ✅ **post · Why Dual-Income Couples Still Feel One Month from Broke: Unmasking the Global Two-Income Trap**
+- ✅ **post · The Portfolio That Pays Your Rent: How Much You Really Need Invested to Cover Housing Costs Globally**
+- ✅ **post · Real Net Worth Targets by Age for Median Earners**
+- ✅ **post · Stop Maxing Your 401(k) or Pension**

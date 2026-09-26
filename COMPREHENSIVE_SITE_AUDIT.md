@@ -1,14 +1,16 @@
-# Comprehensive Post-Publication Site Audit
+# Daily Yield Zero-View Watchdog
 
-**Checked:** 2026-09-26T14:00:09+05:30
-**Inventory:** 74 URLs · 61 Posts · 12 Pages
-**Result:** PASS · 0 hard failure(s)
+- **Checked:** 2026-09-26T15:11:03.089772+05:30
+- **Verdict:** ATTENTION
+- **Synthetic Daily Yield views:** 0
+- **Inventory:** 75 URLs · 62 Posts · 12 Pages
+- **Content failures:** 0
+- **Confirmed external 404/410:** 0
+- **Search Console:** WARN · 0/0 tracked PASS
 
-Images: 96 checked · 0 broken  
-Internal links: 54 checked · 0 broken  
-External links: 352 checked · 0 confirmed 404/410  
-Restricted/rate-limited external checks (not classified broken): 24
+> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
+## Content inventory
 - ✅ **home · DAILY YIELD**
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
@@ -22,6 +24,7 @@ Restricted/rate-limited external checks (not classified broken): 24
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Corporate Finance and Industry News · 26 September 2026 · Coverage September 25 to 26 — (3rd LD) Lee calls for resumption of trade pact negotiations with Mexico to elevate…**
 - ✅ **post · Don't Panic-Pay Cheap Student Loans**
 - ✅ **post · Spain Finance News · 26 September 2026 · Coverage September 25 to 26 — Statistics on Transfer of Property Rights (STPR); Industrial Price Index. 2021 Baseline**
 - ✅ **post · China Finance News · 26 September 2026 · Coverage September 25 to 26 — China set to decide if Costa Rican or Guyanese diplomat becomes first woman UN chief; The…**
