@@ -34,6 +34,13 @@ def repair_external_runtime(content):
  broken="fetch('https://api.frankfurter.app/latest?from=USD').then(function(r){return r.json();}).then(function(j){fx=j;paintFx();}).catch(function(){fx=null;});"
  fixed="fetch('https://api.frankfurter.app/latest?from=USD').then(function(r){if(!r.ok)throw new Error('Frankfurter '+r.status);return r.json();}).catch(function(){return fetch('https://open.er-api.com/v6/latest/USD').then(function(r){if(!r.ok)throw new Error('ER API '+r.status);return r.json();}).then(function(j){return {rates:j.rates,date:j.time_last_update_utc?j.time_last_update_utc.slice(5,16):'latest'};});}).then(function(j){fx=j;paintFx();}).catch(function(){fx=null;});"
  content=content.replace(broken,fixed)
+ link_repairs={
+  'https://corporate.vanguard.com/content/corporatesite/us/en/corp/articles/fuel-for-the-fire-retirement.html':'https://investor.vanguard.com/investor-resources-education/retirement',
+  'https://www.bankofengland.co.uk/financial-stability-report':'https://www.bankofengland.co.uk/financial-stability',
+  'https://www.finra.org/investors/personal-finance/paying-off-debt':'https://www.finra.org/investors/personal-finance/manage-your-debt',
+  'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-403b-tax-sheltered-annuity-plans':'https://www.irs.gov/publications/p571',
+ }
+ for stale,current in link_repairs.items():content=content.replace(stale,current)
  return content,content!=old
 
 def remove_duplicate_article_package(content):
