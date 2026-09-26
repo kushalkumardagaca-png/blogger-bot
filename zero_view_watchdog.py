@@ -90,7 +90,10 @@ def blogger_inventory():
     for resource in ("pages", "posts"):
         page_token = ""
         while True:
-            params = {"status": "live", "fetchBodies": "true", "maxResults": "50", "fields": "items(id,title,url,content,labels,published,updated,status),nextPageToken"}
+            item_fields = "id,title,url,content,published,updated,status"
+            if resource == "posts":
+                item_fields += ",labels"
+            params = {"status": "live", "fetchBodies": "true", "maxResults": "50", "fields": f"items({item_fields}),nextPageToken"}
             if page_token:
                 params["pageToken"] = page_token
             data = request_json(
