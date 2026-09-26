@@ -1,10 +1,10 @@
 {
   "overall": "WARN",
-  "generated_at": "2026-09-26 09:03 IST",
+  "generated_at": "2026-09-26 09:57 IST",
   "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 76,
-    "WARN": 3,
+    "OK": 72,
+    "WARN": 7,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -16,19 +16,19 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "43 recent posts"
+      "detail": "44 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "0 slot(s) due so far today — all published; 1 master articles + 6 news wires today"
+      "detail": "1 slot(s) due so far today — all published; 1 master articles + 8 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "4 due desk(s) present; 6 news wires today"
+      "detail": "4 due desk(s) present; 8 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -46,7 +46,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.7h ago"
+      "detail": "newest master article 2.6h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -70,19 +70,19 @@
       "section": "B. Blog pages",
       "name": "Homepage",
       "status": "OK",
-      "detail": "200 OK · 243 KB"
+      "detail": "200 OK · 242 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 351 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 252 KB"
     },
     {
       "section": "B. Blog pages",
@@ -93,8 +93,8 @@
     {
       "section": "B. Blog pages",
       "name": "Markets Today",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 282 KB"
     },
     {
       "section": "B. Blog pages",
@@ -123,14 +123,14 @@
     {
       "section": "B. Blog pages",
       "name": "About Us",
-      "status": "OK",
-      "detail": "200 OK · 391 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Contact Us",
-      "status": "OK",
-      "detail": "200 OK · 629 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -141,20 +141,20 @@
     {
       "section": "B. Blog pages",
       "name": "Privacy Policy",
-      "status": "OK",
-      "detail": "200 OK · 401 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "robots.txt",
-      "status": "OK",
-      "detail": "reachable, sitemap declared"
+      "status": "WARN",
+      "detail": "Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan"
     },
     {
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "53 URLs indexed"
+      "detail": "55 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,002 instruments · sample OHLC populated"
+      "detail": "456,785 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -465,14 +465,14 @@
     {
       "section": "D. Page integrity",
       "name": "About · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
       "name": "Contact · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "D. Page integrity",
@@ -483,8 +483,8 @@
     {
       "section": "D. Page integrity",
       "name": "Privacy · Daily Yield family directory",
-      "status": "OK",
-      "detail": "present with both market desks"
+      "status": "WARN",
+      "detail": "throttled by Blogspot (checker-side); verified by deployment and next scan"
     },
     {
       "section": "E. Google Search Console",
@@ -494,13 +494,6 @@
     }
   ],
   "history": [
-    {
-      "at": "2026-09-24 22:23 IST",
-      "overall": "WARN",
-      "ok": 56,
-      "warn": 4,
-      "fail": 0
-    },
     {
       "at": "2026-09-24 22:37 IST",
       "overall": "PASS",
@@ -632,6 +625,13 @@
       "overall": "WARN",
       "ok": 76,
       "warn": 3,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-26 09:57 IST",
+      "overall": "WARN",
+      "ok": 72,
+      "warn": 7,
       "fail": 0
     }
   ],

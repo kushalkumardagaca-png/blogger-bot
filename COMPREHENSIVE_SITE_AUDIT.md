@@ -1,12 +1,12 @@
 # Comprehensive Post-Publication Site Audit
 
-**Checked:** 2026-09-26T09:07:13+05:30
-**Inventory:** 66 URLs · 53 Posts · 12 Pages
+**Checked:** 2026-09-26T10:02:02+05:30
+**Inventory:** 68 URLs · 55 Posts · 12 Pages
 **Result:** PASS · 0 hard failure(s)
 
 Images: 94 checked · 0 broken  
-Internal links: 47 checked · 0 broken  
-External links: 273 checked · 0 confirmed 404/410  
+Internal links: 49 checked · 0 broken  
+External links: 300 checked · 0 confirmed 404/410  
 Restricted/rate-limited external checks (not classified broken): 16
 
 - ✅ **home · DAILY YIELD**
@@ -22,6 +22,8 @@ Restricted/rate-limited external checks (not classified broken): 16
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · France Finance News · 26 September 2026 · Coverage September 25 to 26 — France can't count on ECB to fix debt woes, central bank chief says; Five French market…**
+- ✅ **post · Germany Finance News · 26 September 2026 · Coverage September 25 to 26 — Germany news: Parliament approves fuel tax cut; Volkswagen, Audi to recall almost 1…**
 - ✅ **post · Economy and Macro Policy News · 26 September 2026 · Coverage September 25 to 26 — (2nd LD) Lee calls for resumption of trade pact negotiations with Mexico to elevate…**
 - ✅ **post · Market and Trading News · 26 September 2026 · Coverage September 25 to 26 — EU’s reaction to corruption in Ukraine shows Europeans involved in it — envoy; Europe to…**
 - ✅ **post · 5% Down in 2026: Ladder or Trap?**

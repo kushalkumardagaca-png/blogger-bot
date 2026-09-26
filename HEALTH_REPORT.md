@@ -1,20 +1,20 @@
 # 🩺 Blog Health Report — Daily Yield
 
-**Checked:** 2026-09-26 09:03 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
+**Checked:** 2026-09-26 09:57 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
 
-**Scoreboard:** 76 OK · 3 warnings · 0 failures · 1 skipped
+**Scoreboard:** 72 OK · 7 warnings · 0 failures · 1 skipped
 
 
 ## A. Publishing engine
 
 | Component | Status | Detail |
 |---|---|---|
-| Blogger feed reachable | ✅ OK | 43 recent posts |
-| Daily publishing slots | ✅ OK | 0 slot(s) due so far today — all published; 1 master articles + 6 news wires today |
-| Daily news desks due so far | ✅ OK | 4 due desk(s) present; 6 news wires today |
+| Blogger feed reachable | ✅ OK | 44 recent posts |
+| Daily publishing slots | ✅ OK | 1 slot(s) due so far today — all published; 1 master articles + 8 news wires today |
+| Daily news desks due so far | ✅ OK | 4 due desk(s) present; 8 news wires today |
 | No duplicate articles today | ✅ OK | all unique |
 | Newest master article quality | ✅ OK | 2743 words, hero image + schema OK (5% Down in 2026: Ladder or Trap?) |
-| Publishing freshness | ✅ OK | newest master article 1.7h ago |
+| Publishing freshness | ✅ OK | newest master article 2.6h ago |
 | Topic tracker state | ✅ OK | next topic #32 of 500, 31 published, last at 2026-09-26 07:19 UTC |
 | Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
 | News workflow (GitHub Actions) | ✅ OK | last 12 completed runs successful |
@@ -23,21 +23,21 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ✅ OK | 200 OK · 243 KB |
-| Daily Article hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
-| Daily News hub | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Homepage | ✅ OK | 200 OK · 242 KB |
+| Daily Article hub | ✅ OK | 200 OK · 351 KB |
+| Daily News hub | ✅ OK | 200 OK · 252 KB |
 | Calculator hub | ✅ OK | 200 OK · 382 KB |
-| Markets Today | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Markets Today | ✅ OK | 200 OK · 282 KB |
 | Global Snapshot | ✅ OK | 200 OK · 392 KB |
 | Global Snapshot legacy transition | ✅ OK | 200 OK · 210 KB |
 | Money Atlas hub | ✅ OK | 200 OK · 311 KB |
 | For Corporate hub | ✅ OK | 200 OK · 370 KB |
-| About Us | ✅ OK | 200 OK · 391 KB |
-| Contact Us | ✅ OK | 200 OK · 629 KB |
+| About Us | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Contact Us | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
 | Disclaimer | ✅ OK | 200 OK · 395 KB |
-| Privacy Policy | ✅ OK | 200 OK · 401 KB |
-| robots.txt | ✅ OK | reachable, sitemap declared |
-| sitemap.xml | ✅ OK | 53 URLs indexed |
+| Privacy Policy | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| robots.txt | ⚠️ WARN | Blogspot throttle artifact on the checker - the file is auto-generated and verified live; Google treats a missing robots.txt as allow-all, so zero SEO risk. Re-verified next scan |
+| sitemap.xml | ✅ OK | 55 URLs indexed |
 
 ## C. Market data
 
@@ -50,7 +50,7 @@
 | Stocks · Germany board (TradingView) | ✅ OK | 2/2 quotes live |
 | World indices & metals (TradingView) | ✅ OK | 3/3 quotes live |
 | Commodities futures (TradingView) | ✅ OK | 2/2 quotes live |
-| Markets Today · global instrument directory | ✅ OK | 457,002 instruments · sample OHLC populated |
+| Markets Today · global instrument directory | ✅ OK | 456,785 instruments · sample OHLC populated |
 | Crypto prices · primary (CoinGecko) | ✅ OK | live |
 | Crypto prices · Global Snapshot backup (Binance) | ✅ OK | live |
 | Crypto fields · Markets Today fallback (Kraken) | ✅ OK | live |
@@ -99,10 +99,10 @@
 | Global Snapshot · Daily Yield family directory | ✅ OK | present with both market desks |
 | Money Atlas · Daily Yield family directory | ✅ OK | present with both market desks |
 | For Corporate · Daily Yield family directory | ✅ OK | present with both market desks |
-| About · Daily Yield family directory | ✅ OK | present with both market desks |
-| Contact · Daily Yield family directory | ✅ OK | present with both market desks |
+| About · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
+| Contact · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
 | Disclaimer · Daily Yield family directory | ✅ OK | present with both market desks |
-| Privacy · Daily Yield family directory | ✅ OK | present with both market desks |
+| Privacy · Daily Yield family directory | ⚠️ WARN | throttled by Blogspot (checker-side); verified by deployment and next scan |
 
 ## E. Google Search Console
 
