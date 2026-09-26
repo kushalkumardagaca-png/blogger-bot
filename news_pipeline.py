@@ -940,7 +940,8 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
             "canonical": canonical, "n_items": len(items)}
 
 # ---------------------------------------------------------------- related links
-def fetch_related(desk, prev_url):
+def fetch_related(desk, prev_url, token):
+    """Choose related links through Blogger API without opening the public blog."""
     rel = []
     if prev_url:
         rel.append((f"Yesterday's {DESKS[desk][1]} Wire — the previous window", prev_url))
@@ -949,18 +950,19 @@ def fetch_related(desk, prev_url):
         ("Global Snapshot — concise cross-asset summary", BLOG + "/p/global-snapshot.html"),
     ])
     try:
-        feed = json.loads(http_get(f"{BLOG}/feeds/posts/default?alt=json&max-results=25"))
+        query = urllib.parse.urlencode({"status": "live", "fetchBodies": "false", "maxResults": "50", "fields": "items(title,url,labels)"})
+        data = blogger_call("/posts?" + query, token)
         kws = {"market": ["market", "invest", "trading"], "macro": ["inflation", "economy", "recession", "gdp"],
                "corporate": ["corporate", "business", "company"], "personal": ["money", "budget", "savings", "emergency", "salary"]}.get(desk, [])
         label = DESKS[desk][1].lower()
-        for e in feed["feed"]["entry"]:
-            if any(c["term"] == "News" for c in e.get("category", [])):
+        for entry in data.get("items", []):
+            if "News" in entry.get("labels", []):
                 continue
-            t = e["title"]["$t"]
-            link = [l["href"] for l in e["link"] if l["rel"] == "alternate"][0]
-            tl = t.lower()
-            if (desk not in CATEGORY_DESKS and label.split()[0] in tl) or any(k in tl for k in kws):
-                rel.append((t, link))
+            title = entry.get("title", "")
+            link = entry.get("url", "")
+            lower = title.lower()
+            if link and ((desk not in CATEGORY_DESKS and label.split()[0] in lower) or any(k in lower for k in kws)):
+                rel.append((title, link))
             if len(rel) >= 4:
                 break
     except Exception:
@@ -989,17 +991,13 @@ def blogger_call(path, token, method="GET", body=None):
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.loads(r.read())
 
-def live_post_exists(url):
-    """Confirm a real rendered Blogger post; Blogger can return 200 to HEAD on 404 URLs."""
+def live_post_exists(url, token):
+    """Confirm an existing live post through Blogger API without a public pageview."""
     try:
-        req = urllib.request.Request(url, headers=UA, method="GET")
-        with urllib.request.urlopen(req, timeout=25, context=CTX) as response:
-            page = response.read().decode("utf-8", errors="replace")
-            canonical = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', page, re.I)
-            if not canonical:  # tolerate reversed attribute order
-                canonical = re.search(r'<link[^>]+href=["\']([^"\']+)["\'][^>]+rel=["\']canonical["\']', page, re.I)
-            canonical_url = htmlmod.unescape(canonical.group(1)) if canonical else ""
-            return response.status == 200 and canonical_url.rstrip("/") == url.rstrip("/") and "Page not found" not in page
+        path = urllib.parse.urlparse(url).path
+        query = urllib.parse.urlencode({"path": path, "fields": "id,url,status"})
+        post = blogger_call("/posts/bypath?" + query, token)
+        return post.get("status") == "LIVE" and post.get("url", "").rstrip("/") == url.rstrip("/")
     except Exception:
         return False
 
@@ -1048,7 +1046,7 @@ def run_desk(desk, tracker, dry=False, token=None):
         return False
     # Recover safely if Blogger published successfully but a previous tracker push failed.
     expected_url = f"{BLOG}/{now:%Y/%m}/{slug}-{now.date().isoformat()}.html"
-    if not dry and live_post_exists(expected_url):
+    if not dry and live_post_exists(expected_url, token):
         tracker["desks"][desk] = {"edition": now.date().isoformat(),
                                   "window_end": now.isoformat(), "url": expected_url}
         save_tracker(tracker)
@@ -1083,7 +1081,7 @@ def run_desk(desk, tracker, dry=False, token=None):
         print(f"  [{desk}] NO CURRENT ITEMS — edition SKIPPED rather than recycling old news")
         return False
     fx = ecb_reference_rates()
-    related = fetch_related(desk, prev.get("url"))
+    related = fetch_related(desk, prev.get("url"), token)
     art = build_article(desk, items, upcoming, edition_date, eff_start, win_end, fx, related)
     current_post = {"id": "pending", "title": art["title"], "labels": art["labels"], "content": art["html"]}
     art["html"] = ensure_related_articles(art["html"], current_post, fetch_public_posts())
