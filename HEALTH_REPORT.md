@@ -1,8 +1,8 @@
 # 🩺 Blog Health Report — Daily Yield
 
-**Checked:** 2026-09-26 03:20 IST · **Overall:** ❌ ATTENTION NEEDED
+**Checked:** 2026-09-26 08:24 IST · **Overall:** ⚠️ OPERATIONAL WITH WARNINGS
 
-**Scoreboard:** 78 OK · 1 warnings · 1 failures · 1 skipped
+**Scoreboard:** 78 OK · 1 warnings · 0 failures · 1 skipped
 
 
 ## A. Publishing engine
@@ -10,13 +10,12 @@
 | Component | Status | Detail |
 |---|---|---|
 | Blogger feed reachable | ✅ OK | 43 recent posts |
-| Daily publishing slots | ✅ OK | 0 slot(s) due so far today — all published; 0 master articles + 0 news wires today |
-| Daily news desks due so far | ✅ OK | 0 due desk(s) present; 0 news wires today |
-| Previous-day 20-news completion | ❌ FAIL | missing: Spain, Italy, Canada, Mexico |
+| Daily publishing slots | ✅ OK | 0 slot(s) due so far today — all published; 1 master articles + 6 news wires today |
+| Daily news desks due so far | ✅ OK | 4 due desk(s) present; 6 news wires today |
 | No duplicate articles today | ✅ OK | all unique |
-| Newest master article quality | ✅ OK | 2567 words, hero image + schema OK (Nurse, Two Kids, £18k Debt: Fixed) |
-| Publishing freshness | ✅ OK | newest master article 7.4h ago |
-| Topic tracker state | ✅ OK | next topic #31 of 500, 30 published, last at 2026-09-25 19:56 UTC |
+| Newest master article quality | ✅ OK | 2743 words, hero image + schema OK (5% Down in 2026: Ladder or Trap?) |
+| Publishing freshness | ✅ OK | newest master article 1.1h ago |
+| Topic tracker state | ✅ OK | next topic #32 of 500, 31 published, last at 2026-09-26 07:19 UTC |
 | Publisher workflow (GitHub Actions) | ✅ OK | last 8 runs all successful |
 | News workflow (GitHub Actions) | ✅ OK | last 12 completed runs successful |
 
@@ -24,21 +23,21 @@
 
 | Component | Status | Detail |
 |---|---|---|
-| Homepage | ⚠️ WARN | Blogspot throttled the checker — site is alive, checker-side pacing |
+| Homepage | ✅ OK | 200 OK · 242 KB |
 | Daily Article hub | ✅ OK | 200 OK · 349 KB |
 | Daily News hub | ✅ OK | 200 OK · 251 KB |
-| Calculator hub | ✅ OK | 200 OK · 380 KB |
+| Calculator hub | ✅ OK | 200 OK · 381 KB |
 | Markets Today | ✅ OK | 200 OK · 280 KB |
 | Global Snapshot | ✅ OK | 200 OK · 390 KB |
 | Global Snapshot legacy transition | ✅ OK | 200 OK · 210 KB |
-| Money Atlas hub | ✅ OK | 200 OK · 309 KB |
+| Money Atlas hub | ✅ OK | 200 OK · 310 KB |
 | For Corporate hub | ✅ OK | 200 OK · 368 KB |
 | About Us | ✅ OK | 200 OK · 389 KB |
-| Contact Us | ✅ OK | 200 OK · 627 KB |
-| Disclaimer | ✅ OK | 200 OK · 393 KB |
+| Contact Us | ✅ OK | 200 OK · 628 KB |
+| Disclaimer | ✅ OK | 200 OK · 394 KB |
 | Privacy Policy | ✅ OK | 200 OK · 399 KB |
 | robots.txt | ✅ OK | reachable, sitemap declared |
-| sitemap.xml | ✅ OK | 46 URLs indexed |
+| sitemap.xml | ✅ OK | 53 URLs indexed |
 
 ## C. Market data
 
@@ -51,11 +50,11 @@
 | Stocks · Germany board (TradingView) | ✅ OK | 2/2 quotes live |
 | World indices & metals (TradingView) | ✅ OK | 3/3 quotes live |
 | Commodities futures (TradingView) | ✅ OK | 2/2 quotes live |
-| Markets Today · global instrument directory | ✅ OK | 457,021 instruments · sample OHLC populated |
+| Markets Today · global instrument directory | ✅ OK | 456,977 instruments · sample OHLC populated |
 | Crypto prices · primary (CoinGecko) | ✅ OK | live |
 | Crypto prices · Global Snapshot backup (Binance) | ✅ OK | live |
 | Crypto fields · Markets Today fallback (Kraken) | ✅ OK | live |
-| Metals fields · Markets Today fallback (Gold-API) | ✅ OK | live |
+| Metals fields · Markets Today fallback (Gold-API) | ⚠️ WARN | unavailable (HTTP None) |
 | Exchange rates · Markets Today primary fallback (Frankfurter) | ✅ OK | live |
 | Exchange rates · secondary (ER-API) | ✅ OK | live |
 | Exchange rates · backup (jsDelivr) | ✅ OK | live |

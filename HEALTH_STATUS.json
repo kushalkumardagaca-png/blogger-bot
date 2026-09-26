@@ -1,11 +1,11 @@
 {
-  "overall": "FAIL",
-  "generated_at": "2026-09-26 03:20 IST",
-  "summary": "❌ ATTENTION NEEDED",
+  "overall": "WARN",
+  "generated_at": "2026-09-26 08:24 IST",
+  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
     "OK": 78,
     "WARN": 1,
-    "FAIL": 1,
+    "FAIL": 0,
     "SKIP": 1
   },
   "missed_slots": [],
@@ -22,19 +22,13 @@
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "0 slot(s) due so far today — all published; 0 master articles + 0 news wires today"
+      "detail": "0 slot(s) due so far today — all published; 1 master articles + 6 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "0 due desk(s) present; 0 news wires today"
-    },
-    {
-      "section": "A. Publishing engine",
-      "name": "Previous-day 20-news completion",
-      "status": "FAIL",
-      "detail": "missing: Spain, Italy, Canada, Mexico"
+      "detail": "4 due desk(s) present; 6 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -46,19 +40,19 @@
       "section": "A. Publishing engine",
       "name": "Newest master article quality",
       "status": "OK",
-      "detail": "2567 words, hero image + schema OK (Nurse, Two Kids, £18k Debt: Fixed)"
+      "detail": "2743 words, hero image + schema OK (5% Down in 2026: Ladder or Trap?)"
     },
     {
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 7.4h ago"
+      "detail": "newest master article 1.1h ago"
     },
     {
       "section": "A. Publishing engine",
       "name": "Topic tracker state",
       "status": "OK",
-      "detail": "next topic #31 of 500, 30 published, last at 2026-09-25 19:56 UTC"
+      "detail": "next topic #32 of 500, 31 published, last at 2026-09-26 07:19 UTC"
     },
     {
       "section": "A. Publishing engine",
@@ -75,8 +69,8 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "WARN",
-      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
+      "status": "OK",
+      "detail": "200 OK · 242 KB"
     },
     {
       "section": "B. Blog pages",
@@ -94,7 +88,7 @@
       "section": "B. Blog pages",
       "name": "Calculator hub",
       "status": "OK",
-      "detail": "200 OK · 380 KB"
+      "detail": "200 OK · 381 KB"
     },
     {
       "section": "B. Blog pages",
@@ -118,7 +112,7 @@
       "section": "B. Blog pages",
       "name": "Money Atlas hub",
       "status": "OK",
-      "detail": "200 OK · 309 KB"
+      "detail": "200 OK · 310 KB"
     },
     {
       "section": "B. Blog pages",
@@ -136,13 +130,13 @@
       "section": "B. Blog pages",
       "name": "Contact Us",
       "status": "OK",
-      "detail": "200 OK · 627 KB"
+      "detail": "200 OK · 628 KB"
     },
     {
       "section": "B. Blog pages",
       "name": "Disclaimer",
       "status": "OK",
-      "detail": "200 OK · 393 KB"
+      "detail": "200 OK · 394 KB"
     },
     {
       "section": "B. Blog pages",
@@ -160,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "46 URLs indexed"
+      "detail": "53 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -208,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "457,021 instruments · sample OHLC populated"
+      "detail": "456,977 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -231,8 +225,8 @@
     {
       "section": "C. Market data",
       "name": "Metals fields · Markets Today fallback (Gold-API)",
-      "status": "OK",
-      "detail": "live"
+      "status": "WARN",
+      "detail": "unavailable (HTTP None)"
     },
     {
       "section": "C. Market data",
@@ -501,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 13:21 IST",
-      "overall": "WARN",
-      "ok": 38,
-      "warn": 2,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 16:21 IST",
       "overall": "WARN",
       "ok": 35,
@@ -639,6 +626,13 @@
       "ok": 78,
       "warn": 1,
       "fail": 1
+    },
+    {
+      "at": "2026-09-26 08:24 IST",
+      "overall": "WARN",
+      "ok": 78,
+      "warn": 1,
+      "fail": 0
     }
   ],
   "gsc": {
