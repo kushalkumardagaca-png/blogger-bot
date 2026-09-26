@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 53 PASS · 0 FAIL
+**Result:** 55 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -26,6 +26,8 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News structure passes fail-closed publication preflight**
 - ✅ **Master packages retain comprehensive family directory**
 - ✅ **News packages retain comprehensive family directory**
+- ✅ **All future master and News packages retain Daily Yield favicon identity**
+- ✅ **Brand runtime is self-contained and makes no public-site request**
 - ✅ **News packages inject SEO and social metadata**
 - ✅ **News editions include related-reading shelf**
 - ✅ **News editions include continuous gesture motion**
@@ -36,7 +38,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News labels exactly two per post**
 - ✅ **News launch gate is 2026-09-25**
 - ✅ **News cluster selector covers paired desks**
-- ✅ **News duplicate recovery uses rendered GET, not unreliable HEAD**
+- ✅ **News duplicate recovery uses Blogger API without synthetic pageviews**
 - ✅ **News source policy is current**
 - ✅ **News finance filter enabled**
 - ✅ **News requires at least one genuinely current item**
@@ -53,7 +55,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 30
-- ✅ **News tracker launch/state is valid** — 16 desk edition(s) recorded
+- ✅ **Master tracker next-topic state is valid** — next index 34
+- ✅ **News tracker launch/state is valid** — 19 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

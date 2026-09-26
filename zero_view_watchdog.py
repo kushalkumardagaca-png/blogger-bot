@@ -151,6 +151,8 @@ def audit_content(item, known):
     if duplicates:
         issues.append("duplicate HTML ids: " + ", ".join(duplicates[:8]))
     exempt = item["url"].endswith(LEGACY)
+    if "DY_BRAND_IDENTITY_START" not in content:
+        issues.append("Daily Yield favicon identity missing")
     if not exempt and 'id="dyPageFamily"' not in content:
         issues.append("Daily Yield family directory missing")
     if LEGACY in content and not exempt:

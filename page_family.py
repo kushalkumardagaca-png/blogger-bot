@@ -1,6 +1,7 @@
 """Shared, compact Daily Yield family directory for every active static page."""
 import html
 import re
+from brand_identity import ensure_brand_identity
 
 BLOG = "https://dailyyield.blogspot.com"
 FAMILY = [
@@ -91,7 +92,8 @@ def remove_legacy_explore_blocks(content):
 
 
 def ensure_family(content, current_path=""):
-    """Keep one full family directory and retire obsolete smaller card blocks."""
+    """Keep one full family directory, favicon identity and no obsolete cards."""
+    content = ensure_brand_identity(content)
     content = remove_legacy_explore_blocks(content)
     content = content.replace("/p/share-market_0718113516.html", "/p/global-snapshot.html")
     content = content.replace("MARKET EXPLORER", "GLOBAL SNAPSHOT").replace("Market Explorer", "Global Snapshot")

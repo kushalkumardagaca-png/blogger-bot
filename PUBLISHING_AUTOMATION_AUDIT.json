@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-26T08:16:29+05:30",
+  "checked_at_ist": "2026-09-26T20:01:17+05:30",
   "summary": {
-    "pass": 53,
+    "pass": 55,
     "fail": 0
   },
   "checks": [
@@ -116,6 +116,16 @@
       "detail": ""
     },
     {
+      "name": "All future master and News packages retain Daily Yield favicon identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Brand runtime is self-contained and makes no public-site request",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "News packages inject SEO and social metadata",
       "status": "PASS",
       "detail": ""
@@ -166,7 +176,7 @@
       "detail": ""
     },
     {
-      "name": "News duplicate recovery uses rendered GET, not unreliable HEAD",
+      "name": "News duplicate recovery uses Blogger API without synthetic pageviews",
       "status": "PASS",
       "detail": ""
     },
@@ -253,12 +263,12 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 30"
+      "detail": "next index 34"
     },
     {
       "name": "News tracker launch/state is valid",
       "status": "PASS",
-      "detail": "16 desk edition(s) recorded"
+      "detail": "19 desk edition(s) recorded"
     },
     {
       "name": "No obsolete blog URL in production engines",

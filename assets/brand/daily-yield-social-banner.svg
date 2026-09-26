@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500" role="img" aria-labelledby="title desc">
+  <title id="title">Daily Yield social banner</title>
+  <desc id="desc">Daily Yield by Kushal K. Daga social channel banner.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffaf1"/><stop offset=".58" stop-color="#fffdf8"/><stop offset="1" stop-color="#edcfb3"/></linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#c99770" stroke-width="1" opacity=".13"/></pattern>
+  </defs>
+  <rect width="1600" height="500" fill="#fff8ee"/>
+  <path d="M0 405 C262 325 404 445 655 350 C848 277 967 351 1171 237 C1315 156 1414 173 1600 89V500H0Z" fill="#fff" opacity=".57"/>
+  <path d="M1000 392 C1102 356 1143 294 1248 309 C1367 326 1430 224 1530 185" fill="none" stroke="#c86a3d" stroke-width="7" opacity=".55" stroke-linecap="round"/>
+  <g transform="translate(124 96)"><rect width="308" height="308" rx="68" fill="#241610"/><rect x="15" y="15" width="278" height="278" rx="54" fill="none" stroke="#c86a3d" stroke-width="7"/><circle cx="242" cy="63" r="11" fill="#f0b180"/><text x="62" y="193" fill="#fff8ee" font-family="Georgia,DejaVu Serif,serif" font-size="129" font-weight="700">D</text><text x="155" y="193" fill="#fff8ee" font-family="Georgia,DejaVu Serif,serif" font-size="129" font-weight="700">Y</text><path d="M55 243 C101 237 124 216 160 222 C199 228 221 194 262 182" fill="none" stroke="#f0b180" stroke-width="11" stroke-linecap="round"/><path d="M240 177 L266 181 L255 205" fill="none" stroke="#f0b180" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g transform="translate(498 93)"><text x="0" y="32" fill="#9c4522" font-family="Inter,DejaVu Sans,sans-serif" font-size="17" font-weight="800" letter-spacing="5">FINANCIAL CLARITY, PUBLISHED DAILY</text><text x="0" y="145" fill="#241610" font-family="Georgia,DejaVu Serif,serif" font-size="92" font-weight="700" letter-spacing="2">DAILY YIELD</text><text x="5" y="202" fill="#a94d27" font-family="Inter,DejaVu Sans,sans-serif" font-size="28" font-weight="700" letter-spacing="6">BY KUSHAL K. DAGA</text><line x1="5" y1="234" x2="850" y2="234" stroke="#d8b99d" stroke-width="2"/><text x="5" y="287" fill="#4f3a2c" font-family="Inter,DejaVu Sans,sans-serif" font-size="31" font-weight="650">Markets · Money · Better decisions</text><text x="5" y="333" fill="#6e5d4b" font-family="Inter,DejaVu Sans,sans-serif" font-size="21">Independent reporting, practical tools and global financial context.</text></g>
+  <rect y="485" width="1600" height="15" fill="#9c4522"/>
+</svg>
