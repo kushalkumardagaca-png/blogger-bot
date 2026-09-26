@@ -1,9 +1,9 @@
 {
   "verdict": "PASS",
-  "operational": "PASS",
+  "mode": "ZERO_SYNTHETIC_VIEWS",
+  "synthetic_views": 0,
+  "urls": 80,
   "content_failures": 0,
-  "rendered_failures": 0,
-  "rendered_transient_checks": 0,
-  "urls": 75,
-  "rendered_checks": 0
+  "rendered_checks": 0,
+  "gsc": "OK"
 }

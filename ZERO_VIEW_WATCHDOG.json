@@ -1,8 +1,32 @@
 {
-  "mode": "Blogger API source audit",
-  "urls": 80,
-  "hard_failures": 0,
-  "results": [
+  "checkedAtIST": "2026-09-26T17:56:41.378806+05:30",
+  "mode": "ZERO_SYNTHETIC_VIEWS",
+  "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
+  "overall": "PASS",
+  "bloggerControlPlane": {
+    "id": "8911514070006792465",
+    "name": "DAILY YIELD",
+    "published": "2026-08-22T08:40:17-07:00",
+    "updated": "2026-09-26T04:52:18-07:00",
+    "url": "https://dailyyield.blogspot.com/",
+    "posts": {
+      "totalItems": 67
+    },
+    "pages": {
+      "totalItems": 12
+    }
+  },
+  "summary": {
+    "urls": 80,
+    "posts": 67,
+    "pages": 12,
+    "contentFailures": 0,
+    "externalDestinationsChecked": 519,
+    "confirmedExternal404or410": 0,
+    "transientExternalResponses": 24,
+    "syntheticDailyYieldViews": 0
+  },
+  "content": [
     {
       "kind": "home",
       "title": "DAILY YIELD",
@@ -4367,5 +4391,1068 @@
       ]
     }
   ],
-  "broken_external_links": []
+  "confirmedBrokenExternal": [],
+  "transientExternal": [
+    {
+      "url": "https://www.ato.gov.au/",
+      "status": 403
+    },
+    {
+      "url": "https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/withdrawing-and-using-your-super/early-access-to-super",
+      "status": 403
+    },
+    {
+      "url": "https://www.bloomberg.com/canada",
+      "status": 403
+    },
+    {
+      "url": "https://www.bloomberg.com/news/articles/2026-09-25/sk-hynix-s-solidigm-is-said-to-weigh-us-ipo-as-soon-as-2027",
+      "status": 403
+    },
+    {
+      "url": "https://www.bloomberg.com/news/articles/2026-09-26/eu-warns-members-of-urgent-energy-price-crisis-before-winter-season",
+      "status": 403
+    },
+    {
+      "url": "https://www.bloomberg.com/news/articles/2026-09-26/finance-minister-says-leaving-switzerland-more-costly-for-ubs",
+      "status": 403
+    },
+    {
+      "url": "https://www.bloomberg.com/news/articles/2026-09-26/snb-is-in-comfortable-situation-on-inflation-schlegel-tells-srf",
+      "status": 403
+    },
+    {
+      "url": "https://www.bloomberg.com/news/articles/2026-09-26/total-socar-xrg-launch-new-phase-of-azerbaijan-gas-project",
+      "status": 403
+    },
+    {
+      "url": "https://www.bls.gov/cpi/",
+      "status": 403
+    },
+    {
+      "url": "https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/rrsps-related-plans/making-withdrawals.html",
+      "status": "TRANSIENT",
+      "detail": "The read operation timed out"
+    },
+    {
+      "url": "https://www.consumerfinance.gov/",
+      "status": 403
+    },
+    {
+      "url": "https://www.linkedin.com/in/finance-by-kushal/",
+      "status": 999
+    },
+    {
+      "url": "https://www.marketwatch.com/story/8-mortgage-rates-are-not-an-impossibility-as-the-30-year-fixed-rate-surges-aa202464?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/a-death-cross-is-coming-for-the-dollar-why-trump-will-be-happy-0766303d?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/after-capital-markets-day-flop-novo-strikes-licensing-deal-that-sends-a-swedish-companys-stock-soaring-f3c99cbe?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/my-husband-and-i-are-in-our-50s-and-have-no-kids-we-have-2-million-do-we-need-a-will-62fb422f?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/stop-trying-to-beat-the-market-even-the-richest-americans-cant-do-it-consistently-4560e275?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/the-options-market-is-sending-a-contrarian-signal-about-oil-prices-a8812210?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/we-were-wrong-why-morgan-stanley-changed-its-tune-on-the-u-s-dollar-and-what-it-expects-now-7826fb96?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/why-investors-arent-buying-yet-another-attempt-by-the-treasury-to-calm-the-rattled-bond-market-b168cac3?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.oecd.org/els/family/database.htm",
+      "status": 403
+    },
+    {
+      "url": "https://www.oecd.org/en/data/datasets/wealth-distribution-database.html",
+      "status": 403
+    },
+    {
+      "url": "https://www.sec.gov/investor/alerts/teachers403b.pdf",
+      "status": 403
+    },
+    {
+      "url": "https://x.com/CAKUSHAL2509",
+      "status": 403
+    }
+  ],
+  "github": [
+    {
+      "name": "Master publisher",
+      "status": "OK",
+      "detail": "0 failures among 12 recent completed runs"
+    },
+    {
+      "name": "News publisher",
+      "status": "WARN",
+      "detail": "1 failures among 12 recent completed runs"
+    }
+  ],
+  "providers": [
+    {
+      "name": "TradingView global scanner",
+      "status": "OK",
+      "detail": "responding"
+    },
+    {
+      "name": "CoinGecko",
+      "status": "OK",
+      "detail": "responding"
+    },
+    {
+      "name": "Frankfurter FX",
+      "status": "OK",
+      "detail": "responding"
+    },
+    {
+      "name": "Gold API",
+      "status": "OK",
+      "detail": "responding"
+    },
+    {
+      "name": "Mutual fund API",
+      "status": "OK",
+      "detail": "responding"
+    }
+  ],
+  "gsc": {
+    "connection": "OK",
+    "property": "sc-domain:dailyyield.blogspot.com",
+    "permission": "siteOwner",
+    "sitemaps": [
+      {
+        "path": "https://dailyyield.blogspot.com/sitemap-pages.xml",
+        "lastSubmitted": "2026-09-25T16:49:53.274Z",
+        "isPending": false,
+        "isSitemapsIndex": false,
+        "type": "sitemap",
+        "lastDownloaded": "2026-09-25T16:49:55.090Z",
+        "warnings": "0",
+        "errors": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "12",
+            "indexed": "0"
+          }
+        ]
+      },
+      {
+        "path": "https://dailyyield.blogspot.com/sitemap.xml",
+        "lastSubmitted": "2026-09-25T16:49:00.596Z",
+        "isPending": false,
+        "isSitemapsIndex": false,
+        "type": "sitemap",
+        "lastDownloaded": "2026-09-25T16:49:02.556Z",
+        "warnings": "0",
+        "errors": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "46",
+            "indexed": "0"
+          }
+        ]
+      }
+    ],
+    "tracker": {
+      "https://dailyyield.blogspot.com/": {
+        "title": "DAILY YIELD",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T16:53:07Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/global-snapshot.html": {
+        "title": "GLOBAL SNAPSHOT",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T16:57:09Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/markets-today.html": {
+        "title": "MARKETS TODAY",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T16:59:14Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/privacy-policy.html": {
+        "title": "PRIVACY POLICY",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/daily-news.html": {
+        "title": "DAILY NEWS",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:03:21Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html": {
+        "title": "MONEY ATLAS",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:01:15Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html": {
+        "title": "FOR CORPORATE",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:05:37Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/disclaimer.html": {
+        "title": "DISCLAIMER",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/contact-us_01883938366.html": {
+        "title": "CONTACT US",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:07:16Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/calculator_0908148622.html": {
+        "title": "CALCULATOR",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:01:15Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/article.html": {
+        "title": "DAILY ARTICLE",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:05:37Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/about-us_02080501126.html": {
+        "title": "ABOUT US",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Redirect error",
+        "pageFetchState": "REDIRECT_ERROR",
+        "robotsTxtState": "ALLOWED",
+        "lastCrawlTime": "2026-09-25T17:05:37Z",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html": {
+        "title": "Corporate Finance and Industry News · 26 September 2026 · Coverage September 25 to 26 — (3rd LD) Lee calls for resumption of trade pact negotiations with Mexico to elevate…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html": {
+        "title": "Don't Panic-Pay Cheap Student Loans",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/spain-2026-09-26.html": {
+        "title": "Spain Finance News · 26 September 2026 · Coverage September 25 to 26 — Statistics on Transfer of Property Rights (STPR); Industrial Price Index. 2021 Baseline",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/china-2026-09-26.html": {
+        "title": "China Finance News · 26 September 2026 · Coverage September 25 to 26 — China set to decide if Costa Rican or Guyanese diplomat becomes first woman UN chief; The…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html": {
+        "title": "UK Finance News · 26 September 2026 · Coverage September 25 to 26 — Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html": {
+        "title": "Japan Finance News · 26 September 2026 · Coverage September 25 to 26 — International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html": {
+        "title": "Freelance Money on Autopilot",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/france-2026-09-26.html": {
+        "title": "France Finance News · 26 September 2026 · Coverage September 25 to 26 — France can't count on ECB to fix debt woes, central bank chief says; Five French market…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/germany-2026-09-26.html": {
+        "title": "Germany Finance News · 26 September 2026 · Coverage September 25 to 26 — Germany news: Parliament approves fuel tax cut; Volkswagen, Audi to recall almost 1…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01001893817.html": {
+        "title": "Economy and Macro Policy News · 26 September 2026 · Coverage September 25 to 26 — (2nd LD) Lee calls for resumption of trade pact negotiations with Mexico to elevate…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html": {
+        "title": "Market and Trading News · 26 September 2026 · Coverage September 25 to 26 — EU’s reaction to corruption in Ukraine shows Europeans involved in it — envoy; Europe to…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html": {
+        "title": "5% Down in 2026: Ladder or Trap?",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html": {
+        "title": "India Finance News · 26 September 2026 · Coverage September 25 to 26 — Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-26.html": {
+        "title": "Global Finance Wire · 26 September 2026 · Coverage September 25 to 26 — Federal Reserve Board announces approval of application by Peoples Bancorp Inc; Japanese…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html": {
+        "title": "South Korea Finance News · 26 September 2026 · Coverage September 25 to 26 — (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html": {
+        "title": "Australia Finance News · 26 September 2026 · Coverage September 25 to 26 — A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-25.html": {
+        "title": "Brazil Finance News · 25 September 2026 · Coverage September 24 to 25 — Brazil Plans to Buy Up Old Household Debts at Up to 95% Off Before Vote; Brazil’s Lula…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/russia-2026-09-25.html": {
+        "title": "Russia Finance News · 25 September 2026 · Coverage September 24 to 25 — Kiev’s 'top brass' continues to trade sovereignty for Western handouts — Russian MFA…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-25.html": {
+        "title": "Personal Finance News · 25 September 2026 · Coverage September 24 to 25 — Iran war drives UK diesel price to near record high, and makes interest rate rise ‘hard to…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html": {
+        "title": "Nurse, Two Kids, £18k Debt: Fixed",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/china-2026-09-25.html": {
+        "title": "China Finance News · 25 September 2026 · Coverage September 24 to 25 — Trump hails WWII ‘ally’ China as Xi tells of bonds ‘forged in blood and fire’; Details on…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/us-2026-09-25.html": {
+        "title": "US Finance News · 25 September 2026 · Coverage September 24 to 25 — ‘We were wrong.’ Why Morgan Stanley changed its tune on the U.S. dollar — and what it…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html": {
+        "title": "$90k Broke: The New Middle Class",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html": {
+        "title": "Corporate Finance and Industry News · 25 September 2026 · Coverage September 24 to 25 — Japanese Government Bonds Held by the Bank of Japan[XLSX 29KB]; Capital gains tax: how it…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html": {
+        "title": "Covered-Call ETFs: Income or Trap?",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html": {
+        "title": "UK Finance News · 25 September 2026 · Coverage September 24 to 25 — Minutes of the Market Participants Group meeting – 24 September 2026",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html": {
+        "title": "Japan Finance News · 25 September 2026 · Coverage September 24 to 25 — (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html": {
+        "title": "$10k at 22 vs $10k at 32",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html": {
+        "title": "France Finance News · 25 September 2026 · Coverage September 24 to 25 — France to send 'military means' to protect Saudi oil port, Macron says; France says EU’s…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/germany-2026-09-25.html": {
+        "title": "Germany Finance News · 25 September 2026 · Coverage September 24 to 25 — After several difficult years, economists now expect German economy to grow; Opening…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026.html": {
+        "title": "Economy and Macro Policy News · 25 September 2026 · Coverage September 24 to 25 — Bank of Japan Accounts (September 20); The Results of BIS International Locational Banking…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html": {
+        "title": "Market and Trading News · 25 September 2026 · Coverage September 24 to 25 — Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html": {
+        "title": "Stop Splitting Bills 50/50",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html": {
+        "title": "South Korea Finance News · 25 September 2026 · Coverage September 24 to 25 — Lee says combining S. Korea's technology with Mexico's industrial base can create new…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html": {
+        "title": "Australia Finance News · 25 September 2026 · Coverage September 24 to 25 — Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/india-2026-09-25.html": {
+        "title": "India Finance News · 25 September 2026 · Coverage September 24 to 25 — Inox Clean Energy likely to file Rs 10,000 crore IPO with Sebi; Reliance to raise Rs…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-25.html": {
+        "title": "Global Finance Wire · 25 September 2026 · Coverage September 24 to 25 — Original Wallace & Gromit puppets auctioned to raise funds for 'emerging filmmakers'; Dow…",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html": {
+        "title": "12 Money Moves for the Next 12 Months",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/15-money-myths-your-uncle-repeats.html": {
+        "title": "15 Money Myths Your Uncle Repeats",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html": {
+        "title": "House-Hack Before You Landlord",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html": {
+        "title": "Emergency Fund Size by Job Type",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html": {
+        "title": "Run the Recession Checklist While Employed",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html": {
+        "title": "What Quiet Rich People Do on Payday",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html": {
+        "title": "Find £200/Month in 10 Minutes",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html": {
+        "title": "What to Do With Your First Paycheck",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html": {
+        "title": "The First Couples Money Meeting Agenda",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html": {
+        "title": "Only These Insurance Policies Matter: The Forensic Risk-Transfer Filter",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/most-side-hustles-fail-this-filter.html": {
+        "title": "Most Side Hustles Fail This Filter",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html": {
+        "title": "Ask for the Raise That Beats Budgeting",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/w-2-tax-tricks-youre-allowed-to-use.html": {
+        "title": "W-2 Tax Tricks You're Allowed to Use: The High-Earner Playbook",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html": {
+        "title": "FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html": {
+        "title": "Three-Fund Portfolio: Why 3 Core Index Funds Beat 12-ETF Portfolios",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html": {
+        "title": "AI Found £1,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html": {
+        "title": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html": {
+        "title": "The Payday Waterfall: 7 Automatic Transfers That Run Your Entire Financial Life",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html": {
+        "title": "Your Mortgage Is Not the Real Cost: The True Monthly Cost of a £300,000 House Unmasked",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html": {
+        "title": "Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html": {
+        "title": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html": {
+        "title": "Why Dual-Income Couples Still Feel One Month from Broke: Unmasking the Global Two-Income Trap",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html": {
+        "title": "The Portfolio That Pays Your Rent: How Much You Really Need Invested to Cover Housing Costs Globally",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html": {
+        "title": "Real Net Worth Targets by Age for Median Earners",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html": {
+        "title": "Stop Maxing Your 401(k) or Pension",
+        "checkedAt": "2026-09-26T15:17:43.676647+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/canada-2026-09-26.html": {
+        "title": "Canada Finance News · 26 September 2026 · Coverage September 25 to 26 — Canada’s grocery pricing practices face fresh scrutiny; SNB Is in Comfortable Situation on…",
+        "checkedAt": "2026-09-26T17:56:41.378806+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/us-2026-09-26.html": {
+        "title": "US Finance News · 26 September 2026 · Coverage September 25 to 26 — A ‘death cross’ is coming for the dollar. Why Trump will be happy; CEO who posted 'Lake…",
+        "checkedAt": "2026-09-26T17:56:41.378806+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/i-tested-6-ai-money-coaches.html": {
+        "title": "I Tested 6 AI Money Coaches",
+        "checkedAt": "2026-09-26T17:56:41.378806+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-26.html": {
+        "title": "Brazil Finance News · 26 September 2026 · Coverage September 25 to 26 — Cuba Informal Exchange Rate Hits New Highs of 730 Pesos to the US Dollar; Trump and Xi end…",
+        "checkedAt": "2026-09-26T17:56:41.378806+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/italy-2026-09-26.html": {
+        "title": "Italy Finance News · 26 September 2026 · Coverage September 25 to 26 — Shares in Banco BPM rise on report of joint Credit Agricole-UniCredit interest; AI…",
+        "checkedAt": "2026-09-26T17:56:41.378806+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      }
+    },
+    "summary": {
+      "inventory": 79,
+      "tracked": 79,
+      "pass": 0,
+      "notPass": 79,
+      "inspectedThisRun": 5,
+      "inspectionErrors": 0,
+      "sitemapsVisible": 2
+    }
+  },
+  "limitations": [
+    "Rendered-browser and live public-page navigation are intentionally prohibited because they create synthetic pageviews.",
+    "Responsive, metadata and structure checks are performed against Blogger API content packages rather than opening public URLs."
+  ]
 }
