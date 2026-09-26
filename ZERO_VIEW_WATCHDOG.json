@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-26T22:04:22.042117+05:30",
+  "checkedAtIST": "2026-09-26T23:55:38.655809+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 564,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 22,
+    "transientExternalResponses": 23,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -4699,6 +4699,10 @@
     {
       "url": "https://www.consumerfinance.gov/",
       "status": 403
+    },
+    {
+      "url": "https://www.linkedin.com/in/dailyyeild",
+      "status": 999
     },
     {
       "url": "https://www.marketwatch.com/story/8-mortgage-rates-are-not-an-impossibility-as-the-30-year-fixed-rate-surges-aa202464?mod=mw_rss_topstories",
