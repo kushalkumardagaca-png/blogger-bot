@@ -1,6 +1,6 @@
 {
   "overall": "PASS",
-  "generated_at": "2026-09-26 08:41 IST",
+  "generated_at": "2026-09-26 08:54 IST",
   "summary": "✅ ALL SYSTEMS OPERATIONAL",
   "counts": {
     "OK": 79,
@@ -46,7 +46,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 1.4h ago"
+      "detail": "newest master article 1.6h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,979 instruments · sample OHLC populated"
+      "detail": "456,997 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 19:22 IST",
-      "overall": "PASS",
-      "ok": 40,
-      "warn": 0,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 22:20 IST",
       "overall": "WARN",
       "ok": 55,
@@ -629,6 +622,13 @@
     },
     {
       "at": "2026-09-26 08:41 IST",
+      "overall": "PASS",
+      "ok": 79,
+      "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-26 08:54 IST",
       "overall": "PASS",
       "ok": 79,
       "warn": 0,
