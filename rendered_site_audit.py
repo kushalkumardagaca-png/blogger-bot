@@ -41,7 +41,14 @@ async def audit_one(browser,sem,url,kind,vp):
     const shelves=q('.dy-related').map(s=>Array.from(new Set(qs(s,'.dy-related-card').map(a=>a.href))).length);
     function qs(el,s){return Array.from(el.querySelectorAll(s))}
     const badHrefs=q('a[href]').map(a=>a.getAttribute('href')).filter(h=>!h||h==='#'||/^javascript:/i.test(h));
-    return {vw,bodyScroll:document.documentElement.scrollWidth,badCards,imgs,dups,overflow,shelves,badHrefs:badHrefs.slice(0,20),title:document.title,byline:document.body.innerText.includes('Kushal K. Daga')};
+    const desc=(document.querySelector('meta[name="description"]')||{}).content||'';
+    const canonical=(document.querySelector('link[rel="canonical"]')||{}).href||'';
+    const ogTitle=(document.querySelector('meta[property="og:title"]')||{}).content||'';
+    const ogDesc=(document.querySelector('meta[property="og:description"]')||{}).content||'';
+    const ogImage=(document.querySelector('meta[property="og:image"]')||{}).content||'';
+    const schemaErrors=[];q('script[type="application/ld+json"]').forEach((s,i)=>{try{JSON.parse(s.textContent)}catch(e){schemaErrors.push(i+': '+e.message)}});
+    const allLinks=q('a[href]').map(a=>a.href),internal=allLinks.filter(h=>h.startsWith('https://dailyyield.blogspot.com/')),external=allLinks.filter(h=>/^https?:/i.test(h)&&!h.startsWith('https://dailyyield.blogspot.com/'));
+    return {vw,bodyScroll:document.documentElement.scrollWidth,badCards,imgs,dups,overflow,shelves,badHrefs:badHrefs.slice(0,20),title:document.title,byline:document.body.innerText.includes('Kushal K. Daga'),desc,canonical,ogTitle,ogDesc,ogImage,schemaErrors,h1:q('h1').filter(x=>x.getClientRects().length).length,contextCards:q('.dy-context').length,sourceLinks:q('.fbk-src').length,internalLinks:new Set(internal).size,externalLinks:new Set(external).size};
    }''')
    if data['bodyScroll']>data['vw']+8:issues.append(f"body horizontal overflow {data['bodyScroll']} > {data['vw']}")
    if data['badCards']:issues.append('bad card dimensions '+json.dumps(data['badCards'][:8]))
@@ -50,6 +57,16 @@ async def audit_one(browser,sem,url,kind,vp):
    if any(x!=4 for x in data['shelves']):issues.append('related shelf does not contain 4 unique links '+str(data['shelves']))
    if kind=='post' and not data['byline']:issues.append('visible Kushal K. Daga branding missing')
    if data['badHrefs']:issues.append('empty/script hrefs '+json.dumps(data['badHrefs']))
+   if not data['title'].strip():issues.append('SEO title missing')
+   if not (50<=len(data['desc'])<=180):issues.append(f"meta description length {len(data['desc'])}, expected 50–180")
+   if 'share-market_0718113516' not in url and data['canonical'].rstrip('/')!=url.rstrip('/'):issues.append('canonical mismatch '+data['canonical'])
+   if not data['ogTitle'] or not data['ogDesc']:issues.append('Open Graph title/description missing')
+   if kind=='post' and not data['ogImage']:issues.append('Open Graph image missing')
+   if data['h1']<1:issues.append('visible H1 missing')
+   if data['schemaErrors']:issues.append('invalid rendered JSON-LD '+json.dumps(data['schemaErrors']))
+   if kind=='post' and data['contextCards']<1:issues.append('contextual internal-link card missing')
+   if kind=='post' and data['internalLinks']<5:issues.append(f"only {data['internalLinks']} unique internal links")
+   if kind=='post' and ('Finance News' in data['title'] or 'Finance Wire' in data['title']) and data['sourceLinks']<1:issues.append('news external source links missing')
    relevant=[x for x in failed if not any(y in x for y in IGNORE_FAIL)]
    if relevant:issues.append('failed resources '+json.dumps(relevant[:10]))
    severe_console=[x for x in console if x.startswith('pageerror:') or any(y in x.lower() for y in ['uncaught','referenceerror','typeerror'])]

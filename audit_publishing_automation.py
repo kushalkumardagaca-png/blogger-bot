@@ -42,6 +42,9 @@ check('Master hero image is preflight-validated','safe_image' in ap and 'FALLBAC
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('Master structure passes fail-closed publication preflight','assert_publishable(title, html, labels)' in ap)
 check('News structure passes fail-closed publication preflight','assert_publishable(art["title"], art["html"], art["labels"])' in np)
+check('Master packages retain comprehensive family directory','ensure_family(html)' in ap)
+check('News packages retain comprehensive family directory','ensure_family(art["html"])' in np)
+check('News packages inject SEO and social metadata','ensure_seo_meta' in np and 'DY_SEO_META_START' in (ROOT/'seo_meta.py').read_text())
 check('News editions include related-reading shelf','ensure_related_articles' in np and 'fetch_public_posts' in np)
 check('News editions include continuous gesture motion','ensure_continuous_motion' in np)
 

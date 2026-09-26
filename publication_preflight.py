@@ -10,6 +10,8 @@ def assert_publishable(title,content,labels):
  if 'challenge-platform' in content or '/cdn-cgi/challenge-platform/' in content:issues.append('invalid copied challenge script')
  if 'class="dy-context"' not in content:issues.append('contextual internal-link card missing')
  if 'class="dy-related"' not in content:issues.append('related-reading shelf missing')
+ if 'id="dyPageFamily"' not in content:issues.append('comprehensive Daily Yield family directory missing')
+ if 'metaDesc' not in content and 'DY_SEO_META_START' not in content:issues.append('SEO/meta description package missing')
  if 'DY_CONTINUOUS_MOTION_START' not in content:issues.append('continuous gesture controller missing')
  ids=re.findall(r'\bid=["\']([^"\']+)',content,re.I)
  dup=sorted({x for x in ids if ids.count(x)>1})

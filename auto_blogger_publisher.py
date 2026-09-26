@@ -61,6 +61,7 @@ from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from publication_preflight import assert_publishable
+from page_family import ensure_family
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 
@@ -837,6 +838,7 @@ def main():
     title, slug, meta_desc, labels, html = generate_article_content(topic, pub_date_str, pub_time_str)
     current_post = {"id": "pending", "title": title, "labels": labels, "content": html}
     html = ensure_related_articles(html, current_post, fetch_public_posts())
+    html = ensure_family(html)
     html = ensure_continuous_motion(html)
     assert_publishable(title, html, labels)
 

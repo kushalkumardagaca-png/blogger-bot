@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-25T23:51:50+05:30",
+  "checked_at_ist": "2026-09-26T08:16:29+05:30",
   "summary": {
-    "pass": 50,
+    "pass": 53,
     "fail": 0
   },
   "checks": [
@@ -102,6 +102,21 @@
     },
     {
       "name": "News structure passes fail-closed publication preflight",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master packages retain comprehensive family directory",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News packages retain comprehensive family directory",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News packages inject SEO and social metadata",
       "status": "PASS",
       "detail": ""
     },

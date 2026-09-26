@@ -1,27 +1,30 @@
-name: Blog Health Monitor (24/7 Watchdog)
+name: Blog Health Monitor (Post-Publication Full-Site Watchdog)
 
 on:
+  # Run after every master-article or news publishing workflow. A paired news
+  # run may publish two editions; the resulting audit still checks both new
+  # editions and every older Page/Post in the same complete inventory.
+  workflow_run:
+    workflows:
+      - "Autonomous Daily Yield Publishing Engine (5x Daily)"
+      - "Daily Yield News Wires (20 Daily)"
+    types: [completed]
   schedule:
-    # Runs 6x daily — shortly after each IST publishing slot + one overnight sweep
-    # 03:45 UTC = 09:15 IST (after 08:00 slot)
-    # 07:15 UTC = 12:45 IST (after 11:30 slot)
-    # 10:15 UTC = 15:45 IST (after 14:30 slot)
-    # 13:45 UTC = 19:15 IST (after 17:45 slot)
-    # 16:15 UTC = 21:45 IST (after 20:30 slot)
-    # 21:45 UTC = 03:15 IST (overnight full-day verification)
-    - cron: '45 3,7,10,13,16,21 * * *'
+    # Independent overnight verification even when no publisher event occurs.
+    - cron: '45 21 * * *'
   workflow_dispatch:
 
 concurrency:
-  group: health-monitor
+  group: full-site-watchdog
   cancel-in-progress: false
 
 jobs:
   health-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     permissions:
-      contents: write      # commit HEALTH_STATUS.json / HEALTH_REPORT.md
-      actions: write       # auto-heal: re-dispatch publisher if a slot was missed
+      contents: write
+      actions: write
 
     steps:
       - name: Checkout Repository
@@ -35,8 +38,14 @@ jobs:
       - name: Audit publishing automation invariants
         run: python audit_publishing_automation.py --check-only
 
-      - name: Run Health Monitor
+      - name: Wait for Blogger feed and template propagation
+        if: github.event_name == 'workflow_run'
+        run: sleep 75
+
+      - name: Run operational and live-data monitor
+        continue-on-error: true
         env:
+          WATCHDOG_STRICT_EXIT: "false"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
@@ -48,16 +57,60 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
         run: python health_monitor/health_monitor.py
 
-      - name: Commit Health Status
+      - name: Audit SEO GEO content images and links on every URL
+        continue-on-error: true
+        run: python comprehensive_site_audit.py
+
+      - name: Install rendered-browser auditor
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Render every Page and Post at mobile tablet and desktop
+        continue-on-error: true
+        run: python rendered_site_audit.py
+
+      - name: Build watchdog verdict
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          operational=json.load(open('HEALTH_STATUS.json')) if pathlib.Path('HEALTH_STATUS.json').exists() else {'overall':'ERROR'}
+          content=json.load(open('COMPREHENSIVE_SITE_AUDIT.json')) if pathlib.Path('COMPREHENSIVE_SITE_AUDIT.json').exists() else {'hard_failures':-1}
+          rendered=json.load(open('RENDERED_SITE_AUDIT.json')) if pathlib.Path('RENDERED_SITE_AUDIT.json').exists() else {'failures':-1}
+          verdict='PASS' if operational.get('overall')!='FAIL' and content.get('hard_failures')==0 and rendered.get('failures')==0 else 'ATTENTION'
+          summary={'verdict':verdict,'operational':operational.get('overall'),'content_failures':content.get('hard_failures'),'rendered_failures':rendered.get('failures'),'urls':content.get('urls'),'rendered_checks':rendered.get('rendered_checks')}
+          pathlib.Path('WATCHDOG_VERDICT.json').write_text(json.dumps(summary,indent=2))
+          pathlib.Path('WATCHDOG_VERDICT.md').write_text('# Daily Yield Full-Site Watchdog\n\n'+''.join(f'- **{k.replace("_"," ").title()}:** {v}\n' for k,v in summary.items()))
+          print(json.dumps(summary))
+          PY
+
+      - name: Upload full evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-site-watchdog-${{ github.run_id }}
+          path: |
+            HEALTH_STATUS.json
+            HEALTH_REPORT.md
+            COMPREHENSIVE_SITE_AUDIT.json
+            COMPREHENSIVE_SITE_AUDIT.md
+            RENDERED_SITE_AUDIT.json
+            WATCHDOG_VERDICT.json
+            WATCHDOG_VERDICT.md
+            rendered_audit/*.png
+          retention-days: 30
+
+      - name: Commit watchdog status
         if: always()
         run: |
           git config user.name "health-monitor-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add HEALTH_STATUS.json HEALTH_REPORT.md
+          git add HEALTH_STATUS.json HEALTH_REPORT.md COMPREHENSIVE_SITE_AUDIT.json COMPREHENSIVE_SITE_AUDIT.md RENDERED_SITE_AUDIT.json WATCHDOG_VERDICT.json WATCHDOG_VERDICT.md || true
           if git diff --quiet && git diff --staged --quiet; then
-            echo "No status changes to commit."
+            echo "No watchdog status changes to commit."
           else
-            git commit -m "Health check: $(python3 -c 'import json; print(json.load(open("HEALTH_STATUS.json"))["overall"])') [skip ci]"
+            git commit -m "Full-site watchdog report [skip ci]"
             git pull --rebase origin main
             git push
           fi

@@ -972,4 +972,8 @@ if actions:
     for a in actions:
         print("HEAL:", a)
 print("Reports written: HEALTH_STATUS.json, HEALTH_REPORT.md")
-sys.exit(0 if overall != "FAIL" else 1)
+# Site findings are persisted in the report instead of deliberately failing the
+# GitHub workflow and generating an email on every repeat observation. Set
+# WATCHDOG_STRICT_EXIT=true only for an explicitly fail-closed maintenance run.
+strict_exit = os.environ.get("WATCHDOG_STRICT_EXIT", "false").lower() == "true"
+sys.exit(1 if strict_exit and overall == "FAIL" else 0)

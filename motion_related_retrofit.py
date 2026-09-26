@@ -4,6 +4,8 @@ from pathlib import Path
 import json,os,re,urllib.parse,urllib.request
 from continuous_motion import ensure as ensure_motion
 from related_articles import ensure as ensure_related
+from page_family import ensure_family
+from seo_meta import ensure_seo_meta
 BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}';APPLY=os.environ.get('APPLY','false').lower()=='true'
 def token():
  data=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
@@ -75,7 +77,16 @@ def main():
   old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new=new.replace('if(!s.visible||s.hover||s.focus||s.touchUntil>Date.now())return;','if(!s.visible)return;');new=ensure_motion(new)
   if new!=old:update('pages',tok,p,new);changes.append({'kind':'page','url':p.get('url'),'related':0,'article_motion_loop_repaired':new.count('if(!s.visible)return;')>old.count('if(!s.visible)return;'),'runtime_fixed':runtime_fixed})
  for p in posts:
-  old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new,deduped=remove_duplicate_article_package(new);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts);new=ensure_motion(new)
-  if new!=old:update('posts',tok,p,new);changes.append({'kind':'post','url':p.get('url'),'related':new.count('class="dy-related-card"')//2,'duplicate_package_removed':deduped,'schema_fixed':schema_fixed,'runtime_fixed':runtime_fixed})
+  old=p.get('content','');new,runtime_fixed=repair_external_runtime(old);new,deduped=remove_duplicate_article_package(new);new,schema_fixed=repair_article_schema(new,p.get('url',''));new=ensure_related(new,p,posts)
+  if 'News' in p.get('labels',[]):
+   desc='';sm=re.search(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',new,re.I|re.S)
+   if sm:
+    try:desc=json.loads(sm.group(1)).get('description','')
+    except Exception:pass
+   if not desc:desc=re.sub(r'<[^>]+>',' ',new)[:158]
+   im=re.search(r'<img[^>]+src=["\']([^"\']+)',new,re.I)
+   new=ensure_seo_meta(new,p.get('title',''),desc,im.group(1) if im else '')
+  new=ensure_family(new);new=ensure_motion(new)
+  if new!=old:update('posts',tok,p,new);changes.append({'kind':'post','url':p.get('url'),'related':new.count('class="dy-related-card"')//2,'duplicate_package_removed':deduped,'schema_fixed':schema_fixed,'runtime_fixed':runtime_fixed,'family':True,'seo_meta':('News' not in p.get('labels',[]) or 'DY_SEO_META_START' in new)})
  result={'apply':APPLY,'pages_scanned':len(pages),'posts_scanned':len(posts),'changes':changes,'related_shelves':sum(x['kind']=='post' and x['related']>=3 for x in changes)};Path('MOTION_RELATED_AUDIT.json').write_text(json.dumps(result,indent=2));print(json.dumps({'apply':APPLY,'pages':len(pages),'posts':len(posts),'changes':len(changes),'shelves':result['related_shelves']},indent=2))
 if __name__=='__main__':main()

@@ -30,6 +30,8 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
+from page_family import ensure_family
+from seo_meta import ensure_seo_meta
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -1085,6 +1087,9 @@ def run_desk(desk, tracker, dry=False, token=None):
     art = build_article(desk, items, upcoming, edition_date, eff_start, win_end, fx, related)
     current_post = {"id": "pending", "title": art["title"], "labels": art["labels"], "content": art["html"]}
     art["html"] = ensure_related_articles(art["html"], current_post, fetch_public_posts())
+    hero_match = re.search(r'<img[^>]+src=["\']([^"\']+)', art["html"], re.I)
+    art["html"] = ensure_seo_meta(art["html"], art["title"], art["meta"], hero_match.group(1) if hero_match else "")
+    art["html"] = ensure_family(art["html"])
     art["html"] = ensure_continuous_motion(art["html"])
     assert_publishable(art["title"], art["html"], art["labels"])
     print(f"  [{desk}] article built: {art['n_items']} items, '{art['title'][:70]}…'")
