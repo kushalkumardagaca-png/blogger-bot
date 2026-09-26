@@ -260,10 +260,14 @@ def gsc_checks(inventory):
     sitemap_rows = request_json(f"https://www.googleapis.com/webmasters/v3/sites/{enc}/sitemaps", headers).get("sitemap", [])
     current = [row for row in sitemap_rows if row.get("path") in EXPECTED_SITEMAPS]
     previous_tracker = {}
-    try:
-        previous_tracker = json.loads(Path("ZERO_VIEW_WATCHDOG.json").read_text()).get("gsc", {}).get("tracker", {})
-    except Exception:
-        pass
+    for history_file in ("ZERO_VIEW_WATCHDOG.json", "HEALTH_STATUS.json"):
+        try:
+            candidate = json.loads(Path(history_file).read_text()).get("gsc", {}).get("tracker", {})
+            if candidate:
+                previous_tracker = candidate
+                break
+        except Exception:
+            pass
     tracker = dict(previous_tracker)
     today = NOW.strftime("%Y-%m-%d")
     inspected = errors = 0
