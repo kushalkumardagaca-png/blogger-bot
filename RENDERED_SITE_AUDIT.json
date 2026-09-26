@@ -1,7 +1,7 @@
 {
-  "urls": 69,
-  "rendered_checks": 207,
-  "failures": 0,
+  "urls": 71,
+  "rendered_checks": 213,
+  "failures": 1,
   "transient_checks": 33,
   "results": [
     {
@@ -9,33 +9,6 @@
       "kind": "home",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/",
-      "kind": "home",
-      "viewport": "mobile",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/",
-      "kind": "home",
-      "viewport": "tablet",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-      "kind": "post",
-      "viewport": "desktop",
-      "issues": [],
       "warnings": [],
       "data": {
         "vw": 1440,
@@ -43,29 +16,34 @@
         "badCards": [],
         "imgs": [],
         "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
+        "overflow": [
+          [
+            "DIV",
+            "kdNewsRow",
+            "kd-mq",
+            "6322"
+          ]
         ],
+        "shelves": [],
         "badHrefs": [],
-        "title": "DAILY YIELD: 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
+        "title": "DAILY YIELD",
         "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-        "ogTitle": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
+        "desc": "Daily Yield by Kushal K. Daga\u2014also known as CA Kushal\u2014offers finance news, market insights, calculators and practical money guides worldwide",
+        "canonical": "https://dailyyield.blogspot.com/",
+        "ogTitle": "DAILY YIELD",
+        "ogDesc": "Daily Yield by Kushal K. Daga\u2014also known as CA Kushal\u2014offers finance news, market insights, calculators and practical money guides worldwide",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tw3gaBOKtGSDIU5v0tiCI6mAnuQ8kZVO2LrQCiS7Mw9MH3ihh9Idl3zFkz99TXtWBtXZmBhye6M9DiAaO-riq7rwr8GUneWFb9rnHHyiFzIdfQgJ9g-W2X9sdVj3k1418cHeWQCM1dHp9Fov6q5oIMMUiIAUwoAWTUTossvyqKGJqzG88TPg=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
+        "h1": 0,
+        "contextCards": 0,
         "sourceLinks": 0,
-        "internalLinks": 118,
-        "externalLinks": 13
+        "internalLinks": 135,
+        "externalLinks": 16
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-      "kind": "post",
+      "url": "https://dailyyield.blogspot.com/",
+      "kind": "home",
       "viewport": "mobile",
       "issues": [],
       "warnings": [],
@@ -93,235 +71,195 @@
             "",
             {},
             "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
-        "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-        "ogTitle": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 118,
-        "externalLinks": 13
-      }
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-      "kind": "post",
-      "viewport": "tablet",
-      "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
           ],
           [
-            "path",
-            "",
-            {},
-            "1440"
+            "DIV",
+            "kdDesks",
+            "kd-tabs",
+            "1078"
           ],
           [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
-        "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-        "ogTitle": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 118,
-        "externalLinks": 13
-      }
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-      "kind": "post",
-      "viewport": "desktop",
-      "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: $10k at 22 vs $10k at 32",
-        "byline": true,
-        "desc": "Same starting cash, three behaviors: index, random stocks, and cash-only. A visual that makes starting early feel urgent without shame.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-        "ogTitle": "$10k at 22 vs $10k at 32",
-        "ogDesc": "Same starting cash, three behaviors: index, random stocks, and cash-only. A visual that makes starting early feel urgent without shame.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_shQ9qcVgvsrgk9m1_aX6vFzO1lc_IE-8qmcIvyfbELY4ALhKVjzoPgMWnrQEzfSg2iAGPuwZeG_DIBe7MPa3qcMTAnPlXjH8jtmREGEBxN6rS4ltbQGMPKCCqQ395zJlmr39ogmviRgR-_81tt-ReSAcbpraaCgXMM75TBfnQKmF_O5QsA=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 118,
-        "externalLinks": 9
-      }
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-      "kind": "post",
-      "viewport": "mobile",
-      "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
+            "DIV",
+            "kdNewsRow",
+            "kd-mq",
+            "6322"
           ],
           [
             "SPAN",
             "",
             "byline post-labels",
-            "445"
+            "891"
+          ]
+        ],
+        "shelves": [],
+        "badHrefs": [],
+        "title": "DAILY YIELD",
+        "byline": true,
+        "desc": "Daily Yield by Kushal K. Daga\u2014also known as CA Kushal\u2014offers finance news, market insights, calculators and practical money guides worldwide",
+        "canonical": "https://dailyyield.blogspot.com/",
+        "ogTitle": "DAILY YIELD",
+        "ogDesc": "Daily Yield by Kushal K. Daga\u2014also known as CA Kushal\u2014offers finance news, market insights, calculators and practical money guides worldwide",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tw3gaBOKtGSDIU5v0tiCI6mAnuQ8kZVO2LrQCiS7Mw9MH3ihh9Idl3zFkz99TXtWBtXZmBhye6M9DiAaO-riq7rwr8GUneWFb9rnHHyiFzIdfQgJ9g-W2X9sdVj3k1418cHeWQCM1dHp9Fov6q5oIMMUiIAUwoAWTUTossvyqKGJqzG88TPg=w1200-h630-p-k-no-nu",
+        "schemaErrors": [],
+        "h1": 0,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 135,
+        "externalLinks": 16
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/",
+      "kind": "home",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
           ],
           [
-            "THEAD",
+            "path",
             "",
-            "",
-            "432"
+            {},
+            "1440"
           ],
           [
-            "TR",
+            "path",
             "",
-            "",
-            "432"
+            {},
+            "1440"
           ],
           [
-            "TBODY",
-            "",
-            "",
-            "432"
+            "DIV",
+            "kdDesks",
+            "kd-tabs",
+            "1078"
           ],
           [
-            "TR",
-            "",
-            "",
-            "432"
+            "DIV",
+            "kdNewsRow",
+            "kd-mq",
+            "6322"
           ],
           [
-            "TR",
+            "SPAN",
             "",
+            "byline post-labels",
+            "891"
+          ]
+        ],
+        "shelves": [],
+        "badHrefs": [],
+        "title": "DAILY YIELD",
+        "byline": true,
+        "desc": "Daily Yield by Kushal K. Daga\u2014also known as CA Kushal\u2014offers finance news, market insights, calculators and practical money guides worldwide",
+        "canonical": "https://dailyyield.blogspot.com/",
+        "ogTitle": "DAILY YIELD",
+        "ogDesc": "Daily Yield by Kushal K. Daga\u2014also known as CA Kushal\u2014offers finance news, market insights, calculators and practical money guides worldwide",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tw3gaBOKtGSDIU5v0tiCI6mAnuQ8kZVO2LrQCiS7Mw9MH3ihh9Idl3zFkz99TXtWBtXZmBhye6M9DiAaO-riq7rwr8GUneWFb9rnHHyiFzIdfQgJ9g-W2X9sdVj3k1418cHeWQCM1dHp9Fov6q5oIMMUiIAUwoAWTUTossvyqKGJqzG88TPg=w1200-h630-p-k-no-nu",
+        "schemaErrors": [],
+        "h1": 0,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 135,
+        "externalLinks": 16
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+        "ogTitle": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 13
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
             "",
-            "432"
+            {},
+            "1440"
           ],
           [
-            "TR",
+            "path",
             "",
-            "",
-            "432"
+            {},
+            "1440"
           ],
           [
-            "TR",
+            "path",
             "",
-            "",
-            "432"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "445"
+            {},
+            "1440"
           ]
         ],
         "shelves": [
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: $10k at 22 vs $10k at 32",
+        "title": "DAILY YIELD: 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
         "byline": true,
-        "desc": "Same starting cash, three behaviors: index, random stocks, and cash-only. A visual that makes starting early feel urgent without shame.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-        "ogTitle": "$10k at 22 vs $10k at 32",
-        "ogDesc": "Same starting cash, three behaviors: index, random stocks, and cash-only. A visual that makes starting early feel urgent without shame.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_shQ9qcVgvsrgk9m1_aX6vFzO1lc_IE-8qmcIvyfbELY4ALhKVjzoPgMWnrQEzfSg2iAGPuwZeG_DIBe7MPa3qcMTAnPlXjH8jtmREGEBxN6rS4ltbQGMPKCCqQ395zJlmr39ogmviRgR-_81tt-ReSAcbpraaCgXMM75TBfnQKmF_O5QsA=w1200-h630-p-k-no-nu",
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+        "ogTitle": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
         "sourceLinks": 0,
         "internalLinks": 118,
-        "externalLinks": 9
+        "externalLinks": 13
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
+      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
@@ -356,20 +294,47 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: $10k at 22 vs $10k at 32",
+        "title": "DAILY YIELD: 0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
         "byline": true,
-        "desc": "Same starting cash, three behaviors: index, random stocks, and cash-only. A visual that makes starting early feel urgent without shame.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-        "ogTitle": "$10k at 22 vs $10k at 32",
-        "ogDesc": "Same starting cash, three behaviors: index, random stocks, and cash-only. A visual that makes starting early feel urgent without shame.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_shQ9qcVgvsrgk9m1_aX6vFzO1lc_IE-8qmcIvyfbELY4ALhKVjzoPgMWnrQEzfSg2iAGPuwZeG_DIBe7MPa3qcMTAnPlXjH8jtmREGEBxN6rS4ltbQGMPKCCqQ395zJlmr39ogmviRgR-_81tt-ReSAcbpraaCgXMM75TBfnQKmF_O5QsA=w1200-h630-p-k-no-nu",
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+        "ogTitle": "0% Balance Transfers Without the Trap: The Forensic Playbook That Saves Thousands and Doesn't Backfire",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
         "sourceLinks": 0,
         "internalLinks": 118,
-        "externalLinks": 9
+        "externalLinks": 13
       }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html",
@@ -1000,7 +965,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
         "ogTitle": "5% Down in 2026: Ladder or Trap?",
         "ogDesc": "PMI/insurance, rate shock, and equity-less years. When a tiny deposit is a ladder and when it is a trap.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sXdELRRQPbMIwTFBHizax7mXm66o41Yt1GqWPgNsmmSlPYUX1y1rPiQbckD3UJvmPMHC68wcyoqs0zHIyFVh-3BN4DD6FT9bJa_0D0jMmS4w6-NH0A8TUcNTCkFQXVIac3gHYuUk_5wAGhRe12CR3WYmwoWt7CKG7F3RaOiSZHZuYyiYFr=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vvVxmbFHJRPni8xkCwvk1zVUx_4JNecVmIh43JffxodHTI-r3ABdUBOTpWdhL4lH5eKbm-o4EE_83yiWcMT3tDdMIfU2cSZvF6G_frGoQrWWaT0TikHVcCbZ_FZlTQB9pc8JwQMiMUiE65YfzFaxrZI70JbnfHavVHE7qf8-VKV3U6xF-p=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -1123,7 +1088,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
         "ogTitle": "5% Down in 2026: Ladder or Trap?",
         "ogDesc": "PMI/insurance, rate shock, and equity-less years. When a tiny deposit is a ladder and when it is a trap.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sXdELRRQPbMIwTFBHizax7mXm66o41Yt1GqWPgNsmmSlPYUX1y1rPiQbckD3UJvmPMHC68wcyoqs0zHIyFVh-3BN4DD6FT9bJa_0D0jMmS4w6-NH0A8TUcNTCkFQXVIac3gHYuUk_5wAGhRe12CR3WYmwoWt7CKG7F3RaOiSZHZuYyiYFr=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vvVxmbFHJRPni8xkCwvk1zVUx_4JNecVmIh43JffxodHTI-r3ABdUBOTpWdhL4lH5eKbm-o4EE_83yiWcMT3tDdMIfU2cSZvF6G_frGoQrWWaT0TikHVcCbZ_FZlTQB9pc8JwQMiMUiE65YfzFaxrZI70JbnfHavVHE7qf8-VKV3U6xF-p=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -1174,7 +1139,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
         "ogTitle": "5% Down in 2026: Ladder or Trap?",
         "ogDesc": "PMI/insurance, rate shock, and equity-less years. When a tiny deposit is a ladder and when it is a trap.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sXdELRRQPbMIwTFBHizax7mXm66o41Yt1GqWPgNsmmSlPYUX1y1rPiQbckD3UJvmPMHC68wcyoqs0zHIyFVh-3BN4DD6FT9bJa_0D0jMmS4w6-NH0A8TUcNTCkFQXVIac3gHYuUk_5wAGhRe12CR3WYmwoWt7CKG7F3RaOiSZHZuYyiYFr=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vvVxmbFHJRPni8xkCwvk1zVUx_4JNecVmIh43JffxodHTI-r3ABdUBOTpWdhL4lH5eKbm-o4EE_83yiWcMT3tDdMIfU2cSZvF6G_frGoQrWWaT0TikHVcCbZ_FZlTQB9pc8JwQMiMUiE65YfzFaxrZI70JbnfHavVHE7qf8-VKV3U6xF-p=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -1188,54 +1153,340 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: $90k Broke: The New Middle Class",
+        "byline": true,
+        "desc": "Income is not wealth. Show W-2 high earners with luxury leases and a five-figure net worth &#8212; and the 12-month repair.",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
+        "ogTitle": "$90k Broke: The New Middle Class",
+        "ogDesc": "Income is not wealth. Show W-2 high earners with luxury leases and a five-figure net worth &#8212; and the 12-month repair.",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tsO-t8i-qbxqKTKzbAAiuBSFPE_ivCFzhC1DNsp8dsr4Oi0GGFdwpT-90ph6iqCRaqHl1RuITOZa8UhFlXaWgGFNpowXk23SJ2xA3CWu8egD_zeyRvHVch3hv2_w4tM2ImKJxqbwmnIEqTipE4i7wVsAxla6ZZV6CPBIXdLPT58nBjeYg=w1200-h630-p-k-no-nu",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "SPAN",
+            "",
+            "byline post-labels",
+            "428"
+          ],
+          [
+            "THEAD",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "TBODY",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "432"
+          ],
+          [
+            "THEAD",
+            "",
+            "",
+            "445"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "445"
+          ],
+          [
+            "TBODY",
+            "",
+            "",
+            "445"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "445"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: $90k Broke: The New Middle Class",
+        "byline": true,
+        "desc": "Income is not wealth. Show W-2 high earners with luxury leases and a five-figure net worth &#8212; and the 12-month repair.",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
+        "ogTitle": "$90k Broke: The New Middle Class",
+        "ogDesc": "Income is not wealth. Show W-2 high earners with luxury leases and a five-figure net worth &#8212; and the 12-month repair.",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tsO-t8i-qbxqKTKzbAAiuBSFPE_ivCFzhC1DNsp8dsr4Oi0GGFdwpT-90ph6iqCRaqHl1RuITOZa8UhFlXaWgGFNpowXk23SJ2xA3CWu8egD_zeyRvHVch3hv2_w4tM2ImKJxqbwmnIEqTipE4i7wVsAxla6ZZV6CPBIXdLPT58nBjeYg=w1200-h630-p-k-no-nu",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: $90k Broke: The New Middle Class",
+        "byline": true,
+        "desc": "Income is not wealth. Show W-2 high earners with luxury leases and a five-figure net worth &#8212; and the 12-month repair.",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
+        "ogTitle": "$90k Broke: The New Middle Class",
+        "ogDesc": "Income is not wealth. Show W-2 high earners with luxury leases and a five-figure net worth &#8212; and the 12-month repair.",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tsO-t8i-qbxqKTKzbAAiuBSFPE_ivCFzhC1DNsp8dsr4Oi0GGFdwpT-90ph6iqCRaqHl1RuITOZa8UhFlXaWgGFNpowXk23SJ2xA3CWu8egD_zeyRvHVch3hv2_w4tM2ImKJxqbwmnIEqTipE4i7wVsAxla6ZZV6CPBIXdLPT58nBjeYg=w1200-h630-p-k-no-nu",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: AI Found \u00a31,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
+        "ogTitle": "AI Found &#163;1,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 119,
+        "externalLinks": 11
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: AI Found \u00a31,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
+        "ogTitle": "AI Found &#163;1,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 119,
+        "externalLinks": 11
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: AI Found \u00a31,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
+        "ogTitle": "AI Found &#163;1,200 I Was Wasting: The Step-by-Step Prompt Workflow to Audit Your Bank Statements in 60 Minutes",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 119,
+        "externalLinks": 11
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html",
@@ -1424,54 +1675,268 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Australia Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build\u2026",
+        "byline": true,
+        "desc": "Australia Finance News, coverage September 24 to 25: Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build Sydney Harbour&#8230;",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
+        "ogTitle": "Australia Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build&#8230;",
+        "ogDesc": "Australia Finance News, coverage September 24 to 25: Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build Sydney Harbour&#8230;",
+        "ogImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 4,
+        "sourceLinks": 7,
+        "internalLinks": 118,
+        "externalLinks": 14
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Australia Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build\u2026",
+        "byline": true,
+        "desc": "Australia Finance News, coverage September 24 to 25: Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build Sydney Harbour&#8230;",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
+        "ogTitle": "Australia Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build&#8230;",
+        "ogDesc": "Australia Finance News, coverage September 24 to 25: Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build Sydney Harbour&#8230;",
+        "ogImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 4,
+        "sourceLinks": 7,
+        "internalLinks": 118,
+        "externalLinks": 14
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Australia Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build\u2026",
+        "byline": true,
+        "desc": "Australia Finance News, coverage September 24 to 25: Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build Sydney Harbour&#8230;",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
+        "ogTitle": "Australia Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build&#8230;",
+        "ogDesc": "Australia Finance News, coverage September 24 to 25: Live: ASX down as bond market turmoil deepens, oil jumps; Site renowned for helping build Sydney Harbour&#8230;",
+        "ogImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 4,
+        "sourceLinks": 7,
+        "internalLinks": 118,
+        "externalLinks": 14
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Australia Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming\u2026",
+        "byline": true,
+        "desc": "Australia Finance News, coverage September 25 to 26: A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming death of...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
+        "ogTitle": "Australia Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming&#8230;",
+        "ogDesc": "Australia Finance News, coverage September 25 to 26: A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming death of...",
+        "ogImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 9,
+        "sourceLinks": 13,
+        "internalLinks": 119,
+        "externalLinks": 19
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Australia Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming\u2026",
+        "byline": true,
+        "desc": "Australia Finance News, coverage September 25 to 26: A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming death of...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
+        "ogTitle": "Australia Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming&#8230;",
+        "ogDesc": "Australia Finance News, coverage September 25 to 26: A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming death of...",
+        "ogImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 9,
+        "sourceLinks": 13,
+        "internalLinks": 119,
+        "externalLinks": 19
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Australia Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming\u2026",
+        "byline": true,
+        "desc": "Australia Finance News, coverage September 25 to 26: A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming death of...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
+        "ogTitle": "Australia Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming&#8230;",
+        "ogDesc": "Australia Finance News, coverage September 25 to 26: A dangerous new reality is taking hold in Europe; A cash comeback? Shops navigate looming death of...",
+        "ogImage": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 9,
+        "sourceLinks": 13,
+        "internalLinks": 119,
+        "externalLinks": 19
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-25.html",
@@ -1612,27 +2077,134 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+        "ogTitle": "Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhCN8HH6J68vjvcElBiLTNJxce14SG7mL9Ez60gHeTYrABZddjLlqGveoBNhgiggOLchYxtJ_GYC3u2lH7CCA_ykSsYhGsw0157se0n8zC0IU8VKrQbjHcKjxoH1dEXGWEaTkh7GJRNcAgdBCtiJQPgprNsCvT4hDSeTFjCPliV3x5V4Wh5Els_yKbpH34",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 10
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+        "ogTitle": "Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhCN8HH6J68vjvcElBiLTNJxce14SG7mL9Ez60gHeTYrABZddjLlqGveoBNhgiggOLchYxtJ_GYC3u2lH7CCA_ykSsYhGsw0157se0n8zC0IU8VKrQbjHcKjxoH1dEXGWEaTkh7GJRNcAgdBCtiJQPgprNsCvT4hDSeTFjCPliV3x5V4Wh5Els_yKbpH34",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 10
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+        "ogTitle": "Break the 'I Deserve It' Spend Loop: The Neurobiology of Friday Night Retail Therapy and How to Escape It",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEhCN8HH6J68vjvcElBiLTNJxce14SG7mL9Ez60gHeTYrABZddjLlqGveoBNhgiggOLchYxtJ_GYC3u2lH7CCA_ykSsYhGsw0157se0n8zC0IU8VKrQbjHcKjxoH1dEXGWEaTkh7GJRNcAgdBCtiJQPgprNsCvT4hDSeTFjCPliV3x5V4Wh5Els_yKbpH34",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 10
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
@@ -2041,134 +2613,27 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Market and Trading News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe\u2026",
-        "byline": true,
-        "desc": "Market and Trading News, coverage September 24 to 25: Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe; 30-year fixed",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
-        "ogTitle": "Market and Trading News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe&#8230;",
-        "ogDesc": "Market and Trading News, coverage September 24 to 25: Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe; 30-year fixed",
-        "ogImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 27,
-        "sourceLinks": 30,
-        "internalLinks": 119,
-        "externalLinks": 37
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Market and Trading News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe\u2026",
-        "byline": true,
-        "desc": "Market and Trading News, coverage September 24 to 25: Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe; 30-year fixed",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
-        "ogTitle": "Market and Trading News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe&#8230;",
-        "ogDesc": "Market and Trading News, coverage September 24 to 25: Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe; 30-year fixed",
-        "ogImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 27,
-        "sourceLinks": 30,
-        "internalLinks": 119,
-        "externalLinks": 37
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Market and Trading News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe\u2026",
-        "byline": true,
-        "desc": "Market and Trading News, coverage September 24 to 25: Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe; 30-year fixed",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
-        "ogTitle": "Market and Trading News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe&#8230;",
-        "ogDesc": "Market and Trading News, coverage September 24 to 25: Macron admits Ukrainian attacks on Russian oil refineries worsen fuel situation in Europe; 30-year fixed",
-        "ogImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 27,
-        "sourceLinks": 30,
-        "internalLinks": 119,
-        "externalLinks": 37
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
@@ -3051,206 +3516,27 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Emergency Fund Size by Job Type",
-        "byline": true,
-        "desc": "W-2 stable, variable, dual income, single parent. Ditch the one-size 3-month myth.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-        "ogTitle": "Emergency Fund Size by Job Type",
-        "ogDesc": "W-2 stable, variable, dual income, single parent. Ditch the one-size 3-month myth.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_u6c2fmlOb8cedLpMATG63__n1LjvlszyhE3mDSHq8o8TdKXpzf7MwERvaCUkFAMk_NAUB6truCqAJX_bZ50Okmr_FtlSXWvi0KinlBBFSKpOoqbPZam01ds2WhYr6IwFo2ESTbXpMjMWY9M5YOKm-D8HQQRVaFQ3Ek7-6NiqqDvh_rj9M=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 117,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "SPAN",
-            "",
-            "byline post-labels",
-            "482"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "432"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "445"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "445"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Emergency Fund Size by Job Type",
-        "byline": true,
-        "desc": "W-2 stable, variable, dual income, single parent. Ditch the one-size 3-month myth.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-        "ogTitle": "Emergency Fund Size by Job Type",
-        "ogDesc": "W-2 stable, variable, dual income, single parent. Ditch the one-size 3-month myth.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_u6c2fmlOb8cedLpMATG63__n1LjvlszyhE3mDSHq8o8TdKXpzf7MwERvaCUkFAMk_NAUB6truCqAJX_bZ50Okmr_FtlSXWvi0KinlBBFSKpOoqbPZam01ds2WhYr6IwFo2ESTbXpMjMWY9M5YOKm-D8HQQRVaFQ3Ek7-6NiqqDvh_rj9M=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 117,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: Emergency Fund Size by Job Type",
-        "byline": true,
-        "desc": "W-2 stable, variable, dual income, single parent. Ditch the one-size 3-month myth.",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-        "ogTitle": "Emergency Fund Size by Job Type",
-        "ogDesc": "W-2 stable, variable, dual income, single parent. Ditch the one-size 3-month myth.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_u6c2fmlOb8cedLpMATG63__n1LjvlszyhE3mDSHq8o8TdKXpzf7MwERvaCUkFAMk_NAUB6truCqAJX_bZ50Okmr_FtlSXWvi0KinlBBFSKpOoqbPZam01ds2WhYr6IwFo2ESTbXpMjMWY9M5YOKm-D8HQQRVaFQ3Ek7-6NiqqDvh_rj9M=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 117,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
@@ -3275,7 +3561,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
         "ogTitle": "Find \u00a3200/Month in 10 Minutes",
         "ogDesc": "Export, sort, stare. Three categories where almost everyone leaks. A live demo.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tByA2ZcthDmpAUI4Zg3cArHcZX0bszlEA93dHzA_zwoAzQ5GU9HhJmmARoAo4dEMisYR-lkDx_CEEB6XbNGZVIbmGPv9ymII_NSkW8BXCTFZrGDFgL86G5PQefpCZqyB3EC_lm31TGCrRIp-S48xWWjtY8Vw0GyLInvCCt69xz0AW5lD1d-J9I7sL3=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_u3sAqjikoEDMuIz66GtPeeZMZ7kjqjji5Dv8q2FBL3gaykrpDeP_F7tNErzJpy2uD4zQtM6lGr4p1xRfxTwlrJf4ugpGaCOVQ5S_Qq5WZacoHsAuZP04bXqOgQk_0F_6b9dmAH6EvcEuouy1QXh2aNBTnFF7h1L1i5jokIaYjBBfCPxR0ftqdYCA9B=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3398,7 +3684,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
         "ogTitle": "Find \u00a3200/Month in 10 Minutes",
         "ogDesc": "Export, sort, stare. Three categories where almost everyone leaks. A live demo.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tByA2ZcthDmpAUI4Zg3cArHcZX0bszlEA93dHzA_zwoAzQ5GU9HhJmmARoAo4dEMisYR-lkDx_CEEB6XbNGZVIbmGPv9ymII_NSkW8BXCTFZrGDFgL86G5PQefpCZqyB3EC_lm31TGCrRIp-S48xWWjtY8Vw0GyLInvCCt69xz0AW5lD1d-J9I7sL3=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_u3sAqjikoEDMuIz66GtPeeZMZ7kjqjji5Dv8q2FBL3gaykrpDeP_F7tNErzJpy2uD4zQtM6lGr4p1xRfxTwlrJf4ugpGaCOVQ5S_Qq5WZacoHsAuZP04bXqOgQk_0F_6b9dmAH6EvcEuouy1QXh2aNBTnFF7h1L1i5jokIaYjBBfCPxR0ftqdYCA9B=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3449,7 +3735,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
         "ogTitle": "Find \u00a3200/Month in 10 Minutes",
         "ogDesc": "Export, sort, stare. Three categories where almost everyone leaks. A live demo.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tByA2ZcthDmpAUI4Zg3cArHcZX0bszlEA93dHzA_zwoAzQ5GU9HhJmmARoAo4dEMisYR-lkDx_CEEB6XbNGZVIbmGPv9ymII_NSkW8BXCTFZrGDFgL86G5PQefpCZqyB3EC_lm31TGCrRIp-S48xWWjtY8Vw0GyLInvCCt69xz0AW5lD1d-J9I7sL3=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_u3sAqjikoEDMuIz66GtPeeZMZ7kjqjji5Dv8q2FBL3gaykrpDeP_F7tNErzJpy2uD4zQtM6lGr4p1xRfxTwlrJf4ugpGaCOVQ5S_Qq5WZacoHsAuZP04bXqOgQk_0F_6b9dmAH6EvcEuouy1QXh2aNBTnFF7h1L1i5jokIaYjBBfCPxR0ftqdYCA9B=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3463,54 +3749,316 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+        "ogTitle": "FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 120,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "THEAD",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TBODY",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "632"
+          ],
+          [
+            "TR",
+            "",
+            "",
+            "632"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+        "ogTitle": "FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 120,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+        "ogTitle": "FIRE Got Harder: The New Math of Early Retirement in High-Cost Eras",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 120,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: France Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 France to send 'military means' to protect Saudi oil port, Macron says; France says EU\u2019s\u2026",
+        "byline": true,
+        "desc": "France Finance News, coverage September 24 to 25: France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s &#8216;Made in Europe&#8217;&#8230;",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
+        "ogTitle": "France Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s&#8230;",
+        "ogDesc": "France Finance News, coverage September 24 to 25: France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s &#8216;Made in Europe&#8217;&#8230;",
+        "ogImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 9,
+        "sourceLinks": 12,
+        "internalLinks": 118,
+        "externalLinks": 19
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: France Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 France to send 'military means' to protect Saudi oil port, Macron says; France says EU\u2019s\u2026",
+        "byline": true,
+        "desc": "France Finance News, coverage September 24 to 25: France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s &#8216;Made in Europe&#8217;&#8230;",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
+        "ogTitle": "France Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s&#8230;",
+        "ogDesc": "France Finance News, coverage September 24 to 25: France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s &#8216;Made in Europe&#8217;&#8230;",
+        "ogImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 9,
+        "sourceLinks": 12,
+        "internalLinks": 118,
+        "externalLinks": 19
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: France Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 France to send 'military means' to protect Saudi oil port, Macron says; France says EU\u2019s\u2026",
+        "byline": true,
+        "desc": "France Finance News, coverage September 24 to 25: France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s &#8216;Made in Europe&#8217;&#8230;",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
+        "ogTitle": "France Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s&#8230;",
+        "ogDesc": "France Finance News, coverage September 24 to 25: France to send 'military means' to protect Saudi oil port, Macron says; France says EU&#8217;s &#8216;Made in Europe&#8217;&#8230;",
+        "ogImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 9,
+        "sourceLinks": 12,
+        "internalLinks": 118,
+        "externalLinks": 19
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-26.html",
@@ -3669,7 +4217,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
         "ogTitle": "Freelance Money on Autopilot",
         "ogDesc": "Percentage-based automation when paydays are random. The 'minimum viable salary' you pay yourself.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uvFwWOUY2hqYJ3oYBtCPi2j4HAH_5XOTWD4WLX9DY8fevONfeKNOoQb5mbKPnZOSNlV9hZW4quWKa36EcIA6-GncWGqPDmNtTHaiT387Z83db-DcNPciq7LLyjWva6cypN7QpBmjbgmTQmNWiHDLL5WhaF6sLxcdyDNc_mpc4yX_5foFiv=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tYZsaJEC0zRg0a77lmlCUynDRE7mosDg4dsBG_LjwdUWBZIRqCcUk4esTKJDbKR8JM5LuUU5KWliB1_HMLy5sUEtmYEhb-WLnXrXeMbwO45obJDum6BdWXq5IK3yagv4nQUsYK-4_2bQGrOxTbxKmiGAWU4s9FL2RfoDZ2Yt-gLFU07ULn=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3792,7 +4340,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
         "ogTitle": "Freelance Money on Autopilot",
         "ogDesc": "Percentage-based automation when paydays are random. The 'minimum viable salary' you pay yourself.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uvFwWOUY2hqYJ3oYBtCPi2j4HAH_5XOTWD4WLX9DY8fevONfeKNOoQb5mbKPnZOSNlV9hZW4quWKa36EcIA6-GncWGqPDmNtTHaiT387Z83db-DcNPciq7LLyjWva6cypN7QpBmjbgmTQmNWiHDLL5WhaF6sLxcdyDNc_mpc4yX_5foFiv=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tYZsaJEC0zRg0a77lmlCUynDRE7mosDg4dsBG_LjwdUWBZIRqCcUk4esTKJDbKR8JM5LuUU5KWliB1_HMLy5sUEtmYEhb-WLnXrXeMbwO45obJDum6BdWXq5IK3yagv4nQUsYK-4_2bQGrOxTbxKmiGAWU4s9FL2RfoDZ2Yt-gLFU07ULn=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -3843,7 +4391,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
         "ogTitle": "Freelance Money on Autopilot",
         "ogDesc": "Percentage-based automation when paydays are random. The 'minimum viable salary' you pay yourself.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uvFwWOUY2hqYJ3oYBtCPi2j4HAH_5XOTWD4WLX9DY8fevONfeKNOoQb5mbKPnZOSNlV9hZW4quWKa36EcIA6-GncWGqPDmNtTHaiT387Z83db-DcNPciq7LLyjWva6cypN7QpBmjbgmTQmNWiHDLL5WhaF6sLxcdyDNc_mpc4yX_5foFiv=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tYZsaJEC0zRg0a77lmlCUynDRE7mosDg4dsBG_LjwdUWBZIRqCcUk4esTKJDbKR8JM5LuUU5KWliB1_HMLy5sUEtmYEhb-WLnXrXeMbwO45obJDum6BdWXq5IK3yagv4nQUsYK-4_2bQGrOxTbxKmiGAWU4s9FL2RfoDZ2Yt-gLFU07ULn=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -4733,33 +5281,6 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
-      "kind": "post",
-      "viewport": "mobile",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
-      "kind": "post",
-      "viewport": "tablet",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
-      "kind": "post",
-      "viewport": "desktop",
-      "issues": [],
       "warnings": [],
       "data": {
         "vw": 1440,
@@ -4772,23 +5293,23 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: Japan Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese\u2026",
+        "title": "DAILY YIELD: India Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India\u2026",
         "byline": true,
-        "desc": "Japan Finance News, coverage September 24 to 25: (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
-        "ogTitle": "Japan Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese&#8230;",
-        "ogDesc": "Japan Finance News, coverage September 24 to 25: (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign...",
-        "ogImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
+        "desc": "India Finance News, coverage September 25 to 26: Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India IPO subscribed...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
+        "ogTitle": "India Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India&#8230;",
+        "ogDesc": "India Finance News, coverage September 25 to 26: Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India IPO subscribed...",
+        "ogImage": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1600&h=900&q=85",
         "schemaErrors": [],
         "h1": 2,
-        "contextCards": 2,
-        "sourceLinks": 5,
-        "internalLinks": 118,
-        "externalLinks": 12
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
+      "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
@@ -4823,23 +5344,23 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: Japan Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese\u2026",
+        "title": "DAILY YIELD: India Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India\u2026",
         "byline": true,
-        "desc": "Japan Finance News, coverage September 24 to 25: (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
-        "ogTitle": "Japan Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese&#8230;",
-        "ogDesc": "Japan Finance News, coverage September 24 to 25: (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign...",
-        "ogImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
+        "desc": "India Finance News, coverage September 25 to 26: Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India IPO subscribed...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
+        "ogTitle": "India Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India&#8230;",
+        "ogDesc": "India Finance News, coverage September 25 to 26: Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India IPO subscribed...",
+        "ogImage": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1600&h=900&q=85",
         "schemaErrors": [],
         "h1": 2,
-        "contextCards": 2,
-        "sourceLinks": 5,
-        "internalLinks": 118,
-        "externalLinks": 12
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
+      "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
@@ -4874,19 +5395,180 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: Japan Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese\u2026",
+        "title": "DAILY YIELD: India Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India\u2026",
         "byline": true,
-        "desc": "Japan Finance News, coverage September 24 to 25: (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
-        "ogTitle": "Japan Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese&#8230;",
-        "ogDesc": "Japan Finance News, coverage September 24 to 25: (BOJ Review) Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign...",
+        "desc": "India Finance News, coverage September 25 to 26: Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India IPO subscribed...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
+        "ogTitle": "India Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India&#8230;",
+        "ogDesc": "India Finance News, coverage September 25 to 26: Settlement order in the matter of Nippon Yield Maximiser AIF Scheme I; Liqvd Digital India IPO subscribed...",
+        "ogImage": "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Japan Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)\u2026",
+        "byline": true,
+        "desc": "Japan Finance News, coverage September 25 to 26: International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026); International Policy...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
+        "ogTitle": "Japan Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)&#8230;",
+        "ogDesc": "Japan Finance News, coverage September 25 to 26: International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026); International Policy...",
         "ogImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
         "schemaErrors": [],
         "h1": 2,
-        "contextCards": 2,
-        "sourceLinks": 5,
-        "internalLinks": 118,
-        "externalLinks": 12
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Japan Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)\u2026",
+        "byline": true,
+        "desc": "Japan Finance News, coverage September 25 to 26: International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026); International Policy...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
+        "ogTitle": "Japan Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)&#8230;",
+        "ogDesc": "Japan Finance News, coverage September 25 to 26: International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026); International Policy...",
+        "ogImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: Japan Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)\u2026",
+        "byline": true,
+        "desc": "Japan Finance News, coverage September 25 to 26: International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026); International Policy...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
+        "ogTitle": "Japan Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026)&#8230;",
+        "ogDesc": "Japan Finance News, coverage September 25 to 26: International Policy Japan-U.S. Finance Ministerial Meeting (September 25, 2026); International Policy...",
+        "ogImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
       }
     },
     {
@@ -5100,7 +5782,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
         "ogTitle": "Nurse, Two Kids, \u00a318k Debt: Fixed",
         "ogDesc": "UK case study with realistic childcare and NHS pension. Snowball, ISA, and the one lifestyle cut that freed &#163;400/month.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vKEexdW2GZyPC-fVM0MoTiJX43UghECiokrP3X2-X9CcQMN42nYk1cBo6rDg17WObypn5PSrEfbKzmA-5r6-px6zf6_0kAmWEIy0LSVMUDfkt7tXstOhtbiNvezaZWZUpuRlkZt4evj0tbCPMNBP0GQCawLvX4n-k5kIKSIvyzaIH6JgYC=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uIVsYMaZGbbMhO1l49kougVp6r9eoeboVzRuNI6augomplmzgJu9Z9GOdtRZH3yRVsrVOQlMfHfyZxvvJzd_ub8fZebyTPK0PfDsojT2_uzdCp1NuUpWa3FF76TRX1yWvmqNlYN5wMWI2ps6KasAP_e0USiUyDy4zFCvruo4vRoZU9tlKa=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5223,7 +5905,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
         "ogTitle": "Nurse, Two Kids, \u00a318k Debt: Fixed",
         "ogDesc": "UK case study with realistic childcare and NHS pension. Snowball, ISA, and the one lifestyle cut that freed &#163;400/month.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vKEexdW2GZyPC-fVM0MoTiJX43UghECiokrP3X2-X9CcQMN42nYk1cBo6rDg17WObypn5PSrEfbKzmA-5r6-px6zf6_0kAmWEIy0LSVMUDfkt7tXstOhtbiNvezaZWZUpuRlkZt4evj0tbCPMNBP0GQCawLvX4n-k5kIKSIvyzaIH6JgYC=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uIVsYMaZGbbMhO1l49kougVp6r9eoeboVzRuNI6augomplmzgJu9Z9GOdtRZH3yRVsrVOQlMfHfyZxvvJzd_ub8fZebyTPK0PfDsojT2_uzdCp1NuUpWa3FF76TRX1yWvmqNlYN5wMWI2ps6KasAP_e0USiUyDy4zFCvruo4vRoZU9tlKa=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5274,7 +5956,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
         "ogTitle": "Nurse, Two Kids, \u00a318k Debt: Fixed",
         "ogDesc": "UK case study with realistic childcare and NHS pension. Snowball, ISA, and the one lifestyle cut that freed &#163;400/month.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vKEexdW2GZyPC-fVM0MoTiJX43UghECiokrP3X2-X9CcQMN42nYk1cBo6rDg17WObypn5PSrEfbKzmA-5r6-px6zf6_0kAmWEIy0LSVMUDfkt7tXstOhtbiNvezaZWZUpuRlkZt4evj0tbCPMNBP0GQCawLvX4n-k5kIKSIvyzaIH6JgYC=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uIVsYMaZGbbMhO1l49kougVp6r9eoeboVzRuNI6augomplmzgJu9Z9GOdtRZH3yRVsrVOQlMfHfyZxvvJzd_ub8fZebyTPK0PfDsojT2_uzdCp1NuUpWa3FF76TRX1yWvmqNlYN5wMWI2ps6KasAP_e0USiUyDy4zFCvruo4vRoZU9tlKa=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5306,7 +5988,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
         "ogTitle": "Only These Insurance Policies Matter: The Forensic Risk-Transfer Filter",
         "ogDesc": "Life (if dependents), health/gap, disability, home/renters, car. The rest is often sales. A ruthless yes/no list.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_slGKDI317lvPVBpYATMgRURha55MVtJvfPfDyV6b4GGfEth_xSjbBXczbPKUr2_OW_33V34EX_06n7mV539t5RWY3vwmrJjooF6_jxyzqgNunBPfqWcKo3LNynIvpj-kzLR2vq4nCfJ3hl_8hqobYwV287XWChfu3OWuY_43mTHQn47lMy7HFW5fUc=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sYzHppbcUs_ApdFe-jbTuOlFaIEbD8Q8GoVd54GkVaoGS3TZKOoF0NrSeYoi6Z5fZ1W-JxQi_D4dXa0agSdInxHsvKxGR07AezB0jDwsXdQ0Sn5W0N03jS3Qt3H3psJfR8SkcPt0nRZBEkmZ-bIkTdSNDDcVDAcH4ZPfduBsAP88Xy5LyExPxWJDPQ=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5429,7 +6111,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
         "ogTitle": "Only These Insurance Policies Matter: The Forensic Risk-Transfer Filter",
         "ogDesc": "Life (if dependents), health/gap, disability, home/renters, car. The rest is often sales. A ruthless yes/no list.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_slGKDI317lvPVBpYATMgRURha55MVtJvfPfDyV6b4GGfEth_xSjbBXczbPKUr2_OW_33V34EX_06n7mV539t5RWY3vwmrJjooF6_jxyzqgNunBPfqWcKo3LNynIvpj-kzLR2vq4nCfJ3hl_8hqobYwV287XWChfu3OWuY_43mTHQn47lMy7HFW5fUc=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sYzHppbcUs_ApdFe-jbTuOlFaIEbD8Q8GoVd54GkVaoGS3TZKOoF0NrSeYoi6Z5fZ1W-JxQi_D4dXa0agSdInxHsvKxGR07AezB0jDwsXdQ0Sn5W0N03jS3Qt3H3psJfR8SkcPt0nRZBEkmZ-bIkTdSNDDcVDAcH4ZPfduBsAP88Xy5LyExPxWJDPQ=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5480,7 +6162,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
         "ogTitle": "Only These Insurance Policies Matter: The Forensic Risk-Transfer Filter",
         "ogDesc": "Life (if dependents), health/gap, disability, home/renters, car. The rest is often sales. A ruthless yes/no list.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_slGKDI317lvPVBpYATMgRURha55MVtJvfPfDyV6b4GGfEth_xSjbBXczbPKUr2_OW_33V34EX_06n7mV539t5RWY3vwmrJjooF6_jxyzqgNunBPfqWcKo3LNynIvpj-kzLR2vq4nCfJ3hl_8hqobYwV287XWChfu3OWuY_43mTHQn47lMy7HFW5fUc=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sYzHppbcUs_ApdFe-jbTuOlFaIEbD8Q8GoVd54GkVaoGS3TZKOoF0NrSeYoi6Z5fZ1W-JxQi_D4dXa0agSdInxHsvKxGR07AezB0jDwsXdQ0Sn5W0N03jS3Qt3H3psJfR8SkcPt0nRZBEkmZ-bIkTdSNDDcVDAcH4ZPfduBsAP88Xy5LyExPxWJDPQ=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5646,7 +6328,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
         "ogTitle": "Run the Recession Checklist While Employed",
         "ogDesc": "12-month runway, skills, expenses, and a 'what we cut first' list. Do it in a boom.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vI4Rdz2uaEt0Su-6pNnOeHCUf25dXkx_NrZGLkIn_E1l2hlFWXFY6yc-jiYyhqqg0Euq1QtrO3P0xDfZv-Px44DEqzZy79C-DBm0x6KW3XkcaHZ0PBqC3AaTHGxZccKYQpOdQ1Pnl1sQtkdnhXP80ztnLFB-qeO3s1Bh08DrrRZFkG3CK2YhAPR-s=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tBR1M4-vS_0GApIYN-_rTfbytiIDEM1klhwWLqWdOJwfsMd9Y1rN4N5z5O-wsJtGv8WQuTLn4cKWD0NzIplJtEZwoqCEF5oRQVJPmM-JfvdCznvC8KYhFhp1mnFjJzO_y1eW0dqq2AMrgpdu3cOXgrZ6HjDsPmlCQ3f2-uJx3LXwqxE4Izf0LuE_g=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5769,7 +6451,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
         "ogTitle": "Run the Recession Checklist While Employed",
         "ogDesc": "12-month runway, skills, expenses, and a 'what we cut first' list. Do it in a boom.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vI4Rdz2uaEt0Su-6pNnOeHCUf25dXkx_NrZGLkIn_E1l2hlFWXFY6yc-jiYyhqqg0Euq1QtrO3P0xDfZv-Px44DEqzZy79C-DBm0x6KW3XkcaHZ0PBqC3AaTHGxZccKYQpOdQ1Pnl1sQtkdnhXP80ztnLFB-qeO3s1Bh08DrrRZFkG3CK2YhAPR-s=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tBR1M4-vS_0GApIYN-_rTfbytiIDEM1klhwWLqWdOJwfsMd9Y1rN4N5z5O-wsJtGv8WQuTLn4cKWD0NzIplJtEZwoqCEF5oRQVJPmM-JfvdCznvC8KYhFhp1mnFjJzO_y1eW0dqq2AMrgpdu3cOXgrZ6HjDsPmlCQ3f2-uJx3LXwqxE4Izf0LuE_g=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5820,7 +6502,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
         "ogTitle": "Run the Recession Checklist While Employed",
         "ogDesc": "12-month runway, skills, expenses, and a 'what we cut first' list. Do it in a boom.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vI4Rdz2uaEt0Su-6pNnOeHCUf25dXkx_NrZGLkIn_E1l2hlFWXFY6yc-jiYyhqqg0Euq1QtrO3P0xDfZv-Px44DEqzZy79C-DBm0x6KW3XkcaHZ0PBqC3AaTHGxZccKYQpOdQ1Pnl1sQtkdnhXP80ztnLFB-qeO3s1Bh08DrrRZFkG3CK2YhAPR-s=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tBR1M4-vS_0GApIYN-_rTfbytiIDEM1klhwWLqWdOJwfsMd9Y1rN4N5z5O-wsJtGv8WQuTLn4cKWD0NzIplJtEZwoqCEF5oRQVJPmM-JfvdCznvC8KYhFhp1mnFjJzO_y1eW0dqq2AMrgpdu3cOXgrZ6HjDsPmlCQ3f2-uJx3LXwqxE4Izf0LuE_g=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -5968,274 +6650,87 @@
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: South Korea Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Lee says combining S. Korea's technology with Mexico's industrial base can create new\u2026",
-        "byline": true,
-        "desc": "South Korea Finance News, coverage September 24 to 25: Lee says combining S. Korea's technology with Mexico's industrial base can create new growth; (3rd LD)&#8230;",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
-        "ogTitle": "South Korea Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Lee says combining S. Korea's technology with Mexico's industrial base can create new&#8230;",
-        "ogDesc": "South Korea Finance News, coverage September 24 to 25: Lee says combining S. Korea's technology with Mexico's industrial base can create new growth; (3rd LD)&#8230;",
-        "ogImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 8,
-        "sourceLinks": 11,
-        "internalLinks": 118,
-        "externalLinks": 18
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: South Korea Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Lee says combining S. Korea's technology with Mexico's industrial base can create new\u2026",
-        "byline": true,
-        "desc": "South Korea Finance News, coverage September 24 to 25: Lee says combining S. Korea's technology with Mexico's industrial base can create new growth; (3rd LD)&#8230;",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
-        "ogTitle": "South Korea Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Lee says combining S. Korea's technology with Mexico's industrial base can create new&#8230;",
-        "ogDesc": "South Korea Finance News, coverage September 24 to 25: Lee says combining S. Korea's technology with Mexico's industrial base can create new growth; (3rd LD)&#8230;",
-        "ogImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 8,
-        "sourceLinks": 11,
-        "internalLinks": 118,
-        "externalLinks": 18
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: South Korea Finance News \u00b7 25 September 2026 \u00b7 Coverage September 24 to 25 \u2014 Lee says combining S. Korea's technology with Mexico's industrial base can create new\u2026",
-        "byline": true,
-        "desc": "South Korea Finance News, coverage September 24 to 25: Lee says combining S. Korea's technology with Mexico's industrial base can create new growth; (3rd LD)&#8230;",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
-        "ogTitle": "South Korea Finance News &#183; 25 September 2026 &#183; Coverage September 24 to 25 &#8212; Lee says combining S. Korea's technology with Mexico's industrial base can create new&#8230;",
-        "ogDesc": "South Korea Finance News, coverage September 24 to 25: Lee says combining S. Korea's technology with Mexico's industrial base can create new growth; (3rd LD)&#8230;",
-        "ogImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 8,
-        "sourceLinks": 11,
-        "internalLinks": 118,
-        "externalLinks": 18
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: South Korea Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends\u2026",
-        "byline": true,
-        "desc": "South Korea Finance News, coverage September 25 to 26: (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends South...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
-        "ogTitle": "South Korea Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends&#8230;",
-        "ogDesc": "South Korea Finance News, coverage September 25 to 26: (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends South...",
-        "ogImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 12,
-        "sourceLinks": 16,
-        "internalLinks": 119,
-        "externalLinks": 22
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: South Korea Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends\u2026",
-        "byline": true,
-        "desc": "South Korea Finance News, coverage September 25 to 26: (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends South...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
-        "ogTitle": "South Korea Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends&#8230;",
-        "ogDesc": "South Korea Finance News, coverage September 25 to 26: (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends South...",
-        "ogImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 12,
-        "sourceLinks": 16,
-        "internalLinks": 119,
-        "externalLinks": 22
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: South Korea Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends\u2026",
-        "byline": true,
-        "desc": "South Korea Finance News, coverage September 25 to 26: (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends South...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
-        "ogTitle": "South Korea Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends&#8230;",
-        "ogDesc": "South Korea Finance News, coverage September 25 to 26: (Asiad) S. Korean sabre fencers target 4th straight Asiad team gold; (Asiad) Hwang ends South...",
-        "ogImage": "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=1600&h=900&q=85",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 12,
-        "sourceLinks": 16,
-        "internalLinks": 119,
-        "externalLinks": 22
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
       "kind": "post",
       "viewport": "desktop",
       "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
       "warnings": [],
       "data": {
         "vw": 1440,
@@ -6248,13 +6743,147 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: Stop Splitting Bills 50/50",
+        "title": "DAILY YIELD: The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
         "byline": true,
-        "desc": "Equal splits feel fair until the lower earner cannot save a pound. Break down income-proportional systems, joint vs. separate accounts, and  - Analysis by ...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-        "ogTitle": "Stop Splitting Bills 50/50",
-        "ogDesc": "Equal splits feel fair until the lower earner cannot save a pound. Break down income-proportional systems, joint vs. separate accounts, and  - Analysis by ...",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tTyoY0jHvKhMScOFd56HxTsTMetVV6l7fMNgWtDrE-3AZgeH8PK3qtZtg52GatRChYp4u60SkfoMF3iTRwAi00-3O24vDGkRSGz885t9pezwsPO2mDHjS6JQ-Rv1KZau1gxk1pA684m5hPRExC6KxhW7VA_BCz3FJjhB2xiz0u-ywO4b4=w1200-h630-p-k-no-nu",
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+        "ogTitle": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 119,
+        "externalLinks": 13
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+        "ogTitle": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 119,
+        "externalLinks": 13
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
+        "byline": true,
+        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+        "ogTitle": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
+        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 1,
+        "sourceLinks": 0,
+        "internalLinks": 119,
+        "externalLinks": 13
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: The First Couples Money Meeting Agenda",
+        "byline": true,
+        "desc": "Net worth, debts, fears, and a 90-day experiment. A script for the sofa conversation.",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
+        "ogTitle": "The First Couples Money Meeting Agenda",
+        "ogDesc": "Net worth, debts, fears, and a 90-day experiment. A script for the sofa conversation.",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tXXYqwLQFNPOMr8gecyR_1k_1dfbWQRq8KzPX5FOKQALGBPihwqBB9PHI0--h_D_v3KwAsk7Dk0_eZPFKeqvMGHcC9_AyZTSGXvF2-MUDRU-57wMDZWsStTWS2O218HEBMjHEJHuCSvoX-oguoXpLJv0vjW6muYrXEANZOMIF9trFoHKEKLunoblQ=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -6264,7 +6893,7 @@
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
       "kind": "post",
       "viewport": "mobile",
       "issues": [],
@@ -6298,7 +6927,7 @@
             "SPAN",
             "",
             "byline post-labels",
-            "485"
+            "434"
           ],
           [
             "THEAD",
@@ -6371,13 +7000,13 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: Stop Splitting Bills 50/50",
+        "title": "DAILY YIELD: The First Couples Money Meeting Agenda",
         "byline": true,
-        "desc": "Equal splits feel fair until the lower earner cannot save a pound. Break down income-proportional systems, joint vs. separate accounts, and  - Analysis by ...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-        "ogTitle": "Stop Splitting Bills 50/50",
-        "ogDesc": "Equal splits feel fair until the lower earner cannot save a pound. Break down income-proportional systems, joint vs. separate accounts, and  - Analysis by ...",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tTyoY0jHvKhMScOFd56HxTsTMetVV6l7fMNgWtDrE-3AZgeH8PK3qtZtg52GatRChYp4u60SkfoMF3iTRwAi00-3O24vDGkRSGz885t9pezwsPO2mDHjS6JQ-Rv1KZau1gxk1pA684m5hPRExC6KxhW7VA_BCz3FJjhB2xiz0u-ywO4b4=w1200-h630-p-k-no-nu",
+        "desc": "Net worth, debts, fears, and a 90-day experiment. A script for the sofa conversation.",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
+        "ogTitle": "The First Couples Money Meeting Agenda",
+        "ogDesc": "Net worth, debts, fears, and a 90-day experiment. A script for the sofa conversation.",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tXXYqwLQFNPOMr8gecyR_1k_1dfbWQRq8KzPX5FOKQALGBPihwqBB9PHI0--h_D_v3KwAsk7Dk0_eZPFKeqvMGHcC9_AyZTSGXvF2-MUDRU-57wMDZWsStTWS2O218HEBMjHEJHuCSvoX-oguoXpLJv0vjW6muYrXEANZOMIF9trFoHKEKLunoblQ=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -6387,7 +7016,7 @@
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
       "kind": "post",
       "viewport": "tablet",
       "issues": [],
@@ -6422,13 +7051,13 @@
           4
         ],
         "badHrefs": [],
-        "title": "DAILY YIELD: Stop Splitting Bills 50/50",
+        "title": "DAILY YIELD: The First Couples Money Meeting Agenda",
         "byline": true,
-        "desc": "Equal splits feel fair until the lower earner cannot save a pound. Break down income-proportional systems, joint vs. separate accounts, and  - Analysis by ...",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-        "ogTitle": "Stop Splitting Bills 50/50",
-        "ogDesc": "Equal splits feel fair until the lower earner cannot save a pound. Break down income-proportional systems, joint vs. separate accounts, and  - Analysis by ...",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tTyoY0jHvKhMScOFd56HxTsTMetVV6l7fMNgWtDrE-3AZgeH8PK3qtZtg52GatRChYp4u60SkfoMF3iTRwAi00-3O24vDGkRSGz885t9pezwsPO2mDHjS6JQ-Rv1KZau1gxk1pA684m5hPRExC6KxhW7VA_BCz3FJjhB2xiz0u-ywO4b4=w1200-h630-p-k-no-nu",
+        "desc": "Net worth, debts, fears, and a 90-day experiment. A script for the sofa conversation.",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
+        "ogTitle": "The First Couples Money Meeting Agenda",
+        "ogDesc": "Net worth, debts, fears, and a 90-day experiment. A script for the sofa conversation.",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tXXYqwLQFNPOMr8gecyR_1k_1dfbWQRq8KzPX5FOKQALGBPihwqBB9PHI0--h_D_v3KwAsk7Dk0_eZPFKeqvMGHcC9_AyZTSGXvF2-MUDRU-57wMDZWsStTWS2O218HEBMjHEJHuCSvoX-oguoXpLJv0vjW6muYrXEANZOMIF9trFoHKEKLunoblQ=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -6438,167 +7067,6 @@
       }
     },
     {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-      "kind": "post",
-      "viewport": "desktop",
-      "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
-        "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-        "ogTitle": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 119,
-        "externalLinks": 13
-      }
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-      "kind": "post",
-      "viewport": "mobile",
-      "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
-        "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-        "ogTitle": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 119,
-        "externalLinks": 13
-      }
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-      "kind": "post",
-      "viewport": "tablet",
-      "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [
-          4
-        ],
-        "badHrefs": [],
-        "title": "DAILY YIELD: The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
-        "byline": true,
-        "desc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "canonical": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-        "ogTitle": "The $48,000 Teacher Money Rebuild: A Step-by-Step 24-Month Forensic Audit and Wealth Roadmap",
-        "ogDesc": ".kvsd-mqwrap:hover .kvsd-mq,.kn-rowwrap:hover .kn-track,.marquee:hover .marquee-track,.dyw-category-row:hover .dyw-category-track,.dyw-category-row:focus-with",
-        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
-        "schemaErrors": [],
-        "h1": 2,
-        "contextCards": 1,
-        "sourceLinks": 0,
-        "internalLinks": 119,
-        "externalLinks": 13
-      }
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-      "kind": "post",
-      "viewport": "desktop",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-      "kind": "post",
-      "viewport": "mobile",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
-      "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-      "kind": "post",
-      "viewport": "tablet",
-      "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
-    },
-    {
       "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
       "kind": "post",
       "viewport": "desktop",
@@ -6864,6 +7332,140 @@
         "sourceLinks": 7,
         "internalLinks": 118,
         "externalLinks": 14
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
+      "kind": "post",
+      "viewport": "desktop",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: UK Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader\u2026",
+        "byline": true,
+        "desc": "UK Finance News, coverage September 25 to 26: Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader (clone of FCA...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
+        "ogTitle": "UK Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader&#8230;",
+        "ogDesc": "UK Finance News, coverage September 25 to 26: Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader (clone of FCA...",
+        "ogImage": "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
+      "kind": "post",
+      "viewport": "mobile",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: UK Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader\u2026",
+        "byline": true,
+        "desc": "UK Finance News, coverage September 25 to 26: Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader (clone of FCA...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
+        "ogTitle": "UK Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader&#8230;",
+        "ogDesc": "UK Finance News, coverage September 25 to 26: Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader (clone of FCA...",
+        "ogImage": "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
+      }
+    },
+    {
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
+      "kind": "post",
+      "viewport": "tablet",
+      "issues": [],
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [
+          4
+        ],
+        "badHrefs": [],
+        "title": "DAILY YIELD: UK Finance News \u00b7 26 September 2026 \u00b7 Coverage September 25 to 26 \u2014 Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader\u2026",
+        "byline": true,
+        "desc": "UK Finance News, coverage September 25 to 26: Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader (clone of FCA...",
+        "canonical": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
+        "ogTitle": "UK Finance News &#183; 26 September 2026 &#183; Coverage September 25 to 26 &#8212; Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader&#8230;",
+        "ogDesc": "UK Finance News, coverage September 25 to 26: Building the next generation of market infrastructure 23/09/2026; 22K Trader / 22KTrader (clone of FCA...",
+        "ogImage": "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600&h=900&q=85",
+        "schemaErrors": [],
+        "h1": 2,
+        "contextCards": 15,
+        "sourceLinks": 19,
+        "internalLinks": 119,
+        "externalLinks": 25
       }
     },
     {
@@ -7205,7 +7807,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
         "ogTitle": "What Quiet Rich People Do on Payday",
         "ogDesc": "Order of operations, not fancy breakfasts. A payday checklist you can copy this Friday.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sAJGMLDp42p4o7VhcVfb6qkgb3EQzvTqxfhvFDzgYexOdy3alASwCx8YFWypXxdec_8fbnEoR-3SwqAX-YTwLxkCjT3AqPAYKEqeQ1iW1lFA150oV19qnASfUm_kiCfFeYWlMraA6mUAC6CgD-feZZuzJYrkttUtTxrTtGztVa5cY27ZHKMm_iy5_w=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sH5R1sqZTzrlImwyVzdnvrZcp-1iuUMYr7dGXUgeZ0L9xhEAhvhssFG43OQKgaAc9Dyt9oQjF4scExlq_eymSpfKcODtTRvyhpCtF4ufZIO2CTck4l_8OEhAdCuyNZBQ9mQaXNc_E-9y-IaSVGNK3sfTjI3oYtlEL6p6o2oXIE9BkjVcxOb0Vg8nX4=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -7328,7 +7930,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
         "ogTitle": "What Quiet Rich People Do on Payday",
         "ogDesc": "Order of operations, not fancy breakfasts. A payday checklist you can copy this Friday.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sAJGMLDp42p4o7VhcVfb6qkgb3EQzvTqxfhvFDzgYexOdy3alASwCx8YFWypXxdec_8fbnEoR-3SwqAX-YTwLxkCjT3AqPAYKEqeQ1iW1lFA150oV19qnASfUm_kiCfFeYWlMraA6mUAC6CgD-feZZuzJYrkttUtTxrTtGztVa5cY27ZHKMm_iy5_w=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sH5R1sqZTzrlImwyVzdnvrZcp-1iuUMYr7dGXUgeZ0L9xhEAhvhssFG43OQKgaAc9Dyt9oQjF4scExlq_eymSpfKcODtTRvyhpCtF4ufZIO2CTck4l_8OEhAdCuyNZBQ9mQaXNc_E-9y-IaSVGNK3sfTjI3oYtlEL6p6o2oXIE9BkjVcxOb0Vg8nX4=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -7379,7 +7981,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
         "ogTitle": "What Quiet Rich People Do on Payday",
         "ogDesc": "Order of operations, not fancy breakfasts. A payday checklist you can copy this Friday.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sAJGMLDp42p4o7VhcVfb6qkgb3EQzvTqxfhvFDzgYexOdy3alASwCx8YFWypXxdec_8fbnEoR-3SwqAX-YTwLxkCjT3AqPAYKEqeQ1iW1lFA150oV19qnASfUm_kiCfFeYWlMraA6mUAC6CgD-feZZuzJYrkttUtTxrTtGztVa5cY27ZHKMm_iy5_w=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_sH5R1sqZTzrlImwyVzdnvrZcp-1iuUMYr7dGXUgeZ0L9xhEAhvhssFG43OQKgaAc9Dyt9oQjF4scExlq_eymSpfKcODtTRvyhpCtF4ufZIO2CTck4l_8OEhAdCuyNZBQ9mQaXNc_E-9y-IaSVGNK3sfTjI3oYtlEL6p6o2oXIE9BkjVcxOb0Vg8nX4=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -7411,7 +8013,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
         "ogTitle": "What to Do With Your First Paycheck",
         "ogDesc": "50% bills, 20% future, 20% fun, 10% buffer &#8212; then open the accounts the same week.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uOAme9JptoF0L-gWkM65BqYYzkEQVKdNaUNXvIjikZZ7PxBLJCTbrcZmFp8TMTSPNkki78goPaofYLw0-wRg34rMWtQNicPsv1W3sgkSWeJNZ6Ft1z4unCaheeMemptDk5qx7NJFkhliDCNRzoSj88Ct0wF3rK30xiuA1linfw8vrA6y6jrNoIdq_3=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vDEkYG9I5yR-6w6p9JvOUqqkI_RfrU_Zx8gEoaNhiu_XmZJ3tRVdv6XIpDLZ70I5HtqVGTODfH_QPwdtt1_-bsviPkT5JQyJNGHZKgaN6rCg7iiJ1JVSUUzZfyvXohIBUYD2pgbRU4O5dIoaACePWljcQVUnVXQg6vT1dGBjkw8Pb12dC7i-ZRYn-6=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -7534,7 +8136,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
         "ogTitle": "What to Do With Your First Paycheck",
         "ogDesc": "50% bills, 20% future, 20% fun, 10% buffer &#8212; then open the accounts the same week.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uOAme9JptoF0L-gWkM65BqYYzkEQVKdNaUNXvIjikZZ7PxBLJCTbrcZmFp8TMTSPNkki78goPaofYLw0-wRg34rMWtQNicPsv1W3sgkSWeJNZ6Ft1z4unCaheeMemptDk5qx7NJFkhliDCNRzoSj88Ct0wF3rK30xiuA1linfw8vrA6y6jrNoIdq_3=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vDEkYG9I5yR-6w6p9JvOUqqkI_RfrU_Zx8gEoaNhiu_XmZJ3tRVdv6XIpDLZ70I5HtqVGTODfH_QPwdtt1_-bsviPkT5JQyJNGHZKgaN6rCg7iiJ1JVSUUzZfyvXohIBUYD2pgbRU4O5dIoaACePWljcQVUnVXQg6vT1dGBjkw8Pb12dC7i-ZRYn-6=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -7585,7 +8187,7 @@
         "canonical": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
         "ogTitle": "What to Do With Your First Paycheck",
         "ogDesc": "50% bills, 20% future, 20% fun, 10% buffer &#8212; then open the accounts the same week.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_uOAme9JptoF0L-gWkM65BqYYzkEQVKdNaUNXvIjikZZ7PxBLJCTbrcZmFp8TMTSPNkki78goPaofYLw0-wRg34rMWtQNicPsv1W3sgkSWeJNZ6Ft1z4unCaheeMemptDk5qx7NJFkhliDCNRzoSj88Ct0wF3rK30xiuA1linfw8vrA6y6jrNoIdq_3=w1200-h630-p-k-no-nu",
+        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_vDEkYG9I5yR-6w6p9JvOUqqkI_RfrU_Zx8gEoaNhiu_XmZJ3tRVdv6XIpDLZ70I5HtqVGTODfH_QPwdtt1_-bsviPkT5JQyJNGHZKgaN6rCg7iiJ1JVSUUzZfyvXohIBUYD2pgbRU4O5dIoaACePWljcQVUnVXQg6vT1dGBjkw8Pb12dC7i-ZRYn-6=w1200-h630-p-k-no-nu",
         "schemaErrors": [],
         "h1": 2,
         "contextCards": 1,
@@ -7867,27 +8469,128 @@
       "kind": "page",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 1440,
+        "bodyScroll": 1440,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [],
+        "shelves": [],
+        "badHrefs": [],
+        "title": "DAILY YIELD: ABOUT US",
+        "byline": true,
+        "desc": "About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.",
+        "canonical": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "ogTitle": "Daily Yield: About Us",
+        "ogDesc": "About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjF-SJL7XEk_5oTjBKmB7bFtU0RbBBItxl41rxDdxd0LxWf_Jof_de8BaVZD0WSVehxoGDsrba-HSV46m69uytEdoc_I6cCmHaRaAQmOUUqRG_dH51PCnW9Lf44N3CDh86P0xTx-HnMr5buA_AiQmi3UOd9fyApHkKkd2jlHoi68wj8Lc0sPaAoV-WGo0E",
+        "schemaErrors": [],
+        "h1": 1,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "kind": "page",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 360,
+        "bodyScroll": 360,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [],
+        "badHrefs": [],
+        "title": "DAILY YIELD: ABOUT US",
+        "byline": true,
+        "desc": "About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.",
+        "canonical": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "ogTitle": "Daily Yield: About Us",
+        "ogDesc": "About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjF-SJL7XEk_5oTjBKmB7bFtU0RbBBItxl41rxDdxd0LxWf_Jof_de8BaVZD0WSVehxoGDsrba-HSV46m69uytEdoc_I6cCmHaRaAQmOUUqRG_dH51PCnW9Lf44N3CDh86P0xTx-HnMr5buA_AiQmi3UOd9fyApHkKkd2jlHoi68wj8Lc0sPaAoV-WGo0E",
+        "schemaErrors": [],
+        "h1": 1,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "kind": "page",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [
-        "transient HTTP 429; static full-content audit covers this URL"
-      ]
+      "warnings": [],
+      "data": {
+        "vw": 768,
+        "bodyScroll": 768,
+        "badCards": [],
+        "imgs": [],
+        "dups": [],
+        "overflow": [
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ],
+          [
+            "path",
+            "",
+            {},
+            "1440"
+          ]
+        ],
+        "shelves": [],
+        "badHrefs": [],
+        "title": "DAILY YIELD: ABOUT US",
+        "byline": true,
+        "desc": "About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.",
+        "canonical": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "ogTitle": "Daily Yield: About Us",
+        "ogDesc": "About Daily Yield and Kushal K. Daga: transparent financial education, global finance news, market tools and practical money guidance.",
+        "ogImage": "https://blogger.googleusercontent.com/img/a/AVvXsEjF-SJL7XEk_5oTjBKmB7bFtU0RbBBItxl41rxDdxd0LxWf_Jof_de8BaVZD0WSVehxoGDsrba-HSV46m69uytEdoc_I6cCmHaRaAQmOUUqRG_dH51PCnW9Lf44N3CDh86P0xTx-HnMr5buA_AiQmi3UOd9fyApHkKkd2jlHoi68wj8Lc0sPaAoV-WGo0E",
+        "schemaErrors": [],
+        "h1": 1,
+        "contextCards": 0,
+        "sourceLinks": 0,
+        "internalLinks": 118,
+        "externalLinks": 9
+      }
     },
     {
       "url": "https://dailyyield.blogspot.com/p/article.html",
@@ -8278,128 +8981,27 @@
       "kind": "page",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: DAILY NEWS",
-        "byline": true,
-        "desc": "Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.",
-        "canonical": "https://dailyyield.blogspot.com/p/daily-news.html",
-        "ogTitle": "Daily Yield: Daily News",
-        "ogDesc": "Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tguyH24SyAtR6VlNbyRq3jAyhRyriHRExC5SPZwHGjiEwVBotVhi4hlbq2BHkLvoQ=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 158,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
       "kind": "page",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: DAILY NEWS",
-        "byline": true,
-        "desc": "Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.",
-        "canonical": "https://dailyyield.blogspot.com/p/daily-news.html",
-        "ogTitle": "Daily Yield: Daily News",
-        "ogDesc": "Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tguyH24SyAtR6VlNbyRq3jAyhRyriHRExC5SPZwHGjiEwVBotVhi4hlbq2BHkLvoQ=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 158,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
       "kind": "page",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: DAILY NEWS",
-        "byline": true,
-        "desc": "Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.",
-        "canonical": "https://dailyyield.blogspot.com/p/daily-news.html",
-        "ogTitle": "Daily Yield: Daily News",
-        "ogDesc": "Current finance, economy, markets and policy reporting from Daily Yield with dated links to official and reputable sources.",
-        "ogImage": "https://lh3.googleusercontent.com/blogger_img_proxy/AEn0k_tguyH24SyAtR6VlNbyRq3jAyhRyriHRExC5SPZwHGjiEwVBotVhi4hlbq2BHkLvoQ=w1200-h630-p-k-no-nu",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 158,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
@@ -8662,134 +9264,35 @@
       "kind": "page",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 126,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
       "kind": "page",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 126,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
       "kind": "page",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 126,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/markets-today.html",
       "kind": "page",
       "viewport": "desktop",
-      "issues": [],
+      "issues": [
+        "failed resources [\"https://telemetry.tradingview.com/widget/report :: net::ERR_ABORTED\"]"
+      ],
       "warnings": [],
       "data": {
         "vw": 1440,
@@ -8918,363 +9421,27 @@
       "kind": "page",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "DIV",
-            "",
-            "kp-tick-in",
-            "2913"
-          ],
-          [
-            "SPAN",
-            "",
-            "",
-            "1533"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: MONEY ATLAS",
-        "byline": true,
-        "desc": "Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.",
-        "canonical": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-        "ogTitle": "Daily Yield: Money Atlas",
-        "ogDesc": "Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 116,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
       "kind": "page",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "DIV",
-            "",
-            "kp-tick-in",
-            "2913"
-          ],
-          [
-            "SPAN",
-            "ka-tick",
-            "",
-            "1379"
-          ],
-          [
-            "SPAN",
-            "",
-            "",
-            "1533"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: MONEY ATLAS",
-        "byline": true,
-        "desc": "Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.",
-        "canonical": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-        "ogTitle": "Daily Yield: Money Atlas",
-        "ogDesc": "Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 116,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
       "kind": "page",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "DIV",
-            "",
-            "kp-tick-in",
-            "2913"
-          ],
-          [
-            "SPAN",
-            "ka-tick",
-            "",
-            "1379"
-          ],
-          [
-            "SPAN",
-            "",
-            "",
-            "1533"
-          ],
-          [
-            "THEAD",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TBODY",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ],
-          [
-            "TR",
-            "",
-            "",
-            "1959"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: MONEY ATLAS",
-        "byline": true,
-        "desc": "Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.",
-        "canonical": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-        "ogTitle": "Daily Yield: Money Atlas",
-        "ogDesc": "Explore country-by-country currencies, financial context, markets and practical money information with Daily Yield Money Atlas.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 116,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
@@ -9445,128 +9612,27 @@
       "kind": "page",
       "viewport": "desktop",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 1440,
-        "bodyScroll": 1440,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 126,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
       "kind": "page",
       "viewport": "mobile",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 360,
-        "bodyScroll": 360,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 126,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     },
     {
       "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
       "kind": "page",
       "viewport": "tablet",
       "issues": [],
-      "warnings": [],
-      "data": {
-        "vw": 768,
-        "bodyScroll": 768,
-        "badCards": [],
-        "imgs": [],
-        "dups": [],
-        "overflow": [
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ],
-          [
-            "path",
-            "",
-            {},
-            "1440"
-          ]
-        ],
-        "shelves": [],
-        "badHrefs": [],
-        "title": "DAILY YIELD: GLOBAL SNAPSHOT",
-        "byline": true,
-        "desc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "ogTitle": "Daily Yield: Global Snapshot",
-        "ogDesc": "Daily Yield Global Snapshot: a concise cross-asset view of global indices, currencies, commodities, crypto and market conditions.",
-        "ogImage": "",
-        "schemaErrors": [],
-        "h1": 1,
-        "contextCards": 0,
-        "sourceLinks": 0,
-        "internalLinks": 126,
-        "externalLinks": 9
-      }
+      "warnings": [
+        "transient HTTP 429; static full-content audit covers this URL"
+      ]
     }
   ]
 }

@@ -1,9 +1,9 @@
 {
-  "verdict": "PASS",
-  "operational": "PASS",
+  "verdict": "ATTENTION",
+  "operational": "WARN",
   "content_failures": 0,
-  "rendered_failures": 0,
+  "rendered_failures": 1,
   "rendered_transient_checks": 33,
-  "urls": 69,
-  "rendered_checks": 207
+  "urls": 71,
+  "rendered_checks": 213
 }

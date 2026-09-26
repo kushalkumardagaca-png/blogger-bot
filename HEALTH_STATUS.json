@@ -1,10 +1,10 @@
 {
-  "overall": "PASS",
-  "generated_at": "2026-09-26 10:57 IST",
-  "summary": "✅ ALL SYSTEMS OPERATIONAL",
+  "overall": "WARN",
+  "generated_at": "2026-09-26 11:20 IST",
+  "summary": "⚠️ OPERATIONAL WITH WARNINGS",
   "counts": {
-    "OK": 79,
-    "WARN": 0,
+    "OK": 74,
+    "WARN": 5,
     "FAIL": 0,
     "SKIP": 1
   },
@@ -16,19 +16,19 @@
       "section": "A. Publishing engine",
       "name": "Blogger feed reachable",
       "status": "OK",
-      "detail": "44 recent posts"
+      "detail": "45 recent posts"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily publishing slots",
       "status": "OK",
-      "detail": "1 slot(s) due so far today — all published; 2 master articles + 8 news wires today"
+      "detail": "1 slot(s) due so far today — all published; 2 master articles + 10 news wires today"
     },
     {
       "section": "A. Publishing engine",
       "name": "Daily news desks due so far",
       "status": "OK",
-      "detail": "6 due desk(s) present; 8 news wires today"
+      "detail": "6 due desk(s) present; 10 news wires today"
     },
     {
       "section": "A. Publishing engine",
@@ -46,7 +46,7 @@
       "section": "A. Publishing engine",
       "name": "Publishing freshness",
       "status": "OK",
-      "detail": "newest master article 0.0h ago"
+      "detail": "newest master article 0.4h ago"
     },
     {
       "section": "A. Publishing engine",
@@ -69,26 +69,26 @@
     {
       "section": "B. Blog pages",
       "name": "Homepage",
-      "status": "OK",
-      "detail": "200 OK · 242 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily Article hub",
-      "status": "OK",
-      "detail": "200 OK · 351 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Daily News hub",
-      "status": "OK",
-      "detail": "200 OK · 253 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
       "name": "Calculator hub",
-      "status": "OK",
-      "detail": "200 OK · 383 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -99,8 +99,8 @@
     {
       "section": "B. Blog pages",
       "name": "Global Snapshot",
-      "status": "OK",
-      "detail": "200 OK · 392 KB"
+      "status": "WARN",
+      "detail": "Blogspot throttled the checker — site is alive, checker-side pacing"
     },
     {
       "section": "B. Blog pages",
@@ -154,7 +154,7 @@
       "section": "B. Blog pages",
       "name": "sitemap.xml",
       "status": "OK",
-      "detail": "56 URLs indexed"
+      "detail": "58 URLs indexed"
     },
     {
       "section": "C. Market data",
@@ -202,7 +202,7 @@
       "section": "C. Market data",
       "name": "Markets Today · global instrument directory",
       "status": "OK",
-      "detail": "456,773 instruments · sample OHLC populated"
+      "detail": "456,762 instruments · sample OHLC populated"
     },
     {
       "section": "C. Market data",
@@ -495,13 +495,6 @@
   ],
   "history": [
     {
-      "at": "2026-09-24 22:38 IST",
-      "overall": "WARN",
-      "ok": 56,
-      "warn": 10,
-      "fail": 0
-    },
-    {
       "at": "2026-09-24 22:56 IST",
       "overall": "PASS",
       "ok": 76,
@@ -632,6 +625,13 @@
       "overall": "PASS",
       "ok": 79,
       "warn": 0,
+      "fail": 0
+    },
+    {
+      "at": "2026-09-26 11:20 IST",
+      "overall": "WARN",
+      "ok": 74,
+      "warn": 5,
       "fail": 0
     }
   ],

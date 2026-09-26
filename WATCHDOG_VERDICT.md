@@ -1,9 +1,9 @@
 # Daily Yield Full-Site Watchdog
 
-- **Verdict:** PASS
-- **Operational:** PASS
+- **Verdict:** ATTENTION
+- **Operational:** WARN
 - **Content Failures:** 0
-- **Rendered Failures:** 0
+- **Rendered Failures:** 1
 - **Rendered Transient Checks:** 33
-- **Urls:** 69
-- **Rendered Checks:** 207
+- **Urls:** 71
+- **Rendered Checks:** 213
