@@ -251,9 +251,11 @@ def gsc_checks(inventory):
     sites = request_json("https://www.googleapis.com/webmasters/v3/sites", headers)
     visible = sites.get("siteEntry", [])
     exact = next((item for item in visible if item.get("siteUrl", "").rstrip("/") == SITE.rstrip("/")), None)
-    if not exact:
-        return {"connection": "WARN", "detail": "exact property not visible", "visibleProperties": [item.get("siteUrl", "") for item in visible], "tracker": {}, "summary": {}}
-    property_url = exact.get("siteUrl", SITE)
+    domain_property = "sc-domain:" + OWN_HOST
+    property_entry = exact or next((item for item in visible if item.get("siteUrl") == domain_property), None)
+    if not property_entry:
+        return {"connection": "WARN", "detail": "Daily Yield property not visible", "visibleProperties": [item.get("siteUrl", "") for item in visible], "tracker": {}, "summary": {}}
+    property_url = property_entry.get("siteUrl", SITE)
     enc = urllib.parse.quote(property_url, safe="")
     sitemap_rows = request_json(f"https://www.googleapis.com/webmasters/v3/sites/{enc}/sitemaps", headers).get("sitemap", [])
     current = [row for row in sitemap_rows if row.get("path") in EXPECTED_SITEMAPS]
@@ -296,7 +298,7 @@ def gsc_checks(inventory):
     tracker = {url: row for url, row in tracker.items() if url in live_urls}
     passed = sum(row.get("verdict") == "PASS" for row in tracker.values())
     return {
-        "connection": "OK", "property": property_url, "permission": exact.get("permissionLevel"),
+        "connection": "OK", "property": property_url, "permission": property_entry.get("permissionLevel"),
         "sitemaps": current, "tracker": tracker,
         "summary": {"inventory": len(live_urls), "tracked": len(tracker), "pass": passed, "notPass": len(tracker) - passed, "inspectedThisRun": inspected, "inspectionErrors": errors, "sitemapsVisible": len(current)},
     }
