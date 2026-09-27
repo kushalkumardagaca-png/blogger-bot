@@ -3,13 +3,13 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 89,
-    "posts": 76,
+    "urls": 91,
+    "posts": 78,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 600,
+    "externalDestinationsChecked": 624,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 22,
+    "transientExternalResponses": 28,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1020,14 +1020,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html": {
+        "title": "Economy and Macro Policy News \u00b7 27 September 2026 \u00b7 Coverage September 26 to 27 \u2014 S. Korea's tourism balance swings to deficit in July after 4 months of surplus\u2026",
+        "checkedAt": "2026-09-27T09:03:31.580586+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-27.html": {
+        "title": "Market and Trading News \u00b7 27 September 2026 \u00b7 Coverage September 26 to 27 \u2014 Lavrov sees Europe making every effort to disrupt potential peace talks; Bangladesh\u2026",
+        "checkedAt": "2026-09-27T09:03:31.580586+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 88,
-      "tracked": 88,
+      "inventory": 90,
+      "tracked": 90,
       "pass": 0,
-      "notPass": 88,
-      "inspectedThisRun": 3,
+      "notPass": 90,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
@@ -1062,8 +1084,8 @@
     },
     {
       "name": "Gold API",
-      "status": "OK",
-      "detail": "responding"
+      "status": "WARN",
+      "detail": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "name": "Mutual fund API",
