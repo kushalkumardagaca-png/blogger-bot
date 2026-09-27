@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Daily Yield Facebook Page publisher.
 
-Reads publication candidates only through the authenticated Blogger API. It never
-opens, HEADs, or downloads a Daily Yield public URL. Facebook posts are created as
-photo posts so Meta fetches an approved third-party editorial image (or we upload a
-repository brand image) rather than requesting the article for a link preview.
+Reads posts and audience-facing Pages only through the authenticated Blogger API.
+It never opens, HEADs, or downloads a Daily Yield public URL. Every Facebook item is
+a photo post with a locally rendered branded topic card, a useful description and a
+direct website URL. This avoids requesting the article merely to build a link preview.
 """
 from __future__ import annotations
 
@@ -17,10 +17,12 @@ import re
 import sys
 import time
 from datetime import datetime, timedelta, timezone
+from io import BytesIO
 from pathlib import Path
-from urllib.parse import urlparse
+import textwrap
 
 import requests
+from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -29,8 +31,17 @@ GRAPH_VERSION = os.environ.get("FACEBOOK_GRAPH_VERSION", "v26.0")
 GRAPH_ROOT = f"https://graph.facebook.com/{GRAPH_VERSION}"
 TRACKER_PATH = Path(os.environ.get("FACEBOOK_TRACKER", "facebook_tracker.json"))
 BRAND_IMAGE = Path("assets/brand/daily-yield-social-banner.png")
+BRAND_MARK = Path("assets/brand/daily-yield-favicon-512.png")
+CARD_PATH = Path(os.environ.get("FACEBOOK_CARD_PATH", "/tmp/daily-yield-facebook-card.png"))
 MAX_CANDIDATE_AGE_HOURS = 42
 TIMEOUT = (15, 75)
+PAGE_PROMOTION_WINDOWS = ((11 * 60 + 45, 13 * 60 + 30), (19 * 60 + 15, 21 * 60))
+LOW_VALUE_PAGE_TERMS = ("privacy", "terms", "disclaimer", "contact", "correction policy")
+PAGE_PRIORITY_TERMS = {
+    "calculator": 50, "tool": 45, "market": 35, "global": 30,
+    "news": 28, "article": 25, "money": 24, "learn": 20,
+    "resource": 20, "start": 15, "about": 5,
+}
 
 HIGH_IMPACT = {
     "breaking": 18, "market": 9, "rates": 11, "inflation": 11,
@@ -103,7 +114,41 @@ def blogger_candidates(token: str) -> list[dict]:
             continue
         if published >= cutoff and post.get("url", "").startswith("https://dailyyield.blogspot.com/"):
             result.append(post)
+    for post in result:
+        post["kind"] = "post"
     return result
+
+
+def blogger_pages(token: str) -> list[dict]:
+    """Inventory audience-facing evergreen Pages through Blogger API only."""
+    endpoint = f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}/pages"
+    data = request_json(
+        "GET", endpoint,
+        params={
+            "status": "live", "fetchBodies": "true", "maxResults": "50",
+            "fields": "items(id,title,url,published,updated,content)",
+        },
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    pages = []
+    for page in data.get("items", []):
+        title = clean_text(page.get("title", ""))
+        url = page.get("url", "")
+        if not title or not url.startswith("https://dailyyield.blogspot.com/p/"):
+            continue
+        if any(term in title.lower() for term in LOW_VALUE_PAGE_TERMS):
+            continue
+        page["kind"] = "page"
+        page["labels"] = ["Daily Yield Resources"]
+        pages.append(page)
+    # The homepage is an audience destination but is not returned by Blogger Pages API.
+    pages.append({
+        "id": "homepage", "kind": "page", "title": "Daily Yield: Markets, Money and Better Decisions",
+        "url": "https://dailyyield.blogspot.com/", "labels": ["Daily Yield"],
+        "content": "Explore Daily Yield's latest financial reporting, practical money tools, market context and global News editions in one place.",
+        "published": "2026-09-01T00:00:00+05:30", "updated": datetime.now(IST).isoformat(),
+    })
+    return pages
 
 
 def load_tracker() -> dict:
@@ -145,14 +190,117 @@ def summary_from_content(content: str, title: str) -> str:
     return "Clear context, verified sources and practical implications from Daily Yield."
 
 
-def image_from_content(content: str) -> str | None:
+def approved_editorial_image(content: str) -> str | None:
+    """Return only an Unsplash image URL already present in API-provided content."""
     for source in re.findall(r'<img\b[^>]+src=["\']([^"\']+)', content or "", flags=re.I):
         source = html.unescape(source)
-        host = (urlparse(source).hostname or "").lower()
-        # Only third-party editorial imagery is eligible. Never fetch Blogger/blog images.
-        if host == "images.unsplash.com" or host.endswith(".images.unsplash.com"):
+        if re.match(r"^https://images\.unsplash\.com/", source, flags=re.I):
             return source
     return None
+
+
+def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    paths = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf" if bold else "/usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf",
+    ]
+    for path in paths:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            pass
+    return ImageFont.load_default()
+
+
+def content_badge(item: dict) -> str:
+    text = item.get("title", "").lower()
+    if item.get("kind") == "page":
+        if "calculator" in text or "tool" in text:
+            return "CALCULATOR & TOOL"
+        return "EXPLORE DAILY YIELD"
+    if "news" in {str(x).lower() for x in item.get("labels", [])}:
+        return "NEWS BRIEFING"
+    return "IN-DEPTH ANALYSIS"
+
+
+def wrap_title(draw: ImageDraw.ImageDraw, title: str, max_width: int, max_lines: int = 4) -> list[str]:
+    words = title.split()
+    lines, current = [], ""
+    title_font = font(56, True)
+    for word in words:
+        trial = f"{current} {word}".strip()
+        if draw.textbbox((0, 0), trial, font=title_font)[2] <= max_width:
+            current = trial
+        else:
+            if current:
+                lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        while draw.textbbox((0, 0), lines[-1] + "…", font=title_font)[2] > max_width and " " in lines[-1]:
+            lines[-1] = lines[-1].rsplit(" ", 1)[0]
+        lines[-1] = lines[-1].rstrip(".,:;-") + "…"
+    return lines
+
+
+def generate_topic_card(item: dict) -> Path:
+    """Render a 1200x630 branded image without requesting any Daily Yield URL."""
+    width, height = 1200, 630
+    cream, ink, copper, muted = "#FFF8EE", "#241610", "#C86A3D", "#6E5D4B"
+    canvas = Image.new("RGB", (width, height), cream)
+
+    # Topic imagery comes only from an approved third-party URL found in Blogger API content.
+    hero_url = approved_editorial_image(item.get("content", ""))
+    if hero_url:
+        try:
+            response = requests.get(hero_url, timeout=TIMEOUT)
+            response.raise_for_status()
+            hero = Image.open(BytesIO(response.content)).convert("RGB")
+            hero = ImageOps.fit(hero, (500, height), method=Image.Resampling.LANCZOS)
+            hero = ImageEnhance.Contrast(hero).enhance(0.9)
+            canvas.paste(hero, (700, 0))
+            overlay = Image.new("RGBA", (500, height), (36, 22, 16, 75))
+            canvas.paste(overlay, (700, 0), overlay)
+        except Exception as exc:
+            print(f"Editorial image unavailable; using rendered topic motif: {exc}")
+            hero_url = None
+
+    draw = ImageDraw.Draw(canvas)
+    if not hero_url:
+        draw.rectangle((700, 0, width, height), fill="#F4E5D4")
+        for x in range(735, 1200, 70):
+            draw.line((x, 0, x, height), fill="#E8D2BC", width=2)
+        for y in range(35, height, 70):
+            draw.line((700, y, width, y), fill="#E8D2BC", width=2)
+        points = [(735, 510), (820, 465), (900, 480), (985, 355), (1070, 380), (1150, 225)]
+        draw.line(points, fill=copper, width=10, joint="curve")
+        draw.line(((1110, 225), (1158, 216), (1148, 267)), fill=copper, width=10, joint="curve")
+
+    # Opaque copy panel means the title remains readable on every photograph.
+    draw.rounded_rectangle((48, 42, 760, 588), radius=28, fill=cream, outline="#E4CDB5", width=2)
+    if BRAND_MARK.exists():
+        logo = Image.open(BRAND_MARK).convert("RGBA")
+        logo.thumbnail((84, 84), Image.Resampling.LANCZOS)
+        canvas.paste(logo, (78, 70), logo)
+    draw.text((180, 76), "DAILY YIELD", fill=ink, font=font(34, True))
+    draw.text((180, 120), "Markets · Money · Better decisions", fill=muted, font=font(17))
+    draw.rounded_rectangle((78, 180, 340, 222), radius=20, fill=copper)
+    draw.text((98, 191), content_badge(item), fill="white", font=font(16, True))
+
+    title = clean_text(item.get("title", "Daily Yield"))
+    lines = wrap_title(draw, title, 610)
+    y = 255
+    for line in lines:
+        draw.text((78, y), line, fill=ink, font=font(56, True))
+        y += 67
+    draw.line((78, 525, 690, 525), fill="#D9BFA7", width=2)
+    draw.text((78, 544), "Read, calculate and explore at dailyyield.blogspot.com", fill=muted, font=font(18, True))
+    draw.rectangle((0, 615, width, height), fill=ink)
+    CARD_PATH.parent.mkdir(parents=True, exist_ok=True)
+    canvas.save(CARD_PATH, "PNG", optimize=True)
+    return CARD_PATH
 
 
 def score(post: dict, now: datetime) -> float:
@@ -188,15 +336,21 @@ def hashtags(post: dict) -> str:
     return " ".join(tags[:3])
 
 
-def make_caption(post: dict) -> str:
-    title = clean_text(post.get("title", "Daily Yield"))
-    summary = summary_from_content(post.get("content", ""), title)
-    url = post["url"]
+def make_caption(item: dict) -> str:
+    title = clean_text(item.get("title", "Daily Yield"))
+    summary = summary_from_content(item.get("content", ""), title)
+    url = item["url"]
+    if item.get("kind") == "page":
+        call_to_action = "Explore this Daily Yield resource"
+        value_line = "Use the page, review the supporting guidance and bookmark it for your next decision."
+    else:
+        call_to_action = "Read the full Daily Yield report"
+        value_line = "Open the report for the evidence, context and practical implications."
     return (
-        f"{title}\n\n{summary}\n\n"
-        f"Read the full Daily Yield report: {url}\n\n"
+        f"{title}\n\n{summary}\n\n{value_line}\n\n"
+        f"{call_to_action}: {url}\n\n"
         f"By Kushal K. Daga · Markets · Money · Better decisions\n\n"
-        f"{hashtags(post)}"
+        f"{hashtags(item)}"
     )
 
 
@@ -204,14 +358,54 @@ def fingerprint(caption: str) -> str:
     return hashlib.sha256(caption.encode("utf-8")).hexdigest()[:20]
 
 
-def choose_candidate(posts: list[dict], tracker: dict) -> dict | None:
-    seen_ids = {str(x.get("blogger_id")) for x in tracker["published"]}
-    seen_urls = {x.get("url", "").rstrip("/") for x in tracker["published"]}
+def choose_post(posts: list[dict], tracker: dict) -> dict | None:
+    seen_ids = {str(x.get("blogger_id")) for x in tracker["published"] if x.get("kind", "post") == "post"}
+    seen_urls = {x.get("url", "").rstrip("/") for x in tracker["published"] if x.get("kind", "post") == "post"}
     now = datetime.now(timezone.utc)
     eligible = [p for p in posts if str(p.get("id")) not in seen_ids and p.get("url", "").rstrip("/") not in seen_urls]
     if not eligible:
         return None
     return max(eligible, key=lambda p: (score(p, now), parse_time(p["published"])))
+
+
+def page_priority(page: dict) -> int:
+    title = page.get("title", "").lower()
+    return sum(weight for term, weight in PAGE_PRIORITY_TERMS.items() if term in title)
+
+
+def choose_page(pages: list[dict], tracker: dict) -> dict | None:
+    history = {}
+    for entry in tracker.get("published", []):
+        if entry.get("kind") != "page":
+            continue
+        when = entry.get("published_at", "1970-01-01T00:00:00+00:00")
+        history[entry.get("url", "").rstrip("/")] = max(history.get(entry.get("url", "").rstrip("/"), ""), when)
+    if not pages:
+        return None
+    # Unpromoted destinations first; then least recently promoted. Priority breaks ties.
+    return min(
+        pages,
+        key=lambda p: (
+            1 if p["url"].rstrip("/") in history else 0,
+            history.get(p["url"].rstrip("/"), ""),
+            -page_priority(p),
+            p.get("title", ""),
+        ),
+    )
+
+
+def is_page_promotion_time(now: datetime) -> bool:
+    local = now.astimezone(IST)
+    minute = local.hour * 60 + local.minute
+    return any(start <= minute <= end for start, end in PAGE_PROMOTION_WINDOWS)
+
+
+def choose_candidate(posts: list[dict], pages: list[dict], tracker: dict, mode: str = "auto") -> dict | None:
+    if mode == "page" or (mode == "auto" and is_page_promotion_time(datetime.now(timezone.utc))):
+        selected = choose_page(pages, tracker)
+        if selected:
+            return selected
+    return choose_post(posts, tracker)
 
 
 def graph_error(response: requests.Response) -> str:
@@ -264,28 +458,23 @@ def reconcile(access_token: str, url: str, caption_hash: str) -> dict | None:
     return None
 
 
-def publish_photo(post: dict, caption: str, access_token: str) -> dict:
+def publish_photo(item: dict, caption: str, access_token: str) -> dict:
     endpoint = f"{GRAPH_ROOT}/{PAGE_ID}/photos"
     payload = {"message": caption, "published": "true", "access_token": access_token}
-    image_url = image_from_content(post.get("content", ""))
+    card = generate_topic_card(item)
     try:
-        if image_url:
-            response = requests.post(endpoint, data={**payload, "url": image_url}, timeout=TIMEOUT)
-        else:
-            if not BRAND_IMAGE.exists():
-                raise RuntimeError(f"fallback image is missing: {BRAND_IMAGE}")
-            with BRAND_IMAGE.open("rb") as image:
-                response = requests.post(
-                    endpoint, data=payload,
-                    files={"source": (BRAND_IMAGE.name, image, "image/png")},
-                    timeout=TIMEOUT,
-                )
+        with card.open("rb") as image:
+            response = requests.post(
+                endpoint, data=payload,
+                files={"source": (card.name, image, "image/png")},
+                timeout=TIMEOUT,
+            )
         if response.ok:
             return response.json()
         raise RuntimeError(graph_error(response))
     except (requests.RequestException, ValueError, RuntimeError) as exc:
         # Never blindly retry a write. Check the Page first to prevent duplicates.
-        found = reconcile(access_token, post["url"], fingerprint(caption))
+        found = reconcile(access_token, item["url"], fingerprint(caption))
         if found:
             return {"post_id": found["id"], "reconciled": True}
         raise RuntimeError(f"Facebook publish failed and no matching post was found: {exc}") from exc
@@ -300,6 +489,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--content-mode", choices=("auto", "post", "page"), default="auto")
     args = parser.parse_args()
 
     system_user_token = required_env("FACEBOOK_SYSTEM_USER_TOKEN")
@@ -312,21 +502,22 @@ def main() -> int:
 
     blogger_token = blogger_access_token()
     posts = blogger_candidates(blogger_token)
+    pages = blogger_pages(blogger_token)
     tracker = load_tracker()
-    candidate = choose_candidate(posts, tracker)
+    candidate = choose_candidate(posts, pages, tracker, args.content_mode)
     if not candidate:
-        print("No unshared current candidate; no Facebook post created.")
+        print("No eligible website destination; no Facebook post created.")
         return 0
 
     caption = make_caption(candidate)
-    rank = score(candidate, datetime.now(timezone.utc))
-    print(f"Selected score={rank}: {candidate.get('title')} [{candidate.get('id')}]")
+    rank = score(candidate, datetime.now(timezone.utc)) if candidate.get("kind") == "post" else page_priority(candidate)
+    print(f"Selected {candidate.get('kind')} score={rank}: {candidate.get('title')} [{candidate.get('id')}]")
     if args.dry_run:
         print(caption)
         return 0
 
     tracker["pending"] = {
-        "blogger_id": candidate["id"], "url": candidate["url"],
+        "kind": candidate.get("kind", "post"), "blogger_id": candidate["id"], "url": candidate["url"],
         "caption_hash": fingerprint(caption), "selected_at": datetime.now(IST).isoformat(),
     }
     save_tracker(tracker)
@@ -336,6 +527,7 @@ def main() -> int:
     if not facebook_id:
         raise RuntimeError(f"Facebook returned no post identifier: {result}")
     tracker["published"].append({
+        "kind": candidate.get("kind", "post"),
         "blogger_id": candidate["id"],
         "title": candidate.get("title"),
         "url": candidate["url"],
@@ -350,7 +542,7 @@ def main() -> int:
     tracker["last_facebook_post_id"] = facebook_id
     prune_tracker(tracker)
     save_tracker(tracker)
-    print(f"Published Facebook post {facebook_id} for Blogger post {candidate['id']}.")
+    print(f"Published Facebook post {facebook_id} for Blogger {candidate.get('kind', 'post')} {candidate['id']}.")
     return 0
 
 

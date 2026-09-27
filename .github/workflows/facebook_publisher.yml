@@ -21,6 +21,15 @@ on:
           - verify
           - dry-run
           - publish
+      content_mode:
+        description: 'auto rotates articles and website Pages; post/page can be used for controlled tests'
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - post
+          - page
 
 permissions:
   contents: write
@@ -42,8 +51,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Facebook publisher dependency
-        run: python -m pip install --disable-pip-version-check requests
+      - name: Install Facebook publisher dependencies
+        run: python -m pip install --disable-pip-version-check requests pillow
 
       - name: Run isolated Facebook publisher
         env:
@@ -57,10 +66,12 @@ jobs:
         shell: bash
         run: |
           ACTION="${{ github.event.inputs.action }}"
+          MODE="${{ github.event.inputs.content_mode }}"
+          [[ -n "$MODE" ]] || MODE="auto"
           if [[ "${{ github.event_name }}" == "schedule" || "$ACTION" == "publish" ]]; then
-            python facebook_publisher.py
+            python facebook_publisher.py --content-mode "$MODE"
           elif [[ "$ACTION" == "dry-run" ]]; then
-            python facebook_publisher.py --dry-run
+            python facebook_publisher.py --dry-run --content-mode "$MODE"
           else
             python facebook_publisher.py --verify-only
           fi
