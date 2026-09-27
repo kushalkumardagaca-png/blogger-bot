@@ -223,11 +223,21 @@ def graph_error(response: requests.Response) -> str:
         return f"HTTP {response.status_code}: {response.text[:500]}"
 
 
-def verify_page(access_token: str) -> dict:
-    return request_json(
+def resolve_page_token(system_user_token: str) -> tuple[dict, str]:
+    """Resolve the Page access token required by Page publishing endpoints."""
+    page = request_json(
         "GET", f"{GRAPH_ROOT}/{PAGE_ID}",
-        params={"fields": "id,name", "access_token": access_token},
+        params={"fields": "id,name,access_token", "access_token": system_user_token},
     )
+    page_token = page.pop("access_token", "")
+    if not page_token:
+        raise RuntimeError(
+            "Meta verified the Page but did not return a Page access token. "
+            "Reassign the Daily Yield Page to the system user and regenerate the "
+            "system-user token with pages_manage_posts, pages_show_list and "
+            "pages_read_engagement."
+        )
+    return page, page_token
 
 
 def recent_page_posts(access_token: str) -> list[dict]:
@@ -292,11 +302,11 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
-    access_token = required_env("FACEBOOK_SYSTEM_USER_TOKEN")
-    page = verify_page(access_token)
+    system_user_token = required_env("FACEBOOK_SYSTEM_USER_TOKEN")
+    page, page_access_token = resolve_page_token(system_user_token)
     if str(page.get("id")) != PAGE_ID:
         raise RuntimeError(f"token resolved unexpected Page: {page}")
-    print(f"Facebook authorization verified for {page.get('name')} ({page.get('id')}).")
+    print(f"Facebook Page token verified for {page.get('name')} ({page.get('id')}).")
     if args.verify_only:
         return 0
 
@@ -321,7 +331,7 @@ def main() -> int:
     }
     save_tracker(tracker)
 
-    result = publish_photo(candidate, caption, access_token)
+    result = publish_photo(candidate, caption, page_access_token)
     facebook_id = result.get("post_id") or result.get("id")
     if not facebook_id:
         raise RuntimeError(f"Facebook returned no post identifier: {result}")
