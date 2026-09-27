@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-27T06:01:41.339164+05:30
+- **Checked:** 2026-09-27T07:54:01.674231+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 86 URLs · 73 Posts · 12 Pages
+- **Inventory:** 89 URLs · 76 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/85 tracked PASS
+- **Search Console:** OK · 0/88 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · First $1,000: The Scared Person's Plan**
+- ✅ **post · India Finance News · 27 September 2026 · Coverage September 26 to 27 — Nearly 7 billion litres without a market: Ethanol glut in India fuels search for new…**
+- ✅ **post · Global Finance Wire · 27 September 2026 · Coverage September 26 to 27 — Bank of America says Nvidia and these other stocks are on sale; Audemars Piguet says its…**
 - ✅ **post · South Korea Finance News · 27 September 2026 · Coverage September 26 to 27 — (3rd LD) (Asiad) S. Korea wins women's basketball gold medal; (2nd LD) (Asiad) S. Korea…**
 - ✅ **post · Australia Finance News · 27 September 2026 · Coverage September 26 to 27 — The residents and wind farm on the frontline of Australia's energy wars; Bond market…**
 - ✅ **post · Russia Finance News · 26 September 2026 · Coverage September 25 to 26 — Russia ready to share its best practices in culture, Putin says; Russia Can Restart 80% of…**
