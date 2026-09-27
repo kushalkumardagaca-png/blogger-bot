@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 57 PASS · 0 FAIL
+**Result:** 61 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -24,6 +24,10 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Master articles include continuous gesture motion**
 - ✅ **Master hero image is preflight-validated**
 - ✅ **News hero image is preflight-validated**
+- ✅ **Every News desk uses date-rotated fresh hero selection**
+- ✅ **Daily News heroes avoid cross-desk reuse**
+- ✅ **Licensed Commons hero photographs retain visible attribution**
+- ✅ **News tracker records the selected hero for next-day deduplication**
 - ✅ **Master structure passes fail-closed publication preflight**
 - ✅ **News structure passes fail-closed publication preflight**
 - ✅ **Master packages retain comprehensive family directory**
@@ -57,7 +61,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 35
+- ✅ **Master tracker next-topic state is valid** — next index 39
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

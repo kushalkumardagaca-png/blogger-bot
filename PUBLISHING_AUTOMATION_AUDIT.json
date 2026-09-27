@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-27T09:01:24+05:30",
+  "checked_at_ist": "2026-09-27T20:23:22+05:30",
   "summary": {
-    "pass": 57,
+    "pass": 61,
     "fail": 0
   },
   "checks": [
@@ -102,6 +102,26 @@
     },
     {
       "name": "News hero image is preflight-validated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every News desk uses date-rotated fresh hero selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Daily News heroes avoid cross-desk reuse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Licensed Commons hero photographs retain visible attribution",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News tracker records the selected hero for next-day deduplication",
       "status": "PASS",
       "detail": ""
     },
@@ -273,7 +293,7 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 35"
+      "detail": "next index 39"
     },
     {
       "name": "News tracker launch/state is valid",

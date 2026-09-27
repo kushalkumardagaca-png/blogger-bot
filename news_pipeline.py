@@ -22,7 +22,7 @@ import ssl
 import sys
 import time
 import urllib.request
-from urllib.parse import urljoin, quote_plus
+from urllib.parse import urljoin, quote_plus, urlencode
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor
 from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
@@ -49,9 +49,41 @@ TRACKER = os.environ.get("NEWS_TRACKER", "news_tracker.json")
 # minutes later, so the selector includes the full 60-minute cluster runway.
 PREFLIGHT_MINUTES = 60
 HERO_W, HERO_H = 1600, 900
-SESSION_USED_TITLES, SESSION_USED_URLS = set(), set()
+SESSION_USED_TITLES, SESSION_USED_URLS, SESSION_USED_IMAGES = set(), set(), set()
 
-# desk -> (num, label, slug, slot IST "HH:MM", hero unsplash id, hero alt)
+# Wikimedia Commons searches produce a new, licensed, desk-relevant photo each day.
+# Results are date-rotated, checked for image availability and attributed in-page.
+HERO_SEARCH = {
+ "global": "financial district skyline", "us": "Wall Street New York",
+ "china": "Shanghai skyline financial district", "germany": "Frankfurt skyline",
+ "india": "Mumbai skyline", "japan": "Tokyo skyline Marunouchi",
+ "uk": "City of London skyline", "france": "La Defense Paris",
+ "italy": "Milan skyline", "russia": "Moscow International Business Center",
+ "canada": "Toronto skyline financial district", "brazil": "Sao Paulo skyline",
+ "spain": "Madrid skyline business district", "mexico": "Mexico City skyline",
+ "australia": "Sydney skyline business district", "south-korea": "Seoul skyline business district",
+ "market": "stock exchange trading floor", "macro": "economic chart statistics",
+ "corporate": "office buildings corporate", "personal": "household savings money",
+}
+# Resilient lawful fallback rotation. Each date/desk gets a different curated
+# Unsplash photograph if Commons is unavailable; 25 options cover all 20 desks.
+CURATED_HERO_IDS = [
+ "photo-1611974789855-9c2a0a7236a3", "photo-1494522855154-9297ac14b55f",
+ "photo-1560518883-ce09059eeffa", "photo-1590283603385-17ffb3a7f29f",
+ "photo-1493976040374-85c8e12f0c0e", "photo-1518186285589-2f7649de83e0",
+ "photo-1502602898657-3e91760cbb34", "photo-1516483638261-f4dbaf036963",
+ "photo-1460925895917-afdab827c52f", "photo-1449824913935-59a10b8d2000",
+ "photo-1496307653780-42ee777d4833", "photo-1506973035872-a4ec16b8e8d9",
+ "photo-1538485399081-7191377e8241", "photo-1554224155-8d04cb21cd6c",
+ "photo-1486406146926-c627a92ad1ab", "photo-1579621970563-ebec7560ff3e",
+ "photo-1454165804606-c3d57bc86b40", "photo-1526304640581-d334cdbbf45e",
+ "photo-1518770660439-4636190af475", "photo-1563013544-824ae1b704d3",
+ "photo-1618005182384-a83a8bd57fbe", "photo-1506126613408-eca07ce68773",
+ "photo-1532619675605-1ede6c2ed2b0", "photo-1573496359142-b8d87734a5a2",
+ "photo-1522202176988-66273c2fd55f",
+]
+
+# desk -> (num, label, slug, slot IST "HH:MM", legacy fallback photo id, fallback alt)
 DESKS = {
  "global":  (1, "Global News", "global-wire-top15", "06:30", "photo-1611974789855-9c2a0a7236a3", "Global financial district skyline at dusk"),
  "us":      (2, "US", "us", "18:00", "photo-1611974789855-9c2a0a7236a3", "United States Treasury building, Washington DC"),
@@ -756,6 +788,84 @@ def compose_item(it, win_end):
       {contextual_card(etitle + ' ' + desc)}
     </div>'''
 
+# ---------------------------------------------------------------- daily hero imagery
+def _meta_value(metadata, key, default=""):
+    value = metadata.get(key, default)
+    if isinstance(value, dict):
+        value = value.get("value", default)
+    return strip_tags(str(value or default))
+
+
+def curated_daily_hero(desk, edition_date, used_urls, previous_url=""):
+    """Deterministic, cross-desk-unique fallback that changes every day."""
+    desk_number = DESKS[desk][0]
+    seed = edition_date.toordinal() * 31 + desk_number
+    for step in range(len(CURATED_HERO_IDS)):
+        photo_id = CURATED_HERO_IDS[(seed + step) % len(CURATED_HERO_IDS)]
+        url = f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w={HERO_W}&h={HERO_H}&q=85"
+        if url != previous_url and url not in used_urls and url not in SESSION_USED_IMAGES:
+            return {"url": url, "alt": f"Daily financial news editorial photograph for {DESKS[desk][1]}",
+                    "credit": "Editorial photograph · Unsplash", "source": "curated-fallback"}
+    # Twenty desks and twenty-five photos make this practically unreachable.
+    photo_id = CURATED_HERO_IDS[seed % len(CURATED_HERO_IDS)]
+    return {"url": f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w={HERO_W}&h={HERO_H}&q=85",
+            "alt": f"Daily financial news editorial photograph for {DESKS[desk][1]}",
+            "credit": "Editorial photograph · Unsplash", "source": "curated-fallback"}
+
+
+def daily_hero(desk, edition_date, used_urls=None, previous_url=""):
+    """Choose a fresh licensed image for this desk/date without reusing yesterday's."""
+    used_urls = set(used_urls or ())
+    fallback = curated_daily_hero(desk, edition_date, used_urls, previous_url)
+    params = {
+        "action": "query", "format": "json", "formatversion": "2", "origin": "*",
+        "generator": "search", "gsrsearch": HERO_SEARCH[desk] + " filetype:bitmap", "gsrnamespace": "6", "gsrlimit": "30",
+        "prop": "imageinfo", "iiprop": "url|mime|extmetadata", "iiurlwidth": str(HERO_W),
+    }
+    endpoint = "https://commons.wikimedia.org/w/api.php?" + urlencode(params)
+    try:
+        payload = json.loads(http_get(endpoint, tries=2, timeout=20))
+        candidates = []
+        for page in payload.get("query", {}).get("pages", []):
+            info_list = page.get("imageinfo") or []
+            if not info_list:
+                continue
+            info = info_list[0]
+            mime = str(info.get("mime", "")).lower()
+            url = info.get("thumburl") or info.get("url") or ""
+            if mime not in {"image/jpeg", "image/png", "image/webp"} or not url.startswith(("https://upload.wikimedia.org/", "https://thumb.wikimedia.org/")):
+                continue
+            metadata = info.get("extmetadata") or {}
+            license_name = _meta_value(metadata, "LicenseShortName")
+            if not (license_name.lower().startswith(("cc by", "cc0", "public domain", "pdm"))):
+                continue
+            if url == previous_url or url in used_urls or url in SESSION_USED_IMAGES:
+                continue
+            title = _meta_value(metadata, "ImageDescription") or page.get("title", "Wikimedia Commons photograph")
+            artist = _meta_value(metadata, "Artist", "Wikimedia Commons contributor")
+            candidates.append({
+                "url": url, "alt": clip_words(title, 150),
+                "credit": clip_words(f"Photo: {artist} · {license_name} · Wikimedia Commons", 220),
+                "source": "wikimedia-commons", "pageid": int(page.get("pageid", 0)),
+            })
+        if candidates:
+            candidates.sort(key=lambda x: x["pageid"])
+            start = int(hashlib.sha256(f"{desk}:{edition_date.isoformat()}".encode()).hexdigest()[:8], 16) % len(candidates)
+            for offset in range(len(candidates)):
+                chosen = candidates[(start + offset) % len(candidates)]
+                try:
+                    chosen["url"] = safe_image(chosen["url"], fallback["url"])
+                    if chosen["url"] == fallback["url"]:
+                        return fallback
+                    return chosen
+                except Exception:
+                    continue
+    except Exception as exc:
+        print(f"  [{desk}] fresh Commons photo unavailable: {exc}; using rotating curated image")
+    fallback["url"] = safe_image(fallback["url"], FALLBACK_PERSONAL if desk == "personal" else FALLBACK_MARKET)
+    return fallback
+
+
 # ---------------------------------------------------------------- template
 CSS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fbk_styles.css")).read() \
     if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fbk_styles.css")) else "/*missing*/"
@@ -790,8 +900,9 @@ def coverage_window_text(start, end):
         return f"{names[start.month-1]} {start.day} to {names[end.month-1]} {end.day}"
     return f"{names[start.month-1]} {start.day} {start.year} to {names[end.month-1]} {end.day} {end.year}"
 
-def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related):
-    n, label, slug, slot, hero_id, hero_alt = DESKS[desk]
+def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related,
+                  previous_hero="", used_heroes=None):
+    n, label, slug, slot, legacy_hero_id, legacy_hero_alt = DESKS[desk]
     current_items = [i for i in items if not i.get("background")]
     background_items = [i for i in items if i.get("background")]
     volume_note = (f"The strongest {len(current_items)} relevant current items were selected from the complete desk pool."
@@ -815,8 +926,9 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
             "south-korea": "🇰🇷"}.get(desk, "🌍")
     tag = f"Daily News · {flag} {label} Wire" if desk not in CATEGORY_DESKS else f"Daily News · 📑 {label}"
 
-    hero_candidate = f"https://images.unsplash.com/{hero_id}?auto=format&fit=crop&w={HERO_W}&h={HERO_H}&q=85"
-    hero_url = safe_image(hero_candidate, FALLBACK_PERSONAL if desk == "personal" else FALLBACK_MARKET)
+    hero = daily_hero(desk, edition_date, used_urls=used_heroes, previous_url=previous_hero)
+    hero_url, hero_alt, hero_credit = hero["url"], hero["alt"], hero["credit"]
+    SESSION_USED_IMAGES.add(hero_url)
 
     # Current items form the numbered news sections. Older context is isolated below.
     third = max(1, len(current_items) // 3)
@@ -892,7 +1004,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     </div>'''
 
     body = f'''<div class="fbk-wrap">
-  <figure class="fbk-hero"><img src="{hero_url}" alt="{hero_alt}" width="{HERO_W}" height="{HERO_H}" loading="eager" decoding="async" fetchpriority="high" style="display:block;width:100%;height:auto;max-width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px"></figure>
+  <figure class="fbk-hero"><img src="{htmlmod.escape(hero_url, quote=True)}" alt="{htmlmod.escape(hero_alt, quote=True)}" width="{HERO_W}" height="{HERO_H}" loading="eager" decoding="async" fetchpriority="high" style="display:block;width:100%;height:auto;max-width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px"><figcaption style="font-size:11px;color:#7A6A58;margin-top:7px">{htmlmod.escape(hero_credit)}</figcaption></figure>
 
   <style>{CSS}</style>
   {CONTEXT_STYLE}
@@ -937,7 +1049,8 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 
     return {"title": title, "slug": f"{slug}-{edition_date.isoformat()}",
             "meta": meta, "labels": ["News", label], "html": full_html,
-            "canonical": canonical, "n_items": len(items)}
+            "canonical": canonical, "n_items": len(items),
+            "hero_url": hero_url, "hero_credit": hero_credit, "hero_source": hero["source"]}
 
 # ---------------------------------------------------------------- related links
 def fetch_related(desk, prev_url, token):
@@ -1047,7 +1160,7 @@ def run_desk(desk, tracker, dry=False, token=None):
     # Recover safely if Blogger published successfully but a previous tracker push failed.
     expected_url = f"{BLOG}/{now:%Y/%m}/{slug}-{now.date().isoformat()}.html"
     if not dry and live_post_exists(expected_url, token):
-        tracker["desks"][desk] = {"edition": now.date().isoformat(),
+        tracker["desks"][desk] = {**prev, "edition": now.date().isoformat(),
                                   "window_end": now.isoformat(), "url": expected_url}
         save_tracker(tracker)
         print(f"  [{desk}] recovered existing live edition; no duplicate: {expected_url}")
@@ -1082,7 +1195,12 @@ def run_desk(desk, tracker, dry=False, token=None):
         return False
     fx = ecb_reference_rates()
     related = fetch_related(desk, prev.get("url"), token)
-    art = build_article(desk, items, upcoming, edition_date, eff_start, win_end, fx, related)
+    used_heroes = {
+        entry.get("hero_url") for entry in tracker.get("desks", {}).values()
+        if entry.get("edition") == edition_date.isoformat() and entry.get("hero_url")
+    }
+    art = build_article(desk, items, upcoming, edition_date, eff_start, win_end, fx, related,
+                        previous_hero=prev.get("hero_url", ""), used_heroes=used_heroes)
     current_post = {"id": "pending", "title": art["title"], "labels": art["labels"], "content": art["html"]}
     art["html"] = ensure_related_articles(art["html"], current_post, fetch_public_posts())
     hero_match = re.search(r'<img[^>]+src=["\']([^"\']+)', art["html"], re.I)
@@ -1104,7 +1222,10 @@ def run_desk(desk, tracker, dry=False, token=None):
         if not dry:
             tracker["desks"][desk] = {"edition": edition_date.isoformat(),
                                       "window_end": win_end.isoformat(),
-                                      "url": url or prev.get("url", "")}
+                                      "url": url or prev.get("url", ""),
+                                      "hero_url": art["hero_url"],
+                                      "hero_credit": art["hero_credit"],
+                                      "hero_source": art["hero_source"]}
             save_tracker(tracker)
         print(f"  [{desk}] PUBLISHED: {url or '(dry-run)'}")
         return True

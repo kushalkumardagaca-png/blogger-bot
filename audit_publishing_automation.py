@@ -43,6 +43,14 @@ check('Master articles include related-reading shelf','ensure_related_articles' 
 check('Master articles include continuous gesture motion','ensure_continuous_motion' in ap)
 check('Master hero image is preflight-validated','safe_image' in ap and 'FALLBACK_MARKET' in ap)
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
+check('Every News desk uses date-rotated fresh hero selection',
+      'def daily_hero(' in np and 'edition_date.toordinal()' in np and 'previous_hero=prev.get("hero_url"' in np)
+check('Daily News heroes avoid cross-desk reuse',
+      'used_heroes = {' in np and 'SESSION_USED_IMAGES' in np and 'url not in used_urls' in np)
+check('Licensed Commons hero photographs retain visible attribution',
+      'LicenseShortName' in np and 'Wikimedia Commons' in np and '<figcaption' in np)
+check('News tracker records the selected hero for next-day deduplication',
+      '"hero_url": art["hero_url"]' in np and '"hero_credit": art["hero_credit"]' in np)
 check('Master structure passes fail-closed publication preflight','assert_publishable(title, html, labels)' in ap)
 check('News structure passes fail-closed publication preflight','assert_publishable(art["title"], art["html"], art["labels"])' in np)
 check('Master packages retain comprehensive family directory','ensure_family(html)' in ap)
