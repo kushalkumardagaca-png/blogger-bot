@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-27T15:52:45.571577+05:30
+- **Checked:** 2026-09-27T17:57:45.300104+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 101 URLs · 88 Posts · 12 Pages
+- **Inventory:** 105 URLs · 92 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/100 tracked PASS
+- **Search Console:** OK · 0/104 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,10 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Canada Finance News · 27 September 2026 · Coverage September 26 to 27 — The Week Ahead: Earnings from Carnival, Nike; Bloomberg Feed Opens in new window**
+- ✅ **post · US Finance News · 27 September 2026 · Coverage September 26 to 27 — Wall Street money takes back over from small investors as driving force of the stock…**
+- ✅ **post · The Loyalty Tax You're Paying**
+- ✅ **post · Brazil Finance News · 27 September 2026 · Coverage September 26 to 27 — US Offers Argentina Up to US$7 Billion for a Gas and Minerals Corridor; Exclusive |…**
 - ✅ **post · Corporate Finance and Industry News · 27 September 2026 · Coverage September 26 to 27 — Baby bank's urgent appeal as demand for help grows; London’s investment bankers and…**
 - ✅ **post · Italy Finance News · 27 September 2026 · Coverage September 26 to 27 — iShares Italy Govt Bond UCITS E (IITBM.XD); Savings: the twin BTp bonds are here – here’s…**
 - ✅ **post · The 14-Day Pre-5-April Tax Sprint**
