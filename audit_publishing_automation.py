@@ -35,6 +35,8 @@ check('Master packages always rebuilt fresh','Always rebuild with the current da
 check('Master byline is current','By <strong>Kushal K. Daga</strong>' in ap and 'By CA Kushal K. Daga' not in ap)
 check('Master publisher brand is Daily Yield','"name": "Daily Yield"' in ap and '"name": "Finance by CA Kushal"' not in ap)
 check('Canonical social identity uses new LinkedIn and omits closed X','https://www.linkedin.com/in/dailyyeild' in ap and 'x.com/CAKUSHAL2509' not in ap and 'finance-by-kushal' not in ap)
+social=(ROOT/'social_identity.py').read_text()
+check('Canonical public contact email is the Daily Yield brand inbox','dailyyield.official@gmail.com' in social and 'PUBLIC_EMAIL' in social)
 check('Master links both market desks','/p/markets-today.html' in ap and '/p/global-snapshot.html' in ap)
 check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))
 check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)

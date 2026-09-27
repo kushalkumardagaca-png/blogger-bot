@@ -4,6 +4,11 @@ import json
 import re
 
 LINKEDIN = "https://www.linkedin.com/in/dailyyeild"
+PUBLIC_EMAIL = "dailyyield.official@gmail.com"
+OLD_PUBLIC_EMAILS = (
+    "kushalkumardaga.ca@gmail.com",
+    "kushalkumadaga.ca@gmail.com",
+)
 OLD_LINKEDIN = (
     "https://www.linkedin.com/in/finance-by-kushal/",
     "https://www.linkedin.com/in/finance-by-kushal",
@@ -37,6 +42,8 @@ def ensure_social_identity(content):
     content = content or ""
     for old in OLD_LINKEDIN:
         content = content.replace(old, LINKEDIN)
+    for old in OLD_PUBLIC_EMAILS:
+        content = re.sub(re.escape(old), PUBLIC_EMAIL, content, flags=re.I)
 
     # Keep structured data valid while removing the discontinued X identity.
     def json_repl(match):

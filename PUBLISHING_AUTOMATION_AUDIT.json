@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-26T22:02:27+05:30",
+  "checked_at_ist": "2026-09-27T09:01:24+05:30",
   "summary": {
-    "pass": 56,
+    "pass": 57,
     "fail": 0
   },
   "checks": [
@@ -67,6 +67,11 @@
     },
     {
       "name": "Canonical social identity uses new LinkedIn and omits closed X",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Canonical public contact email is the Daily Yield brand inbox",
       "status": "PASS",
       "detail": ""
     },

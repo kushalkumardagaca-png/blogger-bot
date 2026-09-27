@@ -157,6 +157,8 @@ def audit_content(item, known):
         issues.append("obsolete LinkedIn profile present")
     if re.search(r"https?://(?:www\.)?(?:x|twitter)\.com/CAKUSHAL2509", content, re.I):
         issues.append("closed X profile present")
+    if re.search(r"kushalkumard?aga\.ca@gmail\.com", content, re.I):
+        issues.append("obsolete public contact email present")
     if not exempt and 'id="dyPageFamily"' not in content:
         issues.append("Daily Yield family directory missing")
     if LEGACY in content and not exempt:
