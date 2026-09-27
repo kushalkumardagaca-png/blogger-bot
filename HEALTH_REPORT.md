@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-27T09:54:04.230500+05:30
+- **Checked:** 2026-09-27T11:58:03.039772+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 91 URLs · 78 Posts · 12 Pages
+- **Inventory:** 96 URLs · 83 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/90 tracked PASS
+- **Search Console:** OK · 0/95 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,11 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · UK Finance News · 27 September 2026 · Coverage September 26 to 27 — Poland is racing ahead with military spending – but will it help or damage its economic…**
+- ✅ **post · Japan Finance News · 27 September 2026 · Coverage September 26 to 27 — Japan’s LDP worried about fresh attention to money issue; As temperatures rise, Japan’s…**
+- ✅ **post · Don't Ignore State Pension / Social Security**
+- ✅ **post · France Finance News · 27 September 2026 · Coverage September 26 to 27 — In Borneo, young Bajau struggle for a place to belong: 'If I don't have papers, my…**
+- ✅ **post · Germany Finance News · 27 September 2026 · Coverage September 26 to 27 — Spain: Thousands protest in Madrid against housing crisis; Backlash over data centers…**
 - ✅ **post · Economy and Macro Policy News · 27 September 2026 · Coverage September 26 to 27 — S. Korea's tourism balance swings to deficit in July after 4 months of surplus…**
 - ✅ **post · Market and Trading News · 27 September 2026 · Coverage September 26 to 27 — Lavrov sees Europe making every effort to disrupt potential peace talks; Bangladesh…**
 - ✅ **post · First $1,000: The Scared Person's Plan**
