@@ -1,0 +1,81 @@
+name: Daily Yield Facebook Publisher
+
+on:
+  schedule:
+    # Seven organic posts/day, spaced 2h30m apart (IST = UTC+5:30).
+    - cron: '45 1 * * *'   # 07:15 IST
+    - cron: '15 4 * * *'   # 09:45 IST
+    - cron: '45 6 * * *'   # 12:15 IST
+    - cron: '15 9 * * *'   # 14:45 IST
+    - cron: '45 11 * * *'  # 17:15 IST
+    - cron: '15 14 * * *'  # 19:45 IST
+    - cron: '45 16 * * *'  # 22:15 IST
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'verify checks authorization; dry-run ranks without posting; publish creates one Page post'
+        required: true
+        default: verify
+        type: choice
+        options:
+          - verify
+          - dry-run
+          - publish
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-facebook-publisher
+  cancel-in-progress: false
+
+jobs:
+  facebook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Facebook publisher dependency
+        run: python -m pip install --disable-pip-version-check requests
+
+      - name: Run isolated Facebook publisher
+        env:
+          FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
+          FACEBOOK_PAGE_ID: '1303333369533572'
+          FACEBOOK_GRAPH_VERSION: 'v26.0'
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          ACTION="${{ github.event.inputs.action }}"
+          if [[ "${{ github.event_name }}" == "schedule" || "$ACTION" == "publish" ]]; then
+            python facebook_publisher.py
+          elif [[ "$ACTION" == "dry-run" ]]; then
+            python facebook_publisher.py --dry-run
+          else
+            python facebook_publisher.py --verify-only
+          fi
+
+      - name: Commit Facebook audit tracker
+        if: success() && (github.event_name == 'schedule' || github.event.inputs.action == 'publish')
+        shell: bash
+        run: |
+          git config user.name "Daily Yield Facebook Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add facebook_tracker.json
+          if git diff --staged --quiet; then
+            echo "No Facebook tracker change."
+          else
+            git commit -m "Record Daily Yield Facebook publication [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
