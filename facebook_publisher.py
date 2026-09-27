@@ -186,7 +186,9 @@ def summary_from_content(content: str, title: str) -> str:
         if match:
             text = clean_text(match.group(1))
             if len(text) >= 45 and title.lower() not in text.lower():
-                return text[:260].rsplit(" ", 1)[0].rstrip(" ,;:-") + ("…" if len(text) > 260 else "")
+                if len(text) <= 300:
+                    return text
+                return text[:300].rsplit(" ", 1)[0].rstrip(" ,;:-") + "…"
     return "Clear context, verified sources and practical implications from Daily Yield."
 
 
@@ -338,17 +340,21 @@ def hashtags(post: dict) -> str:
 
 def make_caption(item: dict) -> str:
     title = clean_text(item.get("title", "Daily Yield"))
-    summary = summary_from_content(item.get("content", ""), title)
+    summary = summary_from_content(item.get("content", ""), title).strip()
+    if summary and summary[-1] not in ".!?…":
+        summary += "."
     url = item["url"]
     if item.get("kind") == "page":
-        call_to_action = "Explore this Daily Yield resource"
+        top_link = f"🔗 OPEN THIS DAILY YIELD RESOURCE: {url}"
         value_line = "Use the page, review the supporting guidance and bookmark it for your next decision."
     else:
-        call_to_action = "Read the full Daily Yield report"
+        top_link = f"🔗 READ THE FULL REPORT: {url}"
         value_line = "Open the report for the evidence, context and practical implications."
+    # The destination is intentionally the first line so mobile readers can tap it
+    # without expanding or searching through the caption.
     return (
+        f"{top_link}\n\n"
         f"{title}\n\n{summary}\n\n{value_line}\n\n"
-        f"{call_to_action}: {url}\n\n"
         f"By Kushal K. Daga · Markets · Money · Better decisions\n\n"
         f"{hashtags(item)}"
     )
