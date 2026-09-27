@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-27T20:23:22+05:30",
+  "checked_at_ist": "2026-09-27T20:31:21+05:30",
   "summary": {
-    "pass": 61,
+    "pass": 73,
     "fail": 0
   },
   "checks": [
@@ -72,6 +72,66 @@
     },
     {
       "name": "Canonical public contact email is the Daily Yield brand inbox",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook publisher files are deployed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook has seven spaced organic publishing triggers",
+      "status": "PASS",
+      "detail": "['45 1 * * *', '15 4 * * *', '45 6 * * *', '15 9 * * *', '45 11 * * *', '15 14 * * *', '45 16 * * *']"
+    },
+    {
+      "name": "Facebook uses encrypted token secret, never a literal token",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook derives a Page token before publishing",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook destination link is always the first caption line",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook descriptions preserve complete short source text",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook always renders a branded 1200x630 topic card",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook uploads the rendered card rather than a raw full-frame photo",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook rotates audience-facing website Pages as well as posts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook deduplicates and reconciles uncertain writes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook automation excludes comments, messages, ads and artificial engagement",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Facebook candidate discovery creates no Daily Yield public-page requests",
       "status": "PASS",
       "detail": ""
     },
@@ -293,7 +353,7 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 39"
+      "detail": "next index 40"
     },
     {
       "name": "News tracker launch/state is valid",

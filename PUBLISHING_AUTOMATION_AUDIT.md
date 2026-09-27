@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 61 PASS · 0 FAIL
+**Result:** 73 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -18,6 +18,18 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Master publisher brand is Daily Yield**
 - ✅ **Canonical social identity uses new LinkedIn and omits closed X**
 - ✅ **Canonical public contact email is the Daily Yield brand inbox**
+- ✅ **Facebook publisher files are deployed**
+- ✅ **Facebook has seven spaced organic publishing triggers** — ['45 1 * * *', '15 4 * * *', '45 6 * * *', '15 9 * * *', '45 11 * * *', '15 14 * * *', '45 16 * * *']
+- ✅ **Facebook uses encrypted token secret, never a literal token**
+- ✅ **Facebook derives a Page token before publishing**
+- ✅ **Facebook destination link is always the first caption line**
+- ✅ **Facebook descriptions preserve complete short source text**
+- ✅ **Facebook always renders a branded 1200x630 topic card**
+- ✅ **Facebook uploads the rendered card rather than a raw full-frame photo**
+- ✅ **Facebook rotates audience-facing website Pages as well as posts**
+- ✅ **Facebook deduplicates and reconciles uncertain writes**
+- ✅ **Facebook automation excludes comments, messages, ads and artificial engagement**
+- ✅ **Facebook candidate discovery creates no Daily Yield public-page requests**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include related-reading shelf**
@@ -61,7 +73,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 39
+- ✅ **Master tracker next-topic state is valid** — next index 40
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

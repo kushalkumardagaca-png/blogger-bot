@@ -37,6 +37,39 @@ check('Master publisher brand is Daily Yield','"name": "Daily Yield"' in ap and 
 check('Canonical social identity uses new LinkedIn and omits closed X','https://www.linkedin.com/in/dailyyeild' in ap and 'x.com/CAKUSHAL2509' not in ap and 'finance-by-kushal' not in ap)
 social=(ROOT/'social_identity.py').read_text()
 check('Canonical public contact email is the Daily Yield brand inbox','dailyyield.official@gmail.com' in social and 'PUBLIC_EMAIL' in social)
+
+# Facebook organic publishing invariants. These remain isolated from Blogger and
+# News publishing but are checked by the same repository watchdog.
+fp_path=ROOT/'facebook_publisher.py'; fw_path=ROOT/'.github/workflows/facebook_publisher.yml'
+fp=fp_path.read_text() if fp_path.exists() else ''; fw=fw_path.read_text() if fw_path.exists() else ''
+facebook_expected=['45 1 * * *','15 4 * * *','45 6 * * *','15 9 * * *','45 11 * * *','15 14 * * *','45 16 * * *']
+check('Facebook publisher files are deployed',bool(fp) and bool(fw) and (ROOT/'facebook_tracker.json').exists())
+check('Facebook has seven spaced organic publishing triggers',crons(fw_path)==facebook_expected,str(crons(fw_path)) if fw else 'missing workflow')
+check('Facebook uses encrypted token secret, never a literal token',
+      'secrets.FACEBOOK_SYSTEM_USER_TOKEN' in fw and 'FACEBOOK_SYSTEM_USER_TOKEN' in fp)
+check('Facebook derives a Page token before publishing',
+      'def resolve_page_token(' in fp and 'fields": "id,name,access_token"' in fp)
+check('Facebook destination link is always the first caption line',
+      'f"{top_link}\\n\\n"' in fp and 'READ THE FULL REPORT' in fp and 'OPEN THIS DAILY YIELD RESOURCE' in fp)
+check('Facebook descriptions preserve complete short source text',
+      'if len(text) <= 300:' in fp and 'return text' in fp)
+check('Facebook always renders a branded 1200x630 topic card',
+      'def generate_topic_card(' in fp and 'width, height = 1200, 630' in fp
+      and 'DAILY YIELD' in fp and 'Markets · Money · Better decisions' in fp)
+check('Facebook uploads the rendered card rather than a raw full-frame photo',
+      'card = generate_topic_card(item)' in fp and 'files={"source":' in fp
+      and 'data={**payload, "url": image_url}' not in fp)
+check('Facebook rotates audience-facing website Pages as well as posts',
+      '/pages"' in fp and 'PAGE_PROMOTION_WINDOWS' in fp and 'def choose_page(' in fp)
+check('Facebook deduplicates and reconciles uncertain writes',
+      'def reconcile(' in fp and 'seen_ids' in fp and 'caption_hash' in fp)
+check('Facebook automation excludes comments, messages, ads and artificial engagement',
+      'pages_manage_engagement' not in fp+fw and 'pages_messaging' not in fp+fw
+      and 'ads_management' not in fp+fw)
+check('Facebook candidate discovery creates no Daily Yield public-page requests',
+      'www.googleapis.com/blogger/v3' in fp and 'requests.get(item["url"]' not in fp
+      and 'requests.get(post["url"]' not in fp)
+
 check('Master links both market desks','/p/markets-today.html' in ap and '/p/global-snapshot.html' in ap)
 check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))
 check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)
