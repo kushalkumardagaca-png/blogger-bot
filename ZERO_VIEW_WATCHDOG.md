@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-27T11:58:03.039772+05:30
+- **Checked:** 2026-09-27T13:54:06.926584+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 96 URLs · 83 Posts · 12 Pages
+- **Inventory:** 99 URLs · 86 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/95 tracked PASS
+- **Search Console:** OK · 0/98 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · The 14-Day Pre-5-April Tax Sprint**
+- ✅ **post · Spain Finance News · 27 September 2026 · Coverage September 26 to 27 — Middle East conflicts push Europe toward a second energy crisis in five years; Operation…**
+- ✅ **post · China Finance News · 27 September 2026 · Coverage September 26 to 27 — Houthi attacks on Saudi Arabia test limits of Mecca regional security pact; China, U.S.…**
 - ✅ **post · UK Finance News · 27 September 2026 · Coverage September 26 to 27 — Poland is racing ahead with military spending – but will it help or damage its economic…**
 - ✅ **post · Japan Finance News · 27 September 2026 · Coverage September 26 to 27 — Japan’s LDP worried about fresh attention to money issue; As temperatures rise, Japan’s…**
 - ✅ **post · Don't Ignore State Pension / Social Security**
