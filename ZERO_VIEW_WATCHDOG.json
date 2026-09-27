@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-27T20:24:00.948024+05:30",
+  "checkedAtIST": "2026-09-27T20:31:48.662779+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 768,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 33,
+    "transientExternalResponses": 35,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -6288,15 +6288,19 @@
       "status": 999
     },
     {
+      "url": "https://www.marketwatch.com/story/8-mortgage-rates-are-not-an-impossibility-as-the-30-year-fixed-rate-surges-aa202464?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/a-death-cross-is-coming-for-the-dollar-why-trump-will-be-happy-0766303d?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
       "url": "https://www.marketwatch.com/story/after-capital-markets-day-flop-novo-strikes-licensing-deal-that-sends-a-swedish-companys-stock-soaring-f3c99cbe?mod=mw_rss_topstories",
       "status": 401
     },
     {
       "url": "https://www.marketwatch.com/story/from-6-eggs-to-50-000-cars-these-charts-show-how-inflation-has-defined-the-past-5-years-3c7b9ab9?mod=mw_rss_topstories",
-      "status": 401
-    },
-    {
-      "url": "https://www.marketwatch.com/story/my-friend-grosses-300-000-a-year-with-her-pet-sitting-business-she-pays-herself-50-000-should-i-do-the-same-8ab5cba3?mod=mw_rss_topstories",
       "status": 401
     },
     {
@@ -6309,6 +6313,10 @@
     },
     {
       "url": "https://www.marketwatch.com/story/social-security-checks-are-projected-to-be-cut-by-540-a-month-in-just-six-years-a8842912?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/stop-trying-to-beat-the-market-even-the-richest-americans-cant-do-it-consistently-4560e275?mod=mw_rss_topstories",
       "status": 401
     },
     {
@@ -7607,7 +7615,7 @@
       "tracked": 107,
       "pass": 0,
       "notPass": 107,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
