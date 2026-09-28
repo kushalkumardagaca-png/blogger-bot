@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-28T13:58:27.375620+05:30
-- **Verdict:** PASS
+- **Checked:** 2026-09-28T15:56:48.552253+05:30
+- **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 124 URLs · 111 Posts · 12 Pages
+- **Inventory:** 126 URLs · 113 Posts · 12 Pages
 - **Content failures:** 0
-- **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/123 tracked PASS
+- **Confirmed external 404/410:** 1
+- **Search Console:** OK · 0/125 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Corporate Finance and Industry News · 28 September 2026 · Coverage September 27 to 28 — Banks to open at 9:30 a.m. from April under labor-management deal; Hanwha Ocean wins 680…**
+- ✅ **post · Italy Finance News · 28 September 2026 · Coverage September 27 to 28 — Temasek Acquires 9% Stake in Italy’s FSI, Boosts European Investment; Financial Stress…**
 - ✅ **post · Your Student Overdraft Isn't Free**
 - ✅ **post · Spain Finance News · 28 September 2026 · Coverage September 27 to 28 — Spain’s most exclusive waterfront addresses take centre stage in Europe; Fuad Gaši…**
 - ✅ **post · China Finance News · 28 September 2026 · Coverage September 27 to 28 — Asean firms hope Pinglu Canal will open China market, but fear flood of imports; Asean…**

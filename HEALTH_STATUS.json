@@ -1,15 +1,15 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 124,
-    "posts": 111,
+    "urls": 126,
+    "posts": 113,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 912,
-    "confirmedExternal404or410": 0,
-    "transientExternalResponses": 43,
+    "externalDestinationsChecked": 939,
+    "confirmedExternal404or410": 1,
+    "transientExternalResponses": 45,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1405,14 +1405,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html": {
+        "title": "Corporate Finance and Industry News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 Banks to open at 9:30 a.m. from April under labor-management deal; Hanwha Ocean wins 680\u2026",
+        "checkedAt": "2026-09-28T15:56:48.552253+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/italy-2026-09-28.html": {
+        "title": "Italy Finance News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 Temasek Acquires 9% Stake in Italy\u2019s FSI, Boosts European Investment; Financial Stress\u2026",
+        "checkedAt": "2026-09-28T15:56:48.552253+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 123,
-      "tracked": 123,
+      "inventory": 125,
+      "tracked": 125,
       "pass": 0,
-      "notPass": 123,
-      "inspectedThisRun": 3,
+      "notPass": 125,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
