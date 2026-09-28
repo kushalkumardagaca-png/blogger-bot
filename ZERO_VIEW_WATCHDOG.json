@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-29T01:53:32.769272+05:30",
+  "checkedAtIST": "2026-09-29T03:53:27.584145+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 1020,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 54,
+    "transientExternalResponses": 55,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -8105,7 +8105,7 @@
       "status": 403
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
     {
@@ -8114,6 +8114,10 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
     {
@@ -9674,7 +9678,7 @@
       "tracked": 133,
       "pass": 0,
       "notPass": 133,
-      "inspectedThisRun": 133,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
