@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-28T12:02:37.687503+05:30
+- **Checked:** 2026-09-28T13:58:27.375620+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 121 URLs · 108 Posts · 12 Pages
+- **Inventory:** 124 URLs · 111 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/120 tracked PASS
+- **Search Console:** OK · 0/123 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Your Student Overdraft Isn't Free**
+- ✅ **post · Spain Finance News · 28 September 2026 · Coverage September 27 to 28 — Spain’s most exclusive waterfront addresses take centre stage in Europe; Fuad Gaši…**
+- ✅ **post · China Finance News · 28 September 2026 · Coverage September 27 to 28 — Asean firms hope Pinglu Canal will open China market, but fear flood of imports; Asean…**
 - ✅ **post · UK Finance News · 28 September 2026 · Coverage September 27 to 28 — Should you lock into a fixed-rate savings account paying 5.25%?; North Yorkshire…**
 - ✅ **post · Japan Finance News · 28 September 2026 · Coverage September 27 to 28 — Conduct of Funds-Supplying Operations against Pooled Collateral[PDF 90KB]; Higher defense…**
 - ✅ **post · Joint vs. Separate vs. Hybrid Accounts**
