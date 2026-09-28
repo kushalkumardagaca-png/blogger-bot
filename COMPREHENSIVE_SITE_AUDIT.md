@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-28T09:56:19.155065+05:30
+- **Checked:** 2026-09-28T12:02:37.687503+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 116 URLs · 103 Posts · 12 Pages
+- **Inventory:** 121 URLs · 108 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/115 tracked PASS
+- **Search Console:** OK · 0/120 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,11 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · UK Finance News · 28 September 2026 · Coverage September 27 to 28 — Should you lock into a fixed-rate savings account paying 5.25%?; North Yorkshire…**
+- ✅ **post · Japan Finance News · 28 September 2026 · Coverage September 27 to 28 — Conduct of Funds-Supplying Operations against Pooled Collateral[PDF 90KB]; Higher defense…**
+- ✅ **post · Joint vs. Separate vs. Hybrid Accounts**
+- ✅ **post · France Finance News · 28 September 2026 · Coverage September 27 to 28 — Lula's mixed environmental record has brought less deforestation but more oil; Turkey…**
+- ✅ **post · Germany Finance News · 28 September 2026 · Coverage September 27 to 28 — European cities seek ways of boosting affordable housing; Spain: Thousands protest in…**
 - ✅ **post · Economy and Macro Policy News · 28 September 2026 · Coverage September 27 to 28 — China posts weakest industrial profit growth this year, expanding 4.2% in August; Budget…**
 - ✅ **post · Market and Trading News · 28 September 2026 · Coverage September 27 to 28 — S. Korea's AI adoption rate over 40 pct, ranks 12th place globally: report; Japan’s…**
 - ✅ **post · Insure Your Income, Not Just Your Phone**
