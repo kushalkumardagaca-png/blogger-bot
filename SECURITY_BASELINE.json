@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-28T12:26:03.109230+00:00",
+  "approvedAt": "2026-09-28T12:27:08.882408+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -10,7 +10,9 @@
     "page_family.py": "dc434636666e96bf5b7ef0bf4e7be5006cb89da8c984d8e4cb8714cecc6b944d",
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
     "social_identity.py": "b184a8f0d474ce8f0d2fca5541fc4d4b30974d39d5cef96357797988a6fbb242",
-    "security_guard.py": "8d941e1c90f0b72fda95b947830ea862544336b5f206f44fbb8600463afcbd75",
+    "bluesky_publisher.py": "a8aa754b16067926bd22200c905014035a395e4bfe21e7589d77bc37442541c5",
+    "security_guard.py": "b9ef883552936e2f0fc4a30df7fdc45d8f4782224f7a05820456478548185f25",
+    ".github/workflows/bluesky_publisher.yml": "2e024fd5a9442db92c61f52011200a305e44afa548aa8bfa1d33578dc983068b",
     ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
     ".github/workflows/daily_blogger_poster.yml": "ea70b1b9697899df61f9deddbd56177ff8d84877b5115547302a18086c7a7850",
     ".github/workflows/daily_news_wires.yml": "91ff9d4a6ff1b8e8bb3d9a9d003e37b264cb695616d04a0784858eb47e3bd051",
