@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-28T03:53:22.566674+05:30
+- **Checked:** 2026-09-28T06:03:02.390496+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 109 URLs · 96 Posts · 12 Pages
+- **Inventory:** 113 URLs · 100 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/108 tracked PASS
+- **Search Console:** OK · 0/112 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,10 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · India Finance News · 28 September 2026 · Coverage September 27 to 28 — Two years on, Indian equities remain stuck in a grind; Rupee's likely to slip despite RBI…**
+- ✅ **post · Global Finance Wire · 28 September 2026 · Coverage September 27 to 28 — Minutes of the Monetary Policy Meeting on July 30 and 31, 2026[PDF 353KB]; Taxpayer-funded…**
+- ✅ **post · South Korea Finance News · 28 September 2026 · Coverage September 27 to 28 — S. Korea's tourism balance swings to deficit in July after 4 months of surplus; (2nd LD)…**
+- ✅ **post · Australia Finance News · 28 September 2026 · Coverage September 27 to 28 — Live updates: ASX lacking direction ahead of rates decision, Wall Street closes higher…**
 - ✅ **post · Russia Finance News · 27 September 2026 · Coverage September 26 to 27 — Security threats to Russia from Kiev to be eliminated after special military op — Lavrov…**
 - ✅ **post · Personal Finance News · 27 September 2026 · Coverage September 26 to 27 — Ukraine's public debt reaches roughly $223 bln by late September; Thousands rally against…**
 - ✅ **post · £500 Extra: Overtime, Hustle, or Skill?**
