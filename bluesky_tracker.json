@@ -1,6 +1,21 @@
 {
   "version": 1,
   "handle": "dailyyield.bsky.social",
-  "published": [],
-  "pending": null
+  "published": [
+    {
+      "kind": "post",
+      "blogger_id": "4516328180677729614",
+      "title": "Your Student Overdraft Isn't Free",
+      "url": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html",
+      "bluesky_uri": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwld7vbcfp2d",
+      "cid": "bafyreifmzv3k5zroeaxt5lfd5365dn3yrvdwnffzfykbk2o55trukz3oty",
+      "text_hash": "5050b93d81304d24e052",
+      "score": 103.871,
+      "published_at": "2026-09-28T18:05:06.085552+05:30",
+      "reconciled": false
+    }
+  ],
+  "pending": null,
+  "last_success_at": "2026-09-28T18:05:06.085570+05:30",
+  "last_bluesky_uri": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwld7vbcfp2d"
 }
