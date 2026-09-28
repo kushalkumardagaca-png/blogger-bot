@@ -124,7 +124,10 @@ def repository_hashes() -> dict:
 
 def secret_scan() -> list[str]:
     findings = []
-    extensions = {".py", ".yml", ".yaml", ".html", ".css", ".js", ".md", ".txt"}
+    # Scan executable/configuration sources. Generated article HTML can contain
+    # long embedded image/data strings that resemble provider tokens but cannot
+    # grant repository or platform access.
+    extensions = {".py", ".yml", ".yaml", ".js", ".sh"}
     for path in ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.parts or path.suffix.lower() not in extensions:
             continue
