@@ -1,15 +1,15 @@
 {
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 126,
-    "posts": 113,
+    "urls": 130,
+    "posts": 117,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 939,
-    "confirmedExternal404or410": 1,
-    "transientExternalResponses": 45,
+    "externalDestinationsChecked": 981,
+    "confirmedExternal404or410": 0,
+    "transientExternalResponses": 52,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1427,14 +1427,58 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/canada-2026-09-28.html": {
+        "title": "Canada Finance News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 The incoming U.S. import bans on Canadian alcohol, whey, molasses and motorcycles, by the\u2026",
+        "checkedAt": "2026-09-28T18:01:26.897979+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/us-2026-09-28.html": {
+        "title": "US Finance News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 Stock futures drop to start the week as oil prices and Treasury yields rise: Live updates\u2026",
+        "checkedAt": "2026-09-28T18:01:26.897979+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/cheap-frugal-and-value-are-not-synonyms.html": {
+        "title": "Cheap, Frugal, and Value Are Not Synonyms",
+        "checkedAt": "2026-09-28T18:01:26.897979+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-28.html": {
+        "title": "Brazil Finance News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 Colombia\u2019s Peso Slides 2.43% to 3,287: What Expats Need to Know; Entain Maintains Earnings\u2026",
+        "checkedAt": "2026-09-28T18:01:26.897979+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 125,
-      "tracked": 125,
+      "inventory": 129,
+      "tracked": 129,
       "pass": 0,
-      "notPass": 125,
-      "inspectedThisRun": 2,
+      "notPass": 129,
+      "inspectedThisRun": 4,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
