@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-28T13:38:05.225925+00:00",
+  "approvedAt": "2026-09-28T13:46:54.012514+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -11,7 +11,7 @@
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
     "social_identity.py": "b184a8f0d474ce8f0d2fca5541fc4d4b30974d39d5cef96357797988a6fbb242",
     "bluesky_publisher.py": "a8aa754b16067926bd22200c905014035a395e4bfe21e7589d77bc37442541c5",
-    "tumblr_publisher.py": "b23efaafbc4b3f1517c13919836d1d38ace17ede9caa061c5c0dfebe67b0e8bd",
+    "tumblr_publisher.py": "d8399d862ca3069e2dbcdd576ab46b7c0dde915999362a7b2fa83c6f2b01ac72",
     "tumblr_oauth_bootstrap.py": "c71019d02f8376875714fb95b130a0e7b1da23270e1d497379ce4253c2426c05",
     "security_guard.py": "e1f56d286bcc7789a6aeab6fce7368a031817261e94cb396cb48f9cef23ff482",
     ".github/workflows/bluesky_publisher.yml": "2e024fd5a9442db92c61f52011200a305e44afa548aa8bfa1d33578dc983068b",
@@ -30,7 +30,7 @@
     ".github/workflows/security_guard.yml": "299409d9a785aafc0291050ec4d2baf9c69fff0ce9e9795c2e72cd8f0ace8091",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
-    ".github/workflows/tumblr_publisher.yml": "61730f1abb5c0c7a11b03d7c20068524d48b0ac3c8c5637cd967689d08ad9aa6",
+    ".github/workflows/tumblr_publisher.yml": "f8bdf8314109992fae5efa769ff4a8224f5cbf1a065835438a2109786fb9ac49",
     ".github/workflows/update_page_family.yml": "a0544d46418d14889decf5d46150cb4186b14a472cd7563aabc4270bb81c5936"
   },
   "blogger": {
