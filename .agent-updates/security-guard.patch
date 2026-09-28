@@ -1,0 +1,495 @@
+diff --git a/.github/workflows/security_guard.yml b/.github/workflows/security_guard.yml
+new file mode 100644
+index 0000000..6348ac9
+--- /dev/null
++++ b/.github/workflows/security_guard.yml
+@@ -0,0 +1,93 @@
++name: Daily Yield Security Guard
++
++on:
++  schedule:
++    # Best-effort near-real-time monitoring. GitHub schedules can be delayed.
++    - cron: '7,22,37,52 * * * *'
++    # Daily recoverable API backup at 06:13 IST.
++    - cron: '43 0 * * *'
++  workflow_dispatch:
++    inputs:
++      approve_current:
++        description: 'Approve current repository/content hashes after an intentional maintenance change'
++        required: true
++        default: false
++        type: boolean
++      create_backup:
++        description: 'Also create a full authenticated Blogger API backup artifact'
++        required: true
++        default: false
++        type: boolean
++
++permissions:
++  contents: write
++  actions: read
++
++concurrency:
++  group: daily-yield-security-guard
++  cancel-in-progress: false
++
++jobs:
++  security:
++    runs-on: ubuntu-latest
++    timeout-minutes: 15
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          fetch-depth: 1
++
++      - uses: actions/setup-python@v5
++        with:
++          python-version: '3.12'
++
++      - name: Run zero-view security and integrity monitor
++        id: guard
++        continue-on-error: true
++        env:
++          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
++          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
++          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
++          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
++        shell: bash
++        run: |
++          ARGS=()
++          if [[ "${{ github.event.schedule }}" == "43 0 * * *" || "${{ inputs.create_backup }}" == "true" ]]; then
++            ARGS+=(--backup)
++          fi
++          if [[ "${{ inputs.approve_current }}" == "true" ]]; then
++            ARGS+=(--approve-current)
++          fi
++          python security_guard.py "${ARGS[@]}"
++
++      - name: Upload security evidence and daily recovery backup
++        if: always()
++        uses: actions/upload-artifact@v4
++        with:
++          name: daily-yield-security-${{ github.run_id }}
++          retention-days: 30
++          if-no-files-found: ignore
++          path: |
++            SECURITY_STATUS.json
++            SECURITY_STATUS.md
++            SECURITY_BACKUP.json.gz
++
++      - name: Persist approved security baseline and status
++        if: always()
++        shell: bash
++        run: |
++          git config user.name "Daily Yield Security Guard"
++          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
++          git add SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md 2>/dev/null || true
++          if git diff --staged --quiet; then
++            echo "No security state change."
++          else
++            git commit -m "Update Daily Yield security state [skip ci]"
++            git pull --rebase origin main
++            git push origin main
++          fi
++
++      - name: Fail closed when a security anomaly is present
++        if: steps.guard.outcome == 'failure'
++        run: |
++          echo "Security Guard detected an integrity or injection anomaly. Review SECURITY_STATUS artifact."
++          exit 1
+diff --git a/PUBLISHING_AUTOMATION_AUDIT.json b/PUBLISHING_AUTOMATION_AUDIT.json
+index 258add5..ea51316 100644
+--- a/PUBLISHING_AUTOMATION_AUDIT.json
++++ b/PUBLISHING_AUTOMATION_AUDIT.json
+@@ -1,7 +1,7 @@
+ {
+-  "checked_at_ist": "2026-09-27T20:31:21+05:30",
++  "checked_at_ist": "2026-09-28T16:39:49+05:30",
+   "summary": {
+-    "pass": 73,
++    "pass": 78,
+     "fail": 0
+   },
+   "checks": [
+@@ -135,6 +135,31 @@
+       "status": "PASS",
+       "detail": ""
+     },
++    {
++      "name": "Security guard and approved baseline are deployed",
++      "status": "PASS",
++      "detail": ""
++    },
++    {
++      "name": "Security guard runs four times per hour and creates a daily backup",
++      "status": "PASS",
++      "detail": ""
++    },
++    {
++      "name": "Security guard reads Blogger only through authenticated API",
++      "status": "PASS",
++      "detail": ""
++    },
++    {
++      "name": "Security guard detects deletion, modification, injection and leaked secrets",
++      "status": "PASS",
++      "detail": ""
++    },
++    {
++      "name": "Security guard fails closed without accepting an anomalous baseline",
++      "status": "PASS",
++      "detail": ""
++    },
+     {
+       "name": "Master links both market desks",
+       "status": "PASS",
+diff --git a/PUBLISHING_AUTOMATION_AUDIT.md b/PUBLISHING_AUTOMATION_AUDIT.md
+index 827013d..65505e9 100644
+--- a/PUBLISHING_AUTOMATION_AUDIT.md
++++ b/PUBLISHING_AUTOMATION_AUDIT.md
+@@ -1,6 +1,6 @@
+ # Daily Yield Publishing Automation — Final Audit
+ 
+-**Result:** 73 PASS · 0 FAIL
++**Result:** 78 PASS · 0 FAIL
+ 
+ Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
+ 
+@@ -30,6 +30,11 @@ Scope: five daily master articles and twenty daily news wires, including brandin
+ - ✅ **Facebook deduplicates and reconciles uncertain writes**
+ - ✅ **Facebook automation excludes comments, messages, ads and artificial engagement**
+ - ✅ **Facebook candidate discovery creates no Daily Yield public-page requests**
++- ✅ **Security guard and approved baseline are deployed**
++- ✅ **Security guard runs four times per hour and creates a daily backup**
++- ✅ **Security guard reads Blogger only through authenticated API**
++- ✅ **Security guard detects deletion, modification, injection and leaked secrets**
++- ✅ **Security guard fails closed without accepting an anomalous baseline**
+ - ✅ **Master links both market desks**
+ - ✅ **Master posts cannot enter News hub**
+ - ✅ **Master articles include related-reading shelf**
+diff --git a/SECURITY.md b/SECURITY.md
+new file mode 100644
+index 0000000..fa9f4be
+--- /dev/null
++++ b/SECURITY.md
+@@ -0,0 +1,31 @@
++# Daily Yield Security Policy
++
++## Protected systems
++
++- Private GitHub repository and encrypted Actions secrets
++- Daily Yield Blogger Pages and Posts through the authenticated Blogger API
++- Publishing workflows for Articles, News and Facebook
++
++## Automated controls
++
++- Security Guard runs four times per hour on a best-effort GitHub Actions schedule.
++- Daily authenticated Blogger API backups are retained as private workflow artifacts for 30 days.
++- Critical source/workflow hashes, existing Page/Post hashes, deletions, credential patterns and common malicious injection primitives are monitored.
++- A detected anomaly fails the workflow and preserves evidence without accepting the changed baseline.
++- The monitor never requests the public Daily Yield website and therefore creates no synthetic pageviews.
++
++## Platform boundary
++
++Blogger hosting, TLS, network filtering and server patching are operated by Google. This repository cannot install a server daemon or WAF on Blogger. GitHub Actions schedules can be delayed and are not a real-time guarantee. Account security therefore remains essential: use a passkey or security key, 2-Step Verification, recovery methods, minimum Blogger administrators and periodic Google Security Checkup.
++
++## Layout and content rights
++
++Daily Yield's original design, branding, graphics and editorial presentation are protected by copyright. Public browser-delivered HTML, CSS and JavaScript cannot be made technically impossible to inspect or copy. Repository privacy, provenance records, distinctive branding, dated backups and enforcement notices provide deterrence and evidence; disabling right-click or obfuscating code is not considered effective protection.
++
++## Incident response
++
++1. Do not approve a changed security baseline until the difference is understood.
++2. Revoke suspicious Google/GitHub sessions and rotate affected tokens.
++3. Disable publishing workflows if credentials may be compromised.
++4. Restore affected content from a known-good security artifact or Blogger backup.
++5. Review Blogger administrators, GitHub collaborators and OAuth grants.
+diff --git a/SECURITY_BASELINE.json b/SECURITY_BASELINE.json
+new file mode 100644
+index 0000000..59de31f
+--- /dev/null
++++ b/SECURITY_BASELINE.json
+@@ -0,0 +1,31 @@
++{
++  "version": 1,
++  "approvedAt": "2026-09-28T11:09:37.279132+00:00",
++  "repository": {
++    "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
++    "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
++    "facebook_publisher.py": "99e4728cb3cbe371fc5190efe27a2713dbaae4990f81ef1f5a934cbae6671bcf",
++    "zero_view_watchdog.py": "a2d9a0afadd208cc1c157d2ba2395c987b7d24cbc7e08a88f2d53cf9d5b67d97",
++    "publication_preflight.py": "5f9a6156d1cff6c910c901f7429a4ee02eca7f1eacb048bb98d26da06358ca74",
++    "page_family.py": "dc434636666e96bf5b7ef0bf4e7be5006cb89da8c984d8e4cb8714cecc6b944d",
++    "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
++    "social_identity.py": "b184a8f0d474ce8f0d2fca5541fc4d4b30974d39d5cef96357797988a6fbb242",
++    "security_guard.py": "facfdd403d0ceb5c8eee9cbb0d99d18b1c5f521a0307262f60f586123b68649f",
++    ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
++    ".github/workflows/daily_blogger_poster.yml": "ea70b1b9697899df61f9deddbd56177ff8d84877b5115547302a18086c7a7850",
++    ".github/workflows/daily_news_wires.yml": "91ff9d4a6ff1b8e8bb3d9a9d003e37b264cb695616d04a0784858eb47e3bd051",
++    ".github/workflows/deploy_global_snapshot.yml": "1963105e6de9476d1a6ad2149036ec0d74b1992c46d9984314079d5c6460d2b6",
++    ".github/workflows/deploy_markets_today.yml": "defa06e48a006bc7c9dfc1fb81b60217ab61cac1bd43ae6df51dfa0c6cd0bc99",
++    ".github/workflows/facebook_publisher.yml": "aff738065e69f59575e155b3074729ac46ebf1a8a41b8e8bd33cc3e1253a1bc9",
++    ".github/workflows/gsc_rebuild.yml": "e86ca87f1aec0a6b14f76cece490c299896562e201001bbaea36057c3781ca1b",
++    ".github/workflows/health_monitor.yml": "d4fa8ef711aa960860af3bec8b2e16be778dfabc8ed8e67e316fee6477642ee8",
++    ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
++    ".github/workflows/motion_related_retrofit.yml": "cb3b871f0f59254ad5ece87b2b0632536aceeaa6a5c4bc94dc0795ffadcbe50f",
++    ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
++    ".github/workflows/retrofit_live_news.yml": "30a0e41d35522ff047fdeffc5d656725ba160913a4dae4cf14b80ef5ad9b7232",
++    ".github/workflows/security_guard.yml": "299409d9a785aafc0291050ec4d2baf9c69fff0ce9e9795c2e72cd8f0ace8091",
++    ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
++    ".github/workflows/update_page_family.yml": "a0544d46418d14889decf5d46150cb4186b14a472cd7563aabc4270bb81c5936"
++  },
++  "blogger": {}
++}
+diff --git a/audit_publishing_automation.py b/audit_publishing_automation.py
+index 2baf558..9692e7b 100644
+--- a/audit_publishing_automation.py
++++ b/audit_publishing_automation.py
+@@ -70,6 +70,21 @@ check('Facebook candidate discovery creates no Daily Yield public-page requests'
+       'www.googleapis.com/blogger/v3' in fp and 'requests.get(item["url"]' not in fp
+       and 'requests.get(post["url"]' not in fp)
+ 
++# Independent security guard: four API-only checks/hour plus one daily backup.
++sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'
++sg=sg_path.read_text() if sg_path.exists() else ''; sw=sw_path.read_text() if sw_path.exists() else ''
++check('Security guard and approved baseline are deployed',
++      bool(sg) and bool(sw) and (ROOT/'SECURITY_BASELINE.json').exists() and (ROOT/'SECURITY.md').exists())
++check('Security guard runs four times per hour and creates a daily backup',
++      '7,22,37,52 * * * *' in sw and '43 0 * * *' in sw and '--backup' in sw)
++check('Security guard reads Blogger only through authenticated API',
++      'www.googleapis.com/blogger/v3' in sg and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in sg)
++check('Security guard detects deletion, modification, injection and leaked secrets',
++      'live Blogger items removed' in sg and 'existing Blogger content changed' in sg
++      and 'MALICIOUS_PATTERNS' in sg and 'SECRET_PATTERNS' in sg)
++check('Security guard fails closed without accepting an anomalous baseline',
++      'return 1 if critical else 0' in sg and 'if not critical or args.approve_current' in sg)
++
+ check('Master links both market desks','/p/markets-today.html' in ap and '/p/global-snapshot.html' in ap)
+ check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))
+ check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)
+diff --git a/security_guard.py b/security_guard.py
+new file mode 100644
+index 0000000..ec31b84
+--- /dev/null
++++ b/security_guard.py
+@@ -0,0 +1,220 @@
++#!/usr/bin/env python3
++"""Zero-view Daily Yield security and integrity monitor.
++
++This is detection, evidence, backup and fail-closed alerting—not a claim that a
++scheduled GitHub runner is a real-time WAF. Blogger content is read only through
++the authenticated Blogger API; the public website is never requested.
++"""
++from __future__ import annotations
++
++import argparse
++import gzip
++import hashlib
++import json
++import os
++import re
++import sys
++import urllib.parse
++import urllib.request
++from datetime import datetime, timezone
++from pathlib import Path
++
++ROOT = Path(__file__).resolve().parent
++BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
++BASELINE = ROOT / "SECURITY_BASELINE.json"
++STATUS_JSON = ROOT / "SECURITY_STATUS.json"
++STATUS_MD = ROOT / "SECURITY_STATUS.md"
++BACKUP = ROOT / "SECURITY_BACKUP.json.gz"
++
++CRITICAL_FILES = [
++    "auto_blogger_publisher.py", "news_pipeline.py", "facebook_publisher.py",
++    "zero_view_watchdog.py", "publication_preflight.py", "page_family.py",
++    "brand_identity.py", "social_identity.py", "security_guard.py",
++]
++MALICIOUS_PATTERNS = {
++    "external script loader": re.compile(r"<script\b[^>]*\bsrc\s*=", re.I),
++    "iframe/object/embed injection": re.compile(r"<(?:iframe|object|embed)\b", re.I),
++    "javascript URL": re.compile(r"(?:href|src)\s*=\s*[\"']\s*javascript:", re.I),
++    "cookie theft primitive": re.compile(r"document\.cookie", re.I),
++    "dynamic-code primitive": re.compile(r"\b(?:eval|atob)\s*\(|fromCharCode\s*\(", re.I),
++    "socket/miner primitive": re.compile(r"WebSocket\s*\(|coinhive|cryptonight|webmine", re.I),
++    "event-handler injection": re.compile(r"\bonerror\s*=", re.I),
++}
++SECRET_PATTERNS = {
++    "GitHub token": re.compile(r"\b(?:gh[oprsu]_[A-Za-z0-9_]{30,}|github_pat_[A-Za-z0-9_]{40,})\b"),
++    "Google OAuth token": re.compile(r"\bya29\.[A-Za-z0-9._-]{20,}\b"),
++    "Meta token": re.compile(r"\bEA[A-Za-z0-9]{60,}\b"),
++    "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
++}
++
++
++def sha(data: bytes) -> str:
++    return hashlib.sha256(data).hexdigest()
++
++
++def required(name: str) -> str:
++    value = os.environ.get(name, "").strip()
++    if not value:
++        raise RuntimeError(f"missing required secret: {name}")
++    return value
++
++
++def request_json(url: str, *, method: str = "GET", headers: dict | None = None, body=None) -> dict:
++    if "dailyyield.blogspot.com" in url.lower():
++        raise RuntimeError("ZERO-VIEW POLICY BLOCKED public Daily Yield request")
++    data = json.dumps(body).encode() if body is not None else None
++    request = urllib.request.Request(url, data=data, method=method, headers=headers or {})
++    with urllib.request.urlopen(request, timeout=60) as response:
++        raw = response.read()
++        return json.loads(raw) if raw else {}
++
++
++def oauth() -> str:
++    form = urllib.parse.urlencode({
++        "client_id": required("BLOGGER_CLIENT_ID"),
++        "client_secret": required("BLOGGER_CLIENT_SECRET"),
++        "refresh_token": required("BLOGGER_REFRESH_TOKEN"),
++        "grant_type": "refresh_token",
++    }).encode()
++    req = urllib.request.Request("https://oauth2.googleapis.com/token", data=form, method="POST")
++    with urllib.request.urlopen(req, timeout=30) as response:
++        return json.load(response)["access_token"]
++
++
++def blogger_inventory() -> tuple[dict, dict]:
++    token = oauth()
++    headers = {"Authorization": "Bearer " + token}
++    metadata = request_json(
++        f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}?fields=id,name,url,updated,posts(totalItems),pages(totalItems)",
++        headers=headers,
++    )
++    inventory = {}
++    full_backup = {"capturedAt": datetime.now(timezone.utc).isoformat(), "blog": metadata, "items": []}
++    for resource in ("pages", "posts"):
++        page_token = ""
++        while True:
++            fields = "id,title,url,content,published,updated,status"
++            params = {"status": "live", "fetchBodies": "true", "maxResults": "50", "fields": f"items({fields}),nextPageToken"}
++            if page_token:
++                params["pageToken"] = page_token
++            data = request_json(
++                f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}/{resource}?{urllib.parse.urlencode(params)}",
++                headers=headers,
++            )
++            for item in data.get("items", []):
++                content = item.get("content", "")
++                key = f"{resource[:-1]}:{item.get('id', '')}"
++                inventory[key] = {
++                    "kind": resource[:-1], "id": item.get("id", ""), "title": item.get("title", ""),
++                    "url": item.get("url", ""), "updated": item.get("updated", ""),
++                    "content_sha256": sha(content.encode("utf-8")),
++                }
++                full_backup["items"].append({**item, "kind": resource[:-1]})
++            page_token = data.get("nextPageToken", "")
++            if not page_token:
++                break
++    return inventory, full_backup
++
++
++def repository_hashes() -> dict:
++    paths = [ROOT / name for name in CRITICAL_FILES]
++    paths.extend(sorted((ROOT / ".github" / "workflows").glob("*.yml")))
++    return {str(path.relative_to(ROOT)): sha(path.read_bytes()) for path in paths if path.exists()}
++
++
++def secret_scan() -> list[str]:
++    findings = []
++    extensions = {".py", ".yml", ".yaml", ".html", ".css", ".js", ".md", ".txt"}
++    for path in ROOT.rglob("*"):
++        if not path.is_file() or ".git" in path.parts or path.suffix.lower() not in extensions:
++            continue
++        try:
++            text = path.read_text(encoding="utf-8")
++        except Exception:
++            continue
++        for label, pattern in SECRET_PATTERNS.items():
++            if pattern.search(text):
++                findings.append(f"{label} detected in tracked file {path.relative_to(ROOT)}")
++    return findings
++
++
++def content_threats(backup: dict) -> list[str]:
++    findings = []
++    for item in backup["items"]:
++        content = item.get("content", "")
++        for label, pattern in MALICIOUS_PATTERNS.items():
++            if pattern.search(content):
++                findings.append(f"{label}: {item.get('kind')} {item.get('title')} [{item.get('id')}]")
++    return findings
++
++
++def write_report(status: str, critical: list[str], warnings: list[str], details: dict) -> None:
++    report = {
++        "checkedAt": datetime.now(timezone.utc).isoformat(), "status": status,
++        "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS", "syntheticViews": 0,
++        "critical": critical, "warnings": warnings, "details": details,
++    }
++    STATUS_JSON.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
++    lines = [
++        "# Daily Yield Security Guard", "", f"- **Status:** {status}",
++        f"- **Checked:** {report['checkedAt']}", "- **Public website requests:** 0", "",
++        "## Critical findings",
++    ]
++    lines += [f"- {x}" for x in critical] or ["- None"]
++    lines += ["", "## Warnings"] + ([f"- {x}" for x in warnings] or ["- None"])
++    lines += ["", "## Scope", "- Authenticated Blogger API content integrity", "- Critical GitHub workflow/source hashes", "- Credential-pattern scanning", "- Malicious-injection pattern scanning", "- Deletion and unauthorized-edit detection", ""]
++    STATUS_MD.write_text("\n".join(lines), encoding="utf-8")
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--backup", action="store_true")
++    parser.add_argument("--approve-current", action="store_true", help="Approve current hashes after an intentional maintenance change")
++    args = parser.parse_args()
++
++    current_repo = repository_hashes()
++    current_items, full_backup = blogger_inventory()
++    previous = json.loads(BASELINE.read_text()) if BASELINE.exists() else {"repository": {}, "blogger": {}}
++    critical, warnings = [], []
++
++    previous_repo = previous.get("repository", {})
++    if previous_repo and previous_repo != current_repo and not args.approve_current:
++        changed = sorted({*previous_repo, *current_repo} - {k for k in previous_repo.keys() & current_repo.keys() if previous_repo[k] == current_repo[k]})
++        critical.append("critical repository files changed without baseline approval: " + ", ".join(changed[:20]))
++
++    previous_items = previous.get("blogger", {})
++    removed = sorted(set(previous_items) - set(current_items))
++    changed_items = sorted(key for key in previous_items.keys() & current_items.keys() if previous_items[key].get("content_sha256") != current_items[key].get("content_sha256"))
++    if previous_items and removed:
++        critical.append("live Blogger items removed: " + ", ".join(removed[:20]))
++    if previous_items and changed_items and not args.approve_current:
++        critical.append("existing Blogger content changed without baseline approval: " + ", ".join(changed_items[:20]))
++
++    critical.extend(secret_scan())
++    critical.extend(content_threats(full_backup))
++    new_items = sorted(set(current_items) - set(previous_items))
++    if new_items:
++        warnings.append(f"{len(new_items)} new live item(s) accepted after threat scan")
++
++    status = "FAIL" if critical else "PASS"
++    details = {
++        "pages": sum(x["kind"] == "page" for x in current_items.values()),
++        "posts": sum(x["kind"] == "post" for x in current_items.values()),
++        "newItems": len(new_items), "changedItems": len(changed_items), "removedItems": len(removed),
++        "repositoryFiles": len(current_repo), "backupCreated": bool(args.backup),
++    }
++    if args.backup:
++        with gzip.open(BACKUP, "wt", encoding="utf-8") as archive:
++            json.dump(full_backup, archive, ensure_ascii=False)
++    if not critical or args.approve_current:
++        BASELINE.write_text(json.dumps({
++            "version": 1, "approvedAt": datetime.now(timezone.utc).isoformat(),
++            "repository": current_repo, "blogger": current_items,
++        }, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
++    write_report(status, critical, warnings, details)
++    print(json.dumps({"status": status, **details}))
++    return 1 if critical else 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
