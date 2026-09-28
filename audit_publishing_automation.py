@@ -70,6 +70,21 @@ check('Facebook candidate discovery creates no Daily Yield public-page requests'
       'www.googleapis.com/blogger/v3' in fp and 'requests.get(item["url"]' not in fp
       and 'requests.get(post["url"]' not in fp)
 
+# Independent security guard: four API-only checks/hour plus one daily backup.
+sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'
+sg=sg_path.read_text() if sg_path.exists() else ''; sw=sw_path.read_text() if sw_path.exists() else ''
+check('Security guard and approved baseline are deployed',
+      bool(sg) and bool(sw) and (ROOT/'SECURITY_BASELINE.json').exists() and (ROOT/'SECURITY.md').exists())
+check('Security guard runs four times per hour and creates a daily backup',
+      '7,22,37,52 * * * *' in sw and '43 0 * * *' in sw and '--backup' in sw)
+check('Security guard reads Blogger only through authenticated API',
+      'www.googleapis.com/blogger/v3' in sg and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in sg)
+check('Security guard detects deletion, modification, injection and leaked secrets',
+      'live Blogger items removed' in sg and 'existing Blogger content changed' in sg
+      and 'MALICIOUS_PATTERNS' in sg and 'SECRET_PATTERNS' in sg)
+check('Security guard fails closed without accepting an anomalous baseline',
+      'return 1 if critical else 0' in sg and 'if not critical or args.approve_current' in sg)
+
 check('Master links both market desks','/p/markets-today.html' in ap and '/p/global-snapshot.html' in ap)
 check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))
 check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)

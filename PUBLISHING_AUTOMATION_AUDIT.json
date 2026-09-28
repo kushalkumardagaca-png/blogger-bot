@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-27T20:31:21+05:30",
+  "checked_at_ist": "2026-09-28T16:39:49+05:30",
   "summary": {
-    "pass": 73,
+    "pass": 78,
     "fail": 0
   },
   "checks": [
@@ -132,6 +132,31 @@
     },
     {
       "name": "Facebook candidate discovery creates no Daily Yield public-page requests",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Security guard and approved baseline are deployed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Security guard runs four times per hour and creates a daily backup",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Security guard reads Blogger only through authenticated API",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Security guard detects deletion, modification, injection and leaked secrets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Security guard fails closed without accepting an anomalous baseline",
       "status": "PASS",
       "detail": ""
     },

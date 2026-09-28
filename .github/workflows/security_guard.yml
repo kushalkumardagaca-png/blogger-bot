@@ -1,0 +1,93 @@
+name: Daily Yield Security Guard
+
+on:
+  schedule:
+    # Best-effort near-real-time monitoring. GitHub schedules can be delayed.
+    - cron: '7,22,37,52 * * * *'
+    # Daily recoverable API backup at 06:13 IST.
+    - cron: '43 0 * * *'
+  workflow_dispatch:
+    inputs:
+      approve_current:
+        description: 'Approve current repository/content hashes after an intentional maintenance change'
+        required: true
+        default: false
+        type: boolean
+      create_backup:
+        description: 'Also create a full authenticated Blogger API backup artifact'
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: daily-yield-security-guard
+  cancel-in-progress: false
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run zero-view security and integrity monitor
+        id: guard
+        continue-on-error: true
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          ARGS=()
+          if [[ "${{ github.event.schedule }}" == "43 0 * * *" || "${{ inputs.create_backup }}" == "true" ]]; then
+            ARGS+=(--backup)
+          fi
+          if [[ "${{ inputs.approve_current }}" == "true" ]]; then
+            ARGS+=(--approve-current)
+          fi
+          python security_guard.py "${ARGS[@]}"
+
+      - name: Upload security evidence and daily recovery backup
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-yield-security-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            SECURITY_STATUS.json
+            SECURITY_STATUS.md
+            SECURITY_BACKUP.json.gz
+
+      - name: Persist approved security baseline and status
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "Daily Yield Security Guard"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No security state change."
+          else
+            git commit -m "Update Daily Yield security state [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
+
+      - name: Fail closed when a security anomaly is present
+        if: steps.guard.outcome == 'failure'
+        run: |
+          echo "Security Guard detected an integrity or injection anomaly. Review SECURITY_STATUS artifact."
+          exit 1

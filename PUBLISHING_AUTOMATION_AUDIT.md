@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 73 PASS · 0 FAIL
+**Result:** 78 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -30,6 +30,11 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Facebook deduplicates and reconciles uncertain writes**
 - ✅ **Facebook automation excludes comments, messages, ads and artificial engagement**
 - ✅ **Facebook candidate discovery creates no Daily Yield public-page requests**
+- ✅ **Security guard and approved baseline are deployed**
+- ✅ **Security guard runs four times per hour and creates a daily backup**
+- ✅ **Security guard reads Blogger only through authenticated API**
+- ✅ **Security guard detects deletion, modification, injection and leaked secrets**
+- ✅ **Security guard fails closed without accepting an anomalous baseline**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include related-reading shelf**
