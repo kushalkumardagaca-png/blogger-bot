@@ -3,11 +3,11 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 130,
-    "posts": 117,
+    "urls": 131,
+    "posts": 118,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 981,
+    "externalDestinationsChecked": 987,
     "confirmedExternal404or410": 0,
     "transientExternalResponses": 52,
     "syntheticDailyYieldViews": 0
@@ -23,7 +23,7 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-09-27T12:06:03.403Z",
+        "lastDownloaded": "2026-09-28T12:44:20.779Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
@@ -1471,14 +1471,25 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-28.html": {
+        "title": "Mexico Finance News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 Grupo Frontera Lima 2026: Texan Band Plays Costa 21, Peru, on 17 October; India\u2019s bid to\u2026",
+        "checkedAt": "2026-09-28T19:58:49.234247+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 129,
-      "tracked": 129,
+      "inventory": 130,
+      "tracked": 130,
       "pass": 0,
-      "notPass": 129,
-      "inspectedThisRun": 4,
+      "notPass": 130,
+      "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
