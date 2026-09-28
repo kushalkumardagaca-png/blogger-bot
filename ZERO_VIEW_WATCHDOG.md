@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-28T07:54:49.297959+05:30
+- **Checked:** 2026-09-28T09:56:19.155065+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 114 URLs · 101 Posts · 12 Pages
+- **Inventory:** 116 URLs · 103 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/113 tracked PASS
+- **Search Console:** OK · 0/115 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Economy and Macro Policy News · 28 September 2026 · Coverage September 27 to 28 — China posts weakest industrial profit growth this year, expanding 4.2% in August; Budget…**
+- ✅ **post · Market and Trading News · 28 September 2026 · Coverage September 27 to 28 — S. Korea's AI adoption rate over 40 pct, ranks 12th place globally: report; Japan’s…**
 - ✅ **post · Insure Your Income, Not Just Your Phone**
 - ✅ **post · India Finance News · 28 September 2026 · Coverage September 27 to 28 — Two years on, Indian equities remain stuck in a grind; Rupee's likely to slip despite RBI…**
 - ✅ **post · Global Finance Wire · 28 September 2026 · Coverage September 27 to 28 — Minutes of the Monetary Policy Meeting on July 30 and 31, 2026[PDF 353KB]; Taxpayer-funded…**

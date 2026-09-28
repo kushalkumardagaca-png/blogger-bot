@@ -3,13 +3,13 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 114,
-    "posts": 101,
+    "urls": 116,
+    "posts": 103,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 821,
+    "externalDestinationsChecked": 850,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 40,
+    "transientExternalResponses": 41,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1295,14 +1295,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_017346688.html": {
+        "title": "Economy and Macro Policy News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 China posts weakest industrial profit growth this year, expanding 4.2% in August; Budget\u2026",
+        "checkedAt": "2026-09-28T09:56:19.155065+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-28.html": {
+        "title": "Market and Trading News \u00b7 28 September 2026 \u00b7 Coverage September 27 to 28 \u2014 S. Korea's AI adoption rate over 40 pct, ranks 12th place globally: report; Japan\u2019s\u2026",
+        "checkedAt": "2026-09-28T09:56:19.155065+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 113,
-      "tracked": 113,
+      "inventory": 115,
+      "tracked": 115,
       "pass": 0,
-      "notPass": 113,
-      "inspectedThisRun": 1,
+      "notPass": 115,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
@@ -1337,8 +1359,8 @@
     },
     {
       "name": "Gold API",
-      "status": "WARN",
-      "detail": "<urlopen error [Errno -2] Name or service not known>"
+      "status": "OK",
+      "detail": "responding"
     },
     {
       "name": "Mutual fund API",
