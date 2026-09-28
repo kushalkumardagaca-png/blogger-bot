@@ -7,6 +7,7 @@ refresh-token bundle is encrypted with a Fernet key held only in GitHub Actions.
 from __future__ import annotations
 import json, os, sys
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 import requests
 from cryptography.fernet import Fernet
 
@@ -25,9 +26,18 @@ def required(name: str) -> str:
 
 
 def main() -> int:
+    authorization_value = required("TUMBLR_AUTHORIZATION_CODE")
+    # Mobile browsers often hide the long query string. Accept either the
+    # one-time code alone or the complete redirected GitHub callback URL.
+    if "://" in authorization_value:
+        authorization_code = parse_qs(urlparse(authorization_value).query).get("code", [""])[0]
+        if not authorization_code:
+            raise RuntimeError("the saved callback URL contains no Tumblr authorization code")
+    else:
+        authorization_code = authorization_value
     response = requests.post(TOKEN_URL, data={
         "grant_type": "authorization_code",
-        "code": required("TUMBLR_AUTHORIZATION_CODE"),
+        "code": authorization_code,
         "client_id": required("TUMBLR_CONSUMER_KEY"),
         "client_secret": required("TUMBLR_CONSUMER_SECRET"),
         "redirect_uri": REDIRECT_URI,
