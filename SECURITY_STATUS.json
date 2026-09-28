@@ -1,21 +1,17 @@
 {
-  "checkedAt": "2026-09-28T11:10:31.215578+00:00",
-  "status": "FAIL",
+  "checkedAt": "2026-09-28T11:11:21.851903+00:00",
+  "status": "PASS",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [
-    "Meta token detected in tracked file scheduled_ready/topic_281_most-side-hustles-fail-this-filter.html"
-  ],
-  "warnings": [
-    "126 new live item(s) accepted after threat scan"
-  ],
+  "critical": [],
+  "warnings": [],
   "details": {
     "pages": 12,
     "posts": 114,
-    "newItems": 126,
+    "newItems": 0,
     "changedItems": 0,
     "removedItems": 0,
     "repositoryFiles": 24,
-    "backupCreated": true
+    "backupCreated": false
   }
 }
