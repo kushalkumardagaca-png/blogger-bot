@@ -43,7 +43,19 @@ def main() -> int:
         "redirect_uri": REDIRECT_URI,
     }, timeout=(15, 60))
     if not response.ok:
-        raise RuntimeError(f"Tumblr authorization exchange failed: HTTP {response.status_code}; create a fresh authorization code")
+        try:
+            error_payload = response.json()
+            safe_error = {
+                key: error_payload.get(key)
+                for key in ("error", "error_description", "error_uri")
+                if error_payload.get(key)
+            }
+        except ValueError:
+            safe_error = {"response": "non-JSON error"}
+        raise RuntimeError(
+            f"Tumblr authorization exchange failed: HTTP {response.status_code}; "
+            f"safe error details: {safe_error}"
+        )
     token = response.json()
     if not token.get("access_token") or not token.get("refresh_token"):
         raise RuntimeError("Tumblr did not return both access and offline refresh tokens")
