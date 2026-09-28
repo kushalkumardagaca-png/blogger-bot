@@ -98,6 +98,37 @@ check('Bluesky deduplicates against tracker and live recent feed and reconciles 
 check('Bluesky candidate discovery makes no Daily Yield public-page request',
       'www.googleapis.com/blogger/v3' in bp and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in bp)
 
+# Tumblr official OAuth2/NPF automation, independently gated until a test passes.
+tp_path=ROOT/'tumblr_publisher.py'; tw_path=ROOT/'.github/workflows/tumblr_publisher.yml'
+to_path=ROOT/'tumblr_oauth_bootstrap.py'; tow_path=ROOT/'.github/workflows/tumblr_oauth_bootstrap.yml'
+tp=tp_path.read_text() if tp_path.exists() else ''; tw=tw_path.read_text() if tw_path.exists() else ''
+to=to_path.read_text() if to_path.exists() else ''; tow=tow_path.read_text() if tow_path.exists() else ''
+tumblr_expected=['30 3 * * *','30 7 * * *','30 11 * * *','0 16 * * *']
+check('Tumblr publisher, OAuth bootstrap and independent tracker are deployed',
+      bool(tp) and bool(tw) and bool(to) and bool(tow) and (ROOT/'tumblr_tracker.json').exists())
+check('Tumblr has four daily publishing slots behind an activation gate',
+      crons(tw_path)==tumblr_expected and "vars.TUMBLR_AUTOMATION_ENABLED == 'true'" in tw)
+check('Tumblr credentials and encryption key are GitHub secrets or variables',
+      'vars.TUMBLR_CONSUMER_KEY' in tw+tow and 'secrets.TUMBLR_CONSUMER_SECRET' in tw+tow
+      and 'secrets.TUMBLR_TOKEN_ENCRYPTION_KEY' in tw+tow)
+check('Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens',
+      'offline_access' in to and 'Fernet(' in to and 'tumblr_token.enc' in to)
+check('Tumblr publisher rotates refresh tokens without logging plaintext credentials',
+      'grant_type":"refresh_token"' in tp and 'encrypt_bundle(new)' in tp
+      and 'access_token' not in re.sub(r'required\([^\)]*\)', '', tw))
+check('Tumblr creates modern NPF posts with branded uploaded media and alt text',
+      f'{chr(34)}type{chr(34)}:{chr(34)}image{chr(34)}' in tp and 'daily-yield-card' in tp
+      and 'alt_text' in tp and '/posts' in tp)
+check('Tumblr preserves title, summary, direct link, byline and limited tags',
+      f'{chr(34)}type{chr(34)}:{chr(34)}link{chr(34)}' in tp and 'By Kushal K. Daga' in tp
+      and 'def summary(' in tp and 'return out[:5]' in tp)
+check('Tumblr rotates Pages and posts using its own tracker',
+      '/pages"' in tp and 'PAGE_WINDOWS' in tp and 'tumblr_tracker.json' in tp)
+check('Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes',
+      'def recent_posts(' in tp and 'def reconcile(' in tp and 'seen_id' in tp)
+check('Tumblr candidate discovery creates no Daily Yield public-page requests',
+      'www.googleapis.com/blogger/v3' in tp and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in tp)
+
 # Independent security guard: four API-only checks/hour plus one daily backup.
 sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'
 sg=sg_path.read_text() if sg_path.exists() else ''; sw=sw_path.read_text() if sw_path.exists() else ''

@@ -1,0 +1,80 @@
+name: Daily Yield Tumblr Publisher
+
+on:
+  schedule:
+    - cron: '30 3 * * *'   # 09:00 IST
+    - cron: '30 7 * * *'   # 13:00 IST
+    - cron: '30 11 * * *'  # 17:00 IST
+    - cron: '0 16 * * *'   # 21:30 IST
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'verify authenticates only; dry-run selects without publishing; publish creates one post'
+        required: true
+        default: verify
+        type: choice
+        options: [verify, dry-run, publish]
+      content_mode:
+        description: 'auto rotates reports and useful Pages'
+        required: true
+        default: auto
+        type: choice
+        options: [auto, post, page]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-tumblr-publisher
+  cancel-in-progress: false
+
+jobs:
+  tumblr:
+    if: github.event_name == 'workflow_dispatch' || vars.TUMBLR_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests cryptography pillow
+      - name: Authenticate or publish through official Tumblr API
+        env:
+          TUMBLR_BLOG_IDENTIFIER: 'dailyyield-official'
+          TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
+          TUMBLR_CONSUMER_SECRET: ${{ secrets.TUMBLR_CONSUMER_SECRET }}
+          TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          ACTION="${{ github.event.inputs.action }}"
+          MODE="${{ github.event.inputs.content_mode }}"
+          [[ -n "$MODE" ]] || MODE="auto"
+          if [[ "${{ github.event_name }}" == "schedule" || "$ACTION" == "publish" ]]; then
+            python tumblr_publisher.py --content-mode "$MODE"
+          elif [[ "$ACTION" == "dry-run" ]]; then
+            python tumblr_publisher.py --dry-run --content-mode "$MODE"
+          else
+            python tumblr_publisher.py --verify-only
+          fi
+      - name: Persist rotated encrypted token and independent tracker
+        if: success()
+        shell: bash
+        run: |
+          git config user.name "Daily Yield Tumblr Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add tumblr_token.enc
+          if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event.inputs.action }}" == "publish" ]]; then
+            git add tumblr_tracker.json
+          fi
+          if git diff --staged --quiet; then
+            echo "No Tumblr state change."
+          else
+            git commit -m "Update encrypted Tumblr publication state [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi

@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-28T17:54:54+05:30",
+  "checked_at_ist": "2026-09-28T18:23:22+05:30",
   "summary": {
-    "pass": 88,
+    "pass": 98,
     "fail": 0
   },
   "checks": [
@@ -182,6 +182,56 @@
     },
     {
       "name": "Bluesky candidate discovery makes no Daily Yield public-page request",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr publisher, OAuth bootstrap and independent tracker are deployed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr has four daily publishing slots behind an activation gate",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr credentials and encryption key are GitHub secrets or variables",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr publisher rotates refresh tokens without logging plaintext credentials",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr creates modern NPF posts with branded uploaded media and alt text",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr preserves title, summary, direct link, byline and limited tags",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr rotates Pages and posts using its own tracker",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr candidate discovery creates no Daily Yield public-page requests",
       "status": "PASS",
       "detail": ""
     },
@@ -428,7 +478,7 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 43"
+      "detail": "next index 44"
     },
     {
       "name": "News tracker launch/state is valid",

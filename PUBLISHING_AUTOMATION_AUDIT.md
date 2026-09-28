@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 88 PASS · 0 FAIL
+**Result:** 98 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -40,6 +40,16 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Bluesky rotates Pages and posts using an independent publication history**
 - ✅ **Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes**
 - ✅ **Bluesky candidate discovery makes no Daily Yield public-page request**
+- ✅ **Tumblr publisher, OAuth bootstrap and independent tracker are deployed**
+- ✅ **Tumblr has four daily publishing slots behind an activation gate**
+- ✅ **Tumblr credentials and encryption key are GitHub secrets or variables**
+- ✅ **Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens**
+- ✅ **Tumblr publisher rotates refresh tokens without logging plaintext credentials**
+- ✅ **Tumblr creates modern NPF posts with branded uploaded media and alt text**
+- ✅ **Tumblr preserves title, summary, direct link, byline and limited tags**
+- ✅ **Tumblr rotates Pages and posts using its own tracker**
+- ✅ **Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes**
+- ✅ **Tumblr candidate discovery creates no Daily Yield public-page requests**
 - ✅ **Security guard and approved baseline are deployed**
 - ✅ **Security guard runs four times per hour and creates a daily backup**
 - ✅ **Security guard reads Blogger only through authenticated API**
@@ -88,7 +98,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 43
+- ✅ **Master tracker next-topic state is valid** — next index 44
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
