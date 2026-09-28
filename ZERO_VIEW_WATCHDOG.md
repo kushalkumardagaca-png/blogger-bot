@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-28T19:58:49.234247+05:30
+- **Checked:** 2026-09-28T21:58:11.558380+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 131 URLs · 118 Posts · 12 Pages
+- **Inventory:** 134 URLs · 121 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/130 tracked PASS
+- **Search Console:** OK · 0/133 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Russia Finance News · 28 September 2026 · Coverage September 27 to 28 — Russia honors $102 mln Eurobond coupon payment — Finance Ministry; Russia's approach to…**
+- ✅ **post · Personal Finance News · 28 September 2026 · Coverage September 27 to 28 — Meta, Google, Amazon, Microsoft draw Sen. Warren questions about AI tax subsidies; Why the…**
+- ✅ **post · Buy Options, Not Status**
 - ✅ **post · Mexico Finance News · 28 September 2026 · Coverage September 27 to 28 — Grupo Frontera Lima 2026: Texan Band Plays Costa 21, Peru, on 17 October; India’s bid to…**
 - ✅ **post · Canada Finance News · 28 September 2026 · Coverage September 27 to 28 — The incoming U.S. import bans on Canadian alcohol, whey, molasses and motorcycles, by the…**
 - ✅ **post · US Finance News · 28 September 2026 · Coverage September 27 to 28 — Stock futures drop to start the week as oil prices and Treasury yields rise: Live updates…**
