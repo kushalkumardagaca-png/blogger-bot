@@ -1,0 +1,78 @@
+name: Daily Yield Bluesky Publisher
+
+on:
+  schedule:
+    # Five daily slots in IST. Disabled until the controlled API test passes.
+    - cron: '30 2 * * *'   # 08:00 IST
+    - cron: '30 5 * * *'   # 11:00 IST
+    - cron: '30 8 * * *'   # 14:00 IST
+    - cron: '0 12 * * *'   # 17:30 IST
+    - cron: '30 15 * * *'  # 21:00 IST
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'verify authenticates only; dry-run ranks without publishing; publish creates one post'
+        required: true
+        default: verify
+        type: choice
+        options: [verify, dry-run, publish]
+      content_mode:
+        description: 'auto rotates reports and useful Pages'
+        required: true
+        default: auto
+        type: choice
+        options: [auto, post, page]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-bluesky-publisher
+  cancel-in-progress: false
+
+jobs:
+  bluesky:
+    if: github.event_name == 'workflow_dispatch' || vars.BLUESKY_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated Bluesky publisher dependencies
+        run: python -m pip install --disable-pip-version-check requests pillow
+      - name: Authenticate or publish through official AT Protocol API
+        env:
+          BLUESKY_HANDLE: 'dailyyield.bsky.social'
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          ACTION="${{ github.event.inputs.action }}"
+          MODE="${{ github.event.inputs.content_mode }}"
+          [[ -n "$MODE" ]] || MODE="auto"
+          if [[ "${{ github.event_name }}" == "schedule" || "$ACTION" == "publish" ]]; then
+            python bluesky_publisher.py --content-mode "$MODE"
+          elif [[ "$ACTION" == "dry-run" ]]; then
+            python bluesky_publisher.py --dry-run --content-mode "$MODE"
+          else
+            python bluesky_publisher.py --verify-only
+          fi
+      - name: Commit independent Bluesky tracker
+        if: success() && (github.event_name == 'schedule' || github.event.inputs.action == 'publish')
+        shell: bash
+        run: |
+          git config user.name "Daily Yield Bluesky Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add bluesky_tracker.json
+          if git diff --staged --quiet; then
+            echo "No Bluesky tracker change."
+          else
+            git commit -m "Record Daily Yield Bluesky publication [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi

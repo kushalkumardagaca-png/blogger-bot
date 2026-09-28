@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-28T16:39:49+05:30",
+  "checked_at_ist": "2026-09-28T17:54:54+05:30",
   "summary": {
-    "pass": 78,
+    "pass": 88,
     "fail": 0
   },
   "checks": [
@@ -132,6 +132,56 @@
     },
     {
       "name": "Facebook candidate discovery creates no Daily Yield public-page requests",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky publisher files and independent tracker are deployed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky has five daily publishing slots with activation gate",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky app password is an encrypted secret, never a literal credential",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky uses official AT Protocol session, blob and record endpoints",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky text preserves link-first access, byline and brand identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky enforces the 300-character limit and rich-text facets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky always uploads a branded card with descriptive alt text",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky rotates Pages and posts using an independent publication history",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bluesky candidate discovery makes no Daily Yield public-page request",
       "status": "PASS",
       "detail": ""
     },
@@ -378,7 +428,7 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 40"
+      "detail": "next index 43"
     },
     {
       "name": "News tracker launch/state is valid",

@@ -70,6 +70,34 @@ check('Facebook candidate discovery creates no Daily Yield public-page requests'
       'www.googleapis.com/blogger/v3' in fp and 'requests.get(item["url"]' not in fp
       and 'requests.get(post["url"]' not in fp)
 
+# Bluesky official AT Protocol publishing invariants, isolated from Facebook.
+bp_path=ROOT/'bluesky_publisher.py'; bw_path=ROOT/'.github/workflows/bluesky_publisher.yml'
+bp=bp_path.read_text() if bp_path.exists() else ''; bw=bw_path.read_text() if bw_path.exists() else ''
+bluesky_expected=['30 2 * * *','30 5 * * *','30 8 * * *','0 12 * * *','30 15 * * *']
+check('Bluesky publisher files and independent tracker are deployed',
+      bool(bp) and bool(bw) and (ROOT/'bluesky_tracker.json').exists())
+check('Bluesky has five daily publishing slots with activation gate',
+      crons(bw_path)==bluesky_expected and "vars.BLUESKY_AUTOMATION_ENABLED == 'true'" in bw)
+check('Bluesky app password is an encrypted secret, never a literal credential',
+      'secrets.BLUESKY_APP_PASSWORD' in bw and 'required("BLUESKY_APP_PASSWORD")' in bp)
+check('Bluesky uses official AT Protocol session, blob and record endpoints',
+      'com.atproto.server.createSession' in bp and 'com.atproto.repo.uploadBlob' in bp
+      and 'com.atproto.repo.createRecord' in bp)
+check('Bluesky text preserves link-first access, byline and brand identity',
+      'f"{url}\\n\\n{prefix}' in bp and 'By Kushal K. Daga' in bp and '#DailyYield' in bp)
+check('Bluesky enforces the 300-character limit and rich-text facets',
+      'if len(text) > 300:' in bp and 'app.bsky.richtext.facet#link' in bp
+      and 'app.bsky.richtext.facet#tag' in bp)
+check('Bluesky always uploads a branded card with descriptive alt text',
+      'def generate_card(' in bp and 'width": 1200, "height": 630' in bp
+      and 'Daily Yield branded card for:' in bp)
+check('Bluesky rotates Pages and posts using an independent publication history',
+      '/pages"' in bp and 'PAGE_WINDOWS' in bp and 'bluesky_tracker.json' in bp)
+check('Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes',
+      'recent_urls' in bp and 'def reconcile(' in bp and 'text_hash' in bp)
+check('Bluesky candidate discovery makes no Daily Yield public-page request',
+      'www.googleapis.com/blogger/v3' in bp and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in bp)
+
 # Independent security guard: four API-only checks/hour plus one daily backup.
 sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'
 sg=sg_path.read_text() if sg_path.exists() else ''; sw=sw_path.read_text() if sw_path.exists() else ''

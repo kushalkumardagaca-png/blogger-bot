@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 78 PASS · 0 FAIL
+**Result:** 88 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -30,6 +30,16 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Facebook deduplicates and reconciles uncertain writes**
 - ✅ **Facebook automation excludes comments, messages, ads and artificial engagement**
 - ✅ **Facebook candidate discovery creates no Daily Yield public-page requests**
+- ✅ **Bluesky publisher files and independent tracker are deployed**
+- ✅ **Bluesky has five daily publishing slots with activation gate**
+- ✅ **Bluesky app password is an encrypted secret, never a literal credential**
+- ✅ **Bluesky uses official AT Protocol session, blob and record endpoints**
+- ✅ **Bluesky text preserves link-first access, byline and brand identity**
+- ✅ **Bluesky enforces the 300-character limit and rich-text facets**
+- ✅ **Bluesky always uploads a branded card with descriptive alt text**
+- ✅ **Bluesky rotates Pages and posts using an independent publication history**
+- ✅ **Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes**
+- ✅ **Bluesky candidate discovery makes no Daily Yield public-page request**
 - ✅ **Security guard and approved baseline are deployed**
 - ✅ **Security guard runs four times per hour and creates a daily backup**
 - ✅ **Security guard reads Blogger only through authenticated API**
@@ -78,7 +88,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 40
+- ✅ **Master tracker next-topic state is valid** — next index 43
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
