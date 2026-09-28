@@ -61,14 +61,14 @@ jobs:
           else
             python tumblr_publisher.py --verify-only
           fi
-      - name: Persist rotated encrypted token and independent tracker
-        if: success()
+      - name: Persist rotated encrypted token and successful publication tracker
+        if: always()
         shell: bash
         run: |
           git config user.name "Daily Yield Tumblr Bot"
           git config user.email "bot@dailyyield.blogspot.com"
-          git add tumblr_token.enc
-          if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event.inputs.action }}" == "publish" ]]; then
+          git add tumblr_token.enc 2>/dev/null || true
+          if [[ "${{ job.status }}" == "success" && ( "${{ github.event_name }}" == "schedule" || "${{ github.event.inputs.action }}" == "publish" ) ]]; then
             git add tumblr_tracker.json
           fi
           if git diff --staged --quiet; then

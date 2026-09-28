@@ -169,7 +169,7 @@ def payload(x):
   {"type":"text","text":desc},
   {"type":"link","url":url,"title":"Read on Daily Yield","description":title},
   {"type":"text","text":"By Kushal K. Daga · Markets · Money · Better decisions"}],
-  "state":"published","tags":tags(x),"source_url":url,"send_to_twitter":False,"interactability_reblog":"everyone"}
+  "state":"published","tags":",".join(tags(x)),"source_url":url,"send_to_twitter":False,"interactability_reblog":"everyone"}
 def reconcile(token,url):
  for p in recent_posts(token):
   if url.rstrip("/") in post_urls(p):return p
