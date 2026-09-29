@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-29T11:14:24.699560+05:30",
+  "checkedAtIST": "2026-09-29T12:00:03.191471+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 1137,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 67,
+    "transientExternalResponses": 66,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -8751,6 +8751,16 @@
       "detail": "<urlopen error [Errno 104] Connection reset by peer>"
     },
     {
+      "url": "https://en.yna.co.kr/view/AEN20260924001600315",
+      "status": "TRANSIENT",
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://en.yna.co.kr/view/AEN20260924006053315",
+      "status": "TRANSIENT",
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
       "url": "https://www.ato.gov.au/",
       "status": 403
     },
@@ -8960,10 +8970,6 @@
       "status": 403
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
@@ -8976,15 +8982,7 @@
       "status": 429
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/City_of_London_skyline%2C_January_2014_-_geograph.org.uk_-_3822479.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Marunouchi_leaves.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
     {
@@ -10673,7 +10671,7 @@
       "tracked": 145,
       "pass": 0,
       "notPass": 145,
-      "inspectedThisRun": 5,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
