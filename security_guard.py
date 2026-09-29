@@ -14,6 +14,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -78,8 +79,16 @@ def oauth() -> str:
         "grant_type": "refresh_token",
     }).encode()
     req = urllib.request.Request("https://oauth2.googleapis.com/token", data=form, method="POST")
-    with urllib.request.urlopen(req, timeout=30) as response:
-        return json.load(response)["access_token"]
+    try:
+        with urllib.request.urlopen(req, timeout=30) as response:
+            return json.load(response)["access_token"]
+    except urllib.error.HTTPError as exc:
+        try:
+            payload = json.loads(exc.read().decode("utf-8", "replace"))
+            safe = {key: payload.get(key) for key in ("error", "error_description") if payload.get(key)}
+        except Exception:
+            safe = {"response": "non-JSON Google OAuth error"}
+        raise RuntimeError(f"Google OAuth token refresh failed: HTTP {exc.code}; safe details: {safe}") from exc
 
 
 def blogger_inventory() -> tuple[dict, dict]:
