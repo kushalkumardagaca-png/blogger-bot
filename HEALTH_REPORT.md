@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-29T03:53:27.584145+05:30
-- **Verdict:** PASS
+- **Checked:** 2026-09-29T06:01:17.049328+05:30
+- **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 134 URLs · 121 Posts · 12 Pages
+- **Inventory:** 138 URLs · 125 Posts · 12 Pages
 - **Content failures:** 0
-- **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/133 tracked PASS
+- **Confirmed external 404/410:** 1
+- **Search Console:** OK · 0/137 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,10 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · India Finance News · 29 September 2026 · Coverage September 28 to 29 — Adjudication Order in respect of Madhukar Dubey and its proprietorship firm viz. Magnum…**
+- ✅ **post · Global Finance Wire · 29 September 2026 · Coverage September 28 to 29 — Stock futures are little changed after higher yields lead to losing session: Live updates…**
+- ✅ **post · South Korea Finance News · 29 September 2026 · Coverage September 28 to 29 — Hanwha Ocean wins 680 bln-won order to build 2 LNG carriers; Watchdog to slap fines…**
+- ✅ **post · Australia Finance News · 29 September 2026 · Coverage September 28 to 29 — Live: ASX to edge higher as US bonds surge; Reporting rogue AI won't be enough to keep…**
 - ✅ **post · Russia Finance News · 28 September 2026 · Coverage September 27 to 28 — Russia honors $102 mln Eurobond coupon payment — Finance Ministry; Russia's approach to…**
 - ✅ **post · Personal Finance News · 28 September 2026 · Coverage September 27 to 28 — Meta, Google, Amazon, Microsoft draw Sen. Warren questions about AI tax subsidies; Why the…**
 - ✅ **post · Buy Options, Not Status**

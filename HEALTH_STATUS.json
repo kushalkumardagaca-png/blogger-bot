@@ -1,15 +1,15 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 134,
-    "posts": 121,
+    "urls": 138,
+    "posts": 125,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1020,
-    "confirmedExternal404or410": 0,
-    "transientExternalResponses": 55,
+    "externalDestinationsChecked": 1066,
+    "confirmedExternal404or410": 1,
+    "transientExternalResponses": 53,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1515,14 +1515,58 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/india-2026-09-29.html": {
+        "title": "India Finance News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Adjudication Order in respect of Madhukar Dubey and its proprietorship firm viz. Magnum\u2026",
+        "checkedAt": "2026-09-29T06:01:17.049328+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-29.html": {
+        "title": "Global Finance Wire \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Stock futures are little changed after higher yields lead to losing session: Live updates\u2026",
+        "checkedAt": "2026-09-29T06:01:17.049328+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-29.html": {
+        "title": "South Korea Finance News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Hanwha Ocean wins 680 bln-won order to build 2 LNG carriers; Watchdog to slap fines\u2026",
+        "checkedAt": "2026-09-29T06:01:17.049328+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/australia-2026-09-29.html": {
+        "title": "Australia Finance News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Live: ASX to edge higher as US bonds surge; Reporting rogue AI won't be enough to keep\u2026",
+        "checkedAt": "2026-09-29T06:01:17.049328+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 133,
-      "tracked": 133,
+      "inventory": 137,
+      "tracked": 137,
       "pass": 0,
-      "notPass": 133,
-      "inspectedThisRun": 0,
+      "notPass": 137,
+      "inspectedThisRun": 4,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
