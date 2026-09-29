@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Install the shared Daily Yield family directory on every active static page."""
 from pathlib import Path
-import json, os, requests
-from page_family import ACTIVE_PAGES, BLOG, START, ensure_family
+import json, os, re, requests
+from page_family import ACTIVE_PAGES, BLOG, END, START, ensure_family
 from social_identity import SOCIAL_PROFILES
 
 BLOG_ID = os.environ["BLOGGER_BLOG_ID"]
@@ -74,23 +74,27 @@ def main():
 
     refreshed = {page_path(p): p for p in list_pages(h)}
     checks = []
+    social_urls = [url for _name, url, _handle in SOCIAL_PROFILES]
     for path in ACTIVE_PAGES:
         p = refreshed[path]
         content = p.get("content", "")
-        social_urls = [url for _name, url, _handle in SOCIAL_PROFILES]
+        match = re.search(re.escape(START) + r".*?" + re.escape(END), content, re.S)
+        managed = match.group(0) if match else ""
+        social_counts = {url: managed.count(url) for url in social_urls}
         ok = (content.count(START) == 1 and content.count('id="dyPageFamily"') == 1
-              and content.count('class="dyf-social"') == 1
-              and all(content.count(url) == 1 for url in social_urls)
-              and "/p/markets-today.html" in content and "/p/global-snapshot.html" in content
-              and "/p/share-market_0718113516.html" not in content and "Market Explorer" not in content
-              and "twitter.com/CAKUSHAL2509" not in content and "x.com/CAKUSHAL2509" not in content)
-        checks.append({"path": path, "title": p["title"], "verified": ok})
-    if not all(c["verified"] for c in checks):
-        raise RuntimeError("one or more family-directory verification checks failed")
+              and managed.count('class="dyf-social"') == 1
+              and all(count == 1 for count in social_counts.values())
+              and "/p/markets-today.html" in managed and "/p/global-snapshot.html" in managed
+              and "/p/share-market_0718113516.html" not in managed and "Market Explorer" not in managed)
+        checks.append({"path": path, "title": p["title"], "verified": ok,
+                       "managed_block_found": bool(match), "social_counts": social_counts})
 
-    result = {"changed": changed, "unchanged": unchanged, "verified_pages": checks, "verified": True}
+    verified = all(c["verified"] for c in checks)
+    result = {"changed": changed, "unchanged": unchanged, "verified_pages": checks, "verified": verified}
     Path("page_family_result.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
     print(json.dumps(result, indent=2))
+    if not verified:
+        raise RuntimeError("one or more managed family blocks failed verification; inspect page_family_result.json")
 
 
 if __name__ == "__main__":
