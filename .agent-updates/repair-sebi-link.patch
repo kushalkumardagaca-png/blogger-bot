@@ -1,0 +1,57 @@
+diff --git a/.github/workflows/repair_known_external_links.yml b/.github/workflows/repair_known_external_links.yml
+new file mode 100644
+index 0000000..894c29a
+--- /dev/null
++++ b/.github/workflows/repair_known_external_links.yml
+@@ -0,0 +1,21 @@
++name: Repair Verified External Links
++on:
++  workflow_dispatch:
++permissions:
++  contents: read
++jobs:
++  repair:
++    runs-on: ubuntu-latest
++    timeout-minutes: 10
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: '3.12'
++      - name: Repair exact verified malformed links through Blogger API
++        env:
++          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
++          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
++          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
++          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
++        run: python repair_known_external_links.py
+diff --git a/repair_known_external_links.py b/repair_known_external_links.py
+new file mode 100644
+index 0000000..ce534ea
+--- /dev/null
++++ b/repair_known_external_links.py
+@@ -0,0 +1,24 @@
++#!/usr/bin/env python3
++"""Repair explicitly verified malformed external links through Blogger API only."""
++import json, os, urllib.parse, urllib.request
++BLOG_ID=os.environ['BLOGGER_BLOG_ID']
++OLD='https://www.sebi.gov.in/https://www.sebi.gov.in/sebi_data/attachdocs/sep-2026/ORDER_1790584774.pdf'
++NEW='https://www.sebi.gov.in/sebi_data/attachdocs/sep-2026/ORDER_1790584774.pdf'
++PATH='/2026/09/india-2026-09-29.html'
++
++def call(url,token,method='GET',body=None):
++ req=urllib.request.Request(url,data=json.dumps(body).encode() if body else None,method=method,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'})
++ with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
++form=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
++with urllib.request.urlopen(urllib.request.Request('https://oauth2.googleapis.com/token',data=form,method='POST'),timeout=30) as r:token=json.load(r)['access_token']
++base=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
++post=call(base+'/posts/bypath?'+urllib.parse.urlencode({'path':PATH}),token)
++content=post.get('content','')
++if OLD not in content:
++ print('Known malformed SEBI URL is not present; no update required.')
++ raise SystemExit(0)
++updated=content.replace(OLD,NEW)
++body={'kind':'blogger#post','id':post['id'],'title':post['title'],'content':updated,'labels':post.get('labels',[])}
++result=call(base+'/posts/'+post['id'],token,'PUT',body)
++if OLD in result.get('content','') or NEW not in result.get('content',''):raise RuntimeError('Blogger did not persist the exact link repair')
++print(f"Repaired one malformed SEBI source link in Blogger post {post['id']}.")
