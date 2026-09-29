@@ -3,13 +3,13 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 138,
-    "posts": 125,
+    "urls": 139,
+    "posts": 126,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1066,
+    "externalDestinationsChecked": 1067,
     "confirmedExternal404or410": 1,
-    "transientExternalResponses": 53,
+    "transientExternalResponses": 56,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1559,14 +1559,25 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html": {
+        "title": "Laid Off: The First 72 Hours",
+        "checkedAt": "2026-09-29T07:53:01.224417+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 137,
-      "tracked": 137,
+      "inventory": 138,
+      "tracked": 138,
       "pass": 0,
-      "notPass": 137,
-      "inspectedThisRun": 4,
+      "notPass": 138,
+      "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
