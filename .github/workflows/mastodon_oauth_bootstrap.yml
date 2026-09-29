@@ -1,0 +1,36 @@
+name: Mastodon OAuth Bootstrap
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: mastodon-token-state
+  cancel-in-progress: false
+jobs:
+  authorize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install encryption dependency
+        run: python -m pip install --disable-pip-version-check cryptography
+      - name: Exchange one-time authorization code and encrypt token
+        env:
+          MASTODON_INSTANCE: https://mastodon.social
+          MASTODON_CLIENT_ID: ${{ secrets.MASTODON_CLIENT_ID }}
+          MASTODON_CLIENT_SECRET: ${{ secrets.MASTODON_CLIENT_SECRET }}
+          MASTODON_AUTH_CODE: ${{ secrets.MASTODON_AUTH_CODE }}
+          MASTODON_TOKEN_KEY: ${{ secrets.MASTODON_TOKEN_KEY }}
+        run: python mastodon_oauth_bootstrap.py
+      - name: Commit encrypted token state only
+        run: |
+          git config user.name "daily-yield-bot"
+          git config user.email "dailyyield.official@gmail.com"
+          git add mastodon_token.enc MASTODON_BOOTSTRAP_STATUS.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Authorize encrypted Mastodon publisher"
+          git pull --rebase origin main
+          git push origin main
