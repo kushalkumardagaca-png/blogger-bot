@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-29T12:00:03.191471+05:30
+- **Checked:** 2026-09-29T13:57:37.907633+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 146 URLs · 133 Posts · 12 Pages
+- **Inventory:** 148 URLs · 135 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/145 tracked PASS
+- **Search Console:** OK · 0/147 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Spain Finance News · 29 September 2026 · Coverage September 28 to 29 — Flash estimate of the Consumer Price Index (CPI); Retail Trade Indices (RTI)**
+- ✅ **post · China Finance News · 29 September 2026 · Coverage September 28 to 29 — Exclusive | Jamie Dimon on how growth can untangle US-China strife, thorny global issues…**
 - ✅ **post · Japan Finance News · 29 September 2026 · Coverage September 28 to 29 — JGBs Auction Result of 40-Year JGBs on September 29, 2026; JGBs Interest Rate (September…**
 - ✅ **post · UK Finance News · 29 September 2026 · Coverage September 28 to 29 — FCA secures bankruptcy order against Arthur Temlett 28/09/2026; FCA secures money back for…**
 - ✅ **post · France Finance News · 29 September 2026 · Coverage September 28 to 29 — How a beer brewed by Myanmar's junta won a haul of medals at a French ceremony…**
