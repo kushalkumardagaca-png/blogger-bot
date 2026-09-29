@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-29T05:35:16.735828+00:00",
+  "approvedAt": "2026-09-29T05:44:00.482441+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -25,6 +25,7 @@
     ".github/workflows/health_monitor.yml": "d4fa8ef711aa960860af3bec8b2e16be778dfabc8ed8e67e316fee6477642ee8",
     ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
     ".github/workflows/motion_related_retrofit.yml": "cb3b871f0f59254ad5ece87b2b0632536aceeaa6a5c4bc94dc0795ffadcbe50f",
+    ".github/workflows/repair_known_external_links.yml": "a18980a2f2cc0ff8b247eb65c8611af6295dd437d725506e7a3036fa5d9d80ed",
     ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
     ".github/workflows/retrofit_live_news.yml": "30a0e41d35522ff047fdeffc5d656725ba160913a4dae4cf14b80ef5ad9b7232",
     ".github/workflows/security_guard.yml": "299409d9a785aafc0291050ec4d2baf9c69fff0ce9e9795c2e72cd8f0ace8091",
@@ -130,6 +131,46 @@
       "updated": "2026-09-26T20:32:06-07:00",
       "content_sha256": "63dd19cb265430988cc20c7c060784258214c56b0b3f0d5b8ee27ad5321d1300"
     },
+    "post:1810052964905988018": {
+      "kind": "post",
+      "id": "1810052964905988018",
+      "title": "Japan Finance News · 29 September 2026 · Coverage September 28 to 29 — JGBs Auction Result of 40-Year JGBs on September 29, 2026; JGBs Interest Rate (September…",
+      "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-29.html",
+      "updated": "2026-09-28T22:41:21-07:00",
+      "content_sha256": "fd288212fbd8e2eeeee7e630d77a9f83d55f9d9534b21e89aa58c3ae124243fe"
+    },
+    "post:7667045939093536899": {
+      "kind": "post",
+      "id": "7667045939093536899",
+      "title": "UK Finance News · 29 September 2026 · Coverage September 28 to 29 — FCA secures bankruptcy order against Arthur Temlett 28/09/2026; FCA secures money back for…",
+      "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-29.html",
+      "updated": "2026-09-28T22:41:10-07:00",
+      "content_sha256": "f5a7c541b03ae7d49fc849ed4e9118cd048db4d2d1fbe5eefc5e50aca7b65f61"
+    },
+    "post:3888811538986935233": {
+      "kind": "post",
+      "id": "3888811538986935233",
+      "title": "France Finance News · 29 September 2026 · Coverage September 28 to 29 — How a beer brewed by Myanmar's junta won a haul of medals at a French ceremony…",
+      "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-29.html",
+      "updated": "2026-09-28T22:40:24-07:00",
+      "content_sha256": "39cbf72dae7dc34aacff2a8c24c74002177caed74d4df99b2a603bdabb3a2833"
+    },
+    "post:314352988888289456": {
+      "kind": "post",
+      "id": "314352988888289456",
+      "title": "Where to Park Your Emergency Fund",
+      "url": "https://dailyyield.blogspot.com/2026/09/where-to-park-your-emergency-fund.html",
+      "updated": "2026-09-28T22:40:09-07:00",
+      "content_sha256": "72419b04b6f3751e8d6dc7a91e8f472899aa92c39c293fb75a1cf6718360936a"
+    },
+    "post:5530506896553639228": {
+      "kind": "post",
+      "id": "5530506896553639228",
+      "title": "Germany Finance News · 29 September 2026 · Coverage September 28 to 29 — Evicted Spanish pensioner to return home, lawyer says; Diesel prices are surging putting…",
+      "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-29.html",
+      "updated": "2026-09-28T22:40:08-07:00",
+      "content_sha256": "2b05b4cb13ea050507110fc215e8599127a9049ac9b5625c7566d8ea58278eba"
+    },
     "post:5793837205624436935": {
       "kind": "post",
       "id": "5793837205624436935",
@@ -159,8 +200,8 @@
       "id": "1470400056182955354",
       "title": "India Finance News · 29 September 2026 · Coverage September 28 to 29 — Adjudication Order in respect of Madhukar Dubey and its proprietorship firm viz. Magnum…",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-29.html",
-      "updated": "2026-09-28T17:31:11-07:00",
-      "content_sha256": "c18ee521e07bf5f781bcd8ca8ef20686c76963610f117e4941c5a74998d6a4aa"
+      "updated": "2026-09-28T22:43:32-07:00",
+      "content_sha256": "ea73b7103eb6cf10505f193b08040bef8499778665d9720ed240f79f12c29eb3"
     },
     "post:1954269198646496705": {
       "kind": "post",
