@@ -3,13 +3,13 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 139,
-    "posts": 126,
+    "urls": 141,
+    "posts": 128,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1067,
+    "externalDestinationsChecked": 1089,
     "confirmedExternal404or410": 1,
-    "transientExternalResponses": 56,
+    "transientExternalResponses": 134,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1570,14 +1570,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01743986716.html": {
+        "title": "Economy and Macro Policy News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Seoul stocks slightly lower late Tues. morning on inflation woes; Gov't, OECD to discuss\u2026",
+        "checkedAt": "2026-09-29T11:05:41.683497+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-29.html": {
+        "title": "Market and Trading News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Anthropic leaders to control AI lab to promote public good over market forces: Reuters\u2026",
+        "checkedAt": "2026-09-29T11:05:41.683497+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 138,
-      "tracked": 138,
+      "inventory": 140,
+      "tracked": 140,
       "pass": 0,
-      "notPass": 138,
-      "inspectedThisRun": 1,
+      "notPass": 140,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
@@ -1590,8 +1612,8 @@
     },
     {
       "name": "News publisher",
-      "status": "OK",
-      "detail": "0 failures among 12 recent completed runs"
+      "status": "WARN",
+      "detail": "1 failures among 12 recent completed runs"
     }
   ],
   "providers": [
@@ -1602,8 +1624,8 @@
     },
     {
       "name": "CoinGecko",
-      "status": "OK",
-      "detail": "responding"
+      "status": "WARN",
+      "detail": "HTTP 403: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<HTML><"
     },
     {
       "name": "Frankfurter FX",

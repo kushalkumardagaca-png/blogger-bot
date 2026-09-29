@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-29T07:53:01.224417+05:30
+- **Checked:** 2026-09-29T11:05:41.683497+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 139 URLs · 126 Posts · 12 Pages
+- **Inventory:** 141 URLs · 128 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 1
-- **Search Console:** OK · 0/138 tracked PASS
+- **Search Console:** OK · 0/140 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Economy and Macro Policy News · 29 September 2026 · Coverage September 28 to 29 — Seoul stocks slightly lower late Tues. morning on inflation woes; Gov't, OECD to discuss…**
+- ✅ **post · Market and Trading News · 29 September 2026 · Coverage September 28 to 29 — Anthropic leaders to control AI lab to promote public good over market forces: Reuters…**
 - ✅ **post · Laid Off: The First 72 Hours**
 - ✅ **post · India Finance News · 29 September 2026 · Coverage September 28 to 29 — Adjudication Order in respect of Madhukar Dubey and its proprietorship firm viz. Magnum…**
 - ✅ **post · Global Finance Wire · 29 September 2026 · Coverage September 28 to 29 — Stock futures are little changed after higher yields lead to losing session: Live updates…**
