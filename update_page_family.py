@@ -3,6 +3,7 @@
 from pathlib import Path
 import json, os, requests
 from page_family import ACTIVE_PAGES, BLOG, START, ensure_family
+from social_identity import SOCIAL_PROFILES
 
 BLOG_ID = os.environ["BLOGGER_BLOG_ID"]
 BASE = f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}"
@@ -76,9 +77,13 @@ def main():
     for path in ACTIVE_PAGES:
         p = refreshed[path]
         content = p.get("content", "")
+        social_urls = [url for _name, url, _handle in SOCIAL_PROFILES]
         ok = (content.count(START) == 1 and content.count('id="dyPageFamily"') == 1
+              and content.count('class="dyf-social"') == 1
+              and all(content.count(url) == 1 for url in social_urls)
               and "/p/markets-today.html" in content and "/p/global-snapshot.html" in content
-              and "/p/share-market_0718113516.html" not in content and "Market Explorer" not in content)
+              and "/p/share-market_0718113516.html" not in content and "Market Explorer" not in content
+              and "twitter.com/CAKUSHAL2509" not in content and "x.com/CAKUSHAL2509" not in content)
         checks.append({"path": path, "title": p["title"], "verified": ok})
     if not all(c["verified"] for c in checks):
         raise RuntimeError("one or more family-directory verification checks failed")

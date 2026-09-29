@@ -5,6 +5,14 @@ import re
 
 LINKEDIN = "https://www.linkedin.com/in/dailyyeild"
 PUBLIC_EMAIL = "dailyyield.official@gmail.com"
+# Active, public channels shown across the static Page family. LinkedIn remains
+# paused, X is closed, and Reddit is intentionally omitted until approved.
+SOCIAL_PROFILES = (
+    ("Facebook", "https://www.facebook.com/1303333369533572", "Daily Yield on Facebook"),
+    ("Bluesky", "https://bsky.app/profile/dailyyield.bsky.social", "@dailyyield.bsky.social"),
+    ("Tumblr", "https://www.tumblr.com/dailyyield-official", "dailyyield-official"),
+    ("Mastodon", "https://mastodon.social/@dailyyield", "@dailyyield@mastodon.social"),
+)
 OLD_PUBLIC_EMAILS = (
     "kushalkumardaga.ca@gmail.com",
     "kushalkumadaga.ca@gmail.com",
