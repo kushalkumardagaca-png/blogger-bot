@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-29T22:19:30.426896+05:30",
+  "checkedAtIST": "2026-09-29T23:59:16.974953+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 1285,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 70,
+    "transientExternalResponses": 74,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -9847,7 +9847,11 @@
       "status": 401
     },
     {
-      "url": "https://www.marketwatch.com/story/my-friend-grosses-300-000-a-year-with-her-pet-sitting-business-she-pays-herself-50-000-should-i-do-the-same-8ab5cba3?mod=mw_rss_topstories",
+      "url": "https://www.marketwatch.com/story/my-husband-and-i-are-in-our-50s-and-have-no-kids-we-have-2-million-do-we-need-a-will-62fb422f?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
+      "url": "https://www.marketwatch.com/story/novo-nordisk-strikes-second-licensing-deal-since-frosty-capital-markets-day-cc0db878?mod=mw_rss_topstories",
       "status": 401
     },
     {
@@ -9868,10 +9872,6 @@
     },
     {
       "url": "https://www.marketwatch.com/story/the-history-of-this-market-bad-breadth-signal-points-to-ominous-risks-ahead-ad77e065?mod=mw_rss_topstories",
-      "status": 401
-    },
-    {
-      "url": "https://www.marketwatch.com/story/the-options-market-is-sending-a-contrarian-signal-about-oil-prices-a8812210?mod=mw_rss_topstories",
       "status": 401
     },
     {
@@ -9897,6 +9897,22 @@
     {
       "url": "https://www.sec.gov/investor/alerts/teachers403b.pdf",
       "status": 403
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Zora_Montgomery_Courtney_%281882-1962%29_in_The_Des_Moines_Tribune_of_Des_Moines%2C_Iowa_on_12_September_1914%2C_part_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
