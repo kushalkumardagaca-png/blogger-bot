@@ -1,0 +1,77 @@
+name: Daily Yield Mastodon Publisher
+
+on:
+  schedule:
+    # Four daily slots in IST, staggered from other social publishers.
+    - cron: '0 4 * * *'    # 09:30 IST
+    - cron: '0 8 * * *'    # 13:30 IST
+    - cron: '30 12 * * *'  # 18:00 IST
+    - cron: '30 16 * * *'  # 22:00 IST
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'verify authenticates only; dry-run ranks without publishing; publish creates one status'
+        required: true
+        default: verify
+        type: choice
+        options: [verify, dry-run, publish]
+      content_mode:
+        description: 'auto rotates recent reports and useful Pages'
+        required: true
+        default: auto
+        type: choice
+        options: [auto, post, page]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-mastodon-publisher
+  cancel-in-progress: false
+
+jobs:
+  mastodon:
+    if: github.event_name == 'workflow_dispatch' || vars.MASTODON_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install isolated Mastodon publisher dependencies
+        run: python -m pip install --disable-pip-version-check requests pillow cryptography
+      - name: Authenticate, rank or publish through official Mastodon API
+        env:
+          MASTODON_INSTANCE: https://mastodon.social
+          MASTODON_TOKEN_KEY: ${{ secrets.MASTODON_TOKEN_KEY }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          ACTION="${{ github.event.inputs.action }}"
+          MODE="${{ github.event.inputs.content_mode }}"
+          [[ -n "$MODE" ]] || MODE="auto"
+          if [[ "${{ github.event_name }}" == "schedule" || "$ACTION" == "publish" ]]; then
+            python mastodon_publisher.py --content-mode "$MODE"
+          elif [[ "$ACTION" == "dry-run" ]]; then
+            python mastodon_publisher.py --dry-run --content-mode "$MODE"
+          else
+            python mastodon_publisher.py --verify-only
+          fi
+      - name: Commit independent Mastodon tracker
+        if: success() && (github.event_name == 'schedule' || github.event.inputs.action == 'publish')
+        shell: bash
+        run: |
+          git config user.name "Daily Yield Mastodon Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add mastodon_tracker.json
+          if git diff --staged --quiet; then
+            echo "No Mastodon tracker change."
+          else
+            git commit -m "Record Daily Yield Mastodon publication [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
