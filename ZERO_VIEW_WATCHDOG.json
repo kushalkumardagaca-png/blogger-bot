@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-30T01:56:14.270877+05:30",
+  "checkedAtIST": "2026-09-30T03:54:30.071921+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 1285,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 72,
+    "transientExternalResponses": 71,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -9839,10 +9839,6 @@
       "status": 401
     },
     {
-      "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
-      "status": 401
-    },
-    {
       "url": "https://www.marketwatch.com/story/morgan-stanleys-mike-wilson-says-an-s-p-500-correction-may-be-exactly-what-the-market-needs-a6baf54e?mod=mw_rss_topstories",
       "status": 401
     },
@@ -11763,7 +11759,7 @@
       "tracked": 158,
       "pass": 0,
       "notPass": 158,
-      "inspectedThisRun": 158,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
