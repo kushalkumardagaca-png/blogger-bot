@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-29T19:57:00.279866+05:30
+- **Checked:** 2026-09-29T21:58:13.123771+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 156 URLs · 143 Posts · 12 Pages
+- **Inventory:** 159 URLs · 146 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/155 tracked PASS
+- **Search Console:** OK · 0/158 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Russia Finance News · 29 September 2026 · Coverage September 28 to 29 — Bank of Russia purchases yuan worth $46 mln with settlements on September 28; Cotton share…**
+- ✅ **post · Personal Finance News · 29 September 2026 · Coverage September 28 to 29 — Consumer optimism slides sharply as fears escalate over rising prices and jobs; Investors…**
+- ✅ **post · What Changed for Your Money in 2026**
 - ✅ **post · Mexico Finance News · 29 September 2026 · Coverage September 28 to 29 — Peso falls to 18 to the US dollar as oil, Fed worries impact both currencies; Mexican Drug…**
 - ✅ **post · Canada Finance News · 29 September 2026 · Coverage September 28 to 29 — LNG Canada expansion gets go-ahead, as Carney set to highlight 'historic investment' in…**
 - ✅ **post · US Finance News · 29 September 2026 · Coverage September 28 to 29 — Morgan Stanley’s Mike Wilson says an S&P 500 correction may be exactly what the market…**

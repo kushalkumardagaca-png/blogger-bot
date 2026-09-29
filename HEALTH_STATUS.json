@@ -3,13 +3,13 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 156,
-    "posts": 143,
+    "urls": 159,
+    "posts": 146,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1255,
+    "externalDestinationsChecked": 1281,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 71,
+    "transientExternalResponses": 73,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1757,14 +1757,47 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/russia-2026-09-29.html": {
+        "title": "Russia Finance News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Bank of Russia purchases yuan worth $46 mln with settlements on September 28; Cotton share\u2026",
+        "checkedAt": "2026-09-29T21:58:13.123771+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-29.html": {
+        "title": "Personal Finance News \u00b7 29 September 2026 \u00b7 Coverage September 28 to 29 \u2014 Consumer optimism slides sharply as fears escalate over rising prices and jobs; Investors\u2026",
+        "checkedAt": "2026-09-29T21:58:13.123771+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/what-changed-for-your-money-in-2026.html": {
+        "title": "What Changed for Your Money in 2026",
+        "checkedAt": "2026-09-29T21:58:13.123771+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 155,
-      "tracked": 155,
+      "inventory": 158,
+      "tracked": 158,
       "pass": 0,
-      "notPass": 155,
-      "inspectedThisRun": 1,
+      "notPass": 158,
+      "inspectedThisRun": 3,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
@@ -1799,8 +1832,8 @@
     },
     {
       "name": "Gold API",
-      "status": "OK",
-      "detail": "responding"
+      "status": "WARN",
+      "detail": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "name": "Mutual fund API",
