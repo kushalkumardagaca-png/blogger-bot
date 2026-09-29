@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-29T11:05:41.683497+05:30
-- **Verdict:** ATTENTION
+- **Checked:** 2026-09-29T11:14:24.699560+05:30
+- **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 141 URLs · 128 Posts · 12 Pages
+- **Inventory:** 146 URLs · 133 Posts · 12 Pages
 - **Content failures:** 0
-- **Confirmed external 404/410:** 1
-- **Search Console:** OK · 0/140 tracked PASS
+- **Confirmed external 404/410:** 0
+- **Search Console:** OK · 0/145 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,11 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Japan Finance News · 29 September 2026 · Coverage September 28 to 29 — JGBs Auction Result of 40-Year JGBs on September 29, 2026; JGBs Interest Rate (September…**
+- ✅ **post · UK Finance News · 29 September 2026 · Coverage September 28 to 29 — FCA secures bankruptcy order against Arthur Temlett 28/09/2026; FCA secures money back for…**
+- ✅ **post · France Finance News · 29 September 2026 · Coverage September 28 to 29 — How a beer brewed by Myanmar's junta won a haul of medals at a French ceremony…**
+- ✅ **post · Where to Park Your Emergency Fund**
+- ✅ **post · Germany Finance News · 29 September 2026 · Coverage September 28 to 29 — Evicted Spanish pensioner to return home, lawyer says; Diesel prices are surging putting…**
 - ✅ **post · Economy and Macro Policy News · 29 September 2026 · Coverage September 28 to 29 — Seoul stocks slightly lower late Tues. morning on inflation woes; Gov't, OECD to discuss…**
 - ✅ **post · Market and Trading News · 29 September 2026 · Coverage September 28 to 29 — Anthropic leaders to control AI lab to promote public good over market forces: Reuters…**
 - ✅ **post · Laid Off: The First 72 Hours**
