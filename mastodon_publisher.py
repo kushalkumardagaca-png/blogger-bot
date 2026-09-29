@@ -260,7 +260,9 @@ def generate_card(item: dict) -> Path:
 
 
 def recent_statuses(token:str,account_id:str)->list[dict]:
- return api("GET",f"{INSTANCE}/api/v1/accounts/{account_id}/statuses",token=token,retries=2,params={"limit":"40","exclude_replies":"true","exclude_reblogs":"true"})
+ # Public statuses need no timeline-reading scope. Omitting Authorization keeps
+ # the publisher least-privileged while still permitting duplicate checks.
+ return api("GET",f"{INSTANCE}/api/v1/accounts/{account_id}/statuses",retries=2,params={"limit":"40","exclude_replies":"true","exclude_reblogs":"true"})
 
 def status_urls(status:dict)->set[str]:
  content=status.get("content","")
