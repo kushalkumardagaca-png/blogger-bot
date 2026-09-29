@@ -1,0 +1,75 @@
+diff --git a/.github/workflows/mastodon_oauth_bootstrap.yml b/.github/workflows/mastodon_oauth_bootstrap.yml
+new file mode 100644
+index 0000000..6c244da
+--- /dev/null
++++ b/.github/workflows/mastodon_oauth_bootstrap.yml
+@@ -0,0 +1,36 @@
++name: Mastodon OAuth Bootstrap
++on:
++  workflow_dispatch:
++permissions:
++  contents: write
++concurrency:
++  group: mastodon-token-state
++  cancel-in-progress: false
++jobs:
++  authorize:
++    runs-on: ubuntu-latest
++    timeout-minutes: 10
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: '3.12'
++      - name: Install encryption dependency
++        run: python -m pip install --disable-pip-version-check cryptography
++      - name: Exchange one-time authorization code and encrypt token
++        env:
++          MASTODON_INSTANCE: https://mastodon.social
++          MASTODON_CLIENT_ID: ${{ secrets.MASTODON_CLIENT_ID }}
++          MASTODON_CLIENT_SECRET: ${{ secrets.MASTODON_CLIENT_SECRET }}
++          MASTODON_AUTH_CODE: ${{ secrets.MASTODON_AUTH_CODE }}
++          MASTODON_TOKEN_KEY: ${{ secrets.MASTODON_TOKEN_KEY }}
++        run: python mastodon_oauth_bootstrap.py
++      - name: Commit encrypted token state only
++        run: |
++          git config user.name "daily-yield-bot"
++          git config user.email "dailyyield.official@gmail.com"
++          git add mastodon_token.enc MASTODON_BOOTSTRAP_STATUS.json
++          git diff --cached --quiet && exit 0
++          git commit -m "Authorize encrypted Mastodon publisher"
++          git pull --rebase origin main
++          git push origin main
+diff --git a/mastodon_oauth_bootstrap.py b/mastodon_oauth_bootstrap.py
+new file mode 100644
+index 0000000..2d8ec82
+--- /dev/null
++++ b/mastodon_oauth_bootstrap.py
+@@ -0,0 +1,27 @@
++#!/usr/bin/env python3
++"""One-time Mastodon OAuth exchanger. Never logs credentials or tokens."""
++import json, os, urllib.parse, urllib.request
++from cryptography.fernet import Fernet
++INSTANCE=os.environ.get('MASTODON_INSTANCE','https://mastodon.social').rstrip('/')
++REDIRECT='urn:ietf:wg:oauth:2.0:oob'
++SCOPE='read:accounts write:media write:statuses'
++def request(url,method='GET',data=None,token=None):
++ headers={'Accept':'application/json'}
++ if token:headers['Authorization']='Bearer '+token
++ if data is not None:headers['Content-Type']='application/x-www-form-urlencoded'
++ req=urllib.request.Request(url,data=urllib.parse.urlencode(data).encode() if data is not None else None,method=method,headers=headers)
++ with urllib.request.urlopen(req,timeout=45) as r:return json.load(r)
++code=os.environ['MASTODON_AUTH_CODE'].strip()
++try:
++ token=request(INSTANCE+'/oauth/token','POST',{'client_id':os.environ['MASTODON_CLIENT_ID'],'client_secret':os.environ['MASTODON_CLIENT_SECRET'],'redirect_uri':REDIRECT,'grant_type':'authorization_code','code':code,'scope':SCOPE})
++ access=token['access_token']
++ account=request(INSTANCE+'/api/v1/accounts/verify_credentials',token=access)
++ if account.get('username','').lower()!='dailyyield':raise RuntimeError('Authorized account was not @dailyyield; refusing to store token')
++ bundle={'instance':INSTANCE,'access_token':access,'token_type':token.get('token_type','Bearer'),'scope':token.get('scope',SCOPE),'account_id':account['id'],'username':account['username'],'acct':account.get('acct',account['username'])}
++ encrypted=Fernet(os.environ['MASTODON_TOKEN_KEY'].encode()).encrypt(json.dumps(bundle,separators=(',',':')).encode())
++ with open('mastodon_token.enc','wb') as f:f.write(encrypted+b'\n')
++ with open('MASTODON_BOOTSTRAP_STATUS.json','w') as f:json.dump({'status':'PASS','instance':INSTANCE,'username':account['username'],'acct':account.get('acct'),'account_id':account['id'],'scopes':SCOPE.split()},f,indent=2)
++ print('Mastodon authorization verified and encrypted for @dailyyield. No token was logged.')
++except Exception as exc:
++ print('Mastodon authorization failed safely. No credential details were logged.')
++ raise SystemExit(1)
