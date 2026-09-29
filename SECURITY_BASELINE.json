@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-29T13:25:14.865787+00:00",
+  "approvedAt": "2026-09-29T13:47:58.290510+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -24,6 +24,8 @@
     ".github/workflows/gsc_rebuild.yml": "e86ca87f1aec0a6b14f76cece490c299896562e201001bbaea36057c3781ca1b",
     ".github/workflows/health_monitor.yml": "d4fa8ef711aa960860af3bec8b2e16be778dfabc8ed8e67e316fee6477642ee8",
     ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
+    ".github/workflows/mastodon_oauth_bootstrap.yml": "3685d69f1815805f837b6cc051c190d814adcfd7183c985172b31f464224e6c6",
+    ".github/workflows/mastodon_publisher.yml": "54a01b0fbba1e1d1c92047e0064aaaebaaeb7b1a95571bac4f72fe4f455e28a0",
     ".github/workflows/motion_related_retrofit.yml": "cb3b871f0f59254ad5ece87b2b0632536aceeaa6a5c4bc94dc0795ffadcbe50f",
     ".github/workflows/repair_known_external_links.yml": "a18980a2f2cc0ff8b247eb65c8611af6295dd437d725506e7a3036fa5d9d80ed",
     ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
@@ -130,6 +132,14 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-09-26T20:32:06-07:00",
       "content_sha256": "63dd19cb265430988cc20c7c060784258214c56b0b3f0d5b8ee27ad5321d1300"
+    },
+    "post:7115176249025195517": {
+      "kind": "post",
+      "id": "7115176249025195517",
+      "title": "Mexico Finance News · 29 September 2026 · Coverage September 28 to 29 — Peso falls to 18 to the US dollar as oil, Fed worries impact both currencies; Mexican Drug…",
+      "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-29.html",
+      "updated": "2026-09-29T06:29:32-07:00",
+      "content_sha256": "5a0809c2e443d731a874f1d370af701d9f1bcc91b7522d4cbeb54452a15a7cbc"
     },
     "post:7003750694659761692": {
       "kind": "post",
