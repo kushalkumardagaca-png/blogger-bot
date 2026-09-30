@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-09-30",
+  "mode": "REVIEW_ONLY_NO_SEND_CAPABILITY",
+  "daily_limit": 10,
+  "selected": [
+    {
+      "prospect_id": "ft-opinion",
+      "organization": "Financial Times",
+      "email": "opinion@ft.com",
+      "purpose": "Original exclusive opinion proposal",
+      "official_source": "https://www.ft.com/content/e3e8ff2b-95c7-48f8-9eda-312494422e10",
+      "matched_article": "Emergency Fund Size by Job Type",
+      "matched_url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
+      "relevance_score": 150,
+      "fingerprint": "d5453a9d50e0b46f37928446d8ab4b3e72f92ab344de4b89ae77b6b9ebb2eaa3",
+      "draft": "outreach/review_queue/01-ft-opinion.eml",
+      "state": "REVIEW_REQUIRED_NOT_SENT"
+    },
+    {
+      "prospect_id": "money-newsroom",
+      "organization": "Money",
+      "email": "editor@money.com",
+      "purpose": "Corrections letters or topics readers would like covered",
+      "official_source": "https://money.com/contact/",
+      "matched_article": "Emergency Fund Size by Job Type",
+      "matched_url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
+      "relevance_score": 150,
+      "fingerprint": "720e3b988cd0a32eae967c9cb6b301599b2bf635d93543350a1da2c7ace03e8c",
+      "draft": "outreach/review_queue/02-money-newsroom.eml",
+      "state": "REVIEW_REQUIRED_NOT_SENT"
+    }
+  ],
+  "blocked": [
+    {
+      "prospect_id": "business-standard-editorial",
+      "reason": "classification=restricted/human_only"
+    },
+    {
+      "prospect_id": "financial-planning-voices",
+      "reason": "classification=restricted/human_only"
+    },
+    {
+      "prospect_id": "strategic-finance",
+      "reason": "classification=restricted/human_only"
+    },
+    {
+      "prospect_id": "fdic-money-smart",
+      "reason": "classification=restricted/excluded"
+    },
+    {
+      "prospect_id": "outlook-letters",
+      "reason": "classification=restricted/human_only"
+    },
+    {
+      "prospect_id": "finance-india",
+      "reason": "classification=excluded/excluded"
+    },
+    {
+      "prospect_id": "the-financial-diet",
+      "reason": "classification=excluded/excluded"
+    }
+  ]
+}
