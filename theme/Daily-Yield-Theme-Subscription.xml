@@ -1185,6 +1185,7 @@ html,body{overflow-x:clip!important;}
 /* DY_SUBSCRIPTION_CSS_START */
 /* Site-wide Signal Desk: follows Daily Yield's established ivory/copper palette. */
 .dy-sub-zone{position:relative;isolation:isolate;width:100%;padding:clamp(54px,8vw,104px) clamp(16px,4.5vw,48px);overflow:hidden;background:linear-gradient(180deg,var(--paper),#f2e5d2)}
+.dy-sub-zone .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .dy-sub-zone::before,.dy-sub-zone::after{content:"";position:absolute;z-index:-2;border-radius:50%;filter:blur(1px);pointer-events:none}
 .dy-sub-zone::before{width:clamp(320px,48vw,720px);height:clamp(320px,48vw,720px);right:-16%;top:-42%;background:radial-gradient(circle,rgba(188,91,51,.20),rgba(188,91,51,0) 68%);animation:dySubDrift 11s ease-in-out infinite alternate}
 .dy-sub-zone::after{width:430px;height:430px;left:-190px;bottom:-230px;background:radial-gradient(circle,rgba(217,160,91,.19),rgba(217,160,91,0) 70%);animation:dySubDrift 14s ease-in-out -5s infinite alternate-reverse}
