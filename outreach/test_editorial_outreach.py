@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import shutil
+import tempfile
 import unittest
 from email import policy
 from email.parser import BytesParser
@@ -35,18 +36,35 @@ class OutreachSafetyTests(unittest.TestCase):
                 self.assertEqual(article.title, "Emergency Fund Size by Job Type")
                 self.assertGreater(score, 0)
 
-    def test_generated_messages_are_review_only_and_pixel_free(self):
-        self.assertEqual(app.draft(10), 0)
-        manifest = json.loads(app.MANIFEST.read_text())
-        self.assertEqual(manifest["mode"], "REVIEW_ONLY_NO_SEND_CAPABILITY")
-        self.assertEqual(len(manifest["selected"]), 2)
-        self.assertEqual({x["state"] for x in manifest["selected"]}, {"AUTOMATION_APPROVED_NOT_SENT"})
-        for path in app.QUEUE.glob("*.eml"):
-            message = BytesParser(policy=policy.default).parsebytes(path.read_bytes())
-            self.assertEqual(message["X-Daily-Yield-State"], "AUTOMATION-APPROVED-NOT-SENT")
-            body = message.get_body(preferencelist=("plain",)).get_content()
-            self.assertNotIn("<img", body.lower())
-            self.assertIn("utm_source=editorial_outreach", body)
+    def test_generated_messages_are_branded_multipart_and_pixel_free(self):
+        original = (app.INTERACTIONS, app.QUEUE, app.MANIFEST)
+        with tempfile.TemporaryDirectory(dir=app.OUTREACH) as directory:
+            temporary = Path(directory)
+            app.INTERACTIONS = temporary / "interactions.csv"
+            app.INTERACTIONS.write_text("interaction_id,prospect_id,email,message_fingerprint,status,created_at,updated_at,follow_up_count,notes\n")
+            app.QUEUE = temporary / "review_queue"
+            app.MANIFEST = temporary / "manifest.json"
+            try:
+                self.assertEqual(app.draft(10), 0)
+                manifest = json.loads(app.MANIFEST.read_text())
+                self.assertEqual(manifest["mode"], "REVIEW_ONLY_NO_SEND_CAPABILITY")
+                self.assertEqual(len(manifest["selected"]), 2)
+                self.assertEqual({x["state"] for x in manifest["selected"]}, {"AUTOMATION_APPROVED_NOT_SENT"})
+                for path in app.QUEUE.glob("*.eml"):
+                    message = BytesParser(policy=policy.default).parsebytes(path.read_bytes())
+                    self.assertEqual(message["X-Daily-Yield-State"], "AUTOMATION-APPROVED-NOT-SENT")
+                    body = message.get_body(preferencelist=("plain",)).get_content()
+                    html_body = message.get_body(preferencelist=("html",)).get_content()
+                    self.assertNotIn("<img", body.lower())
+                    self.assertIn("utm_source=editorial_outreach", body)
+                    self.assertIn("cid:daily-yield-header", html_body)
+                    self.assertNotIn("<script", html_body.lower())
+                    self.assertNotIn("tracking", html_body.lower().replace("no tracking pixel", ""))
+                    gifs = [part for part in message.walk() if part.get_content_type() == "image/gif"]
+                    self.assertEqual(len(gifs), 1)
+                    self.assertLess(len(gifs[0].get_payload(decode=True)), 100_000)
+            finally:
+                app.INTERACTIONS, app.QUEUE, app.MANIFEST = original
 
 
 if __name__ == "__main__":

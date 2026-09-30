@@ -12,8 +12,9 @@ This subsystem prepares a small, source-verified editorial pilot. It never sends
 - Existing suppressions, prior sent records and duplicate addresses block drafting.
 - One initial approach per recipient; at most one follow-up, never sooner than 10 days.
 - Sponsorship, advertising, paid placement and bulk promotion are outside scope.
-- Open pixels are prohibited. Future click measurement must use ordinary tagged destination links and aggregated server-side analytics, never synthetic traffic.
-- Gmail sending remains absent and locked. A separate OAuth authorization and an explicit reviewed approval file will be required before any future sender is introduced.
+- Open pixels are prohibited. Click measurement uses ordinary tagged destination links and aggregated server-side analytics, never synthetic traffic.
+- Messages use a multipart plain-text and branded HTML presentation. A small inline animated GIF provides progressive enhancement; its complete first frame is the fallback for clients without animation.
+- Gmail uses the least-privilege `gmail.send` scope and cannot read or delete inbox content.
 
 ## Generate the review packet
 

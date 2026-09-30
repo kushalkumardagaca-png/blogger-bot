@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
 import json
 import re
 import shutil
@@ -28,6 +29,7 @@ SEND_LOCK = OUTREACH / "send_lock.json"
 TRACKER = ROOT / "published_tracker.json"
 QUEUE = OUTREACH / "review_queue"
 MANIFEST = OUTREACH / "pilot_manifest.json"
+EMAIL_HEADER = OUTREACH / "assets" / "daily-yield-email-header.gif"
 
 ALLOWED_ELIGIBILITY = {"eligible", "restricted", "excluded"}
 ALLOWED_MODES = {"auto_approved", "review_required", "human_only", "excluded"}
@@ -138,6 +140,8 @@ def registry_errors() -> list[str]:
         except ValueError:
             errors.append(f"prospects.csv:{number}: invalid source_checked_at")
 
+    if not EMAIL_HEADER.exists() or not EMAIL_HEADER.read_bytes().startswith(b"GIF89a"):
+        errors.append("branded animated email header is missing or invalid")
     lock = json.loads(SEND_LOCK.read_text(encoding="utf-8"))
     if lock.get("tracking_pixels_allowed") is not False or lock.get("synthetic_pageviews_allowed") is not False:
         errors.append("tracking pixels and synthetic pageviews must remain prohibited")
@@ -156,6 +160,28 @@ def validation_errors() -> list[str]:
     if not isinstance(limit, int) or not 1 <= limit <= 10:
         errors.append("daily initial-message limit must be an integer from 1 to 10")
     return errors
+
+
+def render_html(plain_body: str) -> str:
+    """Render a conservative email-client-safe Daily Yield presentation."""
+    paragraphs = []
+    url_pattern = re.compile(r"(https?://[^\s]+)")
+    for paragraph in plain_body.strip().split("\n\n"):
+        escaped = html.escape(paragraph).replace("\n", "<br>")
+        escaped = url_pattern.sub(
+            lambda match: f'<a href="{match.group(1)}" style="color:#9c4522;text-decoration:underline;font-weight:700;">{match.group(1)}</a>',
+            escaped,
+        )
+        paragraphs.append(f'<p style="margin:0 0 17px;line-height:1.65;">{escaped}</p>')
+    content = "".join(paragraphs)
+    return f'''<!doctype html>
+<html><body style="margin:0;padding:0;background:#f8f0e3;color:#2b1d15;font-family:Arial,Helvetica,sans-serif;">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f8f0e3;"><tr><td align="center" style="padding:24px 10px;">
+<table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:600px;background:#fffdf8;border:1px solid #eadcc8;border-radius:18px;overflow:hidden;">
+<tr><td style="padding:0;background:#241610;"><img src="cid:daily-yield-header" width="600" height="150" alt="Daily Yield — Read it. Question it." style="display:block;width:100%;height:auto;border:0;"></td></tr>
+<tr><td style="padding:30px 34px 24px;font-size:16px;">{content}</td></tr>
+<tr><td style="padding:18px 34px;background:#241610;color:#d9c4a4;font-size:12px;line-height:1.55;">Independent personal-finance analysis by Kushal K. Daga<br><a href="https://dailyyield.blogspot.com/" style="color:#f0b180;text-decoration:none;">Daily Yield</a> · No paid-placement request · No tracking pixel</td></tr>
+</table></td></tr></table></body></html>'''
 
 
 def compose(prospect: dict[str, str], article: Article) -> tuple[str, str]:
@@ -250,6 +276,13 @@ def draft(limit: int) -> int:
         message["X-Daily-Yield-State"] = approved_state
         message["X-Daily-Yield-Fingerprint"] = fingerprint
         message.set_content(body)
+        message.add_alternative(render_html(body), subtype="html")
+        html_part = message.get_payload()[-1]
+        html_part.add_related(
+            EMAIL_HEADER.read_bytes(), maintype="image", subtype="gif",
+            cid="<daily-yield-header>", filename="daily-yield-header.gif",
+            disposition="inline",
+        )
         path = QUEUE / f"{selected + 1:02d}-{prospect['prospect_id']}.eml"
         path.write_bytes(message.as_bytes())
         manifest["selected"].append({
