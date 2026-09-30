@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-30T09:22:20.428828+00:00",
+  "approvedAt": "2026-09-30T09:50:12.533444+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -13,7 +13,11 @@
     "bluesky_publisher.py": "a8aa754b16067926bd22200c905014035a395e4bfe21e7589d77bc37442541c5",
     "tumblr_publisher.py": "d8399d862ca3069e2dbcdd576ab46b7c0dde915999362a7b2fa83c6f2b01ac72",
     "tumblr_oauth_bootstrap.py": "c71019d02f8376875714fb95b130a0e7b1da23270e1d497379ce4253c2426c05",
-    "security_guard.py": "236e10a3bc5f2830a42ef7065ff3d7ab33c79694351bf3c4f9591e17ca0f5967",
+    "security_guard.py": "6a45d372e4a3d4fc77fcaafaece2530b4e7332db9c67f2aacd7fabba54f0e1a4",
+    "outreach/editorial_outreach.py": "f5c08caca81c7e2dcbefac3cbf7545fe39b6575d54dd530afe5cdb95e348ca2e",
+    "outreach/prospects.csv": "dc0fd67424e2cc14957947c93ad9be3ef2f6fadebd6077f1209b19eb85a13503",
+    "outreach/send_lock.json": "accc55d52f7c28c30a5eb2d5a45ee781d1b9dc865abb201ae9336d88b27ef7b6",
+    "outreach/suppressions.csv": "d20ca85945453ad5eb51bf4070801a4e490c4c5608c61a656488a73dfc1b5ce4",
     ".github/workflows/bluesky_publisher.yml": "2e024fd5a9442db92c61f52011200a305e44afa548aa8bfa1d33578dc983068b",
     ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
     ".github/workflows/daily_blogger_poster.yml": "ea70b1b9697899df61f9deddbd56177ff8d84877b5115547302a18086c7a7850",
@@ -132,6 +136,22 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-09-30T00:24:26-07:00",
       "content_sha256": "226d169d0aa79b728ab538001e88442e51e4b3392e0a71293d357dd08e574e57"
+    },
+    "post:5019452690942245047": {
+      "kind": "post",
+      "id": "5019452690942245047",
+      "title": "Corporate Finance and Industry News · 30 September 2026 · Coverage September 29 to 30 — Liquidity Indicators in the JGB Markets (August)[PDF 1,634KB]; UK economy ‘slightly…",
+      "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01348401010.html",
+      "updated": "2026-09-30T02:38:33-07:00",
+      "content_sha256": "26a99eae44b4c7d071ec96a08eb437a7827106ee4b773da39570c27c48845eee"
+    },
+    "post:2913845025272989831": {
+      "kind": "post",
+      "id": "2913845025272989831",
+      "title": "Italy Finance News · 30 September 2026 · Coverage September 29 to 30 — Italy's producer price inflation climbs to 10.9%; Italy's bond spread hits 100-points mark",
+      "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-30.html",
+      "updated": "2026-09-30T02:38:14-07:00",
+      "content_sha256": "669ebeca0dba0fbb9c5a887179eef9285c9110ab5b0fb0b24c25499650aa8989"
     },
     "post:1499457110813036815": {
       "kind": "post",
