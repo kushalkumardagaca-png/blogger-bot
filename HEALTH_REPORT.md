@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-30T13:58:48.718429+05:30
+- **Checked:** 2026-09-30T15:56:58.455580+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 173 URLs · 160 Posts · 12 Pages
+- **Inventory:** 176 URLs · 163 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/172 tracked PASS
+- **Search Console:** OK · 0/175 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Corporate Finance and Industry News · 30 September 2026 · Coverage September 29 to 30 — Liquidity Indicators in the JGB Markets (August)[PDF 1,634KB]; UK economy ‘slightly…**
+- ✅ **post · Italy Finance News · 30 September 2026 · Coverage September 29 to 30 — Italy's producer price inflation climbs to 10.9%; Italy's bond spread hits 100-points mark**
+- ✅ **post · 90 Days of Passive Income: The Truth**
 - ✅ **post · Spain Finance News · 30 September 2026 · Coverage September 29 to 30 — Flash estimate of the Consumer Price Index (CPI); Retail Trade Indices (RTI)**
 - ✅ **post · China Finance News · 30 September 2026 · Coverage September 29 to 30 — SAFE Releases Data on International Trade in Goods and Servi; SAFE Releases China's…**
 - ✅ **post · UK Finance News · 30 September 2026 · Coverage September 29 to 30 — UK mortgage demand drops to 32-month low as Iran war drives up borrowing costs…**
