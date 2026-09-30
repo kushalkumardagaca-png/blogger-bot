@@ -29,10 +29,11 @@
   },
   "scheduler": {
     "tasks": {
-      "daily-yield-publish": {
-        "endpoint": "/internal/scheduler/daily-publish",
-        "cron": "30 4 * * *"
-      }
+      "daily-yield-publish-1": { "endpoint": "/internal/scheduler/daily-publish", "cron": "30 4 * * *" },
+      "daily-yield-publish-2": { "endpoint": "/internal/scheduler/daily-publish", "cron": "30 7 * * *" },
+      "daily-yield-publish-3": { "endpoint": "/internal/scheduler/daily-publish", "cron": "30 10 * * *" },
+      "daily-yield-publish-4": { "endpoint": "/internal/scheduler/daily-publish", "cron": "30 13 * * *" },
+      "daily-yield-publish-5": { "endpoint": "/internal/scheduler/daily-publish", "cron": "30 16 * * *" }
     }
   },
   "scripts": {

@@ -12,7 +12,27 @@ type FeedPayload = { feed?: { entry?: FeedEntry[] } };
 type PublishResult = { status: string; title?: string; url?: string; postUrl?: string; reason?: string };
 
 const FEED_URL = 'https://dailyyield.blogspot.com/feeds/posts/default?alt=json&max-results=50';
-const LAST_URL_KEY = 'dailyyield:last-published-url';
+const HISTORY_KEY = 'dailyyield:published-url-history';
+const MAX_DAILY_POSTS = 5;
+
+function istDayKey(): string {
+  return new Date(Date.now() + 330 * 60 * 1000).toISOString().slice(0, 10);
+}
+
+function entryUrl(entry: FeedEntry): string {
+  return entry.link?.find((item) => item.rel === 'alternate')?.href ?? '';
+}
+
+async function publishedHistory(): Promise<string[]> {
+  const raw = await redis.get(HISTORY_KEY);
+  if (!raw) return [];
+  try {
+    const value = JSON.parse(raw) as unknown;
+    return Array.isArray(value) ? value.filter((url): url is string => typeof url === 'string').slice(0, 200) : [];
+  } catch {
+    return [];
+  }
+}
 
 function decodeHtml(value: string): string {
   return value
@@ -35,19 +55,26 @@ function suitable(entry: FeedEntry): boolean {
 }
 
 async function publishLatest(): Promise<PublishResult> {
+  const countKey = `dailyyield:post-count:${istDayKey()}`;
+  const dailyCount = Number((await redis.get(countKey)) ?? '0');
+  if (dailyCount >= MAX_DAILY_POSTS) {
+    return { status: 'skipped', reason: `Daily quota of ${MAX_DAILY_POSTS} reached` };
+  }
+
   const response = await fetch(FEED_URL, { headers: { Accept: 'application/json' } });
   if (!response.ok) throw new Error(`Daily Yield feed returned HTTP ${response.status}`);
   const payload = (await response.json()) as FeedPayload;
-  const entry = (payload.feed?.entry ?? []).find(suitable);
-  if (!entry) return { status: 'skipped', reason: 'No eligible master article in feed' };
+  const history = await publishedHistory();
+  const entry = (payload.feed?.entry ?? []).find((candidate) => {
+    const url = entryUrl(candidate);
+    return suitable(candidate) && url.startsWith('https://dailyyield.blogspot.com/') && !history.includes(url);
+  });
+  if (!entry) return { status: 'skipped', reason: 'No new eligible master article in feed' };
 
   const title = decodeHtml(entry.title?.$t ?? '').slice(0, 260);
-  const url = entry.link?.find((item) => item.rel === 'alternate')?.href ?? '';
+  const url = entryUrl(entry);
   if (!title || !url.startsWith('https://dailyyield.blogspot.com/')) {
     throw new Error('Feed entry failed title or official-domain validation');
-  }
-  if ((await redis.get(LAST_URL_KEY)) === url) {
-    return { status: 'skipped', title, url, reason: 'Already published' };
   }
 
   const source = decodeHtml(entry.content?.$t ?? entry.summary?.$t ?? '');
@@ -69,7 +96,8 @@ async function publishLatest(): Promise<PublishResult> {
     sendreplies: true,
     runAs: 'APP',
   });
-  await redis.set(LAST_URL_KEY, url);
+  await redis.set(HISTORY_KEY, JSON.stringify([url, ...history.filter((item) => item !== url)].slice(0, 200)));
+  await redis.set(countKey, String(dailyCount + 1));
   return { status: 'published', title, url, postUrl: post.url };
 }
 
