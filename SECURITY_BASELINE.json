@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-30T15:38:44.236744+00:00",
+  "approvedAt": "2026-09-30T15:44:22.854770+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -20,8 +20,8 @@
     "outreach/send_lock.json": "3a0e527d44451532cf44a4ed53300dcc36c47b41c3eab7a9b1ff722cb9e09383",
     "outreach/suppressions.csv": "d20ca85945453ad5eb51bf4070801a4e490c4c5608c61a656488a73dfc1b5ce4",
     "reddit_devvit/devvit.json": "ffc2756cc5a224cc6fc08f2a1af5af4fa8775db47ac4790629ea44fa20b3be42",
-    "reddit_devvit/server.ts": "a215c5d5a847c3db4c107afe75ad6f5dc9e35bf9bd458cbb885186ed554146de",
-    "reddit_devvit/install.sh": "bc99e809991ac473bd7508f13e048534a8e37941188d065e834e739ec6e27dac",
+    "reddit_devvit/server.ts": "d5722e6f2fb643104676d3c7f4414d2f9b81b925897b218153f6e1a4711c2a52",
+    "reddit_devvit/install.sh": "26fc89e1db974694bd9d25a5bb7065c700dd4db2bf9ad14a32d99f87d88733c4",
     ".github/workflows/bluesky_publisher.yml": "2e024fd5a9442db92c61f52011200a305e44afa548aa8bfa1d33578dc983068b",
     ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
     ".github/workflows/daily_blogger_poster.yml": "ea70b1b9697899df61f9deddbd56177ff8d84877b5115547302a18086c7a7850",
