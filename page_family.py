@@ -19,11 +19,14 @@ ACTIVE_PAGES = [p for _, p, _, _ in FAMILY] + [
     "/p/contact-us_01883938366.html",
     "/p/disclaimer.html",
     "/p/privacy-policy.html",
+    "/p/terms-and-conditions.html",
 ]
 START = "<!-- DY_PAGE_FAMILY_START -->"
 END = "<!-- DY_PAGE_FAMILY_END -->"
 PRIVACY_SUB_START = "<!-- DY_SUBSCRIPTION_PRIVACY_START -->"
 PRIVACY_SUB_END = "<!-- DY_SUBSCRIPTION_PRIVACY_END -->"
+REDDIT_PRIVACY_START = "<!-- DY_REDDIT_APP_PRIVACY_START -->"
+REDDIT_PRIVACY_END = "<!-- DY_REDDIT_APP_PRIVACY_END -->"
 
 
 def family_block(current_path=""):
@@ -51,7 +54,7 @@ def family_block(current_path=""):
 <p class="dyf-kicker">One publication · connected desks</p><h2 id="dyPageFamilyTitle">The Daily Yield family</h2>
 <p class="dyf-intro">Move between reporting, tools, complete market analysis and the concise Global Snapshot without losing your place in Daily Yield.</p>
 <div class="dyf-grid">""" + "".join(cards) + """</div>
-<nav aria-label="Daily Yield information" class="dyf-utility"><a href="https://dailyyield.blogspot.com/p/about-us_02080501126.html">About</a><a href="https://dailyyield.blogspot.com/p/contact-us_01883938366.html">Contact</a><a href="https://dailyyield.blogspot.com/p/disclaimer.html">Disclaimer</a><a href="https://dailyyield.blogspot.com/p/privacy-policy.html">Privacy</a></nav>
+<nav aria-label="Daily Yield information" class="dyf-utility"><a href="https://dailyyield.blogspot.com/p/about-us_02080501126.html">About</a><a href="https://dailyyield.blogspot.com/p/contact-us_01883938366.html">Contact</a><a href="https://dailyyield.blogspot.com/p/disclaimer.html">Disclaimer</a><a href="https://dailyyield.blogspot.com/p/privacy-policy.html">Privacy</a><a href="https://dailyyield.blogspot.com/p/terms-and-conditions.html">Terms</a></nav>
 <div class="dyf-social"><p class="dyf-social-label">Follow Daily Yield</p><nav aria-label="Daily Yield social profiles" class="dyf-social-links">""" + social + """</nav></div>
 <a class="dyf-subscribe" href="#dy-subscribe"><b>Make the next important story find you.</b><span>Choose your alerts →</span></a>
 </section>
@@ -119,11 +122,31 @@ def ensure_subscription_privacy(content, current_path=""):
     return content + "\n" + block
 
 
+def ensure_reddit_app_privacy(content, current_path=""):
+    """Disclose the deliberately narrow data use of the official Reddit Devvit app."""
+    pattern = re.escape(REDDIT_PRIVACY_START) + r".*?" + re.escape(REDDIT_PRIVACY_END)
+    content = re.sub(pattern, "", content or "", flags=re.S).rstrip()
+    if current_path != "/p/privacy-policy.html":
+        return content
+    block = REDDIT_PRIVACY_START + """
+<section aria-labelledby="dyRedditPrivacyTitle" id="dy-reddit-app-privacy" style="margin:38px 0;padding:clamp(22px,4vw,34px);border:1px solid #eadcc8;border-radius:18px;background:#fffaf1;color:#241610">
+<p style="margin:0 0 8px;color:#9c4522;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase">Official Reddit application</p>
+<h2 id="dyRedditPrivacyTitle" style="margin-top:0">Daily Yield Reddit app privacy</h2>
+<p>The Daily Yield Reddit app is a Reddit-hosted Devvit application used only in r/DailyYield. It retrieves Daily Yield’s public Blogger JSON feed from dailyyield.blogspot.com, selects an eligible article and creates a Reddit post through Reddit’s official app services.</p>
+<p>The app does not request or collect passwords, email addresses, precise location, private messages or payment information, and it does not vote on content. To prevent duplicate publication, it stores only the last published Daily Yield article URL in installation-scoped Redis. Reddit may process account, community, platform and operational log information under Reddit’s own terms and privacy policy.</p>
+<p>Questions or deletion requests concerning data controlled by Daily Yield may be sent to dailyyield.official@gmail.com. Community members can contact Reddit separately regarding data controlled by Reddit.</p>
+<p><strong>Effective:</strong> 30 September 2026.</p>
+</section>
+""" + REDDIT_PRIVACY_END
+    return content + "\n" + block
+
+
 def ensure_family(content, current_path=""):
-    """Keep one full family directory, subscription disclosure and no obsolete cards."""
+    """Keep one full family directory, privacy disclosures and no obsolete cards."""
     content = ensure_social_identity(content)
     content = ensure_brand_identity(content)
     content = ensure_subscription_privacy(content, current_path)
+    content = ensure_reddit_app_privacy(content, current_path)
     content = remove_legacy_explore_blocks(content)
     content = content.replace("/p/share-market_0718113516.html", "/p/global-snapshot.html")
     content = content.replace("MARKET EXPLORER", "GLOBAL SNAPSHOT").replace("Market Explorer", "Global Snapshot")
