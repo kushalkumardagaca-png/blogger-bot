@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-30T16:48:58.849416+00:00",
+  "approvedAt": "2026-09-30T16:50:31.453251+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
@@ -13,7 +13,7 @@
     "bluesky_publisher.py": "a8aa754b16067926bd22200c905014035a395e4bfe21e7589d77bc37442541c5",
     "tumblr_publisher.py": "d8399d862ca3069e2dbcdd576ab46b7c0dde915999362a7b2fa83c6f2b01ac72",
     "tumblr_oauth_bootstrap.py": "c71019d02f8376875714fb95b130a0e7b1da23270e1d497379ce4253c2426c05",
-    "security_guard.py": "ffc348b8cf2f8448391cc2d54df43fd821e4988e606ae5c42095bd2cd2ab7a58",
+    "security_guard.py": "652e4f8438bde83aabda35ea9031ae9d1494cbfb50cd78a41217a4a5fcfd46e1",
     "outreach/editorial_outreach.py": "1bc32e16406497143339428412dbd8f68b5cf2cf5ba4a3d334be8789166867c1",
     "outreach/gmail_sender.py": "292cd572119d4802dc1faea5d590e9f12fa176971bf8941ea0266cd7e0765c62",
     "outreach/prospects.csv": "bbb6a3c5e838d4105bf23f920d380be958a81ec0efbc7d1308d64c622d7f16bd",
@@ -22,6 +22,7 @@
     "reddit_devvit/devvit.json": "58a45a2931f853280a4f549a68f254a5bd7cd42e6c888314ce0d6260c80033b4",
     "reddit_devvit/server.ts": "cfc7582a47aea1874b367c6279b22fa313d0a96a2e0fc32dbd26cdccdaaaf390",
     "reddit_devvit/install.sh": "b7c98366fd61b831d948e6380ea85417a93aa2c3ea33ccea09ccf9a6477d34e2",
+    "reddit_devvit/fresh_setup.sh": "a84a339c6de5994670d07882f5ac43bcaf1ca0c64605af807e1403d07f3841b5",
     ".github/workflows/bluesky_publisher.yml": "2e024fd5a9442db92c61f52011200a305e44afa548aa8bfa1d33578dc983068b",
     ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
     ".github/workflows/daily_blogger_poster.yml": "ea70b1b9697899df61f9deddbd56177ff8d84877b5115547302a18086c7a7850",
