@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "dailyyield-feed",
+  "post": {
+    "entrypoints": {
+      "default": { "entry": "splash.html" },
+      "game": { "entry": "game.html" }
+    }
+  },
+  "server": {},
+  "permissions": {
+    "http": {
+      "enable": true,
+      "domains": ["dailyyield.blogspot.com"]
+    },
+    "redis": true,
+    "reddit": { "enable": true }
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Daily Yield: publish latest article",
+        "description": "Publish the latest eligible Daily Yield master article",
+        "forUserType": "moderator",
+        "location": "subreddit",
+        "endpoint": "/internal/menu/publish-now"
+      }
+    ]
+  },
+  "scheduler": {
+    "tasks": {
+      "daily-yield-publish": {
+        "endpoint": "/internal/scheduler/daily-publish",
+        "cron": "30 4 * * *"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "npm run watch"
+  }
+}
