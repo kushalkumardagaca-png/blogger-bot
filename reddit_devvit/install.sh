@@ -144,7 +144,7 @@ function sendJson(res: ServerResponse, status: number, value: unknown): void {
   res.end(body);
 }
 
-const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+export async function onReq(req: IncomingMessage, res: ServerResponse): Promise<void> {
   try {
     const path = new URL(req.url ?? '/', 'http://devvit.local').pathname;
     const allowed = path === '/internal/scheduler/daily-publish' || path === '/internal/menu/publish-now';
@@ -167,8 +167,9 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     console.error('Daily Yield publisher failed', error);
     sendJson(res, 500, { error: error instanceof Error ? error.message : 'unknown error' });
   }
-});
+}
 
+const server = createServer(onReq);
 server.listen(getServerPort());
 DY_SERVER_TS
 
