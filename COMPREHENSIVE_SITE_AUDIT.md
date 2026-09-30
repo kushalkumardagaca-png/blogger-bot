@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-30T03:54:30.071921+05:30
+- **Checked:** 2026-09-30T06:03:17.221525+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 159 URLs · 146 Posts · 12 Pages
+- **Inventory:** 161 URLs · 148 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/158 tracked PASS
+- **Search Console:** OK · 0/160 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · South Korea Finance News · 30 September 2026 · Coverage September 29 to 30 — (2nd LD) Seoul stocks fall for 2nd day on inflation woes; S. Korean won strengthens on…**
+- ✅ **post · Australia Finance News · 30 September 2026 · Coverage September 29 to 30 — Statement by the Monetary Policy Board: Monetary Policy Decision; Live: ASX to fall…**
 - ✅ **post · Russia Finance News · 29 September 2026 · Coverage September 28 to 29 — Bank of Russia purchases yuan worth $46 mln with settlements on September 28; Cotton share…**
 - ✅ **post · Personal Finance News · 29 September 2026 · Coverage September 28 to 29 — Consumer optimism slides sharply as fears escalate over rising prices and jobs; Investors…**
 - ✅ **post · What Changed for Your Money in 2026**
