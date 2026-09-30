@@ -1,17 +1,18 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-30T18:04:26.796156+05:30
-- **Verdict:** ATTENTION
+- **Checked:** 2026-09-30T21:59:05.087723+05:30
+- **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 180 URLs · 167 Posts · 12 Pages
+- **Inventory:** 185 URLs · 171 Posts · 13 Pages
 - **Content failures:** 0
-- **Confirmed external 404/410:** 1
-- **Search Console:** OK · 0/179 tracked PASS
+- **Confirmed external 404/410:** 0
+- **Search Console:** OK · 0/184 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
+- ✅ **page · Terms and Conditions**
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
@@ -24,6 +25,10 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Russia Finance News · 30 September 2026 · Coverage September 29 to 30 — Russia views European factories producing arms for Kiev as military targets — diplomat…**
+- ✅ **post · Personal Finance News · 30 September 2026 · Coverage September 29 to 30 — Parents who want to help their kids in a tough job market should avoid this 1 move, says…**
+- ✅ **post · £90k Salary, £4k Net Worth Audit**
+- ✅ **post · Mexico Finance News · 30 September 2026 · Coverage September 29 to 30 — Banxico Governor Says Mexico Need Not Follow the Fed With Rates at 6.5%; Mexico to…**
 - ✅ **post · Canada Finance News · 30 September 2026 · Coverage September 29 to 30 — CIMPA and CDS announce the start of the trial period for the fail fee framework for…**
 - ✅ **post · US Finance News · 30 September 2026 · Coverage September 29 to 30 — Micron earnings hit Wall Street after the bell. Here's how traders are positioned into the…**
 - ✅ **post · Childcare Is the New Mortgage**

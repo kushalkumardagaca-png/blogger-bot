@@ -1,15 +1,15 @@
 {
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 180,
-    "posts": 167,
-    "pages": 12,
+    "urls": 185,
+    "posts": 171,
+    "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1510,
-    "confirmedExternal404or410": 1,
-    "transientExternalResponses": 93,
+    "externalDestinationsChecked": 1555,
+    "confirmedExternal404or410": 0,
+    "transientExternalResponses": 97,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2021,14 +2021,69 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/p/terms-and-conditions.html": {
+        "title": "Terms and Conditions",
+        "checkedAt": "2026-09-30T21:59:05.087723+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/russia-2026-09-30.html": {
+        "title": "Russia Finance News \u00b7 30 September 2026 \u00b7 Coverage September 29 to 30 \u2014 Russia views European factories producing arms for Kiev as military targets \u2014 diplomat\u2026",
+        "checkedAt": "2026-09-30T21:59:05.087723+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-30.html": {
+        "title": "Personal Finance News \u00b7 30 September 2026 \u00b7 Coverage September 29 to 30 \u2014 Parents who want to help their kids in a tough job market should avoid this 1 move, says\u2026",
+        "checkedAt": "2026-09-30T21:59:05.087723+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html": {
+        "title": "\u00a390k Salary, \u00a34k Net Worth Audit",
+        "checkedAt": "2026-09-30T21:59:05.087723+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-30.html": {
+        "title": "Mexico Finance News \u00b7 30 September 2026 \u00b7 Coverage September 29 to 30 \u2014 Banxico Governor Says Mexico Need Not Follow the Fed With Rates at 6.5%; Mexico to\u2026",
+        "checkedAt": "2026-09-30T21:59:05.087723+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 179,
-      "tracked": 179,
+      "inventory": 184,
+      "tracked": 184,
       "pass": 0,
-      "notPass": 179,
-      "inspectedThisRun": 4,
+      "notPass": 184,
+      "inspectedThisRun": 5,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
