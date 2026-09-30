@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "approvedAt": "2026-09-30T15:51:19.995010+00:00",
+  "approvedAt": "2026-09-30T15:52:56.282821+00:00",
   "repository": {
     "auto_blogger_publisher.py": "daedc5459ee4a70f3b890e8b3215f6870557b7bab56cd1831749b96c0ed649a3",
     "news_pipeline.py": "ac31d02dcd229e32b111c03d5713e28e90a661fc0c2fc1e78c3611aabc5681c1",
     "facebook_publisher.py": "99e4728cb3cbe371fc5190efe27a2713dbaae4990f81ef1f5a934cbae6671bcf",
     "zero_view_watchdog.py": "a2d9a0afadd208cc1c157d2ba2395c987b7d24cbc7e08a88f2d53cf9d5b67d97",
     "publication_preflight.py": "5f9a6156d1cff6c910c901f7429a4ee02eca7f1eacb048bb98d26da06358ca74",
-    "page_family.py": "8df39f6601d14259abf4face23f200c51a96a4d714e43000535e0efd25e84670",
+    "page_family.py": "8c271a8ede24d7ef4306fbea29efde2d4cff566df443558af140ad06c7857377",
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
     "social_identity.py": "6e783b6263cb9aa957f8ee06aeb19f46bb833f6f037bfa6939d076649c025a95",
     "bluesky_publisher.py": "a8aa754b16067926bd22200c905014035a395e4bfe21e7589d77bc37442541c5",
@@ -46,21 +46,29 @@
     ".github/workflows/update_page_family.yml": "a0544d46418d14889decf5d46150cb4186b14a472cd7563aabc4270bb81c5936"
   },
   "blogger": {
+    "page:3254393081257151974": {
+      "kind": "page",
+      "id": "3254393081257151974",
+      "title": "Terms and Conditions",
+      "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+      "updated": "2026-09-30T08:51:20-07:00",
+      "content_sha256": "70b4befdb4d31c2617fb2a18f1a26871febd73134148038eb52cab8a2285f17e"
+    },
     "page:8504888514217789256": {
       "kind": "page",
       "id": "8504888514217789256",
       "title": "GLOBAL SNAPSHOT",
       "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-      "updated": "2026-09-30T00:24:22-07:00",
-      "content_sha256": "b5929a4ffcc80831dfcec66b8a5db99215d9154c1960cef438bc57ad746c42a0"
+      "updated": "2026-09-30T08:51:27-07:00",
+      "content_sha256": "e1bfbd1453221341b231c7b47dd861fcef9ff5f0503535f3247832e5e2fe31b6"
     },
     "page:5236051989054453802": {
       "kind": "page",
       "id": "5236051989054453802",
       "title": "MARKETS TODAY",
       "url": "https://dailyyield.blogspot.com/p/markets-today.html",
-      "updated": "2026-09-30T00:24:21-07:00",
-      "content_sha256": "7424fcc4cb14d6ef4984bb5b8d248b79be9c8ba9d97a78a63c43fe92212ff3a7"
+      "updated": "2026-09-30T08:51:26-07:00",
+      "content_sha256": "32795446ccde19e89cc5c009c7b106dce91105307deb7cbd095196dc88df25de"
     },
     "page:5512428640739964675": {
       "kind": "page",
@@ -75,72 +83,72 @@
       "id": "304220949515133754",
       "title": "PRIVACY POLICY",
       "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
-      "updated": "2026-09-30T00:24:29-07:00",
-      "content_sha256": "2d863a7f36f1aefbabccdc71d58a9fe098aab67e1726fb0fc824aa19dec04091"
+      "updated": "2026-09-30T08:51:34-07:00",
+      "content_sha256": "4a9fe8d56c64b7e0699c134c6295e71c58529327a6b524eb9e464cd9c4a54324"
     },
     "page:9217579601621666930": {
       "kind": "page",
       "id": "9217579601621666930",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "updated": "2026-09-30T00:24:19-07:00",
-      "content_sha256": "3d10312807bb2c0cb6b2aa982c3d1795ecc09694c58be76019a889bd6e771abd"
+      "updated": "2026-09-30T08:51:23-07:00",
+      "content_sha256": "5e8d0741eeb4d8a0dec255a12694386c63d3f6e451cca580b24d4a0afe15288a"
     },
     "page:8572476015753638755": {
       "kind": "page",
       "id": "8572476015753638755",
       "title": "MONEY ATLAS",
       "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-      "updated": "2026-09-30T00:24:23-07:00",
-      "content_sha256": "9b55de507a2ef1c7b8caff1626115070671e9b688b7266705877dd0861244b50"
+      "updated": "2026-09-30T08:51:28-07:00",
+      "content_sha256": "c4d1b36bbe035fc63022199875f9fbe1d4ab0776d75bf06a295078d05b8f4be7"
     },
     "page:6065205676235626846": {
       "kind": "page",
       "id": "6065205676235626846",
       "title": "FOR CORPORATE",
       "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
-      "updated": "2026-09-30T00:24:24-07:00",
-      "content_sha256": "dd2e9570abe23766683a4d6977430ef1ae779304a7c4db7952bcf65b99b9d336"
+      "updated": "2026-09-30T08:51:29-07:00",
+      "content_sha256": "e22eee3448742e361315fb7f638363cd7a91b4a4f0a4d4dfbb036468e41961c7"
     },
     "page:3945823007631424733": {
       "kind": "page",
       "id": "3945823007631424733",
       "title": "DISCLAIMER",
       "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
-      "updated": "2026-09-30T00:24:28-07:00",
-      "content_sha256": "43682649c3d60bab35a324427828cc185897436759e7ed8bcc239e22221f1433"
+      "updated": "2026-09-30T08:51:33-07:00",
+      "content_sha256": "e9bd8590d9b627b0063f8865b9433fd3a44d8986656140c593f34573c7cc34d1"
     },
     "page:4698688245681185879": {
       "kind": "page",
       "id": "4698688245681185879",
       "title": "CONTACT US",
       "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
-      "updated": "2026-09-30T00:24:27-07:00",
-      "content_sha256": "3192114afc89cecca76d395b0acbd5e6cc7ee025bb9f766fb574dcebfbed6b63"
+      "updated": "2026-09-30T08:51:32-07:00",
+      "content_sha256": "3a96fa02822fc50e87b8c6d8f894a5cfd52b0bc3c8a2fc020f2531a3e8fda4cf"
     },
     "page:7468827438203976743": {
       "kind": "page",
       "id": "7468827438203976743",
       "title": "CALCULATOR",
       "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-      "updated": "2026-09-30T00:24:20-07:00",
-      "content_sha256": "c72d2ab7864a0014d3489de867e0a6d8f1d57dd58b29620c669515dc705f6976"
+      "updated": "2026-09-30T08:51:25-07:00",
+      "content_sha256": "e5d77426ef30378509e733fa9d54f9a632b8148bb9a7b71ec4c33e7f9539c76a"
     },
     "page:1685707888914861815": {
       "kind": "page",
       "id": "1685707888914861815",
       "title": "DAILY ARTICLE",
       "url": "https://dailyyield.blogspot.com/p/article.html",
-      "updated": "2026-09-30T00:24:18-07:00",
-      "content_sha256": "744f9a747f33f961e9ec22ef2be1ab956c3a92029f165bbf4cfc12e6329c1867"
+      "updated": "2026-09-30T08:51:22-07:00",
+      "content_sha256": "d485818f1aa1700447af69bb3310d3f158a2cf2a481481023fecf1aba9b91b2a"
     },
     "page:2716668129166401912": {
       "kind": "page",
       "id": "2716668129166401912",
       "title": "ABOUT US",
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
-      "updated": "2026-09-30T00:24:26-07:00",
-      "content_sha256": "226d169d0aa79b728ab538001e88442e51e4b3392e0a71293d357dd08e574e57"
+      "updated": "2026-09-30T08:51:30-07:00",
+      "content_sha256": "99c5388209259d7bc04695fb54847470da4dbd4dc5b99f423d68d10630cfadd2"
     },
     "post:3042075322183164827": {
       "kind": "post",
