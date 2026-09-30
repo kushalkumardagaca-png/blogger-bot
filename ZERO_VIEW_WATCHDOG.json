@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-09-30T21:59:05.087723+05:30",
+  "checkedAtIST": "2026-09-30T23:57:43.129684+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 1555,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 97,
+    "transientExternalResponses": 96,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -11776,10 +11776,6 @@
       "status": 401
     },
     {
-      "url": "https://www.marketwatch.com/story/im-never-selling-im-47-and-buy-bitcoin-with-every-dollar-i-earn-am-i-crazy-364d2a64?mod=mw_rss_topstories",
-      "status": 401
-    },
-    {
       "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
       "status": 401
     },
@@ -11888,6 +11884,10 @@
       "status": 429
     },
     {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
+    },
+    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
@@ -11917,10 +11917,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Polanco_skyline_Mexico_City_-_-_TurismoCDMX_-_15.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     }
   ],
@@ -14034,7 +14030,7 @@
       "tracked": 184,
       "pass": 0,
       "notPass": 184,
-      "inspectedThisRun": 5,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
