@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-30T15:56:58.455580+05:30
-- **Verdict:** PASS
+- **Checked:** 2026-09-30T18:04:26.796156+05:30
+- **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 176 URLs · 163 Posts · 12 Pages
+- **Inventory:** 180 URLs · 167 Posts · 12 Pages
 - **Content failures:** 0
-- **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/175 tracked PASS
+- **Confirmed external 404/410:** 1
+- **Search Console:** OK · 0/179 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,10 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Canada Finance News · 30 September 2026 · Coverage September 29 to 30 — CIMPA and CDS announce the start of the trial period for the fail fee framework for…**
+- ✅ **post · US Finance News · 30 September 2026 · Coverage September 29 to 30 — Micron earnings hit Wall Street after the bell. Here's how traders are positioned into the…**
+- ✅ **post · Childcare Is the New Mortgage**
+- ✅ **post · Brazil Finance News · 30 September 2026 · Coverage September 29 to 30 — San Juan Farmers Protest: Dominican Police Detain Five Leaders Over Debt; Dominican…**
 - ✅ **post · Corporate Finance and Industry News · 30 September 2026 · Coverage September 29 to 30 — Liquidity Indicators in the JGB Markets (August)[PDF 1,634KB]; UK economy ‘slightly…**
 - ✅ **post · Italy Finance News · 30 September 2026 · Coverage September 29 to 30 — Italy's producer price inflation climbs to 10.9%; Italy's bond spread hits 100-points mark**
 - ✅ **post · 90 Days of Passive Income: The Truth**

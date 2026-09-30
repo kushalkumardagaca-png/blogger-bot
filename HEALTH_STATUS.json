@@ -1,15 +1,15 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 176,
-    "posts": 163,
+    "urls": 180,
+    "posts": 167,
     "pages": 12,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1468,
-    "confirmedExternal404or410": 0,
-    "transientExternalResponses": 80,
+    "externalDestinationsChecked": 1510,
+    "confirmedExternal404or410": 1,
+    "transientExternalResponses": 93,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1977,14 +1977,58 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/canada-2026-09-30.html": {
+        "title": "Canada Finance News \u00b7 30 September 2026 \u00b7 Coverage September 29 to 30 \u2014 CIMPA and CDS announce the start of the trial period for the fail fee framework for\u2026",
+        "checkedAt": "2026-09-30T18:04:26.796156+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/us-2026-09-30.html": {
+        "title": "US Finance News \u00b7 30 September 2026 \u00b7 Coverage September 29 to 30 \u2014 Micron earnings hit Wall Street after the bell. Here's how traders are positioned into the\u2026",
+        "checkedAt": "2026-09-30T18:04:26.796156+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html": {
+        "title": "Childcare Is the New Mortgage",
+        "checkedAt": "2026-09-30T18:04:26.796156+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-30.html": {
+        "title": "Brazil Finance News \u00b7 30 September 2026 \u00b7 Coverage September 29 to 30 \u2014 San Juan Farmers Protest: Dominican Police Detain Five Leaders Over Debt; Dominican\u2026",
+        "checkedAt": "2026-09-30T18:04:26.796156+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 175,
-      "tracked": 175,
+      "inventory": 179,
+      "tracked": 179,
       "pass": 0,
-      "notPass": 175,
-      "inspectedThisRun": 3,
+      "notPass": 179,
+      "inspectedThisRun": 4,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
