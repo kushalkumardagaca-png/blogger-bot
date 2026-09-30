@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T01:55:35.114939+05:30",
+  "checkedAtIST": "2026-10-01T03:55:30.621766+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -23,7 +23,7 @@
     "contentFailures": 0,
     "externalDestinationsChecked": 1555,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 97,
+    "transientExternalResponses": 95,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -11888,15 +11888,7 @@
       "status": 429
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
     {
@@ -11974,13 +11966,13 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-09-29T12:10:08.031Z",
+        "lastDownloaded": "2026-09-30T22:21:31.892Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
           {
             "type": "web",
-            "submitted": "12",
+            "submitted": "13",
             "indexed": "0"
           }
         ]
@@ -14034,7 +14026,7 @@
       "tracked": 184,
       "pass": 0,
       "notPass": 184,
-      "inspectedThisRun": 184,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
