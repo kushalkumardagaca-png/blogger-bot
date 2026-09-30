@@ -32,8 +32,9 @@ CRITICAL_FILES = [
     "zero_view_watchdog.py", "publication_preflight.py", "page_family.py",
     "brand_identity.py", "social_identity.py", "bluesky_publisher.py",
     "tumblr_publisher.py", "tumblr_oauth_bootstrap.py", "security_guard.py",
-    "outreach/editorial_outreach.py", "outreach/prospects.csv",
-    "outreach/send_lock.json", "outreach/suppressions.csv",
+    "outreach/editorial_outreach.py", "outreach/gmail_sender.py",
+    "outreach/prospects.csv", "outreach/send_lock.json",
+    "outreach/suppressions.csv",
 ]
 MALICIOUS_PATTERNS = {
     "external script loader": re.compile(r"<script\b[^>]*\bsrc\s*=", re.I),

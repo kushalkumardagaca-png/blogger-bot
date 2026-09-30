@@ -1,0 +1,77 @@
+name: Daily Yield Editorial Outreach
+
+on:
+  schedule:
+    # 13:00 IST daily. Only newly verified eligible contacts are considered.
+    - cron: '30 7 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Validate OAuth without sending, or process the eligible queue'
+        required: true
+        default: validate
+        type: choice
+        options:
+          - validate
+          - send
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-editorial-outreach
+  cancel-in-progress: false
+
+jobs:
+  outreach:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+      GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+      GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate registry and Gmail send-only authorization
+        run: |
+          python outreach/editorial_outreach.py validate
+          python outreach/gmail_sender.py auth-check
+
+      - name: Reserve eligible messages before any send
+        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        run: python outreach/gmail_sender.py reserve
+
+      - name: Persist reservation before contacting Gmail
+        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        run: |
+          git config user.name "Daily Yield Editorial Outreach"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add outreach/interactions.csv outreach/outbox outreach/pilot_manifest.json outreach/review_queue
+          if git diff --staged --quiet; then
+            echo "No new eligible message to reserve."
+          else
+            git commit -m "Reserve Daily Yield editorial outreach [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: Send only previously persisted reservations
+        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        run: python outreach/gmail_sender.py send-reserved
+
+      - name: Persist immutable send outcomes
+        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        run: |
+          git add outreach/interactions.csv
+          if git diff --staged --quiet; then
+            echo "No outreach outcome change."
+          else
+            git commit -m "Record Daily Yield editorial outreach outcome [skip ci]"
+            git push origin HEAD:main
+          fi

@@ -31,7 +31,10 @@ MANIFEST = OUTREACH / "pilot_manifest.json"
 
 ALLOWED_ELIGIBILITY = {"eligible", "restricted", "excluded"}
 ALLOWED_MODES = {"review_required", "human_only", "excluded"}
-BLOCKING_STATUSES = {"sent", "replied", "bounced", "suppressed", "unsubscribed", "complaint"}
+BLOCKING_STATUSES = {
+    "reserved", "sent", "replied", "bounced", "suppressed", "unsubscribed",
+    "complaint", "needs_review", "blocked_after_reservation",
+}
 GENERIC_WORDS = {
     "and", "the", "for", "with", "from", "that", "this", "your", "about",
     "publication", "finance", "financial", "original", "article", "pitch",
@@ -102,7 +105,7 @@ def match_article(prospect: dict[str, str], articles: list[Article]) -> tuple[Ar
     return article, score
 
 
-def validation_errors() -> list[str]:
+def registry_errors() -> list[str]:
     errors: list[str] = []
     prospects = read_csv(PROSPECTS)
     seen_ids, seen_emails = set(), set()
@@ -136,10 +139,22 @@ def validation_errors() -> list[str]:
             errors.append(f"prospects.csv:{number}: invalid source_checked_at")
 
     lock = json.loads(SEND_LOCK.read_text(encoding="utf-8"))
-    if lock.get("sending_enabled") is not False or lock.get("gmail_oauth_configured") is not False:
-        errors.append("send_lock.json must keep sending and Gmail OAuth disabled in this review-only subsystem")
     if lock.get("tracking_pixels_allowed") is not False or lock.get("synthetic_pageviews_allowed") is not False:
         errors.append("tracking pixels and synthetic pageviews must remain prohibited")
+    return errors
+
+
+def validation_errors() -> list[str]:
+    errors = registry_errors()
+    lock = json.loads(SEND_LOCK.read_text(encoding="utf-8"))
+    for key in ("sending_enabled", "gmail_oauth_configured", "review_approval_required"):
+        if not isinstance(lock.get(key), bool):
+            errors.append(f"send_lock.json {key} must be boolean")
+    if lock.get("sending_enabled") is True and lock.get("gmail_oauth_configured") is not True:
+        errors.append("sending cannot be enabled before Gmail OAuth is configured")
+    limit = lock.get("max_initial_messages_per_day")
+    if not isinstance(limit, int) or not 1 <= limit <= 10:
+        errors.append("daily initial-message limit must be an integer from 1 to 10")
     return errors
 
 

@@ -13,10 +13,12 @@ class OutreachSafetyTests(unittest.TestCase):
     def test_registry_and_lock_are_valid(self):
         self.assertEqual(app.validation_errors(), [])
         lock = json.loads(app.SEND_LOCK.read_text())
-        self.assertFalse(lock["sending_enabled"])
-        self.assertFalse(lock["gmail_oauth_configured"])
+        self.assertIsInstance(lock["sending_enabled"], bool)
+        self.assertIsInstance(lock["gmail_oauth_configured"], bool)
         self.assertFalse(lock["tracking_pixels_allowed"])
         self.assertFalse(lock["synthetic_pageviews_allowed"])
+        if lock["sending_enabled"]:
+            self.assertTrue(lock["gmail_oauth_configured"])
 
     def test_only_explicitly_eligible_contacts_can_be_drafted(self):
         eligible = [
