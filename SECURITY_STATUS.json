@@ -1,9 +1,11 @@
 {
-  "checkedAt": "2026-09-30T11:20:52.325462+00:00",
-  "status": "PASS",
+  "checkedAt": "2026-09-30T11:21:06.570435+00:00",
+  "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [],
+  "critical": [
+    "critical repository files changed without baseline approval: .github/workflows/editorial_outreach.yml, outreach/editorial_outreach.py, outreach/gmail_sender.py, outreach/prospects.csv, outreach/send_lock.json, security_guard.py"
+  ],
   "warnings": [],
   "details": {
     "pages": 12,
