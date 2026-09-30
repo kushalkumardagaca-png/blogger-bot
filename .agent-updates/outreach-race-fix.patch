@@ -1,0 +1,32 @@
+diff --git a/.github/workflows/editorial_outreach.yml b/.github/workflows/editorial_outreach.yml
+index 982b145..04df455 100644
+--- a/.github/workflows/editorial_outreach.yml
++++ b/.github/workflows/editorial_outreach.yml
+@@ -58,7 +58,13 @@ jobs:
+             echo "No new eligible message to reserve."
+           else
+             git commit -m "Reserve Daily Yield editorial outreach [skip ci]"
+-            git push origin HEAD:main
++            for attempt in 1 2 3; do
++              git pull --rebase origin main
++              if git push origin HEAD:main; then exit 0; fi
++              sleep $((attempt * 2))
++            done
++            echo "Reservation was not persisted; no email may be sent."
++            exit 1
+           fi
+ 
+       - name: Send only previously persisted reservations
+@@ -73,5 +79,11 @@ jobs:
+             echo "No outreach outcome change."
+           else
+             git commit -m "Record Daily Yield editorial outreach outcome [skip ci]"
+-            git push origin HEAD:main
++            for attempt in 1 2 3; do
++              git pull --rebase origin main
++              if git push origin HEAD:main; then exit 0; fi
++              sleep $((attempt * 2))
++            done
++            echo "Send outcome could not be persisted; reservations remain blocked from reuse."
++            exit 1
+           fi
