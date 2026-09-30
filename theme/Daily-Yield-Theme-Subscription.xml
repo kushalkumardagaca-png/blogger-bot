@@ -1213,11 +1213,33 @@ html,body{overflow-x:clip!important;}
 .dy-sub-submit{position:relative;width:100%;min-height:58px;margin-top:10px;padding:14px 49px 14px 20px;border-radius:15px;background:linear-gradient(120deg,var(--accent-dark),var(--accent),#d67c50);background-size:180% 100%;color:#fff8ee;box-shadow:0 15px 34px -17px rgba(156,69,34,.8);font:800 12px/1.35 var(--font-body);letter-spacing:.08em;text-transform:uppercase;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s,background-position .5s}.dy-sub-submit:hover{transform:translateY(-3px);box-shadow:0 19px 38px -16px rgba(156,69,34,.9);background-position:100% 0}.dy-sub-submit:active{transform:translateY(-1px)}.dy-sub-submit svg{position:absolute;right:20px;top:50%;width:20px;height:20px;transform:translateY(-50%);stroke:currentColor;fill:none;stroke-width:1.8;transition:transform .3s}.dy-sub-submit:hover svg{transform:translate(4px,-50%)}
 .dy-sub-consent{margin:10px 2px 0!important;color:#877562!important;font-size:10px!important;line-height:1.5!important}.dy-sub-consent a{color:var(--accent-dark);text-decoration:underline;text-underline-offset:2px}
 .dy-sub-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.dy-sub-choice{min-height:70px;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fff;display:flex;align-items:center;gap:11px;color:var(--ink);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}.dy-sub-choice:hover{transform:translateY(-3px);border-color:#c99770;box-shadow:0 12px 28px -24px rgba(36,22,16,.65)}.dy-sub-choice svg{width:24px;height:24px;flex:none;stroke:var(--accent-dark);fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.dy-sub-choice b{display:block;font-size:11px;line-height:1.25}.dy-sub-choice small{display:block;margin-top:4px;color:var(--muted);font-size:9px;line-height:1.35}.dy-sub-choice-wide{grid-column:1/-1}
-.dy-sub-trust{display:flex;flex-wrap:wrap;gap:7px 13px;margin-top:17px;color:#796957;font:700 9px/1.3 var(--font-body);letter-spacing:.04em}.dy-sub-trust span::before{content:"✓";margin-right:5px;color:var(--accent-dark)}
+.dy-sub-trust{display:flex;flex-wrap:wrap;gap:7px 13px;margin-top:17px;color:#796957;font:700 9px/1.3 var(--font-body);letter-spacing:.04em}.dy-sub-trust span::before{content:"\2713";margin-right:5px;color:var(--accent-dark)}
 .dy-sub-beacon{position:fixed;left:clamp(12px,2.2vw,28px);bottom:clamp(12px,2.2vw,28px);z-index:72;max-width:270px;padding:9px 13px 9px 9px;border:1px solid rgba(217,160,91,.35);border-radius:999px;background:rgba(36,22,16,.94);color:#fff8ee;display:flex;align-items:center;gap:10px;box-shadow:0 16px 45px -18px rgba(36,22,16,.72);backdrop-filter:blur(12px);transform:translateY(22px);opacity:0;visibility:hidden;transition:opacity .45s,transform .55s var(--ease),visibility 0s linear .55s}.dy-sub-beacon.dy-show{opacity:1;visibility:visible;transform:none;transition:opacity .45s,transform .55s var(--ease)}.dy-sub-beacon:hover{transform:translateY(-3px)}.dy-sub-beacon-icon{position:relative;width:37px;height:37px;flex:none;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#d88155,#9c4522)}.dy-sub-beacon-icon::after{content:"";position:absolute;inset:-4px;border:1px solid rgba(241,179,131,.35);border-radius:50%;animation:dySubPulseRing 2.4s infinite}.dy-sub-beacon-icon svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.8}.dy-sub-beacon-copy{text-align:left}.dy-sub-beacon-copy b{display:block;font:700 11px/1.2 var(--font-body);letter-spacing:.02em}.dy-sub-beacon-copy span{display:block;margin-top:3px;color:#d8c2ad;font-size:9px}.dy-sub-beacon-x{width:23px;height:23px;margin-left:2px;border-radius:50%;color:#cdb6a0;display:grid;place-items:center;font-size:16px}.dy-sub-beacon-x:hover{background:rgba(255,255,255,.09);color:#fff}
 @keyframes dySubDrift{to{transform:translate3d(-25px,22px,0) scale(1.07)}}@keyframes dySubSheen{0%,68%{transform:translateX(-130%)}85%,100%{transform:translateX(130%)}}@keyframes dySubSpin{to{transform:rotate(360deg)}}@keyframes dySubPulse{0%{box-shadow:0 0 0 0 rgba(241,179,131,.55)}70%,100%{box-shadow:0 0 0 12px rgba(241,179,131,0)}}@keyframes dySubPulseRing{0%{transform:scale(.86);opacity:.8}70%,100%{transform:scale(1.25);opacity:0}}@keyframes dySubLine{0%,100%{transform:scaleX(.35);opacity:.45}50%{transform:scaleX(1);opacity:1}}
 @media(max-width:900px){.dy-sub-grid{grid-template-columns:1fr}.dy-sub-story{padding:44px clamp(22px,6vw,52px)}.dy-sub-formside{padding:42px clamp(22px,6vw,52px)}.dy-sub-benefits{max-width:none}}
 @media(max-width:580px){.dy-sub-zone{padding:42px 11px}.dy-sub-shell{border-radius:23px}.dy-sub-story h2{font-size:clamp(39px,12vw,58px)}.dy-sub-benefits{grid-template-columns:1fr}.dy-sub-benefits li{min-height:0;display:grid;grid-template-columns:30px 1fr;column-gap:8px}.dy-sub-benefits svg{grid-row:1/3;margin:1px 0 0}.dy-sub-benefits span{grid-column:2}.dy-sub-steps{align-items:flex-start}.dy-sub-step{max-width:62px;flex-direction:column;text-align:center}.dy-sub-line{margin-top:12px}.dy-sub-choices{grid-template-columns:1fr}.dy-sub-choice-wide{grid-column:auto}.dy-sub-beacon{max-width:230px}.dy-sub-beacon-copy span{display:none}}
+/* Theme-wide visual corrections: brand hierarchy, contact desk and moving article rails. */
+.topbar-inner{height:clamp(92px,10vw,112px)!important}
+.topbar-title{gap:2px!important;padding:5px 0 13px!important;max-width:calc(100vw - 120px)}
+.topbar-title .tb-a{font:800 clamp(32px,4.7vw,50px)/.94 var(--font-display)!important;letter-spacing:.095em!important;white-space:nowrap}
+.topbar-title .tb-line{min-height:15px!important}
+.topbar-title .tb-b{font:500 clamp(10px,1.25vw,13px)/1.1 var(--font-body)!important;letter-spacing:.08em!important;color:var(--accent-dark)!important}
+.topbar-title .tb-caret{height:11px!important}.topbar-title .tb-squig{bottom:-8px!important;width:58px!important}
+.kd-sec{width:100%;min-width:0;overflow:hidden}
+#kd-articles .kd-row{cursor:grab;scroll-snap-type:none;overscroll-behavior-inline:contain}
+#kd-articles .kd-row.kd-grabbing{cursor:grabbing;user-select:none}
+#kd-articles .kd-row[data-kd-auto='1']{scrollbar-width:none}
+#kd-articles .kd-row[data-kd-auto='1']::-webkit-scrollbar{display:none}
+.kd-engage{position:relative;overflow:hidden!important;padding:clamp(30px,5vw,54px)!important;background:radial-gradient(480px 230px at 0 0,rgba(188,91,51,.12),transparent 65%),linear-gradient(145deg,#fffaf0,#f4e1c4)!important}
+.kd-engage::before{content:"?";position:absolute;right:-.04em;bottom:-.36em;color:rgba(156,69,34,.055);font:700 clamp(170px,27vw,330px)/1 var(--font-display);pointer-events:none}
+.kd-engage h2{font-size:clamp(32px,4.8vw,54px)!important;letter-spacing:-.035em}.kd-engage>p{max-width:760px!important;font-size:clamp(13px,1.5vw,16px)!important}
+.kd-eg-row{position:relative;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important;max-width:760px;margin:25px auto 12px!important}
+.kd-eg{min-height:96px;padding:18px!important;border-radius:18px!important;display:flex!important;align-items:center;gap:15px;text-align:left;background:rgba(255,253,248,.92)!important;box-shadow:0 13px 32px -28px rgba(36,22,16,.75);font:inherit!important}
+.kd-eg-icon{width:52px;height:52px;flex:none;border-radius:15px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-dark)}.kd-eg-icon svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.kd-eg-copy{min-width:0}.kd-eg-copy strong{display:block;color:var(--ink);font:700 17px/1.2 var(--font-display)}.kd-eg-copy small{display:block;margin-top:6px;color:var(--muted);font:500 10px/1.45 var(--font-body);overflow-wrap:anywhere}.kd-eg-arrow{margin-left:auto;color:var(--accent-dark);font-size:22px;transition:transform .25s}.kd-eg:hover .kd-eg-arrow{transform:translateX(4px)}
+@media(max-width:560px){.topbar-inner{height:88px!important}.topbar-title{max-width:calc(100vw - 104px)}.topbar-title .tb-a{font-size:27px!important;letter-spacing:.075em!important}.topbar-title .tb-b{font-size:10px!important}.kd-eg-row{grid-template-columns:1fr}.kd-eg{min-height:84px;padding:15px!important}.kd-eg-icon{width:46px;height:46px}.kd-engage{padding:30px 16px!important}}
+/* Also honour phone hardware when a mobile browser requests a desktop-width viewport. */
+@media(max-device-width:760px){.dy-sub-grid{grid-template-columns:1fr!important}.dy-sub-story,.dy-sub-formside{padding:38px 22px!important}.dy-sub-benefits{grid-template-columns:1fr!important}.topbar-inner{height:88px!important}.topbar-title .tb-a{font-size:27px!important}.topbar-title .tb-b{font-size:10px!important}.kd-eg-row{grid-template-columns:1fr!important}}
 @media(prefers-reduced-motion:reduce){.dy-sub-zone::before,.dy-sub-zone::after,.dy-sub-shell::before,.dy-sub-orbit,.dy-sub-live,.dy-sub-line,.dy-sub-beacon-icon::after{animation:none!important}.dy-sub-benefits li,.dy-sub-choice,.dy-sub-submit,.dy-sub-beacon{transition:none!important}}
 /* DY_SUBSCRIPTION_CSS_END */
 ]]></b:skin>
@@ -1542,9 +1564,11 @@ if(D.body)start();else D.addEventListener('DOMContentLoaded',start);}})();
 <a class='kd-dg' href='https://dailyyield.blogspot.com/p/money-atlas_01486068069.html'><b>Money Atlas</b><span>Country comparisons, the reference board, exchange-rate context and the chart studio &#8212; the map around every number you meet.</span><i>Compare the context &#8599;</i></a>
 <a class='kd-dg' href='https://dailyyield.blogspot.com/p/markets-today.html'><b>Markets Today</b><span>Live and delayed prices, day ranges, volume, open interest, charts, technicals, pivots, related ETFs and market news.</span><i>Open today&#39;s desk &#8599;</i></a><a class='kd-dg' href='https://dailyyield.blogspot.com/p/global-snapshot.html'><b>Global Snapshot</b><span>World and country top-25 boards, commodities, crypto, fund desks and a symbol search with live charts &#8212; plus honesty stamps on data age.</span><i>Read the board &#8599;</i></a>
 </div></section>
-<section class='kd-sec kd-engage' id='kd-engage'><h2>Read it? Question it.</h2><p>Comment on any article or calculator result &#8212; corrections, new countries, tools you wish existed. The desk reads every note, and published corrections keep the blog honest.</p>
-<div class='kd-eg-row'><a class='kd-eg' href='mailto:dailyyield.official@gmail.com'>&#9993; dailyyield.official@gmail.com</a><a class='kd-eg' href='https://www.linkedin.com/in/dailyyeild'>in Kushal K. Daga</a></div>
-<p class='kd-eg-fine'>Replies within 24&#8211;48 hours &#183; comments open on every post &#183; no forms, no sign-ups</p></section>
+<section class='kd-sec kd-engage' id='kd-engage'><h2>Read it? Question it.</h2><p>Challenge the arithmetic, request a correction or suggest the next tool. Every serious note reaches the Daily Yield editorial desk.</p>
+<div class='kd-eg-row'>
+<a class='kd-eg' href='mailto:dailyyield.official@gmail.com'><span class='kd-eg-icon'><svg aria-hidden='true' viewBox='0 0 24 24'><rect height='14' rx='2' width='18' x='3' y='5'/><path d='m4.5 7 7.5 5.5L19.5 7'/></svg></span><span class='kd-eg-copy'><strong>Email the editorial desk</strong><small>dailyyield.official@gmail.com</small></span><span aria-hidden='true' class='kd-eg-arrow'>&#8594;</span></a>
+<a class='kd-eg' href='https://dailyyield.blogspot.com/p/contact-us_01883938366.html'><span class='kd-eg-icon'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M5 5h14v11H9l-4 4Z'/><path d='M8 9h8M8 12h5'/></svg></span><span class='kd-eg-copy'><strong>Open the contact desk</strong><small>Corrections, questions and partnership enquiries</small></span><span aria-hidden='true' class='kd-eg-arrow'>&#8594;</span></a>
+</div><p class='kd-eg-fine'>Replies usually arrive within 24&#8211;48 hours &#183; comments remain open on every Post</p></section>
 <section aria-label='Quick money calculators' class='kh-tools' id='khTools'>
 <span class='kh-tkick'>try it yourself</span><h2 class='kh-th2'>Three calculators, live on the home desk.</h2>
 <div class='kh-tgrid'>
@@ -2481,7 +2505,7 @@ if(D.body)start();else D.addEventListener('DOMContentLoaded',start);}})();
  <b:loop index='i' values='data:posts' var='post'>
  <li>
  <span class='popular-num'><b:eval expr='data:i + 1'/></span>
- <a expr:href='data:post.url'><data:post.title/></a>
+ <a expr:href='data:post.url'><b:attr cond='data:post.featuredImage' expr:value='resizeImage(data:post.featuredImage, 640, &quot;16:9&quot;)' name='data-kd-img'/><data:post.title/></a>
  </li>
  </b:loop>
  </ol>
@@ -3230,6 +3254,23 @@ function fill(row,items){
  items.forEach(function(it){row.appendChild(card(it));});
  return true;
 }
+function autoRail(row,speed){
+ if(!row||row.children.length<2)return;
+ [].slice.call(row.querySelectorAll('[data-kd-clone]')).forEach(function(n){n.remove();});
+ var originals=[].slice.call(row.children);
+ originals.forEach(function(n){var c=n.cloneNode(true);c.setAttribute('data-kd-clone','1');c.setAttribute('aria-hidden','true');c.tabIndex=-1;row.appendChild(c);});
+ row.setAttribute('data-kd-auto','1');
+ requestAnimationFrame(function(){row._kdLoop=row.children[originals.length].offsetLeft-row.children[0].offsetLeft;});
+ if(row._kdWired)return;row._kdWired=true;
+ var pauseUntil=0,last=0;
+ function pause(){pauseUntil=Date.now()+4500;}
+ row.addEventListener('pointerdown',pause,{passive:true});row.addEventListener('touchstart',pause,{passive:true});row.addEventListener('wheel',pause,{passive:true});
+ row.addEventListener('mouseenter',function(){pauseUntil=Infinity;});row.addEventListener('mouseleave',function(){pauseUntil=Date.now()+900;});
+ function tick(ts){if(!last)last=ts;var dt=Math.min(.05,(ts-last)/1000);last=ts;
+ if(!rm&&Date.now()>pauseUntil&&row._kdLoop>0&&D.visibilityState==='visible'){row.scrollLeft+=speed*dt;if(row.scrollLeft>=row._kdLoop)row.scrollLeft-=row._kdLoop;}
+ requestAnimationFrame(tick);}
+ requestAnimationFrame(tick);
+}
 function parse(json,needNews){
  var out=[],en=(json.feed&&json.feed.entry)||[];
  en.forEach(function(e){
@@ -3253,9 +3294,10 @@ function go(){
  fetch('/feeds/posts/default?alt=json&max-results=25').then(function(r){return r.json();}).then(function(j){
  var items=parse(j,false).slice(0,10);
  if(!fill(latest,items))emptyBox(latest,'Waiting for your first post','This row fills with your latest general articles the moment you publish \u2014 no placeholders, no invented headlines.');
+ else autoRail(latest,31);
  var pp=D.getElementById('PopularPosts1');
  var links=pp?[].slice.call(pp.querySelectorAll('a[href]')).slice(0,8):[];
- if(links.length){fill(pop,links.map(function(a){return {title:a.textContent.replace(/\s+/g,' ').trim(),href:a.getAttribute('href'),meta:'Reader favourite \u00b7 most-visited',letter:(a.textContent.trim()||'\u2733').charAt(0).toUpperCase(),img:''};}));}
+ if(links.length){fill(pop,links.map(function(a){var title=a.textContent.replace(/\s+/g,' ').trim();return {title:title,href:a.getAttribute('href'),meta:'Reader favourite \u00b7 most-visited',letter:(title||'\u2733').charAt(0).toUpperCase(),img:a.getAttribute('data-kd-img')||''};}));autoRail(pop,24);}
  else emptyBox(pop,'No popular picks yet','Popularity follows readership \u2014 until then the latest row above keeps this desk company.');
  }).catch(function(){
  emptyBox(latest,'Feed unreachable here','On your live blog this row connects to the published article feed automatically.');
