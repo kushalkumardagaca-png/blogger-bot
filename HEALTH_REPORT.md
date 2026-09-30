@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-30T07:54:01.391209+05:30
+- **Checked:** 2026-09-30T09:56:23.054944+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 164 URLs · 151 Posts · 12 Pages
+- **Inventory:** 166 URLs · 153 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/163 tracked PASS
+- **Search Console:** OK · 0/165 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Economy and Macro Policy News · 30 September 2026 · Coverage September 29 to 30 — Minutes of the Monetary Policy Meeting on July 30 and 31, 2026[PDF 353KB]; US-China trade…**
+- ✅ **post · Market and Trading News · 30 September 2026 · Coverage September 29 to 30 — Beijing warns of retaliation if Europe imposes curbs on Chinese businesses; Samsung Heavy…**
 - ✅ **post · Stop Checking Your Portfolio Daily**
 - ✅ **post · India Finance News · 30 September 2026 · Coverage September 29 to 30 — General Remittance dated 29.09.2026 against Dheeraj Wadhawan (PAN: AAOPW4517G) [Defaulter]…**
 - ✅ **post · Global Finance Wire · 30 September 2026 · Coverage September 29 to 30 — Hedge funds hold a record share of the $30 trillion Treasury market. What could go wrong?…**
