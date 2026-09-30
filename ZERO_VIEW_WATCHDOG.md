@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-09-30T09:56:23.054944+05:30
+- **Checked:** 2026-09-30T12:00:46.521291+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 166 URLs · 153 Posts · 12 Pages
+- **Inventory:** 171 URLs · 158 Posts · 12 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/165 tracked PASS
+- **Search Console:** OK · 0/170 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -24,6 +24,11 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · UK Finance News · 30 September 2026 · Coverage September 29 to 30 — UK mortgage demand drops to 32-month low as Iran war drives up borrowing costs…**
+- ✅ **post · Japan Finance News · 30 September 2026 · Coverage September 29 to 30 — JGBs Auction Result of 2-Year JGBs on September 30, 2026; JGBs Interest Rate (September 29…**
+- ✅ **post · Only 5 Money Goals for Your 20s**
+- ✅ **post · France Finance News · 30 September 2026 · Coverage September 29 to 30 — CMA CGM backs down on promise to register 40 ships under the French flag amid threat of…**
+- ✅ **post · Germany Finance News · 30 September 2026 · Coverage September 29 to 30 — Women and children displaced by Nepal's floods say safe housing, privacy and stability…**
 - ✅ **post · Economy and Macro Policy News · 30 September 2026 · Coverage September 29 to 30 — Minutes of the Monetary Policy Meeting on July 30 and 31, 2026[PDF 353KB]; US-China trade…**
 - ✅ **post · Market and Trading News · 30 September 2026 · Coverage September 29 to 30 — Beijing warns of retaliation if Europe imposes curbs on Chinese businesses; Samsung Heavy…**
 - ✅ **post · Stop Checking Your Portfolio Daily**
