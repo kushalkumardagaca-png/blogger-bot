@@ -1,13 +1,13 @@
 {
-  "checkedAtIST": "2026-09-30T12:54:52.303144+05:30",
+  "checkedAtIST": "2026-09-30T13:58:48.718429+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "bloggerControlPlane": {
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-09-30T00:24:29-07:00",
+    "updated": "2026-09-30T00:57:37-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 160
@@ -22,8 +22,8 @@
     "pages": 12,
     "contentFailures": 0,
     "externalDestinationsChecked": 1442,
-    "confirmedExternal404or410": 3,
-    "transientExternalResponses": 78,
+    "confirmedExternal404or410": 0,
+    "transientExternalResponses": 80,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -10699,21 +10699,12 @@
       ]
     }
   ],
-  "confirmedBrokenExternal": [
-    {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
-      "status": 404
-    },
-    {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEip7PslF5pLpAdCIL9Vevu6siUHi-dcOA9-oEh5Q0m5YC_0KGymwEtwUUVyf3_RsA-4VNdPV4bZWN0Oni06oQns58wKKhE_nUneKXYdYBnhNrSVtORasm6zP9DPeXW3NO479naH-1ffE1QXtgJbZdiYDfPmVvPTbwgfFRK-J6ANF9_QYqEih0VWXgpYINw",
-      "status": 404
-    },
-    {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjvoQEQnm6biFXhTLW5fko-iZH5DO6VL_izDLhVAU1BVhU-7M79eN7GHrezoJjKNVCoC4ZC7k4v_0O9lIs2KKcrlNpKtVdOsAb69XoaahoiQLgNOQQTa_B9HWEcJgD96SU7HoTj8depSBvjIa9cuGqEkyP3gaNTD7GqtnX_61T90C91N8pcpF5bKmXDZZY",
-      "status": 404
-    }
-  ],
+  "confirmedBrokenExternal": [],
   "transientExternal": [
+    {
+      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Housing_price_statistics_-_house_price_index",
+      "status": 500
+    },
     {
       "url": "https://www.ato.gov.au/",
       "status": 403
@@ -10916,6 +10907,10 @@
       "status": 401
     },
     {
+      "url": "https://www.marketwatch.com/story/i-have-a-low-interest-rate-im-80-years-old-should-i-move-out-of-my-house-because-of-dangerous-stairs-389c3c7b?mod=mw_rss_topstories",
+      "status": 401
+    },
+    {
       "url": "https://www.marketwatch.com/story/im-never-selling-im-47-and-buy-bitcoin-with-every-dollar-i-earn-am-i-crazy-364d2a64?mod=mw_rss_topstories",
       "status": 401
     },
@@ -10992,15 +10987,15 @@
       "status": 429
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Zora_Montgomery_Courtney_%281882-1962%29_in_The_Des_Moines_Tribune_of_Des_Moines%2C_Iowa_on_12_September_1914%2C_part_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429
     },
     {
@@ -11058,8 +11053,8 @@
     },
     {
       "name": "Gold API",
-      "status": "WARN",
-      "detail": "<urlopen error [Errno -2] Name or service not known>"
+      "status": "OK",
+      "detail": "responding"
     },
     {
       "name": "Mutual fund API",
@@ -13006,7 +13001,7 @@
       "tracked": 172,
       "pass": 0,
       "notPass": 172,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }

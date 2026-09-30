@@ -1,5 +1,5 @@
 {
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
@@ -8,8 +8,8 @@
     "pages": 12,
     "contentFailures": 0,
     "externalDestinationsChecked": 1442,
-    "confirmedExternal404or410": 3,
-    "transientExternalResponses": 78,
+    "confirmedExternal404or410": 0,
+    "transientExternalResponses": 80,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -1951,7 +1951,7 @@
       "tracked": 172,
       "pass": 0,
       "notPass": 172,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
@@ -1986,8 +1986,8 @@
     },
     {
       "name": "Gold API",
-      "status": "WARN",
-      "detail": "<urlopen error [Errno -2] Name or service not known>"
+      "status": "OK",
+      "detail": "responding"
     },
     {
       "name": "Mutual fund API",

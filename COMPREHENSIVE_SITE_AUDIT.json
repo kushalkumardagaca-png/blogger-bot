@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
   "urls": 173,
-  "hard_failures": 3,
+  "hard_failures": 0,
   "results": [
     {
       "kind": "home",
@@ -10675,18 +10675,5 @@
       ]
     }
   ],
-  "broken_external_links": [
-    {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
-      "status": 404
-    },
-    {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEip7PslF5pLpAdCIL9Vevu6siUHi-dcOA9-oEh5Q0m5YC_0KGymwEtwUUVyf3_RsA-4VNdPV4bZWN0Oni06oQns58wKKhE_nUneKXYdYBnhNrSVtORasm6zP9DPeXW3NO479naH-1ffE1QXtgJbZdiYDfPmVvPTbwgfFRK-J6ANF9_QYqEih0VWXgpYINw",
-      "status": 404
-    },
-    {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjvoQEQnm6biFXhTLW5fko-iZH5DO6VL_izDLhVAU1BVhU-7M79eN7GHrezoJjKNVCoC4ZC7k4v_0O9lIs2KKcrlNpKtVdOsAb69XoaahoiQLgNOQQTa_B9HWEcJgD96SU7HoTj8depSBvjIa9cuGqEkyP3gaNTD7GqtnX_61T90C91N8pcpF5bKmXDZZY",
-      "status": 404
-    }
-  ]
+  "broken_external_links": []
 }
