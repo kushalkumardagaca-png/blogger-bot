@@ -18,16 +18,22 @@ Official Devvit application for `r/DailyYield`.
 
 ## Installation
 
-From the generated `dailyyield-feed` Devvit project directory:
+`install.sh` is deliberately self-contained so deployment does not depend on public repository access. Download the reviewed installer, upload it to the Cloud Shell home directory, and run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/reddit_devvit/install.sh | bash
+cd ~/dailyyield-feed
+bash ~/install.sh
 npx devvit upload
 npx devvit publish
 ```
 
-After Reddit approves the version and fetch domain:
+Publishing submits an unlisted version for Reddit review, including the declared `dailyyield.blogspot.com` fetch domain. Do not install the reviewed version until Reddit approves it.
+
+After approval:
 
 ```bash
+cd ~/dailyyield-feed
 npx devvit install DailyYield
 ```
+
+Then use the moderator-only **Daily Yield: publish latest article** subreddit action once for the controlled live test. Redis prevents that same URL from being posted again by the daily scheduler.
