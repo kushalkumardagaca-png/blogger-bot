@@ -6,7 +6,8 @@ This subsystem prepares a small, source-verified editorial pilot. It never sends
 
 - Only addresses explicitly published on an official page are stored.
 - Every contact is classified by the purpose stated on that page.
-- `eligible + review_required` can produce a draft, but never an automatic send.
+- `eligible + auto_approved` can be sent automatically under the locked daily policy.
+- `eligible + review_required` can produce a draft but cannot be automatically reserved.
 - `human_only` and `excluded` records cannot produce drafts.
 - Existing suppressions, prior sent records and duplicate addresses block drafting.
 - One initial approach per recipient; at most one follow-up, never sooner than 10 days.

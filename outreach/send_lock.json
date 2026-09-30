@@ -1,7 +1,7 @@
 {
-  "sending_enabled": false,
-  "gmail_oauth_configured": false,
-  "review_approval_required": true,
+  "sending_enabled": true,
+  "gmail_oauth_configured": true,
+  "review_approval_required": false,
   "max_initial_messages_per_day": 10,
   "max_follow_ups_per_recipient": 1,
   "minimum_follow_up_days": 10,

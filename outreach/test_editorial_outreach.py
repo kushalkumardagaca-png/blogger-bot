@@ -23,7 +23,7 @@ class OutreachSafetyTests(unittest.TestCase):
     def test_only_explicitly_eligible_contacts_can_be_drafted(self):
         eligible = [
             row for row in app.read_csv(app.PROSPECTS)
-            if row["eligibility"] == "eligible" and row["automation_mode"] == "review_required"
+            if row["eligibility"] == "eligible" and row["automation_mode"] == "auto_approved"
         ]
         self.assertEqual({row["prospect_id"] for row in eligible}, {"ft-opinion", "money-newsroom"})
 
@@ -40,10 +40,10 @@ class OutreachSafetyTests(unittest.TestCase):
         manifest = json.loads(app.MANIFEST.read_text())
         self.assertEqual(manifest["mode"], "REVIEW_ONLY_NO_SEND_CAPABILITY")
         self.assertEqual(len(manifest["selected"]), 2)
-        self.assertEqual({x["state"] for x in manifest["selected"]}, {"REVIEW_REQUIRED_NOT_SENT"})
+        self.assertEqual({x["state"] for x in manifest["selected"]}, {"AUTOMATION_APPROVED_NOT_SENT"})
         for path in app.QUEUE.glob("*.eml"):
             message = BytesParser(policy=policy.default).parsebytes(path.read_bytes())
-            self.assertEqual(message["X-Daily-Yield-State"], "REVIEW-REQUIRED-NOT-SENT")
+            self.assertEqual(message["X-Daily-Yield-State"], "AUTOMATION-APPROVED-NOT-SENT")
             body = message.get_body(preferencelist=("plain",)).get_content()
             self.assertNotIn("<img", body.lower())
             self.assertIn("utm_source=editorial_outreach", body)

@@ -121,8 +121,11 @@ def reserve() -> int:
     manifest = json.loads(outreach.MANIFEST.read_text(encoding="utf-8"))
     OUTBOX.mkdir(parents=True, exist_ok=True)
     stamp = now().isoformat(timespec="seconds")
+    prospects = {row["prospect_id"]: row for row in outreach.read_csv(outreach.PROSPECTS)}
     reserved = 0
     for item in manifest.get("selected", []):
+        if prospects.get(item["prospect_id"], {}).get("automation_mode") != "auto_approved":
+            continue
         fingerprint = item["fingerprint"]
         if any(row.get("message_fingerprint") == fingerprint or row.get("email", "").lower() == item["email"].lower() for row in rows):
             continue
@@ -179,7 +182,7 @@ def send_reserved() -> int:
         if row.get("status") != "reserved":
             continue
         prospect = prospects.get(row["prospect_id"])
-        if not prospect or prospect["eligibility"] != "eligible" or prospect["automation_mode"] != "review_required":
+        if not prospect or prospect["eligibility"] != "eligible" or prospect["automation_mode"] != "auto_approved":
             row["status"] = "blocked_after_reservation"
             row["notes"] = "Eligibility changed before send"
             row["updated_at"] = now().isoformat(timespec="seconds")

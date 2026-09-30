@@ -30,7 +30,7 @@ QUEUE = OUTREACH / "review_queue"
 MANIFEST = OUTREACH / "pilot_manifest.json"
 
 ALLOWED_ELIGIBILITY = {"eligible", "restricted", "excluded"}
-ALLOWED_MODES = {"review_required", "human_only", "excluded"}
+ALLOWED_MODES = {"auto_approved", "review_required", "human_only", "excluded"}
 BLOCKING_STATUSES = {
     "reserved", "sent", "replied", "bounced", "suppressed", "unsubscribed",
     "complaint", "needs_review", "blocked_after_reservation",
@@ -129,8 +129,8 @@ def registry_errors() -> list[str]:
             errors.append(f"prospects.csv:{number}: invalid eligibility")
         if row.get("automation_mode") not in ALLOWED_MODES:
             errors.append(f"prospects.csv:{number}: invalid automation_mode")
-        if row.get("eligibility") != "eligible" and row.get("automation_mode") == "review_required":
-            errors.append(f"prospects.csv:{number}: only eligible contacts may be review_required")
+        if row.get("eligibility") != "eligible" and row.get("automation_mode") in {"review_required", "auto_approved"}:
+            errors.append(f"prospects.csv:{number}: only eligible contacts may be drafted or auto-approved")
         if not row.get("source_url", "").startswith("https://"):
             errors.append(f"prospects.csv:{number}: source must be official HTTPS")
         try:
@@ -227,7 +227,7 @@ def draft(limit: int) -> int:
     for prospect in prospects:
         email = prospect["email"].lower()
         reason = ""
-        if prospect["eligibility"] != "eligible" or prospect["automation_mode"] != "review_required":
+        if prospect["eligibility"] != "eligible" or prospect["automation_mode"] not in {"review_required", "auto_approved"}:
             reason = f"classification={prospect['eligibility']}/{prospect['automation_mode']}"
         elif email in suppressions:
             reason = "suppression list"
@@ -246,7 +246,8 @@ def draft(limit: int) -> int:
         message["From"] = "Kushal K. Daga <dailyyield.official@gmail.com>"
         message["To"] = f"{prospect['contact_name']} <{prospect['email']}>"
         message["Subject"] = subject
-        message["X-Daily-Yield-State"] = "REVIEW-REQUIRED-NOT-SENT"
+        approved_state = "AUTOMATION-APPROVED-NOT-SENT" if prospect["automation_mode"] == "auto_approved" else "REVIEW-REQUIRED-NOT-SENT"
+        message["X-Daily-Yield-State"] = approved_state
         message["X-Daily-Yield-Fingerprint"] = fingerprint
         message.set_content(body)
         path = QUEUE / f"{selected + 1:02d}-{prospect['prospect_id']}.eml"
@@ -256,7 +257,8 @@ def draft(limit: int) -> int:
             "email": prospect["email"], "purpose": prospect["permitted_purpose"],
             "official_source": prospect["source_url"], "matched_article": article.title,
             "matched_url": article.url, "relevance_score": score, "fingerprint": fingerprint,
-            "draft": str(path.relative_to(ROOT)), "state": "REVIEW_REQUIRED_NOT_SENT",
+            "draft": str(path.relative_to(ROOT)),
+            "state": "AUTOMATION_APPROVED_NOT_SENT" if prospect["automation_mode"] == "auto_approved" else "REVIEW_REQUIRED_NOT_SENT",
         })
         selected += 1
 
@@ -277,7 +279,8 @@ def main() -> int:
         if errors:
             print("\n".join(errors), file=sys.stderr)
             return 2
-        print("outreach registry valid; sending locked; synthetic views prohibited")
+        state = "enabled under fail-closed policy" if json.loads(SEND_LOCK.read_text())["sending_enabled"] else "locked"
+        print(f"outreach registry valid; sending {state}; synthetic views prohibited")
         return 0
     return draft(args.limit)
 
