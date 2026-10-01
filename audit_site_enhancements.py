@@ -16,7 +16,7 @@ for p in THEMES:
     prefix=p.name+': '
     check(prefix+'valid Blogger XML',valid)
     requirements={
-      'dark mode toggle':"id='dyThemeToggle'",'privacy choice panel':"id='dyPrivacyPanel'",
+      'dark mode toggle':"id='dyThemeToggle'",'complete dark palette v2':'DY_DARK_PALETTE_V2','dark homepage card remap':"html[data-dy-theme='dark'] .kd-card",'dark calculator remap':"html[data-dy-theme='dark'] .kh-tools",'privacy choice panel':"id='dyPrivacyPanel'",
       'site search':"id='searchToggle'",'back to top':"id='toTop'",'mobile menu':"id='drawerToggle'",
       'loading state':"data-dy-loading",'hover states':':hover','reading progress':"id='progressBar'",
       'copy/share feedback':'Link copied','print stylesheet':'@media print','sticky header':'position:sticky',

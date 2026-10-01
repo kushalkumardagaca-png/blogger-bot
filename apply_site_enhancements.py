@@ -32,12 +32,91 @@ window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',
 
 CSS = r"""/* DY_SITE_ENHANCEMENTS_CSS_START */
 :root{color-scheme:light;--dy-focus:#0b66c3}
-html[data-dy-theme='dark']{color-scheme:dark;--paper:#171310;--surface:#221c18;--ink:#f7ecdc;--muted:#c9b8a3;--accent:#e49a6e;--accent-dark:#f0b180;--accent-soft:#33241d;--line:#4d3a2f;--footer-bg:#100c09}
-html[data-dy-theme='dark'] body{background:#171310;color:var(--ink)}
-html[data-dy-theme='dark'] body::before{background:radial-gradient(800px 420px at 86% -80px,rgba(188,91,51,.18),transparent 62%)}
-html[data-dy-theme='dark'] .topbar,html[data-dy-theme='dark'] .topbar.is-scrolled{background:rgba(23,19,16,.94)}
+/* DY_DARK_PALETTE_V2: complete warm-espresso surface and contrast remap. */
+html[data-dy-theme='dark']{color-scheme:dark;--paper:#17120f;--surface:#241c17;--ink:#f5eadb;--muted:#c7b5a1;--accent:#e69263;--accent-dark:#f1ae7c;--accent-soft:#3c281f;--line:#594438;--footer-bg:#0e0a08}
+html[data-dy-theme='dark'] body{background:radial-gradient(900px 520px at 88% -90px,rgba(169,78,42,.16),transparent 65%),#17120f;color:var(--ink)}
+html[data-dy-theme='dark'] body::before{background:radial-gradient(800px 420px at 86% -80px,rgba(188,91,51,.14),transparent 62%)}
+html[data-dy-theme='dark'] .topbar,html[data-dy-theme='dark'] .topbar.is-scrolled{background:rgba(23,18,15,.96);border-color:#49372d}
 html[data-dy-theme='dark'] .item-post .post-body,html[data-dy-theme='dark'] .page-body{color:#eee1d1}
-html[data-dy-theme='dark'] img{filter:brightness(.92)}
+html[data-dy-theme='dark'] img{filter:none}
+/* Navigation stays dark, legible and visibly interactive instead of becoming glaring white pills. */
+html[data-dy-theme='dark'] #page_list_top .kd-nav{background:#15100d}
+html[data-dy-theme='dark'] #page_list_top .kd-n1{background:#29201a;border-color:#5a4437;box-shadow:0 12px 28px -24px #000}
+html[data-dy-theme='dark'] #page_list_top .kd-n1 span{color:#f8eddf}
+html[data-dy-theme='dark'] #page_list_top .kd-n1 b{color:#ffc194;background:#432a20;border-color:#714835}
+html[data-dy-theme='dark'] #page_list_top .kd-r2 a{color:#d8c5b1}
+html[data-dy-theme='dark'] #page_list_top .kd-r2 li+li::before{color:#705647}
+/* The hero, search and note card use one restrained espresso family. */
+html[data-dy-theme='dark'] .kv-hero{background:radial-gradient(540px 320px at 92% 2%,rgba(176,92,51,.15),transparent 68%),linear-gradient(180deg,#1d1612 0%,#17120f 82%)}
+html[data-dy-theme='dark'] .kv-hero::before{background:radial-gradient(circle,rgba(218,139,91,.14),transparent 70%)}
+html[data-dy-theme='dark'] .kv-hero::after{background:radial-gradient(circle,rgba(115,128,89,.10),transparent 70%)}
+html[data-dy-theme='dark'] .kv-badge,html[data-dy-theme='dark'] .kv-search,html[data-dy-theme='dark'] .kv-card,html[data-dy-theme='dark'] .kv-btn.light{background:#251d18;border-color:#5c4639;color:#f5eadb}
+html[data-dy-theme='dark'] .kv-head,html[data-dy-theme='dark'] .kv-lede strong,html[data-dy-theme='dark'] .kv-row{color:#f6ecdf}
+html[data-dy-theme='dark'] .kv-lede,html[data-dy-theme='dark'] .kv-trust span,html[data-dy-theme='dark'] .kv-work{color:#c6b4a0}
+html[data-dy-theme='dark'] .kv-search input{color:#fff5e8}
+html[data-dy-theme='dark'] .kv-search input::placeholder{color:#a9937e}
+html[data-dy-theme='dark'] .kv-btn.dark{background:#e69263;color:#1c120d}
+html[data-dy-theme='dark'] .kv-card::before{background:rgba(206,139,86,.42)}
+html[data-dy-theme='dark'] .kv-row b.neg,html[data-dy-theme='dark'] .kv-row.total.neg b{color:#ff9b86}
+/* Homepage labels, moving rails and cards. */
+html[data-dy-theme='dark'] .kd-kick,html[data-dy-theme='dark'] .kd-ref a,html[data-dy-theme='dark'] .kh-tkick{color:#f1ae7c;background:#2d211b;border-color:#6a4b3b}
+html[data-dy-theme='dark'] .kd-head h2,html[data-dy-theme='dark'] .kd-about-line,html[data-dy-theme='dark'] .kh-th2{color:#f5eadb!important;text-shadow:none}
+html[data-dy-theme='dark'] .kd-lede,html[data-dy-theme='dark'] .kd-about-txt,html[data-dy-theme='dark'] .kd-rowlab,html[data-dy-theme='dark'] .kh-tfine{color:#c6b4a0!important}
+html[data-dy-theme='dark'] .kd-rowlab::after{border-color:#5c4639}
+html[data-dy-theme='dark'] .kd-mqwrap::before{background:linear-gradient(90deg,#17120f,rgba(23,18,15,0))}
+html[data-dy-theme='dark'] .kd-mqwrap::after{background:linear-gradient(270deg,#17120f,rgba(23,18,15,0))}
+html[data-dy-theme='dark'] .kd-card,html[data-dy-theme='dark'] .kd-tab,html[data-dy-theme='dark'] .kd-dg,html[data-dy-theme='dark'] .kd-lg,html[data-dy-theme='dark'] .kd-empty{background:#251d18;border-color:#594438;box-shadow:0 18px 42px -32px #000}
+html[data-dy-theme='dark'] .kd-card .kd-th{background:linear-gradient(135deg,#35271e,#2a201a);color:#d69a72}
+html[data-dy-theme='dark'] .kd-card b,html[data-dy-theme='dark'] .kd-tab b,html[data-dy-theme='dark'] .kd-dg b,html[data-dy-theme='dark'] .kd-lg b,html[data-dy-theme='dark'] .kd-empty b{color:#f5eadb}
+html[data-dy-theme='dark'] .kd-card i,html[data-dy-theme='dark'] .kd-tab i,html[data-dy-theme='dark'] .kd-dg span,html[data-dy-theme='dark'] .kd-lg p,html[data-dy-theme='dark'] .kd-empty{color:#c7b5a1}
+html[data-dy-theme='dark'] .kd-tab svg{stroke:#f1ae7c}
+html[data-dy-theme='dark'] .kd-dg i,html[data-dy-theme='dark'] .kd-lg a{color:#f1ae7c}
+/* Contact desk becomes a calm dark panel with distinct inner cards. */
+html[data-dy-theme='dark'] .kd-engage{background:radial-gradient(500px 250px at 0 0,rgba(201,106,61,.12),transparent 67%),linear-gradient(145deg,#2a201a,#211914)!important;border-color:#5b4437}
+html[data-dy-theme='dark'] .kd-engage h2{color:#f5eadb!important}
+html[data-dy-theme='dark'] .kd-engage>p,html[data-dy-theme='dark'] .kd-eg-fine{color:#c6b4a0!important}
+html[data-dy-theme='dark'] .kd-eg{background:#30241d!important;border-color:#62493a!important;box-shadow:0 14px 34px -28px #000}
+html[data-dy-theme='dark'] .kd-eg-copy strong{color:#fff1e2}
+html[data-dy-theme='dark'] .kd-eg-copy small{color:#c9b8a4}
+html[data-dy-theme='dark'] .kd-eg-icon{background:#432d23;color:#f3ae7d}
+/* Calculator bench no longer flashes white; inputs remain easy to identify. */
+html[data-dy-theme='dark'] .kh-tools{background:#211914;border-color:#594438;box-shadow:0 24px 54px -35px #000}
+html[data-dy-theme='dark'] .kh-tcard{background:#2b211b;border-color:#634a3b}
+html[data-dy-theme='dark'] .kh-tcard>b{color:#f1ae7c}
+html[data-dy-theme='dark'] .kh-tcard label,html[data-dy-theme='dark'] .kh-tcard i{color:#c9b7a3}
+html[data-dy-theme='dark'] .kh-tcard output{color:#fff0df}
+html[data-dy-theme='dark'] .kh-tcard input{background:#17120f;border-color:#6a5040;color:#fff5e9;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+html[data-dy-theme='dark'] .kh-pulse{background:linear-gradient(90deg,#271e18,#2e2119);border-color:#604838}
+html[data-dy-theme='dark'] .kh-plab,html[data-dy-theme='dark'] .kh-pchip{background:#211914;border-color:#594438;color:#f5eadb}
+html[data-dy-theme='dark'] .kh-pchip b{color:#c6b4a0}
+/* Enhanced homepage modules previously carried fixed light colours; remap every level. */
+html[data-dy-theme='dark'] #enhancedHome{--eh-ink:#f5eadb;--eh-accent:#f1ae7c;--eh-line:#594438;--eh-paper:#241c17;color:#f5eadb}
+html[data-dy-theme='dark'] #enhancedHome .enh-toolbar{border-color:#594438;color:#bda992}
+html[data-dy-theme='dark'] #enhancedHome .enh-effects,html[data-dy-theme='dark'] #enhancedHome .enh-tab{background:#251d18;border-color:#60493b;color:#efb184}
+html[data-dy-theme='dark'] #enhancedHome .enh-announcement{background:rgba(85,55,38,.28);border-color:#644b3c;color:#d4c0aa}
+html[data-dy-theme='dark'] #enhancedHome .enh-announcement a{color:#f1ae7c}
+html[data-dy-theme='dark'] #enhancedHome .enh-module{background:radial-gradient(ellipse at 100% 0,rgba(185,108,60,.10),transparent 52%),#241c17;border-color:#594438;color:#f5eadb;box-shadow:0 28px 60px -45px #000}
+html[data-dy-theme='dark'] #enhancedHome .enh-module::before{border-color:rgba(192,139,99,.20)}
+html[data-dy-theme='dark'] #enhancedHome .enh-module h2,html[data-dy-theme='dark'] #enhancedHome .enh-module h3{color:#f5eadb}
+html[data-dy-theme='dark'] #enhancedHome .enh-intro,html[data-dy-theme='dark'] #enhancedHome .enh-card p,html[data-dy-theme='dark'] #enhancedHome .enh-panel p,html[data-dy-theme='dark'] #enhancedHome .enh-panel ul,html[data-dy-theme='dark'] #enhancedHome .enh-details,html[data-dy-theme='dark'] #enhancedHome .enh-fine{color:#c7b5a1}
+html[data-dy-theme='dark'] #enhancedHome .enh-card{background:#2a201a;border-color:#60493b;color:#f5eadb}
+html[data-dy-theme='dark'] #enhancedHome .enh-card small,html[data-dy-theme='dark'] #enhancedHome .enh-panel a{color:#f1ae7c}
+html[data-dy-theme='dark'] #enhancedHome .enh-trail div{background:#2d211a;border-color:#60493b}
+html[data-dy-theme='dark'] #enhancedHome .enh-trail,html[data-dy-theme='dark'] #enhancedHome .enh-panel{background:#2a201a;border-color:#60493b}
+html[data-dy-theme='dark'] #enhancedHome .enh-trail strong,html[data-dy-theme='dark'] #enhancedHome .enh-details summary{color:#f5eadb}
+html[data-dy-theme='dark'] #enhancedHome .enh-trail span{color:#c7b5a1}
+html[data-dy-theme='dark'] #enhancedHome .enh-callout{background:#30231b;color:#d4c0aa;border-color:#e69263}
+html[data-dy-theme='dark'] #enhancedHome .enh-footer{border-color:#594438;color:#bda992}
+/* Subscription, FAQ, privacy and form controls share the same palette. */
+html[data-dy-theme='dark'] .dy-sub-shell{background:linear-gradient(145deg,#251d18,#1f1814);border-color:#594438;box-shadow:0 34px 90px -50px #000}
+html[data-dy-theme='dark'] .dy-sub-formside{background:#241c17}
+html[data-dy-theme='dark'] .dy-sub-step i,html[data-dy-theme='dark'] .dy-sub-field input,html[data-dy-theme='dark'] .dy-sub-choice{background:#17120f;border-color:#594438;color:#f5eadb}
+html[data-dy-theme='dark'] .dy-sub-consent,html[data-dy-theme='dark'] .dy-sub-trust{color:#bda992!important}
+html[data-dy-theme='dark'] .dy-site-faq,html[data-dy-theme='dark'] .dy-privacy,html[data-dy-theme='dark'] .dy-privacy-manage{background:#241c17;color:#f5eadb;border-color:#594438}
+html[data-dy-theme='dark'] .dy-site-faq h2,html[data-dy-theme='dark'] .dy-site-faq summary,html[data-dy-theme='dark'] .dy-privacy h2{color:#f5eadb}
+html[data-dy-theme='dark'] .dy-site-faq p,html[data-dy-theme='dark'] .dy-privacy p{color:#c7b5a1}
+html[data-dy-theme='dark'] .item-post input,html[data-dy-theme='dark'] .item-post select,html[data-dy-theme='dark'] .item-post textarea,html[data-dy-theme='dark'] .page-body input,html[data-dy-theme='dark'] .page-body select,html[data-dy-theme='dark'] .page-body textarea{background:#211914;color:#fff4e6;border-color:#60493b}
+html[data-dy-theme='dark'] a:focus-visible,html[data-dy-theme='dark'] button:focus-visible,html[data-dy-theme='dark'] input:focus-visible,html[data-dy-theme='dark'] select:focus-visible{outline-color:#ffc08f}
 html[data-dy-loading='true']::after{content:"";position:fixed;z-index:9999;top:0;left:0;height:3px;width:34%;background:linear-gradient(90deg,var(--accent),#f0b180);animation:dyLoad 1.1s ease-in-out infinite}
 @keyframes dyLoad{0%{transform:translateX(-110%)}100%{transform:translateX(330%)}}
 .item-post div.post-title{font:600 clamp(27px,2.9vw,40px)/1.14 var(--font-display);letter-spacing:-.02em;margin:0 0 18px;color:var(--ink);overflow-wrap:break-word}.dy-breadcrumb{display:flex;align-items:center;gap:8px;min-height:42px;padding:8px clamp(20px,4.5vw,48px);border-bottom:1px solid var(--line);color:var(--muted);font:600 11px/1.4 var(--font-body);letter-spacing:.06em}

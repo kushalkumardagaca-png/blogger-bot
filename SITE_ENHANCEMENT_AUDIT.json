@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 114,
+  "pass": 120,
   "fail": 0,
   "checks": [
     {
@@ -10,6 +10,18 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: dark mode toggle",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: complete dark palette v2",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: dark homepage card remap",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: dark calculator remap",
       "status": "PASS"
     },
     {
@@ -202,6 +214,18 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark mode toggle",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: complete dark palette v2",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark homepage card remap",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark calculator remap",
       "status": "PASS"
     },
     {
