@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
   "urls": 204,
-  "hard_failures": 1,
+  "hard_failures": 7,
   "results": [
     {
       "kind": "home",
@@ -191,9 +191,7 @@
       "kind": "page",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "issues": [
-        "1 image(s) missing an alt attribute"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [],
       "external": [
@@ -12940,5 +12938,48 @@
       ]
     }
   ],
-  "broken_external_links": []
+  "broken_external_links": [
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEg0yN2xiLfrJCD2Lb0RT3p8JshhnoXV1v-6naNHWuqoLTK6-dGVX7iz6jZ6NgXdwwJ_-CBCsMko4eqaiGb10X0RYgyzknJJu7oSe4TJAQo_2HTX7VAWeObahR-WSEnRPohqpYEDSArOEP2QaQ7LBjhuBc-w4Gs4BZpEk7iK-D2524avINLsCvK5-L1u_K4",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEgqEtuZKBUoc-TaFLmMP3AwP-EBexWiqGjQnlR6Vcxfn_4V5xZHUAEDAg5Iwi48cLYX0TQgkPXKgnRbbOE-cJGTLO1_WHtkXVd3hxjzD_EsjHBPyFj6cYbgdmaZhJJ4NEShz8076OnJkmkc35MC8f-tLi0q0b_t-JUXMRbYvELltsRf8oHv4jPoEhc3k_M",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEiCVZKscbt6-BFRycJvmM5mx4R3FywIsXruVNd5wUqf02j1F1aa_wsT7feMkqc8u-ogNtXxc2kMCBQXzAOcJSZi5hX_uiApzBVs39x3p71t5S6wfTDTVHwwGVA_4dDA8LQ-kSC4GeTsiki1mbTlsQqW6KU0t2F7atSQnB4ooghGKplAlTUBA2l_GAeU0sY",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEifkDjxQyXUJgkov_xcmFBL0uJMLHLDmYzC4Z-Vr-HmGHlwS3ExM9Y2bqmi0yxqGosQ4XQ2Tf02-AumAf0yZiif7bWzn_jRli6NKyasodLUx-d-bT23HGvQkowymN-Z4l1na7pz8syZpWPj7dKzri3Y0PCxOwbc7hDGIUMS4RjroDsGdvvM4mFAr9npuQ4",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjJREO7SrOEV8D3SZueRXkRujD4gCd6Qw-wiFp86puyGZSkK_O4VkaperL6j9vD_UN3IRQ3jYWR7rGtH0k8CB-J5S_QPX34M4p8YE1w1gjSxxiAbXnXPHoUUMaTUhBuZ0aXv7egpwRI7L-_v_GNzF24OWl4oEvnjES8MvJyu9cHqz-ppxUn-21Ei1kplb4",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjjnpq-PcDf-MAQT6ZR6gELqEMX1ajn-c3DHWZXHhHBIihPLu4lXxyFrMDFR-lq-qVWrJ1qM57-0S3MC2T95u-cg1-SP37PDbwcT6TcHjZpUPz6L725VH_VKfdHa98RyNIUZYfWR2IuAozwytk5jty84bYc4oskZp-XBb7LrM5kNnSVOvB8Qq39vr3PSyc",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjvoQEQnm6biFXhTLW5fko-iZH5DO6VL_izDLhVAU1BVhU-7M79eN7GHrezoJjKNVCoC4ZC7k4v_0O9lIs2KKcrlNpKtVdOsAb69XoaahoiQLgNOQQTa_B9HWEcJgD96SU7HoTj8depSBvjIa9cuGqEkyP3gaNTD7GqtnX_61T90C91N8pcpF5bKmXDZZY",
+      "status": 404,
+      "redirects": [],
+      "redirectCount": 0
+    }
+  ]
 }

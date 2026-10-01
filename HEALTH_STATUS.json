@@ -6,11 +6,11 @@
     "urls": 204,
     "posts": 190,
     "pages": 13,
-    "contentFailures": 1,
+    "contentFailures": 0,
     "externalDestinationsChecked": 1772,
-    "confirmedExternal404or410": 0,
+    "confirmedExternal404or410": 7,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 106,
+    "transientExternalResponses": 102,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2293,7 +2293,7 @@
       "tracked": 203,
       "pass": 0,
       "notPass": 203,
-      "inspectedThisRun": 1,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
