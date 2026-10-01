@@ -1,0 +1,101 @@
+diff --git a/.github/workflows/bluesky_publisher.yml b/.github/workflows/bluesky_publisher.yml
+index 2001786..02c7f79 100644
+--- a/.github/workflows/bluesky_publisher.yml
++++ b/.github/workflows/bluesky_publisher.yml
+@@ -2,12 +2,15 @@ name: Daily Yield Bluesky Publisher
+ 
+ on:
+   schedule:
+-    # Five daily slots in IST. Disabled until the controlled API test passes.
+-    - cron: '30 2 * * *'   # 08:00 IST
+-    - cron: '30 5 * * *'   # 11:00 IST
+-    - cron: '30 8 * * *'   # 14:00 IST
+-    - cron: '0 12 * * *'   # 17:30 IST
+-    - cron: '30 15 * * *'  # 21:00 IST
++    # Eight daily slots in IST, independently gated and staggered from other networks.
++    - cron: '10 2 * * *'   # 07:40 IST
++    - cron: '20 4 * * *'   # 09:50 IST
++    - cron: '30 6 * * *'   # 12:00 IST
++    - cron: '40 8 * * *'   # 14:10 IST
++    - cron: '50 10 * * *'  # 16:20 IST
++    - cron: '0 13 * * *'   # 18:30 IST
++    - cron: '10 15 * * *'  # 20:40 IST
++    - cron: '5 17 * * *'   # 22:35 IST
+   workflow_dispatch:
+     inputs:
+       action:
+diff --git a/.github/workflows/facebook_publisher.yml b/.github/workflows/facebook_publisher.yml
+index a685119..de21c74 100644
+--- a/.github/workflows/facebook_publisher.yml
++++ b/.github/workflows/facebook_publisher.yml
+@@ -2,14 +2,17 @@ name: Daily Yield Facebook Publisher
+ 
+ on:
+   schedule:
+-    # Seven organic posts/day, spaced 2h30m apart (IST = UTC+5:30).
+-    - cron: '45 1 * * *'   # 07:15 IST
+-    - cron: '15 4 * * *'   # 09:45 IST
+-    - cron: '45 6 * * *'   # 12:15 IST
+-    - cron: '15 9 * * *'   # 14:45 IST
+-    - cron: '45 11 * * *'  # 17:15 IST
+-    - cron: '15 14 * * *'  # 19:45 IST
+-    - cron: '45 16 * * *'  # 22:15 IST
++    # Ten organic posts/day across the active Indian audience window (IST = UTC+5:30).
++    - cron: '35 1 * * *'   # 07:05 IST
++    - cron: '20 3 * * *'   # 08:50 IST
++    - cron: '5 5 * * *'    # 10:35 IST
++    - cron: '50 6 * * *'   # 12:20 IST
++    - cron: '35 8 * * *'   # 14:05 IST
++    - cron: '20 10 * * *'  # 15:50 IST
++    - cron: '5 12 * * *'   # 17:35 IST
++    - cron: '50 13 * * *'  # 19:20 IST
++    - cron: '35 15 * * *'  # 21:05 IST
++    - cron: '20 17 * * *'  # 22:50 IST
+   workflow_dispatch:
+     inputs:
+       action:
+diff --git a/.github/workflows/mastodon_publisher.yml b/.github/workflows/mastodon_publisher.yml
+index 2153592..29e4bd7 100644
+--- a/.github/workflows/mastodon_publisher.yml
++++ b/.github/workflows/mastodon_publisher.yml
+@@ -2,11 +2,13 @@ name: Daily Yield Mastodon Publisher
+ 
+ on:
+   schedule:
+-    # Four daily slots in IST, staggered from other social publishers.
+-    - cron: '0 4 * * *'    # 09:30 IST
+-    - cron: '0 8 * * *'    # 13:30 IST
+-    - cron: '30 12 * * *'  # 18:00 IST
+-    - cron: '30 16 * * *'  # 22:00 IST
++    # Six daily slots in IST, staggered from other social publishers.
++    - cron: '45 3 * * *'   # 09:15 IST
++    - cron: '15 6 * * *'   # 11:45 IST
++    - cron: '45 8 * * *'   # 14:15 IST
++    - cron: '15 11 * * *'  # 16:45 IST
++    - cron: '45 13 * * *'  # 19:15 IST
++    - cron: '15 16 * * *'  # 21:45 IST
+   workflow_dispatch:
+     inputs:
+       action:
+diff --git a/.github/workflows/tumblr_publisher.yml b/.github/workflows/tumblr_publisher.yml
+index 5d73247..cacca16 100644
+--- a/.github/workflows/tumblr_publisher.yml
++++ b/.github/workflows/tumblr_publisher.yml
+@@ -2,10 +2,13 @@ name: Daily Yield Tumblr Publisher
+ 
+ on:
+   schedule:
+-    - cron: '30 3 * * *'   # 09:00 IST
+-    - cron: '30 7 * * *'   # 13:00 IST
+-    - cron: '30 11 * * *'  # 17:00 IST
+-    - cron: '0 16 * * *'   # 21:30 IST
++    # Six visual/editorial posts per day, independently rotated.
++    - cron: '0 3 * * *'    # 08:30 IST
++    - cron: '40 5 * * *'   # 11:10 IST
++    - cron: '20 8 * * *'   # 13:50 IST
++    - cron: '0 11 * * *'   # 16:30 IST
++    - cron: '40 13 * * *'  # 19:10 IST
++    - cron: '20 16 * * *'  # 21:50 IST
+   workflow_dispatch:
+     inputs:
+       action:
