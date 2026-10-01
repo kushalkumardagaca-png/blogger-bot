@@ -31,7 +31,7 @@ for p in THEMES:
       'lazy later images':"setAttribute('loading','lazy')",'async image decoding':"setAttribute('decoding','async')",
       'priority first image':"setAttribute('fetchpriority','high')",'author identity':'Kushal K. Daga',
       'privacy link':'/p/privacy-policy.html','terms link':'/p/terms-and-conditions.html','contact email':'dailyyield.official@gmail.com',
-      'HTTPS destination':'https://dailyyield.blogspot.com/','analytics consent defaults denied before loading':"gtag('consent','default'",'analytics changes only after choice':"analytics_storage:mode==='analytics'?'granted':'denied'",
+      'HTTPS destination':'https://dailyyield.blogspot.com/','analytics consent defaults denied before loading':"gtag('consent','default'",'Blogger GA4 loader uses saved Measurement ID':"name='google-analytics'",'analytics changes only after choice':"analytics_storage:mode==='analytics'?'granted':'denied'",
       'no external enhancement script':'DY_SITE_ENHANCEMENTS_JS_START','honest advice disclaimer':'educational information',
     }
     for name,needle in requirements.items(): check(prefix+name,needle in text)

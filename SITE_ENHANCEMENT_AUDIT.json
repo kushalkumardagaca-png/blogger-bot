@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 120,
+  "pass": 122,
   "fail": 0,
   "checks": [
     {
@@ -190,6 +190,10 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: analytics consent defaults denied before loading",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: Blogger GA4 loader uses saved Measurement ID",
       "status": "PASS"
     },
     {
@@ -394,6 +398,10 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: analytics consent defaults denied before loading",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Blogger GA4 loader uses saved Measurement ID",
       "status": "PASS"
     },
     {
