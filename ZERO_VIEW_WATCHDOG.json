@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T19:21:35.533841+05:30",
+  "checkedAtIST": "2026-10-01T19:59:07.984421+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -7,7 +7,7 @@
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-01T06:42:12-07:00",
+    "updated": "2026-10-01T07:08:11-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 195
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1848,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 117,
+    "transientExternalResponses": 131,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -13940,26 +13940,127 @@
       "redirectCount": 0
     },
     {
+      "url": "https://www.safe.gov.cn/en/2018/0329/1412.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2019/0329/1496.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2019/0719/1534.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2019/0919/1561.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2019/0926/1568.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2021/0301/1806.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2023/0215/2048.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0227/2393.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0828/2448.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0915/2451.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0924/2452.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0929/2454.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0929/2455.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0929/2456.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 101] Network is unreachable>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0929/2457.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0929/2458.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
+      "url": "https://www.safe.gov.cn/en/2026/0929/2459.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
+    },
+    {
       "url": "https://www.sec.gov/investor/alerts/teachers403b.pdf",
       "status": 403,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
@@ -13995,12 +14096,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14067,6 +14162,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Kathy_at_New_York_Stock_Exchange_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -16452,7 +16553,7 @@
       "tracked": 208,
       "pass": 0,
       "notPass": 208,
-      "inspectedThisRun": 3,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
