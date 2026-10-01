@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T13:59:09.696942+05:30
+- **Checked:** 2026-10-01T15:57:19.965419+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 199 URLs · 185 Posts · 13 Pages
+- **Inventory:** 202 URLs · 188 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/198 tracked PASS
+- **Search Console:** OK · 0/201 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -25,6 +25,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Corporate Finance and Industry News · 1 October 2026 · Coverage September 30 to October 1 — Oil prices rise as Chinese refiners reportedly ban October fuel exports; Brent crude back…**
+- ✅ **post · Italy Finance News · 1 October 2026 · Coverage September 30 to October 1 — Banca Ifis: Bank of Italy calls for write-downs of 215 million and a reshuffle of the…**
+- ✅ **post · Credit Card Bonuses Without the Damage**
 - ✅ **post · Spain Finance News · 1 October 2026 · Coverage September 30 to October 1 — Local elections on 23 May 2027; Spanish Regional Accounts**
 - ✅ **post · China Finance News · 1 October 2026 · Coverage September 30 to October 1 — International trade in goods and services of China (BPM6, fr; The time-series data of…**
 - ✅ **post · UK Finance News · 1 October 2026 · Coverage September 30 to October 1 — FCA opens the gateway to regulated crypto 30/09/2026; FCA secures bankruptcy order against…**
