@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-02T00:00:58.190508+05:30",
+  "checkedAtIST": "2026-10-02T01:56:45.461989+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1878,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 118,
+    "transientExternalResponses": 117,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -14059,6 +14059,12 @@
       "redirectCount": 0
     },
     {
+      "url": "https://www.marketwatch.com/story/one-group-of-funds-is-holding-up-the-stock-market-barclays-says-oil-prices-have-to-fall-to-drive-a-year-end-rally-c6d551f9?mod=mw_rss_topstories",
+      "status": 401,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://www.marketwatch.com/story/oracle-has-reportedly-signed-a-7-billion-deal-with-tencent-it-could-provide-relief-for-the-troubled-stock-abd428f5?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
@@ -14066,6 +14072,12 @@
     },
     {
       "url": "https://www.marketwatch.com/story/she-says-its-just-money-my-friend-pays-for-everything-i-should-be-grateful-but-i-cant-stand-her-anymore-2e7c5c10?mod=mw_rss_topstories",
+      "status": 401,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://www.marketwatch.com/story/social-security-checks-are-projected-to-be-cut-by-540-a-month-in-just-six-years-a8842912?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
       "redirectCount": 0
@@ -14161,11 +14173,10 @@
       "redirectCount": 0
     },
     {
-      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/11-627-M",
-      "status": "TRANSIENT",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
       "redirects": [],
-      "redirectCount": 0,
-      "detail": "<urlopen error timed out>"
+      "redirectCount": 0
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
@@ -14174,31 +14185,7 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Zora_Montgomery_Courtney_%281882-1962%29_in_The_Des_Moines_Tribune_of_Des_Moines%2C_Iowa_on_12_September_1914%2C_part_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14211,12 +14198,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14270,6 +14251,12 @@
       "redirectCount": 0
     },
     {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Skyline_Interlomas_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28318298%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
@@ -14283,6 +14270,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Polanco_skyline_Mexico_City_-_-_TurismoCDMX_-_15.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -16707,7 +16700,7 @@
       "tracked": 211,
       "pass": 0,
       "notPass": 211,
-      "inspectedThisRun": 211,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
