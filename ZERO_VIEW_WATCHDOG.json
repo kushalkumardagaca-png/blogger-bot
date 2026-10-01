@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T18:02:54.581799+05:30",
+  "checkedAtIST": "2026-10-01T18:14:11.953262+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1803,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 110,
+    "transientExternalResponses": 111,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -13510,6 +13510,12 @@
       "redirectCount": 0
     },
     {
+      "url": "https://www.marketwatch.com/story/how-muse-and-other-ai-agents-could-spark-a-bank-run-according-to-an-economist-c4730049?mod=mw_rss_topstories",
+      "status": 401,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://www.marketwatch.com/story/i-have-a-low-interest-rate-im-80-years-old-should-i-move-out-of-my-house-because-of-dangerous-stairs-389c3c7b?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
@@ -13546,6 +13552,12 @@
       "redirectCount": 0
     },
     {
+      "url": "https://www.marketwatch.com/story/my-friend-grosses-300-000-a-year-with-her-pet-sitting-business-she-pays-herself-50-000-should-i-do-the-same-8ab5cba3?mod=mw_rss_topstories",
+      "status": 401,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://www.marketwatch.com/story/my-husband-and-i-are-in-our-50s-and-have-no-kids-we-have-2-million-do-we-need-a-will-62fb422f?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
@@ -13571,12 +13583,6 @@
     },
     {
       "url": "https://www.marketwatch.com/story/she-says-its-just-money-my-friend-pays-for-everything-i-should-be-grateful-but-i-cant-stand-her-anymore-2e7c5c10?mod=mw_rss_topstories",
-      "status": 401,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://www.marketwatch.com/story/social-security-checks-are-projected-to-be-cut-by-540-a-month-in-just-six-years-a8842912?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
       "redirectCount": 0
@@ -13660,7 +13666,7 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -16133,7 +16139,7 @@
       "tracked": 205,
       "pass": 0,
       "notPass": 205,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }

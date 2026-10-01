@@ -1,6 +1,6 @@
 # Daily Yield Search Reach
 
-- Checked: 2026-10-01T12:32:54.473321+00:00
+- Checked: 2026-10-01T12:44:11.769655+00:00
 - Mode: zero synthetic views
 - Google Search Console: managed by `gsc_rebuild.py` and the 12x-daily watchdog
 - Bing API configured: no — implementation ready for the owner API key
