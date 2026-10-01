@@ -417,11 +417,11 @@
       "status": "PASS"
     },
     {
-      "name": "future publications require image alt text",
+      "name": "future publications require image alt attributes and descriptive hero alt",
       "status": "PASS"
     },
     {
-      "name": "watchdog detects image alt gaps",
+      "name": "watchdog detects missing image alt attributes",
       "status": "PASS"
     },
     {

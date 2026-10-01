@@ -137,9 +137,9 @@ def audit_content(item, known):
     links = attrs(content, "a", "href")
     images = attrs(content, "img", "src")
     image_tags = re.findall(r"<img\b[^>]*>", content or "", re.I)
-    missing_alt = [tag for tag in image_tags if not re.search(r"\balt=[\"'][^\"']+[\"']", tag, re.I)]
+    missing_alt = [tag for tag in image_tags if not re.search(r"\balt=[\"'][^\"']*[\"']", tag, re.I)]
     if missing_alt:
-        issues.append(f"{len(missing_alt)} image(s) missing descriptive alt text")
+        issues.append(f"{len(missing_alt)} image(s) missing an alt attribute")
     h1_count = len(re.findall(r"<h1\b", content or "", re.I))
     if h1_count != 1:
         warnings.append(f"content primary H1 count {h1_count}; expected 1 with Theme v4")

@@ -20,10 +20,13 @@ def assert_publishable(title,content,labels):
  if h1_count!=1:issues.append(f'content must contain exactly one primary H1 (found {h1_count})')
  img_tags=re.findall(r'<img\b[^>]*>',content,re.I)
  imgs=[html.unescape(x) for x in re.findall(r'<img\b[^>]*\bsrc=["\']([^"\']+)',content,re.I)]
- missing_alt=[tag for tag in img_tags if not re.search(r'\balt=["\'][^"\']+["\']',tag,re.I)]
- if missing_alt:issues.append(f'{len(missing_alt)} image(s) missing descriptive alt text')
+ missing_alt=[tag for tag in img_tags if not re.search(r'\balt=["\'][^"\']*["\']',tag,re.I)]
+ if missing_alt:issues.append(f'{len(missing_alt)} image(s) missing an alt attribute')
  if not imgs:issues.append('hero image missing')
- elif imgs[0].startswith(('http://','https://')) and not image_works(imgs[0]):issues.append('hero image failed final availability check')
+ else:
+  hero_alt=re.search(r'\balt=["\']([^"\']*)["\']',img_tags[0],re.I) if img_tags else None
+  if not hero_alt or not hero_alt.group(1).strip():issues.append('hero image missing descriptive alt text')
+  if imgs[0].startswith(('http://','https://')) and not image_works(imgs[0]):issues.append('hero image failed final availability check')
  schemas=re.findall(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',content,re.I|re.S)
  if not schemas:issues.append('JSON-LD schema missing')
  for n,raw in enumerate(schemas,1):

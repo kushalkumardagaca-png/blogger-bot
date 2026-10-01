@@ -50,8 +50,8 @@ check('zero-view policy remains enforced',(ROOT/'audit_zero_view_policy.py').exi
 preflight=(ROOT/'publication_preflight.py').read_text()
 watchdog=(ROOT/'zero_view_watchdog.py').read_text()
 check('future publications require one primary H1','exactly one primary H1' in preflight)
-check('future publications require image alt text','missing descriptive alt text' in preflight)
-check('watchdog detects image alt gaps','missing descriptive alt text' in watchdog)
+check('future publications require image alt attributes and descriptive hero alt','missing an alt attribute' in preflight and 'hero image missing descriptive alt text' in preflight)
+check('watchdog detects missing image alt attributes','missing an alt attribute' in watchdog)
 check('watchdog detects external redirect chains','redirectChains' in watchdog and 'redirectCount' in watchdog)
 import subprocess
 reddit_unchanged=subprocess.run(['git','diff','--quiet','--','reddit_devvit'],cwd=ROOT).returncode==0

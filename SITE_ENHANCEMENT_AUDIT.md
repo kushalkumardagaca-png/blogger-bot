@@ -107,7 +107,7 @@
 - ✅ Blogger remains server rendered
 - ✅ zero-view policy remains enforced
 - ✅ future publications require one primary H1
-- ✅ future publications require image alt text
-- ✅ watchdog detects image alt gaps
+- ✅ future publications require image alt attributes and descriptive hero alt
+- ✅ watchdog detects missing image alt attributes
 - ✅ watchdog detects external redirect chains
 - ✅ Reddit 0.0.2 source remains untouched
