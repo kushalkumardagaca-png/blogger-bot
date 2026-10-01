@@ -32,7 +32,7 @@ CRITICAL_FILES = [
     "zero_view_watchdog.py", "publication_preflight.py", "page_family.py",
     "brand_identity.py", "social_identity.py", "bluesky_publisher.py",
     "tumblr_publisher.py", "mastodon_publisher.py", "tumblr_oauth_bootstrap.py",
-    "social_rotation.py", "dispatch_social_events.py",
+    "social_rotation.py", "dispatch_social_events.py", "persist_social_state.sh",
     ".github/workflows/coordinated_social_publish.yml",
     ".github/workflows/daily_blogger_poster.yml", ".github/workflows/daily_news_wires.yml",
     ".github/workflows/facebook_publisher.yml", ".github/workflows/bluesky_publisher.yml",

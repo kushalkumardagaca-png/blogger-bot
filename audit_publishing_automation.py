@@ -158,6 +158,8 @@ check('Master and News publishers dispatch only confirmed live Blogger events',
       and 'dispatch_social_events.py' in aw.read_text() and 'dispatch_social_events.py' in nw.read_text())
 check('Article routing waits at least fifteen minutes after publication',
       'dt.timedelta(minutes=15)' in rotation and 'delay_seconds' in coordinated)
+check('Coordinated tracker writes use race-safe persistence retries',
+      'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
 check('Daily coordinated inventory is exactly 25 articles plus 5 resources',
       'MASTER_PATTERN' in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
       and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
