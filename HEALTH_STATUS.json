@@ -3,13 +3,13 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 185,
-    "posts": 171,
+    "urls": 187,
+    "posts": 173,
     "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1555,
+    "externalDestinationsChecked": 1585,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 95,
+    "transientExternalResponses": 92,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -40,13 +40,13 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-09-29T22:25:45.893Z",
+        "lastDownloaded": "2026-09-30T22:39:31.280Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
           {
             "type": "web",
-            "submitted": "146",
+            "submitted": "173",
             "indexed": "0"
           }
         ]
@@ -2076,14 +2076,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/south-korea-2026-10-01.html": {
+        "title": "South Korea Finance News \u00b7 1 October 2026 \u00b7 Coverage September 30 to October 1 \u2014 Hyundai Mobis signs 600 bln-won deal to sell lamp unit to France's OPmobility; S. Korean\u2026",
+        "checkedAt": "2026-10-01T06:04:32.653005+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/09/australia-2026-10-01.html": {
+        "title": "Australia Finance News \u00b7 1 October 2026 \u00b7 Coverage September 30 to October 1 \u2014 Live: ASX to fall, price of oil surges; Housing waitlist cancellations a 'systems level\u2026",
+        "checkedAt": "2026-10-01T06:04:32.653005+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 184,
-      "tracked": 184,
+      "inventory": 186,
+      "tracked": 186,
       "pass": 0,
-      "notPass": 184,
-      "inspectedThisRun": 0,
+      "notPass": 186,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }

@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T03:55:30.621766+05:30
+- **Checked:** 2026-10-01T06:04:32.653005+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 185 URLs · 171 Posts · 13 Pages
+- **Inventory:** 187 URLs · 173 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/184 tracked PASS
+- **Search Console:** OK · 0/186 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -25,6 +25,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · South Korea Finance News · 1 October 2026 · Coverage September 30 to October 1 — Hyundai Mobis signs 600 bln-won deal to sell lamp unit to France's OPmobility; S. Korean…**
+- ✅ **post · Australia Finance News · 1 October 2026 · Coverage September 30 to October 1 — Live: ASX to fall, price of oil surges; Housing waitlist cancellations a 'systems level…**
 - ✅ **post · Russia Finance News · 30 September 2026 · Coverage September 29 to 30 — Russia views European factories producing arms for Kiev as military targets — diplomat…**
 - ✅ **post · Personal Finance News · 30 September 2026 · Coverage September 29 to 30 — Parents who want to help their kids in a tough job market should avoid this 1 move, says…**
 - ✅ **post · £90k Salary, £4k Net Worth Audit**
