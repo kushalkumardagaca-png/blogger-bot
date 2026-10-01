@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T17:18:10.028336+05:30
+- **Checked:** 2026-10-01T18:02:54.581799+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 204 URLs · 190 Posts · 13 Pages
+- **Inventory:** 206 URLs · 192 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/203 tracked PASS
+- **Search Console:** OK · 0/205 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -26,6 +26,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Canada Finance News · 1 October 2026 · Coverage September 30 to October 1 — Small Canadian steel companies facing U.S. tariffs ‘not going down without a fight’…**
+- ✅ **post · US Finance News · 1 October 2026 · Coverage September 30 to October 1 — Micron stock barely budged on chipmaker's latest earnings. Wall Street still thinks gains…**
 - ✅ **post · A Private AI Advisor on Your Data**
 - ✅ **post · Brazil Finance News · 1 October 2026 · Coverage September 30 to October 1 — Brazil Primary Deficit Reaches US$1.9 Billion in August as Gross Debt Hits 82.9% of GDP…**
 - ✅ **post · Corporate Finance and Industry News · 1 October 2026 · Coverage September 30 to October 1 — Oil prices rise as Chinese refiners reportedly ban October fuel exports; Brent crude back…**

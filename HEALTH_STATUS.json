@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 204,
-    "posts": 190,
+    "urls": 206,
+    "posts": 192,
     "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1772,
+    "externalDestinationsChecked": 1803,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 103,
+    "transientExternalResponses": 110,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2286,14 +2286,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01.html": {
+        "title": "Canada Finance News \u00b7 1 October 2026 \u00b7 Coverage September 30 to October 1 \u2014 Small Canadian steel companies facing U.S. tariffs \u2018not going down without a fight\u2019\u2026",
+        "checkedAt": "2026-10-01T18:02:54.581799+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/us-2026-10-01.html": {
+        "title": "US Finance News \u00b7 1 October 2026 \u00b7 Coverage September 30 to October 1 \u2014 Micron stock barely budged on chipmaker's latest earnings. Wall Street still thinks gains\u2026",
+        "checkedAt": "2026-10-01T18:02:54.581799+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 203,
-      "tracked": 203,
+      "inventory": 205,
+      "tracked": 205,
       "pass": 0,
-      "notPass": 203,
-      "inspectedThisRun": 0,
+      "notPass": 205,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
@@ -2306,8 +2328,8 @@
     },
     {
       "name": "News publisher",
-      "status": "OK",
-      "detail": "0 failures among 12 recent completed runs"
+      "status": "WARN",
+      "detail": "1 failures among 12 recent completed runs"
     }
   ],
   "providers": [
