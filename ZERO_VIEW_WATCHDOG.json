@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T21:58:02.550688+05:30",
+  "checkedAtIST": "2026-10-01T22:23:05.451881+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -7,7 +7,7 @@
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-01T09:11:48-07:00",
+    "updated": "2026-10-01T09:31:50-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 198
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1878,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 118,
+    "transientExternalResponses": 117,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -14173,20 +14173,7 @@
       "redirectCount": 0
     },
     {
-      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/11-627-M",
-      "status": "TRANSIENT",
-      "redirects": [],
-      "redirectCount": 0,
-      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14289,6 +14276,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Kathy_at_New_York_Stock_Exchange_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
