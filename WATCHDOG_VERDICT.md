@@ -4,6 +4,6 @@
 - **Mode:** ZERO_SYNTHETIC_VIEWS
 - **Synthetic Views:** 0
 - **Urls:** 203
-- **Content Failures:** 190
+- **Content Failures:** 1
 - **Rendered Checks:** 0
 - **Gsc:** OK
