@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 98 PASS · 0 FAIL
+**Result:** 102 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -19,7 +19,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Canonical social identity uses new LinkedIn and omits closed X**
 - ✅ **Canonical public contact email is the Daily Yield brand inbox**
 - ✅ **Facebook publisher files are deployed**
-- ✅ **Facebook has seven spaced organic publishing triggers** — ['45 1 * * *', '15 4 * * *', '45 6 * * *', '15 9 * * *', '45 11 * * *', '15 14 * * *', '45 16 * * *']
+- ✅ **Facebook has ten spaced organic publishing triggers** — ['35 1 * * *', '20 3 * * *', '5 5 * * *', '50 6 * * *', '35 8 * * *', '20 10 * * *', '5 12 * * *', '50 13 * * *', '35 15 * * *', '20 17 * * *']
 - ✅ **Facebook uses encrypted token secret, never a literal token**
 - ✅ **Facebook derives a Page token before publishing**
 - ✅ **Facebook destination link is always the first caption line**
@@ -31,7 +31,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Facebook automation excludes comments, messages, ads and artificial engagement**
 - ✅ **Facebook candidate discovery creates no Daily Yield public-page requests**
 - ✅ **Bluesky publisher files and independent tracker are deployed**
-- ✅ **Bluesky has five daily publishing slots with activation gate**
+- ✅ **Bluesky has eight daily publishing slots with activation gate**
 - ✅ **Bluesky app password is an encrypted secret, never a literal credential**
 - ✅ **Bluesky uses official AT Protocol session, blob and record endpoints**
 - ✅ **Bluesky text preserves link-first access, byline and brand identity**
@@ -41,7 +41,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes**
 - ✅ **Bluesky candidate discovery makes no Daily Yield public-page request**
 - ✅ **Tumblr publisher, OAuth bootstrap and independent tracker are deployed**
-- ✅ **Tumblr has four daily publishing slots behind an activation gate**
+- ✅ **Tumblr has six daily publishing slots behind an activation gate**
 - ✅ **Tumblr credentials and encryption key are GitHub secrets or variables**
 - ✅ **Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens**
 - ✅ **Tumblr publisher rotates refresh tokens without logging plaintext credentials**
@@ -50,6 +50,10 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Tumblr rotates Pages and posts using its own tracker**
 - ✅ **Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes**
 - ✅ **Tumblr candidate discovery creates no Daily Yield public-page requests**
+- ✅ **Mastodon publisher files and independent tracker are deployed**
+- ✅ **Mastodon has six daily publishing slots behind an activation gate**
+- ✅ **Mastodon uses official API, isolated credentials and zero-view discovery**
+- ✅ **Configured cross-platform social cadence totals 35 per day after Reddit approval**
 - ✅ **Security guard and approved baseline are deployed**
 - ✅ **Security guard runs four times per hour and creates a daily backup**
 - ✅ **Security guard reads Blogger only through authenticated API**
@@ -98,7 +102,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 44
+- ✅ **Master tracker next-topic state is valid** — next index 57
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

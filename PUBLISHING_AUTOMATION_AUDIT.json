@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-09-28T19:12:35+05:30",
+  "checked_at_ist": "2026-10-01T12:37:28+05:30",
   "summary": {
-    "pass": 98,
+    "pass": 102,
     "fail": 0
   },
   "checks": [
@@ -81,9 +81,9 @@
       "detail": ""
     },
     {
-      "name": "Facebook has seven spaced organic publishing triggers",
+      "name": "Facebook has ten spaced organic publishing triggers",
       "status": "PASS",
-      "detail": "['45 1 * * *', '15 4 * * *', '45 6 * * *', '15 9 * * *', '45 11 * * *', '15 14 * * *', '45 16 * * *']"
+      "detail": "['35 1 * * *', '20 3 * * *', '5 5 * * *', '50 6 * * *', '35 8 * * *', '20 10 * * *', '5 12 * * *', '50 13 * * *', '35 15 * * *', '20 17 * * *']"
     },
     {
       "name": "Facebook uses encrypted token secret, never a literal token",
@@ -141,7 +141,7 @@
       "detail": ""
     },
     {
-      "name": "Bluesky has five daily publishing slots with activation gate",
+      "name": "Bluesky has eight daily publishing slots with activation gate",
       "status": "PASS",
       "detail": ""
     },
@@ -191,7 +191,7 @@
       "detail": ""
     },
     {
-      "name": "Tumblr has four daily publishing slots behind an activation gate",
+      "name": "Tumblr has six daily publishing slots behind an activation gate",
       "status": "PASS",
       "detail": ""
     },
@@ -232,6 +232,26 @@
     },
     {
       "name": "Tumblr candidate discovery creates no Daily Yield public-page requests",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Mastodon publisher files and independent tracker are deployed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Mastodon has six daily publishing slots behind an activation gate",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Mastodon uses official API, isolated credentials and zero-view discovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Configured cross-platform social cadence totals 35 per day after Reddit approval",
       "status": "PASS",
       "detail": ""
     },
@@ -478,7 +498,7 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 44"
+      "detail": "next index 57"
     },
     {
       "name": "News tracker launch/state is valid",
