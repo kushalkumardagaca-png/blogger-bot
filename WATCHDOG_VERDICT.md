@@ -1,9 +1,9 @@
 # Daily Yield Zero-View Watchdog Verdict
 
-- **Verdict:** PASS
+- **Verdict:** ATTENTION
 - **Mode:** ZERO_SYNTHETIC_VIEWS
 - **Synthetic Views:** 0
-- **Urls:** 202
-- **Content Failures:** 0
+- **Urls:** 203
+- **Content Failures:** 190
 - **Rendered Checks:** 0
 - **Gsc:** OK

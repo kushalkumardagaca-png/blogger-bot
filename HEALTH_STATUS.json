@@ -1,15 +1,16 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 202,
-    "posts": 188,
+    "urls": 203,
+    "posts": 189,
     "pages": 13,
-    "contentFailures": 0,
-    "externalDestinationsChecked": 1756,
+    "contentFailures": 190,
+    "externalDestinationsChecked": 1772,
     "confirmedExternal404or410": 0,
-    "transientExternalResponses": 105,
+    "externalRedirectChains": 0,
+    "transientExternalResponses": 102,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2263,14 +2264,25 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-01.html": {
+        "title": "Brazil Finance News \u00b7 1 October 2026 \u00b7 Coverage September 30 to October 1 \u2014 Brazil Primary Deficit Reaches US$1.9 Billion in August as Gross Debt Hits 82.9% of GDP\u2026",
+        "checkedAt": "2026-10-01T16:56:28.181976+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 201,
-      "tracked": 201,
+      "inventory": 202,
+      "tracked": 202,
       "pass": 0,
-      "notPass": 201,
-      "inspectedThisRun": 3,
+      "notPass": 202,
+      "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
