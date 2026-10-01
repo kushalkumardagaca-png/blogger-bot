@@ -2,7 +2,7 @@
 set -euo pipefail
 
 APP_DIR="$HOME/dailyyield-feed"
-INSTALLER_URL="https://gist.githubusercontent.com/kushalkumardagaca-png/32181e3ae9fcc2833e27d58f2fb9124c/raw/4c9467affcd204eaad1221d68a76d62958d2bea9/install.sh"
+INSTALLER_URL="https://gist.githubusercontent.com/kushalkumardagaca-png/32181e3ae9fcc2833e27d58f2fb9124c/raw/install.sh"
 
 echo "Starting a clean Daily Yield Devvit rebuild..."
 rm -rf "$APP_DIR"

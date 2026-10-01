@@ -20,12 +20,17 @@ cat > devvit.json <<'DY_DEVVIT_JSON'
   "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
   "name": "dailyyield-feed",
   "post": {
+    "dir": "dist/client",
     "entrypoints": {
       "default": { "entry": "splash.html" },
       "game": { "entry": "game.html" }
     }
   },
-  "server": {},
+  "media": { "dir": "public" },
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
   "permissions": {
     "http": {
       "enable": true,
@@ -55,7 +60,8 @@ cat > devvit.json <<'DY_DEVVIT_JSON'
     }
   },
   "scripts": {
-    "dev": "npm run watch"
+    "dev": "vite build --watch",
+    "build": "vite build"
   }
 }
 DY_DEVVIT_JSON
