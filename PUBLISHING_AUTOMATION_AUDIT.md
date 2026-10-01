@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 102 PASS · 0 FAIL
+**Result:** 108 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -19,7 +19,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Canonical social identity uses new LinkedIn and omits closed X**
 - ✅ **Canonical public contact email is the Daily Yield brand inbox**
 - ✅ **Facebook publisher files are deployed**
-- ✅ **Facebook has ten spaced organic publishing triggers** — ['35 1 * * *', '20 3 * * *', '5 5 * * *', '50 6 * * *', '35 8 * * *', '20 10 * * *', '5 12 * * *', '50 13 * * *', '35 15 * * *', '20 17 * * *']
+- ✅ **Facebook legacy auto-selection schedule is disabled in favour of exact coordinated routing** — []
 - ✅ **Facebook uses encrypted token secret, never a literal token**
 - ✅ **Facebook derives a Page token before publishing**
 - ✅ **Facebook destination link is always the first caption line**
@@ -31,7 +31,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Facebook automation excludes comments, messages, ads and artificial engagement**
 - ✅ **Facebook candidate discovery creates no Daily Yield public-page requests**
 - ✅ **Bluesky publisher files and independent tracker are deployed**
-- ✅ **Bluesky has eight daily publishing slots with activation gate**
+- ✅ **Bluesky legacy auto-selection schedule is disabled behind its manual activation gate**
 - ✅ **Bluesky app password is an encrypted secret, never a literal credential**
 - ✅ **Bluesky uses official AT Protocol session, blob and record endpoints**
 - ✅ **Bluesky text preserves link-first access, byline and brand identity**
@@ -41,7 +41,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes**
 - ✅ **Bluesky candidate discovery makes no Daily Yield public-page request**
 - ✅ **Tumblr publisher, OAuth bootstrap and independent tracker are deployed**
-- ✅ **Tumblr has six daily publishing slots behind an activation gate**
+- ✅ **Tumblr legacy auto-selection schedule is disabled behind its manual activation gate**
 - ✅ **Tumblr credentials and encryption key are GitHub secrets or variables**
 - ✅ **Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens**
 - ✅ **Tumblr publisher rotates refresh tokens without logging plaintext credentials**
@@ -51,9 +51,15 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes**
 - ✅ **Tumblr candidate discovery creates no Daily Yield public-page requests**
 - ✅ **Mastodon publisher files and independent tracker are deployed**
-- ✅ **Mastodon has six daily publishing slots behind an activation gate**
+- ✅ **Mastodon legacy auto-selection schedule is disabled behind its manual activation gate**
 - ✅ **Mastodon uses official API, isolated credentials and zero-view discovery**
-- ✅ **Configured cross-platform social cadence totals 35 per day after Reddit approval**
+- ✅ **Coordinated router and event dispatcher are deployed**
+- ✅ **Exactly five evenly spread audience-resource promotions are scheduled**
+- ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
+- ✅ **Master and News publishers dispatch only confirmed live Blogger events**
+- ✅ **Article routing waits at least fifteen minutes after publication**
+- ✅ **Daily coordinated inventory is exactly 25 articles plus 5 resources**
+- ✅ **Configured active cadence is 30 unique destinations and becomes 35 after Reddit approval**
 - ✅ **Security guard and approved baseline are deployed**
 - ✅ **Security guard runs four times per hour and creates a daily backup**
 - ✅ **Security guard reads Blogger only through authenticated API**

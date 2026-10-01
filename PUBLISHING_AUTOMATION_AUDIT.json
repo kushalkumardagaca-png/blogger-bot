@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-01T12:37:28+05:30",
+  "checked_at_ist": "2026-10-01T13:04:27+05:30",
   "summary": {
-    "pass": 102,
+    "pass": 108,
     "fail": 0
   },
   "checks": [
@@ -81,9 +81,9 @@
       "detail": ""
     },
     {
-      "name": "Facebook has ten spaced organic publishing triggers",
+      "name": "Facebook legacy auto-selection schedule is disabled in favour of exact coordinated routing",
       "status": "PASS",
-      "detail": "['35 1 * * *', '20 3 * * *', '5 5 * * *', '50 6 * * *', '35 8 * * *', '20 10 * * *', '5 12 * * *', '50 13 * * *', '35 15 * * *', '20 17 * * *']"
+      "detail": "[]"
     },
     {
       "name": "Facebook uses encrypted token secret, never a literal token",
@@ -141,7 +141,7 @@
       "detail": ""
     },
     {
-      "name": "Bluesky has eight daily publishing slots with activation gate",
+      "name": "Bluesky legacy auto-selection schedule is disabled behind its manual activation gate",
       "status": "PASS",
       "detail": ""
     },
@@ -191,7 +191,7 @@
       "detail": ""
     },
     {
-      "name": "Tumblr has six daily publishing slots behind an activation gate",
+      "name": "Tumblr legacy auto-selection schedule is disabled behind its manual activation gate",
       "status": "PASS",
       "detail": ""
     },
@@ -241,7 +241,7 @@
       "detail": ""
     },
     {
-      "name": "Mastodon has six daily publishing slots behind an activation gate",
+      "name": "Mastodon legacy auto-selection schedule is disabled behind its manual activation gate",
       "status": "PASS",
       "detail": ""
     },
@@ -251,7 +251,37 @@
       "detail": ""
     },
     {
-      "name": "Configured cross-platform social cadence totals 35 per day after Reddit approval",
+      "name": "Coordinated router and event dispatcher are deployed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Exactly five evenly spread audience-resource promotions are scheduled",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every social publisher accepts an exact authenticated Blogger target URL",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master and News publishers dispatch only confirmed live Blogger events",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Article routing waits at least fifteen minutes after publication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Daily coordinated inventory is exactly 25 articles plus 5 resources",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Configured active cadence is 30 unique destinations and becomes 35 after Reddit approval",
       "status": "PASS",
       "detail": ""
     },
