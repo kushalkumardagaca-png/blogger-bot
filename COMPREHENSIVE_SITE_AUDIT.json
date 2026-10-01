@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
-  "urls": 203,
-  "hard_failures": 1,
+  "urls": 204,
+  "hard_failures": 0,
   "results": [
     {
       "kind": "home",
@@ -191,9 +191,7 @@
       "kind": "page",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "issues": [
-        "1 image(s) missing an alt attribute"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [],
       "external": [
@@ -570,6 +568,58 @@
         "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
         "https://dailyyield.blogspot.com/p/daily-news.html",
         "https://dailyyield.blogspot.com/#enh-added-start",
+        "https://dailyyield.blogspot.com/p/article.html",
+        "https://dailyyield.blogspot.com/p/daily-news.html",
+        "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+        "https://dailyyield.blogspot.com/p/markets-today.html",
+        "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+        "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+        "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+        "https://dailyyield.blogspot.com/p/disclaimer.html",
+        "https://dailyyield.blogspot.com/p/privacy-policy.html",
+        "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+        "https://dailyyield.blogspot.com/#dy-subscribe"
+      ]
+    },
+    {
+      "kind": "post",
+      "title": "A Private AI Advisor on Your Data",
+      "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
+      "issues": [],
+      "warnings": [],
+      "images": [
+        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&h=506&q=85"
+      ],
+      "external": [
+        "https://www.facebook.com/1303333369533572",
+        "https://bsky.app/profile/dailyyield.bsky.social",
+        "https://www.tumblr.com/dailyyield-official",
+        "https://mastodon.social/@dailyyield"
+      ],
+      "internal": [
+        "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+        "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+        "https://dailyyield.blogspot.com/p/markets-today.html",
+        "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
+        "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
+        "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
+        "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html",
+        "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
+        "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
+        "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
+        "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html",
         "https://dailyyield.blogspot.com/p/article.html",
         "https://dailyyield.blogspot.com/p/daily-news.html",
         "https://dailyyield.blogspot.com/p/calculator_0908148622.html",

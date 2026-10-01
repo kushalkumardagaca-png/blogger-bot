@@ -1,16 +1,16 @@
 {
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 203,
-    "posts": 189,
+    "urls": 204,
+    "posts": 190,
     "pages": 13,
-    "contentFailures": 1,
+    "contentFailures": 0,
     "externalDestinationsChecked": 1772,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 101,
+    "transientExternalResponses": 106,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2275,14 +2275,25 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html": {
+        "title": "A Private AI Advisor on Your Data",
+        "checkedAt": "2026-10-01T17:10:40.529715+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 202,
-      "tracked": 202,
+      "inventory": 203,
+      "tracked": 203,
       "pass": 0,
-      "notPass": 202,
-      "inspectedThisRun": 0,
+      "notPass": 203,
+      "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
