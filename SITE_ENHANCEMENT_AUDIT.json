@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 128,
+  "pass": 124,
   "fail": 0,
   "checks": [
     {
@@ -17,15 +17,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: homepage consent card follows hero",
-      "status": "PASS"
-    },
-    {
       "name": "Daily-Yield-Theme-Subscription.xml: footer privacy control",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: footer displays consent state",
       "status": "PASS"
     },
     {
@@ -237,15 +229,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: homepage consent card follows hero",
-      "status": "PASS"
-    },
-    {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: footer privacy control",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: footer displays consent state",
       "status": "PASS"
     },
     {

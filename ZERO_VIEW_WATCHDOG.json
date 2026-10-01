@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T21:50:28.808860+05:30",
+  "checkedAtIST": "2026-10-01T21:56:02.887224+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1878,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 117,
+    "transientExternalResponses": 120,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -14173,13 +14173,32 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEg0yN2xiLfrJCD2Lb0RT3p8JshhnoXV1v-6naNHWuqoLTK6-dGVX7iz6jZ6NgXdwwJ_-CBCsMko4eqaiGb10X0RYgyzknJJu7oSe4TJAQo_2HTX7VAWeObahR-WSEnRPohqpYEDSArOEP2QaQ7LBjhuBc-w4Gs4BZpEk7iK-D2524avINLsCvK5-L1u_K4",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "The read operation timed out"
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14198,6 +14217,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14276,12 +14301,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Kathy_at_New_York_Stock_Exchange_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0

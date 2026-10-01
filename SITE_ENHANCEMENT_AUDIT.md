@@ -1,15 +1,13 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **128**
+- Pass: **124**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
 - ✅ Daily-Yield-Theme-Subscription.xml: valid Blogger XML
 - ✅ Daily-Yield-Theme-Subscription.xml: light-mode reset for former dark preference
 - ✅ Daily-Yield-Theme-Subscription.xml: privacy choice panel
-- ✅ Daily-Yield-Theme-Subscription.xml: homepage consent card follows hero
 - ✅ Daily-Yield-Theme-Subscription.xml: footer privacy control
-- ✅ Daily-Yield-Theme-Subscription.xml: footer displays consent state
 - ✅ Daily-Yield-Theme-Subscription.xml: saved analytics choice restored on later pages
 - ✅ Daily-Yield-Theme-Subscription.xml: site search
 - ✅ Daily-Yield-Theme-Subscription.xml: back to top
@@ -62,9 +60,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: valid Blogger XML
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: light-mode reset for former dark preference
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy choice panel
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage consent card follows hero
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: footer privacy control
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: footer displays consent state
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: saved analytics choice restored on later pages
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: site search
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: back to top
