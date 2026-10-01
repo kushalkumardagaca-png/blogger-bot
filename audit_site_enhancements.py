@@ -54,6 +54,7 @@ check('future publications require one primary H1','exactly one primary H1' in p
 check('future publications require image alt attributes and descriptive hero alt','missing an alt attribute' in preflight and 'hero image missing descriptive alt text' in preflight)
 check('watchdog detects missing image alt attributes','missing an alt attribute' in watchdog)
 check('watchdog detects external redirect chains','redirectChains' in watchdog and 'redirectCount' in watchdog)
+check('watchdog confirms hard external failures with a second request','confirmedAfterRetry' in watchdog and 'Cache-Control' in watchdog)
 page_repair=(ROOT/'update_page_family.py').read_text()
 page_workflow=(ROOT/'.github/workflows/update_page_family.yml').read_text()
 check('Page-family repair adds only missing alt attributes','ensure_image_alts' in page_repair and 'images_without_alt' in page_repair)

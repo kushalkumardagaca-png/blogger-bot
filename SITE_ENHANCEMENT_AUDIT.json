@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 111,
+  "pass": 112,
   "fail": 0,
   "checks": [
     {
@@ -430,6 +430,10 @@
     },
     {
       "name": "watchdog detects external redirect chains",
+      "status": "PASS"
+    },
+    {
+      "name": "watchdog confirms hard external failures with a second request",
       "status": "PASS"
     },
     {

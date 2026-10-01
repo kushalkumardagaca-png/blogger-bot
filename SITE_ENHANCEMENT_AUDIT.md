@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **111**
+- Pass: **112**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -111,6 +111,7 @@
 - ✅ future publications require image alt attributes and descriptive hero alt
 - ✅ watchdog detects missing image alt attributes
 - ✅ watchdog detects external redirect chains
+- ✅ watchdog confirms hard external failures with a second request
 - ✅ Page-family repair adds only missing alt attributes
 - ✅ Page repair approves intentional Blogger baseline change
 - ✅ Page repair performs immediate zero-view verification

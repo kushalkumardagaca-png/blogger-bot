@@ -221,6 +221,24 @@ def external_status(url):
         with opener.open(request, timeout=18) as response:
             return {"url": url, "finalUrl": response.geturl(), "status": response.status, "redirects": chain, "redirectCount": len(chain), "contentType": response.headers.get("Content-Type", "")}
     except urllib.error.HTTPError as exc:
+        if exc.code in (404, 410):
+            # CDNs can reject a byte-range edge request while the complete asset is healthy.
+            # Count a hard failure only when a second ordinary request confirms it.
+            retry = urllib.request.Request(url, headers={**UA, "Cache-Control": "no-cache"})
+            try:
+                with opener.open(retry, timeout=18) as response:
+                    return {"url": url, "finalUrl": response.geturl(), "status": response.status,
+                            "initialStatus": exc.code, "confirmedAfterRetry": False,
+                            "redirects": chain, "redirectCount": len(chain),
+                            "contentType": response.headers.get("Content-Type", "")}
+            except urllib.error.HTTPError as retry_exc:
+                return {"url": url, "status": retry_exc.code, "initialStatus": exc.code,
+                        "confirmedAfterRetry": retry_exc.code in (404, 410),
+                        "redirects": chain, "redirectCount": len(chain)}
+            except Exception as retry_exc:
+                return {"url": url, "status": "TRANSIENT", "initialStatus": exc.code,
+                        "confirmedAfterRetry": False, "redirects": chain,
+                        "redirectCount": len(chain), "detail": str(retry_exc)[:120]}
         return {"url": url, "status": exc.code, "redirects": chain, "redirectCount": len(chain)}
     except Exception as exc:
         return {"url": url, "status": "TRANSIENT", "redirects": chain, "redirectCount": len(chain), "detail": str(exc)[:120]}
