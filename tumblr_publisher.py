@@ -190,10 +190,15 @@ def publish(token,x):
   raise RuntimeError(f"Tumblr write failed and no matching post was found: {e}") from e
 
 def main():
- p=argparse.ArgumentParser();p.add_argument("--verify-only",action="store_true");p.add_argument("--dry-run",action="store_true");p.add_argument("--content-mode",choices=("auto","post","page"),default="auto");a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument("--verify-only",action="store_true");p.add_argument("--dry-run",action="store_true");p.add_argument("--content-mode",choices=("auto","post","page"),default="auto");p.add_argument("--target-url",default="",help="Publish this exact API-inventoried Daily Yield destination");a=p.parse_args()
  token=refresh_access();user=verify_account(token);print(f"Tumblr account verified for {TUMBLR_BLOG} ({user.get('name','account')}).")
  if a.verify_only:return 0
- posts,pages=inventory(blogger_token());tracker=load_tracker();recent=recent_posts(token);x=choose(posts,pages,tracker,recent,a.content_mode)
+ posts,pages=inventory(blogger_token());tracker=load_tracker();recent=recent_posts(token)
+ if a.target_url:
+  wanted=a.target_url.rstrip("/");x=next((item for item in posts+pages if item.get("url","").rstrip("/")==wanted),None)
+  if x is None:raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {a.target_url}")
+  if x.get("kind")!=a.content_mode:raise RuntimeError(f"Target kind {x.get('kind')} does not match requested mode {a.content_mode}")
+ else:x=choose(posts,pages,tracker,recent,a.content_mode)
  if not x:print("No eligible Tumblr destination; no post created.");return 0
  rank=score(x) if x.get("kind")=="post" else page_score(x);print(f"Selected {x.get('kind')} score={rank}: {x.get('title')} [{x.get('id')}]")
  if a.dry_run:print(json.dumps(payload(x),ensure_ascii=False));return 0

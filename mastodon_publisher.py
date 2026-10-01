@@ -315,12 +315,16 @@ def publish(token:str,account_id:str,item:dict,text:str)->dict:
   raise RuntimeError(f"Mastodon write failed and no matching status was found: {exc}") from exc
 
 def main()->int:
- p=argparse.ArgumentParser();p.add_argument("--verify-only",action="store_true");p.add_argument("--dry-run",action="store_true");p.add_argument("--content-mode",choices=("auto","post","page"),default="auto");a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument("--verify-only",action="store_true");p.add_argument("--dry-run",action="store_true");p.add_argument("--content-mode",choices=("auto","post","page"),default="auto");p.add_argument("--target-url",default="",help="Publish this exact API-inventoried Daily Yield destination");a=p.parse_args()
  bundle=decrypt_token();token=bundle["access_token"];account=verify_account(token);account_id=str(account["id"])
  print(f"Mastodon account verified: @{account.get('acct')} ({account_id})")
  if a.verify_only:return 0
  posts,pages=inventory(blogger_token());tracker=load_tracker();recent=recent_statuses(token,account_id);recent_urls=set().union(*(status_urls(x) for x in recent)) if recent else set()
- item=choose(posts,pages,tracker,a.content_mode,recent_urls)
+ if a.target_url:
+  wanted=a.target_url.rstrip("/");item=next((candidate for candidate in posts+pages if candidate.get("url","").rstrip("/")==wanted),None)
+  if item is None:raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {a.target_url}")
+  if item.get("kind")!=a.content_mode:raise RuntimeError(f"Target kind {item.get('kind')} does not match requested mode {a.content_mode}")
+ else:item=choose(posts,pages,tracker,a.content_mode,recent_urls)
  if not item:print("No eligible Mastodon destination; no status created.");return 0
  text=post_text(item);rank=score(item) if item.get("kind")=="post" else page_score(item)
  print(f"Selected {item.get('kind')} score={rank}: {item.get('title')} [{item.get('id')}]")

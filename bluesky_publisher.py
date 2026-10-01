@@ -320,6 +320,7 @@ def main() -> int:
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--content-mode", choices=("auto", "post", "page"), default="auto")
+    parser.add_argument("--target-url", default="", help="Publish this exact API-inventoried Daily Yield destination")
     args = parser.parse_args()
     session = create_session()
     print(f"Bluesky account verified: {session['handle']} ({session['did']})")
@@ -330,7 +331,15 @@ def main() -> int:
     for entry in recent_records(session):
         text = entry.get("post", {}).get("record", {}).get("text", "")
         recent_urls.update(re.findall(r"https://dailyyield\.blogspot\.com/[^\s]*", text))
-    item = choose(posts, pages, tracker, args.content_mode, recent_urls)
+    if args.target_url:
+        wanted = args.target_url.rstrip("/")
+        item = next((candidate for candidate in posts + pages if candidate.get("url", "").rstrip("/") == wanted), None)
+        if item is None:
+            raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {args.target_url}")
+        if item.get("kind") != args.content_mode:
+            raise RuntimeError(f"Target kind {item.get('kind')} does not match requested mode {args.content_mode}")
+    else:
+        item = choose(posts, pages, tracker, args.content_mode, recent_urls)
     if not item:
         print("No eligible Bluesky destination; no post created."); return 0
     text = post_text(item); rank = score(item) if item.get("kind") == "post" else page_score(item)

@@ -42,9 +42,10 @@ check('Canonical public contact email is the Daily Yield brand inbox','dailyyiel
 # News publishing but are checked by the same repository watchdog.
 fp_path=ROOT/'facebook_publisher.py'; fw_path=ROOT/'.github/workflows/facebook_publisher.yml'
 fp=fp_path.read_text() if fp_path.exists() else ''; fw=fw_path.read_text() if fw_path.exists() else ''
-facebook_expected=['35 1 * * *','20 3 * * *','5 5 * * *','50 6 * * *','35 8 * * *','20 10 * * *','5 12 * * *','50 13 * * *','35 15 * * *','20 17 * * *']
+facebook_expected=[]
 check('Facebook publisher files are deployed',bool(fp) and bool(fw) and (ROOT/'facebook_tracker.json').exists())
-check('Facebook has ten spaced organic publishing triggers',crons(fw_path)==facebook_expected,str(crons(fw_path)) if fw else 'missing workflow')
+check('Facebook legacy auto-selection schedule is disabled in favour of exact coordinated routing',
+      crons(fw_path)==facebook_expected and 'workflow_dispatch:' in fw, str(crons(fw_path)) if fw else 'missing workflow')
 check('Facebook uses encrypted token secret, never a literal token',
       'secrets.FACEBOOK_SYSTEM_USER_TOKEN' in fw and 'FACEBOOK_SYSTEM_USER_TOKEN' in fp)
 check('Facebook derives a Page token before publishing',
@@ -73,10 +74,10 @@ check('Facebook candidate discovery creates no Daily Yield public-page requests'
 # Bluesky official AT Protocol publishing invariants, isolated from Facebook.
 bp_path=ROOT/'bluesky_publisher.py'; bw_path=ROOT/'.github/workflows/bluesky_publisher.yml'
 bp=bp_path.read_text() if bp_path.exists() else ''; bw=bw_path.read_text() if bw_path.exists() else ''
-bluesky_expected=['10 2 * * *','20 4 * * *','30 6 * * *','40 8 * * *','50 10 * * *','0 13 * * *','10 15 * * *','5 17 * * *']
+bluesky_expected=[]
 check('Bluesky publisher files and independent tracker are deployed',
       bool(bp) and bool(bw) and (ROOT/'bluesky_tracker.json').exists())
-check('Bluesky has eight daily publishing slots with activation gate',
+check('Bluesky legacy auto-selection schedule is disabled behind its manual activation gate',
       crons(bw_path)==bluesky_expected and "vars.BLUESKY_AUTOMATION_ENABLED == 'true'" in bw)
 check('Bluesky app password is an encrypted secret, never a literal credential',
       'secrets.BLUESKY_APP_PASSWORD' in bw and 'required("BLUESKY_APP_PASSWORD")' in bp)
@@ -103,10 +104,10 @@ tp_path=ROOT/'tumblr_publisher.py'; tw_path=ROOT/'.github/workflows/tumblr_publi
 to_path=ROOT/'tumblr_oauth_bootstrap.py'; tow_path=ROOT/'.github/workflows/tumblr_oauth_bootstrap.yml'
 tp=tp_path.read_text() if tp_path.exists() else ''; tw=tw_path.read_text() if tw_path.exists() else ''
 to=to_path.read_text() if to_path.exists() else ''; tow=tow_path.read_text() if tow_path.exists() else ''
-tumblr_expected=['0 3 * * *','40 5 * * *','20 8 * * *','0 11 * * *','40 13 * * *','20 16 * * *']
+tumblr_expected=[]
 check('Tumblr publisher, OAuth bootstrap and independent tracker are deployed',
       bool(tp) and bool(tw) and bool(to) and bool(tow) and (ROOT/'tumblr_tracker.json').exists())
-check('Tumblr has six daily publishing slots behind an activation gate',
+check('Tumblr legacy auto-selection schedule is disabled behind its manual activation gate',
       crons(tw_path)==tumblr_expected and "vars.TUMBLR_AUTOMATION_ENABLED == 'true'" in tw)
 check('Tumblr credentials and encryption key are GitHub secrets or variables',
       'vars.TUMBLR_CONSUMER_KEY' in tw+tow and 'secrets.TUMBLR_CONSUMER_SECRET' in tw+tow
@@ -132,16 +133,37 @@ check('Tumblr candidate discovery creates no Daily Yield public-page requests',
 # Mastodon official API automation remains independently gated and tracked.
 mp_path=ROOT/'mastodon_publisher.py'; mw_path=ROOT/'.github/workflows/mastodon_publisher.yml'
 mp=mp_path.read_text() if mp_path.exists() else ''; mw=mw_path.read_text() if mw_path.exists() else ''
-mastodon_expected=['45 3 * * *','15 6 * * *','45 8 * * *','15 11 * * *','45 13 * * *','15 16 * * *']
+mastodon_expected=[]
 check('Mastodon publisher files and independent tracker are deployed',
       bool(mp) and bool(mw) and (ROOT/'mastodon_tracker.json').exists())
-check('Mastodon has six daily publishing slots behind an activation gate',
+check('Mastodon legacy auto-selection schedule is disabled behind its manual activation gate',
       crons(mw_path)==mastodon_expected and "vars.MASTODON_AUTOMATION_ENABLED == 'true'" in mw)
 check('Mastodon uses official API, isolated credentials and zero-view discovery',
       'secrets.MASTODON_TOKEN_KEY' in mw and 'www.googleapis.com/blogger/v3' in mp
       and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in mp)
-check('Configured cross-platform social cadence totals 35 per day after Reddit approval',
-      len(facebook_expected)+len(bluesky_expected)+len(tumblr_expected)+len(mastodon_expected)+5 == 35)
+
+rotation_path=ROOT/'social_rotation.py'; coordinated_path=ROOT/'.github/workflows/coordinated_social_publish.yml'
+dispatch_path=ROOT/'dispatch_social_events.py'
+rotation=rotation_path.read_text() if rotation_path.exists() else ''
+coordinated=coordinated_path.read_text() if coordinated_path.exists() else ''
+dispatch=dispatch_path.read_text() if dispatch_path.exists() else ''
+check('Coordinated router and event dispatcher are deployed',bool(rotation) and bool(coordinated) and bool(dispatch))
+check('Exactly five evenly spread audience-resource promotions are scheduled',
+      crons(coordinated_path)==['45 23 * * *','30 1 * * *','30 4 * * *','30 8 * * *','30 14 * * *'])
+check('Every social publisher accepts an exact authenticated Blogger target URL',
+      all('--target-url' in text and 'Target URL was not found in authenticated Blogger inventory' in text
+          for text in (fp,bp,tp,mp)))
+check('Master and News publishers dispatch only confirmed live Blogger events',
+      'social_events.json' in ap and 'social_events.json' in np
+      and 'dispatch_social_events.py' in aw.read_text() and 'dispatch_social_events.py' in nw.read_text())
+check('Article routing waits at least fifteen minutes after publication',
+      'dt.timedelta(minutes=15)' in rotation and 'delay_seconds' in coordinated)
+check('Daily coordinated inventory is exactly 25 articles plus 5 resources',
+      'MASTER_PATTERN' in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
+      and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
+check('Configured active cadence is 30 unique destinations and becomes 35 after Reddit approval',
+      '25 article promotions' not in rotation and len(re.findall(r'"facebook"', re.search(r'NEWS_PATTERN = \((.*?)\)\nNEWS_KEYS',rotation,re.S).group(1)))==6
+      and 5+20+5==30 and 30+5==35)
 
 # Independent security guard: four API-only checks/hour plus one daily backup.
 sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'

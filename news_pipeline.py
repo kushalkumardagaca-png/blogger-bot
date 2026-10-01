@@ -45,6 +45,7 @@ UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
       "Accept-Language": "en-US,en;q=0.9"}
 CTX = ssl.create_default_context()
 TRACKER = os.environ.get("NEWS_TRACKER", "news_tracker.json")
+SOCIAL_EVENTS_FILE = os.environ.get("SOCIAL_EVENTS_FILE", "social_events.json")
 # Cluster starts 45 minutes before its first desk; paired desks can be 5–15
 # minutes later, so the selector includes the full 60-minute cluster runway.
 PREFLIGHT_MINUTES = 60
@@ -1148,6 +1149,17 @@ def save_tracker(t):
     with open(TRACKER, "w") as f:
         json.dump(t, f, indent=1, ensure_ascii=False)
 
+def append_social_event(desk, url):
+    try:
+        with open(SOCIAL_EVENTS_FILE, encoding="utf-8") as handle:
+            events = json.load(handle)
+    except (FileNotFoundError, json.JSONDecodeError):
+        events = []
+    events.append({"item_key": f"news-{desk}", "target_url": url,
+                   "content_mode": "post", "published_at": dt.datetime.now(dt.timezone.utc).isoformat()})
+    with open(SOCIAL_EVENTS_FILE, "w", encoding="utf-8") as handle:
+        json.dump(events, handle, indent=2)
+
 def run_desk(desk, tracker, dry=False, token=None):
     n, label, slug, slot, _, _ = DESKS[desk]
     now = dt.datetime.now(IST)
@@ -1163,6 +1175,7 @@ def run_desk(desk, tracker, dry=False, token=None):
         tracker["desks"][desk] = {**prev, "edition": now.date().isoformat(),
                                   "window_end": now.isoformat(), "url": expected_url}
         save_tracker(tracker)
+        append_social_event(desk, expected_url)
         print(f"  [{desk}] recovered existing live edition; no duplicate: {expected_url}")
         return True
     # rolling window: previous edition end -> now (24h on first run)
@@ -1227,6 +1240,7 @@ def run_desk(desk, tracker, dry=False, token=None):
                                       "hero_credit": art["hero_credit"],
                                       "hero_source": art["hero_source"]}
             save_tracker(tracker)
+            append_social_event(desk, url)
         print(f"  [{desk}] PUBLISHED: {url or '(dry-run)'}")
         return True
     return False
@@ -1248,6 +1262,8 @@ LAUNCH_DATE = dt.date(2026, 9, 25)   # news section starts Sept 25 (user instruc
 
 def main():
     args = sys.argv[1:]
+    with open(SOCIAL_EVENTS_FILE, "w", encoding="utf-8") as handle:
+        json.dump([], handle)
     dry = "--dry-run" in args
     today = dt.datetime.now(IST).date()
     if today < LAUNCH_DATE:

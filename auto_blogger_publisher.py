@@ -68,6 +68,7 @@ IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 # Blogger Blog ID for "Daily Yield"
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
 TRACKER_FILE = "published_tracker.json"
+SOCIAL_EVENTS_FILE = "social_events.json"
 CSV_FILE = "500_topics_evenly_mixed.csv"
 
 # Permanent entity SEO map. Topic intent remains primary; these variants identify
@@ -820,6 +821,9 @@ def publish_to_blogger(title, content, labels):
     return res
 
 def main():
+    # A workflow consumes only events created by this exact publication run.
+    with open(SOCIAL_EVENTS_FILE, "w", encoding="utf-8") as handle:
+        json.dump([], handle)
     tracker = load_tracker()
     topics = load_topics()
     
@@ -865,6 +869,14 @@ def main():
         "blogger_url": api_res.get("url") if api_res else f"https://dailyyield.blogspot.com/{pub_date_str[:7].replace('-', '/')}/{slug}.html"
     })
     save_tracker(tracker)
+    social_event = {
+        "item_key": f"master-{int(topic['#']) % 5}",
+        "target_url": api_res["url"],
+        "content_mode": "post",
+        "published_at": api_res.get("published") or datetime.now(timezone.utc).isoformat(),
+    }
+    with open(SOCIAL_EVENTS_FILE, "w", encoding="utf-8") as handle:
+        json.dump([social_event], handle, indent=2)
     print(f"Tracker successfully updated! Next topic index: {tracker['next_topic_index']}")
 
 if __name__ == "__main__":

@@ -1,0 +1,308 @@
+diff --git a/.github/workflows/bluesky_publisher.yml b/.github/workflows/bluesky_publisher.yml
+index 02c7f79..a7324be 100644
+--- a/.github/workflows/bluesky_publisher.yml
++++ b/.github/workflows/bluesky_publisher.yml
+@@ -1,16 +1,6 @@
+ name: Daily Yield Bluesky Publisher
+ 
+ on:
+-  schedule:
+-    # Eight daily slots in IST, independently gated and staggered from other networks.
+-    - cron: '10 2 * * *'   # 07:40 IST
+-    - cron: '20 4 * * *'   # 09:50 IST
+-    - cron: '30 6 * * *'   # 12:00 IST
+-    - cron: '40 8 * * *'   # 14:10 IST
+-    - cron: '50 10 * * *'  # 16:20 IST
+-    - cron: '0 13 * * *'   # 18:30 IST
+-    - cron: '10 15 * * *'  # 20:40 IST
+-    - cron: '5 17 * * *'   # 22:35 IST
+   workflow_dispatch:
+     inputs:
+       action:
+diff --git a/.github/workflows/coordinated_social_publish.yml b/.github/workflows/coordinated_social_publish.yml
+new file mode 100644
+index 0000000..c264096
+--- /dev/null
++++ b/.github/workflows/coordinated_social_publish.yml
+@@ -0,0 +1,173 @@
++name: Coordinated Daily Yield Social Publisher
++
++on:
++  schedule:
++    # Homepage plus four rotating top-row resources, spread across the IST day.
++    - cron: '45 23 * * *'  # 05:15 IST
++    - cron: '30 1 * * *'   # 07:00 IST
++    - cron: '30 4 * * *'   # 10:00 IST
++    - cron: '30 8 * * *'   # 14:00 IST
++    - cron: '30 14 * * *'  # 20:00 IST
++  workflow_dispatch:
++    inputs:
++      item_key:
++        description: 'master-N or news-desk key from the authenticated Blogger publisher'
++        required: false
++        default: ''
++        type: string
++      target_url:
++        description: 'Exact authenticated Blogger API destination'
++        required: false
++        default: ''
++        type: string
++      content_mode:
++        description: 'post for event dispatch; scheduled runs plan a page'
++        required: false
++        default: post
++        type: choice
++        options: [post, page]
++      published_at:
++        description: 'Blogger publication timestamp used for the 15-minute delay'
++        required: false
++        default: ''
++        type: string
++
++permissions:
++  contents: write
++
++concurrency:
++  group: coordinated-social-${{ inputs.item_key || github.event.schedule || github.run_id }}
++  cancel-in-progress: false
++
++jobs:
++  plan:
++    runs-on: ubuntu-latest
++    outputs:
++      platform: ${{ steps.route.outputs.platform }}
++      target_url: ${{ steps.route.outputs.target_url }}
++      content_mode: ${{ steps.route.outputs.content_mode }}
++      delay_seconds: ${{ steps.route.outputs.delay_seconds }}
++      item_key: ${{ steps.route.outputs.item_key }}
++    steps:
++      - uses: actions/checkout@v4
++      - id: route
++        shell: bash
++        run: |
++          python social_rotation.py \
++            --item-key '${{ inputs.item_key }}' \
++            --target-url '${{ inputs.target_url }}' \
++            --content-mode '${{ inputs.content_mode || 'page' }}' \
++            --published-at '${{ inputs.published_at }}' \
++            --schedule '${{ github.event.schedule }}'
++
++  facebook:
++    needs: plan
++    if: needs.plan.outputs.platform == 'facebook'
++    runs-on: ubuntu-latest
++    timeout-minutes: 25
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with: {python-version: '3.11'}
++      - run: python -m pip install --disable-pip-version-check requests pillow
++      - name: Wait until at least fifteen minutes after Blogger publication
++        run: sleep '${{ needs.plan.outputs.delay_seconds }}'
++      - name: Publish exact assigned destination to Facebook
++        env:
++          FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
++          FACEBOOK_PAGE_ID: '1303333369533572'
++          FACEBOOK_GRAPH_VERSION: 'v26.0'
++          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
++          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
++          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
++          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
++        run: python facebook_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
++      - name: Persist Facebook tracker
++        run: |
++          git config user.name 'Daily Yield Facebook Bot'
++          git config user.email 'bot@dailyyield.blogspot.com'
++          git add facebook_tracker.json
++          git diff --staged --quiet || (git commit -m 'Record coordinated Facebook publication [skip ci]' && git pull --rebase origin main && git push origin main)
++
++  bluesky:
++    needs: plan
++    if: needs.plan.outputs.platform == 'bluesky' && vars.BLUESKY_AUTOMATION_ENABLED == 'true'
++    runs-on: ubuntu-latest
++    timeout-minutes: 25
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with: {python-version: '3.12'}
++      - run: python -m pip install --disable-pip-version-check requests pillow
++      - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
++      - name: Publish exact assigned destination to Bluesky
++        env:
++          BLUESKY_HANDLE: 'dailyyield.bsky.social'
++          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
++          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
++          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
++          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
++          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
++        run: python bluesky_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
++      - name: Persist Bluesky tracker
++        run: |
++          git config user.name 'Daily Yield Bluesky Bot'
++          git config user.email 'bot@dailyyield.blogspot.com'
++          git add bluesky_tracker.json
++          git diff --staged --quiet || (git commit -m 'Record coordinated Bluesky publication [skip ci]' && git pull --rebase origin main && git push origin main)
++
++  tumblr:
++    needs: plan
++    if: needs.plan.outputs.platform == 'tumblr' && vars.TUMBLR_AUTOMATION_ENABLED == 'true'
++    runs-on: ubuntu-latest
++    timeout-minutes: 25
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with: {python-version: '3.12'}
++      - run: python -m pip install --disable-pip-version-check requests cryptography pillow
++      - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
++      - name: Publish exact assigned destination to Tumblr
++        env:
++          TUMBLR_BLOG_IDENTIFIER: 'dailyyield-official'
++          TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
++          TUMBLR_CONSUMER_SECRET: ${{ secrets.TUMBLR_CONSUMER_SECRET }}
++          TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}
++          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
++          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
++          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
++          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
++        run: python tumblr_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
++      - name: Persist Tumblr token and tracker
++        run: |
++          git config user.name 'Daily Yield Tumblr Bot'
++          git config user.email 'bot@dailyyield.blogspot.com'
++          git add tumblr_token.enc tumblr_tracker.json
++          git diff --staged --quiet || (git commit -m 'Record coordinated Tumblr publication [skip ci]' && git pull --rebase origin main && git push origin main)
++
++  mastodon:
++    needs: plan
++    if: needs.plan.outputs.platform == 'mastodon' && vars.MASTODON_AUTOMATION_ENABLED == 'true'
++    runs-on: ubuntu-latest
++    timeout-minutes: 25
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with: {python-version: '3.12'}
++      - run: python -m pip install --disable-pip-version-check requests cryptography pillow
++      - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
++      - name: Publish exact assigned destination to Mastodon
++        env:
++          MASTODON_INSTANCE: https://mastodon.social
++          MASTODON_TOKEN_KEY: ${{ secrets.MASTODON_TOKEN_KEY }}
++          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
++          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
++          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
++          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
++        run: python mastodon_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
++      - name: Persist Mastodon tracker
++        run: |
++          git config user.name 'Daily Yield Mastodon Bot'
++          git config user.email 'bot@dailyyield.blogspot.com'
++          git add mastodon_tracker.json
++          git diff --staged --quiet || (git commit -m 'Record coordinated Mastodon publication [skip ci]' && git pull --rebase origin main && git push origin main)
+diff --git a/.github/workflows/daily_blogger_poster.yml b/.github/workflows/daily_blogger_poster.yml
+index d67035e..e96e170 100644
+--- a/.github/workflows/daily_blogger_poster.yml
++++ b/.github/workflows/daily_blogger_poster.yml
+@@ -22,6 +22,7 @@ jobs:
+     timeout-minutes: 30
+     permissions:
+       contents: write
++      actions: write
+ 
+     steps:
+       - name: Checkout Repository
+@@ -43,6 +44,11 @@ jobs:
+           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+         run: python auto_blogger_publisher.py
+ 
++      - name: Route the live article to exactly one social platform
++        env:
++          GH_TOKEN: ${{ github.token }}
++        run: python dispatch_social_events.py
++
+       - name: Commit publishing tracker
+         run: |
+           git config user.name "Daily Yield Autonomous Bot"
+diff --git a/.github/workflows/daily_news_wires.yml b/.github/workflows/daily_news_wires.yml
+index 1a96ce4..6076b04 100644
+--- a/.github/workflows/daily_news_wires.yml
++++ b/.github/workflows/daily_news_wires.yml
+@@ -23,6 +23,7 @@ on:
+         default: ""
+ permissions:
+   contents: write
++  actions: write
+ concurrency:
+   group: daily-yield-news-wires
+   cancel-in-progress: false
+@@ -44,6 +45,10 @@ jobs:
+           else
+             python3 news_pipeline.py --due
+           fi
++      - name: Route each live News edition to exactly one social platform
++        env:
++          GH_TOKEN: ${{ github.token }}
++        run: python dispatch_social_events.py
+       - name: Commit news tracker
+         if: always()
+         run: |
+diff --git a/.github/workflows/facebook_publisher.yml b/.github/workflows/facebook_publisher.yml
+index de21c74..ecf08d1 100644
+--- a/.github/workflows/facebook_publisher.yml
++++ b/.github/workflows/facebook_publisher.yml
+@@ -1,18 +1,6 @@
+ name: Daily Yield Facebook Publisher
+ 
+ on:
+-  schedule:
+-    # Ten organic posts/day across the active Indian audience window (IST = UTC+5:30).
+-    - cron: '35 1 * * *'   # 07:05 IST
+-    - cron: '20 3 * * *'   # 08:50 IST
+-    - cron: '5 5 * * *'    # 10:35 IST
+-    - cron: '50 6 * * *'   # 12:20 IST
+-    - cron: '35 8 * * *'   # 14:05 IST
+-    - cron: '20 10 * * *'  # 15:50 IST
+-    - cron: '5 12 * * *'   # 17:35 IST
+-    - cron: '50 13 * * *'  # 19:20 IST
+-    - cron: '35 15 * * *'  # 21:05 IST
+-    - cron: '20 17 * * *'  # 22:50 IST
+   workflow_dispatch:
+     inputs:
+       action:
+diff --git a/.github/workflows/mastodon_publisher.yml b/.github/workflows/mastodon_publisher.yml
+index 29e4bd7..20cd806 100644
+--- a/.github/workflows/mastodon_publisher.yml
++++ b/.github/workflows/mastodon_publisher.yml
+@@ -1,14 +1,6 @@
+ name: Daily Yield Mastodon Publisher
+ 
+ on:
+-  schedule:
+-    # Six daily slots in IST, staggered from other social publishers.
+-    - cron: '45 3 * * *'   # 09:15 IST
+-    - cron: '15 6 * * *'   # 11:45 IST
+-    - cron: '45 8 * * *'   # 14:15 IST
+-    - cron: '15 11 * * *'  # 16:45 IST
+-    - cron: '45 13 * * *'  # 19:15 IST
+-    - cron: '15 16 * * *'  # 21:45 IST
+   workflow_dispatch:
+     inputs:
+       action:
+diff --git a/.github/workflows/tumblr_publisher.yml b/.github/workflows/tumblr_publisher.yml
+index cacca16..e70560a 100644
+--- a/.github/workflows/tumblr_publisher.yml
++++ b/.github/workflows/tumblr_publisher.yml
+@@ -1,14 +1,6 @@
+ name: Daily Yield Tumblr Publisher
+ 
+ on:
+-  schedule:
+-    # Six visual/editorial posts per day, independently rotated.
+-    - cron: '0 3 * * *'    # 08:30 IST
+-    - cron: '40 5 * * *'   # 11:10 IST
+-    - cron: '20 8 * * *'   # 13:50 IST
+-    - cron: '0 11 * * *'   # 16:30 IST
+-    - cron: '40 13 * * *'  # 19:10 IST
+-    - cron: '20 16 * * *'  # 21:50 IST
+   workflow_dispatch:
+     inputs:
+       action:

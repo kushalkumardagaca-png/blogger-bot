@@ -496,6 +496,7 @@ def main() -> int:
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--content-mode", choices=("auto", "post", "page"), default="auto")
+    parser.add_argument("--target-url", default="", help="Publish this exact API-inventoried Daily Yield destination")
     args = parser.parse_args()
 
     system_user_token = required_env("FACEBOOK_SYSTEM_USER_TOKEN")
@@ -510,7 +511,15 @@ def main() -> int:
     posts = blogger_candidates(blogger_token)
     pages = blogger_pages(blogger_token)
     tracker = load_tracker()
-    candidate = choose_candidate(posts, pages, tracker, args.content_mode)
+    if args.target_url:
+        wanted = args.target_url.rstrip("/")
+        candidate = next((item for item in posts + pages if item.get("url", "").rstrip("/") == wanted), None)
+        if candidate is None:
+            raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {args.target_url}")
+        if candidate.get("kind") != args.content_mode:
+            raise RuntimeError(f"Target kind {candidate.get('kind')} does not match requested mode {args.content_mode}")
+    else:
+        candidate = choose_candidate(posts, pages, tracker, args.content_mode)
     if not candidate:
         print("No eligible website destination; no Facebook post created.")
         return 0
