@@ -2,12 +2,15 @@ name: Daily Yield Bluesky Publisher
 
 on:
   schedule:
-    # Five daily slots in IST. Disabled until the controlled API test passes.
-    - cron: '30 2 * * *'   # 08:00 IST
-    - cron: '30 5 * * *'   # 11:00 IST
-    - cron: '30 8 * * *'   # 14:00 IST
-    - cron: '0 12 * * *'   # 17:30 IST
-    - cron: '30 15 * * *'  # 21:00 IST
+    # Eight daily slots in IST, independently gated and staggered from other networks.
+    - cron: '10 2 * * *'   # 07:40 IST
+    - cron: '20 4 * * *'   # 09:50 IST
+    - cron: '30 6 * * *'   # 12:00 IST
+    - cron: '40 8 * * *'   # 14:10 IST
+    - cron: '50 10 * * *'  # 16:20 IST
+    - cron: '0 13 * * *'   # 18:30 IST
+    - cron: '10 15 * * *'  # 20:40 IST
+    - cron: '5 17 * * *'   # 22:35 IST
   workflow_dispatch:
     inputs:
       action:

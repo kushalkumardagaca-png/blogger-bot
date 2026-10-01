@@ -2,14 +2,17 @@ name: Daily Yield Facebook Publisher
 
 on:
   schedule:
-    # Seven organic posts/day, spaced 2h30m apart (IST = UTC+5:30).
-    - cron: '45 1 * * *'   # 07:15 IST
-    - cron: '15 4 * * *'   # 09:45 IST
-    - cron: '45 6 * * *'   # 12:15 IST
-    - cron: '15 9 * * *'   # 14:45 IST
-    - cron: '45 11 * * *'  # 17:15 IST
-    - cron: '15 14 * * *'  # 19:45 IST
-    - cron: '45 16 * * *'  # 22:15 IST
+    # Ten organic posts/day across the active Indian audience window (IST = UTC+5:30).
+    - cron: '35 1 * * *'   # 07:05 IST
+    - cron: '20 3 * * *'   # 08:50 IST
+    - cron: '5 5 * * *'    # 10:35 IST
+    - cron: '50 6 * * *'   # 12:20 IST
+    - cron: '35 8 * * *'   # 14:05 IST
+    - cron: '20 10 * * *'  # 15:50 IST
+    - cron: '5 12 * * *'   # 17:35 IST
+    - cron: '50 13 * * *'  # 19:20 IST
+    - cron: '35 15 * * *'  # 21:05 IST
+    - cron: '20 17 * * *'  # 22:50 IST
   workflow_dispatch:
     inputs:
       action:
