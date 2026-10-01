@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-01T16:53:05.324490+00:00",
+  "checkedAt": "2026-10-01T16:56:57.665675+00:00",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "syntheticViews": 0,
   "site": "https://dailyyield.blogspot.com/",
@@ -7,13 +7,13 @@
   "sitemaps": [
     {
       "sitemap": "https://dailyyield.blogspot.com/sitemap.xml",
-      "status": "ERROR",
-      "detail": "HTTP Error 400: Bad Request"
+      "status": "SUBMITTED",
+      "http": 200
     },
     {
       "sitemap": "https://dailyyield.blogspot.com/sitemap-pages.xml",
-      "status": "ERROR",
-      "detail": "HTTP Error 400: Bad Request"
+      "status": "SUBMITTED",
+      "http": 200
     }
   ],
   "crawlerPolicy": {
