@@ -2,6 +2,15 @@ name: Blog Health Monitor (12x Daily Zero-View Watchdog)
 # Workflow updates are applied through the repository-scoped deployment bridge.
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'theme/**'
+      - 'audit_site_enhancements.py'
+      - 'search_reach.py'
+      - 'publication_preflight.py'
+      - 'zero_view_watchdog.py'
+      - '.github/workflows/health_monitor.yml'
   schedule:
     # Twelve independent API/source checks daily. No public Daily Yield URL is opened.
     - cron: '15 */2 * * *'
