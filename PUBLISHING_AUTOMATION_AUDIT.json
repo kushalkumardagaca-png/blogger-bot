@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-01T13:04:27+05:30",
+  "checked_at_ist": "2026-10-01T13:06:51+05:30",
   "summary": {
-    "pass": 108,
+    "pass": 109,
     "fail": 0
   },
   "checks": [
@@ -272,6 +272,11 @@
     },
     {
       "name": "Article routing waits at least fifteen minutes after publication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Coordinated tracker writes use race-safe persistence retries",
       "status": "PASS",
       "detail": ""
     },
