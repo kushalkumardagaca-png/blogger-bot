@@ -1,18 +1,18 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T07:54:47.223239+05:30
+- **Checked:** 2026-10-01T09:56:50.735071+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 190 URLs · 176 Posts · 13 Pages
+- **Inventory:** 192 URLs · 178 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/189 tracked PASS
+- **Search Console:** OK · 0/191 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
-- ✅ **page · Terms and Conditions**
+- ✅ **page · TERMS AND CONDITIONS**
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
@@ -25,6 +25,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Economy and Macro Policy News · 1 October 2026 · Coverage September 30 to October 1 — Statement by the Monetary Policy Board: Monetary Policy Decision; Seoul shares narrow…**
+- ✅ **post · Market and Trading News · 1 October 2026 · Coverage September 30 to October 1 — S. Korea ordered to pay nearly US$50 mln to Elliott over Samsung merger case; RBA relaxed…**
 - ✅ **post · Your Car Payment Is a Wealth Killer**
 - ✅ **post · India Finance News · 1 October 2026 · Coverage September 30 to October 1 — Indian rupee rebounds to 95.83 vs US dollar as crude prices ease; Notice of Attachment of…**
 - ✅ **post · Global Finance Wire · 1 October 2026 · Coverage September 30 to October 1 — Summary of Opinions at the Monetary Policy Meeting on September 17 and 18, 2026[PDF…**

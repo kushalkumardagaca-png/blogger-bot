@@ -3,7 +3,7 @@
 - **Verdict:** PASS
 - **Mode:** ZERO_SYNTHETIC_VIEWS
 - **Synthetic Views:** 0
-- **Urls:** 190
+- **Urls:** 192
 - **Content Failures:** 0
 - **Rendered Checks:** 0
 - **Gsc:** OK
