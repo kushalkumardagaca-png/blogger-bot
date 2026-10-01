@@ -1,10 +1,10 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T17:10:40.529715+05:30
-- **Verdict:** PASS
+- **Checked:** 2026-10-01T17:10:27.386615+05:30
+- **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
 - **Inventory:** 204 URLs · 190 Posts · 13 Pages
-- **Content failures:** 0
+- **Content failures:** 1
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Search Console:** OK · 0/203 tracked PASS
@@ -18,7 +18,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ✅ **page · DAILY NEWS**
+- ❌ **page · DAILY NEWS** — 1 image(s) missing an alt attribute
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**

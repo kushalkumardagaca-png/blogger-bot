@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
   "urls": 204,
-  "hard_failures": 0,
+  "hard_failures": 1,
   "results": [
     {
       "kind": "home",
@@ -191,7 +191,9 @@
       "kind": "page",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "issues": [],
+      "issues": [
+        "1 image(s) missing an alt attribute"
+      ],
       "warnings": [],
       "images": [],
       "external": [

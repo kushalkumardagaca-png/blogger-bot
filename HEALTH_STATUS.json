@@ -1,12 +1,12 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
     "urls": 204,
     "posts": 190,
     "pages": 13,
-    "contentFailures": 0,
+    "contentFailures": 1,
     "externalDestinationsChecked": 1772,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
@@ -2278,7 +2278,7 @@
       },
       "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html": {
         "title": "A Private AI Advisor on Your Data",
-        "checkedAt": "2026-10-01T17:10:40.529715+05:30",
+        "checkedAt": "2026-10-01T17:10:27.386615+05:30",
         "verdict": "NEUTRAL",
         "coverageState": "URL is unknown to Google",
         "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
