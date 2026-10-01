@@ -3,7 +3,8 @@
 
 No Daily Yield public page is opened. Google state is handled by gsc_rebuild.py;
 this companion records crawler policy and uses Bing's official API only when the
-repository owner has configured BING_WEBMASTER_API_KEY.
+repository owner has configured BING_WEBMASTER_API_KEY. The secret is consumed only
+as an environment value and is never written to status evidence or logs.
 """
 from pathlib import Path
 from datetime import datetime, timezone
