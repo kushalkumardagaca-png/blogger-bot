@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Install the shared Daily Yield family directory on every active static page."""
 from pathlib import Path
-import json, os, re, requests
+import html, json, os, re, requests
 from page_family import ACTIVE_PAGES, BLOG, END, START, ensure_family
 from social_identity import SOCIAL_PROFILES
 
@@ -78,6 +78,22 @@ def create_terms(h):
     return page
 
 
+def ensure_image_alts(content, title):
+    """Add descriptive alt text only where an img has no alt attribute.
+
+    Explicit alt="" remains untouched because it denotes a decorative image.
+    """
+    fallback = html.escape(f"Daily Yield {title} visual", quote=True)
+    def repair(match):
+        tag = match.group(0)
+        if re.search(r"\balt\s*=", tag, re.I):
+            return tag
+        if tag.endswith("/>"):
+            return tag[:-2].rstrip() + f' alt="{fallback}" />'
+        return tag[:-1].rstrip() + f' alt="{fallback}">'
+    return re.sub(r"<img\b[^>]*>", repair, content or "", flags=re.I)
+
+
 def main():
     h = headers()
     pages = list_pages(h)
@@ -101,6 +117,7 @@ def main():
         p = by_path[path]
         old = p.get("content", "")
         base = TERMS_CONTENT if path == TERMS_PATH else old
+        base = ensure_image_alts(base, p["title"])
         new = ensure_family(base, path)
         if new == old:
             unchanged.append(path)
@@ -117,13 +134,17 @@ def main():
         match = re.search(re.escape(START) + r".*?" + re.escape(END), content, re.S)
         managed = match.group(0) if match else ""
         social_counts = {url: managed.count(url) for url in social_urls}
+        images_without_alt = len([tag for tag in re.findall(r"<img\b[^>]*>", content, re.I)
+                                  if not re.search(r"\balt\s*=", tag, re.I)])
         ok = (content.count(START) == 1 and content.count('id="dyPageFamily"') == 1
+              and images_without_alt == 0
               and managed.count('class="dyf-social"') == 1
               and all(count == 1 for count in social_counts.values())
               and "/p/markets-today.html" in managed and "/p/global-snapshot.html" in managed
               and "/p/share-market_0718113516.html" not in managed and "Market Explorer" not in managed)
         checks.append({"path": path, "title": p["title"], "verified": ok,
-                       "managed_block_found": bool(match), "social_counts": social_counts})
+                       "managed_block_found": bool(match), "images_without_alt": images_without_alt,
+                       "social_counts": social_counts})
 
     verified = all(c["verified"] for c in checks)
     result = {"changed": changed, "unchanged": unchanged, "verified_pages": checks, "verified": verified}

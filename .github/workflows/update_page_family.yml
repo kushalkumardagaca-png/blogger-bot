@@ -1,15 +1,31 @@
 name: Update Daily Yield page family
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'update_page_family.py'
+      - '.github/workflows/update_page_family.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: daily-yield-page-family-update
+  cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
       - run: pip install requests
       - name: Back up and update every active static page
         env:
@@ -18,10 +34,75 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python update_page_family.py
+
+      - name: Approve intentional Blogger Page changes in Security Guard
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python security_guard.py --approve-current
+
+      - name: Run immediate full zero-view verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python zero_view_watchdog.py
+
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: daily-yield-page-family-update
+          name: daily-yield-page-family-update-${{ github.run_id }}
           path: |
             page_family_backup.json
             page_family_result.json
+            SECURITY_BASELINE.json
+            SECURITY_STATUS.json
+            SECURITY_STATUS.md
+            ZERO_VIEW_WATCHDOG.json
+            ZERO_VIEW_WATCHDOG.md
+            HEALTH_STATUS.json
+            HEALTH_REPORT.md
+            COMPREHENSIVE_SITE_AUDIT.json
+            COMPREHENSIVE_SITE_AUDIT.md
+            WATCHDOG_VERDICT.json
+            WATCHDOG_VERDICT.md
           retention-days: 30
+
+      - name: Persist approved baseline and zero-view evidence safely
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Page Family Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          files=(
+            page_family_result.json SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md
+            ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md HEALTH_STATUS.json HEALTH_REPORT.md
+            COMPREHENSIVE_SITE_AUDIT.json COMPREHENSIVE_SITE_AUDIT.md
+            WATCHDOG_VERDICT.json WATCHDOG_VERDICT.md
+          )
+          mkdir -p /tmp/daily-yield-page-state
+          for file in "${files[@]}"; do [[ -f "$file" ]] && cp "$file" /tmp/daily-yield-page-state/; done
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/daily-yield-page-state/* .
+            git add "${files[@]}" 2>/dev/null || true
+            if git diff --staged --quiet; then
+              echo "No Page-family evidence change."
+              exit 0
+            fi
+            git commit -m "Repair Page accessibility and verify zero-view state [skip ci]"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          echo "Could not persist Page-family evidence after three reconciled attempts." >&2
+          exit 1

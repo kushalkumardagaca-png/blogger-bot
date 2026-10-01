@@ -38,7 +38,7 @@ CRITICAL_FILES = [
     ".github/workflows/facebook_publisher.yml", ".github/workflows/bluesky_publisher.yml",
     ".github/workflows/tumblr_publisher.yml", ".github/workflows/mastodon_publisher.yml",
     "security_guard.py", "audit_site_enhancements.py", "search_reach.py",
-    "apply_site_enhancements.py", "SEO_EXPERIENCE_REQUIREMENTS.md",
+    "apply_site_enhancements.py", "update_page_family.py", "SEO_EXPERIENCE_REQUIREMENTS.md",
     "theme/Daily-Yield-Theme-Subscription.xml",
     "theme/Daily-Yield-Theme-v4-2026-10-01.xml",
     "outreach/editorial_outreach.py", "outreach/gmail_sender.py",

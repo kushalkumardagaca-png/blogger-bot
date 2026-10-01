@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-01T11:37:30.723507+00:00",
+  "approvedAt": "2026-10-01T11:39:57.768874+00:00",
   "repository": {
     "auto_blogger_publisher.py": "da26cd6e7274ffe5a7176446546383bd03a03e7374cc8d2211d0228cb597f12a",
     "news_pipeline.py": "151657a27e40e38a97ec9f65957c522b19c363a93a28fb92566928447f0d28dc",
@@ -24,10 +24,11 @@
     ".github/workflows/bluesky_publisher.yml": "47ea8d9a01f8761590de4362cedbbaafc652c2d5e18c0a0b7aa66834815571f4",
     ".github/workflows/tumblr_publisher.yml": "10aaab1287a4165d9714bf9b0673f6fbba1519b283041e6f0b57b33c3fc5579b",
     ".github/workflows/mastodon_publisher.yml": "8f94732a0dc547dfbab59b5addef04e5890d9735af54516224e6d1ccd602fee5",
-    "security_guard.py": "c506b56c2e9e37dd5310f3f587d703780aad31752c37754e57d8970f97d59995",
-    "audit_site_enhancements.py": "093401c693c99b1affb8f5ebb9e994e7fa9e055b53ac00055dfd564c3c2fe779",
+    "security_guard.py": "7bdb9f58644b36bbc4656914d4f9ccd0b33efa4652e5017039ab48495f371f94",
+    "audit_site_enhancements.py": "12b804e08d49a85563bfadc9ca4412a3cf504528d0882e1686b2158cefa06c1a",
     "search_reach.py": "6a4244c2db357684d9238aa6b85a763029186c2da50d0d347ea28cfa8f7afe58",
     "apply_site_enhancements.py": "35176f9571755c88077136e7ffc01a54199a7a602e7d675014ec45003ebe09e0",
+    "update_page_family.py": "8e132c5a67149c838810f3d0faf267fdfd48a8486582ae011b55e45013f15450",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
     "theme/Daily-Yield-Theme-Subscription.xml": "5933921a7e97fc83668d10c9cfb7b5f579a49987bc904ad9d13810ac32b4344f",
     "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "5933921a7e97fc83668d10c9cfb7b5f579a49987bc904ad9d13810ac32b4344f",
@@ -55,7 +56,7 @@
     ".github/workflows/security_guard.yml": "0ff329f77dd4156082c0917eb69678772493298de9dc1d4ccbdfda3ffbdfdc93",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
-    ".github/workflows/update_page_family.yml": "a0544d46418d14889decf5d46150cb4186b14a472cd7563aabc4270bb81c5936"
+    ".github/workflows/update_page_family.yml": "278fbded6a4be622a7858e1d9376f99add1becc3931dd090928ee6490ee65f26"
   },
   "blogger": {
     "page:3254393081257151974": {
