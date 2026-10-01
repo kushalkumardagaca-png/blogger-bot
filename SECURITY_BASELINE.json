@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-01T11:20:06.950949+00:00",
+  "approvedAt": "2026-10-01T11:21:06.298599+00:00",
   "repository": {
     "auto_blogger_publisher.py": "da26cd6e7274ffe5a7176446546383bd03a03e7374cc8d2211d0228cb597f12a",
     "news_pipeline.py": "151657a27e40e38a97ec9f65957c522b19c363a93a28fb92566928447f0d28dc",
@@ -52,7 +52,7 @@
     ".github/workflows/repair_known_external_links.yml": "a18980a2f2cc0ff8b247eb65c8611af6295dd437d725506e7a3036fa5d9d80ed",
     ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
     ".github/workflows/retrofit_live_news.yml": "30a0e41d35522ff047fdeffc5d656725ba160913a4dae4cf14b80ef5ad9b7232",
-    ".github/workflows/security_guard.yml": "e7a2eae72fa89ca544f4fca7727c88f9bea4e2c39722e378e0fdc463c69a26dd",
+    ".github/workflows/security_guard.yml": "0ff329f77dd4156082c0917eb69678772493298de9dc1d4ccbdfda3ffbdfdc93",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
     ".github/workflows/update_page_family.yml": "a0544d46418d14889decf5d46150cb4186b14a472cd7563aabc4270bb81c5936"
