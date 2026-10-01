@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T19:59:07.984421+05:30
+- **Checked:** 2026-10-01T21:37:28.999578+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 209 URLs · 195 Posts · 13 Pages
+- **Inventory:** 212 URLs · 198 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/208 tracked PASS
+- **Search Console:** OK · 0/211 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -26,6 +26,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Russia Finance News · 1 October 2026 · Coverage September 30 to October 1 — FACTBOX: Key takeaways from Russia's draft federal budget for 2027-2029; All prerequisites…**
+- ✅ **post · Personal Finance News · 1 October 2026 · Coverage September 30 to October 1 — Pension tops £16,000 a year after 4.7% increase; Healey urged to offer energy support in…**
+- ✅ **post · Your Secret Money Script, Explained**
 - ✅ **post · Mexico Finance News · 1 October 2026 · Coverage September 30 to October 1 — France woos Mexico as a stronger trade partner, citing US uncertainties; Mexico stocks…**
 - ✅ **post · Canada Finance News · 1 October 2026 · Coverage September 30 to October 1 — Small Canadian steel companies worry buying Canadian ‘prices you out’ of domestic…**
 - ✅ **post · US Finance News · 1 October 2026 · Coverage September 30 to October 1 — Racehorse market breaks records riding high on tax breaks, stock market gains; Jim…**
