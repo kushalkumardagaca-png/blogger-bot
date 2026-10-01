@@ -52,6 +52,7 @@ jobs:
         run: python search_reach.py
 
       - name: Audit complete site through APIs without opening the blog
+        if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
