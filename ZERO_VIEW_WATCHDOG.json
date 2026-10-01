@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T21:56:02.887224+05:30",
+  "checkedAtIST": "2026-10-01T21:58:02.550688+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1878,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 120,
+    "transientExternalResponses": 118,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -14173,14 +14173,14 @@
       "redirectCount": 0
     },
     {
-      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEg0yN2xiLfrJCD2Lb0RT3p8JshhnoXV1v-6naNHWuqoLTK6-dGVX7iz6jZ6NgXdwwJ_-CBCsMko4eqaiGb10X0RYgyzknJJu7oSe4TJAQo_2HTX7VAWeObahR-WSEnRPohqpYEDSArOEP2QaQ7LBjhuBc-w4Gs4BZpEk7iK-D2524avINLsCvK5-L1u_K4",
+      "url": "https://www150.statcan.gc.ca/n1/en/catalogue/11-627-M",
       "status": "TRANSIENT",
       "redirects": [],
       "redirectCount": 0,
-      "detail": "The read operation timed out"
+      "detail": "<urlopen error [Errno 104] Connection reset by peer>"
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14222,19 +14222,7 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
