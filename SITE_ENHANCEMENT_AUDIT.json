@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 110,
+  "pass": 111,
   "fail": 0,
   "checks": [
     {
@@ -386,6 +386,10 @@
     },
     {
       "name": "health workflow runs reach readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "health evidence rejects stale concurrent watchdog reports",
       "status": "PASS"
     },
     {

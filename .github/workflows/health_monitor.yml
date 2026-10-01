@@ -100,6 +100,24 @@ jobs:
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
+            set +e
+            python3 - <<'PY'
+          import json, sys
+          from datetime import datetime
+          from pathlib import Path
+          candidate = Path('/tmp/daily-yield-health-state/ZERO_VIEW_WATCHDOG.json')
+          current = Path('ZERO_VIEW_WATCHDOG.json')
+          if candidate.exists() and current.exists():
+              new = datetime.fromisoformat(json.loads(candidate.read_text()).get('checkedAtIST'))
+              old = datetime.fromisoformat(json.loads(current.read_text()).get('checkedAtIST'))
+              if old >= new:
+                  print(f'Remote watchdog evidence is newer ({old.isoformat()}); stale run will not overwrite it.')
+                  sys.exit(42)
+          PY
+            freshness=$?
+            set -e
+            if [[ "$freshness" == "42" ]]; then exit 0; fi
+            if [[ "$freshness" != "0" ]]; then exit "$freshness"; fi
             cp /tmp/daily-yield-health-state/* . 2>/dev/null || true
             git add "${files[@]}" 2>/dev/null || true
             if git diff --staged --quiet; then
