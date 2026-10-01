@@ -16,7 +16,7 @@ for p in THEMES:
     prefix=p.name+': '
     check(prefix+'valid Blogger XML',valid)
     requirements={
-      'dark mode toggle':"id='dyThemeToggle'",'complete dark palette v2':'DY_DARK_PALETTE_V2','dark homepage card remap':"html[data-dy-theme='dark'] .kd-card",'dark calculator remap':"html[data-dy-theme='dark'] .kh-tools",'privacy choice panel':"id='dyPrivacyPanel'",
+      'light-mode reset for former dark preference':"localStorage.removeItem('dy-theme')",'privacy choice panel':"id='dyPrivacyPanel'",'footer privacy control':"id='dyPrivacyManage'",'saved analytics choice restored on later pages':"savedConsent==='analytics'",
       'site search':"id='searchToggle'",'back to top':"id='toTop'",'mobile menu':"id='drawerToggle'",
       'loading state':"data-dy-loading",'hover states':':hover','reading progress':"id='progressBar'",
       'copy/share feedback':'Link copied','print stylesheet':'@media print','sticky header':'position:sticky',
@@ -35,6 +35,8 @@ for p in THEMES:
       'no external enhancement script':'DY_SITE_ENHANCEMENTS_JS_START','honest advice disclaimer':'educational information',
     }
     for name,needle in requirements.items(): check(prefix+name,needle in text)
+    check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)
+    check(prefix+'privacy control is not floating', '.dy-privacy-manage{position:fixed' not in text)
     check(prefix+'no Google Business Profile', 'Google Business Profile' not in text)
 
 workflow=(ROOT/'.github/workflows/health_monitor.yml').read_text()

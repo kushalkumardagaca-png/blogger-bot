@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 122,
+  "pass": 124,
   "fail": 0,
   "checks": [
     {
@@ -9,23 +9,19 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: dark mode toggle",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: complete dark palette v2",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: dark homepage card remap",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: dark calculator remap",
+      "name": "Daily-Yield-Theme-Subscription.xml: light-mode reset for former dark preference",
       "status": "PASS"
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: privacy choice panel",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: footer privacy control",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: saved analytics choice restored on later pages",
       "status": "PASS"
     },
     {
@@ -209,6 +205,14 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-Subscription.xml: dark mode fully removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: privacy control is not floating",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-Subscription.xml: no Google Business Profile",
       "status": "PASS"
     },
@@ -217,23 +221,19 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark mode toggle",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: complete dark palette v2",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark homepage card remap",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark calculator remap",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: light-mode reset for former dark preference",
       "status": "PASS"
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: privacy choice panel",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: footer privacy control",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: saved analytics choice restored on later pages",
       "status": "PASS"
     },
     {
@@ -414,6 +414,14 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating",
       "status": "PASS"
     },
     {

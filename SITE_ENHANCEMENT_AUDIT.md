@@ -1,15 +1,14 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **122**
+- Pass: **124**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
 - ✅ Daily-Yield-Theme-Subscription.xml: valid Blogger XML
-- ✅ Daily-Yield-Theme-Subscription.xml: dark mode toggle
-- ✅ Daily-Yield-Theme-Subscription.xml: complete dark palette v2
-- ✅ Daily-Yield-Theme-Subscription.xml: dark homepage card remap
-- ✅ Daily-Yield-Theme-Subscription.xml: dark calculator remap
+- ✅ Daily-Yield-Theme-Subscription.xml: light-mode reset for former dark preference
 - ✅ Daily-Yield-Theme-Subscription.xml: privacy choice panel
+- ✅ Daily-Yield-Theme-Subscription.xml: footer privacy control
+- ✅ Daily-Yield-Theme-Subscription.xml: saved analytics choice restored on later pages
 - ✅ Daily-Yield-Theme-Subscription.xml: site search
 - ✅ Daily-Yield-Theme-Subscription.xml: back to top
 - ✅ Daily-Yield-Theme-Subscription.xml: mobile menu
@@ -55,13 +54,14 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-Subscription.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-Subscription.xml: honest advice disclaimer
+- ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
+- ✅ Daily-Yield-Theme-Subscription.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-Subscription.xml: no Google Business Profile
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: valid Blogger XML
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode toggle
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: complete dark palette v2
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark homepage card remap
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark calculator remap
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: light-mode reset for former dark preference
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy choice panel
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: footer privacy control
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: saved analytics choice restored on later pages
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: site search
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: back to top
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: mobile menu
@@ -107,6 +107,8 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no Google Business Profile
 - ✅ health workflow runs experience audit
 - ✅ health workflow runs reach readiness
