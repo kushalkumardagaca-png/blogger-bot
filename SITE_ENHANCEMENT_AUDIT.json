@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 112,
+  "pass": 114,
   "fail": 0,
   "checks": [
     {
@@ -177,7 +177,11 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: analytics defaults denied",
+      "name": "Daily-Yield-Theme-Subscription.xml: analytics consent defaults denied before loading",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: analytics changes only after choice",
       "status": "PASS"
     },
     {
@@ -365,7 +369,11 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: analytics defaults denied",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: analytics consent defaults denied before loading",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice",
       "status": "PASS"
     },
     {

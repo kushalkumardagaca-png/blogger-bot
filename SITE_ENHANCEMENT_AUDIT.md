@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **112**
+- Pass: **114**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -47,7 +47,8 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: terms link
 - ✅ Daily-Yield-Theme-Subscription.xml: contact email
 - ✅ Daily-Yield-Theme-Subscription.xml: HTTPS destination
-- ✅ Daily-Yield-Theme-Subscription.xml: analytics defaults denied
+- ✅ Daily-Yield-Theme-Subscription.xml: analytics consent defaults denied before loading
+- ✅ Daily-Yield-Theme-Subscription.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-Subscription.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-Subscription.xml: honest advice disclaimer
 - ✅ Daily-Yield-Theme-Subscription.xml: no Google Business Profile
@@ -94,7 +95,8 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: terms link
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: contact email
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: HTTPS destination
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics defaults denied
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics consent defaults denied before loading
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no Google Business Profile
