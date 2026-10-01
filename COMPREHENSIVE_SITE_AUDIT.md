@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T09:56:50.735071+05:30
+- **Checked:** 2026-10-01T12:02:55.011993+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 192 URLs · 178 Posts · 13 Pages
+- **Inventory:** 197 URLs · 183 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/191 tracked PASS
+- **Search Console:** OK · 0/196 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -25,6 +25,11 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · UK Finance News · 1 October 2026 · Coverage September 30 to October 1 — FCA opens the gateway to regulated crypto 30/09/2026; FCA secures bankruptcy order against…**
+- ✅ **post · Japan Finance News · 1 October 2026 · Coverage September 30 to October 1 — Sources of Changes in Current Account Balances and Market Operations (Sept.)[XLSX 27KB]…**
+- ✅ **post · The 12-Tab Personal CFO Spreadsheet**
+- ✅ **post · France Finance News · 1 October 2026 · Coverage September 30 to October 1 — How much does France's debt cost? How do deficits arise? 13 graphs to understand France's…**
+- ✅ **post · Germany Finance News · 1 October 2026 · Coverage September 30 to October 1 — Germany raises Deutschlandticket price to €66.80 a month from 2027 under new cost-based…**
 - ✅ **post · Economy and Macro Policy News · 1 October 2026 · Coverage September 30 to October 1 — Statement by the Monetary Policy Board: Monetary Policy Decision; Seoul shares narrow…**
 - ✅ **post · Market and Trading News · 1 October 2026 · Coverage September 30 to October 1 — S. Korea ordered to pay nearly US$50 mln to Elliott over Samsung merger case; RBA relaxed…**
 - ✅ **post · Your Car Payment Is a Wealth Killer**
