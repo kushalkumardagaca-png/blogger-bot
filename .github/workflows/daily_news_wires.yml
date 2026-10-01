@@ -23,6 +23,7 @@ on:
         default: ""
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: daily-yield-news-wires
   cancel-in-progress: false
@@ -44,6 +45,10 @@ jobs:
           else
             python3 news_pipeline.py --due
           fi
+      - name: Route each live News edition to exactly one social platform
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python dispatch_social_events.py
       - name: Commit news tracker
         if: always()
         run: |

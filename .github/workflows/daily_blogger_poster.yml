@@ -22,6 +22,7 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: write
+      actions: write
 
     steps:
       - name: Checkout Repository
@@ -42,6 +43,11 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python auto_blogger_publisher.py
+
+      - name: Route the live article to exactly one social platform
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python dispatch_social_events.py
 
       - name: Commit publishing tracker
         run: |

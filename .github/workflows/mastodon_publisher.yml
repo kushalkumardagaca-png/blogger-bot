@@ -1,14 +1,6 @@
 name: Daily Yield Mastodon Publisher
 
 on:
-  schedule:
-    # Six daily slots in IST, staggered from other social publishers.
-    - cron: '45 3 * * *'   # 09:15 IST
-    - cron: '15 6 * * *'   # 11:45 IST
-    - cron: '45 8 * * *'   # 14:15 IST
-    - cron: '15 11 * * *'  # 16:45 IST
-    - cron: '45 13 * * *'  # 19:15 IST
-    - cron: '15 16 * * *'  # 21:45 IST
   workflow_dispatch:
     inputs:
       action:

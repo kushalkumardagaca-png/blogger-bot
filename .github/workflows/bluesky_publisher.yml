@@ -1,16 +1,6 @@
 name: Daily Yield Bluesky Publisher
 
 on:
-  schedule:
-    # Eight daily slots in IST, independently gated and staggered from other networks.
-    - cron: '10 2 * * *'   # 07:40 IST
-    - cron: '20 4 * * *'   # 09:50 IST
-    - cron: '30 6 * * *'   # 12:00 IST
-    - cron: '40 8 * * *'   # 14:10 IST
-    - cron: '50 10 * * *'  # 16:20 IST
-    - cron: '0 13 * * *'   # 18:30 IST
-    - cron: '10 15 * * *'  # 20:40 IST
-    - cron: '5 17 * * *'   # 22:35 IST
   workflow_dispatch:
     inputs:
       action:
