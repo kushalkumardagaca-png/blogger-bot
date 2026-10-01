@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T18:14:11.953262+05:30
+- **Checked:** 2026-10-01T19:21:35.533841+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 206 URLs · 192 Posts · 13 Pages
+- **Inventory:** 209 URLs · 195 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/205 tracked PASS
+- **Search Console:** OK · 0/208 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -26,6 +26,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Mexico Finance News · 1 October 2026 · Coverage September 30 to October 1 — France woos Mexico as a stronger trade partner, citing US uncertainties; Mexico stocks…**
+- ✅ **post · Canada Finance News · 1 October 2026 · Coverage September 30 to October 1 — Small Canadian steel companies worry buying Canadian ‘prices you out’ of domestic…**
+- ✅ **post · US Finance News · 1 October 2026 · Coverage September 30 to October 1 — Racehorse market breaks records riding high on tax breaks, stock market gains; Jim…**
 - ✅ **post · Canada Finance News · 1 October 2026 · Coverage September 30 to October 1 — Small Canadian steel companies facing U.S. tariffs ‘not going down without a fight’…**
 - ✅ **post · US Finance News · 1 October 2026 · Coverage September 30 to October 1 — Micron stock barely budged on chipmaker's latest earnings. Wall Street still thinks gains…**
 - ✅ **post · A Private AI Advisor on Your Data**
