@@ -45,6 +45,7 @@ check('health workflow runs experience audit','python audit_site_enhancements.py
 check('health workflow runs reach readiness','python search_reach.py' in workflow)
 check('health evidence rejects stale concurrent watchdog reports','Remote watchdog evidence is newer' in workflow and 'checkedAtIST' in workflow)
 check('Bing sitemap integration implemented','BING_WEBMASTER_API_KEY' in search and 'SubmitFeed' in search)
+check('Bing SubmitFeed uses required JSON body','json.dumps({"siteUrl":SITE,"feedUrl":sitemap})' in search and 'application/json; charset=utf-8' in search)
 check('Bing integration is optional and fail-safe','status":"READY' in search)
 check('search reach creates zero views','ZERO_SYNTHETIC_VIEWS' in search and 'syntheticViews":0' in search)
 check('Google Search Console remains automated',(ROOT/'gsc_rebuild.py').exists())

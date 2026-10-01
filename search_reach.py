@@ -15,8 +15,16 @@ SITEMAPS=[SITE+"sitemap.xml",SITE+"sitemap-pages.xml"]
 
 
 def bing_submit(key, sitemap):
-    query=urllib.parse.urlencode({"apikey":key,"siteUrl":SITE,"feedUrl":sitemap})
-    req=urllib.request.Request("https://ssl.bing.com/webmaster/api.svc/json/SubmitFeed?"+query,method="POST",headers={"User-Agent":"DailyYield-SearchReach/1.0"})
+    # Bing accepts the API key in the query string, but SubmitFeed's site and
+    # feed values must be a wrapped JSON POST body. Never place the key in logs.
+    query=urllib.parse.urlencode({"apikey":key})
+    payload=json.dumps({"siteUrl":SITE,"feedUrl":sitemap}).encode("utf-8")
+    req=urllib.request.Request(
+        "https://ssl.bing.com/webmaster/api.svc/json/SubmitFeed?"+query,
+        data=payload,
+        method="POST",
+        headers={"User-Agent":"DailyYield-SearchReach/1.0","Content-Type":"application/json; charset=utf-8"},
+    )
     with urllib.request.urlopen(req,timeout=30) as response:
         return response.status
 

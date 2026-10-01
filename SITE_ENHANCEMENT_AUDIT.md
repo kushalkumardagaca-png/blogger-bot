@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **128**
+- Pass: **129**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -118,6 +118,7 @@
 - ✅ health workflow runs reach readiness
 - ✅ health evidence rejects stale concurrent watchdog reports
 - ✅ Bing sitemap integration implemented
+- ✅ Bing SubmitFeed uses required JSON body
 - ✅ Bing integration is optional and fail-safe
 - ✅ search reach creates zero views
 - ✅ Google Search Console remains automated

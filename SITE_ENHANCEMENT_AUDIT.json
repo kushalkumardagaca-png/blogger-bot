@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 128,
+  "pass": 129,
   "fail": 0,
   "checks": [
     {
@@ -458,6 +458,10 @@
     },
     {
       "name": "Bing sitemap integration implemented",
+      "status": "PASS"
+    },
+    {
+      "name": "Bing SubmitFeed uses required JSON body",
       "status": "PASS"
     },
     {
