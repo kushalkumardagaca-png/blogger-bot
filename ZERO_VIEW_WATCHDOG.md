@@ -1,12 +1,12 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-01T06:04:32.653005+05:30
+- **Checked:** 2026-10-01T07:54:47.223239+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 187 URLs · 173 Posts · 13 Pages
+- **Inventory:** 190 URLs · 176 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
-- **Search Console:** OK · 0/186 tracked PASS
+- **Search Console:** OK · 0/189 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -25,6 +25,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Your Car Payment Is a Wealth Killer**
+- ✅ **post · India Finance News · 1 October 2026 · Coverage September 30 to October 1 — Indian rupee rebounds to 95.83 vs US dollar as crude prices ease; Notice of Attachment of…**
+- ✅ **post · Global Finance Wire · 1 October 2026 · Coverage September 30 to October 1 — Summary of Opinions at the Monetary Policy Meeting on September 17 and 18, 2026[PDF…**
 - ✅ **post · South Korea Finance News · 1 October 2026 · Coverage September 30 to October 1 — Hyundai Mobis signs 600 bln-won deal to sell lamp unit to France's OPmobility; S. Korean…**
 - ✅ **post · Australia Finance News · 1 October 2026 · Coverage September 30 to October 1 — Live: ASX to fall, price of oil surges; Housing waitlist cancellations a 'systems level…**
 - ✅ **post · Russia Finance News · 30 September 2026 · Coverage September 29 to 30 — Russia views European factories producing arms for Kiev as military targets — diplomat…**
