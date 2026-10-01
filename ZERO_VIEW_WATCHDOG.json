@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-01T21:37:28.999578+05:30",
+  "checkedAtIST": "2026-10-01T21:50:28.808860+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -7,7 +7,7 @@
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-01T08:55:26-07:00",
+    "updated": "2026-10-01T09:11:48-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 198
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 1878,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 121,
+    "transientExternalResponses": 117,
     "syntheticDailyYieldViews": 0
   },
   "content": [
@@ -14173,31 +14173,13 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Controul_and_Advice%2C_a_scene_in_Midas%2C_with_a_parody_%28BM_1868%2C0808.5824%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -14216,12 +14198,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -16724,7 +16700,7 @@
       "tracked": 211,
       "pass": 0,
       "notPass": 211,
-      "inspectedThisRun": 3,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
