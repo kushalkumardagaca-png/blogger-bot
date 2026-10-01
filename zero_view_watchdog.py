@@ -136,6 +136,13 @@ def audit_content(item, known):
     issues, warnings = [], []
     links = attrs(content, "a", "href")
     images = attrs(content, "img", "src")
+    image_tags = re.findall(r"<img\b[^>]*>", content or "", re.I)
+    missing_alt = [tag for tag in image_tags if not re.search(r"\balt=[\"'][^\"']+[\"']", tag, re.I)]
+    if missing_alt:
+        issues.append(f"{len(missing_alt)} image(s) missing descriptive alt text")
+    h1_count = len(re.findall(r"<h1\b", content or "", re.I))
+    if h1_count != 1:
+        warnings.append(f"content primary H1 count {h1_count}; expected 1 with Theme v4")
     internal, external = [], []
     for link in links:
         absolute = urljoin(SITE, link)
@@ -203,14 +210,20 @@ def audit_content(item, known):
 def external_status(url):
     if is_own_public_host(url):
         return {"url": url, "status": "BLOCKED_BY_ZERO_VIEW_POLICY"}
+    chain = []
+    class TrackingRedirectHandler(ZeroViewRedirectHandler):
+        def redirect_request(self, request, fp, code, message, headers, newurl):
+            chain.append({"status": code, "url": newurl})
+            return super().redirect_request(request, fp, code, message, headers, newurl)
+    opener = urllib.request.build_opener(TrackingRedirectHandler())
     request = urllib.request.Request(url, headers={**UA, "Range": "bytes=0-1023"})
     try:
-        with SAFE_OPENER.open(request, timeout=18) as response:
-            return {"url": url, "status": response.status, "contentType": response.headers.get("Content-Type", "")}
+        with opener.open(request, timeout=18) as response:
+            return {"url": url, "finalUrl": response.geturl(), "status": response.status, "redirects": chain, "redirectCount": len(chain), "contentType": response.headers.get("Content-Type", "")}
     except urllib.error.HTTPError as exc:
-        return {"url": url, "status": exc.code}
+        return {"url": url, "status": exc.code, "redirects": chain, "redirectCount": len(chain)}
     except Exception as exc:
-        return {"url": url, "status": "TRANSIENT", "detail": str(exc)[:120]}
+        return {"url": url, "status": "TRANSIENT", "redirects": chain, "redirectCount": len(chain), "detail": str(exc)[:120]}
 
 
 def github_checks():
@@ -326,6 +339,7 @@ def main():
     with ThreadPoolExecutor(max_workers=10) as pool:
         destination_rows = list(pool.map(external_status, targets))
     hard_external = [row for row in destination_rows if row["status"] in (404, 410)]
+    redirect_chains = [row for row in destination_rows if row.get("redirectCount", 0) > 1]
     transient_external = [row for row in destination_rows if row["status"] in (401, 403, 429, "TRANSIENT") or isinstance(row["status"], int) and row["status"] >= 500]
     content_failures = sum(bool(row["issues"]) for row in rows)
     github = github_checks()
@@ -337,13 +351,13 @@ def main():
         "checkedAtIST": NOW.isoformat(), "mode": "ZERO_SYNTHETIC_VIEWS",
         "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
         "overall": overall, "bloggerControlPlane": metadata,
-        "summary": {"urls": len(inventory), "posts": sum(item["kind"] == "post" for item in inventory), "pages": sum(item["kind"] == "page" for item in inventory), "contentFailures": content_failures, "externalDestinationsChecked": len(targets), "confirmedExternal404or410": len(hard_external), "transientExternalResponses": len(transient_external), "syntheticDailyYieldViews": 0},
+        "summary": {"urls": len(inventory), "posts": sum(item["kind"] == "post" for item in inventory), "pages": sum(item["kind"] == "page" for item in inventory), "contentFailures": content_failures, "externalDestinationsChecked": len(targets), "confirmedExternal404or410": len(hard_external), "externalRedirectChains": len(redirect_chains), "transientExternalResponses": len(transient_external), "syntheticDailyYieldViews": 0},
         "content": rows, "confirmedBrokenExternal": hard_external,
-        "transientExternal": transient_external, "github": github, "providers": providers, "gsc": gsc,
+        "redirectChains": redirect_chains, "transientExternal": transient_external, "github": github, "providers": providers, "gsc": gsc,
         "limitations": ["Rendered-browser and live public-page navigation are intentionally prohibited because they create synthetic pageviews.", "Responsive, metadata and structure checks are performed against Blogger API content packages rather than opening public URLs."],
     }
     Path("ZERO_VIEW_WATCHDOG.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
-    lines = ["# Daily Yield Zero-View Watchdog", "", f"- **Checked:** {report['checkedAtIST']}", f"- **Verdict:** {overall}", "- **Synthetic Daily Yield views:** 0", f"- **Inventory:** {len(inventory)} URLs · {report['summary']['posts']} Posts · {report['summary']['pages']} Pages", f"- **Content failures:** {content_failures}", f"- **Confirmed external 404/410:** {len(hard_external)}", f"- **Search Console:** {gsc.get('connection')} · {gsc.get('summary', {}).get('pass', 0)}/{gsc.get('summary', {}).get('tracked', 0)} tracked PASS", "", "> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.", "", "## Content inventory"]
+    lines = ["# Daily Yield Zero-View Watchdog", "", f"- **Checked:** {report['checkedAtIST']}", f"- **Verdict:** {overall}", "- **Synthetic Daily Yield views:** 0", f"- **Inventory:** {len(inventory)} URLs · {report['summary']['posts']} Posts · {report['summary']['pages']} Pages", f"- **Content failures:** {content_failures}", f"- **Confirmed external 404/410:** {len(hard_external)}", f"- **External redirect chains:** {len(redirect_chains)}", f"- **Search Console:** {gsc.get('connection')} · {gsc.get('summary', {}).get('pass', 0)}/{gsc.get('summary', {}).get('tracked', 0)} tracked PASS", "", "> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.", "", "## Content inventory"]
     for row in rows:
         lines.append(f"- {'✅' if not row['issues'] else '❌'} **{row['kind']} · {row['title']}**" + ((" — " + "; ".join(row["issues"])) if row["issues"] else ""))
     Path("ZERO_VIEW_WATCHDOG.md").write_text("\n".join(lines) + "\n")

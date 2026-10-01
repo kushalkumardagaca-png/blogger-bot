@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-01T11:05:34.141662+00:00",
+  "mode": "ZERO_SYNTHETIC_VIEWS",
+  "syntheticViews": 0,
+  "site": "https://dailyyield.blogspot.com/",
+  "bingConfigured": false,
+  "sitemaps": [
+    {
+      "sitemap": "https://dailyyield.blogspot.com/sitemap.xml",
+      "status": "READY",
+      "detail": "Set repository secret BING_WEBMASTER_API_KEY after site ownership is verified in Bing Webmaster Tools."
+    },
+    {
+      "sitemap": "https://dailyyield.blogspot.com/sitemap-pages.xml",
+      "status": "READY",
+      "detail": "Set repository secret BING_WEBMASTER_API_KEY after site ownership is verified in Bing Webmaster Tools."
+    }
+  ],
+  "crawlerPolicy": {
+    "Googlebot": "allow public indexable content",
+    "bingbot": "allow public indexable content",
+    "ChatGPT-User": "allow discovery",
+    "OAI-SearchBot": "allow discovery",
+    "GPTBot": "publisher choice; not required for ChatGPT search"
+  },
+  "notes": [
+    "Blogger controls robots.txt from its Search preferences; this job never requests the public robots.txt URL.",
+    "No crawler permission guarantees indexing, citation, ranking or traffic."
+  ]
+}

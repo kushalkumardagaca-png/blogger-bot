@@ -223,6 +223,24 @@ Founder and Author, Daily Yield
 https://dailyyield.blogspot.com/
 dailyyield.official@gmail.com
 """
+    elif prospect["prospect_id"] == "forbes-news-tips":
+        subject = f"Sourced personal-finance story idea: {article.title}"
+        body = f"""Dear Forbes News Tips Desk,
+
+I am Kushal K. Daga, founder and author of Daily Yield, an independent personal-finance publication. Your Editorial Values and Standards page invites specific story ideas or news for possible coverage.
+
+A reader-relevant reporting idea is how standard emergency-fund guidance can fail households with variable income, concentrated household earnings or long sector-specific re-employment periods. The central question is whether liquidity guidance should be tied to measurable income risk rather than a universal number of months.
+
+For context, Daily Yield recently published “{article.title}”: {article_link}
+
+This is a story idea for independent editorial consideration, not a request for advertising, paid placement or a backlink. I can provide the underlying calculations and sources if useful. If it is not relevant, no reply or follow-up is necessary.
+
+Kind regards,
+Kushal K. Daga
+Founder and Author, Daily Yield
+https://dailyyield.blogspot.com/
+dailyyield.official@gmail.com
+"""
     else:
         raise ValueError(f"no approved purpose-specific template for {organization}")
     return subject, body

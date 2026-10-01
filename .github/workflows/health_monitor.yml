@@ -34,6 +34,14 @@ jobs:
       - name: Enforce zero-synthetic-view policy
         run: python audit_zero_view_policy.py
 
+      - name: Audit Theme v4 reader, accessibility and SEO requirements
+        run: python audit_site_enhancements.py
+
+      - name: Verify search reach and submit Bing sitemaps when configured
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: python search_reach.py
+
       - name: Audit complete site through APIs without opening the blog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
