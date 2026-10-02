@@ -131,8 +131,18 @@ def replace_hero(content,pic):
 
 def entry(post):
  c=post.get('content','');im=(srcs(c) or [''])[0]
- text=strip_tags(c)[:1200]
- return {'id':{'$t':post['id']},'title':{'$t':post['title']},'published':{'$t':post.get('published','')},'category':[{'term':x} for x in post.get('labels',[])],'link':[{'rel':'alternate','href':post.get('url','')}],'content':{'$t':('<img src="'+html.escape(im,quote=True)+'">' if im else '')+'<p>'+html.escape(text)+'</p>'}}
+ text=strip_tags(c)[:1200];alt=html.escape(post.get('title','Daily Yield article photograph'),quote=True)
+ return {'id':{'$t':post['id']},'title':{'$t':post['title']},'published':{'$t':post.get('published','')},'category':[{'term':x} for x in post.get('labels',[])],'link':[{'rel':'alternate','href':post.get('url','')}],'content':{'$t':('<img alt="'+alt+'" src="'+html.escape(im,quote=True)+'">' if im else '')+'<p>'+html.escape(text)+'</p>'}}
+
+def page_hygiene(content,title):
+ # Add alt text only to literal Page markup, never by rewriting JavaScript.
+ parts=re.split(r'(<script\b.*?</script>)',content or '',flags=re.I|re.S);safe_alt=html.escape(title.title()+' — Daily Yield',quote=True)
+ for i in range(0,len(parts),2):parts[i]=re.sub(r'<img\b(?![^>]*\balt\s*=)',lambda m:'<img alt="'+safe_alt+'"',parts[i],flags=re.I)
+ out=''.join(parts)
+ if 'DY_SEO_META_START' not in out and 'metaDesc' not in out:
+  desc=html.escape(title.title()+' — Official Daily Yield information, context and reader guidance.',quote=True)
+  out+='''<!-- DY_SEO_META_START --><script>(function(d){var metaDesc="'''+desc+'''",m=d.querySelector('meta[name="description"]');if(!m){m=d.createElement('meta');m.name='description';d.head.appendChild(m);}if(!m.content)m.content=metaDesc;})(document);</script><!-- DY_SEO_META_END -->'''
+ return out
 
 def marked(content,block):
  if START in content:return re.sub(re.escape(START)+r'.*?'+re.escape(END),lambda _m:block,content,count=1,flags=re.S)
@@ -211,16 +221,21 @@ def main():
   labels_changed={norm(x) for x in new}!={norm(x) for x in old}
   if labels_changed or content!=p.get('content',''):
    put('posts',p,h,content,new);p['labels']=new;p['content']=content;labels_fixed+=int(labels_changed);time.sleep(.08)
+ pages_hygiene=0
+ for page in pages:
+  clean=page_hygiene(page.get('content',''),page.get('title','Daily Yield page'))
+  if clean!=page.get('content',''):
+   put('pages',page,h,clean);page['content']=clean;pages_hygiene+=1;time.sleep(.08)
  by_title={p['title'].strip().upper():p for p in pages}
  ap=by_title['DAILY ARTICLE'];np=by_title['DAILY NEWS']
  latest_article=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' not in p.get('labels',[])),None)
  latest_news=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' in p.get('labels',[])),None)
- article_current=bool(latest_article and latest_article['id'] in ap['content'] and "norm(label)===norm(cat.label)" in ap['content'] and "/search/label/'+encodeURIComponent(cat.label)" in ap['content'] and 'Authenticated snapshot is complete' in ap['content'] and 'Welcome to the Daily Article.' not in ap['content'] and '#articleHub .ar-group{display:grid!important' in ap['content'] and START in ap['content'])
+ article_current=bool(latest_article and latest_article['id'] in ap['content'] and "norm(label)===norm(cat.label)" in ap['content'] and "/search/label/'+encodeURIComponent(cat.label)" in ap['content'] and 'Authenticated snapshot is complete' in ap['content'] and 'Welcome to the Daily Article.' not in ap['content'] and '#articleHub .ar-group{display:grid!important' in ap['content'] and 'img alt=' in ap['content'] and START in ap['content'])
  news_snapshot_at=np['content'].find('window.ENH_NEWS_SNAPSHOT=');news_engine_at=np['content'].find("var w=window,d=document,root=d.getElementById('enhancedSite');")
  news_current=bool(latest_news and latest_news.get('url','') in np['content'] and news_snapshot_at>=0 and news_engine_at>=0 and news_snapshot_at<news_engine_at and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and "'/search/label/'+encodeURIComponent(l)" in np['content'] and 'var globalItems=byLabel(items,GLOBAL)' in np['content'] and 'public feed must not replace it with a partial batch' in np['content'] and 'var loop=false;' in np['content'] and "else{setTimeout(main,0);}" in np['content'] and 'DY_AUTHENTICATED_NEWS_FALLBACK_START' in np['content'] and START in np['content'])
  ac=ap['content'] if article_current else repair_article_page(ap,posts,cfg)
  nc=np['content'] if news_current else repair_news_page(np,posts)
- pages_fixed=0
+ pages_fixed=pages_hygiene
  if ac!=ap['content']:put('pages',ap,h,ac);pages_fixed+=1
  if nc!=np['content']:put('pages',np,h,nc);pages_fixed+=1
  # Authenticated verification; no public URL requests.
