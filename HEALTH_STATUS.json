@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 1930,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 116,
+    "transientExternalResponses": 117,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2471,8 +2471,8 @@
     },
     {
       "name": "Gold API",
-      "status": "OK",
-      "detail": "responding"
+      "status": "WARN",
+      "detail": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "name": "Mutual fund API",
