@@ -19,18 +19,30 @@ _PROVENANCE=None
 def auth():
  r=requests.post('https://oauth2.googleapis.com/token',data={'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'},timeout=30);r.raise_for_status();return {'Authorization':'Bearer '+r.json()['access_token']}
 
+def api(method,url,**kwargs):
+ last=None
+ for attempt in range(5):
+  try:
+   r=requests.request(method,url,timeout=120,**kwargs)
+   if r.status_code in (429,500,502,503,504):raise requests.HTTPError(f'transient Blogger API {r.status_code}',response=r)
+   r.raise_for_status();return r
+  except requests.RequestException as exc:
+   last=exc
+   if attempt<4:time.sleep(2**attempt)
+ raise last
+
 def list_all(kind,h):
  out=[];token=None
  while True:
   params={'fetchBodies':'true','maxResults':'50','status':'live'}
   if token:params['pageToken']=token
-  r=requests.get(f'{BASE}/{kind}',headers=h,params=params,timeout=120);r.raise_for_status();data=r.json();out.extend(data.get('items',[]));token=data.get('nextPageToken')
+  data=api('GET',f'{BASE}/{kind}',headers=h,params=params).json();out.extend(data.get('items',[]));token=data.get('nextPageToken')
   if not token:return out
 
 def put(kind,item,h,content=None,labels=None):
  body={'kind':f'blogger#{kind[:-1]}','id':item['id'],'title':item['title'],'content':item.get('content','') if content is None else content}
  if kind=='posts':body['labels']=item.get('labels',[]) if labels is None else labels
- r=requests.put(f"{BASE}/{kind}/{item['id']}",headers=h,json=body,timeout=120);r.raise_for_status();return r.json()
+ return api('PUT',f"{BASE}/{kind}/{item['id']}",headers=h,json=body).json()
 
 def norm(v):return re.sub(r'\s+',' ',re.sub(r'[,：:&]+',' ',str(v).lower().replace('&',' and '))).strip()
 def srcs(c):return re.findall(r'<img\b[^>]*\bsrc=["\']([^"\']+)',c or '',re.I)
