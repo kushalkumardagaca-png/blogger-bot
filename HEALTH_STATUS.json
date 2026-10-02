@@ -3,11 +3,11 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 230,
-    "posts": 216,
+    "urls": 231,
+    "posts": 217,
     "pages": 13,
     "contentFailures": 3,
-    "externalDestinationsChecked": 2155,
+    "externalDestinationsChecked": 2156,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
     "transientExternalResponses": 129,
@@ -2574,28 +2574,39 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/the-real-price-of-career-break.html": {
+        "title": "The Real Price of a Career Break",
+        "checkedAt": "2026-10-02T17:16:52.910666+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 229,
-      "tracked": 229,
+      "inventory": 230,
+      "tracked": 230,
       "pass": 0,
-      "neutralOrOther": 229,
+      "neutralOrOther": 230,
       "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 52
+        "URL is unknown to Google": 53
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 219,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 220,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 52
+      "unknownToGoogle": 53
     }
   },
   "github": [
@@ -2603,8 +2614,8 @@
       "name": "Master publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36984542615,
-      "latestUpdatedAt": "2026-10-02T08:32:15Z",
+      "latestRunId": 37002192317,
+      "latestUpdatedAt": "2026-10-02T11:39:43Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
@@ -2621,22 +2632,22 @@
       "latestConclusion": "success",
       "latestRunId": 36998117604,
       "latestUpdatedAt": "2026-10-02T11:10:24Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37000574148,
-      "latestUpdatedAt": "2026-10-02T11:22:00Z",
-      "detail": "latest=success; 3 failures among 12 recent completed runs"
+      "latestRunId": 37002879875,
+      "latestUpdatedAt": "2026-10-02T11:47:01Z",
+      "detail": "latest=success; 2 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36996998551,
-      "latestUpdatedAt": "2026-10-02T10:44:47Z",
+      "latestRunId": 37000574271,
+      "latestUpdatedAt": "2026-10-02T11:23:34Z",
       "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],
