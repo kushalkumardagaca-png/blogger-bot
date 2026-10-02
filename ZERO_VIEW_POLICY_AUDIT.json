@@ -1,6 +1,6 @@
 {
   "policy": "ZERO_SYNTHETIC_VIEWS",
-  "pass": 12,
+  "pass": 13,
   "fail": 0,
   "checks": [
     {
@@ -49,6 +49,10 @@
     },
     {
       "name": "Theme declares reader-navigation-only policy",
+      "status": "PASS"
+    },
+    {
+      "name": "No repository workflow installs or launches a headless browser",
       "status": "PASS"
     }
   ]

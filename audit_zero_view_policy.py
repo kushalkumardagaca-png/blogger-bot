@@ -10,6 +10,7 @@ news = (ROOT / "news_pipeline.py").read_text()
 related = (ROOT / "related_articles.py").read_text()
 rendered = (ROOT / "rendered_site_audit.py").read_text()
 theme = (ROOT / "theme/Daily-Yield-Theme-v4-2026-10-01.xml").read_text()
+all_workflows = "\n".join(path.read_text() for path in (ROOT / ".github/workflows").glob("*.yml"))
 checks = []
 
 
@@ -29,6 +30,7 @@ check("News engine does not read Daily Yield public feeds", "dailyyield.blogspot
 check("Related shelf uses Blogger API", "www.googleapis.com/blogger/v3" in related and "dailyyield.blogspot.com/feeds" not in related)
 check("Theme performs no speculative document prefetch", "link.rel='prefetch'" not in theme and "link.as='document'" not in theme and "rel='prerender'" not in theme)
 check("Theme declares reader-navigation-only policy", "data-dy-navigation-policy','reader-navigation-only'" in theme and "data-dy-synthetic-document-requests','0'" in theme)
+check("No repository workflow installs or launches a headless browser", not any(term in all_workflows.lower() for term in ("playwright", "puppeteer", "selenium", "headlesschrome", "chromium --headless")))
 
 failed = [item for item in checks if item["status"] == "FAIL"]
 report = {"policy": "ZERO_SYNTHETIC_VIEWS", "pass": len(checks) - len(failed), "fail": len(failed), "checks": checks}
