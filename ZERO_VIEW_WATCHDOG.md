@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T20:02:31.989351+05:30
+- **Checked:** 2026-10-02T21:49:38.856864+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 235 URLs · 221 Posts · 13 Pages
-- **Content failures:** 2
-- **Confirmed external 404/410:** 1
+- **Inventory:** 237 URLs · 223 Posts · 13 Pages
+- **Content failures:** 1
+- **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 1
-- **Search Console:** OK · 234 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 236 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ❌ **page · DAILY NEWS** — 1 image(s) missing descriptive alt text
+- ✅ **page · DAILY NEWS**
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
@@ -27,6 +27,8 @@
 - ✅ **page · CALCULATOR**
 - ❌ **page · DAILY ARTICLE** — 65 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · Russia Finance News — 2 October 2026**
+- ✅ **post · Personal Finance News — 2 October 2026**
 - ✅ **post · 4 Hustles, 30 Days Each, 1 Winner**
 - ✅ **post · Mexico Finance News — 2 October 2026**
 - ✅ **post · Canada Finance News — 2 October 2026**

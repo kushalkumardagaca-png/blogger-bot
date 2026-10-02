@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 235,
-    "posts": 221,
+    "urls": 237,
+    "posts": 223,
     "pages": 13,
-    "contentFailures": 2,
-    "externalDestinationsChecked": 2204,
-    "confirmedExternal404or410": 1,
+    "contentFailures": 1,
+    "externalDestinationsChecked": 2254,
+    "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 141,
+    "transientExternalResponses": 144,
     "workflowWarnings": 1,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2629,28 +2629,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/russia-2026-10-02.html": {
+        "title": "Russia Finance News \u2014 2 October 2026",
+        "checkedAt": "2026-10-02T21:49:38.856864+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-02.html": {
+        "title": "Personal Finance News \u2014 2 October 2026",
+        "checkedAt": "2026-10-02T21:49:38.856864+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 234,
-      "tracked": 234,
+      "inventory": 236,
+      "tracked": 236,
       "pass": 0,
-      "neutralOrOther": 234,
+      "neutralOrOther": 236,
       "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 57
+        "URL is unknown to Google": 59
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 224,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 226,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 57
+      "unknownToGoogle": 59
     }
   },
   "github": [
@@ -2666,33 +2688,33 @@
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37013111544,
-      "latestUpdatedAt": "2026-10-02T13:28:01Z",
+      "latestRunId": 37030272857,
+      "latestUpdatedAt": "2026-10-02T15:55:05Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37013158854,
-      "latestUpdatedAt": "2026-10-02T13:43:13Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
-    },
-    {
-      "name": "Security guard",
-      "status": "OK",
-      "latestConclusion": "success",
-      "latestRunId": 37020573068,
-      "latestUpdatedAt": "2026-10-02T14:32:45Z",
+      "latestRunId": 37030313664,
+      "latestUpdatedAt": "2026-10-02T16:10:23Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
-      "name": "Zero-view watchdog",
+      "name": "Security guard",
       "status": "WARN",
       "latestConclusion": "failure",
-      "latestRunId": 37020078039,
-      "latestUpdatedAt": "2026-10-02T14:28:36Z",
-      "detail": "latest=failure; 4 failures among 11 recent completed runs"
+      "latestRunId": 37033147899,
+      "latestUpdatedAt": "2026-10-02T16:19:50Z",
+      "detail": "latest=failure; 4 failures among 12 recent completed runs"
+    },
+    {
+      "name": "Zero-view watchdog",
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 37020572896,
+      "latestUpdatedAt": "2026-10-02T14:34:38Z",
+      "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],
   "providers": [
