@@ -11,6 +11,7 @@ from pathlib import Path
 import requests
 from cryptography.fernet import Fernet
 from PIL import Image, ImageDraw, ImageFont
+from social_creative import render_social_card, tumblr_payload
 
 IST=timezone(timedelta(hours=5,minutes=30),name="IST")
 BLOG_ID=os.environ.get("BLOGGER_BLOG_ID","8911514070006792465")
@@ -140,36 +141,11 @@ def font(size,bold=False):
   except OSError:pass
  return ImageFont.load_default()
 def card(x):
- im=Image.new("RGB",(1200,630),"#FFF8EE");d=ImageDraw.Draw(im);ink="#241610";copper="#C86A3D";muted="#6E5D4B"
- d.rectangle((700,0,1200,630),fill="#F4E5D4")
- for a in range(735,1200,70):d.line((a,0,a,630),fill="#E8D2BC",width=2)
- for a in range(35,630,70):d.line((700,a,1200,a),fill="#E8D2BC",width=2)
- d.line([(735,510),(820,465),(900,480),(985,355),(1070,380),(1150,225)],fill=copper,width=10,joint="curve");d.rounded_rectangle((48,42,760,588),28,fill="#FFF8EE",outline="#E4CDB5",width=2)
- if BRAND_MARK.exists():logo=Image.open(BRAND_MARK).convert("RGBA");logo.thumbnail((84,84));im.paste(logo,(78,70),logo)
- d.text((180,76),"DAILY YIELD",fill=ink,font=font(34,True));d.text((180,120),"Markets · Money · Better decisions",fill=muted,font=font(17));d.rounded_rectangle((78,180,355,222),20,fill=copper);d.text((98,191),"EXPLORE" if x.get("kind")=="page" else "LATEST REPORT",fill="white",font=font(16,True))
- words=clean(x.get("title","Daily Yield")).split();lines=[];cur="";f=font(52,True)
- for word in words:
-  trial=(cur+" "+word).strip()
-  if d.textbbox((0,0),trial,font=f)[2]<=610:cur=trial
-  else:
-   if cur:lines.append(cur)
-   cur=word
- if cur:lines.append(cur)
- if len(lines)>4:lines=lines[:4];lines[-1]=lines[-1].rstrip(".,:;-")+"…"
- y=255
- for line in lines:d.text((78,y),line,fill=ink,font=f);y+=63
- d.line((78,525,690,525),fill="#D9BFA7",width=2);d.text((78,544),"dailyyield.blogspot.com",fill=muted,font=font(20,True));d.rectangle((0,615,1200,630),fill=ink)
- im.save(CARD,"JPEG",quality=88,optimize=True);return CARD
+ return render_social_card(x, "tumblr", CARD, summary(x), "JPEG")
 
 def payload(x):
- title=clean(x.get("title","Daily Yield"));url=x["url"];desc=summary(x)
- return {"content":[
-  {"type":"text","text":title,"subtype":"heading1"},
-  {"type":"image","media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":1200,"height":630}],"alt_text":f"Daily Yield branded card for: {title}"[:4096]},
-  {"type":"text","text":desc},
-  {"type":"link","url":url,"title":"Read on Daily Yield","description":title},
-  {"type":"text","text":"By Kushal K. Daga · Markets · Money · Better decisions"}],
-  "state":"published","tags":",".join(tags(x)),"source_url":url,"send_to_twitter":False,"interactability_reblog":"everyone"}
+ return tumblr_payload(x, summary(x))
+
 def reconcile(token,url):
  for p in recent_posts(token):
   if url.rstrip("/") in post_urls(p):return p

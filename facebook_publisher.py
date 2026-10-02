@@ -23,6 +23,7 @@ import textwrap
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
+from social_creative import build_caption, creative_meta, render_social_card
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -248,62 +249,10 @@ def wrap_title(draw: ImageDraw.ImageDraw, title: str, max_width: int, max_lines:
 
 
 def generate_topic_card(item: dict) -> Path:
-    """Render a 1200x630 branded image without requesting any Daily Yield URL."""
-    width, height = 1200, 630
-    cream, ink, copper, muted = "#FFF8EE", "#241610", "#C86A3D", "#6E5D4B"
-    canvas = Image.new("RGB", (width, height), cream)
-
-    # Topic imagery comes only from an approved third-party URL found in Blogger API content.
-    hero_url = approved_editorial_image(item.get("content", ""))
-    if hero_url:
-        try:
-            response = requests.get(hero_url, timeout=TIMEOUT)
-            response.raise_for_status()
-            hero = Image.open(BytesIO(response.content)).convert("RGB")
-            hero = ImageOps.fit(hero, (500, height), method=Image.Resampling.LANCZOS)
-            hero = ImageEnhance.Contrast(hero).enhance(0.9)
-            canvas.paste(hero, (700, 0))
-            overlay = Image.new("RGBA", (500, height), (36, 22, 16, 75))
-            canvas.paste(overlay, (700, 0), overlay)
-        except Exception as exc:
-            print(f"Editorial image unavailable; using rendered topic motif: {exc}")
-            hero_url = None
-
-    draw = ImageDraw.Draw(canvas)
-    if not hero_url:
-        draw.rectangle((700, 0, width, height), fill="#F4E5D4")
-        for x in range(735, 1200, 70):
-            draw.line((x, 0, x, height), fill="#E8D2BC", width=2)
-        for y in range(35, height, 70):
-            draw.line((700, y, width, y), fill="#E8D2BC", width=2)
-        points = [(735, 510), (820, 465), (900, 480), (985, 355), (1070, 380), (1150, 225)]
-        draw.line(points, fill=copper, width=10, joint="curve")
-        draw.line(((1110, 225), (1158, 216), (1148, 267)), fill=copper, width=10, joint="curve")
-
-    # Opaque copy panel means the title remains readable on every photograph.
-    draw.rounded_rectangle((48, 42, 760, 588), radius=28, fill=cream, outline="#E4CDB5", width=2)
-    if BRAND_MARK.exists():
-        logo = Image.open(BRAND_MARK).convert("RGBA")
-        logo.thumbnail((84, 84), Image.Resampling.LANCZOS)
-        canvas.paste(logo, (78, 70), logo)
-    draw.text((180, 76), "DAILY YIELD", fill=ink, font=font(34, True))
-    draw.text((180, 120), "Markets · Money · Better decisions", fill=muted, font=font(17))
-    draw.rounded_rectangle((78, 180, 340, 222), radius=20, fill=copper)
-    draw.text((98, 191), content_badge(item), fill="white", font=font(16, True))
-
+    """Render the deterministic story/platform creative without a site request."""
     title = clean_text(item.get("title", "Daily Yield"))
-    lines = wrap_title(draw, title, 610)
-    y = 255
-    for line in lines:
-        draw.text((78, y), line, fill=ink, font=font(56, True))
-        y += 67
-    draw.line((78, 525, 690, 525), fill="#D9BFA7", width=2)
-    draw.text((78, 544), "Read, calculate and explore at dailyyield.blogspot.com", fill=muted, font=font(18, True))
-    draw.rectangle((0, 615, width, height), fill=ink)
-    CARD_PATH.parent.mkdir(parents=True, exist_ok=True)
-    canvas.save(CARD_PATH, "PNG", optimize=True)
-    return CARD_PATH
-
+    synopsis = summary_from_content(item.get("content", ""), title)
+    return render_social_card(item, "facebook", CARD_PATH, synopsis, "PNG")
 
 def score(post: dict, now: datetime) -> float:
     published = parse_time(post["published"])
@@ -340,25 +289,8 @@ def hashtags(post: dict) -> str:
 
 def make_caption(item: dict) -> str:
     title = clean_text(item.get("title", "Daily Yield"))
-    summary = summary_from_content(item.get("content", ""), title).strip()
-    if summary and summary[-1] not in ".!?…":
-        summary += "."
-    url = item["url"]
-    if item.get("kind") == "page":
-        top_link = f"🔗 OPEN THIS DAILY YIELD RESOURCE: {url}"
-        value_line = "Use the page, review the supporting guidance and bookmark it for your next decision."
-    else:
-        top_link = f"🔗 READ THE FULL REPORT: {url}"
-        value_line = "Open the report for the evidence, context and practical implications."
-    # The destination is intentionally the first line so mobile readers can tap it
-    # without expanding or searching through the caption.
-    return (
-        f"{top_link}\n\n"
-        f"{title}\n\n{summary}\n\n{value_line}\n\n"
-        f"By Kushal K. Daga · Markets · Money · Better decisions\n\n"
-        f"{hashtags(item)}"
-    )
-
+    synopsis = summary_from_content(item.get("content", ""), title)
+    return build_caption(item, "facebook", synopsis)
 
 def fingerprint(caption: str) -> str:
     return hashlib.sha256(caption.encode("utf-8")).hexdigest()[:20]

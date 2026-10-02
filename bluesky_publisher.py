@@ -20,6 +20,7 @@ from pathlib import Path
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
+from social_creative import build_caption, image_alt, render_social_card
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -195,24 +196,7 @@ def summary(item: dict) -> str:
 
 
 def post_text(item: dict) -> str:
-    url, title = item["url"], clean(item.get("title", "Daily Yield"))
-    prefix = "Explore:" if item.get("kind") == "page" else "Read the report:"
-    suffix = "By Kushal K. Daga · #DailyYield"
-    fixed = f"{url}\n\n{prefix} {title}\n\n\n\n{suffix}"
-    room = max(0, 300 - len(fixed))
-    body = summary(item).strip()
-    if body and body[-1] not in ".!?…":
-        body += "."
-    if len(body) > room:
-        body = body[:max(0, room - 1)].rsplit(" ", 1)[0].rstrip(" ,;:-") + "…"
-    text = f"{url}\n\n{prefix} {title}\n\n{body}\n\n{suffix}"
-    if len(text) > 300:
-        # Preserve link, title, byline and identity if a very long title consumes the limit.
-        title_room = max(30, 300 - len(f"{url}\n\n{prefix} \n\n{suffix}") - 1)
-        title = title[:title_room].rsplit(" ", 1)[0].rstrip(" ,;:-") + "…"
-        text = f"{url}\n\n{prefix} {title}\n\n{suffix}"
-    return text
-
+    return build_caption(item, "bluesky", summary(item), 300)
 
 def richtext_facets(text: str, url: str) -> list[dict]:
     link_start = text.index(url)
@@ -237,46 +221,10 @@ def font(size: int, bold: bool = False):
 
 
 def generate_card(item: dict) -> Path:
-    canvas = Image.new("RGB", (1200, 630), "#FFF8EE")
-    draw = ImageDraw.Draw(canvas)
-    ink, copper, muted = "#241610", "#C86A3D", "#6E5D4B"
-    draw.rectangle((700, 0, 1200, 630), fill="#F4E5D4")
-    for x in range(735, 1200, 70): draw.line((x, 0, x, 630), fill="#E8D2BC", width=2)
-    for y in range(35, 630, 70): draw.line((700, y, 1200, y), fill="#E8D2BC", width=2)
-    draw.line([(735, 510), (820, 465), (900, 480), (985, 355), (1070, 380), (1150, 225)], fill=copper, width=10, joint="curve")
-    draw.rounded_rectangle((48, 42, 760, 588), radius=28, fill="#FFF8EE", outline="#E4CDB5", width=2)
-    if BRAND_MARK.exists():
-        logo = Image.open(BRAND_MARK).convert("RGBA"); logo.thumbnail((84, 84), Image.Resampling.LANCZOS); canvas.paste(logo, (78, 70), logo)
-    draw.text((180, 76), "DAILY YIELD", fill=ink, font=font(34, True))
-    draw.text((180, 120), "Markets · Money · Better decisions", fill=muted, font=font(17))
-    badge = "EXPLORE DAILY YIELD" if item.get("kind") == "page" else "LATEST REPORT"
-    draw.rounded_rectangle((78, 180, 355, 222), radius=20, fill=copper); draw.text((98, 191), badge, fill="white", font=font(16, True))
-    title = clean(item.get("title", "Daily Yield")); words, lines, current = title.split(), [], ""
-    title_font = font(52, True)
-    for word in words:
-        trial = (current + " " + word).strip()
-        if draw.textbbox((0, 0), trial, font=title_font)[2] <= 610: current = trial
-        else:
-            if current: lines.append(current)
-            current = word
-    if current: lines.append(current)
-    if len(lines) > 4:
-        lines = lines[:4]
-        while draw.textbbox((0, 0), lines[-1] + "…", font=title_font)[2] > 610 and " " in lines[-1]: lines[-1] = lines[-1].rsplit(" ", 1)[0]
-        lines[-1] = lines[-1].rstrip(".,:;-") + "…"
-    y = 255
-    for line in lines: draw.text((78, y), line, fill=ink, font=title_font); y += 63
-    draw.line((78, 525, 690, 525), fill="#D9BFA7", width=2)
-    draw.text((78, 544), "dailyyield.blogspot.com", fill=muted, font=font(20, True))
-    draw.rectangle((0, 615, 1200, 630), fill=ink)
-    CARD_PATH.parent.mkdir(parents=True, exist_ok=True)
-    quality = 88
-    canvas.save(CARD_PATH, "JPEG", quality=quality, optimize=True)
-    while CARD_PATH.stat().st_size > 950_000 and quality > 55:
-        quality -= 8; canvas.save(CARD_PATH, "JPEG", quality=quality, optimize=True)
-    if CARD_PATH.stat().st_size > 1_000_000: raise RuntimeError("Bluesky card exceeds image upload limit")
-    return CARD_PATH
-
+    path = render_social_card(item, "bluesky", CARD_PATH, summary(item), "JPEG")
+    if path.stat().st_size > 1_000_000:
+        raise RuntimeError("Bluesky card exceeds image upload limit")
+    return path
 
 def recent_records(session: dict) -> list[dict]:
     data = api("GET", BSKY_SERVICE + "/xrpc/app.bsky.feed.getAuthorFeed", token=session["accessJwt"], retries=2, params={"actor": session["did"], "limit": "30", "filter": "posts_no_replies"})
@@ -301,7 +249,7 @@ def publish(item: dict, text: str, session: dict) -> dict:
     card = generate_card(item)
     blob = api("POST", BSKY_SERVICE + "/xrpc/com.atproto.repo.uploadBlob", token=session["accessJwt"], retries=2, headers={"Content-Type": "image/jpeg"}, data=card.read_bytes()).get("blob")
     if not blob: raise RuntimeError("Bluesky image upload returned no blob")
-    alt = f"Daily Yield branded card for: {clean(item.get('title', 'Daily Yield'))}"[:1000]
+    alt = image_alt(item, "bluesky")[:1000]
     record = {
         "$type": "app.bsky.feed.post", "text": text, "facets": richtext_facets(text, item["url"]),
         "createdAt": datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),

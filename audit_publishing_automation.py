@@ -50,13 +50,13 @@ check('Facebook uses encrypted token secret, never a literal token',
       'secrets.FACEBOOK_SYSTEM_USER_TOKEN' in fw and 'FACEBOOK_SYSTEM_USER_TOKEN' in fp)
 check('Facebook derives a Page token before publishing',
       'def resolve_page_token(' in fp and 'fields": "id,name,access_token"' in fp)
-check('Facebook destination link is always the first caption line',
-      'f"{top_link}\\n\\n"' in fp and 'READ THE FULL REPORT' in fp and 'OPEN THIS DAILY YIELD RESOURCE' in fp)
+check('Facebook uses platform-native creative copy instead of corporate boilerplate',
+      'build_caption(item, "facebook"' in fp and 'READ THE FULL REPORT' not in fp
+      and 'OPEN THIS DAILY YIELD RESOURCE' not in fp)
 check('Facebook descriptions preserve complete short source text',
       'if len(text) <= 300:' in fp and 'return text' in fp)
-check('Facebook always renders a branded 1200x630 topic card',
-      'def generate_topic_card(' in fp and 'width, height = 1200, 630' in fp
-      and 'DAILY YIELD' in fp and 'Markets · Money · Better decisions' in fp)
+check('Facebook renders the shared deterministic 1200x630 creative system',
+      'def generate_topic_card(' in fp and 'render_social_card(item, "facebook"' in fp)
 check('Facebook uploads the rendered card rather than a raw full-frame photo',
       'card = generate_topic_card(item)' in fp and 'files={"source":' in fp
       and 'data={**payload, "url": image_url}' not in fp)
@@ -84,14 +84,14 @@ check('Bluesky app password is an encrypted secret, never a literal credential',
 check('Bluesky uses official AT Protocol session, blob and record endpoints',
       'com.atproto.server.createSession' in bp and 'com.atproto.repo.uploadBlob' in bp
       and 'com.atproto.repo.createRecord' in bp)
-check('Bluesky text preserves link-first access, byline and brand identity',
-      'f"{url}\\n\\n{prefix}' in bp and 'By Kushal K. Daga' in bp and '#DailyYield' in bp)
+check('Bluesky uses concise platform-native creative copy and brand identity',
+      'build_caption(item, "bluesky"' in bp and '#DailyYield' in (ROOT/'social_creative.py').read_text())
 check('Bluesky enforces the 300-character limit and rich-text facets',
-      'if len(text) > 300:' in bp and 'app.bsky.richtext.facet#link' in bp
-      and 'app.bsky.richtext.facet#tag' in bp)
-check('Bluesky always uploads a branded card with descriptive alt text',
-      'def generate_card(' in bp and 'width": 1200, "height": 630' in bp
-      and 'Daily Yield branded card for:' in bp)
+      'build_caption(item, "bluesky", summary(item), 300)' in bp
+      and 'app.bsky.richtext.facet#link' in bp and 'app.bsky.richtext.facet#tag' in bp)
+check('Bluesky uploads the shared creative card with descriptive alt text',
+      'render_social_card(item, "bluesky"' in bp and 'image_alt(item, "bluesky")' in bp
+      and 'width": 1200, "height": 630' in bp)
 check('Bluesky rotates Pages and posts using an independent publication history',
       '/pages"' in bp and 'PAGE_WINDOWS' in bp and 'bluesky_tracker.json' in bp)
 check('Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes',
@@ -117,12 +117,12 @@ check('Tumblr OAuth bootstrap requires offline refresh access and encrypts token
 check('Tumblr publisher rotates refresh tokens without logging plaintext credentials',
       'grant_type":"refresh_token"' in tp and 'encrypt_bundle(new)' in tp
       and 'access_token' not in re.sub(r'required\([^\)]*\)', '', tw))
-check('Tumblr creates modern NPF posts with branded uploaded media and alt text',
-      f'{chr(34)}type{chr(34)}:{chr(34)}image{chr(34)}' in tp and 'daily-yield-card' in tp
-      and 'alt_text' in tp and '/posts' in tp)
-check('Tumblr preserves title, summary, direct link, byline and limited tags',
-      f'{chr(34)}type{chr(34)}:{chr(34)}link{chr(34)}' in tp and 'By Kushal K. Daga' in tp
-      and 'def summary(' in tp and 'return out[:5]' in tp)
+check('Tumblr creates modern NPF posts with shared creative media and alt text',
+      'tumblr_payload(x, summary(x))' in tp and 'daily-yield-card' in tp
+      and 'render_social_card(x, "tumblr"' in tp and '/posts' in tp)
+check('Tumblr preserves title, summary, direct link, byline and platform-native tags',
+      'def summary(' in tp and 'tumblr_payload' in tp
+      and 'By Kushal K. Daga' in (ROOT/'social_creative.py').read_text())
 check('Tumblr rotates Pages and posts using its own tracker',
       '/pages"' in tp and 'PAGE_WINDOWS' in tp and 'tumblr_tracker.json' in tp)
 check('Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes',
@@ -141,6 +141,24 @@ check('Mastodon legacy auto-selection schedule is disabled behind its manual act
 check('Mastodon uses official API, isolated credentials and zero-view discovery',
       'secrets.MASTODON_TOKEN_KEY' in mw and 'www.googleapis.com/blogger/v3' in mp
       and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in mp)
+check('Mastodon uses platform-native copy, descriptive alt text and shared creative cards',
+      'build_caption(item, "mastodon"' in mp and 'image_alt(item, "mastodon")' in mp
+      and 'render_social_card(item, "mastodon"' in mp)
+
+# Shared creative layer: deterministic retries, story/platform variety and no site views.
+creative_path=ROOT/'social_creative.py'; creative=creative_path.read_text() if creative_path.exists() else ''
+check('Shared social creative engine is deployed across all four active networks',
+      bool(creative) and all('social_creative import' in text for text in (fp,bp,tp,mp)))
+check('Creative system has at least ten visual directions and five compositions',
+      len(re.findall(r'\{"name":',creative))>=10 and '"layout": (seed // 31) % 5' in creative)
+check('Creative outputs are deterministic per platform, destination and IST day',
+      'hashlib.sha256(raw.encode())' in creative and 'datetime.now(IST).date().isoformat()' in creative)
+check('Captions use topic hooks, questions and platform-specific structures',
+      'HOOKS =' in creative and 'QUESTIONS =' in creative and all(f'platform == "{p}"' in creative for p in ('facebook','bluesky','mastodon')))
+check('Creative engine cannot request a Daily Yield public page',
+      'requests.get(url' in creative and 'PHOTO_HOSTS' in creative and 'dailyyield.blogspot.com' not in creative)
+check('Corporate social boilerplate was removed from all active publisher outputs',
+      all(term not in creative for term in ('READ THE FULL REPORT','OPEN THIS DAILY YIELD RESOURCE','Markets · Money · Better decisions')))
 
 rotation_path=ROOT/'social_rotation.py'; coordinated_path=ROOT/'.github/workflows/coordinated_social_publish.yml'
 dispatch_path=ROOT/'dispatch_social_events.py'
