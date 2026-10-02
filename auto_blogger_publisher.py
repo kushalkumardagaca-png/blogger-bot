@@ -182,7 +182,8 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
     # Construct exact 25-taxonomy labels + SEO/GEO tags
     # Keep the public label archive clean: one canonical desk plus the shared
     # collection and author labels. Titles/"Strategy" variants fragmented shelves.
-    labels = list(dict.fromkeys([category, "2026 Money Moves", "Kushal K. Daga"]))
+    labels = [category, "2026 Money Moves", "Kushal K. Daga"]
+    labels = list(dict.fromkeys(labels))
     labels_str = ", ".join(labels)
     schema_keywords = ", ".join(dict.fromkeys(labels + SEO_QUERY_TERMS))
     
