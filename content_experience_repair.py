@@ -147,9 +147,10 @@ def repair_article_page(page,posts,cfg):
  c=c.replace("var thisRun=++runId;records=[];failed=false;loading=true;finished=false;retry.hidden=true;render();status.textContent='Reading the published article feed\\u2026';", "var thisRun=++runId;records=[];failed=false;loading=true;finished=false;retry.hidden=true;status.textContent='Refreshing the published article index\\u2026';")
  old="if(preview){records=(cfg.snapshotEntries||[]).map(parseEntry).filter(Boolean);finished=true;render();status.textContent=records.length?'Published-post snapshot \\u00b7 article cards link directly to the full posts':'No published non-news articles were available in the public feed at the last check';}\nelse load();"
  new="records=(cfg.snapshotEntries||[]).map(parseEntry).filter(Boolean);finished=true;render();status.textContent=records.length?'Archive ready \\u00b7 newest articles first \\u00b7 News excluded':'No non-news articles published yet';\nif(!preview)setTimeout(load,80);"
- if "if(!preview)setTimeout(load,80);" not in c:
-  if old not in c:raise RuntimeError('Daily Article startup source not found')
-  c=c.replace(old,new)
+ if old in c:c=c.replace(old,new)
+ c=c.replace("if(!preview)setTimeout(load,80);", "/* Authenticated snapshot is complete; no slower public-feed replacement. */")
+ c=c.replace("setInterval(function(){if(!document.hidden&&!loading)load();},600000);", "/* Snapshot refresh is deployed by the authenticated two-hour repair workflow. */")
+ c=re.sub(r'<p[^>]*>\s*<strong>Welcome to the Daily Article\.</strong>.*?The news stays in the Daily News\.</p>','',c,count=1,flags=re.I|re.S)
  css=START+'''<style>
 #articleHub .ar-section{content-visibility:auto;contain-intrinsic-size:1px 430px}#articleHub .ar-viewport{overflow:visible!important}#articleHub .ar-track{display:block!important;transform:none!important}#articleHub .ar-group{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;width:100%!important}#articleHub .ar-duplicate,#articleHub .ar-rowtools{display:none!important}#articleHub .ar-card{width:auto!important;min-width:0!important}#articleHub .ar-image{aspect-ratio:16/9}@media(max-width:620px){#articleHub .ar-group{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}#articleHub .ar-section{padding-block:22px}.ar-heading h2{font-size:24px!important}#articleHub .ar-card-body{padding:10px!important}#articleHub .ar-card h3{font-size:14px!important}}
 </style>'''+END
@@ -169,6 +170,8 @@ def repair_news_page(page,posts):
  c=c.replace("fillTrack(rows.g,byLabel(items,GLOBAL).slice(0,10),GLOBAL,sample);", "var globalItems=byLabel(items,GLOBAL);if(!globalItems.length)globalItems=items.slice().sort(function(a,b){return a.published<b.published?1:-1;}).slice(0,12);fillTrack(rows.g,globalItems,GLOBAL,sample);")
  c=c.replace("renderAll(w.ENH_PREVIEW?demoItems():[],!!w.ENH_PREVIEW);", "renderAll(w.ENH_PREVIEW?demoItems():(w.ENH_NEWS_SNAPSHOT||[]),!!w.ENH_PREVIEW);")
  c=c.replace("status('demo',w.ENH_PREVIEW?'Offline sample layout \\u00b7 examples, not published news':'Loading published news\\u2026');", "status(w.ENH_PREVIEW?'demo':'live',w.ENH_PREVIEW?'Offline sample layout \\u00b7 examples, not published news':'Published news ready \\u00b7 newest first');")
+ c=c.replace("var loop=items.length>=4;\n var pool=loop?items.concat(items):items;", "var loop=false;\n var pool=items;")
+ c=c.replace("try{pull();setInterval(function(){if(!d.hidden)pull();},300000);}catch(e){}", "/* Authenticated snapshot is complete; public feed must not replace it with a partial batch. */")
  css=START+'''<style>
 #enhancedSite .kn-rowwrap{overflow:visible!important}#enhancedSite .kn-track{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;transform:none!important;animation:none!important;max-width:none!important}#enhancedSite .kn-card{min-width:0!important;width:auto!important}#enhancedSite .kn-cimg{aspect-ratio:16/9;max-height:150px}#enhancedSite .kn-cimg img{width:100%;height:100%;object-fit:cover}@media(max-width:700px){#enhancedSite .kn-track{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}#enhancedSite .kn-card{padding:9px!important}#enhancedSite .kn-ctitle{font-size:15px!important}.kn-cfoot{font-size:8px!important}}
 </style>'''+END
@@ -193,8 +196,8 @@ def main():
  ap=by_title['DAILY ARTICLE'];np=by_title['DAILY NEWS']
  latest_article=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' not in p.get('labels',[])),None)
  latest_news=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' in p.get('labels',[])),None)
- article_current=bool(latest_article and latest_article['id'] in ap['content'] and "norm(label)===norm(cat.label)" in ap['content'] and "/search/label/'+encodeURIComponent(cat.label)" in ap['content'] and '#articleHub .ar-group{display:grid!important' in ap['content'] and START in ap['content'])
- news_current=bool(latest_news and latest_news.get('url','') in np['content'] and 'window.ENH_NEWS_SNAPSHOT=' in np['content'] and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and "'/search/label/'+encodeURIComponent(l)" in np['content'] and 'var globalItems=byLabel(items,GLOBAL)' in np['content'] and START in np['content'])
+ article_current=bool(latest_article and latest_article['id'] in ap['content'] and "norm(label)===norm(cat.label)" in ap['content'] and "/search/label/'+encodeURIComponent(cat.label)" in ap['content'] and 'Authenticated snapshot is complete' in ap['content'] and 'Welcome to the Daily Article.' not in ap['content'] and '#articleHub .ar-group{display:grid!important' in ap['content'] and START in ap['content'])
+ news_current=bool(latest_news and latest_news.get('url','') in np['content'] and 'window.ENH_NEWS_SNAPSHOT=' in np['content'] and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and "'/search/label/'+encodeURIComponent(l)" in np['content'] and 'var globalItems=byLabel(items,GLOBAL)' in np['content'] and 'public feed must not replace it with a partial batch' in np['content'] and 'var loop=false;' in np['content'] and START in np['content'])
  ac=ap['content'] if article_current else repair_article_page(ap,posts,cfg)
  nc=np['content'] if news_current else repair_news_page(np,posts)
  pages_fixed=0

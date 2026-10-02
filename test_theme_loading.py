@@ -62,6 +62,8 @@ class ThemeLoadingTests(unittest.TestCase):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("className='dy-feed-sentinel'", text)
         self.assertIn("rootMargin:'1400px 0px'", text)
+        self.assertIn("io.observe(sent);load()", text)
+        self.assertIn("setTimeout(load,0)", text)
         self.assertIn("blog-pager-older-link", text)
         self.assertIn("function sortGrid()", text)
         self.assertIn("querySelector('time.published')", text)
