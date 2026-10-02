@@ -14,6 +14,7 @@ REPORT=Path('CONTENT_EXPERIENCE_REPAIR_STATUS.json')
 COMMONS='https://commons.wikimedia.org/w/api.php'
 START='<!-- DY_CONTENT_EXPERIENCE_REPAIR_START -->';END='<!-- DY_CONTENT_EXPERIENCE_REPAIR_END -->'
 NEWS_LABELS=['US','China','Germany','India','Japan','UK','France','Italy','Russia','Canada','Brazil','Spain','Mexico','Australia','South Korea','Market and Trading','Economy and Macro Policy','Corporate Finance and Industry','Personal Finance','Global News']
+_PROVENANCE=None
 
 def auth():
  r=requests.post('https://oauth2.googleapis.com/token',data={'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'},timeout=30);r.raise_for_status();return {'Authorization':'Bearer '+r.json()['access_token']}
@@ -53,14 +54,25 @@ def categories_from_article_page(pages):
  return page,cfg,[c['label'] for c in cfg['categories']]
 
 def category_for(post,categories):
- labels=post.get('labels',[]);by={norm(c):c for c in categories}
+ # The authenticated pre-repair inventory preserves the original desk labels and
+ # is the recovery source after the former shared "2026 Money Moves" tag caused
+ # every Master Article to be grouped into one shelf.
+ global _PROVENANCE
+ if _PROVENANCE is None:
+  try:
+   inv=json.loads(Path('CONTENT_EXPERIENCE_INVENTORY.json').read_text())
+   _PROVENANCE={x.get('id'):x.get('labels',[]) for x in inv.get('posts',[])}
+  except Exception:_PROVENANCE={}
+ labels=_PROVENANCE.get(post.get('id')) or post.get('labels',[]);by={norm(c):c for c in categories}
  aliases={'starters students and first jobs':'Starters Students and First Jobs'}
- for label in labels:
+ # Prefer a specific desk; the shared collection name is considered only when
+ # no other canonical category exists (the real Desk 25 articles).
+ ordered=[x for x in labels if norm(x)!='2026 money moves']+[x for x in labels if norm(x)=='2026 money moves']
+ for label in ordered:
   n=norm(label)
   if n in by:return by[n]
   if n in aliases and aliases[n] in categories:return aliases[n]
- # The existing Strategy label is also evidence after removing its suffix.
- for label in labels:
+ for label in ordered:
   n=norm(re.sub(r'\s+strategy\s*$','',label,flags=re.I))
   if n in by:return by[n]
  raise RuntimeError('No valid Daily Article category for post '+post.get('title',''))
@@ -73,7 +85,7 @@ def normalized_labels(post,categories):
    title=post.get('title','').lower();desk=next((x for x in NEWS_LABELS if x.lower() in title),None)
   if not desk:raise RuntimeError('News desk label missing for '+post.get('title',''))
   return ['News',desk]
- cat=category_for(post,categories);return list(dict.fromkeys([cat,'2026 Money Moves','Kushal K. Daga']))
+ cat=category_for(post,categories);return [cat,'Kushal K. Daga']
 
 def commons_photo(title,desk,used):
  country={'UK':'United Kingdom','US':'United States','Global News':'world financial district','Market and Trading':'stock market trading','Economy and Macro Policy':'economy central bank','Corporate Finance and Industry':'business industry','Personal Finance':'personal finance money'}
