@@ -1,16 +1,16 @@
 {
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
     "urls": 226,
     "posts": 212,
     "pages": 13,
-    "contentFailures": 214,
+    "contentFailures": 0,
     "externalDestinationsChecked": 2043,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 124,
+    "transientExternalResponses": 121,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2537,7 +2537,7 @@
       "tracked": 225,
       "pass": 0,
       "neutralOrOther": 225,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -2575,24 +2575,24 @@
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36970955827,
-      "latestUpdatedAt": "2026-10-02T06:08:33Z",
-      "detail": "latest=success; 0 failures among 10 recent completed runs"
+      "latestRunId": 36976308753,
+      "latestUpdatedAt": "2026-10-02T07:15:38Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36977127803,
-      "latestUpdatedAt": "2026-10-02T07:10:06Z",
-      "detail": "latest=success; 3 failures among 12 recent completed runs"
+      "latestRunId": 36979868003,
+      "latestUpdatedAt": "2026-10-02T07:41:29Z",
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36973872801,
-      "latestUpdatedAt": "2026-10-02T06:32:42Z",
+      "latestRunId": 36977127844,
+      "latestUpdatedAt": "2026-10-02T07:11:50Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],

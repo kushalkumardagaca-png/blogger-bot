@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-02T12:48:58.358372+05:30",
+  "checkedAtIST": "2026-10-02T13:11:18.520163+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -7,7 +7,7 @@
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-02T00:15:40-07:00",
+    "updated": "2026-10-02T00:28:30-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 212
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 2043,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 124,
+    "transientExternalResponses": 121,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -15041,12 +15041,6 @@
       "detail": "'ascii' codec can't encode character '\\u20ac' in position 50: ordinal not in range(128)"
     },
     {
-      "url": "https://www.finra.org/investors/personal-finance/manage-your-debt",
-      "status": 403,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://www.linkedin.com/in/dailyyeild",
       "status": 999,
       "redirects": [],
@@ -15281,12 +15275,6 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
@@ -15318,12 +15306,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15442,9 +15424,9 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36977863981,
-      "latestUpdatedAt": "2026-10-02T07:18:42Z",
-      "detail": "latest=success; 2 failures among 12 recent completed runs"
+      "latestRunId": 36979868003,
+      "latestUpdatedAt": "2026-10-02T07:41:29Z",
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
@@ -15452,7 +15434,7 @@
       "latestConclusion": "success",
       "latestRunId": 36977127844,
       "latestUpdatedAt": "2026-10-02T07:11:50Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
   "providers": [
