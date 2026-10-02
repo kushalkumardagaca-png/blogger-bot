@@ -118,6 +118,8 @@ def repair_article_page(page,posts,cfg):
  cfg['preview']=False;cfg['snapshotEntries']=[entry(p) for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' not in p.get('labels',[])]
  c=page['content'];pat=r'(<script[^>]+id=["\']ar-config["\'][^>]*>).*?(</script>)';c,n=re.subn(pat,lambda m:m.group(1)+json.dumps(cfg,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')+m.group(2),c,count=1,flags=re.I|re.S)
  if n!=1:raise RuntimeError('Unable to update article snapshot')
+ c=c.replace("function inCategory(post,cat){return post.labels.indexOf(cat.label)!==-1;}", "function inCategory(post,cat){return post.labels.some(function(label){return norm(label)===norm(cat.label);});}")
+ c=c.replace("function labelURL(cat){var query=cat?'label:\"'+cat.label+'\" -label:News':'-label:News';return cfg.blog+'/search?q='+encodeURIComponent(query)+'&max-results=20';}", "function labelURL(cat){return cat?cfg.blog+'/search/label/'+encodeURIComponent(cat.label)+'?max-results=20':cfg.blog+'/search?max-results=20';}")
  c=c.replace("var thisRun=++runId;records=[];failed=false;loading=true;finished=false;retry.hidden=true;render();status.textContent='Reading the published article feed\\u2026';", "var thisRun=++runId;records=[];failed=false;loading=true;finished=false;retry.hidden=true;status.textContent='Refreshing the published article index\\u2026';")
  old="if(preview){records=(cfg.snapshotEntries||[]).map(parseEntry).filter(Boolean);finished=true;render();status.textContent=records.length?'Published-post snapshot \\u00b7 article cards link directly to the full posts':'No published non-news articles were available in the public feed at the last check';}\nelse load();"
  new="records=(cfg.snapshotEntries||[]).map(parseEntry).filter(Boolean);finished=true;render();status.textContent=records.length?'Archive ready \\u00b7 newest articles first \\u00b7 News excluded':'No non-news articles published yet';\nif(!preview)setTimeout(load,80);"
@@ -125,7 +127,7 @@ def repair_article_page(page,posts,cfg):
   if old not in c:raise RuntimeError('Daily Article startup source not found')
   c=c.replace(old,new)
  css=START+'''<style>
-#articleHub .ar-section{content-visibility:auto;contain-intrinsic-size:1px 430px}#articleHub .ar-track{gap:10px}#articleHub .ar-card{width:clamp(210px,24vw,280px)}#articleHub .ar-image{aspect-ratio:16/9}@media(max-width:620px){#articleHub .ar-card{width:210px}#articleHub .ar-section{padding-block:22px}.ar-heading h2{font-size:24px!important}}
+#articleHub .ar-section{content-visibility:auto;contain-intrinsic-size:1px 430px}#articleHub .ar-viewport{overflow:visible!important}#articleHub .ar-track{display:block!important;transform:none!important}#articleHub .ar-group{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;width:100%!important}#articleHub .ar-duplicate,#articleHub .ar-rowtools{display:none!important}#articleHub .ar-card{width:auto!important;min-width:0!important}#articleHub .ar-image{aspect-ratio:16/9}@media(max-width:620px){#articleHub .ar-group{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}#articleHub .ar-section{padding-block:22px}.ar-heading h2{font-size:24px!important}#articleHub .ar-card-body{padding:10px!important}#articleHub .ar-card h3{font-size:14px!important}}
 </style>'''+END
  return marked(c,css)
 
@@ -139,6 +141,8 @@ def repair_news_page(page,posts):
  c=re.sub(r'<script>window\.ENH_NEWS_SNAPSHOT=.*?</script>','',c,flags=re.S)+snap
  # Repair an earlier alt-text migration that accidentally modified a JavaScript regex literal.
  c=re.sub(r'/<img\[\^ alt=["\'][^"\']+["\']>\]\+src=',r'/<img[^>]+src=',c)
+ c=re.sub(r"function labelURL\(l\)\{.*?\n\}", "function labelURL(l){return '/search/label/'+encodeURIComponent(l)+'?max-results=50';}", c, count=1, flags=re.S)
+ c=c.replace("fillTrack(rows.g,byLabel(items,GLOBAL).slice(0,10),GLOBAL,sample);", "var globalItems=byLabel(items,GLOBAL);if(!globalItems.length)globalItems=items.slice().sort(function(a,b){return a.published<b.published?1:-1;}).slice(0,12);fillTrack(rows.g,globalItems,GLOBAL,sample);")
  c=c.replace("renderAll(w.ENH_PREVIEW?demoItems():[],!!w.ENH_PREVIEW);", "renderAll(w.ENH_PREVIEW?demoItems():(w.ENH_NEWS_SNAPSHOT||[]),!!w.ENH_PREVIEW);")
  c=c.replace("status('demo',w.ENH_PREVIEW?'Offline sample layout \\u00b7 examples, not published news':'Loading published news\\u2026');", "status(w.ENH_PREVIEW?'demo':'live',w.ENH_PREVIEW?'Offline sample layout \\u00b7 examples, not published news':'Published news ready \\u00b7 newest first');")
  css=START+'''<style>
@@ -165,8 +169,8 @@ def main():
  ap=by_title['DAILY ARTICLE'];np=by_title['DAILY NEWS']
  latest_article=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' not in p.get('labels',[])),None)
  latest_news=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' in p.get('labels',[])),None)
- article_current=bool(latest_article and latest_article['id'] in ap['content'] and "if(!preview)setTimeout(load,80);" in ap['content'] and START in ap['content'])
- news_current=bool(latest_news and latest_news.get('url','') in np['content'] and 'window.ENH_NEWS_SNAPSHOT=' in np['content'] and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and START in np['content'])
+ article_current=bool(latest_article and latest_article['id'] in ap['content'] and "norm(label)===norm(cat.label)" in ap['content'] and "/search/label/'+encodeURIComponent(cat.label)" in ap['content'] and '#articleHub .ar-group{display:grid!important' in ap['content'] and START in ap['content'])
+ news_current=bool(latest_news and latest_news.get('url','') in np['content'] and 'window.ENH_NEWS_SNAPSHOT=' in np['content'] and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and "'/search/label/'+encodeURIComponent(l)" in np['content'] and 'var globalItems=byLabel(items,GLOBAL)' in np['content'] and START in np['content'])
  ac=ap['content'] if article_current else repair_article_page(ap,posts,cfg)
  nc=np['content'] if news_current else repair_news_page(np,posts)
  pages_fixed=0
@@ -174,9 +178,11 @@ def main():
  if nc!=np['content']:put('pages',np,h,nc);pages_fixed+=1
  # Authenticated verification; no public URL requests.
  verified=list_all('posts',h);heroes=[image_key((srcs(p.get('content','')) or [''])[0]) for p in verified];heroes=[x for x in heroes if x];dupes=len(heroes)-len(set(heroes))
- report={'status':'PASS' if dupes==0 else 'PARTIAL','zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts)}
+ category_counts={cat:sum(any(norm(x)==norm(cat) for x in p.get('labels',[])) for p in posts if 'News' not in p.get('labels',[])) for cat in categories}
+ news_counts={desk:sum(desk in p.get('labels',[]) for p in posts if 'News' in p.get('labels',[])) for desk in NEWS_LABELS}
+ report={'status':'PASS' if dupes==0 and all(category_counts.values()) and news_counts.get('Global News',0)>0 else 'PARTIAL','zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts),'article_category_counts':category_counts,'news_desk_counts':news_counts}
  REPORT.write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report))
- if dupes:raise RuntimeError(f'{dupes} duplicate hero assignments remain')
+ if report['status']!='PASS':raise RuntimeError('Content inventory still has an empty article category, missing Global News desk, or duplicate hero assignment')
 if __name__=='__main__':
  try:main()
  except Exception as exc:

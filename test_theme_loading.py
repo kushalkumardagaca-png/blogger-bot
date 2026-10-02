@@ -63,6 +63,8 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("className='dy-feed-sentinel'", text)
         self.assertIn("rootMargin:'1400px 0px'", text)
         self.assertIn("blog-pager-older-link", text)
+        self.assertIn("function sortGrid()", text)
+        self.assertIn("querySelector('time.published')", text)
         self.assertIn("var all=parse(j,false);", text)
         self.assertIn("Earlier articles", text)
         self.assertIn("grid-template-columns:repeat(5,minmax(0,1fr))!important", text)
