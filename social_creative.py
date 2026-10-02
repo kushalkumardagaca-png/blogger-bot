@@ -22,26 +22,86 @@ IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 SIZE = (1200, 630)
 PHOTO_HOSTS = ("images.unsplash.com", "upload.wikimedia.org", "thumb.wikimedia.org", "blogger.googleusercontent.com")
 
-# The same licensed editorial-photo family already used by Daily Yield articles.
-PHOTO_POOLS = {
-    "market": ("photo-1611974789855-9c2a0a7236a3", "photo-1590283603385-17ffb3a7f29f", "photo-1518186285589-2f7649de83e0"),
-    "debt": ("photo-1563013544-824ae1b704d3", "photo-1526304640581-d334cdbbf45e"),
-    "tax": ("photo-1554224155-8d04cb21cd6c", "photo-1454165804606-c3d57bc86b40"),
-    "saving": ("photo-1579621970563-ebec7560ff3e", "photo-1559526324-4b87b5e36e44"),
-    "economy": ("photo-1454165804606-c3d57bc86b40", "photo-1486406146926-c627a92ad1ab"),
-    "news": ("photo-1494522855154-9297ac14b55f", "photo-1502602898657-3e91760cbb34", "photo-1506973035872-a4ec16b8e8d9"),
-    "page": ("photo-1460925895917-afdab827c52f", "photo-1518770660439-4636190af475"),
-    "general": ("photo-1526304640581-d334cdbbf45e", "photo-1507679799987-c73779587ccf"),
+# A broad, verified Unsplash editorial library: people and real life first, with
+# homes, pets, banks, work, technology, shops, travel and cities worldwide.
+PHOTO_LIBRARY = {
+    "people": (
+        ("photo-1521737604893-d14cc237f11d", "a diverse young team collaborating"),
+        ("photo-1529156069898-49953e39b3ac", "friends sharing a candid moment outdoors"),
+        ("photo-1494790108377-be9c29b29330", "a confident young woman in natural light"),
+        ("photo-1500648767791-00dcc994a43e", "a young man in a candid portrait"),
+        ("photo-1524504388940-b1c1722653e1", "a young woman in a bright editorial portrait"),
+        ("photo-1531482615713-2afd69097998", "young professionals collaborating at work"),
+    ),
+    "family": (
+        ("photo-1511895426328-dc8714191300", "a family spending time together at home"),
+        ("photo-1506869640319-fe1a24fd76dc", "friends enjoying time together"),
+        ("photo-1522202176988-66273c2fd55f", "young people learning and working together"),
+    ),
+    "pets": (
+        ("photo-1517849845537-4d257902454a", "a cheerful dog outdoors"),
+        ("photo-1514888286974-6c03e2ca1dba", "a cat in a vivid close-up portrait"),
+        ("photo-1601758228041-f3b2795255f1", "a person relaxing with a pet"),
+    ),
+    "dogs": (
+        ("photo-1517849845537-4d257902454a", "a cheerful dog outdoors"),
+        ("photo-1552053831-71594a27632d", "a dog looking toward the camera"),
+        ("photo-1558788353-f76d92427f16", "a playful dog in natural light"),
+    ),
+    "cats": (
+        ("photo-1514888286974-6c03e2ca1dba", "a cat in a vivid close-up portrait"),
+        ("photo-1573865526739-10659fec78a5", "a curious cat in natural light"),
+        ("photo-1495360010541-f48722b34f7d", "a relaxed cat at home"),
+    ),
+    "homes": (
+        ("photo-1600585154340-be6161a56a0c", "a contemporary home surrounded by greenery"),
+        ("photo-1564013799919-ab600027ffc6", "a welcoming modern family home"),
+        ("photo-1600607687939-ce8a6c25118c", "a bright modern home interior"),
+    ),
+    "banking": (
+        ("photo-1541354329998-f4d9a9f9297f", "a monumental bank and civic building"),
+        ("photo-1486406146926-c627a92ad1ab", "a global banking and business district"),
+        ("photo-1556742049-0cfed4f6a45d", "a person making a digital payment"),
+        ("photo-1556740749-887f6717d7e4", "a customer using modern payment technology"),
+    ),
+    "work": (
+        ("photo-1517245386807-bb43f82c33c4", "a creative team working together"),
+        ("photo-1497366754035-f200968a6e72", "a bright contemporary workplace"),
+        ("photo-1556761175-b413da4baf72", "colleagues in a modern meeting"),
+        ("photo-1526304640581-d334cdbbf45e", "a person reviewing money and plans at a desk"),
+    ),
+    "technology": (
+        ("photo-1516321318423-f06f85e504b3", "a laptop and connected digital workspace"),
+        ("photo-1518770660439-4636190af475", "technology hardware in a vivid close-up"),
+        ("photo-1534723328310-e82dad3ee43f", "a modern digital technology workspace"),
+    ),
+    "shopping": (
+        ("photo-1441986300917-64674bd600d8", "a lively contemporary retail store"),
+        ("photo-1556742049-0cfed4f6a45d", "a person completing a cashless purchase"),
+        ("photo-1556740749-887f6717d7e4", "a bright modern checkout experience"),
+    ),
+    "travel": (
+        ("photo-1500530855697-b586d89ba3ee", "a person exploring a beautiful landscape"),
+        ("photo-1539635278303-d4002c07eae3", "friends travelling through a dramatic landscape"),
+        ("photo-1488646953014-85cb44e25828", "a traveller beginning a global journey"),
+    ),
+    "global": (
+        ("photo-1493976040374-85c8e12f0c0e", "Tokyo city life and architecture"),
+        ("photo-1502602898657-3e91760cbb34", "Paris and its international cityscape"),
+        ("photo-1506973035872-a4ec16b8e8d9", "Sydney harbour and its global skyline"),
+        ("photo-1494522855154-9297ac14b55f", "a vibrant Asian financial-city skyline"),
+        ("photo-1469571486292-0ba58a3f068b", "people moving through a global city"),
+    ),
 }
-PHOTO_ALT = {
-    "market": "financial market screens and investment analysis",
-    "debt": "a card payment and personal finance workspace",
-    "tax": "financial documents and a calculator on a desk",
-    "saving": "coins and a practical savings plan",
-    "economy": "economic analysis at a professional workspace",
-    "news": "a contemporary financial district and business activity",
-    "page": "a digital financial research and planning workspace",
-    "general": "a modern personal-finance planning workspace",
+TOPIC_THEMES = {
+    "market": ("people", "banking", "technology", "global", "work"),
+    "debt": ("people", "banking", "homes", "family", "work"),
+    "tax": ("people", "work", "banking", "homes"),
+    "saving": ("people", "family", "pets", "homes", "travel", "shopping"),
+    "economy": ("people", "global", "banking", "shopping", "work"),
+    "news": ("global", "people", "banking", "work", "travel"),
+    "page": ("technology", "people", "global", "work"),
+    "general": tuple(PHOTO_LIBRARY),
 }
 
 PALETTES = (
@@ -189,7 +249,7 @@ def tumblr_payload(item: dict, summary: str) -> dict:
 
 def image_alt(item: dict, platform: str) -> str:
     meta = creative_meta(item, platform)
-    return trim(f"Editorial photograph showing {_photo_alt(item)}. Daily Yield overlay: {meta['hook']}. Headline: {clean(item.get('title','Daily Yield'))}", 950)
+    return trim(f"Editorial photograph showing {_photo_alt(item, platform)}. Daily Yield overlay: {meta['hook']}. Headline: {clean(item.get('title','Daily Yield'))}", 950)
 
 
 def _font(size: int, bold: bool = False):
@@ -233,14 +293,48 @@ def _photo_url(item: dict) -> str:
     return ""
 
 
+def _semantic_theme(item: dict, platform: str) -> str:
+    text = (item.get("title", "") + " " + " ".join(str(x) for x in item.get("labels", []))).lower()
+    explicit = (
+        ("dogs", ("dog", "puppy", "canine")),
+        ("cats", ("cat", "kitten", "feline")),
+        ("pets", ("pet", "animal", "veterinary")),
+        ("homes", ("home", "house", "housing", "mortgage", "rent", "property", "real estate")),
+        ("family", ("family", "parent", "child", "couple", "wedding", "baby")),
+        ("travel", ("travel", "trip", "holiday", "vacation", "flight", "tourism")),
+        ("shopping", ("shop", "retail", "grocery", "spending", "consumer", "purchase")),
+        ("technology", ("ai", "fintech", "digital", "technology", "crypto", "app")),
+        ("global", ("global", "world", "international", "country", "countries", "overseas")),
+        ("banking", ("bank", "loan", "credit", "interest rate", "payment", "deposit")),
+        ("work", ("career", "salary", "job", "office", "business", "company", "startup")),
+    )
+    for theme, words in explicit:
+        if any(word in text for word in words): return theme
+    themes = TOPIC_THEMES[topic(item)]
+    return themes[(creative_seed(item, platform) // 53) % len(themes)]
+
+
+def _curated_entries(item: dict, platform: str) -> list[tuple[str, str]]:
+    theme = _semantic_theme(item, platform)
+    primary = list(PHOTO_LIBRARY[theme])
+    # A second relevant lane gives network retries alternatives without showing
+    # the same narrow finance cliché repeatedly.
+    lanes = TOPIC_THEMES[topic(item)]
+    secondary_theme = lanes[(lanes.index(theme) + 1) % len(lanes)] if theme in lanes else lanes[0]
+    secondary = list(PHOTO_LIBRARY[secondary_theme])
+    seed = creative_seed(item, platform)
+    first = seed % len(primary)
+    second = (seed // 101) % len(secondary)
+    # Always lead with the semantically selected lane; secondary photos exist
+    # only as network-failure fallbacks.
+    return primary[first:] + primary[:first] + secondary[second:] + secondary[:second]
+
+
 def _fallback_photo_urls(item: dict, platform: str) -> list[str]:
-    pool = PHOTO_POOLS[topic(item)]
-    start = creative_seed(item, platform) % len(pool)
-    ordered = pool[start:] + pool[:start]
-    return [f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=1600&h=900&q=88" for photo_id in ordered]
+    return [f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=1600&h=900&q=88" for photo_id, _ in _curated_entries(item, platform)]
 
 
-def _photo_alt(item: dict) -> str:
+def _article_photo_alt(item: dict) -> str:
     content = item.get("content", "")
     for match in re.finditer(r'<img\b[^>]*>', content, flags=re.I):
         tag = match.group(0)
@@ -249,7 +343,16 @@ def _photo_alt(item: dict) -> str:
         if src and _allowed_photo_host(urlparse(html.unescape(src.group(1))).hostname or "") and alt:
             value = clean(alt.group(1))
             if value: return value
-    return PHOTO_ALT[topic(item)]
+    return "the article's editorial scene"
+
+
+def _photo_alt(item: dict, platform: str) -> str:
+    article_photo = _photo_url(item)
+    # One quarter reuse the article hero; the rest expand into a much broader,
+    # context-aware global lifestyle library.
+    if article_photo and creative_seed(item, platform) % 4 == 0:
+        return _article_photo_alt(item)
+    return _curated_entries(item, platform)[0][1]
 
 
 def _photo_credit(item: dict, url: str) -> str:
@@ -276,7 +379,13 @@ def _download_photo(url: str) -> Image.Image:
 
 def _photo(item: dict, platform: str) -> tuple[Image.Image, str]:
     article_photo = _photo_url(item)
-    urls = ([article_photo] if article_photo else []) + _fallback_photo_urls(item, platform)
+    curated = _fallback_photo_urls(item, platform)
+    # Reuse some article heroes, but deliberately rotate most posts through the
+    # broader people/life/world collection so feeds never become one visual genre.
+    if article_photo and creative_seed(item, platform) % 4 == 0:
+        urls = [article_photo] + curated
+    else:
+        urls = curated + ([article_photo] if article_photo else [])
     errors = []
     for url in dict.fromkeys(urls):
         try:
@@ -292,16 +401,17 @@ def render_social_card(item: dict, platform: str, destination: Path, summary: st
     palette = PALETTES[meta["style_index"]]
     source, photo_url = _photo(item, platform)
     canvas = ImageOps.fit(source, SIZE, Image.Resampling.LANCZOS)
-    canvas = ImageEnhance.Contrast(canvas).enhance(1.09)
-    canvas = ImageEnhance.Color(canvas).enhance(0.94)
+    canvas = ImageEnhance.Contrast(canvas).enhance(1.04)
+    canvas = ImageEnhance.Color(canvas).enhance(1.14)
+    canvas = ImageEnhance.Brightness(canvas).enhance(1.03)
 
-    # A cinematic gradient protects readability while leaving the photograph dominant.
+    # A light lower-third gradient protects readability without muting the photo.
     rgba = canvas.convert("RGBA")
     shade = Image.new("RGBA", SIZE, (0, 0, 0, 0))
     shade_draw = ImageDraw.Draw(shade)
     for y in range(SIZE[1]):
         progress = y / (SIZE[1] - 1)
-        alpha = int(12 + 210 * (progress ** 2.15))
+        alpha = int(3 + 145 * (progress ** 3.0))
         shade_draw.line((0, y, SIZE[0], y), fill=(5, 8, 15, alpha))
     rgba = Image.alpha_composite(rgba, shade)
     # Alternate a subtle side vignette so consecutive photographs have editorial variety.
@@ -310,37 +420,34 @@ def render_social_card(item: dict, platform: str, destination: Path, summary: st
     side_draw = ImageDraw.Draw(side_shade)
     for x in range(SIZE[0]):
         edge = (1 - x / SIZE[0]) if left_title else (x / SIZE[0])
-        alpha = int(82 * (edge ** 2.5))
+        alpha = int(32 * (edge ** 2.8))
         side_draw.line((x, 0, x, SIZE[1]), fill=(5, 8, 15, alpha))
     rgba = Image.alpha_composite(rgba, side_shade)
     draw = ImageDraw.Draw(rgba)
 
     accent = palette["accent"]
     title = clean(item.get("title", "Daily Yield"))
-    title_font = _font(51 if len(title) < 88 else 44, True)
-    text_x = 66 if left_title else 430
-    text_width = 1020 if left_title else 704
-    lines = _lines(draw, title, title_font, text_width, 4)
-    line_height = 59 if len(title) < 88 else 52
+    title_font = _font(40 if len(title) < 88 else 34, True)
+    text_x = 58 if left_title else 448
+    text_width = 1080 if left_title else 690
+    lines = _lines(draw, title, title_font, text_width, 3)
+    line_height = 47 if len(title) < 88 else 41
     title_y = 545 - line_height * len(lines)
 
-    # Small translucent label—not a banner—then the photographic headline treatment.
-    hook_font = _font(14, True)
+    # A bright social sticker carries the hook; the headline stays subordinate.
+    hook_font = _font(15, True)
     hook = meta["hook"]
     hook_w = draw.textbbox((0, 0), hook, font=hook_font)[2]
-    draw.rounded_rectangle((text_x, title_y - 55, text_x + hook_w + 32, title_y - 20), radius=16, fill=(8, 10, 15, 185))
-    draw.text((text_x + 16, title_y - 47), hook, font=hook_font, fill=accent)
-    draw.rectangle((text_x, title_y - 8, text_x + 78, title_y - 2), fill=accent)
+    draw.rounded_rectangle((text_x, title_y - 53, text_x + hook_w + 34, title_y - 17), radius=18, fill=accent)
+    draw.text((text_x + 17, title_y - 45), hook, font=hook_font, fill="#11151F")
     for line in lines:
-        # Minimal shadow keeps type readable on detailed photography.
-        draw.text((text_x + 2, title_y + 3), line, font=title_font, fill=(0, 0, 0, 150))
-        draw.text((text_x, title_y), line, font=title_font, fill="#FFFFFF")
+        draw.text((text_x, title_y), line, font=title_font, fill="#FFFFFF", stroke_width=2, stroke_fill=(0, 0, 0, 155))
         title_y += line_height
 
     # Compact masthead and source credit retain identity without covering the image.
-    brand_font = _font(22, True)
-    draw.text((66, 42), "DAILY YIELD", font=brand_font, fill="#FFFFFF")
-    draw.text((66, 72), platform.upper() + " · PHOTO EDITION", font=_font(11, True), fill=(255, 255, 255, 205))
+    brand_font = _font(18, True)
+    draw.text((58, 36), "DAILY YIELD", font=brand_font, fill="#FFFFFF", stroke_width=1, stroke_fill=(0,0,0,125))
+    draw.text((58, 61), platform.upper(), font=_font(10, True), fill=(255, 255, 255, 225))
     credit = _photo_credit(item, photo_url)
     credit_font = _font(10, True)
     credit_w = draw.textbbox((0, 0), credit, font=credit_font)[2]

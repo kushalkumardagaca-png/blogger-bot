@@ -152,9 +152,12 @@ check('Shared social creative engine is deployed across all four active networks
 check('Creative system is photo-first with at least ten treatments and five compositions',
       len(re.findall(r'\{"name":',creative))>=10 and '"layout": (seed // 31) % 5' in creative
       and 'ImageOps.fit(source, SIZE' in creative and 'full-bleed editorial photograph' in creative)
-check('Creative system reuses authenticated article heroes and fails closed without a licensed photo',
+check('Creative system mixes article heroes with a broad licensed global lifestyle library',
       'Use the hero embedded in authenticated Blogger content' in creative
-      and 'No licensed editorial photo could be loaded' in creative
+      and all(f'"{theme}"' in creative for theme in ('people','family','pets','homes','banking','work','technology','shopping','travel','global'))
+      and len(re.findall(r'photo-\d{10,}-[a-z0-9]+',creative))>=35)
+check('Photo selection is semantic and fails closed instead of producing a banner',
+      'def _semantic_theme(' in creative and 'No licensed editorial photo could be loaded' in creative
       and 'banner-only graphic' in creative)
 check('Creative outputs are deterministic per platform, destination and IST day',
       'hashlib.sha256(raw.encode())' in creative and 'datetime.now(IST).date().isoformat()' in creative)

@@ -7,8 +7,8 @@ from unittest.mock import patch
 from PIL import Image, ImageChops, ImageDraw
 
 from social_creative import (
-    _photo_url, build_caption, creative_meta, image_alt, render_social_card,
-    tumblr_payload,
+    _curated_entries, _photo_url, _semantic_theme, build_caption, creative_meta,
+    image_alt, render_social_card, tumblr_payload,
 )
 
 
@@ -29,6 +29,23 @@ def test_authenticated_article_hero_is_selected_before_any_fallback():
     assert _photo_url(story) == hero
     story["content"] = '<img src="https://malicious.example/images.unsplash.com/photo.jpg">'
     assert _photo_url(story) == ""
+
+
+def test_global_lifestyle_library_routes_explicit_real_life_subjects():
+    cases = {
+        "dogs": "The real cost of adopting a dog",
+        "homes": "Should you rent or buy a home?",
+        "banking": "What a bank interest-rate change means",
+        "travel": "A budget for your next international trip",
+        "shopping": "Why the grocery shop costs more",
+        "technology": "The fintech app changing payments",
+        "work": "How to negotiate your next salary",
+        "family": "A practical family money plan",
+    }
+    for expected, title in cases.items():
+        story = item(70, title, ["Personal Finance"])
+        assert _semantic_theme(story, "facebook") == expected
+        assert _curated_entries(story, "facebook")[0][1]
 
 
 def test_signature_is_deterministic_and_platform_specific():
