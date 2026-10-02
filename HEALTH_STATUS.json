@@ -2548,7 +2548,7 @@
       "tracked": 226,
       "pass": 0,
       "neutralOrOther": 226,
-      "inspectedThisRun": 1,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -2594,16 +2594,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36986128961,
-      "latestUpdatedAt": "2026-10-02T08:48:36Z",
+      "latestRunId": 36987692363,
+      "latestUpdatedAt": "2026-10-02T09:05:02Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36984154694,
-      "latestUpdatedAt": "2026-10-02T08:29:27Z",
+      "latestRunId": 36986078181,
+      "latestUpdatedAt": "2026-10-02T08:49:41Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
