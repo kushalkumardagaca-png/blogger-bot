@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T11:37:01.808466+00:00",
+  "approvedAt": "2026-10-02T11:46:55.973551+00:00",
   "repository": {
     "auto_blogger_publisher.py": "d2b68659346d064b9ed64fa392d6575c61ae88c24ea8af51dfe89d877343c2cb",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
@@ -29,11 +29,11 @@
     "audit_site_enhancements.py": "fa337e5a78b207170b9bae039a4343f45df0359e7028ed10fb7f377ffc5034bc",
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
     "bing_url_automation.py": "2f6931444ff4ba61154a23d8224a9ffbcb6cf1c250aa6d6ae13ee97db5de2211",
-    "apply_site_enhancements.py": "0873941183a208121073820ae61f2efd216e89096ec9adbc14d996cc6176c1ff",
+    "apply_site_enhancements.py": "ca754d5e1bb2069b5d93d8ce58fb2ae1ff331ab4db79809a36e72a6e647d71d6",
     "update_page_family.py": "54696abfa722316c789f900c24829239ebbd8a54157d358e3e39753d59ea3b29",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
-    "theme/Daily-Yield-Theme-Subscription.xml": "f4e9c524c7da9992b6e76e7a2396a4f7415b9fef588121638da7aa23d6adcc04",
-    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "22d5c089afaec29000adddb65df0d172bbec36d212b0c036dcbd7b0a33169242",
+    "theme/Daily-Yield-Theme-Subscription.xml": "b8d3bbea779ecca6b3d07ce6f02ead137d63b024b3afb322e1330b4066be64cd",
+    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "094d08f16d224185251f0bd1c16a03a1e73338f82005d3d1ad0b96fefc10f97d",
     "outreach/editorial_outreach.py": "d83a640afc61787d425d55ff24a53cd148e9eb8639f3aa225c426b4e3ff38e03",
     "outreach/gmail_sender.py": "292cd572119d4802dc1faea5d590e9f12fa176971bf8941ea0266cd7e0765c62",
     "outreach/prospects.csv": "95c7ebe7f8d006bfa97c98910c2b66e8707b3de2d6065dd16814ce82622f613a",
@@ -168,6 +168,14 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-10-02T00:10:40-07:00",
       "content_sha256": "2feff498bec375e0ac24988ddcbc31558e5a952481028a9f332bb5acd4b06ca3"
+    },
+    "post:1766285354349597171": {
+      "kind": "post",
+      "id": "1766285354349597171",
+      "title": "The Real Price of a Career Break",
+      "url": "https://dailyyield.blogspot.com/2026/10/the-real-price-of-career-break.html",
+      "updated": "2026-10-02T04:39:34-07:00",
+      "content_sha256": "c0c94bfc0ceb98431dba3e6642a1843c037b18b3fd4445960316baf688b78c3c"
     },
     "post:1379109366375175777": {
       "kind": "post",
