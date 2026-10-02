@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T06:02:49.187682+05:30
+- **Checked:** 2026-10-02T07:28:22.107923+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 214 URLs · 200 Posts · 13 Pages
+- **Inventory:** 217 URLs · 203 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/213 tracked PASS
+- **Search Console:** OK · 0/216 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -26,6 +26,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · S&P 500 vs. Global: Pick One**
+- ✅ **post · India Finance News · 2 October 2026 · Coverage October 1 to 2 — Remittance Order dated October 01, 2026 issued under RC No. 9267 of 2026 drawn against S S…**
+- ✅ **post · Global Finance Wire · 2 October 2026 · Coverage October 1 to 2 — Average Contract Interest Rates on Loans and Discounts (Aug.)[PDF 1,118KB]; Sources of…**
 - ✅ **post · South Korea Finance News · 2 October 2026 · Coverage October 1 to 2 — S. Korean won weakens against U.S. dollar on lingering worries over higher yields; LS…**
 - ✅ **post · Australia Finance News · 2 October 2026 · Coverage October 1 to 2 — Statement by the Monetary Policy Board: Monetary Policy Decision; Live: ASX to rise as US…**
 - ✅ **post · Russia Finance News · 1 October 2026 · Coverage September 30 to October 1 — FACTBOX: Key takeaways from Russia's draft federal budget for 2027-2029; All prerequisites…**

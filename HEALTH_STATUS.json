@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 214,
-    "posts": 200,
+    "urls": 217,
+    "posts": 203,
     "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1904,
+    "externalDestinationsChecked": 1930,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 669,
+    "transientExternalResponses": 118,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2396,14 +2396,47 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/s-500-vs-global-pick-one.html": {
+        "title": "S&P 500 vs. Global: Pick One",
+        "checkedAt": "2026-10-02T07:28:22.107923+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/india-2026-10-02.html": {
+        "title": "India Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Remittance Order dated October 01, 2026 issued under RC No. 9267 of 2026 drawn against S S\u2026",
+        "checkedAt": "2026-10-02T07:28:22.107923+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-02.html": {
+        "title": "Global Finance Wire \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Average Contract Interest Rates on Loans and Discounts (Aug.)[PDF 1,118KB]; Sources of\u2026",
+        "checkedAt": "2026-10-02T07:28:22.107923+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "Discovered - currently not indexed",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 213,
-      "tracked": 213,
+      "inventory": 216,
+      "tracked": 216,
       "pass": 0,
-      "notPass": 213,
-      "inspectedThisRun": 2,
+      "notPass": 216,
+      "inspectedThisRun": 3,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }
