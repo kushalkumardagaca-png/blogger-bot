@@ -38,7 +38,9 @@ def main():
   excerpt=c[max(0,at-1800):at+3200] if at>=0 else ''
   classes=sorted(set(re.findall(r'class=["\']([^"\']+)',excerpt,re.I)))
   ids=sorted(set(re.findall(r'id=["\']([^"\']+)',excerpt,re.I)))
-  page_rows.append({'id':p.get('id'),'title':p.get('title'),'url':p.get('url'),'updated':p.get('updated'),'content_length':len(c),'has_shelf_wait':at>=0,'shelf_excerpt':excerpt,'nearby_classes':classes,'nearby_ids':ids,'script_count':len(re.findall(r'<script\b',c,re.I))})
+  scripts=re.findall(r'<script\b[^>]*>(.*?)</script>',c,re.I|re.S)
+  relevant_scripts=[s for s in scripts if 'ar-feedstatus' in s or '/feeds/posts' in s or 'ar-viewport' in s]
+  page_rows.append({'id':p.get('id'),'title':p.get('title'),'url':p.get('url'),'updated':p.get('updated'),'content_length':len(c),'has_shelf_wait':at>=0,'shelf_excerpt':excerpt,'nearby_classes':classes,'nearby_ids':ids,'script_count':len(scripts),'relevant_scripts':relevant_scripts})
  duplicates=[{'hero':src,'post_ids':ids,'count':len(ids)} for src,ids in image_owners.items() if len(ids)>1]
  labels={}
  for p in post_rows:
