@@ -277,15 +277,15 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: prefetch is restricted to Home Article News and labels",
+      "name": "Daily-Yield-Theme-Subscription.xml: every Page and Post entry triggers selected-destination warming",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: selected hubs warm all canonical label archives",
+      "name": "Daily-Yield-Theme-Subscription.xml: warming destinations are only Home Article News and canonical labels",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: navigation warming respects Data Saver and never prerenders",
+      "name": "Daily-Yield-Theme-Subscription.xml: navigation warming uses document prefetch and never prerender",
       "status": "PASS"
     },
     {
@@ -593,15 +593,15 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: prefetch is restricted to Home Article News and labels",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: every Page and Post entry triggers selected-destination warming",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: selected hubs warm all canonical label archives",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: warming destinations are only Home Article News and canonical labels",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming respects Data Saver and never prerenders",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming uses document prefetch and never prerender",
       "status": "PASS"
     },
     {

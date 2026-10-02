@@ -72,20 +72,18 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("grid-template-columns:repeat(5,minmax(0,1fr))!important", text)
         self.assertIn(".dy-sub-grid{grid-template-columns:1.05fr .95fr!important;min-height:0!important}", text)
 
-    def test_adaptive_navigation_warming_is_bounded_and_connection_aware(self):
+    def test_every_entry_warms_only_selected_hubs_and_labels(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("link.rel='prefetch'", text)
         self.assertIn("link.as='document'", text)
-        self.assertIn("c&&c.saveData", text)
-        self.assertIn("data-dy-prefetch-scope", text)
-        self.assertIn("path==='/p/article.html'", text)
-        self.assertIn("path==='/p/daily-news.html'", text)
-        self.assertIn("path.indexOf('/search/label/')===0", text)
-        self.assertIn("if(!scope)return", text)
+        self.assertIn("data-dy-prefetch-scope','every-entry-selected-destinations'", text)
+        self.assertIn("core=['/','/p/article.html','/p/daily-news.html']", text)
+        self.assertIn("'/search/label/'+encodeURIComponent(label)", text)
         self.assertIn("limit=52", text)
         self.assertIn("DOMContentLoaded',function(){setTimeout(collect,0)", text)
         self.assertIn("requestIdleCallback(drain,{timeout:1800})", text)
         self.assertIn("data-dy-prefetched", text)
+        self.assertNotIn("if(!scope)return", text)
         self.assertNotIn("rel='prerender'", text)
 
     def test_noncritical_comment_engine_is_loaded_during_idle_time(self):

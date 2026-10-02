@@ -72,9 +72,9 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages
-- ✅ Daily-Yield-Theme-Subscription.xml: prefetch is restricted to Home Article News and labels
-- ✅ Daily-Yield-Theme-Subscription.xml: selected hubs warm all canonical label archives
-- ✅ Daily-Yield-Theme-Subscription.xml: navigation warming respects Data Saver and never prerenders
+- ✅ Daily-Yield-Theme-Subscription.xml: every Page and Post entry triggers selected-destination warming
+- ✅ Daily-Yield-Theme-Subscription.xml: warming destinations are only Home Article News and canonical labels
+- ✅ Daily-Yield-Theme-Subscription.xml: navigation warming uses document prefetch and never prerender
 - ✅ Daily-Yield-Theme-Subscription.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-Subscription.xml: five tool benches share one compact row
 - ✅ Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height
@@ -151,9 +151,9 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: prefetch is restricted to Home Article News and labels
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: selected hubs warm all canonical label archives
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming respects Data Saver and never prerenders
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Page and Post entry triggers selected-destination warming
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: warming destinations are only Home Article News and canonical labels
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming uses document prefetch and never prerender
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: five tool benches share one compact row
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height
