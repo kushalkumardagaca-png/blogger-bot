@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T10:26:31.110434+00:00",
+  "approvedAt": "2026-10-02T10:34:50.715268+00:00",
   "repository": {
     "auto_blogger_publisher.py": "c1be1331aa2812b1aeb8943f67f955f8686315a3f5a3a00ff980054f909d5238",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
@@ -26,7 +26,7 @@
     ".github/workflows/tumblr_publisher.yml": "10aaab1287a4165d9714bf9b0673f6fbba1519b283041e6f0b57b33c3fc5579b",
     ".github/workflows/mastodon_publisher.yml": "8f94732a0dc547dfbab59b5addef04e5890d9735af54516224e6d1ccd602fee5",
     "security_guard.py": "9bde4c61da577a793994cbe5a4b277e65b8a42e86b2dd3411116e7db2e2f1490",
-    "audit_site_enhancements.py": "51bbbf6fc2e78e29a72d9ae169b88d17550eac1931a985c87a5564e01ddeb2f9",
+    "audit_site_enhancements.py": "ef360352ddc9a3d7daf4560729fc168c8c9910eda18b085d0fdc9ac59144aa0d",
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
     "bing_url_automation.py": "2f6931444ff4ba61154a23d8224a9ffbcb6cf1c250aa6d6ae13ee97db5de2211",
     "apply_site_enhancements.py": "5db24e9fd424f7cbedc92bfeb1808d6c25b95fbb4293c1b961c1395955a34eef",
@@ -59,7 +59,7 @@
     ".github/workflows/repair_known_external_links.yml": "a18980a2f2cc0ff8b247eb65c8611af6295dd437d725506e7a3036fa5d9d80ed",
     ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
     ".github/workflows/retrofit_live_news.yml": "30a0e41d35522ff047fdeffc5d656725ba160913a4dae4cf14b80ef5ad9b7232",
-    ".github/workflows/security_guard.yml": "5eb7a2c6fd223f9fda2b0e32d93c70446eaed5dcd0b54c633bfd6d67af73e9fe",
+    ".github/workflows/security_guard.yml": "d9d28f0c96adabbb7ed3f8264b33eb75f603b4fabd494a78519d50550105cea2",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
     ".github/workflows/update_page_family.yml": "278fbded6a4be622a7858e1d9376f99add1becc3931dd090928ee6490ee65f26"
