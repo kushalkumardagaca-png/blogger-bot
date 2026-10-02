@@ -158,8 +158,9 @@ def main():
    desk=next((x for x in new if x not in ('News','2026 Money Moves','Kushal K. Daga')),new[0]);pic=commons_photo(p.get('title',''),desk,used)
    if pic:content=replace_hero(content,pic);images_fixed+=1;hero_key=pic['base']
   if hero_key:hero_owner.setdefault(hero_key,p['id'])
-  if new!=old or content!=p.get('content',''):
-   put('posts',p,h,content,new);p['labels']=new;p['content']=content;labels_fixed+=int(new!=old);time.sleep(.08)
+  labels_changed={norm(x) for x in new}!={norm(x) for x in old}
+  if labels_changed or content!=p.get('content',''):
+   put('posts',p,h,content,new);p['labels']=new;p['content']=content;labels_fixed+=int(labels_changed);time.sleep(.08)
  by_title={p['title'].strip().upper():p for p in pages}
  ap=by_title['DAILY ARTICLE'];np=by_title['DAILY NEWS']
  ac=repair_article_page(ap,posts,cfg);nc=repair_news_page(np,posts)
