@@ -95,10 +95,14 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("c=c[:script_start]+snap+c[script_start:]", source)
         self.assertIn("news_snapshot_at<news_engine_at", source)
         self.assertIn("else{setTimeout(main,0);}", source)
-        self.assertIn("DY_AUTHENTICATED_NEWS_FALLBACK_START", source)
+        self.assertIn("DY_AUTHENTICATED_NEWS_FALLBACK_V2", source)
+        self.assertIn("rebuild('Global News'", source)
         self.assertIn("rebuild('Country dispatches'", source)
         self.assertIn("rebuild('Specialty desks'", source)
-        self.assertIn("found.forEach(function(it){row.appendChild(makeCard(it));}", source)
+        self.assertIn("function wire(row)", source)
+        self.assertIn("row.addEventListener('pointermove'", source)
+        self.assertIn("row.scrollLeft+=34*dt", source)
+        self.assertIn("found.forEach(function(it){row.appendChild(makeCard(it));});wire(row)", source)
         self.assertNotIn("flags=re.S)+snap", source)
 
     def test_every_entry_warms_only_selected_hubs_and_labels(self):
