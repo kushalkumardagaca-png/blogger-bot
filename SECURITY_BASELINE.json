@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T08:24:20.571810+00:00",
+  "approvedAt": "2026-10-02T08:47:58.778014+00:00",
   "repository": {
     "auto_blogger_publisher.py": "5dc016b83accce2406956dd9d9a8fd78c61e5773e4297ba12ba2acfe301ba715",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
@@ -29,11 +29,11 @@
     "audit_site_enhancements.py": "51bbbf6fc2e78e29a72d9ae169b88d17550eac1931a985c87a5564e01ddeb2f9",
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
     "bing_url_automation.py": "2f6931444ff4ba61154a23d8224a9ffbcb6cf1c250aa6d6ae13ee97db5de2211",
-    "apply_site_enhancements.py": "e84b31d9c5c1fd03d146f8ec05129928dbf72dc07b74500e156572b98f4ffade",
+    "apply_site_enhancements.py": "72c97293d3f416f13125c5f8b74ad220dd101937d74c770efe08ef42930d42b8",
     "update_page_family.py": "8e132c5a67149c838810f3d0faf267fdfd48a8486582ae011b55e45013f15450",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
-    "theme/Daily-Yield-Theme-Subscription.xml": "57ccdee002aa2746a5aa415c9f13fa8aa950d7d1bf3fd6d3448a6b05b96076eb",
-    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "74d3c5cab4e917c73563e6c8110a25f672456428871b57a21f6388088ecf2251",
+    "theme/Daily-Yield-Theme-Subscription.xml": "4e4d5022f10f455d6ba04fb28bdb70f6ca417abf3db2edc31ba202e3af5725a8",
+    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "1f7bfbb939271a5c16b98bbc74a136f51d51cc349daee534e909dc59e2f61c93",
     "outreach/editorial_outreach.py": "d83a640afc61787d425d55ff24a53cd148e9eb8639f3aa225c426b4e3ff38e03",
     "outreach/gmail_sender.py": "292cd572119d4802dc1faea5d590e9f12fa176971bf8941ea0266cd7e0765c62",
     "outreach/prospects.csv": "95c7ebe7f8d006bfa97c98910c2b66e8707b3de2d6065dd16814ce82622f613a",
@@ -166,6 +166,14 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-10-02T00:10:40-07:00",
       "content_sha256": "2feff498bec375e0ac24988ddcbc31558e5a952481028a9f332bb5acd4b06ca3"
+    },
+    "post:577819612147620529": {
+      "kind": "post",
+      "id": "577819612147620529",
+      "title": "Capital Gains, Explained Like a Human",
+      "url": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
+      "updated": "2026-10-02T01:32:06-07:00",
+      "content_sha256": "e9c012eb7ed7cb0eb5294ca8ad8898d7ac94a442d932897ac90411a27a4e56ce"
     },
     "post:2005014805006920526": {
       "kind": "post",
