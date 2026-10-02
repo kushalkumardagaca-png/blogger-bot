@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-02T07:41:20.766179+00:00",
+  "status": "PASS",
+  "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
+  "syntheticViews": 0,
+  "site": "https://dailyyield.blogspot.com/",
+  "quota": {
+    "dailyAvailable": 93,
+    "monthlyAvailable": 2993
+  },
+  "summary": {
+    "inventory": 226,
+    "candidates": 226,
+    "submitted": 93,
+    "quotaDeferred": 133,
+    "inspected": 0,
+    "knownToBing": 0,
+    "pendingMonitoring": 93,
+    "removedAlerts": 0
+  },
+  "errors": [],
+  "notes": [
+    "GetUrlInfo supplies documented index details; it is not represented as the complete Webmaster Tools URL Inspection UI.",
+    "No Live URL fetch is performed.",
+    "Submission does not guarantee crawling, indexing, ranking or traffic."
+  ]
+}
