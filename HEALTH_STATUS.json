@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2187,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 171,
+    "transientExternalResponses": 141,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2668,8 +2668,8 @@
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37004691211,
-      "latestUpdatedAt": "2026-10-02T12:07:58Z",
+      "latestRunId": 37006773497,
+      "latestUpdatedAt": "2026-10-02T12:29:28Z",
       "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],
