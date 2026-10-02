@@ -57,6 +57,6 @@
     "Personal Finance": 7,
     "Global News": 8
   },
-  "error_type": "RuntimeError",
-  "error": "Content inventory still has an empty article category, missing Global News desk, or duplicate hero assignment"
+  "error_type": "HTTPError",
+  "error": "503 Server Error: Service Unavailable for url: https://www.googleapis.com/blogger/v3/blogs/8911514070006792465/posts?fetchBodies=true&maxResults=50&status=live"
 }
