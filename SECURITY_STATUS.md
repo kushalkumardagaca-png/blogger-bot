@@ -1,14 +1,14 @@
 # Daily Yield Security Guard
 
-- **Status:** PASS
-- **Checked:** 2026-10-02T03:01:47.153287+00:00
+- **Status:** FAIL
+- **Checked:** 2026-10-02T03:02:22.787407+00:00
 - **Public website requests:** 0
 
 ## Critical findings
-- None
+- critical repository files changed without baseline approval: bluesky_publisher.py, facebook_publisher.py, mastodon_publisher.py, tumblr_publisher.py
 
 ## Warnings
-- 2 new live item(s) accepted after threat scan
+- None
 
 ## Scope
 - Authenticated Blogger API content integrity
