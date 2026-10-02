@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T15:07:28.349198+05:30
+- **Checked:** 2026-10-02T15:25:44.016988+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 227 URLs · 213 Posts · 13 Pages
+- **Inventory:** 229 URLs · 215 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 226 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 228 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -27,6 +27,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Corporate Finance and Industry News**
+- ✅ **post · Italy Finance News — 2 October 2026**
 - ✅ **post · Capital Gains, Explained Like a Human**
 - ✅ **post · Spain Finance News — 2 October 2026**
 - ✅ **post · China Finance News — 2 October 2026**
