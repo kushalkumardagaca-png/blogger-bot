@@ -47,13 +47,15 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("prefers-reduced-motion:reduce", text)
         self.assertIn("<noscript><style>#dyPageLoader{display:none!important}</style></noscript>", text)
 
-    def test_loader_has_soft_entry_and_exit_without_animating_each_sticker(self):
+    def test_loader_has_lightweight_soft_entry_and_exit(self):
         text = THEMES[0].read_text(encoding="utf-8")
-        self.assertIn("@keyframes dyLoaderEnter", text)
-        self.assertIn("@keyframes dyCardEnter", text)
-        self.assertIn("transition:opacity .34s ease", text)
-        self.assertIn("Math.max(0,380-(clock-start))", text)
+        self.assertIn("@keyframes dyLoaderFadeIn{from{opacity:0}to{opacity:1}}", text)
+        self.assertIn("transition:opacity .24s ease-out", text)
+        self.assertIn("Math.max(0,300-(clock-start))", text)
         self.assertIn("location.assign(u.href);},260)", text)
+        self.assertIn("contain:strict", text)
+        self.assertNotIn("dyCardEnter", text)
+        self.assertNotIn("dyStickersEnter", text)
         self.assertNotIn(".dy-sticker{animation:", text)
 
     def test_noncritical_comment_engine_is_loaded_during_idle_time(self):
