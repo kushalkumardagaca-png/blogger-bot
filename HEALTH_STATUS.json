@@ -1,16 +1,16 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 224,
-    "posts": 210,
+    "urls": 226,
+    "posts": 212,
     "pages": 13,
-    "contentFailures": 0,
-    "externalDestinationsChecked": 2016,
+    "contentFailures": 214,
+    "externalDestinationsChecked": 2043,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 116,
+    "transientExternalResponses": 124,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2508,28 +2508,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/spain-2026-10-02.html": {
+        "title": "Spain Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Spain launches the new European savings and investment account; Tourist Movements at\u2026",
+        "checkedAt": "2026-10-02T12:39:56.469050+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/china-2026-10-02.html": {
+        "title": "China Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Greer says no specific timeline set for enforcing US-China Board of Trade; EU retools\u2026",
+        "checkedAt": "2026-10-02T12:39:56.469050+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 223,
-      "tracked": 223,
+      "inventory": 225,
+      "tracked": 225,
       "pass": 0,
-      "neutralOrOther": 223,
-      "inspectedThisRun": 3,
+      "neutralOrOther": 225,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 46
+        "URL is unknown to Google": 48
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 213,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 215,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 46
+      "unknownToGoogle": 48
     }
   },
   "github": [
@@ -2545,8 +2567,8 @@
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36970914538,
-      "latestUpdatedAt": "2026-10-02T05:53:22Z",
+      "latestRunId": 36976253757,
+      "latestUpdatedAt": "2026-10-02T07:00:26Z",
       "detail": "latest=success; 1 failures among 12 recent completed runs"
     },
     {
@@ -2555,23 +2577,23 @@
       "latestConclusion": "success",
       "latestRunId": 36970955827,
       "latestUpdatedAt": "2026-10-02T06:08:33Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "detail": "latest=success; 0 failures among 10 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36973608274,
-      "latestUpdatedAt": "2026-10-02T06:27:25Z",
-      "detail": "latest=success; 5 failures among 12 recent completed runs"
+      "latestRunId": 36977127803,
+      "latestUpdatedAt": "2026-10-02T07:10:06Z",
+      "detail": "latest=success; 3 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36966440590,
-      "latestUpdatedAt": "2026-10-02T04:54:45Z",
-      "detail": "latest=success; 1 failures among 11 recent completed runs"
+      "latestRunId": 36973872801,
+      "latestUpdatedAt": "2026-10-02T06:32:42Z",
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
   "providers": [
