@@ -114,11 +114,12 @@ def clean_slug(title):
     return re.sub(r'[^a-z0-9]+', '-', s).strip('-')
 
 def get_standardized_category(raw_cat):
-    clean = raw_cat.replace("&", "and").replace(",", "").strip()
+    clean = re.sub(r"[^a-z0-9]+", " ", raw_cat.lower().replace("&", " and ")).strip()
     for cat in CATEGORIES_25:
-        if cat.lower() == clean.lower() or cat.lower() in clean.lower():
+        canonical = re.sub(r"[^a-z0-9]+", " ", cat.lower().replace("&", " and ")).strip()
+        if canonical == clean or canonical in clean:
             return cat
-    return clean
+    raise ValueError(f"Unknown master category: {raw_cat}")
 
 def generate_svg_diagram_1(title, category):
     return f"""<div style="margin: 32px 0; background: #FFFDF8; border: 1px solid #EADCC8; border-radius: 8px; padding: 24px; box-shadow: 0 4px 14px -6px rgba(36, 22, 16, 0.08); text-align: center;">
@@ -179,7 +180,9 @@ def generate_article_content(topic, pub_date_str, pub_time_str):
     post_url = f"https://dailyyield.blogspot.com/{year_month}/{slug}.html"
     
     # Construct exact 25-taxonomy labels + SEO/GEO tags
-    labels = [category, "2026 Money Moves", title, f"{category} Strategy", "Kushal K. Daga"]
+    # Keep the public label archive clean: one canonical desk plus the shared
+    # collection and author labels. Titles/"Strategy" variants fragmented shelves.
+    labels = list(dict.fromkeys([category, "2026 Money Moves", "Kushal K. Daga"]))
     labels_str = ", ".join(labels)
     schema_keywords = ", ".join(dict.fromkeys(labels + SEO_QUERY_TERMS))
     

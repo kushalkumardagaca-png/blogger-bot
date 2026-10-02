@@ -91,7 +91,10 @@ def ensure_image_alts(content, title):
         if tag.endswith("/>"):
             return tag[:-2].rstrip() + f' alt="{fallback}" />'
         return tag[:-1].rstrip() + f' alt="{fallback}">'
-    return re.sub(r"<img\b[^>]*>", repair, content or "", flags=re.I)
+    # Never interpret JavaScript strings/regex literals containing "<img" as
+    # markup. A previous whole-document substitution corrupted the News parser.
+    parts = re.split(r"(<script\b[^>]*>.*?</script>)", content or "", flags=re.I | re.S)
+    return "".join(part if re.match(r"<script\b", part, re.I) else re.sub(r"<img\b[^>]*>", repair, part, flags=re.I) for part in parts)
 
 
 def main():
