@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 129,
+  "pass": 139,
   "fail": 0,
   "checks": [
     {
@@ -121,6 +121,22 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-Subscription.xml: English document language",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: content language declaration",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: descriptive homepage title",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: branded Page titles",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-Subscription.xml: robots index policy",
       "status": "PASS"
     },
@@ -214,6 +230,10 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: dark mode fully removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: Blogger package is sole standard meta-description authority",
       "status": "PASS"
     },
     {
@@ -341,6 +361,22 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: English document language",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: content language declaration",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: descriptive homepage title",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: branded Page titles",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: robots index policy",
       "status": "PASS"
     },
@@ -434,6 +470,10 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Blogger package is sole standard meta-description authority",
       "status": "PASS"
     },
     {

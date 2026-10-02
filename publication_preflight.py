@@ -4,7 +4,7 @@ from image_safety import image_works
 
 def assert_publishable(title,content,labels):
  issues=[]; labels=labels or []
- if not title or len(title.strip())<8:issues.append('missing/short title')
+ if not title or len(title.strip())<20:issues.append('missing/short SEO title (minimum 20 characters)')
  if len(content)<8000:issues.append(f'content package too small ({len(content)} bytes)')
  if 'Kushal K. Daga' not in content:issues.append('current byline missing')
  if 'challenge-platform' in content or '/cdn-cgi/challenge-platform/' in content:issues.append('invalid copied challenge script')

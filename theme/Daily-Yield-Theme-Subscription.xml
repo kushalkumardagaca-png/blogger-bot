@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
  <!-- DAILY YIELD OPTION 5 FAVICON START -->
  <link href='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-label%3D%22Daily%20Yield%20logo%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%23fff8ee%22%2F%3E%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22422%22%20height%3D%22422%22%20rx%3D%22105%22%20fill%3D%22%23c86a3d%22%2F%3E%3Ccircle%20cx%3D%22414%22%20cy%3D%2292%22%20r%3D%2210%22%20fill%3D%22%23241610%22%2F%3E%3Ctext%20x%3D%22130%22%20y%3D%22300%22%20fill%3D%22%23fff8ee%22%20font-family%3D%22Georgia%2CDejaVu%20Serif%2Cserif%22%20font-size%3D%22190%22%20font-weight%3D%22700%22%3ED%3C%2Ftext%3E%3Ctext%20x%3D%22260%22%20y%3D%22300%22%20fill%3D%22%23fff8ee%22%20font-family%3D%22Georgia%2CDejaVu%20Serif%2Cserif%22%20font-size%3D%22190%22%20font-weight%3D%22700%22%3EY%3C%2Ftext%3E%3Cpath%20d%3D%22M103%20390%20C180%20375%20229%20348%20280%20355%20C335%20363%20371%20319%20420%20287%22%20fill%3D%22none%22%20stroke%3D%22%23f0b180%22%20stroke-width%3D%2217%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M387%20278%20L427%20285%20L406%20321%22%20fill%3D%22none%22%20stroke%3D%22%23f0b180%22%20stroke-width%3D%2217%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E' rel='icon' sizes='any' type='image/svg+xml'/>
@@ -26,11 +26,19 @@
 =====================================================================
 -->
 <meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'/>
+<meta content='en' http-equiv='Content-Language'/>
+<b:if cond='data:view.isHomepage'>
+<title>Daily Yield | Finance, Markets, News &amp; Calculators</title>
+<b:elseif cond='data:view.isSingleItem'/>
+<b:if cond='data:view.isPost'>
 <title><data:blog.pageTitle/></title>
-<b:include data='blog' name='all-head-content'/>
-<b:if cond='data:blog.metaDescription'>
-<meta expr:content='data:blog.metaDescription' name='description'/>
+<b:else/>
+<title><data:blog.pageName/> | Daily Yield Finance</title>
 </b:if>
+<b:else/>
+<title><data:blog.pageTitle/></title>
+</b:if>
+<b:include data='blog' name='all-head-content'/>
 <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
 <meta expr:content='data:blog.pageTitle' property='og:title'/>
 <meta expr:content='data:blog.title' property='og:site_name'/>

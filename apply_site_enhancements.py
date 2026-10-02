@@ -99,6 +99,25 @@ var bc=D.querySelector('.dy-breadcrumb');if(bc){var parts=[{"@type":"ListItem","
 
 
 def inject(text: str) -> str:
+    text = text.replace("expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml'", "expr:dir='data:blog.languageDirection' lang='en' xmlns='http://www.w3.org/1999/xhtml'", 1)
+    old_title = "<title><data:blog.pageTitle/></title>"
+    title_package = """<b:if cond='data:view.isHomepage'>
+<title>Daily Yield | Finance, Markets, News &amp; Calculators</title>
+<b:elseif cond='data:view.isSingleItem'/>
+<b:if cond='data:view.isPost'>
+<title><data:blog.pageTitle/></title>
+<b:else/>
+<title><data:blog.pageName/> | Daily Yield Finance</title>
+</b:if>
+<b:else/>
+<title><data:blog.pageTitle/></title>
+</b:if>"""
+    if 'Daily Yield | Finance, Markets, News &amp; Calculators' not in text:
+        text = text.replace(old_title, title_package, 1)
+    text = text.replace("<b:if cond='data:blog.metaDescription'>\n<meta expr:content='data:blog.metaDescription' name='description'/>\n</b:if>\n", "", 1)
+    viewport = "<meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'/>"
+    if "http-equiv='Content-Language'" not in text:
+        text = text.replace(viewport, viewport + "\n<meta content='en' http-equiv='Content-Language'/>", 1)
     text = text.replace("<h1 class='post-title entry-title'><data:post.title/></h1>", "<div aria-level='2' class='post-title entry-title' role='heading'><data:post.title/></div>", 1)
     text = text.replace('.item-post h1.post-title{', '.item-post .post-title{').replace('.item-post h1.post-title::after{', '.item-post .post-title::after{').replace('.item-post h1.post-title,.item-post h1.post-title::after{', '.item-post .post-title,.item-post .post-title::after{')
     if "DY_SITE_ENHANCEMENTS_HEAD_START" not in text:

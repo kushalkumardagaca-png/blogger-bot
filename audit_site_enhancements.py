@@ -24,7 +24,7 @@ for p in THEMES:
       'form success state':"data-state','success",'form error state':"data-state','error",
       'accurate schema-based last reviewed date':'schemaModified','privacy confirmation dialog':"role='dialog'",'visible FAQ':"id='dy-site-faq'",'FAQ schema':'FAQPage',
       'floating contact':"aria-label='Contact Daily Yield'",'breadcrumb navigation':"class='dy-breadcrumb'",
-      'breadcrumb schema':'BreadcrumbList','Blogger canonical package':"name='all-head-content'",'robots index policy':"name='robots'",
+      'breadcrumb schema':'BreadcrumbList','Blogger canonical package':"name='all-head-content'",'English document language':"lang='en'",'content language declaration':"http-equiv='Content-Language'",'descriptive homepage title':'Daily Yield | Finance, Markets, News &amp; Calculators','branded Page titles':'<data:blog.pageName/> | Daily Yield Finance','robots index policy':"name='robots'",
       'Googlebot policy':"name='googlebot'",'Bingbot policy':"name='bingbot'",'ChatGPT search policy':"name='ChatGPT-User'",
       'OpenAI search policy':"name='OAI-SearchBot'",'WebSite schema':'SearchAction','favicon':"rel='icon'",
       'responsive mobile CSS':'@media(max-width:560px)','keyboard focus':':focus-visible','reduced motion':'prefers-reduced-motion',
@@ -36,6 +36,7 @@ for p in THEMES:
     }
     for name,needle in requirements.items(): check(prefix+name,needle in text)
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)
+    check(prefix+'Blogger package is sole standard meta-description authority', "<meta expr:content='data:blog.metaDescription' name='description'/>" not in text)
     check(prefix+'privacy control is not floating', '.dy-privacy-manage{position:fixed' not in text)
     check(prefix+'no Google Business Profile', 'Google Business Profile' not in text)
 
