@@ -44,6 +44,7 @@ CSS = r"""/* DY_SITE_ENHANCEMENTS_CSS_START */
 @media(max-width:640px){.dy-symbol-field{inset:-3%;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(16,1fr);gap:0;transform:rotate(-2deg) scale(1.03);animation-name:dyFieldDriftMobile}.dy-symbol-field span{min-width:28px;min-height:28px;font-size:24px;opacity:.21}.dy-sticker{--s:.62;padding:8px 10px}.dy-load-card{width:235px}.dy-load-title{font-size:28px;margin-top:13px}.dy-load-ring{width:70px;height:70px}.dy-load-ring::after{inset:15px}}
 @keyframes dyFieldDriftMobile{0%,100%{transform:rotate(-2deg) scale(1.03) translateY(0)}50%{transform:rotate(-1deg) scale(1.03) translateY(-6px)}}
 /* Compact high-density layout: more dated content remains visible per screen. */
+html,body{max-width:100%;overflow-x:clip}.fk-home main,.fk-home #enhancedHome,.kd-sec,.kd-row,.kd-mqwrap{max-width:100%;min-width:0}.kd-row,.kd-mqwrap{overflow-x:auto;overscroll-behavior-inline:contain}
 .fk-rest .blog-posts{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.fk-rest .blog-posts .post{padding:16px}.fk-rest .blog-posts h3.post-title{font-size:18px}.fk-rest .blog-posts .post-snippet{font-size:12px;line-height:1.55;-webkit-line-clamp:2}.blog-posts .snippet-thumbnail-container{aspect-ratio:16/9}.dy-auto-feed #blog-pager{display:none!important}.dy-feed-sentinel{grid-column:1/-1;min-height:56px;display:grid;place-items:center;color:var(--muted);font:700 10px/1.4 var(--font-body);letter-spacing:.1em;text-transform:uppercase}.dy-feed-sentinel[data-finished='true']{min-height:28px;opacity:.72}
 /* Keep the subscription desk useful without letting it dominate the page. */
 .dy-sub-zone{padding:24px 16px!important}.dy-sub-shell{width:min(1040px,100%)!important;border-radius:22px!important}.dy-sub-grid{grid-template-columns:1.05fr .95fr!important;min-height:0!important}.dy-sub-story,.dy-sub-formside{padding:26px!important}.dy-sub-story h2{font-size:clamp(32px,4vw,46px)!important;line-height:1!important}.dy-sub-lede{margin:14px 0 18px!important;font-size:13px!important;line-height:1.55!important}.dy-sub-benefits{gap:7px!important}.dy-sub-benefits li{min-height:78px!important;padding:11px!important;border-radius:12px!important}.dy-sub-benefits svg{width:18px!important;height:18px!important;margin-bottom:6px!important}.dy-sub-benefits span{margin-top:3px!important;font-size:9px!important}.dy-sub-formside h3{font-size:27px!important}.dy-sub-formside>p{margin:8px 0 12px!important}.dy-sub-steps{margin-bottom:12px!important}.dy-sub-field input,.dy-sub-submit{height:46px!important;min-height:46px!important}.dy-sub-choices{margin-top:10px!important}.dy-sub-choice{min-height:52px!important;padding:9px!important}.dy-sub-trust{margin-top:10px!important}
@@ -208,6 +209,16 @@ def inject(text: str) -> str:
     # parsing. The compact inline SVG favicon remains authoritative.
     text = re.sub(r"\n\s*<link href='data:image/png;base64,[^']+'[^>]*/>", "", text)
     text = text.replace(';animation:pageIn .8s ease}', '}').replace('@keyframes pageIn{from{opacity:0}to{opacity:1}}\n', '')
+    # Read the lightweight summary inventory rather than only the newest 25 full
+    # Posts. This gives the home rails enough non-News entries without downloading
+    # every article body and lets media$thumbnail provide the card photograph.
+    text = text.replace("fetch('/feeds/posts/default?alt=json&max-results=25')", "fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published')")
+    text = text.replace("fetch('/feeds/posts/default/-/News?alt=json&max-results=15')", "fetch('/feeds/posts/summary/-/News?alt=json&max-results=150&orderby=published')")
+    old_home_image = 'var img=\'\';var m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||\'\');if(m)img=m[1];'
+    new_home_image = 'var img=e.media$thumbnail&&e.media$thumbnail.url||\'\';var m=/<img[^>]+src="([^"]+)"/.exec((e.summary&&e.summary.$t)||(e.content&&e.content.$t)||\'\');if(!img&&m)img=m[1];'
+    if old_home_image not in text:
+        raise RuntimeError('Homepage feed image parser not found')
+    text = text.replace(old_home_image, new_home_image, 1)
     # Both homepage article rails are chronological. PopularPosts is intentionally
     # not used here because its opaque ranking made the desk look unordered.
     text = text.replace("<p class='kd-rowlab'>Most popular</p>", "<p class='kd-rowlab'>Earlier articles</p>", 1)

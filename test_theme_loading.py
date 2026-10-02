@@ -72,6 +72,27 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("grid-template-columns:repeat(5,minmax(0,1fr))!important", text)
         self.assertIn(".dy-sub-grid{grid-template-columns:1.05fr .95fr!important;min-height:0!important}", text)
 
+    def test_homepage_uses_deep_summary_inventory_for_both_article_rows(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn("/feeds/posts/summary?alt=json&max-results=150&orderby=published", text)
+        self.assertIn("var items=all.slice(0,8)", text)
+        self.assertIn("var earlier=all.slice(8,16)", text)
+        self.assertIn("e.media$thumbnail&&e.media$thumbnail.url", text)
+        self.assertIn("(e.summary&&e.summary.$t)||(e.content&&e.content.$t)", text)
+        self.assertNotIn("/feeds/posts/default?alt=json&max-results=25", text)
+
+    def test_mobile_document_is_contained_while_rows_remain_scrollable(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn("html,body{max-width:100%;overflow-x:clip}", text)
+        self.assertIn(".kd-row,.kd-mqwrap{overflow-x:auto;overscroll-behavior-inline:contain}", text)
+
+    def test_news_snapshot_precedes_renderer_and_ready_main_is_deferred(self):
+        source = Path("content_experience_repair.py").read_text(encoding="utf-8")
+        self.assertIn("c=c[:script_start]+snap+c[script_start:]", source)
+        self.assertIn("news_snapshot_at<news_engine_at", source)
+        self.assertIn("else{setTimeout(main,0);}", source)
+        self.assertNotIn("flags=re.S)+snap", source)
+
     def test_every_entry_warms_only_selected_hubs_and_labels(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("link.rel='prefetch'", text)

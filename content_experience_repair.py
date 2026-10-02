@@ -163,7 +163,11 @@ def news_item(post):
 def repair_news_page(page,posts):
  c=page['content'];items=[news_item(p) for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' in p.get('labels',[])]
  snap='<script>window.ENH_NEWS_SNAPSHOT='+json.dumps(items,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')+';</script>'
- c=re.sub(r'<script>window\.ENH_NEWS_SNAPSHOT=.*?</script>','',c,flags=re.S)+snap
+ c=re.sub(r'<script>window\.ENH_NEWS_SNAPSHOT=.*?</script>','',c,flags=re.S)
+ engine=c.find("var w=window,d=document,root=d.getElementById('enhancedSite');")
+ script_start=c.rfind('<script',0,engine)
+ if engine<0 or script_start<0:raise RuntimeError('Daily News rendering engine not found')
+ c=c[:script_start]+snap+c[script_start:]
  # Repair an earlier alt-text migration that accidentally modified a JavaScript regex literal.
  c=re.sub(r'/<img\[\^ alt=["\'][^"\']+["\']>\]\+src=',r'/<img[^>]+src=',c)
  c=re.sub(r"function labelURL\(l\)\{.*?\n\}", "function labelURL(l){return '/search/label/'+encodeURIComponent(l)+'?max-results=50';}", c, count=1, flags=re.S)
@@ -172,6 +176,7 @@ def repair_news_page(page,posts):
  c=c.replace("status('demo',w.ENH_PREVIEW?'Offline sample layout \\u00b7 examples, not published news':'Loading published news\\u2026');", "status(w.ENH_PREVIEW?'demo':'live',w.ENH_PREVIEW?'Offline sample layout \\u00b7 examples, not published news':'Published news ready \\u00b7 newest first');")
  c=c.replace("var loop=items.length>=4;\n var pool=loop?items.concat(items):items;", "var loop=false;\n var pool=items;")
  c=c.replace("try{pull();setInterval(function(){if(!d.hidden)pull();},300000);}catch(e){}", "/* Authenticated snapshot is complete; public feed must not replace it with a partial batch. */")
+ c=c.replace("if(d.readyState==='loading'){d.addEventListener('DOMContentLoaded',main);}else{main();}", "if(d.readyState==='loading'){d.addEventListener('DOMContentLoaded',main);}else{setTimeout(main,0);}")
  css=START+'''<style>
 #enhancedSite .kn-rowwrap{overflow:visible!important}#enhancedSite .kn-track{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;transform:none!important;animation:none!important;max-width:none!important}#enhancedSite .kn-card{min-width:0!important;width:auto!important}#enhancedSite .kn-cimg{aspect-ratio:16/9;max-height:150px}#enhancedSite .kn-cimg img{width:100%;height:100%;object-fit:cover}@media(max-width:700px){#enhancedSite .kn-track{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}#enhancedSite .kn-card{padding:9px!important}#enhancedSite .kn-ctitle{font-size:15px!important}.kn-cfoot{font-size:8px!important}}
 </style>'''+END
@@ -197,7 +202,8 @@ def main():
  latest_article=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' not in p.get('labels',[])),None)
  latest_news=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' in p.get('labels',[])),None)
  article_current=bool(latest_article and latest_article['id'] in ap['content'] and "norm(label)===norm(cat.label)" in ap['content'] and "/search/label/'+encodeURIComponent(cat.label)" in ap['content'] and 'Authenticated snapshot is complete' in ap['content'] and 'Welcome to the Daily Article.' not in ap['content'] and '#articleHub .ar-group{display:grid!important' in ap['content'] and START in ap['content'])
- news_current=bool(latest_news and latest_news.get('url','') in np['content'] and 'window.ENH_NEWS_SNAPSHOT=' in np['content'] and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and "'/search/label/'+encodeURIComponent(l)" in np['content'] and 'var globalItems=byLabel(items,GLOBAL)' in np['content'] and 'public feed must not replace it with a partial batch' in np['content'] and 'var loop=false;' in np['content'] and START in np['content'])
+ news_snapshot_at=np['content'].find('window.ENH_NEWS_SNAPSHOT=');news_engine_at=np['content'].find("var w=window,d=document,root=d.getElementById('enhancedSite');")
+ news_current=bool(latest_news and latest_news.get('url','') in np['content'] and news_snapshot_at>=0 and news_engine_at>=0 and news_snapshot_at<news_engine_at and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and "'/search/label/'+encodeURIComponent(l)" in np['content'] and 'var globalItems=byLabel(items,GLOBAL)' in np['content'] and 'public feed must not replace it with a partial batch' in np['content'] and 'var loop=false;' in np['content'] and "else{setTimeout(main,0);}" in np['content'] and START in np['content'])
  ac=ap['content'] if article_current else repair_article_page(ap,posts,cfg)
  nc=np['content'] if news_current else repair_news_page(np,posts)
  pages_fixed=0
