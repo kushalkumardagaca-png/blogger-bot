@@ -1,21 +1,22 @@
 {
-  "checkedAt": "2026-10-02T10:19:46.248205+00:00",
+  "checkedAt": "2026-10-02T10:21:32.249951+00:00",
   "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "critical": [
-    "existing Blogger content changed without baseline approval: page:1685707888914861815, page:9217579601621666930, post:1107194767136752071, post:1126447614310368625, post:115783846078738704, post:1244600316209982174, post:1246197502482808342, post:133946527053973582, post:1374496040576360177, post:1403438240302459064, post:1496481957315805113, post:1525321452486561932, post:1685234226138286098, post:193247759891078847, post:1971188583231907134, post:2070861226123418361, post:2129270346434103164, post:2148070858167788668, post:2220914668880365188, post:2418376376538238746"
+    "critical repository files changed without baseline approval: .github/workflows/content_experience_repair.yml, auto_blogger_publisher.py, update_page_family.py",
+    "existing Blogger content changed without baseline approval: page:1685707888914861815, page:304220949515133754, page:3254393081257151974, page:9217579601621666930, post:1107194767136752071, post:1126447614310368625, post:115783846078738704, post:1244600316209982174, post:1246197502482808342, post:133946527053973582, post:1374496040576360177, post:1403438240302459064, post:1496481957315805113, post:1525321452486561932, post:1685234226138286098, post:193247759891078847, post:1971188583231907134, post:2070861226123418361, post:2129270346434103164, post:2148070858167788668"
   ],
   "warnings": [],
   "details": {
     "pages": 13,
     "posts": 215,
     "newItems": 0,
-    "changedItems": 80,
+    "changedItems": 82,
     "removedItems": 0,
     "repositoryFiles": 61,
     "backupCreated": false,
-    "repositoryChangeApproved": true,
+    "repositoryChangeApproved": false,
     "bloggerChangeApproved": false
   }
 }
