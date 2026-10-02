@@ -7,6 +7,7 @@ import json
 ROOT=Path(__file__).parent
 THEMES=[ROOT/'theme/Daily-Yield-Theme-Subscription.xml',ROOT/'theme/Daily-Yield-Theme-v4-2026-10-01.xml']
 checks=[]
+# All checks are static or authenticated evidence; no public Daily Yield URL is opened.
 def check(name, ok): checks.append({'name':name,'status':'PASS' if ok else 'FAIL'})
 
 for p in THEMES:
