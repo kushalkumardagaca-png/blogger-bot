@@ -35,6 +35,15 @@ def norm(v):return re.sub(r'\s+',' ',re.sub(r'[,：:&]+',' ',str(v).lower().repl
 def srcs(c):return re.findall(r'<img\b[^>]*\bsrc=["\']([^"\']+)',c or '',re.I)
 def clean_src(s):return re.sub(r'([?&])(w|h|q|fit|crop|auto)=[^&]+','',html.unescape(s or '')).rstrip('?&')
 def strip_tags(v):return re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',html.unescape(v or ''))).strip()
+def image_key(url):
+ from urllib.parse import unquote,urlparse
+ path=unquote(urlparse(url or '').path);parts=[x for x in path.split('/') if x]
+ if 'thumb' in parts and len(parts)>=2:return parts[-2].lower()
+ if parts:
+  last=parts[-1]
+  if last.lower().startswith('file:'):last=last[5:]
+  return last.lower()
+ return clean_src(url).lower()
 
 def categories_from_article_page(pages):
  page=next(p for p in pages if p.get('title','').strip().upper()=='DAILY ARTICLE')
@@ -66,15 +75,20 @@ def normalized_labels(post,categories):
   return ['News',desk]
  cat=category_for(post,categories);return list(dict.fromkeys([cat,'2026 Money Moves','Kushal K. Daga']))
 
-def commons_photo(query,used):
- params={'action':'query','format':'json','generator':'search','gsrnamespace':'6','gsrlimit':'20','gsrsearch':query+' photograph filetype:bitmap','prop':'imageinfo','iiprop':'url|extmetadata','iiurlwidth':'1200','origin':'*'}
- r=requests.get(COMMONS,params=params,headers={'User-Agent':'DailyYieldEditorialRepair/1.0 (dailyyield.official@gmail.com)'},timeout=45);r.raise_for_status()
- pages=(r.json().get('query') or {}).get('pages',{})
- for page in pages.values():
-  info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata') or {};url=info.get('thumburl') or info.get('url') or '';base=clean_src(info.get('descriptionurl') or info.get('url') or '')
-  if not url or base in used or re.search(r'\.(?:svg|gif|webm|ogv)(?:\?|$)',url,re.I):continue
-  license_name=strip_tags((meta.get('LicenseShortName') or {}).get('value')) or 'Wikimedia Commons licence';artist=strip_tags((meta.get('Artist') or {}).get('value')) or 'Wikimedia Commons contributor'
-  used.add(base);return {'url':url,'base':base,'credit':f'Photo: {artist[:100]} · {license_name} · Wikimedia Commons'}
+def commons_photo(title,desk,used):
+ country={'UK':'United Kingdom','US':'United States','Global News':'world financial district','Market and Trading':'stock market trading','Economy and Macro Policy':'economy central bank','Corporate Finance and Industry':'business industry','Personal Finance':'personal finance money'}
+ cleaned=re.sub(r'\b(?:finance|news|20\d\d|september|october|november|december|january|february|march|april|may|june|july|august)\b|[—–-]|\d+',' ',title,flags=re.I)
+ words=' '.join(re.findall(r"[A-Za-z£$']+",cleaned)[:5])
+ queries=[(country.get(desk,desk)+' city business').strip(),(words+' '+country.get(desk,desk)).strip(),country.get(desk,desk)+' economy']
+ for query in queries:
+  params={'action':'query','format':'json','generator':'search','gsrnamespace':'6','gsrlimit':'50','gsrsearch':query,'prop':'imageinfo','iiprop':'url|extmetadata','iiurlwidth':'1200','origin':'*'}
+  r=requests.get(COMMONS,params=params,headers={'User-Agent':'DailyYieldEditorialRepair/1.0 (dailyyield.official@gmail.com)'},timeout=45);r.raise_for_status()
+  pages=(r.json().get('query') or {}).get('pages',{})
+  for page in pages.values():
+   info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata') or {};url=info.get('thumburl') or info.get('url') or '';base=image_key(info.get('descriptionurl') or info.get('url') or '')
+   if not url or base in used or re.search(r'\.(?:svg|gif|webm|ogv)(?:\?|$)',url,re.I):continue
+   license_name=strip_tags((meta.get('LicenseShortName') or {}).get('value')) or 'Wikimedia Commons licence';artist=strip_tags((meta.get('Artist') or {}).get('value')) or 'Wikimedia Commons contributor'
+   used.add(base);return {'url':url,'base':base,'credit':f'Photo: {artist[:100]} · {license_name} · Wikimedia Commons'}
  return None
 
 def replace_hero(content,pic):
@@ -134,12 +148,12 @@ def main():
  # Newest instance keeps an existing duplicated photo; older repeats receive a distinct Commons photo.
  for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True):
   old=p.get('labels',[]);new=normalized_labels(p,categories)
-  hero=clean_src((srcs(p.get('content','')) or [''])[0]);duplicate=bool(hero and hero in hero_owner);content=p.get('content','')
-  if hero:used.add(hero)
+  hero=clean_src((srcs(p.get('content','')) or [''])[0]);hero_key=image_key(hero);duplicate=bool(hero_key and hero_key in hero_owner);content=p.get('content','')
+  if hero_key:used.add(hero_key)
   if duplicate:
-   desk=next((x for x in new if x not in ('News','2026 Money Moves','Kushal K. Daga')),new[0]);pic=commons_photo(p.get('title','')+' '+desk,used)
-   if pic:content=replace_hero(content,pic);images_fixed+=1
-  if hero:hero_owner.setdefault(hero,p['id'])
+   desk=next((x for x in new if x not in ('News','2026 Money Moves','Kushal K. Daga')),new[0]);pic=commons_photo(p.get('title',''),desk,used)
+   if pic:content=replace_hero(content,pic);images_fixed+=1;hero_key=pic['base']
+  if hero_key:hero_owner.setdefault(hero_key,p['id'])
   if new!=old or content!=p.get('content',''):
    put('posts',p,h,content,new);p['labels']=new;p['content']=content;labels_fixed+=int(new!=old);time.sleep(.08)
  by_title={p['title'].strip().upper():p for p in pages}
@@ -149,7 +163,7 @@ def main():
  if ac!=ap['content']:put('pages',ap,h,ac);pages_fixed+=1
  if nc!=np['content']:put('pages',np,h,nc);pages_fixed+=1
  # Authenticated verification; no public URL requests.
- verified=list_all('posts',h);heroes=[clean_src((srcs(p.get('content','')) or [''])[0]) for p in verified];heroes=[x for x in heroes if x];dupes=len(heroes)-len(set(heroes))
+ verified=list_all('posts',h);heroes=[image_key((srcs(p.get('content','')) or [''])[0]) for p in verified];heroes=[x for x in heroes if x];dupes=len(heroes)-len(set(heroes))
  report={'status':'PASS' if dupes==0 else 'PARTIAL','zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts)}
  REPORT.write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report))
  if dupes:raise RuntimeError(f'{dupes} duplicate hero assignments remain')
