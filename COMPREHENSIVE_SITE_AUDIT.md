@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T08:19:58.239876+05:30
+- **Checked:** 2026-10-02T09:55:56.739288+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 217 URLs · 203 Posts · 13 Pages
+- **Inventory:** 219 URLs · 205 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/216 tracked PASS
+- **Search Console:** OK · 0/218 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -26,6 +26,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Economy and Macro Policy News · 2 October 2026 · Coverage October 1 to 2 — OECD chief economist calls Future Fund 'wise policy choice': budget ministry; Asia Bankers…**
+- ✅ **post · Market and Trading News · 2 October 2026 · Coverage October 1 to 2 — Situation in Europe so critical that it is being ‘eaten alive’ — Trump; IN BRIEF: Putin…**
 - ✅ **post · S&P 500 vs. Global: Pick One**
 - ✅ **post · India Finance News · 2 October 2026 · Coverage October 1 to 2 — Remittance Order dated October 01, 2026 issued under RC No. 9267 of 2026 drawn against S S…**
 - ✅ **post · Global Finance Wire · 2 October 2026 · Coverage October 1 to 2 — Average Contract Interest Rates on Loans and Discounts (Aug.)[PDF 1,118KB]; Sources of…**
