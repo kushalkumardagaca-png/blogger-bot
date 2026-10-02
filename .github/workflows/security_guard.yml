@@ -112,7 +112,17 @@ jobs:
           exit 1
 
       - name: Fail closed when a security anomaly is present
-        if: steps.guard.outcome == 'failure'
+        if: always()
         run: |
-          echo "Security Guard detected an integrity or injection anomaly. Review SECURITY_STATUS artifact."
-          exit 1
+          if python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('SECURITY_STATUS.json')
+          raise SystemExit(0 if p.exists() and json.loads(p.read_text()).get('status')=='PASS' else 1)
+          PY
+          then
+            echo "Security Guard status is PASS."
+          else
+            echo "Security Guard detected an integrity or injection anomaly. Review SECURITY_STATUS artifact."
+            exit 1
+          fi
