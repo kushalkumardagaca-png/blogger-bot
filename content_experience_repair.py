@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Repair Daily Yield labels, duplicate hero photography and Page feed rendering.
 
-Uses authenticated Blogger API inventory only; it never opens a public Daily Yield URL
-and therefore creates no synthetic pageviews.
+Uses authenticated Blogger API inventory only; it never opens, prefetches or renders a
+public Daily Yield URL and therefore creates no synthetic pageviews.
 """
 from __future__ import annotations
 import html, json, os, re, time
