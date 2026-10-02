@@ -3,8 +3,8 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 226,
-    "posts": 212,
+    "urls": 227,
+    "posts": 213,
     "pages": 13,
     "contentFailures": 0,
     "externalDestinationsChecked": 2043,
@@ -2530,28 +2530,39 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html": {
+        "title": "Capital Gains, Explained Like a Human",
+        "checkedAt": "2026-10-02T14:17:53.307363+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 225,
-      "tracked": 225,
+      "inventory": 226,
+      "tracked": 226,
       "pass": 0,
-      "neutralOrOther": 225,
-      "inspectedThisRun": 0,
+      "neutralOrOther": 226,
+      "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 48
+        "URL is unknown to Google": 49
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 215,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 216,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 48
+      "unknownToGoogle": 49
     }
   },
   "github": [
@@ -2559,8 +2570,8 @@
       "name": "Master publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36968777504,
-      "latestUpdatedAt": "2026-10-02T05:24:40Z",
+      "latestRunId": 36984542615,
+      "latestUpdatedAt": "2026-10-02T08:32:15Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
@@ -2575,24 +2586,24 @@
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36976308753,
-      "latestUpdatedAt": "2026-10-02T07:15:38Z",
+      "latestRunId": 36985804894,
+      "latestUpdatedAt": "2026-10-02T08:45:18Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36983811342,
-      "latestUpdatedAt": "2026-10-02T08:24:26Z",
+      "latestRunId": 36986128961,
+      "latestUpdatedAt": "2026-10-02T08:48:36Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36981771532,
-      "latestUpdatedAt": "2026-10-02T08:04:01Z",
+      "latestRunId": 36984154694,
+      "latestUpdatedAt": "2026-10-02T08:29:27Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
