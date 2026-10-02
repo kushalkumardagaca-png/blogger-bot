@@ -140,6 +140,8 @@ def audit_content(item, known):
     missing_alt = [tag for tag in image_tags if not (lambda m: m and html.unescape(m.group(1)).strip())(re.search(r"\balt\s*=\s*[\"']([^\"']*)[\"']", tag, re.I))]
     if missing_alt:
         issues.append(f"{len(missing_alt)} image(s) missing descriptive alt text")
+    if title.strip().upper() == "DAILY NEWS" and "DY_AUTHENTICATED_NEWS_FALLBACK_START" not in content:
+        issues.append("authenticated country and specialty card fallback missing")
     if len(title) > 46:
         issues.append(f"Bing title budget exceeded ({len(title)} characters; maximum 46)")
     if not any(marker in content for marker in ("DY_SEO_META_START", "metaDesc")):
