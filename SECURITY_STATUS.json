@@ -1,9 +1,11 @@
 {
-  "checkedAt": "2026-10-02T10:00:03.892826+00:00",
-  "status": "PASS",
+  "checkedAt": "2026-10-02T10:00:22.578191+00:00",
+  "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [],
+  "critical": [
+    "critical repository files changed without baseline approval: .github/workflows/content_experience_repair.yml"
+  ],
   "warnings": [],
   "details": {
     "pages": 13,
@@ -13,7 +15,7 @@
     "removedItems": 0,
     "repositoryFiles": 61,
     "backupCreated": false,
-    "repositoryChangeApproved": true,
+    "repositoryChangeApproved": false,
     "bloggerChangeApproved": false
   }
 }

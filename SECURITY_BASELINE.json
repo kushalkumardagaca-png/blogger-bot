@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T10:00:03.891205+00:00",
+  "approvedAt": "2026-10-02T09:57:29.710254+00:00",
   "repository": {
     "auto_blogger_publisher.py": "5dc016b83accce2406956dd9d9a8fd78c61e5773e4297ba12ba2acfe301ba715",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
@@ -46,7 +46,6 @@
     ".github/workflows/bing_seo_repair.yml": "c52d8fd44619f95c109222d523f386a9004bf6b5ff6054f24bdd862615306dc4",
     ".github/workflows/bing_url_automation.yml": "8ebe2173b68b006b6dfe8bce93a5a4d7f30c431774d01955c3b0fe1708fc9fd0",
     ".github/workflows/content_experience_inventory.yml": "93a99a9289d4bfeb60b3f09df19baceeb69353f3faf3dde470c621fb66955fb9",
-    ".github/workflows/content_experience_repair.yml": "4d7902bcd3d647aded5b6ab73a3a62d6fbd38239a05c9863468ef1ac9e4e2182",
     ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
     ".github/workflows/deploy_global_snapshot.yml": "1963105e6de9476d1a6ad2149036ec0d74b1992c46d9984314079d5c6460d2b6",
     ".github/workflows/deploy_markets_today.yml": "defa06e48a006bc7c9dfc1fb81b60217ab61cac1bd43ae6df51dfa0c6cd0bc99",
