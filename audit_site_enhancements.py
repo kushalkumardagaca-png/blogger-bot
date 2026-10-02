@@ -24,7 +24,7 @@ for p in THEMES:
       'form success state':"data-state','success",'form error state':"data-state','error",
       'accurate schema-based last reviewed date':'schemaModified','privacy confirmation dialog':"role='dialog'",'visible FAQ':"id='dy-site-faq'",'FAQ schema':'FAQPage',
       'floating contact':"aria-label='Contact Daily Yield'",'breadcrumb navigation':"class='dy-breadcrumb'",
-      'breadcrumb schema':'BreadcrumbList','Blogger canonical package':"name='all-head-content'",'English document language':"lang='en'",'content language declaration':"http-equiv='Content-Language'",'descriptive homepage title':'Daily Yield | Finance, Markets, News &amp; Calculators','branded Page titles':'<data:blog.pageName/> | Daily Yield Finance','robots index policy':"name='robots'",
+      'breadcrumb schema':'BreadcrumbList','Blogger canonical package':"name='all-head-content'",'English document language':"lang='en'",'content language declaration':"http-equiv='Content-Language'",'descriptive homepage title':'Daily Yield | Finance, Markets, News &amp; Calculators','Bing-safe single-item titles':'<title><data:blog.pageName/></title>','server-rendered description fallback':'Bing-safe server-rendered fallback','robots index policy':"name='robots'",
       'Googlebot policy':"name='googlebot'",'Bingbot policy':"name='bingbot'",'ChatGPT search policy':"name='ChatGPT-User'",
       'OpenAI search policy':"name='OAI-SearchBot'",'WebSite schema':'SearchAction','favicon':"rel='icon'",
       'responsive mobile CSS':'@media(max-width:560px)','keyboard focus':':focus-visible','reduced motion':'prefers-reduced-motion',
@@ -38,7 +38,7 @@ for p in THEMES:
     theme_images=[] if not valid else [node for node in tree.getroot().iter() if str(node.tag).split('}')[-1].lower()=='img']
     check(prefix+'every Theme image has nonempty alt', valid and all(any(str(key).split('}')[-1]=='alt' and str(value).strip() for key,value in node.attrib.items()) for node in theme_images))
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)
-    check(prefix+'Blogger package is sole standard meta-description authority', "<meta expr:content='data:blog.metaDescription' name='description'/>" not in text)
+    check(prefix+'description fallback is conditional and non-duplicating', "<b:if cond='!data:blog.metaDescription'>" in text and "<meta expr:content='data:blog.metaDescription' name='description'/>" not in text)
     check(prefix+'privacy control is not floating', '.dy-privacy-manage{position:fixed' not in text)
     check(prefix+'no Google Business Profile', 'Google Business Profile' not in text)
 
@@ -59,8 +59,8 @@ check('zero-view policy remains enforced',(ROOT/'audit_zero_view_policy.py').exi
 preflight=(ROOT/'publication_preflight.py').read_text()
 watchdog=(ROOT/'zero_view_watchdog.py').read_text()
 check('future publications require one primary H1','exactly one primary H1' in preflight)
-check('future publications require image alt attributes and descriptive hero alt','missing an alt attribute' in preflight and 'hero image missing descriptive alt text' in preflight)
-check('watchdog detects missing image alt attributes','missing an alt attribute' in watchdog)
+check('future publications require descriptive image alts','missing descriptive alt text' in preflight and 'hero image missing descriptive alt text' in preflight)
+check('watchdog detects missing or empty image alts','missing descriptive alt text' in watchdog)
 check('watchdog detects external redirect chains','redirectChains' in watchdog and 'redirectCount' in watchdog)
 check('watchdog confirms hard external failures with a second request','confirmedAfterRetry' in watchdog and 'Cache-Control' in watchdog)
 page_repair=(ROOT/'update_page_family.py').read_text()

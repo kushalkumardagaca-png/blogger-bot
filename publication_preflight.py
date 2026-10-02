@@ -5,6 +5,7 @@ from image_safety import image_works
 def assert_publishable(title,content,labels):
  issues=[]; labels=labels or []
  if not title or len(title.strip())<20:issues.append('missing/short SEO title (minimum 20 characters)')
+ if len(title.strip())>46:issues.append(f'Bing title budget exceeded ({len(title.strip())} characters; maximum 46)')
  if len(content)<8000:issues.append(f'content package too small ({len(content)} bytes)')
  if 'Kushal K. Daga' not in content:issues.append('current byline missing')
  if 'challenge-platform' in content or '/cdn-cgi/challenge-platform/' in content:issues.append('invalid copied challenge script')
@@ -20,8 +21,11 @@ def assert_publishable(title,content,labels):
  if h1_count!=1:issues.append(f'content must contain exactly one primary H1 (found {h1_count})')
  img_tags=re.findall(r'<img\b[^>]*>',content,re.I)
  imgs=[html.unescape(x) for x in re.findall(r'<img\b[^>]*\bsrc=["\']([^"\']+)',content,re.I)]
- missing_alt=[tag for tag in img_tags if not re.search(r'\balt=["\'][^"\']*["\']',tag,re.I)]
- if missing_alt:issues.append(f'{len(missing_alt)} image(s) missing an alt attribute')
+ missing_alt=[]
+ for tag in img_tags:
+  alt=re.search(r'\balt\s*=\s*["\']([^"\']*)["\']',tag,re.I)
+  if not alt or not html.unescape(alt.group(1)).strip():missing_alt.append(tag)
+ if missing_alt:issues.append(f'{len(missing_alt)} image(s) missing descriptive alt text')
  if not imgs:issues.append('hero image missing')
  else:
   hero_alt=re.search(r'\balt=["\']([^"\']*)["\']',img_tags[0],re.I) if img_tags else None

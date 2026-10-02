@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **146**
+- Pass: **148**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -36,7 +36,8 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: English document language
 - ✅ Daily-Yield-Theme-Subscription.xml: content language declaration
 - ✅ Daily-Yield-Theme-Subscription.xml: descriptive homepage title
-- ✅ Daily-Yield-Theme-Subscription.xml: branded Page titles
+- ✅ Daily-Yield-Theme-Subscription.xml: Bing-safe single-item titles
+- ✅ Daily-Yield-Theme-Subscription.xml: server-rendered description fallback
 - ✅ Daily-Yield-Theme-Subscription.xml: robots index policy
 - ✅ Daily-Yield-Theme-Subscription.xml: Googlebot policy
 - ✅ Daily-Yield-Theme-Subscription.xml: Bingbot policy
@@ -64,7 +65,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: honest advice disclaimer
 - ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
-- ✅ Daily-Yield-Theme-Subscription.xml: Blogger package is sole standard meta-description authority
+- ✅ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
 - ✅ Daily-Yield-Theme-Subscription.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-Subscription.xml: no Google Business Profile
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: valid Blogger XML
@@ -99,7 +100,8 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: English document language
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: content language declaration
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: descriptive homepage title
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: branded Page titles
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Bing-safe single-item titles
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: server-rendered description fallback
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: robots index policy
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Googlebot policy
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Bingbot policy
@@ -127,7 +129,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Blogger package is sole standard meta-description authority
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no Google Business Profile
 - ✅ health workflow runs experience audit
@@ -142,8 +144,8 @@
 - ✅ Blogger remains server rendered
 - ✅ zero-view policy remains enforced
 - ✅ future publications require one primary H1
-- ✅ future publications require image alt attributes and descriptive hero alt
-- ✅ watchdog detects missing image alt attributes
+- ✅ future publications require descriptive image alts
+- ✅ watchdog detects missing or empty image alts
 - ✅ watchdog detects external redirect chains
 - ✅ watchdog confirms hard external failures with a second request
 - ✅ Page-family repair adds only missing alt attributes

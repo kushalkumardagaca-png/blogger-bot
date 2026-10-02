@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-01T13:06:51+05:30",
+  "checked_at_ist": "2026-10-02T12:39:33+05:30",
   "summary": {
-    "pass": 109,
+    "pass": 120,
     "fail": 0
   },
   "checks": [
@@ -96,7 +96,7 @@
       "detail": ""
     },
     {
-      "name": "Facebook destination link is always the first caption line",
+      "name": "Facebook uses platform-native creative copy instead of corporate boilerplate",
       "status": "PASS",
       "detail": ""
     },
@@ -106,7 +106,7 @@
       "detail": ""
     },
     {
-      "name": "Facebook always renders a branded 1200x630 topic card",
+      "name": "Facebook renders the shared deterministic 1200x630 creative system",
       "status": "PASS",
       "detail": ""
     },
@@ -156,7 +156,7 @@
       "detail": ""
     },
     {
-      "name": "Bluesky text preserves link-first access, byline and brand identity",
+      "name": "Bluesky uses concise platform-native creative copy and brand identity",
       "status": "PASS",
       "detail": ""
     },
@@ -166,7 +166,7 @@
       "detail": ""
     },
     {
-      "name": "Bluesky always uploads a branded card with descriptive alt text",
+      "name": "Bluesky uploads the shared creative card with descriptive alt text",
       "status": "PASS",
       "detail": ""
     },
@@ -211,12 +211,12 @@
       "detail": ""
     },
     {
-      "name": "Tumblr creates modern NPF posts with branded uploaded media and alt text",
+      "name": "Tumblr creates modern NPF posts with shared creative media and alt text",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Tumblr preserves title, summary, direct link, byline and limited tags",
+      "name": "Tumblr preserves title, summary, direct link, byline and platform-native tags",
       "status": "PASS",
       "detail": ""
     },
@@ -247,6 +247,51 @@
     },
     {
       "name": "Mastodon uses official API, isolated credentials and zero-view discovery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Mastodon uses platform-native copy, descriptive alt text and shared creative cards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Shared social creative engine is deployed across all four active networks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Creative system is photo-first with at least ten treatments and five compositions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Creative system mixes article heroes with a broad licensed global lifestyle library",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Photo selection is semantic and fails closed instead of producing a banner",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Creative outputs are deterministic per platform, destination and IST day",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Captions use topic hooks, questions and platform-specific structures",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Creative engine cannot request a Daily Yield public page",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Corporate social boilerplate was removed from all active publisher outputs",
       "status": "PASS",
       "detail": ""
     },
@@ -311,7 +356,17 @@
       "detail": ""
     },
     {
-      "name": "Security guard fails closed without accepting an anomalous baseline",
+      "name": "Security guard fails closed without accepting an anomalous Blogger baseline",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Accepted main-branch code changes refresh repository hashes without approving Blogger mutations",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Security guard protects the shared live social creative engine",
       "status": "PASS",
       "detail": ""
     },
@@ -511,7 +566,7 @@
       "detail": ""
     },
     {
-      "name": "News titles show desk, publication date and exact coverage window first",
+      "name": "News titles are Bing-safe while exact coverage remains in description/body",
       "status": "PASS",
       "detail": ""
     },
@@ -533,7 +588,7 @@
     {
       "name": "Master tracker next-topic state is valid",
       "status": "PASS",
-      "detail": "next index 57"
+      "detail": "next index 62"
     },
     {
       "name": "News tracker launch/state is valid",

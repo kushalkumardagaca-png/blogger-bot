@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 146,
+  "pass": 148,
   "fail": 0,
   "checks": [
     {
@@ -133,7 +133,11 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: branded Page titles",
+      "name": "Daily-Yield-Theme-Subscription.xml: Bing-safe single-item titles",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: server-rendered description fallback",
       "status": "PASS"
     },
     {
@@ -245,7 +249,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: Blogger package is sole standard meta-description authority",
+      "name": "Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating",
       "status": "PASS"
     },
     {
@@ -385,7 +389,11 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: branded Page titles",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Bing-safe single-item titles",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: server-rendered description fallback",
       "status": "PASS"
     },
     {
@@ -497,7 +505,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Blogger package is sole standard meta-description authority",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating",
       "status": "PASS"
     },
     {
@@ -557,11 +565,11 @@
       "status": "PASS"
     },
     {
-      "name": "future publications require image alt attributes and descriptive hero alt",
+      "name": "future publications require descriptive image alts",
       "status": "PASS"
     },
     {
-      "name": "watchdog detects missing image alt attributes",
+      "name": "watchdog detects missing or empty image alts",
       "status": "PASS"
     },
     {

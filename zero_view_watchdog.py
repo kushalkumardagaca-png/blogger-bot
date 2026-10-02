@@ -137,9 +137,13 @@ def audit_content(item, known):
     links = attrs(content, "a", "href")
     images = attrs(content, "img", "src")
     image_tags = re.findall(r"<img\b[^>]*>", content or "", re.I)
-    missing_alt = [tag for tag in image_tags if not re.search(r"\balt=[\"'][^\"']*[\"']", tag, re.I)]
+    missing_alt = [tag for tag in image_tags if not (lambda m: m and html.unescape(m.group(1)).strip())(re.search(r"\balt\s*=\s*[\"']([^\"']*)[\"']", tag, re.I))]
     if missing_alt:
-        issues.append(f"{len(missing_alt)} image(s) missing an alt attribute")
+        issues.append(f"{len(missing_alt)} image(s) missing descriptive alt text")
+    if len(title) > 46:
+        issues.append(f"Bing title budget exceeded ({len(title)} characters; maximum 46)")
+    if not any(marker in content for marker in ("DY_SEO_META_START", "metaDesc")):
+        issues.append("SEO/meta description package missing")
     h1_count = len(re.findall(r"<h1\b", content or "", re.I))
     if h1_count != 1:
         warnings.append(f"content primary H1 count {h1_count}; expected 1 with Theme v4")
@@ -192,8 +196,6 @@ def audit_content(item, known):
             issues.append(f"related suggestion count {len(related)}, expected 4")
         if "DY_CONTINUOUS_MOTION_START" not in content:
             issues.append("motion/swipe package missing")
-        if not any(marker in content for marker in ("DY_SEO_META_START", "metaDesc")):
-            issues.append("SEO/meta description package missing")
         if "News" in item.get("labels", []) and 'class="fbk-src' not in content:
             issues.append("original News source links missing")
     for link in internal:

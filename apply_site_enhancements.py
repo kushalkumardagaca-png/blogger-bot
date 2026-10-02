@@ -88,7 +88,7 @@ if(panel&&manage){var hero=D.querySelector('.fk-home .kv-hero');if(hero)hero.ins
 try{var q=new URLSearchParams(location.search),a={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){var v=q.get(k);if(v)a[k]=v.slice(0,160);});if(Object.keys(a).length){sessionStorage.setItem('dy-attribution',JSON.stringify(a));H.setAttribute('data-dy-attributed','true');}}catch(e){}
 D.querySelectorAll('input[type="password"]').forEach(function(i){if(i.parentNode.classList.contains('dy-password-wrap'))return;var w=D.createElement('span');w.className='dy-password-wrap';i.parentNode.insertBefore(w,i);w.appendChild(i);var b=D.createElement('button');b.type='button';b.className='dy-password-toggle';b.textContent='Show';b.setAttribute('aria-label','Show password');b.addEventListener('click',function(){var show=i.type==='password';i.type=show?'text':'password';b.textContent=show?'Hide':'Show';b.setAttribute('aria-label',(show?'Hide':'Show')+' password');});w.appendChild(b);});
 D.querySelectorAll('form').forEach(function(f){var s=f.querySelector('.dy-form-status');if(!s){s=D.createElement('p');s.className='dy-form-status';s.setAttribute('role','status');f.appendChild(s);}f.addEventListener('invalid',function(e){s.textContent='Please check the highlighted field and try again.';s.setAttribute('data-state','error');},true);f.addEventListener('submit',function(){if(f.checkValidity()){s.textContent=f.classList.contains('dy-sub-form')?'Opening the secure confirmation step in a new tab.':'Submitted. Please follow the next on-screen step.';s.setAttribute('data-state','success');}});});
-D.querySelectorAll('img:not([alt])').forEach(function(img){var box=img.closest('a,article,figure'),label=box?(box.getAttribute('aria-label')||box.textContent||''):'';label=label.replace(/\s+/g,' ').trim().slice(0,160);img.alt=label||'Daily Yield editorial image';});
+D.querySelectorAll('img:not([alt]),img[alt=""]').forEach(function(img){var box=img.closest('a,article,figure'),label=box?(box.getAttribute('aria-label')||box.textContent||''):'';label=label.replace(/\s+/g,' ').trim().slice(0,160);img.alt=label||'Daily Yield editorial image';});
 D.querySelectorAll('.post-body img,.page-body img').forEach(function(img,n){if(!img.hasAttribute('decoding'))img.setAttribute('decoding','async');if(n>0&&!img.hasAttribute('loading'))img.setAttribute('loading','lazy');if(n===0&&!img.hasAttribute('fetchpriority'))img.setAttribute('fetchpriority','high');});
 var contentH1=D.querySelector('.item-post .post-body h1'),templateTitle=D.querySelector('.item-post .post-header .post-title-container');if(contentH1&&templateTitle)templateTitle.style.display='none';
 function schemaModified(){var found='';D.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){try{var data=JSON.parse(s.textContent),walk=function(x){if(!x||found)return;if(Array.isArray(x)){x.forEach(walk);return;}if(typeof x==='object'){if(x.dateModified)found=String(x.dateModified);Object.keys(x).forEach(function(k){walk(x[k]);});}};walk(data);}catch(e){}});return found;}
@@ -126,6 +126,20 @@ def inject(text: str) -> str:
     if 'Daily Yield | Finance, Markets, News &amp; Calculators' not in text:
         text = text.replace(old_title, title_package, 1)
     text = text.replace("<b:if cond='data:blog.metaDescription'>\n<meta expr:content='data:blog.metaDescription' name='description'/>\n</b:if>\n", "", 1)
+    if "Bing-safe server-rendered fallback" not in text:
+        fallback = """<b:include data='blog' name='all-head-content'/>
+<!-- Bing-safe server-rendered fallback. Blogger's all-head-content remains the
+     sole standard-description source when an editor-provided value exists. -->
+<b:if cond='!data:blog.metaDescription'>
+ <b:if cond='data:view.isHomepage'>
+  <meta content='Daily Yield explains finance, markets and money with sourced news, practical calculators, clear analysis and educational tools for global readers.' name='description'/>
+ <b:elseif cond='data:view.isSingleItem'/>
+  <meta expr:content='data:blog.pageName + &quot; — Sourced financial context, practical explanations and clear takeaways from Daily Yield.&quot;' name='description'/>
+ <b:else/>
+  <meta content='Explore Daily Yield finance education, market coverage, practical money guides, calculators and sourced financial analysis.' name='description'/>
+ </b:if>
+</b:if>"""
+        text = text.replace("<b:include data='blog' name='all-head-content'/>", fallback, 1)
     viewport = "<meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'/>"
     if "http-equiv='Content-Language'" not in text:
         text = text.replace(viewport, viewport + "\n<meta content='en' http-equiv='Content-Language'/>", 1)

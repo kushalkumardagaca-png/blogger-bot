@@ -62,6 +62,8 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from publication_preflight import assert_publishable
 from page_family import ensure_family
+from seo_hygiene import compact_title, repair_image_alts
+from seo_meta import ensure_seo_meta
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 
@@ -168,7 +170,8 @@ def generate_svg_diagram_2():
 
 def generate_article_content(topic, pub_date_str, pub_time_str):
     category = get_standardized_category(topic["Category"])
-    title = topic["Punchy Title"]
+    # Keep the Blogger document title within Bing's rendered-title budget.
+    title = compact_title(topic["Punchy Title"])
     desc = topic["Video Description"]
     idea = topic["Video Idea"]
     slug = clean_slug(title)
@@ -779,6 +782,8 @@ document.addEventListener("DOMContentLoaded", function() {{
   </section>
 </article>
 """
+    html, _ = repair_image_alts(html, title)
+    html = ensure_seo_meta(html, title, meta_desc)
     return title, slug, meta_desc, labels, html
 
 def publish_to_blogger(title, content, labels):

@@ -32,6 +32,7 @@ from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
+from seo_hygiene import compact_title, repair_image_alts
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -915,7 +916,9 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     win_str = f"{fmt_day(win_start.date())}–{fmt_day(win_end.date())} {win_end.year}"
     coverage_lead = coverage_window_text(win_start, win_end)
     publish_lead = f"{edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
-    title = f"{desk_title_prefix(desk)} · {publish_lead} · Coverage {coverage_lead} — {headline_bits}"
+    # Coverage and headlines remain in the description/body; the document title
+    # stays compact enough for Bing even while Blogger appends the site name.
+    title = compact_title(f"{desk_title_prefix(desk)} — {publish_lead}")
     meta = (f"{desk_title_prefix(desk)}, coverage {coverage_lead}: "
             + "; ".join(t for t in top[:3])).strip()
     if len(meta) > 158:
@@ -1220,6 +1223,7 @@ def run_desk(desk, tracker, dry=False, token=None):
     art["html"] = ensure_seo_meta(art["html"], art["title"], art["meta"], hero_match.group(1) if hero_match else "")
     art["html"] = ensure_family(art["html"])
     art["html"] = ensure_continuous_motion(art["html"])
+    art["html"], _ = repair_image_alts(art["html"], art["title"])
     assert_publishable(art["title"], art["html"], art["labels"])
     print(f"  [{desk}] article built: {art['n_items']} items, '{art['title'][:70]}…'")
     url = publish_post(art, token, dry)

@@ -286,9 +286,10 @@ check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Da
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
 check('News meta description capped','if len(meta) > 158' in np)
-check('News titles show desk, publication date and exact coverage window first',
-      'title = f"{desk_title_prefix(desk)} · {publish_lead} · Coverage {coverage_lead}' in np
-      and 'coverage_window_text' in np)
+check('News titles are Bing-safe while exact coverage remains in description/body',
+      'title = compact_title(f"{desk_title_prefix(desk)} — {publish_lead}")' in np
+      and 'coverage_lead = coverage_window_text(win_start, win_end)' in np
+      and 'coverage {coverage_lead}' in np)
 check('Older dates never alter the stated current coverage window',
       'background_items = [i for i in items if i.get("background")]' in np
       and 'coverage_lead = coverage_window_text(win_start, win_end)' in np

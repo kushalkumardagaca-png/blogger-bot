@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 109 PASS · 0 FAIL
+**Result:** 120 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -22,9 +22,9 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Facebook legacy auto-selection schedule is disabled in favour of exact coordinated routing** — []
 - ✅ **Facebook uses encrypted token secret, never a literal token**
 - ✅ **Facebook derives a Page token before publishing**
-- ✅ **Facebook destination link is always the first caption line**
+- ✅ **Facebook uses platform-native creative copy instead of corporate boilerplate**
 - ✅ **Facebook descriptions preserve complete short source text**
-- ✅ **Facebook always renders a branded 1200x630 topic card**
+- ✅ **Facebook renders the shared deterministic 1200x630 creative system**
 - ✅ **Facebook uploads the rendered card rather than a raw full-frame photo**
 - ✅ **Facebook rotates audience-facing website Pages as well as posts**
 - ✅ **Facebook deduplicates and reconciles uncertain writes**
@@ -34,9 +34,9 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Bluesky legacy auto-selection schedule is disabled behind its manual activation gate**
 - ✅ **Bluesky app password is an encrypted secret, never a literal credential**
 - ✅ **Bluesky uses official AT Protocol session, blob and record endpoints**
-- ✅ **Bluesky text preserves link-first access, byline and brand identity**
+- ✅ **Bluesky uses concise platform-native creative copy and brand identity**
 - ✅ **Bluesky enforces the 300-character limit and rich-text facets**
-- ✅ **Bluesky always uploads a branded card with descriptive alt text**
+- ✅ **Bluesky uploads the shared creative card with descriptive alt text**
 - ✅ **Bluesky rotates Pages and posts using an independent publication history**
 - ✅ **Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes**
 - ✅ **Bluesky candidate discovery makes no Daily Yield public-page request**
@@ -45,14 +45,23 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Tumblr credentials and encryption key are GitHub secrets or variables**
 - ✅ **Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens**
 - ✅ **Tumblr publisher rotates refresh tokens without logging plaintext credentials**
-- ✅ **Tumblr creates modern NPF posts with branded uploaded media and alt text**
-- ✅ **Tumblr preserves title, summary, direct link, byline and limited tags**
+- ✅ **Tumblr creates modern NPF posts with shared creative media and alt text**
+- ✅ **Tumblr preserves title, summary, direct link, byline and platform-native tags**
 - ✅ **Tumblr rotates Pages and posts using its own tracker**
 - ✅ **Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes**
 - ✅ **Tumblr candidate discovery creates no Daily Yield public-page requests**
 - ✅ **Mastodon publisher files and independent tracker are deployed**
 - ✅ **Mastodon legacy auto-selection schedule is disabled behind its manual activation gate**
 - ✅ **Mastodon uses official API, isolated credentials and zero-view discovery**
+- ✅ **Mastodon uses platform-native copy, descriptive alt text and shared creative cards**
+- ✅ **Shared social creative engine is deployed across all four active networks**
+- ✅ **Creative system is photo-first with at least ten treatments and five compositions**
+- ✅ **Creative system mixes article heroes with a broad licensed global lifestyle library**
+- ✅ **Photo selection is semantic and fails closed instead of producing a banner**
+- ✅ **Creative outputs are deterministic per platform, destination and IST day**
+- ✅ **Captions use topic hooks, questions and platform-specific structures**
+- ✅ **Creative engine cannot request a Daily Yield public page**
+- ✅ **Corporate social boilerplate was removed from all active publisher outputs**
 - ✅ **Coordinated router and event dispatcher are deployed**
 - ✅ **Exactly five evenly spread audience-resource promotions are scheduled**
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
@@ -65,7 +74,9 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Security guard runs four times per hour and creates a daily backup**
 - ✅ **Security guard reads Blogger only through authenticated API**
 - ✅ **Security guard detects deletion, modification, injection and leaked secrets**
-- ✅ **Security guard fails closed without accepting an anomalous baseline**
+- ✅ **Security guard fails closed without accepting an anomalous Blogger baseline**
+- ✅ **Accepted main-branch code changes refresh repository hashes without approving Blogger mutations**
+- ✅ **Security guard protects the shared live social creative engine**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include related-reading shelf**
@@ -105,11 +116,11 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News publisher brand is Daily Yield**
 - ✅ **News schema uses actual build/publish time**
 - ✅ **News meta description capped**
-- ✅ **News titles show desk, publication date and exact coverage window first**
+- ✅ **News titles are Bing-safe while exact coverage remains in description/body**
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 57
+- ✅ **Master tracker next-topic state is valid** — next index 62
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
