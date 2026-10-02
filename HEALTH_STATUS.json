@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 221,
-    "posts": 207,
+    "urls": 224,
+    "posts": 210,
     "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1987,
+    "externalDestinationsChecked": 2016,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 120,
+    "transientExternalResponses": 116,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2475,28 +2475,61 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/uk-2026-10-02.html": {
+        "title": "UK Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Economic activity and social change in the UK, real-time indicators: 1 October 2026\u2026",
+        "checkedAt": "2026-10-02T12:00:33.815324+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/japan-2026-10-02.html": {
+        "title": "Japan Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 JGBs Auction Result of Treasury Discount Bills on October 2, 2026; PRI International\u2026",
+        "checkedAt": "2026-10-02T12:00:33.815324+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html": {
+        "title": "Coast vs. Barista vs. Fat FIRE",
+        "checkedAt": "2026-10-02T12:00:33.815324+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 220,
-      "tracked": 220,
+      "inventory": 223,
+      "tracked": 223,
       "pass": 0,
-      "neutralOrOther": 220,
-      "inspectedThisRun": 2,
+      "neutralOrOther": 223,
+      "inspectedThisRun": 3,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 43
+        "URL is unknown to Google": 46
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 210,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 213,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 43
+      "unknownToGoogle": 46
     }
   },
   "github": [
@@ -2504,41 +2537,41 @@
       "name": "Master publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36953067878,
-      "latestUpdatedAt": "2026-10-02T01:53:53Z",
+      "latestRunId": 36968777504,
+      "latestUpdatedAt": "2026-10-02T05:24:40Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36965006386,
-      "latestUpdatedAt": "2026-10-02T04:33:19Z",
+      "latestRunId": 36970914538,
+      "latestUpdatedAt": "2026-10-02T05:53:22Z",
       "detail": "latest=success; 1 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36965932759,
-      "latestUpdatedAt": "2026-10-02T04:45:53Z",
+      "latestRunId": 36970955827,
+      "latestUpdatedAt": "2026-10-02T06:08:33Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36966440610,
-      "latestUpdatedAt": "2026-10-02T04:52:43Z",
-      "detail": "latest=success; 8 failures among 12 recent completed runs"
+      "latestRunId": 36973608274,
+      "latestUpdatedAt": "2026-10-02T06:27:25Z",
+      "detail": "latest=success; 5 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36964512809,
-      "latestUpdatedAt": "2026-10-02T04:28:00Z",
-      "detail": "latest=success; 2 failures among 11 recent completed runs"
+      "latestRunId": 36966440590,
+      "latestUpdatedAt": "2026-10-02T04:54:45Z",
+      "detail": "latest=success; 1 failures among 11 recent completed runs"
     }
   ],
   "providers": [
