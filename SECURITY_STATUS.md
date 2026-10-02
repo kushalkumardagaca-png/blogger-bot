@@ -1,11 +1,11 @@
 # Daily Yield Security Guard
 
 - **Status:** FAIL
-- **Checked:** 2026-10-02T10:00:22.578191+00:00
+- **Checked:** 2026-10-02T10:08:58.858099+00:00
 - **Public website requests:** 0
 
 ## Critical findings
-- critical repository files changed without baseline approval: .github/workflows/content_experience_repair.yml
+- existing Blogger content changed without baseline approval: page:1685707888914861815, page:9217579601621666930, post:5855044192522572590
 
 ## Warnings
 - None

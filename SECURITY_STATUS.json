@@ -1,21 +1,21 @@
 {
-  "checkedAt": "2026-10-02T10:00:22.578191+00:00",
+  "checkedAt": "2026-10-02T10:08:58.858099+00:00",
   "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "critical": [
-    "critical repository files changed without baseline approval: .github/workflows/content_experience_repair.yml"
+    "existing Blogger content changed without baseline approval: page:1685707888914861815, page:9217579601621666930, post:5855044192522572590"
   ],
   "warnings": [],
   "details": {
     "pages": 13,
     "posts": 215,
     "newItems": 0,
-    "changedItems": 0,
+    "changedItems": 3,
     "removedItems": 0,
     "repositoryFiles": 61,
     "backupCreated": false,
-    "repositoryChangeApproved": false,
+    "repositoryChangeApproved": true,
     "bloggerChangeApproved": false
   }
 }
