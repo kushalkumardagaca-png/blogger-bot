@@ -88,6 +88,7 @@ if(panel&&manage){var hero=D.querySelector('.fk-home .kv-hero');if(hero)hero.ins
 try{var q=new URLSearchParams(location.search),a={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){var v=q.get(k);if(v)a[k]=v.slice(0,160);});if(Object.keys(a).length){sessionStorage.setItem('dy-attribution',JSON.stringify(a));H.setAttribute('data-dy-attributed','true');}}catch(e){}
 D.querySelectorAll('input[type="password"]').forEach(function(i){if(i.parentNode.classList.contains('dy-password-wrap'))return;var w=D.createElement('span');w.className='dy-password-wrap';i.parentNode.insertBefore(w,i);w.appendChild(i);var b=D.createElement('button');b.type='button';b.className='dy-password-toggle';b.textContent='Show';b.setAttribute('aria-label','Show password');b.addEventListener('click',function(){var show=i.type==='password';i.type=show?'text':'password';b.textContent=show?'Hide':'Show';b.setAttribute('aria-label',(show?'Hide':'Show')+' password');});w.appendChild(b);});
 D.querySelectorAll('form').forEach(function(f){var s=f.querySelector('.dy-form-status');if(!s){s=D.createElement('p');s.className='dy-form-status';s.setAttribute('role','status');f.appendChild(s);}f.addEventListener('invalid',function(e){s.textContent='Please check the highlighted field and try again.';s.setAttribute('data-state','error');},true);f.addEventListener('submit',function(){if(f.checkValidity()){s.textContent=f.classList.contains('dy-sub-form')?'Opening the secure confirmation step in a new tab.':'Submitted. Please follow the next on-screen step.';s.setAttribute('data-state','success');}});});
+D.querySelectorAll('img:not([alt])').forEach(function(img){var box=img.closest('a,article,figure'),label=box?(box.getAttribute('aria-label')||box.textContent||''):'';label=label.replace(/\s+/g,' ').trim().slice(0,160);img.alt=label||'Daily Yield editorial image';});
 D.querySelectorAll('.post-body img,.page-body img').forEach(function(img,n){if(!img.hasAttribute('decoding'))img.setAttribute('decoding','async');if(n>0&&!img.hasAttribute('loading'))img.setAttribute('loading','lazy');if(n===0&&!img.hasAttribute('fetchpriority'))img.setAttribute('fetchpriority','high');});
 var contentH1=D.querySelector('.item-post .post-body h1'),templateTitle=D.querySelector('.item-post .post-header .post-title-container');if(contentH1&&templateTitle)templateTitle.style.display='none';
 function schemaModified(){var found='';D.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){try{var data=JSON.parse(s.textContent),walk=function(x){if(!x||found)return;if(Array.isArray(x)){x.forEach(walk);return;}if(typeof x==='object'){if(x.dateModified)found=String(x.dateModified);Object.keys(x).forEach(function(k){walk(x[k]);});}};walk(data);}catch(e){}});return found;}
@@ -99,6 +100,16 @@ var bc=D.querySelector('.dy-breadcrumb');if(bc){var parts=[{"@type":"ListItem","
 
 
 def inject(text: str) -> str:
+    image_repairs = {
+        "<img class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>": "<img alt='Comment author profile photo' class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>",
+        "<img src='https://resources.blogblog.com/img/icon_delete13.gif'/>": "<img alt='Delete comment' src='https://resources.blogblog.com/img/icon_delete13.gif'/>",
+        "<img class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>": "<img alt='Kushal K. Daga, Daily Yield author' class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>",
+        "<img alt=\"\" loading=\"lazy\" src=\"'+esc(p.thumb)+'\" onerror=\"this.remove()\"/>": "<img alt=\"'+esc(p.title)+'\" loading=\"lazy\" src=\"'+esc(p.thumb)+'\" onerror=\"this.remove()\"/>",
+        "im.alt='';im.loading='lazy'": "im.alt=it.title||'Daily Yield article preview';im.loading='lazy'",
+        "<img loading=\"lazy\" alt=\"\" src=\"'+esc(it.img)+'\"/>": "<img loading=\"lazy\" alt=\"'+esc(it.title)+'\" src=\"'+esc(it.img)+'\"/>",
+    }
+    for old, new in image_repairs.items():
+        text = text.replace(old, new, 1)
     text = text.replace("expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml'", "expr:dir='data:blog.languageDirection' lang='en' xmlns='http://www.w3.org/1999/xhtml'", 1)
     old_title = "<title><data:blog.pageTitle/></title>"
     title_package = """<b:if cond='data:view.isHomepage'>

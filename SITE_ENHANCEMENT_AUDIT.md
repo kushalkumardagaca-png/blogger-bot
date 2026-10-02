@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **139**
+- Pass: **146**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -50,6 +50,8 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: lazy later images
 - ✅ Daily-Yield-Theme-Subscription.xml: async image decoding
 - ✅ Daily-Yield-Theme-Subscription.xml: priority first image
+- ✅ Daily-Yield-Theme-Subscription.xml: runtime fallback for widget images missing alt
+- ✅ Daily-Yield-Theme-Subscription.xml: informative moving thumbnails use titles
 - ✅ Daily-Yield-Theme-Subscription.xml: author identity
 - ✅ Daily-Yield-Theme-Subscription.xml: privacy link
 - ✅ Daily-Yield-Theme-Subscription.xml: terms link
@@ -60,6 +62,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-Subscription.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-Subscription.xml: honest advice disclaimer
+- ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-Subscription.xml: Blogger package is sole standard meta-description authority
 - ✅ Daily-Yield-Theme-Subscription.xml: privacy control is not floating
@@ -110,6 +113,8 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: lazy later images
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: async image decoding
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: priority first image
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: runtime fallback for widget images missing alt
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: informative moving thumbnails use titles
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: author identity
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy link
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: terms link
@@ -120,6 +125,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Blogger package is sole standard meta-description authority
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating
@@ -129,6 +135,7 @@
 - ✅ health evidence rejects stale concurrent watchdog reports
 - ✅ Bing sitemap integration implemented
 - ✅ Bing SubmitFeed uses required JSON body
+- ✅ future related-article photographs have descriptive alt text
 - ✅ Bing integration is optional and fail-safe
 - ✅ search reach creates zero views
 - ✅ Google Search Console remains automated

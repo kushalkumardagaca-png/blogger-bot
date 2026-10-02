@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 139,
+  "pass": 146,
   "fail": 0,
   "checks": [
     {
@@ -189,6 +189,14 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-Subscription.xml: runtime fallback for widget images missing alt",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: informative moving thumbnails use titles",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-Subscription.xml: author identity",
       "status": "PASS"
     },
@@ -226,6 +234,10 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: honest advice disclaimer",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt",
       "status": "PASS"
     },
     {
@@ -429,6 +441,14 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: runtime fallback for widget images missing alt",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: informative moving thumbnails use titles",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: author identity",
       "status": "PASS"
     },
@@ -469,6 +489,10 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed",
       "status": "PASS"
     },
@@ -502,6 +526,10 @@
     },
     {
       "name": "Bing SubmitFeed uses required JSON body",
+      "status": "PASS"
+    },
+    {
+      "name": "future related-article photographs have descriptive alt text",
       "status": "PASS"
     },
     {

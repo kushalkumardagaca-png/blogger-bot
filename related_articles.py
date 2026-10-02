@@ -38,7 +38,7 @@ def select(current,posts,limit=4):
  out.sort(key=lambda x:(x[0],x[1]),reverse=True)
  return [x[2] for x in out[:limit]]
 def _card(p):
- body=p.get('content','');m=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);img=(f'<img src="{html.escape(m.group(1),quote=True)}" alt="" loading="lazy" decoding="async">' if m else '')
+ body=p.get('content','');m=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);img=(f'<img src="{html.escape(m.group(1),quote=True)}" alt="Article preview: {html.escape(p.get("title", "Daily Yield article"), quote=True)}" loading="lazy" decoding="async">' if m else '')
  label=next((x for x in p.get('labels',[]) if x not in ('News','Kushal K. Daga')), 'Daily Article')
  return f'<a class="dy-related-card" href="{html.escape(p.get("url", ""),quote=True)}"><span class="dy-related-thumb">{img}</span><span class="dy-related-copy"><small>{html.escape(label)}</small><strong>{html.escape(p.get("title","Daily Yield article"))}</strong><em>Read next →</em></span></a>'
 def shelf(current,posts):

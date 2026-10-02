@@ -11,8 +11,8 @@ def check(name, ok): checks.append({'name':name,'status':'PASS' if ok else 'FAIL
 
 for p in THEMES:
     text=p.read_text(encoding='utf-8')
-    try: ET.parse(p); valid=True
-    except Exception: valid=False
+    try: tree=ET.parse(p); valid=True
+    except Exception: tree=None; valid=False
     prefix=p.name+': '
     check(prefix+'valid Blogger XML',valid)
     requirements={
@@ -29,12 +29,14 @@ for p in THEMES:
       'OpenAI search policy':"name='OAI-SearchBot'",'WebSite schema':'SearchAction','favicon':"rel='icon'",
       'responsive mobile CSS':'@media(max-width:560px)','keyboard focus':':focus-visible','reduced motion':'prefers-reduced-motion',
       'lazy later images':"setAttribute('loading','lazy')",'async image decoding':"setAttribute('decoding','async')",
-      'priority first image':"setAttribute('fetchpriority','high')",'author identity':'Kushal K. Daga',
+      'priority first image':"setAttribute('fetchpriority','high')",'runtime fallback for widget images missing alt':"img:not([alt])",'informative moving thumbnails use titles':"im.alt=it.title||'Daily Yield article preview'",'author identity':'Kushal K. Daga',
       'privacy link':'/p/privacy-policy.html','terms link':'/p/terms-and-conditions.html','contact email':'dailyyield.official@gmail.com',
       'HTTPS destination':'https://dailyyield.blogspot.com/','analytics consent defaults denied before loading':"gtag('consent','default'",'Blogger GA4 loader uses saved Measurement ID':"name='google-analytics'",'analytics changes only after choice':"analytics_storage:mode==='analytics'?'granted':'denied'",
       'no external enhancement script':'DY_SITE_ENHANCEMENTS_JS_START','honest advice disclaimer':'educational information',
     }
     for name,needle in requirements.items(): check(prefix+name,needle in text)
+    theme_images=[] if not valid else [node for node in tree.getroot().iter() if str(node.tag).split('}')[-1].lower()=='img']
+    check(prefix+'every Theme image has nonempty alt', valid and all(any(str(key).split('}')[-1]=='alt' and str(value).strip() for key,value in node.attrib.items()) for node in theme_images))
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)
     check(prefix+'Blogger package is sole standard meta-description authority', "<meta expr:content='data:blog.metaDescription' name='description'/>" not in text)
     check(prefix+'privacy control is not floating', '.dy-privacy-manage{position:fixed' not in text)
@@ -47,6 +49,8 @@ check('health workflow runs reach readiness','python search_reach.py' in workflo
 check('health evidence rejects stale concurrent watchdog reports','Remote watchdog evidence is newer' in workflow and 'checkedAtIST' in workflow)
 check('Bing sitemap integration implemented','BING_WEBMASTER_API_KEY' in search and 'SubmitFeed' in search)
 check('Bing SubmitFeed uses required JSON body','json.dumps({"siteUrl":SITE,"feedUrl":sitemap})' in search and 'application/json; charset=utf-8' in search)
+related=(ROOT/'related_articles.py').read_text()
+check('future related-article photographs have descriptive alt text','alt="Article preview:' in related and 'alt=""' not in related)
 check('Bing integration is optional and fail-safe','status":"READY' in search)
 check('search reach creates zero views','ZERO_SYNTHETIC_VIEWS' in search and 'syntheticViews":0' in search)
 check('Google Search Console remains automated',(ROOT/'gsc_rebuild.py').exists())

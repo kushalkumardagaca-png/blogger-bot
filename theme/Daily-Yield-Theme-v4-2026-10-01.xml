@@ -1964,7 +1964,7 @@ window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',
 </b:includable>
      <b:includable id='commentAuthorAvatar'>
  <div class='avatar-image-container'>
- <img class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>
+ <img alt='Comment author profile photo' class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>
  </div>
 </b:includable>
      <b:includable id='commentDeleteIcon' var='comment'>
@@ -1975,7 +1975,7 @@ window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',
  </div>
  <b:else/>
  <a class='comment-delete' expr:href='data:comment.deleteUrl' expr:title='data:messages.deleteComment'>
- <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+ <img alt='Delete comment' src='https://resources.blogblog.com/img/icon_delete13.gif'/>
  </a>
  </b:if>
  </span>
@@ -2200,7 +2200,7 @@ window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',
  <b:if cond='data:post.author.aboutMe and data:view.isPost'>
  <div class='author-profile'>
  <b:if cond='data:post.author.authorPhoto.url'>
- <img class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>
+ <img alt='Kushal K. Daga, Daily Yield author' class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>
  <div class='author-about'>
  <b:include data='post' name='aboutPostAuthor'/>
  </div>
@@ -3161,7 +3161,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;
 function hi(s,q){var t=esc(s);if(!q)return t;var i=t.toLowerCase().indexOf(q);if(i<0)return t;return t.slice(0,i)+'<mark>'+t.slice(i,i+q.length)+'</mark>'+t.slice(i+q.length);}
 function thumbURL(th){if(!th)return '';return String(th).replace(/\/s\d+(-c)?\//,'/s400-c/').replace(/=s\d+(-c)?$/,'=s400-c').replace(/=s\d+(-c)?&/,'=s400-c&');}
 function initials(s){var w=String(s).replace(/[^A-Za-z0-9 ]/g,' ').split(/\s+/).filter(Boolean);return ((w[0]||'F')[0]+((w[1]||'B')[0])).toUpperCase();}
-function thumb(p,big){return '<span class="'+(big?'kvsd-thumb':'kvsd-rowthumb')+'"><i>'+initials(p.title)+'</i>'+(p.thumb?'<img alt="" loading="lazy" src="'+esc(p.thumb)+'" onerror="this.remove()"/>':'')+'</span>';}
+function thumb(p,big){return '<span class="'+(big?'kvsd-thumb':'kvsd-rowthumb')+'"><i>'+initials(p.title)+'</i>'+(p.thumb?'<img alt="'+esc(p.title)+'" loading="lazy" src="'+esc(p.thumb)+'" onerror="this.remove()"/>':'')+'</span>';}
 function strip(html){var tmp=d.createElement('div');tmp.innerHTML=html||'';return (tmp.textContent||'').replace(/\s+/g,' ');}
 function fmtDate(dt){var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return dt.getDate()+' '+M[dt.getMonth()]+' '+dt.getFullYear();}
 function dayKey(dt){return dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();}
@@ -3307,7 +3307,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 function card(it){
  var a=D.createElement('a');a.className='kd-card';a.href=it.href;
  var th=D.createElement('div');th.className='kd-th';
- if(it.img){var im=D.createElement('img');im.src=it.img;im.alt='';im.loading='lazy';th.appendChild(im);}
+ if(it.img){var im=D.createElement('img');im.src=it.img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);}
  else{th.textContent=it.letter||'\u2733';}
  var b=D.createElement('b');b.textContent=it.title;
  var i=D.createElement('i');i.textContent=it.meta;
@@ -3380,7 +3380,7 @@ function go(){
  if(nsig===window.__kdNewsSig&&newsRow.children.length)return;
  window.__kdNewsSig=nsig;
  newsRow.innerHTML='';
- var html=items.map(function(it){return '<a class="kd-card" href="'+esc(it.href)+'"><div class="kd-th">'+(it.img?'<img loading="lazy" alt="" src="'+esc(it.img)+'"/>':esc(it.letter))+'</div><b>'+esc(it.title)+'</b><i>'+esc(it.meta)+'</i></a>';}).join('');
+ var html=items.map(function(it){return '<a class="kd-card" href="'+esc(it.href)+'"><div class="kd-th">'+(it.img?'<img loading="lazy" alt="'+esc(it.title)+'" src="'+esc(it.img)+'"/>':esc(it.letter))+'</div><b>'+esc(it.title)+'</b><i>'+esc(it.meta)+'</i></a>';}).join('');
  newsRow.innerHTML=html+html;
  marquee('kdNewsWrap','kdNewsRow',78);
  settleTrack(newsRow,html);
@@ -3494,6 +3494,7 @@ if(panel&&manage){var hero=D.querySelector('.fk-home .kv-hero');if(hero)hero.ins
 try{var q=new URLSearchParams(location.search),a={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){var v=q.get(k);if(v)a[k]=v.slice(0,160);});if(Object.keys(a).length){sessionStorage.setItem('dy-attribution',JSON.stringify(a));H.setAttribute('data-dy-attributed','true');}}catch(e){}
 D.querySelectorAll('input[type="password"]').forEach(function(i){if(i.parentNode.classList.contains('dy-password-wrap'))return;var w=D.createElement('span');w.className='dy-password-wrap';i.parentNode.insertBefore(w,i);w.appendChild(i);var b=D.createElement('button');b.type='button';b.className='dy-password-toggle';b.textContent='Show';b.setAttribute('aria-label','Show password');b.addEventListener('click',function(){var show=i.type==='password';i.type=show?'text':'password';b.textContent=show?'Hide':'Show';b.setAttribute('aria-label',(show?'Hide':'Show')+' password');});w.appendChild(b);});
 D.querySelectorAll('form').forEach(function(f){var s=f.querySelector('.dy-form-status');if(!s){s=D.createElement('p');s.className='dy-form-status';s.setAttribute('role','status');f.appendChild(s);}f.addEventListener('invalid',function(e){s.textContent='Please check the highlighted field and try again.';s.setAttribute('data-state','error');},true);f.addEventListener('submit',function(){if(f.checkValidity()){s.textContent=f.classList.contains('dy-sub-form')?'Opening the secure confirmation step in a new tab.':'Submitted. Please follow the next on-screen step.';s.setAttribute('data-state','success');}});});
+D.querySelectorAll('img:not([alt])').forEach(function(img){var box=img.closest('a,article,figure'),label=box?(box.getAttribute('aria-label')||box.textContent||''):'';label=label.replace(/\s+/g,' ').trim().slice(0,160);img.alt=label||'Daily Yield editorial image';});
 D.querySelectorAll('.post-body img,.page-body img').forEach(function(img,n){if(!img.hasAttribute('decoding'))img.setAttribute('decoding','async');if(n>0&&!img.hasAttribute('loading'))img.setAttribute('loading','lazy');if(n===0&&!img.hasAttribute('fetchpriority'))img.setAttribute('fetchpriority','high');});
 var contentH1=D.querySelector('.item-post .post-body h1'),templateTitle=D.querySelector('.item-post .post-header .post-title-container');if(contentH1&&templateTitle)templateTitle.style.display='none';
 function schemaModified(){var found='';D.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){try{var data=JSON.parse(s.textContent),walk=function(x){if(!x||found)return;if(Array.isArray(x)){x.forEach(walk);return;}if(typeof x==='object'){if(x.dateModified)found=String(x.dateModified);Object.keys(x).forEach(function(k){walk(x[k]);});}};walk(data);}catch(e){}});return found;}
