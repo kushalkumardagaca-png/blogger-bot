@@ -18,7 +18,7 @@ for p in THEMES:
     requirements={
       'light-mode reset for former dark preference':"localStorage.removeItem('dy-theme')",'privacy choice panel':"id='dyPrivacyPanel'",'homepage consent card follows hero':"hero.insertAdjacentElement('afterend',panel)",'footer privacy control':"id='dyPrivacyManage'",'footer displays consent state':'Privacy choices · Analytics allowed','saved analytics choice restored on later pages':"savedConsent==='analytics'",
       'site search':"id='searchToggle'",'back to top':"id='toTop'",'mobile menu':"id='drawerToggle'",
-      'loading state':"data-dy-loading",'hover states':':hover','reading progress':"id='progressBar'",
+      'full-screen finance loading transition':"DY_FINANCE_LOADER_START",'hover states':':hover','reading progress':"id='progressBar'",
       'copy/share feedback':'Link copied','print stylesheet':'@media print','sticky header':'position:sticky',
       'skip link':"class='skip-link'",'future password visibility':'dy-password-toggle','UTM attribution':'utm_source',
       'form success state':"data-state','success",'form error state':"data-state','error",
@@ -35,6 +35,13 @@ for p in THEMES:
       'no external enhancement script':'DY_SITE_ENHANCEMENTS_JS_START','honest advice disclaimer':'educational information',
     }
     for name,needle in requirements.items(): check(prefix+name,needle in text)
+    check(prefix+'loader covers every internal navigation direction', "D.addEventListener('click'" in text and "location.assign(u.href)" in text and "dailyyield\\.blogspot\\." in text)
+    check(prefix+'loader exits at DOM readiness instead of waiting for images', "DOMContentLoaded',ready" in text and "setTimeout(ready,1800)" in text)
+    check(prefix+'two-second performance budget is measured honestly', "data-dy-two-second-budget" in text and "ms<=2000?'met':'miss'" in text)
+    check(prefix+'render-blocking Google Fonts removed', 'fonts.googleapis.com' not in text and 'fonts.gstatic.com' not in text)
+    check(prefix+'duplicate base64 favicon payloads removed', 'data:image/png;base64' not in text)
+    check(prefix+'Theme transfer budget stays below 310 KB', len(text.encode('utf-8')) < 310000)
+    check(prefix+'old body fade delay removed', 'animation:pageIn' not in text and '@keyframes pageIn' not in text)
     theme_images=[] if not valid else [node for node in tree.getroot().iter() if str(node.tag).split('}')[-1].lower()=='img']
     check(prefix+'every Theme image has nonempty alt', valid and all(any(str(key).split('}')[-1]=='alt' and str(value).strip() for key,value in node.attrib.items()) for node in theme_images))
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)

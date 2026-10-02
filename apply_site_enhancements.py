@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Idempotently add Daily Yield's accessibility, privacy and SEO experience layer."""
 from pathlib import Path
+import re
 
 THEMES = [
     Path("theme/Daily-Yield-Theme-Subscription.xml"),
@@ -17,7 +18,7 @@ HEAD = r"""<!-- DY_SITE_ENHANCEMENTS_HEAD_START -->
 <b:else/>
 <meta content='noindex,follow' name='robots'/>
 </b:if>
-<meta content='light dark' name='color-scheme'/>
+<meta content='light' name='color-scheme'/>
 <!-- Optional analytics stays denied until the reader explicitly allows it. -->
 <script>//<![CDATA[
 window.dataLayer=window.dataLayer||[];
@@ -34,8 +35,18 @@ window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',
 
 CSS = r"""/* DY_SITE_ENHANCEMENTS_CSS_START */
 :root{color-scheme:light;--dy-focus:#0b66c3}
-html[data-dy-loading='true']::after{content:"";position:fixed;z-index:9999;top:0;left:0;height:3px;width:34%;background:linear-gradient(90deg,var(--accent),#f0b180);animation:dyLoad 1.1s ease-in-out infinite}
-@keyframes dyLoad{0%{transform:translateX(-110%)}100%{transform:translateX(330%)}}
+/* Full-screen, dependency-free finance transition. It covers genuine navigation
+   gaps but never claims that animation time is network/render time. */
+.dy-load-screen{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 34%,#fffdf8 0,#fbf2e5 46%,#f4e3cf 100%);color:#241610;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.dy-load-screen[data-active='true']{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .12s ease}
+.dy-load-screen::before,.dy-load-screen::after{content:"";position:absolute;border:1px solid rgba(188,91,51,.13);border-radius:50%;width:min(76vw,680px);aspect-ratio:1;animation:dyOrbit 5s linear infinite}.dy-load-screen::after{width:min(54vw,460px);animation-direction:reverse;animation-duration:3.8s}
+.dy-load-card{position:relative;z-index:2;width:min(88vw,440px);text-align:center;padding:28px 24px}.dy-load-kicker{display:block;margin-bottom:15px;color:#9c4522;font:800 10px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase}.dy-load-mark{width:112px;height:112px;margin:0 auto 18px;position:relative;display:grid;place-items:center;border-radius:32px;background:#bc5b33;box-shadow:0 25px 60px -30px rgba(36,22,16,.72)}
+.dy-load-mark::before{content:"DY";color:#fff8ee;font:700 35px/1 Georgia,"Times New Roman",serif;letter-spacing:-.08em}.dy-load-coin{position:absolute;width:18px;height:18px;right:-6px;top:8px;border-radius:50%;background:#f0b180;border:3px solid #fff8ee;animation:dyCoin 1.5s ease-in-out infinite}
+.dy-load-chart{display:block;width:210px;height:58px;margin:0 auto 15px}.dy-load-chart .dy-axis{stroke:#eadcc8;stroke-width:1}.dy-load-chart .dy-line{fill:none;stroke:#bc5b33;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:260;stroke-dashoffset:260;animation:dyDraw 1.35s cubic-bezier(.22,.61,.36,1) infinite}.dy-load-chart .dy-dot{fill:#9c4522;transform-origin:center;animation:dyPulse 1.35s ease-in-out infinite}
+.dy-load-title{margin:0;color:#241610;font:700 clamp(27px,7vw,38px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.035em}.dy-load-copy{min-height:1.5em;margin:10px 0 17px;color:#7a6a58;font:600 12px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:.06em}.dy-load-track{height:3px;width:min(72vw,280px);margin:auto;overflow:hidden;border-radius:999px;background:#eadcc8}.dy-load-track span{display:block;width:45%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#bc5b33,#f0b180);animation:dyTrack 1.05s ease-in-out infinite}
+@keyframes dyOrbit{to{transform:rotate(360deg)}}@keyframes dyCoin{50%{transform:translateY(-8px) rotate(18deg)}}@keyframes dyDraw{0%{stroke-dashoffset:260}62%,100%{stroke-dashoffset:0}}@keyframes dyPulse{0%,100%{opacity:.35;transform:scale(.75)}60%{opacity:1;transform:scale(1.15)}}@keyframes dyTrack{0%{transform:translateX(-110%)}100%{transform:translateX(330%)}}
+/* Keep below-fold modules out of initial layout/paint work where supported. */
+.site-footer,.dy-site-faq,#sidebar_feed{content-visibility:auto;contain-intrinsic-size:1px 720px}
 .item-post div.post-title{font:600 clamp(27px,2.9vw,40px)/1.14 var(--font-display);letter-spacing:-.02em;margin:0 0 18px;color:var(--ink);overflow-wrap:break-word}.dy-breadcrumb{display:flex;align-items:center;gap:8px;min-height:42px;padding:8px clamp(20px,4.5vw,48px);border-bottom:1px solid var(--line);color:var(--muted);font:600 11px/1.4 var(--font-body);letter-spacing:.06em}
 .dy-breadcrumb a{color:var(--accent-dark);text-decoration:underline;text-underline-offset:3px}.dy-breadcrumb span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dy-site-faq{padding:clamp(40px,6vw,80px) clamp(20px,4.5vw,48px);background:var(--surface);border-top:1px solid var(--line)}
@@ -48,8 +59,25 @@ html[data-dy-loading='true']::after{content:"";position:fixed;z-index:9999;top:0
 .dy-password-wrap{position:relative}.dy-password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);padding:7px;border-radius:6px;font-size:12px;background:var(--surface);border:1px solid var(--line)}
 @media print{.dy-privacy,.dy-privacy-manage,.dy-site-faq,.dy-breadcrumb,.dy-form-status{display:none!important}body{background:#fff!important;color:#000!important}.item-post .post-body,.page-body{font-size:11pt!important;line-height:1.5!important;color:#000!important}a[href]::after{content:" (" attr(href) ")";font-size:8pt;overflow-wrap:anywhere}}
 @media(max-width:560px){.dy-privacy{left:8px;right:8px;bottom:8px}.fk-home .dy-privacy{left:auto;right:auto;bottom:auto;margin:14px 10px}.dy-privacy-actions>*{flex:1 1 140px;justify-content:center}.dy-breadcrumb{padding-right:58px}}
-@media(prefers-reduced-motion:reduce){html[data-dy-loading='true']::after{animation:none;width:100%}}
+@media(prefers-reduced-motion:reduce){.dy-load-screen,.dy-load-screen *{animation:none!important;transition:none!important}.dy-load-chart .dy-line{stroke-dashoffset:0}.dy-load-track span{width:100%;transform:none}}
 /* DY_SITE_ENHANCEMENTS_CSS_END */"""
+
+LOADER = r"""<!-- DY_FINANCE_LOADER_START -->
+<div aria-label='Daily Yield page transition' aria-live='polite' class='dy-load-screen' data-active='true' id='dyPageLoader' role='status'>
+ <div class='dy-load-card'>
+  <span class='dy-load-kicker'>Daily Yield</span>
+  <span aria-hidden='true' class='dy-load-mark'><i class='dy-load-coin'/></span>
+  <svg aria-hidden='true' class='dy-load-chart' viewBox='0 0 210 58'><path class='dy-axis' d='M4 50H206M4 32H206M4 14H206'/><path class='dy-line' d='M7 47 39 38 67 42 98 26 126 31 157 13 201 5'/><circle class='dy-dot' cx='201' cy='5' r='4'/></svg>
+  <p class='dy-load-title'>Market momentum,<br/>beautifully measured.</p>
+  <p class='dy-load-copy' id='dyLoadCopy'>Preparing your finance desk</p>
+  <span aria-hidden='true' class='dy-load-track'><span/></span>
+ </div>
+</div>
+<noscript><style>#dyPageLoader{display:none!important}</style></noscript>
+<script>//<![CDATA[
+window.__dyLoadStart=(window.performance&&performance.now)?performance.now():Date.now();
+//]]></script>
+<!-- DY_FINANCE_LOADER_END -->"""
 
 BREADCRUMB = r"""<!-- DY_BREADCRUMB_START -->
 <b:if cond='data:view.isSingleItem'>
@@ -76,12 +104,16 @@ PRIVACY = r"""<!-- DY_PRIVACY_CHOICES_START -->
 
 JS = r"""<!-- DY_SITE_ENHANCEMENTS_JS_START -->
 <script>//<![CDATA[
-(function(){'use strict';var D=document,H=D.documentElement;
-H.setAttribute('data-dy-loading','true');
+(function(){'use strict';var D=document,H=D.documentElement,L=D.getElementById('dyPageLoader'),LC=D.getElementById('dyLoadCopy'),navTimer=0;
 function safeGet(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}}
 function safeSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 try{localStorage.removeItem('dy-theme');}catch(e){}H.removeAttribute('data-dy-theme');var themeMeta=D.querySelector('meta[name="theme-color"]');if(themeMeta)themeMeta.content='#F8F0E3';
-function loaded(){H.removeAttribute('data-dy-loading');}if(D.readyState==='complete')loaded();else window.addEventListener('load',loaded,{once:true});setTimeout(loaded,4500);
+function showLoad(copy){if(!L)return;if(LC&&copy)LC.textContent=copy;L.removeAttribute('aria-hidden');L.setAttribute('data-active','true');H.setAttribute('data-dy-transitioning','true');}
+function hideLoad(){if(!L)return;var start=window.__dyLoadStart||0,clock=(window.performance&&performance.now)?performance.now():Date.now(),wait=Math.max(0,260-(clock-start));setTimeout(function(){L.removeAttribute('data-active');L.setAttribute('aria-hidden','true');H.removeAttribute('data-dy-transitioning');if(window.performance&&performance.now){H.setAttribute('data-dy-interactive-ms',String(Math.round(performance.now())));}},wait);}
+function ready(){hideLoad();}if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',ready,{once:true});else ready();window.addEventListener('pageshow',ready);setTimeout(ready,1800);
+D.addEventListener('click',function(e){if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;var a=e.target.closest?e.target.closest('a[href]'):null;if(!a||a.hasAttribute('download')||a.target==='_blank')return;var raw=a.getAttribute('href')||'';if(!raw||raw.charAt(0)==='#'||/^(?:mailto:|tel:|javascript:)/i.test(raw))return;var u;try{u=new URL(a.href,location.href);}catch(err){return;}if(!/^dailyyield\.blogspot\./i.test(u.hostname)||u.protocol!=='https:')return;if(u.href===location.href)return;e.preventDefault();var copy=u.pathname==='/'?'Returning to Daily Yield':u.pathname.indexOf('/p/')===0?'Opening the finance desk':'Loading the next analysis';showLoad(copy);clearTimeout(navTimer);navTimer=setTimeout(function(){location.assign(u.href);},70);setTimeout(hideLoad,10000);},true);
+window.addEventListener('beforeunload',function(){showLoad('Securing your next view');});
+window.addEventListener('load',function(){if(!window.performance)return;var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0],ms=n?Math.round(n.loadEventEnd||performance.now()):Math.round(performance.now());H.setAttribute('data-dy-complete-ms',String(ms));H.setAttribute('data-dy-two-second-budget',ms<=2000?'met':'miss');});
 var panel=D.getElementById('dyPrivacyPanel'),manage=D.getElementById('dyPrivacyManage');
 function consentLabel(mode){return mode==='analytics'?'Privacy choices · Analytics allowed':mode==='essential'?'Privacy choices · Essential only':'Privacy choices';}function setConsentLabel(mode){if(manage){manage.textContent=consentLabel(mode);manage.setAttribute('data-consent',mode||'unset');}}function consent(mode){safeSet('dy-consent',mode);if(panel)panel.classList.remove('dy-open');if(manage)manage.setAttribute('aria-expanded','false');setConsentLabel(mode);window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'dy_consent_update',analytics_storage:mode==='analytics'?'granted':'denied'});if(typeof window.gtag==='function')window.gtag('consent','update',{analytics_storage:mode==='analytics'?'granted':'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});}
 if(panel&&manage){var hero=D.querySelector('.fk-home .kv-hero');if(hero)hero.insertAdjacentElement('afterend',panel);var savedConsent=safeGet('dy-consent');setConsentLabel(savedConsent);if(savedConsent==='analytics'||savedConsent==='essential')consent(savedConsent);else panel.classList.add('dy-open');manage.addEventListener('click',function(){var open=!panel.classList.contains('dy-open');panel.classList.toggle('dy-open',open);manage.setAttribute('aria-expanded',open?'true':'false');if(open){if(hero)panel.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){panel.querySelector('button').focus();},hero?500:0);}});panel.querySelectorAll('[data-dy-consent]').forEach(function(b){b.addEventListener('click',function(){consent(b.getAttribute('data-dy-consent'));});});}
@@ -97,6 +129,13 @@ var bc=D.querySelector('.dy-breadcrumb');if(bc){var parts=[{"@type":"ListItem","
 })();
 //]]></script>
 <!-- DY_SITE_ENHANCEMENTS_JS_END -->"""
+
+
+def replace_marked(text: str, start: str, end: str, package: str) -> str:
+    pattern = re.escape(start) + r".*?" + re.escape(end)
+    if re.search(pattern, text, flags=re.S):
+        return re.sub(pattern, lambda _: package, text, count=1, flags=re.S)
+    return text
 
 
 def inject(text: str) -> str:
@@ -115,11 +154,7 @@ def inject(text: str) -> str:
     title_package = """<b:if cond='data:view.isHomepage'>
 <title>Daily Yield | Finance, Markets, News &amp; Calculators</title>
 <b:elseif cond='data:view.isSingleItem'/>
-<b:if cond='data:view.isPost'>
-<title><data:blog.pageTitle/></title>
-<b:else/>
-<title><data:blog.pageName/> | Daily Yield Finance</title>
-</b:if>
+<title><data:blog.pageName/></title>
 <b:else/>
 <title><data:blog.pageTitle/></title>
 </b:if>"""
@@ -145,10 +180,26 @@ def inject(text: str) -> str:
         text = text.replace(viewport, viewport + "\n<meta content='en' http-equiv='Content-Language'/>", 1)
     text = text.replace("<h1 class='post-title entry-title'><data:post.title/></h1>", "<div aria-level='2' class='post-title entry-title' role='heading'><data:post.title/></div>", 1)
     text = text.replace('.item-post h1.post-title{', '.item-post .post-title{').replace('.item-post h1.post-title::after{', '.item-post .post-title::after{').replace('.item-post h1.post-title,.item-post h1.post-title::after{', '.item-post .post-title,.item-post .post-title::after{')
-    if "DY_SITE_ENHANCEMENTS_HEAD_START" not in text:
+    # Remove render-blocking web-font connections. Existing font stacks retain
+    # the same editorial character through local system/Georgia fallbacks.
+    text = re.sub(r"\n<link[^>]+href='https://fonts\.googleapis\.com[^']*'[^>]*/>", "", text)
+    text = re.sub(r"\n<link[^>]+href='https://fonts\.gstatic\.com[^']*'[^>]*/>", "", text)
+    # Three duplicate embedded PNG favicon variants added ~47 KB ahead of body
+    # parsing. The compact inline SVG favicon remains authoritative.
+    text = re.sub(r"\n\s*<link href='data:image/png;base64,[^']+'[^>]*/>", "", text)
+    text = text.replace(';animation:pageIn .8s ease}', '}').replace('@keyframes pageIn{from{opacity:0}to{opacity:1}}\n', '')
+    if "DY_SITE_ENHANCEMENTS_HEAD_START" in text:
+        text = replace_marked(text, "<!-- DY_SITE_ENHANCEMENTS_HEAD_START -->", "<!-- DY_SITE_ENHANCEMENTS_HEAD_END -->", HEAD)
+    else:
         text = text.replace("</head>", HEAD + "\n</head>", 1)
-    if "DY_SITE_ENHANCEMENTS_CSS_START" not in text:
+    if "DY_SITE_ENHANCEMENTS_CSS_START" in text:
+        text = replace_marked(text, "/* DY_SITE_ENHANCEMENTS_CSS_START */", "/* DY_SITE_ENHANCEMENTS_CSS_END */", CSS)
+    else:
         text = text.replace("]]></b:skin>", CSS + "\n]]></b:skin>", 1)
+    if "DY_FINANCE_LOADER_START" in text:
+        text = replace_marked(text, "<!-- DY_FINANCE_LOADER_START -->", "<!-- DY_FINANCE_LOADER_END -->", LOADER)
+    else:
+        text = re.sub(r"(<body\b[^>]*>)", lambda m: m.group(1) + "\n" + LOADER, text, count=1)
     if "DY_BREADCRUMB_START" not in text:
         anchor = " <!-- ================= Blog header : title and description ================= -->"
         text = text.replace(anchor, BREADCRUMB + "\n\n" + anchor, 1)
@@ -166,7 +217,11 @@ def inject(text: str) -> str:
             raise RuntimeError('footer policy anchor not found')
         text = text[:at] + footer_control + text[at:]
     if "DY_PRIVACY_CHOICES_START" not in text:
-        text = text.replace("</body>", PRIVACY + "\n" + JS + "\n</body>", 1)
+        text = text.replace("</body>", PRIVACY + "\n</body>", 1)
+    if "DY_SITE_ENHANCEMENTS_JS_START" in text:
+        text = replace_marked(text, "<!-- DY_SITE_ENHANCEMENTS_JS_START -->", "<!-- DY_SITE_ENHANCEMENTS_JS_END -->", JS)
+    else:
+        text = text.replace("</body>", JS + "\n</body>", 1)
     return text
 
 

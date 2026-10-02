@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 148,
+  "pass": 162,
   "fail": 0,
   "checks": [
     {
@@ -45,7 +45,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: loading state",
+      "name": "Daily-Yield-Theme-Subscription.xml: full-screen finance loading transition",
       "status": "PASS"
     },
     {
@@ -241,6 +241,34 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-Subscription.xml: loader covers every internal navigation direction",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: loader exits at DOM readiness instead of waiting for images",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: two-second performance budget is measured honestly",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: render-blocking Google Fonts removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: old body fade delay removed",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt",
       "status": "PASS"
     },
@@ -301,7 +329,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: loading state",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: full-screen finance loading transition",
       "status": "PASS"
     },
     {
@@ -494,6 +522,34 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: loader covers every internal navigation direction",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: loader exits at DOM readiness instead of waiting for images",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: two-second performance budget is measured honestly",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: render-blocking Google Fonts removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed",
       "status": "PASS"
     },
     {

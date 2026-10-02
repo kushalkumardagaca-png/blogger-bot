@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **148**
+- Pass: **162**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -14,7 +14,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: site search
 - ✅ Daily-Yield-Theme-Subscription.xml: back to top
 - ✅ Daily-Yield-Theme-Subscription.xml: mobile menu
-- ✅ Daily-Yield-Theme-Subscription.xml: loading state
+- ✅ Daily-Yield-Theme-Subscription.xml: full-screen finance loading transition
 - ✅ Daily-Yield-Theme-Subscription.xml: hover states
 - ✅ Daily-Yield-Theme-Subscription.xml: reading progress
 - ✅ Daily-Yield-Theme-Subscription.xml: copy/share feedback
@@ -63,6 +63,13 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-Subscription.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-Subscription.xml: honest advice disclaimer
+- ✅ Daily-Yield-Theme-Subscription.xml: loader covers every internal navigation direction
+- ✅ Daily-Yield-Theme-Subscription.xml: loader exits at DOM readiness instead of waiting for images
+- ✅ Daily-Yield-Theme-Subscription.xml: two-second performance budget is measured honestly
+- ✅ Daily-Yield-Theme-Subscription.xml: render-blocking Google Fonts removed
+- ✅ Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed
+- ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB
+- ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
@@ -78,7 +85,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: site search
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: back to top
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: mobile menu
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: loading state
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: full-screen finance loading transition
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: hover states
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: reading progress
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: copy/share feedback
@@ -127,6 +134,13 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: loader covers every internal navigation direction
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: loader exits at DOM readiness instead of waiting for images
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: two-second performance budget is measured honestly
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: render-blocking Google Fonts removed
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating
