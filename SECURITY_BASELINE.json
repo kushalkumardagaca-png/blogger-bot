@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T15:13:39.177108+00:00",
+  "approvedAt": "2026-10-02T15:14:50.260237+00:00",
   "repository": {
     "auto_blogger_publisher.py": "d2b68659346d064b9ed64fa392d6575c61ae88c24ea8af51dfe89d877343c2cb",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
@@ -55,7 +55,7 @@
     ".github/workflows/health_monitor.yml": "2f30dfdc50fff6dc6649db193a8266bb0989d977f41eb20ccdc6fa0cdc02d0fb",
     ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
     ".github/workflows/mastodon_oauth_bootstrap.yml": "3685d69f1815805f837b6cc051c190d814adcfd7183c985172b31f464224e6c6",
-    ".github/workflows/motion_related_retrofit.yml": "cb3b871f0f59254ad5ece87b2b0632536aceeaa6a5c4bc94dc0795ffadcbe50f",
+    ".github/workflows/motion_related_retrofit.yml": "0191dd56def255888787eef5d4de9d2dbb28c18d29439608cce4bd1f1bc525b9",
     ".github/workflows/repair_known_external_links.yml": "a18980a2f2cc0ff8b247eb65c8611af6295dd437d725506e7a3036fa5d9d80ed",
     ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
     ".github/workflows/retrofit_live_news.yml": "30a0e41d35522ff047fdeffc5d656725ba160913a4dae4cf14b80ef5ad9b7232",
