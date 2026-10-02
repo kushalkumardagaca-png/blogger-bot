@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T09:57:29.710254+00:00",
+  "approvedAt": "2026-10-02T10:26:31.110434+00:00",
   "repository": {
-    "auto_blogger_publisher.py": "5dc016b83accce2406956dd9d9a8fd78c61e5773e4297ba12ba2acfe301ba715",
+    "auto_blogger_publisher.py": "c1be1331aa2812b1aeb8943f67f955f8686315a3f5a3a00ff980054f909d5238",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
     "facebook_publisher.py": "33fec201d418fa6da9be3a549c5d0c00bdd44717548944d5051b68f83a20beb5",
     "social_creative.py": "8cfb4d647277c56bec2ead9fa64e86548e5af9513cd756587d35d5bd1ec46a2a",
@@ -30,7 +30,7 @@
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
     "bing_url_automation.py": "2f6931444ff4ba61154a23d8224a9ffbcb6cf1c250aa6d6ae13ee97db5de2211",
     "apply_site_enhancements.py": "5db24e9fd424f7cbedc92bfeb1808d6c25b95fbb4293c1b961c1395955a34eef",
-    "update_page_family.py": "8e132c5a67149c838810f3d0faf267fdfd48a8486582ae011b55e45013f15450",
+    "update_page_family.py": "54696abfa722316c789f900c24829239ebbd8a54157d358e3e39753d59ea3b29",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
     "theme/Daily-Yield-Theme-Subscription.xml": "69a8efc47d9a084d068fd9c52f23ed4b78978968297d9d413de88b15903f9fbf",
     "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "61031464015ca44e6a095126a83b56076082e3dcf5df278c05f433707d058d3f",
@@ -46,6 +46,7 @@
     ".github/workflows/bing_seo_repair.yml": "c52d8fd44619f95c109222d523f386a9004bf6b5ff6054f24bdd862615306dc4",
     ".github/workflows/bing_url_automation.yml": "8ebe2173b68b006b6dfe8bce93a5a4d7f30c431774d01955c3b0fe1708fc9fd0",
     ".github/workflows/content_experience_inventory.yml": "93a99a9289d4bfeb60b3f09df19baceeb69353f3faf3dde470c621fb66955fb9",
+    ".github/workflows/content_experience_repair.yml": "cdea6992f64e3748339506b68109e26f1f0e8572e2e69bbdcd770234e10a2e1e",
     ".github/workflows/contextual_links_retrofit.yml": "50054f78d38057eb1977dfa877bd8e4792b3661b814aa389e330f8f343e2157a",
     ".github/workflows/deploy_global_snapshot.yml": "1963105e6de9476d1a6ad2149036ec0d74b1992c46d9984314079d5c6460d2b6",
     ".github/workflows/deploy_markets_today.yml": "defa06e48a006bc7c9dfc1fb81b60217ab61cac1bd43ae6df51dfa0c6cd0bc99",
@@ -69,8 +70,8 @@
       "id": "3254393081257151974",
       "title": "TERMS AND CONDITIONS",
       "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-      "updated": "2026-10-02T00:10:19-07:00",
-      "content_sha256": "5a1ac9bd1b758136facc89bfe34697b7dcdd09d6188777499b70b3b1a1f3bdd3"
+      "updated": "2026-10-02T03:19:45-07:00",
+      "content_sha256": "134369f62b0e35e27d2fbd6a72f86b2d4ff3085bebbb7b3e35ddbc1e1f8a1fc3"
     },
     "page:8504888514217789256": {
       "kind": "page",
@@ -101,16 +102,16 @@
       "id": "304220949515133754",
       "title": "PRIVACY POLICY",
       "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
-      "updated": "2026-10-02T00:10:26-07:00",
-      "content_sha256": "64e72714f3806794ab2823527e462c1b46c20103f9be4c2379261006e3ec3a3f"
+      "updated": "2026-10-02T03:19:44-07:00",
+      "content_sha256": "9803d81153b9eab315e9d8a09114d018095277aabf6a5a839ff95e9ba4b21c64"
     },
     "page:9217579601621666930": {
       "kind": "page",
       "id": "9217579601621666930",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "updated": "2026-10-02T00:10:28-07:00",
-      "content_sha256": "0ea698fba6b7118dfa6aa2b4cb6bc8aa9bcdb0d1198ddfa9d3bd229f55c2f24b"
+      "updated": "2026-10-02T03:15:57-07:00",
+      "content_sha256": "a5b7d40823a363c43248d67b84df7051448e124cead77b83708bcaed2955d4ab"
     },
     "page:8572476015753638755": {
       "kind": "page",
@@ -157,8 +158,8 @@
       "id": "1685707888914861815",
       "title": "DAILY ARTICLE",
       "url": "https://dailyyield.blogspot.com/p/article.html",
-      "updated": "2026-10-02T00:10:38-07:00",
-      "content_sha256": "099807e3b87e198ad546163df9fcd568fb325010f4195166968ca2876ce42c48"
+      "updated": "2026-10-02T03:15:56-07:00",
+      "content_sha256": "bef744b9d4411f271ed76e30dc6b0aeded253ab5e7508fa4594a2e84d3718b64"
     },
     "page:2716668129166401912": {
       "kind": "page",
@@ -173,7 +174,7 @@
       "id": "1504093871376035088",
       "title": "Corporate Finance and Industry News",
       "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html",
-      "updated": "2026-10-02T02:39:21-07:00",
+      "updated": "2026-10-02T03:24:22-07:00",
       "content_sha256": "1c88655b0edd84974d08a20259090ceb77edba4a3edf4d044af4f15d96fcfe82"
     },
     "post:955420358948638066": {
@@ -181,7 +182,7 @@
       "id": "955420358948638066",
       "title": "Italy Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-02.html",
-      "updated": "2026-10-02T02:38:35-07:00",
+      "updated": "2026-10-02T03:24:23-07:00",
       "content_sha256": "cf9e802db41dccb650e8eba851961e12c03e11778c993a143c43ddd837d3fbb7"
     },
     "post:577819612147620529": {
@@ -189,7 +190,7 @@
       "id": "577819612147620529",
       "title": "Capital Gains, Explained Like a Human",
       "url": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
-      "updated": "2026-10-02T01:32:06-07:00",
+      "updated": "2026-10-02T03:00:04-07:00",
       "content_sha256": "e9c012eb7ed7cb0eb5294ca8ad8898d7ac94a442d932897ac90411a27a4e56ce"
     },
     "post:2005014805006920526": {
@@ -205,7 +206,7 @@
       "id": "3093831134407049207",
       "title": "China Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-02.html",
-      "updated": "2026-10-02T00:10:43-07:00",
+      "updated": "2026-10-02T03:24:24-07:00",
       "content_sha256": "5191636ddedcd288912da5bacd4d73f287af6814a32de9d3fa1f0418c0d3a5fe"
     },
     "post:3582600754100729351": {
@@ -221,7 +222,7 @@
       "id": "1875628838135514595",
       "title": "Japan Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-02.html",
-      "updated": "2026-10-02T00:10:46-07:00",
+      "updated": "2026-10-02T03:24:26-07:00",
       "content_sha256": "b5674a5f7ebdbdaf40e9ccb31121611ef1f21cf3f7a324a7a72641582afd3c64"
     },
     "post:2333084406415618664": {
@@ -229,7 +230,7 @@
       "id": "2333084406415618664",
       "title": "Coast vs. Barista vs. Fat FIRE",
       "url": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html",
-      "updated": "2026-10-02T00:10:47-07:00",
+      "updated": "2026-10-02T03:00:06-07:00",
       "content_sha256": "2340519a6cfe2b7ff774143a0218e53b0fca5babc1acb4473117638bfe9b9147"
     },
     "post:4732705071384887954": {
@@ -237,7 +238,7 @@
       "id": "4732705071384887954",
       "title": "France Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-02.html",
-      "updated": "2026-10-02T00:10:48-07:00",
+      "updated": "2026-10-02T03:24:27-07:00",
       "content_sha256": "a3794b5801eb3cb3d76c3f0ddc7fd4c7c9b84d67a6e14655d892091a569d8ba2"
     },
     "post:1241153471079039627": {
@@ -245,7 +246,7 @@
       "id": "1241153471079039627",
       "title": "Germany Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-02.html",
-      "updated": "2026-10-02T00:10:50-07:00",
+      "updated": "2026-10-02T03:24:28-07:00",
       "content_sha256": "9cf5de8af3c1e3578316ef016f25484ac3e32c272a72f2712e505867c48a0db4"
     },
     "post:7126642917481377533": {
@@ -253,7 +254,7 @@
       "id": "7126642917481377533",
       "title": "Macro Policy News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026.html",
-      "updated": "2026-10-02T00:10:51-07:00",
+      "updated": "2026-10-02T03:24:29-07:00",
       "content_sha256": "8e4fdf6bdef03fe367c33d7cff52e3079fed63e576319f7b511a1472b5e328af"
     },
     "post:6527694942512355244": {
@@ -261,7 +262,7 @@
       "id": "6527694942512355244",
       "title": "Market News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-02.html",
-      "updated": "2026-10-02T00:10:53-07:00",
+      "updated": "2026-10-02T03:24:30-07:00",
       "content_sha256": "79fe519e8d0056f4a4175c51a9cfe4d4058bf7536bcf95a36d24f424c186a4e2"
     },
     "post:1799455763474408220": {
@@ -269,7 +270,7 @@
       "id": "1799455763474408220",
       "title": "S&P 500 vs. Global: Pick One",
       "url": "https://dailyyield.blogspot.com/2026/10/s-500-vs-global-pick-one.html",
-      "updated": "2026-10-02T00:10:54-07:00",
+      "updated": "2026-10-02T03:00:11-07:00",
       "content_sha256": "f2a85e4a93d8b2ab9c2a34a6e52b9a58022c22c45eab710fe9679a2117d57cfa"
     },
     "post:7592536897293931312": {
@@ -277,7 +278,7 @@
       "id": "7592536897293931312",
       "title": "India Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-02.html",
-      "updated": "2026-10-02T00:10:55-07:00",
+      "updated": "2026-10-02T03:24:32-07:00",
       "content_sha256": "9f68a51728e5fffe94bd140be44d8c485a0c734463d6e087ad1983112aa9917c"
     },
     "post:888647573326388172": {
@@ -285,7 +286,7 @@
       "id": "888647573326388172",
       "title": "Global Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-02.html",
-      "updated": "2026-10-02T00:10:57-07:00",
+      "updated": "2026-10-02T03:24:33-07:00",
       "content_sha256": "191e7f605c30788aecd1cce53a5fb5c1c7ef4873d65f3abdf053d3d463cb3788"
     },
     "post:7836621888717460852": {
@@ -301,7 +302,7 @@
       "id": "5158064681276983892",
       "title": "Australia Finance News — 2 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-02.html",
-      "updated": "2026-10-02T00:10:59-07:00",
+      "updated": "2026-10-02T03:24:34-07:00",
       "content_sha256": "8b5dd0f9012417257e184bfff8e31be13083d84b7e17ac652ecb609de2d22a51"
     },
     "post:626954337147022449": {
@@ -325,7 +326,7 @@
       "id": "7248649539978874711",
       "title": "Your Secret Money Script, Explained",
       "url": "https://dailyyield.blogspot.com/2026/10/your-secret-money-script-explained.html",
-      "updated": "2026-10-02T00:11:04-07:00",
+      "updated": "2026-10-02T03:00:15-07:00",
       "content_sha256": "0123f52c046745404265b78f047e5848010d5cdf57b7d073b58b093954ef3654"
     },
     "post:1697237802506427825": {
@@ -333,7 +334,7 @@
       "id": "1697237802506427825",
       "title": "Mexico Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-01.html",
-      "updated": "2026-10-02T00:11:05-07:00",
+      "updated": "2026-10-02T03:24:35-07:00",
       "content_sha256": "d3e4503329d09d0568a4169153c8a6220d6ca910d385746d5bb24b97eb27c392"
     },
     "post:132048976709130267": {
@@ -341,7 +342,7 @@
       "id": "132048976709130267",
       "title": "Canada Finance News — 1 October 2026 (2)",
       "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
-      "updated": "2026-10-02T00:11:06-07:00",
+      "updated": "2026-10-02T03:24:36-07:00",
       "content_sha256": "42abf92d6da88cdc513ccc79533ef29731cd4e48e73dcae3083475bee4684852"
     },
     "post:7963636691459098956": {
@@ -357,23 +358,23 @@
       "id": "3571951616049148857",
       "title": "Canada Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01.html",
-      "updated": "2026-10-02T00:11:09-07:00",
-      "content_sha256": "e0f2fb192980fe3f43da207abe8f31b89885bfbdbe6cc60c3f3424cdfb676c82"
+      "updated": "2026-10-02T03:24:38-07:00",
+      "content_sha256": "614c3a5aaf6608be5308a95fc5c809490423a1f959f6f40c936f0efcb2d1d1a2"
     },
     "post:7632338182974546049": {
       "kind": "post",
       "id": "7632338182974546049",
       "title": "US Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-01.html",
-      "updated": "2026-10-02T00:11:10-07:00",
-      "content_sha256": "c6837de62551c55b752546db5094a9c8afcafc2567c8a2c676d5968a82d76d7a"
+      "updated": "2026-10-02T03:09:19-07:00",
+      "content_sha256": "1d81d48b29f0e6f7a8fcbc69a7c53ce21548a7a115fbefb0587c99b4251d8ea1"
     },
     "post:9105498753770999311": {
       "kind": "post",
       "id": "9105498753770999311",
       "title": "A Private AI Advisor on Your Data",
       "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
-      "updated": "2026-10-02T00:11:12-07:00",
+      "updated": "2026-10-02T03:00:20-07:00",
       "content_sha256": "bd24f17f978e6795b1270b73c3145f42e8cbbdb6524125966ae79cd5757face4"
     },
     "post:553934405300545275": {
@@ -381,7 +382,7 @@
       "id": "553934405300545275",
       "title": "Brazil Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-01.html",
-      "updated": "2026-10-02T00:11:13-07:00",
+      "updated": "2026-10-02T03:24:39-07:00",
       "content_sha256": "1028b7d399bda7afd5dee0a67e42d5cea9fd49829f72e76fa3473cd3493ce654"
     },
     "post:2586213142082697872": {
@@ -389,7 +390,7 @@
       "id": "2586213142082697872",
       "title": "Corporate Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry.html",
-      "updated": "2026-10-02T00:11:15-07:00",
+      "updated": "2026-10-02T03:24:40-07:00",
       "content_sha256": "459526e879d57900940c553aaa456db96a4c23b0aef9cdad01490a41037b4dcc"
     },
     "post:2370753968758385048": {
@@ -397,7 +398,7 @@
       "id": "2370753968758385048",
       "title": "Italy Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-01.html",
-      "updated": "2026-10-02T00:11:16-07:00",
+      "updated": "2026-10-02T03:24:41-07:00",
       "content_sha256": "99d39c2743f3bf603a0e7c0d05fe8b4f1d7b5bca43911e2893a83693998efaa6"
     },
     "post:5001890081868019899": {
@@ -405,7 +406,7 @@
       "id": "5001890081868019899",
       "title": "Credit Card Bonuses Without the Damage",
       "url": "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
-      "updated": "2026-10-02T00:11:17-07:00",
+      "updated": "2026-10-02T03:00:24-07:00",
       "content_sha256": "f6f2e16ff552e09e07944123b6e8ce4887bb113861f5e77c1ce086e55b3be4a8"
     },
     "post:537381809861598684": {
@@ -421,7 +422,7 @@
       "id": "9028432246850261596",
       "title": "China Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-01.html",
-      "updated": "2026-10-02T00:11:20-07:00",
+      "updated": "2026-10-02T03:24:42-07:00",
       "content_sha256": "71896773c8443c000471b2bc3450336b3cc55002a1a4a47d093989fbbc67593b"
     },
     "post:983834499565146723": {
@@ -437,7 +438,7 @@
       "id": "5545386663868376235",
       "title": "Japan Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-10-01.html",
-      "updated": "2026-10-02T00:11:23-07:00",
+      "updated": "2026-10-02T03:24:43-07:00",
       "content_sha256": "06e5187c78d4991854e5ec31388a675f3c7d5785dbdd19528ecdc1cb0c0999fe"
     },
     "post:2373709041132325539": {
@@ -445,7 +446,7 @@
       "id": "2373709041132325539",
       "title": "The 12-Tab Personal CFO Spreadsheet",
       "url": "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
-      "updated": "2026-10-02T00:11:24-07:00",
+      "updated": "2026-10-02T03:00:27-07:00",
       "content_sha256": "615a497ae2d0a662dfb590fe98d36bf18fd020a57451897b3c9d737f931ebca1"
     },
     "post:7819017210363133781": {
@@ -453,7 +454,7 @@
       "id": "7819017210363133781",
       "title": "France Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-10-01.html",
-      "updated": "2026-10-02T00:11:26-07:00",
+      "updated": "2026-10-02T03:24:44-07:00",
       "content_sha256": "0f1acbbbc5e24893c00ec1fe707ddb95fbd00bd956d7120a9efd1bae04ad1a7b"
     },
     "post:967337411893740866": {
@@ -461,7 +462,7 @@
       "id": "967337411893740866",
       "title": "Germany Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-10-01.html",
-      "updated": "2026-10-02T00:11:27-07:00",
+      "updated": "2026-10-02T03:24:46-07:00",
       "content_sha256": "12d2d45707b9f28fd1eea0b2b6118a902378125adf1e0b9af2f687c4ab705115"
     },
     "post:6190892833991317126": {
@@ -469,7 +470,7 @@
       "id": "6190892833991317126",
       "title": "Macro Policy News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01962741990.html",
-      "updated": "2026-10-02T00:11:28-07:00",
+      "updated": "2026-10-02T03:24:47-07:00",
       "content_sha256": "f0ca5fe463d325273e81e9af50870bb0d3e99da1274c158b91abb488999d46be"
     },
     "post:3794916987021150590": {
@@ -477,7 +478,7 @@
       "id": "3794916987021150590",
       "title": "Market News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html",
-      "updated": "2026-10-02T00:11:30-07:00",
+      "updated": "2026-10-02T03:24:48-07:00",
       "content_sha256": "dae2749f59a05f3ddb6f21490fbc02100d2df592ea901f68c5f6ca85e8a30143"
     },
     "post:2392626462720316715": {
@@ -485,7 +486,7 @@
       "id": "2392626462720316715",
       "title": "Your Car Payment Is a Wealth Killer",
       "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
-      "updated": "2026-10-02T00:11:31-07:00",
+      "updated": "2026-10-02T03:00:32-07:00",
       "content_sha256": "e0a79081212052148d8b1733da9a2d8988145339d946bc1e08bb8f07c8140ada"
     },
     "post:2678078863814343955": {
@@ -493,7 +494,7 @@
       "id": "2678078863814343955",
       "title": "India Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-10-01.html",
-      "updated": "2026-10-02T00:11:32-07:00",
+      "updated": "2026-10-02T03:24:49-07:00",
       "content_sha256": "04ba8df37396b258136b03729f0fd763d0e60f719c74ffbaf2ba95367adad196"
     },
     "post:309111306060639526": {
@@ -501,7 +502,7 @@
       "id": "309111306060639526",
       "title": "Global Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-10-01.html",
-      "updated": "2026-10-02T00:11:34-07:00",
+      "updated": "2026-10-02T03:24:50-07:00",
       "content_sha256": "0c8d16db06dac6a0dc517029f08bf35f12d7ec5ea7e025c9400f2139a6821e06"
     },
     "post:2542420316692426930": {
@@ -517,7 +518,7 @@
       "id": "635769679322746121",
       "title": "Australia Finance News — 1 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-10-01.html",
-      "updated": "2026-10-02T00:11:36-07:00",
+      "updated": "2026-10-02T03:24:51-07:00",
       "content_sha256": "abd902d98fb9c8f151c1aa770f9d1265e583ffc84d95267b582ab3dd4e239980"
     },
     "post:1610593295668865715": {
@@ -541,7 +542,7 @@
       "id": "1518139427210986224",
       "title": "£90k Salary, £4k Net Worth Audit",
       "url": "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html",
-      "updated": "2026-10-02T00:11:40-07:00",
+      "updated": "2026-10-02T03:00:36-07:00",
       "content_sha256": "47c44af57b2d99e7e25c7f57b3100085cb5bb8252bb419f059f8a20cfd1febc2"
     },
     "post:5921749039774626930": {
@@ -549,7 +550,7 @@
       "id": "5921749039774626930",
       "title": "Mexico Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-30.html",
-      "updated": "2026-10-02T00:11:42-07:00",
+      "updated": "2026-10-02T03:24:53-07:00",
       "content_sha256": "4885101cac7c4bc1596b892b6b8698e5365883b8a124183d125b4d7402841ace"
     },
     "post:3417859541869662007": {
@@ -557,7 +558,7 @@
       "id": "3417859541869662007",
       "title": "Canada Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-30.html",
-      "updated": "2026-10-02T00:11:43-07:00",
+      "updated": "2026-10-02T03:24:54-07:00",
       "content_sha256": "b021c9448763b952fc690f03596685a6a77c53b499cd7411c09b5f2712fa745d"
     },
     "post:4378017040434071616": {
@@ -573,7 +574,7 @@
       "id": "8564410517739387148",
       "title": "Childcare Is the New Mortgage",
       "url": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html",
-      "updated": "2026-10-02T00:11:46-07:00",
+      "updated": "2026-10-02T03:00:39-07:00",
       "content_sha256": "093fdbbdc51c747618622f8d95b7b1c7b8d36363e017d7e85bf155d8c2399a87"
     },
     "post:6754930054304268139": {
@@ -581,7 +582,7 @@
       "id": "6754930054304268139",
       "title": "Brazil Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-30.html",
-      "updated": "2026-10-02T00:11:47-07:00",
+      "updated": "2026-10-02T03:24:55-07:00",
       "content_sha256": "5940e0a40f57004ce017836efc9e4c83a7c078d5c52d400693924a0cedc01d97"
     },
     "post:5019452690942245047": {
@@ -589,7 +590,7 @@
       "id": "5019452690942245047",
       "title": "Corporate Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01348401010.html",
-      "updated": "2026-10-02T00:11:48-07:00",
+      "updated": "2026-10-02T03:24:56-07:00",
       "content_sha256": "517c81b5ae8310a5f48035223097ba3a546a09a8fc2457dbbf8665666ac7902c"
     },
     "post:2913845025272989831": {
@@ -597,7 +598,7 @@
       "id": "2913845025272989831",
       "title": "Italy Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-30.html",
-      "updated": "2026-10-02T00:11:50-07:00",
+      "updated": "2026-10-02T03:24:57-07:00",
       "content_sha256": "62becfef593e5f5ac45cceb4693402c54745b1d8520887f611b8e0a58a7eaa07"
     },
     "post:1499457110813036815": {
@@ -605,7 +606,7 @@
       "id": "1499457110813036815",
       "title": "90 Days of Passive Income: The Truth",
       "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
-      "updated": "2026-10-02T00:11:51-07:00",
+      "updated": "2026-10-02T03:00:43-07:00",
       "content_sha256": "98719727d701cf9e1f704272338a3f0d10d71d5ed1b112a6c56009ad9dae75e9"
     },
     "post:1152148656719761146": {
@@ -621,8 +622,8 @@
       "id": "48092243194050927",
       "title": "China Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-30.html",
-      "updated": "2026-10-02T00:11:54-07:00",
-      "content_sha256": "bb10bf9b211b23cbbc0a46ee16f4302bba125248be7bea663e46d0cf99c2d0dd"
+      "updated": "2026-10-02T03:24:58-07:00",
+      "content_sha256": "b93dc0b35bd26f3737bede4bff91fcd8d3379f04b50fe6d5a5c8f6cac4d70281"
     },
     "post:8686096611857118978": {
       "kind": "post",
@@ -637,7 +638,7 @@
       "id": "3369513303010484098",
       "title": "Japan Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-30.html",
-      "updated": "2026-10-02T00:11:56-07:00",
+      "updated": "2026-10-02T03:24:59-07:00",
       "content_sha256": "1e9a7c06801f93771074cc313d38ca31e55547b70048ed15b297af4d7c2fadb5"
     },
     "post:6003168629771257786": {
@@ -645,7 +646,7 @@
       "id": "6003168629771257786",
       "title": "Only 5 Money Goals for Your 20s",
       "url": "https://dailyyield.blogspot.com/2026/09/only-5-money-goals-for-your-20s.html",
-      "updated": "2026-10-02T00:11:58-07:00",
+      "updated": "2026-10-02T03:00:46-07:00",
       "content_sha256": "2e7e66ce275b60bdf80681d5b8703daef960f780bcaaf031f264bacb5499b294"
     },
     "post:2849933272866910243": {
@@ -653,7 +654,7 @@
       "id": "2849933272866910243",
       "title": "France Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-30.html",
-      "updated": "2026-10-02T00:11:59-07:00",
+      "updated": "2026-10-02T03:25:00-07:00",
       "content_sha256": "c826fc4cddb8e909f61cca58752595511e78e5af2ad7ff0c756cc78671e4d080"
     },
     "post:416760661369375574": {
@@ -661,7 +662,7 @@
       "id": "416760661369375574",
       "title": "Germany Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-30.html",
-      "updated": "2026-10-02T00:12:00-07:00",
+      "updated": "2026-10-02T03:25:01-07:00",
       "content_sha256": "5b941f45fb5705ba0af84cfde266e26d0b588d966eaf4c753ba5a4a579fb4189"
     },
     "post:7732982655147361005": {
@@ -669,7 +670,7 @@
       "id": "7732982655147361005",
       "title": "Macro Policy News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0527246697.html",
-      "updated": "2026-10-02T00:12:02-07:00",
+      "updated": "2026-10-02T03:25:03-07:00",
       "content_sha256": "84613468c05f998430c65c12a16ccacdd4b5253e4f5a94b5bd7117a557db9db5"
     },
     "post:8099889816920857108": {
@@ -677,7 +678,7 @@
       "id": "8099889816920857108",
       "title": "Market News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-30.html",
-      "updated": "2026-10-02T00:12:03-07:00",
+      "updated": "2026-10-02T03:25:04-07:00",
       "content_sha256": "bb8bc281f653c555b2f2fdbbcb9acb6f17cf5bb9a377995e65c6b3d31a359ad5"
     },
     "post:2303680525771764438": {
@@ -685,7 +686,7 @@
       "id": "2303680525771764438",
       "title": "Stop Checking Your Portfolio Daily",
       "url": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html",
-      "updated": "2026-10-02T00:12:04-07:00",
+      "updated": "2026-10-02T03:00:51-07:00",
       "content_sha256": "cea9f2a65d1d9d9d029bc066833a69d7c009839c3a4b8f1f406621e241004495"
     },
     "post:734722129897789265": {
@@ -693,7 +694,7 @@
       "id": "734722129897789265",
       "title": "India Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-30.html",
-      "updated": "2026-10-02T00:12:06-07:00",
+      "updated": "2026-10-02T03:25:05-07:00",
       "content_sha256": "b2817c66415a608fa59875ca72b2c1ff411e04402095835dcb4d7897546aaa1c"
     },
     "post:4173730771472877576": {
@@ -701,23 +702,23 @@
       "id": "4173730771472877576",
       "title": "Global Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-30.html",
-      "updated": "2026-10-02T00:12:07-07:00",
-      "content_sha256": "8c16ce20afa71d7ad1fdaa8fa8ff4e1e588cd0844bd141bb9ef019c000b46989"
+      "updated": "2026-10-02T03:25:06-07:00",
+      "content_sha256": "c932845640a4d7f57ea57f3a5aeb5f659a3bfada98db136b2ebbad622c257d88"
     },
     "post:3338477738272234964": {
       "kind": "post",
       "id": "3338477738272234964",
       "title": "South Korea Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-30.html",
-      "updated": "2026-10-02T00:12:09-07:00",
-      "content_sha256": "d5f94cf67b7722c60a8b95dea49f9463a7900c29830444f471eddcdb10934958"
+      "updated": "2026-10-02T03:09:49-07:00",
+      "content_sha256": "905a6358eff14f00d0d126e477d499b9295befd191c19a5182f1bc65dc0baeb9"
     },
     "post:4294031392271634610": {
       "kind": "post",
       "id": "4294031392271634610",
       "title": "Australia Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-30.html",
-      "updated": "2026-10-02T00:12:10-07:00",
+      "updated": "2026-10-02T03:25:07-07:00",
       "content_sha256": "d65c933f7f98165ab265971bc72e64b4b26fabf4a3ab28833ba0f34f0d29aa86"
     },
     "post:9100032476497143186": {
@@ -741,7 +742,7 @@
       "id": "3487685101279047331",
       "title": "What Changed for Your Money in 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/what-changed-for-your-money-in-2026.html",
-      "updated": "2026-10-02T00:12:14-07:00",
+      "updated": "2026-10-02T03:00:56-07:00",
       "content_sha256": "eaed043792b66f94604afb12c3beadef5c3f157d70e40576a8b53144dc8de74b"
     },
     "post:7115176249025195517": {
@@ -749,7 +750,7 @@
       "id": "7115176249025195517",
       "title": "Mexico Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-29.html",
-      "updated": "2026-10-02T00:12:15-07:00",
+      "updated": "2026-10-02T03:25:08-07:00",
       "content_sha256": "b0fb6ad43fd09b48d0cacfc2b62e3f06baff6c9be55427aef41e1ce32c6feeed"
     },
     "post:7003750694659761692": {
@@ -757,7 +758,7 @@
       "id": "7003750694659761692",
       "title": "Canada Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-29.html",
-      "updated": "2026-10-02T00:12:17-07:00",
+      "updated": "2026-10-02T03:25:09-07:00",
       "content_sha256": "700936a37be9d508b2d43eff51050d6ebf301ef2bd5cdd2a7848ef9713b1ce11"
     },
     "post:1559881385941953973": {
@@ -773,7 +774,7 @@
       "id": "4498405341941524443",
       "title": "The Market Is Not a Casino",
       "url": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
-      "updated": "2026-10-02T00:12:19-07:00",
+      "updated": "2026-10-02T03:00:59-07:00",
       "content_sha256": "212049d9d33ee38c496d8c7d5c6266788002f25f4794b2c8f3cd3be7a5c65948"
     },
     "post:6981062378758319524": {
@@ -781,7 +782,7 @@
       "id": "6981062378758319524",
       "title": "Brazil Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-29.html",
-      "updated": "2026-10-02T00:12:21-07:00",
+      "updated": "2026-10-02T03:25:10-07:00",
       "content_sha256": "95a09d650116b7f1ea3e87623a8c5238f9984a92d5624a24bd670cab774f4ccf"
     },
     "post:3890352632686960222": {
@@ -789,7 +790,7 @@
       "id": "3890352632686960222",
       "title": "Corporate Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_0629962340.html",
-      "updated": "2026-10-02T00:12:22-07:00",
+      "updated": "2026-10-02T03:25:11-07:00",
       "content_sha256": "f8c4a717cc04184539958ec033414327637aa9c260ce36f85353eeced8546d62"
     },
     "post:5797453094847355471": {
@@ -797,15 +798,15 @@
       "id": "5797453094847355471",
       "title": "Italy Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-29.html",
-      "updated": "2026-10-02T00:12:23-07:00",
-      "content_sha256": "42f5937fbc23e34f788599b1cc1d4c4ed6e38b21a37f2740ae099084fb6e8cd4"
+      "updated": "2026-10-02T03:25:12-07:00",
+      "content_sha256": "3d482e1b2a4ad9304accbda739259ac0b1b4bc9cdee172d7f9320522cf9e6ec0"
     },
     "post:7255018414657547539": {
       "kind": "post",
       "id": "7255018414657547539",
       "title": "BRRRR With the Ugly Months Included",
       "url": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html",
-      "updated": "2026-10-02T00:12:25-07:00",
+      "updated": "2026-10-02T03:01:03-07:00",
       "content_sha256": "ec25fbacb715d3cf1b6e115a90889c5ddee948beada00448fc0889a3385eca21"
     },
     "post:6059871633623862310": {
@@ -813,15 +814,15 @@
       "id": "6059871633623862310",
       "title": "Spain Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-29.html",
-      "updated": "2026-10-02T00:12:26-07:00",
-      "content_sha256": "c33dc3a2c71e3b7868555bc384a233af70caa2bfe4a60d06c70b0ead7b67a218"
+      "updated": "2026-10-02T03:09:57-07:00",
+      "content_sha256": "ded143ad45a0a20a511f273ec27c57133ad5bf1f5a974a31d4d0b19484d708d9"
     },
     "post:9007144551320250681": {
       "kind": "post",
       "id": "9007144551320250681",
       "title": "China Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-29.html",
-      "updated": "2026-10-02T00:12:28-07:00",
+      "updated": "2026-10-02T03:25:13-07:00",
       "content_sha256": "17b8c2933647c33cda2dfb87bc25ca4eaef8123da478a8b08eee122bf6889327"
     },
     "post:1810052964905988018": {
@@ -829,7 +830,7 @@
       "id": "1810052964905988018",
       "title": "Japan Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-29.html",
-      "updated": "2026-10-02T00:12:29-07:00",
+      "updated": "2026-10-02T03:25:14-07:00",
       "content_sha256": "e848ffd80ca0ae06161f9ef32dfe88ae87012ed1b85b1e39b872b66794d519c8"
     },
     "post:7667045939093536899": {
@@ -845,7 +846,7 @@
       "id": "3888811538986935233",
       "title": "France Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-29.html",
-      "updated": "2026-10-02T00:12:32-07:00",
+      "updated": "2026-10-02T03:25:15-07:00",
       "content_sha256": "3effd6dd594bc16cdf56bbbf33023b1f2fa18c12e4bfe959e46041f554e92669"
     },
     "post:314352988888289456": {
@@ -853,7 +854,7 @@
       "id": "314352988888289456",
       "title": "Where to Park Your Emergency Fund",
       "url": "https://dailyyield.blogspot.com/2026/09/where-to-park-your-emergency-fund.html",
-      "updated": "2026-10-02T00:12:34-07:00",
+      "updated": "2026-10-02T03:01:08-07:00",
       "content_sha256": "e025d8e10bfe6d6745fc53c3b0fdab6b1caa8895c76d384522d0af65e4b3d708"
     },
     "post:5530506896553639228": {
@@ -861,7 +862,7 @@
       "id": "5530506896553639228",
       "title": "Germany Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-29.html",
-      "updated": "2026-10-02T00:12:35-07:00",
+      "updated": "2026-10-02T03:25:16-07:00",
       "content_sha256": "4e31f60bf2a4d2fbf6909a6087de65b174c60d9e0f128819e391564559964a67"
     },
     "post:5793837205624436935": {
@@ -869,7 +870,7 @@
       "id": "5793837205624436935",
       "title": "Macro Policy News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01743986716.html",
-      "updated": "2026-10-02T00:12:36-07:00",
+      "updated": "2026-10-02T03:25:18-07:00",
       "content_sha256": "41eed6f131313366bc9f8d215ac81aeb66bcf9395a83faecab60716c2a4a14af"
     },
     "post:5663946889586320606": {
@@ -877,7 +878,7 @@
       "id": "5663946889586320606",
       "title": "Market News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-29.html",
-      "updated": "2026-10-02T00:12:38-07:00",
+      "updated": "2026-10-02T03:25:19-07:00",
       "content_sha256": "b95606899ce9cb350ba3105490e72a3a240dd708b127637f7f8034f13a6383f7"
     },
     "post:5611067798787673649": {
@@ -885,7 +886,7 @@
       "id": "5611067798787673649",
       "title": "Laid Off: The First 72 Hours",
       "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
-      "updated": "2026-10-02T00:12:39-07:00",
+      "updated": "2026-10-02T03:01:12-07:00",
       "content_sha256": "f19e0c0dcb7ded6a505d93b0f5e59f017f85be4f1e303e7be41a87d987296970"
     },
     "post:1470400056182955354": {
@@ -893,7 +894,7 @@
       "id": "1470400056182955354",
       "title": "India Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-29.html",
-      "updated": "2026-10-02T00:12:41-07:00",
+      "updated": "2026-10-02T03:25:20-07:00",
       "content_sha256": "0e34d67cf23d132064ffd9975b62988a960a7b1ff97548bd482fac0e510aee15"
     },
     "post:1954269198646496705": {
@@ -901,7 +902,7 @@
       "id": "1954269198646496705",
       "title": "Global Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-29.html",
-      "updated": "2026-10-02T00:12:42-07:00",
+      "updated": "2026-10-02T03:25:21-07:00",
       "content_sha256": "8c7309b242cdfaa9d9be48de66c14fcd9b79657dfc31f16912cf1cea9ac6bbdb"
     },
     "post:4156483657490223145": {
@@ -909,15 +910,15 @@
       "id": "4156483657490223145",
       "title": "South Korea Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-29.html",
-      "updated": "2026-10-02T00:12:44-07:00",
-      "content_sha256": "8d5d873a432e012b41a0a804335afcf7ebd0f6e754d14cfeaec42b48d91c6c29"
+      "updated": "2026-10-02T03:10:07-07:00",
+      "content_sha256": "c4929ba79bbacadecf3760e2de99b8d3be1f2f23a7f96291fb97e2128d9438a3"
     },
     "post:2829755268130449976": {
       "kind": "post",
       "id": "2829755268130449976",
       "title": "Australia Finance News — 29 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-29.html",
-      "updated": "2026-10-02T00:12:45-07:00",
+      "updated": "2026-10-02T03:25:22-07:00",
       "content_sha256": "f2e1d7b7c4f80df392a2f7c961c2794bc97d4c9146a76310811f4f35f03fb10a"
     },
     "post:5244611819587678418": {
@@ -941,7 +942,7 @@
       "id": "6448805219822825799",
       "title": "Buy Options, Not Status",
       "url": "https://dailyyield.blogspot.com/2026/09/buy-options-not-status.html",
-      "updated": "2026-10-02T00:12:50-07:00",
+      "updated": "2026-10-02T03:01:16-07:00",
       "content_sha256": "ecd789631aa6b706c8518454980772cdf42acb05f6f3fd7bd8200e53e8dea22d"
     },
     "post:6158169707232928737": {
@@ -949,7 +950,7 @@
       "id": "6158169707232928737",
       "title": "Mexico Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-28.html",
-      "updated": "2026-10-02T00:12:51-07:00",
+      "updated": "2026-10-02T03:25:23-07:00",
       "content_sha256": "78abf0484b323e48abb0bb1fedc62e85e12e1716ddcec4a8b59f06883dbc546b"
     },
     "post:1692610470499812937": {
@@ -957,7 +958,7 @@
       "id": "1692610470499812937",
       "title": "Canada Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-28.html",
-      "updated": "2026-10-02T00:12:53-07:00",
+      "updated": "2026-10-02T03:25:24-07:00",
       "content_sha256": "852c4cb8e52bd596384dac763b71266f11c504c5e6d46470df6ebd21b3adba74"
     },
     "post:6398572425484507020": {
@@ -973,7 +974,7 @@
       "id": "2045026967272748700",
       "title": "Cheap, Frugal, and Value Are Not Synonyms",
       "url": "https://dailyyield.blogspot.com/2026/09/cheap-frugal-and-value-are-not-synonyms.html",
-      "updated": "2026-10-02T00:12:55-07:00",
+      "updated": "2026-10-02T03:01:19-07:00",
       "content_sha256": "9d28102bba7e2bca5f9caaf906089a0f130f6f01972229a142dc0625667f1ca7"
     },
     "post:2086262243563462858": {
@@ -981,7 +982,7 @@
       "id": "2086262243563462858",
       "title": "Brazil Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-28.html",
-      "updated": "2026-10-02T00:12:57-07:00",
+      "updated": "2026-10-02T03:25:25-07:00",
       "content_sha256": "4e9280ac63090be9c75700e345b1ab4c438375a185cbab170b821ef83d650b7c"
     },
     "post:1176196356811634898": {
@@ -989,7 +990,7 @@
       "id": "1176196356811634898",
       "title": "Corporate Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html",
-      "updated": "2026-10-02T00:12:58-07:00",
+      "updated": "2026-10-02T03:25:26-07:00",
       "content_sha256": "bfa78f312f9c60039e0e3ad32d2e5eb3a71bc8c30696da611867c481fa73b960"
     },
     "post:8220571972089630701": {
@@ -997,7 +998,7 @@
       "id": "8220571972089630701",
       "title": "Italy Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-28.html",
-      "updated": "2026-10-02T00:12:59-07:00",
+      "updated": "2026-10-02T03:25:27-07:00",
       "content_sha256": "067c1a24875d4014f7636ea66c346b21aebe78063bef11a3e36f334e72dfccb9"
     },
     "post:4516328180677729614": {
@@ -1005,23 +1006,23 @@
       "id": "4516328180677729614",
       "title": "Your Student Overdraft Isn't Free",
       "url": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html",
-      "updated": "2026-10-02T00:13:01-07:00",
-      "content_sha256": "d8ef0b2d5a0508d16da64dc4c13dd876a73a3eb87dec32c24289aaef9fea5d22"
+      "updated": "2026-10-02T03:10:15-07:00",
+      "content_sha256": "758cf8c83392d074c450b007421acbef617a7481766fb2a00a2a2ae9b4376953"
     },
     "post:3308607986117894116": {
       "kind": "post",
       "id": "3308607986117894116",
       "title": "Spain Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-28.html",
-      "updated": "2026-10-02T00:13:02-07:00",
-      "content_sha256": "6e85e610d8c6d714b6ca3924a02c6d8cea266d08a3724e5074e01e9ad52daa59"
+      "updated": "2026-10-02T03:10:17-07:00",
+      "content_sha256": "04fdf2b04ec9a01c1b56e29b71bd7df4698d0bccebb3bc6d87347bccebfe432b"
     },
     "post:6136867085515829924": {
       "kind": "post",
       "id": "6136867085515829924",
       "title": "China Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-28.html",
-      "updated": "2026-10-02T00:13:04-07:00",
+      "updated": "2026-10-02T03:25:28-07:00",
       "content_sha256": "8989ebab6698c4b8fa928a60c9f00ca5cadac0d14d7a4589f33d66b6920d73d8"
     },
     "post:2456526586094870954": {
@@ -1037,15 +1038,15 @@
       "id": "7828478888559605544",
       "title": "Japan Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-28.html",
-      "updated": "2026-10-02T00:13:07-07:00",
-      "content_sha256": "3c3f735f114d0f5891740cfca63e6b2ff31205784dc24ad0b8bca9b3224c5414"
+      "updated": "2026-10-02T03:25:29-07:00",
+      "content_sha256": "1b774ca821f2f6ab293ca8fd435f1c79b9606ddb1d073675585f6f85efc8cd1b"
     },
     "post:8825196756986669857": {
       "kind": "post",
       "id": "8825196756986669857",
       "title": "Joint vs. Separate vs. Hybrid Accounts",
       "url": "https://dailyyield.blogspot.com/2026/09/joint-vs-separate-vs-hybrid-accounts.html",
-      "updated": "2026-10-02T00:13:08-07:00",
+      "updated": "2026-10-02T03:01:28-07:00",
       "content_sha256": "afcd24f1890f852f4c703085774123a0cc2666ca8da24997de73dcf3b857f31a"
     },
     "post:7610007741627454383": {
@@ -1053,7 +1054,7 @@
       "id": "7610007741627454383",
       "title": "France Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-28.html",
-      "updated": "2026-10-02T00:13:10-07:00",
+      "updated": "2026-10-02T03:25:31-07:00",
       "content_sha256": "964d3d3482ea03393f2a7d2604edc37c55f0fa0bc8cdcb129c71d678e088570f"
     },
     "post:7064447949502231390": {
@@ -1061,7 +1062,7 @@
       "id": "7064447949502231390",
       "title": "Germany Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-28.html",
-      "updated": "2026-10-02T00:13:11-07:00",
+      "updated": "2026-10-02T03:25:32-07:00",
       "content_sha256": "b8af1fe9cbe9965643d424f26471a63300b5ee4e766f3aea88cb75964fd8b6f8"
     },
     "post:7120917028774007604": {
@@ -1069,7 +1070,7 @@
       "id": "7120917028774007604",
       "title": "Macro Policy News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_017346688.html",
-      "updated": "2026-10-02T00:13:13-07:00",
+      "updated": "2026-10-02T03:25:33-07:00",
       "content_sha256": "4b1fceaa8f5ccbb52d1985ffc36efc6c46eba059534572d91116347a3b9cc474"
     },
     "post:4839715618924227739": {
@@ -1077,7 +1078,7 @@
       "id": "4839715618924227739",
       "title": "Market News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-28.html",
-      "updated": "2026-10-02T00:13:14-07:00",
+      "updated": "2026-10-02T03:25:34-07:00",
       "content_sha256": "e34e18a5b693de7e88eef6cae1e6f5193f526c25a76c8a34d5dff9bf52504952"
     },
     "post:7123852462020825588": {
@@ -1085,7 +1086,7 @@
       "id": "7123852462020825588",
       "title": "Insure Your Income, Not Just Your Phone",
       "url": "https://dailyyield.blogspot.com/2026/09/insure-your-income-not-just-your-phone.html",
-      "updated": "2026-10-02T00:13:15-07:00",
+      "updated": "2026-10-02T03:01:32-07:00",
       "content_sha256": "91f446489fb2f68cafbb6542bc748a6f8b7fabc8aceccfc0f1762213c6cd65d8"
     },
     "post:7080232271061962890": {
@@ -1093,7 +1094,7 @@
       "id": "7080232271061962890",
       "title": "India Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-28.html",
-      "updated": "2026-10-02T00:13:17-07:00",
+      "updated": "2026-10-02T03:25:35-07:00",
       "content_sha256": "b386049459cedee8d61e401290b4f1147ec9d848f89ce437778e108b73d789d6"
     },
     "post:6334994565996995329": {
@@ -1101,7 +1102,7 @@
       "id": "6334994565996995329",
       "title": "Global Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-28.html",
-      "updated": "2026-10-02T00:13:18-07:00",
+      "updated": "2026-10-02T03:25:36-07:00",
       "content_sha256": "911d996c1b089c1497be56a229214dfc47fe112636e728f0290dd9b0cc497dca"
     },
     "post:3566483254293904115": {
@@ -1109,15 +1110,15 @@
       "id": "3566483254293904115",
       "title": "South Korea Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-28.html",
-      "updated": "2026-10-02T00:13:20-07:00",
-      "content_sha256": "3773d997e239f9c8f535a200ff8ee3d82b701da96f46fcd622527864bec6a6a7"
+      "updated": "2026-10-02T03:10:28-07:00",
+      "content_sha256": "ae4ca50d747cfcea1e6bec4ef821bf988782ff8d0f53a1e0baf57a4aa9256c92"
     },
     "post:8595229389581582705": {
       "kind": "post",
       "id": "8595229389581582705",
       "title": "Australia Finance News — 28 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-28.html",
-      "updated": "2026-10-02T00:13:21-07:00",
+      "updated": "2026-10-02T03:25:37-07:00",
       "content_sha256": "b2a125f98b21d14438ad142f92d9b51733fbafe9e0127faeacfbca22bb19b59d"
     },
     "post:5984345327493779721": {
@@ -1133,15 +1134,15 @@
       "id": "4559693310963899298",
       "title": "Personal Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-27.html",
-      "updated": "2026-10-02T00:13:24-07:00",
-      "content_sha256": "2f837757d34665fb212d10eb529e9c14e778c31a973dddefe2978cd92117c0bd"
+      "updated": "2026-10-02T03:10:31-07:00",
+      "content_sha256": "b601ae428e69b5684bd9e79dac57d35e306c85685d639c4a781da72686fc1e74"
     },
     "post:8711042237458005134": {
       "kind": "post",
       "id": "8711042237458005134",
       "title": "£500 Extra: Overtime, Hustle, or Skill?",
       "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html",
-      "updated": "2026-10-02T00:13:25-07:00",
+      "updated": "2026-10-02T03:01:38-07:00",
       "content_sha256": "3025da5cb4b9061394270937dda4142e4c7efc8dddb992c76c3679099195ae9c"
     },
     "post:2220914668880365188": {
@@ -1149,15 +1150,15 @@
       "id": "2220914668880365188",
       "title": "Mexico Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-27.html",
-      "updated": "2026-10-02T00:13:27-07:00",
-      "content_sha256": "ee4114ca60d6e566ea02e435c28aad2bba3d6984900229e633392cc1af263bb9"
+      "updated": "2026-10-02T03:25:38-07:00",
+      "content_sha256": "56809e88cd020777a376e22f290e1eed845e4ef0f9eac2a19875e19903056174"
     },
     "post:2949080403088347215": {
       "kind": "post",
       "id": "2949080403088347215",
       "title": "Canada Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-27.html",
-      "updated": "2026-10-02T00:13:28-07:00",
+      "updated": "2026-10-02T03:25:39-07:00",
       "content_sha256": "77593cefd81e9e8f3e873a90132e5685fd84d74639334c00f9fac8077e0c0f1f"
     },
     "post:9051696550888128467": {
@@ -1165,15 +1166,15 @@
       "id": "9051696550888128467",
       "title": "US Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-27.html",
-      "updated": "2026-10-02T00:13:30-07:00",
-      "content_sha256": "b3a67db6d00c3aee00371d9dd10b6761d61563963ac767d67aebaa22bacaf427"
+      "updated": "2026-10-02T03:10:39-07:00",
+      "content_sha256": "185c813f45579c8905a5249ffe3080e6616c7c1d69a1e7bec23cedbb489c3421"
     },
     "post:3867527095511324597": {
       "kind": "post",
       "id": "3867527095511324597",
       "title": "The Loyalty Tax You're Paying",
       "url": "https://dailyyield.blogspot.com/2026/09/the-loyalty-tax-youre-paying.html",
-      "updated": "2026-10-02T00:13:31-07:00",
+      "updated": "2026-10-02T03:01:42-07:00",
       "content_sha256": "731fb2bda756cbbbc7f5875f749b223670ba2d4fe9c20b82c43e32f6d72bec1a"
     },
     "post:5838514800314490393": {
@@ -1181,7 +1182,7 @@
       "id": "5838514800314490393",
       "title": "Brazil Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-27.html",
-      "updated": "2026-10-02T00:13:32-07:00",
+      "updated": "2026-10-02T03:25:40-07:00",
       "content_sha256": "10824973db0b873a02964d35d59c6799b6ba4e255b7c46bde846439e59e1bc8c"
     },
     "post:7973170617751893872": {
@@ -1189,15 +1190,15 @@
       "id": "7973170617751893872",
       "title": "Corporate Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01446121781.html",
-      "updated": "2026-10-02T00:13:34-07:00",
-      "content_sha256": "78e1ea5b11d7cda458864cd0eb7e6980aa87e2fd703c64b6285f6b5d5b82d04e"
+      "updated": "2026-10-02T03:25:41-07:00",
+      "content_sha256": "cdab043a11c787438863e5fd34dac7e4db67bda013ab046ab91bb2fd9865b677"
     },
     "post:538540418347251104": {
       "kind": "post",
       "id": "538540418347251104",
       "title": "Italy Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-27.html",
-      "updated": "2026-10-02T00:13:35-07:00",
+      "updated": "2026-10-02T03:25:42-07:00",
       "content_sha256": "935de9b9bb254ecafbf2d280de92740743f4f5c9a053cf9f005f7ef060f27cb0"
     },
     "post:3406242455506009272": {
@@ -1205,23 +1206,23 @@
       "id": "3406242455506009272",
       "title": "The 14-Day Pre-5-April Tax Sprint",
       "url": "https://dailyyield.blogspot.com/2026/09/the-14-day-pre-5-april-tax-sprint.html",
-      "updated": "2026-10-02T00:13:37-07:00",
-      "content_sha256": "8df60bdacb08259a178acb9e273eeec964bc2abba1f5e7c488f57e940e517ec8"
+      "updated": "2026-10-02T03:13:51-07:00",
+      "content_sha256": "3681b65f8a6a14fa6e1b8a4fc3ead17a5585c5c652780ea632b1c1ae8b5dc4a4"
     },
     "post:3692047325956181058": {
       "kind": "post",
       "id": "3692047325956181058",
       "title": "Spain Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-27.html",
-      "updated": "2026-10-02T00:13:38-07:00",
-      "content_sha256": "58578811f03b7e11693a03aecb2ac28c993cea8741abe2d511447ff6fae77062"
+      "updated": "2026-10-02T03:13:53-07:00",
+      "content_sha256": "57c98d4875a73339fb43527d0fabea90a10ae6a50200a3aa914839cba99dabb3"
     },
     "post:4208803768759667992": {
       "kind": "post",
       "id": "4208803768759667992",
       "title": "China Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-27.html",
-      "updated": "2026-10-02T00:13:39-07:00",
+      "updated": "2026-10-02T03:25:43-07:00",
       "content_sha256": "831d907a0402eae682febf3ce6e4621f8220832b0cc9cd4118f81adba756e18a"
     },
     "post:6008980440625951868": {
@@ -1229,15 +1230,15 @@
       "id": "6008980440625951868",
       "title": "UK Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-27.html",
-      "updated": "2026-10-02T00:13:41-07:00",
-      "content_sha256": "15d9386a445f5fcc3dd0837d5b12609f5e23a1c88594e027a3f2e7725b4aa189"
+      "updated": "2026-10-02T03:13:56-07:00",
+      "content_sha256": "c9a53fc485cb5459ddaca5ec1afd72687e6976e27f41125f663075b004a55042"
     },
     "post:7952741125342031934": {
       "kind": "post",
       "id": "7952741125342031934",
       "title": "Japan Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-27.html",
-      "updated": "2026-10-02T00:13:42-07:00",
+      "updated": "2026-10-02T03:25:44-07:00",
       "content_sha256": "32a3c1c3223695a035364f4fc3126c13992319ba656b481b7e29603940af1b70"
     },
     "post:6874126328143581453": {
@@ -1245,79 +1246,79 @@
       "id": "6874126328143581453",
       "title": "Don't Ignore State Pension / Social Security",
       "url": "https://dailyyield.blogspot.com/2026/09/dont-ignore-state-pension-social.html",
-      "updated": "2026-10-02T00:13:44-07:00",
-      "content_sha256": "8ba032e40d92449cfeab6850962a6c00baa46d26b509f24d0a200e5e40122690"
+      "updated": "2026-10-02T03:13:59-07:00",
+      "content_sha256": "e2fddf7e48ef9a488afad8d7fdb50e4e3800f060ee2e97efad2008c6584dfd66"
     },
     "post:2148070858167788668": {
       "kind": "post",
       "id": "2148070858167788668",
       "title": "France Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-27.html",
-      "updated": "2026-10-02T00:13:45-07:00",
-      "content_sha256": "685e963ccb5e681cf80258d7f7812b798009cf7df5a3ca19a2ed882ed0867796"
+      "updated": "2026-10-02T03:25:45-07:00",
+      "content_sha256": "12022a66c8535922ff2a10f572421b4e5158dc1bec19b12ddc5de7661dd2ffad"
     },
     "post:193247759891078847": {
       "kind": "post",
       "id": "193247759891078847",
       "title": "Germany Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-27.html",
-      "updated": "2026-10-02T00:13:47-07:00",
-      "content_sha256": "3487c0f026bf4d2aa152f4d57f035c182087bc29ad202230773954afdb5a54e3"
+      "updated": "2026-10-02T03:25:47-07:00",
+      "content_sha256": "676a50892b496d921fd253e53c5cb491edccc7adb0ca3b2d5bc71e637631a1b1"
     },
     "post:6486100444408340779": {
       "kind": "post",
       "id": "6486100444408340779",
       "title": "Macro Policy News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html",
-      "updated": "2026-10-02T00:13:48-07:00",
-      "content_sha256": "8d2cd1b82a9dccb0bb4d0da6203dd179d8d972d462d8394cf5e8f3a33170f33a"
+      "updated": "2026-10-02T03:25:48-07:00",
+      "content_sha256": "86d5b8b149b3c836a6bb26bec172da1e9443e83179a17abd4f3bc2cc736d24af"
     },
     "post:5949797759482040830": {
       "kind": "post",
       "id": "5949797759482040830",
       "title": "Market News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-27.html",
-      "updated": "2026-10-02T00:13:50-07:00",
-      "content_sha256": "5bc634ce2d40cffe238a030237bf1aee1684a04243d46ed7c890377309cc8508"
+      "updated": "2026-10-02T03:25:49-07:00",
+      "content_sha256": "7236bf8c368a95e4560866b6f6ffa93a831475f5926358aee4eaba28937130af"
     },
     "post:7839033619702786971": {
       "kind": "post",
       "id": "7839033619702786971",
       "title": "First $1,000: The Scared Person's Plan",
       "url": "https://dailyyield.blogspot.com/2026/09/first-1000-scared-persons-plan.html",
-      "updated": "2026-10-02T00:13:51-07:00",
-      "content_sha256": "6c726f8fd91ff93ade183f2ed446a3e18bad19c6868757c17c356ec833569b86"
+      "updated": "2026-10-02T03:14:08-07:00",
+      "content_sha256": "bdfbfcdc6a1070134143a3e1c2142f2b181dcc8a448dbad105049a0121cddb07"
     },
     "post:6563970637452730738": {
       "kind": "post",
       "id": "6563970637452730738",
       "title": "India Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-27.html",
-      "updated": "2026-10-02T00:13:53-07:00",
-      "content_sha256": "28a88e45f64222cbaac68c44fb7e832b32656c0d208ad345d4d5149017b966f8"
+      "updated": "2026-10-02T03:25:50-07:00",
+      "content_sha256": "ce7645aa45afa7d24d4f30fe982f683bcb1d1d9e80d234c2b4aa97dfafa6f931"
     },
     "post:1525321452486561932": {
       "kind": "post",
       "id": "1525321452486561932",
       "title": "Global Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-27.html",
-      "updated": "2026-10-02T00:13:54-07:00",
-      "content_sha256": "9a100286d23f4faca9ca698643fb18f1f1163a58cf561fe8f268e4fad90835cf"
+      "updated": "2026-10-02T03:25:51-07:00",
+      "content_sha256": "2208c183f51d35e5cbe1533eef181dea96d2c0cee1b323cd2d4e0224b02ea2bb"
     },
     "post:2983561509636256187": {
       "kind": "post",
       "id": "2983561509636256187",
       "title": "South Korea Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-27.html",
-      "updated": "2026-10-02T00:13:55-07:00",
-      "content_sha256": "85b0332d3f1547706a93a73f5908f2312f706b80681205b34359b3736eddea53"
+      "updated": "2026-10-02T03:14:13-07:00",
+      "content_sha256": "c468da428ef019c563b9c66b938396377b7c65bd273bb3d487040e6dbb469ba3"
     },
     "post:6643967970978131215": {
       "kind": "post",
       "id": "6643967970978131215",
       "title": "Australia Finance News — 27 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-27.html",
-      "updated": "2026-10-02T00:13:57-07:00",
+      "updated": "2026-10-02T03:25:52-07:00",
       "content_sha256": "781f3d4fe5a8218a9efcdb2709d0a99c531729faff11060de7ea0d0a2076a729"
     },
     "post:8141949697072344971": {
@@ -1325,407 +1326,407 @@
       "id": "8141949697072344971",
       "title": "Russia Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-26.html",
-      "updated": "2026-10-02T00:13:58-07:00",
-      "content_sha256": "d323d821369a81e11f7425325c49a61227ac67dec6654f38bb08c4383ca28a85"
+      "updated": "2026-10-02T03:14:17-07:00",
+      "content_sha256": "624ca9a360f266343431ef2ec47bdc35ba579a3642f52e69cc90a06bfcb25773"
     },
     "post:5809539308164270577": {
       "kind": "post",
       "id": "5809539308164270577",
       "title": "Personal Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-26.html",
-      "updated": "2026-10-02T00:14:00-07:00",
-      "content_sha256": "fb8a217d9c57f7fef0dcff6a8c6f9cb841caea91702defb4216f83ba091b5efc"
+      "updated": "2026-10-02T03:14:18-07:00",
+      "content_sha256": "21d201e043dbe8f63aba88ff51737268ba5a0d15ca76c0714b36ef7523f5e4d6"
     },
     "post:3640853899029929702": {
       "kind": "post",
       "id": "3640853899029929702",
       "title": "Why Your Budget Dies in Week Two",
       "url": "https://dailyyield.blogspot.com/2026/09/why-your-budget-dies-in-week-two.html",
-      "updated": "2026-10-02T00:14:01-07:00",
-      "content_sha256": "1d59dc98ed33d0e66201362d57668bb5a2ae6d0296b75440c4b5c8fc4ae9e7e7"
+      "updated": "2026-10-02T03:14:20-07:00",
+      "content_sha256": "4318e42c9498a60abbffe47628094ceba1cc43e1580a0a0feabf74c19c5ef7f0"
     },
     "post:8973398431497020572": {
       "kind": "post",
       "id": "8973398431497020572",
       "title": "Mexico Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-26.html",
-      "updated": "2026-10-02T00:14:03-07:00",
-      "content_sha256": "3ae6463c817cff60ed1b157a678e4b1a651cff157c4411e7ecbc262af13e66c4"
+      "updated": "2026-10-02T03:25:53-07:00",
+      "content_sha256": "8bd2addd3461d639a34cf4c551076999d8f57a5e3c1c36f22baeebeae506ff7c"
     },
     "post:133946527053973582": {
       "kind": "post",
       "id": "133946527053973582",
       "title": "Canada Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-26.html",
-      "updated": "2026-10-02T00:14:04-07:00",
-      "content_sha256": "f574acbe12db09bfa4fcb44efc98370445ae15e4c3adb15bec6bd40bffcaee3c"
+      "updated": "2026-10-02T03:25:54-07:00",
+      "content_sha256": "eae5a07b83c426e2341570f2e164917cf5e02da752da23fc22263f22d335a40b"
     },
     "post:7833492098676155691": {
       "kind": "post",
       "id": "7833492098676155691",
       "title": "US Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-26.html",
-      "updated": "2026-10-02T00:14:05-07:00",
-      "content_sha256": "c8d675511f7f0b439db486cbfef01fbf49116a6e7288b3eaa4a29c3f9e1795cd"
+      "updated": "2026-10-02T03:14:26-07:00",
+      "content_sha256": "7ccbc1d26019d7c8776eacca9ca857fd3b55f353e2fffdadcb27054761b54869"
     },
     "post:2691449182304659819": {
       "kind": "post",
       "id": "2691449182304659819",
       "title": "I Tested 6 AI Money Coaches",
       "url": "https://dailyyield.blogspot.com/2026/09/i-tested-6-ai-money-coaches.html",
-      "updated": "2026-10-02T00:14:07-07:00",
-      "content_sha256": "bd0194caa84f57a16c951ad0a61605f2f88dc8a3966c53f9925190b44f089f0b"
+      "updated": "2026-10-02T03:14:27-07:00",
+      "content_sha256": "d2e4abb554a6d8bc740a148c179fef9c234348146324724a8314764974602702"
     },
     "post:4252136656968625158": {
       "kind": "post",
       "id": "4252136656968625158",
       "title": "Brazil Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-26.html",
-      "updated": "2026-10-02T00:14:08-07:00",
-      "content_sha256": "e1638b9506f066d325d8f64f4c2cb9ce1ff2e43b08726b23a269f0667fecc8d0"
+      "updated": "2026-10-02T03:25:55-07:00",
+      "content_sha256": "945a550cd7adefe94f50074497614fab82cb3c5270c205d88cb2f812144c7199"
     },
     "post:4802097022733879661": {
       "kind": "post",
       "id": "4802097022733879661",
       "title": "Italy Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-26.html",
-      "updated": "2026-10-02T00:14:10-07:00",
-      "content_sha256": "4759503d5eecfb1f1920d14822bcb387d31248df0ebf12c089755d94abbf8dfb"
+      "updated": "2026-10-02T03:25:56-07:00",
+      "content_sha256": "477a03c1aa2159af56199d43983a9c074c386c34c3d37d9231d78323d19b7672"
     },
     "post:3265098780048862172": {
       "kind": "post",
       "id": "3265098780048862172",
       "title": "Corporate Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html",
-      "updated": "2026-10-02T00:14:11-07:00",
-      "content_sha256": "62229936cb5973de035d28474be7cca8dbee276220ecd88bf7d5a88422b9b7cd"
+      "updated": "2026-10-02T03:25:58-07:00",
+      "content_sha256": "3631de5869b0ef57add58e5d98d6c3347c3a5fcdb458a4c612862145bb23f178"
     },
     "post:1971188583231907134": {
       "kind": "post",
       "id": "1971188583231907134",
       "title": "Don't Panic-Pay Cheap Student Loans",
       "url": "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html",
-      "updated": "2026-10-02T00:14:13-07:00",
-      "content_sha256": "754094e21acd3fdc638f08f6a45b1d454b4c4af8a7b431f3f7b62a4305806125"
+      "updated": "2026-10-02T03:14:34-07:00",
+      "content_sha256": "32a087c59f2b5555ffb153f65119f82420eccf38ffe6b4a0b1e820f9593b2ebc"
     },
     "post:7978855042342948180": {
       "kind": "post",
       "id": "7978855042342948180",
       "title": "Spain Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-26.html",
-      "updated": "2026-10-02T00:14:14-07:00",
-      "content_sha256": "3b75ba3982516c845d4396feafd900fae0ed4af68313e59114a794d254a37670"
+      "updated": "2026-10-02T03:14:35-07:00",
+      "content_sha256": "d425538f810c0a65a9d4102649a817ff21585e003b56c48ad64c12769ded5546"
     },
     "post:6017439504908254782": {
       "kind": "post",
       "id": "6017439504908254782",
       "title": "China Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-26.html",
-      "updated": "2026-10-02T00:14:15-07:00",
-      "content_sha256": "e35fa463f76c28a3e9355808c621cf7e3478c56c8604042e37546c87e98f676e"
+      "updated": "2026-10-02T03:25:59-07:00",
+      "content_sha256": "ac9f5b060eeb4924d73e0d670a7beac0bc3558f16ba62c1eb6fb9a3b9f6fafd5"
     },
     "post:4827012825782525705": {
       "kind": "post",
       "id": "4827012825782525705",
       "title": "UK Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
-      "updated": "2026-10-02T00:14:17-07:00",
-      "content_sha256": "7d86d982b60ee28daf4185d57b6f5936f47c6b29e06eac26ee2ad804c2e2cc69"
+      "updated": "2026-10-02T03:14:39-07:00",
+      "content_sha256": "0c12bded01c226a0c11326e1a4d03256ca55a4d1cb9b6ebf9870c2a4ee4f5463"
     },
     "post:1107194767136752071": {
       "kind": "post",
       "id": "1107194767136752071",
       "title": "Japan Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
-      "updated": "2026-10-02T00:14:18-07:00",
-      "content_sha256": "98d0db2a51a63e78397d56a597846852b7f846534d0ae73c6b9aa899a748e6fc"
+      "updated": "2026-10-02T03:26:00-07:00",
+      "content_sha256": "01510e01412a20d72091d014a545b1ddc88f72bc8ac86a451a36d2cda2e8be02"
     },
     "post:4067190918070361492": {
       "kind": "post",
       "id": "4067190918070361492",
       "title": "Freelance Money on Autopilot",
       "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
-      "updated": "2026-10-02T00:14:20-07:00",
-      "content_sha256": "1e7254e2a69f772f8a46f1dce7eac6980b4d85e94ed05cf51478b9f9e395bf71"
+      "updated": "2026-10-02T03:14:42-07:00",
+      "content_sha256": "d9775808708a186b98a41594cc24a1d8ad66e6b8ab1f2b627d93e460708b24f2"
     },
     "post:4996598231152424846": {
       "kind": "post",
       "id": "4996598231152424846",
       "title": "France Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-26.html",
-      "updated": "2026-10-02T00:14:21-07:00",
-      "content_sha256": "7f810dc9062a9216e90e58d8eb6d848f09e36a533be91d6bc62509b89b4ebe6e"
+      "updated": "2026-10-02T03:26:01-07:00",
+      "content_sha256": "b6d759ce48e4a2f5b2059bca17bbac05e36fd3637feedcca5431a31f4b3694c7"
     },
     "post:1685234226138286098": {
       "kind": "post",
       "id": "1685234226138286098",
       "title": "Germany Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-26.html",
-      "updated": "2026-10-02T00:14:23-07:00",
-      "content_sha256": "667ae7ea1002583866bf973666f76a75798085bf4a1b82a9867deae6ef42a3ff"
+      "updated": "2026-10-02T03:26:02-07:00",
+      "content_sha256": "3449712468adf288a2c0caab5196bc0c00360b2c433c5622746237d96a06f2ba"
     },
     "post:6787552373366780877": {
       "kind": "post",
       "id": "6787552373366780877",
       "title": "Macro Policy News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01001893817.html",
-      "updated": "2026-10-02T00:14:24-07:00",
-      "content_sha256": "a73a8d852ba530c918666bc9fe048da01fa6d02b31576191e343ffbb7eb6ef78"
+      "updated": "2026-10-02T03:26:03-07:00",
+      "content_sha256": "e451cf470960ee35a121a013c0b9ed27e1e4c368b2a3c2c0511be9f8871ed22c"
     },
     "post:1244600316209982174": {
       "kind": "post",
       "id": "1244600316209982174",
       "title": "Market News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
-      "updated": "2026-10-02T00:14:26-07:00",
-      "content_sha256": "97703e5911eaa5312d5143cd912e8284820adf0f29839bffcdbf979e619e190f"
+      "updated": "2026-10-02T03:26:04-07:00",
+      "content_sha256": "d8d7896a6f03e4ea6229a5de8269edeb21c41d5bc752bfbb641939b92f8b0b16"
     },
     "post:1403438240302459064": {
       "kind": "post",
       "id": "1403438240302459064",
       "title": "5% Down in 2026: Ladder or Trap?",
       "url": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
-      "updated": "2026-10-02T00:14:27-07:00",
-      "content_sha256": "b35d8c442b0e9dfb5a16cc9909916ce37121e3abc338ca5d887c4af982005f3e"
+      "updated": "2026-10-02T03:14:50-07:00",
+      "content_sha256": "e0c7a4ba8797194128bfbdd12b9159c3340dfa24a7dbdf58440abdfabec7450b"
     },
     "post:6622106669535090283": {
       "kind": "post",
       "id": "6622106669535090283",
       "title": "India Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
-      "updated": "2026-10-02T00:14:28-07:00",
-      "content_sha256": "7aa9ee5e4f445c39d10ebeb3d94eac770dcae5800bd22dcc7380229a29a04b5b"
+      "updated": "2026-10-02T03:26:06-07:00",
+      "content_sha256": "c2e9f0da4ba52f5c23dcf3d62110723a5e85892c880b6cfcbcd2a2e1c2e6f155"
     },
     "post:115783846078738704": {
       "kind": "post",
       "id": "115783846078738704",
       "title": "Global Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-26.html",
-      "updated": "2026-10-02T00:14:30-07:00",
-      "content_sha256": "06eddae12e9904b417721f89ac18c729ddf7d9b9a369cf44750f0e74b1e6c23f"
+      "updated": "2026-10-02T03:26:07-07:00",
+      "content_sha256": "160ee7f0becb72afd4a684cf853964a2f014ef8b09b30eefdb4d1cc9e534fa92"
     },
     "post:9115764774433521189": {
       "kind": "post",
       "id": "9115764774433521189",
       "title": "South Korea Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
-      "updated": "2026-10-02T00:14:31-07:00",
-      "content_sha256": "ffc12f2f0d8000ddadd4956590b46d7b76f89319dea9aefa1264b04618e8863d"
+      "updated": "2026-10-02T03:14:55-07:00",
+      "content_sha256": "2e00d67367cdacc08071dd4578b983d158eaf84e4c03d7f8f9178824b4133f7d"
     },
     "post:2557941853294839938": {
       "kind": "post",
       "id": "2557941853294839938",
       "title": "Australia Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
-      "updated": "2026-10-02T00:14:33-07:00",
-      "content_sha256": "9929d55583246834f22e51fac272cc4518aff6712892f5b44751d6576ccd154a"
+      "updated": "2026-10-02T03:26:08-07:00",
+      "content_sha256": "bf4be72177720672197304b6efa205df9ca3ef18ae4a7ed7d3583e218746f83d"
     },
     "post:2972395376134557585": {
       "kind": "post",
       "id": "2972395376134557585",
       "title": "Brazil Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-25.html",
-      "updated": "2026-10-02T00:14:34-07:00",
-      "content_sha256": "ac6f2018ccee23577b7b580dcb20cd4ca119e1ca0041b256023821a8ccfc323d"
+      "updated": "2026-10-02T03:26:09-07:00",
+      "content_sha256": "9a69c61cf38858cf32f1775c139b8cd56ce55585a5d8e4f3c2453dfce7b50ecf"
     },
     "post:3288071481427933520": {
       "kind": "post",
       "id": "3288071481427933520",
       "title": "Russia Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-25.html",
-      "updated": "2026-10-02T00:14:35-07:00",
-      "content_sha256": "4001cc7e42e135ddc2a9521406198775632251e12edfdb370b622bd0a16f8b96"
+      "updated": "2026-10-02T03:15:00-07:00",
+      "content_sha256": "01dc21b61d3a0265ab5cd60a90add00f07e927cc71c8d7a00c58e6e5b7454140"
     },
     "post:749521336862589933": {
       "kind": "post",
       "id": "749521336862589933",
       "title": "Personal Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-25.html",
-      "updated": "2026-10-02T00:14:37-07:00",
-      "content_sha256": "b9b001072b21a11bb1b07cf40663d68f9544cfddded80ab525b66656c582d665"
+      "updated": "2026-10-02T03:15:02-07:00",
+      "content_sha256": "dd9cf87d70964fd6e2f95a3602250caa183bd0a742c9b2d17eac3be776074c11"
     },
     "post:6486688981578418368": {
       "kind": "post",
       "id": "6486688981578418368",
       "title": "Nurse, Two Kids, £18k Debt: Fixed",
       "url": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
-      "updated": "2026-10-02T00:14:39-07:00",
-      "content_sha256": "7f07aa45c979e2d27eaeb9cb0cdd5757bd81bc5b4520000caff6bc874a401c83"
+      "updated": "2026-10-02T03:15:04-07:00",
+      "content_sha256": "ae867b0cbbbcda84f7680869d0e1a951da0e562e342f2e86a04749b3a51cb28a"
     },
     "post:8683335223431479047": {
       "kind": "post",
       "id": "8683335223431479047",
       "title": "China Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-25.html",
-      "updated": "2026-10-02T00:14:40-07:00",
-      "content_sha256": "3ced9fdbb33371bdebcec0e5d9d9a5fe41f473f543f6e32d64b59a600f134ac9"
+      "updated": "2026-10-02T03:26:10-07:00",
+      "content_sha256": "a1a4808cd845fcbb327c2b38d3fa1824d64196e24d9f619fd93b7d2dcb9a40ca"
     },
     "post:6882231783502356233": {
       "kind": "post",
       "id": "6882231783502356233",
       "title": "US Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-25.html",
-      "updated": "2026-10-02T00:14:41-07:00",
-      "content_sha256": "584cb7bb7bdcbe0f7309dd71712fd5aa6de55706ef9151983b1f1d6a6b4f4a40"
+      "updated": "2026-10-02T03:15:08-07:00",
+      "content_sha256": "d6388448fdb48fa607222f46b44f1a76b0722564a11a2600ee43cd5410c3fa7d"
     },
     "post:2070861226123418361": {
       "kind": "post",
       "id": "2070861226123418361",
       "title": "$90k Broke: The New Middle Class",
       "url": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
-      "updated": "2026-10-02T00:14:43-07:00",
-      "content_sha256": "5d4e8f9c53949f1876fafa32b9e2611bf89e672233f52f35e1e7403719a655f4"
+      "updated": "2026-10-02T03:15:09-07:00",
+      "content_sha256": "fe02468be2d54733074db27d1b46d9ce11e94742289e2de7e97f7121e2111573"
     },
     "post:1496481957315805113": {
       "kind": "post",
       "id": "1496481957315805113",
       "title": "Corporate Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
-      "updated": "2026-10-02T00:14:44-07:00",
-      "content_sha256": "0e23ee5a9dc7955f441582fc9f78c705aad4321d753bf2bb6c83a0cf5167a99e"
+      "updated": "2026-10-02T03:26:11-07:00",
+      "content_sha256": "c3e993b55e9740a2c2fae42dafcf9617882120864b94895ac79779305be487b5"
     },
     "post:2786685833728780482": {
       "kind": "post",
       "id": "2786685833728780482",
       "title": "Covered-Call ETFs: Income or Trap?",
       "url": "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html",
-      "updated": "2026-10-02T00:14:46-07:00",
-      "content_sha256": "f9598caa97f79ba99a73747b34920297bd2a364c020a663ef6e0e19aaec4ec7a"
+      "updated": "2026-10-02T03:15:13-07:00",
+      "content_sha256": "2856e572123a0f8988ab3bb37ab6873e5f7e03e2cf49624c2ad839d504b039e5"
     },
     "post:1374496040576360177": {
       "kind": "post",
       "id": "1374496040576360177",
       "title": "UK Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html",
-      "updated": "2026-10-02T00:14:47-07:00",
-      "content_sha256": "87b6e1326015bb0b9b2f597d5fffcb76318f62739f0356105562558c0aa76f45"
+      "updated": "2026-10-02T03:15:15-07:00",
+      "content_sha256": "a9afc2955af51641ac03505bdc0ff77770d2bf0725fd10d484425a0829489a6e"
     },
     "post:2129270346434103164": {
       "kind": "post",
       "id": "2129270346434103164",
       "title": "Japan Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-25.html",
-      "updated": "2026-10-02T00:14:49-07:00",
-      "content_sha256": "09f82a73592d6c0893c9ad6436c64b896689133c4702dae2e793dd32f4e067d1"
+      "updated": "2026-10-02T03:26:12-07:00",
+      "content_sha256": "cf6fcf7d7f7eb65307220c094d19b446b8e8eee21110ff0d0a2e504ce1ce661c"
     },
     "post:2418376376538238746": {
       "kind": "post",
       "id": "2418376376538238746",
       "title": "$10k at 22 vs $10k at 32",
       "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-      "updated": "2026-10-02T00:14:50-07:00",
-      "content_sha256": "4b811c9cfef968aef191862a7aa07d43cf64c6c29031a6da70a8108af055d83d"
+      "updated": "2026-10-02T03:15:18-07:00",
+      "content_sha256": "346f3022bd0d42d07b118ce826d9badc900145179777ea77df0ebc903a87e584"
     },
     "post:4562345940833333639": {
       "kind": "post",
       "id": "4562345940833333639",
       "title": "France Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
-      "updated": "2026-10-02T00:14:51-07:00",
-      "content_sha256": "9725b16499212f4598ae40dcde0798432a154010e1f477da52a92b06f9912050"
+      "updated": "2026-10-02T03:26:13-07:00",
+      "content_sha256": "010be2909cad0c9020bc1ecc900bf7b58f444af860bf9903ee08e45483689ffa"
     },
     "post:9219122336676981755": {
       "kind": "post",
       "id": "9219122336676981755",
       "title": "Germany Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-25.html",
-      "updated": "2026-10-02T00:14:53-07:00",
-      "content_sha256": "1530760df75e097a030c634953b8524511fdcfbd60ee727777fd59f789e55ab0"
+      "updated": "2026-10-02T03:26:14-07:00",
+      "content_sha256": "f2d1c6b0be71fd5f0de5d301b39be2c604eb201a269fa21f9544f204e75256e6"
     },
     "post:3580047848347313026": {
       "kind": "post",
       "id": "3580047848347313026",
       "title": "Macro Policy News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026.html",
-      "updated": "2026-10-02T00:14:54-07:00",
-      "content_sha256": "700ede5cb4eb3de191ada8d3a79c403a62561ff28b7a2287a8b7e33b417403ae"
+      "updated": "2026-10-02T03:26:15-07:00",
+      "content_sha256": "b6b3b3f31c90294ae06916226961800c049522a05909be6067042f11c5a41776"
     },
     "post:778009067188225768": {
       "kind": "post",
       "id": "778009067188225768",
       "title": "Market News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
-      "updated": "2026-10-02T00:14:55-07:00",
-      "content_sha256": "5013392ceaeae5dba929f1b9dd71f683980a6d5e8bd743b628960a1a9f682466"
+      "updated": "2026-10-02T03:26:16-07:00",
+      "content_sha256": "5401e346dc4afe010945db316142fffebe5a7151d1800242b1461ea9bf3d8a63"
     },
     "post:4808062258120764865": {
       "kind": "post",
       "id": "4808062258120764865",
       "title": "Stop Splitting Bills 50/50",
       "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-      "updated": "2026-10-02T00:14:57-07:00",
-      "content_sha256": "72730bff813ad820a2c1d4b3c3b6b83b2e545866fcf7e99215b0172cf17443ab"
+      "updated": "2026-10-02T03:15:27-07:00",
+      "content_sha256": "4bb0ef7cacb5b515692ebed101d2386effd0c05a3d85ad1644938892c39f9ef4"
     },
     "post:8605540625196160085": {
       "kind": "post",
       "id": "8605540625196160085",
       "title": "South Korea Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
-      "updated": "2026-10-02T00:14:58-07:00",
-      "content_sha256": "07a20cc9f56d65efbcce9b3806314d93281ff1df9b8cd6e381336908724951d2"
+      "updated": "2026-10-02T03:15:29-07:00",
+      "content_sha256": "bbbe1fdfe839a85bc1d94d7377d3086411966949ebc25dde3bc2a9a22b199dea"
     },
     "post:3885410382183430593": {
       "kind": "post",
       "id": "3885410382183430593",
       "title": "Australia Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-25.html",
-      "updated": "2026-10-02T00:15:00-07:00",
-      "content_sha256": "824be108568152a6f0acd051122616c0ae0fcc8e395b4cb977978b527b83b253"
+      "updated": "2026-10-02T03:26:17-07:00",
+      "content_sha256": "87e5456c9bc22e933bcc6e42b1829a9c9ca207e15f91faa01089d7fc3fe14ed6"
     },
     "post:7434389172805313190": {
       "kind": "post",
       "id": "7434389172805313190",
       "title": "India Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-25.html",
-      "updated": "2026-10-02T00:15:01-07:00",
-      "content_sha256": "e1bf58678ad02fa9907b93746129f7272173be0e5744c470291a5e2e4c9d4696"
+      "updated": "2026-10-02T03:26:19-07:00",
+      "content_sha256": "fbf2a09d8a4d82e51a582e5ee12a4e94ad6068bc80146e4341667d2f622bc09c"
     },
     "post:8502389971570439316": {
       "kind": "post",
       "id": "8502389971570439316",
       "title": "Global Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-25.html",
-      "updated": "2026-10-02T00:15:03-07:00",
-      "content_sha256": "4a40f69da4bf265e8be74f1a7b0541510f0939c6e4cd6dff6a9bd0e9ef1c5b34"
+      "updated": "2026-10-02T03:26:20-07:00",
+      "content_sha256": "46e4b972600fa31e524ca65229673bb27cef8ad55edf000a016765dd5b0eacdd"
     },
     "post:5855044192522572590": {
       "kind": "post",
       "id": "5855044192522572590",
       "title": "12 Money Moves for the Next 12 Months",
       "url": "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html",
-      "updated": "2026-10-02T00:15:04-07:00",
-      "content_sha256": "3a153a9ebfae7b744e40e18e6adb2545c4078d7d89b10d88c407bed6b6faf629"
+      "updated": "2026-10-02T03:03:10-07:00",
+      "content_sha256": "425ce2581683a0611ddbe9d65591f3e9034f955b166826d490dbc9e7963a5884"
     },
     "post:1246197502482808342": {
       "kind": "post",
       "id": "1246197502482808342",
       "title": "15 Money Myths Your Uncle Repeats",
       "url": "https://dailyyield.blogspot.com/2026/09/15-money-myths-your-uncle-repeats.html",
-      "updated": "2026-10-02T00:15:05-07:00",
-      "content_sha256": "0a26b4df0bf5b1f9b171dfd83549b92a02034beee3274625785d0f9133f64394"
+      "updated": "2026-10-02T03:15:37-07:00",
+      "content_sha256": "7554362138183e8d7cce91e8ce4ff650177779012ec32ee6d6ea324369bd1c12"
     },
     "post:1126447614310368625": {
       "kind": "post",
       "id": "1126447614310368625",
       "title": "House-Hack Before You Landlord",
       "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html",
-      "updated": "2026-10-02T00:15:07-07:00",
-      "content_sha256": "356de70c0cde9ae9f96582e6f130cd7bb912131e9ab5b5d1ee08cfdc24373e59"
+      "updated": "2026-10-02T03:15:38-07:00",
+      "content_sha256": "07655871edbaaec2b53d94bb640af35909ab3a8c40f879fe5404d805dd68828f"
     },
     "post:4058080268134530730": {
       "kind": "post",
       "id": "4058080268134530730",
       "title": "Emergency Fund Size by Job Type",
       "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-      "updated": "2026-10-02T00:15:08-07:00",
-      "content_sha256": "b217f98357d3904b2b4cfdf51825412e6cc4bcf1cdbb564fd7fec41f7ff55d1f"
+      "updated": "2026-10-02T03:15:40-07:00",
+      "content_sha256": "8672d3c332ab5a01f74ab77ae9f93e617ad4d9a05b0aef954581caeae40740c2"
     },
     "post:7476330954814461730": {
       "kind": "post",
       "id": "7476330954814461730",
       "title": "Run the Recession Checklist While Employed",
       "url": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
-      "updated": "2026-10-02T00:15:10-07:00",
+      "updated": "2026-10-02T03:03:16-07:00",
       "content_sha256": "d5dd0b7c321a4ef7c51ff0c06e86474e900e71e5264bc04f0c2b7a3f73509530"
     },
     "post:4690992148902176975": {
@@ -1733,7 +1734,7 @@
       "id": "4690992148902176975",
       "title": "What Quiet Rich People Do on Payday",
       "url": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
-      "updated": "2026-10-02T00:15:11-07:00",
+      "updated": "2026-10-02T03:03:17-07:00",
       "content_sha256": "692b4a41ed612059e4090070e7599253feab6042d7669264be79993101816aa8"
     },
     "post:5733569512815684823": {
@@ -1741,7 +1742,7 @@
       "id": "5733569512815684823",
       "title": "Find £200/Month in 10 Minutes",
       "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
-      "updated": "2026-10-02T00:15:13-07:00",
+      "updated": "2026-10-02T03:03:18-07:00",
       "content_sha256": "bf8572a2fb58afdd5e9ad4a11dd60e45c35d5d0841d3c6194f3b01b2f9856844"
     },
     "post:1187159577085494350": {
@@ -1749,7 +1750,7 @@
       "id": "1187159577085494350",
       "title": "What to Do With Your First Paycheck",
       "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
-      "updated": "2026-10-02T00:15:14-07:00",
+      "updated": "2026-10-02T03:03:19-07:00",
       "content_sha256": "9d5441d24f3add8f510dc558a49c0d92eca3749bc4b0664c4ad27684db9cfaeb"
     },
     "post:6615350878444001009": {
@@ -1757,7 +1758,7 @@
       "id": "6615350878444001009",
       "title": "The First Couples Money Meeting Agenda",
       "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-      "updated": "2026-10-02T00:15:16-07:00",
+      "updated": "2026-10-02T03:03:20-07:00",
       "content_sha256": "58911532e2fb7fe741bee211162c16ff8b00fc6febb0f873be28cf42ac9590c1"
     },
     "post:5756773504895872461": {
@@ -1765,7 +1766,7 @@
       "id": "5756773504895872461",
       "title": "Only These Insurance Policies Matter",
       "url": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
-      "updated": "2026-10-02T00:15:17-07:00",
+      "updated": "2026-10-02T03:03:21-07:00",
       "content_sha256": "0f97e37c7b63b02acdc89b4b8dbfdf022a30612513b38eaf2c6a39a422dea5e1"
     },
     "post:5309215588489880357": {
@@ -1773,7 +1774,7 @@
       "id": "5309215588489880357",
       "title": "Most Side Hustles Fail This Filter",
       "url": "https://dailyyield.blogspot.com/2026/09/most-side-hustles-fail-this-filter.html",
-      "updated": "2026-10-02T00:15:19-07:00",
+      "updated": "2026-10-02T03:03:22-07:00",
       "content_sha256": "b6a75d39307cfdfee05221dd887e7350a9bb45c8e12bc9c5b4047ec3fcbb195a"
     },
     "post:6406126111566056260": {
@@ -1781,7 +1782,7 @@
       "id": "6406126111566056260",
       "title": "Ask for the Raise That Beats Budgeting",
       "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html",
-      "updated": "2026-10-02T00:15:20-07:00",
+      "updated": "2026-10-02T03:03:23-07:00",
       "content_sha256": "734838e23b163860878b4c2aef6d9485ea5e6c62883ccabe1a44906f6318d62f"
     },
     "post:4165288479268683898": {
@@ -1789,7 +1790,7 @@
       "id": "4165288479268683898",
       "title": "W-2 Tax Tricks You're Allowed to Use",
       "url": "https://dailyyield.blogspot.com/2026/09/w-2-tax-tricks-youre-allowed-to-use.html",
-      "updated": "2026-10-02T00:15:22-07:00",
+      "updated": "2026-10-02T03:03:24-07:00",
       "content_sha256": "1084e1296bc05230c7fca18a0f9e74375226fe29c7bb195d9ab9627466e47017"
     },
     "post:824646953557055227": {
@@ -1797,7 +1798,7 @@
       "id": "824646953557055227",
       "title": "FIRE Got Harder",
       "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
-      "updated": "2026-10-02T00:15:23-07:00",
+      "updated": "2026-10-02T03:03:25-07:00",
       "content_sha256": "ecfa89244c101ce65ab9aa54b93e9f1ced83ef6c2e0ef6bbd627e2139c303767"
     },
     "post:2758262234277933362": {
@@ -1805,7 +1806,7 @@
       "id": "2758262234277933362",
       "title": "Three-Fund Portfolio",
       "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
-      "updated": "2026-10-02T00:15:25-07:00",
+      "updated": "2026-10-02T03:03:26-07:00",
       "content_sha256": "bac853ea1009ee6f9a8ff08e659d05e204377bd4b0783ff6a44f8b1ad45e9b90"
     },
     "post:2862470767911665544": {
@@ -1813,7 +1814,7 @@
       "id": "2862470767911665544",
       "title": "AI Found £1,200 I Was Wasting",
       "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
-      "updated": "2026-10-02T00:15:26-07:00",
+      "updated": "2026-10-02T03:15:41-07:00",
       "content_sha256": "a474d9e72fd662771c16701f238e8e8bdef013a0cd68dd07132e53d680bc4f3d"
     },
     "post:8372498042597820613": {
@@ -1821,7 +1822,7 @@
       "id": "8372498042597820613",
       "title": "0% Balance Transfers Without the Trap",
       "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-      "updated": "2026-10-02T00:15:28-07:00",
+      "updated": "2026-10-02T03:15:43-07:00",
       "content_sha256": "ae457c81ae1235c3a0d53a09cd56c001e60e1697f950813108ba0b265213a26f"
     },
     "post:727827414976743220": {
@@ -1829,7 +1830,7 @@
       "id": "727827414976743220",
       "title": "The Payday Waterfall",
       "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
-      "updated": "2026-10-02T00:15:29-07:00",
+      "updated": "2026-10-02T03:15:44-07:00",
       "content_sha256": "cecd1602fdfcfcb74082ac65d131ae97e775221d998469e613a43d86381cff5e"
     },
     "post:1794738258819020541": {
@@ -1837,7 +1838,7 @@
       "id": "1794738258819020541",
       "title": "Your Mortgage Is Not the Real Cost",
       "url": "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html",
-      "updated": "2026-10-02T00:15:31-07:00",
+      "updated": "2026-10-02T03:15:45-07:00",
       "content_sha256": "1f84cbf89ee066f0dbcca111bd8c574b2e78f2323a76a8aa3e3f0f5e0d0b2b19"
     },
     "post:8754928028995933789": {
@@ -1845,7 +1846,7 @@
       "id": "8754928028995933789",
       "title": "Break the 'I Deserve It' Spend Loop",
       "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
-      "updated": "2026-10-02T00:15:32-07:00",
+      "updated": "2026-10-02T03:15:48-07:00",
       "content_sha256": "f529ca99055fc26bff85f6f8d3fbcd4fb2018f9e8a3a28a403067ac079b5a313"
     },
     "post:3041537970389212664": {
@@ -1853,7 +1854,7 @@
       "id": "3041537970389212664",
       "title": "The $48,000 Teacher Money Rebuild",
       "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-      "updated": "2026-10-02T00:15:34-07:00",
+      "updated": "2026-10-02T03:15:49-07:00",
       "content_sha256": "aea546123281401b4230cc23f7dec6a537d968118e204316da6b537746acf69c"
     },
     "post:7949223128636486384": {
@@ -1861,7 +1862,7 @@
       "id": "7949223128636486384",
       "title": "Why Dual-Income Couples Still Feel One Month…",
       "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
-      "updated": "2026-10-02T00:15:35-07:00",
+      "updated": "2026-10-02T03:15:50-07:00",
       "content_sha256": "5159eea402bcf82f02bd99c2c006181dacfcfaa18df893aac73fec8b853ae26f"
     },
     "post:5564629106804601974": {
@@ -1869,7 +1870,7 @@
       "id": "5564629106804601974",
       "title": "The Portfolio That Pays Your Rent",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
-      "updated": "2026-10-02T00:15:37-07:00",
+      "updated": "2026-10-02T03:15:51-07:00",
       "content_sha256": "ef28cc912102a1638db3a345c264cc03d0a5ff134d8ed761fbff809f204934f6"
     },
     "post:8780956659587017395": {
@@ -1877,7 +1878,7 @@
       "id": "8780956659587017395",
       "title": "Real Net Worth Targets by Age for Median…",
       "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
-      "updated": "2026-10-02T00:15:38-07:00",
+      "updated": "2026-10-02T03:15:53-07:00",
       "content_sha256": "c6a76b63ece54431107be40d03ef802a3ce050be41b68b24ed64ced081e3568c"
     },
     "post:76036352328662163": {
@@ -1885,7 +1886,7 @@
       "id": "76036352328662163",
       "title": "Stop Maxing Your 401(k) or Pension",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-      "updated": "2026-10-02T00:15:40-07:00",
+      "updated": "2026-10-02T03:15:54-07:00",
       "content_sha256": "3467553d76515f39a29d935a476a5faa32056798bc5930188714a51e23ae335b"
     }
   }
