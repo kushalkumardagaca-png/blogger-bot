@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-02T11:21:01.009436+00:00",
+  "approvedAt": "2026-10-02T11:29:27.659393+00:00",
   "repository": {
-    "auto_blogger_publisher.py": "f956867dfcbee142f9f44be29419649325b020c302bed4954a2588d7ce919b32",
+    "auto_blogger_publisher.py": "d2b68659346d064b9ed64fa392d6575c61ae88c24ea8af51dfe89d877343c2cb",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
     "facebook_publisher.py": "33fec201d418fa6da9be3a549c5d0c00bdd44717548944d5051b68f83a20beb5",
     "social_creative.py": "8cfb4d647277c56bec2ead9fa64e86548e5af9513cd756587d35d5bd1ec46a2a",
@@ -29,11 +29,11 @@
     "audit_site_enhancements.py": "fa337e5a78b207170b9bae039a4343f45df0359e7028ed10fb7f377ffc5034bc",
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
     "bing_url_automation.py": "2f6931444ff4ba61154a23d8224a9ffbcb6cf1c250aa6d6ae13ee97db5de2211",
-    "apply_site_enhancements.py": "5db24e9fd424f7cbedc92bfeb1808d6c25b95fbb4293c1b961c1395955a34eef",
+    "apply_site_enhancements.py": "0873941183a208121073820ae61f2efd216e89096ec9adbc14d996cc6176c1ff",
     "update_page_family.py": "54696abfa722316c789f900c24829239ebbd8a54157d358e3e39753d59ea3b29",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
-    "theme/Daily-Yield-Theme-Subscription.xml": "69a8efc47d9a084d068fd9c52f23ed4b78978968297d9d413de88b15903f9fbf",
-    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "61031464015ca44e6a095126a83b56076082e3dcf5df278c05f433707d058d3f",
+    "theme/Daily-Yield-Theme-Subscription.xml": "f4e9c524c7da9992b6e76e7a2396a4f7415b9fef588121638da7aa23d6adcc04",
+    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "22d5c089afaec29000adddb65df0d172bbec36d212b0c036dcbd7b0a33169242",
     "outreach/editorial_outreach.py": "d83a640afc61787d425d55ff24a53cd148e9eb8639f3aa225c426b4e3ff38e03",
     "outreach/gmail_sender.py": "292cd572119d4802dc1faea5d590e9f12fa176971bf8941ea0266cd7e0765c62",
     "outreach/prospects.csv": "95c7ebe7f8d006bfa97c98910c2b66e8707b3de2d6065dd16814ce82622f613a",
@@ -110,8 +110,8 @@
       "id": "9217579601621666930",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "updated": "2026-10-02T03:46:54-07:00",
-      "content_sha256": "8eb3244538b6ebf60a8e53c4b6d144ac5b5e31d424fb91649212a06ed3f1c73d"
+      "updated": "2026-10-02T04:22:00-07:00",
+      "content_sha256": "17f6af3c99d0bb8ce825f3c147ea78b9dcfd387dd5d7bcd8e9a16a736aa316c5"
     },
     "page:8572476015753638755": {
       "kind": "page",
@@ -158,8 +158,8 @@
       "id": "1685707888914861815",
       "title": "DAILY ARTICLE",
       "url": "https://dailyyield.blogspot.com/p/article.html",
-      "updated": "2026-10-02T03:15:56-07:00",
-      "content_sha256": "bef744b9d4411f271ed76e30dc6b0aeded253ab5e7508fa4594a2e84d3718b64"
+      "updated": "2026-10-02T04:21:59-07:00",
+      "content_sha256": "da4f650e153e3f05336d25b467510c021e4ef0fd295b3d3d7007b46e03273d3c"
     },
     "page:2716668129166401912": {
       "kind": "page",
@@ -198,7 +198,7 @@
       "id": "577819612147620529",
       "title": "Capital Gains, Explained Like a Human",
       "url": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
-      "updated": "2026-10-02T03:00:04-07:00",
+      "updated": "2026-10-02T04:28:14-07:00",
       "content_sha256": "e9c012eb7ed7cb0eb5294ca8ad8898d7ac94a442d932897ac90411a27a4e56ce"
     },
     "post:2005014805006920526": {
@@ -238,7 +238,7 @@
       "id": "2333084406415618664",
       "title": "Coast vs. Barista vs. Fat FIRE",
       "url": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html",
-      "updated": "2026-10-02T03:00:06-07:00",
+      "updated": "2026-10-02T04:28:15-07:00",
       "content_sha256": "2340519a6cfe2b7ff774143a0218e53b0fca5babc1acb4473117638bfe9b9147"
     },
     "post:4732705071384887954": {
@@ -278,7 +278,7 @@
       "id": "1799455763474408220",
       "title": "S&P 500 vs. Global: Pick One",
       "url": "https://dailyyield.blogspot.com/2026/10/s-500-vs-global-pick-one.html",
-      "updated": "2026-10-02T03:00:11-07:00",
+      "updated": "2026-10-02T04:28:17-07:00",
       "content_sha256": "f2a85e4a93d8b2ab9c2a34a6e52b9a58022c22c45eab710fe9679a2117d57cfa"
     },
     "post:7592536897293931312": {
@@ -334,7 +334,7 @@
       "id": "7248649539978874711",
       "title": "Your Secret Money Script, Explained",
       "url": "https://dailyyield.blogspot.com/2026/10/your-secret-money-script-explained.html",
-      "updated": "2026-10-02T03:00:15-07:00",
+      "updated": "2026-10-02T04:28:18-07:00",
       "content_sha256": "0123f52c046745404265b78f047e5848010d5cdf57b7d073b58b093954ef3654"
     },
     "post:1697237802506427825": {
@@ -382,7 +382,7 @@
       "id": "9105498753770999311",
       "title": "A Private AI Advisor on Your Data",
       "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
-      "updated": "2026-10-02T03:00:20-07:00",
+      "updated": "2026-10-02T04:28:19-07:00",
       "content_sha256": "bd24f17f978e6795b1270b73c3145f42e8cbbdb6524125966ae79cd5757face4"
     },
     "post:553934405300545275": {
@@ -414,7 +414,7 @@
       "id": "5001890081868019899",
       "title": "Credit Card Bonuses Without the Damage",
       "url": "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
-      "updated": "2026-10-02T03:00:24-07:00",
+      "updated": "2026-10-02T04:28:20-07:00",
       "content_sha256": "f6f2e16ff552e09e07944123b6e8ce4887bb113861f5e77c1ce086e55b3be4a8"
     },
     "post:537381809861598684": {
@@ -454,7 +454,7 @@
       "id": "2373709041132325539",
       "title": "The 12-Tab Personal CFO Spreadsheet",
       "url": "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
-      "updated": "2026-10-02T03:00:27-07:00",
+      "updated": "2026-10-02T04:28:22-07:00",
       "content_sha256": "615a497ae2d0a662dfb590fe98d36bf18fd020a57451897b3c9d737f931ebca1"
     },
     "post:7819017210363133781": {
@@ -494,7 +494,7 @@
       "id": "2392626462720316715",
       "title": "Your Car Payment Is a Wealth Killer",
       "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
-      "updated": "2026-10-02T03:00:32-07:00",
+      "updated": "2026-10-02T04:28:23-07:00",
       "content_sha256": "e0a79081212052148d8b1733da9a2d8988145339d946bc1e08bb8f07c8140ada"
     },
     "post:2678078863814343955": {
@@ -550,7 +550,7 @@
       "id": "1518139427210986224",
       "title": "£90k Salary, £4k Net Worth Audit",
       "url": "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html",
-      "updated": "2026-10-02T03:00:36-07:00",
+      "updated": "2026-10-02T04:28:24-07:00",
       "content_sha256": "47c44af57b2d99e7e25c7f57b3100085cb5bb8252bb419f059f8a20cfd1febc2"
     },
     "post:5921749039774626930": {
@@ -582,7 +582,7 @@
       "id": "8564410517739387148",
       "title": "Childcare Is the New Mortgage",
       "url": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html",
-      "updated": "2026-10-02T03:00:39-07:00",
+      "updated": "2026-10-02T04:28:25-07:00",
       "content_sha256": "093fdbbdc51c747618622f8d95b7b1c7b8d36363e017d7e85bf155d8c2399a87"
     },
     "post:6754930054304268139": {
@@ -590,8 +590,8 @@
       "id": "6754930054304268139",
       "title": "Brazil Finance News — 30 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-30.html",
-      "updated": "2026-10-02T03:24:55-07:00",
-      "content_sha256": "5940e0a40f57004ce017836efc9e4c83a7c078d5c52d400693924a0cedc01d97"
+      "updated": "2026-10-02T04:21:54-07:00",
+      "content_sha256": "8415e5a21a10b7f1f48b8f82d80a464516c3b27896005ce8479c369c412ce1c7"
     },
     "post:5019452690942245047": {
       "kind": "post",
@@ -614,7 +614,7 @@
       "id": "1499457110813036815",
       "title": "90 Days of Passive Income: The Truth",
       "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
-      "updated": "2026-10-02T03:00:43-07:00",
+      "updated": "2026-10-02T04:28:26-07:00",
       "content_sha256": "98719727d701cf9e1f704272338a3f0d10d71d5ed1b112a6c56009ad9dae75e9"
     },
     "post:1152148656719761146": {
@@ -654,7 +654,7 @@
       "id": "6003168629771257786",
       "title": "Only 5 Money Goals for Your 20s",
       "url": "https://dailyyield.blogspot.com/2026/09/only-5-money-goals-for-your-20s.html",
-      "updated": "2026-10-02T03:00:46-07:00",
+      "updated": "2026-10-02T04:28:27-07:00",
       "content_sha256": "2e7e66ce275b60bdf80681d5b8703daef960f780bcaaf031f264bacb5499b294"
     },
     "post:2849933272866910243": {
@@ -694,7 +694,7 @@
       "id": "2303680525771764438",
       "title": "Stop Checking Your Portfolio Daily",
       "url": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html",
-      "updated": "2026-10-02T03:00:51-07:00",
+      "updated": "2026-10-02T04:28:28-07:00",
       "content_sha256": "cea9f2a65d1d9d9d029bc066833a69d7c009839c3a4b8f1f406621e241004495"
     },
     "post:734722129897789265": {
@@ -782,7 +782,7 @@
       "id": "4498405341941524443",
       "title": "The Market Is Not a Casino",
       "url": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
-      "updated": "2026-10-02T03:00:59-07:00",
+      "updated": "2026-10-02T04:28:29-07:00",
       "content_sha256": "212049d9d33ee38c496d8c7d5c6266788002f25f4794b2c8f3cd3be7a5c65948"
     },
     "post:6981062378758319524": {
@@ -814,7 +814,7 @@
       "id": "7255018414657547539",
       "title": "BRRRR With the Ugly Months Included",
       "url": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html",
-      "updated": "2026-10-02T03:01:03-07:00",
+      "updated": "2026-10-02T04:28:30-07:00",
       "content_sha256": "ec25fbacb715d3cf1b6e115a90889c5ddee948beada00448fc0889a3385eca21"
     },
     "post:6059871633623862310": {
@@ -862,7 +862,7 @@
       "id": "314352988888289456",
       "title": "Where to Park Your Emergency Fund",
       "url": "https://dailyyield.blogspot.com/2026/09/where-to-park-your-emergency-fund.html",
-      "updated": "2026-10-02T03:01:08-07:00",
+      "updated": "2026-10-02T04:28:31-07:00",
       "content_sha256": "e025d8e10bfe6d6745fc53c3b0fdab6b1caa8895c76d384522d0af65e4b3d708"
     },
     "post:5530506896553639228": {
@@ -894,7 +894,7 @@
       "id": "5611067798787673649",
       "title": "Laid Off: The First 72 Hours",
       "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
-      "updated": "2026-10-02T03:01:12-07:00",
+      "updated": "2026-10-02T04:28:32-07:00",
       "content_sha256": "f19e0c0dcb7ded6a505d93b0f5e59f017f85be4f1e303e7be41a87d987296970"
     },
     "post:1470400056182955354": {
@@ -950,7 +950,7 @@
       "id": "6448805219822825799",
       "title": "Buy Options, Not Status",
       "url": "https://dailyyield.blogspot.com/2026/09/buy-options-not-status.html",
-      "updated": "2026-10-02T03:01:16-07:00",
+      "updated": "2026-10-02T04:28:33-07:00",
       "content_sha256": "ecd789631aa6b706c8518454980772cdf42acb05f6f3fd7bd8200e53e8dea22d"
     },
     "post:6158169707232928737": {
@@ -982,7 +982,7 @@
       "id": "2045026967272748700",
       "title": "Cheap, Frugal, and Value Are Not Synonyms",
       "url": "https://dailyyield.blogspot.com/2026/09/cheap-frugal-and-value-are-not-synonyms.html",
-      "updated": "2026-10-02T03:01:19-07:00",
+      "updated": "2026-10-02T04:28:34-07:00",
       "content_sha256": "9d28102bba7e2bca5f9caaf906089a0f130f6f01972229a142dc0625667f1ca7"
     },
     "post:2086262243563462858": {
@@ -1014,7 +1014,7 @@
       "id": "4516328180677729614",
       "title": "Your Student Overdraft Isn't Free",
       "url": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html",
-      "updated": "2026-10-02T03:10:15-07:00",
+      "updated": "2026-10-02T04:28:35-07:00",
       "content_sha256": "758cf8c83392d074c450b007421acbef617a7481766fb2a00a2a2ae9b4376953"
     },
     "post:3308607986117894116": {
@@ -1054,7 +1054,7 @@
       "id": "8825196756986669857",
       "title": "Joint vs. Separate vs. Hybrid Accounts",
       "url": "https://dailyyield.blogspot.com/2026/09/joint-vs-separate-vs-hybrid-accounts.html",
-      "updated": "2026-10-02T03:01:28-07:00",
+      "updated": "2026-10-02T04:28:36-07:00",
       "content_sha256": "afcd24f1890f852f4c703085774123a0cc2666ca8da24997de73dcf3b857f31a"
     },
     "post:7610007741627454383": {
@@ -1094,7 +1094,7 @@
       "id": "7123852462020825588",
       "title": "Insure Your Income, Not Just Your Phone",
       "url": "https://dailyyield.blogspot.com/2026/09/insure-your-income-not-just-your-phone.html",
-      "updated": "2026-10-02T03:01:32-07:00",
+      "updated": "2026-10-02T04:28:37-07:00",
       "content_sha256": "91f446489fb2f68cafbb6542bc748a6f8b7fabc8aceccfc0f1762213c6cd65d8"
     },
     "post:7080232271061962890": {
@@ -1150,7 +1150,7 @@
       "id": "8711042237458005134",
       "title": "£500 Extra: Overtime, Hustle, or Skill?",
       "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html",
-      "updated": "2026-10-02T03:01:38-07:00",
+      "updated": "2026-10-02T04:28:38-07:00",
       "content_sha256": "3025da5cb4b9061394270937dda4142e4c7efc8dddb992c76c3679099195ae9c"
     },
     "post:2220914668880365188": {
@@ -1182,7 +1182,7 @@
       "id": "3867527095511324597",
       "title": "The Loyalty Tax You're Paying",
       "url": "https://dailyyield.blogspot.com/2026/09/the-loyalty-tax-youre-paying.html",
-      "updated": "2026-10-02T03:01:42-07:00",
+      "updated": "2026-10-02T04:28:39-07:00",
       "content_sha256": "731fb2bda756cbbbc7f5875f749b223670ba2d4fe9c20b82c43e32f6d72bec1a"
     },
     "post:5838514800314490393": {
@@ -1214,7 +1214,7 @@
       "id": "3406242455506009272",
       "title": "The 14-Day Pre-5-April Tax Sprint",
       "url": "https://dailyyield.blogspot.com/2026/09/the-14-day-pre-5-april-tax-sprint.html",
-      "updated": "2026-10-02T03:13:51-07:00",
+      "updated": "2026-10-02T04:28:40-07:00",
       "content_sha256": "3681b65f8a6a14fa6e1b8a4fc3ead17a5585c5c652780ea632b1c1ae8b5dc4a4"
     },
     "post:3692047325956181058": {
@@ -1254,7 +1254,7 @@
       "id": "6874126328143581453",
       "title": "Don't Ignore State Pension / Social Security",
       "url": "https://dailyyield.blogspot.com/2026/09/dont-ignore-state-pension-social.html",
-      "updated": "2026-10-02T03:13:59-07:00",
+      "updated": "2026-10-02T04:28:41-07:00",
       "content_sha256": "e2fddf7e48ef9a488afad8d7fdb50e4e3800f060ee2e97efad2008c6584dfd66"
     },
     "post:2148070858167788668": {
@@ -1294,7 +1294,7 @@
       "id": "7839033619702786971",
       "title": "First $1,000: The Scared Person's Plan",
       "url": "https://dailyyield.blogspot.com/2026/09/first-1000-scared-persons-plan.html",
-      "updated": "2026-10-02T03:14:08-07:00",
+      "updated": "2026-10-02T04:28:42-07:00",
       "content_sha256": "bdfbfcdc6a1070134143a3e1c2142f2b181dcc8a448dbad105049a0121cddb07"
     },
     "post:6563970637452730738": {
@@ -1350,7 +1350,7 @@
       "id": "3640853899029929702",
       "title": "Why Your Budget Dies in Week Two",
       "url": "https://dailyyield.blogspot.com/2026/09/why-your-budget-dies-in-week-two.html",
-      "updated": "2026-10-02T03:14:20-07:00",
+      "updated": "2026-10-02T04:28:43-07:00",
       "content_sha256": "4318e42c9498a60abbffe47628094ceba1cc43e1580a0a0feabf74c19c5ef7f0"
     },
     "post:8973398431497020572": {
@@ -1382,7 +1382,7 @@
       "id": "2691449182304659819",
       "title": "I Tested 6 AI Money Coaches",
       "url": "https://dailyyield.blogspot.com/2026/09/i-tested-6-ai-money-coaches.html",
-      "updated": "2026-10-02T03:14:27-07:00",
+      "updated": "2026-10-02T04:28:44-07:00",
       "content_sha256": "d2e4abb554a6d8bc740a148c179fef9c234348146324724a8314764974602702"
     },
     "post:4252136656968625158": {
@@ -1390,8 +1390,8 @@
       "id": "4252136656968625158",
       "title": "Brazil Finance News — 26 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-26.html",
-      "updated": "2026-10-02T03:25:55-07:00",
-      "content_sha256": "945a550cd7adefe94f50074497614fab82cb3c5270c205d88cb2f812144c7199"
+      "updated": "2026-10-02T04:21:56-07:00",
+      "content_sha256": "4f9632fd1f7fc8a8a62716110d476bda6a00f5efb7cfd43f890324ecf3c70b6c"
     },
     "post:4802097022733879661": {
       "kind": "post",
@@ -1414,7 +1414,7 @@
       "id": "1971188583231907134",
       "title": "Don't Panic-Pay Cheap Student Loans",
       "url": "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html",
-      "updated": "2026-10-02T03:14:34-07:00",
+      "updated": "2026-10-02T04:28:45-07:00",
       "content_sha256": "32a087c59f2b5555ffb153f65119f82420eccf38ffe6b4a0b1e820f9593b2ebc"
     },
     "post:7978855042342948180": {
@@ -1454,7 +1454,7 @@
       "id": "4067190918070361492",
       "title": "Freelance Money on Autopilot",
       "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
-      "updated": "2026-10-02T03:14:42-07:00",
+      "updated": "2026-10-02T04:28:46-07:00",
       "content_sha256": "d9775808708a186b98a41594cc24a1d8ad66e6b8ab1f2b627d93e460708b24f2"
     },
     "post:4996598231152424846": {
@@ -1494,7 +1494,7 @@
       "id": "1403438240302459064",
       "title": "5% Down in 2026: Ladder or Trap?",
       "url": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
-      "updated": "2026-10-02T03:14:50-07:00",
+      "updated": "2026-10-02T04:28:47-07:00",
       "content_sha256": "e0c7a4ba8797194128bfbdd12b9159c3340dfa24a7dbdf58440abdfabec7450b"
     },
     "post:6622106669535090283": {
@@ -1534,8 +1534,8 @@
       "id": "2972395376134557585",
       "title": "Brazil Finance News — 25 September 2026",
       "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-25.html",
-      "updated": "2026-10-02T03:26:09-07:00",
-      "content_sha256": "9a69c61cf38858cf32f1775c139b8cd56ce55585a5d8e4f3c2453dfce7b50ecf"
+      "updated": "2026-10-02T04:21:58-07:00",
+      "content_sha256": "dfbedf2c4b78990fc4cc092e9e424d64cf2869d56f33ada3d947403bc83d8f5e"
     },
     "post:3288071481427933520": {
       "kind": "post",
@@ -1558,7 +1558,7 @@
       "id": "6486688981578418368",
       "title": "Nurse, Two Kids, £18k Debt: Fixed",
       "url": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
-      "updated": "2026-10-02T03:15:04-07:00",
+      "updated": "2026-10-02T04:28:48-07:00",
       "content_sha256": "ae867b0cbbbcda84f7680869d0e1a951da0e562e342f2e86a04749b3a51cb28a"
     },
     "post:8683335223431479047": {
@@ -1582,7 +1582,7 @@
       "id": "2070861226123418361",
       "title": "$90k Broke: The New Middle Class",
       "url": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
-      "updated": "2026-10-02T03:15:09-07:00",
+      "updated": "2026-10-02T04:28:49-07:00",
       "content_sha256": "fe02468be2d54733074db27d1b46d9ce11e94742289e2de7e97f7121e2111573"
     },
     "post:1496481957315805113": {
@@ -1598,7 +1598,7 @@
       "id": "2786685833728780482",
       "title": "Covered-Call ETFs: Income or Trap?",
       "url": "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html",
-      "updated": "2026-10-02T03:15:13-07:00",
+      "updated": "2026-10-02T04:28:50-07:00",
       "content_sha256": "2856e572123a0f8988ab3bb37ab6873e5f7e03e2cf49624c2ad839d504b039e5"
     },
     "post:1374496040576360177": {
@@ -1622,7 +1622,7 @@
       "id": "2418376376538238746",
       "title": "$10k at 22 vs $10k at 32",
       "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-      "updated": "2026-10-02T03:15:18-07:00",
+      "updated": "2026-10-02T04:28:51-07:00",
       "content_sha256": "346f3022bd0d42d07b118ce826d9badc900145179777ea77df0ebc903a87e584"
     },
     "post:4562345940833333639": {
@@ -1662,7 +1662,7 @@
       "id": "4808062258120764865",
       "title": "Stop Splitting Bills 50/50",
       "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-      "updated": "2026-10-02T03:15:27-07:00",
+      "updated": "2026-10-02T04:28:52-07:00",
       "content_sha256": "4bb0ef7cacb5b515692ebed101d2386effd0c05a3d85ad1644938892c39f9ef4"
     },
     "post:8605540625196160085": {
@@ -1710,7 +1710,7 @@
       "id": "1246197502482808342",
       "title": "15 Money Myths Your Uncle Repeats",
       "url": "https://dailyyield.blogspot.com/2026/09/15-money-myths-your-uncle-repeats.html",
-      "updated": "2026-10-02T03:15:37-07:00",
+      "updated": "2026-10-02T04:28:53-07:00",
       "content_sha256": "7554362138183e8d7cce91e8ce4ff650177779012ec32ee6d6ea324369bd1c12"
     },
     "post:1126447614310368625": {
@@ -1718,7 +1718,7 @@
       "id": "1126447614310368625",
       "title": "House-Hack Before You Landlord",
       "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html",
-      "updated": "2026-10-02T03:15:38-07:00",
+      "updated": "2026-10-02T04:28:54-07:00",
       "content_sha256": "07655871edbaaec2b53d94bb640af35909ab3a8c40f879fe5404d805dd68828f"
     },
     "post:4058080268134530730": {
@@ -1726,7 +1726,7 @@
       "id": "4058080268134530730",
       "title": "Emergency Fund Size by Job Type",
       "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-      "updated": "2026-10-02T03:15:40-07:00",
+      "updated": "2026-10-02T04:28:55-07:00",
       "content_sha256": "8672d3c332ab5a01f74ab77ae9f93e617ad4d9a05b0aef954581caeae40740c2"
     },
     "post:7476330954814461730": {
@@ -1734,7 +1734,7 @@
       "id": "7476330954814461730",
       "title": "Run the Recession Checklist While Employed",
       "url": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
-      "updated": "2026-10-02T03:03:16-07:00",
+      "updated": "2026-10-02T04:28:56-07:00",
       "content_sha256": "d5dd0b7c321a4ef7c51ff0c06e86474e900e71e5264bc04f0c2b7a3f73509530"
     },
     "post:4690992148902176975": {
@@ -1742,7 +1742,7 @@
       "id": "4690992148902176975",
       "title": "What Quiet Rich People Do on Payday",
       "url": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
-      "updated": "2026-10-02T03:03:17-07:00",
+      "updated": "2026-10-02T04:28:57-07:00",
       "content_sha256": "692b4a41ed612059e4090070e7599253feab6042d7669264be79993101816aa8"
     },
     "post:5733569512815684823": {
@@ -1750,7 +1750,7 @@
       "id": "5733569512815684823",
       "title": "Find £200/Month in 10 Minutes",
       "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
-      "updated": "2026-10-02T03:03:18-07:00",
+      "updated": "2026-10-02T04:28:58-07:00",
       "content_sha256": "bf8572a2fb58afdd5e9ad4a11dd60e45c35d5d0841d3c6194f3b01b2f9856844"
     },
     "post:1187159577085494350": {
@@ -1758,7 +1758,7 @@
       "id": "1187159577085494350",
       "title": "What to Do With Your First Paycheck",
       "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
-      "updated": "2026-10-02T03:03:19-07:00",
+      "updated": "2026-10-02T04:28:59-07:00",
       "content_sha256": "9d5441d24f3add8f510dc558a49c0d92eca3749bc4b0664c4ad27684db9cfaeb"
     },
     "post:6615350878444001009": {
@@ -1766,7 +1766,7 @@
       "id": "6615350878444001009",
       "title": "The First Couples Money Meeting Agenda",
       "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-      "updated": "2026-10-02T03:03:20-07:00",
+      "updated": "2026-10-02T04:29:00-07:00",
       "content_sha256": "58911532e2fb7fe741bee211162c16ff8b00fc6febb0f873be28cf42ac9590c1"
     },
     "post:5756773504895872461": {
@@ -1774,7 +1774,7 @@
       "id": "5756773504895872461",
       "title": "Only These Insurance Policies Matter",
       "url": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
-      "updated": "2026-10-02T03:03:21-07:00",
+      "updated": "2026-10-02T04:29:01-07:00",
       "content_sha256": "0f97e37c7b63b02acdc89b4b8dbfdf022a30612513b38eaf2c6a39a422dea5e1"
     },
     "post:5309215588489880357": {
@@ -1782,7 +1782,7 @@
       "id": "5309215588489880357",
       "title": "Most Side Hustles Fail This Filter",
       "url": "https://dailyyield.blogspot.com/2026/09/most-side-hustles-fail-this-filter.html",
-      "updated": "2026-10-02T03:03:22-07:00",
+      "updated": "2026-10-02T04:29:02-07:00",
       "content_sha256": "b6a75d39307cfdfee05221dd887e7350a9bb45c8e12bc9c5b4047ec3fcbb195a"
     },
     "post:6406126111566056260": {
@@ -1790,7 +1790,7 @@
       "id": "6406126111566056260",
       "title": "Ask for the Raise That Beats Budgeting",
       "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html",
-      "updated": "2026-10-02T03:03:23-07:00",
+      "updated": "2026-10-02T04:29:03-07:00",
       "content_sha256": "734838e23b163860878b4c2aef6d9485ea5e6c62883ccabe1a44906f6318d62f"
     },
     "post:4165288479268683898": {
@@ -1798,7 +1798,7 @@
       "id": "4165288479268683898",
       "title": "W-2 Tax Tricks You're Allowed to Use",
       "url": "https://dailyyield.blogspot.com/2026/09/w-2-tax-tricks-youre-allowed-to-use.html",
-      "updated": "2026-10-02T03:03:24-07:00",
+      "updated": "2026-10-02T04:29:05-07:00",
       "content_sha256": "1084e1296bc05230c7fca18a0f9e74375226fe29c7bb195d9ab9627466e47017"
     },
     "post:824646953557055227": {
@@ -1806,7 +1806,7 @@
       "id": "824646953557055227",
       "title": "FIRE Got Harder",
       "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
-      "updated": "2026-10-02T03:03:25-07:00",
+      "updated": "2026-10-02T04:29:06-07:00",
       "content_sha256": "ecfa89244c101ce65ab9aa54b93e9f1ced83ef6c2e0ef6bbd627e2139c303767"
     },
     "post:2758262234277933362": {
@@ -1814,7 +1814,7 @@
       "id": "2758262234277933362",
       "title": "Three-Fund Portfolio",
       "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
-      "updated": "2026-10-02T03:03:26-07:00",
+      "updated": "2026-10-02T04:29:07-07:00",
       "content_sha256": "bac853ea1009ee6f9a8ff08e659d05e204377bd4b0783ff6a44f8b1ad45e9b90"
     },
     "post:2862470767911665544": {
@@ -1822,7 +1822,7 @@
       "id": "2862470767911665544",
       "title": "AI Found £1,200 I Was Wasting",
       "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
-      "updated": "2026-10-02T03:15:41-07:00",
+      "updated": "2026-10-02T04:29:08-07:00",
       "content_sha256": "a474d9e72fd662771c16701f238e8e8bdef013a0cd68dd07132e53d680bc4f3d"
     },
     "post:8372498042597820613": {
@@ -1830,7 +1830,7 @@
       "id": "8372498042597820613",
       "title": "0% Balance Transfers Without the Trap",
       "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
-      "updated": "2026-10-02T03:15:43-07:00",
+      "updated": "2026-10-02T04:29:09-07:00",
       "content_sha256": "ae457c81ae1235c3a0d53a09cd56c001e60e1697f950813108ba0b265213a26f"
     },
     "post:727827414976743220": {
@@ -1838,7 +1838,7 @@
       "id": "727827414976743220",
       "title": "The Payday Waterfall",
       "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
-      "updated": "2026-10-02T03:15:44-07:00",
+      "updated": "2026-10-02T04:29:10-07:00",
       "content_sha256": "cecd1602fdfcfcb74082ac65d131ae97e775221d998469e613a43d86381cff5e"
     },
     "post:1794738258819020541": {
@@ -1846,7 +1846,7 @@
       "id": "1794738258819020541",
       "title": "Your Mortgage Is Not the Real Cost",
       "url": "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html",
-      "updated": "2026-10-02T03:15:45-07:00",
+      "updated": "2026-10-02T04:29:11-07:00",
       "content_sha256": "1f84cbf89ee066f0dbcca111bd8c574b2e78f2323a76a8aa3e3f0f5e0d0b2b19"
     },
     "post:8754928028995933789": {
@@ -1854,7 +1854,7 @@
       "id": "8754928028995933789",
       "title": "Break the 'I Deserve It' Spend Loop",
       "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
-      "updated": "2026-10-02T03:15:48-07:00",
+      "updated": "2026-10-02T04:29:12-07:00",
       "content_sha256": "f529ca99055fc26bff85f6f8d3fbcd4fb2018f9e8a3a28a403067ac079b5a313"
     },
     "post:3041537970389212664": {
@@ -1862,7 +1862,7 @@
       "id": "3041537970389212664",
       "title": "The $48,000 Teacher Money Rebuild",
       "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-      "updated": "2026-10-02T03:15:49-07:00",
+      "updated": "2026-10-02T04:29:13-07:00",
       "content_sha256": "aea546123281401b4230cc23f7dec6a537d968118e204316da6b537746acf69c"
     },
     "post:7949223128636486384": {
@@ -1870,7 +1870,7 @@
       "id": "7949223128636486384",
       "title": "Why Dual-Income Couples Still Feel One Month…",
       "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
-      "updated": "2026-10-02T03:15:50-07:00",
+      "updated": "2026-10-02T04:29:14-07:00",
       "content_sha256": "5159eea402bcf82f02bd99c2c006181dacfcfaa18df893aac73fec8b853ae26f"
     },
     "post:5564629106804601974": {
@@ -1878,7 +1878,7 @@
       "id": "5564629106804601974",
       "title": "The Portfolio That Pays Your Rent",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
-      "updated": "2026-10-02T03:15:51-07:00",
+      "updated": "2026-10-02T04:29:15-07:00",
       "content_sha256": "ef28cc912102a1638db3a345c264cc03d0a5ff134d8ed761fbff809f204934f6"
     },
     "post:8780956659587017395": {
@@ -1886,7 +1886,7 @@
       "id": "8780956659587017395",
       "title": "Real Net Worth Targets by Age for Median…",
       "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
-      "updated": "2026-10-02T03:15:53-07:00",
+      "updated": "2026-10-02T04:29:16-07:00",
       "content_sha256": "c6a76b63ece54431107be40d03ef802a3ce050be41b68b24ed64ced081e3568c"
     },
     "post:76036352328662163": {
@@ -1894,7 +1894,7 @@
       "id": "76036352328662163",
       "title": "Stop Maxing Your 401(k) or Pension",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-      "updated": "2026-10-02T03:15:54-07:00",
+      "updated": "2026-10-02T04:29:17-07:00",
       "content_sha256": "3467553d76515f39a29d935a476a5faa32056798bc5930188714a51e23ae335b"
     }
   }
