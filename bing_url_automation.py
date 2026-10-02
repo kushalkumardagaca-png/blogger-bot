@@ -289,6 +289,15 @@ def main() -> int:
             candidates.append(item)
             record["status"] = "SUBMISSION_PENDING"
 
+    # When quota is limited, protect new/current publications before historical
+    # backfill. The homepage remains first, then the most recently published or
+    # updated items. Deferred URLs keep their fingerprint and are retried later.
+    def candidate_priority(item: dict):
+        freshness = parse_time(item.get("published", "")) or parse_time(item.get("updated", ""))
+        stamp = freshness.timestamp() if freshness else 0.0
+        return (0 if item["kind"] == "home" else 1, -stamp, item["url"])
+
+    candidates.sort(key=candidate_priority)
     quota = {"dailyAvailable": 0, "monthlyAvailable": 0}
     submitted = []
     deferred = []

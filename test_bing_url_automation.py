@@ -75,6 +75,22 @@ class BingUrlAutomationTests(unittest.TestCase):
         final = json.loads(bing.STATE_PATH.read_text())
         self.assertTrue(all(row["status"] == "MONITOR_COMPLETE" for row in final["urls"].values()))
 
+    def test_limited_quota_prioritizes_homepage_then_newest_content(self):
+        newest = {
+            "id": "2", "kind": "post", "title": "Newest guide",
+            "url": bing.SITE + "2026/10/newest.html", "published": "2026-10-02T03:00:00Z",
+            "updated": "2026-10-02T03:00:00Z", "content": "new", "labels": [], "fingerprint": "new-fp",
+        }
+        submitted = []
+        with patch.object(bing, "blogger_inventory", return_value=self.items + [newest]), \
+             patch.object(bing, "get_quota", return_value={"dailyAvailable": 2, "monthlyAvailable": 2}), \
+             patch.object(bing, "submit_batch", side_effect=lambda key, urls: submitted.extend(urls)), \
+             patch.object(bing, "get_url_info"):
+            self.assertEqual(bing.main(), 0)
+        self.assertEqual(submitted, [bing.SITE, newest["url"]])
+        report = json.loads(bing.STATUS_JSON.read_text())
+        self.assertEqual(report["summary"]["quotaDeferred"], 1)
+
     def test_safe_error_detail_never_copies_request_url(self):
         value = bing.safe_detail(b'<html>https://ssl.bing.com/path?apikey=SECRET</html>')
         self.assertEqual(value, "provider returned a non-JSON error")
