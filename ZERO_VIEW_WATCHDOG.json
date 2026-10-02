@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-02T17:29:42.787580+05:30",
+  "checkedAtIST": "2026-10-02T17:36:01.584643+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "ATTENTION",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 2187,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 141,
+    "transientExternalResponses": 143,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -15639,12 +15639,6 @@
       "redirectCount": 0
     },
     {
-      "url": "https://www.marketwatch.com/story/hes-been-badmouthing-treasury-bonds-since-2020-but-now-the-big-fat-cushion-of-5-25-yields-is-turning-this-strategist-bullish-376fafba?mod=mw_rss_topstories",
-      "status": 401,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://www.marketwatch.com/story/how-european-supplies-could-impact-a-u-s-diesel-ban-as-white-house-reportedly-asks-germany-france-to-release-stockpiles-5edd8284?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
@@ -15837,19 +15831,25 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Controul_and_Advice%2C_a_scene_in_Midas%2C_with_a_parody_%28BM_1868%2C0808.5824%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15862,6 +15862,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Bill_of_Loading_Java-China-Japan-Lijn_From_Saigon_to_the_Netherlands_East_Indies_-_French_Indo-China_%281921-1922%29_Oghi_BC_02.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15898,12 +15904,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/1858-59%2C_Montreal_Foundry_and_City_Works_%28Advertisement_and_Business_Card%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15976,6 +15976,18 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/%28Business_card_for_City_Printing_House%2C_R._Mathison%2C_Jr.%29_%2812347494843%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Skyline_Interlomas_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/1857-58%2C_Montreal_Foundry_and_City_Works_%28Advertisement_and_Business_Card%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -16058,16 +16070,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37004076085,
-      "latestUpdatedAt": "2026-10-02T11:59:51Z",
+      "latestRunId": 37004691219,
+      "latestUpdatedAt": "2026-10-02T12:06:13Z",
       "detail": "latest=success; 2 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37002879924,
-      "latestUpdatedAt": "2026-10-02T11:48:44Z",
+      "latestRunId": 37004075989,
+      "latestUpdatedAt": "2026-10-02T12:01:50Z",
       "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],
@@ -18697,7 +18709,7 @@
       "tracked": 232,
       "pass": 0,
       "neutralOrOther": 232,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
