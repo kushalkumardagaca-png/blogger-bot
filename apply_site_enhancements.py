@@ -208,6 +208,9 @@ def inject(text: str) -> str:
     # Three duplicate embedded PNG favicon variants added ~47 KB ahead of body
     # parsing. The compact inline SVG favicon remains authoritative.
     text = re.sub(r"\n\s*<link href='data:image/png;base64,[^']+'[^>]*/>", "", text)
+    # Remove the obsolete multi-line developer banner; the compact version marker
+    # remains, while this saves transfer bytes for functional feed recovery code.
+    text = re.sub(r'<!--\s*=+\s*DAILY YIELD.*?=+\s*-->', '', text, count=1, flags=re.S)
     text = text.replace(';animation:pageIn .8s ease}', '}').replace('@keyframes pageIn{from{opacity:0}to{opacity:1}}\n', '')
     # Read the lightweight summary inventory rather than only the newest 25 full
     # Posts. This gives the home rails enough non-News entries without downloading
@@ -216,9 +219,33 @@ def inject(text: str) -> str:
     text = text.replace("fetch('/feeds/posts/default/-/News?alt=json&max-results=15')", "fetch('/feeds/posts/summary/-/News?alt=json&max-results=150&orderby=published')")
     old_home_image = 'var img=\'\';var m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||\'\');if(m)img=m[1];'
     new_home_image = 'var img=e.media$thumbnail&&e.media$thumbnail.url||\'\';var m=/<img[^>]+src="([^"]+)"/.exec((e.summary&&e.summary.$t)||(e.content&&e.content.$t)||\'\');if(!img&&m)img=m[1];'
-    if old_home_image not in text:
+    if old_home_image in text:
+        text = text.replace(old_home_image, new_home_image, 1)
+    elif new_home_image not in text:
         raise RuntimeError('Homepage feed image parser not found')
-    text = text.replace(old_home_image, new_home_image, 1)
+    # The newest 150 mixed entries can still be almost entirely News. Merge a
+    # second lightweight summary page so both Article rows have genuine posts.
+    text = text.replace("fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published').then(function(r){return r.json();})", "articleInventory()")
+    inventory_anchor = "function go(){"
+    inventory_helper = "function articleInventory(){return Promise.all([1,151].map(function(start){return fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published&start-index='+start).then(function(r){if(!r.ok)throw Error('feed');return r.json();});})).then(function(parts){var entries=[];parts.forEach(function(j){entries=entries.concat(j.feed&&j.feed.entry||[]);});return {feed:{entry:entries}};});}\nfunction go(){"
+    if 'function articleInventory()' not in text:
+        text = text.replace(inventory_anchor, inventory_helper, 1)
+    # News needs only a small newest batch; retain full content there so cards can
+    # recover photographs even when Blogger omits media$thumbnail.
+    text = text.replace("fetch('/feeds/posts/summary/-/News?alt=json&max-results=150&orderby=published')", "fetch('/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published')")
+    # Keep the feed entry id and hydrate missing Article thumbnails from only the
+    # 16 selected entry resources instead of downloading every full article body.
+    text = text.replace("var a=D.createElement('a');a.className='kd-card';a.href=it.href;", "var a=D.createElement('a');a.className='kd-card';a.href=it.href;if(it.id)a.setAttribute('data-kd-entry',it.id);")
+    text = text.replace("out.push({title:e.title&&e.title.$t||'Untitled',href:href,img:img,", "out.push({id:(e.id&&e.id.$t||'').split('post-').pop(),title:e.title&&e.title.$t||'Untitled',href:href,img:img,")
+    hydrate_anchor = "function emptyBox(row,title,msg){"
+    hydrate_helper = '''function hydrate(items){var q=items.filter(function(it){return !it.img&&it.id;}).slice(),active=0;function pump(){while(active<4&&q.length){(function(it){active++;fetch('/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){var e=j.entry||{},img=e.media$thumbnail&&e.media$thumbnail.url||'',m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||'');if(!img&&m)img=m[1];if(!img)return;D.querySelectorAll('[data-kd-entry="'+it.id+'"] .kd-th').forEach(function(th){th.textContent='';var im=D.createElement('img');im.src=img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);});}).catch(function(){}).then(function(){active--;pump();});})(q.shift());}}pump();}
+function emptyBox(row,title,msg){'''
+    if 'function hydrate(items)' in text:
+        text = re.sub(r"function hydrate\(items\).*?\nfunction emptyBox\(row,title,msg\)\{", lambda _m: hydrate_helper, text, count=1, flags=re.S)
+    else:
+        text = text.replace(hydrate_anchor, hydrate_helper, 1)
+    text = text.replace("else autoRail(latest,31);", "else{autoRail(latest,31);hydrate(items);}")
+    text = text.replace("if(fill(pop,earlier))autoRail(pop,24);", "if(fill(pop,earlier)){autoRail(pop,24);hydrate(earlier);}")
     # Both homepage article rails are chronological. PopularPosts is intentionally
     # not used here because its opaque ranking made the desk look unordered.
     text = text.replace("<p class='kd-rowlab'>Most popular</p>", "<p class='kd-rowlab'>Earlier articles</p>", 1)
@@ -268,6 +295,12 @@ def inject(text: str) -> str:
         text = replace_marked(text, "<!-- DY_SITE_ENHANCEMENTS_JS_START -->", "<!-- DY_SITE_ENHANCEMENTS_JS_END -->", JS)
     else:
         text = text.replace("</body>", JS + "\n</body>", 1)
+    # Production JS does not need explanatory block comments. Removing only those
+    # inside this owned marker preserves code while keeping the Theme under budget.
+    a,b='<!-- DY_SITE_ENHANCEMENTS_JS_START -->','<!-- DY_SITE_ENHANCEMENTS_JS_END -->'
+    before,rest=text.split(a,1);owned,after=rest.split(b,1)
+    owned=re.sub(r'/\*.*?\*/','',owned,flags=re.S)
+    text=before+a+owned+b+after
     return text
 
 

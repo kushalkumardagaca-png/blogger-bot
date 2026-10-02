@@ -5,23 +5,7 @@
  <link href='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%20role%3D%22img%22%20aria-label%3D%22Daily%20Yield%20logo%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%23fff8ee%22%2F%3E%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22422%22%20height%3D%22422%22%20rx%3D%22105%22%20fill%3D%22%23c86a3d%22%2F%3E%3Ccircle%20cx%3D%22414%22%20cy%3D%2292%22%20r%3D%2210%22%20fill%3D%22%23241610%22%2F%3E%3Ctext%20x%3D%22130%22%20y%3D%22300%22%20fill%3D%22%23fff8ee%22%20font-family%3D%22Georgia%2CDejaVu%20Serif%2Cserif%22%20font-size%3D%22190%22%20font-weight%3D%22700%22%3ED%3C%2Ftext%3E%3Ctext%20x%3D%22260%22%20y%3D%22300%22%20fill%3D%22%23fff8ee%22%20font-family%3D%22Georgia%2CDejaVu%20Serif%2Cserif%22%20font-size%3D%22190%22%20font-weight%3D%22700%22%3EY%3C%2Ftext%3E%3Cpath%20d%3D%22M103%20390%20C180%20375%20229%20348%20280%20355%20C335%20363%20371%20319%20420%20287%22%20fill%3D%22none%22%20stroke%3D%22%23f0b180%22%20stroke-width%3D%2217%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M387%20278%20L427%20285%20L406%20321%22%20fill%3D%22none%22%20stroke%3D%22%23f0b180%22%20stroke-width%3D%2217%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E' rel='icon' sizes='any' type='image/svg+xml'/>
  <meta content='#c86a3d' name='theme-color'/>
  <!-- DAILY YIELD OPTION 5 FAVICON END -->
-<!--
-=====================================================================
- DAILY YIELD &#8212; custom Blogger theme
- Second-generation Blogger theme (Layouts v3 engine, widgets v2).
- Structure mirrors the blog's default (Contempo) layout 1:1:
- sections : header / search_top / page_list_top /
- page_body / ads / sidebar_feed / footer
- widgets : Header1, BlogSearch1, PageList1,
- Blog1, PopularPosts1, BlogArchive1, Label1,
- ReportAbuse1, Attribution1 (all version 2, every
- widget with its own full main includable)
- Skin : light ivory paper, soft ink, champagne gold,
- Playfair Display + Inter, quiet motion.
- Customise : Theme > Customise (colours and fonts)
- Layout > every gadget above is editable / movable
-=====================================================================
--->
+
 <meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'/>
 <meta content='en' http-equiv='Content-Language'/>
 <b:if cond='data:view.isHomepage'>
@@ -3335,7 +3319,7 @@ marquee('kdDeskWrap','kdDesks',42);
 /* ---- honest card builders ---- */
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function card(it){
- var a=D.createElement('a');a.className='kd-card';a.href=it.href;
+ var a=D.createElement('a');a.className='kd-card';a.href=it.href;if(it.id)a.setAttribute('data-kd-entry',it.id);if(it.id)a.setAttribute('data-kd-entry',it.id);if(it.id)a.setAttribute('data-kd-entry',it.id);if(it.id)a.setAttribute('data-kd-entry',it.id);
  var th=D.createElement('div');th.className='kd-th';
  if(it.img){var im=D.createElement('img');im.src=it.img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);}
  else{th.textContent=it.letter||'\u2733';}
@@ -3343,6 +3327,7 @@ function card(it){
  var i=D.createElement('i');i.textContent=it.meta;
  a.appendChild(th);a.appendChild(b);a.appendChild(i);return a;
 }
+function hydrate(items){var q=items.filter(function(it){return !it.img&&it.id;}).slice(),active=0;function pump(){while(active<4&&q.length){(function(it){active++;fetch('/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){var e=j.entry||{},img=e.media$thumbnail&&e.media$thumbnail.url||'',m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||'');if(!img&&m)img=m[1];if(!img)return;D.querySelectorAll('[data-kd-entry="'+it.id+'"] .kd-th').forEach(function(th){th.textContent='';var im=D.createElement('img');im.src=img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);});}).catch(function(){}).then(function(){active--;pump();});})(q.shift());}}pump();}
 function emptyBox(row,title,msg){
  row.innerHTML='';var e=D.createElement('div');e.className='kd-empty';
  var b=D.createElement('b');b.textContent=title;e.appendChild(b);
@@ -3379,7 +3364,7 @@ function parse(json,needNews){
  if(needNews?!isNews:isNews)return;
  var href='';(e.link||[]).forEach(function(l){if(l.rel==='alternate')href=l.href;});
  var img=e.media$thumbnail&&e.media$thumbnail.url||'';var m=/<img[^>]+src="([^"]+)"/.exec((e.summary&&e.summary.$t)||(e.content&&e.content.$t)||'');if(!img&&m)img=m[1];
- out.push({title:e.title&&e.title.$t||'Untitled',href:href,img:img,
+ out.push({id:(e.id&&e.id.$t||'').split('post-').pop(),title:e.title&&e.title.$t||'Untitled',href:href,img:img,
  meta:(e.published&&e.published.$t||'').slice(0,10)+' \u00b7 '+(cats.filter(function(c){return c!=='News';})[0]||'General'),
  when:e.published&&e.published.$t||'',letter:(e.title&&e.title.$t||'\u2733').charAt(0).toUpperCase()});
  });
@@ -3390,20 +3375,21 @@ var latest=D.getElementById('kdRowLatest'),pop=D.getElementById('kdRowPopular'),
 emptyBox(latest,'Checking the shelves\u2026','Latest general articles will line up here the moment the feed answers.');
 emptyBox(pop,'Checking the shelves\u2026','Reader favourites appear once the blog has published posts.');
 emptyBox(newsRow,'Checking the wire\u2026','News dispatches will tick here once published.');
+function articleInventory(){return Promise.all([1,151].map(function(start){return fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published&start-index='+start).then(function(r){if(!r.ok)throw Error('feed');return r.json();});})).then(function(parts){var entries=[];parts.forEach(function(j){entries=entries.concat(j.feed&&j.feed.entry||[]);});return {feed:{entry:entries}};});}
 function go(){
- fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published').then(function(r){return r.json();}).then(function(j){
+ articleInventory().then(function(j){
  var all=parse(j,false);
  var items=all.slice(0,8);
  if(!fill(latest,items))emptyBox(latest,'Waiting for your first post','This row fills with your latest general articles the moment you publish \u2014 no placeholders, no invented headlines.');
- else autoRail(latest,31);
+ else{autoRail(latest,31);hydrate(items);}
  var earlier=all.slice(8,16);
- if(fill(pop,earlier))autoRail(pop,24);
+ if(fill(pop,earlier)){autoRail(pop,24);hydrate(earlier);}
  else emptyBox(pop,'More dated articles will appear here','This second row continues the same newest-first article timeline.');
  }).catch(function(){
  emptyBox(latest,'Feed unreachable here','On your live blog this row connects to the published article feed automatically.');
  emptyBox(pop,'Feed unreachable here','Popular picks connect on your live blog.');
  });
- fetch('/feeds/posts/summary/-/News?alt=json&max-results=150&orderby=published').then(function(r){return r.json();}).then(function(j){
+ fetch('/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published').then(function(r){return r.json();}).then(function(j){
  var items=parse(j,true).slice(0,12);
  var nsig=items.map(function(it){return it.title;}).join('|');
  if(items.length){
@@ -3530,13 +3516,9 @@ D.querySelectorAll('input[type="password"]').forEach(function(i){if(i.parentNode
 D.querySelectorAll('form').forEach(function(f){var s=f.querySelector('.dy-form-status');if(!s){s=D.createElement('p');s.className='dy-form-status';s.setAttribute('role','status');f.appendChild(s);}f.addEventListener('invalid',function(e){s.textContent='Please check the highlighted field and try again.';s.setAttribute('data-state','error');},true);f.addEventListener('submit',function(){if(f.checkValidity()){s.textContent=f.classList.contains('dy-sub-form')?'Opening the secure confirmation step in a new tab.':'Submitted. Please follow the next on-screen step.';s.setAttribute('data-state','success');}});});
 D.querySelectorAll('img:not([alt]),img[alt=""]').forEach(function(img){var box=img.closest('a,article,figure'),label=box?(box.getAttribute('aria-label')||box.textContent||''):'';label=label.replace(/\s+/g,' ').trim().slice(0,160);img.alt=label||'Daily Yield editorial image';});
 D.querySelectorAll('.post-body img,.page-body img').forEach(function(img,n){if(!img.hasAttribute('decoding'))img.setAttribute('decoding','async');if(n>0&&!img.hasAttribute('loading'))img.setAttribute('loading','lazy');if(n===0&&!img.hasAttribute('fetchpriority'))img.setAttribute('fetchpriority','high');});
-/* Gapless chronological feed: preload the next Blogger page before the reader
-   reaches the end, append it in server order, and continue until exhausted. */
+
 (function(){var grid=D.querySelector('.blog-posts.hfeed'),pager=D.getElementById('blog-pager');if(!grid||!pager)return;var next=pager.querySelector('.blog-pager-older-link'),busy=false,seen={};grid.querySelectorAll('h3.post-title a').forEach(function(a){seen[a.href]=1;});function sortGrid(){var cards=[].slice.call(grid.querySelectorAll(':scope > .post-outer-container'));cards.sort(function(a,b){var ad=a.querySelector('time.published'),bd=b.querySelector('time.published');return (Date.parse(bd&&bd.getAttribute('datetime')||0)||0)-(Date.parse(ad&&ad.getAttribute('datetime')||0)||0);});cards.forEach(function(card){grid.insertBefore(card,sent||null);});}sortGrid();if(!next)return;H.classList.add('dy-auto-feed');var sent=D.createElement('div');sent.className='dy-feed-sentinel';sent.setAttribute('role','status');sent.textContent='Loading more articles';grid.appendChild(sent);function load(){if(busy||!next)return;busy=true;var href=next.href;fetch(href,{credentials:'same-origin'}).then(function(r){if(!r.ok)throw Error('feed');return r.text();}).then(function(markup){var doc=new DOMParser().parseFromString(markup,'text/html'),fresh=doc.querySelectorAll('.blog-posts.hfeed .post-outer-container'),frag=D.createDocumentFragment(),added=0;fresh.forEach(function(article){var a=article.querySelector('h3.post-title a'),key=a&&a.href;if(key&&seen[key])return;if(key)seen[key]=1;article.classList.add('in');article.classList.remove('will-reveal');article.querySelectorAll('img').forEach(function(img){img.loading='lazy';img.decoding='async';});frag.appendChild(D.importNode(article,true));added++;});grid.insertBefore(frag,sent);sortGrid();next=doc.querySelector('#blog-pager .blog-pager-older-link');busy=false;if(!next){sent.textContent='All articles loaded';sent.setAttribute('data-finished','true');if(io)io.disconnect();}else{sent.textContent=added?'Loading more articles':'Continuing the archive';setTimeout(load,0);}}).catch(function(){busy=false;sent.textContent='More articles will load when the connection recovers';});}var io;if('IntersectionObserver' in window){io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting;}))load();},{rootMargin:'1400px 0px'});io.observe(sent);load();}else load();})();
-/* Selected-destination navigation warmer: every Daily Yield Page or Post can
-   trigger it, including a direct social-media deep link. Only Home, Daily
-   Article, Daily News and canonical label archives are warmed. Destinations are
-   fetched as low-priority documents without execution or synthetic pageviews. */
+
 (function(){H.setAttribute('data-dy-prefetch-scope','every-entry-selected-destinations');var mobile=matchMedia('(max-width:760px)').matches,limit=52,used=0,seen={},queue=[],running=false,core=['/','/p/article.html','/p/daily-news.html'],labels='Contrarian Hooks|Age and Wealth Milestones|Passive Income Reality|Middle Class Survival|Money Audits and Case Studies|Housing Cars and Big Buys|Automation and Money Systems|Credit Debt and Optimization|AI Fintech and Future Money|Money Psychology and Mindset|Investing Strategies|Retirement Pensions and FIRE|Taxes and Account Optimization|Career Salary and Raises|Side Hustles That Work|Insurance and Protection|Couples Family and Kids|Starters Students and First Jobs|Spending Lifestyle and Frugality|Rich Habits vs Broke Habits|Recessions Crashes and Defense|Cash Savings and Emergency Funds|Real Estate Investing|Myths Scams and Bad Advice|2026 Money Moves|US|China|Germany|India|Japan|UK|France|Italy|Russia|Canada|Brazil|Spain|Mexico|Australia|South Korea|Market and Trading|Economy and Macro Policy|Corporate Finance and Industry|Personal Finance|Global News'.split('|');function eligible(a){if(!a||used>=limit)return'';var u;try{u=new URL(a.href,location.href);}catch(e){return'';}if(u.origin!==location.origin||u.href===location.href||u.protocol!=='https:'||u.hash&&u.pathname===location.pathname&&u.search===location.search)return'';if(/\/feeds(?:\/|\?|$)/.test(u.pathname)||/^(?:mailto:|tel:|javascript:)/i.test(a.getAttribute('href')||''))return'';u.hash='';return u.href;}function warm(href){if(!href||seen[href]||used>=limit||D.hidden)return;seen[href]=1;used++;var link=D.createElement('link');link.rel='prefetch';link.as='document';link.href=href;link.setAttribute('fetchpriority','low');D.head.appendChild(link);H.setAttribute('data-dy-prefetched',String(used));}function drain(deadline){running=false;if(D.hidden)return;while(queue.length&&used<limit&&(!deadline||deadline.timeRemaining()>4||deadline.didTimeout)){warm(queue.shift());if(mobile)break;}if(queue.length&&used<limit)schedule();}function schedule(){if(running)return;running=true;if('requestIdleCallback' in window)requestIdleCallback(drain,{timeout:1800});else setTimeout(function(){drain(null);},700);}function collect(){var ranked=[];core.forEach(function(path){var a=D.createElement('a');a.href=path;ranked.push(a);});labels.forEach(function(label){var a=D.createElement('a');a.href='/search/label/'+encodeURIComponent(label)+'?max-results=50';ranked.push(a);});ranked.forEach(function(a){var h=eligible(a);if(h&&!seen[h]&&queue.indexOf(h)<0)queue.push(h);});schedule();}function intent(e){var a=e.target.closest&&e.target.closest('a[href]'),h=eligible(a);if(h){queue=queue.filter(function(x){return x!==h;});warm(h);}}D.addEventListener('pointerover',intent,{passive:true});D.addEventListener('focusin',intent,{passive:true});D.addEventListener('touchstart',intent,{passive:true});if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',function(){setTimeout(collect,0);},{once:true});else setTimeout(collect,0);window.addEventListener('pageshow',collect);})();
 var contentH1=D.querySelector('.item-post .post-body h1'),templateTitle=D.querySelector('.item-post .post-header .post-title-container');if(contentH1&&templateTitle)templateTitle.style.display='none';
 function schemaModified(){var found='';D.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){try{var data=JSON.parse(s.textContent),walk=function(x){if(!x||found)return;if(Array.isArray(x)){x.forEach(walk);return;}if(typeof x==='object'){if(x.dateModified)found=String(x.dateModified);Object.keys(x).forEach(function(k){walk(x[k]);});}};walk(data);}catch(e){}});return found;}

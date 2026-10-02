@@ -74,11 +74,15 @@ class ThemeLoadingTests(unittest.TestCase):
 
     def test_homepage_uses_deep_summary_inventory_for_both_article_rows(self):
         text = THEMES[0].read_text(encoding="utf-8")
-        self.assertIn("/feeds/posts/summary?alt=json&max-results=150&orderby=published", text)
+        self.assertIn("function articleInventory()", text)
+        self.assertIn("Promise.all([1,151]", text)
+        self.assertIn("max-results=150&orderby=published&start-index=", text)
         self.assertIn("var items=all.slice(0,8)", text)
         self.assertIn("var earlier=all.slice(8,16)", text)
         self.assertIn("e.media$thumbnail&&e.media$thumbnail.url", text)
-        self.assertIn("(e.summary&&e.summary.$t)||(e.content&&e.content.$t)", text)
+        self.assertIn("function hydrate(items)", text)
+        self.assertIn("/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json", text)
+        self.assertIn("/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published", text)
         self.assertNotIn("/feeds/posts/default?alt=json&max-results=25", text)
 
     def test_mobile_document_is_contained_while_rows_remain_scrollable(self):
@@ -91,6 +95,10 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("c=c[:script_start]+snap+c[script_start:]", source)
         self.assertIn("news_snapshot_at<news_engine_at", source)
         self.assertIn("else{setTimeout(main,0);}", source)
+        self.assertIn("DY_AUTHENTICATED_NEWS_FALLBACK_START", source)
+        self.assertIn("rebuild('Country dispatches'", source)
+        self.assertIn("rebuild('Specialty desks'", source)
+        self.assertIn("found.forEach(function(it){row.appendChild(makeCard(it));}", source)
         self.assertNotIn("flags=re.S)+snap", source)
 
     def test_every_entry_warms_only_selected_hubs_and_labels(self):
