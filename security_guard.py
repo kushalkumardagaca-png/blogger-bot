@@ -29,7 +29,7 @@ BACKUP = ROOT / "SECURITY_BACKUP.json.gz"
 
 CRITICAL_FILES = [
     "auto_blogger_publisher.py", "news_pipeline.py", "facebook_publisher.py",
-    "zero_view_watchdog.py", "publication_preflight.py", "page_family.py",
+    "social_creative.py", "zero_view_watchdog.py", "publication_preflight.py", "page_family.py",
     "brand_identity.py", "social_identity.py", "bluesky_publisher.py",
     "tumblr_publisher.py", "mastodon_publisher.py", "tumblr_oauth_bootstrap.py",
     "social_rotation.py", "dispatch_social_events.py", "persist_social_state.sh",
@@ -195,7 +195,8 @@ def write_report(status: str, critical: list[str], warnings: list[str], details:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--backup", action="store_true")
-    parser.add_argument("--approve-current", action="store_true", help="Approve current hashes after an intentional maintenance change")
+    parser.add_argument("--approve-current", action="store_true", help="Approve current repository and Blogger hashes after intentional content maintenance")
+    parser.add_argument("--approve-repository", action="store_true", help="Approve the checked-out main-branch repository change only; Blogger mutations remain fail-closed")
     args = parser.parse_args()
 
     current_repo = repository_hashes()
@@ -204,7 +205,7 @@ def main() -> int:
     critical, warnings = [], []
 
     previous_repo = previous.get("repository", {})
-    if previous_repo and previous_repo != current_repo and not args.approve_current:
+    if previous_repo and previous_repo != current_repo and not (args.approve_current or args.approve_repository):
         changed = sorted({*previous_repo, *current_repo} - {k for k in previous_repo.keys() & current_repo.keys() if previous_repo[k] == current_repo[k]})
         critical.append("critical repository files changed without baseline approval: " + ", ".join(changed[:20]))
 
@@ -228,6 +229,8 @@ def main() -> int:
         "posts": sum(x["kind"] == "post" for x in current_items.values()),
         "newItems": len(new_items), "changedItems": len(changed_items), "removedItems": len(removed),
         "repositoryFiles": len(current_repo), "backupCreated": bool(args.backup),
+        "repositoryChangeApproved": bool(args.approve_repository or args.approve_current),
+        "bloggerChangeApproved": bool(args.approve_current),
     }
     if args.backup:
         with gzip.open(BACKUP, "wt", encoding="utf-8") as archive:

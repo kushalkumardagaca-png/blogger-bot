@@ -62,6 +62,11 @@ jobs:
           if [[ "${{ github.event.schedule }}" == "43 0 * * *" || "${{ inputs.create_backup }}" == "true" ]]; then
             ARGS+=(--backup)
           fi
+          # A commit already accepted onto main is an intentional repository change.
+          # Approve repository hashes only; Blogger deletions/edits still fail closed.
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            ARGS+=(--approve-repository)
+          fi
           if [[ "${{ inputs.approve_current }}" == "true" ]]; then
             ARGS+=(--approve-current)
           fi

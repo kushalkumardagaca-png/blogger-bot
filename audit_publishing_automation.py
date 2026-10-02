@@ -205,8 +205,14 @@ check('Security guard reads Blogger only through authenticated API',
 check('Security guard detects deletion, modification, injection and leaked secrets',
       'live Blogger items removed' in sg and 'existing Blogger content changed' in sg
       and 'MALICIOUS_PATTERNS' in sg and 'SECRET_PATTERNS' in sg)
-check('Security guard fails closed without accepting an anomalous baseline',
-      'return 1 if critical else 0' in sg and 'if not critical or args.approve_current' in sg)
+check('Security guard fails closed without accepting an anomalous Blogger baseline',
+      'return 1 if critical else 0' in sg and 'if not critical or args.approve_current' in sg
+      and 'changed_items and not args.approve_current' in sg)
+check('Accepted main-branch code changes refresh repository hashes without approving Blogger mutations',
+      '--approve-repository' in sg+sw and 'github.event_name' in sw
+      and 'args.approve_current or args.approve_repository' in sg)
+check('Security guard protects the shared live social creative engine',
+      '"social_creative.py"' in sg)
 
 check('Master links both market desks','/p/markets-today.html' in ap and '/p/global-snapshot.html' in ap)
 check('Master posts cannot enter News hub','"News"' not in re.search(r'labels = \[(.*?)\]',ap,re.S).group(1))

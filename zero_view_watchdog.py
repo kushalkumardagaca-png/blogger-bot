@@ -251,12 +251,30 @@ def github_checks():
     if not token:
         return [{"name": "GitHub workflow history", "status": "SKIP", "detail": "token unavailable"}]
     headers = {"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json"}
-    for workflow, label in (("daily_blogger_poster.yml", "Master publisher"), ("daily_news_wires.yml", "News publisher")):
+    workflows = (
+        ("daily_blogger_poster.yml", "Master publisher"),
+        ("daily_news_wires.yml", "News publisher"),
+        ("coordinated_social_publish.yml", "Coordinated social publisher"),
+        ("security_guard.yml", "Security guard"),
+        ("health_monitor.yml", "Zero-view watchdog"),
+    )
+    for workflow, label in workflows:
         try:
             data = request_json(f"https://api.github.com/repos/{repo}/actions/workflows/{workflow}/runs?per_page=12", headers)
             complete = [run for run in data.get("workflow_runs", []) if run.get("status") == "completed"]
             failed = [run for run in complete if run.get("conclusion") == "failure"]
-            output.append({"name": label, "status": "WARN" if failed else "OK", "detail": f"{len(failed)} failures among {len(complete)} recent completed runs"})
+            latest = complete[0] if complete else {}
+            latest_result = latest.get("conclusion", "NO_COMPLETED_RUN")
+            # Historical failures remain evidence, but only the latest completed
+            # run determines current health and alert severity.
+            output.append({
+                "name": label,
+                "status": "OK" if latest_result == "success" else "WARN",
+                "latestConclusion": latest_result,
+                "latestRunId": latest.get("id"),
+                "latestUpdatedAt": latest.get("updated_at", ""),
+                "detail": f"latest={latest_result}; {len(failed)} failures among {len(complete)} recent completed runs",
+            })
         except Exception as exc:
             output.append({"name": label, "status": "WARN", "detail": str(exc)[:120]})
     return output
@@ -340,10 +358,24 @@ def gsc_checks(inventory):
     live_urls = {item["url"] for item in inventory if not item["url"].endswith(LEGACY)}
     tracker = {url: row for url, row in tracker.items() if url in live_urls}
     passed = sum(row.get("verdict") == "PASS" for row in tracker.values())
+    coverage = {}
+    fetch_states = {}
+    for row in tracker.values():
+        coverage[row.get("coverageState", "UNKNOWN") or "UNKNOWN"] = coverage.get(row.get("coverageState", "UNKNOWN") or "UNKNOWN", 0) + 1
+        fetch_states[row.get("pageFetchState", "UNKNOWN") or "UNKNOWN"] = fetch_states.get(row.get("pageFetchState", "UNKNOWN") or "UNKNOWN", 0) + 1
     return {
         "connection": "OK", "property": property_url, "permission": property_entry.get("permissionLevel"),
         "sitemaps": current, "tracker": tracker,
-        "summary": {"inventory": len(live_urls), "tracked": len(tracker), "pass": passed, "notPass": len(tracker) - passed, "inspectedThisRun": inspected, "inspectionErrors": errors, "sitemapsVisible": len(current)},
+        "summary": {
+            "inventory": len(live_urls), "tracked": len(tracker), "pass": passed,
+            "neutralOrOther": len(tracker) - passed, "inspectedThisRun": inspected,
+            "inspectionErrors": errors, "sitemapsVisible": len(current),
+            "coverageStates": dict(sorted(coverage.items())),
+            "pageFetchStates": dict(sorted(fetch_states.items())),
+            "redirectErrors": coverage.get("Redirect error", 0),
+            "discoveredNotIndexed": coverage.get("Discovered - currently not indexed", 0),
+            "unknownToGoogle": coverage.get("URL is unknown to Google", 0),
+        },
     }
 
 
@@ -369,13 +401,15 @@ def main():
         "checkedAtIST": NOW.isoformat(), "mode": "ZERO_SYNTHETIC_VIEWS",
         "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
         "overall": overall, "bloggerControlPlane": metadata,
-        "summary": {"urls": len(inventory), "posts": sum(item["kind"] == "post" for item in inventory), "pages": sum(item["kind"] == "page" for item in inventory), "contentFailures": content_failures, "externalDestinationsChecked": len(targets), "confirmedExternal404or410": len(hard_external), "externalRedirectChains": len(redirect_chains), "transientExternalResponses": len(transient_external), "syntheticDailyYieldViews": 0},
+        "summary": {"urls": len(inventory), "posts": sum(item["kind"] == "post" for item in inventory), "pages": sum(item["kind"] == "page" for item in inventory), "contentFailures": content_failures, "externalDestinationsChecked": len(targets), "confirmedExternal404or410": len(hard_external), "externalRedirectChains": len(redirect_chains), "transientExternalResponses": len(transient_external), "workflowWarnings": sum(row.get("status") == "WARN" for row in github), "gscRedirectErrors": gsc.get("summary", {}).get("redirectErrors", 0), "syntheticDailyYieldViews": 0},
         "content": rows, "confirmedBrokenExternal": hard_external,
         "redirectChains": redirect_chains, "transientExternal": transient_external, "github": github, "providers": providers, "gsc": gsc,
         "limitations": ["Rendered-browser and live public-page navigation are intentionally prohibited because they create synthetic pageviews.", "Responsive, metadata and structure checks are performed against Blogger API content packages rather than opening public URLs."],
     }
     Path("ZERO_VIEW_WATCHDOG.json").write_text(json.dumps(report, indent=2, ensure_ascii=False))
-    lines = ["# Daily Yield Zero-View Watchdog", "", f"- **Checked:** {report['checkedAtIST']}", f"- **Verdict:** {overall}", "- **Synthetic Daily Yield views:** 0", f"- **Inventory:** {len(inventory)} URLs · {report['summary']['posts']} Posts · {report['summary']['pages']} Pages", f"- **Content failures:** {content_failures}", f"- **Confirmed external 404/410:** {len(hard_external)}", f"- **External redirect chains:** {len(redirect_chains)}", f"- **Search Console:** {gsc.get('connection')} · {gsc.get('summary', {}).get('pass', 0)}/{gsc.get('summary', {}).get('tracked', 0)} tracked PASS", "", "> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.", "", "## Content inventory"]
+    gsc_summary = gsc.get("summary", {})
+    workflow_warnings = sum(row.get("status") == "WARN" for row in github)
+    lines = ["# Daily Yield Zero-View Watchdog", "", f"- **Checked:** {report['checkedAtIST']}", f"- **Verdict:** {overall}", "- **Synthetic Daily Yield views:** 0", f"- **Inventory:** {len(inventory)} URLs · {report['summary']['posts']} Posts · {report['summary']['pages']} Pages", f"- **Content failures:** {content_failures}", f"- **Confirmed external 404/410:** {len(hard_external)}", f"- **External redirect chains:** {len(redirect_chains)}", f"- **Current workflow warnings:** {workflow_warnings}", f"- **Search Console:** {gsc.get('connection')} · {gsc_summary.get('tracked', 0)} URLs tracked · {gsc_summary.get('redirectErrors', 0)} historical redirect errors · {gsc_summary.get('sitemapsVisible', 0)} sitemaps visible", "", "> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.", "", "## Content inventory"]
     for row in rows:
         lines.append(f"- {'✅' if not row['issues'] else '❌'} **{row['kind']} · {row['title']}**" + ((" — " + "; ".join(row["issues"])) if row["issues"] else ""))
     Path("ZERO_VIEW_WATCHDOG.md").write_text("\n".join(lines) + "\n")
