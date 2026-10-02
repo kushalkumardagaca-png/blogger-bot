@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2187,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 143,
+    "transientExternalResponses": 171,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2652,24 +2652,24 @@
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37002217473,
-      "latestUpdatedAt": "2026-10-02T11:54:54Z",
-      "detail": "latest=success; 0 failures among 10 recent completed runs"
+      "latestRunId": 37003810562,
+      "latestUpdatedAt": "2026-10-02T12:11:49Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37004691219,
-      "latestUpdatedAt": "2026-10-02T12:06:13Z",
+      "latestRunId": 37006773506,
+      "latestUpdatedAt": "2026-10-02T12:27:38Z",
       "detail": "latest=success; 2 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37004075989,
-      "latestUpdatedAt": "2026-10-02T12:01:50Z",
+      "latestRunId": 37004691211,
+      "latestUpdatedAt": "2026-10-02T12:07:58Z",
       "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],
