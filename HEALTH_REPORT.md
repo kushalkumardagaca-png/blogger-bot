@@ -1,31 +1,31 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T15:25:44.016988+05:30
-- **Verdict:** PASS
+- **Checked:** 2026-10-02T15:55:18.115935+05:30
+- **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
 - **Inventory:** 229 URLs · 215 Posts · 13 Pages
-- **Content failures:** 0
+- **Content failures:** 3
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Current workflow warnings:** 0
+- **Current workflow warnings:** 1
 - **Search Console:** OK · 228 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
-- ✅ **page · TERMS AND CONDITIONS**
+- ❌ **page · TERMS AND CONDITIONS** — SEO/meta description package missing
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ✅ **page · DAILY NEWS**
+- ❌ **page · DAILY NEWS** — 1 image(s) missing descriptive alt text
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
 - ✅ **page · CONTACT US**
 - ✅ **page · CALCULATOR**
-- ✅ **page · DAILY ARTICLE**
+- ❌ **page · DAILY ARTICLE** — 63 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
 - ✅ **post · Corporate Finance and Industry News**
 - ✅ **post · Italy Finance News — 2 October 2026**

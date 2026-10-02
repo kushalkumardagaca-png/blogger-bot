@@ -1,17 +1,17 @@
 {
-  "overall": "PASS",
+  "overall": "ATTENTION",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
     "urls": 229,
     "posts": 215,
     "pages": 13,
-    "contentFailures": 0,
-    "externalDestinationsChecked": 2073,
+    "contentFailures": 3,
+    "externalDestinationsChecked": 2142,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 121,
-    "workflowWarnings": 0,
+    "transientExternalResponses": 757,
+    "workflowWarnings": 1,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
@@ -2570,7 +2570,7 @@
       "tracked": 228,
       "pass": 0,
       "neutralOrOther": 228,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -2614,19 +2614,19 @@
     },
     {
       "name": "Security guard",
-      "status": "OK",
-      "latestConclusion": "success",
-      "latestRunId": 36992576218,
-      "latestUpdatedAt": "2026-10-02T09:55:57Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "status": "WARN",
+      "latestConclusion": "failure",
+      "latestRunId": 36995761101,
+      "latestUpdatedAt": "2026-10-02T10:29:47Z",
+      "detail": "latest=failure; 7 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36990837641,
-      "latestUpdatedAt": "2026-10-02T09:39:23Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 36992576219,
+      "latestUpdatedAt": "2026-10-02T09:57:34Z",
+      "detail": "latest=success; 0 failures among 10 recent completed runs"
     }
   ],
   "providers": [
