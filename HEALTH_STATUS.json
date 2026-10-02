@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 231,
-    "posts": 217,
+    "urls": 233,
+    "posts": 219,
     "pages": 13,
     "contentFailures": 3,
-    "externalDestinationsChecked": 2156,
+    "externalDestinationsChecked": 2187,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 129,
+    "transientExternalResponses": 141,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2585,28 +2585,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/canada-2026-10-02.html": {
+        "title": "Canada Finance News \u2014 2 October 2026",
+        "checkedAt": "2026-10-02T17:29:42.787580+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/us-2026-10-02.html": {
+        "title": "US Finance News \u2014 2 October 2026",
+        "checkedAt": "2026-10-02T17:29:42.787580+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 230,
-      "tracked": 230,
+      "inventory": 232,
+      "tracked": 232,
       "pass": 0,
-      "neutralOrOther": 230,
-      "inspectedThisRun": 1,
+      "neutralOrOther": 232,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 53
+        "URL is unknown to Google": 55
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 220,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 222,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 53
+      "unknownToGoogle": 55
     }
   },
   "github": [
@@ -2622,32 +2644,32 @@
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36998089577,
-      "latestUpdatedAt": "2026-10-02T10:55:07Z",
-      "detail": "latest=success; 1 failures among 12 recent completed runs"
+      "latestRunId": 37003749419,
+      "latestUpdatedAt": "2026-10-02T11:56:42Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36998117604,
-      "latestUpdatedAt": "2026-10-02T11:10:24Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 37002217473,
+      "latestUpdatedAt": "2026-10-02T11:54:54Z",
+      "detail": "latest=success; 0 failures among 10 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37002879875,
-      "latestUpdatedAt": "2026-10-02T11:47:01Z",
+      "latestRunId": 37004076085,
+      "latestUpdatedAt": "2026-10-02T11:59:51Z",
       "detail": "latest=success; 2 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37000574271,
-      "latestUpdatedAt": "2026-10-02T11:23:34Z",
+      "latestRunId": 37002879924,
+      "latestUpdatedAt": "2026-10-02T11:48:44Z",
       "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],

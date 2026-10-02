@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T17:16:52.910666+05:30
+- **Checked:** 2026-10-02T17:29:42.787580+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 231 URLs · 217 Posts · 13 Pages
+- **Inventory:** 233 URLs · 219 Posts · 13 Pages
 - **Content failures:** 3
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 230 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 232 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -25,8 +25,10 @@
 - ✅ **page · DISCLAIMER**
 - ✅ **page · CONTACT US**
 - ✅ **page · CALCULATOR**
-- ❌ **page · DAILY ARTICLE** — 63 image(s) missing descriptive alt text
+- ❌ **page · DAILY ARTICLE** — 64 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · Canada Finance News — 2 October 2026**
+- ✅ **post · US Finance News — 2 October 2026**
 - ✅ **post · The Real Price of a Career Break**
 - ✅ **post · Brazil Finance News — 2 October 2026**
 - ✅ **post · Corporate Finance and Industry News**
