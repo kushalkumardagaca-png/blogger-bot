@@ -1,14 +1,14 @@
 # Daily Yield Security Guard
 
 - **Status:** PASS
-- **Checked:** 2026-10-02T06:54:03.779565+00:00
+- **Checked:** 2026-10-02T07:10:02.277052+00:00
 - **Public website requests:** 0
 
 ## Critical findings
 - None
 
 ## Warnings
-- None
+- 2 new live item(s) accepted after threat scan
 
 ## Scope
 - Authenticated Blogger API content integrity
