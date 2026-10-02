@@ -42,6 +42,7 @@ for p in THEMES:
     check(prefix+'duplicate base64 favicon payloads removed', 'data:image/png;base64' not in text)
     check(prefix+'Theme transfer budget stays below 310 KB', len(text.encode('utf-8')) < 310000)
     check(prefix+'old body fade delay removed', 'animation:pageIn' not in text and '@keyframes pageIn' not in text)
+    check(prefix+'comment iframe engine is deferred off critical path', 'DY_LAZY_COMMENT_LOADER_START' in text and "<script src='https://www.blogger.com/static" not in text)
     theme_images=[] if not valid else [node for node in tree.getroot().iter() if str(node.tag).split('}')[-1].lower()=='img']
     check(prefix+'every Theme image has nonempty alt', valid and all(any(str(key).split('}')[-1]=='alt' and str(value).strip() for key,value in node.attrib.items()) for node in theme_images))
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)

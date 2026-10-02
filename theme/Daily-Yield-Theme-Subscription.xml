@@ -2100,8 +2100,11 @@ window.__dyLoadStart=(window.performance&&performance.now)?performance.now():Dat
  <h4 id='comment-post-message'>Post a Comment</h4>
  <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
  <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='180px' id='comment-editor' name='comment-editor' src='' width='100%'/>
- <script src='https://www.blogger.com/static/v1/jsbin/3790099508-comment_from_post_iframe.js' type='text/javascript'/>
- <script type='text/javascript'>BLOG_CMT_createIframe(&#39;https://www.blogger.com/rpc_relay.html&#39;);</script>
+ <!-- DY_LAZY_COMMENT_LOADER_START -->
+<script>//<![CDATA[
+(function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.src='https://www.blogger.com/static/v1/jsbin/3790099508-comment_from_post_iframe.js';s.async=true;s.onload=function(){if(typeof BLOG_CMT_createIframe==='function')BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');};document.head.appendChild(s);}if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:1800});else window.setTimeout(load,900);})();
+//]]></script>
+<!-- DY_LAZY_COMMENT_LOADER_END -->
  </div>
  <b:else/>
  <p class='comment-note'>Comments are closed for this post.</p>

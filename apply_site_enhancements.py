@@ -79,6 +79,12 @@ window.__dyLoadStart=(window.performance&&performance.now)?performance.now():Dat
 //]]></script>
 <!-- DY_FINANCE_LOADER_END -->"""
 
+COMMENT_LOADER = r"""<!-- DY_LAZY_COMMENT_LOADER_START -->
+<script>//<![CDATA[
+(function(){var done=false;function load(){if(done)return;done=true;var s=document.createElement('script');s.src='https://www.blogger.com/static/v1/jsbin/3790099508-comment_from_post_iframe.js';s.async=true;s.onload=function(){if(typeof BLOG_CMT_createIframe==='function')BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');};document.head.appendChild(s);}if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:1800});else window.setTimeout(load,900);})();
+//]]></script>
+<!-- DY_LAZY_COMMENT_LOADER_END -->"""
+
 BREADCRUMB = r"""<!-- DY_BREADCRUMB_START -->
 <b:if cond='data:view.isSingleItem'>
 <nav aria-label='Breadcrumb' class='dy-breadcrumb'><a expr:href='data:blog.homepageUrl'>Home</a><span aria-hidden='true'>&#8250;</span><span aria-current='page'><data:blog.pageName/></span></nav>
@@ -180,6 +186,11 @@ def inject(text: str) -> str:
         text = text.replace(viewport, viewport + "\n<meta content='en' http-equiv='Content-Language'/>", 1)
     text = text.replace("<h1 class='post-title entry-title'><data:post.title/></h1>", "<div aria-level='2' class='post-title entry-title' role='heading'><data:post.title/></div>", 1)
     text = text.replace('.item-post h1.post-title{', '.item-post .post-title{').replace('.item-post h1.post-title::after{', '.item-post .post-title::after{').replace('.item-post h1.post-title,.item-post h1.post-title::after{', '.item-post .post-title,.item-post .post-title::after{')
+    blocking_comment = re.compile(r"<script src='https://www\.blogger\.com/static/v1/jsbin/3790099508-comment_from_post_iframe\.js' type='text/javascript'/>\s*<script type='text/javascript'>BLOG_CMT_createIframe\(&#39;https://www\.blogger\.com/rpc_relay\.html&#39;\);</script>")
+    if "DY_LAZY_COMMENT_LOADER_START" in text:
+        text = replace_marked(text, "<!-- DY_LAZY_COMMENT_LOADER_START -->", "<!-- DY_LAZY_COMMENT_LOADER_END -->", COMMENT_LOADER)
+    else:
+        text = blocking_comment.sub(lambda _: COMMENT_LOADER, text, count=1)
     # Remove render-blocking web-font connections. Existing font stacks retain
     # the same editorial character through local system/Georgia fallbacks.
     text = re.sub(r"\n<link[^>]+href='https://fonts\.googleapis\.com[^']*'[^>]*/>", "", text)

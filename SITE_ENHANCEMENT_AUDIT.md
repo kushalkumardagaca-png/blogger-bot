@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **162**
+- Pass: **164**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -70,6 +70,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed
 - ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
+- ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
@@ -141,6 +142,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating

@@ -43,6 +43,12 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("prefers-reduced-motion:reduce", text)
         self.assertIn("<noscript><style>#dyPageLoader{display:none!important}</style></noscript>", text)
 
+    def test_noncritical_comment_engine_is_loaded_during_idle_time(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn("DY_LAZY_COMMENT_LOADER_START", text)
+        self.assertIn("requestIdleCallback(load,{timeout:1800})", text)
+        self.assertNotIn("<script src='https://www.blogger.com/static", text)
+
     def test_real_two_second_budget_is_recorded_not_fabricated(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("data-dy-complete-ms", text)
