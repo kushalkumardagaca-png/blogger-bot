@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 212,
-    "posts": 198,
+    "urls": 214,
+    "posts": 200,
     "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1878,
+    "externalDestinationsChecked": 1904,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 116,
+    "transientExternalResponses": 669,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2374,14 +2374,36 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-02.html": {
+        "title": "South Korea Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 S. Korean won weakens against U.S. dollar on lingering worries over higher yields; LS\u2026",
+        "checkedAt": "2026-10-02T06:02:49.187682+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/australia-2026-10-02.html": {
+        "title": "Australia Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Statement by the Monetary Policy Board: Monetary Policy Decision; Live: ASX to rise as US\u2026",
+        "checkedAt": "2026-10-02T06:02:49.187682+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 211,
-      "tracked": 211,
+      "inventory": 213,
+      "tracked": 213,
       "pass": 0,
-      "notPass": 211,
-      "inspectedThisRun": 0,
+      "notPass": 213,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2
     }

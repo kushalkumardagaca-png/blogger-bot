@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T03:53:10.908871+05:30
+- **Checked:** 2026-10-02T06:02:49.187682+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 212 URLs · 198 Posts · 13 Pages
+- **Inventory:** 214 URLs · 200 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/211 tracked PASS
+- **Search Console:** OK · 0/213 tracked PASS
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
 
@@ -26,6 +26,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · South Korea Finance News · 2 October 2026 · Coverage October 1 to 2 — S. Korean won weakens against U.S. dollar on lingering worries over higher yields; LS…**
+- ✅ **post · Australia Finance News · 2 October 2026 · Coverage October 1 to 2 — Statement by the Monetary Policy Board: Monetary Policy Decision; Live: ASX to rise as US…**
 - ✅ **post · Russia Finance News · 1 October 2026 · Coverage September 30 to October 1 — FACTBOX: Key takeaways from Russia's draft federal budget for 2027-2029; All prerequisites…**
 - ✅ **post · Personal Finance News · 1 October 2026 · Coverage September 30 to October 1 — Pension tops £16,000 a year after 4.7% increase; Healey urged to offer energy support in…**
 - ✅ **post · Your Secret Money Script, Explained**
