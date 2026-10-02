@@ -43,6 +43,10 @@ for p in THEMES:
     check(prefix+'Theme transfer budget stays below 310 KB', len(text.encode('utf-8')) < 310000)
     check(prefix+'old body fade delay removed', 'animation:pageIn' not in text and '@keyframes pageIn' not in text)
     check(prefix+'comment iframe engine is deferred off critical path', 'DY_LAZY_COMMENT_LOADER_START' in text and "<script src='https://www.blogger.com/static" not in text)
+    check(prefix+'feed pages continuously append older Blogger pages', "className='dy-feed-sentinel'" in text and "blog-pager-older-link" in text and "rootMargin:'1400px 0px'" in text)
+    check(prefix+'homepage article rails use newest-first chronology', 'var all=parse(j,false);' in text and 'Earlier articles' in text)
+    check(prefix+'five tool benches share one compact row', '#kd-tools .kd-digest{grid-template-columns:repeat(5,minmax(0,1fr))!important' in text)
+    check(prefix+'subscription desk is compact instead of full-height', '.dy-sub-grid{grid-template-columns:1.05fr .95fr!important;min-height:0!important}' in text)
     theme_images=[] if not valid else [node for node in tree.getroot().iter() if str(node.tag).split('}')[-1].lower()=='img']
     check(prefix+'every Theme image has nonempty alt', valid and all(any(str(key).split('}')[-1]=='alt' and str(value).strip() for key,value in node.attrib.items()) for node in theme_images))
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)
