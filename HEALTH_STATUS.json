@@ -3,15 +3,15 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 233,
-    "posts": 219,
+    "urls": 235,
+    "posts": 221,
     "pages": 13,
-    "contentFailures": 3,
-    "externalDestinationsChecked": 2187,
-    "confirmedExternal404or410": 0,
+    "contentFailures": 2,
+    "externalDestinationsChecked": 2204,
+    "confirmedExternal404or410": 1,
     "externalRedirectChains": 0,
     "transientExternalResponses": 141,
-    "workflowWarnings": 0,
+    "workflowWarnings": 1,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
@@ -2607,28 +2607,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/4-hustles-30-days-each-1-winner.html": {
+        "title": "4 Hustles, 30 Days Each, 1 Winner",
+        "checkedAt": "2026-10-02T20:02:31.989351+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-02.html": {
+        "title": "Mexico Finance News \u2014 2 October 2026",
+        "checkedAt": "2026-10-02T20:02:31.989351+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 232,
-      "tracked": 232,
+      "inventory": 234,
+      "tracked": 234,
       "pass": 0,
-      "neutralOrOther": 232,
-      "inspectedThisRun": 0,
+      "neutralOrOther": 234,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 55
+        "URL is unknown to Google": 57
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 222,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 224,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 55
+      "unknownToGoogle": 57
     }
   },
   "github": [
@@ -2636,41 +2658,41 @@
       "name": "Master publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37002192317,
-      "latestUpdatedAt": "2026-10-02T11:39:43Z",
+      "latestRunId": 37020396637,
+      "latestUpdatedAt": "2026-10-02T14:31:20Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37003749419,
-      "latestUpdatedAt": "2026-10-02T11:56:42Z",
+      "latestRunId": 37013111544,
+      "latestUpdatedAt": "2026-10-02T13:28:01Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37003810562,
-      "latestUpdatedAt": "2026-10-02T12:11:49Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "latestRunId": 37013158854,
+      "latestUpdatedAt": "2026-10-02T13:43:13Z",
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37006773506,
-      "latestUpdatedAt": "2026-10-02T12:27:38Z",
-      "detail": "latest=success; 2 failures among 12 recent completed runs"
+      "latestRunId": 37020573068,
+      "latestUpdatedAt": "2026-10-02T14:32:45Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
-      "status": "OK",
-      "latestConclusion": "success",
-      "latestRunId": 37006773497,
-      "latestUpdatedAt": "2026-10-02T12:29:28Z",
-      "detail": "latest=success; 3 failures among 11 recent completed runs"
+      "status": "WARN",
+      "latestConclusion": "failure",
+      "latestRunId": 37020078039,
+      "latestUpdatedAt": "2026-10-02T14:28:36Z",
+      "detail": "latest=failure; 4 failures among 11 recent completed runs"
     }
   ],
   "providers": [

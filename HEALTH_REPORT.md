@@ -1,20 +1,20 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T18:01:15.878782+05:30
+- **Checked:** 2026-10-02T20:02:31.989351+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 233 URLs · 219 Posts · 13 Pages
-- **Content failures:** 3
-- **Confirmed external 404/410:** 0
+- **Inventory:** 235 URLs · 221 Posts · 13 Pages
+- **Content failures:** 2
+- **Confirmed external 404/410:** 1
 - **External redirect chains:** 0
-- **Current workflow warnings:** 0
-- **Search Console:** OK · 232 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Current workflow warnings:** 1
+- **Search Console:** OK · 234 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
-- ❌ **page · TERMS AND CONDITIONS** — SEO/meta description package missing
+- ✅ **page · TERMS AND CONDITIONS**
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
@@ -25,8 +25,10 @@
 - ✅ **page · DISCLAIMER**
 - ✅ **page · CONTACT US**
 - ✅ **page · CALCULATOR**
-- ❌ **page · DAILY ARTICLE** — 64 image(s) missing descriptive alt text
+- ❌ **page · DAILY ARTICLE** — 65 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · 4 Hustles, 30 Days Each, 1 Winner**
+- ✅ **post · Mexico Finance News — 2 October 2026**
 - ✅ **post · Canada Finance News — 2 October 2026**
 - ✅ **post · US Finance News — 2 October 2026**
 - ✅ **post · The Real Price of a Career Break**
