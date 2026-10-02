@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-02T13:32:26.264043+05:30",
+  "checkedAtIST": "2026-10-02T13:57:51.081512+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 2043,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 123,
+    "transientExternalResponses": 121,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -15263,37 +15263,13 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Zora_Montgomery_Courtney_%281882-1962%29_in_The_Des_Moines_Tribune_of_Des_Moines%2C_Iowa_on_12_September_1914%2C_part_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15312,6 +15288,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15336,6 +15318,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Shanghai_ESA366469.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Sonnenuntergang_Frankfurt.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15436,16 +15424,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36981771607,
-      "latestUpdatedAt": "2026-10-02T08:02:36Z",
+      "latestRunId": 36983811342,
+      "latestUpdatedAt": "2026-10-02T08:24:26Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36981585425,
-      "latestUpdatedAt": "2026-10-02T08:02:19Z",
+      "latestRunId": 36981771532,
+      "latestUpdatedAt": "2026-10-02T08:04:01Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
@@ -15487,7 +15475,7 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-09-30T22:21:31.892Z",
+        "lastDownloaded": "2026-10-02T05:32:35.286Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
