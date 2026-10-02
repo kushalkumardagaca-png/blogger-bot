@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-02T12:39:33+05:30",
+  "checked_at_ist": "2026-10-02T13:10:59+05:30",
   "summary": {
-    "pass": 120,
+    "pass": 128,
     "fail": 0
   },
   "checks": [
@@ -27,6 +27,46 @@
     },
     {
       "name": "News runs cannot overlap",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing URL automation reconciles every two hours",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master and News publishers trigger Bing reconciliation without schedule changes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing URL submission is quota-aware and capped at 500 per batch",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing URL automation suppresses unchanged duplicate submissions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing index monitoring uses GetUrlInfo with bounded stages",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing URL automation creates no public Daily Yield requests or Live URL fetches",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing API-key errors are redacted rather than stringified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing URL evidence and state are persisted without secrets",
       "status": "PASS",
       "detail": ""
     },

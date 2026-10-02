@@ -26,6 +26,25 @@ check('Every master trigger is exactly 45 minutes early',
 check('Master runs cannot overlap','cancel-in-progress: false' in aw.read_text() and 'daily-yield-master-publisher' in aw.read_text())
 check('News runs cannot overlap','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-wires' in nw.read_text())
 
+bing_py=(ROOT/'bing_url_automation.py').read_text()
+bing_workflow=(ROOT/'.github/workflows/bing_url_automation.yml').read_text()
+check('Bing URL automation reconciles every two hours', "cron: '35 */2 * * *'" in bing_workflow)
+check('Master and News publishers trigger Bing reconciliation without schedule changes',
+      'gh workflow run bing_url_automation.yml --ref main' in aw.read_text()
+      and 'gh workflow run bing_url_automation.yml --ref main' in nw.read_text())
+check('Bing URL submission is quota-aware and capped at 500 per batch',
+      'GetUrlSubmissionQuota' in bing_py and 'range(0, len(selected), 500)' in bing_py)
+check('Bing URL automation suppresses unchanged duplicate submissions',
+      'submittedFingerprint' in bing_py and '!= item["fingerprint"]' in bing_py)
+check('Bing index monitoring uses GetUrlInfo with bounded stages',
+      'GetUrlInfo' in bing_py and 'INSPECTION_DELAYS = (6, 24, 72, 168)' in bing_py)
+check('Bing URL automation creates no public Daily Yield requests or Live URL fetches',
+      'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in bing_py and 'FetchUrl' not in bing_py)
+check('Bing API-key errors are redacted rather than stringified',
+      'safe_detail' in bing_py and 'apikey' not in bing_py.split('def safe_detail',1)[1].split('def json_request',1)[0])
+check('Bing URL evidence and state are persisted without secrets',
+      'BING_URL_AUTOMATION_STATE.json' in bing_workflow and 'BING_WEBMASTER_API_KEY' in bing_workflow)
+
 ap=(ROOT/'auto_blogger_publisher.py').read_text(); np=(ROOT/'news_pipeline.py').read_text()
 check('Master publisher uses IST','datetime.now(IST)' in ap)
 check('Master tracker advances only after live URL','tracker will not advance' in ap and 'if not api_res or not api_res.get("url")' in ap)

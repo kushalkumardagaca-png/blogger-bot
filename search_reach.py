@@ -8,7 +8,7 @@ as an environment value and is never written to status evidence or logs.
 """
 from pathlib import Path
 from datetime import datetime, timezone
-import json, os, urllib.parse, urllib.request
+import json, os, urllib.error, urllib.parse, urllib.request
 
 SITE="https://dailyyield.blogspot.com/"
 SITEMAPS=[SITE+"sitemap.xml",SITE+"sitemap-pages.xml"]
@@ -25,8 +25,16 @@ def bing_submit(key, sitemap):
         method="POST",
         headers={"User-Agent":"DailyYield-SearchReach/1.0","Content-Type":"application/json; charset=utf-8"},
     )
-    with urllib.request.urlopen(req,timeout=30) as response:
-        return response.status
+    try:
+        with urllib.request.urlopen(req,timeout=30) as response:
+            return response.status
+    except urllib.error.HTTPError as exc:
+        # Never stringify the request/exception: Bing requires the key in the
+        # query string and urllib's exception URL would otherwise expose it.
+        exc.read()
+        raise RuntimeError(f"Bing SubmitFeed returned HTTP {exc.code}") from exc
+    except (urllib.error.URLError, TimeoutError) as exc:
+        raise RuntimeError(f"Bing SubmitFeed network failure: {exc.__class__.__name__}") from exc
 
 
 def main():

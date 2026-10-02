@@ -62,3 +62,7 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+      - name: Trigger Bing URL submission reconciliation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run bing_url_automation.yml --ref main

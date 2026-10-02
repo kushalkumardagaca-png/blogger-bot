@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 120 PASS · 0 FAIL
+**Result:** 128 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -9,6 +9,14 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Every master trigger is exactly 45 minutes early**
 - ✅ **Master runs cannot overlap**
 - ✅ **News runs cannot overlap**
+- ✅ **Bing URL automation reconciles every two hours**
+- ✅ **Master and News publishers trigger Bing reconciliation without schedule changes**
+- ✅ **Bing URL submission is quota-aware and capped at 500 per batch**
+- ✅ **Bing URL automation suppresses unchanged duplicate submissions**
+- ✅ **Bing index monitoring uses GetUrlInfo with bounded stages**
+- ✅ **Bing URL automation creates no public Daily Yield requests or Live URL fetches**
+- ✅ **Bing API-key errors are redacted rather than stringified**
+- ✅ **Bing URL evidence and state are persisted without secrets**
 - ✅ **Master publisher uses IST**
 - ✅ **Master tracker advances only after live URL**
 - ✅ **Master duplicate recovery**

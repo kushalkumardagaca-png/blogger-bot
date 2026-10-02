@@ -1,0 +1,96 @@
+name: Bing URL Submission and Index Monitoring
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'bing_url_automation.py'
+      - 'test_bing_url_automation.py'
+      - '.github/workflows/bing_url_automation.yml'
+  schedule:
+    # Two-hour zero-view reconciliation for new, updated and manually changed URLs.
+    - cron: '35 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-bing-url-automation
+  cancel-in-progress: false
+
+jobs:
+  submit-and-monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify Bing URL automation guardrails
+        run: python -m unittest test_bing_url_automation -v
+
+      - name: Reconcile Blogger inventory with Bing
+        id: automation
+        continue-on-error: true
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: python bing_url_automation.py
+
+      - name: Upload redacted Bing evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bing-url-automation-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            BING_URL_AUTOMATION_STATE.json
+            BING_URL_AUTOMATION_STATUS.json
+            BING_URL_AUTOMATION_STATUS.md
+
+      - name: Persist Bing queue and status safely
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Bing URL Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/dy-bing-url-state
+          for file in BING_URL_AUTOMATION_STATE.json BING_URL_AUTOMATION_STATUS.json BING_URL_AUTOMATION_STATUS.md; do
+            [[ -f "$file" ]] && cp "$file" /tmp/dy-bing-url-state/
+          done
+          if [[ ! -f /tmp/dy-bing-url-state/BING_URL_AUTOMATION_STATUS.json ]]; then
+            echo "No Bing URL evidence was produced."
+            exit 1
+          fi
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-bing-url-state/* .
+            git add BING_URL_AUTOMATION_STATE.json BING_URL_AUTOMATION_STATUS.json BING_URL_AUTOMATION_STATUS.md
+            if git diff --staged --quiet; then
+              echo "No Bing URL state change."
+              exit 0
+            fi
+            git commit -m "Update Bing URL submission state [skip ci]"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Concurrent repository update detected; retrying ($attempt/3)."
+            sleep $((attempt * 2))
+          done
+          exit 1
+
+      - name: Fail closed on Bing or authentication errors
+        if: steps.automation.outcome == 'failure'
+        run: |
+          echo "Bing URL automation reported a redacted API or authentication error."
+          exit 1
