@@ -82,7 +82,10 @@ def commons_photo(title,desk,used):
  queries=[(country.get(desk,desk)+' city business').strip(),(words+' '+country.get(desk,desk)).strip(),country.get(desk,desk)+' economy']
  for query in queries:
   params={'action':'query','format':'json','generator':'search','gsrnamespace':'6','gsrlimit':'50','gsrsearch':query,'prop':'imageinfo','iiprop':'url|extmetadata','iiurlwidth':'1200','origin':'*'}
-  r=requests.get(COMMONS,params=params,headers={'User-Agent':'DailyYieldEditorialRepair/1.0 (dailyyield.official@gmail.com)'},timeout=45);r.raise_for_status()
+  try:
+   r=requests.get(COMMONS,params=params,headers={'User-Agent':'DailyYieldEditorialRepair/1.0 (dailyyield.official@gmail.com)'},timeout=45);r.raise_for_status()
+  except requests.RequestException:
+   continue
   pages=(r.json().get('query') or {}).get('pages',{})
   for page in pages.values():
    info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata') or {};url=info.get('thumburl') or info.get('url') or '';base=image_key(info.get('descriptionurl') or info.get('url') or '')
@@ -118,8 +121,9 @@ def repair_article_page(page,posts,cfg):
  c=c.replace("var thisRun=++runId;records=[];failed=false;loading=true;finished=false;retry.hidden=true;render();status.textContent='Reading the published article feed\\u2026';", "var thisRun=++runId;records=[];failed=false;loading=true;finished=false;retry.hidden=true;status.textContent='Refreshing the published article index\\u2026';")
  old="if(preview){records=(cfg.snapshotEntries||[]).map(parseEntry).filter(Boolean);finished=true;render();status.textContent=records.length?'Published-post snapshot \\u00b7 article cards link directly to the full posts':'No published non-news articles were available in the public feed at the last check';}\nelse load();"
  new="records=(cfg.snapshotEntries||[]).map(parseEntry).filter(Boolean);finished=true;render();status.textContent=records.length?'Archive ready \\u00b7 newest articles first \\u00b7 News excluded':'No non-news articles published yet';\nif(!preview)setTimeout(load,80);"
- if old not in c and new not in c:raise RuntimeError('Daily Article startup source not found')
- c=c.replace(old,new)
+ if "if(!preview)setTimeout(load,80);" not in c:
+  if old not in c:raise RuntimeError('Daily Article startup source not found')
+  c=c.replace(old,new)
  css=START+'''<style>
 #articleHub .ar-section{content-visibility:auto;contain-intrinsic-size:1px 430px}#articleHub .ar-track{gap:10px}#articleHub .ar-card{width:clamp(210px,24vw,280px)}#articleHub .ar-image{aspect-ratio:16/9}@media(max-width:620px){#articleHub .ar-card{width:210px}#articleHub .ar-section{padding-block:22px}.ar-heading h2{font-size:24px!important}}
 </style>'''+END
@@ -167,4 +171,12 @@ def main():
  report={'status':'PASS' if dupes==0 else 'PARTIAL','zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts)}
  REPORT.write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report))
  if dupes:raise RuntimeError(f'{dupes} duplicate hero assignments remain')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ try:main()
+ except Exception as exc:
+  prior={}
+  try:prior=json.loads(REPORT.read_text())
+  except Exception:pass
+  prior.update({'status':'FAIL','zero_view':True,'error_type':type(exc).__name__,'error':str(exc)[:500]})
+  REPORT.write_text(json.dumps(prior,indent=2),encoding='utf-8')
+  raise
