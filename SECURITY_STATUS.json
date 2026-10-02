@@ -1,11 +1,9 @@
 {
-  "checkedAt": "2026-10-02T04:49:07.683734+00:00",
-  "status": "FAIL",
+  "checkedAt": "2026-10-02T04:52:37.085775+00:00",
+  "status": "PASS",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [
-    "critical repository files changed without baseline approval: bluesky_publisher.py, facebook_publisher.py, mastodon_publisher.py, tumblr_publisher.py"
-  ],
+  "critical": [],
   "warnings": [
     "2 new live item(s) accepted after threat scan"
   ],
@@ -15,7 +13,9 @@
     "newItems": 2,
     "changedItems": 0,
     "removedItems": 0,
-    "repositoryFiles": 55,
-    "backupCreated": false
+    "repositoryFiles": 56,
+    "backupCreated": false,
+    "repositoryChangeApproved": true,
+    "bloggerChangeApproved": false
   }
 }
