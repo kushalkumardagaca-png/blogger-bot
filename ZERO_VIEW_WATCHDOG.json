@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-02T13:11:18.520163+05:30",
+  "checkedAtIST": "2026-10-02T13:30:26.510943+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "PASS",
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 2043,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 121,
+    "transientExternalResponses": 122,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -15095,12 +15095,6 @@
       "redirectCount": 0
     },
     {
-      "url": "https://www.marketwatch.com/story/i-have-a-low-interest-rate-im-80-years-old-should-i-move-out-of-my-house-because-of-dangerous-stairs-389c3c7b?mod=mw_rss_topstories",
-      "status": 401,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://www.marketwatch.com/story/im-afraid-of-human-stupidity-why-this-top-economist-prefers-u-s-tech-and-gold-over-bonds-30299219?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
@@ -15275,6 +15269,12 @@
       "redirectCount": 0
     },
     {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Milan_%28Milano%29_Skyline_seen_from_Southeast.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
@@ -15306,6 +15306,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/72/AZCA.c.m.2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -15424,16 +15430,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36979868003,
-      "latestUpdatedAt": "2026-10-02T07:41:29Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 36981679301,
+      "latestUpdatedAt": "2026-10-02T08:01:35Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36977127844,
-      "latestUpdatedAt": "2026-10-02T07:11:50Z",
+      "latestRunId": 36979867987,
+      "latestUpdatedAt": "2026-10-02T07:43:01Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],

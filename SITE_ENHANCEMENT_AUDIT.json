@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 164,
+  "pass": 162,
   "fail": 0,
   "checks": [
     {
@@ -266,10 +266,6 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: old body fade delay removed",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path",
       "status": "PASS"
     },
     {
@@ -554,10 +550,6 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path",
       "status": "PASS"
     },
     {
