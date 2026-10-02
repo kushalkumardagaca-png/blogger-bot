@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2254,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 144,
+    "transientExternalResponses": 141,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2704,16 +2704,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37033658331,
-      "latestUpdatedAt": "2026-10-02T16:24:22Z",
-      "detail": "latest=success; 6 failures among 12 recent completed runs"
+      "latestRunId": 37047293734,
+      "latestUpdatedAt": "2026-10-02T18:25:22Z",
+      "detail": "latest=success; 5 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37033148130,
-      "latestUpdatedAt": "2026-10-02T16:21:44Z",
+      "latestRunId": 37033913687,
+      "latestUpdatedAt": "2026-10-02T16:28:15Z",
       "detail": "latest=success; 2 failures among 11 recent completed runs"
     }
   ],
@@ -2735,8 +2735,8 @@
     },
     {
       "name": "Gold API",
-      "status": "OK",
-      "detail": "responding"
+      "status": "WARN",
+      "detail": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "name": "Mutual fund API",

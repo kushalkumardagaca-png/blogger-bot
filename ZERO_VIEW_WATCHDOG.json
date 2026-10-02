@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-02T21:56:19.012401+05:30",
+  "checkedAtIST": "2026-10-02T23:59:34.944713+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "ATTENTION",
@@ -7,7 +7,7 @@
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-02T09:22:44-07:00",
+    "updated": "2026-10-02T09:52:56-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 223
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 2254,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 144,
+    "transientExternalResponses": 141,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -16922,12 +16922,6 @@
       "redirectCount": 0
     },
     {
-      "url": "https://www.marketwatch.com/story/meta-servicenow-and-these-7-other-tech-stocks-could-lead-the-next-leg-of-the-ai-trade-b8b68c93?mod=mw_rss_topstories",
-      "status": 401,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
@@ -17084,25 +17078,13 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Chart_---_Total-US-Consumer-Credit-Outstanding-1945-2011.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Wall_Street%2C_New_York_City.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -17138,12 +17120,6 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Bill_of_Loading_Java-China-Japan-Lijn_From_Saigon_to_the_Netherlands_East_Indies_-_French_Indo-China_%281921-1922%29_Oghi_BC_01.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
@@ -17151,6 +17127,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/1858-59%2C_Montreal_Foundry_and_City_Works_%28Advertisement_and_Business_Card%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -17317,16 +17299,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37033658331,
-      "latestUpdatedAt": "2026-10-02T16:24:22Z",
-      "detail": "latest=success; 6 failures among 12 recent completed runs"
+      "latestRunId": 37047293734,
+      "latestUpdatedAt": "2026-10-02T18:25:22Z",
+      "detail": "latest=success; 5 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37033148130,
-      "latestUpdatedAt": "2026-10-02T16:21:44Z",
+      "latestRunId": 37033913687,
+      "latestUpdatedAt": "2026-10-02T16:28:15Z",
       "detail": "latest=success; 2 failures among 11 recent completed runs"
     }
   ],
@@ -17348,8 +17330,8 @@
     },
     {
       "name": "Gold API",
-      "status": "OK",
-      "detail": "responding"
+      "status": "WARN",
+      "detail": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "name": "Mutual fund API",
