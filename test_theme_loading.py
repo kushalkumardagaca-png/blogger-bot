@@ -21,8 +21,12 @@ class ThemeLoadingTests(unittest.TestCase):
     def test_finance_loader_is_full_screen_and_dependency_free(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("position:fixed;inset:0", text)
-        self.assertIn("class='dy-load-chart'", text)
-        self.assertIn("class='dy-load-coin'", text)
+        self.assertIn("class='dy-symbol-field'", text)
+        self.assertIn("class='dy-sticker-field'", text)
+        self.assertIn("class='dy-load-ring'", text)
+        self.assertEqual(text.count("class='dy-sticker'"), 24)
+        loader = text.split("DY_FINANCE_LOADER_START", 1)[1].split("DY_FINANCE_LOADER_END", 1)[0]
+        self.assertGreaterEqual(loader.count("<span>"), 112)
         self.assertNotIn("fonts.googleapis.com", text)
         self.assertNotIn("fonts.gstatic.com", text)
         self.assertNotIn("data:image/png;base64", text)
