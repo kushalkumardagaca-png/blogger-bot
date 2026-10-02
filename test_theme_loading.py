@@ -58,6 +58,16 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertNotIn("dyStickersEnter", text)
         self.assertNotIn(".dy-sticker{animation:", text)
 
+    def test_gapless_date_ordered_feed_and_compact_sections(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn("className='dy-feed-sentinel'", text)
+        self.assertIn("rootMargin:'1400px 0px'", text)
+        self.assertIn("blog-pager-older-link", text)
+        self.assertIn("var all=parse(j,false);", text)
+        self.assertIn("Earlier articles", text)
+        self.assertIn("grid-template-columns:repeat(5,minmax(0,1fr))!important", text)
+        self.assertIn(".dy-sub-grid{grid-template-columns:1.05fr .95fr!important;min-height:0!important}", text)
+
     def test_noncritical_comment_engine_is_loaded_during_idle_time(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("DY_LAZY_COMMENT_LOADER_START", text)
