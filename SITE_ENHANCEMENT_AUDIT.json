@@ -277,15 +277,15 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: every Page and Post entry triggers selected-destination warming",
+      "name": "Daily-Yield-Theme-Subscription.xml: navigation is reader initiated only",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: warming destinations are only Home Article News and canonical labels",
+      "name": "Daily-Yield-Theme-Subscription.xml: synthetic document request count is fixed at zero",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: navigation warming uses document prefetch and never prerender",
+      "name": "Daily-Yield-Theme-Subscription.xml: no speculative document prefetch or prerender",
       "status": "PASS"
     },
     {
@@ -593,15 +593,15 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: every Page and Post entry triggers selected-destination warming",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: navigation is reader initiated only",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: warming destinations are only Home Article News and canonical labels",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: synthetic document request count is fixed at zero",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming uses document prefetch and never prerender",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: no speculative document prefetch or prerender",
       "status": "PASS"
     },
     {

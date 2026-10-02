@@ -122,19 +122,15 @@ class ThemeLoadingTests(unittest.TestCase):
         workflow = Path(".github/workflows/motion_related_retrofit.yml").read_text(encoding="utf-8")
         self.assertIn("github.event_name == 'push' && 'true'", workflow)
 
-    def test_every_entry_warms_only_selected_hubs_and_labels(self):
+    def test_navigation_creates_no_speculative_document_requests(self):
         text = THEMES[0].read_text(encoding="utf-8")
-        self.assertIn("link.rel='prefetch'", text)
-        self.assertIn("link.as='document'", text)
-        self.assertIn("data-dy-prefetch-scope','every-entry-selected-destinations'", text)
-        self.assertIn("core=['/','/p/article.html','/p/daily-news.html']", text)
-        self.assertIn("'/search/label/'+encodeURIComponent(label)", text)
-        self.assertIn("limit=52", text)
-        self.assertIn("DOMContentLoaded',function(){setTimeout(collect,0)", text)
-        self.assertIn("requestIdleCallback(drain,{timeout:1800})", text)
-        self.assertIn("data-dy-prefetched", text)
-        self.assertNotIn("if(!scope)return", text)
+        self.assertIn("data-dy-navigation-policy','reader-navigation-only'", text)
+        self.assertIn("data-dy-synthetic-document-requests','0'", text)
+        self.assertNotIn("link.rel='prefetch'", text)
+        self.assertNotIn("link.as='document'", text)
         self.assertNotIn("rel='prerender'", text)
+        self.assertNotIn("data-dy-prefetched", text)
+        self.assertNotIn("requestIdleCallback(drain", text)
 
     def test_noncritical_comment_engine_is_loaded_during_idle_time(self):
         text = THEMES[0].read_text(encoding="utf-8")

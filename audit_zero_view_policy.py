@@ -9,6 +9,7 @@ zero = (ROOT / "zero_view_watchdog.py").read_text()
 news = (ROOT / "news_pipeline.py").read_text()
 related = (ROOT / "related_articles.py").read_text()
 rendered = (ROOT / "rendered_site_audit.py").read_text()
+theme = (ROOT / "theme/Daily-Yield-Theme-v4-2026-10-01.xml").read_text()
 checks = []
 
 
@@ -26,6 +27,8 @@ check("Rendered compatibility script cannot navigate", "page.goto" not in render
 check("News duplicate recovery uses Blogger API", "/posts/bypath?" in news and "live_post_exists(expected_url, token)" in news)
 check("News engine does not read Daily Yield public feeds", "dailyyield.blogspot.com/feeds" not in news)
 check("Related shelf uses Blogger API", "www.googleapis.com/blogger/v3" in related and "dailyyield.blogspot.com/feeds" not in related)
+check("Theme performs no speculative document prefetch", "link.rel='prefetch'" not in theme and "link.as='document'" not in theme and "rel='prerender'" not in theme)
+check("Theme declares reader-navigation-only policy", "data-dy-navigation-policy','reader-navigation-only'" in theme and "data-dy-synthetic-document-requests','0'" in theme)
 
 failed = [item for item in checks if item["status"] == "FAIL"]
 report = {"policy": "ZERO_SYNTHETIC_VIEWS", "pass": len(checks) - len(failed), "fail": len(failed), "checks": checks}

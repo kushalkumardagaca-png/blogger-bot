@@ -1,6 +1,6 @@
 {
   "policy": "ZERO_SYNTHETIC_VIEWS",
-  "pass": 10,
+  "pass": 12,
   "fail": 0,
   "checks": [
     {
@@ -41,6 +41,14 @@
     },
     {
       "name": "Related shelf uses Blogger API",
+      "status": "PASS"
+    },
+    {
+      "name": "Theme performs no speculative document prefetch",
+      "status": "PASS"
+    },
+    {
+      "name": "Theme declares reader-navigation-only policy",
       "status": "PASS"
     }
   ]
