@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2142,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 128,
+    "transientExternalResponses": 155,
     "workflowWarnings": 1,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2616,17 +2616,17 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36996233882,
-      "latestUpdatedAt": "2026-10-02T10:34:55Z",
+      "latestRunId": 36996439131,
+      "latestUpdatedAt": "2026-10-02T10:37:11Z",
       "detail": "latest=success; 7 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "WARN",
       "latestConclusion": "failure",
-      "latestRunId": 36995360827,
-      "latestUpdatedAt": "2026-10-02T10:34:31Z",
-      "detail": "latest=failure; 1 failures among 10 recent completed runs"
+      "latestRunId": 36995761131,
+      "latestUpdatedAt": "2026-10-02T10:36:19Z",
+      "detail": "latest=failure; 2 failures among 11 recent completed runs"
     }
   ],
   "providers": [

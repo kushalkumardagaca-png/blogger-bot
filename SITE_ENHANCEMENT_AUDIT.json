@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 172,
+  "pass": 164,
   "fail": 0,
   "checks": [
     {
@@ -270,22 +270,6 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: homepage article rails use newest-first chronology",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: five tool benches share one compact row",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height",
       "status": "PASS"
     },
     {
@@ -574,22 +558,6 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: homepage article rails use newest-first chronology",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: five tool benches share one compact row",
-      "status": "PASS"
-    },
-    {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height",
       "status": "PASS"
     },
     {

@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **172**
+- Pass: **164**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -71,10 +71,6 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
-- ✅ Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages
-- ✅ Daily-Yield-Theme-Subscription.xml: homepage article rails use newest-first chronology
-- ✅ Daily-Yield-Theme-Subscription.xml: five tool benches share one compact row
-- ✅ Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height
 - ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
@@ -147,10 +143,6 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage article rails use newest-first chronology
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: five tool benches share one compact row
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating
