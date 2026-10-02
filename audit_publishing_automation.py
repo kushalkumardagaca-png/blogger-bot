@@ -149,8 +149,13 @@ check('Mastodon uses platform-native copy, descriptive alt text and shared creat
 creative_path=ROOT/'social_creative.py'; creative=creative_path.read_text() if creative_path.exists() else ''
 check('Shared social creative engine is deployed across all four active networks',
       bool(creative) and all('social_creative import' in text for text in (fp,bp,tp,mp)))
-check('Creative system has at least ten visual directions and five compositions',
-      len(re.findall(r'\{"name":',creative))>=10 and '"layout": (seed // 31) % 5' in creative)
+check('Creative system is photo-first with at least ten treatments and five compositions',
+      len(re.findall(r'\{"name":',creative))>=10 and '"layout": (seed // 31) % 5' in creative
+      and 'ImageOps.fit(source, SIZE' in creative and 'full-bleed editorial photograph' in creative)
+check('Creative system reuses authenticated article heroes and fails closed without a licensed photo',
+      'Use the hero embedded in authenticated Blogger content' in creative
+      and 'No licensed editorial photo could be loaded' in creative
+      and 'banner-only graphic' in creative)
 check('Creative outputs are deterministic per platform, destination and IST day',
       'hashlib.sha256(raw.encode())' in creative and 'datetime.now(IST).date().isoformat()' in creative)
 check('Captions use topic hooks, questions and platform-specific structures',

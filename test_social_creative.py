@@ -2,11 +2,13 @@
 """Regression tests for varied, deterministic Daily Yield social creatives."""
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw
 
 from social_creative import (
-    build_caption, creative_meta, image_alt, render_social_card, tumblr_payload,
+    _photo_url, build_caption, creative_meta, image_alt, render_social_card,
+    tumblr_payload,
 )
 
 
@@ -18,6 +20,15 @@ def item(n=1, title=None, labels=None, kind="post"):
         "labels": labels or ["Personal Finance"],
         "content": "<p>A practical breakdown of the numbers, trade-offs and next questions, based on verifiable sources rather than hype.</p>",
     }
+
+
+def test_authenticated_article_hero_is_selected_before_any_fallback():
+    story = item(6)
+    hero = "https://images.unsplash.com/photo-123?auto=format&fit=crop&w=900"
+    story["content"] = f'<figure><img src="{hero}" alt="Editorial market photograph"></figure>'
+    assert _photo_url(story) == hero
+    story["content"] = '<img src="https://malicious.example/images.unsplash.com/photo.jpg">'
+    assert _photo_url(story) == ""
 
 
 def test_signature_is_deterministic_and_platform_specific():
@@ -55,22 +66,28 @@ def test_tumblr_is_native_npf_with_conversation_and_descriptive_alt():
     assert block_types == ["text", "text", "image", "text", "text", "link", "text"]
     assert data["content"][4]["subtype"] == "quote"
     assert story["url"] == data["source_url"] == data["content"][5]["url"]
-    assert "editorial card" in data["content"][2]["alt_text"]
+    assert "Editorial photograph" in data["content"][2]["alt_text"]
     assert "moneyblr" in data["tags"]
 
 
-def test_cards_are_accessible_sized_and_visually_distinct():
+def test_cards_are_photo_first_accessible_sized_and_visually_distinct():
     story = item(31, "Gold, rates and the market mood: what to watch", ["Markets"])
-    with TemporaryDirectory() as temp:
-        paths = []
-        for platform in ("facebook", "bluesky", "tumblr", "mastodon"):
-            path = Path(temp) / f"{platform}.jpg"
-            render_social_card(story, platform, path, "A compact guide to the signals and limits behind today's market move.")
-            paths.append(path)
-            with Image.open(path) as image:
-                assert image.size == (1200, 630)
-            assert path.stat().st_size < 1_000_000
-            alt = image_alt(story, platform)
-            assert story["title"] in alt and "editorial card" in alt
-        with Image.open(paths[0]) as first, Image.open(paths[1]) as second:
-            assert ImageChops.difference(first.convert("RGB"), second.convert("RGB")).getbbox() is not None
+    # Keep the unit test offline while exercising the full photographic compositor.
+    photo = Image.new("RGB", (1600, 900), "#31546b")
+    photo_draw = ImageDraw.Draw(photo)
+    for x in range(0, 1600, 80):
+        photo_draw.rectangle((x, 180 + x // 8, x + 55, 900), fill=(45 + x % 150, 85, 110))
+    with patch("social_creative._photo", return_value=(photo, "https://images.unsplash.com/test")):
+        with TemporaryDirectory() as temp:
+            paths = []
+            for platform in ("facebook", "bluesky", "tumblr", "mastodon"):
+                path = Path(temp) / f"{platform}.jpg"
+                render_social_card(story, platform, path, "A compact guide to the signals and limits behind today's market move.")
+                paths.append(path)
+                with Image.open(path) as image:
+                    assert image.size == (1200, 630)
+                assert path.stat().st_size < 1_000_000
+                alt = image_alt(story, platform)
+                assert story["title"] in alt and "Editorial photograph" in alt
+            with Image.open(paths[0]) as first, Image.open(paths[1]) as second:
+                assert ImageChops.difference(first.convert("RGB"), second.convert("RGB")).getbbox() is not None

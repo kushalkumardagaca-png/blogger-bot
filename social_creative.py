@@ -20,7 +20,29 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 SIZE = (1200, 630)
-PHOTO_HOSTS = ("images.unsplash.com", "upload.wikimedia.org")
+PHOTO_HOSTS = ("images.unsplash.com", "upload.wikimedia.org", "thumb.wikimedia.org", "blogger.googleusercontent.com")
+
+# The same licensed editorial-photo family already used by Daily Yield articles.
+PHOTO_POOLS = {
+    "market": ("photo-1611974789855-9c2a0a7236a3", "photo-1590283603385-17ffb3a7f29f", "photo-1518186285589-2f7649de83e0"),
+    "debt": ("photo-1563013544-824ae1b704d3", "photo-1526304640581-d334cdbbf45e"),
+    "tax": ("photo-1554224155-8d04cb21cd6c", "photo-1454165804606-c3d57bc86b40"),
+    "saving": ("photo-1579621970563-ebec7560ff3e", "photo-1559526324-4b87b5e36e44"),
+    "economy": ("photo-1454165804606-c3d57bc86b40", "photo-1486406146926-c627a92ad1ab"),
+    "news": ("photo-1494522855154-9297ac14b55f", "photo-1502602898657-3e91760cbb34", "photo-1506973035872-a4ec16b8e8d9"),
+    "page": ("photo-1460925895917-afdab827c52f", "photo-1518770660439-4636190af475"),
+    "general": ("photo-1526304640581-d334cdbbf45e", "photo-1507679799987-c73779587ccf"),
+}
+PHOTO_ALT = {
+    "market": "financial market screens and investment analysis",
+    "debt": "a card payment and personal finance workspace",
+    "tax": "financial documents and a calculator on a desk",
+    "saving": "coins and a practical savings plan",
+    "economy": "economic analysis at a professional workspace",
+    "news": "a contemporary financial district and business activity",
+    "page": "a digital financial research and planning workspace",
+    "general": "a modern personal-finance planning workspace",
+}
 
 PALETTES = (
     {"name":"acid ledger","bg":"#101522","panel":"#D8FF49","ink":"#F7F4EA","panel_ink":"#11151F","accent":"#FF6B6B","muted":"#AFB8C8"},
@@ -167,7 +189,7 @@ def tumblr_payload(item: dict, summary: str) -> dict:
 
 def image_alt(item: dict, platform: str) -> str:
     meta = creative_meta(item, platform)
-    return trim(f"Daily Yield {meta['style']} editorial card. {meta['hook']}. Headline: {clean(item.get('title','Daily Yield'))}", 950)
+    return trim(f"Editorial photograph showing {_photo_alt(item)}. Daily Yield overlay: {meta['hook']}. Headline: {clean(item.get('title','Daily Yield'))}", 950)
 
 
 def _font(size: int, bold: bool = False):
@@ -198,80 +220,141 @@ def _lines(draw, text: str, font, width: int, max_lines: int) -> list[str]:
     return lines
 
 
+def _allowed_photo_host(host: str) -> bool:
+    host = host.lower()
+    return host in PHOTO_HOSTS or host.endswith(".bp.blogspot.com")
+
+
 def _photo_url(item: dict) -> str:
+    """Use the hero embedded in authenticated Blogger content whenever possible."""
     for source in re.findall(r'<img\b[^>]+src=["\']([^"\']+)', item.get("content", ""), flags=re.I):
         source = html.unescape(source)
-        host = (urlparse(source).hostname or "").lower()
-        if host in PHOTO_HOSTS: return source
+        if _allowed_photo_host(urlparse(source).hostname or ""): return source
     return ""
 
 
-def _photo(item: dict) -> Image.Image | None:
-    url = _photo_url(item)
-    if not url: return None
-    try:
-        response = requests.get(url, timeout=(10,35), stream=True, headers={"User-Agent":"DailyYield-SocialCreative/2.0"})
-        response.raise_for_status()
-        chunks, total = [], 0
-        for chunk in response.iter_content(128 * 1024):
-            total += len(chunk)
-            if total > 12 * 1024 * 1024:
-                raise ValueError("editorial image exceeds 12 MB safety limit")
-            chunks.append(chunk)
-        return Image.open(BytesIO(b"".join(chunks))).convert("RGB")
-    except Exception as exc:
-        print(f"Creative photo unavailable; using original graphic system: {exc}")
-        return None
+def _fallback_photo_urls(item: dict, platform: str) -> list[str]:
+    pool = PHOTO_POOLS[topic(item)]
+    start = creative_seed(item, platform) % len(pool)
+    ordered = pool[start:] + pool[:start]
+    return [f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=1600&h=900&q=88" for photo_id in ordered]
 
+
+def _photo_alt(item: dict) -> str:
+    content = item.get("content", "")
+    for match in re.finditer(r'<img\b[^>]*>', content, flags=re.I):
+        tag = match.group(0)
+        src = re.search(r'src=["\']([^"\']+)', tag, flags=re.I)
+        alt = re.search(r'alt=["\']([^"\']+)', tag, flags=re.I)
+        if src and _allowed_photo_host(urlparse(html.unescape(src.group(1))).hostname or "") and alt:
+            value = clean(alt.group(1))
+            if value: return value
+    return PHOTO_ALT[topic(item)]
+
+
+def _photo_credit(item: dict, url: str) -> str:
+    match = re.search(r'<figcaption\b[^>]*>(.*?)</figcaption>', item.get("content", ""), flags=re.I | re.S)
+    if match and _photo_url(item) == url:
+        return trim(clean(match.group(1)), 95).upper()
+    host = (urlparse(url).hostname or "").lower()
+    if host == "images.unsplash.com": return "EDITORIAL PHOTO · UNSPLASH"
+    if "wikimedia.org" in host: return "EDITORIAL PHOTO · WIKIMEDIA COMMONS"
+    return "ARTICLE EDITORIAL PHOTOGRAPH"
+
+
+def _download_photo(url: str) -> Image.Image:
+    response = requests.get(url, timeout=(10,35), stream=True, headers={"User-Agent":"DailyYield-SocialCreative/3.0"})
+    response.raise_for_status()
+    chunks, total = [], 0
+    for chunk in response.iter_content(128 * 1024):
+        total += len(chunk)
+        if total > 12 * 1024 * 1024:
+            raise ValueError("editorial image exceeds 12 MB safety limit")
+        chunks.append(chunk)
+    return Image.open(BytesIO(b"".join(chunks))).convert("RGB")
+
+
+def _photo(item: dict, platform: str) -> tuple[Image.Image, str]:
+    article_photo = _photo_url(item)
+    urls = ([article_photo] if article_photo else []) + _fallback_photo_urls(item, platform)
+    errors = []
+    for url in dict.fromkeys(urls):
+        try:
+            return _download_photo(url), url
+        except Exception as exc:
+            errors.append(f"{urlparse(url).hostname}: {exc}")
+    # Fail closed: a social post must never regress to a banner-only graphic.
+    raise RuntimeError("No licensed editorial photo could be loaded: " + " | ".join(errors))
 
 def render_social_card(item: dict, platform: str, destination: Path, summary: str = "", image_format: str = "JPEG") -> Path:
-    meta = creative_meta(item, platform); palette = PALETTES[meta["style_index"]]
-    canvas = Image.new("RGB", SIZE, palette["bg"]); draw = ImageDraw.Draw(canvas)
-    seed, layout = int(meta["seed"],16), meta["layout"]
-    photo = _photo(item)
-    if photo:
-        photo = ImageOps.fit(photo, (500,630), Image.Resampling.LANCZOS)
-        photo = ImageEnhance.Contrast(photo).enhance(1.08)
-        photo = photo.filter(ImageFilter.GaussianBlur(.15))
-        photo = Image.blend(photo, Image.new("RGB", photo.size, palette["bg"]), 0.16)
-        side = 0 if layout in (1,3) else 700
-        canvas.paste(photo, (side, 0))
-    # Grid, stickers and oversized index create variation without sacrificing legibility.
-    if layout in (0,2,4):
-        for x in range(0,1200,72): draw.line((x,0,x,630),fill=palette["muted"],width=1)
-        for y in range(0,630,72): draw.line((0,y,1200,y),fill=palette["muted"],width=1)
-    panel_x = 55 if layout != 1 else 430
-    panel_w = 760 if layout in (0,3) else 690
-    if layout == 4: panel_w = 840
-    draw.rounded_rectangle((panel_x,45,panel_x+panel_w,585),radius=32,fill=palette["panel"],outline=palette["accent"],width=4)
-    # Decorative sticker and issue marker.
-    sticker_x = 915 if panel_x < 100 else 85
-    draw.ellipse((sticker_x,55,sticker_x+190,245),fill=palette["accent"])
-    draw.text((sticker_x+45,105),f"{seed%97+1:02d}",fill=palette["bg"],font=_font(56,True))
-    draw.rounded_rectangle((panel_x+34,76,panel_x+360,120),radius=18,fill=palette["accent"])
-    draw.text((panel_x+54,87),meta["hook"][:30],fill=palette["bg"],font=_font(15,True))
-    title = clean(item.get("title","Daily Yield")); title_font=_font(49 if len(title)<90 else 42,True)
-    lines=_lines(draw,title,title_font,panel_w-75,5); y=154
+    """Render a full-bleed editorial photograph with restrained magazine overlays."""
+    meta = creative_meta(item, platform)
+    palette = PALETTES[meta["style_index"]]
+    source, photo_url = _photo(item, platform)
+    canvas = ImageOps.fit(source, SIZE, Image.Resampling.LANCZOS)
+    canvas = ImageEnhance.Contrast(canvas).enhance(1.09)
+    canvas = ImageEnhance.Color(canvas).enhance(0.94)
+
+    # A cinematic gradient protects readability while leaving the photograph dominant.
+    rgba = canvas.convert("RGBA")
+    shade = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    shade_draw = ImageDraw.Draw(shade)
+    for y in range(SIZE[1]):
+        progress = y / (SIZE[1] - 1)
+        alpha = int(12 + 210 * (progress ** 2.15))
+        shade_draw.line((0, y, SIZE[0], y), fill=(5, 8, 15, alpha))
+    rgba = Image.alpha_composite(rgba, shade)
+    # Alternate a subtle side vignette so consecutive photographs have editorial variety.
+    left_title = meta["layout"] in (0, 2, 4)
+    side_shade = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    side_draw = ImageDraw.Draw(side_shade)
+    for x in range(SIZE[0]):
+        edge = (1 - x / SIZE[0]) if left_title else (x / SIZE[0])
+        alpha = int(82 * (edge ** 2.5))
+        side_draw.line((x, 0, x, SIZE[1]), fill=(5, 8, 15, alpha))
+    rgba = Image.alpha_composite(rgba, side_shade)
+    draw = ImageDraw.Draw(rgba)
+
+    accent = palette["accent"]
+    title = clean(item.get("title", "Daily Yield"))
+    title_font = _font(51 if len(title) < 88 else 44, True)
+    text_x = 66 if left_title else 430
+    text_width = 1020 if left_title else 704
+    lines = _lines(draw, title, title_font, text_width, 4)
+    line_height = 59 if len(title) < 88 else 52
+    title_y = 545 - line_height * len(lines)
+
+    # Small translucent label—not a banner—then the photographic headline treatment.
+    hook_font = _font(14, True)
+    hook = meta["hook"]
+    hook_w = draw.textbbox((0, 0), hook, font=hook_font)[2]
+    draw.rounded_rectangle((text_x, title_y - 55, text_x + hook_w + 32, title_y - 20), radius=16, fill=(8, 10, 15, 185))
+    draw.text((text_x + 16, title_y - 47), hook, font=hook_font, fill=accent)
+    draw.rectangle((text_x, title_y - 8, text_x + 78, title_y - 2), fill=accent)
     for line in lines:
-        draw.text((panel_x+38,y),line,fill=palette["panel_ink"],font=title_font);y+=58 if len(title)<90 else 51
-    micro = first_sentence(summary or clean(item.get("content","")),105)
-    if micro:
-        draw.line((panel_x+38,500,panel_x+panel_w-38,500),fill=palette["accent"],width=4)
-        micro_font = _font(16)
-        micro_line = _lines(draw, micro, micro_font, panel_w-76, 1)[0]
-        draw.text((panel_x+38,516),micro_line,fill=palette["panel_ink"],font=micro_font)
-    # Brand is present but subordinate to the story and always outside its panel.
-    brand_x = 960 if panel_x < 100 else 72
-    draw.text((brand_x,510),"DAILY",fill=palette["ink"],font=_font(34,True));draw.text((brand_x,548),"YIELD",fill=palette["ink"],font=_font(34,True))
-    draw.text((brand_x,590),platform.upper()+" EDITION",fill=palette["ink"],font=_font(13,True))
-    deco_x = 840 if panel_x < 100 else 65
-    for n,symbol in enumerate(("+","↗","₹","$")):
-        x=deco_x+(n%2)*230;y0=280+(n//2)*100;draw.text((x,y0),symbol,fill=palette["accent"],font=_font(48,True))
-    destination.parent.mkdir(parents=True,exist_ok=True)
-    fmt=image_format.upper()
-    if fmt=="PNG": canvas.save(destination,"PNG",optimize=True)
+        # Minimal shadow keeps type readable on detailed photography.
+        draw.text((text_x + 2, title_y + 3), line, font=title_font, fill=(0, 0, 0, 150))
+        draw.text((text_x, title_y), line, font=title_font, fill="#FFFFFF")
+        title_y += line_height
+
+    # Compact masthead and source credit retain identity without covering the image.
+    brand_font = _font(22, True)
+    draw.text((66, 42), "DAILY YIELD", font=brand_font, fill="#FFFFFF")
+    draw.text((66, 72), platform.upper() + " · PHOTO EDITION", font=_font(11, True), fill=(255, 255, 255, 205))
+    credit = _photo_credit(item, photo_url)
+    credit_font = _font(10, True)
+    credit_w = draw.textbbox((0, 0), credit, font=credit_font)[2]
+    draw.text((1140 - credit_w, 594), credit, font=credit_font, fill=(255, 255, 255, 190))
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    final = rgba.convert("RGB")
+    fmt = image_format.upper()
+    if fmt == "PNG":
+        final.save(destination, "PNG", optimize=True)
     else:
-        quality=89;canvas.save(destination,"JPEG",quality=quality,optimize=True)
-        while destination.stat().st_size>950_000 and quality>60:
-            quality-=7;canvas.save(destination,"JPEG",quality=quality,optimize=True)
+        quality = 89
+        final.save(destination, "JPEG", quality=quality, optimize=True)
+        while destination.stat().st_size > 950_000 and quality > 60:
+            quality -= 7
+            final.save(destination, "JPEG", quality=quality, optimize=True)
     return destination
