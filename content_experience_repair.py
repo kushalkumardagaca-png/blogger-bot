@@ -163,7 +163,12 @@ def main():
    put('posts',p,h,content,new);p['labels']=new;p['content']=content;labels_fixed+=int(labels_changed);time.sleep(.08)
  by_title={p['title'].strip().upper():p for p in pages}
  ap=by_title['DAILY ARTICLE'];np=by_title['DAILY NEWS']
- ac=repair_article_page(ap,posts,cfg);nc=repair_news_page(np,posts)
+ latest_article=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' not in p.get('labels',[])),None)
+ latest_news=next((p for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True) if 'News' in p.get('labels',[])),None)
+ article_current=bool(latest_article and latest_article['id'] in ap['content'] and "if(!preview)setTimeout(load,80);" in ap['content'] and START in ap['content'])
+ news_current=bool(latest_news and latest_news.get('url','') in np['content'] and 'window.ENH_NEWS_SNAPSHOT=' in np['content'] and "w.ENH_NEWS_SNAPSHOT||[]" in np['content'] and START in np['content'])
+ ac=ap['content'] if article_current else repair_article_page(ap,posts,cfg)
+ nc=np['content'] if news_current else repair_news_page(np,posts)
  pages_fixed=0
  if ac!=ap['content']:put('pages',ap,h,ac);pages_fixed+=1
  if nc!=np['content']:put('pages',np,h,nc);pages_fixed+=1
