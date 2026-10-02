@@ -3,15 +3,15 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 229,
-    "posts": 215,
+    "urls": 230,
+    "posts": 216,
     "pages": 13,
     "contentFailures": 3,
-    "externalDestinationsChecked": 2142,
+    "externalDestinationsChecked": 2155,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
     "transientExternalResponses": 129,
-    "workflowWarnings": 1,
+    "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
@@ -2563,28 +2563,39 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-02.html": {
+        "title": "Brazil Finance News \u2014 2 October 2026",
+        "checkedAt": "2026-10-02T16:51:47.262720+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 228,
-      "tracked": 228,
+      "inventory": 229,
+      "tracked": 229,
       "pass": 0,
-      "neutralOrOther": 228,
-      "inspectedThisRun": 0,
+      "neutralOrOther": 229,
+      "inspectedThisRun": 1,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 167,
         "Redirect error": 10,
-        "URL is unknown to Google": 51
+        "URL is unknown to Google": 52
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 218,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 219,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 167,
-      "unknownToGoogle": 51
+      "unknownToGoogle": 52
     }
   },
   "github": [
@@ -2600,33 +2611,33 @@
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36990927437,
-      "latestUpdatedAt": "2026-10-02T09:39:31Z",
+      "latestRunId": 36998089577,
+      "latestUpdatedAt": "2026-10-02T10:55:07Z",
       "detail": "latest=success; 1 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36991034747,
-      "latestUpdatedAt": "2026-10-02T09:54:41Z",
+      "latestRunId": 36998117604,
+      "latestUpdatedAt": "2026-10-02T11:10:24Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 36996998545,
-      "latestUpdatedAt": "2026-10-02T10:43:15Z",
-      "detail": "latest=success; 7 failures among 12 recent completed runs"
+      "latestRunId": 37000574148,
+      "latestUpdatedAt": "2026-10-02T11:22:00Z",
+      "detail": "latest=success; 3 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
-      "status": "WARN",
-      "latestConclusion": "failure",
-      "latestRunId": 36996234105,
-      "latestUpdatedAt": "2026-10-02T10:38:10Z",
-      "detail": "latest=failure; 3 failures among 11 recent completed runs"
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 36996998551,
+      "latestUpdatedAt": "2026-10-02T10:44:47Z",
+      "detail": "latest=success; 3 failures among 11 recent completed runs"
     }
   ],
   "providers": [
