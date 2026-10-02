@@ -1,5 +1,11 @@
 name: Continuous carousels and related reading
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'continuous_motion.py'
+      - 'motion_related_retrofit.py'
+      - '.github/workflows/motion_related_retrofit.yml'
   workflow_dispatch:
     inputs:
       apply:
@@ -19,7 +25,7 @@ jobs:
         with:
           python-version: "3.12"
       - env:
-          APPLY: ${{ inputs.apply }}
+          APPLY: ${{ github.event_name == 'push' && 'true' || inputs.apply }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
