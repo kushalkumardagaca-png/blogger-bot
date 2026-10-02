@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 172,
+  "pass": 178,
   "fail": 0,
   "checks": [
     {
@@ -274,6 +274,18 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: prefetch is restricted to Home Article News and labels",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: selected hubs warm all canonical label archives",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: navigation warming respects Data Saver and never prerenders",
       "status": "PASS"
     },
     {
@@ -578,6 +590,18 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: prefetch is restricted to Home Article News and labels",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: selected hubs warm all canonical label archives",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming respects Data Saver and never prerenders",
       "status": "PASS"
     },
     {

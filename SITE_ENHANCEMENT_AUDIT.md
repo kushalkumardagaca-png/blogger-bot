@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **172**
+- Pass: **178**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -72,6 +72,9 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages
+- ✅ Daily-Yield-Theme-Subscription.xml: prefetch is restricted to Home Article News and labels
+- ✅ Daily-Yield-Theme-Subscription.xml: selected hubs warm all canonical label archives
+- ✅ Daily-Yield-Theme-Subscription.xml: navigation warming respects Data Saver and never prerenders
 - ✅ Daily-Yield-Theme-Subscription.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-Subscription.xml: five tool benches share one compact row
 - ✅ Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height
@@ -148,6 +151,9 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: prefetch is restricted to Home Article News and labels
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: selected hubs warm all canonical label archives
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: navigation warming respects Data Saver and never prerenders
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: five tool benches share one compact row
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height
