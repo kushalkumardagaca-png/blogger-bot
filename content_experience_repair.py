@@ -202,6 +202,7 @@ def main():
  if nc!=np['content']:put('pages',np,h,nc);pages_fixed+=1
  # Authenticated verification; no public URL requests.
  verified=list_all('posts',h);heroes=[image_key((srcs(p.get('content','')) or [''])[0]) for p in verified];heroes=[x for x in heroes if x];dupes=len(heroes)-len(set(heroes))
+ # Fail closed if even one canonical Article or Global News shelf would be empty.
  category_counts={cat:sum(any(norm(x)==norm(cat) for x in p.get('labels',[])) for p in posts if 'News' not in p.get('labels',[])) for cat in categories}
  news_counts={desk:sum(desk in p.get('labels',[]) for p in posts if 'News' in p.get('labels',[])) for desk in NEWS_LABELS}
  report={'status':'PASS' if dupes==0 and all(category_counts.values()) and news_counts.get('Global News',0)>0 else 'PARTIAL','zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts),'article_category_counts':category_counts,'news_desk_counts':news_counts}
