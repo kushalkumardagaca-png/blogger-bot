@@ -3,14 +3,16 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 219,
-    "posts": 205,
+    "urls": 221,
+    "posts": 207,
     "pages": 13,
     "contentFailures": 0,
-    "externalDestinationsChecked": 1955,
+    "externalDestinationsChecked": 1987,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 116,
+    "transientExternalResponses": 120,
+    "workflowWarnings": 0,
+    "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
   "gsc": {
@@ -2451,28 +2453,92 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/france-2026-10-02.html": {
+        "title": "France Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 Isolating Israel: The West's brake on West Bank colonization and Gaza's destruction\u2026",
+        "checkedAt": "2026-10-02T10:22:32.134315+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/germany-2026-10-02.html": {
+        "title": "Germany Finance News \u00b7 2 October 2026 \u00b7 Coverage October 1 to 2 \u2014 North and South Korea trade accusations over landmines that injured three soldiers; German\u2026",
+        "checkedAt": "2026-10-02T10:22:32.134315+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 218,
-      "tracked": 218,
+      "inventory": 220,
+      "tracked": 220,
       "pass": 0,
-      "notPass": 218,
+      "neutralOrOther": 220,
       "inspectedThisRun": 2,
       "inspectionErrors": 0,
-      "sitemapsVisible": 2
+      "sitemapsVisible": 2,
+      "coverageStates": {
+        "Discovered - currently not indexed": 167,
+        "Redirect error": 10,
+        "URL is unknown to Google": 43
+      },
+      "pageFetchStates": {
+        "PAGE_FETCH_STATE_UNSPECIFIED": 210,
+        "REDIRECT_ERROR": 10
+      },
+      "redirectErrors": 10,
+      "discoveredNotIndexed": 167,
+      "unknownToGoogle": 43
     }
   },
   "github": [
     {
       "name": "Master publisher",
       "status": "OK",
-      "detail": "0 failures among 12 recent completed runs"
+      "latestConclusion": "success",
+      "latestRunId": 36953067878,
+      "latestUpdatedAt": "2026-10-02T01:53:53Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "News publisher",
-      "status": "WARN",
-      "detail": "1 failures among 12 recent completed runs"
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 36965006386,
+      "latestUpdatedAt": "2026-10-02T04:33:19Z",
+      "detail": "latest=success; 1 failures among 12 recent completed runs"
+    },
+    {
+      "name": "Coordinated social publisher",
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 36965932759,
+      "latestUpdatedAt": "2026-10-02T04:45:53Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
+    },
+    {
+      "name": "Security guard",
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 36966440610,
+      "latestUpdatedAt": "2026-10-02T04:52:43Z",
+      "detail": "latest=success; 8 failures among 12 recent completed runs"
+    },
+    {
+      "name": "Zero-view watchdog",
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 36964512809,
+      "latestUpdatedAt": "2026-10-02T04:28:00Z",
+      "detail": "latest=success; 2 failures among 11 recent completed runs"
     }
   ],
   "providers": [

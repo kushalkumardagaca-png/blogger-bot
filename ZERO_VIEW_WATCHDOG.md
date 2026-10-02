@@ -1,15 +1,16 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-02T09:55:56.739288+05:30
+- **Checked:** 2026-10-02T10:22:32.134315+05:30
 - **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 219 URLs · 205 Posts · 13 Pages
+- **Inventory:** 221 URLs · 207 Posts · 13 Pages
 - **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
-- **Search Console:** OK · 0/218 tracked PASS
+- **Current workflow warnings:** 0
+- **Search Console:** OK · 220 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
-> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth.
+> No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
@@ -26,6 +27,8 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · France Finance News · 2 October 2026 · Coverage October 1 to 2 — Isolating Israel: The West's brake on West Bank colonization and Gaza's destruction…**
+- ✅ **post · Germany Finance News · 2 October 2026 · Coverage October 1 to 2 — North and South Korea trade accusations over landmines that injured three soldiers; German…**
 - ✅ **post · Economy and Macro Policy News · 2 October 2026 · Coverage October 1 to 2 — OECD chief economist calls Future Fund 'wise policy choice': budget ministry; Asia Bankers…**
 - ✅ **post · Market and Trading News · 2 October 2026 · Coverage October 1 to 2 — Situation in Europe so critical that it is being ‘eaten alive’ — Trump; IN BRIEF: Putin…**
 - ✅ **post · S&P 500 vs. Global: Pick One**
