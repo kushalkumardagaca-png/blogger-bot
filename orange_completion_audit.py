@@ -12,6 +12,7 @@ THEME=(ROOT/'theme/Daily-Yield-Theme-v4-2026-10-01.xml').read_text(encoding='utf
 OWNER=json.loads((ROOT/'OWNER_CONFIRMED_STATUS.json').read_text())
 WATCH=json.loads((ROOT/'ZERO_VIEW_WATCHDOG.json').read_text()) if (ROOT/'ZERO_VIEW_WATCHDOG.json').exists() else {}
 GSC=json.loads((ROOT/'GSC_REBUILD_REPORT.json').read_text()) if (ROOT/'GSC_REBUILD_REPORT.json').exists() else {}
+FORM=OWNER.get('form_verification',{})
 
 
 def item(name,status,evidence,next_action='None'):
@@ -23,9 +24,9 @@ items=[
  item('Loading feedback and animation','GREEN' if OWNER.get('loading_animation_completed_successfully') and 'DY_FINANCE_LOADER_START' in THEME else 'OWNER_ACTION',
       'Owner confirmed successful operation; full-screen loader remains in current Theme.',
       'Retain current behavior.'),
- item('Form success and error states','OWNER_ACTION',
-      'Accessible success/error status logic is present and source-audited, but external provider outcomes require a genuine owner test.',
-      'Submit one real subscription/contact test and confirm the received success or validation outcome.'),
+ item('Form success and error states','GREEN' if FORM.get('invalid_email_rejected') and FORM.get('valid_email_reached_confirmation_route') else 'OWNER_ACTION',
+      'Accessible status logic is source-audited; the provider rejected an invalid address and routed a valid confirmation-only test correctly, with zero public Daily Yield requests.',
+      'Continue normal provider monitoring; the test address is not stored in this repository.'),
  item('Confirmation/privacy modal','GREEN' if OWNER.get('privacy_cookie_requirement_completed_successfully') and "gtag('consent','default'" in THEME else 'OWNER_ACTION',
       'Owner confirmed successful privacy/cookie behavior; consent defaults denied and footer controls remain present.',
       'Retain consent-first behavior.'),
@@ -33,15 +34,15 @@ items=[
       'Theme renders Last reviewed only from valid dateModified structured data; no date is fabricated.'),
  item('Expandable FAQ plus FAQ schema','GREEN' if "id='dy-site-faq'" in THEME and 'FAQPage' in THEME else 'FAIL',
       'Visible FAQ and FAQPage schema coexist in the owner-confirmed active Theme.'),
- item('Google Request Indexing','GREEN_POLICY' if 'manualLiveTestQueue' in (ROOT/'gsc_rebuild.py').read_text() else 'FAIL',
+ item('Google Request Indexing','GREEN' if 'manualLiveTestQueue' in (ROOT/'gsc_rebuild.py').read_text() else 'FAIL',
       'Search Console inspection/sitemap automation is complete; unsupported Request Indexing automation is correctly refused.',
       'Use the generated manual queue only when Search Console identifies a genuine priority URL.'),
  item('Old-URL redirects and redirect-chain control','GREEN' if summary.get('confirmedExternal404or410',1)==0 and summary.get('externalRedirectChains',1)==0 else 'ATTENTION',
       f"Independent watchdog: {summary.get('confirmedExternal404or410','?')} confirmed external 404/410 and {summary.get('externalRedirectChains','?')} redirect chains; historical GSC observations: {summary.get('gscRedirectErrors','?')}.",
       'Continue recrawl monitoring; historical Search Console observations are not current live failures.'),
- item('Page-speed and real-user performance monitoring','PENDING_THEME_UPLOAD',
-      'Consent-gated LCP, CLS, INP, DOM-ready and load measurement is now built as one non-pageview GA4 event.',
-      'Upload the new Theme package and allow genuine consented field data to accumulate.'),
+ item('Page-speed and real-user performance monitoring','GREEN' if OWNER.get('theme_v6_0_uploaded') and "dy_web_vitals" in THEME else 'PENDING_THEME_UPLOAD',
+      'Owner confirmed Theme v6.0 live. It measures consent-gated LCP, CLS, INP, DOM-ready and load as one non-pageview GA4 event.',
+      'Allow genuine consented field data to accumulate; implementation Green does not claim a universal speed outcome.'),
  item('ChatGPT/OAI search discovery','GREEN' if "name='ChatGPT-User'" in THEME and "name='OAI-SearchBot'" in THEME else 'FAIL',
       'Public indexable content carries responsible ChatGPT-User and OAI-SearchBot directives; no citation guarantee is claimed.'),
  item('Exactly one primary H1','GREEN' if warnings==0 and 'contentH1' in THEME else 'ATTENTION',
@@ -50,9 +51,9 @@ items=[
       'Visible breadcrumb and matching BreadcrumbList generator are present in the owner-confirmed active Theme.'),
  item('WebP and modern image optimization','GREEN' if (ROOT/'optimize_embedded_images.py').exists() and 'image/webp' in (ROOT/'news_pipeline.py').read_text() else 'FAIL',
       'Selective WebP tooling exists and publishers accept modern image output while preserving attribution and quality.'),
- item('Layout-shift control','PENDING_THEME_UPLOAD',
-      'Aspect-ratio, width-containment and reserved-layout controls exist; consented CLS field measurement is now built.',
-      'Upload the new Theme package and review genuine CLS field evidence before claiming a universal result.'),
+ item('Layout-shift control','GREEN' if OWNER.get('theme_v6_0_uploaded') and 'layout-shift' in THEME else 'PENDING_THEME_UPLOAD',
+      'Owner confirmed the Theme with aspect-ratio, width-containment, reserved-layout controls and consented CLS measurement is live.',
+      'Continue reviewing genuine field evidence; Green confirms the control and monitor, not a fabricated universal CLS result.'),
 ]
 counts={}
 for row in items:counts[row['status']]=counts.get(row['status'],0)+1
