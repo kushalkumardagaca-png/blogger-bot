@@ -86,7 +86,7 @@ def main():
   ident=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
   if item.get('url')!=urls.get(ident):fail.append({'id':ident,'issue':'URL changed'})
   if not item.get('title','').strip():fail.append({'id':ident,'issue':'empty title'})
-  readable=len(html.unescape(re.sub('<[^>]+>',' ',content))).strip()
+  readable=html.unescape(re.sub('<[^>]+>',' ',content)).strip()
   controlled_move=item.get('url','').endswith('/p/share-market_0718113516.html')
   if len(readable)<200 and not controlled_move:fail.append({'id':ident,'issue':'insufficient readable content'})
   if image_alt_failures(content):fail.append({'id':ident,'issue':'missing image alt','count':len(image_alt_failures(content))})
