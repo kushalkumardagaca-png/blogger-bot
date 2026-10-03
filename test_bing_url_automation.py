@@ -91,6 +91,30 @@ class BingUrlAutomationTests(unittest.TestCase):
         report = json.loads(bing.STATUS_JSON.read_text())
         self.assertEqual(report["summary"]["quotaDeferred"], 1)
 
+    def test_url_info_burst_is_capped_at_ten_per_run(self):
+        items = []
+        records = {}
+        for number in range(12):
+            url = bing.SITE + f"2026/10/status-{number}.html"
+            fingerprint = f"fp-{number}"
+            items.append({"id": str(number), "kind": "post", "title": f"Status {number}",
+                          "url": url, "updated": "2026-10-02T01:00:00Z", "content": "x",
+                          "labels": [], "fingerprint": fingerprint})
+            records[url] = {"submittedFingerprint": fingerprint,
+                            "lastSubmittedAt": "2026-10-01T00:00:00+00:00",
+                            "nextInspectionAt": "2000-01-01T00:00:00+00:00",
+                            "inspectionStage": 0, "status": "SUBMITTED"}
+        bing.STATE_PATH.write_text(json.dumps({"version": 1, "urls": records}))
+        with patch.object(bing, "blogger_inventory", return_value=items), \
+             patch.object(bing, "get_quota", return_value={"dailyAvailable": 0, "monthlyAvailable": 100}), \
+             patch.object(bing, "submit_batch"), \
+             patch.object(bing, "get_url_info", return_value={"IsPage": True, "LastCrawledDate": "2026-10-02T02:00:00Z"}) as info:
+            self.assertEqual(bing.main(), 0)
+            self.assertEqual(info.call_count, 10)
+        report = json.loads(bing.STATUS_JSON.read_text())
+        self.assertEqual(report["summary"]["inspected"], 10)
+        self.assertEqual(report["errors"], [])
+
     def test_safe_error_detail_never_copies_request_url(self):
         value = bing.safe_detail(b'<html>https://ssl.bing.com/path?apikey=SECRET</html>')
         self.assertEqual(value, "provider returned a non-JSON error")

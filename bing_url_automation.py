@@ -26,7 +26,10 @@ STATUS_JSON = Path("BING_URL_AUTOMATION_STATUS.json")
 STATUS_MD = Path("BING_URL_AUTOMATION_STATUS.md")
 BING_BASE = "https://ssl.bing.com/webmaster/api.svc/json"
 INSPECTION_DELAYS = (6, 24, 72, 168)
-MAX_INSPECTIONS_PER_RUN = int(os.environ.get("BING_MAX_INSPECTIONS_PER_RUN", "40"))
+# Bing's legacy GetUrlInfo endpoint begins returning HTTP 400 after ten status
+# lookups in one short run. Keep each two-hour reconciliation within that
+# provider-side burst ceiling; remaining URLs stay queued for later runs.
+MAX_INSPECTIONS_PER_RUN = min(10, max(1, int(os.environ.get("BING_MAX_INSPECTIONS_PER_RUN", "10"))))
 TRANSIENT_HTTP = {429, 500, 502, 503, 504}
 
 
