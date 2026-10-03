@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-03T11:23:57.941934+00:00",
+  "checkedAt": "2026-10-03T14:48:33.824522+00:00",
   "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
@@ -7,12 +7,12 @@
     "critical repository files changed without baseline approval: .github/workflows/gsc_rebuild.yml, apply_site_enhancements.py, audit_site_enhancements.py, bing_url_automation.py, theme/Daily-Yield-Theme-Subscription.xml, theme/Daily-Yield-Theme-v4-2026-10-01.xml"
   ],
   "warnings": [
-    "1 new live item(s) accepted after threat scan"
+    "2 new live item(s) accepted after threat scan"
   ],
   "details": {
     "pages": 13,
-    "posts": 241,
-    "newItems": 1,
+    "posts": 242,
+    "newItems": 2,
     "changedItems": 0,
     "removedItems": 0,
     "repositoryFiles": 61,
