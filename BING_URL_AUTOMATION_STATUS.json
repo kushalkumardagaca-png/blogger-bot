@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-03T14:47:00.848319+00:00",
+  "checkedAt": "2026-10-03T14:50:17.397392+00:00",
   "status": "PASS",
   "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
@@ -9,13 +9,13 @@
     "monthlyAvailable": 2800
   },
   "summary": {
-    "inventory": 256,
-    "candidates": 159,
+    "inventory": 260,
+    "candidates": 163,
     "submitted": 0,
-    "quotaDeferred": 159,
+    "quotaDeferred": 163,
     "inspected": 10,
-    "knownToBing": 59,
-    "pendingMonitoring": 39,
+    "knownToBing": 68,
+    "pendingMonitoring": 29,
     "removedAlerts": 0
   },
   "errors": [],
