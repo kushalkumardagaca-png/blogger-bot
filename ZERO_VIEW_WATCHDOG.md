@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-03T06:00:58.732230+05:30
+- **Checked:** 2026-10-03T07:55:54.710233+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 239 URLs · 225 Posts · 13 Pages
+- **Inventory:** 242 URLs · 228 Posts · 13 Pages
 - **Content failures:** 2
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 238 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 241 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ❌ **page · DAILY NEWS** — Daily Yield family directory missing; SEO/meta description package missing
+- ❌ **page · DAILY NEWS** — Daily Yield family directory missing; Daily Yield favicon identity missing
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
@@ -27,6 +27,9 @@
 - ✅ **page · CALCULATOR**
 - ❌ **page · DAILY ARTICLE** — 65 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · Buy Term. Skip the Whole-Life Pitch.**
+- ✅ **post · India Finance News — 3 October 2026**
+- ✅ **post · Global Finance Wire — 3 October 2026**
 - ✅ **post · South Korea Finance News — 3 October 2026**
 - ✅ **post · Australia Finance News — 3 October 2026**
 - ✅ **post · Russia Finance News — 2 October 2026**
