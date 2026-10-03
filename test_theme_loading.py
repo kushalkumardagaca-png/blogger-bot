@@ -90,6 +90,12 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("html,body{max-width:100%;overflow-x:clip}", text)
         self.assertIn(".kd-row,.kd-mqwrap{overflow-x:auto;overscroll-behavior-inline:contain}", text)
 
+    def test_duplicate_default_post_grid_is_hidden_only_on_homepage(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn(".fk-home #Blog1 .blog-posts,.fk-home #blog-pager{display:none!important}", text)
+        self.assertNotIn(".fk-rest #Blog1 .blog-posts{display:none", text)
+        self.assertNotIn("#Blog1 .blog-posts{display:none!important}", text.replace(".fk-home #Blog1 .blog-posts{display:none!important}", ""))
+
     def test_news_snapshot_precedes_renderer_and_ready_main_is_deferred(self):
         source = Path("content_experience_repair.py").read_text(encoding="utf-8")
         self.assertIn("c=c[:script_start]+snap+c[script_start:]", source)
