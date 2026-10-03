@@ -1,14 +1,16 @@
 {
-  "checkedAt": "2026-10-03T05:26:27.017189+00:00",
+  "checkedAt": "2026-10-03T05:50:50.611430+00:00",
   "status": "PASS",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "critical": [],
-  "warnings": [],
+  "warnings": [
+    "1 new live item(s) accepted after threat scan"
+  ],
   "details": {
     "pages": 13,
-    "posts": 232,
-    "newItems": 0,
+    "posts": 233,
+    "newItems": 1,
     "changedItems": 0,
     "removedItems": 0,
     "repositoryFiles": 61,
