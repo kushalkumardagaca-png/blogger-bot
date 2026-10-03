@@ -1,13 +1,13 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 240,
+  "posts_checked": 246,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 0,
+  "duplicate_heroes_replaced": 6,
   "remaining_duplicate_heroes": 0,
-  "pages_repaired": 1,
-  "article_snapshot_entries": 68,
-  "news_snapshot_entries": 172,
+  "pages_repaired": 2,
+  "article_snapshot_entries": 69,
+  "news_snapshot_entries": 177,
   "article_category_counts": {
     "Contrarian Hooks": 3,
     "Age and Wealth Milestones": 3,
@@ -27,7 +27,7 @@
     "Insurance and Protection": 3,
     "Couples Family and Kids": 3,
     "Starters Students and First Jobs": 3,
-    "Spending Lifestyle and Frugality": 2,
+    "Spending Lifestyle and Frugality": 3,
     "Rich Habits vs Broke Habits": 2,
     "Recessions Crashes and Defense": 2,
     "Cash Savings and Emergency Funds": 2,
@@ -36,7 +36,7 @@
     "2026 Money Moves": 2
   },
   "news_desk_counts": {
-    "US": 9,
+    "US": 10,
     "China": 9,
     "Germany": 9,
     "India": 9,
@@ -45,16 +45,16 @@
     "France": 9,
     "Italy": 8,
     "Russia": 8,
-    "Canada": 8,
-    "Brazil": 8,
+    "Canada": 9,
+    "Brazil": 9,
     "Spain": 8,
-    "Mexico": 7,
+    "Mexico": 8,
     "Australia": 9,
     "South Korea": 9,
     "Market and Trading": 9,
     "Economy and Macro Policy": 9,
     "Corporate Finance and Industry": 9,
-    "Personal Finance": 8,
+    "Personal Finance": 9,
     "Global News": 9
   }
 }
