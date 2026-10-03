@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2278,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 180,
+    "transientExternalResponses": 143,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2680,7 +2680,7 @@
       "tracked": 238,
       "pass": 0,
       "neutralOrOther": 238,
-      "inspectedThisRun": 2,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -2734,8 +2734,8 @@
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37072279802,
-      "latestUpdatedAt": "2026-10-02T22:26:13Z",
+      "latestRunId": 37082054213,
+      "latestUpdatedAt": "2026-10-03T00:28:35Z",
       "detail": "latest=success; 2 failures among 11 recent completed runs"
     }
   ],
