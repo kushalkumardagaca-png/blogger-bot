@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-03T16:20:11.796525+00:00",
+  "generated_at": "2026-10-03T16:22:49.212898+00:00",
   "method": "Official social APIs only; no Daily Yield page requests and no synthetic views.",
   "limitations": "Impressions are recorded only where the platform API supplies them. Engagement counts are not treated as impressions.",
   "platforms": {
     "facebook": {
-      "status": "unavailable: token not configured",
+      "status": "partial: 49 unavailable",
       "observations": 0
     },
     "bluesky": {
@@ -16,8 +16,8 @@
       "observations": 22
     },
     "tumblr": {
-      "status": "unavailable: API key not configured",
-      "observations": 0
+      "status": "ok",
+      "observations": 25
     }
   },
   "items": [
@@ -49,6 +49,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829465413577572352",
+      "title": "US Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/us-2026-10-03.html",
+      "published_at": "2026-10-03T20:34:21.521181+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwxmgodqna2y",
       "title": "Italy Finance News — 3 October 2026",
@@ -72,6 +83,17 @@
         "favourites": 0,
         "reblogs": 0,
         "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829436287368019968",
+      "title": "China Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/china-2026-10-03.html",
+      "published_at": "2026-10-03T12:51:24.566570+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -117,6 +139,28 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829421169775116289",
+      "title": "Economy and Macro Policy News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0526097754.html",
+      "published_at": "2026-10-03T08:51:07.313523+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829260492889620480",
+      "title": "FOR CORPORATE",
+      "destination": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "published_at": "2026-10-03T07:13:39.739847+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwwo3e2dsl2x",
       "title": "India Finance News — 3 October 2026",
@@ -140,6 +184,17 @@
         "favourites": 0,
         "reblogs": 0,
         "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829403701834924032",
+      "title": "Australia Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-03.html",
+      "published_at": "2026-10-03T04:13:28.658717+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -180,6 +235,17 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829363957829615616",
+      "title": "Canada Finance News — 2 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-02.html",
+      "published_at": "2026-10-02T17:41:45.755004+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -251,6 +317,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829345321198960640",
+      "title": "Spain Finance News — 2 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-02.html",
+      "published_at": "2026-10-02T12:45:32.518942+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "mastodon",
       "social_id": "117369818876116343",
       "title": "UK Finance News · 2 October 2026 · Coverage October 1 to 2 — Economic activity and social change in the UK, real-time indicators: 1 October 2026…",
@@ -287,6 +364,17 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829336046492893184",
+      "title": "Germany Finance News · 2 October 2026 · Coverage October 1 to 2 — North and South Korea trade accusations over landmines that injured three soldiers; German…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-02.html",
+      "published_at": "2026-10-02T10:18:07.516042+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -345,6 +433,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829313050293174272",
+      "title": "South Korea Finance News · 2 October 2026 · Coverage October 1 to 2 — S. Korean won weakens against U.S. dollar on lingering worries over higher yields; LS…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-02.html",
+      "published_at": "2026-10-02T04:12:36.571355+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwtwkigu6h2f",
       "title": "Australia Finance News · 2 October 2026 · Coverage October 1 to 2 — Statement by the Monetary Policy Board: Monetary Policy Decision; Live: ASX to rise as US…",
@@ -386,6 +485,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829283135578669056",
+      "title": "Your Secret Money Script, Explained",
+      "destination": "https://dailyyield.blogspot.com/2026/10/your-secret-money-script-explained.html",
+      "published_at": "2026-10-01T20:17:07.652101+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "mastodon",
       "social_id": "117366187313325230",
       "title": "DAILY ARTICLE",
@@ -395,6 +505,17 @@
         "favourites": 0,
         "reblogs": 1,
         "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829279285661581312",
+      "title": "Mexico Finance News · 1 October 2026 · Coverage September 30 to October 1 — France woos Mexico as a stronger trade partner, citing US uncertainties; Mexico stocks…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-01.html",
+      "published_at": "2026-10-01T19:15:56.197561+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -427,6 +548,39 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829272272701374464",
+      "title": "A Private AI Advisor on Your Data",
+      "destination": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
+      "published_at": "2026-10-01T17:24:27.995690+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829264715109793792",
+      "title": "Corporate Finance and Industry News · 1 October 2026 · Coverage September 30 to October 1 — Oil prices rise as Chinese refiners reportedly ban October fuel exports; Brent crude back…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry.html",
+      "published_at": "2026-10-01T15:24:20.495882+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829260492889620480",
+      "title": "FOR CORPORATE",
+      "destination": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "published_at": "2026-10-01T14:17:13.943475+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mws5rtltgz24",
       "title": "GLOBAL SNAPSHOT — MOVED",
@@ -454,6 +608,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829241149917151232",
+      "title": "Your Car Payment Is a Wealth Killer",
+      "destination": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
+      "published_at": "2026-10-01T09:09:47.018953+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwrtfyo3zi2v",
       "title": "Your Car Payment Is a Wealth Killer",
@@ -477,6 +642,17 @@
         "favourites": 0,
         "reblogs": 1,
         "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829198305785430016",
+      "title": "GLOBAL SNAPSHOT — MOVED",
+      "destination": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
+      "published_at": "2026-09-30T21:48:47.771926+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -522,6 +698,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829180762380206080",
+      "title": "Childcare Is the New Mortgage",
+      "destination": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html",
+      "published_at": "2026-09-30T17:09:56.945913+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwpx3zahdy2c",
       "title": "90 Days of Passive Income: The Truth",
@@ -545,6 +732,17 @@
         "favourites": 0,
         "reblogs": 1,
         "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829165928340226048",
+      "title": "GLOBAL SNAPSHOT",
+      "destination": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+      "published_at": "2026-09-30T13:14:10.637631+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -576,6 +774,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829150461526409216",
+      "title": "Stop Checking Your Portfolio Daily",
+      "destination": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html",
+      "published_at": "2026-09-30T09:08:20.007556+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwpcvdm7t62m",
       "title": "Stop Checking Your Portfolio Daily",
@@ -599,6 +808,17 @@
         "favourites": 0,
         "reblogs": 1,
         "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829107653528715264",
+      "title": "MARKETS TODAY",
+      "destination": "https://dailyyield.blogspot.com/p/markets-today.html",
+      "published_at": "2026-09-29T21:47:54.921774+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
@@ -644,6 +864,17 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829090144560775168",
+      "title": "The Market Is Not a Casino",
+      "destination": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
+      "published_at": "2026-09-29T17:09:37.173003+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwnglzbzxa2d",
       "title": "BRRRR With the Ugly Months Included",
@@ -658,6 +889,28 @@
       "impressions_available": false
     },
     {
+      "platform": "tumblr",
+      "social_id": "829075267217653760",
+      "title": "CALCULATOR",
+      "destination": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "published_at": "2026-09-29T13:13:08.963794+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829060098514157568",
+      "title": "Laid Off: The First 72 Hours",
+      "destination": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
+      "published_at": "2026-09-29T09:12:03.505035+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
       "platform": "bluesky",
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwmslxps4e2g",
       "title": "Laid Off: The First 72 Hours",
@@ -668,6 +921,28 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829016332623282176",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "destination": "https://dailyyield.blogspot.com/",
+      "published_at": "2026-09-28T21:36:24.593104+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829007514767163392",
+      "title": "Your Student Overdraft Isn't Free",
+      "destination": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html",
+      "published_at": "2026-09-28T19:16:15.206895+05:30",
+      "metrics": {
+        "notes": 0
       },
       "impressions_available": false
     },
