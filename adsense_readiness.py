@@ -101,5 +101,13 @@ def main():
  if fail:lines+=['','## Failures']+[f"- {x}" for x in fail]
  REPORT_MD.write_text('\n'.join(lines)+'\n')
  print(json.dumps({'status':report['status'],**s,'syntheticViews':0}))
+ for row in fail[:20]:print('::error title=AdSense readiness audit::'+json.dumps(row,ensure_ascii=True))
  return 1 if fail else 0
-if __name__=='__main__':raise SystemExit(main())
+if __name__=='__main__':
+ try:raise SystemExit(main())
+ except Exception as exc:
+  diagnostic={'checkedAt':datetime.now(timezone.utc).isoformat(),'status':'ERROR','mode':'AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS','syntheticViews':0,'errorType':exc.__class__.__name__,'error':str(exc)[:500]}
+  REPORT_JSON.write_text(json.dumps(diagnostic,indent=2)+'\n')
+  REPORT_MD.write_text('# Daily Yield AdSense Readiness\n\n- **Status:** ERROR\n- **Public Daily Yield requests:** 0\n- **Error:** '+exc.__class__.__name__+'\n')
+  print('::error title=AdSense readiness execution::'+exc.__class__.__name__+': '+str(exc)[:500])
+  raise

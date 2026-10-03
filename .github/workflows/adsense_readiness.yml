@@ -28,6 +28,8 @@ jobs:
       - name: Verify repeat-safe AdSense readiness controls
         run: python -m unittest test_adsense_readiness -v
       - name: Prepare and audit every live Page and Post
+        id: readiness
+        continue-on-error: true
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
@@ -91,4 +93,9 @@ jobs:
             if git push origin HEAD:main; then exit 0; fi
             sleep $((attempt * 2))
           done
+          exit 1
+      - name: Fail closed when readiness audit reports an error
+        if: steps.readiness.outcome == 'failure'
+        run: |
+          echo "AdSense readiness did not pass. See the persisted redacted report."
           exit 1
