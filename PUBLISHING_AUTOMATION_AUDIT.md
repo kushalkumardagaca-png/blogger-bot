@@ -128,7 +128,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 63
+- ✅ **Master tracker next-topic state is valid** — next index 66
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

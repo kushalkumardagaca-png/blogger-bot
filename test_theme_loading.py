@@ -161,6 +161,17 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("ms<=2000?'met':'miss'", text)
         self.assertNotIn("animation:pageIn", text)
 
+    def test_real_user_vitals_are_consented_and_not_pageviews(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn("data-dy-rum-policy','consent-only-non-pageview'", text)
+        self.assertIn("largest-contentful-paint", text)
+        self.assertIn("layout-shift", text)
+        self.assertIn("durationThreshold:40", text)
+        self.assertIn("safeGet('dy-consent')==='analytics'", text)
+        self.assertIn("gtag('event','dy_web_vitals'", text)
+        self.assertIn("non_interaction:true", text)
+        self.assertNotIn("gtag('event','page_view'", text)
+
 
 if __name__ == "__main__":
     unittest.main()

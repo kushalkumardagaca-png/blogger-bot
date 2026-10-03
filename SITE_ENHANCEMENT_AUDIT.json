@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 184,
+  "pass": 190,
   "fail": 0,
   "checks": [
     {
@@ -250,6 +250,18 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: two-second performance budget is measured honestly",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: real-user vitals require analytics consent",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: real-user vitals event is not a pageview",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: LCP CLS and INP are measured without navigation",
       "status": "PASS"
     },
     {
@@ -578,6 +590,18 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: two-second performance budget is measured honestly",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: real-user vitals require analytics consent",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: real-user vitals event is not a pageview",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: LCP CLS and INP are measured without navigation",
       "status": "PASS"
     },
     {

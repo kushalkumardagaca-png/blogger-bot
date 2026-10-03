@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **184**
+- Pass: **190**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -66,6 +66,9 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: loader covers every internal navigation direction
 - ✅ Daily-Yield-Theme-Subscription.xml: loader exits at DOM readiness instead of waiting for images
 - ✅ Daily-Yield-Theme-Subscription.xml: two-second performance budget is measured honestly
+- ✅ Daily-Yield-Theme-Subscription.xml: real-user vitals require analytics consent
+- ✅ Daily-Yield-Theme-Subscription.xml: real-user vitals event is not a pageview
+- ✅ Daily-Yield-Theme-Subscription.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-Subscription.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed
 - ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB
@@ -148,6 +151,9 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: loader covers every internal navigation direction
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: loader exits at DOM readiness instead of waiting for images
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: two-second performance budget is measured honestly
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: real-user vitals require analytics consent
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: real-user vitals event is not a pageview
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB

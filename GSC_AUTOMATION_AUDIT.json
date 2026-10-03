@@ -1,5 +1,5 @@
 {
-  "pass": 21,
+  "pass": 22,
   "fail": 0,
   "checks": [
     {
@@ -72,6 +72,10 @@
     },
     {
       "name": "Dedicated browser OAuth client is supported",
+      "status": "PASS"
+    },
+    {
+      "name": "Health monitor delegates to the zero-view watchdog",
       "status": "PASS"
     },
     {

@@ -1,6 +1,6 @@
 {
   "policy": "ZERO_SYNTHETIC_VIEWS",
-  "pass": 15,
+  "pass": 16,
   "fail": 0,
   "checks": [
     {
@@ -57,6 +57,10 @@
     },
     {
       "name": "Theme accelerator is restricted to non-document feed paths",
+      "status": "PASS"
+    },
+    {
+      "name": "Real-user metrics are consented non-pageview events",
       "status": "PASS"
     },
     {

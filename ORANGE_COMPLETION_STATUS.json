@@ -1,0 +1,99 @@
+{
+  "checked": "2026-10-03",
+  "mode": "ZERO_SYNTHETIC_VIEWS",
+  "public_daily_yield_requests": 0,
+  "owner_confirmation": {
+    "confirmed_at_ist": "2026-10-03",
+    "source": "Owner confirmation in Arena.ai conversation",
+    "theme_v5_9_uploaded": true,
+    "loading_animation_completed_successfully": true,
+    "privacy_cookie_requirement_completed_successfully": true,
+    "notes": "Owner explicitly confirmed the latest Theme upload, loading animation and privacy/cookie requirement. No password, token or private account data is recorded."
+  },
+  "counts": {
+    "GREEN": 9,
+    "OWNER_ACTION": 1,
+    "GREEN_POLICY": 1,
+    "PENDING_THEME_UPLOAD": 2
+  },
+  "items": [
+    {
+      "requirement": "Loading feedback and animation",
+      "status": "GREEN",
+      "evidence": "Owner confirmed successful operation; full-screen loader remains in current Theme.",
+      "next_action": "Retain current behavior."
+    },
+    {
+      "requirement": "Form success and error states",
+      "status": "OWNER_ACTION",
+      "evidence": "Accessible success/error status logic is present and source-audited, but external provider outcomes require a genuine owner test.",
+      "next_action": "Submit one real subscription/contact test and confirm the received success or validation outcome."
+    },
+    {
+      "requirement": "Confirmation/privacy modal",
+      "status": "GREEN",
+      "evidence": "Owner confirmed successful privacy/cookie behavior; consent defaults denied and footer controls remain present.",
+      "next_action": "Retain consent-first behavior."
+    },
+    {
+      "requirement": "Genuine last-updated date",
+      "status": "GREEN",
+      "evidence": "Theme renders Last reviewed only from valid dateModified structured data; no date is fabricated.",
+      "next_action": "None"
+    },
+    {
+      "requirement": "Expandable FAQ plus FAQ schema",
+      "status": "GREEN",
+      "evidence": "Visible FAQ and FAQPage schema coexist in the owner-confirmed active Theme.",
+      "next_action": "None"
+    },
+    {
+      "requirement": "Google Request Indexing",
+      "status": "GREEN_POLICY",
+      "evidence": "Search Console inspection/sitemap automation is complete; unsupported Request Indexing automation is correctly refused.",
+      "next_action": "Use the generated manual queue only when Search Console identifies a genuine priority URL."
+    },
+    {
+      "requirement": "Old-URL redirects and redirect-chain control",
+      "status": "GREEN",
+      "evidence": "Independent watchdog: 0 confirmed external 404/410 and 0 redirect chains; historical GSC observations: 10.",
+      "next_action": "Continue recrawl monitoring; historical Search Console observations are not current live failures."
+    },
+    {
+      "requirement": "Page-speed and real-user performance monitoring",
+      "status": "PENDING_THEME_UPLOAD",
+      "evidence": "Consent-gated LCP, CLS, INP, DOM-ready and load measurement is now built as one non-pageview GA4 event.",
+      "next_action": "Upload the new Theme package and allow genuine consented field data to accumulate."
+    },
+    {
+      "requirement": "ChatGPT/OAI search discovery",
+      "status": "GREEN",
+      "evidence": "Public indexable content carries responsible ChatGPT-User and OAI-SearchBot directives; no citation guarantee is claimed.",
+      "next_action": "None"
+    },
+    {
+      "requirement": "Exactly one primary H1",
+      "status": "GREEN",
+      "evidence": "Independent API/source watchdog currently records 0 structural warning(s); Theme suppresses duplicate wrapper title when an editorial H1 exists.",
+      "next_action": "None"
+    },
+    {
+      "requirement": "Visible breadcrumbs plus BreadcrumbList schema",
+      "status": "GREEN",
+      "evidence": "Visible breadcrumb and matching BreadcrumbList generator are present in the owner-confirmed active Theme.",
+      "next_action": "None"
+    },
+    {
+      "requirement": "WebP and modern image optimization",
+      "status": "GREEN",
+      "evidence": "Selective WebP tooling exists and publishers accept modern image output while preserving attribution and quality.",
+      "next_action": "None"
+    },
+    {
+      "requirement": "Layout-shift control",
+      "status": "PENDING_THEME_UPLOAD",
+      "evidence": "Aspect-ratio, width-containment and reserved-layout controls exist; consented CLS field measurement is now built.",
+      "next_action": "Upload the new Theme package and review genuine CLS field evidence before claiming a universal result."
+    }
+  ]
+}

@@ -32,7 +32,8 @@ check("Theme performs no speculative document prefetch", "link.rel='prefetch'" n
 check("Theme does not fetch Older or label-page documents", "className='dy-feed-sentinel'" not in theme and "fetch(href,{credentials:'same-origin'})" not in theme)
 check("Theme declares reader-navigation-only policy", "data-dy-navigation-policy','reader-navigation-only'" in theme and "data-dy-synthetic-document-requests','0'" in theme)
 check("Theme accelerator is restricted to non-document feed paths", "data-dy-safe-accelerator','feed-and-assets-only'" in theme and "/^\\/feeds\\//.test(u.pathname)" in theme and "DYFeedCache.get('/p/" not in theme and "DYFeedCache.get('/search/" not in theme)
-check("No repository workflow installs or launches a headless browser",  not any(term in all_workflows.lower() for term in ("playwright", "puppeteer", "selenium", "headlesschrome", "chromium --headless")))
+check("Real-user metrics are consented non-pageview events", "data-dy-rum-policy','consent-only-non-pageview'" in theme and "gtag('event','dy_web_vitals'" in theme and "gtag('event','page_view'" not in theme)
+check("No repository workflow installs or launches a headless browser",   not any(term in all_workflows.lower() for term in ("playwright", "puppeteer", "selenium", "headlesschrome", "chromium --headless")))
 
 failed = [item for item in checks if item["status"] == "FAIL"]
 report = {"policy": "ZERO_SYNTHETIC_VIEWS", "pass": len(checks) - len(failed), "fail": len(failed), "checks": checks}
