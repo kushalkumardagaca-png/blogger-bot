@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2505,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 207,
+    "transientExternalResponses": 156,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -26,7 +26,7 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-10-02T05:32:35.286Z",
+        "lastDownloaded": "2026-10-03T07:29:26.687Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
@@ -2957,16 +2957,16 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37131689939,
-      "latestUpdatedAt": "2026-10-03T15:03:34Z",
+      "latestRunId": 37132908356,
+      "latestUpdatedAt": "2026-10-03T15:20:53Z",
       "detail": "latest=success; 4 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37119499121,
-      "latestUpdatedAt": "2026-10-03T11:25:57Z",
+      "latestRunId": 37131876593,
+      "latestUpdatedAt": "2026-10-03T15:05:26Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
