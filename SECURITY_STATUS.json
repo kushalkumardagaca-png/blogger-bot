@@ -1,19 +1,21 @@
 {
-  "checkedAt": "2026-10-03T03:00:16.268638+00:00",
+  "checkedAt": "2026-10-03T03:26:09.320625+00:00",
   "status": "PASS",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "critical": [],
-  "warnings": [],
+  "warnings": [
+    "2 new live item(s) accepted after threat scan"
+  ],
   "details": {
     "pages": 13,
-    "posts": 228,
-    "newItems": 0,
-    "changedItems": 5,
+    "posts": 230,
+    "newItems": 2,
+    "changedItems": 0,
     "removedItems": 0,
     "repositoryFiles": 61,
     "backupCreated": false,
-    "repositoryChangeApproved": true,
-    "bloggerChangeApproved": true
+    "repositoryChangeApproved": false,
+    "bloggerChangeApproved": false
   }
 }
