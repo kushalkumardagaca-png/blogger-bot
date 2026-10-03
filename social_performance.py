@@ -140,10 +140,13 @@ def facebook_metrics(entries: list[dict]) -> tuple[list[dict], str]:
             if not pid:
                 continue
             try:
+                # Basic engagement and insights are separate calls. A metric that
+                # is unavailable for one post must not erase the genuine counts
+                # that Facebook can still return for that post.
                 data = get_json(
                     f"https://graph.facebook.com/{version}/{pid}",
                     params={
-                        "fields": "created_time,shares,comments.limit(0).summary(true),reactions.limit(0).summary(true),insights.metric(post_impressions,post_impressions_unique,post_clicks)",
+                        "fields": "created_time,shares,comments.limit(0).summary(true),reactions.limit(0).summary(true)",
                         "access_token": page_token,
                     },
                 )
@@ -152,7 +155,14 @@ def facebook_metrics(entries: list[dict]) -> tuple[list[dict], str]:
                     "comments": int(data.get("comments", {}).get("summary", {}).get("total_count", 0)),
                     "reactions": int(data.get("reactions", {}).get("summary", {}).get("total_count", 0)),
                 }
-                for insight in data.get("insights", {}).get("data", []):
+                try:
+                    insights = get_json(
+                        f"https://graph.facebook.com/{version}/{pid}/insights",
+                        params={"metric": "post_impressions,post_impressions_unique,post_clicks", "access_token": page_token},
+                    )
+                except Exception:
+                    insights = {"data": []}
+                for insight in insights.get("data", []):
                     values = insight.get("values", [])
                     value = values[-1].get("value") if values else None
                     if value is not None:
