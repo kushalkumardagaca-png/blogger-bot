@@ -49,6 +49,21 @@ function decodeHtml(value: string): string {
     .trim();
 }
 
+function firstPhoto(entry: FeedEntry): string {
+  const source = entry.content?.$t ?? '';
+  const match = source.match(/<img\b[^>]*\bsrc=["']([^"']+)["']/i);
+  if (!match) return '';
+  const value = match[1].replace(/&amp;/gi, '&');
+  try {
+    const host = new URL(value).hostname.toLowerCase();
+    return host === 'images.unsplash.com' || host === 'upload.wikimedia.org' ||
+      host === 'thumb.wikimedia.org' || host === 'blogger.googleusercontent.com' ||
+      host.endsWith('.bp.blogspot.com') ? value : '';
+  } catch {
+    return '';
+  }
+}
+
 function suitable(entry: FeedEntry): boolean {
   const labels = (entry.category ?? []).map((item) => (item.term ?? '').toLowerCase());
   return !labels.some((label) => label === 'news' || label.includes('daily news'));
@@ -78,15 +93,19 @@ async function publishLatest(): Promise<PublishResult> {
   }
 
   const source = decodeHtml(entry.content?.$t ?? entry.summary?.$t ?? '');
-  const summary = source.length > 520 ? `${source.slice(0, 517).trim()}…` : source;
+  const summary = source.length > 360 ? `${source.slice(0, 357).trim()}…` : source;
+  const photo = firstPhoto(entry);
   const body = [
+    `**Read:** ${url}`,
+    '',
+    `## ${title}`,
+    '',
+    '**By Kushal K. Daga**',
+    ...(photo ? ['', `![${title}](${photo})`] : []),
+    '',
     summary || 'A practical Daily Yield analysis for today’s money decisions.',
     '',
-    `**Read the complete analysis:** [${title}](${url})`,
-    '',
-    '**Discussion:** Which assumption in this analysis would you challenge first—and why?',
-    '',
-    '*Published automatically by the official Daily Yield app. Educational information, not individualized financial advice.*',
+    '*Educational information, not individualized financial advice.*',
   ].join('\n');
 
   const post = await reddit.submitPost({

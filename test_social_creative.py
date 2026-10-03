@@ -63,9 +63,11 @@ def test_caption_limits_platform_voice_and_cross_network_difference():
     assert len(captions["mastodon"]) <= 500
     assert len(set(captions.values())) == 3
     assert all(story["url"] in text and "#DailyYield" in text for text in captions.values())
+    assert all(text.startswith(story["url"]) for text in captions.values())
     assert all("Read the report" not in text and "Clear context" not in text for text in captions.values())
     assert all("A clear look at compounding interest" in text for text in captions.values())
-    assert "?" in captions["facebook"] and "?" in captions["mastodon"]
+    assert all("By Kushal K. Daga" in text for text in captions.values())
+    assert all(text.count("#") <= 2 for text in captions.values())
 
 
 def test_many_stories_do_not_collapse_to_one_template_or_caption():
@@ -81,11 +83,23 @@ def test_tumblr_is_native_npf_with_conversation_and_descriptive_alt():
     story = item(22, "A tax deduction checklist without the jargon", ["Tax"])
     data = tumblr_payload(story, "A practical checklist for keeping the right records and asking better questions.")
     block_types = [block["type"] for block in data["content"]]
-    assert block_types == ["text", "text", "image", "text", "text", "link", "text"]
-    assert data["content"][4]["subtype"] == "quote"
-    assert story["url"] == data["source_url"] == data["content"][5]["url"]
+    assert block_types == ["link", "text", "image", "text", "text"]
+    assert story["url"] == data["source_url"] == data["content"][0]["url"]
+    assert data["content"][1]["text"] == story["title"]
     assert "Editorial photograph" in data["content"][2]["alt_text"]
+    assert "By Kushal K. Daga" in data["content"][4]["text"]
     assert "moneyblr" in data["tags"]
+    assert len(data["tags"].split(",")) <= 3
+
+
+def test_reddit_template_places_link_first_and_keeps_title_author_photo_detail():
+    source = Path('reddit_devvit/server.ts').read_text(encoding='utf-8')
+    start = source.index('const body = [')
+    body = source[start:source.index("].join('\\n');", start)]
+    assert body.index('`**Read:** ${url}`') < body.index('`## ${title}`')
+    assert body.index('`## ${title}`') < body.index("'**By Kushal K. Daga**'")
+    assert '![${title}](${photo})' in body
+    assert "summary || 'A practical Daily Yield analysis" in body
 
 
 def test_cards_are_photo_first_accessible_sized_and_visually_distinct():

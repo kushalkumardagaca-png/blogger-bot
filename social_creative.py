@@ -219,41 +219,43 @@ def build_caption(item: dict, platform: str, summary: str, limit: int | None = N
     tags = " ".join(hashtag_list(item))
     content_type = "Source-led news edition" if meta["topic"] == "news" else "Practical decision guide"
     if platform == "facebook":
-        ctas = (
-            "Inside: the assumptions, downside and source links.",
+        details = (
+            "Includes visible assumptions, downside analysis and source links.",
             "Use the worked example, then replace it with your own figures.",
-            "Read the limitations before using the conclusion.",
-            "Save this for the decision—not just the headline.",
+            "Read the limitations before applying the conclusion.",
+            "A concise framework for testing the decision with real numbers.",
         )
-        cta = ctas[(creative_seed(item, platform) // 41) % len(ctas)]
-        return f"{meta['emoji']} {insight}\n\n{title}\n\n{content_type}. {cta}\n\n{meta['question']}\n\nRead: {url}\n\nBy Kushal K. Daga · {tags}"
+        detail = details[(creative_seed(item, platform) // 41) % len(details)]
+        return f"{url}\n\n{title}\n\n{meta['emoji']} {insight}\n{content_type}. {detail}\n\nBy Kushal K. Daga\n{tags}"
     if platform == "bluesky":
-        base = f"{meta['emoji']} {insight}\n\n{title}\n{url}\n{tags}"
-        if len(base) <= 300: return base
-        fixed = f"{meta['emoji']} {meta['hook'].title()}\n\n{url}\n{tags}"
-        title_room = max(35, 300 - len(fixed) - 1)
-        return f"{meta['emoji']} {meta['hook'].title()}\n{trim(title,title_room)}\n{url}\n{tags}"
+        fixed = f"{url}\n\n\n\nBy Kushal K. Daga\n{tags}"
+        room = 300 - len(fixed)
+        short_title = trim(title, max(35, min(len(title), room // 2)))
+        remaining = max(0, 300 - len(fixed) - len(short_title) - 1)
+        short_detail = trim(insight, remaining) if remaining >= 25 else ""
+        parts = [url, "", short_title]
+        if short_detail: parts.extend([short_detail])
+        parts.extend(["By Kushal K. Daga", tags])
+        return "\n".join(parts)[:300]
     if platform == "mastodon":
-        base = f"{meta['emoji']} {insight}\n\n{title}\n\n{content_type}. {meta['question']}\n\n{url}\n\n{tags}\nBy Kushal K. Daga"
+        base = f"{url}\n\n{title}\n\n{meta['emoji']} {insight}\n{content_type}.\n\nBy Kushal K. Daga\n{tags}"
         if len(base) <= 500: return base
-        fixed = f"{meta['emoji']} {meta['hook'].title()}\n\n\n\n{meta['question']}\n\n{url}\n\n{tags}\nBy Kushal K. Daga"
+        fixed = f"{url}\n\n\n\n{content_type}.\n\nBy Kushal K. Daga\n{tags}"
         return fixed.replace("\n\n\n\n", "\n\n" + trim(title, max(45, 500-len(fixed))) + "\n\n")
-    return f"{meta['emoji']} {meta['hook']}\n{title}\n{insight}\n{url}\n{tags}"
+    return f"{url}\n\n{title}\n{insight}\nBy Kushal K. Daga\n{tags}"
 
 
 def tumblr_payload(item: dict, summary: str) -> dict:
     meta = creative_meta(item, "tumblr")
     title, url = clean(item.get("title", "Daily Yield")), item["url"]
     insight = first_sentence(summary, 360)
-    tags = [x.lstrip("#") for x in hashtag_list(item)] + [meta["style"], "moneyblr"]
+    tags = [x.lstrip("#") for x in hashtag_list(item)] + ["moneyblr"]
     return {
         "content": [
-            {"type":"text", "text":f"{meta['emoji']} {meta['hook']}", "subtype":"heading1"},
-            {"type":"text", "text":title, "subtype":"heading2"},
+            {"type":"link", "url":url, "title":"Read on Daily Yield", "description":trim(title, 180)},
+            {"type":"text", "text":title, "subtype":"heading1"},
             {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":PLATFORM_SIZES["tumblr"][0],"height":PLATFORM_SIZES["tumblr"][1]}], "alt_text":image_alt(item, "tumblr")},
             {"type":"text", "text":insight},
-            {"type":"text", "text":meta["question"], "subtype":"quote"},
-            {"type":"link", "url":url, "title":"Open the full Daily Yield story", "description":trim(title, 180)},
             {"type":"text", "text":"By Kushal K. Daga · sourced financial education with visible assumptions and limitations."},
         ],
         "state":"published", "tags":",".join(dict.fromkeys(tags)), "source_url":url,
