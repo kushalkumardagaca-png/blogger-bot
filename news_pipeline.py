@@ -752,13 +752,13 @@ def fmt_day(d):
     return f"{MONTHS[d.month-1]} {d.day}"
 
 def compose_item(it, win_end):
-    typ = item_type(it["title"])
-    why = WHY[typ][hash(it["title"]) % len(WHY[typ])]
+    # Vary sentence form deterministically, but never add a fact that is absent
+    # from the selected source record.
     title = clean_title(it["title"])
     if len(title) > 140:  # trim long official titles at word boundary
         cut = title[:140].rfind(" ")
         title = title[:cut if cut > 60 else 140].rstrip(" ,;:-(") + "…"
-    if it["desc"] and len(it["desc"]) > 80:
+    if it["desc"] and len(it["desc"]) > 20:
         desc = it["desc"]
         cut = desc.find(". ", 60)
         if 0 < cut < 320:
@@ -769,19 +769,31 @@ def compose_item(it, win_end):
     is_background = bool(it.get("background"))
     etitle, eagency = htmlmod.escape(title), htmlmod.escape(it["agency"])
     core = htmlmod.escape(desc) if desc else etitle
+    form = int(hashlib.sha256((title + it["agency"]).encode()).hexdigest()[:2], 16) % 4
     if is_background:
         chip = f"Background · originally {day}"
         display_title = f"Background context: {etitle}"
-        body = (f"<strong>Background—not current-window news.</strong> Originally published by "
-                f"<strong>{eagency}</strong> on {day}: {core}. This item is included only to provide "
-                f"context for the current desk. <em>{why}</em>")
+        body = (f"<strong>Background—not current-window news.</strong> "
+                f"<strong>{eagency}</strong> published this on {day}: {core}. "
+                "It is separated from the current-period items so its date and role are clear.")
     else:
         chip = day
         display_title = etitle
-        body = f"<strong>{eagency}</strong> — {core}."
         if not desc:
-            body = f"<strong>{eagency}</strong> — published {day}: {etitle}."
-        body += f" <em>{why}</em>"
+            options = [
+                f"<strong>{eagency}</strong> published this item on {day}: {etitle}.",
+                f"The {day} item from <strong>{eagency}</strong> is titled: {etitle}.",
+                f"Published {day}, the <strong>{eagency}</strong> source records: {etitle}.",
+                f"For {day}, <strong>{eagency}</strong> published: {etitle}.",
+            ]
+        else:
+            options = [
+                f"<strong>{eagency}</strong> reports: {core}.",
+                f"In its {day} update, <strong>{eagency}</strong> reports: {core}.",
+                f"The {day} account from <strong>{eagency}</strong> says: {core}.",
+                f"According to <strong>{eagency}</strong>: {core}.",
+            ]
+        body = options[form]
     return f'''    <div class="fbk-item{' fbk-background' if is_background else ''}">
       <span class="fbk-chip">{chip}</span>
       <h3>{display_title}</h3>
@@ -999,6 +1011,13 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
       <p><strong>Related reading on Daily Yield:</strong></p>{links}
     </div>'''
 
+    source_hosts = sorted({urllib.parse.urlparse(i.get("url", "")).hostname or "" for i in current_items if i.get("url")})
+    subject_list = "; ".join(top) if top else "the linked current-period release"
+    method_html = f'''
+    <h2 class="fbk-h2"><b>METHOD</b> How to Read This {htmlmod.escape(label)} Edition</h2>
+    <p>This edition is a source map, not a prediction. Its current-period subjects are {htmlmod.escape(subject_list)}. The {len(current_items)} current item(s) come from {len(source_hosts)} distinct source website(s); each link retains the publisher's wording and date so readers can inspect the underlying record.</p>
+    <p>A headline can establish that an announcement or report exists, but it cannot by itself establish investment suitability, causation or what happens next. Compare publication dates, units, geographic scope and revisions before combining figures from different items. Older material is isolated as background, while forward calendar entries are labelled separately. If a linked source changes its document after publication, the source—not this edition—remains the authoritative record.</p>'''
+
     signoff = f'''
     <div class="fbk-signoff">
       <span class="fbk-script">Read it? Question it. &#9999;</span>
@@ -1026,6 +1045,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 {background_html}
 {fx_html}
 {week_html}
+{method_html}
 {related_html}
 {signoff}
 </div>'''

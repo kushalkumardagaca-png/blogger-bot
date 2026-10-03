@@ -1,12 +1,49 @@
 """Fail-closed structural checks run immediately before every Blogger publish."""
 import html,json,re
+from urllib.parse import urlsplit
 from image_safety import image_works
+
+MASS_TEMPLATE_PHRASES=(
+ 'This forensic framework eliminates redundant intermediary friction',
+ 'strict institutional baseline assumptions','Zero Emotional Bias',
+ '100-Yr Empirical Return','Forensic Simplified System',
+ 'mathematically proven execution protocols',
+)
+UNSUPPORTED_ABSOLUTES=('guaranteed returns','always outperforms','risk-free investment','100% systematic autopilot')
+
+def _plain(content):
+ value=re.sub(r'<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>',' ',content or '',flags=re.I|re.S)
+ return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',value))).strip()
+
+def _source_domains(content):
+ own='dailyyield.blogspot.com';ignore={'facebook.com','www.facebook.com','bsky.app','www.tumblr.com','mastodon.social','linkedin.com','www.linkedin.com','follow.it'};out=set()
+ for url in re.findall(r'<a\b[^>]*href=["\'](https?://[^"\']+)',content or '',flags=re.I):
+  host=(urlsplit(html.unescape(url)).hostname or '').lower()
+  if host and host!=own and host not in ignore:out.add(host)
+ return out
 
 def assert_publishable(title,content,labels):
  issues=[]; labels=labels or []
  if not title or len(title.strip())<20:issues.append('missing/short SEO title (minimum 20 characters)')
  if len(title.strip())>46:issues.append(f'Bing title budget exceeded ({len(title.strip())} characters; maximum 46)')
  if len(content)<8000:issues.append(f'content package too small ({len(content)} bytes)')
+ text=_plain(content);word_count=len(re.findall(r"[A-Za-z][A-Za-z'-]+",text));is_news='News' in labels
+ minimum_words=350 if is_news else 900
+ if word_count<minimum_words:issues.append(f'insufficient reader-value depth ({word_count} words; minimum {minimum_words})')
+ paragraphs=[]
+ for raw in re.findall(r'<p\b[^>]*>(.*?)</p>',content or '',flags=re.I|re.S):
+  value=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',raw))).strip().casefold()
+  if len(value)>=100:paragraphs.append(value)
+ if len(paragraphs)!=len(set(paragraphs)):issues.append('duplicated substantive paragraph detected')
+ source_minimum=2 if is_news else 3
+ if len(_source_domains(content))<source_minimum:issues.append(f'insufficient independent/primary source domains (minimum {source_minimum})')
+ for phrase in MASS_TEMPLATE_PHRASES:
+  if phrase.casefold() in text.casefold():issues.append('mass-template phrase prohibited: '+phrase)
+ for phrase in UNSUPPORTED_ABSOLUTES:
+  if phrase.casefold() in text.casefold():issues.append('unsupported absolute claim prohibited: '+phrase)
+ if not is_news:
+  if 'Worked example with disclosed assumptions' not in content:issues.append('transparent worked example missing')
+  if 'Editorial method' not in content:issues.append('editorial method disclosure missing')
  if 'Kushal K. Daga' not in content:issues.append('current byline missing')
  if 'challenge-platform' in content or '/cdn-cgi/challenge-platform/' in content:issues.append('invalid copied challenge script')
  if 'class="dy-context"' not in content:issues.append('contextual internal-link card missing')
