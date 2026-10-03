@@ -1,0 +1,94 @@
+name: AdSense Readiness and Policy Update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'adsense_readiness.py'
+      - 'test_adsense_readiness.py'
+      - '.github/workflows/adsense_readiness.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-security-guard
+  cancel-in-progress: false
+
+jobs:
+  prepare-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify repeat-safe AdSense readiness controls
+        run: python -m unittest test_adsense_readiness -v
+      - name: Prepare and audit every live Page and Post
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python adsense_readiness.py
+      - name: Run immediate zero-view verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python zero_view_watchdog.py
+      - name: Approve intentional authenticated policy maintenance
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python security_guard.py --approve-current
+      - name: Upload recovery backup and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adsense-readiness-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            ADSENSE_READINESS_BACKUP.json.gz
+            ADSENSE_READINESS_REPORT.json
+            ADSENSE_READINESS_REPORT.md
+            ZERO_VIEW_WATCHDOG.json
+            ZERO_VIEW_WATCHDOG.md
+            SECURITY_STATUS.json
+            SECURITY_STATUS.md
+      - name: Persist evidence and approved security state
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield AdSense Readiness"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/dy-adsense-state
+          cp ADSENSE_READINESS_REPORT.json ADSENSE_READINESS_REPORT.md \
+             SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md \
+             ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md /tmp/dy-adsense-state/
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-adsense-state/* .
+            git add ADSENSE_READINESS_REPORT.json ADSENSE_READINESS_REPORT.md \
+                    SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md \
+                    ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record AdSense readiness evidence [skip ci]"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
