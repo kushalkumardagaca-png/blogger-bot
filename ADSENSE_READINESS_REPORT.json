@@ -1,8 +1,21 @@
 {
-  "checkedAt": "2026-10-03T14:57:25.392495+00:00",
-  "status": "ERROR",
+  "checkedAt": "2026-10-03T15:00:44.623942+00:00",
+  "status": "PASS",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "errorType": "AttributeError",
-  "error": "'int' object has no attribute 'strip'"
+  "summary": {
+    "items": 259,
+    "posts": 246,
+    "pages": 13,
+    "changed": 0,
+    "policyPagesReady": 5,
+    "failures": 0
+  },
+  "changed": [],
+  "failures": [],
+  "notes": [
+    "Approval and revenue remain Google decisions.",
+    "No ad code is installed before approval.",
+    "Unrelated content, URLs, titles and labels are preserved."
+  ]
 }
