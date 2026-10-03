@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **178**
+- Pass: **184**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -71,10 +71,13 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
-- ✅ Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages
+- ✅ Daily-Yield-Theme-Subscription.xml: archives keep reader-initiated native pagination
 - ✅ Daily-Yield-Theme-Subscription.xml: navigation is reader initiated only
 - ✅ Daily-Yield-Theme-Subscription.xml: synthetic document request count is fixed at zero
 - ✅ Daily-Yield-Theme-Subscription.xml: no speculative document prefetch or prerender
+- ✅ Daily-Yield-Theme-Subscription.xml: safe accelerator accepts feed paths only
+- ✅ Daily-Yield-Theme-Subscription.xml: accelerator never caches Page or label documents
+- ✅ Daily-Yield-Theme-Subscription.xml: homepage feed metadata is session cached
 - ✅ Daily-Yield-Theme-Subscription.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-Subscription.xml: five tool benches share one compact row
 - ✅ Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height
@@ -150,10 +153,13 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: archives keep reader-initiated native pagination
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: navigation is reader initiated only
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: synthetic document request count is fixed at zero
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no speculative document prefetch or prerender
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: safe accelerator accepts feed paths only
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: accelerator never caches Page or label documents
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage feed metadata is session cached
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: five tool benches share one compact row
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height

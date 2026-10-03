@@ -1,6 +1,6 @@
 {
   "policy": "ZERO_SYNTHETIC_VIEWS",
-  "pass": 13,
+  "pass": 15,
   "fail": 0,
   "checks": [
     {
@@ -48,7 +48,15 @@
       "status": "PASS"
     },
     {
+      "name": "Theme does not fetch Older or label-page documents",
+      "status": "PASS"
+    },
+    {
       "name": "Theme declares reader-navigation-only policy",
+      "status": "PASS"
+    },
+    {
+      "name": "Theme accelerator is restricted to non-document feed paths",
       "status": "PASS"
     },
     {

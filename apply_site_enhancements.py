@@ -19,11 +19,16 @@ HEAD = r"""<!-- DY_SITE_ENHANCEMENTS_HEAD_START -->
 <meta content='noindex,follow' name='robots'/>
 </b:if>
 <meta content='light' name='color-scheme'/>
+<!-- Connection setup only: no document or asset is requested. -->
+<link crossorigin='anonymous' href='https://blogger.googleusercontent.com' rel='preconnect'/>
+<link crossorigin='anonymous' href='https://lh3.googleusercontent.com' rel='preconnect'/>
 <!-- Optional analytics stays denied until the reader explicitly allows it. -->
 <script>//<![CDATA[
 window.dataLayer=window.dataLayer||[];
 window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
 window.gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+/* Feed-only session cache. It cannot request Page, Post, label or archive documents. */
+(function(){var memory={};function safe(url){try{var u=new URL(url,location.href);return u.origin===location.origin&&/^\/feeds\//.test(u.pathname);}catch(e){return false;}}function get(url,ttl){if(!safe(url))return Promise.reject(Error('document requests prohibited'));var key='dy-feed-cache:'+url,now=Date.now(),saved=null;try{saved=JSON.parse(sessionStorage.getItem(key)||'null');}catch(e){}if(saved&&now-saved.at<ttl)return Promise.resolve(saved.data);if(memory[url])return memory[url];memory[url]=fetch(url,{credentials:'same-origin'}).then(function(r){if(!r.ok)throw Error('feed');return r.json();}).then(function(data){try{sessionStorage.setItem(key,JSON.stringify({at:Date.now(),data:data}));}catch(e){}return data;}).then(function(data){delete memory[url];return data;},function(err){delete memory[url];throw err;});return memory[url];}window.DYFeedCache={get:get,isSafeFeed:safe};})();
 //]]></script>
 <!-- Blogger's universal GA4 include reads the Measurement ID from Blogger Settings. -->
 <b:include data='blog' name='google-analytics'/>
@@ -129,14 +134,16 @@ D.querySelectorAll('input[type="password"]').forEach(function(i){if(i.parentNode
 D.querySelectorAll('form').forEach(function(f){var s=f.querySelector('.dy-form-status');if(!s){s=D.createElement('p');s.className='dy-form-status';s.setAttribute('role','status');f.appendChild(s);}f.addEventListener('invalid',function(e){s.textContent='Please check the highlighted field and try again.';s.setAttribute('data-state','error');},true);f.addEventListener('submit',function(){if(f.checkValidity()){s.textContent=f.classList.contains('dy-sub-form')?'Opening the secure confirmation step in a new tab.':'Submitted. Please follow the next on-screen step.';s.setAttribute('data-state','success');}});});
 D.querySelectorAll('img:not([alt]),img[alt=""]').forEach(function(img){var box=img.closest('a,article,figure'),label=box?(box.getAttribute('aria-label')||box.textContent||''):'';label=label.replace(/\s+/g,' ').trim().slice(0,160);img.alt=label||'Daily Yield editorial image';});
 D.querySelectorAll('.post-body img,.page-body img').forEach(function(img,n){if(!img.hasAttribute('decoding'))img.setAttribute('decoding','async');if(n>0&&!img.hasAttribute('loading'))img.setAttribute('loading','lazy');if(n===0&&!img.hasAttribute('fetchpriority'))img.setAttribute('fetchpriority','high');});
-/* Gapless chronological feed: preload the next Blogger page before the reader
-   reaches the end, append it in server order, and continue until exhausted. */
-(function(){var grid=D.querySelector('.blog-posts.hfeed'),pager=D.getElementById('blog-pager');if(!grid||!pager)return;var next=pager.querySelector('.blog-pager-older-link'),busy=false,seen={};grid.querySelectorAll('h3.post-title a').forEach(function(a){seen[a.href]=1;});function sortGrid(){var cards=[].slice.call(grid.querySelectorAll(':scope > .post-outer-container'));cards.sort(function(a,b){var ad=a.querySelector('time.published'),bd=b.querySelector('time.published');return (Date.parse(bd&&bd.getAttribute('datetime')||0)||0)-(Date.parse(ad&&ad.getAttribute('datetime')||0)||0);});cards.forEach(function(card){grid.insertBefore(card,sent||null);});}sortGrid();if(!next)return;H.classList.add('dy-auto-feed');var sent=D.createElement('div');sent.className='dy-feed-sentinel';sent.setAttribute('role','status');sent.textContent='Loading more articles';grid.appendChild(sent);function load(){if(busy||!next)return;busy=true;var href=next.href;fetch(href,{credentials:'same-origin'}).then(function(r){if(!r.ok)throw Error('feed');return r.text();}).then(function(markup){var doc=new DOMParser().parseFromString(markup,'text/html'),fresh=doc.querySelectorAll('.blog-posts.hfeed .post-outer-container'),frag=D.createDocumentFragment(),added=0;fresh.forEach(function(article){var a=article.querySelector('h3.post-title a'),key=a&&a.href;if(key&&seen[key])return;if(key)seen[key]=1;article.classList.add('in');article.classList.remove('will-reveal');article.querySelectorAll('img').forEach(function(img){img.loading='lazy';img.decoding='async';});frag.appendChild(D.importNode(article,true));added++;});grid.insertBefore(frag,sent);sortGrid();next=doc.querySelector('#blog-pager .blog-pager-older-link');busy=false;if(!next){sent.textContent='All articles loaded';sent.setAttribute('data-finished','true');if(io)io.disconnect();}else{sent.textContent=added?'Loading more articles':'Continuing the archive';setTimeout(load,0);}}).catch(function(){busy=false;sent.textContent='More articles will load when the connection recovers';});}var io;if('IntersectionObserver' in window){io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting;}))load();},{rootMargin:'1400px 0px'});io.observe(sent);load();}else load();})();
+/* Archive and label pagination remains reader initiated. The native Older/Newer
+   controls are preserved; no next-page document is fetched in the background. */
 /* Zero-request navigation policy: never prefetch, prerender, ping or otherwise
    request another Daily Yield document before a reader actually navigates to it.
    Blogger can count speculative document requests as traffic, so selected-hub
    warming is intentionally disabled to protect analytics integrity. */
 (function(){H.setAttribute('data-dy-navigation-policy','reader-navigation-only');H.setAttribute('data-dy-synthetic-document-requests','0');})();
+/* Safe accelerator: caches only Blogger feed JSON already required by visible
+   shelves. It rejects Page, Post, archive and label documents by construction. */
+(function(){H.setAttribute('data-dy-safe-accelerator','feed-and-assets-only');D.addEventListener('pointerover',function(e){var a=e.target.closest&&e.target.closest('a'),img=a&&a.querySelector&&a.querySelector('img');if(img&&typeof img.decode==='function')img.decode().catch(function(){});},{passive:true});D.addEventListener('focusin',function(e){var a=e.target.closest&&e.target.closest('a'),img=a&&a.querySelector&&a.querySelector('img');if(img&&typeof img.decode==='function')img.decode().catch(function(){});},{passive:true});})();
 var contentH1=D.querySelector('.item-post .post-body h1'),templateTitle=D.querySelector('.item-post .post-header .post-title-container');if(contentH1&&templateTitle)templateTitle.style.display='none';
 function schemaModified(){var found='';D.querySelectorAll('script[type="application/ld+json"]').forEach(function(s){try{var data=JSON.parse(s.textContent),walk=function(x){if(!x||found)return;if(Array.isArray(x)){x.forEach(walk);return;}if(typeof x==='object'){if(x.dateModified)found=String(x.dateModified);Object.keys(x).forEach(function(k){walk(x[k]);});}};walk(data);}catch(e){}});return found;}
 var modified=schemaModified(),titleBox=D.querySelector('.item-post .post-title-container,.page-body h1');if(modified&&titleBox){var dt=new Date(modified);if(!isNaN(dt.getTime())){var badge=D.createElement('p');badge.className='dy-updated';badge.textContent='Last reviewed '+dt.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});if(titleBox.parentNode)titleBox.parentNode.insertBefore(badge,titleBox.nextSibling);}}
@@ -227,12 +234,15 @@ def inject(text: str) -> str:
     # second lightweight summary page so both Article rows have genuine posts.
     text = text.replace("fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published').then(function(r){return r.json();})", "articleInventory()")
     inventory_anchor = "function go(){"
-    inventory_helper = "function articleInventory(){return Promise.all([1,151].map(function(start){return fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published&start-index='+start).then(function(r){if(!r.ok)throw Error('feed');return r.json();});})).then(function(parts){var entries=[];parts.forEach(function(j){entries=entries.concat(j.feed&&j.feed.entry||[]);});return {feed:{entry:entries}};});}\nfunction go(){"
-    if 'function articleInventory()' not in text:
+    inventory_helper = "function articleInventory(){return Promise.all([1,151].map(function(start){return window.DYFeedCache.get('/feeds/posts/summary?alt=json&max-results=150&orderby=published&start-index='+start,300000);})).then(function(parts){var entries=[];parts.forEach(function(j){entries=entries.concat(j.feed&&j.feed.entry||[]);});return {feed:{entry:entries}};});}\nfunction go(){"
+    if 'function articleInventory()' in text:
+        text = re.sub(r"function articleInventory\(\)\{.*?\}\nfunction go\(\)\{", lambda _m: inventory_helper, text, count=1, flags=re.S)
+    else:
         text = text.replace(inventory_anchor, inventory_helper, 1)
     # News needs only a small newest batch; retain full content there so cards can
     # recover photographs even when Blogger omits media$thumbnail.
     text = text.replace("fetch('/feeds/posts/summary/-/News?alt=json&max-results=150&orderby=published')", "fetch('/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published')")
+    text = text.replace("fetch('/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published').then(function(r){return r.json();})", "window.DYFeedCache.get('/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published',300000)")
     # Keep the feed entry id and hydrate missing Article thumbnails from only the
     # 16 selected entry resources instead of downloading every full article body.
     card_anchor = "var a=D.createElement('a');a.className='kd-card';a.href=it.href;"
@@ -240,7 +250,7 @@ def inject(text: str) -> str:
     text = re.sub(re.escape(card_anchor)+r'(?:'+re.escape(card_entry)+r')*', card_anchor+card_entry, text, count=1)
     text = text.replace("out.push({title:e.title&&e.title.$t||'Untitled',href:href,img:img,", "out.push({id:(e.id&&e.id.$t||'').split('post-').pop(),title:e.title&&e.title.$t||'Untitled',href:href,img:img,")
     hydrate_anchor = "function emptyBox(row,title,msg){"
-    hydrate_helper = '''function hydrate(items){var q=items.filter(function(it){return !it.img&&it.id;}).slice(),active=0;function pump(){while(active<4&&q.length){(function(it){active++;fetch('/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){var e=j.entry||{},img=e.media$thumbnail&&e.media$thumbnail.url||'',m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||'');if(!img&&m)img=m[1];if(!img)return;D.querySelectorAll('[data-kd-entry="'+it.id+'"] .kd-th').forEach(function(th){th.textContent='';var im=D.createElement('img');im.src=img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);});}).catch(function(){}).then(function(){active--;pump();});})(q.shift());}}pump();}
+    hydrate_helper = '''function hydrate(items){var q=items.filter(function(it){return !it.img&&it.id;}).slice(),active=0;function pump(){while(active<4&&q.length){(function(it){active++;window.DYFeedCache.get('/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json',300000).then(function(j){var e=j.entry||{},img=e.media$thumbnail&&e.media$thumbnail.url||'',m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||'');if(!img&&m)img=m[1];if(!img)return;D.querySelectorAll('[data-kd-entry="'+it.id+'"] .kd-th').forEach(function(th){th.textContent='';var im=D.createElement('img');im.src=img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);});}).catch(function(){}).then(function(){active--;pump();});})(q.shift());}}pump();}
 function emptyBox(row,title,msg){'''
     if 'function hydrate(items)' in text:
         text = re.sub(r"function hydrate\(items\).*?\nfunction emptyBox\(row,title,msg\)\{", lambda _m: hydrate_helper, text, count=1, flags=re.S)

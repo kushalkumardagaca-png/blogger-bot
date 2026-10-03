@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 178,
+  "pass": 184,
   "fail": 0,
   "checks": [
     {
@@ -273,7 +273,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: feed pages continuously append older Blogger pages",
+      "name": "Daily-Yield-Theme-Subscription.xml: archives keep reader-initiated native pagination",
       "status": "PASS"
     },
     {
@@ -286,6 +286,18 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: no speculative document prefetch or prerender",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: safe accelerator accepts feed paths only",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: accelerator never caches Page or label documents",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: homepage feed metadata is session cached",
       "status": "PASS"
     },
     {
@@ -589,7 +601,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: feed pages continuously append older Blogger pages",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: archives keep reader-initiated native pagination",
       "status": "PASS"
     },
     {
@@ -602,6 +614,18 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: no speculative document prefetch or prerender",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: safe accelerator accepts feed paths only",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: accelerator never caches Page or label documents",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: homepage feed metadata is session cached",
       "status": "PASS"
     },
     {

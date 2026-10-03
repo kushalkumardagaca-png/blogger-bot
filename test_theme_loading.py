@@ -58,15 +58,13 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertNotIn("dyStickersEnter", text)
         self.assertNotIn(".dy-sticker{animation:", text)
 
-    def test_gapless_date_ordered_feed_and_compact_sections(self):
+    def test_archives_use_reader_initiated_pagination_and_compact_sections(self):
         text = THEMES[0].read_text(encoding="utf-8")
-        self.assertIn("className='dy-feed-sentinel'", text)
-        self.assertIn("rootMargin:'1400px 0px'", text)
-        self.assertIn("io.observe(sent);load()", text)
-        self.assertIn("setTimeout(load,0)", text)
         self.assertIn("blog-pager-older-link", text)
-        self.assertIn("function sortGrid()", text)
-        self.assertIn("querySelector('time.published')", text)
+        self.assertNotIn("className='dy-feed-sentinel'", text)
+        self.assertNotIn("rootMargin:'1400px 0px'", text)
+        self.assertNotIn("io.observe(sent);load()", text)
+        self.assertNotIn("fetch(href,{credentials:'same-origin'})", text)
         self.assertIn("var all=parse(j,false);", text)
         self.assertIn("Earlier articles", text)
         self.assertIn("grid-template-columns:repeat(5,minmax(0,1fr))!important", text)
@@ -137,6 +135,18 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertNotIn("rel='prerender'", text)
         self.assertNotIn("data-dy-prefetched", text)
         self.assertNotIn("requestIdleCallback(drain", text)
+
+    def test_safe_accelerator_caches_only_feed_data_and_assets(self):
+        text = THEMES[0].read_text(encoding="utf-8")
+        self.assertIn("data-dy-safe-accelerator','feed-and-assets-only'", text)
+        self.assertIn("/^\\/feeds\\//.test(u.pathname)", text)
+        self.assertIn("document requests prohibited", text)
+        self.assertIn("sessionStorage.setItem(key", text)
+        self.assertIn("window.DYFeedCache.get('/feeds/posts/summary", text)
+        self.assertIn("window.DYFeedCache.get('/feeds/posts/default/-/News", text)
+        self.assertIn("img.decode()", text)
+        self.assertNotIn("DYFeedCache.get('/p/", text)
+        self.assertNotIn("DYFeedCache.get('/search/", text)
 
     def test_noncritical_comment_engine_is_loaded_during_idle_time(self):
         text = THEMES[0].read_text(encoding="utf-8")
