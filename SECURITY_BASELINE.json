@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-03T11:07:59.899463+00:00",
+  "approvedAt": "2026-10-03T11:23:41.097211+00:00",
   "repository": {
     "auto_blogger_publisher.py": "d2b68659346d064b9ed64fa392d6575c61ae88c24ea8af51dfe89d877343c2cb",
     "news_pipeline.py": "2795c0c2d520ddc739f49a5571bcbe811be1dff043e6e5f08412d9d0c9571f9c",
@@ -26,14 +26,14 @@
     ".github/workflows/tumblr_publisher.yml": "10aaab1287a4165d9714bf9b0673f6fbba1519b283041e6f0b57b33c3fc5579b",
     ".github/workflows/mastodon_publisher.yml": "8f94732a0dc547dfbab59b5addef04e5890d9735af54516224e6d1ccd602fee5",
     "security_guard.py": "9bde4c61da577a793994cbe5a4b277e65b8a42e86b2dd3411116e7db2e2f1490",
-    "audit_site_enhancements.py": "73fa791b26787a730630d6102650929ac5b759940aa3842eb6dccb8eab921cbc",
+    "audit_site_enhancements.py": "823a2cc950dc42abc8b56bf3f0063ae8633d7787da95834e68a0b176cb9248b2",
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
-    "bing_url_automation.py": "2f6931444ff4ba61154a23d8224a9ffbcb6cf1c250aa6d6ae13ee97db5de2211",
-    "apply_site_enhancements.py": "3d499b083d3f543f5647c4f0a0b5d5b089ac0a421e3448700a3efa4ec1c8d44b",
+    "bing_url_automation.py": "4ba4c3286a656a43afcf57cc4789eeb52dbe4042d663b796d7f321233d3a92f1",
+    "apply_site_enhancements.py": "2a1f2ffd0b8ff4740eb4f245a437f6c174989611169510fa94e5c8f1f5e26067",
     "update_page_family.py": "54696abfa722316c789f900c24829239ebbd8a54157d358e3e39753d59ea3b29",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
-    "theme/Daily-Yield-Theme-Subscription.xml": "611b404a37ec44fa0430b101d0ad6035ec64161b8976c55477476cdb7072c16f",
-    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "6490620e1cba6086d00f15089c4a59c5673b9082e1a8e09af94adb8edfd5277c",
+    "theme/Daily-Yield-Theme-Subscription.xml": "87a1563e947310cc4ea804238d6e3826ca458fd99f24611aed0cd9ff0910b358",
+    "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "0f5add48ac136d51fcbad3bf7d0289850be0d7bfc1b3daf6f424ff68428694ab",
     "outreach/editorial_outreach.py": "d83a640afc61787d425d55ff24a53cd148e9eb8639f3aa225c426b4e3ff38e03",
     "outreach/gmail_sender.py": "292cd572119d4802dc1faea5d590e9f12fa176971bf8941ea0266cd7e0765c62",
     "outreach/prospects.csv": "95c7ebe7f8d006bfa97c98910c2b66e8707b3de2d6065dd16814ce82622f613a",
@@ -51,7 +51,7 @@
     ".github/workflows/deploy_global_snapshot.yml": "1963105e6de9476d1a6ad2149036ec0d74b1992c46d9984314079d5c6460d2b6",
     ".github/workflows/deploy_markets_today.yml": "defa06e48a006bc7c9dfc1fb81b60217ab61cac1bd43ae6df51dfa0c6cd0bc99",
     ".github/workflows/editorial_outreach.yml": "3fe670701a2bdde78d5a36e1cd3f4760c01c503e2aea36d864dfa5d538fc45f0",
-    ".github/workflows/gsc_rebuild.yml": "e86ca87f1aec0a6b14f76cece490c299896562e201001bbaea36057c3781ca1b",
+    ".github/workflows/gsc_rebuild.yml": "41959df4080bc712397270d583325937bbe6ad7e012fb88e5301873cb5df2b27",
     ".github/workflows/health_monitor.yml": "2f30dfdc50fff6dc6649db193a8266bb0989d977f41eb20ccdc6fa0cdc02d0fb",
     ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
     ".github/workflows/mastodon_oauth_bootstrap.yml": "3685d69f1815805f837b6cc051c190d814adcfd7183c985172b31f464224e6c6",
@@ -168,6 +168,14 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-10-02T08:15:00-07:00",
       "content_sha256": "f495bfd2db10a3049a3850b3b71a4306ded8da94e3acbeedb05799d5b392770e"
+    },
+    "post:8692987777881824271": {
+      "kind": "post",
+      "id": "8692987777881824271",
+      "title": "Brazil Finance News — 3 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-03.html",
+      "updated": "2026-10-03T04:11:01-07:00",
+      "content_sha256": "176f8e8605209186f39c1a25f26dda42f09caab080e4aa22c547a6df9add044e"
     },
     "post:9150949963237525136": {
       "kind": "post",
