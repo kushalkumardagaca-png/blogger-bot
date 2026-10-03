@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-03T12:02:09.708322+05:30
+- **Checked:** 2026-10-03T13:55:43.081121+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 249 URLs · 235 Posts · 13 Pages
+- **Inventory:** 251 URLs · 237 Posts · 13 Pages
 - **Content failures:** 2
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 248 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 250 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -25,8 +25,10 @@
 - ✅ **page · DISCLAIMER**
 - ✅ **page · CONTACT US**
 - ✅ **page · CALCULATOR**
-- ❌ **page · DAILY ARTICLE** — 66 image(s) missing descriptive alt text
+- ❌ **page · DAILY ARTICLE** — 67 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · Spain Finance News — 3 October 2026**
+- ✅ **post · China Finance News — 3 October 2026**
 - ✅ **post · UK Finance News — 3 October 2026**
 - ✅ **post · Japan Finance News — 3 October 2026**
 - ✅ **post · A Money Constitution for Couples**
