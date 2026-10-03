@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-10-03T11:06:34.764075+00:00",
-  "status": "ATTENTION",
+  "checkedAt": "2026-10-03T11:11:20.287904+00:00",
+  "status": "PASS",
   "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "site": "https://dailyyield.blogspot.com/",
@@ -9,18 +9,16 @@
     "monthlyAvailable": 2800
   },
   "summary": {
-    "inventory": 254,
-    "candidates": 157,
+    "inventory": 255,
+    "candidates": 158,
     "submitted": 0,
-    "quotaDeferred": 157,
-    "inspected": 10,
+    "quotaDeferred": 158,
+    "inspected": 0,
     "knownToBing": 49,
-    "pendingMonitoring": 49,
+    "pendingMonitoring": 48,
     "removedAlerts": 0
   },
-  "errors": [
-    "Bing URL info API error 400: provider returned a JSON error"
-  ],
+  "errors": [],
   "notes": [
     "GetUrlInfo supplies documented index details; it is not represented as the complete Webmaster Tools URL Inspection UI.",
     "No Live URL fetch is performed.",
