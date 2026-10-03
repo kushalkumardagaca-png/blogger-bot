@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-03T20:30:44.710072+05:30
+- **Checked:** 2026-10-03T20:33:26.764563+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
 - **Inventory:** 260 URLs · 246 Posts · 13 Pages
 - **Content failures:** 2
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 1
-- **Current workflow warnings:** 1
+- **Current workflow warnings:** 0
 - **Search Console:** OK · 259 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
