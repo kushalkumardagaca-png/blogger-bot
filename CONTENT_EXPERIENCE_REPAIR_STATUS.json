@@ -1,13 +1,13 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 225,
+  "posts_checked": 227,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 2,
+  "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 0,
-  "pages_repaired": 1,
+  "pages_repaired": 2,
   "article_snapshot_entries": 65,
-  "news_snapshot_entries": 160,
+  "news_snapshot_entries": 162,
   "article_category_counts": {
     "Contrarian Hooks": 3,
     "Age and Wealth Milestones": 3,
@@ -39,7 +39,7 @@
     "US": 9,
     "China": 8,
     "Germany": 8,
-    "India": 8,
+    "India": 9,
     "Japan": 8,
     "UK": 8,
     "France": 8,
@@ -55,6 +55,6 @@
     "Economy and Macro Policy": 8,
     "Corporate Finance and Industry": 8,
     "Personal Finance": 8,
-    "Global News": 8
+    "Global News": 9
   }
 }
