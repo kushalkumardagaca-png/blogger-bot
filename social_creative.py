@@ -20,6 +20,14 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 SIZE = (1200, 630)
+PLATFORM_SIZES = {
+    # Taller native feed assets earn more useful screen space without increasing
+    # posting frequency. Bluesky retains a wide link-friendly treatment.
+    "facebook": (1080, 1350),
+    "tumblr": (1080, 1350),
+    "mastodon": (1080, 1080),
+    "bluesky": (1200, 675),
+}
 PHOTO_HOSTS = ("images.unsplash.com", "upload.wikimedia.org", "thumb.wikimedia.org", "blogger.googleusercontent.com")
 
 # A broad, verified Unsplash editorial library: people and real life first, with
@@ -118,26 +126,26 @@ PALETTES = (
 )
 
 HOOKS = {
-    "page": ("SAVE THIS MONEY TOOL", "YOUR NEXT SMART TAB", "BOOKMARK ENERGY", "THE USEFUL CORNER OF THE INTERNET"),
-    "news": ("THE MONEY UPDATE", "WHAT JUST MOVED", "THE CONTEXT DROP", "TODAY, MINUS THE NOISE"),
-    "market": ("THE CHART HAS NOTES", "MARKET MOOD CHECK", "WHAT THE NUMBERS ARE SAYING", "ZOOM OUT BEFORE YOU TAP BUY"),
-    "debt": ("DEBT CHECK, NO SHAME", "YOUR APR HAS A PLOT", "THE REPAYMENT REALITY CHECK", "BORROWING MATH, UNFILTERED"),
-    "tax": ("TAX, BUT MAKE IT CLEAR", "THE FINE PRINT HAS ENTERED", "KEEP THE RECEIPTS", "YOUR TAX TAB, DECODED"),
-    "saving": ("FUTURE-YOU SENT A NOTE", "SMALL MOVE, LONG SHADOW", "THE SAVINGS PLOT TWIST", "MAKE THE MONEY STAY"),
-    "economy": ("YOUR WALLET FELT THAT", "THE ECONOMY, IN HUMAN TERMS", "MACRO WITHOUT THE MONOLOGUE", "WHY PRICES ARE ACTING LIKE THAT"),
-    "general": ("MONEY, MINUS THE LECTURE", "PAUSE THE SCROLL", "THE RECEIPTS ARE IN", "LET'S DO THE MATH"),
+    "page": ("A PRACTICAL MONEY RESOURCE", "SAVE FOR YOUR NEXT DECISION", "USE THE TOOL, CHECK THE ASSUMPTIONS", "A USEFUL DAILY YIELD RESOURCE"),
+    "news": ("WHAT CHANGED — AND WHAT DID NOT", "THE SOURCE-LED UPDATE", "CURRENT REPORTS, CLEARLY DATED", "THE NEWS BEHIND THE HEADLINE"),
+    "market": ("PRICE IS NOT THE WHOLE STORY", "READ THE RISK BEFORE THE RETURN", "WHAT THE NUMBERS CAN SUPPORT", "CONTEXT BEFORE A MARKET DECISION"),
+    "debt": ("START WITH THE EFFECTIVE COST", "PUT THE REPAYMENT MATH ON PAPER", "COMPARE THE RATE AND THE CASH BUFFER", "A DEBT DECISION WITH VISIBLE NUMBERS"),
+    "tax": ("CHECK THE COUNTRY AND TAX YEAR", "ELIGIBILITY BEFORE THE TAX SAVING", "KEEP THE RECORD, VERIFY THE RULE", "SEPARATE TAX MATH FROM TAX LAW"),
+    "saving": ("MAKE THE NEXT STEP MEASURABLE", "TEST THE PLAN WITH REAL CASH FLOW", "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS", "BUILD MARGIN BEFORE CHASING RETURN"),
+    "economy": ("CONNECT THE DATA TO THE DECISION", "WHAT THE RELEASE ACTUALLY SAYS", "MACRO DATA WITH LIMITS ATTACHED", "THE HOUSEHOLD QUESTION BEHIND THE NUMBER"),
+    "general": ("ONE DECISION, CLEAR ASSUMPTIONS", "CHECK THE DOWNSIDE, NOT JUST THE CLAIM", "A PRACTICAL WAY TO TEST THE IDEA", "PUT THE TRADE-OFFS ON ONE PAGE"),
 }
 
-EMOJIS = ("🧾", "📊", "🧠", "⚡", "🪩", "🔎", "💸", "📌", "🧮", "🌐")
+EMOJIS = ("🧾", "📊", "🧠", "⚡", "🔎", "📌", "🧮", "🌐")
 QUESTIONS = {
-    "market": ("What would make you change your view?", "Are you watching the price—or the context?"),
-    "debt": ("Which number would you tackle first?", "What would make this repayment plan feel realistic?"),
-    "tax": ("Which rule deserves a plain-English explainer next?", "What part of the fine print trips people up most?"),
-    "saving": ("What is the smallest version of this move you could start today?", "What helps you make saving automatic?"),
-    "news": ("Which development deserves the deeper follow-up?", "What changes your money decision here?"),
-    "page": ("Which tool should Daily Yield build next?", "Save it now—which decision will you use it for?"),
-    "economy": ("Where are you feeling this most in real life?", "Which number needs more context?"),
-    "general": ("What is your take after seeing the numbers?", "What should Daily Yield unpack next?"),
+    "market": ("Which assumption would change your view?", "What downside would make this unsuitable for you?"),
+    "debt": ("Which balance has the highest effective cost?", "How much cash buffer must the plan preserve?"),
+    "tax": ("Which official rule and tax year apply to you?", "What record would you need to support the claim?"),
+    "saving": ("What amount can you sustain in a difficult month?", "Which assumption should you stress-test first?"),
+    "news": ("Which linked source deserves a closer read?", "Does this report change a decision—or only the context?"),
+    "page": ("Which decision will you use this resource for?", "What useful tool should Daily Yield improve next?"),
+    "economy": ("Which household decision could this number affect?", "What comparison period would make this clearer?"),
+    "general": ("Which number would decide this for you?", "What evidence would make you choose differently?"),
 }
 
 
@@ -209,20 +217,26 @@ def build_caption(item: dict, platform: str, summary: str, limit: int | None = N
     title, url = clean(item.get("title", "Daily Yield")), item["url"]
     insight = first_sentence(summary, 210 if platform in ("facebook", "tumblr") else 130)
     tags = " ".join(hashtag_list(item))
+    content_type = "Source-led news edition" if meta["topic"] == "news" else "Practical decision guide"
     if platform == "facebook":
-        ctas = ("Save this for the next money conversation.", "Send this to the group chat that debates everything.", "Read it now; bookmark it for decision day.", "The useful bit is the context—not just the headline.")
+        ctas = (
+            "Inside: the assumptions, downside and source links.",
+            "Use the worked example, then replace it with your own figures.",
+            "Read the limitations before using the conclusion.",
+            "Save this for the decision—not just the headline.",
+        )
         cta = ctas[(creative_seed(item, platform) // 41) % len(ctas)]
-        return f"{meta['emoji']} {meta['hook']}\n\n{title}\n\n{insight}\n\n{cta}\n{meta['question']}\n\n{url}\n\nBy Kushal K. Daga · {tags}"
+        return f"{meta['emoji']} {insight}\n\n{title}\n\n{content_type}. {cta}\n\n{meta['question']}\n\nRead: {url}\n\nBy Kushal K. Daga · {tags}"
     if platform == "bluesky":
-        base = f"{meta['emoji']} {meta['hook']}\n{title}\n{insight}\n{url}\n{tags}"
+        base = f"{meta['emoji']} {insight}\n\n{title}\n{url}\n{tags}"
         if len(base) <= 300: return base
-        fixed = f"{meta['emoji']} {meta['hook']}\n\n{url}\n{tags}"
+        fixed = f"{meta['emoji']} {meta['hook'].title()}\n\n{url}\n{tags}"
         title_room = max(35, 300 - len(fixed) - 1)
-        return f"{meta['emoji']} {meta['hook']}\n{trim(title,title_room)}\n{url}\n{tags}"
+        return f"{meta['emoji']} {meta['hook'].title()}\n{trim(title,title_room)}\n{url}\n{tags}"
     if platform == "mastodon":
-        base = f"{meta['emoji']} {meta['hook']}\n\n{title}\n\n{insight}\n\n{meta['question']}\n\n{url}\n\n{tags}\nBy Kushal K. Daga"
+        base = f"{meta['emoji']} {insight}\n\n{title}\n\n{content_type}. {meta['question']}\n\n{url}\n\n{tags}\nBy Kushal K. Daga"
         if len(base) <= 500: return base
-        fixed = f"{meta['emoji']} {meta['hook']}\n\n\n\n{meta['question']}\n\n{url}\n\n{tags}\nBy Kushal K. Daga"
+        fixed = f"{meta['emoji']} {meta['hook'].title()}\n\n\n\n{meta['question']}\n\n{url}\n\n{tags}\nBy Kushal K. Daga"
         return fixed.replace("\n\n\n\n", "\n\n" + trim(title, max(45, 500-len(fixed))) + "\n\n")
     return f"{meta['emoji']} {meta['hook']}\n{title}\n{insight}\n{url}\n{tags}"
 
@@ -236,11 +250,11 @@ def tumblr_payload(item: dict, summary: str) -> dict:
         "content": [
             {"type":"text", "text":f"{meta['emoji']} {meta['hook']}", "subtype":"heading1"},
             {"type":"text", "text":title, "subtype":"heading2"},
-            {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":1200,"height":630}], "alt_text":image_alt(item, "tumblr")},
+            {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":PLATFORM_SIZES["tumblr"][0],"height":PLATFORM_SIZES["tumblr"][1]}], "alt_text":image_alt(item, "tumblr")},
             {"type":"text", "text":insight},
             {"type":"text", "text":meta["question"], "subtype":"quote"},
             {"type":"link", "url":url, "title":"Open the full Daily Yield story", "description":trim(title, 180)},
-            {"type":"text", "text":"By Kushal K. Daga · clear numbers, useful context, zero finance-bro fog."},
+            {"type":"text", "text":"By Kushal K. Daga · sourced financial education with visible assumptions and limitations."},
         ],
         "state":"published", "tags":",".join(dict.fromkeys(tags)), "source_url":url,
         "send_to_twitter":False, "interactability_reblog":"everyone",
@@ -331,7 +345,12 @@ def _curated_entries(item: dict, platform: str) -> list[tuple[str, str]]:
 
 
 def _fallback_photo_urls(item: dict, platform: str) -> list[str]:
-    return [f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=1600&h=900&q=88" for photo_id, _ in _curated_entries(item, platform)]
+    width, height = PLATFORM_SIZES.get(platform, SIZE)
+    # Request the intended aspect ratio from the licensed source instead of
+    # taking a narrow centre crop from the same landscape asset everywhere.
+    request_width = max(1200, width)
+    request_height = round(request_width * height / width)
+    return [f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w={request_width}&h={request_height}&q=88" for photo_id, _ in _curated_entries(item, platform)]
 
 
 def _article_photo_alt(item: dict) -> str:
@@ -400,58 +419,64 @@ def render_social_card(item: dict, platform: str, destination: Path, summary: st
     meta = creative_meta(item, platform)
     palette = PALETTES[meta["style_index"]]
     source, photo_url = _photo(item, platform)
-    canvas = ImageOps.fit(source, SIZE, Image.Resampling.LANCZOS)
+    size = PLATFORM_SIZES.get(platform, SIZE)
+    width, height = size
+    sx, sy = width / 1200, height / 630
+    canvas = ImageOps.fit(source, size, Image.Resampling.LANCZOS)
     canvas = ImageEnhance.Contrast(canvas).enhance(1.04)
     canvas = ImageEnhance.Color(canvas).enhance(1.14)
     canvas = ImageEnhance.Brightness(canvas).enhance(1.03)
 
     # A light lower-third gradient protects readability without muting the photo.
     rgba = canvas.convert("RGBA")
-    shade = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    shade = Image.new("RGBA", size, (0, 0, 0, 0))
     shade_draw = ImageDraw.Draw(shade)
-    for y in range(SIZE[1]):
-        progress = y / (SIZE[1] - 1)
+    for y in range(height):
+        progress = y / (height - 1)
         alpha = int(3 + 145 * (progress ** 3.0))
         shade_draw.line((0, y, SIZE[0], y), fill=(5, 8, 15, alpha))
     rgba = Image.alpha_composite(rgba, shade)
     # Alternate a subtle side vignette so consecutive photographs have editorial variety.
     left_title = meta["layout"] in (0, 2, 4)
-    side_shade = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    side_shade = Image.new("RGBA", size, (0, 0, 0, 0))
     side_draw = ImageDraw.Draw(side_shade)
-    for x in range(SIZE[0]):
-        edge = (1 - x / SIZE[0]) if left_title else (x / SIZE[0])
+    for x in range(width):
+        edge = (1 - x / width) if left_title else (x / width)
         alpha = int(32 * (edge ** 2.8))
-        side_draw.line((x, 0, x, SIZE[1]), fill=(5, 8, 15, alpha))
+        side_draw.line((x, 0, x, height), fill=(5, 8, 15, alpha))
     rgba = Image.alpha_composite(rgba, side_shade)
     draw = ImageDraw.Draw(rgba)
 
     accent = palette["accent"]
     title = clean(item.get("title", "Daily Yield"))
-    title_font = _font(40 if len(title) < 88 else 34, True)
-    text_x = 58 if left_title else 448
-    text_width = 1080 if left_title else 690
+    font_scale = max(.82, min(1.08, sx))
+    title_font = _font(int((40 if len(title) < 88 else 34) * font_scale), True)
+    text_x = int((58 if left_title else 448) * sx)
+    text_width = int((1080 if left_title else 690) * sx)
     lines = _lines(draw, title, title_font, text_width, 3)
-    line_height = 47 if len(title) < 88 else 41
-    title_y = 545 - line_height * len(lines)
+    line_height = int((47 if len(title) < 88 else 41) * font_scale)
+    title_y = int(height * .87) - line_height * len(lines)
 
-    # A bright social sticker carries the hook; the headline stays subordinate.
-    hook_font = _font(15, True)
+    # A concise decision hook gives the image meaning without using clickbait.
+    hook_font = _font(max(12, int(15 * font_scale)), True)
     hook = meta["hook"]
     hook_w = draw.textbbox((0, 0), hook, font=hook_font)[2]
-    draw.rounded_rectangle((text_x, title_y - 53, text_x + hook_w + 34, title_y - 17), radius=18, fill=accent)
-    draw.text((text_x + 17, title_y - 45), hook, font=hook_font, fill="#11151F")
+    hook_top = title_y - int(53 * font_scale)
+    hook_bottom = title_y - int(17 * font_scale)
+    draw.rounded_rectangle((text_x, hook_top, text_x + hook_w + int(34 * font_scale), hook_bottom), radius=int(18 * font_scale), fill=accent)
+    draw.text((text_x + int(17 * font_scale), title_y - int(45 * font_scale)), hook, font=hook_font, fill="#11151F")
     for line in lines:
         draw.text((text_x, title_y), line, font=title_font, fill="#FFFFFF", stroke_width=2, stroke_fill=(0, 0, 0, 155))
         title_y += line_height
 
     # Compact masthead and source credit retain identity without covering the image.
-    brand_font = _font(18, True)
-    draw.text((58, 36), "DAILY YIELD", font=brand_font, fill="#FFFFFF", stroke_width=1, stroke_fill=(0,0,0,125))
-    draw.text((58, 61), platform.upper(), font=_font(10, True), fill=(255, 255, 255, 225))
+    brand_font = _font(max(15, int(18 * font_scale)), True)
+    draw.text((int(58*sx), int(36*sy)), "DAILY YIELD", font=brand_font, fill="#FFFFFF", stroke_width=1, stroke_fill=(0,0,0,125))
+    draw.text((int(58*sx), int(61*sy)), platform.upper(), font=_font(max(9, int(10*font_scale)), True), fill=(255, 255, 255, 225))
     credit = _photo_credit(item, photo_url)
-    credit_font = _font(10, True)
+    credit_font = _font(max(9, int(10 * font_scale)), True)
     credit_w = draw.textbbox((0, 0), credit, font=credit_font)[2]
-    draw.text((1140 - credit_w, 594), credit, font=credit_font, fill=(255, 255, 255, 190))
+    draw.text((width - int(60*sx) - credit_w, height - int(36*sy)), credit, font=credit_font, fill=(255, 255, 255, 190))
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     final = rgba.convert("RGB")

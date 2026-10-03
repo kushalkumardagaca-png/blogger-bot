@@ -33,6 +33,7 @@ CRITICAL_FILES = [
     "brand_identity.py", "social_identity.py", "bluesky_publisher.py",
     "tumblr_publisher.py", "mastodon_publisher.py", "tumblr_oauth_bootstrap.py",
     "social_rotation.py", "dispatch_social_events.py", "persist_social_state.sh",
+    "social_performance.py", ".github/workflows/social_performance.yml",
     ".github/workflows/coordinated_social_publish.yml",
     ".github/workflows/daily_blogger_poster.yml", ".github/workflows/daily_news_wires.yml",
     ".github/workflows/facebook_publisher.yml", ".github/workflows/bluesky_publisher.yml",

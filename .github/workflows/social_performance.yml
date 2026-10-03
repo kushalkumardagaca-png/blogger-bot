@@ -1,0 +1,47 @@
+name: Daily Yield Genuine Social Performance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'social_performance.py'
+      - '.github/workflows/social_performance.yml'
+  schedule:
+    - cron: '10 21 * * *'  # 02:40 IST; measurement only, no publishing
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-social-performance
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --disable-pip-version-check requests
+      - name: Collect genuine platform metrics without opening Daily Yield
+        env:
+          FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
+          FACEBOOK_PAGE_ID: '1303333369533572'
+          FACEBOOK_GRAPH_VERSION: 'v26.0'
+          TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
+        run: python social_performance.py
+      - name: Persist genuine social evidence
+        run: |
+          git config user.name 'Daily Yield Social Performance Bot'
+          git config user.email 'bot@dailyyield.blogspot.com'
+          git add SOCIAL_PERFORMANCE.json
+          if git diff --staged --quiet; then
+            echo 'No social performance change.'
+          else
+            git commit -m 'Record genuine social performance [skip ci]'
+            git pull --rebase origin main
+            git push origin main
+          fi

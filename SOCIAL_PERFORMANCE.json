@@ -1,0 +1,689 @@
+{
+  "generated_at": "2026-10-03T16:20:11.796525+00:00",
+  "method": "Official social APIs only; no Daily Yield page requests and no synthetic views.",
+  "limitations": "Impressions are recorded only where the platform API supplies them. Engagement counts are not treated as impressions.",
+  "platforms": {
+    "facebook": {
+      "status": "unavailable: token not configured",
+      "observations": 0
+    },
+    "bluesky": {
+      "status": "ok",
+      "observations": 27
+    },
+    "mastodon": {
+      "status": "ok",
+      "observations": 22
+    },
+    "tumblr": {
+      "status": "unavailable: API key not configured",
+      "observations": 0
+    }
+  },
+  "items": [
+    {
+      "platform": "mastodon",
+      "social_id": "117377589867136292",
+      "title": "Mexico Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-03.html",
+      "published_at": "2026-10-03T20:34:44.622943+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwy5vlv5nh2s",
+      "title": "Canada Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-03.html",
+      "published_at": "2026-10-03T20:34:28.699326+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwxmgodqna2y",
+      "title": "Italy Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-03.html",
+      "published_at": "2026-10-03T15:21:54.490221+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117375768824203975",
+      "title": "Spain Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-03.html",
+      "published_at": "2026-10-03T12:51:37.753943+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwx7yik6572d",
+      "title": "Japan Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-03.html",
+      "published_at": "2026-10-03T11:39:13.668226+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117375170061039871",
+      "title": "France Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/france-2026-10-03.html",
+      "published_at": "2026-10-03T10:19:21.294295+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwx3iqy6sb2z",
+      "title": "Germany Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-03.html",
+      "published_at": "2026-10-03T10:18:50.637105+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwwo3e2dsl2x",
+      "title": "India Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/india-2026-10-03.html",
+      "published_at": "2026-10-03T06:18:42.367731+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117373732336366853",
+      "title": "South Korea Finance News — 3 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-03.html",
+      "published_at": "2026-10-03T04:13:43.387231+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117371959771009374",
+      "title": "Personal Finance News — 2 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-02.html",
+      "published_at": "2026-10-02T20:42:56.194527+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117371855427241065",
+      "title": "4 Hustles, 30 Days Each, 1 Winner",
+      "destination": "https://dailyyield.blogspot.com/2026/10/4-hustles-30-days-each-1-winner.html",
+      "published_at": "2026-10-02T20:16:24.138968+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwvivaliwd2i",
+      "title": "Mexico Finance News — 2 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-02.html",
+      "published_at": "2026-10-02T19:13:08.765161+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117371180707151926",
+      "title": "The Real Price of a Career Break",
+      "destination": "https://dailyyield.blogspot.com/2026/10/the-real-price-of-career-break.html",
+      "published_at": "2026-10-02T17:24:48.625216+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwvadxf4lf2z",
+      "title": "Brazil Finance News — 2 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-02.html",
+      "published_at": "2026-10-02T16:40:18.834478+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117370708162919240",
+      "title": "Corporate Finance and Industry News",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html",
+      "published_at": "2026-10-02T15:24:38.181818+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117370443855135866",
+      "title": "Capital Gains, Explained Like a Human",
+      "destination": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
+      "published_at": "2026-10-02T14:17:25.216362+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwutav4qdd2x",
+      "title": "China Finance News — 2 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/china-2026-10-02.html",
+      "published_at": "2026-10-02T12:45:57.211658+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117369818876116343",
+      "title": "UK Finance News · 2 October 2026 · Coverage October 1 to 2 — Economic activity and social change in the UK, real-time indicators: 1 October 2026…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/uk-2026-10-02.html",
+      "published_at": "2026-10-02T11:38:28.687853+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117369706211439305",
+      "title": "Coast vs. Barista vs. Fat FIRE",
+      "destination": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html",
+      "published_at": "2026-10-02T11:09:49.559981+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwukz5szay2o",
+      "title": "France Finance News · 2 October 2026 · Coverage October 1 to 2 — Isolating Israel: The West's brake on West Bank colonization and Gaza's destruction…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/france-2026-10-02.html",
+      "published_at": "2026-10-02T10:18:28.210639+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwufmpojxq2b",
+      "title": "Market and Trading News · 2 October 2026 · Coverage October 1 to 2 — Situation in Europe so critical that it is being ‘eaten alive’ — Trump; IN BRIEF: Putin…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-02.html",
+      "published_at": "2026-10-02T08:42:02.584896+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117368877320590028",
+      "title": "S&P 500 vs. Global: Pick One",
+      "destination": "https://dailyyield.blogspot.com/2026/10/s-500-vs-global-pick-one.html",
+      "published_at": "2026-10-02T07:39:01.917482+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117368568018549083",
+      "title": "Global Finance Wire · 2 October 2026 · Coverage October 1 to 2 — Average Contract Interest Rates on Loans and Discounts (Aug.)[PDF 1,118KB]; Sources of…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-02.html",
+      "published_at": "2026-10-02T06:20:22.946214+05:30",
+      "metrics": {
+        "favourites": 1,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwlnmcjlhi2v",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "destination": "https://dailyyield.blogspot.com/",
+      "published_at": "2026-10-02T05:22:27.797534+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwtwkigu6h2f",
+      "title": "Australia Finance News · 2 October 2026 · Coverage October 1 to 2 — Statement by the Monetary Policy Board: Monetary Policy Decision; Live: ASX to rise as US…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-02.html",
+      "published_at": "2026-10-02T04:12:20.841263+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117366524676256059",
+      "title": "Russia Finance News · 1 October 2026 · Coverage September 30 to October 1 — FACTBOX: Key takeaways from Russia's draft federal budget for 2027-2029; All prerequisites…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-01.html",
+      "published_at": "2026-10-01T21:40:43.204179+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwt5fpqq232i",
+      "title": "Personal Finance News · 1 October 2026 · Coverage September 30 to October 1 — Pension tops £16,000 a year after 4.7% increase; Healey urged to offer energy support in…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-01.html",
+      "published_at": "2026-10-01T20:42:17.315568+05:30",
+      "metrics": {
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117366187313325230",
+      "title": "DAILY ARTICLE",
+      "destination": "https://dailyyield.blogspot.com/p/article.html",
+      "published_at": "2026-10-01T20:14:55.540253+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwsyklsmos2b",
+      "title": "US Finance News · 1 October 2026 · Coverage September 30 to October 1 — Racehorse market breaks records riding high on tax breaks, stock market gains; Jim…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/us-2026-10-01_01887906195.html",
+      "published_at": "2026-10-01T19:15:31.555806+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwstek6ajo2f",
+      "title": "US Finance News · 1 October 2026 · Coverage September 30 to October 1 — Micron stock barely budged on chipmaker's latest earnings. Wall Street still thinks gains…",
+      "destination": "https://dailyyield.blogspot.com/2026/10/us-2026-10-01.html",
+      "published_at": "2026-10-01T17:42:40.302474+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mws5rtltgz24",
+      "title": "GLOBAL SNAPSHOT — MOVED",
+      "destination": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
+      "published_at": "2026-10-01T11:16:24.117343+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117363714162768893",
+      "title": "GLOBAL SNAPSHOT",
+      "destination": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+      "published_at": "2026-10-01T09:45:58.177686+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwrtfyo3zi2v",
+      "title": "Your Car Payment Is a Wealth Killer",
+      "destination": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
+      "published_at": "2026-10-01T08:10:49.277793+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117360992071311457",
+      "title": "MARKETS TODAY",
+      "destination": "https://dailyyield.blogspot.com/p/markets-today.html",
+      "published_at": "2026-09-30T22:13:42.359689+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwqovfoliv2h",
+      "title": "GLOBAL SNAPSHOT",
+      "destination": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+      "published_at": "2026-09-30T21:17:17.892624+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117360059709751667",
+      "title": "Childcare Is the New Mortgage",
+      "destination": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html",
+      "published_at": "2026-09-30T18:16:35.641243+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwqcfidpvd23",
+      "title": "Childcare Is the New Mortgage",
+      "destination": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html",
+      "published_at": "2026-09-30T17:33:38.822068+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwpx3zahdy2c",
+      "title": "90 Days of Passive Income: The Truth",
+      "destination": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
+      "published_at": "2026-09-30T14:11:29.909135+05:30",
+      "metrics": {
+        "likes": 1,
+        "reposts": 0,
+        "replies": 1,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117359001643580367",
+      "title": "Only 5 Money Goals for Your 20s",
+      "destination": "https://dailyyield.blogspot.com/2026/09/only-5-money-goals-for-your-20s.html",
+      "published_at": "2026-09-30T13:47:30.797185+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwpncx3ylc2u",
+      "title": "MARKETS TODAY",
+      "destination": "https://dailyyield.blogspot.com/p/markets-today.html",
+      "published_at": "2026-09-30T11:16:25.264801+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117358051230638638",
+      "title": "CALCULATOR",
+      "destination": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "published_at": "2026-09-30T09:45:48.685700+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwpcvdm7t62m",
+      "title": "Stop Checking Your Portfolio Daily",
+      "destination": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html",
+      "published_at": "2026-09-30T08:09:51.030743+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117355335508951151",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "destination": "https://dailyyield.blogspot.com/",
+      "published_at": "2026-09-29T22:15:10.063443+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwo6e7zgge24",
+      "title": "CALCULATOR",
+      "destination": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "published_at": "2026-09-29T21:16:02.820608+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117354645192966257",
+      "title": "The Market Is Not a Casino",
+      "destination": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
+      "published_at": "2026-09-29T19:19:36.728705+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwnrvbvxcu2c",
+      "title": "The Market Is Not a Casino",
+      "destination": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
+      "published_at": "2026-09-29T17:32:55.965793+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwnglzbzxa2d",
+      "title": "BRRRR With the Ugly Months Included",
+      "destination": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html",
+      "published_at": "2026-09-29T14:10:53.689696+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwmslxps4e2g",
+      "title": "Laid Off: The First 72 Hours",
+      "destination": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
+      "published_at": "2026-09-29T08:12:57.282066+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwld7vbcfp2d",
+      "title": "Your Student Overdraft Isn't Free",
+      "destination": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html",
+      "published_at": "2026-09-28T18:05:06.085552+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    }
+  ]
+}

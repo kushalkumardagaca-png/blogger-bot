@@ -7,8 +7,8 @@ from unittest.mock import patch
 from PIL import Image, ImageChops, ImageDraw
 
 from social_creative import (
-    _curated_entries, _photo_url, _semantic_theme, build_caption, creative_meta,
-    image_alt, render_social_card, tumblr_payload,
+    PLATFORM_SIZES, _curated_entries, _photo_url, _semantic_theme, build_caption,
+    creative_meta, image_alt, render_social_card, tumblr_payload,
 )
 
 
@@ -64,6 +64,7 @@ def test_caption_limits_platform_voice_and_cross_network_difference():
     assert len(set(captions.values())) == 3
     assert all(story["url"] in text and "#DailyYield" in text for text in captions.values())
     assert all("Read the report" not in text and "Clear context" not in text for text in captions.values())
+    assert all("A clear look at compounding interest" in text for text in captions.values())
     assert "?" in captions["facebook"] and "?" in captions["mastodon"]
 
 
@@ -102,7 +103,7 @@ def test_cards_are_photo_first_accessible_sized_and_visually_distinct():
                 render_social_card(story, platform, path, "A compact guide to the signals and limits behind today's market move.")
                 paths.append(path)
                 with Image.open(path) as image:
-                    assert image.size == (1200, 630)
+                    assert image.size == PLATFORM_SIZES[platform]
                 assert path.stat().st_size < 1_000_000
                 alt = image_alt(story, platform)
                 assert story["title"] in alt and "Editorial photograph" in alt
