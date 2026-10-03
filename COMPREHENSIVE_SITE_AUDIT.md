@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-03T03:54:11.723383+05:30
+- **Checked:** 2026-10-03T05:56:23.457731+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 237 URLs · 223 Posts · 13 Pages
-- **Content failures:** 1
+- **Inventory:** 239 URLs · 225 Posts · 13 Pages
+- **Content failures:** 2
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 236 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 238 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ✅ **page · DAILY NEWS**
+- ❌ **page · DAILY NEWS** — Daily Yield family directory missing; SEO/meta description package missing
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
@@ -27,6 +27,8 @@
 - ✅ **page · CALCULATOR**
 - ❌ **page · DAILY ARTICLE** — 65 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · South Korea Finance News — 3 October 2026**
+- ✅ **post · Australia Finance News — 3 October 2026**
 - ✅ **post · Russia Finance News — 2 October 2026**
 - ✅ **post · Personal Finance News — 2 October 2026**
 - ✅ **post · 4 Hustles, 30 Days Each, 1 Winner**
