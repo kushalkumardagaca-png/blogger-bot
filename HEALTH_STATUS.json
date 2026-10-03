@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 242,
-    "posts": 228,
+    "urls": 244,
+    "posts": 230,
     "pages": 13,
     "contentFailures": 2,
-    "externalDestinationsChecked": 2299,
+    "externalDestinationsChecked": 2323,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 0,
-    "transientExternalResponses": 181,
+    "transientExternalResponses": 144,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -43,13 +43,13 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-10-01T21:19:39.736Z",
+        "lastDownloaded": "2026-10-02T22:25:23.492Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
           {
             "type": "web",
-            "submitted": "198",
+            "submitted": "223",
             "indexed": "0"
           }
         ]
@@ -2706,28 +2706,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0526097754.html": {
+        "title": "Economy and Macro Policy News \u2014 3 October 2026",
+        "checkedAt": "2026-10-03T09:24:28.164171+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-03.html": {
+        "title": "Market and Trading News \u2014 3 October 2026",
+        "checkedAt": "2026-10-03T09:24:28.164171+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 241,
-      "tracked": 241,
+      "inventory": 243,
+      "tracked": 243,
       "pass": 0,
-      "neutralOrOther": 241,
-      "inspectedThisRun": 3,
+      "neutralOrOther": 243,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 181,
         "Redirect error": 10,
-        "URL is unknown to Google": 50
+        "URL is unknown to Google": 52
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 231,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 233,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 181,
-      "unknownToGoogle": 50
+      "unknownToGoogle": 52
     }
   },
   "github": [
@@ -2743,32 +2765,32 @@
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37082517426,
-      "latestUpdatedAt": "2026-10-03T00:33:34Z",
+      "latestRunId": 37092009962,
+      "latestUpdatedAt": "2026-10-03T03:06:02Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37087740974,
-      "latestUpdatedAt": "2026-10-03T02:07:44Z",
+      "latestRunId": 37092061181,
+      "latestUpdatedAt": "2026-10-03T03:21:11Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37089568937,
-      "latestUpdatedAt": "2026-10-03T02:22:30Z",
+      "latestRunId": 37094737822,
+      "latestUpdatedAt": "2026-10-03T03:54:42Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37082382585,
-      "latestUpdatedAt": "2026-10-03T00:32:38Z",
+      "latestRunId": 37089780631,
+      "latestUpdatedAt": "2026-10-03T02:28:18Z",
       "detail": "latest=success; 2 failures among 11 recent completed runs"
     }
   ],

@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-03T07:55:54.710233+05:30
+- **Checked:** 2026-10-03T09:24:28.164171+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 242 URLs · 228 Posts · 13 Pages
+- **Inventory:** 244 URLs · 230 Posts · 13 Pages
 - **Content failures:** 2
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 0
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 241 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 243 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -25,8 +25,10 @@
 - ✅ **page · DISCLAIMER**
 - ✅ **page · CONTACT US**
 - ✅ **page · CALCULATOR**
-- ❌ **page · DAILY ARTICLE** — 65 image(s) missing descriptive alt text
+- ❌ **page · DAILY ARTICLE** — 66 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · Economy and Macro Policy News — 3 October 2026**
+- ✅ **post · Market and Trading News — 3 October 2026**
 - ✅ **post · Buy Term. Skip the Whole-Life Pitch.**
 - ✅ **post · India Finance News — 3 October 2026**
 - ✅ **post · Global Finance Wire — 3 October 2026**
