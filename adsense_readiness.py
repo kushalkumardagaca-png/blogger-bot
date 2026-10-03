@@ -76,11 +76,11 @@ def main():
  with gzip.open(BACKUP,'wt',encoding='utf-8') as f:json.dump({'createdAt':datetime.now(timezone.utc).isoformat(),'items':before},f,ensure_ascii=False)
  changed=[]
  for item in before:
-  content=item.get('content','');new=repair_image_alts(content,item.get('title','Daily Yield'))
+  content=item.get('content','');new,alts_repaired=repair_image_alts(content,item.get('title','Daily Yield'))
   key=policy_key(item.get('url',''))
   if key:new=ensure_block(new,key)
   if new!=content:
-   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':max(0,len(image_alt_failures(content))-len(image_alt_failures(new)))})
+   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired})
  after=inventory(token);fail=[];page_keys=set()
  for item in after:
   ident=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))

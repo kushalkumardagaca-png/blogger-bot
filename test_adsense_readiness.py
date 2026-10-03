@@ -24,4 +24,10 @@ class AdSenseReadinessTests(unittest.TestCase):
   self.assertIn('before',new);self.assertIn('after',new);self.assertNotIn('old wording',new)
   self.assertEqual(new.count(a.START),1)
 
+ def test_alt_repair_result_is_unpacked_before_policy_insertion(self):
+  repaired,count=a.repair_image_alts('<p>Text</p><img src="x">','Example')
+  self.assertIsInstance(repaired,str);self.assertEqual(count,1)
+  final=a.ensure_block(repaired,'privacy-policy.html')
+  self.assertIn('alt="Example — editorial photograph"',final)
+
 if __name__=='__main__':unittest.main()
