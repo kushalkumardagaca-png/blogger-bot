@@ -1,11 +1,11 @@
 # Daily Yield Security Guard
 
-- **Status:** PASS
-- **Checked:** 2026-10-03T11:23:41.098504+00:00
+- **Status:** FAIL
+- **Checked:** 2026-10-03T11:23:57.941934+00:00
 - **Public website requests:** 0
 
 ## Critical findings
-- None
+- critical repository files changed without baseline approval: .github/workflows/gsc_rebuild.yml, apply_site_enhancements.py, audit_site_enhancements.py, bing_url_automation.py, theme/Daily-Yield-Theme-Subscription.xml, theme/Daily-Yield-Theme-v4-2026-10-01.xml
 
 ## Warnings
 - 1 new live item(s) accepted after threat scan

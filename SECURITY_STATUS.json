@@ -1,9 +1,11 @@
 {
-  "checkedAt": "2026-10-03T11:23:41.098504+00:00",
-  "status": "PASS",
+  "checkedAt": "2026-10-03T11:23:57.941934+00:00",
+  "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [],
+  "critical": [
+    "critical repository files changed without baseline approval: .github/workflows/gsc_rebuild.yml, apply_site_enhancements.py, audit_site_enhancements.py, bing_url_automation.py, theme/Daily-Yield-Theme-Subscription.xml, theme/Daily-Yield-Theme-v4-2026-10-01.xml"
+  ],
   "warnings": [
     "1 new live item(s) accepted after threat scan"
   ],
@@ -15,7 +17,7 @@
     "removedItems": 0,
     "repositoryFiles": 61,
     "backupCreated": false,
-    "repositoryChangeApproved": true,
+    "repositoryChangeApproved": false,
     "bloggerChangeApproved": false
   }
 }
