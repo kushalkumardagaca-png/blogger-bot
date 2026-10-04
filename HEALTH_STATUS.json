@@ -3,15 +3,15 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 271,
-    "posts": 257,
+    "urls": 277,
+    "posts": 263,
     "pages": 13,
     "contentFailures": 2,
-    "externalDestinationsChecked": 2622,
+    "externalDestinationsChecked": 2662,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 226,
-    "workflowWarnings": 1,
+    "transientExternalResponses": 228,
+    "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
@@ -3025,69 +3025,135 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/put-money-on-calendar-not-your-mood.html": {
+        "title": "Put Money on the Calendar, Not Your Mood",
+        "checkedAt": "2026-10-04T17:56:14.324206+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01760479359.html": {
+        "title": "Corporate Finance and Industry News",
+        "checkedAt": "2026-10-04T17:56:14.324206+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/spain-2026-10-04.html": {
+        "title": "Spain Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T17:56:14.324206+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-04.html": {
+        "title": "Brazil Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T17:56:14.324206+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/italy-2026-10-04.html": {
+        "title": "Italy Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T17:56:14.324206+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/china-2026-10-04.html": {
+        "title": "China Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T17:56:14.324206+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 270,
-      "tracked": 270,
+      "inventory": 276,
+      "tracked": 276,
       "pass": 0,
-      "neutralOrOther": 270,
-      "inspectedThisRun": 2,
+      "neutralOrOther": 276,
+      "inspectedThisRun": 6,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 187,
         "Redirect error": 10,
-        "URL is unknown to Google": 73
+        "URL is unknown to Google": 79
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 260,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 266,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 187,
-      "unknownToGoogle": 73
+      "unknownToGoogle": 79
     }
   },
   "github": [
     {
       "name": "Master publisher",
-      "status": "WARN",
-      "latestConclusion": "failure",
-      "latestRunId": 37175876671,
-      "latestUpdatedAt": "2026-10-04T04:03:45Z",
-      "detail": "latest=failure; 2 failures among 12 recent completed runs"
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 37200999989,
+      "latestUpdatedAt": "2026-10-04T12:07:20Z",
+      "detail": "latest=success; 7 failures among 12 recent completed runs"
     },
     {
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37181940026,
-      "latestUpdatedAt": "2026-10-04T06:09:16Z",
+      "latestRunId": 37197715367,
+      "latestUpdatedAt": "2026-10-04T11:09:55Z",
       "detail": "latest=success; 2 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37181966815,
-      "latestUpdatedAt": "2026-10-04T06:24:25Z",
+      "latestRunId": 37201018334,
+      "latestUpdatedAt": "2026-10-04T12:14:39Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37187869221,
-      "latestUpdatedAt": "2026-10-04T08:07:07Z",
-      "detail": "latest=success; 4 failures among 12 recent completed runs"
+      "latestRunId": 37200999995,
+      "latestUpdatedAt": "2026-10-04T12:07:12Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37181596517,
-      "latestUpdatedAt": "2026-10-04T06:03:59Z",
+      "latestRunId": 37187869220,
+      "latestUpdatedAt": "2026-10-04T08:09:31Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
