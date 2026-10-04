@@ -1,13 +1,13 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-04T21:29:07.196386+05:30
+- **Checked:** 2026-10-04T21:53:01.605015+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
 - **Inventory:** 283 URLs · 269 Posts · 13 Pages
-- **Content failures:** 1
+- **Content failures:** 0
 - **Confirmed external 404/410:** 1
 - **External redirect chains:** 1
-- **Current workflow warnings:** 1
+- **Current workflow warnings:** 0
 - **Search Console:** OK · 282 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ❌ **page · DAILY NEWS** — Daily Yield family directory missing; Daily Yield favicon identity missing; SEO/meta description package missing
+- ✅ **page · DAILY NEWS**
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**

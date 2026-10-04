@@ -6,12 +6,12 @@
     "urls": 283,
     "posts": 269,
     "pages": 13,
-    "contentFailures": 1,
+    "contentFailures": 0,
     "externalDestinationsChecked": 2736,
     "confirmedExternal404or410": 1,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 249,
-    "workflowWarnings": 1,
+    "transientExternalResponses": 173,
+    "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
@@ -3164,7 +3164,7 @@
       "tracked": 282,
       "pass": 0,
       "neutralOrOther": 282,
-      "inspectedThisRun": 6,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -3202,17 +3202,17 @@
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37214404591,
-      "latestUpdatedAt": "2026-10-04T15:49:13Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 37215041747,
+      "latestUpdatedAt": "2026-10-04T16:14:04Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
-      "status": "WARN",
-      "latestConclusion": "failure",
-      "latestRunId": 37215036356,
-      "latestUpdatedAt": "2026-10-04T15:59:15Z",
-      "detail": "latest=failure; 1 failures among 12 recent completed runs"
+      "status": "OK",
+      "latestConclusion": "success",
+      "latestRunId": 37216527729,
+      "latestUpdatedAt": "2026-10-04T16:22:51Z",
+      "detail": "latest=success; 3 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",

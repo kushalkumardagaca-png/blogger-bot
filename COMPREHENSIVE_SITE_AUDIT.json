@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
   "urls": 283,
-  "hard_failures": 2,
+  "hard_failures": 1,
   "results": [
     {
       "kind": "home",
@@ -193,14 +193,15 @@
       "kind": "page",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "issues": [
-        "Daily Yield family directory missing",
-        "Daily Yield favicon identity missing",
-        "SEO/meta description package missing"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [],
-      "external": [],
+      "external": [
+        "https://www.facebook.com/1303333369533572",
+        "https://bsky.app/profile/dailyyield.bsky.social",
+        "https://www.tumblr.com/dailyyield-official",
+        "https://mastodon.social/@dailyyield"
+      ],
       "internal": [
         "https://dailyyield.blogspot.com/#kn-global-sec",
         "https://dailyyield.blogspot.com/#kn-country-sec",
@@ -226,7 +227,20 @@
         "https://dailyyield.blogspot.com/search?q=label%3A%22Economy and Macro Policy%22%20label%3ANews",
         "https://dailyyield.blogspot.com/search?q=label%3A%22Corporate Finance and Industry%22%20label%3ANews",
         "https://dailyyield.blogspot.com/search?q=label%3A%22Personal Finance%22%20label%3ANews",
-        "https://dailyyield.blogspot.com"
+        "https://dailyyield.blogspot.com",
+        "https://dailyyield.blogspot.com/p/article.html",
+        "https://dailyyield.blogspot.com/p/daily-news.html",
+        "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+        "https://dailyyield.blogspot.com/p/markets-today.html",
+        "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+        "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+        "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+        "https://dailyyield.blogspot.com/p/disclaimer.html",
+        "https://dailyyield.blogspot.com/p/privacy-policy.html",
+        "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+        "https://dailyyield.blogspot.com/#dy-subscribe"
       ]
     },
     {
