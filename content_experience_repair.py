@@ -196,7 +196,11 @@ def repair_article_page(page,posts,cfg):
  c=c.replace('requestAnimationFrame(function(){try{if(group.getBoundingClientRect().width<=viewport.clientWidth+1)duplicate.hidden=true;}catch(e){}});','requestAnimationFrame(function(){duplicate.hidden=false;});')
  c=c.replace('requestAnimationFrame(function(){duplicate.hidden=false;});','requestAnimationFrame(function(){duplicate.hidden=false;});')
  c=c.replace("document.querySelectorAll('.ar-viewport').forEach(function(v){bind(v,null,0,false)});", "/* Daily Article rows use the exact Daily News wire motion below. */")
- c=re.sub(r'var last=0;\s*function tick\(t\)\{.*?\}requestAnimationFrame\(tick\);','/* Auto-scroll is supplied by the Daily News wire motion below. */',c,count=1,flags=re.S)
+ # Remove the complete native tick block by its stable following comment. A
+ # former nested-brace regex left `}requestAnimationFrame(tick);` behind and
+ # caused the browser-stopping SyntaxError visible in the supplied screenshot.
+ c=re.sub(r'var last=0;.*?(?=// Human-readable note deck)','/* Auto-scroll is supplied by the Daily News wire motion below. */\n',c,count=1,flags=re.S)
+ c=c.replace('/* Auto-scroll is supplied by the Daily News wire motion below. */}requestAnimationFrame(tick);','/* Auto-scroll is supplied by the Daily News wire motion below. */')
  c=c.replace('.ar-heading-copy{flex:1 1 430px;min-width:0;}', '.ar-heading-copy{flex:1 1 430px;min-width:0;text-align:left;}')
  c=c.replace('.ar-heading h2{margin:0 0 12px;', '.ar-heading h2{margin:0 0 12px;text-align:left;')
  c=c.replace("im.alt='';im.loading='lazy'", "im.alt=post.title+' — Daily Yield article photograph';im.loading='lazy'")

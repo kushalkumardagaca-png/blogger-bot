@@ -25,6 +25,7 @@ requestAnimationFrame(function(){{try{{if(group.getBoundingClientRect().width<=v
 document.querySelectorAll('.ar-viewport').forEach(function(v){{bind(v,null,0,false)}});
 var last=0;
 function tick(t){{var dt=1;rowStates.forEach(function(s){{s.viewport.scrollLeft+=dt*24;}});requestAnimationFrame(tick);}}requestAnimationFrame(tick);
+// Human-readable note deck
 /* Authenticated snapshot is complete; no slower public-feed replacement. */
 </script>
 </main>
@@ -64,6 +65,7 @@ def test_article_uses_daily_news_wire_motion_verbatim_behaviour():
     assert "delay(250)" in out
     assert "pointerenter" in out and "pointerleave" in out
     assert "Auto-scroll is supplied by the Daily News wire motion below." in out
+    assert "/* Auto-scroll is supplied by the Daily News wire motion below. */}requestAnimationFrame(tick);" not in out
     assert "dt*24" not in out
     assert "dt*58" not in out
     assert "bind(v,null,0,false)" not in out
