@@ -64,13 +64,21 @@ jobs:
             SECURITY_STATUS.md
             ZERO_VIEW_WATCHDOG.json
             ZERO_VIEW_WATCHDOG.md
-      - name: Persist report and approved state
+      - name: Persist cleanup report with race-safe retries
         if: always()
         run: |
+          test -f INACTIVE_SOCIAL_REMOVAL_REPORT.json || exit 1
+          cp INACTIVE_SOCIAL_REMOVAL_REPORT.json /tmp/inactive-social-report.json
           git config user.name 'Daily Yield Inactive Social Cleanup'
           git config user.email 'bot@dailyyield.blogspot.com'
-          git add INACTIVE_SOCIAL_REMOVAL_REPORT.json SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md
-          if git diff --staged --quiet; then exit 0; fi
-          git commit -m 'Remove inactive social channels from Blogger [skip ci]'
-          git pull --rebase origin main
-          git push origin main
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/inactive-social-report.json INACTIVE_SOCIAL_REMOVAL_REPORT.json
+            git add INACTIVE_SOCIAL_REMOVAL_REPORT.json
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m 'Remove inactive social channels from Blogger [skip ci]'
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
