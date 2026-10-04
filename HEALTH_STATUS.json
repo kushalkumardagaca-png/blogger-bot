@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 267,
-    "posts": 253,
+    "urls": 269,
+    "posts": 255,
     "pages": 13,
     "contentFailures": 2,
-    "externalDestinationsChecked": 2575,
+    "externalDestinationsChecked": 2594,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 236,
+    "transientExternalResponses": 219,
     "workflowWarnings": 1,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -2981,28 +2981,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/france-2026-10-04.html": {
+        "title": "France Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T10:23:35.129656+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/germany-2026-10-04.html": {
+        "title": "Germany Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T10:23:35.129656+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 266,
-      "tracked": 266,
+      "inventory": 268,
+      "tracked": 268,
       "pass": 0,
-      "neutralOrOther": 266,
-      "inspectedThisRun": 6,
+      "neutralOrOther": 268,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 187,
         "Redirect error": 10,
-        "URL is unknown to Google": 69
+        "URL is unknown to Google": 71
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 256,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 258,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 187,
-      "unknownToGoogle": 69
+      "unknownToGoogle": 71
     }
   },
   "github": [
@@ -3026,24 +3048,24 @@
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37175837637,
-      "latestUpdatedAt": "2026-10-04T04:03:12Z",
-      "detail": "latest=success; 0 failures among 10 recent completed runs"
+      "latestRunId": 37177202827,
+      "latestUpdatedAt": "2026-10-04T04:45:47Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37177212273,
-      "latestUpdatedAt": "2026-10-04T04:30:59Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "latestRunId": 37178297073,
+      "latestUpdatedAt": "2026-10-04T04:53:47Z",
+      "detail": "latest=success; 4 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37171660575,
-      "latestUpdatedAt": "2026-10-04T02:40:11Z",
+      "latestRunId": 37177112717,
+      "latestUpdatedAt": "2026-10-04T04:32:09Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],

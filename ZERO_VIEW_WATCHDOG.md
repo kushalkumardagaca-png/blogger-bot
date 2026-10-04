@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-04T09:58:55.993639+05:30
+- **Checked:** 2026-10-04T10:23:35.129656+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 267 URLs · 253 Posts · 13 Pages
+- **Inventory:** 269 URLs · 255 Posts · 13 Pages
 - **Content failures:** 2
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 1
 - **Current workflow warnings:** 1
-- **Search Console:** OK · 266 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 268 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -27,6 +27,8 @@
 - ✅ **page · CALCULATOR**
 - ❌ **page · DAILY ARTICLE** — 69 image(s) missing descriptive alt text
 - ✅ **page · ABOUT US**
+- ✅ **post · France Finance News — 4 October 2026**
+- ✅ **post · Germany Finance News — 4 October 2026**
 - ✅ **post · South Korea Finance News — 4 October 2026**
 - ✅ **post · Economy and Macro Policy News — 4 October 2026**
 - ✅ **post · Market and Trading News — 4 October 2026**
