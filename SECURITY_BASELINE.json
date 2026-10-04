@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-04T13:04:48.877375+00:00",
+  "approvedAt": "2026-10-04T13:09:00.963172+00:00",
   "repository": {
     "auto_blogger_publisher.py": "f84a513e37b63240e623b1618d179e115f8270fa990e0f8db7264ba2ca0d5cd0",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -43,6 +43,7 @@
     "outreach/send_lock.json": "31158436a1061934931db1705e3d38026937eed4841085fcca0f210866703774",
     "outreach/suppressions.csv": "d20ca85945453ad5eb51bf4070801a4e490c4c5608c61a656488a73dfc1b5ce4",
     ".github/workflows/adsense_readiness.yml": "fd885ee8e5816766cd7389beeda91b2587928bc40402586fe8586c9bd17fc31f",
+    ".github/workflows/audience_growth_baseline.yml": "0299042a165e5a51b39034f3ff073334e427e7873d176b9ede5036eb341bde2c",
     ".github/workflows/bing_seo_repair.yml": "c52d8fd44619f95c109222d523f386a9004bf6b5ff6054f24bdd862615306dc4",
     ".github/workflows/bing_url_automation.yml": "8ebe2173b68b006b6dfe8bce93a5a4d7f30c431774d01955c3b0fe1708fc9fd0",
     ".github/workflows/content_experience_inventory.yml": "93a99a9289d4bfeb60b3f09df19baceeb69353f3faf3dde470c621fb66955fb9",
