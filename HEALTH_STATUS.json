@@ -7,11 +7,11 @@
     "posts": 247,
     "pages": 13,
     "contentFailures": 2,
-    "externalDestinationsChecked": 2519,
+    "externalDestinationsChecked": 2520,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 181,
-    "workflowWarnings": 1,
+    "transientExternalResponses": 210,
+    "workflowWarnings": 2,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
   },
@@ -43,13 +43,13 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-10-02T22:25:23.492Z",
+        "lastDownloaded": "2026-10-03T19:21:14.592Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
           {
             "type": "web",
-            "submitted": "223",
+            "submitted": "247",
             "indexed": "0"
           }
         ]
@@ -2922,7 +2922,7 @@
       "tracked": 260,
       "pass": 0,
       "neutralOrOther": 260,
-      "inspectedThisRun": 260,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -2968,17 +2968,17 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37145361524,
-      "latestUpdatedAt": "2026-10-03T18:45:11Z",
-      "detail": "latest=success; 4 failures among 12 recent completed runs"
+      "latestRunId": 37170802942,
+      "latestUpdatedAt": "2026-10-04T02:21:46Z",
+      "detail": "latest=success; 3 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
-      "status": "OK",
-      "latestConclusion": "success",
-      "latestRunId": 37137162941,
-      "latestUpdatedAt": "2026-10-03T16:33:42Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "status": "WARN",
+      "latestConclusion": "cancelled",
+      "latestRunId": 37150289490,
+      "latestUpdatedAt": "2026-10-03T20:36:24Z",
+      "detail": "latest=cancelled; 0 failures among 11 recent completed runs"
     }
   ],
   "providers": [
