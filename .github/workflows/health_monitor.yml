@@ -10,6 +10,7 @@ on:
       - 'search_reach.py'
       - 'publication_preflight.py'
       - 'zero_view_watchdog.py'
+      - 'test_zero_view_watchdog.py'
       - 'audit_publishing_automation.py'
       - 'social_creative.py'
       - 'social_rotation.py'
@@ -48,6 +49,9 @@ jobs:
 
       - name: Verify publishing automation invariants
         run: python audit_publishing_automation.py --check-only
+
+      - name: Verify watchdog markup parsing
+        run: python -m unittest test_zero_view_watchdog -v
 
       - name: Enforce zero-synthetic-view policy
         run: python audit_zero_view_policy.py

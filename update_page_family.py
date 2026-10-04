@@ -4,6 +4,7 @@ from pathlib import Path
 import html, json, os, re, requests
 from page_family import ACTIVE_PAGES, BLOG, END, START, ensure_family
 from social_identity import SOCIAL_PROFILES
+from seo_hygiene import image_alt_failures
 
 BLOG_ID = os.environ["BLOGGER_BLOG_ID"]
 BASE = f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}"
@@ -136,8 +137,10 @@ def main():
         match = re.search(re.escape(START) + r".*?" + re.escape(END), content, re.S)
         managed = match.group(0) if match else ""
         social_counts = {url: managed.count(url) for url in social_urls}
-        images_without_alt = len([tag for tag in re.findall(r"<img\b[^>]*>", content, re.I)
-                                  if not re.search(r"\balt\s*=", tag, re.I)])
+        # JavaScript Page applications contain parser regexes and HTML strings;
+        # shared hygiene inspects literal document images without corrupting or
+        # falsely counting those executable examples.
+        images_without_alt = image_alt_failures(content)
         ok = (content.count(START) == 1 and content.count('id="dyPageFamily"') == 1
               and images_without_alt == 0
               and managed.count('class="dyf-social"') == 1

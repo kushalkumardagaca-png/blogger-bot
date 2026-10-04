@@ -73,8 +73,19 @@ def description_from_content(title: str, content: str) -> str:
     return _word_clip(fallback, MAX_DESCRIPTION_CHARS)
 
 
+def _markup_parts(content: str) -> list[str]:
+    """Split literal markup from executable text that may contain HTML examples.
+
+    Daily Yield's Page applications legitimately contain JavaScript strings and
+    regular expressions with text such as ``<img>``. Treating those strings as
+    document elements can corrupt the application and creates false accessibility
+    failures. Even indexes are literal markup; odd indexes are preserved scripts.
+    """
+    return re.split(r"(<script\b[^>]*>.*?</script>)", content or "", flags=re.I | re.S)
+
+
 def repair_image_alts(content: str, title: str) -> tuple[str, int]:
-    """Give every content image a non-empty, descriptive alt attribute."""
+    """Give every literal content image a non-empty, descriptive alt attribute."""
     count = 0
     image_number = 0
 
@@ -99,12 +110,17 @@ def repair_image_alts(content: str, title: str) -> tuple[str, int]:
         count += 1
         return updated
 
-    return re.sub(r"<img\b[^>]*>", repair, content or "", flags=re.I | re.S), count
+    parts = _markup_parts(content)
+    for index in range(0, len(parts), 2):
+        parts[index] = re.sub(r"<img\b[^>]*>", repair, parts[index], flags=re.I | re.S)
+    return "".join(parts), count
 
 
 def image_alt_failures(content: str) -> int:
     failures = 0
-    for tag in re.findall(r"<img\b[^>]*>", content or "", flags=re.I | re.S):
+    parts = _markup_parts(content)
+    literal_markup = "".join(parts[::2])
+    for tag in re.findall(r"<img\b[^>]*>", literal_markup, flags=re.I | re.S):
         match = re.search(r"\balt\s*=\s*(?:([\"'])(.*?)\1|([^\s>]*))", tag, flags=re.I | re.S)
         value = (match.group(2) if match and match.group(1) else (match.group(3) if match else ""))
         if not match or not clean_text(value):

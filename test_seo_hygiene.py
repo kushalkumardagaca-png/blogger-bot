@@ -30,6 +30,15 @@ class SeoHygieneTests(unittest.TestCase):
         self.assertEqual(image_alt_failures(repaired), 0)
         self.assertIn('alt="Existing"', repaired)
 
+    def test_javascript_html_examples_are_never_rewritten_or_counted(self):
+        script = '<script>var parser=/<img[^>]+src=/;var sample="<img src=\\"dynamic\\">";</script>'
+        content = '<img src="literal">' + script
+        repaired, count = repair_image_alts(content, "Market guide")
+        self.assertEqual(count, 1)
+        self.assertEqual(image_alt_failures(repaired), 0)
+        self.assertIn(script, repaired)
+        self.assertIn('alt="Market guide — editorial photograph"', repaired)
+
     def test_description_is_factual_and_bounded(self):
         content = "<p>This sourced guide explains diversified investment costs, tax structure and practical risk controls for long-term readers.</p>"
         description = description_from_content("Guide", content)

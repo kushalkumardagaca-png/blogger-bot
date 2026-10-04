@@ -114,13 +114,24 @@ def blogger_inventory():
     return metadata, list({item["url"]: item for item in items if item.get("url")}.values())
 
 
+def literal_markup(value):
+    """Return document markup without executable script/style bodies.
+
+    Page applications contain JavaScript strings and regex literals that look
+    like HTML tags. Those are not rendered elements and must not be counted as
+    links, images, headings, IDs or accessibility failures.
+    """
+    return re.sub(r"<(?:script|style)\b[^>]*>.*?</(?:script|style)>", " ", value or "", flags=re.I | re.S)
+
+
 def plain(value):
-    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(value or ""))).strip()
+    value = literal_markup(value)
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(value))).strip()
 
 
 def attrs(content, tag, attr):
     pattern = rf"<{tag}\b[^>]*\b{attr}=[\"']([^\"']+)"
-    return [html.unescape(value) for value in re.findall(pattern, content or "", re.I)]
+    return [html.unescape(value) for value in re.findall(pattern, literal_markup(content), re.I)]
 
 
 def normalized_internal(url):
@@ -132,11 +143,12 @@ def audit_content(item, known):
     if item["kind"] == "home":
         return {"kind": "home", "title": item["title"], "url": item["url"], "issues": [], "warnings": [], "images": [], "external": [], "internal": []}
     content = item.get("content", "")
+    markup = literal_markup(content)
     title = item.get("title", "")
     issues, warnings = [], []
-    links = attrs(content, "a", "href")
-    images = attrs(content, "img", "src")
-    image_tags = re.findall(r"<img\b[^>]*>", content or "", re.I)
+    links = attrs(markup, "a", "href")
+    images = attrs(markup, "img", "src")
+    image_tags = re.findall(r"<img\b[^>]*>", markup, re.I)
     missing_alt = [tag for tag in image_tags if not (lambda m: m and html.unescape(m.group(1)).strip())(re.search(r"\balt\s*=\s*[\"']([^\"']*)[\"']", tag, re.I))]
     if missing_alt:
         issues.append(f"{len(missing_alt)} image(s) missing descriptive alt text")
@@ -146,7 +158,7 @@ def audit_content(item, known):
         issues.append(f"Bing title budget exceeded ({len(title)} characters; maximum 46)")
     if not any(marker in content for marker in ("DY_SEO_META_START", "metaDesc")):
         issues.append("SEO/meta description package missing")
-    h1_count = len(re.findall(r"<h1\b", content or "", re.I))
+    h1_count = len(re.findall(r"<h1\b", markup, re.I))
     if h1_count != 1:
         warnings.append(f"content primary H1 count {h1_count}; expected 1 with Theme v4")
     internal, external = [], []
@@ -159,7 +171,7 @@ def audit_content(item, known):
             external.append(absolute)
     if len(plain(content).split()) < 40:
         issues.append("content unexpectedly short")
-    ids = re.findall(r"\bid=[\"']([^\"']+)", content, re.I)
+    ids = re.findall(r"\bid=[\"']([^\"']+)", markup, re.I)
     duplicates = sorted({value for value in ids if ids.count(value) > 1})
     if duplicates:
         issues.append("duplicate HTML ids: " + ", ".join(duplicates[:8]))
