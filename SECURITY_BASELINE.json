@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-04T13:02:44.503420+00:00",
+  "approvedAt": "2026-10-04T13:04:39.502778+00:00",
   "repository": {
     "auto_blogger_publisher.py": "f84a513e37b63240e623b1618d179e115f8270fa990e0f8db7264ba2ca0d5cd0",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
     "facebook_publisher.py": "33fec201d418fa6da9be3a549c5d0c00bdd44717548944d5051b68f83a20beb5",
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
-    "zero_view_watchdog.py": "0e0c9ce5019f5531a4da39de6c21dfc27863c90490ff5ef13229e2e800bd8938",
+    "zero_view_watchdog.py": "0eab806875a05f48db35ca71f2536681df2b7c60d683fa26711214ecb2a3c8b6",
     "publication_preflight.py": "d0af09a76ce9e88d4d439b64520a63f7971a6a4e46de24e7d54d799678654ddd",
-    "page_family.py": "802e35e1ec197589ad99a04904da7f8bedb3143563b9c33d8d73c9cd11200626",
+    "page_family.py": "dbb3ab8e1b651432fc283b6cc44bef0596a4c74f7c2ae52d994c48476a9bad9e",
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
     "social_identity.py": "8e90db28ceb310f82b5b87510707e5ec926fded26d79de3e0f80c0fb7d6d528a",
     "bluesky_publisher.py": "4d35ed721f98592ad7c66d8db05adca28bfabb619e28188019fa45484d64ced7",
@@ -62,7 +62,7 @@
     ".github/workflows/security_guard.yml": "d539f5e4421f342211489e1fc4441a227ff446211dd5a2fe788a514d0f62fff2",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
-    ".github/workflows/update_page_family.yml": "278fbded6a4be622a7858e1d9376f99add1becc3931dd090928ee6490ee65f26"
+    ".github/workflows/update_page_family.yml": "fde6ba34d23d7037cc68fdf87a1482f80db11bfb812bf082a57a935c4972e06d"
   },
   "blogger": {
     "page:3254393081257151974": {
