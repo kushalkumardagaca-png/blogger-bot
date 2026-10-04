@@ -1,5 +1,5 @@
 {
-  "checkedAtIST": "2026-10-04T21:53:01.605015+05:30",
+  "checkedAtIST": "2026-10-04T22:04:12.630185+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
   "overall": "ATTENTION",
@@ -7,7 +7,7 @@
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-04T09:22:52-07:00",
+    "updated": "2026-10-04T09:34:04-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 269
@@ -24,7 +24,7 @@
     "externalDestinationsChecked": 2736,
     "confirmedExternal404or410": 1,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 173,
+    "transientExternalResponses": 180,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -20000,6 +20000,13 @@
   ],
   "transientExternal": [
     {
+      "url": "https://english.elpais.com/economy-and-business/2026-10-01/brett-christophers-economic-geographer-in-contemporary-capitalism-the-right-to-housing-does-not-exist.html",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error _ssl.c:993: The handshake operation timed out>"
+    },
+    {
       "url": "https://www.ato.gov.au/",
       "status": 403,
       "redirects": [],
@@ -20788,13 +20795,37 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/SkylineMilanItaly-fromPirelliPenthouse5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/La_D%C3%A9fense%2C_Paris_April_2012.jpg/1920px-La_D%C3%A9fense%2C_Paris_April_2012.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Bill_of_Loading_Java-China-Japan-Lijn_From_Saigon_to_the_Netherlands_East_Indies_-_French_Indo-China_%281921-1922%29_Oghi_BC_03.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Gachibowli_IT_%26_Financial_District_Skyline_View%2C_Dec_2018.jpg/1920px-Gachibowli_IT_%26_Financial_District_Skyline_View%2C_Dec_2018.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Cummins_Corporate_Office_Building_-_2008-08-25_-_Elizabeth_Nicodemus_00.jpg/1920px-Cummins_Corporate_Office_Building_-_2008-08-25_-_Elizabeth_Nicodemus_00.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Wall_Street%2C_Manhattan%2C_New_York_City%2C_20231002_172333.jpg/1920px-Wall_Street%2C_Manhattan%2C_New_York_City%2C_20231002_172333.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/AUS_Melbourne%2C_Central_Business_District%2C_Birrarung_Marr%2C_View_011.jpg/1280px-AUS_Melbourne%2C_Central_Business_District%2C_Birrarung_Marr%2C_View_011.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Mumbai%2C_India%2C_Bombay%2C_Mumbai_skyline_at_sunset.jpg/1920px-Mumbai%2C_India%2C_Bombay%2C_Mumbai_skyline_at_sunset.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20818,19 +20849,7 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Sydney_Skyline_from_Botany_Bay_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Sao_Paulo_Skyline_at_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Mumbai_night_skyline.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20885,6 +20904,12 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Bill_of_Loading_Java-China-Japan-Lijn_From_Saigon_to_the_Netherlands_East_Indies_-_French_Indo-China_%281921-1922%29_Oghi_BC_01.webp?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/City_of_London_Skyline_from_the_Tower_of_London_-_geograph.org.uk_-_2681092.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20998,6 +21023,12 @@
       "redirectCount": 0
     },
     {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/1857-58%2C_Montreal_Foundry_and_City_Works_%28Advertisement_and_Business_Card%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28318298%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
@@ -21038,6 +21069,18 @@
       "status": 429,
       "redirects": [],
       "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Kathy_at_New_York_Stock_Exchange_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Sao_Paulo_Skyline_in_Brazil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
     }
   ],
   "github": [
@@ -21069,8 +21112,8 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37216527729,
-      "latestUpdatedAt": "2026-10-04T16:22:51Z",
+      "latestRunId": 37217219323,
+      "latestUpdatedAt": "2026-10-04T16:34:02Z",
       "detail": "latest=success; 3 failures among 12 recent completed runs"
     },
     {
