@@ -3,7 +3,7 @@
 **Verified date:** 4 October 2026 (IST)  
 **Sender:** Kushal K. Daga, Daily Yield  
 **Delivery:** Gmail API with send-only OAuth  
-**Daily policy:** Target minimum 10, enforced maximum 20 source-verified initial messages; hourly discovery and recipient-local delivery windows
+**Daily policy:** Target minimum 10, enforced maximum 12 source-verified initial messages; hourly discovery and recipient-local delivery windows
 
 ## Repair outcome
 
@@ -21,4 +21,4 @@
 - Restricted, human-only and excluded recipients cannot be sent automated messages.
 - No paid-placement request, reciprocal-link request, tracking pixel or synthetic Daily Yield pageview.
 - Gmail permission remains limited to `gmail.send`; inbox reading and deletion are unavailable.
-- The 10–20 daily policy never authorizes unverified addresses or repeated daily spam. When verified eligible inventory is exhausted, the workflow reports a shortfall rather than contacting an unsafe recipient.
+- The 10–12 daily policy never authorizes unverified addresses or repeated daily spam. When verified eligible inventory is exhausted, the workflow reports a shortfall rather than contacting an unsafe recipient.

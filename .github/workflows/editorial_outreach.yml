@@ -127,6 +127,6 @@ jobs:
             exit 1
           fi
 
-      - name: Enforce the 10-to-20 daily policy visibly
+      - name: Enforce the 10-to-12 daily policy visibly
         if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: python outreach/gmail_sender.py verify-daily

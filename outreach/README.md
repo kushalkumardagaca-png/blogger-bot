@@ -1,6 +1,6 @@
 # Daily Yield Editorial Outreach
 
-This subsystem continuously discovers and verifies editorial opportunities, then sends source-matched proposals through Gmail's send-only API. The daily target is **at least 10 and never more than 20** initial messages, subject to strict recipient eligibility.
+This subsystem continuously discovers and verifies editorial opportunities, then sends source-matched proposals through Gmail's send-only API. The daily target is **at least 10 and never more than 12** initial messages, subject to strict recipient eligibility.
 
 ## Continuous discovery
 
@@ -16,7 +16,7 @@ This subsystem continuously discovers and verifies editorial opportunities, then
 ## Delivery safeguards
 
 - Sends only during approximately 08:00–12:59 in the recipient's recorded local time zone.
-- Maximum 20 initial messages per IST calendar day; target minimum 10.
+- Maximum 12 initial messages per IST calendar day; target minimum 10.
 - A shortage is reported at the end of the day instead of filling the quota with doubtful contacts.
 - Existing suppressions, prior interactions, duplicate addresses and duplicate organizations are blocked.
 - One initial approach per recipient; no automatic repeat after Gmail accepts a message.

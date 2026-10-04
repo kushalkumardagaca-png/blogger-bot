@@ -365,7 +365,7 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate")
     drafting = sub.add_parser("draft")
-    drafting.add_argument("--limit", type=int, default=10, choices=range(1, 21), metavar="1..20")
+    drafting.add_argument("--limit", type=int, default=10, choices=range(1, 13), metavar="1..12")
     args = parser.parse_args()
     if args.command == "validate":
         errors = validation_errors()
