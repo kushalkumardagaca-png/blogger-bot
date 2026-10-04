@@ -4,6 +4,11 @@ on:
   schedule:
     # 13:00 IST daily. Only newly verified eligible contacts are considered.
     - cron: '30 7 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'outreach/**'
+      - '.github/workflows/editorial_outreach.yml'
   workflow_dispatch:
     inputs:
       mode:
@@ -24,6 +29,7 @@ concurrency:
 
 jobs:
   outreach:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run outreach]')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -45,11 +51,11 @@ jobs:
           python outreach/gmail_sender.py auth-check
 
       - name: Reserve eligible messages before any send
-        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: python outreach/gmail_sender.py reserve
 
       - name: Persist reservation before contacting Gmail
-        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: |
           git config user.name "Daily Yield Editorial Outreach"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -68,11 +74,11 @@ jobs:
           fi
 
       - name: Send only previously persisted reservations
-        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: python outreach/gmail_sender.py send-reserved
 
       - name: Persist immutable send outcomes
-        if: github.event_name == 'schedule' || inputs.mode == 'send'
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: |
           git add outreach/interactions.csv
           if git diff --staged --quiet; then
@@ -87,3 +93,7 @@ jobs:
             echo "Send outcome could not be persisted; reservations remain blocked from reuse."
             exit 1
           fi
+
+      - name: Enforce the ten-message daily target visibly
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
+        run: python outreach/gmail_sender.py verify-daily

@@ -218,14 +218,29 @@ def send_reserved() -> int:
     return 0
 
 
+def verify_daily() -> int:
+    settings = require_enabled()
+    today = now().date().isoformat()
+    rows = read_interactions()
+    sent = [row for row in rows if row.get("created_at", "").startswith(today) and row.get("status") == "sent"]
+    target = int(settings["max_initial_messages_per_day"])
+    result = {"date": today, "sent": len(sent), "target": target, "status": "PASS" if len(sent) == target else "SHORTFALL"}
+    print(json.dumps(result))
+    if len(sent) != target:
+        raise RuntimeError(f"daily outreach shortfall: sent {len(sent)} of {target}; replenish verified eligible prospects")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("auth-check", "reserve", "send-reserved"))
+    parser.add_argument("command", choices=("auth-check", "reserve", "send-reserved", "verify-daily"))
     args = parser.parse_args()
     if args.command == "auth-check":
         return auth_check()
     if args.command == "reserve":
         return reserve()
+    if args.command == "verify-daily":
+        return verify_daily()
     return send_reserved()
 
 

@@ -26,7 +26,8 @@ class OutreachSafetyTests(unittest.TestCase):
             row for row in app.read_csv(app.PROSPECTS)
             if row["eligibility"] == "eligible" and row["automation_mode"] == "auto_approved"
         ]
-        self.assertEqual({row["prospect_id"] for row in eligible}, {"ft-opinion", "money-newsroom"})
+        self.assertEqual(len(eligible), 12)
+        self.assertTrue({"ft-opinion", "money-newsroom", "forbes-news-tips", "fortune-personal-finance", "business-insider-personal-finance"}.issubset({row["prospect_id"] for row in eligible}))
 
     def test_specific_article_match(self):
         articles = app.load_articles()
@@ -47,9 +48,9 @@ class OutreachSafetyTests(unittest.TestCase):
             try:
                 self.assertEqual(app.draft(10), 0)
                 manifest = json.loads(app.MANIFEST.read_text())
-                self.assertEqual(manifest["mode"], "REVIEW_ONLY_NO_SEND_CAPABILITY")
-                self.assertEqual(len(manifest["selected"]), 3)
-                self.assertEqual({x["state"] for x in manifest["selected"]}, {"AUTOMATION_APPROVED_NOT_SENT", "REVIEW_REQUIRED_NOT_SENT"})
+                self.assertEqual(manifest["mode"], "SOURCE_VERIFIED_RESERVATION_QUEUE")
+                self.assertEqual(len(manifest["selected"]), 10)
+                self.assertEqual({x["state"] for x in manifest["selected"]}, {"AUTOMATION_APPROVED_NOT_SENT"})
                 for path in app.QUEUE.glob("*.eml"):
                     message = BytesParser(policy=policy.default).parsebytes(path.read_bytes())
                     self.assertIn(message["X-Daily-Yield-State"], {"AUTOMATION-APPROVED-NOT-SENT", "REVIEW-REQUIRED-NOT-SENT"})

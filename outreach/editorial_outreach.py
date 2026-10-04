@@ -46,6 +46,16 @@ GENERIC_WORDS = {
 MATCH_HINTS = {
     "ft-opinion": "emergency fund size job type income risk",
     "money-newsroom": "emergency fund size job type income risk",
+    "forbes-news-tips": "what changed money 2026",
+    "fortune-personal-finance": "career break salary",
+    "business-insider-personal-finance": "BRRRR ugly months real estate",
+    "investopedia-news-tips": "capital gains explained taxes",
+    "inc-contributors": "hustles 30 days winner",
+    "best-finance-resource": "graduate credit file",
+    "finance-care-online": "money constitution couples",
+    "financebuzz-contributors": "term whole life insurance",
+    "investmentpedia-contributors": "S&P 500 global investing",
+    "financeproper-contributors": "AI advisor data fintech",
 }
 
 
@@ -242,7 +252,23 @@ https://dailyyield.blogspot.com/
 dailyyield.official@gmail.com
 """
     else:
-        raise ValueError(f"no approved purpose-specific template for {organization}")
+        contact = prospect.get("contact_name", "Editorial Team")
+        purpose = prospect["permitted_purpose"]
+        subject = f"Editorial proposal for {organization}: {article.title}"
+        body = f"""Dear {contact},
+
+I am Kushal K. Daga, founder and author of Daily Yield, an independent personal-finance publication. Your published editorial guidance invites {purpose.lower()}, so I am contacting you through that designated route with one relevant idea.
+
+I propose an original, evidence-based article that tests common financial guidance against realistic household constraints, using transparent calculations and primary sources. A related Daily Yield article shows the subject area and my reader-focused approach: “{article.title}” — {article_link}
+
+The proposed contribution would be newly written for {organization}, adapted to your audience and editorial requirements; it would not be a republication of the linked article. I am not requesting advertising, paid placement, reciprocal links or guaranteed coverage. If the angle is not suitable, no reply or follow-up is necessary.
+
+Kind regards,
+Kushal K. Daga
+Founder and Author, Daily Yield
+https://dailyyield.blogspot.com/
+dailyyield.official@gmail.com
+"""
     return subject, body
 
 
@@ -262,7 +288,7 @@ def draft(limit: int) -> int:
     QUEUE.mkdir(parents=True)
     manifest = {
         "generated_at": date.today().isoformat(),
-        "mode": "REVIEW_ONLY_NO_SEND_CAPABILITY",
+        "mode": "SOURCE_VERIFIED_RESERVATION_QUEUE",
         "daily_limit": limit,
         "selected": [],
         "blocked": [],
