@@ -1,10 +1,10 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-04T18:34:34.281322+05:30
-- **Verdict:** ATTENTION
+- **Checked:** 2026-10-04T18:34:48.990094+05:30
+- **Verdict:** PASS
 - **Synthetic Daily Yield views:** 0
 - **Inventory:** 277 URLs · 263 Posts · 13 Pages
-- **Content failures:** 1
+- **Content failures:** 0
 - **Confirmed external 404/410:** 0
 - **External redirect chains:** 1
 - **Current workflow warnings:** 0
@@ -14,7 +14,7 @@
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
-- ❌ **page · TERMS AND CONDITIONS** — SEO/meta description package missing
+- ✅ **page · TERMS AND CONDITIONS**
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**

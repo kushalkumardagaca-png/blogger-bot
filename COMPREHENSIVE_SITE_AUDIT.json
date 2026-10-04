@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
   "urls": 277,
-  "hard_failures": 1,
+  "hard_failures": 0,
   "results": [
     {
       "kind": "home",
@@ -17,9 +17,7 @@
       "kind": "page",
       "title": "TERMS AND CONDITIONS",
       "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-      "issues": [
-        "SEO/meta description package missing"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [],
       "external": [

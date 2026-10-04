@@ -1,13 +1,13 @@
 {
-  "checkedAtIST": "2026-10-04T18:34:34.281322+05:30",
+  "checkedAtIST": "2026-10-04T18:34:48.990094+05:30",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "policy": "No public dailyyield.blogspot.com URL was requested or rendered.",
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "bloggerControlPlane": {
     "id": "8911514070006792465",
     "name": "DAILY YIELD",
     "published": "2026-08-22T08:40:17-07:00",
-    "updated": "2026-10-04T06:00:37-07:00",
+    "updated": "2026-10-04T06:04:39-07:00",
     "url": "https://dailyyield.blogspot.com/",
     "posts": {
       "totalItems": 263
@@ -20,11 +20,11 @@
     "urls": 277,
     "posts": 263,
     "pages": 13,
-    "contentFailures": 1,
+    "contentFailures": 0,
     "externalDestinationsChecked": 2662,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 188,
+    "transientExternalResponses": 235,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -44,9 +44,7 @@
       "kind": "page",
       "title": "TERMS AND CONDITIONS",
       "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-      "issues": [
-        "SEO/meta description package missing"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [],
       "external": [
@@ -19426,18 +19424,32 @@
   ],
   "transientExternal": [
     {
+      "url": "https://en.mercopress.com/2026/09/25/the-falklands-economic-development-agency-appoints-josh-smith-as-managing-director?utm_source=feed&amp;utm_medium=rss&amp;utm_content=main&amp;utm_campaign=rss",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error _ssl.c:993: The handshake operation timed out>"
+    },
+    {
       "url": "https://en.mercopress.com/2026/09/29/chile-s-defence-minister-backs-trade-between-punta-arenas-and-the-falklands?utm_source=feed&amp;utm_medium=rss&amp;utm_content=main&amp;utm_campaign=rss",
       "status": "TRANSIENT",
       "redirects": [],
       "redirectCount": 0,
-      "detail": "<urlopen error timed out>"
+      "detail": "<urlopen error _ssl.c:993: The handshake operation timed out>"
     },
     {
       "url": "https://en.mercopress.com/2026/09/29/latin-american-airports-will-need-us-178-billion-to-nearly-double-their-traffic?utm_source=feed&amp;utm_medium=rss&amp;utm_content=main&amp;utm_campaign=rss",
       "status": "TRANSIENT",
       "redirects": [],
       "redirectCount": 0,
-      "detail": "<urlopen error timed out>"
+      "detail": "<urlopen error _ssl.c:993: The handshake operation timed out>"
+    },
+    {
+      "url": "https://en.mercopress.com/2026/10/01/uruguay-s-foreign-minister-separates-the-invaded-island-from-the-money-extracted-from-the-falklands?utm_source=feed&amp;utm_medium=rss&amp;utm_content=main&amp;utm_campaign=rss",
+      "status": "TRANSIENT",
+      "redirects": [],
+      "redirectCount": 0,
+      "detail": "<urlopen error _ssl.c:993: The handshake operation timed out>"
     },
     {
       "url": "https://www.ato.gov.au/",
@@ -19994,7 +20006,19 @@
       "redirectCount": 0
     },
     {
+      "url": "https://www.marketwatch.com/story/im-never-selling-im-47-and-buy-bitcoin-with-every-dollar-i-earn-am-i-crazy-364d2a64?mod=mw_rss_topstories",
+      "status": 401,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://www.marketwatch.com/story/meta-servicenow-and-these-7-other-tech-stocks-could-lead-the-next-leg-of-the-ai-trade-b8b68c93?mod=mw_rss_topstories",
+      "status": 401,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://www.marketwatch.com/story/micron-could-dethrone-nvidia-and-become-the-biggest-driver-of-s-p-500-profit-growth-d62e0e68?mod=mw_rss_topstories",
       "status": 401,
       "redirects": [],
       "redirectCount": 0
@@ -20180,6 +20204,204 @@
       "redirectCount": 0
     },
     {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Paris-La_Defense-092-2004-gje.jpg/1920px-Paris-La_Defense-092-2004-gje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/America_at_work.._%28IA_americaatwork00fras%29.pdf/page1-500px-America_at_work.._%28IA_americaatwork00fras%29.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/America_at_work.._%28IA_americaatwork00fras%29.pdf/page1-500px-America_at_work.._%28IA_americaatwork00fras%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Along_Hitec_City_Road_%2850516%29.jpg/1280px-Along_Hitec_City_Road_%2850516%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Korail_351966_at_Songdo_Station.jpg/1280px-Korail_351966_at_Songdo_Station.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/General_skyline_of_Milan_-_2017.jpg/1920px-General_skyline_of_Milan_-_2017.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/A_Career_for_lawyers_in_the_U.S._Department_of_Agriculture_%28IA_careerforlawyers872unit%29.pdf/page1-960px-A_Career_for_lawyers_in_the_U.S._Department_of_Agriculture_%28IA_careerforlawyers872unit%29.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/A_Career_for_lawyers_in_the_U.S._Department_of_Agriculture_%28IA_careerforlawyers872unit%29.pdf/page1-960px-A_Career_for_lawyers_in_the_U.S._Department_of_Agriculture_%28IA_careerforlawyers872unit%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Blue_Book_Magazine_1930-04.pdf/page1-500px-Blue_Book_Magazine_1930-04.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Blue_Book_Magazine_1930-04.pdf/page1-500px-Blue_Book_Magazine_1930-04.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/London_Stock_Exchange_geograph-3066495-by-Ben-Brooksbank.jpg/1920px-London_Stock_Exchange_geograph-3066495-by-Ben-Brooksbank.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Cummins_Engine_03.jpg/1920px-Cummins_Engine_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Financial_District%2C_Toronto%2C_Ontario_from_CN_Tower_%2821849823261%29.jpg/1280px-Financial_District%2C_Toronto%2C_Ontario_from_CN_Tower_%2821849823261%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Frankfurt_Skyline_bei_Nacht.jpg/1920px-Frankfurt_Skyline_bei_Nacht.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Nation%27s_Business_1914-09.pdf/page1-960px-Nation%27s_Business_1914-09.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Central_Business_District%2C_London_-_geograph.org.uk_-_2942255.jpg/1280px-Central_Business_District%2C_London_-_geograph.org.uk_-_2942255.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Lockheed_Vega_5B%2C_Amelia_Earhart_-_DPLA_-_17901a4d2c93d49987e58e0b46efd42c_%28page_1%29.jpg/1280px-Lockheed_Vega_5B%2C_Amelia_Earhart_-_DPLA_-_17901a4d2c93d49987e58e0b46efd42c_%28page_1%29.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Lockheed_Vega_5B%2C_Amelia_Earhart_-_DPLA_-_17901a4d2c93d49987e58e0b46efd42c_%28page_1%29.jpg/1280px-Lockheed_Vega_5B%2C_Amelia_Earhart_-_DPLA_-_17901a4d2c93d49987e58e0b46efd42c_%28page_1%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/2024-National-Money-Laundering-Risk-Assessment.pdf/page1-960px-2024-National-Money-Laundering-Risk-Assessment.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/LA_City_Hall_lit_in_Italian_flag_for_victims_of_August_2016_Italy_earthquake.jpg/1280px-LA_City_Hall_lit_in_Italian_flag_for_victims_of_August_2016_Italy_earthquake.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Portrait_of_Billie_Holiday_and_Mister%2C_Downbeat%2C_New_York%2C_N.Y.%2C_ca._Feb._1947_%28LOC%2C_5020400274%2C_cropped%29.jpg/1920px-Portrait_of_Billie_Holiday_and_Mister%2C_Downbeat%2C_New_York%2C_N.Y.%2C_ca._Feb._1947_%28LOC%2C_5020400274%2C_cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Paris_06_2012_La_Defense_3216.JPG/1920px-Paris_06_2012_La_Defense_3216.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/2014-09-29_-_Reichsbr%C3%BCcke-Donau_City-Sunken_City.jpg/1280px-2014-09-29_-_Reichsbr%C3%BCcke-Donau_City-Sunken_City.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/America_at_work_%28IA_americaatwork00frasrich%29.pdf/page1-500px-America_at_work_%28IA_americaatwork00frasrich%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/City_of_Asheboro_Central_Business_District_Redevelopment_Plan_2018-2023.pdf/page1-960px-City_of_Asheboro_Central_Business_District_Redevelopment_Plan_2018-2023.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/%27t_Japans_Cultureel_Centrum_business_cards%2C_Amsterdam_%282023%29_01.jpg/1280px-%27t_Japans_Cultureel_Centrum_business_cards%2C_Amsterdam_%282023%29_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/%27t_Japans_Cultureel_Centrum_business_cards%2C_Amsterdam_%282023%29_02.jpg/1280px-%27t_Japans_Cultureel_Centrum_business_cards%2C_Amsterdam_%282023%29_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Brazil%2C_Its_Conditions_and_Prospects.djvu/page1-1280px-Brazil%2C_Its_Conditions_and_Prospects.djvu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Union_Street_Gowanus_New_York_October_2021_panorama_1.jpg/1920px-Union_Street_Gowanus_New_York_October_2021_panorama_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/1963_Census_of_Business%2C_manufactures%2C_and_Mineral%2C_Virgin_Islands_of_the_United_States_and_Guam_%28IA_1963censusofbu1963unse%29.pdf/page1-1280px-1963_Census_of_Business%2C_manufactures%2C_and_Mineral%2C_Virgin_Islands_of_the_United_States_and_Guam_%28IA_1963censusofbu1963unse%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/EADA_Business_School_-_Barcelona_City_Centre_Campus_2019.jpg/1280px-EADA_Business_School_-_Barcelona_City_Centre_Campus_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Nation%27s_Business_1914-12.pdf/page1-960px-Nation%27s_Business_1914-12.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Skyline_-_Liberdade_%28S%C3%A3o_Paulo%2C_Brazil%29_2.jpg/1920px-Skyline_-_Liberdade_%28S%C3%A3o_Paulo%2C_Brazil%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Station_D%C3%A9fense_M%C3%A9tro_Paris_Ligne_1_-_Puteaux_%28FR92%29_-_2022-07-02_-_5.jpg/1920px-Station_D%C3%A9fense_M%C3%A9tro_Paris_Ligne_1_-_Puteaux_%28FR92%29_-_2022-07-02_-_5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
@@ -20187,6 +20409,18 @@
     },
     {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Another_shot_of_that_classic_Toronto_Skyline_%2827798366082%29.jpg/1920px-Another_shot_of_that_classic_Toronto_Skyline_%2827798366082%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/2026._April_10.IJDDT%2CDemographic_determinants.pdf/page1-960px-2026._April_10.IJDDT%2CDemographic_determinants.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/2026._April_10.IJDDT%2CDemographic_determinants.pdf/page1-960px-2026._April_10.IJDDT%2CDemographic_determinants.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20222,13 +20456,31 @@
       "redirectCount": 0
     },
     {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Brazil_%28cont.%29_-_Business_Conditions_-_DPLA_-_6321dd6ecff580cc3804f3b81fec74b2.pdf/page1-330px-Brazil_%28cont.%29_-_Business_Conditions_-_DPLA_-_6321dd6ecff580cc3804f3b81fec74b2.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Mumbai_skyline_Carter_Road_Bandra.jpg/1920px-Mumbai_skyline_Carter_Road_Bandra.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
     },
     {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Nation%27s_Business_1915-05.pdf/page1-960px-Nation%27s_Business_1915-05.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Atardecer_en_La_Defense%2C_Par%C3%ADs_2011.jpg/1920px-Atardecer_en_La_Defense%2C_Par%C3%ADs_2011.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Nation%27s_Business_1916-05.pdf/page1-1280px-Nation%27s_Business_1916-05.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20252,6 +20504,18 @@
       "redirectCount": 0
     },
     {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/%28Ruby%2C_Jack%29_2-4_Business_and_Financial_Interests_-_Nov-_1963_-_Dec-_1963_-_DPLA_-_612315683d4795bbef36e47d9d579ff0.pdf/page1-960px-%28Ruby%2C_Jack%29_2-4_Business_and_Financial_Interests_-_Nov-_1963_-_Dec-_1963_-_DPLA_-_612315683d4795bbef36e47d9d579ff0.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/%28Ruby%2C_Jack%29_2-4_Business_and_Financial_Interests_-_Nov-_1963_-_Dec-_1963_-_DPLA_-_612315683d4795bbef36e47d9d579ff0.pdf/page1-960px-%28Ruby%2C_Jack%29_2-4_Business_and_Financial_Interests_-_Nov-_1963_-_Dec-_1963_-_DPLA_-_612315683d4795bbef36e47d9d579ff0.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Frankfurt_Stock_Exchange_%28Ank_Kumar%2C_Infosys%29_03.jpg/1920px-Frankfurt_Stock_Exchange_%28Ank_Kumar%2C_Infosys%29_03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
@@ -20265,6 +20529,30 @@
     },
     {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Nation%27s_Business_1914-01.pdf/page1-960px-Nation%27s_Business_1914-01.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf/page1-500px-Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf/page1-500px-Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Nation%27s_Business_1914-04.pdf/page1-960px-Nation%27s_Business_1914-04.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Nation%27s_Business_1914-07.pdf/page1-960px-Nation%27s_Business_1914-07.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20300,7 +20588,7 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Controul_and_Advice%2C_a_scene_in_Midas%2C_with_a_parody_%28BM_1868%2C0808.5824%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Wall_Street_%28New_York_City%29%2C_1866.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20319,6 +20607,18 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Economic_growth_of_Haiti.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Lending_%26_Borrowing_Decisions_-_10_19_08.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "status": 429,
+      "redirects": [],
+      "redirectCount": 0
+    },
+    {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Sydney_Skyline_from_Botany_Bay_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20402,12 +20702,6 @@
       "redirectCount": 0
     },
     {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Skyline_of_S%C3%A3o_Paulo_at_dusk_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
       "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Moscow_International_Business_Center6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
@@ -20439,12 +20733,6 @@
     },
     {
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Cummins_Corporate_Office_Building_-_April_2008_-_Holly_Higgins_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Sonnenuntergang_Frankfurt.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "status": 429,
       "redirects": [],
       "redirectCount": 0
@@ -20550,12 +20838,6 @@
       "status": 429,
       "redirects": [],
       "redirectCount": 0
-    },
-    {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Sao_Paulo_Skyline_in_Brazil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "status": 429,
-      "redirects": [],
-      "redirectCount": 0
     }
   ],
   "github": [
@@ -20595,9 +20877,9 @@
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37204047678,
-      "latestUpdatedAt": "2026-10-04T13:02:23Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 37204320930,
+      "latestUpdatedAt": "2026-10-04T13:06:39Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     }
   ],
   "providers": [

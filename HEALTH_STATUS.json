@@ -1,16 +1,16 @@
 {
-  "overall": "ATTENTION",
+  "overall": "PASS",
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
     "urls": 277,
     "posts": 263,
     "pages": 13,
-    "contentFailures": 1,
+    "contentFailures": 0,
     "externalDestinationsChecked": 2662,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 188,
+    "transientExternalResponses": 235,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -3152,9 +3152,9 @@
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37204047678,
-      "latestUpdatedAt": "2026-10-04T13:02:23Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 37204320930,
+      "latestUpdatedAt": "2026-10-04T13:06:39Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     }
   ],
   "providers": [
