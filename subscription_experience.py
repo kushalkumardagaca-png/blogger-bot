@@ -277,8 +277,6 @@ function autoRail(row,speed){
         "subscription_js": text.count(START_JS),
         "follow_it_forms": text.count("https://api.follow.it/subscribe"),
         "blogger_follow_links": text.count(f"https://www.blogger.com/followers/follow/{BLOG_ID}"),
-        "legacy_twitter_shares": text.count("twitter.com/intent/tweet"),
-        "legacy_linkedin_shares": text.count("linkedin.com/sharing/share-offsite"),
         "all_linkedin_links": len(re.findall(r"linkedin\.com", text, re.I)),
         "popular_featured_images": text.count("name='data-kd-img'"),
         "moving_article_rails": text.count("function autoRail"),

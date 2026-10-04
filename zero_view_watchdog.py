@@ -166,10 +166,8 @@ def audit_content(item, known):
     exempt = item["url"].endswith(LEGACY)
     if "DY_BRAND_IDENTITY_START" not in content:
         issues.append("Daily Yield favicon identity missing")
-    if "linkedin.com/in/finance-by-kushal" in content.lower():
-        issues.append("obsolete LinkedIn profile present")
-    if re.search(r"https?://(?:www\.)?(?:x|twitter)\.com/CAKUSHAL2509", content, re.I):
-        issues.append("closed X profile present")
+    if re.search(r"https?://(?:www\.)?(?:linkedin\.com/|(?:x|twitter)\.com/|reddit\.com/)", content, re.I):
+        issues.append("removed inactive social-channel URL present")
     if re.search(r"kushalkumard?aga\.ca@gmail\.com", content, re.I):
         issues.append("obsolete public contact email present")
     if not exempt and 'id="dyPageFamily"' not in content:

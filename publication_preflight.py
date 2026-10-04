@@ -16,7 +16,7 @@ def _plain(content):
  return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',value))).strip()
 
 def _source_domains(content):
- own='dailyyield.blogspot.com';ignore={'facebook.com','www.facebook.com','bsky.app','www.tumblr.com','mastodon.social','linkedin.com','www.linkedin.com','follow.it'};out=set()
+ own='dailyyield.blogspot.com';ignore={'facebook.com','www.facebook.com','bsky.app','www.tumblr.com','mastodon.social','follow.it'};out=set()
  for url in re.findall(r'<a\b[^>]*href=["\'](https?://[^"\']+)',content or '',flags=re.I):
   host=(urlsplit(html.unescape(url)).hostname or '').lower()
   if host and host!=own and host not in ignore:out.add(host)
