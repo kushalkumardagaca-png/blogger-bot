@@ -52,15 +52,20 @@ def ensure_social_identity(content):
         return match.group(1) + json.dumps(_rewrite_json(data), ensure_ascii=False, indent=2) + match.group(3)
     content = JSON_LD_RE.sub(json_repl, content)
 
-    # Delete visible inactive-channel anchors, including common strong wrappers.
+    # Never run prose punctuation cleanup through CSS or executable JavaScript.
+    # The former whole-document `\s+([,.;])` substitution interpreted the dot
+    # in a descendant CSS selector (`#root .card`) as punctuation and silently
+    # changed it to `#root.card`, disabling the Page design.
+    protected = re.split(r"(<(?:style|script)\b[^>]*>.*?</(?:style|script)\s*>)", content, flags=re.I | re.S)
     anchor = r"<a\b[^>]*href=[\"']" + INACTIVE_URL_RE.pattern + r"[\"'][^>]*>.*?</a\s*>"
-    content = re.sub(r"<strong\b[^>]*>\s*" + anchor + r"\s*</strong\s*>", "", content, flags=re.I | re.S)
-    content = re.sub(anchor, "", content, flags=re.I | re.S)
-    content = INACTIVE_URL_RE.sub("", content)
-
-    # Clean punctuation left by removing an inactive contact route.
-    content = re.sub(r"\b(?:or\s+)?via\s*(?:</?strong\b[^>]*>\s*)*(?:,|and|\.)", ".", content, flags=re.I)
-    content = re.sub(r"\bvia\s*(?:,|and)\s*", "via ", content, flags=re.I)
-    content = re.sub(r"\s+([,.;])", r"\1", content)
-    content = re.sub(r" {2,}", " ", content)
-    return content
+    for i in range(0, len(protected), 2):
+        part = protected[i]
+        part = re.sub(r"<strong\b[^>]*>\s*" + anchor + r"\s*</strong\s*>", "", part, flags=re.I | re.S)
+        part = re.sub(anchor, "", part, flags=re.I | re.S)
+        part = INACTIVE_URL_RE.sub("", part)
+        part = re.sub(r"\b(?:or\s+)?via\s*(?:</?strong\b[^>]*>\s*)*(?:,|and|\.)", ".", part, flags=re.I)
+        part = re.sub(r"\bvia\s*(?:,|and)\s*", "via ", part, flags=re.I)
+        part = re.sub(r"\s+([,.;])", r"\1", part)
+        part = re.sub(r" {2,}", " ", part)
+        protected[i] = part
+    return "".join(protected)
