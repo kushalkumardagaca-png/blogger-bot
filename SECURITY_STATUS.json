@@ -1,11 +1,9 @@
 {
-  "checkedAt": "2026-10-04T16:04:36.920432+00:00",
-  "status": "FAIL",
+  "checkedAt": "2026-10-04T16:04:48.108929+00:00",
+  "status": "PASS",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [
-    "existing Blogger content changed without baseline approval: page:1685707888914861815, page:9217579601621666930"
-  ],
+  "critical": [],
   "warnings": [],
   "details": {
     "pages": 13,
@@ -16,6 +14,6 @@
     "repositoryFiles": 62,
     "backupCreated": false,
     "repositoryChangeApproved": true,
-    "bloggerChangeApproved": false
+    "bloggerChangeApproved": true
   }
 }
