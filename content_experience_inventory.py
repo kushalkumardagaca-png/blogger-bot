@@ -42,13 +42,19 @@ def main():
   relevant_scripts=[s for s in scripts if 'ar-feedstatus' in s or '/feeds/posts' in s or 'ar-viewport' in s]
   # Preserve the authenticated, non-script opening structure for visual diagnosis
   # without requesting or rendering the public Page (zero synthetic views).
-  article_opening=''
-  if p.get('title','').strip().upper()=='DAILY ARTICLE':
+  article_opening='';authenticated_design_source=''
+  page_title=p.get('title','').strip().upper()
+  if page_title in ('DAILY NEWS','DAILY ARTICLE'):
+   # Public Page content, obtained through authenticated Blogger API only. This
+   # enables exact local rendering and cross-Page design analysis with zero
+   # public URL requests and therefore zero synthetic views.
+   authenticated_design_source=c
+  if page_title=='DAILY ARTICLE':
    root_at=c.find('id="articleHub"');first_section=c.find('class="ar-section"',root_at)
    if root_at>=0:
     article_opening=c[root_at:min(len(c),first_section if first_section>root_at else root_at+30000)]
     article_opening=re.sub(r'<script\b[^>]*>.*?</script>','[SCRIPT OMITTED]',article_opening,flags=re.I|re.S)
-  page_rows.append({'id':p.get('id'),'title':p.get('title'),'url':p.get('url'),'updated':p.get('updated'),'content_length':len(c),'has_shelf_wait':at>=0,'shelf_excerpt':excerpt,'article_opening':article_opening,'article_v5':('DAILY ARTICLE EXPERIENCE V5' in c),'article_feature_present':('DY_ARTICLE_FEATURE_START' in c),'article_sticky_note_count':len(re.findall(r'class=["\'][^"\']*\bar-note-sheet\b',c,re.I)),'article_continuous_scroll':('dt*58' in c and 'Date.now()<s.touchUntil' in c and 'w<=s.viewport.clientWidth' not in c),'nearby_classes':classes,'nearby_ids':ids,'script_count':len(scripts),'relevant_scripts':relevant_scripts})
+  page_rows.append({'id':p.get('id'),'title':p.get('title'),'url':p.get('url'),'updated':p.get('updated'),'content_length':len(c),'has_shelf_wait':at>=0,'shelf_excerpt':excerpt,'article_opening':article_opening,'authenticated_design_source':authenticated_design_source,'article_v5':('DAILY ARTICLE EXPERIENCE V5' in c),'article_feature_present':('DY_ARTICLE_FEATURE_START' in c),'article_sticky_note_count':len(re.findall(r'class=["\'][^"\']*\bar-note-sheet\b',c,re.I)),'article_continuous_scroll':('dt*58' in c and 'Date.now()<s.touchUntil' in c and 'w<=s.viewport.clientWidth' not in c),'nearby_classes':classes,'nearby_ids':ids,'script_count':len(scripts),'relevant_scripts':relevant_scripts})
  duplicates=[{'hero':src,'post_ids':ids,'count':len(ids)} for src,ids in image_owners.items() if len(ids)>1]
  labels={}
  for p in post_rows:
