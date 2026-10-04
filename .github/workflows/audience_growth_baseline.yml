@@ -1,0 +1,67 @@
+name: Authenticated Audience Growth Baseline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'audience_growth_baseline.py'
+      - 'test_audience_growth_baseline.py'
+      - '.github/workflows/audience_growth_baseline.yml'
+  schedule:
+    - cron: '35 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-audience-growth-baseline
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify truthful acquisition mathematics
+        run: python -m unittest test_audience_growth_baseline -v
+      - name: Capture authenticated Search Console baseline
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python audience_growth_baseline.py
+      - name: Upload baseline evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audience-growth-baseline-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            AUDIENCE_GROWTH_BASELINE.json
+            AUDIENCE_GROWTH_BASELINE.md
+      - name: Persist latest baseline safely
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Audience Measurement"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp AUDIENCE_GROWTH_BASELINE.json /tmp/AUDIENCE_GROWTH_BASELINE.json
+          cp AUDIENCE_GROWTH_BASELINE.md /tmp/AUDIENCE_GROWTH_BASELINE.md
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+            cp /tmp/AUDIENCE_GROWTH_BASELINE.json .
+            cp /tmp/AUDIENCE_GROWTH_BASELINE.md .
+            git add AUDIENCE_GROWTH_BASELINE.json AUDIENCE_GROWTH_BASELINE.md
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Update authenticated audience baseline [skip ci]"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
