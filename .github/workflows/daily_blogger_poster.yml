@@ -69,6 +69,7 @@ jobs:
         if: steps.publisher.outcome == 'success'
         run: |
           set -euo pipefail
+          trap 'code=$?; echo "::error title=Publication persistence command failed::line=$LINENO command=$BASH_COMMAND exit=$code"; exit $code' ERR
           git config user.name "Daily Yield Autonomous Bot"
           git config user.email "bot@dailyyield.blogspot.com"
           cp published_tracker.json /tmp/published_tracker.json
