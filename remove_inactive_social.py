@@ -21,7 +21,8 @@ def headers():
 def inventory(kind,h):
  out=[];token=None
  while True:
-  params={'status':'live','fetchBodies':'true','maxResults':'500','fields':'nextPageToken,items(id,title,url,content,status,labels)'}
+  fields='nextPageToken,items(id,title,url,content,status,labels)' if kind=='posts' else 'nextPageToken,items(id,title,url,content,status)'
+  params={'status':'live','fetchBodies':'true','maxResults':'500','fields':fields}
   if token:params['pageToken']=token
   r=requests.get(f'{BASE}/{kind}',headers=h,params=params,timeout=60);r.raise_for_status();data=r.json();out.extend(data.get('items',[]));token=data.get('nextPageToken')
   if not token:return out
