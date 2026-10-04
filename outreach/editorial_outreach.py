@@ -124,6 +124,7 @@ def registry_errors() -> list[str]:
     required = {
         "prospect_id", "organization", "email", "audience_topics", "permitted_purpose",
         "eligibility", "automation_mode", "source_url", "source_checked_at", "source_evidence",
+        "country", "timezone",
     }
     for number, row in enumerate(prospects, 2):
         missing = sorted(key for key in required if not row.get(key))
@@ -149,6 +150,11 @@ def registry_errors() -> list[str]:
             date.fromisoformat(row.get("source_checked_at", ""))
         except ValueError:
             errors.append(f"prospects.csv:{number}: invalid source_checked_at")
+        try:
+            from zoneinfo import ZoneInfo
+            ZoneInfo(row.get("timezone", ""))
+        except Exception:
+            errors.append(f"prospects.csv:{number}: invalid timezone")
 
     if not EMAIL_HEADER.exists() or not EMAIL_HEADER.read_bytes().startswith(b"GIF89a"):
         errors.append("branded animated email header is missing or invalid")
@@ -166,9 +172,14 @@ def validation_errors() -> list[str]:
             errors.append(f"send_lock.json {key} must be boolean")
     if lock.get("sending_enabled") is True and lock.get("gmail_oauth_configured") is not True:
         errors.append("sending cannot be enabled before Gmail OAuth is configured")
+    minimum = lock.get("minimum_initial_messages_per_day")
     limit = lock.get("max_initial_messages_per_day")
-    if not isinstance(limit, int) or not 1 <= limit <= 10:
-        errors.append("daily initial-message limit must be an integer from 1 to 10")
+    if not isinstance(minimum, int) or not 1 <= minimum <= 20:
+        errors.append("daily minimum target must be an integer from 1 to 20")
+    if not isinstance(limit, int) or not 1 <= limit <= 20:
+        errors.append("daily maximum must be an integer from 1 to 20")
+    if isinstance(minimum, int) and isinstance(limit, int) and minimum > limit:
+        errors.append("daily minimum target cannot exceed daily maximum")
     return errors
 
 
@@ -272,7 +283,7 @@ dailyyield.official@gmail.com
     return subject, body
 
 
-def draft(limit: int) -> int:
+def draft(limit: int, allowed_prospect_ids: set[str] | None = None) -> int:
     errors = validation_errors()
     if errors:
         print("\n".join(errors), file=sys.stderr)
@@ -297,7 +308,9 @@ def draft(limit: int) -> int:
     for prospect in prospects:
         email = prospect["email"].lower()
         reason = ""
-        if prospect["eligibility"] != "eligible" or prospect["automation_mode"] not in {"review_required", "auto_approved"}:
+        if allowed_prospect_ids is not None and prospect["prospect_id"] not in allowed_prospect_ids:
+            reason = "outside recipient local business-time window"
+        elif prospect["eligibility"] != "eligible" or prospect["automation_mode"] not in {"review_required", "auto_approved"}:
             reason = f"classification={prospect['eligibility']}/{prospect['automation_mode']}"
         elif email in suppressions:
             reason = "suppression list"
@@ -310,6 +323,9 @@ def draft(limit: int) -> int:
             continue
 
         article, score = match_article(prospect, articles)
+        if score <= 0:
+            manifest["blocked"].append({"prospect_id": prospect["prospect_id"], "reason": "no Daily Yield topic match"})
+            continue
         subject, body = compose(prospect, article)
         fingerprint = hashlib.sha256((email + "\n" + subject + "\n" + body).encode()).hexdigest()
         message = EmailMessage()
@@ -349,7 +365,7 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("validate")
     drafting = sub.add_parser("draft")
-    drafting.add_argument("--limit", type=int, default=10, choices=range(1, 11), metavar="1..10")
+    drafting.add_argument("--limit", type=int, default=10, choices=range(1, 21), metavar="1..20")
     args = parser.parse_args()
     if args.command == "validate":
         errors = validation_errors()

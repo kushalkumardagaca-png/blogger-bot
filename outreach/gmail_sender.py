@@ -102,6 +102,15 @@ def write_interactions(rows: list[dict[str, str]]) -> None:
     temporary.replace(outreach.INTERACTIONS)
 
 
+def prospect_due(prospect: dict[str, str], instant: datetime | None = None) -> bool:
+    instant = instant or now()
+    try:
+        local_hour = instant.astimezone(ZoneInfo(prospect["timezone"])).hour
+    except Exception:
+        return False
+    return 8 <= local_hour <= 12
+
+
 def reserve() -> int:
     settings = require_enabled()
     errors = outreach.registry_errors()
@@ -115,7 +124,13 @@ def reserve() -> int:
         print("Daily outreach limit already reached; reserved=0")
         return 0
 
-    result = outreach.draft(remaining)
+    prospects = {row["prospect_id"]: row for row in outreach.read_csv(outreach.PROSPECTS)}
+    due = set()
+    instant = now()
+    for prospect in prospects.values():
+        if prospect_due(prospect, instant):
+            due.add(prospect["prospect_id"])
+    result = outreach.draft(remaining, allowed_prospect_ids=due)
     if result:
         return result
     manifest = json.loads(outreach.MANIFEST.read_text(encoding="utf-8"))
@@ -220,14 +235,20 @@ def send_reserved() -> int:
 
 def verify_daily() -> int:
     settings = require_enabled()
-    today = now().date().isoformat()
+    instant = now()
+    today = instant.date().isoformat()
     rows = read_interactions()
     sent = [row for row in rows if row.get("created_at", "").startswith(today) and row.get("status") == "sent"]
-    target = int(settings["max_initial_messages_per_day"])
-    result = {"date": today, "sent": len(sent), "target": target, "status": "PASS" if len(sent) == target else "SHORTFALL"}
+    minimum = int(settings["minimum_initial_messages_per_day"])
+    maximum = int(settings["max_initial_messages_per_day"])
+    if len(sent) > maximum:
+        raise RuntimeError(f"daily outreach maximum exceeded: sent {len(sent)} of {maximum}")
+    final_window = instant.hour >= 23
+    status = "PASS" if len(sent) >= minimum else ("SHORTFALL" if final_window else "IN_PROGRESS")
+    result = {"date": today, "sent": len(sent), "minimum": minimum, "maximum": maximum, "finalWindow": final_window, "status": status}
     print(json.dumps(result))
-    if len(sent) != target:
-        raise RuntimeError(f"daily outreach shortfall: sent {len(sent)} of {target}; replenish verified eligible prospects")
+    if final_window and len(sent) < minimum:
+        raise RuntimeError(f"daily outreach shortfall: sent {len(sent)}; minimum {minimum}; only verified eligible recipients are permitted")
     return 0
 
 

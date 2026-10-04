@@ -42,7 +42,7 @@ CRITICAL_FILES = [
     "bing_url_automation.py", "apply_site_enhancements.py", "update_page_family.py", "SEO_EXPERIENCE_REQUIREMENTS.md",
     "theme/Daily-Yield-Theme-Subscription.xml",
     "theme/Daily-Yield-Theme-v4-2026-10-01.xml",
-    "outreach/editorial_outreach.py", "outreach/gmail_sender.py",
+    "outreach/editorial_outreach.py", "outreach/gmail_sender.py", "outreach/prospect_discovery.py",
     "outreach/prospects.csv", "outreach/send_lock.json",
     "outreach/suppressions.csv",
 ]

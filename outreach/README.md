@@ -1,28 +1,37 @@
 # Daily Yield Editorial Outreach
 
-This subsystem sends a small, source-verified editorial outreach batch through Gmail's send-only API. The daily target is ten initial messages, but a message is permitted only when the recipient's own official page explicitly invites that kind of editorial contact.
+This subsystem continuously discovers and verifies editorial opportunities, then sends source-matched proposals through Gmail's send-only API. The daily target is **at least 10 and never more than 20** initial messages, subject to strict recipient eligibility.
 
-## Safety and delivery rules
+## Continuous discovery
 
-- Only addresses explicitly published on an official page are stored.
-- Every contact records the permitted purpose and source-check date.
-- `eligible + auto_approved` may be reserved and sent under the locked policy.
-- `eligible + review_required` can produce a draft but cannot be sent automatically.
-- `human_only` and `excluded` records cannot produce drafts.
-- Existing suppressions, prior interactions and duplicate addresses block repeat initial messages.
-- One initial approach per recipient; at most one follow-up, never sooner than ten days.
+- Runs hourly around the clock.
+- Uses public search-result RSS only to locate candidate official pages; search snippets are never accepted as evidence.
+- Obeys `robots.txt`, uses a declared Daily Yield user agent and limits page requests.
+- Accepts a candidate only when the official HTTPS page itself contains Daily Yield-relevant finance topics, an explicit invitation for pitches/contributions/tips/guest proposals, and an organizational email belonging to the same domain.
+- Rejects paid placement, editorial fees, backlink schemes, sponsored-post routes and unrelated categories.
+- Adds no more than one automatically discovered recipient per organization page.
+- Records the official source, verification date, country and IANA time zone.
+- Classifies an explicit prohibition on automated/AI material as `human_only`, which blocks automated delivery.
+
+## Delivery safeguards
+
+- Sends only during approximately 08:00–12:59 in the recipient's recorded local time zone.
+- Maximum 20 initial messages per IST calendar day; target minimum 10.
+- A shortage is reported at the end of the day instead of filling the quota with doubtful contacts.
+- Existing suppressions, prior interactions, duplicate addresses and duplicate organizations are blocked.
+- One initial approach per recipient; no automatic repeat after Gmail accepts a message.
 - Sponsorship, paid placement, link exchanges and bulk promotion are outside scope.
 - Open pixels and synthetic pageviews are prohibited.
 - Gmail authorization is limited to `gmail.send`; it cannot read or delete inbox content.
 - Every message is committed as a reservation before Gmail is contacted, preventing duplicate retries.
-- The workflow fails visibly when fewer than ten messages are recorded as sent for the day; a successful no-op can no longer hide an empty eligible queue.
 
 ## Local validation
 
 ```bash
 python outreach/editorial_outreach.py validate
-python outreach/editorial_outreach.py draft --limit 10
+python outreach/prospect_discovery.py
+python outreach/editorial_outreach.py draft --limit 20
 python -m unittest outreach/test_editorial_outreach.py
 ```
 
-Generated drafts are administrative proposals, not publishable articles. A recipient that prohibits automated or AI-generated material remains `human_only` and receives no generated message.
+Generated messages are administrative proposals, not completed submissions. Restricted, excluded and `human_only` recipients never receive automated messages.

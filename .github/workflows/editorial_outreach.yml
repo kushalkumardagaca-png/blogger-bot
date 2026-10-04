@@ -2,8 +2,8 @@ name: Daily Yield Editorial Outreach
 
 on:
   schedule:
-    # 13:00 IST daily. Only newly verified eligible contacts are considered.
-    - cron: '30 7 * * *'
+    # Hourly, worldwide. Discovery is continuous; delivery is gated by each recipient's local business window.
+    - cron: '17 * * * *'
   push:
     branches: [main]
     paths:
@@ -50,6 +50,39 @@ jobs:
           python outreach/editorial_outreach.py validate
           python outreach/gmail_sender.py auth-check
 
+      - name: Discover source-verified editorial opportunities
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
+        env:
+          OUTREACH_DISCOVERY_STATUS: /tmp/DISCOVERY_STATUS.json
+        run: python outreach/prospect_discovery.py
+
+      - name: Upload discovery evidence
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
+        uses: actions/upload-artifact@v4
+        with:
+          name: editorial-discovery-${{ github.run_id }}
+          retention-days: 14
+          path: /tmp/DISCOVERY_STATUS.json
+
+      - name: Persist verified discovery state
+        if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
+        run: |
+          git config user.name "Daily Yield Editorial Discovery"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add outreach/prospects.csv
+          if git diff --staged --quiet; then
+            echo "No new verified opportunity."
+          else
+            git commit -m "Refresh verified editorial opportunities"
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 2))
+            done
+            echo "Discovery state could not be persisted; no new recipient may be used."
+            exit 1
+          fi
+
       - name: Reserve eligible messages before any send
         if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: python outreach/gmail_sender.py reserve
@@ -94,6 +127,6 @@ jobs:
             exit 1
           fi
 
-      - name: Enforce the ten-message daily target visibly
+      - name: Enforce the 10-to-20 daily policy visibly
         if: github.event_name == 'schedule' || github.event_name == 'push' || inputs.mode == 'send'
         run: python outreach/gmail_sender.py verify-daily
