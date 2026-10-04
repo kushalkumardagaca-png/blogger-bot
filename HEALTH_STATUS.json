@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 269,
-    "posts": 255,
+    "urls": 271,
+    "posts": 257,
     "pages": 13,
     "contentFailures": 2,
-    "externalDestinationsChecked": 2594,
+    "externalDestinationsChecked": 2622,
     "confirmedExternal404or410": 0,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 166,
+    "transientExternalResponses": 226,
     "workflowWarnings": 1,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -26,7 +26,7 @@
         "isPending": false,
         "isSitemapsIndex": false,
         "type": "sitemap",
-        "lastDownloaded": "2026-10-03T07:29:26.687Z",
+        "lastDownloaded": "2026-10-04T07:37:44.781Z",
         "warnings": "0",
         "errors": "0",
         "contents": [
@@ -3003,28 +3003,50 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/uk-2026-10-04.html": {
+        "title": "UK Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T13:36:57.833717+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/japan-2026-10-04.html": {
+        "title": "Japan Finance News \u2014 4 October 2026",
+        "checkedAt": "2026-10-04T13:36:57.833717+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 268,
-      "tracked": 268,
+      "inventory": 270,
+      "tracked": 270,
       "pass": 0,
-      "neutralOrOther": 268,
-      "inspectedThisRun": 0,
+      "neutralOrOther": 270,
+      "inspectedThisRun": 2,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 187,
         "Redirect error": 10,
-        "URL is unknown to Google": 71
+        "URL is unknown to Google": 73
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 258,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 260,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 187,
-      "unknownToGoogle": 71
+      "unknownToGoogle": 73
     }
   },
   "github": [
@@ -3040,32 +3062,32 @@
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37177167225,
-      "latestUpdatedAt": "2026-10-04T04:30:37Z",
+      "latestRunId": 37181940026,
+      "latestUpdatedAt": "2026-10-04T06:09:16Z",
       "detail": "latest=success; 2 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37177202827,
-      "latestUpdatedAt": "2026-10-04T04:45:47Z",
+      "latestRunId": 37181966815,
+      "latestUpdatedAt": "2026-10-04T06:24:25Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37178297073,
-      "latestUpdatedAt": "2026-10-04T04:53:47Z",
+      "latestRunId": 37187869221,
+      "latestUpdatedAt": "2026-10-04T08:07:07Z",
       "detail": "latest=success; 4 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37178297045,
-      "latestUpdatedAt": "2026-10-04T04:55:47Z",
+      "latestRunId": 37181596517,
+      "latestUpdatedAt": "2026-10-04T06:03:59Z",
       "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],

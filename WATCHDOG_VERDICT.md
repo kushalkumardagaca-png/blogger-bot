@@ -3,7 +3,7 @@
 - **Verdict:** ATTENTION
 - **Mode:** ZERO_SYNTHETIC_VIEWS
 - **Synthetic Views:** 0
-- **Urls:** 269
+- **Urls:** 271
 - **Content Failures:** 2
 - **Rendered Checks:** 0
 - **Gsc:** OK
