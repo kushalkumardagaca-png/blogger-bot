@@ -25,6 +25,27 @@ START = "<!-- DY_PAGE_FAMILY_START -->"
 END = "<!-- DY_PAGE_FAMILY_END -->"
 PRIVACY_SUB_START = "<!-- DY_SUBSCRIPTION_PRIVACY_START -->"
 PRIVACY_SUB_END = "<!-- DY_SUBSCRIPTION_PRIVACY_END -->"
+SEO_START = "<!-- DY_SEO_META_START -->"
+SEO_END = "<!-- DY_SEO_META_END -->"
+PAGE_DESCRIPTIONS = {
+    "/p/terms-and-conditions.html": "Read the rules, educational limits and acceptable-use terms governing Daily Yield.",
+    "/p/privacy-policy.html": "Understand Daily Yield privacy choices, analytics, subscriptions and advertising disclosures.",
+    "/p/disclaimer.html": "Review the educational, financial and advertising limitations that apply to Daily Yield content.",
+    "/p/contact-us_01883938366.html": "Contact Daily Yield about corrections, privacy, advertising or editorial questions.",
+    "/p/about-us_02080501126.html": "Learn how Daily Yield creates sourced financial education, reporting and practical reader tools.",
+}
+
+
+def ensure_page_meta(content, current_path=""):
+    """Install a factual fallback description when a Page package has none."""
+    if "metaDesc" in (content or "") or SEO_START in (content or ""):
+        return content or ""
+    description = PAGE_DESCRIPTIONS.get(
+        current_path,
+        "Explore Daily Yield financial education, current reporting, practical tools and reader guidance.",
+    )
+    block = SEO_START + """<script>(function(d){var metaDesc=%r,m=d.querySelector('meta[name="description"]');if(!m){m=d.createElement('meta');m.name='description';d.head.appendChild(m);}if(!m.content)m.content=metaDesc;})(document);</script>""" % description + SEO_END
+    return (content or "").rstrip() + "\n" + block
 
 
 def family_block(current_path=""):
@@ -122,6 +143,7 @@ def ensure_subscription_privacy(content, current_path=""):
 
 def ensure_family(content, current_path=""):
     """Keep one full family directory, privacy disclosures and no obsolete cards."""
+    content = ensure_page_meta(content, current_path)
     content = ensure_social_identity(content)
     content = ensure_brand_identity(content)
     content = ensure_subscription_privacy(content, current_path)

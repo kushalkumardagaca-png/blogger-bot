@@ -5,6 +5,11 @@ on:
     branches: [main]
     paths:
       - 'update_page_family.py'
+      - 'page_family.py'
+      - 'brand_identity.py'
+      - 'social_identity.py'
+      - 'seo_hygiene.py'
+      - 'test_page_family.py'
       - '.github/workflows/update_page_family.yml'
 
 permissions:
@@ -27,6 +32,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests
+      - name: Verify repeat-safe Page metadata controls
+        run: python -m unittest test_page_family test_seo_hygiene -v
       - name: Back up and update every active static page
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}

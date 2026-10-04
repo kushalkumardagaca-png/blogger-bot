@@ -169,13 +169,15 @@ def audit_content(item, known):
             internal.append(absolute)
         elif urlparse(absolute).scheme in ("http", "https"):
             external.append(absolute)
-    if len(plain(content).split()) < 40:
+    exempt = item["url"].endswith(LEGACY)
+    # The retired Market Explorer URL is intentionally a compact hand-off Page;
+    # requiring article depth there would encourage duplicate low-value content.
+    if len(plain(content).split()) < 40 and not exempt:
         issues.append("content unexpectedly short")
     ids = re.findall(r"\bid=[\"']([^\"']+)", markup, re.I)
     duplicates = sorted({value for value in ids if ids.count(value) > 1})
     if duplicates:
         issues.append("duplicate HTML ids: " + ", ".join(duplicates[:8]))
-    exempt = item["url"].endswith(LEGACY)
     if "DY_BRAND_IDENTITY_START" not in content:
         issues.append("Daily Yield favicon identity missing")
     if re.search(r"https?://(?:www\.)?(?:linkedin\.com/|(?:x|twitter)\.com/|reddit\.com/)", content, re.I):
