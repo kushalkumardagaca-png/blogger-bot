@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-10-04T13:08:56.780080+00:00",
+  "mode": "AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS",
+  "syntheticViews": 0,
+  "property": "sc-domain:dailyyield.blogspot.com",
+  "requestedThrough": "2026-10-03",
+  "availableThrough": "2026-09-29",
+  "searchAcquisition": {
+    "last7Days": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "averagePosition": null
+    },
+    "last28Days": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "averagePosition": null
+    },
+    "last90Days": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "averagePosition": null
+    },
+    "topPages28Days": [],
+    "countries28Days": [],
+    "devices28Days": []
+  },
+  "readerMeasurement": {
+    "status": "NOT_AVAILABLE_FROM_SEARCH_CONSOLE",
+    "dau": null,
+    "wau": null,
+    "mau": null,
+    "retention7Day": null,
+    "retention30Day": null,
+    "explanation": "Search clicks and impressions are not users, sessions, pageviews or retention. DAU and cohort retention require consented first-party analytics reporting access."
+  },
+  "limitations": [
+    "Search Console data is delayed and may omit privacy-protected rows.",
+    "Clicks are genuine search-acquisition evidence but are not total website traffic.",
+    "No public Daily Yield URL was requested."
+  ]
+}
