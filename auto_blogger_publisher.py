@@ -188,8 +188,22 @@ def main():
     article_topic = dict(topic)
     article_topic["Category"] = category
     title, slug, meta_desc, labels, html = build_reader_value_article(article_topic, pub_date_str, pub_time_str, hero)
+
+    # Publication preflight requires one useful internal action and a related shelf.
+    # Build both deterministically before Blogger is contacted. Authenticated API
+    # inventory remains primary; the persisted tracker is a zero-view fallback if
+    # Google temporarily throttles that read.
+    html += "\n" + CONTEXT_STYLE + "\n" + contextual_card(title + " " + category + " " + html, "articles")
     current_post = {"id": "pending", "title": title, "labels": labels, "content": html}
-    html = ensure_related_articles(html, current_post, fetch_public_posts())
+    related_candidates = fetch_public_posts()
+    if not related_candidates:
+        related_candidates = [{
+            "id": f"tracker-{row.get('topic_id', index)}",
+            "title": row.get("title", "Daily Yield article"),
+            "content": "", "labels": [row.get("category", "Daily Article")],
+            "published": row.get("published_at", ""), "url": row.get("blogger_url", ""),
+        } for index, row in enumerate(tracker.get("published_posts", [])) if row.get("blogger_url")]
+    html = ensure_related_articles(html, current_post, related_candidates)
     html = ensure_family(html)
     html = ensure_continuous_motion(html)
     assert_publishable(title, html, labels)

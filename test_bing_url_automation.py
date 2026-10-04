@@ -44,10 +44,10 @@ class BingUrlAutomationTests(unittest.TestCase):
         with patch.object(bing, "blogger_inventory", return_value=self.items), \
              patch.object(bing, "get_quota", return_value={"dailyAvailable": 10, "monthlyAvailable": 10}), \
              patch.object(bing, "submit_batch", side_effect=lambda key, urls: batches.append(urls)), \
-             patch.object(bing, "get_url_info") as info:
+             patch.object(bing, "get_page_stats", return_value={}) as stats:
             self.assertEqual(bing.main(), 0)
             self.assertEqual(sum(map(len, batches)), 2)
-            self.assertFalse(info.called)
+            self.assertFalse(stats.called)
             batches.clear()
             self.assertEqual(bing.main(), 0)
             self.assertEqual(batches, [])
@@ -56,10 +56,10 @@ class BingUrlAutomationTests(unittest.TestCase):
         self.assertEqual(report["summary"]["submitted"], 0)
         self.assertEqual(report["syntheticViews"], 0)
 
-    def test_due_status_check_uses_get_url_info_without_resubmission(self):
+    def test_due_status_check_uses_page_stats_without_resubmission(self):
         with patch.object(bing, "blogger_inventory", return_value=self.items), \
              patch.object(bing, "get_quota", return_value={"dailyAvailable": 10, "monthlyAvailable": 10}), \
-             patch.object(bing, "submit_batch"), patch.object(bing, "get_url_info"):
+             patch.object(bing, "submit_batch"), patch.object(bing, "get_page_stats", return_value={}):
             bing.main()
         state = json.loads(bing.STATE_PATH.read_text())
         for record in state["urls"].values():
@@ -68,12 +68,12 @@ class BingUrlAutomationTests(unittest.TestCase):
         with patch.object(bing, "blogger_inventory", return_value=self.items), \
              patch.object(bing, "get_quota", return_value={"dailyAvailable": 10, "monthlyAvailable": 10}), \
              patch.object(bing, "submit_batch") as submit, \
-             patch.object(bing, "get_url_info", return_value={"IsPage": True, "LastCrawledDate": "2026-10-02T02:00:00Z"}) as info:
+             patch.object(bing, "get_page_stats", return_value={item["url"]: {"Impressions": 1, "Clicks": 0, "LatestDate": "2026-10-02"} for item in self.items}) as stats:
             self.assertEqual(bing.main(), 0)
             self.assertFalse(submit.called)
-            self.assertEqual(info.call_count, 2)
+            self.assertEqual(stats.call_count, 1)
         final = json.loads(bing.STATE_PATH.read_text())
-        self.assertTrue(all(row["status"] == "MONITOR_COMPLETE" for row in final["urls"].values()))
+        self.assertTrue(all(row["status"] == "BING_PERFORMANCE_OBSERVED" for row in final["urls"].values()))
 
     def test_limited_quota_prioritizes_homepage_then_newest_content(self):
         newest = {
@@ -85,13 +85,13 @@ class BingUrlAutomationTests(unittest.TestCase):
         with patch.object(bing, "blogger_inventory", return_value=self.items + [newest]), \
              patch.object(bing, "get_quota", return_value={"dailyAvailable": 2, "monthlyAvailable": 2}), \
              patch.object(bing, "submit_batch", side_effect=lambda key, urls: submitted.extend(urls)), \
-             patch.object(bing, "get_url_info"):
+             patch.object(bing, "get_page_stats", return_value={}):
             self.assertEqual(bing.main(), 0)
         self.assertEqual(submitted, [bing.SITE, newest["url"]])
         report = json.loads(bing.STATUS_JSON.read_text())
         self.assertEqual(report["summary"]["quotaDeferred"], 1)
 
-    def test_url_info_burst_is_capped_at_ten_per_run(self):
+    def test_page_stats_reconciliation_is_capped_at_ten_records_per_run(self):
         items = []
         records = {}
         for number in range(12):
@@ -108,9 +108,9 @@ class BingUrlAutomationTests(unittest.TestCase):
         with patch.object(bing, "blogger_inventory", return_value=items), \
              patch.object(bing, "get_quota", return_value={"dailyAvailable": 0, "monthlyAvailable": 100}), \
              patch.object(bing, "submit_batch"), \
-             patch.object(bing, "get_url_info", return_value={"IsPage": True, "LastCrawledDate": "2026-10-02T02:00:00Z"}) as info:
+             patch.object(bing, "get_page_stats", return_value={url: {"Impressions": 1, "Clicks": 0, "LatestDate": "2026-10-02"} for url in records}) as stats:
             self.assertEqual(bing.main(), 0)
-            self.assertEqual(info.call_count, 10)
+            self.assertEqual(stats.call_count, 1)
         report = json.loads(bing.STATUS_JSON.read_text())
         self.assertEqual(report["summary"]["inspected"], 10)
         self.assertEqual(report["errors"], [])

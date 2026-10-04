@@ -1,6 +1,12 @@
 name: Autonomous Daily Yield Publishing Engine (5x Daily)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'auto_blogger_publisher.py'
+      - 'publication_preflight.py'
+      - '.github/workflows/daily_blogger_poster.yml'
   schedule:
     # Start each production run 45 minutes before its editorial target (IST, UTC+5:30).
     # This reserves up to 15 minutes for build/publish and 30 minutes for feed/search discovery.
@@ -18,6 +24,7 @@ concurrency:
 
 jobs:
   publish_next_article:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run master publisher]')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -37,6 +44,8 @@ jobs:
         run: pip install google-api-python-client google-auth pillow
 
       - name: Run Daily Yield master-article publisher
+        id: publisher
+        continue-on-error: true
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
@@ -44,25 +53,53 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python auto_blogger_publisher.py
 
+      - name: Upload publisher diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-publisher-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            published_tracker.json
+            social_events.json
+            scheduled_ready/topic_*.html
+
+      - name: Persist confirmed publication state safely
+        if: steps.publisher.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Autonomous Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
+          cp published_tracker.json /tmp/published_tracker.json
+          cp social_events.json /tmp/social_events.json
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/published_tracker.json published_tracker.json
+            cp /tmp/social_events.json social_events.json
+            git add published_tracker.json social_events.json
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Auto-published next Daily Yield article [$(date -u)] [skip ci]"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
+
       - name: Route the live article to exactly one social platform
+        if: steps.publisher.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: python dispatch_social_events.py
 
-      - name: Commit publishing tracker
-        run: |
-          git config user.name "Daily Yield Autonomous Bot"
-          git config user.email "bot@dailyyield.blogspot.com"
-          git add published_tracker.json
-          if git diff --staged --quiet; then
-            echo "No tracker change."
-          else
-            git commit -m "Auto-published next Daily Yield article [$(date -u)]"
-            git pull --rebase origin main
-            git push origin main
-          fi
-
       - name: Trigger Bing URL submission reconciliation
+        if: steps.publisher.outcome == 'success'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run bing_url_automation.yml --ref main
+
+      - name: Fail after preserving publisher diagnostics
+        if: steps.publisher.outcome == 'failure'
+        run: |
+          echo "Master publisher failed before a confirmed tracked publication."
+          exit 1

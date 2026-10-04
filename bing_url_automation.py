@@ -26,9 +26,8 @@ STATUS_JSON = Path("BING_URL_AUTOMATION_STATUS.json")
 STATUS_MD = Path("BING_URL_AUTOMATION_STATUS.md")
 BING_BASE = "https://ssl.bing.com/webmaster/api.svc/json"
 INSPECTION_DELAYS = (6, 24, 72, 168)
-# Bing's legacy GetUrlInfo endpoint begins returning HTTP 400 after ten status
-# lookups in one short run. Keep each two-hour reconciliation within that
-# provider-side burst ceiling; remaining URLs stay queued for later runs.
+# Evaluate a bounded number of pending records against the site-wide page-stats
+# response each run; remaining records stay queued for later reconciliation.
 MAX_INSPECTIONS_PER_RUN = min(10, max(1, int(os.environ.get("BING_MAX_INSPECTIONS_PER_RUN", "10"))))
 TRANSIENT_HTTP = {429, 500, 502, 503, 504}
 
@@ -207,19 +206,33 @@ def submit_batch(key: str, urls: list[str]) -> None:
     )
 
 
-def get_url_info(key: str, url: str) -> dict:
-    if not valid_daily_yield_url(url):
-        raise RuntimeError("invalid Bing inspection URL")
+def get_page_stats(key: str) -> dict[str, dict]:
+    """Return Bing-observed Daily Yield pages from Search Performance.
+
+    Bing's GetUrlInfo family currently returns provider-side HTTP 400/UnknownError
+    even for valid verified properties. GetPageStats remains supported and is a
+    truthful control-plane signal: a URL present there has generated a Bing
+    impression. Absence is kept as pending, never misrepresented as not indexed.
+    """
     payload = json_request(
-        bing_url("GetUrlInfo", key, siteUrl=SITE, url=url),
-        service="Bing URL info", retries=2,
+        bing_url("GetPageStats", key, siteUrl=SITE),
+        service="Bing page stats", retries=2,
     )
-    data = unwrap(payload) or {}
-    # Keep only documented, non-secret control-plane fields.
-    return {name: data.get(name) for name in (
-        "Url", "IsPage", "DiscoveryDate", "LastCrawledDate", "HttpStatus",
-        "DocumentSize", "AnchorCount", "TotalChildUrlCount",
-    )}
+    rows = unwrap(payload) or []
+    if not isinstance(rows, list):
+        return {}
+    observed: dict[str, dict] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        url = row.get("Query", "")
+        if not valid_daily_yield_url(url):
+            continue
+        previous = observed.setdefault(url, {"Impressions": 0, "Clicks": 0, "LatestDate": ""})
+        previous["Impressions"] += max(0, int(row.get("Impressions", 0) or 0))
+        previous["Clicks"] += max(0, int(row.get("Clicks", 0) or 0))
+        previous["LatestDate"] = max(str(previous["LatestDate"]), str(row.get("Date", "")))
+    return observed
 
 
 def load_state() -> dict:
@@ -262,6 +275,8 @@ def write_evidence(report: dict) -> None:
     ]
     if report.get("errors"):
         lines += ["## Errors", ""] + [f"- {error}" for error in report["errors"]] + [""]
+    if report.get("warnings"):
+        lines += ["## Provider warnings", ""] + [f"- {warning}" for warning in report["warnings"]] + [""]
     STATUS_MD.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -333,37 +348,52 @@ def main() -> int:
     due = []
     current_time = now_utc()
     for url, record in records.items():
-        if url not in current_urls or record.get("status") == "MONITOR_COMPLETE":
+        if url not in current_urls or record.get("status") in ("MONITOR_COMPLETE", "BING_PERFORMANCE_OBSERVED"):
             continue
         next_at = parse_time(record.get("nextInspectionAt", ""))
+        # Migrate records left by the provider-broken GetUrlInfo monitor into the
+        # working page-performance reconciliation immediately.
+        if record.get("status") == "INSPECTION_ERROR" and record.get("monitorVersion") != 2:
+            next_at = current_time
+            record["nextInspectionAt"] = iso(current_time)
         if record.get("lastSubmittedAt") and next_at and next_at <= current_time:
             due.append((next_at, url, record))
     due.sort(key=lambda row: (row[0], row[1]))
     inspected = 0
-    for _, url, record in due[:MAX_INSPECTIONS_PER_RUN]:
+    warnings: list[str] = []
+    observed_pages: dict[str, dict] = {}
+    stats_available = not due
+    if due:
         try:
-            info = get_url_info(key, url)
-            inspected += 1
-            record["lastInspectedAt"] = iso()
-            record["lastUrlInfo"] = info
-            known = bool(info.get("IsPage") or info.get("DiscoveryDate") or info.get("LastCrawledDate"))
-            if known and info.get("LastCrawledDate"):
-                record["status"] = "MONITOR_COMPLETE"
-                record["nextInspectionAt"] = ""
-            else:
-                stage = int(record.get("inspectionStage", 0)) + 1
-                record["inspectionStage"] = stage
-                if stage >= len(INSPECTION_DELAYS):
-                    record["status"] = "NOT_KNOWN_AFTER_7_DAYS"
-                    record["nextInspectionAt"] = ""
-                else:
-                    submitted_at = parse_time(record.get("lastSubmittedAt", "")) or current_time
-                    record["status"] = "KNOWN_TO_BING" if known else "MONITORING_PENDING"
-                    record["nextInspectionAt"] = schedule_after(submitted_at, stage)
+            observed_pages = get_page_stats(key)
+            stats_available = True
         except Exception as exc:
-            errors.append(str(exc))
-            record["status"] = "INSPECTION_ERROR"
+            # Search Performance is supplementary monitoring. Submission/quota
+            # errors remain fatal, but a reporting outage must not turn a valid
+            # zero-view submission run into repeated failure notifications.
+            warnings.append(str(exc))
+    for _, url, record in due[:MAX_INSPECTIONS_PER_RUN]:
+        inspected += 1
+        record["lastInspectedAt"] = iso()
+        record["monitorVersion"] = 2
+        if not stats_available:
+            record["status"] = "MONITORING_PROVIDER_DELAY"
             record["nextInspectionAt"] = iso(current_time + timedelta(hours=2))
+            continue
+        if url in observed_pages:
+            record["lastPageStats"] = observed_pages[url]
+            record["status"] = "BING_PERFORMANCE_OBSERVED"
+            record["nextInspectionAt"] = ""
+            continue
+        stage = int(record.get("inspectionStage", 0)) + 1
+        record["inspectionStage"] = stage
+        submitted_at = parse_time(record.get("lastSubmittedAt", "")) or current_time
+        if stage >= len(INSPECTION_DELAYS):
+            record["status"] = "NO_PERFORMANCE_SIGNAL_AFTER_7_DAYS"
+            record["nextInspectionAt"] = ""
+        else:
+            record["status"] = "MONITORING_PENDING"
+            record["nextInspectionAt"] = schedule_after(submitted_at, stage)
 
     state.update({
         "version": 1, "site": SITE, "updatedAt": iso(),
@@ -371,8 +401,8 @@ def main() -> int:
         "syntheticViews": 0, "urls": records,
     })
     STATE_PATH.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    known_count = sum(r.get("status") in ("KNOWN_TO_BING", "MONITOR_COMPLETE") for u, r in records.items() if u in current_urls)
-    pending_count = sum(r.get("status") in ("SUBMITTED", "MONITORING_PENDING", "KNOWN_TO_BING", "INSPECTION_ERROR") for u, r in records.items() if u in current_urls)
+    known_count = sum(r.get("status") == "BING_PERFORMANCE_OBSERVED" for u, r in records.items() if u in current_urls)
+    pending_count = sum(r.get("status") in ("SUBMITTED", "MONITORING_PENDING", "MONITORING_PROVIDER_DELAY") for u, r in records.items() if u in current_urls)
     report = {
         "checkedAt": iso(), "status": "PASS" if not errors else "ATTENTION",
         "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS", "syntheticViews": 0,
@@ -383,8 +413,10 @@ def main() -> int:
             "pendingMonitoring": pending_count, "removedAlerts": len(removed),
         },
         "errors": sorted(set(errors)),
+        "warnings": sorted(set(warnings)),
         "notes": [
-            "GetUrlInfo supplies documented index details; it is not represented as the complete Webmaster Tools URL Inspection UI.",
+            "Bing GetPageStats supplies a performance-observed signal; absence is not represented as proof that a URL is unindexed.",
+            "The provider-failing GetUrlInfo family is not called.",
             "No Live URL fetch is performed.",
             "Submission does not guarantee crawling, indexing, ranking or traffic.",
         ],
