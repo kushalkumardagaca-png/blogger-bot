@@ -44,7 +44,7 @@ def main():
   # without requesting or rendering the public Page (zero synthetic views).
   article_opening='';authenticated_design_source=''
   page_title=p.get('title','').strip().upper()
-  if page_title in ('DAILY NEWS','DAILY ARTICLE'):
+  if page_title in ('DAILY NEWS','DAILY ARTICLE','ABOUT US','CONTACT US','PRIVACY POLICY','DISCLAIMER','FINANCIAL DISCLAIMER'):
    # Public Page content, obtained through authenticated Blogger API only. This
    # enables exact local rendering and cross-Page design analysis with zero
    # public URL requests and therefore zero synthetic views.
