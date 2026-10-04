@@ -4,7 +4,7 @@
 Authenticated Blogger API only: this maintenance creates zero public pageviews.
 """
 from __future__ import annotations
-import gzip, html, json, os, re
+import gzip, html, json, os, re, time
 from pathlib import Path
 import requests
 from social_identity import ensure_social_identity
@@ -48,6 +48,18 @@ def clean(content,path):
  return ensure_social_identity(content).strip()
 
 
+def update_item(kind,item_id,body,h):
+ url=f'{BASE}/{kind}/{item_id}'
+ last=None
+ for attempt in range(5):
+  r=requests.patch(url,headers={**h,'Content-Type':'application/json'},json=body,timeout=60)
+  if r.ok:return r
+  last=r
+  if r.status_code not in (409,429,500,502,503,504):return r
+  time.sleep(2 ** attempt)
+ return last
+
+
 def main():
  h=headers();items=[]
  for kind in ('posts','pages'):
@@ -61,9 +73,10 @@ def main():
   if revised==x.get('content',''):continue
   body={'kind':f'blogger#{x["_kind"][:-1]}','id':x['id'],'title':x.get('title',''),'content':revised}
   if x['_kind']=='posts':body['labels']=x.get('labels',[])
-  r=requests.put(f'{BASE}/{x["_kind"]}/{x["id"]}',headers={**h,'Content-Type':'application/json'},json=body,timeout=60)
-  if not r.ok:fail.append({'id':x['id'],'title':x.get('title'),'reason':f'HTTP {r.status_code}'});continue
+  r=update_item(x['_kind'],x['id'],body,h)
+  if not r.ok:fail.append({'id':x['id'],'title':x.get('title'),'reason':f'HTTP {r.status_code}: {r.text[:160]}'});continue
   changed.append({'id':x['id'],'kind':x['_kind'],'title':x.get('title'),'url':x.get('url')})
+  time.sleep(.25)
  # Re-inventory through the authenticated API and fail closed if any URL survived.
  remaining=[]
  for kind in ('posts','pages'):
