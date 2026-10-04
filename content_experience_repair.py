@@ -149,6 +149,7 @@ def marked(content,block):
  if START in content:return re.sub(re.escape(START)+r'.*?'+re.escape(END),lambda _m:block,content,count=1,flags=re.S)
  return content+'\n'+block
 
+# Immutable marker for the clean static Article application deployed from authenticated data.
 ARTICLE_SCRATCH_MARK='DY_ARTICLE_FROM_SCRATCH_V1'
 
 def article_card(post,cat):
