@@ -1,13 +1,13 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 263,
+  "posts_checked": 267,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 0,
+  "duplicate_heroes_replaced": 5,
   "remaining_duplicate_heroes": 0,
-  "pages_repaired": 1,
+  "pages_repaired": 2,
   "article_snapshot_entries": 70,
-  "news_snapshot_entries": 193,
+  "news_snapshot_entries": 197,
   "article_category_counts": {
     "Contrarian Hooks": 3,
     "Age and Wealth Milestones": 3,
@@ -36,7 +36,7 @@
     "2026 Money Moves": 2
   },
   "news_desk_counts": {
-    "US": 10,
+    "US": 11,
     "China": 10,
     "Germany": 10,
     "India": 10,
@@ -45,16 +45,16 @@
     "France": 10,
     "Italy": 9,
     "Russia": 9,
-    "Canada": 9,
+    "Canada": 10,
     "Brazil": 10,
     "Spain": 9,
-    "Mexico": 8,
+    "Mexico": 9,
     "Australia": 10,
     "South Korea": 10,
     "Market and Trading": 10,
     "Economy and Macro Policy": 10,
     "Corporate Finance and Industry": 10,
-    "Personal Finance": 9,
+    "Personal Finance": 10,
     "Global News": 10
   }
 }
