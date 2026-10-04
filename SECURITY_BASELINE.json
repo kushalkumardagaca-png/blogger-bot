@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-04T16:20:12.243426+00:00",
+  "approvedAt": "2026-10-04T16:22:42.441231+00:00",
   "repository": {
     "auto_blogger_publisher.py": "f84a513e37b63240e623b1618d179e115f8270fa990e0f8db7264ba2ca0d5cd0",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -32,7 +32,7 @@
     "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
     "bing_url_automation.py": "7a38a16ae9aafcb21071ab5a0a0be525796190fb6d2294d17b0c4699db2444a9",
     "apply_site_enhancements.py": "2a1f2ffd0b8ff4740eb4f245a437f6c174989611169510fa94e5c8f1f5e26067",
-    "update_page_family.py": "cdc1ec77dd2e85ead2f2d256986600f42e4f755de4b8cbd076384d5daf96b5c4",
+    "update_page_family.py": "6df68a3d7ff291662a257bb09994dffafa1b589a5b4ef9bcec583ffe2358b27c",
     "SEO_EXPERIENCE_REQUIREMENTS.md": "a683ff3f37d823bded624bcabd568e0e32572096b0e0131616022424bc948675",
     "theme/Daily-Yield-Theme-Subscription.xml": "285843318d5b0aa5ac8aafb3c24647137f4b2838cf1c81106af27ee4a9222bf3",
     "theme/Daily-Yield-Theme-v4-2026-10-01.xml": "01b04860c85f54be5748b56c7e36f98f7a529244219ba6b75e31414e92dee13a",
@@ -63,7 +63,7 @@
     ".github/workflows/security_guard.yml": "d539f5e4421f342211489e1fc4441a227ff446211dd5a2fe788a514d0f62fff2",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
-    ".github/workflows/update_page_family.yml": "fde6ba34d23d7037cc68fdf87a1482f80db11bfb812bf082a57a935c4972e06d"
+    ".github/workflows/update_page_family.yml": "a059303e4a8d5be1308ed6e1d87d7334f3b821a35617c852a118867f1c463fb4"
   },
   "blogger": {
     "page:3254393081257151974": {
