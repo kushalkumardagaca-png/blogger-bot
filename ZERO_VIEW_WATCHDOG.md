@@ -1,6 +1,6 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-04T18:30:07.862568+05:30
+- **Checked:** 2026-10-04T18:30:34.925771+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
 - **Inventory:** 277 URLs · 263 Posts · 13 Pages
@@ -14,12 +14,12 @@
 
 ## Content inventory
 - ✅ **home · DAILY YIELD**
-- ✅ **page · TERMS AND CONDITIONS**
+- ❌ **page · TERMS AND CONDITIONS** — SEO/meta description package missing
 - ✅ **page · GLOBAL SNAPSHOT**
 - ✅ **page · MARKETS TODAY**
 - ❌ **page · GLOBAL SNAPSHOT — MOVED** — content unexpectedly short
 - ✅ **page · PRIVACY POLICY**
-- ❌ **page · DAILY NEWS** — Daily Yield family directory missing; Daily Yield favicon identity missing
+- ✅ **page · DAILY NEWS**
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
