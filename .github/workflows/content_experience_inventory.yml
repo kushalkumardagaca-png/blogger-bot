@@ -39,7 +39,7 @@ jobs:
           git add CONTENT_EXPERIENCE_INVENTORY.json
           if git diff --staged --quiet; then exit 0; fi
           git commit -m "Inventory content experience [skip ci]"
-          for attempt in 1 2 3; do
+          for attempt in 1 2 3 4 5 6; do
             if git push origin HEAD:main; then exit 0; fi
             git pull --rebase origin main
             sleep $((attempt * 2))
