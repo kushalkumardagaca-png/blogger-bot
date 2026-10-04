@@ -263,7 +263,7 @@ def write_evidence(report: dict) -> None:
         f"- Submission candidates: **{summary['candidates']}**",
         f"- URLs submitted: **{summary['submitted']}**",
         f"- Quota deferred: **{summary['quotaDeferred']}**",
-        f"- URL-info checks: **{summary['inspected']}**",
+        f"- Performance-monitor records checked: **{summary['inspected']}**",
         f"- Known/crawled by Bing: **{summary['knownToBing']}**",
         f"- Pending monitoring: **{summary['pendingMonitoring']}**",
         f"- Removed inventory alerts: **{summary['removedAlerts']}**", "",

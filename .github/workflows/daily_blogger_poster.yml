@@ -73,7 +73,7 @@ jobs:
           git config user.email "bot@dailyyield.blogspot.com"
           cp published_tracker.json /tmp/published_tracker.json
           cp social_events.json /tmp/social_events.json
-          for attempt in 1 2 3; do
+          for attempt in {1..12}; do
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/published_tracker.json published_tracker.json
@@ -82,7 +82,8 @@ jobs:
             if git diff --staged --quiet; then exit 0; fi
             git commit -m "Auto-published next Daily Yield article [$(date -u)] [skip ci]"
             if git push origin HEAD:main; then exit 0; fi
-            sleep $((attempt * 2))
+            echo "Concurrent state update detected; retrying publication persistence ($attempt/12)."
+            sleep $((attempt * 3))
           done
           exit 1
 
