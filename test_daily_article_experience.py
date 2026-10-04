@@ -13,71 +13,69 @@ def sample_page():
         "categories": [{"number": 1, "name": "Contrarian Hooks", "label": "Contrarian Hooks", "art": "fallback.jpg"}],
         "snapshotEntries": [],
     }
-    content = f'''<main id="articleHub">
+    content = f'''<style>.ar-heading-copy{{flex:1 1 430px;min-width:0;}}.ar-heading h2{{margin:0 0 12px;font-size:30px;}}</style><main id="articleHub">
 <script id="ar-config" type="application/json">{json.dumps(cfg)}</script>
-<header class="ar-hero"><div class="ar-copy"><h1>Articles</h1></div><aside class="ar-note"><div class="ar-note-sheet">Note</div></aside></header>
-<section class="ar-section"><div class="ar-rowtools"><span class="ar-rowcount"></span></div><div class="ar-viewport"></div></section>
+<header class="ar-hero"><div class="ar-copy"><h1>Good questions. Better <em>answers.</em></h1></div><aside class="ar-note"><div class="ar-note-sheet">Note</div></aside></header>
+<section class="ar-section"><div class="ar-heading-copy"><h2>Contrarian Hooks</h2></div><div class="ar-rowtools"><span class="ar-rowcount"></span></div><div class="ar-viewport"></div></section>
 <script>
 function norm(v){{return v;}}
 function inCategory(post,cat){{return post.labels.indexOf(cat.label)!==-1;}}
 function card(post,cat){{var im={{}};im.alt='';im.loading='lazy';}}
-var state={{viewport:viewport,group:group,duplicate:duplicate,hover:false,focus:false,touchUntil:0,visible:true}};
-viewport.addEventListener('pointerdown',function(){{if(viewport._arState)viewport._arState.touchUntil=Date.now()+8000;}},{{passive:true}});
- viewport.addEventListener('wheel',function(){{if(viewport._arState)viewport._arState.touchUntil=Date.now()+5000;}},{{passive:true}});
-function tick(dt,s){{if(!s.visible)return;var w=s.group.getBoundingClientRect().width;if(w<=s.viewport.clientWidth+1){{s.duplicate.hidden=true;return;}}s.duplicate.hidden=false;s.carry=(s.carry||0)+dt*24;}}
+requestAnimationFrame(function(){{try{{if(group.getBoundingClientRect().width<=viewport.clientWidth+1)duplicate.hidden=true;}}catch(e){{}}}});
+document.querySelectorAll('.ar-viewport').forEach(function(v){{bind(v,null,0,false)}});
+var last=0;
+function tick(t){{var dt=1;rowStates.forEach(function(s){{s.viewport.scrollLeft+=dt*24;}});requestAnimationFrame(tick);}}requestAnimationFrame(tick);
 /* Authenticated snapshot is complete; no slower public-feed replacement. */
 </script>
-</main>'''
+</main>
+<!-- DY_CONTENT_EXPERIENCE_REPAIR_START --><style>/* DAILY ARTICLE EXPERIENCE V7 */</style><!-- DY_CONTENT_EXPERIENCE_REPAIR_END -->'''
     return {"id": "page-1", "title": "DAILY ARTICLE", "content": content}, cfg
 
 
-def test_article_repair_restores_horizontal_carousels_and_controls():
+def post(pid="post-1", labels=None):
+    return {"id": pid, "title": "A useful article", "url": "/a", "published": "2026-10-04T00:00:00Z", "labels": labels or ["Contrarian Hooks"], "content": '<img src="photo.jpg"><p>Useful context.</p>'}
+
+
+def test_article_repair_removes_all_experience_overlays_and_preserves_authored_design():
     page, cfg = sample_page()
-    post = {"id": "post-1", "title": "A useful article", "url": "https://dailyyield.blogspot.com/2026/10/a.html", "published": "2026-10-04T00:00:00Z", "labels": ["Contrarian Hooks"], "content": '<img src="photo.jpg"><p>Useful context.</p>'}
-    out = repair.repair_article_page(page, [post], cfg)
-    assert "DAILY ARTICLE EXPERIENCE V7" in out
+    out = repair.repair_article_page(page, [post()], cfg)
+    assert "DAILY ARTICLE EXPERIENCE" not in out
+    assert repair.START not in out
     assert "DY_ARTICLE_FEATURE_START" not in out
-    assert "arNewsGrammar='7'" in out
-    assert "#articleHub .ar-note{width:100%;max-width:370px" in out
-    assert "#articleHub .ar-heading-copy{display:block!important;width:auto!important;margin:0!important;text-align:left!important}" in out
-    assert "#articleHub .ar-heading h2" in out and "text-align:left!important" in out
-    assert "#articleHub .ar-track{display:flex!important" in out
-    assert "#articleHub .ar-group{display:flex!important" in out
-    assert "#articleHub .ar-rowtools{display:flex!important" in out
-    assert "#articleHub .ar-duplicate,#articleHub .ar-duplicate[hidden]{display:flex!important" in out
-    assert "overflow-x:auto!important" in out
-    assert "#articleHub .ar-group{display:grid!important" not in out
-    assert "#articleHub .ar-viewport{overflow:visible!important" not in out
+    assert '<header class="ar-hero">' in out
+    assert 'class="ar-note"' in out
+    assert '<em>answers.</em>' in out
+    assert "display:grid!important" not in out
+    assert "overflow:visible!important" not in out
+    assert ".ar-heading-copy{flex:1 1 430px;min-width:0;text-align:left;}" in out
+    assert ".ar-heading h2{margin:0 0 12px;text-align:left;" in out
 
 
-def test_article_repair_preserves_real_snapshot_excludes_news_and_improves_motion_alt():
+def test_article_uses_daily_news_wire_motion_verbatim_behaviour():
     page, cfg = sample_page()
-    posts = [
-        {"id": "article-1", "title": "Real article", "url": "/real", "published": "2026-10-04T00:00:00Z", "labels": ["Contrarian Hooks"], "content": '<img src="real.jpg"><p>Original article.</p>'},
-        {"id": "news-1", "title": "News item", "url": "/news", "published": "2026-10-04T01:00:00Z", "labels": ["News", "India"], "content": '<img src="news.jpg"><p>News.</p>'},
-    ]
-    out = repair.repair_article_page(page, posts, cfg)
-    assert "article-1" in out
-    assert "news-1" not in out
-    assert "dt*58" in out
+    out = repair.repair_article_page(page, [post()], cfg)
+    assert out.count(repair.ARTICLE_SCROLL_START) == 1
+    assert "view.scrollLeft+=72*dt" in out
+    assert "if(view.scrollLeft>=half)view.scrollLeft-=half" in out
+    assert "view.setPointerCapture" in out
+    assert "view.scrollLeft=drag.left-dx" in out
+    assert "delay(180)" in out
+    assert "delay(900)" in out
+    assert "delay(250)" in out
+    assert "pointerenter" in out and "pointerleave" in out
+    assert "Auto-scroll is supplied by the Daily News wire motion below." in out
     assert "dt*24" not in out
-    assert "s.active" in out
-    assert "active:false" in out
-    assert "Date.now()+32" in out
-    assert "Date.now()+48" in out
-    assert "Date.now()+8000" not in out
-    assert "Date.now()+5000" not in out
-    assert "s.hover||s.focus" not in out
-    assert "duplicate.hidden=false" in out
-    assert "w<=s.viewport.clientWidth" not in out
-    assert "Daily Yield article photograph" in out
+    assert "dt*58" not in out
+    assert "bind(v,null,0,false)" not in out
 
 
-def test_article_repair_is_idempotent():
+def test_article_snapshot_excludes_news_and_repair_is_idempotent():
     page, cfg = sample_page()
-    post = {"id": "post-1", "title": "A useful article", "url": "/a", "published": "2026-10-04T00:00:00Z", "labels": ["Contrarian Hooks"], "content": '<img src="photo.jpg"><p>Text.</p>'}
-    once = repair.repair_article_page(page, [post], cfg)
-    twice = repair.repair_article_page({**page, "content": once}, [post], cfg)
-    assert twice.count(repair.START) == 1
-    assert twice.count("DAILY ARTICLE EXPERIENCE V7") == 1
-    assert "DY_ARTICLE_FEATURE_START" not in twice
+    posts = [post("article-1"), post("news-1", ["News", "India"])]
+    once = repair.repair_article_page(page, posts, cfg)
+    twice = repair.repair_article_page({**page, "content": once}, posts, cfg)
+    assert "article-1" in twice
+    assert "news-1" not in twice
+    assert twice.count(repair.ARTICLE_SCROLL_START) == 1
+    assert twice.count(repair.ARTICLE_SCROLL_END) == 1
+    assert "Daily Yield article photograph" in twice
