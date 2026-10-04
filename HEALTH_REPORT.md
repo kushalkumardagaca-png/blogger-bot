@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-05T01:22:50.659640+05:30
+- **Checked:** 2026-10-05T02:58:09.225656+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 284 URLs · 270 Posts · 13 Pages
+- **Inventory:** 285 URLs · 271 Posts · 13 Pages
 - **Content failures:** 1
 - **Confirmed external 404/410:** 1
 - **External redirect chains:** 1
-- **Current workflow warnings:** 0
-- **Search Console:** OK · 283 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Current workflow warnings:** 1
+- **Search Console:** OK · 284 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ❌ **page · DAILY NEWS** — Daily Yield favicon identity missing; SEO/meta description package missing
+- ❌ **page · DAILY NEWS** — Daily Yield favicon identity missing
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
@@ -27,6 +27,7 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Landlords Lie With Appreciation**
 - ✅ **post · A Two-Tier Emergency Fund**
 - ✅ **post · Russia Finance News — 4 October 2026**
 - ✅ **post · Selling the Crash Is the Expensive Feeling**
