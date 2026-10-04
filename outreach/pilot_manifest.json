@@ -1,12 +1,12 @@
 {
   "generated_at": "2026-10-04",
   "mode": "SOURCE_VERIFIED_RESERVATION_QUEUE",
-  "daily_limit": 10,
+  "daily_limit": 2,
   "selected": [],
   "blocked": [
     {
       "prospect_id": "ft-opinion",
-      "reason": "outside recipient local business-time window"
+      "reason": "prior interaction blocks a new initial message"
     },
     {
       "prospect_id": "money-newsroom",
