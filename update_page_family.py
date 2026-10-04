@@ -5,6 +5,7 @@ import html, json, os, re, requests
 from page_family import ACTIVE_PAGES, BLOG, END, START, ensure_family
 from social_identity import SOCIAL_PROFILES
 from seo_hygiene import image_alt_failures
+from policy_hero_scale import ensure_policy_hero_scale
 
 BLOG_ID = os.environ["BLOGGER_BLOG_ID"]
 BASE = f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}"
@@ -121,6 +122,7 @@ def main():
         old = p.get("content", "")
         base = TERMS_CONTENT if path == TERMS_PATH else old
         base = ensure_image_alts(base, p["title"])
+        base = ensure_policy_hero_scale(base, path)
         new = ensure_family(base, path)
         if new == old:
             unchanged.append(path)
