@@ -32,9 +32,10 @@ def test_article_repair_restores_horizontal_carousels_and_controls():
     page, cfg = sample_page()
     post = {"id": "post-1", "title": "A useful article", "url": "https://dailyyield.blogspot.com/2026/10/a.html", "published": "2026-10-04T00:00:00Z", "labels": ["Contrarian Hooks"], "content": '<img src="photo.jpg"><p>Useful context.</p>'}
     out = repair.repair_article_page(page, [post], cfg)
-    assert "DAILY ARTICLE EXPERIENCE V5" in out
-    assert "DY_ARTICLE_FEATURE_START" in out
-    assert "class=\"ar-feature\"" in out
+    assert "DAILY ARTICLE EXPERIENCE V6" in out
+    assert "DY_ARTICLE_FEATURE_START" not in out
+    assert "arNewsGrammar='6'" in out
+    assert "#articleHub .ar-note{width:100%;max-width:370px" in out
     assert "#articleHub .ar-track{display:flex!important" in out
     assert "#articleHub .ar-group{display:flex!important" in out
     assert "#articleHub .ar-rowtools{display:flex!important" in out
@@ -66,5 +67,5 @@ def test_article_repair_is_idempotent():
     once = repair.repair_article_page(page, [post], cfg)
     twice = repair.repair_article_page({**page, "content": once}, [post], cfg)
     assert twice.count(repair.START) == 1
-    assert twice.count("DAILY ARTICLE EXPERIENCE V5") == 1
-    assert twice.count("DY_ARTICLE_FEATURE_START") == 1
+    assert twice.count("DAILY ARTICLE EXPERIENCE V6") == 1
+    assert "DY_ARTICLE_FEATURE_START" not in twice
