@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04T02:38:16.443726+00:00",
+  "checkedAt": "2026-10-04T04:28:55.855481+00:00",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "syntheticViews": 0,
   "site": "https://dailyyield.blogspot.com/",
@@ -7,13 +7,13 @@
   "sitemaps": [
     {
       "sitemap": "https://dailyyield.blogspot.com/sitemap.xml",
-      "status": "SUBMITTED",
-      "http": 200
+      "status": "ALREADY_SUBMITTED",
+      "detail": "Daily duplicate submission suppressed."
     },
     {
       "sitemap": "https://dailyyield.blogspot.com/sitemap-pages.xml",
-      "status": "SUBMITTED",
-      "http": 200
+      "status": "ALREADY_SUBMITTED",
+      "detail": "Daily duplicate submission suppressed."
     }
   ],
   "crawlerPolicy": {
