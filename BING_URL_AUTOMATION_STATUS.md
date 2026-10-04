@@ -1,7 +1,7 @@
 # Bing URL Submission and Index-Status Automation
 
-- **Status:** ATTENTION
-- **Checked:** 2026-10-04T11:13:28.697892+00:00
+- **Status:** PASS
+- **Checked:** 2026-10-04T11:59:17.744950+00:00
 - **Mode:** authenticated control-plane, zero public Daily Yield requests
 - **Synthetic Daily Yield views:** 0
 
@@ -11,7 +11,7 @@
 - Submission candidates: **276**
 - URLs submitted: **0**
 - Quota deferred: **276**
-- URL-info checks: **0**
+- URL-info checks: **10**
 - Known/crawled by Bing: **0**
 - Pending monitoring: **10**
 - Removed inventory alerts: **0**
@@ -22,7 +22,3 @@
 - No public Daily Yield URL, Bing Live URL fetch or synthetic pageview is created.
 - Unchanged URLs are not resubmitted.
 - Submission does not guarantee crawling, indexing, ranking or traffic.
-
-## Errors
-
-- Bing URL info API error 400: provider returned a JSON error
