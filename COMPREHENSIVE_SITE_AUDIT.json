@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
   "urls": 277,
-  "hard_failures": 2,
+  "hard_failures": 1,
   "results": [
     {
       "kind": "home",
@@ -131,9 +131,7 @@
       "kind": "page",
       "title": "GLOBAL SNAPSHOT — MOVED",
       "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
-      "issues": [
-        "content unexpectedly short"
-      ],
+      "issues": [],
       "warnings": [],
       "images": [],
       "external": [],
