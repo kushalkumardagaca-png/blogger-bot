@@ -7,7 +7,7 @@ import pytest
 
 import reader_value_article as rva
 from publication_preflight import MASS_TEMPLATE_PHRASES, _plain, _source_domains, assert_publishable
-from news_pipeline import DESKS, build_article, compose_item
+from news_pipeline import DESKS, build_article, compose_item, dedupe_rendered_stories
 
 
 def topics_by_family():
@@ -93,6 +93,19 @@ def test_all_20_news_desks_build_source_led_transparent_editions():
             assert len(_source_domains(article['html'])) >= 3, desk
             assert 'source map, not a prediction' in text, desk
             assert all(item['desc'] in text for item in items), desk
+
+
+def test_news_visible_paragraph_deduplication_keeps_one_source_record():
+    shared = {
+        'desc': 'The agency issued the same sufficiently detailed release summary for two syndicated records.',
+        'agency': 'Official Agency', 'date': __import__('datetime').date(2026, 10, 4),
+        'media': False, 'background': False,
+    }
+    items = [
+        {**shared, 'title': 'First syndication headline', 'url': 'https://official.example/one'},
+        {**shared, 'title': 'Second syndication headline', 'url': 'https://official.example/two'},
+    ]
+    assert dedupe_rendered_stories(items) == [items[0]]
 
 
 def test_news_item_prose_is_deterministic_and_source_bounded():

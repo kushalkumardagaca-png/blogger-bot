@@ -663,6 +663,34 @@ def story_title_key(title):
     """Stable exact-headline key shared across every desk in an edition."""
     return re.sub(r"[^a-z0-9]+", " ", clean_title(htmlmod.unescape(strip_tags(title or ""))).casefold()).strip()
 
+
+def rendered_story_key(item):
+    """Match the source-led sentence that compose_item will actually display."""
+    desc = re.sub(r"\s+", " ", strip_tags(item.get("desc", ""))).strip()
+    if len(desc) > 20:
+        cut = desc.find(". ", 60)
+        if 0 < cut < 320:
+            desc = desc[:cut + 1]
+        core = desc
+    else:
+        core = clean_title(item.get("title", ""))
+    value = f"{item.get('agency', '')} {core}"
+    return re.sub(r"[^a-z0-9]+", " ", htmlmod.unescape(value).casefold()).strip()
+
+
+def dedupe_rendered_stories(items):
+    """Prevent two source records from producing an identical visible paragraph."""
+    seen, unique = set(), []
+    for item in items:
+        key = rendered_story_key(item)
+        if key and key in seen:
+            continue
+        if key:
+            seen.add(key)
+        unique.append(item)
+    return unique
+
+
 def load_today_story_keys(day):
     """Inventory already-live News stories so later desks cannot republish them."""
     titles, urls = set(), set()
@@ -1221,6 +1249,11 @@ def run_desk(desk, tracker, dry=False, token=None):
         print(f"  [{desk}] cross-desk duplicate guard excluded {before_dedupe - len(items_raw)} items")
     items, upcoming, eff_lo = select_items(items_raw, win_start, win_end, desk,
                                            own_off=own_off, own_med=own_med)
+    selected_before_body_dedupe = len(items)
+    items = dedupe_rendered_stories(items)
+    if len(items) != selected_before_body_dedupe:
+        print(f"  [{desk}] visible-paragraph duplicate guard excluded "
+              f"{selected_before_body_dedupe - len(items)} item(s)")
     eff_start = win_start
     current_count = sum(1 for item in items if not item.get("background"))
     background_count = sum(1 for item in items if item.get("background"))
