@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-04T04:30:54.515273+00:00",
+  "approvedAt": "2026-10-04T04:32:59.366508+00:00",
   "repository": {
     "auto_blogger_publisher.py": "0fed5d7abea940362e0a08bce144403c0caf98283ec69336c41a7040e7065d33",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -55,7 +55,7 @@
     ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
     ".github/workflows/mastodon_oauth_bootstrap.yml": "3685d69f1815805f837b6cc051c190d814adcfd7183c985172b31f464224e6c6",
     ".github/workflows/motion_related_retrofit.yml": "0191dd56def255888787eef5d4de9d2dbb28c18d29439608cce4bd1f1bc525b9",
-    ".github/workflows/remove_inactive_social_once.yml": "f3b6fe6731144b4dd958bf6c5d2bb2a7eb6a301c4e41492b98a43177165d1557",
+    ".github/workflows/remove_inactive_social_once.yml": "1fb222654f11b16f8d4e15913f3ee8241ff2e1bb1ffe7bac63fe16ddbddef07c",
     ".github/workflows/repair_known_external_links.yml": "a18980a2f2cc0ff8b247eb65c8611af6295dd437d725506e7a3036fa5d9d80ed",
     ".github/workflows/repository_update_bridge.yml": "867331e3d3f12cc065ed4f2c1b020cd7ca63842ad767c6c2845c0949dd96b4ae",
     ".github/workflows/retrofit_live_news.yml": "30a0e41d35522ff047fdeffc5d656725ba160913a4dae4cf14b80ef5ad9b7232",
