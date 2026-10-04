@@ -1,7 +1,7 @@
 {
   "mode": "Blogger API source audit",
-  "urls": 283,
-  "hard_failures": 1,
+  "urls": 284,
+  "hard_failures": 2,
   "results": [
     {
       "kind": "home",
@@ -193,7 +193,10 @@
       "kind": "page",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "issues": [],
+      "issues": [
+        "Daily Yield favicon identity missing",
+        "SEO/meta description package missing"
+      ],
       "warnings": [],
       "images": [],
       "external": [
@@ -529,6 +532,7 @@
         "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/%28H.A.S.C._No._109-100%29_NATIONAL_SECURITY_IMPLICATIONS_OF_THE_DUBAI_PORTS_WORLD_DEAL_TO_TAKE_OVER_MANAGEMENT_OF_U.S._PORTS_%28IA_gov.gpo.fdsys.CHRG-109hhrg32987%29.pdf/page1-960px-thumbnail.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
         "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-7476330954814461730-0.jpg",
         "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/1816-1916%2C_one_hundred_years_of_savings_banking_%28IA_cu31924031216280%29.pdf/page1-500px-1816-1916%2C_one_hundred_years_of_savings_banking_%28IA_cu31924031216280%29.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
         "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf/page1-500px-Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&h=506&q=85",
         "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Farm_family_business_-_a_guide_for_4-H_club_leaders_%28IA_CAT31304526%29.pdf/page1-960px-Farm_family_business_-_a_guide_for_4-H_club_leaders_%28IA_CAT31304526%29.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
@@ -654,6 +658,7 @@
         "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
         "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
         "https://dailyyield.blogspot.com/search/label/Cash%20Savings%20and%20Emergency%20Funds?max-results=20",
+        "https://dailyyield.blogspot.com/2026/10/a-two-tier-emergency-fund.html",
         "https://dailyyield.blogspot.com/2026/09/where-to-park-your-emergency-fund.html",
         "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
         "https://dailyyield.blogspot.com/search/label/Real%20Estate%20Investing?max-results=20",
@@ -706,6 +711,59 @@
         "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
         "https://dailyyield.blogspot.com/p/daily-news.html",
         "https://dailyyield.blogspot.com/#enh-added-start",
+        "https://dailyyield.blogspot.com/p/article.html",
+        "https://dailyyield.blogspot.com/p/daily-news.html",
+        "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+        "https://dailyyield.blogspot.com/p/markets-today.html",
+        "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+        "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+        "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+        "https://dailyyield.blogspot.com/p/disclaimer.html",
+        "https://dailyyield.blogspot.com/p/privacy-policy.html",
+        "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+        "https://dailyyield.blogspot.com/#dy-subscribe"
+      ]
+    },
+    {
+      "kind": "post",
+      "title": "A Two-Tier Emergency Fund",
+      "url": "https://dailyyield.blogspot.com/2026/10/a-two-tier-emergency-fund.html",
+      "issues": [],
+      "warnings": [],
+      "images": [
+        "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/America_at_work.._%28IA_americaatwork00fras%29.pdf/page1-500px-America_at_work.._%28IA_americaatwork00fras%29.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/America_at_work.._%28IA_americaatwork00fras%29.pdf/page1-500px-America_at_work.._%28IA_americaatwork00fras%29.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
+        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&h=506&q=85"
+      ],
+      "external": [
+        "https://www.consumerfinance.gov/consumer-tools/debt-collection/",
+        "https://consumer.ftc.gov/articles/how-get-out-debt",
+        "https://www.rbi.org.in/FinancialEducation/Home.aspx",
+        "https://www.facebook.com/1303333369533572",
+        "https://bsky.app/profile/dailyyield.bsky.social",
+        "https://www.tumblr.com/dailyyield-official",
+        "https://mastodon.social/@dailyyield"
+      ],
+      "internal": [
+        "https://dailyyield.blogspot.com/p/markets-today.html",
+        "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "https://dailyyield.blogspot.com/p/calculator_0908148622.html#kc-emi",
+        "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
+        "https://dailyyield.blogspot.com/2026/10/a-money-constitution-for-couples.html",
+        "https://dailyyield.blogspot.com/2026/10/4-hustles-30-days-each-1-winner.html",
+        "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
+        "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
+        "https://dailyyield.blogspot.com/2026/10/a-money-constitution-for-couples.html",
+        "https://dailyyield.blogspot.com/2026/10/4-hustles-30-days-each-1-winner.html",
+        "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
         "https://dailyyield.blogspot.com/p/article.html",
         "https://dailyyield.blogspot.com/p/daily-news.html",
         "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
@@ -11132,7 +11190,7 @@
       "issues": [],
       "warnings": [],
       "images": [
-        "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=900&h=506&q=85",
+        "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/1816-1916%2C_one_hundred_years_of_savings_banking_%28IA_cu31924031216280%29.pdf/page1-500px-1816-1916%2C_one_hundred_years_of_savings_banking_%28IA_cu31924031216280%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf/page1-500px-Francis_Yeats-Brown_-_The_Lives_of_a_Bengal_Lancer.pdf.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=imageinfo&amp;utm_content=thumbnail",
         "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&h=506&q=85",
         "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=900&h=506&q=85",
