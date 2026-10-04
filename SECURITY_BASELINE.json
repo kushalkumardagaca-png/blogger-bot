@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-04T02:21:40.355855+00:00",
+  "approvedAt": "2026-10-04T03:51:31.196560+00:00",
   "repository": {
     "auto_blogger_publisher.py": "0fed5d7abea940362e0a08bce144403c0caf98283ec69336c41a7040e7065d33",
-    "news_pipeline.py": "2cec9cd9f82db37edfc258928fb82d22f6bdfe2291f309d82979fe78f26ae372",
+    "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
     "facebook_publisher.py": "33fec201d418fa6da9be3a549c5d0c00bdd44717548944d5051b68f83a20beb5",
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
     "zero_view_watchdog.py": "49d656296e331fd979d594f01ed1b83cdd32d0d33124c57837dab7e7ac60643f",
@@ -171,6 +171,46 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-10-03T07:56:12-07:00",
       "content_sha256": "8c6c0abc03a5cd7febf1e0687a2a556fae40971e6325c872da43a3504773329c"
+    },
+    "post:1189890035012609567": {
+      "kind": "post",
+      "id": "1189890035012609567",
+      "title": "Economy and Macro Policy News — 4 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01900447569.html",
+      "updated": "2026-10-03T19:56:45-07:00",
+      "content_sha256": "6b3051ae64e24c2951185e25a5f6cf7e28ce58b8ba4591537ec522fb12fc4d00"
+    },
+    "post:7880504546833796577": {
+      "kind": "post",
+      "id": "7880504546833796577",
+      "title": "Market and Trading News — 4 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-04.html",
+      "updated": "2026-10-03T19:56:25-07:00",
+      "content_sha256": "14638a1985668d32f15f25c62f12682b8f7f7f7db42aa291c96eb12edda20c3e"
+    },
+    "post:424542317912604382": {
+      "kind": "post",
+      "id": "424542317912604382",
+      "title": "Australia Finance News — 4 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-04.html",
+      "updated": "2026-10-03T19:55:54-07:00",
+      "content_sha256": "aeab7fe73d633a4124eeccdb4efeed74f7d777899f3d3705e5deea5c051a21e0"
+    },
+    "post:1132583668251750835": {
+      "kind": "post",
+      "id": "1132583668251750835",
+      "title": "India Finance News — 4 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-04.html",
+      "updated": "2026-10-03T19:55:41-07:00",
+      "content_sha256": "5b33eb6e9c399a58db6e92b40e229c532f8e633a5552a05f91cda56fd72859bf"
+    },
+    "post:7269705468830606778": {
+      "kind": "post",
+      "id": "7269705468830606778",
+      "title": "Global Finance Wire — 4 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-04.html",
+      "updated": "2026-10-03T19:55:30-07:00",
+      "content_sha256": "1206028ab0a5b124f13fc7fe9da501a90aeeb697ccb9bd04cfa5464dffc4277d"
     },
     "post:6705981824863856048": {
       "kind": "post",
