@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-04T18:34:48.990094+05:30
-- **Verdict:** PASS
+- **Checked:** 2026-10-04T21:29:07.196386+05:30
+- **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 277 URLs · 263 Posts · 13 Pages
-- **Content failures:** 0
-- **Confirmed external 404/410:** 0
+- **Inventory:** 283 URLs · 269 Posts · 13 Pages
+- **Content failures:** 1
+- **Confirmed external 404/410:** 1
 - **External redirect chains:** 1
-- **Current workflow warnings:** 0
-- **Search Console:** OK · 276 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Current workflow warnings:** 1
+- **Search Console:** OK · 282 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ✅ **page · DAILY NEWS**
+- ❌ **page · DAILY NEWS** — Daily Yield family directory missing; Daily Yield favicon identity missing; SEO/meta description package missing
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
@@ -27,6 +27,12 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · Russia Finance News — 4 October 2026**
+- ✅ **post · Selling the Crash Is the Expensive Feeling**
+- ✅ **post · Personal Finance News — 4 October 2026**
+- ✅ **post · Mexico Finance News — 4 October 2026**
+- ✅ **post · Canada Finance News — 4 October 2026**
+- ✅ **post · US Finance News — 4 October 2026**
 - ✅ **post · Put Money on the Calendar, Not Your Mood**
 - ✅ **post · Corporate Finance and Industry News**
 - ✅ **post · Spain Finance News — 4 October 2026**
