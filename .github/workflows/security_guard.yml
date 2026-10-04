@@ -8,7 +8,6 @@ on:
       - '*.py'
       - '.github/workflows/**'
       - 'outreach/**'
-      - 'reddit_devvit/**'
   schedule:
     # Best-effort near-real-time monitoring. GitHub schedules can be delayed.
     - cron: '7,22,37,52 * * * *'

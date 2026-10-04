@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-03T21:51:34+05:30",
+  "checked_at_ist": "2026-10-04T09:58:31+05:30",
   "summary": {
     "pass": 128,
     "fail": 0
@@ -106,7 +106,7 @@
       "detail": ""
     },
     {
-      "name": "Canonical social identity uses new LinkedIn and omits closed X",
+      "name": "Inactive LinkedIn, X and Reddit profiles are absent from future master output",
       "status": "PASS",
       "detail": ""
     },
@@ -371,7 +371,7 @@
       "detail": ""
     },
     {
-      "name": "Configured active cadence is 30 unique destinations and becomes 35 after Reddit approval",
+      "name": "Configured active cadence is exactly 30 unique destinations across four retained networks",
       "status": "PASS",
       "detail": ""
     },

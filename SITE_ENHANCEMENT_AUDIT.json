@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 190,
+  "pass": 189,
   "fail": 0,
   "checks": [
     {
@@ -758,10 +758,6 @@
     },
     {
       "name": "Page repair performs immediate zero-view verification",
-      "status": "PASS"
-    },
-    {
-      "name": "Reddit 0.0.2 source remains untouched",
       "status": "PASS"
     }
   ]

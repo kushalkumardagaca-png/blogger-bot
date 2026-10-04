@@ -24,7 +24,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Master packages always rebuilt fresh**
 - ✅ **Master byline is current**
 - ✅ **Master publisher brand is Daily Yield**
-- ✅ **Canonical social identity uses new LinkedIn and omits closed X**
+- ✅ **Inactive LinkedIn, X and Reddit profiles are absent from future master output**
 - ✅ **Canonical public contact email is the Daily Yield brand inbox**
 - ✅ **Facebook publisher files are deployed**
 - ✅ **Facebook legacy auto-selection schedule is disabled in favour of exact coordinated routing** — []
@@ -77,7 +77,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Article routing waits at least fifteen minutes after publication**
 - ✅ **Coordinated tracker writes use race-safe persistence retries**
 - ✅ **Daily coordinated inventory is exactly 25 articles plus 5 resources**
-- ✅ **Configured active cadence is 30 unique destinations and becomes 35 after Reddit approval**
+- ✅ **Configured active cadence is exactly 30 unique destinations across four retained networks**
 - ✅ **Security guard and approved baseline are deployed**
 - ✅ **Security guard runs four times per hour and creates a daily backup**
 - ✅ **Security guard reads Blogger only through authenticated API**

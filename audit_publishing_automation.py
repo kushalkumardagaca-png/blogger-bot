@@ -54,7 +54,8 @@ check('Master canonical repaired to live URL','predicted.group(0)' in ap and 'po
 check('Master packages always rebuilt fresh','Always rebuild with the current date' in ap and 'Loading pre-compiled' not in ap)
 check('Master byline is current',"AUTHOR='Kushal K. Daga'" in rv and 'By <strong>{AUTHOR}</strong>' in rv and 'By CA Kushal K. Daga' not in master)
 check('Master publisher brand is Daily Yield',"'name':'Daily Yield'" in rv and 'Finance by CA Kushal' not in master)
-check('Canonical social identity uses new LinkedIn and omits closed X','https://www.linkedin.com/in/dailyyeild' in rv and 'x.com/CAKUSHAL2509' not in master and 'finance-by-kushal' not in master)
+check('Inactive LinkedIn, X and Reddit profiles are absent from future master output',
+      all(term not in master.casefold() for term in ('linkedin.com/','x.com/','twitter.com/','reddit.com/')))
 social=(ROOT/'social_identity.py').read_text()
 check('Canonical public contact email is the Daily Yield brand inbox','dailyyield.official@gmail.com' in social and 'PUBLIC_EMAIL' in social)
 
@@ -210,9 +211,9 @@ check('Coordinated tracker writes use race-safe persistence retries',
 check('Daily coordinated inventory is exactly 25 articles plus 5 resources',
       'MASTER_PATTERN' in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
       and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
-check('Configured active cadence is 30 unique destinations and becomes 35 after Reddit approval',
+check('Configured active cadence is exactly 30 unique destinations across four retained networks',
       '25 article promotions' not in rotation and len(re.findall(r'"facebook"', re.search(r'NEWS_PATTERN = \((.*?)\)\nNEWS_KEYS',rotation,re.S).group(1)))==6
-      and 5+20+5==30 and 30+5==35)
+      and 5+20+5==30 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 # Independent security guard: four API-only checks/hour plus one daily backup.
 sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'

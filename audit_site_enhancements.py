@@ -90,9 +90,6 @@ page_workflow=(ROOT/'.github/workflows/update_page_family.yml').read_text()
 check('Page-family repair adds only missing alt attributes','ensure_image_alts' in page_repair and 'images_without_alt' in page_repair)
 check('Page repair approves intentional Blogger baseline change','security_guard.py --approve-current' in page_workflow)
 check('Page repair performs immediate zero-view verification','python zero_view_watchdog.py' in page_workflow)
-import subprocess
-reddit_unchanged=subprocess.run(['git','diff','--quiet','--','reddit_devvit'],cwd=ROOT).returncode==0
-check('Reddit 0.0.2 source remains untouched',reddit_unchanged)
 failed=[x for x in checks if x['status']=='FAIL']
 report={'standard':'DAILY_YIELD_SITE_V4','mode':'STATIC_ZERO_VIEW','pass':len(checks)-len(failed),'fail':len(failed),'checks':checks}
 (ROOT/'SITE_ENHANCEMENT_AUDIT.json').write_text(json.dumps(report,indent=2)+'\n')

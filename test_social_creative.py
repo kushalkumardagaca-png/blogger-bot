@@ -92,16 +92,6 @@ def test_tumblr_is_native_npf_with_conversation_and_descriptive_alt():
     assert len(data["tags"].split(",")) <= 3
 
 
-def test_reddit_template_places_link_first_and_keeps_title_author_photo_detail():
-    source = Path('reddit_devvit/server.ts').read_text(encoding='utf-8')
-    start = source.index('const body = [')
-    body = source[start:source.index("].join('\\n');", start)]
-    assert body.index('`**Read:** ${url}`') < body.index('`## ${title}`')
-    assert body.index('`## ${title}`') < body.index("'**By Kushal K. Daga**'")
-    assert '![${title}](${photo})' in body
-    assert "summary || 'A practical Daily Yield analysis" in body
-
-
 def test_cards_are_photo_first_accessible_sized_and_visually_distinct():
     story = item(31, "Gold, rates and the market mood: what to watch", ["Markets"])
     # Keep the unit test offline while exercising the full photographic compositor.

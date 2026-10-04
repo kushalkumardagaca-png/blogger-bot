@@ -44,8 +44,7 @@ CRITICAL_FILES = [
     "theme/Daily-Yield-Theme-v4-2026-10-01.xml",
     "outreach/editorial_outreach.py", "outreach/gmail_sender.py",
     "outreach/prospects.csv", "outreach/send_lock.json",
-    "outreach/suppressions.csv", "reddit_devvit/devvit.json",
-    "reddit_devvit/server.ts", "reddit_devvit/install.sh", "reddit_devvit/fresh_setup.sh",
+    "outreach/suppressions.csv",
 ]
 MALICIOUS_PATTERNS = {
     "external script loader": re.compile(r"<script\b[^>]*\bsrc\s*=", re.I),
