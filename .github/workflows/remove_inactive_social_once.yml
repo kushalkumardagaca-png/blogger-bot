@@ -65,7 +65,7 @@ jobs:
             ZERO_VIEW_WATCHDOG.json
             ZERO_VIEW_WATCHDOG.md
       - name: Persist report and approved state
-        if: success()
+        if: always()
         run: |
           git config user.name 'Daily Yield Inactive Social Cleanup'
           git config user.email 'bot@dailyyield.blogspot.com'
