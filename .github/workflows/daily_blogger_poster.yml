@@ -75,7 +75,9 @@ jobs:
           cp social_events.json /tmp/social_events.json
           for attempt in {1..12}; do
             git fetch origin main
-            git reset --hard origin/main
+            # Explicit single-branch fetch always updates FETCH_HEAD; shallow
+            # Actions checkouts do not consistently create origin/main.
+            git reset --hard FETCH_HEAD
             cp /tmp/published_tracker.json published_tracker.json
             cp /tmp/social_events.json social_events.json
             git add published_tracker.json social_events.json
