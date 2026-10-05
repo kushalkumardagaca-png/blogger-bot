@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-05T07:02:28.691361+00:00",
+  "approvedAt": "2026-10-05T07:09:19.464419+00:00",
   "repository": {
     "auto_blogger_publisher.py": "2d926299a9faf7ef25d2970b630ad1bc74e88dc842d7649bed4b800890b18862",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
     "facebook_publisher.py": "33fec201d418fa6da9be3a549c5d0c00bdd44717548944d5051b68f83a20beb5",
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
-    "publication_preflight.py": "efad2a6fd34c0abff1cb4ae367df5168d567d113889f8f4b8c8b1ced2ab8cbaa",
+    "publication_preflight.py": "289d81f7490596bfb83e0611941ebf4b9e1b608670c91abed5ef94c1f163ff3a",
     "page_family.py": "1b3840a38ceb00df51ccc68c12fbd586eb6fb533ea1b1bbd655f3f82e2142a8d",
-    "prepare_master_article.py": "16904518b97c0397d5c2af3ab5847d064cb1267484cc8c0ed274caf046f14c62",
-    "master_article_v2.py": "43a540aedd5953100e35ad0599d4ab2035a9ae79c13ec82d505933db973b608d",
+    "prepare_master_article.py": "5630cb79c01601d1c5330a803147f8c08b521e6152c503fca2b334a32c5415b3",
+    "master_article_v2.py": "9489ca4fe5110df2423d7387e5d818b52a09b0d4dcb7fec8a3a4c0dc5f4cc7f3",
     "reader_value_article.py": "155c09b0fac79d5fecb082b8b35c7a8254887df126e203b58c1fedcdfc2e19a1",
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
     "social_identity.py": "3e39ddc398e6896cf4f5eeb28ff92b7c128b08eb48faeb4c7acc697ac06d3491",
@@ -171,6 +171,22 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-10-04T23:42:24-07:00",
       "content_sha256": "6123472f360ad27ac8c64a18a26a26d30d8d0a09edabe2dfe2aaf6486fc40dc3"
+    },
+    "post:6612585196075280264": {
+      "kind": "post",
+      "id": "6612585196075280264",
+      "title": "Spain Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-05.html",
+      "updated": "2026-10-05T00:05:38-07:00",
+      "content_sha256": "40720bdae8ccbe5604b4022a2a60808acf544c6db3643f21576245141306ec58"
+    },
+    "post:6054016105714886332": {
+      "kind": "post",
+      "id": "6054016105714886332",
+      "title": "China Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-05.html",
+      "updated": "2026-10-05T00:05:27-07:00",
+      "content_sha256": "57e5de6f6beb5b6200743c1d74dd734d6d0a67f413a7a099d21ae2ec9c7ff8de"
     },
     "post:9058975335781746111": {
       "kind": "post",
