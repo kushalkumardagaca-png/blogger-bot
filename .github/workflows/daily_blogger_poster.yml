@@ -27,13 +27,12 @@ concurrency:
 
 jobs:
   publish_next_article:
-    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run master publisher]')
+    if: vars.MASTER_V2_ENABLED == 'true' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[run master publisher]'))
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
       contents: write
       actions: write
-      models: read
 
     steps:
       - name: Checkout Repository
@@ -51,7 +50,8 @@ jobs:
         id: preparation
         continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          MASTER_TEXT_API_URL: ${{ vars.MASTER_TEXT_API_URL }}
+          MASTER_TEXT_API_KEY: ${{ secrets.MASTER_TEXT_API_KEY }}
           MASTER_TEXT_MODEL: ${{ vars.MASTER_TEXT_MODEL }}
           MASTER_IMAGE_API_URL: ${{ vars.MASTER_IMAGE_API_URL }}
           MASTER_IMAGE_MODEL: ${{ vars.MASTER_IMAGE_MODEL }}

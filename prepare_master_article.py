@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Research and prepare one strict Master Article V2 package before publication.
 
-Text is produced through GitHub Models from a topic-specific evidence packet.
-Three AI photographs are generated through an OpenAI-compatible image provider,
+Text is produced through an owner-configured OpenAI-compatible provider from a
+topic-specific evidence packet. Three AI photographs are generated through an
+OpenAI-compatible image provider,
 cropped to a common 16:9 landscape ratio, and persisted in the repository before
 Blogger publication. No public Daily Yield page is requested.
 """
@@ -67,8 +68,8 @@ def discover(topic):
  return evidence[:10]
 
 def model_json(messages,max_tokens=16000):
- token=required('GITHUB_TOKEN');model=os.environ.get('MASTER_TEXT_MODEL','').strip() or 'openai/gpt-4.1'
- r=requests.post('https://models.github.ai/inference/chat/completions',headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'}},timeout=600)
+ endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL')
+ r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'}},timeout=600)
  r.raise_for_status()
  try:payload=r.json()
  except ValueError:raise RuntimeError(f"model endpoint returned non-JSON HTTP {r.status_code} ({r.headers.get('content-type','unknown')}): {r.text[:240]!r}")
@@ -137,13 +138,14 @@ def verify_evidence(draft,evidence):
   raise RuntimeError('independent evidence review rejected the package: '+json.dumps(review.get('unsupported_claims',[])[:10],ensure_ascii=False))
 
 def image_call(prompt):
- endpoint=os.environ.get('MASTER_IMAGE_API_URL','').strip() or 'https://models.github.ai/inference/images/generations'
- token=os.environ.get('MASTER_IMAGE_API_KEY','').strip() or required('GITHUB_TOKEN');model=os.environ.get('MASTER_IMAGE_MODEL','').strip() or 'openai/gpt-image-1'
+ endpoint=required('MASTER_IMAGE_API_URL');token=required('MASTER_IMAGE_API_KEY');model=required('MASTER_IMAGE_MODEL')
  r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'prompt':prompt,'n':1,'size':'1536x1024','response_format':'b64_json'},timeout=600);r.raise_for_status();item=r.json()['data'][0]
  return base64.b64decode(item['b64_json']) if item.get('b64_json') else requests.get(item['url'],timeout=120).content
 
 def prepare():
  global STAGE
+ STAGE='provider-configuration'
+ for name in ('MASTER_TEXT_API_URL','MASTER_TEXT_API_KEY','MASTER_TEXT_MODEL','MASTER_IMAGE_API_URL','MASTER_IMAGE_API_KEY','MASTER_IMAGE_MODEL'):required(name)
  STAGE='load-topic';index,topic=load_next();target=PACKAGES/f"topic_{topic['#']}.json"
  if target.exists():
   package=json.loads(target.read_text());validate(package);print(target);return
