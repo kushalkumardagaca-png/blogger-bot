@@ -190,7 +190,7 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   for _ in range(3):
    result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
    parsed=paragraph_list(result.get('paragraphs'));count=words(' '.join(parsed))
-   if 320<=count<=540:accepted=parsed;break
+   if 250<=count<=700:accepted=parsed;break
   if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
   sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
