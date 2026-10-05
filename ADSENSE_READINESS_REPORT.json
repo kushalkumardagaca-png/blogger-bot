@@ -1,26 +1,17 @@
 {
-  "checkedAt": "2026-10-05T07:09:39.731460+00:00",
+  "checkedAt": "2026-10-05T13:17:09.593300+00:00",
   "status": "PASS",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "summary": {
-    "items": 298,
-    "posts": 285,
+    "items": 303,
+    "posts": 290,
     "pages": 13,
-    "changed": 1,
+    "changed": 0,
     "policyPagesReady": 5,
     "failures": 0
   },
-  "changed": [
-    {
-      "kind": "page",
-      "id": "3254393081257151974",
-      "title": "TERMS AND CONDITIONS",
-      "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-      "policyDisclosure": true,
-      "imageAltsRepaired": 0
-    }
-  ],
+  "changed": [],
   "failures": [],
   "notes": [
     "Approval and revenue remain Google decisions.",

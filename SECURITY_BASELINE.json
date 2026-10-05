@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-05T13:09:50.886172+00:00",
+  "approvedAt": "2026-10-05T13:17:50.481516+00:00",
   "repository": {
     "auto_blogger_publisher.py": "2d926299a9faf7ef25d2970b630ad1bc74e88dc842d7649bed4b800890b18862",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -8,8 +8,8 @@
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
     "publication_preflight.py": "289d81f7490596bfb83e0611941ebf4b9e1b608670c91abed5ef94c1f163ff3a",
     "page_family.py": "1b3840a38ceb00df51ccc68c12fbd586eb6fb533ea1b1bbd655f3f82e2142a8d",
-    "prepare_master_article.py": "054a77005567f42385cede94fd9a31e09c90b4d9c91e4b1a2519d08820c4a015",
-    "master_article_v2.py": "67e14b0ff3ae16374d83635c8f18e23c960544764162f7603990c2305156d42f",
+    "prepare_master_article.py": "3b647e61026945e9b3be95b4df935e5935b7e1f91dc650d506a64e004610347b",
+    "master_article_v2.py": "45aa170536822ef669779b55bbb79299f86ec5f7ddae6a95a2e36d8bb0c1f2e3",
     "reader_value_article.py": "155c09b0fac79d5fecb082b8b35c7a8254887df126e203b58c1fedcdfc2e19a1",
     "rewrite_existing_masters.py": "0846ba49fd706bf792a3d03de1837794c74e0a7e05760300394f0fea8b8df711",
     "photo_selector.py": "bf4035a0a1329e02579c33bb26b14d2c30cbf96ac1ffbb04294ec67a4fa3e412",
@@ -2491,10 +2491,10 @@
     "post:76036352328662163": {
       "kind": "post",
       "id": "76036352328662163",
-      "title": "Stop Maxing Your 401(k) or Pension",
+      "title": "Stop Maxing Your 401(k)",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-      "updated": "2026-10-04T23:47:43-07:00",
-      "content_sha256": "e092d8b61f2368100cdd02df5a700b20125f0875dc963f85176d08dbb0fdae1a"
+      "updated": "2026-10-05T06:11:55-07:00",
+      "content_sha256": "cdbe545acc7e824578652c984dbebdb1c3e03790a834dc212ae622adf6a5af80"
     }
   }
 }
