@@ -54,6 +54,11 @@ def test_model_visual_aliases_are_normalized_for_rendering():
     p['visuals'][0]['numeric_values']=[1]
     with pytest.raises(ValueError,match='mismatched labels and values'):validate(p)
 
+def test_evidence_table_supports_qualitative_rows():
+    p=package();p['visuals'][0]={'type':'table','title':'Choice comparison','caption':'A source-grounded qualitative comparison.','source':1,'after_section':2,'data':[{'Choice':'A','Trade-off':'Lower liquidity'},{'Choice':'B','Trade-off':'Higher liquidity'}]}
+    validate(p);body=render(p,topic(),'2026-10-05','08:00')[-1]
+    assert 'Lower liquidity' in body and '<thead>' in body
+
 def test_visual_number_accepts_single_decorated_number_only():
     assert _visual_number('15%')==15
     assert _visual_number('$100,000')==100000

@@ -306,16 +306,22 @@ def build_package(topic,target):
     if not chart.get('values') and chart.get('numeric_values'):chart['values']=chart.pop('numeric_values')
     if not chart.get('source') and chart.get('source_number'):chart['source']=chart.pop('source_number')
     if str(chart.get('type','')).casefold() in ('chart','metrics','graph'):chart['type']='bar'
-    if not chart.get('labels') or len(chart.get('labels',[]))!=len(chart.get('values',[])):raise ValueError('empty or mismatched visual arrays')
-    normalized=[]
-    for value in chart.get('values',[]):
-     number=round(_visual_number(value),8)
-     if number not in evidence_numbers:raise ValueError(f'value {value} is absent from the retrieved evidence')
-     normalized.append(number)
-    chart['values']=normalized
+    if not chart.get('title') or not chart.get('caption') or not (chart.get('source') or chart.get('source_number')):raise ValueError('visual attribution metadata is incomplete')
+    rows=chart.get('data') or []
+    if rows:
+     chart['type']='table'
+     if len(rows)<2 or not all(isinstance(row,dict) and len(row)>=2 for row in rows):raise ValueError('malformed visual table rows')
+    else:
+     if not chart.get('labels') or len(chart.get('labels',[]))!=len(chart.get('values',[])):raise ValueError('empty or mismatched visual arrays')
+     normalized=[]
+     for value in chart.get('values',[]):
+      number=round(_visual_number(value),8)
+      if number not in evidence_numbers:raise ValueError(f'value {value} is absent from the retrieved evidence')
+      normalized.append(number)
+     chart['values']=normalized
    visual_error='';break
   except (TypeError,ValueError) as exc:visual_error=str(exc)
-  repair_prompt='''Replace all data visuals with at least three accurate, evidence-appropriate representations. Every value must be copied verbatim from the evidence, labels and values must have equal nonzero length, source must be the matching evidence number, and after_section must name an article section. Use only table, bar, pie or line types. Return strict JSON {"visuals":[...]}. ARTICLE SECTIONS: '''+json.dumps([x.get('heading') for x in draft.get('sections',[])],ensure_ascii=False)+' EVIDENCE: '+json.dumps(evidence,ensure_ascii=False)
+  repair_prompt='''Replace all data visuals with at least three accurate, evidence-appropriate representations. Every visual must include title, explanatory caption, numeric source evidence index, and an after_section copied exactly from the article headings. A numeric chart must include equal nonempty labels and values arrays whose values are copied verbatim from evidence. When the evidence supports categories rather than quantities, use type table and data as at least two flat row objects with the same two or more columns. Never use phone numbers as quantitative values. Return only strict JSON {"visuals":[...]}; do not omit any required key. ARTICLE SECTIONS: '''+json.dumps([x.get('heading') for x in draft.get('sections',[])],ensure_ascii=False)+' EVIDENCE: '+json.dumps(evidence,ensure_ascii=False)
   draft['visuals']=model_json([{'role':'system','content':'Repair data visuals without inventing or transforming any number.'},{'role':'user','content':repair_prompt}],max_tokens=2500).get('visuals',[])
  if visual_error:raise RuntimeError('data visual repair failed: '+visual_error)
  STAGE='evidence-verification';verify_evidence(draft,evidence)

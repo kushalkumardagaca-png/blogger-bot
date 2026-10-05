@@ -42,11 +42,16 @@ def validate(package):
     visuals=package.get("visuals") or []
     if len(visuals)<3: errors.append("at least three evidence-based data representations are required")
     for index,v in enumerate(visuals,1):
-        labels=v.get("labels") or []; values=v.get("values") or v.get("numeric_values") or []
-        if not labels or len(labels)!=len(values): errors.append(f"data visual {index} has mismatched labels and values")
+        rows=v.get("data") or []
+        if rows and str(v.get("type","table")).casefold()=="table":
+            if len(rows)<2 or not all(isinstance(row,dict) and len(row)>=2 for row in rows):errors.append(f"data visual {index} has malformed table rows")
         else:
-            try:[float(x) for x in values]
-            except (TypeError,ValueError):errors.append(f"data visual {index} contains a non-numeric value")
+            labels=v.get("labels") or []; values=v.get("values") or v.get("numeric_values") or []
+            if not labels or len(labels)!=len(values): errors.append(f"data visual {index} has mismatched labels and values")
+            else:
+                try:[float(x) for x in values]
+                except (TypeError,ValueError):errors.append(f"data visual {index} contains a non-numeric value")
+        if not v.get("title") or not v.get("caption") or not (v.get("source") or v.get("source_number")):errors.append(f"data visual {index} attribution metadata incomplete")
     sources=package.get("sources") or []
     if len(sources)<6: errors.append("at least six topic-specific sources are required")
     for index,s in enumerate(sources,1):
@@ -81,9 +86,12 @@ def visual(v,sources,index):
         key=str(raw_source).casefold();source_id=next((i for i,x in enumerate(sources,1) if key in (str(x.get('title',''))+' '+str(x.get('name',''))).casefold()),1)
     src=sources[min(max(source_id-1,0),len(sources)-1)]
     kind=str(v.get("type","table")).casefold();kind='bar' if kind in ('chart','metrics','graph') else kind;labels=[str(x) for x in v.get("labels",[])];values=[float(x) for x in (v.get("values") or v.get("numeric_values") or [])]
-    if not labels or len(labels)!=len(values):raise ValueError(f"data visual {index} has mismatched labels and values")
+    data=v.get("data") or []
+    if not data and (not labels or len(labels)!=len(values)):raise ValueError(f"data visual {index} has mismatched labels and values")
     palette=("#9c4522","#08744f","#d69a5c","#315b7d","#7b5d92","#6e7b47","#c66b78","#4f7772")
-    if kind=="table":
+    if kind=="table" and data:
+        columns=list(data[0]);head=''.join(f'<th scope="col">{esc(x)}</th>' for x in columns);rows=''.join('<tr>'+''.join(f'<td>{esc(row.get(x,""))}</td>' for x in columns)+'</tr>' for row in data);body=f'<table><caption>{title}</caption><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table>'
+    elif kind=="table":
         rows="".join(f"<tr><th>{esc(a)}</th><td>{b:g}</td></tr>" for a,b in zip(labels,values));body=f'<table><caption>{title}</caption><tbody>{rows}</tbody></table>'
     elif kind=="pie":
         total=sum(max(0,x) for x in values) or 1;offset=0;circles=[];legend=[]
