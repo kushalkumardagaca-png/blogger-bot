@@ -205,9 +205,21 @@ def generate_text(topic,evidence):
 Return a compact planning object only. Requirements: title 20-46 characters, punchy, no date; meta_description 110-158 characters; choose 8-11 genuinely topic-specific section_plans with unique heading and focus according to this topic's natural editorial logic—not a recurring template. Vary the progression, concepts, heading syntax and number of sections from other articles while establishing context before conclusions and never opening with a summary or direct answer. Include a module_headings object with seven short, topic-specific and mutually distinct labels for contents, summary, faq, glossary, sources, internal_links and external_sources; do not use generic labels such as Summary, FAQ, Glossary or Sources. Include entities, geography, temporal_coverage, 5-10 topic-specific FAQ questions, 8-20 glossary terms, exactly 3 distinct photorealistic landscape photo_prompts, and at least 3 evidence-appropriate visuals. The three photo_prompts must instead be precise placement-specific search briefs for real, openly licensed editorial photographs: opening context, the subject near 2,000 words, and the later section near 4,000 words. Every visual needs type, title, caption, source number, after_section, labels and numeric values copied verbatim from the evidence. No invented values. JSON keys: title,meta_description,entities,geography,temporal_coverage,module_headings,section_plans,faq_questions,glossary_terms,visuals,photo_prompts.'''
  plan=model_json([{'role':'system','content':'You are a meticulous financial editor planning a deeply sourced, visibly human and non-templated article. Accuracy, originality and reader value override speed.'},{'role':'user','content':plan_prompt}],max_tokens=6000)
  section_plans=plan.pop('section_plans',[])
+ if isinstance(section_plans,dict):section_plans=list(section_plans.values())
+ normalized_plans=[]
+ for item in section_plans if isinstance(section_plans,list) else []:
+  if isinstance(item,dict):normalized_plans.append(item)
+  elif isinstance(item,list) and len(item)>=2:normalized_plans.append({'heading':str(item[0]),'focus':str(item[1])})
+ section_plans=normalized_plans
  if not 8<=len(section_plans)<=11:raise RuntimeError('editorial planner did not return 8-11 topic-specific sections')
  module_keys=('contents','summary','faq','glossary','sources','internal_links','external_sources');module_headings=plan.get('module_headings') or {}
- if any(not str(module_headings.get(key,'')).strip() for key in module_keys):raise RuntimeError('editorial planner omitted topic-specific module headings')
+ if isinstance(module_headings,list):
+  merged={}
+  for i,item in enumerate(module_headings):
+   if isinstance(item,dict):merged.update(item)
+   elif i<len(module_keys):merged[module_keys[i]]=str(item)
+  module_headings=merged;plan['module_headings']=merged
+ if not isinstance(module_headings,dict) or any(not str(module_headings.get(key,'')).strip() for key in module_keys):raise RuntimeError('editorial planner omitted topic-specific module headings')
  if len({str(module_headings[key]).casefold().strip() for key in module_keys})!=len(module_keys):raise RuntimeError('editorial planner repeated module headings')
  sections=[];section_target=round(4050/len(section_plans))
  for number,item in enumerate(section_plans,1):
