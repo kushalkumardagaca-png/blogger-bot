@@ -321,6 +321,13 @@ def build_package(topic,target):
     if not chart.get('caption'):chart['caption']=f"Evidence categories reported by {evidence[source_number-1].get('title') or evidence[source_number-1].get('name') or 'the cited source'}."
     if not chart.get('title'):raise ValueError('visual title is missing')
     rows=chart.get('data') or []
+    if isinstance(rows,dict):
+     if rows and all(isinstance(value,list) for value in rows.values()) and len({len(value) for value in rows.values()})==1:
+      keys=list(rows);rows=[{key:rows[key][i] for key in keys} for i in range(len(rows[keys[0]]))]
+     else:rows=[{'Category':key,'Value':value} for key,value in rows.items()]
+     chart['data']=rows
+    if isinstance(rows,list) and len(rows)==1 and isinstance(rows[0],dict) and len(rows[0])>=2:
+     rows=[{'Category':key,'Value':value} for key,value in rows[0].items()];chart['data']=rows
     if rows:
      chart['type']='table'
      if len(rows)<2 or not all(isinstance(row,dict) and len(row)>=2 for row in rows):raise ValueError('malformed visual table rows')
