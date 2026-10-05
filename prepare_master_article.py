@@ -219,11 +219,12 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if not 4000<=core_count<=4200:raise RuntimeError(f'normalized core is {core_count} words before validation')
  summary_prompt=f'''Using only this completed article and its evidence, write a 650-730 word after-article summary in 6-10 natural paragraphs. Do not add facts, headings, FAQ material or a new direct-answer opening. Return strict JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
- summary=None
- for _ in range(3):
-  candidate=paragraph_list(model_json([{'role':'system','content':'Compress faithfully without introducing new claims.'},{'role':'user','content':summary_prompt}],max_tokens=3000).get('paragraphs'))
-  if 650<=words(' '.join(candidate))<=730:summary=candidate;break
- if not summary:raise RuntimeError('summary failed its 650-730 word preparation gate')
+ summary=paragraph_list(model_json([{'role':'system','content':'Compress faithfully without introducing new claims.'},{'role':'user','content':summary_prompt}],max_tokens=3500).get('paragraphs'));summary_count=words(' '.join(summary))
+ if summary_count<600:
+  needed=700-summary_count;prompt=f'''Add approximately {needed} words in new summary paragraphs using only the completed article. Do not introduce facts or repeat existing summary wording. Return JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EXISTING SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';addition=paragraph_list(model_json([{'role':'system','content':'Expand a faithful after-article summary.'},{'role':'user','content':prompt}],max_tokens=2500).get('paragraphs'));summary.extend(addition)
+ elif summary_count>800:
+  prompt=f'''Rewrite this after-article summary in 650-750 words, preserving only supported points and adding no facts. Return JSON {{"paragraphs":[...]}}. SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';summary=paragraph_list(model_json([{'role':'system','content':'Condense faithfully.'},{'role':'user','content':prompt}],max_tokens=3000).get('paragraphs'))
+ if not 600<=words(' '.join(summary))<=800:raise RuntimeError(f'summary failed normalization at {words(" ".join(summary))} words')
  support_prompt=f'''Create reader-specific support material for the article below, using only the evidence packet. Answer these FAQ questions: {json.dumps(plan.pop('faq_questions',[]),ensure_ascii=False)}. Define these glossary terms: {json.dumps(plan.pop('glossary_terms',[]),ensure_ascii=False)}. Return strict JSON with faq:[{{question,answer}}] and glossary:[{{term,definition}}]. At least 5 FAQs and 8 definitions. Keep answers accurate, concise and non-repetitive. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
  support=model_json([{'role':'system','content':'Create accurate topic-specific reader support, not generic boilerplate.'},{'role':'user','content':support_prompt}],max_tokens=5000)
  plan['sections']=sections;plan['summary']=summary;plan['faq']=support.get('faq',[]);plan['glossary']=support.get('glossary',[])
