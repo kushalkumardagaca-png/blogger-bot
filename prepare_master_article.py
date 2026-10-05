@@ -69,7 +69,11 @@ def discover(topic):
 def model_json(messages,max_tokens=16000):
  token=required('GITHUB_TOKEN');model=os.environ.get('MASTER_TEXT_MODEL','').strip() or 'openai/gpt-4.1'
  r=requests.post('https://models.github.ai/inference/chat/completions',headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'}},timeout=600)
- r.raise_for_status();text=r.json()['choices'][0]['message']['content']
+ r.raise_for_status()
+ try:payload=r.json()
+ except ValueError:raise RuntimeError(f"model endpoint returned non-JSON HTTP {r.status_code} ({r.headers.get('content-type','unknown')}): {r.text[:240]!r}")
+ try:text=payload['choices'][0]['message']['content']
+ except (KeyError,IndexError,TypeError):raise RuntimeError('model response omitted choices/message/content: '+json.dumps(payload)[:500])
  if isinstance(text,list):text=''.join(str(part.get('text','')) if isinstance(part,dict) else str(part) for part in text)
  text=str(text or '').strip();text=re.sub(r'^```(?:json)?\s*|\s*```$','',text,flags=re.I|re.S).strip()
  start=text.find('{');end=text.rfind('}')
