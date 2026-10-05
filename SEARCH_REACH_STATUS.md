@@ -1,13 +1,13 @@
 # Daily Yield Search Reach
 
-- Checked: 2026-10-05T00:35:09.027483+00:00
+- Checked: 2026-10-05T02:25:45.734972+00:00
 - Mode: zero synthetic views
 - Google Search Console: managed by `gsc_rebuild.py` and the 12x-daily watchdog
 - Bing API configured: yes
 
 ## Sitemaps
-- `https://dailyyield.blogspot.com/sitemap.xml` — SUBMITTED
-- `https://dailyyield.blogspot.com/sitemap-pages.xml` — SUBMITTED
+- `https://dailyyield.blogspot.com/sitemap.xml` — ALREADY_SUBMITTED
+- `https://dailyyield.blogspot.com/sitemap-pages.xml` — ALREADY_SUBMITTED
 
 ## Responsible crawler policy
 - Permit Googlebot and bingbot on public indexable content.

@@ -10,7 +10,7 @@
     "externalDestinationsChecked": 2771,
     "confirmedExternal404or410": 1,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 256,
+    "transientExternalResponses": 191,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -3241,7 +3241,7 @@
       "tracked": 289,
       "pass": 0,
       "neutralOrOther": 289,
-      "inspectedThisRun": 3,
+      "inspectedThisRun": 0,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
@@ -3287,8 +3287,8 @@
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37254171918,
-      "latestUpdatedAt": "2026-10-05T02:08:32Z",
+      "latestRunId": 37255081546,
+      "latestUpdatedAt": "2026-10-05T02:21:56Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
@@ -3297,7 +3297,7 @@
       "latestConclusion": "success",
       "latestRunId": 37248081304,
       "latestUpdatedAt": "2026-10-05T00:37:45Z",
-      "detail": "latest=success; 0 failures among 12 recent completed runs"
+      "detail": "latest=success; 0 failures among 11 recent completed runs"
     }
   ],
   "providers": [
