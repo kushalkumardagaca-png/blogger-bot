@@ -15,7 +15,7 @@ def load_registry():
  if REGISTRY.exists():return json.loads(REGISTRY.read_text())
  return {'version':1,'baseline_complete':False,'items':[]}
 def save_registry(r):REGISTRY.write_text(json.dumps(r,indent=2,ensure_ascii=False)+'\n')
-def terms(text):return [x for x in re.findall(r'[a-z0-9]{3,}',text.casefold()) if x not in STOP][:14]
+def terms(text):return [x for x in re.findall(r'[a-z0-9]{3,}',str(text).casefold()) if x not in STOP][:14]
 def commons_candidates(brief):
  q=' '.join(terms(brief)[:9]);params={'action':'query','format':'json','generator':'search','gsrnamespace':6,'gsrlimit':40,'gsrsearch':q,'prop':'imageinfo','iiprop':'url|size|extmetadata','iiurlwidth':1600}
  r=requests.get('https://commons.wikimedia.org/w/api.php',params=params,headers={'User-Agent':UA},timeout=60);r.raise_for_status();out=[]

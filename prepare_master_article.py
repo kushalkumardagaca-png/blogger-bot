@@ -280,8 +280,11 @@ def build_package(topic,target):
  if any(re.sub(r'[^a-z0-9]+',' ',p.get('title','').casefold()).strip()==title_key for p in prior):raise RuntimeError('generated master title duplicates an existing package')
  new_heads={x.get('heading','').casefold().strip() for x in draft.get('sections',[])}
  if prior and max((len(new_heads&{x.get('heading','').casefold().strip() for x in p.get('sections',[])})/max(1,len(new_heads)) for p in prior),default=0)>.5:raise RuntimeError('generated heading structure repeats an existing master package')
- slug=re.sub(r'[^a-z0-9]+','-',draft['title'].casefold()).strip('-');briefs=draft.pop('photo_prompts')
- if len(briefs)!=3:raise RuntimeError('text model did not provide exactly three placement-specific photo briefs')
+ slug=re.sub(r'[^a-z0-9]+','-',draft['title'].casefold()).strip('-');raw_briefs=draft.pop('photo_prompts');briefs=[]
+ for item in raw_briefs:
+  if isinstance(item,str):briefs.append(item)
+  elif isinstance(item,dict):briefs.append(str(item.get('brief') or item.get('prompt') or item.get('description') or ''))
+ if len(briefs)!=3 or any(len(x.strip())<20 for x in briefs):raise RuntimeError('text model did not provide exactly three complete placement-specific photo briefs')
  STAGE='licensed-photo-selection';draft['photos']=choose_photos(briefs,slug,topic.get('#',slug));draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
  STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
  STAGE='final-validation';validate(draft)
