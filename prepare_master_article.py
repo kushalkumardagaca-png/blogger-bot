@@ -282,6 +282,10 @@ def build_package(topic,target):
   package=json.loads(target.read_text());validate(package);return package
  STAGE='source-discovery';evidence=discover(topic)
  STAGE='text-generation';draft=generate_text(topic,evidence)
+ for chart in draft.get('visuals',[]):
+  if not chart.get('values') and chart.get('numeric_values'):chart['values']=chart.pop('numeric_values')
+  if not chart.get('source') and chart.get('source_number'):chart['source']=chart.pop('source_number')
+  if str(chart.get('type','')).casefold() in ('chart','metrics','graph'):chart['type']='bar'
  evidence_numbers=set()
  for match in re.findall(r'(?<![A-Za-z])[-+]?\d[\d,]*(?:\.\d+)?', ' '.join(x['text'] for x in evidence)):
   try:evidence_numbers.add(round(float(match.replace(',','')),8))

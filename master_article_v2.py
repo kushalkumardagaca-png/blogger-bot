@@ -69,12 +69,12 @@ def photo(p,index):
     return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(p['alt'])}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{credit}</figcaption></figure>'''
 
 def visual(v,sources,index):
-    title=esc(v.get("title",f"Data view {index}"));caption=esc(v.get("caption",''));raw_source=v.get("source",1)
+    title=esc(v.get("title",f"Data view {index}"));caption=esc(v.get("caption",''));raw_source=v.get("source",v.get("source_number",1))
     try: source_id=int(raw_source or 1)
     except (TypeError,ValueError):
         key=str(raw_source).casefold();source_id=next((i for i,x in enumerate(sources,1) if key in (str(x.get('title',''))+' '+str(x.get('name',''))).casefold()),1)
     src=sources[min(max(source_id-1,0),len(sources)-1)]
-    kind=str(v.get("type","table")).casefold();labels=[str(x) for x in v.get("labels",[])];values=[float(x) for x in v.get("values",[])]
+    kind=str(v.get("type","table")).casefold();kind='bar' if kind in ('chart','metrics','graph') else kind;labels=[str(x) for x in v.get("labels",[])];values=[float(x) for x in (v.get("values") or v.get("numeric_values") or [])]
     if not labels or len(labels)!=len(values):raise ValueError(f"data visual {index} has mismatched labels and values")
     palette=("#9c4522","#08744f","#d69a5c","#315b7d","#7b5d92","#6e7b47","#c66b78","#4f7772")
     if kind=="table":
