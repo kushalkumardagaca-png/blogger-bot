@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-05T14:00:29.071218+00:00",
+  "approvedAt": "2026-10-05T14:01:06.697607+00:00",
   "repository": {
     "auto_blogger_publisher.py": "2d926299a9faf7ef25d2970b630ad1bc74e88dc842d7649bed4b800890b18862",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -29,7 +29,7 @@
     ".github/workflows/coordinated_social_publish.yml": "58dc39a9d2d2131a02d93be89702bcdd911e3951b014b1adebd169db781845f1",
     ".github/workflows/daily_blogger_poster.yml": "113c0c42311d07e5647306247024bed2964c546cbbe110c66cd7b39e2ec414db",
     ".github/workflows/rewrite_existing_masters.yml": "7b694953284054fd9e8898a225ffc2bd9b4e3308fc9c6cb20be91f837efb357f",
-    ".github/workflows/refresh_master_v2_design.yml": "0f658ec0c8c6024aa9d70ec6657873ff19b18ac37d4d42ce3b285fd850ed552a",
+    ".github/workflows/refresh_master_v2_design.yml": "09935ba5f09f73feb384a2ed635a31c359a9a4dd48e66e0fc1b8c461f5c3b526",
     ".github/workflows/daily_news_wires.yml": "455a6e8b3d4ea782b27e02b412edad8a68e949e84e0e81f0a3591b78bdeac2f0",
     ".github/workflows/facebook_publisher.yml": "47b96c3d772d2afc1eb43dec46bbacd2df7aaacc3da676534650f8c211ece089",
     ".github/workflows/bluesky_publisher.yml": "47ea8d9a01f8761590de4362cedbbaafc652c2d5e18c0a0b7aa66834815571f4",
