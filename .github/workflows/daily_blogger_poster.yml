@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - 'auto_blogger_publisher.py'
+      - 'prepare_master_article.py'
+      - 'master_article_v2.py'
+      - 'reader_value_article.py'
       - 'publication_preflight.py'
       - '.github/workflows/daily_blogger_poster.yml'
   schedule:
@@ -30,6 +33,7 @@ jobs:
     permissions:
       contents: write
       actions: write
+      models: read
 
     steps:
       - name: Checkout Repository
@@ -41,7 +45,38 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install google-api-python-client google-auth pillow
+        run: pip install google-api-python-client google-auth pillow requests
+
+      - name: Research and prepare the strict Master Article V2 package
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          MASTER_TEXT_MODEL: ${{ vars.MASTER_TEXT_MODEL }}
+          MASTER_IMAGE_API_URL: ${{ vars.MASTER_IMAGE_API_URL }}
+          MASTER_IMAGE_MODEL: ${{ vars.MASTER_IMAGE_MODEL }}
+          MASTER_IMAGE_API_KEY: ${{ secrets.MASTER_IMAGE_API_KEY }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python prepare_master_article.py
+
+      - name: Persist generated photographs and researched package before publication
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Master Preparation"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add assets/master master_packages
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Prepare researched Master Article V2 package [skip ci]"
+          for attempt in {1..8}; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase origin main
+            sleep $((attempt * 2))
+          done
+          exit 1
 
       - name: Run Daily Yield master-article publisher
         id: publisher
@@ -64,6 +99,8 @@ jobs:
             published_tracker.json
             social_events.json
             scheduled_ready/topic_*.html
+            master_packages/topic_*.json
+            assets/master/**/*.jpg
 
       - name: Persist confirmed publication state safely
         if: steps.publisher.outcome == 'success'

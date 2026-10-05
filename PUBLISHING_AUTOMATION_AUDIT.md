@@ -87,9 +87,9 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Security guard protects the shared live social creative engine**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
-- ✅ **Master articles include related-reading shelf**
+- ✅ **Master articles include measured 10–15-item continuous discovery shelf**
 - ✅ **Master articles include continuous gesture motion**
-- ✅ **Master hero image is preflight-validated**
+- ✅ **Master uses three AI-generated 16:9 topic-specific photographs**
 - ✅ **News hero image is preflight-validated**
 - ✅ **Every News desk uses date-rotated fresh hero selection**
 - ✅ **Daily News heroes avoid cross-desk reuse**
@@ -128,7 +128,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
-- ✅ **Master tracker next-topic state is valid** — next index 74
+- ✅ **Master tracker next-topic state is valid** — next index 75
 - ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**

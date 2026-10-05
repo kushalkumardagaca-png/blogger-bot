@@ -48,7 +48,7 @@ def ensure_page_meta(content, current_path=""):
     return (content or "").rstrip() + "\n" + block
 
 
-def family_block(current_path=""):
+def family_block(current_path="", include_follow=True):
     cards = []
     for name, path, description, verb in FAMILY:
         current = path == current_path
@@ -64,6 +64,8 @@ def family_block(current_path=""):
         f'<span>{html.escape(handle)}</span></a>'
         for name, url, handle in SOCIAL_PROFILES
     )
+    follow_block = ("""<div class="dyf-social"><p class="dyf-social-label">Follow Daily Yield</p><nav aria-label="Daily Yield social profiles" class="dyf-social-links">"""
+                    + social + """</nav></div><a class="dyf-subscribe" href="#dy-subscribe"><b>Make the next important story find you.</b><span>Choose your alerts →</span></a>""") if include_follow else ""
     return START + """
 <style>
 #dyPageFamily{--dyf-ink:#241610;--dyf-muted:#6e5d4b;--dyf-line:#eadcc8;--dyf-paper:#fffdf8;max-width:1180px;margin:clamp(48px,8vw,92px) auto 18px;padding:clamp(25px,5vw,46px);border:1px solid var(--dyf-line);border-radius:22px;background:linear-gradient(145deg,#fffdf8,#fff9ef);color:var(--dyf-ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-sizing:border-box}
@@ -74,8 +76,7 @@ def family_block(current_path=""):
 <p class="dyf-intro">Move between reporting, tools, complete market analysis and the concise Global Snapshot without losing your place in Daily Yield.</p>
 <div class="dyf-grid">""" + "".join(cards) + """</div>
 <nav aria-label="Daily Yield information" class="dyf-utility"><a href="https://dailyyield.blogspot.com/p/about-us_02080501126.html">About</a><a href="https://dailyyield.blogspot.com/p/contact-us_01883938366.html">Contact</a><a href="https://dailyyield.blogspot.com/p/disclaimer.html">Disclaimer</a><a href="https://dailyyield.blogspot.com/p/privacy-policy.html">Privacy</a><a href="https://dailyyield.blogspot.com/p/terms-and-conditions.html">Terms</a></nav>
-<div class="dyf-social"><p class="dyf-social-label">Follow Daily Yield</p><nav aria-label="Daily Yield social profiles" class="dyf-social-links">""" + social + """</nav></div>
-<a class="dyf-subscribe" href="#dy-subscribe"><b>Make the next important story find you.</b><span>Choose your alerts →</span></a>
+""" + follow_block + """
 </section>
 """ + END
 

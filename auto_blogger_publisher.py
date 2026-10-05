@@ -184,27 +184,30 @@ def main():
     print(f"Processing Topic #{topic['#']} (Index {current_idx}): {topic['Punchy Title']} [{topic['Category']}]")
     category = get_standardized_category(topic["Category"])
     preview_title = compact_title(topic["Punchy Title"])
-    hero = generate_hero_image_figure(preview_title, category)
     article_topic = dict(topic)
     article_topic["Category"] = category
-    title, slug, meta_desc, labels, html = build_reader_value_article(article_topic, pub_date_str, pub_time_str, hero)
+    title, slug, meta_desc, labels, html = build_reader_value_article(article_topic, pub_date_str, pub_time_str)
 
-    # Publication preflight requires one useful internal action and a related shelf.
+    # Master V2 already contains contextual links, a measured 10–15-item discovery
+    # shelf, a separate follow section and the family directory in the required order.
+    master_v2 = '<!-- DY_MASTER_V2 -->' in html
+    # Legacy packages require one useful internal action and a related shelf.
     # Build both deterministically before Blogger is contacted. Authenticated API
     # inventory remains primary; the persisted tracker is a zero-view fallback if
     # Google temporarily throttles that read.
-    html += "\n" + CONTEXT_STYLE + "\n" + contextual_card(title + " " + category + " " + html, "articles")
-    current_post = {"id": "pending", "title": title, "labels": labels, "content": html}
-    related_candidates = fetch_public_posts()
-    if not related_candidates:
-        related_candidates = [{
-            "id": f"tracker-{row.get('topic_id', index)}",
-            "title": row.get("title", "Daily Yield article"),
-            "content": "", "labels": [row.get("category", "Daily Article")],
-            "published": row.get("published_at", ""), "url": row.get("blogger_url", ""),
-        } for index, row in enumerate(tracker.get("published_posts", [])) if row.get("blogger_url")]
-    html = ensure_related_articles(html, current_post, related_candidates)
-    html = ensure_family(html)
+    if not master_v2:
+        html += "\n" + CONTEXT_STYLE + "\n" + contextual_card(title + " " + category + " " + html, "articles")
+        current_post = {"id": "pending", "title": title, "labels": labels, "content": html}
+        related_candidates = fetch_public_posts()
+        if not related_candidates:
+            related_candidates = [{
+                "id": f"tracker-{row.get('topic_id', index)}",
+                "title": row.get("title", "Daily Yield article"),
+                "content": "", "labels": [row.get("category", "Daily Article")],
+                "published": row.get("published_at", ""), "url": row.get("blogger_url", ""),
+            } for index, row in enumerate(tracker.get("published_posts", [])) if row.get("blogger_url")]
+        html = ensure_related_articles(html, current_post, related_candidates)
+        html = ensure_family(html)
     html = ensure_continuous_motion(html)
     assert_publishable(title, html, labels)
 

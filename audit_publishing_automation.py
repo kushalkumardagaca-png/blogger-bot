@@ -46,14 +46,14 @@ check('Bing URL evidence and state are persisted without secrets',
       'BING_URL_AUTOMATION_STATE.json' in bing_workflow and 'BING_WEBMASTER_API_KEY' in bing_workflow)
 
 ap=(ROOT/'auto_blogger_publisher.py').read_text(); np=(ROOT/'news_pipeline.py').read_text()
-rv=(ROOT/'reader_value_article.py').read_text(); master=ap+rv
+rv=(ROOT/'reader_value_article.py').read_text(); mv2=(ROOT/'master_article_v2.py').read_text(); prep=(ROOT/'prepare_master_article.py').read_text(); master=ap+rv+mv2+prep
 check('Master publisher uses IST','datetime.now(IST)' in ap)
 check('Master tracker advances only after live URL','tracker will not advance' in ap and 'if not api_res or not api_res.get("url")' in ap)
 check('Master duplicate recovery','posts().search' in ap and 'Existing exact-title post recovered' in ap)
 check('Master canonical repaired to live URL','predicted.group(0)' in ap and 'posts().update' in ap)
 check('Master packages always rebuilt fresh','Always rebuild with the current date' in ap and 'Loading pre-compiled' not in ap)
-check('Master byline is current',"AUTHOR='Kushal K. Daga'" in rv and 'By <strong>{AUTHOR}</strong>' in rv and 'By CA Kushal K. Daga' not in master)
-check('Master publisher brand is Daily Yield',"'name':'Daily Yield'" in rv and 'Finance by CA Kushal' not in master)
+check('Master byline is current','AUTHOR="Kushal K. Daga"' in mv2 and 'By <strong>{AUTHOR}</strong>' in mv2 and 'By CA Kushal K. Daga' not in master)
+check('Master publisher brand is Daily Yield','"name":"Daily Yield"' in mv2 and 'Finance by CA Kushal' not in master)
 check('Inactive LinkedIn, X and Reddit profiles are absent from future master output',
       all(term not in master.casefold() for term in ('linkedin.com/','x.com/','twitter.com/','reddit.com/')))
 social=(ROOT/'social_identity.py').read_text()
@@ -236,13 +236,11 @@ check('Accepted main-branch code changes refresh repository hashes without appro
 check('Security guard protects the shared live social creative engine',
       '"social_creative.py"' in sg)
 
-check('Master links both market desks','/p/markets-today.html' in rv and '/p/global-snapshot.html' in rv)
-check('Master posts cannot enter News hub',
-      "labels=[category,'Kushal K. Daga']" in (ROOT/'reader_value_article.py').read_text()
-      and "'News'" not in re.search(r"labels=\[(.*?)\]",(ROOT/'reader_value_article.py').read_text(),re.S).group(1))
-check('Master articles include related-reading shelf','ensure_related_articles' in ap and 'fetch_public_posts' in ap)
+check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
+check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
+check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy-related-track' in mv2 and 'low_exposure_posts' in prep)
 check('Master articles include continuous gesture motion','ensure_continuous_motion' in ap)
-check('Master hero image is preflight-validated','safe_image' in ap and 'FALLBACK_MARKET' in ap)
+check('Master uses three AI-generated 16:9 topic-specific photographs','image_call(' in prep and "image.resize((1600,900)" in prep and "len(photos)!=3" in mv2)
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('Every News desk uses date-rotated fresh hero selection',
       'def daily_hero(' in np and 'edition_date.toordinal()' in np and 'previous_hero=prev.get("hero_url"' in np)

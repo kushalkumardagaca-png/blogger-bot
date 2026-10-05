@@ -85,9 +85,13 @@ def item_path(kind: str, item: dict) -> str:
     return urlparse(item.get("url", "")).path if kind == "pages" else ""
 
 
+def canonical_family(content: str, current_path: str = "") -> str:
+    return family_block(current_path, include_follow='<!-- DY_MASTER_V2 -->' not in (content or ''))
+
+
 def canonicalize(content: str, current_path: str = "") -> str:
     """Replace only the marked family block; preserve all editorial content."""
-    block = family_block(current_path)
+    block = canonical_family(content, current_path)
     pattern = re.escape(START) + r".*?" + re.escape(END)
     updated, count = re.subn(pattern, lambda _match: block, content or "", flags=re.S)
     if count:
@@ -107,7 +111,7 @@ def verify_content(content: str, current_path: str = "") -> list[str]:
         issues.append("family markers are not unique")
     if content.count('id="dyPageFamily"') != 1:
         issues.append("family directory id is not unique")
-    if block != family_block(current_path):
+    if block != canonical_family(content, current_path):
         issues.append("family block differs from canonical source")
     for selector in REQUIRED_SELECTORS:
         if selector not in block:
@@ -117,8 +121,9 @@ def verify_content(content: str, current_path: str = "") -> list[str]:
             issues.append("corrupted joined selector: " + selector)
     if block.count('class="dyf-card') != 7:
         issues.append("expected seven family cards")
-    if block.count('aria-label="Follow Daily Yield on ') != 4:
-        issues.append("expected four active social-profile links")
+    expected_socials = 0 if '<!-- DY_MASTER_V2 -->' in (content or '') else 4
+    if block.count('aria-label="Follow Daily Yield on ') != expected_socials:
+        issues.append(f"expected {expected_socials} family-block social-profile links")
     return issues
 
 

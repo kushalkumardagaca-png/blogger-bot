@@ -27,8 +27,8 @@ def assert_publishable(title,content,labels):
  if not title or len(title.strip())<20:issues.append('missing/short SEO title (minimum 20 characters)')
  if len(title.strip())>46:issues.append(f'Bing title budget exceeded ({len(title.strip())} characters; maximum 46)')
  if len(content)<8000:issues.append(f'content package too small ({len(content)} bytes)')
- text=_plain(content);word_count=len(re.findall(r"[A-Za-z][A-Za-z'-]+",text));is_news='News' in labels
- minimum_words=350 if is_news else 900
+ text=_plain(content);word_count=len(re.findall(r"[A-Za-z][A-Za-z'-]+",text));is_news='News' in labels;master_v2='<!-- DY_MASTER_V2 -->' in content
+ minimum_words=350 if is_news else (4500 if master_v2 else 900)
  if word_count<minimum_words:issues.append(f'insufficient reader-value depth ({word_count} words; minimum {minimum_words})')
  paragraphs=[]
  for raw in re.findall(r'<p\b[^>]*>(.*?)</p>',content or '',flags=re.I|re.S):
@@ -41,13 +41,20 @@ def assert_publishable(title,content,labels):
   if phrase.casefold() in text.casefold():issues.append('mass-template phrase prohibited: '+phrase)
  for phrase in UNSUPPORTED_ABSOLUTES:
   if phrase.casefold() in text.casefold():issues.append('unsupported absolute claim prohibited: '+phrase)
- if not is_news:
+ if not is_news and not master_v2:
   if 'Worked example with disclosed assumptions' not in content:issues.append('transparent worked example missing')
   if 'Editorial method' not in content:issues.append('editorial method disclosure missing')
+ if master_v2:
+  for marker,name in (("class=\"dy2-toc\"","table of contents"),("class=\"dy2-summary\"","600–800 word summary"),("class=\"dy2-faq\"","topic FAQ"),("class=\"dy2-glossary\"","glossary"),("class=\"dy2-low\"","10–15 item discovery shelf"),("class=\"dy2-follow\"","separate follow section")):
+   if marker not in content:issues.append(name+' missing')
+  if content.count('class="dy2-photo"')!=3:issues.append('exactly three editorial landscape photos required')
+  if content.count('class="dy2-data"')<3:issues.append('at least three evidence-based data representations required')
+  order=[content.find(x) for x in ('class="dy2-summary"','class="dy2-faq"','class="dy2-glossary"','class="dy2-low"','class="dy2-follow"','DY_PAGE_FAMILY_START')]
+  if any(x<0 for x in order) or order!=sorted(order):issues.append('Master V2 closing-section order is invalid')
  if 'Kushal K. Daga' not in content:issues.append('current byline missing')
  if 'challenge-platform' in content or '/cdn-cgi/challenge-platform/' in content:issues.append('invalid copied challenge script')
- if 'class="dy-context"' not in content:issues.append('contextual internal-link card missing')
- if 'class="dy-related"' not in content:issues.append('related-reading shelf missing')
+ if not master_v2 and 'class="dy-context"' not in content:issues.append('contextual internal-link card missing')
+ if not master_v2 and 'class="dy-related"' not in content:issues.append('related-reading shelf missing')
  if 'id="dyPageFamily"' not in content:issues.append('comprehensive Daily Yield family directory missing')
  if 'metaDesc' not in content and 'DY_SEO_META_START' not in content:issues.append('SEO/meta description package missing')
  if 'DY_CONTINUOUS_MOTION_START' not in content:issues.append('continuous gesture controller missing')
