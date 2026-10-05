@@ -222,20 +222,31 @@ Return a compact planning object only. Requirements: title 20-46 characters, pun
  if not isinstance(module_headings,dict) or any(not str(module_headings.get(key,'')).strip() for key in module_keys):raise RuntimeError('editorial planner omitted topic-specific module headings')
  if len({str(module_headings[key]).casefold().strip() for key in module_keys})!=len(module_keys):raise RuntimeError('editorial planner repeated module headings')
  sections=[];section_target=round(4050/len(section_plans))
- for number,item in enumerate(section_plans,1):
-  heading=str(item.get('heading','')).strip();focus=str(item.get('focus','')).strip()
-  if not heading or not focus:raise RuntimeError('editorial plan contains an incomplete section')
-  prior=[x['heading'] for x in sections]
-  prompt=f'''Write section {number} of {len(section_plans)} for a Daily Yield financial article titled {plan.get('title')!r}. Heading: {heading!r}. Focus: {focus}. Topic: {json.dumps(topic,ensure_ascii=False)}. Prior headings: {json.dumps(prior)}. Evidence packet: {evidence_json}.
+ if os.environ.get('OLLAMA_API_URL','').strip():
+  bulk_prompt=f'''Write the complete main body for a Daily Yield financial article titled {plan.get('title')!r} using exactly these planned sections: {json.dumps(section_plans,ensure_ascii=False)}. Topic: {json.dumps(topic,ensure_ascii=False)}. Evidence packet: {evidence_json}.
+Return strict JSON {{"sections":[{{"heading":"exact planned heading","paragraphs":["..."]}}]}}. Preserve every planned heading exactly and in order. Write 4,030-4,150 actual main-body words total, distributed naturally across the sections in 4-7 paragraphs each. Establish context before conclusions; vary pacing and paragraph shape. Use only evidence-supported facts, identify uncertainty and jurisdiction naturally, and add contextual source tokens such as [[S1|descriptive anchor]] plus useful internal tokens such as [[I1|descriptive anchor]]. Do not include a summary, FAQ, glossary, generic method prose, invented quotation, unsupported number, personal anecdote, repeated introduction or repeated conclusion.'''
+  result=model_json([{'role':'system','content':'Write rigorous, natural, non-templated financial journalism as one coherent article. Accuracy and the total word budget are mandatory.'},{'role':'user','content':bulk_prompt}],max_tokens=8192)
+  raw_sections=result.get('sections') or []
+  if isinstance(raw_sections,dict):raw_sections=list(raw_sections.values())
+  for number,item in enumerate(raw_sections if isinstance(raw_sections,list) else []):
+   if number>=len(section_plans) or not isinstance(item,dict):continue
+   paragraphs=paragraph_list(item.get('paragraphs') or item.get('content'))
+   if paragraphs:sections.append({'heading':section_plans[number]['heading'],'paragraphs':paragraphs})
+  if len(sections)!=len(section_plans):raise RuntimeError('keyless bulk writer returned an incomplete section set')
+ else:
+  for number,item in enumerate(section_plans,1):
+   heading=str(item.get('heading','')).strip();focus=str(item.get('focus','')).strip()
+   if not heading or not focus:raise RuntimeError('editorial plan contains an incomplete section')
+   prior=[x['heading'] for x in sections]
+   prompt=f'''Write section {number} of {len(section_plans)} for a Daily Yield financial article titled {plan.get('title')!r}. Heading: {heading!r}. Focus: {focus}. Topic: {json.dumps(topic,ensure_ascii=False)}. Prior headings: {json.dumps(prior)}. Evidence packet: {evidence_json}.
 Write approximately {section_target} actual words in 4-7 natural paragraphs. Establish context before conclusions. Use only evidence-supported facts; identify uncertainty, jurisdiction and limitations naturally. Add contextual source tokens such as [[S1|descriptive anchor]] and useful Daily Yield internal tokens such as [[I1|descriptive anchor]]. Do not include the heading, summary, FAQ, glossary, generic method prose, invented quotation, unsupported number, personal anecdote or repeated material. Return strict JSON {{"paragraphs":[...]}} only.'''
-
-  accepted=None
-  for _ in range(3):
-   result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
-   parsed=paragraph_list(result.get('paragraphs'));count=words(' '.join(parsed))
-   if 250<=count<=700:accepted=parsed;break
-  if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
-  sections.append({'heading':heading,'paragraphs':accepted})
+   accepted=None
+   for _ in range(3):
+    result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
+    parsed=paragraph_list(result.get('paragraphs'));count=words(' '.join(parsed))
+    if 250<=count<=700:accepted=parsed;break
+   if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
+   sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if core_count<4000:
   for _ in range(3):

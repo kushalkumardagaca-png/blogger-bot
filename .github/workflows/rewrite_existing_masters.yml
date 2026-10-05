@@ -20,8 +20,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: daily-yield-master-publisher
-  cancel-in-progress: false
+  group: daily-yield-keyless-master-migration
+  cancel-in-progress: true
 
 jobs:
   rewrite_one_backed_up_master:
