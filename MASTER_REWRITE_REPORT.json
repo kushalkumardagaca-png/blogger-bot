@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-05T13:00:40.439115+00:00",
-  "phase": "prepare-pending",
-  "error_type": "HTTPError",
-  "error": "403 Client Error: Forbidden for url: https://www.googleapis.com/webmasters/v3/sites/https%3A%2F%2Fdailyyield.blogspot.com%2F/searchAnalytics/query"
+  "status": "BACKUP_READY",
+  "at": "2026-10-05T13:02:55.540117+00:00",
+  "pending": {
+    "backup": "master_rewrite_backups/post_76036352328662163.json.gz",
+    "content_sha256": "e092d8b61f2368100cdd02df5a700b20125f0875dc963f85176d08dbb0fdae1a",
+    "id": "76036352328662163",
+    "labels": [
+      "Contrarian Hooks",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-19T23:00:00-07:00",
+    "title": "Stop Maxing Your 401(k) or Pension",
+    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html"
+  },
+  "master_count": 75,
+  "remaining": 75
 }
