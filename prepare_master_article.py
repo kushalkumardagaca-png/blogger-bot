@@ -172,16 +172,35 @@ Return a compact planning object only. Requirements: title 20-46 characters, pun
   if not heading or not focus:raise RuntimeError('editorial plan contains an incomplete section')
   prior=[x['heading'] for x in sections]
   prompt=f'''Write section {number} of 9 for a Daily Yield financial article titled {plan.get('title')!r}. Heading: {heading!r}. Focus: {focus}. Topic: {json.dumps(topic,ensure_ascii=False)}. Prior headings: {json.dumps(prior)}. Evidence packet: {evidence_json}.
-Write 450-460 actual words in 4-7 natural paragraphs. Establish context before conclusions. Use only evidence-supported facts; identify uncertainty, jurisdiction and limitations naturally. Add contextual source tokens such as [[S1|descriptive anchor]] and useful Daily Yield internal tokens such as [[I1|descriptive anchor]]. Do not include the heading, summary, FAQ, glossary, generic method prose, invented quotation, unsupported number, personal anecdote or repeated material. Return strict JSON {{"paragraphs":[...]}} only.'''
+Write 440-480 actual words in 4-7 natural paragraphs. Establish context before conclusions. Use only evidence-supported facts; identify uncertainty, jurisdiction and limitations naturally. Add contextual source tokens such as [[S1|descriptive anchor]] and useful Daily Yield internal tokens such as [[I1|descriptive anchor]]. Do not include the heading, summary, FAQ, glossary, generic method prose, invented quotation, unsupported number, personal anecdote or repeated material. Return strict JSON {{"paragraphs":[...]}} only.'''
   accepted=None
   for _ in range(3):
    result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
    count=words(' '.join(result.get('paragraphs') or []))
-   if 450<=count<=460:accepted=result['paragraphs'];break
-  if not accepted:raise RuntimeError(f'section {number} failed its 450-460 word gate')
+   if 320<=count<=540:accepted=result['paragraphs'];break
+  if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
   sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
- if not 4000<=core_count<=4200:raise RuntimeError(f'assembled core is {core_count} words before validation')
+ if core_count<4000:
+  needed=4050-core_count;expand_prompt=f'''Add {needed-10} to {needed+10} words as 2-5 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
+  addition=None
+  for _ in range(3):
+   candidate=model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion at the exact word budget.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs') or []
+   if needed-10<=words(' '.join(candidate))<=needed+10:addition=candidate;break
+  if not addition:raise RuntimeError(f'core expansion failed; assembled core was {core_count} words')
+  sections[-1]['paragraphs'].extend(addition)
+ elif core_count>4200:
+  current=words(' '.join(sections[-1]['paragraphs']));target=current-(core_count-4100)
+  if target<250:raise RuntimeError(f'assembled core is too large to normalize safely: {core_count} words')
+  rewrite_prompt=f'''Rewrite this final section in {target-10} to {target+10} words, preserving its supported claims, citation tokens and focus without repetition. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
+  replacement=None
+  for _ in range(3):
+   candidate=model_json([{'role':'system','content':'Condense accurately to the exact requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)).get('paragraphs') or []
+   if target-10<=words(' '.join(candidate))<=target+10:replacement=candidate;break
+  if not replacement:raise RuntimeError(f'core condensation failed; assembled core was {core_count} words')
+  sections[-1]['paragraphs']=replacement
+ core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
+ if not 4000<=core_count<=4200:raise RuntimeError(f'normalized core is {core_count} words before validation')
  summary_prompt=f'''Using only this completed article and its evidence, write a 650-730 word after-article summary in 6-10 natural paragraphs. Do not add facts, headings, FAQ material or a new direct-answer opening. Return strict JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
  summary=None
  for _ in range(3):
