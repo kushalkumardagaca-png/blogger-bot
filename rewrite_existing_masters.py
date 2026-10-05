@@ -55,7 +55,11 @@ def is_master(post):
 
 def backup_next():
  token=auth();state=load_state()
- if state.get('pending'):raise RuntimeError('a backed-up rewrite is already pending')
+ if state.get('pending'):
+  pending=state['pending'];path=ROOT/pending['backup']
+  if not path.exists():raise RuntimeError('pending rewrite backup is missing')
+  save_report('BACKUP_READY',pending=pending,master_count=state.get('inventory_master_count'),remaining=state.get('inventory_master_count',0)-len(state.get('completed',{})))
+  print(pending['id']);return
  posts=inventory(token);masters=sorted((p for p in posts if is_master(p)),key=lambda x:(x.get('published',''),x['id']))
  for post in masters:
   if MARKER in (post.get('content') or ''):

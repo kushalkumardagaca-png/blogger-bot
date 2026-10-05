@@ -73,7 +73,7 @@ def model_json(messages,max_tokens=16000):
  token=os.environ.get('MASTER_TEXT_API_KEY','').strip();model=os.environ.get('MASTER_TEXT_MODEL','').strip() or 'openai'
  headers={'Content-Type':'application/json'}
  if token:headers['Authorization']='Bearer '+token
- r=requests.post(endpoint,headers=headers,json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'private':True},timeout=600)
+ r=requests.post(endpoint,headers=headers,json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'reasoning_effort':'low','private':True},timeout=600)
  r.raise_for_status()
  try:payload=r.json()
  except ValueError:raise RuntimeError(f"model endpoint returned non-JSON HTTP {r.status_code} ({r.headers.get('content-type','unknown')}): {r.text[:240]!r}")
