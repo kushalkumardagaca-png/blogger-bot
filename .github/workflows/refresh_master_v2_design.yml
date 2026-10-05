@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: daily-yield-master-publisher
+  group: daily-yield-master-design-refresh
   cancel-in-progress: false
 
 jobs:
