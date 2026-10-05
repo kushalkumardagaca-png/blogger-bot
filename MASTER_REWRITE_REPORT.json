@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-05T07:20:58.761517+00:00",
-  "phase": "prepare-pending",
-  "error_type": "RuntimeError",
-  "error": "model response omitted choices/message/content: {\"id\": \"pllns_7876f394ed4fd17e2343f6195ba313d3\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"reasoning\": \"We need to produce a JSON with the specified keys. Title length 12-46 characters. Punchy title: \\\"Stop Maxing Your 401(k) or Pension\\\". That's 32 characters, okay. meta_description 110-158 chars. Entities: specific people/organizations/concepts. From evidence: Cambridge Dictionary, Contrarian News, Wiktionary, etc. But topic is about 401(k) or pension. The evidence packet does"
+  "status": "BACKUP_READY",
+  "at": "2026-10-05T07:22:23.472690+00:00",
+  "pending": {
+    "backup": "master_rewrite_backups/post_76036352328662163.json.gz",
+    "content_sha256": "e092d8b61f2368100cdd02df5a700b20125f0875dc963f85176d08dbb0fdae1a",
+    "id": "76036352328662163",
+    "labels": [
+      "Contrarian Hooks",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-19T23:00:00-07:00",
+    "title": "Stop Maxing Your 401(k) or Pension",
+    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html"
+  },
+  "master_count": 75,
+  "remaining": 75
 }
