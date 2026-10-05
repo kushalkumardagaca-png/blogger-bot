@@ -106,7 +106,9 @@ jobs:
           set -euo pipefail
           git config user.name "Daily Yield Master Migration"
           git config user.email "bot@dailyyield.blogspot.com"
-          git add MASTER_REWRITE_STATE.json MASTER_REWRITE_REPORT.json
+          for path in MASTER_REWRITE_STATE.json MASTER_REWRITE_REPORT.json; do
+            if [ -e "$path" ]; then git add "$path"; fi
+          done
           if git diff --staged --quiet; then exit 0; fi
           git commit -m "Record legacy master V2 rewrite result [skip ci]"
           for attempt in {1..12}; do

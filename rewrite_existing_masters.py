@@ -11,7 +11,7 @@ from datetime import datetime,timezone
 from pathlib import Path
 import requests
 from brand_identity import ensure_brand_identity
-from continuous_motion import ensure_continuous_motion
+from continuous_motion import ensure as ensure_continuous_motion
 from master_article_v2 import render,validate
 from prepare_master_article import build_package
 from publication_preflight import assert_publishable
