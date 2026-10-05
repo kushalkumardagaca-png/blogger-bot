@@ -1,3 +1,6 @@
 {
-  "status": "PASS"
+  "status": "FAIL",
+  "stage": "source-discovery",
+  "error_type": "RuntimeError",
+  "error": "only 0 usable topic-specific scholarly/primary sources found; minimum 6"
 }
