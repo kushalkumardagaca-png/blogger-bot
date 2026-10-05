@@ -1,11 +1,11 @@
 # Daily Yield Security Guard
 
-- **Status:** PASS
-- **Checked:** 2026-10-05T16:51:24.192989+00:00
+- **Status:** FAIL
+- **Checked:** 2026-10-05T17:02:44.243953+00:00
 - **Public website requests:** 0
 
 ## Critical findings
-- None
+- existing Blogger content changed without baseline approval: page:9217579601621666930, post:1022860638256450673, post:4559693310963899298, post:5809539308164270577, post:749521336862589933
 
 ## Warnings
 - None
