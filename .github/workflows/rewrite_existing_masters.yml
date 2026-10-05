@@ -1,4 +1,5 @@
 name: Replace Legacy Master Articles with Master V2
+# User-authorized gradual migration: one verified legacy Master per run.
 
 on:
   push:
