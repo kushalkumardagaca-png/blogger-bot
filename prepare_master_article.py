@@ -224,10 +224,14 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
  return plan
 def verify_evidence(draft,evidence):
  packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
+ review_package={k:draft.get(k) for k in ('sections','summary','faq','visuals')}
  for review_round in range(3):
-  review=model_json([{'role':'system','content':'Act as a hostile financial fact checker. Reject unsupported claims, invented numbers, misleading causal language and citations that do not support nearby prose.'},{'role':'user','content':'Compare this proposed article package with the evidence packet. Return JSON with pass (boolean) and unsupported_claims (array of exact quoted claim text). Do not rewrite or excuse anything. PACKAGE: '+json.dumps(draft,ensure_ascii=False)+' EVIDENCE: '+json.dumps(packet,ensure_ascii=False)}],max_tokens=5000)
-  claims=[str(x) for x in review.get('unsupported_claims',[]) if str(x).strip()]
-  if review.get('pass') and not claims:return
+  review=model_json([{'role':'system','content':'Act as a hostile financial fact checker. Evaluate only visible prose and numeric visuals. Reject unsupported claims, invented numbers, misleading causal language and citations that do not support nearby prose. Never list evidence-source titles or photo-search briefs as article claims.'},{'role':'user','content':'Compare this proposed visible editorial content with the evidence packet. Return JSON with pass (boolean) and unsupported_claims (array of exact quoted text that actually occurs in the proposed content). Do not rewrite or excuse anything. CONTENT: '+json.dumps(review_package,ensure_ascii=False)+' EVIDENCE: '+json.dumps(packet,ensure_ascii=False)}],max_tokens=5000)
+  editorial_plain=json.dumps(review_package,ensure_ascii=False).casefold();claims=[]
+  for item in review.get('unsupported_claims',[]):
+   claim=str(item).strip();needle=' '.join(re.sub(r'\[\[[^]]+\]\]',' ',claim).casefold().split()[:8])
+   if claim and needle and needle in re.sub(r'\[\[[^]]+\]\]',' ',editorial_plain):claims.append(claim)
+  if not claims:return
   repaired=False
   for section in draft.get('sections',[]):
    section_text=' '.join(paragraph_list(section.get('paragraphs')));matched=[]
