@@ -147,7 +147,7 @@ def paragraph_list(value):
   elif isinstance(item,list):
    for child in item:walk(child)
   elif isinstance(item,dict):
-   for key in ('text','paragraph','content'):
+   for key in ('paragraphs','addition','sections','text','paragraph','content'):
     if key in item:walk(item[key]);break
  walk(value);return out
 
@@ -243,7 +243,7 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
    accepted=None
    for _ in range(3):
     result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
-    parsed=paragraph_list(result.get('paragraphs'));count=words(' '.join(parsed))
+    parsed=paragraph_list(result);count=words(' '.join(parsed))
     if 250<=count<=700:accepted=parsed;break
    if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
    sections.append({'heading':heading,'paragraphs':accepted})
@@ -251,9 +251,10 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
  if core_count<4000:
   for _ in range(3):
    needed=4050-core_count;expand_prompt=f'''Add approximately {needed} words as 2-6 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
-   candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs'));added=words(' '.join(candidate))
-   minimum_useful=max(20,min(80,needed-20))
-   if added>=minimum_useful and core_count+added<=4200:sections[-1]['paragraphs'].extend(candidate);core_count+=added
+   candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)));added=words(' '.join(candidate))
+   capacity=4150-core_count
+   if added>capacity:candidate=trim_paragraphs(candidate,capacity);added=words(' '.join(candidate))
+   if added>=20:sections[-1]['paragraphs'].extend(candidate);core_count+=added
    if core_count>=4000:break
   if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
  elif core_count>4200:
@@ -265,7 +266,7 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
    target=current-cut;rewrite_prompt=f'''Rewrite this section in approximately {target} words, preserving its supported claims, citation tokens and distinct focus without repetition. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
    replacement=None
    for _ in range(3):
-    candidate=paragraph_list(model_json([{'role':'system','content':'Condense accurately near the requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)).get('paragraphs'));count=words(' '.join(candidate))
+    candidate=paragraph_list(model_json([{'role':'system','content':'Condense accurately near the requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)));count=words(' '.join(candidate))
     if target-50<=count<=target+50:replacement=candidate;break
    if not replacement:continue
    actual_cut=current-words(' '.join(replacement));section['paragraphs']=replacement;excess-=max(0,actual_cut)
@@ -274,11 +275,11 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if not 4000<=core_count<=4200:raise RuntimeError(f'normalized core is {core_count} words before validation')
  summary_prompt=f'''Using only this completed article and its evidence, write a 650-730 word after-article summary in 6-10 natural paragraphs. Do not add facts, headings, FAQ material or a new direct-answer opening. Return strict JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
- summary=paragraph_list(model_json([{'role':'system','content':'Compress faithfully without introducing new claims.'},{'role':'user','content':summary_prompt}],max_tokens=3500).get('paragraphs'));summary_count=words(' '.join(summary))
+ summary=paragraph_list(model_json([{'role':'system','content':'Compress faithfully without introducing new claims.'},{'role':'user','content':summary_prompt}],max_tokens=3500));summary_count=words(' '.join(summary))
  if summary_count<600:
-  needed=700-summary_count;prompt=f'''Add approximately {needed} words in new summary paragraphs using only the completed article. Do not introduce facts or repeat existing summary wording. Return JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EXISTING SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';addition=paragraph_list(model_json([{'role':'system','content':'Expand a faithful after-article summary.'},{'role':'user','content':prompt}],max_tokens=2500).get('paragraphs'));summary.extend(addition)
+  needed=700-summary_count;prompt=f'''Add approximately {needed} words in new summary paragraphs using only the completed article. Do not introduce facts or repeat existing summary wording. Return JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EXISTING SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';addition=paragraph_list(model_json([{'role':'system','content':'Expand a faithful after-article summary.'},{'role':'user','content':prompt}],max_tokens=2500));summary.extend(addition)
  elif summary_count>800:
-  prompt=f'''Rewrite this after-article summary in 650-750 words, preserving only supported points and adding no facts. Return JSON {{"paragraphs":[...]}}. SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';summary=paragraph_list(model_json([{'role':'system','content':'Condense faithfully.'},{'role':'user','content':prompt}],max_tokens=3000).get('paragraphs'))
+  prompt=f'''Rewrite this after-article summary in 650-750 words, preserving only supported points and adding no facts. Return JSON {{"paragraphs":[...]}}. SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';summary=paragraph_list(model_json([{'role':'system','content':'Condense faithfully.'},{'role':'user','content':prompt}],max_tokens=3000))
  if words(' '.join(summary))>800:summary=trim_paragraphs(summary,750)
  if not 600<=words(' '.join(summary))<=800:raise RuntimeError(f'summary failed normalization at {words(" ".join(summary))} words')
  support_prompt=f'''Create reader-specific support material for the article below, using only the evidence packet. Answer these FAQ questions: {json.dumps(plan.pop('faq_questions',[]),ensure_ascii=False)}. Define these glossary terms: {json.dumps(plan.pop('glossary_terms',[]),ensure_ascii=False)}. Return strict JSON with faq:[{{question,answer}}] and glossary:[{{term,definition}}]. At least 5 FAQs and 8 definitions. Keep answers accurate, concise and non-repetitive. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
@@ -306,7 +307,7 @@ def verify_evidence(draft,evidence):
    target=words(section_text);prompt=f'''Rewrite this article section in {target-50} to {target+50} words. Remove or accurately qualify every rejected claim. Use only the evidence packet, retain useful contextual source tokens, preserve the section's distinct purpose, and do not add new figures. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section.get('heading')} REJECTED CLAIMS: {json.dumps(matched,ensure_ascii=False)} SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {json.dumps(packet,ensure_ascii=False)}'''
    replacement=None
    for _ in range(3):
-    candidate=paragraph_list(model_json([{'role':'system','content':'Repair unsupported financial prose conservatively and at the exact word budget.'},{'role':'user','content':prompt}],max_tokens=4000).get('paragraphs'))
+    candidate=paragraph_list(model_json([{'role':'system','content':'Repair unsupported financial prose conservatively and at the exact word budget.'},{'role':'user','content':prompt}],max_tokens=4000))
     if target-60<=words(' '.join(candidate))<=target+60:replacement=candidate;break
    if not replacement:raise RuntimeError('evidence repair could not preserve the section word budget')
    section['paragraphs']=replacement;repaired=True
