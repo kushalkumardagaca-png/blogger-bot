@@ -123,6 +123,17 @@ def model_json(messages,max_tokens=16000):
   except Exception as exc:last=exc
  raise RuntimeError(f'model failed to return valid JSON after 3 attempts: {type(last).__name__}: {str(last)[:300]}')
 
+def paragraph_list(value):
+ out=[]
+ def walk(item):
+  if isinstance(item,str) and item.strip():out.append(item.strip())
+  elif isinstance(item,list):
+   for child in item:walk(child)
+  elif isinstance(item,dict):
+   for key in ('text','paragraph','content'):
+    if key in item:walk(item[key]);break
+ walk(value);return out
+
 def internal_links():
  return [
   {'title':'Daily Article','url':BLOG+'/p/article.html','relevance':'More original Daily Yield explainers.'},
@@ -176,8 +187,8 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   accepted=None
   for _ in range(3):
    result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
-   count=words(' '.join(result.get('paragraphs') or []))
-   if 320<=count<=540:accepted=result['paragraphs'];break
+   parsed=paragraph_list(result.get('paragraphs'));count=words(' '.join(parsed))
+   if 320<=count<=540:accepted=parsed;break
   if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
   sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
@@ -185,7 +196,7 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   needed=4050-core_count;expand_prompt=f'''Add {needed-10} to {needed+10} words as 2-5 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
   addition=None
   for _ in range(3):
-   candidate=model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion at the exact word budget.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs') or []
+   candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion at the exact word budget.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs'))
    if needed-10<=words(' '.join(candidate))<=needed+10:addition=candidate;break
   if not addition:raise RuntimeError(f'core expansion failed; assembled core was {core_count} words')
   sections[-1]['paragraphs'].extend(addition)
@@ -195,7 +206,7 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   rewrite_prompt=f'''Rewrite this final section in {target-10} to {target+10} words, preserving its supported claims, citation tokens and focus without repetition. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
   replacement=None
   for _ in range(3):
-   candidate=model_json([{'role':'system','content':'Condense accurately to the exact requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)).get('paragraphs') or []
+   candidate=paragraph_list(model_json([{'role':'system','content':'Condense accurately to the exact requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)).get('paragraphs'))
    if target-10<=words(' '.join(candidate))<=target+10:replacement=candidate;break
   if not replacement:raise RuntimeError(f'core condensation failed; assembled core was {core_count} words')
   sections[-1]['paragraphs']=replacement
@@ -204,7 +215,7 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
  summary_prompt=f'''Using only this completed article and its evidence, write a 650-730 word after-article summary in 6-10 natural paragraphs. Do not add facts, headings, FAQ material or a new direct-answer opening. Return strict JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
  summary=None
  for _ in range(3):
-  candidate=model_json([{'role':'system','content':'Compress faithfully without introducing new claims.'},{'role':'user','content':summary_prompt}],max_tokens=3000).get('paragraphs') or []
+  candidate=paragraph_list(model_json([{'role':'system','content':'Compress faithfully without introducing new claims.'},{'role':'user','content':summary_prompt}],max_tokens=3000).get('paragraphs'))
   if 650<=words(' '.join(candidate))<=730:summary=candidate;break
  if not summary:raise RuntimeError('summary failed its 650-730 word preparation gate')
  support_prompt=f'''Create reader-specific support material for the article below, using only the evidence packet. Answer these FAQ questions: {json.dumps(plan.pop('faq_questions',[]),ensure_ascii=False)}. Define these glossary terms: {json.dumps(plan.pop('glossary_terms',[]),ensure_ascii=False)}. Return strict JSON with faq:[{{question,answer}}] and glossary:[{{term,definition}}]. At least 5 FAQs and 8 definitions. Keep answers accurate, concise and non-repetitive. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
