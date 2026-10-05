@@ -52,7 +52,7 @@ def test_model_visual_aliases_are_normalized_for_rendering():
     body=render(p,topic(),'2026-10-05','08:00')[-1]
     assert 'dy2-data-bar' in body and 'Alias view' in body
     p['visuals'][0]['numeric_values']=[1]
-    with pytest.raises(ValueError,match='mismatched labels and values'):render(p,topic(),'2026-10-05','08:00')
+    with pytest.raises(ValueError,match='mismatched labels and values'):validate(p)
 
 def test_visual_number_accepts_single_decorated_number_only():
     assert _visual_number('15%')==15

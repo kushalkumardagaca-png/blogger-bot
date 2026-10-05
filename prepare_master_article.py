@@ -288,7 +288,9 @@ def build_package(topic,target):
  global STAGE
  target=Path(target)
  if target.exists():
-  package=json.loads(target.read_text());validate(package);return package
+  try:
+   package=json.loads(target.read_text());validate(package);return package
+  except (OSError,ValueError,json.JSONDecodeError):target.unlink(missing_ok=True)
  STAGE='source-discovery';evidence=discover(topic)
  STAGE='text-generation';draft=generate_text(topic,evidence)
  evidence_numbers=set()
@@ -304,7 +306,7 @@ def build_package(topic,target):
     if not chart.get('values') and chart.get('numeric_values'):chart['values']=chart.pop('numeric_values')
     if not chart.get('source') and chart.get('source_number'):chart['source']=chart.pop('source_number')
     if str(chart.get('type','')).casefold() in ('chart','metrics','graph'):chart['type']='bar'
-    if len(chart.get('labels',[]))!=len(chart.get('values',[])):raise ValueError('mismatched visual arrays')
+    if not chart.get('labels') or len(chart.get('labels',[]))!=len(chart.get('values',[])):raise ValueError('empty or mismatched visual arrays')
     normalized=[]
     for value in chart.get('values',[]):
      number=round(_visual_number(value),8)

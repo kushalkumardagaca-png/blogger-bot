@@ -41,6 +41,12 @@ def validate(package):
         if float(p.get("width",0) or 0)<=float(p.get("height",1) or 1): errors.append(f"photo {index} is not landscape")
     visuals=package.get("visuals") or []
     if len(visuals)<3: errors.append("at least three evidence-based data representations are required")
+    for index,v in enumerate(visuals,1):
+        labels=v.get("labels") or []; values=v.get("values") or v.get("numeric_values") or []
+        if not labels or len(labels)!=len(values): errors.append(f"data visual {index} has mismatched labels and values")
+        else:
+            try:[float(x) for x in values]
+            except (TypeError,ValueError):errors.append(f"data visual {index} contains a non-numeric value")
     sources=package.get("sources") or []
     if len(sources)<6: errors.append("at least six topic-specific sources are required")
     for index,s in enumerate(sources,1):
