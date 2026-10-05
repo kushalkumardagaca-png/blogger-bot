@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-05T11:52:17.753446+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_76036352328662163.json.gz",
-    "content_sha256": "e092d8b61f2368100cdd02df5a700b20125f0875dc963f85176d08dbb0fdae1a",
-    "id": "76036352328662163",
-    "labels": [
-      "Contrarian Hooks",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-09-19T23:00:00-07:00",
-    "title": "Stop Maxing Your 401(k) or Pension",
-    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html"
-  },
-  "master_count": 75,
-  "remaining": 75
+  "status": "FAIL",
+  "at": "2026-10-05T11:53:30.593664+00:00",
+  "phase": "prepare-pending",
+  "error_type": "RuntimeError",
+  "error": "independent evidence review rejected claims that could not be located safely: [\"CalPERS Holds Health Premium Increase to 4.97% for 2027 While Advancing Care Quality\", \"CalPERS Posts 14.8% Preliminary Investment Return for Fiscal Year 2025-26\", \"CalPERS $100 Billion Climate Action Plan Integration\"]"
 }
