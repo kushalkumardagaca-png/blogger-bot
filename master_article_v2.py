@@ -63,7 +63,10 @@ def linked_text(text,sources,internals):
     out.append(esc((text or "")[pos:]));return "".join(out)
 
 def photo(p,index):
-    return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(p['alt'])}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{esc(p['caption'])}</figcaption></figure>'''
+    credit=esc(p['caption'])
+    if p.get('source_page'): credit=f'<a href="{esc(p["source_page"])}" rel="noopener" target="_blank">{credit}</a>'
+    if p.get('license_url'): credit+=f' · <a href="{esc(p["license_url"])}" rel="license noopener" target="_blank">Licence</a>'
+    return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(p['alt'])}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{credit}</figcaption></figure>'''
 
 def visual(v,sources,index):
     title=esc(v.get("title",f"Data view {index}"));caption=esc(v.get("caption",''));source_id=int(v.get("source",1) or 1);src=sources[min(max(source_id-1,0),len(sources)-1)]

@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """Research and prepare one strict Master Article V2 package before publication.
 
-Text is produced through an OpenAI-compatible provider from a topic-specific
-evidence packet. Three distinct photographs are generated through an image
-provider. Explicit repository configuration is mandatory, so generation is
-not coupled to a retired or anonymous rate-limited platform,
-cropped to a common 16:9 landscape ratio, and persisted in the repository before
-Blogger publication. No public Daily Yield page is requested.
+Text is produced through the repository's Gemini key (with an optional
+OpenAI-compatible fallback) from a topic-specific evidence packet. Three distinct,
+openly licensed photographs are selected for their exact editorial placements,
+checked against the permanent global reuse registry, cropped to a common 16:9
+landscape ratio, attributed, and persisted before Blogger publication. No public Daily Yield page is requested.
 """
 from __future__ import annotations
 import base64,csv,gzip,html,json,os,re,sys,urllib.parse,urllib.request
@@ -16,6 +15,7 @@ from xml.etree import ElementTree
 from PIL import Image
 import io,requests
 from master_article_v2 import validate,words
+from photo_selector import choose_photos
 
 ROOT=Path(__file__).parent
 PACKAGES=ROOT/'master_packages';ASSETS=ROOT/'assets/master'
@@ -95,17 +95,27 @@ def discover(topic):
  if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
  return evidence[:10]
 def model_json(messages,max_tokens=16000):
- endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL')
- headers={'Content-Type':'application/json','Authorization':'Bearer '+token}
- last=None
+ key=os.environ.get('GEMINI_API_KEY','').strip()
+ if key:
+  model=os.environ.get('GEMINI_MODEL','').strip() or 'gemini-3.5-flash-lite';last=None
+  system='\n'.join(x['content'] for x in messages if x.get('role')=='system');conversation=[x for x in messages if x.get('role')!='system']
+  contents=[{'role':'model' if x.get('role')=='assistant' else 'user','parts':[{'text':x['content']}]} for x in conversation]
+  endpoint=f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent'
+  for attempt in range(3):
+   body={'contents':contents+([{'role':'user','parts':[{'text':'Return one complete strict JSON object only. Do not use markdown.'}]}] if attempt else []),'generationConfig':{'responseMimeType':'application/json','temperature':0.2,'maxOutputTokens':max_tokens}}
+   if system:body['systemInstruction']={'parts':[{'text':system}]}
+   try:
+    r=requests.post(endpoint,headers={'x-goog-api-key':key,'Content-Type':'application/json'},json=body,timeout=600);r.raise_for_status();payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts']);begin=text.find('{');finish=text.rfind('}')
+    if begin<0 or finish<=begin:raise ValueError('Gemini returned no complete JSON object')
+    return json.loads(text[begin:finish+1])
+   except Exception as exc:last=exc
+  raise RuntimeError(f'Gemini failed to return valid JSON after 3 attempts: {type(last).__name__}: {str(last)[:300]}')
+ endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
  for attempt in range(3):
   request_messages=list(messages)
-  if attempt:request_messages.append({'role':'user','content':'The previous response was incomplete or invalid. Return one complete strict JSON object only; shorten reasoning, never truncate JSON.'})
+  if attempt:request_messages.append({'role':'user','content':'Return one complete strict JSON object only; never truncate JSON.'})
   try:
-   r=requests.post(endpoint,headers=headers,json={'model':model,'messages':request_messages,'temperature':0.25,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'reasoning_effort':'low'},timeout=600);r.raise_for_status()
-   payload=r.json();text=payload['choices'][0]['message'].get('content')
-   if isinstance(text,list):text=''.join(str(part.get('text','')) if isinstance(part,dict) else str(part) for part in text)
-   text=str(text or '').strip();text=re.sub(r'^```(?:json)?\s*|\s*```$','',text,flags=re.I|re.S).strip();begin=text.find('{');finish=text.rfind('}')
+   r=requests.post(endpoint,headers=headers,json={'model':model,'messages':request_messages,'temperature':0.25,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'reasoning_effort':'low'},timeout=600);r.raise_for_status();payload=r.json();text=str(payload['choices'][0]['message'].get('content') or '').strip();begin=text.find('{');finish=text.rfind('}')
    if begin<0 or finish<=begin:raise ValueError('model returned no complete JSON object')
    return json.loads(text[begin:finish+1])
   except Exception as exc:last=exc
@@ -150,7 +160,7 @@ def generate_text(topic,evidence):
  packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
  evidence_json=json.dumps(packet,ensure_ascii=False)
  plan_prompt=f'''Design one original Daily Yield master article as strict JSON. Topic: {json.dumps(topic,ensure_ascii=False)}. Evidence packet: {evidence_json}.
-Return a compact planning object only. Requirements: title 20-46 characters, punchy, no date; meta_description 110-158 characters; exactly 9 genuinely topic-specific section_plans with unique heading and focus; do not use universal template headings. Plan a background-first progression rather than opening with a summary or direct answer. Include entities, geography, temporal_coverage, 5-10 topic-specific FAQ questions, 8-20 glossary terms, exactly 3 distinct photorealistic landscape photo_prompts, and at least 3 evidence-appropriate visuals. Every visual needs type, title, caption, source number, after_section, labels and numeric values copied verbatim from the evidence. No invented values. JSON keys: title,meta_description,entities,geography,temporal_coverage,section_plans,faq_questions,glossary_terms,visuals,photo_prompts.'''
+Return a compact planning object only. Requirements: title 20-46 characters, punchy, no date; meta_description 110-158 characters; exactly 9 genuinely topic-specific section_plans with unique heading and focus; do not use universal template headings. Plan a background-first progression rather than opening with a summary or direct answer. Include entities, geography, temporal_coverage, 5-10 topic-specific FAQ questions, 8-20 glossary terms, exactly 3 distinct photorealistic landscape photo_prompts, and at least 3 evidence-appropriate visuals. The three photo_prompts must instead be precise placement-specific search briefs for real, openly licensed editorial photographs: opening context, the subject near 2,000 words, and the later section near 4,000 words. Every visual needs type, title, caption, source number, after_section, labels and numeric values copied verbatim from the evidence. No invented values. JSON keys: title,meta_description,entities,geography,temporal_coverage,section_plans,faq_questions,glossary_terms,visuals,photo_prompts.'''
  plan=model_json([{'role':'system','content':'You are a meticulous financial editor planning a deeply sourced, non-templated article. Accuracy and reader value override speed.'},{'role':'user','content':plan_prompt}],max_tokens=6000)
  section_plans=plan.pop('section_plans',[])
  if len(section_plans)!=9:raise RuntimeError('editorial planner did not return exactly nine topic-specific sections')
@@ -218,19 +228,9 @@ def build_package(topic,target):
  if any(re.sub(r'[^a-z0-9]+',' ',p.get('title','').casefold()).strip()==title_key for p in prior):raise RuntimeError('generated master title duplicates an existing package')
  new_heads={x.get('heading','').casefold().strip() for x in draft.get('sections',[])}
  if prior and max((len(new_heads&{x.get('heading','').casefold().strip() for x in p.get('sections',[])})/max(1,len(new_heads)) for p in prior),default=0)>.5:raise RuntimeError('generated heading structure repeats an existing master package')
- slug=re.sub(r'[^a-z0-9]+','-',draft['title'].casefold()).strip('-');folder=ASSETS/slug;folder.mkdir(parents=True,exist_ok=True)
- photos=[];prompts=draft.pop('photo_prompts')
- if len(prompts)!=3:raise RuntimeError('text model did not provide exactly three photo prompts')
- STAGE='image-generation'
- for i,prompt in enumerate(prompts,1):
-  raw=image_call('Photorealistic editorial finance photograph, horizontal landscape, topic-specific and realistic. '+prompt+' No text, no letters, no logos, no watermark, no charts.')
-  image=Image.open(io.BytesIO(raw)).convert('RGB');w,h=image.size;ratio=16/9
-  if w/h>ratio:new_w=int(h*ratio);image=image.crop(((w-new_w)//2,0,(w+new_w)//2,h))
-  else:new_h=int(w/ratio);image=image.crop((0,(h-new_h)//2,w,(h+new_h)//2))
-  image=image.resize((1600,900),Image.Resampling.LANCZOS);path=folder/f'photo-{i}.jpg';image.save(path,'JPEG',quality=88,optimize=True)
-  url=f'https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/{slug}/photo-{i}.jpg'
-  photos.append({'url':url,'alt':f"{draft['title']} — topic-specific editorial photograph {i}",'caption':f"Editorial illustration for {draft['title']}",'width':1600,'height':900})
- draft['photos']=photos;draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
+ slug=re.sub(r'[^a-z0-9]+','-',draft['title'].casefold()).strip('-');briefs=draft.pop('photo_prompts')
+ if len(briefs)!=3:raise RuntimeError('text model did not provide exactly three placement-specific photo briefs')
+ STAGE='licensed-photo-selection';draft['photos']=choose_photos(briefs,slug,topic.get('#',slug));draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
  STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
  STAGE='final-validation';validate(draft)
  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');return draft

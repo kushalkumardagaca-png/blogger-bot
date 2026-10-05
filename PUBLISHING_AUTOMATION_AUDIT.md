@@ -89,7 +89,7 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**
 - ✅ **Master articles include continuous gesture motion**
-- ✅ **Master uses three AI-generated 16:9 topic-specific photographs**
+- ✅ **Master uses three unique licensed 16:9 placement-specific photographs**
 - ✅ **News hero image is preflight-validated**
 - ✅ **Every News desk uses date-rotated fresh hero selection**
 - ✅ **Daily News heroes avoid cross-desk reuse**

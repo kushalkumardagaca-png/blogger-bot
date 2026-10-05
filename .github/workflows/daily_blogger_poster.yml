@@ -9,6 +9,8 @@ on:
       - 'master_article_v2.py'
       - 'reader_value_article.py'
       - 'publication_preflight.py'
+      - 'photo_selector.py'
+      - 'build_photo_registry.py'
       - '.github/workflows/daily_blogger_poster.yml'
   schedule:
     # Start each production run 45 minutes before its editorial target (IST, UTC+5:30).
@@ -27,9 +29,9 @@ concurrency:
 
 jobs:
   publish_next_article:
-    if: vars.MASTER_V2_ENABLED == 'true' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[run master publisher]'))
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run master publisher]')
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 180
     permissions:
       contents: write
       actions: write
@@ -44,12 +46,32 @@ jobs:
           python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install google-api-python-client google-auth pillow requests
+        run: pip install google-api-python-client google-auth pillow imagehash requests
+
+      - name: Build or confirm the authenticated global photo baseline
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python build_photo_registry.py
+
+      - name: Persist the global photo baseline before selection
+        run: |
+          git config user.name "Daily Yield Photo Registry"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add PHOTO_USAGE_REGISTRY.json
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Build authenticated global photo-use baseline [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
 
       - name: Research and prepare the strict Master Article V2 package
         id: preparation
         continue-on-error: true
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           MASTER_TEXT_API_URL: ${{ vars.MASTER_TEXT_API_URL }}
           MASTER_TEXT_API_KEY: ${{ secrets.MASTER_TEXT_API_KEY }}
           MASTER_TEXT_MODEL: ${{ vars.MASTER_TEXT_MODEL }}
@@ -81,7 +103,7 @@ jobs:
           set -euo pipefail
           git config user.name "Daily Yield Master Preparation"
           git config user.email "bot@dailyyield.blogspot.com"
-          git add assets/master master_packages
+          git add assets/master master_packages PHOTO_USAGE_REGISTRY.json
           if git diff --staged --quiet; then exit 0; fi
           git commit -m "Prepare researched Master Article V2 package [skip ci]"
           for attempt in {1..8}; do
