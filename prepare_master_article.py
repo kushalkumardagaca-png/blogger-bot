@@ -136,6 +136,18 @@ def paragraph_list(value):
     if key in item:walk(item[key]);break
  walk(value);return out
 
+def trim_paragraphs(value,limit=750):
+ out=[];count=0
+ for paragraph in paragraph_list(value):
+  kept=[]
+  for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
+   n=words(sentence)
+   if count+n>limit:break
+   kept.append(sentence);count+=n
+  if kept:out.append(' '.join(kept))
+  if count>=limit-35:break
+ return out
+
 def internal_links():
  return [
   {'title':'Daily Article','url':BLOG+'/p/article.html','relevance':'More original Daily Yield explainers.'},
@@ -224,6 +236,7 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   needed=700-summary_count;prompt=f'''Add approximately {needed} words in new summary paragraphs using only the completed article. Do not introduce facts or repeat existing summary wording. Return JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EXISTING SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';addition=paragraph_list(model_json([{'role':'system','content':'Expand a faithful after-article summary.'},{'role':'user','content':prompt}],max_tokens=2500).get('paragraphs'));summary.extend(addition)
  elif summary_count>800:
   prompt=f'''Rewrite this after-article summary in 650-750 words, preserving only supported points and adding no facts. Return JSON {{"paragraphs":[...]}}. SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';summary=paragraph_list(model_json([{'role':'system','content':'Condense faithfully.'},{'role':'user','content':prompt}],max_tokens=3000).get('paragraphs'))
+ if words(' '.join(summary))>800:summary=trim_paragraphs(summary,750)
  if not 600<=words(' '.join(summary))<=800:raise RuntimeError(f'summary failed normalization at {words(" ".join(summary))} words')
  support_prompt=f'''Create reader-specific support material for the article below, using only the evidence packet. Answer these FAQ questions: {json.dumps(plan.pop('faq_questions',[]),ensure_ascii=False)}. Define these glossary terms: {json.dumps(plan.pop('glossary_terms',[]),ensure_ascii=False)}. Return strict JSON with faq:[{{question,answer}}] and glossary:[{{term,definition}}]. At least 5 FAQs and 8 definitions. Keep answers accurate, concise and non-repetitive. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
  support=model_json([{'role':'system','content':'Create accurate topic-specific reader support, not generic boilerplate.'},{'role':'user','content':support_prompt}],max_tokens=5000)
