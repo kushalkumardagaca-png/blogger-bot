@@ -40,6 +40,9 @@ def test_master_v2_separates_core_and_summary_word_requirements():
     assert labels==['Cash Savings and Emergency Funds','Kushal K. Daga']
     assert '#08744f' not in body and '#073b2b' not in body
     assert 'dy2-answer' in body and 'grid-template-rows' in body and 'prefers-reduced-motion' in body
+    assert body.count('class="dy2-rail-group"')==2 and body.count('aria-hidden="true"')>=1
+    assert 'flex-flow:row nowrap!important' in body and 'pointerdown' in body and 'pointercancel' in body
+    assert "if(!drag)x-=" in body  # automatic right-to-left flow resumes after release
     with patch('publication_preflight.image_works',return_value=True):assert assert_publishable(title,body+'<!-- DY_SEO_META_START --><!-- DY_SEO_META_END --><!-- DY_CONTINUOUS_MOTION_START -->',labels)
 
 def test_master_v2_rejects_date_title_and_supporting_word_padding():

@@ -238,7 +238,7 @@ check('Security guard protects the shared live social creative engine',
 
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
-check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy-related-track' in mv2 and 'low_exposure_posts' in prep)
+check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy2-rail-track' in mv2 and 'pointerdown' in mv2 and 'low_exposure_posts' in prep)
 check('Master articles include continuous gesture motion','ensure_continuous_motion' in ap)
 check('Master uses three unique licensed 16:9 placement-specific photographs','choose_photos' in prep and "image.resize((1600,900)" in (ROOT/'photo_selector.py').read_text() and "len(photos)!=3" in mv2 and 'PHOTO_USAGE_REGISTRY.json' in (ROOT/'photo_selector.py').read_text())
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
