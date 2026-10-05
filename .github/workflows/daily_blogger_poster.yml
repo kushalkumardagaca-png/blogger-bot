@@ -94,6 +94,10 @@ jobs:
           git config user.email "bot@dailyyield.blogspot.com"
           git add MASTER_PREPARATION_REPORT.json
           git commit -m "Record Master V2 preparation failure [skip ci]"
+          # Generated/rejected package and photo changes must not block rebasing
+          # the diagnostic commit when another maintenance workflow moves main.
+          git restore .
+          git clean -fd assets/master master_packages
           git pull --rebase origin main
           git push origin HEAD:main
 
