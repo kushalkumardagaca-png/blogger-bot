@@ -9,7 +9,7 @@ from PIL import Image,ImageStat
 from io import BytesIO
 ROOT=Path(__file__).parent;REGISTRY=ROOT/'PHOTO_USAGE_REGISTRY.json';UA='DailyYieldPhotoEditor/1.0 (dailyyield.official@gmail.com)'
 ALLOW=('cc0','public domain','cc by 2.0','cc by 2.5','cc by 3.0','cc by 4.0')
-STOP={'the','and','with','from','into','that','this','photo','photograph','editorial','landscape','horizontal','realistic','without','showing','financial','finance'}
+STOP={'the','and','with','from','into','that','this','photo','photograph','editorial','landscape','horizontal','realistic','without','showing','financial','finance','opening','context','article','subject','mid','later','mechanism','evidence','implications','decisions','stop','maxing'}
 def clean(v):return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',str(v or '')))).strip()
 def load_registry():
  if REGISTRY.exists():return json.loads(REGISTRY.read_text())
@@ -17,9 +17,18 @@ def load_registry():
 def save_registry(r):REGISTRY.write_text(json.dumps(r,indent=2,ensure_ascii=False)+'\n')
 def terms(text):return [x for x in re.findall(r'[a-z0-9]{3,}',str(text).casefold()) if x not in STOP][:14]
 def commons_candidates(brief):
- q=' '.join(terms(brief)[:9]);params={'action':'query','format':'json','generator':'search','gsrnamespace':6,'gsrlimit':40,'gsrsearch':q,'prop':'imageinfo','iiprop':'url|size|extmetadata','iiurlwidth':1600}
- r=requests.get('https://commons.wikimedia.org/w/api.php',params=params,headers={'User-Agent':UA},timeout=60);r.raise_for_status();out=[]
- for p in r.json().get('query',{}).get('pages',{}).values():
+ tokens=terms(brief);queries=[' '.join(tokens[:3])]+tokens[:6]
+ text=str(brief).casefold();lexicons=((('retirement','pension','401','ira'),('retirement','older couple','financial planning','workplace meeting')),(('housing','mortgage','property','real estate'),('residential houses','home buying','apartment buildings')),(('career','salary','job','workplace'),('office workers','workplace meeting','professional working')),(('invest','stock','market','portfolio'),('stock exchange','financial district','business analysis')),(('saving','budget','debt','credit'),('household budgeting','savings','payment card')),(('tax','government','regulation'),('government office','tax forms','parliament building')))
+ for keys,extra in lexicons:
+  if any(k in text for k in keys):queries.extend(extra)
+ pages={}
+ for q in dict.fromkeys(x for x in queries if x.strip()):
+  params={'action':'query','format':'json','generator':'search','gsrnamespace':6,'gsrlimit':25,'gsrsearch':q,'prop':'imageinfo','iiprop':'url|size|extmetadata','iiurlwidth':1600}
+  try:
+   r=requests.get('https://commons.wikimedia.org/w/api.php',params=params,headers={'User-Agent':UA},timeout=60);r.raise_for_status();pages.update(r.json().get('query',{}).get('pages',{}))
+  except Exception:continue
+ out=[]
+ for p in pages.values():
   info=(p.get('imageinfo') or [{}])[0];m=info.get('extmetadata') or {};val=lambda k:clean((m.get(k) or {}).get('value',''))
   license_name=val('LicenseShortName') or val('UsageTerms');license_url=val('LicenseUrl');desc=val('ImageDescription');artist=val('Artist') or info.get('user','Unknown creator')
   combined=(license_name+' '+license_url).casefold()
@@ -45,9 +54,9 @@ def choose_photos(briefs,slug,article_key):
    text=(c['title']+' '+c['description']).casefold();overlap=len(bt&set(terms(text)));ratio=c['width']/c['height'];crop_penalty=abs(ratio-16/9)
    ranked.append((overlap*20+min(c['width'],5000)/500-crop_penalty*5,c))
   ranked.sort(key=lambda x:x[0],reverse=True);winner=None
-  for semantic,c in ranked[:18]:
+  for semantic,c in ranked[:12]:
    try:
-    rr=requests.get(c['download_url'],headers={'User-Agent':UA},timeout=90);rr.raise_for_status();raw=rr.content
+    rr=requests.get(c['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
     image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
     if w<1200 or h<650:continue
     gray=image.resize((256,144)).convert('L');contrast=ImageStat.Stat(gray).stddev[0]
