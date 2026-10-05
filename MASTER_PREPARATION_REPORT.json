@@ -1,6 +1,6 @@
 {
   "status": "FAIL",
   "stage": "text-generation",
-  "error_type": "JSONDecodeError",
-  "error": "Expecting value: line 1 column 1 (char 0)"
+  "error_type": "RuntimeError",
+  "error": "model endpoint returned non-JSON HTTP 200 (text/plain): 'OK\\r\\n'"
 }
