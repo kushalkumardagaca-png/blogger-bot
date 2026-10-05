@@ -8,7 +8,7 @@ checked against the permanent global reuse registry, cropped to a common 16:9
 landscape ratio, attributed, and persisted before Blogger publication. No public Daily Yield page is requested.
 """
 from __future__ import annotations
-import base64,csv,gzip,html,json,os,re,sys,urllib.parse,urllib.request
+import base64,csv,gzip,html,json,os,re,sys,time,urllib.parse,urllib.request
 from datetime import datetime
 from pathlib import Path
 from xml.etree import ElementTree
@@ -101,7 +101,7 @@ def model_json(messages,max_tokens=16000):
   system='\n'.join(x['content'] for x in messages if x.get('role')=='system');conversation=[x for x in messages if x.get('role')!='system']
   contents=[{'role':'model' if x.get('role')=='assistant' else 'user','parts':[{'text':x['content']}]} for x in conversation]
   endpoint=f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent'
-  for attempt in range(3):
+  for attempt in range(5):
    body={'contents':contents+([{'role':'user','parts':[{'text':'Return one complete strict JSON object only. Do not use markdown.'}]}] if attempt else []),'generationConfig':{'responseMimeType':'application/json','temperature':0.2,'maxOutputTokens':max_tokens}}
    if system:body['systemInstruction']={'parts':[{'text':system}]}
    try:
@@ -110,8 +110,10 @@ def model_json(messages,max_tokens=16000):
     payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts']);begin=text.find('{');finish=text.rfind('}')
     if begin<0 or finish<=begin:raise ValueError('Gemini returned no complete JSON object')
     return json.loads(text[begin:finish+1])
-   except Exception as exc:last=exc
-  raise RuntimeError(f'Gemini failed to return valid JSON after 3 attempts: {type(last).__name__}: {str(last)[:300]}')
+   except Exception as exc:
+    last=exc
+    if attempt<4:time.sleep(15*(attempt+1))
+  raise RuntimeError(f'Gemini failed to return valid JSON after 5 attempts: {type(last).__name__}: {str(last)[:300]}')
  endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
  for attempt in range(3):
   request_messages=list(messages)
