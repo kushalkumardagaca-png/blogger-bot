@@ -48,6 +48,8 @@ jobs:
         run: pip install google-api-python-client google-auth pillow requests
 
       - name: Research and prepare the strict Master Article V2 package
+        id: preparation
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MASTER_TEXT_MODEL: ${{ vars.MASTER_TEXT_MODEL }}
@@ -63,7 +65,18 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
         run: python prepare_master_article.py
 
+      - name: Persist redacted preparation failure for repair
+        if: steps.preparation.outcome == 'failure'
+        run: |
+          git config user.name "Daily Yield Master Preparation"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add MASTER_PREPARATION_REPORT.json
+          git commit -m "Record Master V2 preparation failure [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
       - name: Persist generated photographs and researched package before publication
+        if: steps.preparation.outcome == 'success'
         run: |
           set -euo pipefail
           git config user.name "Daily Yield Master Preparation"
@@ -79,6 +92,7 @@ jobs:
           exit 1
 
       - name: Run Daily Yield master-article publisher
+        if: steps.preparation.outcome == 'success'
         id: publisher
         continue-on-error: true
         env:
@@ -96,6 +110,7 @@ jobs:
           retention-days: 14
           if-no-files-found: ignore
           path: |
+            MASTER_PREPARATION_REPORT.json
             published_tracker.json
             social_events.json
             scheduled_ready/topic_*.html
@@ -137,8 +152,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run bing_url_automation.yml --ref main
 
-      - name: Fail after preserving publisher diagnostics
-        if: steps.publisher.outcome == 'failure'
+      - name: Fail after preserving preparation or publisher diagnostics
+        if: steps.preparation.outcome == 'failure' || steps.publisher.outcome == 'failure'
         run: |
-          echo "Master publisher failed before a confirmed tracked publication."
+          echo "Master V2 preparation or publication failed closed before a tracked publication."
           exit 1

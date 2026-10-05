@@ -171,4 +171,10 @@ def prepare():
  draft['photos']=photos;draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
  draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts();validate(draft)
  PACKAGES.mkdir(exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');print(target)
-if __name__=='__main__':prepare()
+if __name__=='__main__':
+ try:
+  prepare()
+  Path('MASTER_PREPARATION_REPORT.json').write_text(json.dumps({'status':'PASS'},indent=2)+'\n')
+ except Exception as exc:
+  Path('MASTER_PREPARATION_REPORT.json').write_text(json.dumps({'status':'FAIL','error_type':type(exc).__name__,'error':str(exc)[:1000]},indent=2)+'\n')
+  raise
