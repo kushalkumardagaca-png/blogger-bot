@@ -103,7 +103,7 @@ jobs:
           set -euo pipefail
           git config user.name "Daily Yield Master Preparation"
           git config user.email "bot@dailyyield.blogspot.com"
-          git add assets/master master_packages PHOTO_USAGE_REGISTRY.json
+          git add assets/master master_packages PHOTO_USAGE_REGISTRY.json MASTER_PREPARATION_REPORT.json
           if git diff --staged --quiet; then exit 0; fi
           git commit -m "Prepare researched Master Article V2 package [skip ci]"
           for attempt in {1..8}; do
