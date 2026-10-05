@@ -2,5 +2,5 @@
   "status": "FAIL",
   "stage": "text-generation",
   "error_type": "RuntimeError",
-  "error": "data visual repair failed: visual attribution metadata is incomplete"
+  "error": "data visual repair failed: malformed visual table rows"
 }
