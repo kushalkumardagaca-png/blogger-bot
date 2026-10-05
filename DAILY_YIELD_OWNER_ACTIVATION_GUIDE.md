@@ -73,7 +73,7 @@ Analytics must remain optional. A reader choosing **Essential only** must still 
 10. Paste the Bing key as the value and save.
 11. Never paste the key into chat, a repository file, issue, commit or screenshot.
 
-After the secret exists, the 12-times-daily health workflow will submit the two Blogger sitemaps through the implemented Bing integration, with duplicate daily submissions suppressed.
+After the secret exists, the dedicated authenticated search-reach workflow can submit the two Blogger sitemaps through the implemented Bing integration, with duplicate daily submissions suppressed.
 
 ## 4. Request priority indexing in Google Search Console — only for important new/changed URLs
 
@@ -135,7 +135,7 @@ The following are already deployed and automated:
 - Exact Blogger URL recovery.
 - Publication preflight and H1/alt enforcement.
 - Search Console/sitemap monitoring.
-- Twelve-times-daily zero-view watchdog.
+- Security Guard integrity monitoring plus static zero-synthetic-view policy audits.
 - Security Guard and integrity baseline.
 - Facebook, Bluesky, Tumblr and Mastodon coordinated active-30 router.
 - Fifteen-minute article social delay target.

@@ -29,7 +29,7 @@ BACKUP = ROOT / "SECURITY_BACKUP.json.gz"
 
 CRITICAL_FILES = [
     "auto_blogger_publisher.py", "news_pipeline.py", "facebook_publisher.py",
-    "social_creative.py", "zero_view_watchdog.py", "publication_preflight.py", "page_family.py",
+    "social_creative.py", "publication_preflight.py", "page_family.py",
     "brand_identity.py", "social_identity.py", "bluesky_publisher.py",
     "tumblr_publisher.py", "mastodon_publisher.py", "tumblr_oauth_bootstrap.py",
     "social_rotation.py", "dispatch_social_events.py", "persist_social_state.sh",

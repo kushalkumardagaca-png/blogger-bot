@@ -37,19 +37,6 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python bing_seo_repair.py
 
-      - name: Run immediate full-site zero-view verification
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
-          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
-          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
-          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
-          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
-          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
-        run: python zero_view_watchdog.py
-
       - name: Approve the intentional authenticated content maintenance
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
@@ -71,8 +58,6 @@ jobs:
             BING_SEO_REPAIR_REPORT.md
             SECURITY_STATUS.json
             SECURITY_STATUS.md
-            ZERO_VIEW_WATCHDOG.json
-            ZERO_VIEW_WATCHDOG.md
 
       - name: Persist repair evidence and approved security state
         if: success()
@@ -82,15 +67,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p /tmp/dy-bing-state
           cp BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md \
-             SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md \
-             ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md /tmp/dy-bing-state/
+             SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md /tmp/dy-bing-state/
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/dy-bing-state/* .
             git add BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md \
-                    SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md \
-                    ZERO_VIEW_WATCHDOG.json ZERO_VIEW_WATCHDOG.md
+                    SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md
             if git diff --staged --quiet; then
               echo "No repair-state change."
               exit 0

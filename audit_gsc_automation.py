@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import json
-R=Path(__file__).parent;setup=(R/'gsc_rebuild.py').read_text();health=(R/'zero_view_watchdog.py').read_text();shim=(R/'health_monitor/health_monitor.py').read_text();workflow=(R/'.github/workflows/gsc_rebuild.yml').read_text();checks=[]
-def ck(name,ok):checks.append({'name':name,'status':'PASS' if ok else 'FAIL'})
+R=Path(__file__).parent
+setup=(R/'gsc_rebuild.py').read_text()
+workflow=(R/'.github/workflows/gsc_rebuild.yml').read_text()
+all_workflows='\n'.join(p.read_text() for p in (R/'.github/workflows').glob('*.yml'))
+checks=[]
+def ck(name,ok): checks.append({'name':name,'status':'PASS' if ok else 'FAIL'})
 ck('Exact URL-prefix property required',"SITE=BLOG+'/'" in setup and 'if not exact' in setup)
 ck('Current Post sitemap submitted','/sitemap.xml' in setup)
 ck('Current Page sitemap submitted','/sitemap-pages.xml' in setup)
@@ -21,8 +25,11 @@ ck('Fresh baseline file generated','GSC_BASELINE.json' in setup)
 ck('Reports generated','GSC_REBUILD_REPORT.json' in setup and 'GSC_REBUILD_REPORT.md' in setup)
 ck('Workflow uses secret without exposing it','secrets.GSC_REFRESH_TOKEN' in workflow and 'GSC_REFRESH_TOKEN' in workflow)
 ck('Dedicated browser OAuth client is supported','GSC_CLIENT_ID' in workflow and 'GSC_CLIENT_SECRET' in workflow and "os.environ.get('GSC_CLIENT_ID')" in setup)
-ck('Health monitor delegates to the zero-view watchdog','from zero_view_watchdog import main' in shim)
-ck('Health monitor inventories Pages and Posts','for resource in ("pages", "posts")' in health)
-ck('Health monitor maintains both sitemaps','sitemap-pages.xml' in health and 'sitemap.xml' in health)
-ck('Health monitor parses current inspection response','indexStatusResult' in health and 'coverageState' in health)
-out={'pass':sum(x['status']=='PASS' for x in checks),'fail':sum(x['status']=='FAIL' for x in checks),'checks':checks};(R/'GSC_AUTOMATION_AUDIT.json').write_text(json.dumps(out,indent=2));(R/'GSC_AUTOMATION_AUDIT.md').write_text('# Search Console Automation Audit\n\n'+f"**{out['pass']} PASS · {out['fail']} FAIL**\n\n"+'\n'.join(f"- {'✅' if x['status']=='PASS' else '❌'} {x['name']}" for x in checks)+'\n');print(json.dumps({'pass':out['pass'],'fail':out['fail']}));raise SystemExit(1 if out['fail'] else 0)
+ck('Dedicated Search Console workflow remains active','python gsc_rebuild.py' in workflow)
+ck('Removed watchdog is not an indirect GSC dependency','zero_view_watchdog' not in all_workflows and not (R/'.github/workflows/health_monitor.yml').exists())
+ck('Search Console automation uses authenticated Google APIs','searchconsole.googleapis.com' in setup and 'www.googleapis.com/webmasters/v3/' in setup)
+out={'pass':sum(x['status']=='PASS' for x in checks),'fail':sum(x['status']=='FAIL' for x in checks),'checks':checks}
+(R/'GSC_AUTOMATION_AUDIT.json').write_text(json.dumps(out,indent=2)+'\n')
+(R/'GSC_AUTOMATION_AUDIT.md').write_text('# Search Console Automation Audit\n\n'+f"**{out['pass']} PASS · {out['fail']} FAIL**\n\n"+'\n'.join(f"- {'✅' if x['status']=='PASS' else '❌'} {x['name']}" for x in checks)+'\n')
+print(json.dumps({'pass':out['pass'],'fail':out['fail']}))
+raise SystemExit(1 if out['fail'] else 0)

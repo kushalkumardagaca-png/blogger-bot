@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 189,
+  "pass": 186,
   "fail": 0,
   "checks": [
     {
@@ -685,15 +685,15 @@
       "status": "PASS"
     },
     {
-      "name": "health workflow runs experience audit",
+      "name": "malfunctioning scheduled watchdog is removed",
       "status": "PASS"
     },
     {
-      "name": "health workflow runs reach readiness",
+      "name": "retained workflows do not invoke removed watchdog",
       "status": "PASS"
     },
     {
-      "name": "health evidence rejects stale concurrent watchdog reports",
+      "name": "Security Guard remains automated",
       "status": "PASS"
     },
     {
@@ -737,18 +737,6 @@
       "status": "PASS"
     },
     {
-      "name": "watchdog detects missing or empty image alts",
-      "status": "PASS"
-    },
-    {
-      "name": "watchdog detects external redirect chains",
-      "status": "PASS"
-    },
-    {
-      "name": "watchdog confirms hard external failures with a second request",
-      "status": "PASS"
-    },
-    {
       "name": "Page-family repair adds only missing alt attributes",
       "status": "PASS"
     },
@@ -757,7 +745,7 @@
       "status": "PASS"
     },
     {
-      "name": "Page repair performs immediate zero-view verification",
+      "name": "Page workflow contains no synthetic-view verification",
       "status": "PASS"
     }
   ]

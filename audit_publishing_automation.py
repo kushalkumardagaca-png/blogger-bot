@@ -60,7 +60,7 @@ social=(ROOT/'social_identity.py').read_text()
 check('Canonical public contact email is the Daily Yield brand inbox','dailyyield.official@gmail.com' in social and 'PUBLIC_EMAIL' in social)
 
 # Facebook organic publishing invariants. These remain isolated from Blogger and
-# News publishing but are checked by the same repository watchdog.
+# News publishing and remain covered by authenticated/static repository audits.
 fp_path=ROOT/'facebook_publisher.py'; fw_path=ROOT/'.github/workflows/facebook_publisher.yml'
 fp=fp_path.read_text() if fp_path.exists() else ''; fw=fw_path.read_text() if fw_path.exists() else ''
 facebook_expected=[]

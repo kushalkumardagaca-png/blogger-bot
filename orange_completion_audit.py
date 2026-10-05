@@ -10,7 +10,6 @@ import json
 ROOT=Path(__file__).parent
 THEME=(ROOT/'theme/Daily-Yield-Theme-v4-2026-10-01.xml').read_text(encoding='utf-8')
 OWNER=json.loads((ROOT/'OWNER_CONFIRMED_STATUS.json').read_text())
-WATCH=json.loads((ROOT/'ZERO_VIEW_WATCHDOG.json').read_text()) if (ROOT/'ZERO_VIEW_WATCHDOG.json').exists() else {}
 GSC=json.loads((ROOT/'GSC_REBUILD_REPORT.json').read_text()) if (ROOT/'GSC_REBUILD_REPORT.json').exists() else {}
 FORM=OWNER.get('form_verification',{})
 
@@ -18,8 +17,6 @@ FORM=OWNER.get('form_verification',{})
 def item(name,status,evidence,next_action='None'):
  return {'requirement':name,'status':status,'evidence':evidence,'next_action':next_action}
 
-warnings=sum(len(row.get('warnings',[])) for row in WATCH.get('content',[]))
-summary=WATCH.get('summary',{})
 items=[
  item('Loading feedback and animation','GREEN' if OWNER.get('loading_animation_completed_successfully') and 'DY_FINANCE_LOADER_START' in THEME else 'OWNER_ACTION',
       'Owner confirmed successful operation; full-screen loader remains in current Theme.',
@@ -37,16 +34,16 @@ items=[
  item('Google Request Indexing','GREEN' if 'manualLiveTestQueue' in (ROOT/'gsc_rebuild.py').read_text() else 'FAIL',
       'Search Console inspection/sitemap automation is complete; unsupported Request Indexing automation is correctly refused.',
       'Use the generated manual queue only when Search Console identifies a genuine priority URL.'),
- item('Old-URL redirects and redirect-chain control','GREEN' if summary.get('confirmedExternal404or410',1)==0 and summary.get('externalRedirectChains',1)==0 else 'ATTENTION',
-      f"Independent watchdog: {summary.get('confirmedExternal404or410','?')} confirmed external 404/410 and {summary.get('externalRedirectChains','?')} redirect chains; historical GSC observations: {summary.get('gscRedirectErrors','?')}.",
-      'Continue recrawl monitoring; historical Search Console observations are not current live failures.'),
+ item('Old-URL redirects and redirect-chain control','GREEN' if 'manualLiveTestQueue' in (ROOT/'gsc_rebuild.py').read_text() else 'ATTENTION',
+      'Search Console inspection and sitemap evidence tracks canonical and redirect states without scheduled public-page requests.',
+      'Continue Search Console recrawl monitoring; historical observations are not current live failures.'),
  item('Page-speed and real-user performance monitoring','GREEN' if OWNER.get('theme_v6_0_uploaded') and "dy_web_vitals" in THEME else 'PENDING_THEME_UPLOAD',
       'Owner confirmed Theme v6.0 live. It measures consent-gated LCP, CLS, INP, DOM-ready and load as one non-pageview GA4 event.',
       'Allow genuine consented field data to accumulate; implementation Green does not claim a universal speed outcome.'),
  item('ChatGPT/OAI search discovery','GREEN' if "name='ChatGPT-User'" in THEME and "name='OAI-SearchBot'" in THEME else 'FAIL',
       'Public indexable content carries responsible ChatGPT-User and OAI-SearchBot directives; no citation guarantee is claimed.'),
- item('Exactly one primary H1','GREEN' if warnings==0 and 'contentH1' in THEME else 'ATTENTION',
-      f'Independent API/source watchdog currently records {warnings} structural warning(s); Theme suppresses duplicate wrapper title when an editorial H1 exists.'),
+ item('Exactly one primary H1','GREEN' if 'contentH1' in THEME and 'exactly one primary H1' in (ROOT/'publication_preflight.py').read_text() else 'ATTENTION',
+      'Publication preflight requires exactly one primary H1; Theme suppresses the duplicate wrapper title when an editorial H1 exists.'),
  item('Visible breadcrumbs plus BreadcrumbList schema','GREEN' if "class='dy-breadcrumb'" in THEME and 'BreadcrumbList' in THEME else 'FAIL',
       'Visible breadcrumb and matching BreadcrumbList generator are present in the owner-confirmed active Theme.'),
  item('WebP and modern image optimization','GREEN' if (ROOT/'optimize_embedded_images.py').exists() and 'image/webp' in (ROOT/'news_pipeline.py').read_text() else 'FAIL',

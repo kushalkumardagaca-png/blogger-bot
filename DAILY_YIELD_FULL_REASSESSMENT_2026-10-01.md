@@ -1,4 +1,6 @@
 # Daily Yield — Full Website and Automation Reassessment
+> **Historical snapshot:** This 1 October 2026 reassessment records the controls that existed on that date. The malfunctioning scheduled watchdog described below was retired on 5 October 2026; Security Guard and zero-synthetic-view policy audits remain active.
+
 
 **Date:** 1 October 2026  
 **Assessment mode:** repository inspection, authenticated Blogger/API evidence and zero-view reports; no synthetic Daily Yield pageviews.

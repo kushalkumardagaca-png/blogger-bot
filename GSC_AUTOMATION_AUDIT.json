@@ -1,5 +1,5 @@
 {
-  "pass": 22,
+  "pass": 21,
   "fail": 0,
   "checks": [
     {
@@ -75,19 +75,15 @@
       "status": "PASS"
     },
     {
-      "name": "Health monitor delegates to the zero-view watchdog",
+      "name": "Dedicated Search Console workflow remains active",
       "status": "PASS"
     },
     {
-      "name": "Health monitor inventories Pages and Posts",
+      "name": "Removed watchdog is not an indirect GSC dependency",
       "status": "PASS"
     },
     {
-      "name": "Health monitor maintains both sitemaps",
-      "status": "PASS"
-    },
-    {
-      "name": "Health monitor parses current inspection response",
+      "name": "Search Console automation uses authenticated Google APIs",
       "status": "PASS"
     }
   ]

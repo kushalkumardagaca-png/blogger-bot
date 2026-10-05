@@ -1,19 +1,19 @@
 {
-  "checkedAt": "2026-10-05T02:25:45.734972+00:00",
+  "checkedAt": "2026-10-05T03:27:52.799056+00:00",
   "mode": "ZERO_SYNTHETIC_VIEWS",
   "syntheticViews": 0,
   "site": "https://dailyyield.blogspot.com/",
-  "bingConfigured": true,
+  "bingConfigured": false,
   "sitemaps": [
     {
       "sitemap": "https://dailyyield.blogspot.com/sitemap.xml",
-      "status": "ALREADY_SUBMITTED",
-      "detail": "Daily duplicate submission suppressed."
+      "status": "READY",
+      "detail": "Set repository secret BING_WEBMASTER_API_KEY after site ownership is verified in Bing Webmaster Tools."
     },
     {
       "sitemap": "https://dailyyield.blogspot.com/sitemap-pages.xml",
-      "status": "ALREADY_SUBMITTED",
-      "detail": "Daily duplicate submission suppressed."
+      "status": "READY",
+      "detail": "Set repository secret BING_WEBMASTER_API_KEY after site ownership is verified in Bing Webmaster Tools."
     }
   ],
   "crawlerPolicy": {

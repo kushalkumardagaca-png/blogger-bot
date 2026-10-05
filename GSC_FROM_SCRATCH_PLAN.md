@@ -17,7 +17,7 @@ Google does not provide a control or API to erase historical Search Console perf
 
 ## Current authorization status
 
-The repository currently has no `GSC_REFRESH_TOKEN`. Search Console automation has therefore never run; watchdog reports correctly show `SKIP`.
+The repository currently has no `GSC_REFRESH_TOKEN`. Search Console automation therefore remains unavailable until owner authorization is completed.
 
 One owner authorization is required. For the browser-only OAuth Playground route:
 
@@ -62,7 +62,7 @@ A successful live test is not proof of indexing; it only confirms that Google’
 
 ## Continuing automation
 
-After authorization, the six-times-daily health watchdog will:
+After authorization, the dedicated authenticated Search Console workflow will:
 
 - Maintain both Blogger sitemaps.
 - Inventory the homepage plus every current Page and Post.

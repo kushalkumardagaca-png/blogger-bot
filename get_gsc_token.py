@@ -24,9 +24,9 @@ Then paste that code into GitHub as a secret (2 more minutes):
   4. Secret: paste the code
   5. Click "Add secret"
 
-DONE. Within a few hours the health watchdog notices it automatically and
-starts: sitemap management, Google index tracking, and search metrics in
-every health report. No other action ever needed.
+DONE. The dedicated Search Console workflow can then perform authenticated
+sitemap management, Google index tracking, and search-metrics reporting
+without requesting public Daily Yield pages.
 """
 from google_auth_oauthlib.flow import InstalledAppFlow
 
@@ -62,7 +62,7 @@ def main():
     print("=" * 65)
     print("GitHub -> blogger-bot repo -> Settings -> Secrets and variables ->")
     print("Actions -> New repository secret -> Name: GSC_REFRESH_TOKEN")
-    print("The cloud watchdog will pick it up automatically within hours.")
+    print("The dedicated Search Console workflow can now use it securely.")
 
 
 if __name__ == "__main__":

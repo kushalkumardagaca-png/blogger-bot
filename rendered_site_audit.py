@@ -8,7 +8,7 @@ report = {
     "failures": 0,
     "rendered_checks": 0,
     "synthetic_views": 0,
-    "reason": "Opening public Daily Yield pages would create synthetic pageviews. Use zero_view_watchdog.py for API/source checks.",
+    "reason": "Opening public Daily Yield pages would create synthetic pageviews. Use authenticated API and static source audits instead.",
 }
 Path("RENDERED_SITE_AUDIT.json").write_text(json.dumps(report, indent=2))
 print(json.dumps(report, indent=2))

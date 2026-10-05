@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **189**
+- Pass: **186**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -174,9 +174,9 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no Google Business Profile
-- ✅ health workflow runs experience audit
-- ✅ health workflow runs reach readiness
-- ✅ health evidence rejects stale concurrent watchdog reports
+- ✅ malfunctioning scheduled watchdog is removed
+- ✅ retained workflows do not invoke removed watchdog
+- ✅ Security Guard remains automated
 - ✅ Bing sitemap integration implemented
 - ✅ Bing SubmitFeed uses required JSON body
 - ✅ future related-article photographs have descriptive alt text
@@ -187,9 +187,6 @@
 - ✅ zero-view policy remains enforced
 - ✅ future publications require one primary H1
 - ✅ future publications require descriptive image alts
-- ✅ watchdog detects missing or empty image alts
-- ✅ watchdog detects external redirect chains
-- ✅ watchdog confirms hard external failures with a second request
 - ✅ Page-family repair adds only missing alt attributes
 - ✅ Page repair approves intentional Blogger baseline change
-- ✅ Page repair performs immediate zero-view verification
+- ✅ Page workflow contains no synthetic-view verification
