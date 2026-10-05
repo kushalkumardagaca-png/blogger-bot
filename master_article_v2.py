@@ -69,7 +69,11 @@ def photo(p,index):
     return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(p['alt'])}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{credit}</figcaption></figure>'''
 
 def visual(v,sources,index):
-    title=esc(v.get("title",f"Data view {index}"));caption=esc(v.get("caption",''));source_id=int(v.get("source",1) or 1);src=sources[min(max(source_id-1,0),len(sources)-1)]
+    title=esc(v.get("title",f"Data view {index}"));caption=esc(v.get("caption",''));raw_source=v.get("source",1)
+    try: source_id=int(raw_source or 1)
+    except (TypeError,ValueError):
+        key=str(raw_source).casefold();source_id=next((i for i,x in enumerate(sources,1) if key in (str(x.get('title',''))+' '+str(x.get('name',''))).casefold()),1)
+    src=sources[min(max(source_id-1,0),len(sources)-1)]
     kind=str(v.get("type","table")).casefold();labels=[str(x) for x in v.get("labels",[])];values=[float(x) for x in v.get("values",[])]
     if not labels or len(labels)!=len(values):raise ValueError(f"data visual {index} has mismatched labels and values")
     palette=("#9c4522","#08744f","#d69a5c","#315b7d","#7b5d92","#6e7b47","#c66b78","#4f7772")
@@ -111,12 +115,18 @@ def render(package,topic,pub_date,pub_time,canonical_url=None,modified_date=None
     meta=str(package.get("meta_description","")).strip()[:158]
     if not 110<=len(meta)<=158: raise ValueError("MASTER V2 REJECTED — unique meta description must be 110–158 characters")
     toc="".join(f'<li><a href="#dy2-{i}">{esc(s["heading"])}</a></li>' for i,s in enumerate(package["sections"],1))
-    visuals=list(package["visuals"]);section_html=[];cumulative=0;second=False;third=False
+    heading_positions={str(s.get('heading','')).casefold().strip():i for i,s in enumerate(package['sections'],1)};visuals=[]
+    for n,item in enumerate(package['visuals'],1):
+        item=dict(item);raw=item.get('after_section',min(len(package['sections']),n+2))
+        try: position=int(raw)
+        except (TypeError,ValueError): position=heading_positions.get(str(raw).casefold().strip(),min(len(package['sections']),n+2))
+        item['_after_section']=max(1,min(len(package['sections']),position));visuals.append(item)
+    visuals.sort(key=lambda x:x['_after_section']);section_html=[];cumulative=0;second=False;third=False
     for i,s in enumerate(package["sections"],1):
         paragraphs="".join(f'<p>{linked_text(p,sources,internals)}</p>' for p in s["paragraphs"])
         cumulative+=words(" ".join(s["paragraphs"]))
         extra=""
-        while visuals and int(visuals[0].get("after_section",i))<=i: extra+=visual(visuals.pop(0),sources,len(package["visuals"])-len(visuals))
+        while visuals and visuals[0]['_after_section']<=i: extra+=visual(visuals.pop(0),sources,len(package["visuals"])-len(visuals))
         if cumulative>=2000 and not second: extra+=photo(package["photos"][1],2);second=True
         if cumulative>=4000 and not third: extra+=photo(package["photos"][2],3);third=True
         section_html.append(f'<section id="dy2-{i}"><h2>{esc(s["heading"])}</h2>{paragraphs}{extra}</section>')
