@@ -211,7 +211,8 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   for _ in range(3):
    needed=4050-core_count;expand_prompt=f'''Add approximately {needed} words as 2-6 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
    candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs'));added=words(' '.join(candidate))
-   if added>=80 and core_count+added<=4200:sections[-1]['paragraphs'].extend(candidate);core_count+=added
+   minimum_useful=max(20,min(80,needed-20))
+   if added>=minimum_useful and core_count+added<=4200:sections[-1]['paragraphs'].extend(candidate);core_count+=added
    if core_count>=4000:break
   if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
  elif core_count>4200:
