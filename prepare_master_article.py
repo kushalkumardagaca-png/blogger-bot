@@ -291,22 +291,31 @@ def build_package(topic,target):
   package=json.loads(target.read_text());validate(package);return package
  STAGE='source-discovery';evidence=discover(topic)
  STAGE='text-generation';draft=generate_text(topic,evidence)
- for chart in draft.get('visuals',[]):
-  if not chart.get('values') and chart.get('numeric_values'):chart['values']=chart.pop('numeric_values')
-  if not chart.get('source') and chart.get('source_number'):chart['source']=chart.pop('source_number')
-  if str(chart.get('type','')).casefold() in ('chart','metrics','graph'):chart['type']='bar'
  evidence_numbers=set()
  for match in re.findall(r'(?<![A-Za-z])[-+]?\d[\d,]*(?:\.\d+)?', ' '.join(x['text'] for x in evidence)):
   try:evidence_numbers.add(round(float(match.replace(',','')),8))
   except ValueError:pass
- for chart in draft.get('visuals',[]):
-  normalized=[]
-  for value in chart.get('values',[]):
-   try:number=round(_visual_number(value),8)
-   except (TypeError,ValueError):raise RuntimeError('data visual contains a non-numeric value')
-   if number not in evidence_numbers:raise RuntimeError(f'data visual value {value} is absent from the retrieved evidence')
-   normalized.append(number)
-  chart['values']=normalized
+ visual_error='data visuals are incomplete'
+ for visual_attempt in range(3):
+  try:
+   visuals=draft.get('visuals',[])
+   if len(visuals)<3:raise ValueError('fewer than three data visuals')
+   for chart in visuals:
+    if not chart.get('values') and chart.get('numeric_values'):chart['values']=chart.pop('numeric_values')
+    if not chart.get('source') and chart.get('source_number'):chart['source']=chart.pop('source_number')
+    if str(chart.get('type','')).casefold() in ('chart','metrics','graph'):chart['type']='bar'
+    if len(chart.get('labels',[]))!=len(chart.get('values',[])):raise ValueError('mismatched visual arrays')
+    normalized=[]
+    for value in chart.get('values',[]):
+     number=round(_visual_number(value),8)
+     if number not in evidence_numbers:raise ValueError(f'value {value} is absent from the retrieved evidence')
+     normalized.append(number)
+    chart['values']=normalized
+   visual_error='';break
+  except (TypeError,ValueError) as exc:visual_error=str(exc)
+  repair_prompt='''Replace all data visuals with at least three accurate, evidence-appropriate representations. Every value must be copied verbatim from the evidence, labels and values must have equal nonzero length, source must be the matching evidence number, and after_section must name an article section. Use only table, bar, pie or line types. Return strict JSON {"visuals":[...]}. ARTICLE SECTIONS: '''+json.dumps([x.get('heading') for x in draft.get('sections',[])],ensure_ascii=False)+' EVIDENCE: '+json.dumps(evidence,ensure_ascii=False)
+  draft['visuals']=model_json([{'role':'system','content':'Repair data visuals without inventing or transforming any number.'},{'role':'user','content':repair_prompt}],max_tokens=2500).get('visuals',[])
+ if visual_error:raise RuntimeError('data visual repair failed: '+visual_error)
  STAGE='evidence-verification';verify_evidence(draft,evidence)
  prior=[]
  for path in PACKAGES.rglob('*.json'):
