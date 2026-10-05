@@ -306,7 +306,20 @@ def build_package(topic,target):
     if not chart.get('values') and chart.get('numeric_values'):chart['values']=chart.pop('numeric_values')
     if not chart.get('source') and chart.get('source_number'):chart['source']=chart.pop('source_number')
     if str(chart.get('type','')).casefold() in ('chart','metrics','graph'):chart['type']='bar'
-    if not chart.get('title') or not chart.get('caption') or not (chart.get('source') or chart.get('source_number')):raise ValueError('visual attribution metadata is incomplete')
+    raw_source=chart.get('source') or chart.get('source_number')
+    try:source_number=int(raw_source)
+    except (TypeError,ValueError):source_number=0
+    if not 1<=source_number<=len(evidence):
+     clue=(str(raw_source or '')+' '+str(chart.get('title',''))+' '+json.dumps(chart.get('data') or chart.get('labels') or [],ensure_ascii=False)).casefold()
+     clue_tokens=set(re.findall(r'[a-z0-9]{4,}',clue))
+     scores=[]
+     for i,item in enumerate(evidence,1):
+      haystack=(str(item.get('title',''))+' '+str(item.get('url',''))+' '+str(item.get('text',''))).casefold()
+      scores.append((len(clue_tokens & set(re.findall(r'[a-z0-9]{4,}',haystack))),i))
+     source_number=max(scores)[1] if scores else 1
+    chart['source']=source_number;chart.pop('source_number',None)
+    if not chart.get('caption'):chart['caption']=f"Evidence categories reported by {evidence[source_number-1].get('title') or evidence[source_number-1].get('name') or 'the cited source'}."
+    if not chart.get('title'):raise ValueError('visual title is missing')
     rows=chart.get('data') or []
     if rows:
      chart['type']='table'
