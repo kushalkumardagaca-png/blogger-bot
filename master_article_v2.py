@@ -8,6 +8,7 @@ from social_identity import SOCIAL_PROFILES
 
 BLOG="https://dailyyield.blogspot.com"
 AUTHOR="Kushal K. Daga"
+MASTER_V2_VERSION="2.0"
 CORE_MIN,CORE_MAX=3800,4300
 SUMMARY_MIN,SUMMARY_MAX=600,800
 
