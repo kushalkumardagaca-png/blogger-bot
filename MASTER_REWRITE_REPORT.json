@@ -1,7 +1,7 @@
 {
-  "status": "PACKAGE_READY",
-  "at": "2026-10-05T13:08:06.298810+00:00",
-  "post_id": "76036352328662163",
-  "package": "master_packages/rewrites/post_76036352328662163.json",
-  "title": "Stop Maxing Your 401(k)"
+  "status": "FAIL",
+  "at": "2026-10-05T13:08:08.879753+00:00",
+  "phase": "apply-pending",
+  "error_type": "ValueError",
+  "error": "invalid literal for int() with base 10: 'The Employer Match Optimization Threshold'"
 }
