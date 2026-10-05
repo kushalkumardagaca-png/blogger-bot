@@ -105,7 +105,9 @@ def model_json(messages,max_tokens=16000):
    body={'contents':contents+([{'role':'user','parts':[{'text':'Return one complete strict JSON object only. Do not use markdown.'}]}] if attempt else []),'generationConfig':{'responseMimeType':'application/json','temperature':0.2,'maxOutputTokens':max_tokens}}
    if system:body['systemInstruction']={'parts':[{'text':system}]}
    try:
-    r=requests.post(endpoint,headers={'x-goog-api-key':key,'Content-Type':'application/json'},json=body,timeout=600);r.raise_for_status();payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts']);begin=text.find('{');finish=text.rfind('}')
+    r=requests.post(endpoint,headers={'x-goog-api-key':key,'Content-Type':'application/json'},json=body,timeout=600)
+    if not r.ok:raise RuntimeError(f"Gemini HTTP {r.status_code}: {r.text[:500]}")
+    payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts']);begin=text.find('{');finish=text.rfind('}')
     if begin<0 or finish<=begin:raise ValueError('Gemini returned no complete JSON object')
     return json.loads(text[begin:finish+1])
    except Exception as exc:last=exc
