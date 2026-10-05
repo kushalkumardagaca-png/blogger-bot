@@ -6,7 +6,7 @@
   "blocked": [
     {
       "prospect_id": "ft-opinion",
-      "reason": "outside recipient local business-time window"
+      "reason": "prior interaction blocks a new initial message"
     },
     {
       "prospect_id": "money-newsroom",
@@ -14,7 +14,7 @@
     },
     {
       "prospect_id": "business-standard-editorial",
-      "reason": "classification=restricted/human_only"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "financial-planning-voices",
@@ -30,11 +30,11 @@
     },
     {
       "prospect_id": "outlook-letters",
-      "reason": "classification=restricted/human_only"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "finance-india",
-      "reason": "classification=excluded/excluded"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "the-financial-diet",
