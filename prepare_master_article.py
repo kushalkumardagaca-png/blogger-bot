@@ -172,7 +172,7 @@ def low_exposure_posts():
  access_response=requests.post('https://oauth2.googleapis.com/token',data={'client_id':cid,'client_secret':secret,'refresh_token':refresh,'grant_type':'refresh_token'},timeout=30);access_response.raise_for_status();access=access_response.json()['access_token']
  from datetime import date,timedelta
  body={'startDate':str(date.today()-timedelta(days=90)),'endDate':str(date.today()-timedelta(days=1)),'dimensions':['page'],'rowLimit':25000}
- site=urllib.parse.quote(BLOG+'/',safe='')
+ site=urllib.parse.quote(os.environ.get('GSC_SITE_PROPERTY','sc-domain:dailyyield.blogspot.com'),safe='')
  rr=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60);rr.raise_for_status()
  scores={row['keys'][0].rstrip('/'):(float(row.get('clicks',0)),float(row.get('impressions',0))) for row in rr.json().get('rows',[])}
  def rank(p):return (*scores.get(p.get('url','').rstrip('/'),(0,0)),p.get('published',''))
