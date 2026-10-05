@@ -232,7 +232,12 @@ Return strict JSON {{"sections":[{{"heading":"exact planned heading","paragraphs
    if number>=len(section_plans) or not isinstance(item,dict):continue
    paragraphs=paragraph_list(item.get('paragraphs') or item.get('content'))
    if paragraphs:sections.append({'heading':section_plans[number]['heading'],'paragraphs':paragraphs})
-  if len(sections)!=len(section_plans):raise RuntimeError('keyless bulk writer returned an incomplete section set')
+  while len(sections)<len(section_plans):
+   number=len(sections);item=section_plans[number];heading=str(item.get('heading','')).strip();focus=str(item.get('focus','')).strip()
+   missing_prompt=f'''Write only the missing section {number+1} of {len(section_plans)} for {plan.get('title')!r}. Heading: {heading}. Focus: {focus}. Write approximately {section_target} words in 4-7 paragraphs using only this evidence: {evidence_json}. Add contextual source tokens, avoid repetition and return strict JSON {{"paragraphs":[...]}}.'''
+   addition=paragraph_list(model_json([{'role':'system','content':'Complete one missing evidence-grounded article section accurately.'},{'role':'user','content':missing_prompt}],max_tokens=3500))
+   if words(' '.join(addition))<200:raise RuntimeError('keyless writer could not complete a missing section')
+   sections.append({'heading':heading,'paragraphs':addition})
  else:
   for number,item in enumerate(section_plans,1):
    heading=str(item.get('heading','')).strip();focus=str(item.get('focus','')).strip()
