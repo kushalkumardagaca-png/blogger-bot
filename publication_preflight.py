@@ -48,7 +48,7 @@ def assert_publishable(title,content,labels):
   for marker,name in (("class=\"dy2-toc\"","table of contents"),("class=\"dy2-summary\"","600–800 word summary"),("class=\"dy2-faq\"","topic FAQ"),("class=\"dy2-glossary\"","glossary"),("class=\"dy2-low\"","10–15 item discovery shelf"),("class=\"dy2-follow\"","separate follow section")):
    if marker not in content:issues.append(name+' missing')
   if content.count('class="dy2-photo"')!=3:issues.append('exactly three editorial landscape photos required')
-  if content.count('class="dy2-data"')<3:issues.append('at least three evidence-based data representations required')
+  if content.count('class="dy2-data ')<3:issues.append('at least three evidence-based data representations required')
   order=[content.find(x) for x in ('class="dy2-summary"','class="dy2-faq"','class="dy2-glossary"','class="dy2-low"','class="dy2-follow"','DY_PAGE_FAMILY_START')]
   if any(x<0 for x in order) or order!=sorted(order):issues.append('Master V2 closing-section order is invalid')
  if 'Kushal K. Daga' not in content:issues.append('current byline missing')

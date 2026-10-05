@@ -91,10 +91,9 @@ def internal_links():
  ]
 
 def low_exposure_posts():
- # Blogger exposes aggregate Blog views, not per-Post views. Use genuine GSC page
- # performance when authorized; otherwise rank authenticated Blogger items by
- # zero comments and age as a transparent low-engagement discovery fallback.
- cid=os.environ.get('GSC_CLIENT_ID');secret=os.environ.get('GSC_CLIENT_SECRET');refresh=os.environ.get('GSC_REFRESH_TOKEN')
+ # Blogger exposes aggregate Blog views, not per-Post views. Use genuine GSC
+ # per-URL clicks and impressions and fail closed if that evidence is unavailable.
+ cid=required('GSC_CLIENT_ID');secret=required('GSC_CLIENT_SECRET');refresh=required('GSC_REFRESH_TOKEN')
  blogger_token=requests.post('https://oauth2.googleapis.com/token',data={'client_id':required('BLOGGER_CLIENT_ID'),'client_secret':required('BLOGGER_CLIENT_SECRET'),'refresh_token':required('BLOGGER_REFRESH_TOKEN'),'grant_type':'refresh_token'},timeout=30).json()['access_token']
  base=f"https://www.googleapis.com/blogger/v3/blogs/{required('BLOGGER_BLOG_ID')}"
  posts=[];page=None
@@ -103,19 +102,13 @@ def low_exposure_posts():
   if page:params['pageToken']=page
   data=requests.get(base+'/posts',headers={'Authorization':'Bearer '+blogger_token},params=params,timeout=60).json();posts+=data.get('items',[]);page=data.get('nextPageToken')
   if not page:break
- scores={}
- if cid and secret and refresh:
-  access=requests.post('https://oauth2.googleapis.com/token',data={'client_id':cid,'client_secret':secret,'refresh_token':refresh,'grant_type':'refresh_token'},timeout=30).json().get('access_token')
-  if access:
-   from datetime import date,timedelta
-   body={'startDate':str(date.today()-timedelta(days=90)),'endDate':str(date.today()-timedelta(days=1)),'dimensions':['page'],'rowLimit':25000}
-   site=urllib.parse.quote(BLOG+'/',safe='')
-   rr=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60)
-   if rr.ok:
-    for row in rr.json().get('rows',[]):scores[row['keys'][0].rstrip('/')]=(float(row.get('clicks',0)),float(row.get('impressions',0)))
- def rank(p):
-  if scores:return (*scores.get(p.get('url','').rstrip('/'),(0,0)),p.get('published',''))
-  replies=int((p.get('replies') or {}).get('totalItems',0) or 0);return (replies,0,p.get('published',''))
+ access_response=requests.post('https://oauth2.googleapis.com/token',data={'client_id':cid,'client_secret':secret,'refresh_token':refresh,'grant_type':'refresh_token'},timeout=30);access_response.raise_for_status();access=access_response.json()['access_token']
+ from datetime import date,timedelta
+ body={'startDate':str(date.today()-timedelta(days=90)),'endDate':str(date.today()-timedelta(days=1)),'dimensions':['page'],'rowLimit':25000}
+ site=urllib.parse.quote(BLOG+'/',safe='')
+ rr=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60);rr.raise_for_status()
+ scores={row['keys'][0].rstrip('/'):(float(row.get('clicks',0)),float(row.get('impressions',0))) for row in rr.json().get('rows',[])}
+ def rank(p):return (*scores.get(p.get('url','').rstrip('/'),(0,0)),p.get('published',''))
  chosen=sorted(posts,key=rank)[:15]
  out=[]
  for p in chosen:
@@ -126,7 +119,7 @@ def low_exposure_posts():
 def generate_text(topic,evidence):
  packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
  prompt=f'''Create one original Daily Yield master article package as strict JSON. Topic: {json.dumps(topic,ensure_ascii=False)}. Evidence packet: {json.dumps(packet,ensure_ascii=False)}.
-Rules: title 12-46 characters, punchy, no date. Build 8-12 genuinely topic-specific sections; never reuse generic fixed headings. The combined section paragraphs must be 3,900-4,300 actual words, excluding all later material. Do not begin with a summary or direct answer: establish background, problem, evidence, mechanisms, alternatives, advantages, disadvantages, limitations, jurisdiction and practical implications in the order this topic needs. Then supply a separate 600-800 word summary. Supply 5-10 topic-specific FAQs and 8-20 glossary entries. Use only facts supported by the evidence packet; distinguish fact, inference and uncertainty. No personal anecdote, invented quote, guarantee or mass-template prose.
+Rules: title 12-46 characters, punchy, no date. Build 8-12 genuinely topic-specific sections; never reuse generic fixed headings. The combined section paragraphs must be 4,000-4,200 actual words, excluding all later material. Do not begin with a summary or direct answer: establish background, problem, evidence, mechanisms, alternatives, advantages, disadvantages, limitations, jurisdiction and practical implications in the order this topic needs. Then supply a separate 600-800 word summary. Supply 5-10 topic-specific FAQs and 8-20 glossary entries. Use only facts supported by the evidence packet; distinguish fact, inference and uncertainty. No personal anecdote, invented quote, guarantee or mass-template prose.
 Use contextual citation tokens [[S1|anchor text]] and internal tokens [[I1|anchor text]] in paragraphs. Each source number corresponds to evidence order. Create at least 3 appropriate data visual specifications from numbers present verbatim in evidence: type may be table, bar, line, histogram or pie; include labels, numeric values, title, caption, source number, and after_section. Do not invent numbers. Give three distinct photorealistic landscape prompts tied closely to different aspects of this exact topic, with no text, logos, charts or watermarks.
 Return JSON keys: title, meta_description (110-158 chars), entities:[specific people/organizations/concepts], geography:[applicable countries/regions], temporal_coverage, sections:[{{heading,paragraphs:[plain text]}}], summary:[paragraphs], faq:[{{question,answer}}], glossary:[{{term,definition}}], visuals:[{{type,title,caption,source,after_section,labels,values}}], photo_prompts:[string]. Do not return markdown fences.'''
  return model_json([{'role':'system','content':'You are a meticulous financial editor. Accuracy, source fidelity, natural variation and reader value override speed.'},{'role':'user','content':prompt}])

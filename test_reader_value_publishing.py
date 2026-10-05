@@ -8,7 +8,7 @@ from publication_preflight import assert_publishable
 def package():
     sections=[]
     for i in range(8):
-        paragraph=f'Section {i+1} '+('evidence context decision risk alternative source limitation application '*60)+' [[S1|official evidence]].'
+        paragraph=f'Section {i+1} '+('evidence context decision risk alternative source limitation application '*63)+' [[S1|official evidence]].'
         sections.append({'heading':f'Topic-specific section {i+1}','paragraphs':[paragraph]})
     summary=[
         'Summary one '+('evidence context decision limitation '*87),
@@ -18,7 +18,7 @@ def package():
       'title':'Build a Stronger Cash Buffer','meta_description':'A source-led examination of cash reserves, household risk, competing priorities and practical decisions under uncertain income.','sections':sections,'summary':summary,
       'faq':[{'question':f'Question {i}?','answer':'A topic-specific answer based on the evidence and its limitations.'} for i in range(5)],
       'glossary':[{'term':f'Term {i}','definition':'A definition used specifically in this article.'} for i in range(8)],
-      'visuals':[{'type':'bar','title':f'Evidence view {i}','caption':'Illustrative sourced comparison.','source':1,'after_section':i+2,'labels':['A','B'],'values':[1,2]} for i in range(3)],
+      'visuals':[{'type':kind,'title':f'Evidence view {i}','caption':'Illustrative sourced comparison.','source':1,'after_section':i+2,'labels':['A','B'],'values':[1,2]} for i,kind in enumerate(('table','pie','line'))],
       'photos':[{'url':f'https://images.example/photo-{i}.jpg','alt':f'Topic-specific financial photograph {i}','caption':'Topic-specific editorial photograph.','width':1600,'height':900} for i in range(3)],
       'sources':[{'name':f'Official source {i}','title':f'Source document {i}','url':f'https://source{i}.gov/document','date':'2026','use':'Evidence'} for i in range(6)],
       'internal_links':[{'title':'Daily Yield Calculators','url':'https://dailyyield.blogspot.com/p/calculator_0908148622.html','relevance':'Model the assumptions.'}],
@@ -28,11 +28,13 @@ def topic():return {'#':'1','Category':'Cash Savings and Emergency Funds','Punch
 
 def test_master_v2_separates_core_and_summary_word_requirements():
     p=package();metrics=validate(p)
-    assert 3800<=metrics['core_words']<=4300
+    assert 4000<=metrics['core_words']<=4200
     assert 600<=metrics['summary_words']<=800
     title,slug,meta,labels,body=render(p,topic(),'2026-10-05','08:00')
     assert body.count('class="dy2-photo"')==3
-    assert body.count('class="dy2-data"')==3
+    assert body.count('class="dy2-data dy2-data-')==3
+    assert 'dy2-data-table' in body and 'dy2-data-pie' in body and 'dy2-data-line' in body
+    assert body.index('<h1>') < body.index('class="dy2-by"') < body.index('class="dy2-photo"')
     assert body.index('class="dy2-summary"')<body.index('class="dy2-faq"')<body.index('class="dy2-glossary"')<body.index('class="dy2-low"')<body.index('class="dy2-follow"')<body.index('DY_PAGE_FAMILY_START')
     assert labels==['Cash Savings and Emergency Funds','Kushal K. Daga']
     with patch('publication_preflight.image_works',return_value=True):assert assert_publishable(title,body+'<!-- DY_SEO_META_START --><!-- DY_SEO_META_END --><!-- DY_CONTINUOUS_MOTION_START -->',labels)
