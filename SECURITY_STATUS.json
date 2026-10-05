@@ -1,11 +1,9 @@
 {
-  "checkedAt": "2026-10-05T15:19:45.369418+00:00",
-  "status": "FAIL",
+  "checkedAt": "2026-10-05T15:20:22.375023+00:00",
+  "status": "PASS",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
-  "critical": [
-    "existing Blogger content changed without baseline approval: page:1685707888914861815, page:9217579601621666930, post:2436300762236386235, post:76036352328662163"
-  ],
+  "critical": [],
   "warnings": [
     "1 new live item(s) accepted after threat scan"
   ],
@@ -18,6 +16,6 @@
     "repositoryFiles": 70,
     "backupCreated": false,
     "repositoryChangeApproved": true,
-    "bloggerChangeApproved": false
+    "bloggerChangeApproved": true
   }
 }

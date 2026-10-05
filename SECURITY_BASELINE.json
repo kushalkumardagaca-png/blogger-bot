@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-05T14:01:06.697607+00:00",
+  "approvedAt": "2026-10-05T15:20:22.372748+00:00",
   "repository": {
     "auto_blogger_publisher.py": "2d926299a9faf7ef25d2970b630ad1bc74e88dc842d7649bed4b800890b18862",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -8,10 +8,10 @@
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
     "publication_preflight.py": "289d81f7490596bfb83e0611941ebf4b9e1b608670c91abed5ef94c1f163ff3a",
     "page_family.py": "1b3840a38ceb00df51ccc68c12fbd586eb6fb533ea1b1bbd655f3f82e2142a8d",
-    "prepare_master_article.py": "152bee90b9b053d8eafcf6c038797ed602a849069495c0b052e5e519de0eceb2",
-    "master_article_v2.py": "fe4ddea365bf6071308f6728277608c0d7a39d0f35ca1545a3e3c076846e58e2",
+    "prepare_master_article.py": "42c7a3453e18435d2cc944046ff55a2b8d3f9b594439ae7ab0d51691468c46d6",
+    "master_article_v2.py": "75ec949f02c4f3c5faee6edc47cdc4be54205be5fc0a6340f962777684b6176f",
     "reader_value_article.py": "155c09b0fac79d5fecb082b8b35c7a8254887df126e203b58c1fedcdfc2e19a1",
-    "rewrite_existing_masters.py": "0846ba49fd706bf792a3d03de1837794c74e0a7e05760300394f0fea8b8df711",
+    "rewrite_existing_masters.py": "d37d8935e1bcfe68f9851ceacb234d4fb136569f2a5b44a8eea88fffc63ab479",
     "refresh_master_v2_design.py": "711d4fbdb70b42a82b6f53e144ddbb269d44615ea351a41807311d1468784af7",
     "photo_selector.py": "bf4035a0a1329e02579c33bb26b14d2c30cbf96ac1ffbb04294ec67a4fa3e412",
     "build_photo_registry.py": "827889f0ddc32939aed2ac44b09d99d266aff135684b6ef860e5a10cc5c3529f",
@@ -28,7 +28,7 @@
     ".github/workflows/social_performance.yml": "dded36a902c5a2d2de5208743f43110b6b72e614e54e0be720073b1d05fccdcc",
     ".github/workflows/coordinated_social_publish.yml": "58dc39a9d2d2131a02d93be89702bcdd911e3951b014b1adebd169db781845f1",
     ".github/workflows/daily_blogger_poster.yml": "113c0c42311d07e5647306247024bed2964c546cbbe110c66cd7b39e2ec414db",
-    ".github/workflows/rewrite_existing_masters.yml": "7b694953284054fd9e8898a225ffc2bd9b4e3308fc9c6cb20be91f837efb357f",
+    ".github/workflows/rewrite_existing_masters.yml": "c02aed50310e902a95589048bebc39904cba80944f8a131217972190abfcb5c0",
     ".github/workflows/refresh_master_v2_design.yml": "09935ba5f09f73feb384a2ed635a31c359a9a4dd48e66e0fc1b8c461f5c3b526",
     ".github/workflows/daily_news_wires.yml": "455a6e8b3d4ea782b27e02b412edad8a68e949e84e0e81f0a3591b78bdeac2f0",
     ".github/workflows/facebook_publisher.yml": "47b96c3d772d2afc1eb43dec46bbacd2df7aaacc3da676534650f8c211ece089",
@@ -119,8 +119,8 @@
       "id": "9217579601621666930",
       "title": "DAILY NEWS",
       "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "updated": "2026-10-05T06:00:08-07:00",
-      "content_sha256": "5a865156060e17f21f25bf6f47933dde84ebbe69c7b1b8d26fc195f94beb6226"
+      "updated": "2026-10-05T07:55:25-07:00",
+      "content_sha256": "a7427983b2e5e57f09311662e09775d9bb22c5d0470eb120afcfceffe12eef5e"
     },
     "page:8572476015753638755": {
       "kind": "page",
@@ -167,8 +167,8 @@
       "id": "1685707888914861815",
       "title": "DAILY ARTICLE",
       "url": "https://dailyyield.blogspot.com/p/article.html",
-      "updated": "2026-10-05T00:01:45-07:00",
-      "content_sha256": "9757f1d2e2d811f6c3ad8888fe009a7f534148538762bf4552068d4e046a96de"
+      "updated": "2026-10-05T07:55:23-07:00",
+      "content_sha256": "086475d5a497c836f3a9d00c0c8d12b9d7450269fb09d9a96dfb7e31e323b1f6"
     },
     "page:2716668129166401912": {
       "kind": "page",
@@ -178,13 +178,21 @@
       "updated": "2026-10-04T23:42:24-07:00",
       "content_sha256": "6123472f360ad27ac8c64a18a26a26d30d8d0a09edabe2dfe2aaf6486fc40dc3"
     },
+    "post:4241027143860885131": {
+      "kind": "post",
+      "id": "4241027143860885131",
+      "title": "Personal Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-05.html",
+      "updated": "2026-10-05T07:58:44-07:00",
+      "content_sha256": "3f45dc979052d09a8e6c60de9ec657abd322cba9bda1c5e219cef2770bb7add7"
+    },
     "post:2436300762236386235": {
       "kind": "post",
       "id": "2436300762236386235",
       "title": "Your Tax Refund Is a Trap",
       "url": "https://dailyyield.blogspot.com/2026/10/your-tax-refund-is-trap.html",
-      "updated": "2026-10-05T06:42:13-07:00",
-      "content_sha256": "31aa6a2e7bafb54e79ac80fd1357f02c5854d0e35cdc1bf9ae10e031602d9b40"
+      "updated": "2026-10-05T07:23:58-07:00",
+      "content_sha256": "cdb5f697fac99497fd4112cb2f266c08e82fe042d98764ac516bde3f5c735d42"
     },
     "post:2338107994704127487": {
       "kind": "post",
@@ -2511,8 +2519,8 @@
       "id": "76036352328662163",
       "title": "Stop Maxing Your 401(k)",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-      "updated": "2026-10-05T06:11:55-07:00",
-      "content_sha256": "cdbe545acc7e824578652c984dbebdb1c3e03790a834dc212ae622adf6a5af80"
+      "updated": "2026-10-05T07:23:56-07:00",
+      "content_sha256": "6da1c71d678ad2e0669eb30d29e05ceb8804560b5b0e0dadd76a7f543dc36478"
     }
   }
 }
