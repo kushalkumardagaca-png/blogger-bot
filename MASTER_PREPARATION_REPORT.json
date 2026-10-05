@@ -2,5 +2,5 @@
   "status": "FAIL",
   "stage": "text-generation",
   "error_type": "RuntimeError",
-  "error": "section 1 failed its 450-460 word gate"
+  "error": "data visual contains a non-numeric value"
 }
