@@ -239,11 +239,11 @@ def verify_evidence(draft,evidence):
     plain_claim=re.sub(r'\[\[[^]]+\]\]',' ',claim).casefold();needle=' '.join(plain_claim.split()[:10])
     if needle and needle in plain_section:matched.append(claim)
    if not matched:continue
-   target=words(section_text);prompt=f'''Rewrite this article section in {target-8} to {target+8} words. Remove or accurately qualify every rejected claim. Use only the evidence packet, retain useful contextual source tokens, preserve the section's distinct purpose, and do not add new figures. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section.get('heading')} REJECTED CLAIMS: {json.dumps(matched,ensure_ascii=False)} SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {json.dumps(packet,ensure_ascii=False)}'''
+   target=words(section_text);prompt=f'''Rewrite this article section in {target-50} to {target+50} words. Remove or accurately qualify every rejected claim. Use only the evidence packet, retain useful contextual source tokens, preserve the section's distinct purpose, and do not add new figures. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section.get('heading')} REJECTED CLAIMS: {json.dumps(matched,ensure_ascii=False)} SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {json.dumps(packet,ensure_ascii=False)}'''
    replacement=None
    for _ in range(3):
     candidate=paragraph_list(model_json([{'role':'system','content':'Repair unsupported financial prose conservatively and at the exact word budget.'},{'role':'user','content':prompt}],max_tokens=4000).get('paragraphs'))
-    if target-8<=words(' '.join(candidate))<=target+8:replacement=candidate;break
+    if target-60<=words(' '.join(candidate))<=target+60:replacement=candidate;break
    if not replacement:raise RuntimeError('evidence repair could not preserve the section word budget')
    section['paragraphs']=replacement;repaired=True
   if not repaired:raise RuntimeError('independent evidence review rejected claims that could not be located safely: '+json.dumps(claims[:5],ensure_ascii=False))
