@@ -1,6 +1,6 @@
 {
-  "status": "BLOCKED_PROVIDER_CONFIGURATION",
-  "stage": "provider-configuration",
-  "error_type": "ExternalProviderRequired",
-  "error": "Master Article V2 is fail-closed until an owner-configured text provider and image-generation provider are available through repository secrets and variables. The rejected legacy template will not publish as a fallback."
+  "status": "FAIL",
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "section 1 failed its 450-460 word gate"
 }
