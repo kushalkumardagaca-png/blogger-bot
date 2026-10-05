@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   rewrite_one_backed_up_master:
-    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run master rewrite]')
+    if: vars.MASTER_V2_MIGRATION_ENABLED == 'true' && (github.event_name != 'push' || contains(github.event.head_commit.message, '[run master rewrite]'))
     runs-on: ubuntu-latest
     timeout-minutes: 75
     permissions:

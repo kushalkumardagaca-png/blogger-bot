@@ -3,8 +3,8 @@
 
 Text is produced through an OpenAI-compatible provider from a topic-specific
 evidence packet. Three distinct photographs are generated through an image
-provider. Explicit repository configuration overrides the audited public
-provider defaults, so generation is not coupled to a retired platform,
+provider. Explicit repository configuration is mandatory, so generation is
+not coupled to a retired or anonymous rate-limited platform,
 cropped to a common 16:9 landscape ratio, and persisted in the repository before
 Blogger publication. No public Daily Yield page is requested.
 """
@@ -95,10 +95,8 @@ def discover(topic):
  if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
  return evidence[:10]
 def model_json(messages,max_tokens=16000):
- endpoint=os.environ.get('MASTER_TEXT_API_URL','').strip() or 'https://text.pollinations.ai/openai'
- token=os.environ.get('MASTER_TEXT_API_KEY','').strip();model=os.environ.get('MASTER_TEXT_MODEL','').strip() or 'openai'
- headers={'Content-Type':'application/json'}
- if token:headers['Authorization']='Bearer '+token
+ endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL')
+ headers={'Content-Type':'application/json','Authorization':'Bearer '+token}
  last=None
  for attempt in range(3):
   request_messages=list(messages)
@@ -189,12 +187,8 @@ def verify_evidence(draft,evidence):
   raise RuntimeError('independent evidence review rejected the package: '+json.dumps(review.get('unsupported_claims',[])[:10],ensure_ascii=False))
 
 def image_call(prompt):
- endpoint=os.environ.get('MASTER_IMAGE_API_URL','').strip();token=os.environ.get('MASTER_IMAGE_API_KEY','').strip();model=os.environ.get('MASTER_IMAGE_MODEL','').strip() or 'flux'
- if not endpoint:
-  url='https://image.pollinations.ai/prompt/'+urllib.parse.quote(prompt,safe='')
-  r=requests.get(url,params={'model':model,'width':1600,'height':900,'safe':'true','nologo':'true','private':'true'},timeout=600);r.raise_for_status();return r.content
- headers={'Content-Type':'application/json'}
- if token:headers['Authorization']='Bearer '+token
+ endpoint=required('MASTER_IMAGE_API_URL');token=required('MASTER_IMAGE_API_KEY');model=required('MASTER_IMAGE_MODEL')
+ headers={'Content-Type':'application/json','Authorization':'Bearer '+token}
  r=requests.post(endpoint,headers=headers,json={'model':model,'prompt':prompt,'n':1,'size':'1536x1024','response_format':'b64_json'},timeout=600);r.raise_for_status();item=r.json()['data'][0]
  return base64.b64decode(item['b64_json']) if item.get('b64_json') else requests.get(item['url'],timeout=120).content
 
