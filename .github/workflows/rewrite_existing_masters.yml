@@ -31,14 +31,10 @@ jobs:
     permissions:
       contents: write
     env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
-      MASTER_TEXT_API_URL: ${{ vars.MASTER_TEXT_API_URL }}
-      MASTER_TEXT_API_KEY: ${{ secrets.MASTER_TEXT_API_KEY }}
-      MASTER_TEXT_MODEL: ${{ vars.MASTER_TEXT_MODEL }}
-      MASTER_IMAGE_API_URL: ${{ vars.MASTER_IMAGE_API_URL }}
-      MASTER_IMAGE_MODEL: ${{ vars.MASTER_IMAGE_MODEL }}
-      MASTER_IMAGE_API_KEY: ${{ secrets.MASTER_IMAGE_API_KEY }}
+      # Keyless local open-source writing model. The migration does not consume
+      # Gemini, OpenAI, Vertex AI or any other paid text-generation credential.
+      OLLAMA_API_URL: http://127.0.0.1:11434
+      OLLAMA_MODEL: qwen2.5:3b
       BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
@@ -54,6 +50,27 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install pillow imagehash requests
+      - name: Restore the keyless local model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama/models
+          key: ollama-qwen2.5-3b-v1
+      - name: Start the keyless local article model
+        run: |
+          set -euo pipefail
+          mkdir -p "$HOME/.ollama"
+          docker run -d --name daily-yield-ollama -p 11434:11434 \
+            -e OLLAMA_CONTEXT_LENGTH=32768 \
+            -v "$HOME/.ollama:/root/.ollama" ollama/ollama:latest
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:11434/api/tags >/dev/null; then break; fi
+            if [ "$attempt" -eq 30 ]; then exit 1; fi
+            sleep 2
+          done
+          docker exec daily-yield-ollama ollama pull "$OLLAMA_MODEL"
+          curl -fsS http://127.0.0.1:11434/api/show \
+            -H 'Content-Type: application/json' \
+            -d "{\"model\":\"$OLLAMA_MODEL\"}" >/dev/null
 
       - name: Build or confirm the authenticated global photo baseline
         run: python build_photo_registry.py

@@ -1,9 +1,10 @@
+import os
 import re
-from unittest.mock import patch
+from unittest.mock import Mock,patch
 import pytest
 from master_article_v2 import render,validate,words
 from publication_preflight import assert_publishable
-from prepare_master_article import _visual_number
+from prepare_master_article import _visual_number,model_json
 
 
 def package():
@@ -63,6 +64,14 @@ def test_evidence_table_supports_qualitative_rows():
     p=package();p['visuals'][0]={'type':'table','title':'Choice comparison','caption':'A source-grounded qualitative comparison.','source':1,'after_section':2,'data':[{'Choice':'A','Trade-off':'Lower liquidity'},{'Choice':'B','Trade-off':'Higher liquidity'}]}
     validate(p);body=render(p,topic(),'2026-10-05','08:00')[-1]
     assert 'Lower liquidity' in body and '<thead>' in body
+
+def test_keyless_local_model_precedes_configured_cloud_keys():
+    response=Mock();response.raise_for_status.return_value=None;response.json.return_value={'message':{'content':'{"answer":"local"}'}}
+    env={'OLLAMA_API_URL':'http://127.0.0.1:11434','OLLAMA_MODEL':'qwen2.5:3b','GEMINI_API_KEY':'must-not-be-used'}
+    with patch.dict(os.environ,env,clear=False),patch('prepare_master_article.requests.post',return_value=response) as post:
+        assert model_json([{'role':'user','content':'Return JSON'}],100)=={'answer':'local'}
+    assert post.call_args.args[0]=='http://127.0.0.1:11434/api/chat'
+    assert post.call_args.kwargs['json']['model']=='qwen2.5:3b'
 
 def test_visual_number_accepts_single_decorated_number_only():
     assert _visual_number('15%')==15

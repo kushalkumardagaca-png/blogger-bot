@@ -96,6 +96,20 @@ def discover(topic):
  if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
  return evidence[:10]
 def model_json(messages,max_tokens=16000):
+ local=os.environ.get('OLLAMA_API_URL','').strip().rstrip('/')
+ if local:
+  model=os.environ.get('OLLAMA_MODEL','qwen2.5:3b').strip();last=None
+  for attempt in range(4):
+   request_messages=list(messages)
+   if attempt:request_messages.append({'role':'user','content':'Return one complete strict JSON object only. Repair any missing required fields and do not use markdown.'})
+   try:
+    r=requests.post(local+'/api/chat',json={'model':model,'messages':request_messages,'stream':False,'format':'json','options':{'temperature':0.2,'num_predict':min(max_tokens,8192),'num_ctx':32768}},timeout=1200);r.raise_for_status();text=str(r.json()['message']['content']);begin=text.find('{');finish=text.rfind('}')
+    if begin<0 or finish<=begin:raise ValueError('local model returned no complete JSON object')
+    return json.loads(text[begin:finish+1])
+   except Exception as exc:
+    last=exc
+    if attempt<3:time.sleep(8*(attempt+1))
+  raise RuntimeError(f'local keyless model failed to return valid JSON after 4 attempts: {type(last).__name__}: {str(last)[:300]}')
  key=os.environ.get('GEMINI_API_KEY','').strip()
  if key:
   model=os.environ.get('GEMINI_MODEL','').strip() or 'gemini-3.5-flash-lite';last=None
