@@ -17,6 +17,7 @@ from master_article_v2 import validate
 ROOT=Path(__file__).parent
 PACKAGES=ROOT/'master_packages';ASSETS=ROOT/'assets/master'
 BLOG='https://dailyyield.blogspot.com'
+STAGE='startup'
 
 def required(name):
  value=os.environ.get(name,'').strip()
@@ -69,7 +70,11 @@ def model_json(messages,max_tokens=16000):
  token=required('GITHUB_TOKEN');model=os.environ.get('MASTER_TEXT_MODEL','').strip() or 'openai/gpt-4.1'
  r=requests.post('https://models.github.ai/inference/chat/completions',headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'}},timeout=600)
  r.raise_for_status();text=r.json()['choices'][0]['message']['content']
- return json.loads(text)
+ if isinstance(text,list):text=''.join(str(part.get('text','')) if isinstance(part,dict) else str(part) for part in text)
+ text=str(text or '').strip();text=re.sub(r'^```(?:json)?\s*|\s*```$','',text,flags=re.I|re.S).strip()
+ start=text.find('{');end=text.rfind('}')
+ if start<0 or end<=start:raise RuntimeError('model returned no JSON object')
+ return json.loads(text[start:end+1])
 
 def internal_links():
  return [
@@ -134,10 +139,12 @@ def image_call(prompt):
  return base64.b64decode(item['b64_json']) if item.get('b64_json') else requests.get(item['url'],timeout=120).content
 
 def prepare():
- index,topic=load_next();target=PACKAGES/f"topic_{topic['#']}.json"
+ global STAGE
+ STAGE='load-topic';index,topic=load_next();target=PACKAGES/f"topic_{topic['#']}.json"
  if target.exists():
   package=json.loads(target.read_text());validate(package);print(target);return
- evidence=discover(topic);draft=generate_text(topic,evidence)
+ STAGE='source-discovery';evidence=discover(topic)
+ STAGE='text-generation';draft=generate_text(topic,evidence)
  evidence_numbers=set()
  for match in re.findall(r'(?<![A-Za-z])[-+]?\d[\d,]*(?:\.\d+)?', ' '.join(x['text'] for x in evidence)):
   try:evidence_numbers.add(round(float(match.replace(',','')),8))
@@ -147,7 +154,7 @@ def prepare():
    try:number=round(float(value),8)
    except (TypeError,ValueError):raise RuntimeError('data visual contains a non-numeric value')
    if number not in evidence_numbers:raise RuntimeError(f'data visual value {value} is absent from the retrieved evidence')
- verify_evidence(draft,evidence)
+ STAGE='evidence-verification';verify_evidence(draft,evidence)
  prior=[]
  for path in PACKAGES.glob('topic_*.json'):
   try:prior.append(json.loads(path.read_text()))
@@ -160,6 +167,7 @@ def prepare():
  photos=[]
  prompts=draft.pop('photo_prompts')
  if len(prompts)!=3:raise RuntimeError('text model did not provide exactly three photo prompts')
+ STAGE='image-generation'
  for i,prompt in enumerate(prompts,1):
   raw=image_call('Photorealistic editorial finance photograph, horizontal landscape, topic-specific and realistic. '+prompt+' No text, no letters, no logos, no watermark, no charts.')
   image=Image.open(io.BytesIO(raw)).convert('RGB');w,h=image.size;ratio=16/9
@@ -169,12 +177,13 @@ def prepare():
   url=f'https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/{slug}/photo-{i}.jpg'
   photos.append({'url':url,'alt':f"{draft['title']} — topic-specific editorial photograph {i}",'caption':f"Editorial illustration for {draft['title']}",'width':1600,'height':900})
  draft['photos']=photos;draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
- draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts();validate(draft)
+ STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
+ STAGE='final-validation';validate(draft)
  PACKAGES.mkdir(exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');print(target)
 if __name__=='__main__':
  try:
   prepare()
   Path('MASTER_PREPARATION_REPORT.json').write_text(json.dumps({'status':'PASS'},indent=2)+'\n')
  except Exception as exc:
-  Path('MASTER_PREPARATION_REPORT.json').write_text(json.dumps({'status':'FAIL','error_type':type(exc).__name__,'error':str(exc)[:1000]},indent=2)+'\n')
+  Path('MASTER_PREPARATION_REPORT.json').write_text(json.dumps({'status':'FAIL','stage':STAGE,'error_type':type(exc).__name__,'error':str(exc)[:1000]},indent=2)+'\n')
   raise
