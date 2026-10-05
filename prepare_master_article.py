@@ -102,7 +102,7 @@ def model_json(messages,max_tokens=16000):
   request_messages=list(messages)
   if attempt:request_messages.append({'role':'user','content':'The previous response was incomplete or invalid. Return one complete strict JSON object only; shorten reasoning, never truncate JSON.'})
   try:
-   r=requests.post(endpoint,headers=headers,json={'model':model,'messages':request_messages,'temperature':0.25,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'reasoning_effort':'low','private':True},timeout=600);r.raise_for_status()
+   r=requests.post(endpoint,headers=headers,json={'model':model,'messages':request_messages,'temperature':0.25,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'reasoning_effort':'low'},timeout=600);r.raise_for_status()
    payload=r.json();text=payload['choices'][0]['message'].get('content')
    if isinstance(text,list):text=''.join(str(part.get('text','')) if isinstance(part,dict) else str(part) for part in text)
    text=str(text or '').strip();text=re.sub(r'^```(?:json)?\s*|\s*```$','',text,flags=re.I|re.S).strip();begin=text.find('{');finish=text.rfind('}')
