@@ -3,6 +3,7 @@ from unittest.mock import patch
 import pytest
 from master_article_v2 import render,validate,words
 from publication_preflight import assert_publishable
+from prepare_master_article import _visual_number
 
 
 def package():
@@ -44,3 +45,16 @@ def test_master_v2_rejects_date_title_and_supporting_word_padding():
     with pytest.raises(ValueError,match='contains a date'):validate(p)
     p=package();p['sections']=[{'heading':'Short body','paragraphs':['Only a few core words.']}]
     with pytest.raises(ValueError,match='main article'):validate(p)
+
+def test_model_visual_aliases_are_normalized_for_rendering():
+    p=package()
+    p['visuals'][0]={'type':'chart','title':'Alias view','caption':'Sourced comparison.','source_number':1,'after_section':2,'labels':['A','B'],'numeric_values':[1,2]}
+    body=render(p,topic(),'2026-10-05','08:00')[-1]
+    assert 'dy2-data-bar' in body and 'Alias view' in body
+    p['visuals'][0]['numeric_values']=[1]
+    with pytest.raises(ValueError,match='mismatched labels and values'):render(p,topic(),'2026-10-05','08:00')
+
+def test_visual_number_accepts_single_decorated_number_only():
+    assert _visual_number('15%')==15
+    assert _visual_number('$100,000')==100000
+    with pytest.raises(ValueError):_visual_number('10 to 20')

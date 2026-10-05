@@ -276,6 +276,13 @@ def image_call(prompt):
  r=requests.post(endpoint,headers=headers,json={'model':model,'prompt':prompt,'n':1,'size':'1536x1024','response_format':'b64_json'},timeout=600);r.raise_for_status();item=r.json()['data'][0]
  return base64.b64decode(item['b64_json']) if item.get('b64_json') else requests.get(item['url'],timeout=120).content
 
+def _visual_number(value):
+ if isinstance(value,(int,float)) and not isinstance(value,bool):return float(value)
+ text=str(value).strip().replace('\N{MINUS SIGN}','-').replace('\N{EN DASH}','-')
+ matches=re.findall(r'[-+]?\d[\d,]*(?:\.\d+)?',text)
+ if len(matches)!=1:raise ValueError(value)
+ return float(matches[0].replace(',',''))
+
 def build_package(topic,target):
  global STAGE
  target=Path(target)
@@ -292,10 +299,13 @@ def build_package(topic,target):
   try:evidence_numbers.add(round(float(match.replace(',','')),8))
   except ValueError:pass
  for chart in draft.get('visuals',[]):
+  normalized=[]
   for value in chart.get('values',[]):
-   try:number=round(float(value),8)
+   try:number=round(_visual_number(value),8)
    except (TypeError,ValueError):raise RuntimeError('data visual contains a non-numeric value')
    if number not in evidence_numbers:raise RuntimeError(f'data visual value {value} is absent from the retrieved evidence')
+   normalized.append(number)
+  chart['values']=normalized
  STAGE='evidence-verification';verify_evidence(draft,evidence)
  prior=[]
  for path in PACKAGES.rglob('*.json'):
