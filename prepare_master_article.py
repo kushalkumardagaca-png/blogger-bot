@@ -224,10 +224,27 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
  return plan
 def verify_evidence(draft,evidence):
  packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
- review=model_json([{'role':'system','content':'Act as a hostile financial fact checker. Reject unsupported claims, invented numbers, misleading causal language and citations that do not support nearby prose.'},{'role':'user','content':'Compare this proposed article package with the evidence packet. Return JSON with pass (boolean) and unsupported_claims (array). Do not rewrite or excuse anything. PACKAGE: '+json.dumps(draft,ensure_ascii=False)+' EVIDENCE: '+json.dumps(packet,ensure_ascii=False)}],max_tokens=5000)
- if not review.get('pass') or review.get('unsupported_claims'):
-  raise RuntimeError('independent evidence review rejected the package: '+json.dumps(review.get('unsupported_claims',[])[:10],ensure_ascii=False))
-
+ for review_round in range(3):
+  review=model_json([{'role':'system','content':'Act as a hostile financial fact checker. Reject unsupported claims, invented numbers, misleading causal language and citations that do not support nearby prose.'},{'role':'user','content':'Compare this proposed article package with the evidence packet. Return JSON with pass (boolean) and unsupported_claims (array of exact quoted claim text). Do not rewrite or excuse anything. PACKAGE: '+json.dumps(draft,ensure_ascii=False)+' EVIDENCE: '+json.dumps(packet,ensure_ascii=False)}],max_tokens=5000)
+  claims=[str(x) for x in review.get('unsupported_claims',[]) if str(x).strip()]
+  if review.get('pass') and not claims:return
+  repaired=False
+  for section in draft.get('sections',[]):
+   section_text=' '.join(paragraph_list(section.get('paragraphs')));matched=[]
+   plain_section=re.sub(r'\[\[[^]]+\]\]',' ',section_text).casefold()
+   for claim in claims:
+    plain_claim=re.sub(r'\[\[[^]]+\]\]',' ',claim).casefold();needle=' '.join(plain_claim.split()[:10])
+    if needle and needle in plain_section:matched.append(claim)
+   if not matched:continue
+   target=words(section_text);prompt=f'''Rewrite this article section in {target-8} to {target+8} words. Remove or accurately qualify every rejected claim. Use only the evidence packet, retain useful contextual source tokens, preserve the section's distinct purpose, and do not add new figures. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section.get('heading')} REJECTED CLAIMS: {json.dumps(matched,ensure_ascii=False)} SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {json.dumps(packet,ensure_ascii=False)}'''
+   replacement=None
+   for _ in range(3):
+    candidate=paragraph_list(model_json([{'role':'system','content':'Repair unsupported financial prose conservatively and at the exact word budget.'},{'role':'user','content':prompt}],max_tokens=4000).get('paragraphs'))
+    if target-8<=words(' '.join(candidate))<=target+8:replacement=candidate;break
+   if not replacement:raise RuntimeError('evidence repair could not preserve the section word budget')
+   section['paragraphs']=replacement;repaired=True
+  if not repaired:raise RuntimeError('independent evidence review rejected claims that could not be located safely: '+json.dumps(claims[:5],ensure_ascii=False))
+ raise RuntimeError('independent evidence review still rejected the package after two repair rounds')
 def image_call(prompt):
  endpoint=required('MASTER_IMAGE_API_URL');token=required('MASTER_IMAGE_API_KEY');model=required('MASTER_IMAGE_MODEL')
  headers={'Content-Type':'application/json','Authorization':'Bearer '+token}
