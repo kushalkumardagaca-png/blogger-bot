@@ -1,18 +1,16 @@
 {
-  "completed": {},
+  "completed": {
+    "76036352328662163": {
+      "content_sha256": "cdbe545acc7e824578652c984dbebdb1c3e03790a834dc212ae622adf6a5af80",
+      "old_title": "Stop Maxing Your 401(k) or Pension",
+      "status": "rewritten-v2",
+      "title": "Stop Maxing Your 401(k)",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
+      "verified_at": "2026-10-05T13:11:56.754147+00:00"
+    }
+  },
   "inventory_completed_count": 0,
   "inventory_master_count": 75,
-  "pending": {
-    "backup": "master_rewrite_backups/post_76036352328662163.json.gz",
-    "content_sha256": "e092d8b61f2368100cdd02df5a700b20125f0875dc963f85176d08dbb0fdae1a",
-    "id": "76036352328662163",
-    "labels": [
-      "Contrarian Hooks",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-09-19T23:00:00-07:00",
-    "title": "Stop Maxing Your 401(k) or Pension",
-    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html"
-  },
+  "pending": null,
   "version": 1
 }
