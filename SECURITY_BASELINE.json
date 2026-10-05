@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-05T11:56:57.054368+00:00",
+  "approvedAt": "2026-10-05T11:59:23.554919+00:00",
   "repository": {
     "auto_blogger_publisher.py": "2d926299a9faf7ef25d2970b630ad1bc74e88dc842d7649bed4b800890b18862",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
@@ -8,11 +8,11 @@
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
     "publication_preflight.py": "289d81f7490596bfb83e0611941ebf4b9e1b608670c91abed5ef94c1f163ff3a",
     "page_family.py": "1b3840a38ceb00df51ccc68c12fbd586eb6fb533ea1b1bbd655f3f82e2142a8d",
-    "prepare_master_article.py": "e1a21a8ea2844e71c27204376232a75b65f66bc7243b01dfa70261adae7c7477",
+    "prepare_master_article.py": "38f301cb2357fad9ab4191c746bf2d05db93a4d31f48811a4d5463de3d3d2ebe",
     "master_article_v2.py": "5ded3d09a81208253768d0a1f7d16f7ec30eddb1fda5f84d7036b9feed3180a6",
     "reader_value_article.py": "155c09b0fac79d5fecb082b8b35c7a8254887df126e203b58c1fedcdfc2e19a1",
     "rewrite_existing_masters.py": "0846ba49fd706bf792a3d03de1837794c74e0a7e05760300394f0fea8b8df711",
-    "photo_selector.py": "65ad54def666e6ffd57cd02f2cd0a8d916e601a4d67ce701a5c8bd9df1fcf3b4",
+    "photo_selector.py": "6c22f5a86652539db0a86df657119629c6ce6f45bcddc37bad41be70225cd307",
     "build_photo_registry.py": "827889f0ddc32939aed2ac44b09d99d266aff135684b6ef860e5a10cc5c3529f",
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
     "social_identity.py": "3e39ddc398e6896cf4f5eeb28ff92b7c128b08eb48faeb4c7acc697ac06d3491",
@@ -175,6 +175,22 @@
       "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
       "updated": "2026-10-04T23:42:24-07:00",
       "content_sha256": "6123472f360ad27ac8c64a18a26a26d30d8d0a09edabe2dfe2aaf6486fc40dc3"
+    },
+    "post:57952324199187304": {
+      "kind": "post",
+      "id": "57952324199187304",
+      "title": "Canada Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-05.html",
+      "updated": "2026-10-05T04:58:15-07:00",
+      "content_sha256": "f73ca44788a6a766b1344f244157fb31ef0eb465f64b85055171f2c307f4664c"
+    },
+    "post:3954264095832469965": {
+      "kind": "post",
+      "id": "3954264095832469965",
+      "title": "US Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-05.html",
+      "updated": "2026-10-05T04:58:02-07:00",
+      "content_sha256": "958b92018855497a67319c8a1d359912023d8f1b32c6f4f0ed4d9cd07b5f3cb0"
     },
     "post:3442600443400729974": {
       "kind": "post",
