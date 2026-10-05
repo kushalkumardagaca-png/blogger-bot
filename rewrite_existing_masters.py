@@ -2,7 +2,8 @@
 """Back up and replace one legacy master Post with a validated Master V2 package.
 
 Two phases make an irreversible Blogger update impossible until the original full
-API representation has been committed separately. The script never touches News
+API representation has been committed separately. Canary generation is rerunnable
+from its durable backup without advancing to another Post. The script never touches News
 or Pages and never creates a replacement Post; it updates the original Post ID.
 """
 from __future__ import annotations
