@@ -1,9 +1,9 @@
 # Daily Yield Audience Growth Baseline
 
-- **Checked:** 2026-10-04T13:08:56.780080+00:00
+- **Checked:** 2026-10-05T01:49:03.134422+00:00
 - **Mode:** AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS
 - **Synthetic views:** 0
-- **Search data available through:** 2026-09-29
+- **Search data available through:** 2026-10-02
 
 ## Authenticated Google search acquisition
 
