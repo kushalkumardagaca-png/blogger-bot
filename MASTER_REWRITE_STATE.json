@@ -1,5 +1,10 @@
 {
   "completed": {
+    "2436300762236386235": {
+      "status": "already-v2",
+      "title": "Your Tax Refund Is a Trap",
+      "url": "https://dailyyield.blogspot.com/2026/10/your-tax-refund-is-trap.html"
+    },
     "76036352328662163": {
       "content_sha256": "cdbe545acc7e824578652c984dbebdb1c3e03790a834dc212ae622adf6a5af80",
       "old_title": "Stop Maxing Your 401(k) or Pension",
@@ -9,8 +14,19 @@
       "verified_at": "2026-10-05T13:11:56.754147+00:00"
     }
   },
-  "inventory_completed_count": 0,
-  "inventory_master_count": 75,
-  "pending": null,
+  "inventory_completed_count": 2,
+  "inventory_master_count": 76,
+  "pending": {
+    "backup": "master_rewrite_backups/post_8780956659587017395.json.gz",
+    "content_sha256": "bfb39c53bc5694da50cd425de806ac0f10e9a5c47c599a8f00f622a39d9dd456",
+    "id": "8780956659587017395",
+    "labels": [
+      "Age and Wealth Milestones",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-20T01:00:00-07:00",
+    "title": "Real Net Worth Targets by Age for Median\u2026",
+    "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html"
+  },
   "version": 1
 }
