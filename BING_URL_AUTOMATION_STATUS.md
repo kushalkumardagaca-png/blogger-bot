@@ -1,16 +1,16 @@
 # Bing URL Submission and Index-Status Automation
 
 - **Status:** PASS
-- **Checked:** 2026-10-05T10:57:23.116292+00:00
+- **Checked:** 2026-10-05T11:58:37.472050+00:00
 - **Mode:** authenticated control-plane, zero public Daily Yield requests
 - **Synthetic Daily Yield views:** 0
 
 ## Current run
 
-- Blogger inventory: **302**
-- Submission candidates: **302**
+- Blogger inventory: **304**
+- Submission candidates: **304**
 - URLs submitted: **0**
-- Quota deferred: **302**
+- Quota deferred: **304**
 - Performance-monitor records checked: **10**
 - Known/crawled by Bing: **0**
 - Pending monitoring: **10**
