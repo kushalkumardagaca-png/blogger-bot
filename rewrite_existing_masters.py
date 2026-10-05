@@ -61,7 +61,13 @@ def backup_next():
   if not path.exists():raise RuntimeError('pending rewrite backup is missing')
   save_report('BACKUP_READY',pending=pending,master_count=state.get('inventory_master_count'),remaining=state.get('inventory_master_count',0)-len(state.get('completed',{})))
   print(pending['id']);return
- posts=inventory(token);masters=sorted((p for p in posts if is_master(p)),key=lambda x:(x.get('published',''),x['id']))
+ posts=inventory(token)
+ # The user explicitly prioritized Master posts published on 2026-10-05; the
+ # already-backed-up pending post always remains first and is never displaced.
+ def migration_order(post):
+  published=str(post.get('published',''))
+  return (0 if published.startswith('2026-10-05') else 1,published,post['id'])
+ masters=sorted((p for p in posts if is_master(p)),key=migration_order)
  for post in masters:
   if MARKER in (post.get('content') or ''):
    state['completed'].setdefault(post['id'],{'url':post.get('url'),'title':post.get('title'),'status':'already-v2'})
