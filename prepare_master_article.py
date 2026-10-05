@@ -18,6 +18,7 @@ from master_article_v2 import validate,words
 from photo_selector import choose_photos
 
 ROOT=Path(__file__).parent
+# Licensed-photo Master V2 production pipeline, revision 2026-10-05.
 PACKAGES=ROOT/'master_packages';ASSETS=ROOT/'assets/master'
 BLOG='https://dailyyield.blogspot.com'
 STAGE='startup'
