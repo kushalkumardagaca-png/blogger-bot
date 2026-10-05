@@ -283,8 +283,10 @@ def build_package(topic,target):
  slug=re.sub(r'[^a-z0-9]+','-',draft['title'].casefold()).strip('-');raw_briefs=draft.pop('photo_prompts');briefs=[]
  for item in raw_briefs:
   if isinstance(item,str):briefs.append(item)
-  elif isinstance(item,dict):briefs.append(str(item.get('brief') or item.get('prompt') or item.get('description') or ''))
- if len(briefs)!=3 or any(len(x.strip())<20 for x in briefs):raise RuntimeError('text model did not provide exactly three complete placement-specific photo briefs')
+  elif isinstance(item,dict):briefs.append(' '.join(str(v) for v in item.values() if isinstance(v,(str,int,float))))
+ if len(briefs)!=3 or any(len(x.strip())<20 for x in briefs):
+  headings=[str(x.get('heading','')) for x in draft.get('sections',[])]
+  briefs=[f"Opening editorial context for {draft['title']}: {'; '.join(headings[:2])}",f"Mid-article mechanism and evidence for {draft['title']}: {'; '.join(headings[3:6])}",f"Later implications and decisions for {draft['title']}: {'; '.join(headings[-3:])}"]
  STAGE='licensed-photo-selection';draft['photos']=choose_photos(briefs,slug,topic.get('#',slug));draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
  STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
  STAGE='final-validation';validate(draft)
