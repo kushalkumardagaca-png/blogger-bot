@@ -1,12 +1,11 @@
 {
   "version": 1,
-  "approvedAt": "2026-10-05T03:23:32.662758+00:00",
+  "approvedAt": "2026-10-05T03:29:16.405021+00:00",
   "repository": {
     "auto_blogger_publisher.py": "f84a513e37b63240e623b1618d179e115f8270fa990e0f8db7264ba2ca0d5cd0",
     "news_pipeline.py": "4397b4934a4ab504d3f7b96775289167c7b3ccc0fd10636284a08591fa4b42b7",
     "facebook_publisher.py": "33fec201d418fa6da9be3a549c5d0c00bdd44717548944d5051b68f83a20beb5",
     "social_creative.py": "46ff3a8bc1c94a930330c6269b9ed8c6d2b81b0f6e797d533465538ee9b7c6d0",
-    "zero_view_watchdog.py": "0eab806875a05f48db35ca71f2536681df2b7c60d683fa26711214ecb2a3c8b6",
     "publication_preflight.py": "d0af09a76ce9e88d4d439b64520a63f7971a6a4e46de24e7d54d799678654ddd",
     "page_family.py": "dbb3ab8e1b651432fc283b6cc44bef0596a4c74f7c2ae52d994c48476a9bad9e",
     "brand_identity.py": "8ab6796c09c13c151a23b5fce8fe71c8c130221535adc65d5d2dd83c89ec9d75",
@@ -27,9 +26,9 @@
     ".github/workflows/bluesky_publisher.yml": "47ea8d9a01f8761590de4362cedbbaafc652c2d5e18c0a0b7aa66834815571f4",
     ".github/workflows/tumblr_publisher.yml": "10aaab1287a4165d9714bf9b0673f6fbba1519b283041e6f0b57b33c3fc5579b",
     ".github/workflows/mastodon_publisher.yml": "8f94732a0dc547dfbab59b5addef04e5890d9735af54516224e6d1ccd602fee5",
-    "security_guard.py": "cea2571fb4d19855d806d10a254e5a4d65061123e0af7ead9bb5cf678e5e2075",
-    "audit_site_enhancements.py": "abb7b85b549334fbadf7f8527a1c83044097be336468d46257f74d5c69bb2dcc",
-    "search_reach.py": "1d50388368fbfeb2000c3addc8aeaeaf0ec93aa75b1e8cc7bfbd20cd5d9acd99",
+    "security_guard.py": "bcc22c1544a3aabcc376cf4fdb1f13f34d492be6f4b2452877656da6f8f23cc0",
+    "audit_site_enhancements.py": "e83a426d6ebbb8e042613e949ad6ea5e70359022dca9eb0941afad8d56c6d775",
+    "search_reach.py": "0dba40aee15b16fa9e6ffd41ae0e1981d598616bce31eb41336de317c5de519f",
     "bing_url_automation.py": "7a38a16ae9aafcb21071ab5a0a0be525796190fb6d2294d17b0c4699db2444a9",
     "apply_site_enhancements.py": "2a1f2ffd0b8ff4740eb4f245a437f6c174989611169510fa94e5c8f1f5e26067",
     "update_page_family.py": "6df68a3d7ff291662a257bb09994dffafa1b589a5b4ef9bcec583ffe2358b27c",
@@ -42,9 +41,9 @@
     "outreach/prospects.csv": "e6c40ff24249dc9c0fbfc048ec142a61802dcfedea25111abd7247330c2b7f1b",
     "outreach/send_lock.json": "31158436a1061934931db1705e3d38026937eed4841085fcca0f210866703774",
     "outreach/suppressions.csv": "d20ca85945453ad5eb51bf4070801a4e490c4c5608c61a656488a73dfc1b5ce4",
-    ".github/workflows/adsense_readiness.yml": "fd885ee8e5816766cd7389beeda91b2587928bc40402586fe8586c9bd17fc31f",
+    ".github/workflows/adsense_readiness.yml": "fde2ebf7408530dca1abe3a9fa23d3bd909d0fbc5ae2d172c73311bc5fa635ec",
     ".github/workflows/audience_growth_baseline.yml": "0299042a165e5a51b39034f3ff073334e427e7873d176b9ede5036eb341bde2c",
-    ".github/workflows/bing_seo_repair.yml": "c52d8fd44619f95c109222d523f386a9004bf6b5ff6054f24bdd862615306dc4",
+    ".github/workflows/bing_seo_repair.yml": "823e2b5728fbe1380a94b9e685b01ba4d9be90121f28062b049349e38ca8228b",
     ".github/workflows/bing_url_automation.yml": "8ebe2173b68b006b6dfe8bce93a5a4d7f30c431774d01955c3b0fe1708fc9fd0",
     ".github/workflows/content_experience_inventory.yml": "56bf9b8aa191860434f51ca220510456b25d938fab16f3a6d2055376eecc2712",
     ".github/workflows/content_experience_repair.yml": "cdea6992f64e3748339506b68109e26f1f0e8572e2e69bbdcd770234e10a2e1e",
@@ -53,7 +52,6 @@
     ".github/workflows/deploy_markets_today.yml": "defa06e48a006bc7c9dfc1fb81b60217ab61cac1bd43ae6df51dfa0c6cd0bc99",
     ".github/workflows/editorial_outreach.yml": "41ccfd2bde1220d1708d528e6d1265fe1da98809d2fe9cd557a521afdb7bf1ea",
     ".github/workflows/gsc_rebuild.yml": "41959df4080bc712397270d583325937bbe6ad7e012fb88e5301873cb5df2b27",
-    ".github/workflows/health_monitor.yml": "d6e480580d66949e3dc110e46411f8d3ebe19f6b6119449e13ce3a81a523448d",
     ".github/workflows/identity_migration.yml": "08b73e89032a3f2ef8f3df091d71ddb8e353a81abe612b051655355e3c27c875",
     ".github/workflows/mastodon_oauth_bootstrap.yml": "3685d69f1815805f837b6cc051c190d814adcfd7183c985172b31f464224e6c6",
     ".github/workflows/motion_related_retrofit.yml": "0191dd56def255888787eef5d4de9d2dbb28c18d29439608cce4bd1f1bc525b9",
@@ -63,7 +61,7 @@
     ".github/workflows/security_guard.yml": "d539f5e4421f342211489e1fc4441a227ff446211dd5a2fe788a514d0f62fff2",
     ".github/workflows/site_content_audit_cleanup.yml": "98c9274ee910b9ba7b525825f6d5423b49dbea1a455206bf2d6ca4b8ad88a442",
     ".github/workflows/tumblr_oauth_bootstrap.yml": "9d14ddafd5b34b8ee9d797790400d5f2e3129a9c3efc54caa747014e5a01305d",
-    ".github/workflows/update_page_family.yml": "a059303e4a8d5be1308ed6e1d87d7334f3b821a35617c852a118867f1c463fb4"
+    ".github/workflows/update_page_family.yml": "a48a1af0544bfa568d561520440064e3c114314ea6910691291558016ff64095"
   },
   "blogger": {
     "page:3254393081257151974": {
