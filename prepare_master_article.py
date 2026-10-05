@@ -193,13 +193,12 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
   sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if core_count<4000:
-  needed=4050-core_count;expand_prompt=f'''Add {needed-10} to {needed+10} words as 2-5 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
-  addition=None
   for _ in range(3):
-   candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion at the exact word budget.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs'))
-   if needed-10<=words(' '.join(candidate))<=needed+10:addition=candidate;break
-  if not addition:raise RuntimeError(f'core expansion failed; assembled core was {core_count} words')
-  sections[-1]['paragraphs'].extend(addition)
+   needed=4050-core_count;expand_prompt=f'''Add approximately {needed} words as 2-6 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
+   candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)).get('paragraphs'));added=words(' '.join(candidate))
+   if added>=80 and core_count+added<=4200:sections[-1]['paragraphs'].extend(candidate);core_count+=added
+   if core_count>=4000:break
+  if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
  elif core_count>4200:
   current=words(' '.join(sections[-1]['paragraphs']));target=current-(core_count-4100)
   if target<250:raise RuntimeError(f'assembled core is too large to normalize safely: {core_count} words')
