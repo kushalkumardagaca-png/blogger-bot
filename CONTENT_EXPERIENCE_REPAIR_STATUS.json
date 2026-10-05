@@ -1,15 +1,15 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "zero_view": true,
-  "posts_checked": 290,
+  "posts_checked": 292,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 5,
-  "remaining_duplicate_heroes": 0,
-  "pages_repaired": 1,
-  "article_snapshot_entries": 75,
-  "news_snapshot_entries": 215,
+  "duplicate_heroes_replaced": 0,
+  "remaining_duplicate_heroes": 1,
+  "pages_repaired": 2,
+  "article_snapshot_entries": 76,
+  "news_snapshot_entries": 216,
   "article_category_counts": {
-    "Contrarian Hooks": 3,
+    "Contrarian Hooks": 4,
     "Age and Wealth Milestones": 3,
     "Passive Income Reality": 3,
     "Middle Class Survival": 4,
@@ -48,7 +48,7 @@
     "Canada": 11,
     "Brazil": 11,
     "Spain": 10,
-    "Mexico": 9,
+    "Mexico": 10,
     "Australia": 11,
     "South Korea": 11,
     "Market and Trading": 11,
@@ -56,5 +56,7 @@
     "Corporate Finance and Industry": 11,
     "Personal Finance": 10,
     "Global News": 11
-  }
+  },
+  "error_type": "RuntimeError",
+  "error": "Content inventory still has an empty article category, missing Global News desk, or duplicate hero assignment"
 }
