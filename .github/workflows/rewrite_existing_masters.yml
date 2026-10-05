@@ -98,7 +98,7 @@ jobs:
         run: python rewrite_existing_masters.py prepare-pending
 
       - name: Persist validated package and three photographs before Blogger update
-        if: steps.preparation.outcome == 'success'
+        if: ${{ always() && steps.preparation.outcome == 'success' }}
         run: |
           set -euo pipefail
           git add MASTER_REWRITE_REPORT.json master_packages/rewrites assets/master PHOTO_USAGE_REGISTRY.json
@@ -112,7 +112,7 @@ jobs:
           $pushed
 
       - name: Update the original Post ID and verify authenticated API reread
-        if: steps.preparation.outcome == 'success'
+        if: ${{ always() && steps.preparation.outcome == 'success' }}
         id: application
         continue-on-error: true
         run: python rewrite_existing_masters.py apply-pending
