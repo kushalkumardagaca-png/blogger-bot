@@ -1,3 +1,6 @@
 {
-  "status": "PASS"
+  "status": "FAIL",
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "data visual repair failed: empty or mismatched visual arrays"
 }
