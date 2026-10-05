@@ -3,14 +3,14 @@
   "zero_view": true,
   "synthetic_views": 0,
   "summary": {
-    "urls": 287,
-    "posts": 273,
+    "urls": 290,
+    "posts": 276,
     "pages": 13,
-    "contentFailures": 1,
-    "externalDestinationsChecked": 2756,
+    "contentFailures": 0,
+    "externalDestinationsChecked": 2771,
     "confirmedExternal404or410": 1,
     "externalRedirectChains": 1,
-    "transientExternalResponses": 251,
+    "transientExternalResponses": 256,
     "workflowWarnings": 0,
     "gscRedirectErrors": 10,
     "syntheticDailyYieldViews": 0
@@ -3201,28 +3201,61 @@
         "lastCrawlTime": "",
         "googleCanonical": "",
         "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html": {
+        "title": "The 'Investment' Your New Friend Found",
+        "checkedAt": "2026-10-05T07:38:40.227711+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/india-2026-10-05.html": {
+        "title": "India Finance News \u2014 5 October 2026",
+        "checkedAt": "2026-10-05T07:38:40.227711+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
+      },
+      "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-05.html": {
+        "title": "Global Finance Wire \u2014 5 October 2026",
+        "checkedAt": "2026-10-05T07:38:40.227711+05:30",
+        "verdict": "NEUTRAL",
+        "coverageState": "URL is unknown to Google",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "lastCrawlTime": "",
+        "googleCanonical": "",
+        "userCanonical": ""
       }
     },
     "summary": {
-      "inventory": 286,
-      "tracked": 286,
+      "inventory": 289,
+      "tracked": 289,
       "pass": 0,
-      "neutralOrOther": 286,
-      "inspectedThisRun": 2,
+      "neutralOrOther": 289,
+      "inspectedThisRun": 3,
       "inspectionErrors": 0,
       "sitemapsVisible": 2,
       "coverageStates": {
         "Discovered - currently not indexed": 204,
         "Redirect error": 10,
-        "URL is unknown to Google": 72
+        "URL is unknown to Google": 75
       },
       "pageFetchStates": {
-        "PAGE_FETCH_STATE_UNSPECIFIED": 276,
+        "PAGE_FETCH_STATE_UNSPECIFIED": 279,
         "REDIRECT_ERROR": 10
       },
       "redirectErrors": 10,
       "discoveredNotIndexed": 204,
-      "unknownToGoogle": 72
+      "unknownToGoogle": 75
     }
   },
   "github": [
@@ -3230,41 +3263,41 @@
       "name": "Master publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37230586929,
-      "latestUpdatedAt": "2026-10-04T20:03:10Z",
+      "latestRunId": 37253198657,
+      "latestUpdatedAt": "2026-10-05T01:53:58Z",
       "detail": "latest=success; 7 failures among 12 recent completed runs"
     },
     {
       "name": "News publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37240117782,
-      "latestUpdatedAt": "2026-10-04T22:28:43Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 37248218199,
+      "latestUpdatedAt": "2026-10-05T00:37:56Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Coordinated social publisher",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37245288937,
-      "latestUpdatedAt": "2026-10-04T23:52:21Z",
+      "latestRunId": 37253220631,
+      "latestUpdatedAt": "2026-10-05T02:09:07Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Security guard",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37247815901,
-      "latestUpdatedAt": "2026-10-05T00:31:11Z",
+      "latestRunId": 37254171918,
+      "latestUpdatedAt": "2026-10-05T02:08:32Z",
       "detail": "latest=success; 0 failures among 12 recent completed runs"
     },
     {
       "name": "Zero-view watchdog",
       "status": "OK",
       "latestConclusion": "success",
-      "latestRunId": 37239882769,
-      "latestUpdatedAt": "2026-10-04T22:26:23Z",
-      "detail": "latest=success; 0 failures among 11 recent completed runs"
+      "latestRunId": 37248081304,
+      "latestUpdatedAt": "2026-10-05T00:37:45Z",
+      "detail": "latest=success; 0 failures among 12 recent completed runs"
     }
   ],
   "providers": [

@@ -1,14 +1,14 @@
 # Daily Yield Zero-View Watchdog
 
-- **Checked:** 2026-10-05T06:05:09.095097+05:30
+- **Checked:** 2026-10-05T07:38:40.227711+05:30
 - **Verdict:** ATTENTION
 - **Synthetic Daily Yield views:** 0
-- **Inventory:** 287 URLs · 273 Posts · 13 Pages
-- **Content failures:** 1
+- **Inventory:** 290 URLs · 276 Posts · 13 Pages
+- **Content failures:** 0
 - **Confirmed external 404/410:** 1
 - **External redirect chains:** 1
 - **Current workflow warnings:** 0
-- **Search Console:** OK · 286 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
+- **Search Console:** OK · 289 URLs tracked · 10 historical redirect errors · 2 sitemaps visible
 
 > No public Daily Yield page was opened. Blogger API and Search Console API are the sources of truth. Search indexing states are reported as observations, not falsely treated as website failures.
 
@@ -19,7 +19,7 @@
 - ✅ **page · MARKETS TODAY**
 - ✅ **page · GLOBAL SNAPSHOT — MOVED**
 - ✅ **page · PRIVACY POLICY**
-- ❌ **page · DAILY NEWS** — Daily Yield favicon identity missing
+- ✅ **page · DAILY NEWS**
 - ✅ **page · MONEY ATLAS**
 - ✅ **page · FOR CORPORATE**
 - ✅ **page · DISCLAIMER**
@@ -27,6 +27,9 @@
 - ✅ **page · CALCULATOR**
 - ✅ **page · DAILY ARTICLE**
 - ✅ **page · ABOUT US**
+- ✅ **post · The 'Investment' Your New Friend Found**
+- ✅ **post · India Finance News — 5 October 2026**
+- ✅ **post · Global Finance Wire — 5 October 2026**
 - ✅ **post · South Korea Finance News — 5 October 2026**
 - ✅ **post · Australia Finance News — 5 October 2026**
 - ✅ **post · Landlords Lie With Appreciation**
