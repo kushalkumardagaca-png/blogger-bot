@@ -31,6 +31,7 @@ CRITICAL_FILES = [
     "auto_blogger_publisher.py", "news_pipeline.py", "facebook_publisher.py",
     "social_creative.py", "publication_preflight.py", "page_family.py",
     "prepare_master_article.py", "master_article_v2.py", "reader_value_article.py",
+    "rewrite_existing_masters.py",
     "brand_identity.py", "social_identity.py", "bluesky_publisher.py",
     "tumblr_publisher.py", "mastodon_publisher.py", "tumblr_oauth_bootstrap.py",
     "social_rotation.py", "dispatch_social_events.py", "persist_social_state.sh",

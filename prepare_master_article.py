@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Research and prepare one strict Master Article V2 package before publication.
 
-Text is produced through an owner-configured OpenAI-compatible provider from a
-topic-specific evidence packet. Three AI photographs are generated through an
-OpenAI-compatible image provider,
+Text is produced through an OpenAI-compatible provider from a topic-specific
+evidence packet. Three distinct photographs are generated through an image
+provider. Explicit repository configuration overrides the audited public
+provider defaults, so generation is not coupled to a retired platform,
 cropped to a common 16:9 landscape ratio, and persisted in the repository before
 Blogger publication. No public Daily Yield page is requested.
 """
@@ -68,8 +69,11 @@ def discover(topic):
  return evidence[:10]
 
 def model_json(messages,max_tokens=16000):
- endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL')
- r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'}},timeout=600)
+ endpoint=os.environ.get('MASTER_TEXT_API_URL','').strip() or 'https://text.pollinations.ai/openai'
+ token=os.environ.get('MASTER_TEXT_API_KEY','').strip();model=os.environ.get('MASTER_TEXT_MODEL','').strip() or 'openai'
+ headers={'Content-Type':'application/json'}
+ if token:headers['Authorization']='Bearer '+token
+ r=requests.post(endpoint,headers=headers,json={'model':model,'messages':messages,'temperature':0.35,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'private':True},timeout=600)
  r.raise_for_status()
  try:payload=r.json()
  except ValueError:raise RuntimeError(f"model endpoint returned non-JSON HTTP {r.status_code} ({r.headers.get('content-type','unknown')}): {r.text[:240]!r}")
@@ -131,17 +135,20 @@ def verify_evidence(draft,evidence):
   raise RuntimeError('independent evidence review rejected the package: '+json.dumps(review.get('unsupported_claims',[])[:10],ensure_ascii=False))
 
 def image_call(prompt):
- endpoint=required('MASTER_IMAGE_API_URL');token=required('MASTER_IMAGE_API_KEY');model=required('MASTER_IMAGE_MODEL')
- r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'prompt':prompt,'n':1,'size':'1536x1024','response_format':'b64_json'},timeout=600);r.raise_for_status();item=r.json()['data'][0]
+ endpoint=os.environ.get('MASTER_IMAGE_API_URL','').strip();token=os.environ.get('MASTER_IMAGE_API_KEY','').strip();model=os.environ.get('MASTER_IMAGE_MODEL','').strip() or 'flux'
+ if not endpoint:
+  url='https://image.pollinations.ai/prompt/'+urllib.parse.quote(prompt,safe='')
+  r=requests.get(url,params={'model':model,'width':1600,'height':900,'safe':'true','nologo':'true','private':'true'},timeout=600);r.raise_for_status();return r.content
+ headers={'Content-Type':'application/json'}
+ if token:headers['Authorization']='Bearer '+token
+ r=requests.post(endpoint,headers=headers,json={'model':model,'prompt':prompt,'n':1,'size':'1536x1024','response_format':'b64_json'},timeout=600);r.raise_for_status();item=r.json()['data'][0]
  return base64.b64decode(item['b64_json']) if item.get('b64_json') else requests.get(item['url'],timeout=120).content
 
-def prepare():
+def build_package(topic,target):
  global STAGE
- STAGE='provider-configuration'
- for name in ('MASTER_TEXT_API_URL','MASTER_TEXT_API_KEY','MASTER_TEXT_MODEL','MASTER_IMAGE_API_URL','MASTER_IMAGE_API_KEY','MASTER_IMAGE_MODEL'):required(name)
- STAGE='load-topic';index,topic=load_next();target=PACKAGES/f"topic_{topic['#']}.json"
+ target=Path(target)
  if target.exists():
-  package=json.loads(target.read_text());validate(package);print(target);return
+  package=json.loads(target.read_text());validate(package);return package
  STAGE='source-discovery';evidence=discover(topic)
  STAGE='text-generation';draft=generate_text(topic,evidence)
  evidence_numbers=set()
@@ -155,7 +162,8 @@ def prepare():
    if number not in evidence_numbers:raise RuntimeError(f'data visual value {value} is absent from the retrieved evidence')
  STAGE='evidence-verification';verify_evidence(draft,evidence)
  prior=[]
- for path in PACKAGES.glob('topic_*.json'):
+ for path in PACKAGES.rglob('*.json'):
+  if path.resolve()==target.resolve():continue
   try:prior.append(json.loads(path.read_text()))
   except Exception:pass
  title_key=re.sub(r'[^a-z0-9]+',' ',draft.get('title','').casefold()).strip()
@@ -163,8 +171,7 @@ def prepare():
  new_heads={x.get('heading','').casefold().strip() for x in draft.get('sections',[])}
  if prior and max((len(new_heads&{x.get('heading','').casefold().strip() for x in p.get('sections',[])})/max(1,len(new_heads)) for p in prior),default=0)>.5:raise RuntimeError('generated heading structure repeats an existing master package')
  slug=re.sub(r'[^a-z0-9]+','-',draft['title'].casefold()).strip('-');folder=ASSETS/slug;folder.mkdir(parents=True,exist_ok=True)
- photos=[]
- prompts=draft.pop('photo_prompts')
+ photos=[];prompts=draft.pop('photo_prompts')
  if len(prompts)!=3:raise RuntimeError('text model did not provide exactly three photo prompts')
  STAGE='image-generation'
  for i,prompt in enumerate(prompts,1):
@@ -178,7 +185,12 @@ def prepare():
  draft['photos']=photos;draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
  STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
  STAGE='final-validation';validate(draft)
- PACKAGES.mkdir(exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');print(target)
+ target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');return draft
+
+def prepare():
+ global STAGE
+ STAGE='load-topic';index,topic=load_next();target=PACKAGES/f"topic_{topic['#']}.json"
+ package=build_package(topic,target);print(target);return package
 if __name__=='__main__':
  try:
   prepare()

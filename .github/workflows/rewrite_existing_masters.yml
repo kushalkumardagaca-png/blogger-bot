@@ -1,0 +1,132 @@
+name: Replace Legacy Master Articles with Master V2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rewrite_existing_masters.py'
+      - 'prepare_master_article.py'
+      - 'master_article_v2.py'
+      - '.github/workflows/rewrite_existing_masters.yml'
+  schedule:
+    - cron: '15 3 * * *'
+    - cron: '45 6 * * *'
+    - cron: '45 9 * * *'
+    - cron: '0 13 * * *'
+    - cron: '45 15 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: daily-yield-master-publisher
+  cancel-in-progress: false
+
+jobs:
+  rewrite_one_backed_up_master:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[run master rewrite]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    permissions:
+      contents: write
+    env:
+      MASTER_TEXT_API_URL: ${{ vars.MASTER_TEXT_API_URL }}
+      MASTER_TEXT_API_KEY: ${{ secrets.MASTER_TEXT_API_KEY }}
+      MASTER_TEXT_MODEL: ${{ vars.MASTER_TEXT_MODEL }}
+      MASTER_IMAGE_API_URL: ${{ vars.MASTER_IMAGE_API_URL }}
+      MASTER_IMAGE_MODEL: ${{ vars.MASTER_IMAGE_MODEL }}
+      MASTER_IMAGE_API_KEY: ${{ secrets.MASTER_IMAGE_API_KEY }}
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+      GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+      GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+      GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pillow requests
+
+      - name: Capture the next original Post before any generation or update
+        id: availability
+        run: |
+          python rewrite_existing_masters.py backup-next
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          print('has_pending='+str(bool(json.load(open('MASTER_REWRITE_STATE.json')).get('pending'))).lower())
+          PY
+
+      - name: Persist the original backup before preparing replacement content
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Master Migration"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add MASTER_REWRITE_STATE.json MASTER_REWRITE_REPORT.json master_rewrite_backups
+          git commit -m "Back up next legacy master before V2 rewrite [skip ci]"
+          pushed=false
+          for attempt in {1..12}; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then pushed=true; break; fi
+            sleep $((attempt * 2))
+          done
+          $pushed
+
+      - name: Research, generate and validate the replacement package
+        if: steps.availability.outputs.has_pending == 'true'
+        id: preparation
+        continue-on-error: true
+        run: python rewrite_existing_masters.py prepare-pending
+
+      - name: Persist validated package and three photographs before Blogger update
+        if: steps.preparation.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git add MASTER_REWRITE_REPORT.json master_packages/rewrites assets/master
+          git commit -m "Prepare validated Master V2 rewrite package [skip ci]"
+          pushed=false
+          for attempt in {1..12}; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then pushed=true; break; fi
+            sleep $((attempt * 2))
+          done
+          $pushed
+
+      - name: Update the original Post ID and verify authenticated API reread
+        if: steps.preparation.outcome == 'success'
+        id: application
+        continue-on-error: true
+        run: python rewrite_existing_masters.py apply-pending
+
+      - name: Persist verified rewrite state or redacted failure
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Master Migration"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add MASTER_REWRITE_STATE.json MASTER_REWRITE_REPORT.json
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Record legacy master V2 rewrite result [skip ci]"
+          for attempt in {1..12}; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
+
+      - name: Enforce fail-closed migration result
+        if: steps.preparation.outcome == 'failure' || steps.application.outcome == 'failure'
+        run: exit 1
+
+      - name: Upload migration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-v2-rewrite-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            MASTER_REWRITE_STATE.json
+            MASTER_REWRITE_REPORT.json
+            master_packages/rewrites/*.json
