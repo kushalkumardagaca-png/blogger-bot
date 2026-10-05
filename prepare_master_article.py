@@ -200,15 +200,20 @@ Write 440-480 actual words in 4-7 natural paragraphs. Establish context before c
    if core_count>=4000:break
   if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
  elif core_count>4200:
-  current=words(' '.join(sections[-1]['paragraphs']));target=current-(core_count-4100)
-  if target<250:raise RuntimeError(f'assembled core is too large to normalize safely: {core_count} words')
-  rewrite_prompt=f'''Rewrite this final section in {target-10} to {target+10} words, preserving its supported claims, citation tokens and focus without repetition. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
-  replacement=None
-  for _ in range(3):
-   candidate=paragraph_list(model_json([{'role':'system','content':'Condense accurately to the exact requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)).get('paragraphs'))
-   if target-10<=words(' '.join(candidate))<=target+10:replacement=candidate;break
-  if not replacement:raise RuntimeError(f'core condensation failed; assembled core was {core_count} words')
-  sections[-1]['paragraphs']=replacement
+  excess=core_count-4100
+  for section in reversed(sections):
+   if excess<=0:break
+   current=words(' '.join(section['paragraphs']));cut=min(excess,max(0,current-280))
+   if cut<=0:continue
+   target=current-cut;rewrite_prompt=f'''Rewrite this section in approximately {target} words, preserving its supported claims, citation tokens and distinct focus without repetition. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
+   replacement=None
+   for _ in range(3):
+    candidate=paragraph_list(model_json([{'role':'system','content':'Condense accurately near the requested word budget.'},{'role':'user','content':rewrite_prompt}],max_tokens=max(1500,target*3)).get('paragraphs'));count=words(' '.join(candidate))
+    if target-50<=count<=target+50:replacement=candidate;break
+   if not replacement:continue
+   actual_cut=current-words(' '.join(replacement));section['paragraphs']=replacement;excess-=max(0,actual_cut)
+  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
+  if core_count>4200:raise RuntimeError(f'assembled core remains too large after safe condensation: {core_count} words')
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if not 4000<=core_count<=4200:raise RuntimeError(f'normalized core is {core_count} words before validation')
  summary_prompt=f'''Using only this completed article and its evidence, write a 650-730 word after-article summary in 6-10 natural paragraphs. Do not add facts, headings, FAQ material or a new direct-answer opening. Return strict JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
