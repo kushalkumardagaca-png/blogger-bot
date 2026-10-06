@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T04:05:34.494434+00:00",
-  "pending": {
-    "id": "7379873073788189964",
-    "title": "Put Money on the Calendar, Not Your Mood",
-    "url": "https://dailyyield.blogspot.com/2026/10/put-money-on-calendar-not-your-mood.html",
-    "published": "2026-10-04T04:59:20-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Rich Habits vs Broke Habits"
-    ],
-    "content_sha256": "acf540cf112a9a1f87361e8334b5e5cbd861af583e44a0add33944f840504c78",
-    "backup": "master_rewrite_backups/post_7379873073788189964.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 73
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T04:05:36.910730+00:00",
+  "post_id": "7379873073788189964",
+  "package": "master_packages/rewrites/post_7379873073788189964.json",
+  "title": "Put Saving on the Payday Clock"
 }
