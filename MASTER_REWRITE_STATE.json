@@ -30,8 +30,19 @@
       "verified_at": "2026-10-06T03:46:18.157046+00:00"
     }
   },
-  "inventory_completed_count": 3,
+  "inventory_completed_count": 4,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_9090794225984393149.json.gz",
+    "content_sha256": "32621b2fb2ce7e74fbd8e5f467e27003ed5a9828028e2a28eff95e2aad0a0d65",
+    "id": "9090794225984393149",
+    "labels": [
+      "Kushal K. Daga",
+      "Recessions Crashes and Defense"
+    ],
+    "published": "2026-10-04T08:45:19-07:00",
+    "title": "Selling the Crash Is the Expensive Feeling",
+    "url": "https://dailyyield.blogspot.com/2026/10/selling-crash-is-expensive-feeling.html"
+  },
   "version": 1
 }
