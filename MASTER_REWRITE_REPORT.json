@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T06:37:07.223415+00:00",
-  "post_id": "3041537970389212664",
-  "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
-  "old_title": "The $48,000 Teacher Money Rebuild",
-  "title": "A Teacher Salary Needs a System",
-  "completed": 11,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T06:54:40.971754+00:00",
+  "pending": {
+    "id": "8754928028995933789",
+    "title": "Break the 'I Deserve It' Spend Loop",
+    "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+    "published": "2026-09-20T23:00:00-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Money Psychology and Mindset"
+    ],
+    "content_sha256": "e10597a1b4cea065c79019f7e894dc6e9229c464fe7b93ca6b2159f29c0903dc",
+    "backup": "master_rewrite_backups/post_8754928028995933789.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 65
 }

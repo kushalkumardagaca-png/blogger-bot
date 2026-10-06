@@ -86,8 +86,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 10,
+  "inventory_completed_count": 11,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_8754928028995933789.json.gz",
+    "content_sha256": "e10597a1b4cea065c79019f7e894dc6e9229c464fe7b93ca6b2159f29c0903dc",
+    "id": "8754928028995933789",
+    "labels": [
+      "Kushal K. Daga",
+      "Money Psychology and Mindset"
+    ],
+    "published": "2026-09-20T23:00:00-07:00",
+    "title": "Break the 'I Deserve It' Spend Loop",
+    "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html"
+  },
   "version": 1
 }
