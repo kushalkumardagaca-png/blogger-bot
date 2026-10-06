@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T05:54:14.204444+00:00",
-  "pending": {
-    "id": "5564629106804601974",
-    "title": "The Portfolio That Pays Your Rent",
-    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
-    "published": "2026-09-20T03:00:00-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Passive Income Reality"
-    ],
-    "content_sha256": "86f90bbf4db09ffdbbe37b0108d45422888745d46f83366b53e6a7c1426a2c04",
-    "backup": "master_rewrite_backups/post_5564629106804601974.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 68
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T05:54:16.559990+00:00",
+  "post_id": "5564629106804601974",
+  "package": "master_packages/rewrites/post_5564629106804601974.json",
+  "title": "Your Portfolio Does Not Owe You Rent"
 }
