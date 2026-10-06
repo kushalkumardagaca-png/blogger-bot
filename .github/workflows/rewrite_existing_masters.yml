@@ -10,6 +10,9 @@ on:
       - 'master_article_v2.py'
       - 'photo_selector.py'
       - 'build_photo_registry.py'
+      - 'master_packages/rewrites/**'
+      - 'assets/master/**'
+      - 'ARENA_REWRITE_MANIFEST.json'
       - '.github/workflows/rewrite_existing_masters.yml'
   schedule:
     # Run only after all five new daily Masters have had their production windows.
