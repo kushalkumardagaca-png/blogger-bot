@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T04:51:39.561871+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_8594486389302937562.json.gz",
-    "content_sha256": "952f9543fb41b9c341b177d245ab1ddd452e50293ea756033975cd0dad4214a2",
-    "id": "8594486389302937562",
-    "labels": [
-      "Kushal K. Daga",
-      "Myths Scams and Bad Advice"
-    ],
-    "published": "2026-10-04T18:53:47-07:00",
-    "title": "The 'Investment' Your New Friend Found",
-    "url": "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html"
-  },
-  "master_count": 76,
-  "remaining": 69
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T04:51:41.520649+00:00",
+  "post_id": "8594486389302937562",
+  "package": "master_packages/rewrites/post_8594486389302937562.json",
+  "title": "Trust Is Not Investment Due Diligence"
 }
