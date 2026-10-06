@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T08:06:33.826388+00:00",
-  "post_id": "727827414976743220",
-  "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
-  "old_title": "The Payday Waterfall",
-  "title": "Your Paycheck Needs a Routing Order",
-  "completed": 14,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T08:13:09.466591+00:00",
+  "pending": {
+    "id": "8372498042597820613",
+    "title": "0% Balance Transfers Without the Trap",
+    "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+    "published": "2026-09-21T06:00:00-07:00",
+    "labels": [
+      "Credit Debt and Optimization",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "d529b4449eec0dafde343470700f8ca0af1817ac5f0baf53ca6e8951e7574532",
+    "backup": "master_rewrite_backups/post_8372498042597820613.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 62
 }
