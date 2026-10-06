@@ -70,8 +70,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 8,
+  "inventory_completed_count": 9,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_7949223128636486384.json.gz",
+    "content_sha256": "5b163212c7cdf29c50820580e1cb6b0a52b7ea806686076c33750289a3b6b374",
+    "id": "7949223128636486384",
+    "labels": [
+      "Kushal K. Daga",
+      "Middle Class Survival"
+    ],
+    "published": "2026-09-20T05:00:00-07:00",
+    "title": "Why Dual-Income Couples Still Feel One Month\u2026",
+    "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html"
+  },
   "version": 1
 }
