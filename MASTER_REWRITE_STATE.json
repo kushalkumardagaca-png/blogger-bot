@@ -134,8 +134,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 16,
+  "inventory_completed_count": 17,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_824646953557055227.json.gz",
+    "content_sha256": "4a7dc62d810ca856000a75a4d1213f77b3fe4929b177dae128665df17fb00f0b",
+    "id": "824646953557055227",
+    "labels": [
+      "Kushal K. Daga",
+      "Middle Class Survival"
+    ],
+    "published": "2026-09-21T21:24:13-07:00",
+    "title": "FIRE Got Harder",
+    "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html"
+  },
   "version": 1
 }
