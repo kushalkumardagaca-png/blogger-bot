@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T07:01:37.243107+00:00",
-  "pending": {
-    "id": "1794738258819020541",
-    "title": "Your Mortgage Is Not the Real Cost",
-    "url": "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html",
-    "published": "2026-09-21T01:00:00-07:00",
-    "labels": [
-      "Housing Cars and Big Buys",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "d167a249f289cef64a8cca16e2b719dd503cfeaf4508481fa7e205404f43c2ee",
-    "backup": "master_rewrite_backups/post_1794738258819020541.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 64
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T07:01:39.460095+00:00",
+  "post_id": "1794738258819020541",
+  "package": "master_packages/rewrites/post_1794738258819020541.json",
+  "title": "The Mortgage Is Only the Cover Charge"
 }
