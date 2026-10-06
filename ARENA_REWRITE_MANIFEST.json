@@ -331,7 +331,16 @@
         "Taxes and Account Optimization"
       ],
       "package": "master_packages/rewrites/post_4165288479268683898.json",
-      "status": "awaiting-arena-draft"
+      "status": "arena-draft-validated",
+      "replacement_title": "Your W-2 Has More Tax Levers Than You Think",
+      "metrics": {
+        "body_words": 4139,
+        "summary_words": 633,
+        "sources": 8,
+        "visuals": 4,
+        "photos": 3
+      },
+      "arena_path": "arena_work/post_4165288479268683898.json"
     },
     {
       "post_id": "6406126111566056260",
@@ -1006,5 +1015,5 @@
       "status": "awaiting-arena-draft"
     }
   ],
-  "arena_validated_count": 1
+  "arena_validated_count": 17
 }
