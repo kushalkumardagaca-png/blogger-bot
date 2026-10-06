@@ -56,14 +56,22 @@ def is_master(post):
 
 def backup_next():
  token=auth();state=load_state()
- if state.get('pending'):
-  pending=state['pending'];path=ROOT/pending['backup']
+ # A validated Arena package is an explicit editorial target. Prefer it over the
+ # generic chronological queue so a package-triggered run stays generation-free.
+ # Any earlier generic backup remains on disk; no Blogger content is changed here.
+ prepared=[]
+ for path in sorted(PACKAGES.glob('post_*.json')):
+  match=re.fullmatch(r'post_(\d+)\.json',path.name)
+  if match and match.group(1) not in state.get('completed',{}):prepared.append(match.group(1))
+ pending=state.get('pending')
+ if pending and (not prepared or pending['id'] in prepared):
+  path=ROOT/pending['backup']
   if not path.exists():raise RuntimeError('pending rewrite backup is missing')
   save_report('BACKUP_READY',pending=pending,master_count=state.get('inventory_master_count'),remaining=state.get('inventory_master_count',0)-len(state.get('completed',{})))
   print(pending['id']);return
  posts=inventory(token)
- # The user explicitly prioritized Master posts published on 2026-10-05; the
- # already-backed-up pending post always remains first and is never displaced.
+ # The user explicitly prioritized Master posts published on 2026-10-05 when
+ # no Arena-authored package is waiting.
  def migration_order(post):
   published=str(post.get('published',''))
   return (0 if published.startswith('2026-10-05') else 1,published,post['id'])
@@ -71,8 +79,12 @@ def backup_next():
  for post in masters:
   if MARKER in (post.get('content') or ''):
    state['completed'].setdefault(post['id'],{'url':post.get('url'),'title':post.get('title'),'status':'already-v2'})
- for post in masters:
-  if post['id'] in state['completed']:continue
+ candidates=[p for p in masters if p['id'] not in state['completed']]
+ if prepared:
+  by_id={p['id']:p for p in candidates};missing=[x for x in prepared if x not in by_id]
+  if missing:raise RuntimeError('prepared package target is not an eligible live Master: '+','.join(missing))
+  candidates=[by_id[prepared[0]]]
+ for post in candidates:
   BACKUPS.mkdir(exist_ok=True);path=BACKUPS/f"post_{post['id']}.json.gz"
   with gzip.open(path,'wt',encoding='utf-8') as f:json.dump(post,f,ensure_ascii=False)
   state['pending']={'id':post['id'],'title':post.get('title'),'url':post.get('url'),'published':post.get('published'),'labels':post.get('labels') or [],'content_sha256':digest(post.get('content')),'backup':str(path.relative_to(ROOT))}
