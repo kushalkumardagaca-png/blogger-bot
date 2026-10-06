@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T08:31:07.003567+00:00",
-  "pending": {
-    "id": "2758262234277933362",
-    "title": "Three-Fund Portfolio",
-    "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
-    "published": "2026-09-21T21:09:34-07:00",
-    "labels": [
-      "Automation and Money Systems",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "2ba2d974e98ac5c57b8d7f27ab9d5a2f48438f37ec8da8d3104a25ab8d92662a",
-    "backup": "master_rewrite_backups/post_2758262234277933362.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 60
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T08:31:08.946059+00:00",
+  "post_id": "2758262234277933362",
+  "package": "master_packages/rewrites/post_2758262234277933362.json",
+  "title": "A Three-Fund Portfolio Needs Three Jobs"
 }
