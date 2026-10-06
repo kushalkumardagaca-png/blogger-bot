@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T15:09:46.621883+00:00",
-  "pending": {
-    "id": "6406126111566056260",
-    "title": "Ask for the Raise That Beats Budgeting",
-    "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html",
-    "published": "2026-09-22T05:33:32-07:00",
-    "labels": [
-      "Career Salary and Raises",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "a28b4643b4e40a74b8929ca73694129e5f0064497c306576d48b9cd9ae662c4d",
-    "backup": "master_rewrite_backups/post_6406126111566056260.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 57
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T15:09:48.823160+00:00",
+  "post_id": "6406126111566056260",
+  "package": "master_packages/rewrites/post_6406126111566056260.json",
+  "title": "Build the Case Before Asking for a Raise"
 }
