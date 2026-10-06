@@ -10,7 +10,7 @@
     },
     {
       "prospect_id": "money-newsroom",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "business-standard-editorial",
@@ -18,7 +18,7 @@
     },
     {
       "prospect_id": "financial-planning-voices",
-      "reason": "classification=restricted/human_only"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "strategic-finance",
@@ -26,7 +26,7 @@
     },
     {
       "prospect_id": "fdic-money-smart",
-      "reason": "classification=restricted/excluded"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "outlook-letters",
@@ -38,47 +38,47 @@
     },
     {
       "prospect_id": "the-financial-diet",
-      "reason": "classification=excluded/excluded"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "forbes-news-tips",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "fortune-personal-finance",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "business-insider-personal-finance",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "investopedia-news-tips",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "inc-contributors",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "best-finance-resource",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "finance-care-online",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "financebuzz-contributors",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "investmentpedia-contributors",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     },
     {
       "prospect_id": "financeproper-contributors",
-      "reason": "prior interaction blocks a new initial message"
+      "reason": "outside recipient local business-time window"
     }
   ]
 }
