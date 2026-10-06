@@ -1,0 +1,490 @@
+{
+  "title": "A Three-Fund Portfolio Needs Three Jobs",
+  "meta_description": "Build a three-fund portfolio by defining asset roles, checking ETF overlap and fees, coordinating accounts and using a written rebalancing rule.",
+  "entities": [
+    "three-fund portfolio",
+    "asset allocation",
+    "portfolio diversification",
+    "ETF overlap",
+    "portfolio rebalancing"
+  ],
+  "geography": [
+    "United States",
+    "United Kingdom"
+  ],
+  "temporal_coverage": "2025/2026",
+  "module_headings": {
+    "contents": "Design the portfolio from its jobs",
+    "summary": "The three-fund decision in brief",
+    "faq": "Before choosing the funds",
+    "glossary": "Portfolio design terms",
+    "sources": "Evidence behind the structure",
+    "internal_links": "Continue building the system",
+    "external_sources": "Primary investor guidance"
+  },
+  "sections": [
+    {
+      "heading": "Three Funds Are a Framework, Not a Promise",
+      "paragraphs": [
+        "A three-fund portfolio is an operating design, not a guarantee that three tickers will outperform twelve. Its value comes from assigning a broad market job to each holding, seeing the total allocation clearly, controlling cost and maintaining the mix. A poorly chosen trio can be concentrated, expensive or mismatched to the investor just as easily as a larger portfolio.",
+        "The familiar version uses one broad domestic stock fund, one broad international stock fund and one broad bond fund. Those labels describe roles rather than mandatory products. The appropriate markets, currencies, bond risks and stock-to-bond split depend on where the investor lives, the goal, account rules, taxes and the loss the plan can withstand without being abandoned.",
+        "Count economic exposures before counting funds. One total-market fund may own thousands of securities, while several thematic funds may repeatedly own the same large companies. FINRA warns that exchange-traded products can overlap and that similar holdings can affect overall diversification. [[S4|Its guidance]] is a direct reason to inspect what each fund owns rather than celebrating a higher ticker count.",
+        "Simplicity has an honest purpose: fewer decisions to document, fewer holdings to rebalance, less opportunity to chase recent winners and an easier explanation for every dollar. It does not eliminate market losses, interest-rate risk, currency movements, tracking difference, taxes or behavioral mistakes. A simple portfolio remains a risky investment portfolio.",
+        "This article uses illustrative allocations and fee assumptions, not model portfolios or personal recommendations. Percentages are teaching examples. An investor needs to account for time horizon, cash reserves, debt, income stability, legal jurisdiction, tax status and ability to accept volatility before selecting funds or an allocation.",
+        "The Securities and Exchange Commission notes that mutual funds and ETFs can help investors diversify, but both can lose money and both have costs. [[S3|Its fund guide]] also warns that past performance is not a reliable indicator of future performance. The three-fund decision should therefore begin with structure, not a leaderboard.",
+        "A fund earns a place only when its job can be stated in one sentence, its benchmark and holdings support that job, its risks fit the plan, and its cost is competitive for the access it provides. If two funds perform the same job, the portfolio needs an explicit reason for both. If no reason exists, complexity has arrived without a benefit.",
+        "The proper comparison is not three funds versus twelve in the abstract. Compare two complete portfolios serving the same goal and target allocation, including overlap, cost, trading friction, tax consequences and the owner's ability to maintain them. Simplicity wins when it delivers the needed exposures with fewer failure points—not because three is a magical number.",
+        "Write the architecture before searching for products: growth assets, stabilizing assets, desired geography, acceptable implementation method and rebalancing rule. Product selection then fills defined boxes. Starting with popular tickers reverses the process and often leaves a collection that looks diversified while lacking a coherent allocation."
+      ]
+    },
+    {
+      "heading": "The Goal Sets the Allocation Before the Funds",
+      "paragraphs": [
+        "Name the money's job, target date and required flexibility. Retirement thirty years away, a home deposit in four years and an indefinite family endowment cannot share one default allocation. Investor.gov explains that asset allocation divides money among asset classes and that the appropriate mix depends on time horizon and risk tolerance. [[S1|That foundation]] comes before choosing a fund family.",
+        "Separate near-term spending from the long-term portfolio. Money required soon may need cash or other low-volatility instruments rather than a stock fund that can fall sharply before the bill arrives. A three-fund investment portfolio should not be forced to double as the emergency fund merely to keep the account screen tidy.",
+        "Translate risk tolerance into an observable loss scenario. Instead of saying 'moderate,' estimate how the household would respond if the equity portion fell substantially and recovery took years. Would contributions continue? Would the goal date move? Would the investor sell? A portfolio that is abandoned during stress was too aggressive regardless of a questionnaire label.",
+        "Risk capacity differs from emotional willingness. A secure income, flexible goal and long horizon may create capacity to hold more volatile assets, while a fragile job, fixed deadline or large upcoming withdrawal reduces it. The allocation must respect the tighter constraint. Courage cannot pay a bill due during a market decline.",
+        "Choose the broad stock-bond decision first, then divide stocks between home and international markets. Bonds can reduce volatility and fund rebalancing, but they can lose value when rates or credit conditions change. International stocks add geographic and currency exposure, but they also carry political, accounting, market and currency risks. Diversification rearranges risk; it does not erase it.",
+        "Treat any sample such as 60% domestic stock, 20% international stock and 20% bonds as arithmetic, not advice. Its equity allocation is 80%, not 60%, because both stock funds belong to the same broad risk bucket. Always calculate the total stock, bond, cash and other exposure after looking through every fund.",
+        "Decide whether the target is a fixed allocation or a glide path. A fixed mix stays constant until goals change. A glide path intentionally becomes more conservative over time under a written schedule. Neither should drift accidentally because one asset performed well or a fund was added after an exciting year.",
+        "Document why the allocation can support the goal. Record horizon, expected contributions, withdrawal window, emergency reserve, maximum tolerable drawdown and review triggers. Expected return may inform planning, but it should be a range with uncertainty, not the single number needed to make an underfunded goal appear solved.",
+        "If the required return seems implausibly high, do not make the portfolio more speculative until the spreadsheet works. Change controllable variables first: savings rate, spending target, goal date or contribution duration. Investment design manages uncertainty; it cannot manufacture a safe solution to a funding gap."
+      ]
+    },
+    {
+      "heading": "Give Each Fund One Distinct Market Job",
+      "paragraphs": [
+        "The domestic-stock role seeks broad ownership of the investor's home equity market. Verify whether 'total market' truly includes large, mid-sized and small companies, and whether it uses market-cap weighting or another method. A large-company index may be perfectly deliberate, but it should not be described as the entire market if smaller companies are absent.",
+        "The international-stock role should define its geography. Some funds include developed markets only; others add emerging markets; some exclude the investor's home country, while global funds include it. Check country, sector and company concentration. The word 'international' alone does not establish comprehensive diversification.",
+        "The bond role needs equal scrutiny. A broad bond index can include government, agency and corporate securities with a particular duration and credit profile. A long-duration fund, high-yield fund or foreign-currency bond fund may behave very differently. Match duration, quality and currency exposure to the stabilizing job rather than reaching for the highest recent yield.",
+        "Read the investment objective, principal strategy, benchmark and principal risks in the prospectus or key disclosure. Investor.gov says an ETF's documents provide its objective, strategies, risks, costs and performance. [[S2|The ETF bulletin]] also notes that market price can differ from net asset value and that trading brings spreads and possible commissions.",
+        "Check the holdings depth and sampling method. Index funds may own every benchmark constituent or a representative sample. Sampling can be efficient, but it introduces tracking considerations. Compare the fund with its benchmark over appropriate periods after fees without assuming that the closest historical tracker will remain the closest.",
+        "Choose mutual-fund or ETF implementation based on actual account mechanics. Mutual funds usually transact at end-of-day net asset value and may support exact-dollar automatic purchases. ETFs trade intraday and may introduce bid-ask spreads, premiums, discounts and whole-share constraints unless the platform offers fractional shares. The wrapper does not determine the asset allocation.",
+        "Avoid treating a fund's name as due diligence. 'Core,' 'balanced,' 'world' and 'income' are marketing labels, not standardized exposure guarantees. A world-stock fund may already include domestic companies, and adding a domestic fund can create a home-market overweight. Look through the fund before combining it with another.",
+        "Currency hedging deserves a written choice. An international equity fund may leave currency exposure unhedged; a bond fund may hedge it. Hedging changes behavior and cost but does not make the fund universally safer. Understand the policy and ensure the role remains stable across products rather than discovering the difference during volatility.",
+        "Create a one-page fund-role card: job, benchmark, coverage, exclusions, expense ratio, trading costs, distribution policy, domicile, replication method, currency policy and replacement criteria. If the card cannot be completed from authoritative documents, the fund is not ready for purchase."
+      ]
+    },
+    {
+      "heading": "More Tickers Can Hide the Same Holdings",
+      "paragraphs": [
+        "Twelve ETFs can still represent one concentrated bet. A broad domestic fund, a large-company fund, a technology fund and several themes may all place the same mega-cap companies near the top. The account contains more lines, yet the underlying company exposure has been counted repeatedly. Diversification must be measured through holdings and risk factors.",
+        "FINRA advises investors to look under the hood of each fund, identify similar company positions and consider overlap with individual securities. [[S5|Its concentration-risk guidance]] also recommends diversification both across and within asset classes. This is stronger than a rule based on the number of products.",
+        "Build an exposure map with rows for asset class, country, sector, company size, credit quality, maturity and currency. Assign each holding to the exposures it contributes. For fund-of-funds products, look through underlying funds when information is available. A total-portfolio map reveals both gaps and duplication.",
+        "Overlap is not automatically wrong. A deliberate tilt toward small companies, value stocks or a home market may reflect a documented belief and risk budget. The problem is accidental overlap: the investor thinks twelve funds reduce risk when several merely intensify the same exposure. Intent and measurement separate a tilt from clutter.",
+        "Thematic and sector funds need a hurdle. State the expected portfolio job, maximum weight, source of funding and conditions for exit. If the holding exists because a story is persuasive or the sector recently performed well, it is speculation around the core rather than required diversification. Label it accurately and limit it accordingly.",
+        "Check bond overlap too. Several 'income' funds may own the same corporate issuers or share sensitivity to interest rates and credit spreads. A stock-and-bond balanced fund combined with separate stock and bond funds can duplicate both sleeves. The fund count reveals nothing until the internal allocations are aggregated.",
+        "Watch indirect concentration from employment and property. A worker whose salary, pension and employer shares depend on one industry may not want an additional sector fund tied to the same cycle. A homeowner already has substantial local-property exposure. The investment account is part of the household balance sheet, not an isolated contest.",
+        "Compare the simple and complex portfolios using weighted underlying exposures. If both deliver nearly the same market mix, the extra holdings must justify their fees, monitoring, tax lots and rebalancing interactions. If the complex version changes the mix, evaluate that decision explicitly rather than calling it harmless diversification.",
+        "Set a deletion test: if removing a fund leaves the target exposures materially unchanged, the holding may be redundant. Tax consequences or transaction costs can justify retaining an existing position, but new contributions need not keep feeding it. Simplification can happen gradually without creating unnecessary taxable sales."
+      ]
+    },
+    {
+      "heading": "Cost Is a Portfolio Exposure Too",
+      "paragraphs": [
+        "Expense ratios reduce fund assets every year regardless of whether the market rises or falls. The cost may appear small as a percentage, but it compounds across a long holding period. Investor.gov emphasizes that both mutual funds and ETFs charge fees and expenses and that all such costs reduce return. [[S6|Its comparison bulletin]] distinguishes ongoing costs from direct transaction charges.",
+        "Calculate the portfolio's weighted expense ratio, not just the cheapest fund. Multiply each fund's weight by its expense ratio and add the results. A 5% satellite with a high fee may have a modest portfolio effect; an expensive core holding affects nearly every dollar. The weighted number makes trade-offs visible.",
+        "Add costs outside the headline ratio: commissions, bid-ask spreads, platform or account fees, sales loads, redemption fees, foreign-exchange charges and advice fees. An ETF with a low expense ratio can be expensive for small frequent trades on a costly platform. A no-transaction-fee fund can still carry a larger annual expense.",
+        "FINRA's Fund Analyzer allows investors to compare specific funds, share classes, trade costs, loads and holding periods. [[S7|Its instructions]] stress that account-level costs can apply even when a product has no stated load or commission. Use the investor's platform and purchase pattern rather than a generic fee ranking.",
+        "Illustrate the drag without presenting a forecast as fact. On £100,000 growing at a hypothetical 5% before fees for twenty years, a 0.10% annual cost and a 0.80% annual cost produce different ending values. The example isolates fees under fixed assumptions; actual returns, contributions, taxes and costs vary.",
+        "Tracking difference matters alongside expense ratio. Securities lending revenue, sampling, taxes, cash balances and trading can cause a fund to lag or occasionally outpace its benchmark by more than the stated fee. Evaluate a consistent history and methodology without using a short period as a prediction.",
+        "Turnover can create hidden trading costs inside the fund and distributions in taxable accounts. The SEC's mutual-fund guide notes that costs lower returns and that investors may owe tax on distributions. [[S3|The guide]] is a reason to review turnover, distribution history and after-tax implications, not merely the management fee.",
+        "Do not switch for a tiny fee difference without calculating break-even. Selling may create tax, commissions, spreads or time out of market. A cheaper alternative is useful only when future savings plausibly exceed transition cost and the replacement preserves the intended exposure.",
+        "Write a cost ceiling and review it annually. The ceiling should apply to total portfolio cost for the chosen access, not become a race to the absolute cheapest ticker. Reliability, tracking, liquidity, tax treatment, automation and service can justify a small difference when they improve implementation."
+      ]
+    },
+    {
+      "heading": "See One Portfolio Across Every Account",
+      "paragraphs": [
+        "A household with a workplace plan, personal retirement account and taxable brokerage account does not own three separate strategies. It owns one portfolio held in several containers. Calculate the target and actual allocation across all accounts, including pensions or other assets when they materially affect risk.",
+        "The same three funds need not appear in every account. One account may offer an excellent bond fund but a poor international option; another may offer broad low-cost equities. Fill the total household roles where implementation is strongest, then aggregate the weights. Account-level imbalance can still produce a balanced total.",
+        "Asset location is different from asset allocation. Allocation determines how much economic exposure belongs to stocks, bonds and other assets. Location decides which account holds those exposures. Tax rules, withdrawal restrictions, creditor protection and estate consequences are jurisdiction-specific, so obtain qualified advice rather than relying on universal internet rules.",
+        "In the United States, mutual-fund dividends and capital-gain distributions can create taxable income even when reinvested, and sales can create gain or loss. IRS Publication 550 explains the treatment and reporting framework. [[S8|That source]] illustrates why a taxable simplification trade cannot be evaluated solely by fund fees.",
+        "Keep tax lots and cost basis intact when consolidating. Verify that transfers are in kind when appropriate, that the receiving platform supports the securities, and that basis records arrive correctly. Selling everything to make the screen cleaner can trigger avoidable tax or remove an otherwise acceptable holding.",
+        "Employer stock and restricted compensation belong on the exposure map once owned or economically vested. They can create concentration in the same company that provides income. A three-fund account beside a large employer-stock position is not a diversified household portfolio merely because the account itself looks broad.",
+        "Currency and domicile also span accounts. A globally diversified portfolio may hold assets priced in several currencies, while fund domicile can affect withholding, reporting and estate considerations. Do not infer economic currency exposure from the trading currency alone; a sterling-traded global equity fund can own businesses earning revenue worldwide.",
+        "Create a household allocation table listing each account, holding, role, current value and target contribution. Sum by role rather than by ticker. This turns rebalancing into a funding problem: direct new money to the underweight role wherever it is most efficient instead of trading every account back to identical percentages.",
+        "Review beneficiary designations, access and account rules separately from the investments. A perfectly allocated portfolio can still fail operationally if beneficiaries are outdated, records are inaccessible or a spouse cannot locate accounts. Simple holdings should be accompanied by simple, secure documentation."
+      ]
+    },
+    {
+      "heading": "Rebalance by Rule, Not by Headlines",
+      "paragraphs": [
+        "Market movement changes allocation. If stocks rise faster than bonds, the portfolio becomes more equity-heavy and riskier than the written target. Rebalancing restores the intended mix; it is not a forecast that the winner will soon fall. Investor.gov describes rebalancing as returning a portfolio to its desired allocation. [[S1|The principle]] keeps risk, not predictions, in control.",
+        "Choose a calendar rule, a threshold rule or a combination. A calendar rule reviews every six or twelve months. A threshold rule acts when an asset class moves beyond a stated band, such as five percentage points from target. A combined rule checks periodically and trades only when a band is crossed, reducing needless activity.",
+        "Use contributions, dividends and withdrawals first. Direct new money toward underweight roles and take planned withdrawals from overweight roles when sensible. The SEC's year-end bulletin lists directing continuous contributions as one way to rebalance. [[S2|This cash-flow method]] may reduce selling, taxes and transaction costs.",
+        "Rebalance at the asset-class level before forcing every fund to an exact weight. If total equities are on target but domestic and international stocks have drifted modestly within allowed bands, the written rule determines whether action is needed. Precision beyond the rule can create cost without meaningful risk improvement.",
+        "In taxable accounts, compare drift with the tax and trading cost of correction. Rebalancing is not permission to ignore tax lots or wash-sale rules. An investor may rebalance inside tax-advantaged accounts or with new cash while allowing a taxable position to move back gradually.",
+        "Record the calculation before trading: current values, current percentages, target percentages, bands, required change and selected account. Then record order type, execution price, spread and resulting allocation. A documented worksheet prevents accidental double trades across accounts.",
+        "Avoid market orders in thinly traded ETFs without understanding execution risk. Liquidity, spreads and premiums or discounts can worsen during volatile periods. The SEC's ETF bulletin recommends reviewing costs and product information. Use platform tools and order types only when their operation is understood.",
+        "A life change can justify changing the target; market news alone usually does not. A nearer withdrawal date, changed income, inheritance, pension revision or altered goal can change capacity. Write the new allocation and transition plan first. Do not disguise fear or enthusiasm as a strategic review.",
+        "After rebalancing, confirm settlement, cash balance, allocation and automation. Update recurring contributions to support the target and retain the worksheet. The process should end with fewer open decisions, not a lingering intention to make another tactical trade next week."
+      ]
+    },
+    {
+      "heading": "Know When Three Is Too Many or Too Few",
+      "paragraphs": [
+        "Three funds may be more than necessary when one balanced or target-date fund already supplies the desired diversified allocation and automatic rebalancing at acceptable cost. Adding separate funds around it can duplicate exposures and disrupt its glide path. Understand the all-in-one product before building on top of it.",
+        "Three may be too few when the plan requires a distinct job the chosen funds do not provide: inflation-linked liabilities, a near-term cash reserve, a specialized tax-exempt bond allocation, a mandated ethical screen or a liability-matching sleeve. Add a holding for a defined need, not to make the portfolio appear sophisticated.",
+        "A single global stock fund may combine domestic and international equity roles. Paired with a suitable bond fund, the portfolio has two products but can still express the same economic architecture. Conversely, a market unavailable through one broad product may require several regional funds. Exposure design matters more than the number three.",
+        "Small accounts and platforms without fractional trading can make three-way contributions awkward. An all-in-one fund or broad mutual funds accepting exact currency amounts may automate more effectively. Operational ease is a legitimate criterion because a theoretically optimal plan that remains unfunded is inferior to a good plan followed consistently.",
+        "Ethical or sustainability constraints require deeper holdings review. Two funds with similar labels can use different exclusions, engagement policies and index methodologies. A screened fund may overlap heavily with a standard index or create sector concentration. Document both the values objective and the resulting portfolio trade-offs.",
+        "Retirees drawing income may need a cash or short-duration spending reserve outside the three long-term roles. That reserve is not a performance enhancer; it supports planned withdrawals without forcing sales at an inconvenient time. Size and design depend on spending, income sources and risk, not a universal number of years.",
+        "Investors with concentrated legacy holdings may use the three-fund structure as a destination while transitioning gradually. Treat the legacy holding as an exposure in the current allocation and direct new money around it. Tax-aware reduction can take time; pretending it is outside the portfolio understates risk.",
+        "Do not add alternatives merely because stocks and bonds sometimes fall together. Real estate, commodities, private assets and complex strategies bring their own liquidity, valuation, leverage, fee and tax risks. The burden of proof rises with complexity. Define the job and examine whether a simpler holding already performs it.",
+        "Use a complexity budget: each additional fund needs a distinct role, measurable benefit, acceptable cost and a maintenance rule. When one of those is missing, the holding is a candidate for consolidation. The budget permits necessary complexity while preventing collection by impulse."
+      ]
+    },
+    {
+      "heading": "Write the Maintenance Contract Before Investing",
+      "paragraphs": [
+        "An investment policy statement turns the portfolio from a collection into a system. It can fit on one page: goal, horizon, target allocation, permitted ranges, fund roles, contribution rule, rebalancing method, review dates, cost ceiling and conditions for replacement. The document exists to guide decisions when markets are noisy.",
+        "List events that do not justify change: headlines, elections by themselves, forecasts, social-media enthusiasm, a fund's one-year ranking or fear after a routine decline. Then list legitimate review triggers: goal changes, persistent benchmark change, material fee increase, fund closure, strategy drift, tracking problems or a better implementation after costs.",
+        "Replacement criteria should preserve exposure. Compare benchmark, holdings, duration, currency policy, domicile, tax effect, liquidity and total cost. A lower expense ratio does not make two funds equivalent. Map the old and new roles before selling, and plan the transition so the portfolio does not accidentally leave an asset class.",
+        "Automate contributions in target-aware proportions or direct them to underweights. Automation reduces the number of moments when mood can interfere, but it still needs review after salary changes, contribution limits or account migrations. Confirm that distributions are reinvested or directed according to the plan.",
+        "Schedule a brief quarterly operational check and one deeper annual review. The quarterly check confirms contributions, cash, beneficiaries, statements and unexpected changes. The annual review recalculates household allocation, weighted cost, overlap, goal progress and rebalancing need. Constant monitoring is not a substitute for a better rule.",
+        "Measure success with process and goal metrics, not whether the portfolio beat a neighbor's. Track savings rate, contribution completion, allocation drift, weighted fees, progress toward the funded goal and adherence during volatility. Relative returns can be compared with appropriate blended benchmarks, but short-term outperformance is not the system's purpose.",
+        "Prepare for incapacity or succession. Maintain a secure inventory of institutions and accounts, not passwords in an unsafe document. Record where statements, policy and beneficiary information are held and whom to contact. A simple portfolio becomes genuinely useful when another trusted person can understand its design.",
+        "Review the policy after major life events but resist rewriting it to fit recent markets. If the allocation changes, record what changed in the goal or capacity and why the new target is more suitable. An audit trail exposes performance chasing disguised as planning.",
+        "Three funds can be enough when their roles cover the required markets, the total allocation matches the goal, costs are understood and a maintenance rule survives stress. Twelve can be appropriate when each adds a necessary exposure. The durable principle is not three versus twelve. It is one clear job for every holding and one coherent plan for the whole portfolio."
+      ]
+    }
+  ],
+  "summary": [
+    "A three-fund portfolio is a framework, not a promise of superior returns. Its usual roles are broad domestic stocks, broad international stocks and broad bonds, but the appropriate markets, products and weights depend on the goal, jurisdiction, account access, taxes and the investor's capacity to tolerate losses.",
+    "Start with the money's purpose, time horizon, spending deadline and emergency reserve. Choose the broad stock-bond allocation before products, then decide how equity should be divided geographically. Translate risk into an observable loss scenario rather than relying on labels such as conservative or moderate.",
+    "Give each fund one documented job. Check its objective, benchmark, coverage, exclusions, holdings, costs, risks, replication method, currency policy and wrapper. A domestic large-company index is not automatically a total market; an international fund may exclude emerging markets; and bond funds can differ sharply in duration and credit risk.",
+    "Count underlying exposures rather than tickers. Several funds can repeatedly own the same companies, sectors or bond issuers. Build a total-portfolio map by asset class, country, sector, company size, credit quality, maturity and currency. Overlap can be a deliberate tilt, but accidental overlap is not diversification.",
+    "Calculate weighted portfolio cost and add commissions, spreads, platform fees, loads, foreign exchange and advice charges. Consider tracking difference, turnover and tax distributions as well as the expense ratio. Do not switch for a tiny fee reduction until future savings exceed tax and transition costs.",
+    "View workplace plans, retirement accounts and taxable accounts as one household portfolio. The same three products need not appear in every account. Place each role where implementation is strongest, aggregate values across accounts and distinguish asset allocation from tax-sensitive asset location.",
+    "Rebalance under a written calendar or threshold rule rather than a forecast. Use new contributions, dividends and withdrawals to fill underweights before selling. In taxable accounts, compare drift with tax and trading costs. Record the calculation, execution and resulting allocation.",
+    "Three funds may be more than necessary when an all-in-one fund already provides the target mix, or too few when a genuine liability, tax, ethical or cash-reserve need requires another role. Every additional holding should have a distinct purpose, measurable benefit, acceptable cost and maintenance rule.",
+    "Write a one-page investment policy covering goals, allocation, ranges, fund roles, contributions, rebalancing, review dates, cost ceiling and replacement criteria. Define which headlines do not justify change and which structural events do. Measure contribution completion, drift, fees and goal progress rather than short-term bragging rights.",
+    "The durable rule is not that three funds beat twelve. A simple portfolio succeeds when it supplies the required exposures with fewer failure points and can be maintained through difficult markets. A larger portfolio can also be valid when every holding has one clear job inside one coherent household plan.",
+    "Inspect domestic-stock, international-stock and bond roles separately. Verify company-size coverage, included countries, emerging-market policy, bond duration, credit quality and currency treatment. Product names such as total, world, core or income do not establish that the underlying exposure matches the intended role.",
+    "Coordinate the plan with the rest of the household balance sheet. Employer shares, pensions, property, near-term cash needs and concentrated income can change effective risk. A diversified account is not necessarily a diversified household when employment and investments depend on the same company, sector or local economy.",
+    "Keep a fund-role card and household allocation table. Record each fund's benchmark, expense ratio, account, value, target role and replacement conditions. During reviews, direct contributions toward underweights and simplify redundant holdings gradually when taxes or transaction costs make an immediate sale inefficient. The goal is controlled exposure and durable execution, not the cleanest possible account screen or the most fashionable collection of tickers."
+  ],
+  "faq": [
+    {
+      "question": "Do three funds automatically beat twelve ETFs?",
+      "answer": "No. Performance depends on underlying exposures, allocation, costs and market outcomes. Three funds are useful only when they cover the required jobs clearly."
+    },
+    {
+      "question": "What are the usual three roles?",
+      "answer": "Broad domestic equities, broad international equities and broad bonds, although the correct markets and products depend on the investor’s circumstances."
+    },
+    {
+      "question": "Can one global stock fund replace two stock funds?",
+      "answer": "Potentially. Verify whether it includes the home market, desired regions and company sizes, then combine it with the chosen stabilizing assets."
+    },
+    {
+      "question": "How often should a portfolio be rebalanced?",
+      "answer": "Use a written calendar, threshold or combined rule. Review does not require trading when the portfolio remains inside its permitted ranges."
+    },
+    {
+      "question": "Are several ETFs always more diversified?",
+      "answer": "No. Multiple ETFs can hold the same companies, sectors or bond issuers. Inspect and aggregate their underlying exposures."
+    },
+    {
+      "question": "Should an expensive existing fund be sold immediately?",
+      "answer": "Not automatically. Compare future fee savings with taxes, spreads, commissions and whether the replacement preserves the intended exposure."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Asset allocation",
+      "definition": "The division of a portfolio among broad asset classes such as stocks, bonds and cash."
+    },
+    {
+      "term": "Diversification",
+      "definition": "Spreading exposure across and within asset classes to reduce dependence on one investment."
+    },
+    {
+      "term": "Expense ratio",
+      "definition": "Annual fund operating expenses expressed as a percentage of assets."
+    },
+    {
+      "term": "Tracking difference",
+      "definition": "The gap between a fund’s return and the return of its benchmark."
+    },
+    {
+      "term": "Bid-ask spread",
+      "definition": "The difference between the highest current purchase bid and lowest current sale offer."
+    },
+    {
+      "term": "Rebalancing",
+      "definition": "Returning portfolio weights toward the written target allocation."
+    },
+    {
+      "term": "Asset location",
+      "definition": "The choice of which account type holds each portfolio exposure."
+    },
+    {
+      "term": "Home bias",
+      "definition": "An overweight to the investor’s domestic market relative to a global market portfolio."
+    },
+    {
+      "term": "Duration",
+      "definition": "A measure of a bond portfolio’s sensitivity to interest-rate changes."
+    },
+    {
+      "term": "Investment policy statement",
+      "definition": "A written contract defining portfolio goals, rules and review triggers."
+    }
+  ],
+  "visuals": [
+    {
+      "type": "bar",
+      "title": "Three funds can express four-fifths equity exposure",
+      "caption": "Illustrative allocation only: domestic and international funds are both equity.",
+      "source": 1,
+      "after_section": "The Goal Sets the Allocation Before the Funds",
+      "labels": [
+        "Domestic stock",
+        "International stock",
+        "Broad bonds"
+      ],
+      "values": [
+        60,
+        20,
+        20
+      ]
+    },
+    {
+      "type": "bar",
+      "title": "Ticker count can exceed distinct portfolio jobs",
+      "caption": "Illustrative comparison showing why the number of funds is not a diversification measure.",
+      "source": 4,
+      "after_section": "More Tickers Can Hide the Same Holdings",
+      "labels": [
+        "Fund tickers",
+        "Distinct core jobs",
+        "Potentially redundant holdings"
+      ],
+      "values": [
+        12,
+        3,
+        9
+      ]
+    },
+    {
+      "type": "bar",
+      "title": "Annual cost compounds across a long holding period",
+      "caption": "Illustrative ending value of £100,000 at 5% gross return for 20 years before 0.10% or 0.80% annual cost; returns are not forecasts.",
+      "source": 6,
+      "after_section": "Cost Is a Portfolio Exposure Too",
+      "labels": [
+        "0.10% annual cost",
+        "0.80% annual cost"
+      ],
+      "values": [
+        260354,
+        227536
+      ]
+    },
+    {
+      "type": "table",
+      "title": "A threshold rule turns drift into a decision",
+      "caption": "Illustrative bands for a 60/20/20 target; personal targets and bands differ.",
+      "source": 2,
+      "after_section": "Rebalance by Rule, Not by Headlines",
+      "data": [
+        {
+          "Role": "Domestic stock",
+          "Target": "60%",
+          "Review band": "55%–65%"
+        },
+        {
+          "Role": "International stock",
+          "Target": "20%",
+          "Review band": "15%–25%"
+        },
+        {
+          "Role": "Broad bonds",
+          "Target": "20%",
+          "Review band": "15%–25%"
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/a-three-fund-portfolio-needs-three-jobs/photo-1.jpg",
+      "alt": "Investor reading a fund document beside a laptop displaying portfolio graphics",
+      "caption": "Photo: Kampus Production / Pexels License",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/a-man-looking-at-documents-8441818/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "creator": "Kampus Production"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/a-three-fund-portfolio-needs-three-jobs/photo-2.jpg",
+      "alt": "People comparing three asset-allocation pie charts beside a laptop",
+      "caption": "Photo: RDNE Stock project / Pexels License",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/a-person-holding-a-pie-chart-report-8068810/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "creator": "RDNE Stock project"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/a-three-fund-portfolio-needs-three-jobs/photo-3.jpg",
+      "alt": "Person calculating portfolio weights in a notebook during a review",
+      "caption": "Photo: AlphaTradeZone / Pexels License",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/person-calculating-white-writing-on-a-notebook-5833259/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "creator": "AlphaTradeZone"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Investor.gov",
+      "title": "Introduction to Investing: Asset Allocation and Diversification",
+      "url": "https://www.investor.gov/introduction-investing",
+      "date": "2026",
+      "use": "Goals, time horizon, risk tolerance and broad allocation."
+    },
+    {
+      "name": "Investor.gov",
+      "title": "Is It Time to Rebalance Your Investment Portfolio?",
+      "url": "https://www.investor.gov/additional-resources/spotlight/formerdirectorlorischock-directors-take/it-time-rebalance-your-investment-portfolio",
+      "date": "2025",
+      "use": "Diversification and periodic rebalancing."
+    },
+    {
+      "name": "U.S. Securities and Exchange Commission",
+      "title": "Mutual Funds and ETFs: A Guide for Investors",
+      "url": "https://www.sec.gov/investor/pubs/sec-guide-to-mutual-funds.pdf",
+      "date": "2025",
+      "use": "Fund risks, diversification, costs and tax distributions."
+    },
+    {
+      "name": "FINRA",
+      "title": "Exchange-Traded Funds and Products",
+      "url": "https://www.finra.org/investors/investing/investment-products/exchange-traded-funds-and-products",
+      "date": "2025",
+      "use": "ETF structure, costs and overlapping exposures."
+    },
+    {
+      "name": "FINRA",
+      "title": "Concentrate on Concentration Risk",
+      "url": "https://www.finra.org/investors/insights/concentration-risk",
+      "date": "2022",
+      "use": "Look-through diversification and rebalancing."
+    },
+    {
+      "name": "Investor.gov",
+      "title": "Characteristics of Mutual Funds and Exchange-Traded Funds",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/characteristics-mutual-funds-exchange-traded-funds",
+      "date": "2025",
+      "use": "Pricing, trading and fee differences."
+    },
+    {
+      "name": "FINRA",
+      "title": "Using the FINRA Fund Analyzer",
+      "url": "https://www.finra.org/investors/tools-and-calculators/using-finra-fund-analyzer",
+      "date": "2026",
+      "use": "Comparing fund, share-class and account costs."
+    },
+    {
+      "name": "Internal Revenue Service",
+      "title": "Publication 550: Investment Income and Expenses",
+      "url": "https://www.irs.gov/forms-pubs/about-publication-550",
+      "date": "2025",
+      "use": "Taxable distributions, sales, basis and investment income."
+    }
+  ],
+  "internal_links": [
+    {
+      "title": "Daily Yield Calculators",
+      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "relevance": "Test contributions and hypothetical fee effects."
+    },
+    {
+      "title": "Daily Yield Articles",
+      "url": "https://dailyyield.blogspot.com/p/daily-articles.html",
+      "relevance": "Continue with evidence-led investment systems."
+    }
+  ],
+  "low_view_posts": [
+    {
+      "title": "Stop Maxing Your 401(k)",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
+      "image": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/stop-maxing-your-401-k/photo-1.jpg",
+      "label": "Contrarian Hooks"
+    },
+    {
+      "title": "Real Net Worth Targets by Age for Median…",
+      "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjJREO7SrOEV8D3SZueRXkRujD4gCd6Qw-wiFp86puyGZSkK_O4VkaperL6j9vD_UN3IRQ3jYWR7rGtH0k8CB-J5S_QPX34M4p8YE1w1gjSxxiAbXnXPHoUUMaTUhBuZ0aXv7egpwRI7L-_v_GNzF24OWl4oEvnjES8MvJyu9cHqz-ppxUn-21Ei1kplb4",
+      "label": "Age and Wealth Milestones"
+    },
+    {
+      "title": "The Portfolio That Pays Your Rent",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEi_htziga3A_s4s8g6LdFwKiLPpWp1V4h90RaALm2jY0kuadqTcp-TGjR09vGn4KMkBz_NSf6A3sfccVWJu-QK73V7z5cHsl8X5__C194p-nHYXRqJCY9nqY8y9tUZH_qMnK803TV8kbpLa1je6eoXIm5xjuEDcL3fB0ebmxuqbhdHR_Fa1f6EWqHTLcr0",
+      "label": "Passive Income Reality"
+    },
+    {
+      "title": "Why Dual-Income Couples Still Feel One Month…",
+      "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhkXyr4N5Qs6KAKwQcdgtLLuEAMybACMU3d0R119ZcmcNSVomBx7cC6BJDUhG-P4spkTHrZlXTvj-xhQVR8VpQZ_pJqzf-KrX3S2E5DGxB6NImYgB2ZHYw-ccyW75R6ElAe2EIscY47cA-xc-VDeV1M319GSvzjyXCVvy9cFANXGaiV3q3TTC6F65Ss37s",
+      "label": "Middle Class Survival"
+    },
+    {
+      "title": "The $48,000 Teacher Money Rebuild",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
+      "label": "Money Audits and Case Studies"
+    },
+    {
+      "title": "Break the 'I Deserve It' Spend Loop",
+      "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhCN8HH6J68vjvcElBiLTNJxce14SG7mL9Ez60gHeTYrABZddjLlqGveoBNhgiggOLchYxtJ_GYC3u2lH7CCA_ykSsYhGsw0157se0n8zC0IU8VKrQbjHcKjxoH1dEXGWEaTkh7GJRNcAgdBCtiJQPgprNsCvT4hDSeTFjCPliV3x5V4Wh5Els_yKbpH34",
+      "label": "Money Psychology and Mindset"
+    },
+    {
+      "title": "Your Mortgage Is Not the Real Cost",
+      "url": "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjjnpq-PcDf-MAQT6ZR6gELqEMX1ajn-c3DHWZXHhHBIihPLu4lXxyFrMDFR-lq-qVWrJ1qM57-0S3MC2T95u-cg1-SP37PDbwcT6TcHjZpUPz6L725VH_VKfdHa98RyNIUZYfWR2IuAozwytk5jty84bYc4oskZp-XBb7LrM5kNnSVOvB8Qq39vr3PSyc",
+      "label": "Housing Cars and Big Buys"
+    },
+    {
+      "title": "The Payday Waterfall",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjk846T9Oi0HOafXBU44nu-XZiefbV_BTL0P0KDc17fnXNC4JjfJNh9nm2qPE3KvqPY2kLHzMT8fkhIkraYAr6MJfS_QDbkaK5hxhvS3tsunWnEVNXnN10UgFjYqtfdZVuc3SOK-8tgt9Hp_ezZOW5-iv_oWOIwWdxoDVCbL1yuMTdkgF0jDNTfTIkDxCI",
+      "label": "Automation and Money Systems"
+    },
+    {
+      "title": "0% Balance Transfers Without the Trap",
+      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
+      "label": "Credit Debt and Optimization"
+    },
+    {
+      "title": "AI Found £1,200 I Was Wasting",
+      "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
+      "label": "AI Fintech and Future Money"
+    },
+    {
+      "title": "Three-Fund Portfolio",
+      "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
+      "image": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-2758262234277933362-0.jpg",
+      "label": "Automation and Money Systems"
+    },
+    {
+      "title": "FIRE Got Harder",
+      "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+      "image": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+      "label": "Middle Class Survival"
+    }
+  ]
+}
