@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-06T04:03:49.693716+00:00",
-  "phase": "prepare-pending",
-  "error_type": "RuntimeError",
-  "error": "Gemini failed to return valid JSON after 5 attempts: RuntimeError: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-li"
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T04:05:34.494434+00:00",
+  "pending": {
+    "id": "7379873073788189964",
+    "title": "Put Money on the Calendar, Not Your Mood",
+    "url": "https://dailyyield.blogspot.com/2026/10/put-money-on-calendar-not-your-mood.html",
+    "published": "2026-10-04T04:59:20-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Rich Habits vs Broke Habits"
+    ],
+    "content_sha256": "acf540cf112a9a1f87361e8334b5e5cbd861af583e44a0add33944f840504c78",
+    "backup": "master_rewrite_backups/post_7379873073788189964.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 73
 }
