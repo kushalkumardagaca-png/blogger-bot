@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T03:46:12.701073+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_8780956659587017395.json.gz",
-    "content_sha256": "bfb39c53bc5694da50cd425de806ac0f10e9a5c47c599a8f00f622a39d9dd456",
-    "id": "8780956659587017395",
-    "labels": [
-      "Age and Wealth Milestones",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-09-20T01:00:00-07:00",
-    "title": "Real Net Worth Targets by Age for Median\u2026",
-    "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html"
-  },
-  "master_count": 76,
-  "remaining": 74
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T03:46:14.638371+00:00",
+  "post_id": "8780956659587017395",
+  "package": "master_packages/rewrites/post_8780956659587017395.json",
+  "title": "Age Is a Bad Net Worth Target"
 }
