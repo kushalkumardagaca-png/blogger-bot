@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T04:51:45.453258+00:00",
-  "post_id": "8594486389302937562",
-  "url": "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html",
-  "old_title": "The 'Investment' Your New Friend Found",
-  "title": "Trust Is Not Investment Due Diligence",
-  "completed": 8,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T05:54:14.204444+00:00",
+  "pending": {
+    "id": "5564629106804601974",
+    "title": "The Portfolio That Pays Your Rent",
+    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
+    "published": "2026-09-20T03:00:00-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Passive Income Reality"
+    ],
+    "content_sha256": "86f90bbf4db09ffdbbe37b0108d45422888745d46f83366b53e6a7c1426a2c04",
+    "backup": "master_rewrite_backups/post_5564629106804601974.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 68
 }
