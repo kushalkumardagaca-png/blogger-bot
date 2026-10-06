@@ -173,7 +173,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install requests
-      - run: pip install Pillow
+      - run: pip install Pillow ImageHash
       - name: Back up, refresh and authenticated-reread all selected Posts
         id: refresh
         continue-on-error: true
