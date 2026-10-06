@@ -5,13 +5,6 @@ import gzip,json,re
 from datetime import datetime,timezone
 from pathlib import Path
 import requests
-from brand_identity import ensure_brand_identity
-from continuous_motion import ensure as ensure_continuous_motion
-from master_article_v2 import render,validate
-from publication_preflight import assert_publishable
-from rewrite_existing_masters import auth,base,headers,is_master
-from seo_meta import ensure_seo_meta
-from social_identity import ensure_social_identity
 
 ROOT=Path(__file__).parent
 REPORT=ROOT/'MASTER_PHOTO_REFRESH_REPORT.json'
@@ -23,6 +16,13 @@ def save(status,**data):
  REPORT.write_text(json.dumps({'status':status,'at':datetime.now(timezone.utc).isoformat(),**data},indent=2)+'\n')
 
 def main():
+ from brand_identity import ensure_brand_identity
+ from continuous_motion import ensure as ensure_continuous_motion
+ from master_article_v2 import render,validate
+ from publication_preflight import assert_publishable
+ from rewrite_existing_masters import auth,base,headers,is_master
+ from seo_meta import ensure_seo_meta
+ from social_identity import ensure_social_identity
  token=auth(); prepared=[];BACKUPS.mkdir(exist_ok=True)
  # Back up and fully preflight every item before the first irreversible update.
  for post_id in TARGETS:
