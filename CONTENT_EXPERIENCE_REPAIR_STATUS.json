@@ -1,13 +1,13 @@
 {
   "status": "FAIL",
   "zero_view": true,
-  "posts_checked": 296,
+  "posts_checked": 298,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 3,
+  "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 1,
   "pages_repaired": 1,
   "article_snapshot_entries": 76,
-  "news_snapshot_entries": 220,
+  "news_snapshot_entries": 222,
   "article_category_counts": {
     "Contrarian Hooks": 4,
     "Age and Wealth Milestones": 3,
@@ -39,7 +39,7 @@
     "US": 12,
     "China": 11,
     "Germany": 11,
-    "India": 11,
+    "India": 12,
     "Japan": 11,
     "UK": 11,
     "France": 11,
@@ -55,7 +55,7 @@
     "Economy and Macro Policy": 11,
     "Corporate Finance and Industry": 11,
     "Personal Finance": 11,
-    "Global News": 11
+    "Global News": 12
   },
   "error_type": "RuntimeError",
   "error": "Content inventory still has an empty article category, missing Global News desk, or duplicate hero assignment"
