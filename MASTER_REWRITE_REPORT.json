@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-05T18:35:47.930820+00:00",
-  "phase": "prepare-pending",
-  "error_type": "RuntimeError",
-  "error": "core expansion failed; assembled core remains 3877 words"
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T02:50:21.251662+00:00",
+  "pending": {
+    "backup": "master_rewrite_backups/post_8780956659587017395.json.gz",
+    "content_sha256": "bfb39c53bc5694da50cd425de806ac0f10e9a5c47c599a8f00f622a39d9dd456",
+    "id": "8780956659587017395",
+    "labels": [
+      "Age and Wealth Milestones",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-20T01:00:00-07:00",
+    "title": "Real Net Worth Targets by Age for Median\u2026",
+    "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html"
+  },
+  "master_count": 76,
+  "remaining": 74
 }
