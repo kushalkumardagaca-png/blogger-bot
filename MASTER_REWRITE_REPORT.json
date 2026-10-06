@@ -1,7 +1,7 @@
 {
-  "status": "PACKAGE_READY",
-  "at": "2026-10-06T04:50:39.562868+00:00",
-  "post_id": "8594486389302937562",
-  "package": "master_packages/rewrites/post_8594486389302937562.json",
-  "title": "Trust Is Not Investment Due Diligence"
+  "status": "FAIL",
+  "at": "2026-10-06T04:50:41.445695+00:00",
+  "phase": "apply-pending",
+  "error_type": "RuntimeError",
+  "error": "PUBLICATION PREFLIGHT FAILED \u2014 unsupported absolute claim prohibited: guaranteed returns"
 }
