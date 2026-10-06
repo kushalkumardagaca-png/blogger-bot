@@ -12,15 +12,15 @@ on:
       - 'build_photo_registry.py'
       - '.github/workflows/rewrite_existing_masters.yml'
   schedule:
-    - cron: '15 3 * * *'
-    - cron: '45 6 * * *'
-    - cron: '45 9 * * *'
-    - cron: '0 13 * * *'
-    - cron: '45 15 * * *'
+    # Run only after all five new daily Masters have had their production windows.
+    # Existing-post migration must never consume quota ahead of new publishing.
+    - cron: '30 16 * * *'
   workflow_dispatch:
 
 concurrency:
-  group: daily-yield-keyless-master-migration
+  # Share the production lock with new Masters; queued migration can never
+  # overlap or interfere with a scheduled new-article publication.
+  group: daily-yield-master-publisher
   cancel-in-progress: false
 
 jobs:
