@@ -1,0 +1,68 @@
+name: Refresh Master Article Photos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'refresh_master_photos.py'
+      - 'master_packages/rewrites/**'
+      - 'assets/master/**'
+      - 'PHOTO_USAGE_REGISTRY.json'
+      - '.github/workflows/refresh_master_photos.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: daily-yield-master-publisher
+  cancel-in-progress: false
+
+jobs:
+  refresh_selected_master_photos:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[run master photo refresh]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Back up, refresh and authenticated-reread all selected Posts
+        id: refresh
+        continue-on-error: true
+        run: python refresh_master_photos.py
+      - name: Persist backups and verified refresh report
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Master Photo Refresh"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add MASTER_PHOTO_REFRESH_REPORT.json master_photo_refresh_backups
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Record verified Master photo refresh [skip ci]"
+          for attempt in {1..12}; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
+      - name: Enforce fail-closed photo refresh result
+        if: steps.refresh.outcome == 'failure'
+        run: exit 1
+      - name: Upload photo refresh evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-photo-refresh-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            MASTER_PHOTO_REFRESH_REPORT.json
+            master_photo_refresh_backups/*.json.gz
