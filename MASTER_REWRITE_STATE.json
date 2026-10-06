@@ -54,8 +54,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 6,
+  "inventory_completed_count": 7,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_8594486389302937562.json.gz",
+    "content_sha256": "952f9543fb41b9c341b177d245ab1ddd452e50293ea756033975cd0dad4214a2",
+    "id": "8594486389302937562",
+    "labels": [
+      "Kushal K. Daga",
+      "Myths Scams and Bad Advice"
+    ],
+    "published": "2026-10-04T18:53:47-07:00",
+    "title": "The 'Investment' Your New Friend Found",
+    "url": "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html"
+  },
   "version": 1
 }
