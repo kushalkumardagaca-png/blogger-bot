@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T09:47:33.781943+00:00",
-  "post_id": "4165288479268683898",
-  "url": "https://dailyyield.blogspot.com/2026/09/w-2-tax-tricks-youre-allowed-to-use.html",
-  "old_title": "W-2 Tax Tricks You're Allowed to Use",
-  "title": "Your W-2 Has More Tax Levers Than You Think",
-  "completed": 19,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T15:09:46.621883+00:00",
+  "pending": {
+    "id": "6406126111566056260",
+    "title": "Ask for the Raise That Beats Budgeting",
+    "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html",
+    "published": "2026-09-22T05:33:32-07:00",
+    "labels": [
+      "Career Salary and Raises",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "a28b4643b4e40a74b8929ca73694129e5f0064497c306576d48b9cd9ae662c4d",
+    "backup": "master_rewrite_backups/post_6406126111566056260.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 57
 }

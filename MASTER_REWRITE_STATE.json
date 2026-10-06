@@ -150,8 +150,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 18,
+  "inventory_completed_count": 19,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_6406126111566056260.json.gz",
+    "content_sha256": "a28b4643b4e40a74b8929ca73694129e5f0064497c306576d48b9cd9ae662c4d",
+    "id": "6406126111566056260",
+    "labels": [
+      "Career Salary and Raises",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-22T05:33:32-07:00",
+    "title": "Ask for the Raise That Beats Budgeting",
+    "url": "https://dailyyield.blogspot.com/2026/09/ask-for-raise-that-beats-budgeting.html"
+  },
   "version": 1
 }
