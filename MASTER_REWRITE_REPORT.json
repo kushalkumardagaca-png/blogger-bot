@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T06:31:28.572282+00:00",
-  "pending": {
-    "id": "7949223128636486384",
-    "title": "Why Dual-Income Couples Still Feel One Month\u2026",
-    "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
-    "published": "2026-09-20T05:00:00-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Middle Class Survival"
-    ],
-    "content_sha256": "5b163212c7cdf29c50820580e1cb6b0a52b7ea806686076c33750289a3b6b374",
-    "backup": "master_rewrite_backups/post_7949223128636486384.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 67
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T06:31:30.949975+00:00",
+  "post_id": "7949223128636486384",
+  "package": "master_packages/rewrites/post_7949223128636486384.json",
+  "title": "Two Paychecks Can Still Break"
 }
