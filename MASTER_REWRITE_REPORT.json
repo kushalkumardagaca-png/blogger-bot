@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T04:01:12.990598+00:00",
-  "pending": {
-    "id": "5564629106804601974",
-    "title": "The Portfolio That Pays Your Rent",
-    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
-    "published": "2026-09-20T03:00:00-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Passive Income Reality"
-    ],
-    "content_sha256": "86f90bbf4db09ffdbbe37b0108d45422888745d46f83366b53e6a7c1426a2c04",
-    "backup": "master_rewrite_backups/post_5564629106804601974.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 73
+  "status": "FAIL",
+  "at": "2026-10-06T04:03:49.693716+00:00",
+  "phase": "prepare-pending",
+  "error_type": "RuntimeError",
+  "error": "Gemini failed to return valid JSON after 5 attempts: RuntimeError: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-li"
 }
