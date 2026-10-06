@@ -14,6 +14,7 @@ on:
       - 'assets/master/**'
       - 'ARENA_REWRITE_MANIFEST.json'
       - '.github/workflows/rewrite_existing_masters.yml'
+      - 'refresh_master_photos.py'
   schedule:
     # Run only after all five new daily Masters have had their production windows.
     # Existing-post migration must never consume quota ahead of new publishing.
@@ -154,3 +155,37 @@ jobs:
             MASTER_REWRITE_STATE.json
             MASTER_REWRITE_REPORT.json
             master_packages/rewrites/*.json
+
+  refresh_selected_master_photos:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[run master photo refresh]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - name: Back up, refresh and authenticated-reread all selected Posts
+        id: refresh
+        continue-on-error: true
+        run: python refresh_master_photos.py
+      - name: Upload photo refresh evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-photo-refresh-trusted-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            MASTER_PHOTO_REFRESH_REPORT.json
+            master_photo_refresh_backups/*.json.gz
+      - name: Enforce fail-closed photo refresh result
+        if: steps.refresh.outcome == 'failure'
+        run: exit 1
