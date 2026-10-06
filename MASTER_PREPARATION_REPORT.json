@@ -1,6 +1,6 @@
 {
   "status": "FAIL",
-  "stage": "source-discovery",
+  "stage": "text-generation",
   "error_type": "RuntimeError",
-  "error": "only 0 usable topic-specific scholarly/primary sources found; minimum 6"
+  "error": "Gemini failed to return valid JSON after 5 attempts: RuntimeError: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-li"
 }
