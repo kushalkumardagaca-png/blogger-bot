@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T08:20:55.469554+00:00",
-  "pending": {
-    "id": "2862470767911665544",
-    "title": "AI Found \u00a31,200 I Was Wasting",
-    "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
-    "published": "2026-09-21T09:00:00-07:00",
-    "labels": [
-      "AI Fintech and Future Money",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "563b3323f62cca403db5fe021f59d1adacaa539384a6dc7165d3d0b641c7dee8",
-    "backup": "master_rewrite_backups/post_2862470767911665544.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 61
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T08:20:57.515396+00:00",
+  "post_id": "2862470767911665544",
+  "package": "master_packages/rewrites/post_2862470767911665544.json",
+  "title": "Make AI Prove Every Spending Leak"
 }
