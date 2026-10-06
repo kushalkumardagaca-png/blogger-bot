@@ -118,8 +118,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 14,
+  "inventory_completed_count": 15,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_2862470767911665544.json.gz",
+    "content_sha256": "563b3323f62cca403db5fe021f59d1adacaa539384a6dc7165d3d0b641c7dee8",
+    "id": "2862470767911665544",
+    "labels": [
+      "AI Fintech and Future Money",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-21T09:00:00-07:00",
+    "title": "AI Found \u00a31,200 I Was Wasting",
+    "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html"
+  },
   "version": 1
 }
