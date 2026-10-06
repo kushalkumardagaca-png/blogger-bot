@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-10-06T08:02:42.135980+00:00",
+  "checkedAt": "2026-10-06T08:24:15.049657+00:00",
   "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "critical": [
     "critical repository files changed without baseline approval: .github/workflows/refresh_master_photos.yml, .github/workflows/rewrite_existing_masters.yml, rewrite_existing_masters.py",
-    "existing Blogger content changed without baseline approval: page:9217579601621666930, post:1022860638256450673, post:115783846078738704, post:1224431701070336470, post:1244600316209982174, post:1374496040576360177, post:1794738258819020541, post:2373709041132325539, post:2557941853294839938, post:3041537970389212664, post:332980622017107325, post:3885410382183430593, post:4498405341941524443, post:4559693310963899298, post:4827012825782525705, post:5283900934510767783, post:5564629106804601974, post:5611067798787673649, post:5809539308164270577, post:5949797759482040830"
+    "existing Blogger content changed without baseline approval: page:9217579601621666930, post:1022860638256450673, post:115783846078738704, post:1224431701070336470, post:1244600316209982174, post:1374496040576360177, post:1794738258819020541, post:2373709041132325539, post:2557941853294839938, post:2862470767911665544, post:3041537970389212664, post:332980622017107325, post:3885410382183430593, post:4498405341941524443, post:4559693310963899298, post:4827012825782525705, post:5283900934510767783, post:5564629106804601974, post:5611067798787673649, post:5809539308164270577"
   ],
   "warnings": [
     "12 new live item(s) accepted after threat scan"
@@ -14,7 +14,7 @@
     "pages": 13,
     "posts": 306,
     "newItems": 12,
-    "changedItems": 34,
+    "changedItems": 37,
     "removedItems": 0,
     "repositoryFiles": 71,
     "backupCreated": false,
