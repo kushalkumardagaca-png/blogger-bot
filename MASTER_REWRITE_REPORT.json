@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T03:46:18.157211+00:00",
-  "post_id": "8780956659587017395",
-  "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
-  "old_title": "Real Net Worth Targets by Age for Median\u2026",
-  "title": "Age Is a Bad Net Worth Target",
-  "completed": 3,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T04:01:12.990598+00:00",
+  "pending": {
+    "id": "5564629106804601974",
+    "title": "The Portfolio That Pays Your Rent",
+    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
+    "published": "2026-09-20T03:00:00-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Passive Income Reality"
+    ],
+    "content_sha256": "86f90bbf4db09ffdbbe37b0108d45422888745d46f83366b53e6a7c1426a2c04",
+    "backup": "master_rewrite_backups/post_5564629106804601974.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 73
 }

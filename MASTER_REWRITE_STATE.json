@@ -22,8 +22,19 @@
       "verified_at": "2026-10-06T03:46:18.157046+00:00"
     }
   },
-  "inventory_completed_count": 2,
+  "inventory_completed_count": 3,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_5564629106804601974.json.gz",
+    "content_sha256": "86f90bbf4db09ffdbbe37b0108d45422888745d46f83366b53e6a7c1426a2c04",
+    "id": "5564629106804601974",
+    "labels": [
+      "Kushal K. Daga",
+      "Passive Income Reality"
+    ],
+    "published": "2026-09-20T03:00:00-07:00",
+    "title": "The Portfolio That Pays Your Rent",
+    "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html"
+  },
   "version": 1
 }
