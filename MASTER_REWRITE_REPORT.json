@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T06:54:40.971754+00:00",
-  "pending": {
-    "id": "8754928028995933789",
-    "title": "Break the 'I Deserve It' Spend Loop",
-    "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
-    "published": "2026-09-20T23:00:00-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Money Psychology and Mindset"
-    ],
-    "content_sha256": "e10597a1b4cea065c79019f7e894dc6e9229c464fe7b93ca6b2159f29c0903dc",
-    "backup": "master_rewrite_backups/post_8754928028995933789.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 65
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T06:54:43.215767+00:00",
+  "post_id": "8754928028995933789",
+  "package": "master_packages/rewrites/post_8754928028995933789.json",
+  "title": "The Purchase Is Not the Reward"
 }
