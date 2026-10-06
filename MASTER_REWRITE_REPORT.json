@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-06T08:06:26.811462+00:00",
-  "pending": {
-    "id": "727827414976743220",
-    "title": "The Payday Waterfall",
-    "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
-    "published": "2026-09-21T03:30:00-07:00",
-    "labels": [
-      "Automation and Money Systems",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "459c4dc397aab9d80dd84f6665f59696486a657ae79ccc3a66d5996b852310c6",
-    "backup": "master_rewrite_backups/post_727827414976743220.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 63
+  "status": "PACKAGE_READY",
+  "at": "2026-10-06T08:06:29.266158+00:00",
+  "post_id": "727827414976743220",
+  "package": "master_packages/rewrites/post_727827414976743220.json",
+  "title": "Your Paycheck Needs a Routing Order"
 }
