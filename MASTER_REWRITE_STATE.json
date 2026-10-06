@@ -142,8 +142,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 17,
+  "inventory_completed_count": 18,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4165288479268683898.json.gz",
+    "content_sha256": "15e75d9a5d720b68af1a74b24170dcd01e7e0bfcbed79903b40c836a55539800",
+    "id": "4165288479268683898",
+    "labels": [
+      "Kushal K. Daga",
+      "Taxes and Account Optimization"
+    ],
+    "published": "2026-09-22T02:25:39-07:00",
+    "title": "W-2 Tax Tricks You're Allowed to Use",
+    "url": "https://dailyyield.blogspot.com/2026/09/w-2-tax-tricks-youre-allowed-to-use.html"
+  },
   "version": 1
 }
