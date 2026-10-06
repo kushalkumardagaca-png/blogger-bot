@@ -175,7 +175,15 @@
         "Money Audits and Case Studies"
       ],
       "package": "master_packages/rewrites/post_3041537970389212664.json",
-      "status": "awaiting-arena-draft"
+      "status": "arena-draft-validated",
+      "arena_path": "arena_drafts/post_3041537970389212664.json",
+      "validated_metrics": {
+        "core_words": 4008,
+        "summary_words": 600,
+        "sources": 8,
+        "visuals": 4,
+        "photos": 3
+      }
     },
     {
       "post_id": "8754928028995933789",
