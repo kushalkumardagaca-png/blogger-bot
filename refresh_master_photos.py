@@ -57,4 +57,7 @@ def main():
 if __name__=='__main__':
  try:main()
  except Exception as exc:
-  save('FAIL',error_type=type(exc).__name__,error=str(exc)[:1600]);raise
+  message=str(exc)[:1600].replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+  save('FAIL',error_type=type(exc).__name__,error=str(exc)[:1600])
+  print(f'::error title=Master photo refresh failure::{message}',flush=True)
+  raise
