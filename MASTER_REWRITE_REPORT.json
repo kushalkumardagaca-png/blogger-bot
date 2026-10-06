@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T04:28:57.229098+00:00",
-  "post_id": "9090794225984393149",
-  "url": "https://dailyyield.blogspot.com/2026/10/selling-crash-is-expensive-feeling.html",
-  "old_title": "Selling the Crash Is the Expensive Feeling",
-  "title": "Panic Selling Creates a Second Loss",
-  "completed": 5,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T04:35:22.619312+00:00",
+  "pending": {
+    "id": "5283900934510767783",
+    "title": "A Two-Tier Emergency Fund",
+    "url": "https://dailyyield.blogspot.com/2026/10/a-two-tier-emergency-fund.html",
+    "published": "2026-10-04T11:02:43-07:00",
+    "labels": [
+      "Cash Savings and Emergency Funds",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "d6ab93d8147f20da99fef3f2e8f424b362c2f4bbef7edc1b54e21bf0084ae22f",
+    "backup": "master_rewrite_backups/post_5283900934510767783.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 71
 }
