@@ -41,6 +41,7 @@ jobs:
         run: python refresh_master_photos.py
       - name: Persist backups and verified refresh report
         if: always()
+        continue-on-error: true
         run: |
           set -euo pipefail
           git config user.name "Daily Yield Master Photo Refresh"
