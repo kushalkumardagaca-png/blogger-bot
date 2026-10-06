@@ -126,8 +126,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 15,
+  "inventory_completed_count": 16,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_2758262234277933362.json.gz",
+    "content_sha256": "2ba2d974e98ac5c57b8d7f27ab9d5a2f48438f37ec8da8d3104a25ab8d92662a",
+    "id": "2758262234277933362",
+    "labels": [
+      "Automation and Money Systems",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-21T21:09:34-07:00",
+    "title": "Three-Fund Portfolio",
+    "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html"
+  },
   "version": 1
 }

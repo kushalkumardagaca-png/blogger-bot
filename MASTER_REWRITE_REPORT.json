@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-06T08:21:01.425852+00:00",
-  "post_id": "2862470767911665544",
-  "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
-  "old_title": "AI Found \u00a31,200 I Was Wasting",
-  "title": "Make AI Prove Every Spending Leak",
-  "completed": 16,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-06T08:31:07.003567+00:00",
+  "pending": {
+    "id": "2758262234277933362",
+    "title": "Three-Fund Portfolio",
+    "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
+    "published": "2026-09-21T21:09:34-07:00",
+    "labels": [
+      "Automation and Money Systems",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "2ba2d974e98ac5c57b8d7f27ab9d5a2f48438f37ec8da8d3104a25ab8d92662a",
+    "backup": "master_rewrite_backups/post_2758262234277933362.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 60
 }
