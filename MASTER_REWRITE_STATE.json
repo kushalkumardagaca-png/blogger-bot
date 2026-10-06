@@ -102,8 +102,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 12,
+  "inventory_completed_count": 13,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_727827414976743220.json.gz",
+    "content_sha256": "459c4dc397aab9d80dd84f6665f59696486a657ae79ccc3a66d5996b852310c6",
+    "id": "727827414976743220",
+    "labels": [
+      "Automation and Money Systems",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-21T03:30:00-07:00",
+    "title": "The Payday Waterfall",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html"
+  },
   "version": 1
 }
