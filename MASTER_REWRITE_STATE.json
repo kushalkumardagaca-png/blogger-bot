@@ -46,8 +46,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 5,
+  "inventory_completed_count": 6,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_1224431701070336470.json.gz",
+    "content_sha256": "5c3533420de772b6c7296f7c5e1b3b2b7eb5e7773c725404122628905dfded5f",
+    "id": "1224431701070336470",
+    "labels": [
+      "Kushal K. Daga",
+      "Real Estate Investing"
+    ],
+    "published": "2026-10-04T13:03:01-07:00",
+    "title": "Landlords Lie With Appreciation",
+    "url": "https://dailyyield.blogspot.com/2026/10/landlords-lie-with-appreciation.html"
+  },
   "version": 1
 }
