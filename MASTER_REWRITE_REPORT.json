@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T13:01:08.557428+00:00",
-  "post_id": "8711042237458005134",
-  "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html",
-  "old_title": "\u00a3500 Extra: Overtime, Hustle, or Skill?",
-  "title": "Choose Your Best Route to \u00a3500 Extra",
-  "completed": 47,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T14:05:19.508824+00:00",
+  "pending": {
+    "id": "7123852462020825588",
+    "title": "Insure Your Income, Not Just Your Phone",
+    "url": "https://dailyyield.blogspot.com/2026/09/insure-your-income-not-just-your-phone.html",
+    "published": "2026-09-27T18:49:56-07:00",
+    "labels": [
+      "Insurance and Protection",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "f79935add320c1fd5c3617a4e9b2f682dd54af73009ab3c8be224d120f1d4d28",
+    "backup": "master_rewrite_backups/post_7123852462020825588.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 29
 }
