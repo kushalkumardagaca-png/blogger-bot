@@ -350,8 +350,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 43,
+  "inventory_completed_count": 44,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_3406242455506009272.json.gz",
+    "content_sha256": "af11012d9ff9fc193fe4957d10f5ca6a9cd82307517f6912f530feac918ab591",
+    "id": "3406242455506009272",
+    "labels": [
+      "Kushal K. Daga",
+      "Taxes and Account Optimization"
+    ],
+    "published": "2026-09-27T01:23:02-07:00",
+    "title": "The 14-Day Pre-5-April Tax Sprint",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-14-day-pre-5-april-tax-sprint.html"
+  },
   "version": 1
 }
