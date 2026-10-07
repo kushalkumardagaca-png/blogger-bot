@@ -53,19 +53,28 @@ jobs:
         run: python rewrite_existing_masters.py prepare-pending
 
       - name: Apply to the preserved Blogger Post ID and authenticate reread
+        id: application
+        continue-on-error: true
         run: python rewrite_existing_masters.py apply-pending
 
-      - name: Persist verified rewrite state
+      - name: Persist verified rewrite state or redacted failure
+        if: always()
         run: |
           set -euo pipefail
           git add MASTER_REWRITE_STATE.json MASTER_REWRITE_REPORT.json
-          git commit -m "Record verified approved Master replacement [skip ci]"
-          for attempt in {1..12}; do
-            git pull --rebase origin main
-            if git push origin HEAD:main; then exit 0; fi
-            sleep $((attempt * 2))
-          done
-          exit 1
+          if ! git diff --staged --quiet; then
+            git commit -m "Record approved Master replacement result [skip ci]"
+            for attempt in {1..12}; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then pushed=true; break; fi
+              sleep $((attempt * 2))
+            done
+            test "${pushed:-false}" = true
+          fi
+
+      - name: Enforce fail-closed result
+        if: steps.application.outcome == 'failure'
+        run: exit 1
 
       - name: Upload redacted migration evidence
         if: always()
