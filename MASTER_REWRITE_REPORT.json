@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-07T02:55:18.055321+00:00",
-  "phase": "backup-next",
-  "error_type": "RuntimeError",
-  "error": "prepared package target is not an eligible live Master: 5309213658472423871"
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T02:56:45.914769+00:00",
+  "pending": {
+    "backup": "master_rewrite_backups/post_5309215588489880357.json.gz",
+    "content_sha256": "835dc8cf25493f6a3d0c53d627ff963c1d5847cd3c9fab93221c04ec6b2cc108",
+    "id": "5309215588489880357",
+    "labels": [
+      "Kushal K. Daga",
+      "Side Hustles That Work"
+    ],
+    "published": "2026-09-22T08:04:51-07:00",
+    "title": "Most Side Hustles Fail This Filter",
+    "url": "https://dailyyield.blogspot.com/2026/09/most-side-hustles-fail-this-filter.html"
+  },
+  "master_count": 76,
+  "remaining": 56
 }
