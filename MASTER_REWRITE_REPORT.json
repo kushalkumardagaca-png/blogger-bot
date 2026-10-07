@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T14:32:51.043828+00:00",
-  "pending": {
-    "id": "2045026967272748700",
-    "title": "Cheap, Frugal, and Value Are Not Synonyms",
-    "url": "https://dailyyield.blogspot.com/2026/09/cheap-frugal-and-value-are-not-synonyms.html",
-    "published": "2026-09-28T04:42:07-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Spending Lifestyle and Frugality"
-    ],
-    "content_sha256": "0b3a574579febfb23a06b4cad1709d7ac46f0c3ad8dd9183453adacdb0a022c6",
-    "backup": "master_rewrite_backups/post_2045026967272748700.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 26
+  "status": "PASS",
+  "at": "2026-10-07T14:32:56.412788+00:00",
+  "post_id": "2045026967272748700",
+  "url": "https://dailyyield.blogspot.com/2026/09/cheap-frugal-and-value-are-not-synonyms.html",
+  "old_title": "Cheap, Frugal, and Value Are Not Synonyms",
+  "title": "Buy for Value, Not Just Price",
+  "completed": 51,
+  "master_count": 76
 }
