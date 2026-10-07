@@ -166,8 +166,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 20,
+  "inventory_completed_count": 21,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_3845366839700982429.json.gz",
+    "content_sha256": "8b3c02b04754d1a16b77e8a4be06788d0c53a9425f052222767d7798eb272d77",
+    "id": "3845366839700982429",
+    "labels": [
+      "2026 Money Moves",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-10-04T22:29:31-07:00",
+    "title": "Don't Leave Free Room in 2026 Accounts",
+    "url": "https://dailyyield.blogspot.com/2026/10/dont-leave-free-room-in-2026-accounts.html"
+  },
   "version": 1
 }
