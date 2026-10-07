@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T03:38:48.941769+00:00",
-  "pending": {
-    "id": "5756773504895872461",
-    "title": "Only These Insurance Policies Matter",
-    "url": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html",
-    "published": "2026-09-22T19:42:14-07:00",
-    "labels": [
-      "Insurance and Protection",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "e6f5620d2a20d18057c5bef35da20ef4f00bddb175500c59b3e842c563e4942c",
-    "backup": "master_rewrite_backups/post_5756773504895872461.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 54
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T03:38:51.036463+00:00",
+  "post_id": "5756773504895872461",
+  "package": "master_packages/rewrites/post_5756773504895872461.json",
+  "title": "Buy Insurance for Losses You Cannot Absorb"
 }
