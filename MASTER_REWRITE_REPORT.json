@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T03:33:23.390354+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_3845366839700982429.json.gz",
-    "content_sha256": "8b3c02b04754d1a16b77e8a4be06788d0c53a9425f052222767d7798eb272d77",
-    "id": "3845366839700982429",
-    "labels": [
-      "2026 Money Moves",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-10-04T22:29:31-07:00",
-    "title": "Don't Leave Free Room in 2026 Accounts",
-    "url": "https://dailyyield.blogspot.com/2026/10/dont-leave-free-room-in-2026-accounts.html"
-  },
-  "master_count": 76,
-  "remaining": 55
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T03:33:25.401048+00:00",
+  "post_id": "3845366839700982429",
+  "package": "master_packages/rewrites/post_3845366839700982429.json",
+  "title": "Prioritize Tax-Advantaged Room Before Year-End"
 }
