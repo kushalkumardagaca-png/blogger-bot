@@ -261,24 +261,32 @@
       ]
     },
     {
-      "type": "bar",
+      "type": "table",
       "title": "A market range is a distribution, not one magic number",
       "caption": "Illustrative percentile index only; use the current BLS occupation, location and industry data for an actual request.",
       "source": 1,
       "after_section": "Use Market Data as a Range, Not a Verdict",
-      "labels": [
-        "10th percentile",
-        "25th percentile",
-        "Median",
-        "75th percentile",
-        "90th percentile"
-      ],
-      "values": [
-        55,
-        72,
-        100,
-        128,
-        155
+      "data": [
+        {
+          "Position in range": "10th percentile",
+          "Illustrative index": "55"
+        },
+        {
+          "Position in range": "25th percentile",
+          "Illustrative index": "72"
+        },
+        {
+          "Position in range": "Median",
+          "Illustrative index": "100"
+        },
+        {
+          "Position in range": "75th percentile",
+          "Illustrative index": "128"
+        },
+        {
+          "Position in range": "90th percentile",
+          "Illustrative index": "155"
+        }
       ]
     },
     {
@@ -324,37 +332,37 @@
   ],
   "photos": [
     {
-      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-the-case-before-asking-for-a-raise/photo-1.jpg",
-      "alt": "Professionals discussing documents during a compensation meeting",
-      "caption": "Photo: Vlada Karpovich / Pexels License",
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-the-case-before-asking-for-a-raise/photo-1.jpg?v=2",
+      "alt": "Employee in a one-to-one compensation interview with a hiring manager",
+      "caption": "Photo: Tima Miroshnichenko / Pexels License",
       "width": 1600,
       "height": 900,
-      "source_page": "https://www.pexels.com/photo/business-partners-having-a-meeting-at-the-office-7433848/",
+      "source_page": "https://www.pexels.com/photo/candidate-having-an-interview-5439148/",
       "license": "Pexels License",
       "license_url": "https://www.pexels.com/license/",
-      "creator": "Vlada Karpovich"
+      "creator": "Tima Miroshnichenko"
     },
     {
-      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-the-case-before-asking-for-a-raise/photo-2.jpg",
-      "alt": "Professionals analyzing performance charts on a laptop and tablet",
-      "caption": "Photo: Mikhail Nilov / Pexels License",
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-the-case-before-asking-for-a-raise/photo-2.jpg?v=2",
+      "alt": "Manager and employee reviewing compensation evidence with reports and a calculator",
+      "caption": "Photo: Pavel Danilyuk / Pexels License",
       "width": 1600,
       "height": 900,
-      "source_page": "https://www.pexels.com/photo/people-looking-at-graphs-on-a-laptop-and-a-digital-tablet-6930432/",
+      "source_page": "https://www.pexels.com/photo/elderly-man-standing-beside-a-woman-sitting-at-desk-7654487/",
       "license": "Pexels License",
       "license_url": "https://www.pexels.com/license/",
-      "creator": "Mikhail Nilov"
+      "creator": "Pavel Danilyuk"
     },
     {
-      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-the-case-before-asking-for-a-raise/photo-3.jpg",
-      "alt": "Professional writing a follow-up plan beside a laptop",
-      "caption": "Photo: Kaboompics.com / Pexels License",
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-the-case-before-asking-for-a-raise/photo-3.jpg?v=2",
+      "alt": "Employee and hiring panel shaking hands after a successful compensation negotiation",
+      "caption": "Photo: Edmond Dantès / Pexels License",
       "width": 1600,
       "height": 900,
-      "source_page": "https://www.pexels.com/photo/person-writing-on-notebook-while-using-a-laptop-5387268/",
+      "source_page": "https://www.pexels.com/photo/man-in-black-suit-jacket-sitting-beside-woman-in-brown-long-sleeve-shirt-4344860/",
       "license": "Pexels License",
       "license_url": "https://www.pexels.com/license/",
-      "creator": "Kaboompics.com"
+      "creator": "Edmond Dantès"
     }
   ],
   "sources": [

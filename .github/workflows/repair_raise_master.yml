@@ -1,0 +1,40 @@
+name: Repair Raise Master Mobile Visuals
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'arena_work/repair_live_6406126111566056260.py'
+      - 'master_packages/rewrites/post_6406126111566056260.json'
+      - 'assets/master/build-the-case-before-asking-for-a-raise/**'
+      - '.github/workflows/repair_raise_master.yml'
+concurrency:
+  group: daily-yield-master-publisher
+  cancel-in-progress: false
+jobs:
+  repair:
+    if: contains(github.event.head_commit.message, '[run live master repair]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests pillow imagehash
+      - name: Update original post and authenticate reread
+        run: python arena_work/repair_live_6406126111566056260.py
+      - name: Persist repair evidence
+        run: |
+          git config user.name "Daily Yield Master Repair"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add arena_work/repair_report_6406126111566056260.json arena_work/repair_backup_6406126111566056260.json.gz
+          git commit -m "Record raise article repair result [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
