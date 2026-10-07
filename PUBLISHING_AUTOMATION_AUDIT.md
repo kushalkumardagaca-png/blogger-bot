@@ -69,13 +69,13 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Creative engine cannot request a Daily Yield public page**
 - ✅ **Corporate social boilerplate was removed from all active publisher outputs**
 - ✅ **Coordinated router and event dispatcher are deployed**
-- ✅ **Exactly four evenly spread audience-resource promotions are scheduled**
+- ✅ **Exactly five established audience-resource promotions are scheduled**
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
 - ✅ **News publisher dispatches only confirmed live Blogger events**
 - ✅ **Article routing waits at least fifteen minutes after publication**
 - ✅ **Coordinated tracker writes use race-safe persistence retries**
-- ✅ **Daily coordinated inventory is exactly 20 News articles plus 4 resources**
-- ✅ **Configured cadence is 24 destinations split equally across four networks**
+- ✅ **Daily coordinated inventory is exactly 20 News articles plus 5 resources**
+- ✅ **Configured cadence restores 25 established destinations across four networks**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**

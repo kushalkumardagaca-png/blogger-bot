@@ -192,8 +192,8 @@ rotation=rotation_path.read_text() if rotation_path.exists() else ''
 coordinated=coordinated_path.read_text() if coordinated_path.exists() else ''
 dispatch=dispatch_path.read_text() if dispatch_path.exists() else ''
 check('Coordinated router and event dispatcher are deployed',bool(rotation) and bool(coordinated) and bool(dispatch))
-check('Exactly four evenly spread audience-resource promotions are scheduled',
-      crons(coordinated_path)==['45 23 * * *','30 4 * * *','30 8 * * *','30 14 * * *'])
+check('Exactly five established audience-resource promotions are scheduled',
+      crons(coordinated_path)==['45 23 * * *','30 1 * * *','30 4 * * *','30 8 * * *','30 14 * * *'])
 check('Every social publisher accepts an exact authenticated Blogger target URL',
       all('--target-url' in text and 'Target URL was not found in authenticated Blogger inventory' in text
           for text in (fp,bp,tp,mp)))
@@ -203,12 +203,12 @@ check('Article routing waits at least fifteen minutes after publication',
       'dt.timedelta(minutes=15)' in rotation and 'delay_seconds' in coordinated)
 check('Coordinated tracker writes use race-safe persistence retries',
       'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
-check('Daily coordinated inventory is exactly 20 News articles plus 4 resources',
+check('Daily coordinated inventory is exactly 20 News articles plus 5 resources',
       'MASTER_PATTERN' not in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
       and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
-check('Configured cadence is 24 destinations split equally across four networks',
-      'RESOURCE_PATTERN = ("facebook", "bluesky", "tumblr", "mastodon")' in rotation
-      and 'NEWS_PATTERN = RESOURCE_PATTERN * 5' in rotation and 20+4==24 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
+check('Configured cadence restores 25 established destinations across four networks',
+      'RESOURCE_PATTERN = ("facebook", "bluesky", "facebook", "tumblr", "mastodon")' in rotation
+      and 20+5==25 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)

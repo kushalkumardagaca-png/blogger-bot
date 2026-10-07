@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Balanced Daily Yield social routing for live News and resources.
+"""Deterministic Daily Yield social routing for live News and resources.
 
-Every day: 20 News editions plus the homepage and three rotating header Pages.
-Each destination is assigned to exactly one network. The 24 daily destinations
-are divided equally: six per platform, with day-to-day rotation and no platform
-priority. Publishers use the authenticated Blogger API and never create views.
+Every day: 20 News editions plus the homepage and four rotating header Pages.
+Each destination is assigned to exactly one active network using the established
+Daily Yield platform pattern. Publishers use the authenticated Blogger API and
+never create synthetic public-page views.
 """
 from __future__ import annotations
 
@@ -16,8 +16,13 @@ from pathlib import Path
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 PLATFORMS = ("facebook", "bluesky", "tumblr", "mastodon")
-RESOURCE_PATTERN = ("facebook", "bluesky", "tumblr", "mastodon")
-NEWS_PATTERN = RESOURCE_PATTERN * 5
+RESOURCE_PATTERN = ("facebook", "bluesky", "facebook", "tumblr", "mastodon")
+NEWS_PATTERN = (
+    "facebook", "bluesky", "tumblr", "mastodon", "facebook",
+    "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
+    "facebook", "bluesky", "tumblr", "mastodon", "facebook",
+    "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
+)
 NEWS_KEYS = (
     "australia", "south-korea", "global", "india", "market", "macro",
     "germany", "france", "uk", "japan", "china", "spain", "corporate",
@@ -34,9 +39,10 @@ HEADER_PAGES = (
 )
 RESOURCE_SCHEDULES = {
     "45 23 * * *": 0,  # 05:15 IST
-    "30 4 * * *": 1,   # 10:00 IST
-    "30 8 * * *": 2,   # 14:00 IST
-    "30 14 * * *": 3,  # 20:00 IST
+    "30 1 * * *": 1,   # 07:00 IST
+    "30 4 * * *": 2,   # 10:00 IST
+    "30 8 * * *": 3,   # 14:00 IST
+    "30 14 * * *": 4,  # 20:00 IST
 }
 
 
