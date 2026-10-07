@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T06:01:18.508760+00:00",
-  "pending": {
-    "id": "4058080268134530730",
-    "title": "Emergency Fund Size by Job Type",
-    "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-    "published": "2026-09-23T23:03:15-07:00",
-    "labels": [
-      "Cash Savings and Emergency Funds",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "993e8152de132a5e2ce4fb7659cf3cc005a6bc98bec44a401714eb32be36a38b",
-    "backup": "master_rewrite_backups/post_4058080268134530730.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 48
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T06:01:20.932222+00:00",
+  "post_id": "4058080268134530730",
+  "package": "master_packages/rewrites/post_4058080268134530730.json",
+  "title": "Size Your Emergency Fund to Your Income Risk"
 }
