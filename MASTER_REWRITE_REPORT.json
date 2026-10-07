@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T09:38:02.567165+00:00",
-  "pending": {
-    "id": "3640853899029929702",
-    "title": "Why Your Budget Dies in Week Two",
-    "url": "https://dailyyield.blogspot.com/2026/09/why-your-budget-dies-in-week-two.html",
-    "published": "2026-09-26T07:24:20-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Money Psychology and Mindset"
-    ],
-    "content_sha256": "7d9d4f68e030ce75405c128d4761aa569381c60e3758f2a8c40c12e1cbd98c3e",
-    "backup": "master_rewrite_backups/post_3640853899029929702.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 35
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T09:38:05.138727+00:00",
+  "post_id": "3640853899029929702",
+  "package": "master_packages/rewrites/post_3640853899029929702.json",
+  "title": "Build a Budget That Survives Week Two"
 }
