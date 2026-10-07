@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T14:19:23.437705+00:00",
-  "post_id": "4516328180677729614",
-  "url": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html",
-  "old_title": "Your Student Overdraft Isn't Free",
-  "title": "Escape Your Student Overdraft Safely",
-  "completed": 50,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T14:32:51.043828+00:00",
+  "pending": {
+    "id": "2045026967272748700",
+    "title": "Cheap, Frugal, and Value Are Not Synonyms",
+    "url": "https://dailyyield.blogspot.com/2026/09/cheap-frugal-and-value-are-not-synonyms.html",
+    "published": "2026-09-28T04:42:07-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Spending Lifestyle and Frugality"
+    ],
+    "content_sha256": "0b3a574579febfb23a06b4cad1709d7ac46f0c3ad8dd9183453adacdb0a022c6",
+    "backup": "master_rewrite_backups/post_2045026967272748700.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 26
 }
