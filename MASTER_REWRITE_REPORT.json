@@ -1,7 +1,7 @@
 {
   "status": "FAIL",
-  "at": "2026-10-06T16:40:29.004397+00:00",
-  "phase": "prepare-pending",
+  "at": "2026-10-07T02:55:18.055321+00:00",
+  "phase": "backup-next",
   "error_type": "RuntimeError",
-  "error": "only 5 usable topic-specific scholarly/primary sources found; minimum 6"
+  "error": "prepared package target is not an eligible live Master: 5309213658472423871"
 }
