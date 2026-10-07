@@ -190,8 +190,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 23,
+  "inventory_completed_count": 24,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_1187159577085494350.json.gz",
+    "content_sha256": "e6a340911dacb9dfd4ad9703713bc693980509a69b4af47c949f16372ad18a84",
+    "id": "1187159577085494350",
+    "labels": [
+      "Kushal K. Daga",
+      "Starters Students and First Jobs"
+    ],
+    "published": "2026-09-23T02:06:54-07:00",
+    "title": "What to Do With Your First Paycheck",
+    "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html"
+  },
   "version": 1
 }

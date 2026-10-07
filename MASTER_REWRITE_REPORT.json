@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T05:25:34.356124+00:00",
-  "post_id": "6615350878444001009",
-  "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html",
-  "old_title": "The First Couples Money Meeting Agenda",
-  "title": "Run a Money Meeting That Ends in Decisions",
-  "completed": 24,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T05:31:18.615255+00:00",
+  "pending": {
+    "id": "1187159577085494350",
+    "title": "What to Do With Your First Paycheck",
+    "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
+    "published": "2026-09-23T02:06:54-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Starters Students and First Jobs"
+    ],
+    "content_sha256": "e6a340911dacb9dfd4ad9703713bc693980509a69b4af47c949f16372ad18a84",
+    "backup": "master_rewrite_backups/post_1187159577085494350.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 52
 }
