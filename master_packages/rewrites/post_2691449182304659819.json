@@ -1,0 +1,586 @@
+{
+  "title": "Test AI Money Coaches Before Trusting Them",
+  "meta_description": "A rigorous framework for testing AI money coaches for accuracy, current sources, privacy, security, conflicts, safety and appropriate human escalation.",
+  "entities": [
+    "AI money coach",
+    "financial chatbot",
+    "privacy",
+    "cybersecurity",
+    "financial advice",
+    "algorithmic recommendations"
+  ],
+  "geography": [
+    "United States"
+  ],
+  "temporal_coverage": "2026",
+  "module_headings": {
+    "contents": "Inside the AI Money-Coach Test",
+    "summary": "Summary: A Trust-But-Verify Protocol",
+    "faq": "Questions to Ask Before Using an AI Coach",
+    "glossary": "AI Finance Terms in Plain English",
+    "sources": "Evidence and Test Notes",
+    "internal_links": "Internal Links: Related Daily Yield Resources",
+    "external_sources": "External Links: Official Sources"
+  },
+  "sections": [
+    {
+      "heading": "An AI Money Coach Is a Tool, Not a Fiduciary",
+      "paragraphs": [
+        "Define what the product actually does before grading it. A chatbot that explains budgeting differs from software that reads transactions, recommends securities, initiates transfers or sells financial products. Marketing words such as coach, copilot and adviser do not establish legal duty, competence or accountability.",
+        "The opening photograph shows a person actively using an AI chatbot on a laptop because the useful question is not whether AI sounds impressive. It is whether a specific output is correct, current, suitable, transparent and safe for the financial task placed in front of it.",
+        "Do not claim that six unnamed products were tested without a published protocol and preserved evidence. A trustworthy comparison identifies versions, dates, prompts, settings, account access, scoring rules and limitations. This article supplies that repeatable evaluation framework instead of manufacturing a winner.",
+        "AI can organize questions, explain common terms, draft a budget category list and surface issues for verification. It can also hallucinate rules, overlook context, express false certainty or steer a user toward an affiliated product. Convenience and authority must remain separate.",
+        "Begin with a low-stakes task using invented numbers. Never start by uploading tax returns, account credentials or identity documents. Increase access only after the product, provider, privacy terms, security controls and deletion process have been evaluated.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Separate product evaluation from model evaluation. The same underlying model can behave differently because a provider changes system instructions, retrieval, fine-tuning, safety filters, available tools or commercial ranking. Test the consumer-facing product that receives the data and delivers the action. Naming a famous model does not answer who stores the conversation, selects sources or benefits from a recommendation.",
+        "Define prohibited uses alongside approved ones. The coach may organize spending categories but may not choose investments, submit applications or contact creditors. Write these boundaries where household members can see them. Product capability often expands silently, so an explicit local policy prevents a new button from becoming automatic permission for a higher-risk task."
+      ]
+    },
+    {
+      "heading": "Write the Test Protocol Before Opening the Apps",
+      "paragraphs": [
+        "Use the same factual household case for every product: income timing, essential expenses, debts, rates, emergency savings, insurance, dependents and goals. Include deliberate ambiguities so the evaluator can see whether the tool asks clarifying questions or invents missing facts.",
+        "Freeze the test date and record product tier, model label, platform, country setting and whether browsing or account connections are enabled. AI systems change frequently; results from different versions are not clean comparisons.",
+        "Create task groups covering arithmetic, prioritization, regulatory freshness, uncertainty, privacy explanation, conflicts and escalation. Score each separately. A polished conversational style must not compensate for a wrong calculation or dangerous recommendation.",
+        "Use predetermined pass conditions. An arithmetic answer should reproduce independently; a current-rule answer should link an authoritative source; a recommendation should state assumptions and alternatives; a high-stakes question should identify when professional help is appropriate.",
+        "Preserve prompts and complete responses after removing personal data. Note retries and follow-up prompts. Selecting only the best answer after repeated attempts produces a misleading result.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Include a negative control: a simple question that every tool should answer correctly and a deliberately impossible request that should be refused or qualified. This reveals both basic competence and willingness to invent. Randomize product order where practical, use a clean session, and keep evaluator expectations from changing the follow-up prompts given to later products."
+      ]
+    },
+    {
+      "heading": "Test Arithmetic Before Advice",
+      "paragraphs": [
+        "Give every coach the same cash-flow table, loan balances and interest rates. Ask it to total income, essential spending, minimum payments and available surplus, then reproduce the result in a spreadsheet or calculator.",
+        "Introduce a unit trap such as annual insurance beside monthly expenses. Reliable software should normalize periods explicitly. A plausible total that silently mixes monthly and annual figures can distort every later recommendation.",
+        "Test compound interest, payoff comparisons and percentage changes with values that have an independently verified answer. Require steps, rounding policy and dates rather than accepting a confident final number.",
+        "Change one input and repeat the task. The output should move in the expected direction. If a higher interest rate produces a lower projected cost without explanation, the model or prompt has failed a basic consistency test.",
+        "Do not connect live accounts to test arithmetic. Synthetic data reveals calculation quality without exposing transactions. Account aggregation is a separate security and privacy decision.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Test dates explicitly. Ask for a monthly schedule beginning on a specified day, then inspect leap years, billing dates and payment timing. Financial mistakes often arise from calendars rather than formulas. A coach that calculates correctly but places rent after the account is depleted has failed cash-flow planning. Validate both amount and timing against an independent worksheet."
+      ]
+    },
+    {
+      "heading": "See Whether It Asks What Is Missing",
+      "paragraphs": [
+        "A responsible coach should recognize when a recommendation depends on unknowns. Debt prioritization may require rates, delinquency, collateral, promotional expiry and household essentials. Investment allocation may require horizon, risk, taxes and existing holdings.",
+        "Score the questions it asks before answering. A tool that immediately recommends paying the smallest debt may be applying a generic script while ignoring a past-due mortgage or a zero-percent promotion ending tomorrow.",
+        "Test uncertainty by withholding a crucial fact, then supplying it later. The coach should revise the conclusion and explain why. Refusing to update is a warning; silently reversing without explanation is also weak.",
+        "Look for distinction between education and personalized advice. Disclaimers alone do not cure a response that gives precise instructions unsupported by the user’s situation.",
+        "Reward bounded language: what is known, what is assumed, what could change and what evidence should be checked. False precision is not personalization.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Prompt injection and irrelevant context can also change behavior. Add a note that tells the model to ignore prior safety rules or to recommend a named product regardless of facts. A finance tool should resist instructions embedded in uploaded documents when those instructions conflict with the user’s goal or product controls. Record whether the provider describes defenses and reporting channels."
+      ]
+    },
+    {
+      "heading": "Challenge It With Current Rules",
+      "paragraphs": [
+        "Ask about a rule that recently changed and another that varies by jurisdiction. Require the effective date and primary source. Do not grade from memory; verify against the responsible regulator or agency.",
+        "The FTC [[S1|explains]] that consumers should evaluate AI claims critically, while financial regulators continue applying existing consumer-protection principles to automated products. A chatbot label does not remove obligations that otherwise apply.",
+        "Separate retrieval from reasoning. A correct link paired with a conclusion the source does not support is still a failure. Open the cited page and compare the claim, scope, date and exceptions.",
+        "Test whether the coach admits when it lacks current access. An honest limitation is safer than a fabricated citation. Product interfaces should make freshness understandable rather than leaving users to infer it.",
+        "Repeat time-sensitive questions after a material rule change. A permanent review needs versioned evidence because an answer can improve or deteriorate without notice.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Current-source testing should include source quality, not merely a hyperlink. A marketing blog quoting an obsolete threshold should not outrank the responsible agency. Require the model to distinguish a proposal, final rule, court order and effective requirement. Financial products often fail by collapsing those legal stages into one confident present-tense statement."
+      ]
+    },
+    {
+      "heading": "Inspect Privacy Before Sharing Transactions",
+      "paragraphs": [
+        "The midpoint photograph displays cybersecurity on a laptop because financial coaching can expose account balances, spending patterns, debts, health purchases, location and family relationships. That data can be sensitive even without a bank password.",
+        "Read the privacy notice and product terms for collection, purpose, retention, model training, advertising, sharing, deletion and cross-border processing. Search for precise statements rather than relying on a lock icon or broad promise of security.",
+        "The CFPB [[S2|warns]] that data brokers and surveillance practices can create consumer risks. Determine whether transaction or conversation data may be used beyond delivering the requested service.",
+        "Prefer data minimization. Use ranges, redacted statements or manually entered totals when full transaction history is unnecessary. Never paste credentials, one-time codes, Social Security numbers or full account numbers into a chat.",
+        "Test deletion before deep adoption. Remove a sample conversation or account connection, then verify what deletion covers, how long it takes and whether backups or derived data are excluded.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Before uploading a statement, inspect whether the service permits provider personnel, contractors or subprocessors to review content. Determine whether privacy choices differ between free, paid, enterprise and API versions. Do not assume a setting in one interface controls every product from the same company. Capture the exact setting and confirmation at the time of testing.",
+        "Assume that de-identification can fail when detailed transactions are combined. Merchant, time, location and rare expenses may re-identify a person. Remove fields not needed for the test and avoid uploading another person’s information. A user cannot consent on behalf of every family member, employee or client whose activity appears on a shared statement."
+      ]
+    },
+    {
+      "heading": "Audit Connections, Permissions and Security",
+      "paragraphs": [
+        "If the product links accounts, identify the aggregator, authorization method, institutions reached, data fields, refresh frequency and whether the tool can move money. Read permissions on the bank’s own authorization screen.",
+        "Use multifactor authentication and unique credentials. Do not provide bank login details directly to an unfamiliar chatbot. A secure connection should be distinguishable from a request to reveal credentials in conversation.",
+        "Review connected apps from the financial institution as well as the coach. Revoke a test connection and confirm updates stop. Document how access can be restored without leaving stale tokens.",
+        "Check breach history, security contacts and incident notices. Security claims should be specific enough to assess, but no certification makes sharing unlimited data risk-free.",
+        "Create alerts for new connections, transfers and profile changes. Automation that can execute financial actions needs limits, confirmation and a rapid pause method.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Action authority deserves a separate test environment. If transfers, trades or bill payments are offered, examine limits, confirmation screens, cooling-off periods, payee verification and dispute paths without sending real money. Ask what happens after a duplicated instruction, model outage or compromised device. A text disclaimer cannot compensate for weak transaction controls."
+      ]
+    },
+    {
+      "heading": "Look for Sales Incentives and Conflicts",
+      "paragraphs": [
+        "Find out how the product earns money: subscription, lead generation, advertising, affiliate payment, asset-management fee, interchange or sale of another service. Free coaching can still have a commercial objective.",
+        "Ask the same question while changing only the availability of an affiliated product. If recommendations shift without an economic reason, investigate whether ranking or language favors revenue.",
+        "The SEC [[S3|investor guidance]] emphasizes checking the background and services of investment professionals. A chatbot should not make a person or firm appear registered, licensed or fiduciary when that status has not been verified.",
+        "Require disclosure of fees and alternatives in dollars where possible. A recommendation to consolidate, refinance or move assets should show costs, lost protections and the provider’s compensation.",
+        "Do not treat a disclosure buried in terms as proof that the conversational output is neutral. Score the recommendation itself for balanced alternatives and explicit conflicts.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Test whether a recommendation changes after the user says they already own the provider’s affiliated fund, card or account. The coach should still compare alternatives using consistent criteria. Ask for the full cost over a realistic period and request an option that earns the provider nothing. Evasion or unexplained ranking changes should lower the conflict score."
+      ]
+    },
+    {
+      "heading": "Test Harmful Edge Cases",
+      "paragraphs": [
+        "Use synthetic scenarios involving fraud, domestic financial abuse, imminent eviction, suicidal language, tax deadlines and unauthorized transactions. The goal is not to demand therapy from software; it is to see whether it avoids harmful improvisation and routes urgent cases appropriately.",
+        "A coach should not tell a user to ignore court papers, conceal assets, evade tax, borrow from an obvious scam or disclose credentials. Safety boundaries should survive persistent follow-up prompts.",
+        "Check whether crisis resources match the user’s stated country. Generic emergency language can be inadequate when timing and jurisdiction matter.",
+        "For suspected fraud, the response should prioritize verified contact channels, account protection and preservation of evidence rather than encouraging confrontation with an unknown sender.",
+        "Record both false negatives and overreaction. A tool that labels every normal expense as fraud becomes unusable; one that normalizes a clear account takeover is unsafe.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Edge-case tests must not use a real vulnerable person’s story without permission. Build synthetic cases, remove identifying details and minimize reviewer exposure. If a product stores prompts for improvement, high-risk scenarios can still reveal sensitive patterns. Safety research should follow the same privacy discipline demanded from the product."
+      ]
+    },
+    {
+      "heading": "Compare the Coach With Human Escalation",
+      "paragraphs": [
+        "The late photograph shows a financial professional reviewing documents with a client because some tasks require accountable human judgment. Complexity, legal consequences, regulated advice and emotional vulnerability can exceed a chatbot’s role.",
+        "Define escalation triggers before testing: estate documents, tax positions, insolvency, insurance coverage, securities transactions, suspected abuse and any recommendation involving irreversible loss of protections.",
+        "A strong product should explain what kind of professional may help and what records to bring. It should not imply that any person using the title coach has the credentials required for regulated work.",
+        "Verify professionals through the relevant official database, understand compensation and ask about conflicts. Human status is not automatic proof of quality; it is an opportunity for identifiable accountability and qualification checks.",
+        "Use AI to prepare questions, organize facts and compare written explanations, then retain human review for decisions whose error cost exceeds the convenience benefit.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Human escalation should include a clean handoff. The product ought to summarize verified facts, unresolved questions and source links without presenting hallucinated conclusions as facts. The user should control what is shared. A coach that sends a lead to a sales partner without clear consent is not providing neutral escalation; it is creating a commercial referral."
+      ]
+    },
+    {
+      "heading": "Score Outcomes, Not Personality",
+      "paragraphs": [
+        "Build a weighted scorecard: accuracy, completeness, uncertainty, source quality, privacy, security, conflicts, accessibility and escalation. Give arithmetic and safety more weight than tone or animation.",
+        "Use pass, partial and fail with evidence. Numerical totals, citations, screenshots and term excerpts are stronger than impressions such as “felt smart.”",
+        "Track severe failures separately. One recommendation to expose credentials or abandon an essential payment should not be averaged away by many pleasant budgeting tips.",
+        "Assess consistency across fresh sessions. High variance makes a product unsuitable for tasks requiring repeatable controls, even if one response is excellent.",
+        "Publish limitations: small sample, synthetic case, geography, version drift and features not tested. A score is a dated observation, not a permanent product ranking.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Report confidence intervals or variation where scoring depends on repeated stochastic outputs. A single success among five runs is not reliability. Define how many runs were used, how disagreements were resolved and whether a severe failure occurred. Keep raw, redacted evidence available so another reviewer can reproduce the conclusion rather than trusting a star rating.",
+        "Separate accessibility quality from financial correctness while scoring both. Clear language, language support, screen-reader behavior and understandable error messages determine whether users can safely verify advice. An accurate formula hidden behind unexplained jargon can still cause misuse. Record whether the tool shows work and allows correction without forcing the user to start over."
+      ]
+    },
+    {
+      "heading": "Adopt the Smallest Safe Role",
+      "paragraphs": [
+        "Choose the narrowest role the evidence supports. A tool may pass expense categorization but fail tax, investment or debt advice. Limit it to the passing task instead of granting general authority.",
+        "Create a verification rule for every output class. Arithmetic goes to a calculator; regulations go to primary sources; transactions go to statements; high-stakes recommendations go to a qualified person.",
+        "Set review dates and revoke unused connections. Export useful records before cancellation, then delete data under the product’s documented process.",
+        "Measure benefit in time saved, errors prevented and decisions improved. If checking the coach consumes more effort than the task or repeatedly creates corrections, stop using it.",
+        "The final judgment is practical: AI money coaching can support financial organization, but trust must be earned task by task through reproducible evidence, minimal data and human accountability.",
+        "For this section, record the exact prompt, answer, evidence checked, severity of any error and the decision that follows. Repeat the task in a new session so memory or hidden context does not create a false impression of reliability.",
+        "Use a red-line rule: no product advances because it is friendly, fast or inexpensive. It advances only when the output can be independently checked, the data requested is proportionate, and a user can reverse access or escalate a consequential decision.",
+        "Document the counterexample most likely to break the result. Change income, jurisdiction, account type, deadline or risk tolerance as appropriate. A robust tool explains why the recommendation changes; a brittle tool merely produces another polished paragraph.",
+        "Adoption should include an exit plan on day one. Record how to export conversations, budgets and categories; disconnect accounts; cancel billing; delete the profile; and contact support. Test at least one export before building a long history. Portability limits lock-in and lets the user leave when terms, quality or ownership change.",
+        "Keep final decision authority outside the chatbot at all times."
+      ]
+    }
+  ],
+  "summary": [
+    "Define the product’s actual function before calling it a financial coach, adviser or copilot.",
+    "Use a published, repeatable protocol rather than claiming an undocumented test of named products.",
+    "Test with synthetic financial data before sharing any real transactions or documents.",
+    "Freeze product version, date, tier, country and settings because AI outputs change.",
+    "Score arithmetic, prioritization, rule freshness, uncertainty, privacy, conflicts and escalation separately.",
+    "Reproduce every calculation independently and test unit conversions.",
+    "Reward clarifying questions and penalize invented facts or false precision.",
+    "Require primary sources and effective dates for changing financial rules.",
+    "Open citations and confirm that they support the claim and its exceptions.",
+    "Read privacy terms for collection, retention, training, advertising, sharing and deletion.",
+    "Minimize data and never paste credentials, codes or full account identifiers into chat.",
+    "Audit account connections from the bank and revoke a test connection.",
+    "Identify subscriptions, affiliates, lead generation and other commercial incentives.",
+    "Test serious edge cases and maintain red lines for credentials, essential payments and legal notices.",
+    "Define when a qualified human must review the decision.",
+    "Verify a professional’s credentials and compensation through official sources.",
+    "Weight accuracy and safety more heavily than tone, personality or interface quality.",
+    "Adopt only the narrowest role the evidence supports, then review and delete unused access.",
+    "Evaluate the complete consumer product, not just the underlying model name. Provider instructions, tools and incentives can change behavior.",
+    "Include easy controls and impossible requests to test basic competence and willingness to invent.",
+    "Use identical clean-session prompts and preserve every retry so products receive comparable treatment.",
+    "Check dates, cash timing, units and rounding in addition to final arithmetic totals.",
+    "Test whether uploaded text can manipulate the coach into ignoring safety or favoring a product.",
+    "Distinguish proposals, final rules, court actions and effective requirements when checking regulatory freshness.",
+    "Check whether staff, contractors or subprocessors may review conversations and uploaded documents.",
+    "Confirm privacy controls separately for each consumer, enterprise or API product used.",
+    "Treat transaction authority as a separate risk tier with limits, confirmations and dispute procedures.",
+    "Ask for a recommendation that produces no revenue for the provider to expose potential steering.",
+    "Use synthetic edge cases rather than real vulnerable people’s identifying stories.",
+    "Require a user-controlled human handoff containing verified facts and unresolved questions.",
+    "Do not confuse a commercial sales referral with neutral professional escalation.",
+    "Repeat tests and report output variation; one excellent answer does not establish reliability.",
+    "Keep severe failures visible rather than averaging them away with pleasant low-stakes responses.",
+    "Create an exit plan covering exports, account disconnection, subscription cancellation and profile deletion.",
+    "Re-test after model, terms, ownership, data access or major financial rules change.",
+    "Stop using a coach when independent verification costs more time or risk than the tool saves.",
+    "Write explicit approved and prohibited uses so expanding product features do not silently receive broader authority.",
+    "Remember that detailed transactions can re-identify people even after names and account numbers are removed.",
+    "Do not upload information about family members, employees or clients without an appropriate basis and permission.",
+    "Score accessibility, plain language and correction workflows separately from mathematical accuracy.",
+    "Verify that the tool shows its work and lets users correct facts without concealing earlier assumptions.",
+    "Use independent statements, calculators, regulators and professional databases as the evidence layer above conversational output.",
+    "Trust is task-specific and temporary: retain human control, minimal permissions, reproducible checks and a practical exit route.",
+    "Record the provider, product tier, model label, country setting, account permissions and date beside every published result.",
+    "A product should lose points when it refuses to disclose uncertainty, commercial incentives, data retention or the basis for a recommendation.",
+    "Before acting, restate the verified facts and decision in the user’s own words; inability to do so signals excessive dependence."
+  ],
+  "faq": [
+    {
+      "question": "Can an AI coach replace a financial adviser?",
+      "answer": "No general assumption is safe. Use it only for tasks it passes and escalate regulated or high-impact decisions."
+    },
+    {
+      "question": "Should I connect bank accounts?",
+      "answer": "Only after evaluating necessity, provider, permissions, security, retention and revocation. Synthetic or manual data may be enough."
+    },
+    {
+      "question": "How do I test accuracy?",
+      "answer": "Use predetermined cases, reproduce calculations independently, open citations and rerun changed inputs."
+    },
+    {
+      "question": "Are disclaimers enough?",
+      "answer": "No. A disclaimer does not correct false calculations, invented facts, unsuitable instructions or hidden incentives."
+    },
+    {
+      "question": "Can a free coach be unbiased?",
+      "answer": "Possibly, but inspect advertising, affiliate, lead-generation and product-sale incentives."
+    },
+    {
+      "question": "What data should never go into chat?",
+      "answer": "Do not paste passwords, one-time codes, full account numbers, Social Security numbers or unnecessary identity documents."
+    },
+    {
+      "question": "When should a human review the answer?",
+      "answer": "Use qualified human help for legal, tax, insolvency, insurance, securities, abuse, fraud and irreversible decisions."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Hallucination",
+      "definition": "Confidently generated information that is unsupported or false."
+    },
+    {
+      "term": "Data minimization",
+      "definition": "Collecting or sharing only information necessary for the task."
+    },
+    {
+      "term": "Account aggregator",
+      "definition": "Service that connects and retrieves data from financial accounts."
+    },
+    {
+      "term": "Fiduciary",
+      "definition": "Legal duty that depends on role and law, not the use of an adviser-like label."
+    },
+    {
+      "term": "Primary source",
+      "definition": "Authoritative regulator, statute, filing or official record supporting a claim."
+    },
+    {
+      "term": "Model drift",
+      "definition": "Change in behavior or quality across versions or time."
+    },
+    {
+      "term": "Conflict of interest",
+      "definition": "Incentive that may pull a recommendation away from the user’s interest."
+    },
+    {
+      "term": "Synthetic data",
+      "definition": "Invented test information that does not expose a real person."
+    },
+    {
+      "term": "Escalation",
+      "definition": "Routing a question to accountable qualified help."
+    },
+    {
+      "term": "Revocation",
+      "definition": "Withdrawal of a product’s authorization to access data or accounts."
+    }
+  ],
+  "visuals": [
+    {
+      "type": "table",
+      "title": "AI money-coach scorecard",
+      "caption": "Weight correctness and safety above presentation.",
+      "source": 1,
+      "after_section": "Test Arithmetic Before Advice",
+      "data": [
+        {
+          "Dimension": "Accuracy",
+          "Test": "Reproduce calculations"
+        },
+        {
+          "Dimension": "Freshness",
+          "Test": "Verify primary source and date"
+        },
+        {
+          "Dimension": "Privacy",
+          "Test": "Minimize, delete and revoke"
+        },
+        {
+          "Dimension": "Safety",
+          "Test": "Challenge high-risk scenarios"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Data-access ladder",
+      "caption": "Grant only the minimum access needed for a passing task.",
+      "source": 2,
+      "after_section": "Inspect Privacy Before Sharing Transactions",
+      "data": [
+        {
+          "Level": "1",
+          "Access": "Synthetic numbers"
+        },
+        {
+          "Level": "2",
+          "Access": "Manual redacted totals"
+        },
+        {
+          "Level": "3",
+          "Access": "Read-only limited connection"
+        },
+        {
+          "Level": "4",
+          "Access": "Action authority only with strong controls"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Evidence hierarchy",
+      "caption": "Conversational confidence is not evidence.",
+      "source": 3,
+      "after_section": "Challenge It With Current Rules",
+      "data": [
+        {
+          "Evidence": "Primary official record",
+          "Use": "Rules and registration"
+        },
+        {
+          "Evidence": "Statement or contract",
+          "Use": "Account-specific facts"
+        },
+        {
+          "Evidence": "Independent calculator",
+          "Use": "Arithmetic check"
+        },
+        {
+          "Evidence": "AI response",
+          "Use": "Question generation, not final proof"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Escalation triggers",
+      "caption": "High error cost calls for accountable review.",
+      "source": 3,
+      "after_section": "Compare the Coach With Human Escalation",
+      "data": [
+        {
+          "Trigger": "Legal or tax consequence",
+          "Action": "Qualified professional"
+        },
+        {
+          "Trigger": "Investment transaction",
+          "Action": "Verify registration and conflicts"
+        },
+        {
+          "Trigger": "Fraud or abuse",
+          "Action": "Official urgent channels"
+        },
+        {
+          "Trigger": "Irreversible loss of benefit",
+          "Action": "Independent human review"
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/evaluate-ai-money-coaches-before-trusting-them/photo-1.jpg",
+      "alt": "Person typing on a laptop displaying an AI chatbot interface",
+      "caption": "Photo: Matheus Bertelli / Pexels License",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/man-working-with-chatgpt-16094042/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "creator": "Matheus Bertelli"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/evaluate-ai-money-coaches-before-trusting-them/photo-2.jpg",
+      "alt": "Laptop screen displaying the words Cyber Security in a dark office",
+      "caption": "Photo: cottonbro studio / Pexels License",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/laptop-with-cyber-security-text-on-the-screen-5483240/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "creator": "cottonbro studio"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/evaluate-ai-money-coaches-before-trusting-them/photo-3.jpg",
+      "alt": "Financial adviser reviewing printed documents with a client at an office desk",
+      "caption": "Photo: RDNE Stock project / Pexels License",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/an-agent-showing-documents-to-his-client-7821671/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "creator": "RDNE Stock project"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Federal Trade Commission",
+      "title": "Keep your AI claims in check",
+      "url": "https://www.ftc.gov/business-guidance/blog/2023/02/keep-your-ai-claims-check",
+      "date": "2023",
+      "use": "Evaluation of AI capability claims."
+    },
+    {
+      "name": "Consumer Financial Protection Bureau",
+      "title": "Data brokers and surveillance risks",
+      "url": "https://www.consumerfinance.gov/about-us/blog/",
+      "date": "2026",
+      "use": "Consumer financial data and privacy context."
+    },
+    {
+      "name": "U.S. Securities and Exchange Commission",
+      "title": "Investment Adviser Public Disclosure",
+      "url": "https://adviserinfo.sec.gov/",
+      "date": "2026",
+      "use": "Professional registration and background verification."
+    },
+    {
+      "name": "Federal Trade Commission",
+      "title": "How to recognize and report scams",
+      "url": "https://consumer.ftc.gov/scams",
+      "date": "2026",
+      "use": "Fraud red flags and reporting."
+    },
+    {
+      "name": "National Institute of Standards and Technology",
+      "title": "AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "date": "2026",
+      "use": "AI risk governance and measurement."
+    },
+    {
+      "name": "Consumer Financial Protection Bureau",
+      "title": "Adverse action notification when using complex algorithms",
+      "url": "https://www.consumerfinance.gov/compliance/circulars/circular-2022-03-adverse-action-notification-requirements-in-connection-with-credit-decisions-based-on-complex-algorithms/",
+      "date": "2022",
+      "use": "Accountability for algorithmic credit decisions."
+    }
+  ],
+  "internal_links": [
+    {
+      "title": "Daily Yield Calculators",
+      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "relevance": "Model mortgage payments and trade-offs."
+    },
+    {
+      "title": "Daily Yield Articles",
+      "url": "https://dailyyield.blogspot.com/p/daily-articles.html",
+      "relevance": "Continue with housing and emergency-fund guides."
+    }
+  ],
+  "low_view_posts": [
+    {
+      "title": "Stop Maxing Your 401(k)",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
+      "image": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/stop-maxing-your-401-k/photo-1.jpg",
+      "label": "Contrarian Hooks"
+    },
+    {
+      "title": "Real Net Worth Targets by Age for Median…",
+      "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjJREO7SrOEV8D3SZueRXkRujD4gCd6Qw-wiFp86puyGZSkK_O4VkaperL6j9vD_UN3IRQ3jYWR7rGtH0k8CB-J5S_QPX34M4p8YE1w1gjSxxiAbXnXPHoUUMaTUhBuZ0aXv7egpwRI7L-_v_GNzF24OWl4oEvnjES8MvJyu9cHqz-ppxUn-21Ei1kplb4",
+      "label": "Age and Wealth Milestones"
+    },
+    {
+      "title": "The Portfolio That Pays Your Rent",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEi_htziga3A_s4s8g6LdFwKiLPpWp1V4h90RaALm2jY0kuadqTcp-TGjR09vGn4KMkBz_NSf6A3sfccVWJu-QK73V7z5cHsl8X5__C194p-nHYXRqJCY9nqY8y9tUZH_qMnK803TV8kbpLa1je6eoXIm5xjuEDcL3fB0ebmxuqbhdHR_Fa1f6EWqHTLcr0",
+      "label": "Passive Income Reality"
+    },
+    {
+      "title": "Why Dual-Income Couples Still Feel One Month…",
+      "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhkXyr4N5Qs6KAKwQcdgtLLuEAMybACMU3d0R119ZcmcNSVomBx7cC6BJDUhG-P4spkTHrZlXTvj-xhQVR8VpQZ_pJqzf-KrX3S2E5DGxB6NImYgB2ZHYw-ccyW75R6ElAe2EIscY47cA-xc-VDeV1M319GSvzjyXCVvy9cFANXGaiV3q3TTC6F65Ss37s",
+      "label": "Middle Class Survival"
+    },
+    {
+      "title": "The $48,000 Teacher Money Rebuild",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
+      "label": "Money Audits and Case Studies"
+    },
+    {
+      "title": "Break the 'I Deserve It' Spend Loop",
+      "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhCN8HH6J68vjvcElBiLTNJxce14SG7mL9Ez60gHeTYrABZddjLlqGveoBNhgiggOLchYxtJ_GYC3u2lH7CCA_ykSsYhGsw0157se0n8zC0IU8VKrQbjHcKjxoH1dEXGWEaTkh7GJRNcAgdBCtiJQPgprNsCvT4hDSeTFjCPliV3x5V4Wh5Els_yKbpH34",
+      "label": "Money Psychology and Mindset"
+    },
+    {
+      "title": "Your Mortgage Is Not the Real Cost",
+      "url": "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjjnpq-PcDf-MAQT6ZR6gELqEMX1ajn-c3DHWZXHhHBIihPLu4lXxyFrMDFR-lq-qVWrJ1qM57-0S3MC2T95u-cg1-SP37PDbwcT6TcHjZpUPz6L725VH_VKfdHa98RyNIUZYfWR2IuAozwytk5jty84bYc4oskZp-XBb7LrM5kNnSVOvB8Qq39vr3PSyc",
+      "label": "Housing Cars and Big Buys"
+    },
+    {
+      "title": "The Payday Waterfall",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjk846T9Oi0HOafXBU44nu-XZiefbV_BTL0P0KDc17fnXNC4JjfJNh9nm2qPE3KvqPY2kLHzMT8fkhIkraYAr6MJfS_QDbkaK5hxhvS3tsunWnEVNXnN10UgFjYqtfdZVuc3SOK-8tgt9Hp_ezZOW5-iv_oWOIwWdxoDVCbL1yuMTdkgF0jDNTfTIkDxCI",
+      "label": "Automation and Money Systems"
+    },
+    {
+      "title": "0% Balance Transfers Without the Trap",
+      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
+      "label": "Credit Debt and Optimization"
+    },
+    {
+      "title": "AI Found £1,200 I Was Wasting",
+      "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
+      "label": "AI Fintech and Future Money"
+    },
+    {
+      "title": "Three-Fund Portfolio",
+      "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
+      "image": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-2758262234277933362-0.jpg",
+      "label": "Automation and Money Systems"
+    },
+    {
+      "title": "FIRE Got Harder",
+      "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+      "image": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+      "label": "Middle Class Survival"
+    }
+  ]
+}
