@@ -14,7 +14,7 @@
     },
     {
       "prospect_id": "business-standard-editorial",
-      "reason": "outside recipient local business-time window"
+      "reason": "classification=restricted/human_only"
     },
     {
       "prospect_id": "financial-planning-voices",
@@ -30,11 +30,11 @@
     },
     {
       "prospect_id": "outlook-letters",
-      "reason": "outside recipient local business-time window"
+      "reason": "classification=restricted/human_only"
     },
     {
       "prospect_id": "finance-india",
-      "reason": "outside recipient local business-time window"
+      "reason": "classification=excluded/excluded"
     },
     {
       "prospect_id": "the-financial-diet",
