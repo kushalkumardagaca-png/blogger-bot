@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T16:08:43.345872+00:00",
-  "pending": {
-    "id": "5611067798787673649",
-    "title": "Laid Off: The First 72 Hours",
-    "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
-    "published": "2026-09-28T18:51:35-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Recessions Crashes and Defense"
-    ],
-    "content_sha256": "999c45e7039da59b0db9c6224bfbc0f18f7e381bf64236ecc2825a2bc87509b8",
-    "backup": "master_rewrite_backups/post_5611067798787673649.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 24
+  "status": "PASS",
+  "at": "2026-10-07T16:08:47.842076+00:00",
+  "post_id": "5611067798787673649",
+  "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
+  "old_title": "Laid Off: The First 72 Hours",
+  "title": "Your First 72 Hours After a Layoff",
+  "completed": 53,
+  "master_count": 76
 }

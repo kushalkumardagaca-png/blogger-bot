@@ -229,6 +229,14 @@
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
       "verified_at": "2026-10-06T05:54:21.034401+00:00"
     },
+    "5611067798787673649": {
+      "content_sha256": "310d3cbce27c2f635986634ff2d5e7d0ea7d3448e13226b33595c4de6d57c40b",
+      "old_title": "Laid Off: The First 72 Hours",
+      "status": "rewritten-v2",
+      "title": "Your First 72 Hours After a Layoff",
+      "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
+      "verified_at": "2026-10-07T16:08:47.841332+00:00"
+    },
     "5733569512815684823": {
       "content_sha256": "3a111c544b839a76417bf1f152f533d3a164eece02ecfebb773241fa14ef9a66",
       "old_title": "Find \u00a3200/Month in 10 Minutes",
@@ -416,17 +424,6 @@
   },
   "inventory_completed_count": 52,
   "inventory_master_count": 76,
-  "pending": {
-    "backup": "master_rewrite_backups/post_5611067798787673649.json.gz",
-    "content_sha256": "999c45e7039da59b0db9c6224bfbc0f18f7e381bf64236ecc2825a2bc87509b8",
-    "id": "5611067798787673649",
-    "labels": [
-      "Kushal K. Daga",
-      "Recessions Crashes and Defense"
-    ],
-    "published": "2026-09-28T18:51:35-07:00",
-    "title": "Laid Off: The First 72 Hours",
-    "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html"
-  },
+  "pending": null,
   "version": 1
 }
