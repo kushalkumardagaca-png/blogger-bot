@@ -1,26 +1,219 @@
 {
-  "generated_at": "2026-10-06T21:25:39.956823+00:00",
+  "generated_at": "2026-10-07T21:27:10.108882+00:00",
   "method": "Official social APIs only; no Daily Yield page requests and no synthetic views.",
   "limitations": "Impressions are recorded only where the platform API supplies them. Engagement counts are not treated as impressions.",
   "platforms": {
     "facebook": {
-      "status": "partial: 74 unavailable",
+      "status": "partial: 80 unavailable",
       "observations": 0
     },
     "bluesky": {
       "status": "ok",
-      "observations": 46
+      "observations": 52
     },
     "mastodon": {
       "status": "ok",
-      "observations": 36
+      "observations": 41
     },
     "tumblr": {
       "status": "ok",
-      "observations": 41
+      "observations": 45
     }
   },
   "items": [
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxcdpbwq7n2z",
+      "title": "Russia Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-07.html",
+      "published_at": "2026-10-07T21:44:57.162833+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117399923004217823",
+      "title": "Mexico Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-07.html",
+      "published_at": "2026-10-07T19:14:21.228485+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829817028856725504",
+      "title": "Canada Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-07.html",
+      "published_at": "2026-10-07T17:43:07.991304+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxbojm7fef2r",
+      "title": "Corporate Finance and Industry News",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02075404004.html",
+      "published_at": "2026-10-07T15:25:57.674039+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117399023649974189",
+      "title": "Italy Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-07.html",
+      "published_at": "2026-10-07T15:25:38.243955+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117394493524302695",
+      "title": "MONEY ATLAS",
+      "destination": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+      "published_at": "2026-10-07T14:17:46.106357+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829798436426629120",
+      "title": "Spain Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-07.html",
+      "published_at": "2026-10-07T12:47:36.885185+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxbbvhfyis2p",
+      "title": "Japan Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-07.html",
+      "published_at": "2026-10-07T11:39:56.713299+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117397823677461931",
+      "title": "France Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/france-2026-10-07.html",
+      "published_at": "2026-10-07T10:20:28.481957+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829789148074459136",
+      "title": "Germany Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-07.html",
+      "published_at": "2026-10-07T10:19:58.756884+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxay26z6eo2o",
+      "title": "Economy and Macro Policy News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0694295104.html",
+      "published_at": "2026-10-07T08:43:38.294134+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "social_id": "117396898331411021",
+      "title": "India Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/india-2026-10-07.html",
+      "published_at": "2026-10-07T06:25:08.463945+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxaqcb2poq2u",
+      "title": "Global Finance Wire — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-07.html",
+      "published_at": "2026-10-07T06:24:58.949585+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxamtq5kev2l",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "destination": "https://dailyyield.blogspot.com/",
+      "published_at": "2026-10-07T05:23:10.362926+05:30",
+      "metrics": {
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "social_id": "829766245225267200",
+      "title": "South Korea Finance News — 7 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-07.html",
+      "published_at": "2026-10-07T04:15:57.137610+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
     {
       "platform": "mastodon",
       "social_id": "117394611122032984",
