@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T06:32:13.456679+00:00",
-  "post_id": "1246197502482808342",
-  "url": "https://dailyyield.blogspot.com/2026/09/15-money-myths-your-uncle-repeats.html",
-  "old_title": "15 Money Myths Your Uncle Repeats",
-  "title": "Test Money Advice Before You Trust It",
-  "completed": 31,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T06:58:18.593131+00:00",
+  "pending": {
+    "id": "5855044192522572590",
+    "title": "12 Money Moves for the Next 12 Months",
+    "url": "https://dailyyield.blogspot.com/2026/09/12-money-moves-for-next-12-months.html",
+    "published": "2026-09-24T08:05:50-07:00",
+    "labels": [
+      "2026 Money Moves",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "834fb94a865eb338bcc12d004cec89e5f1bd12d6ce9d7ac27d7178d392275dca",
+    "backup": "master_rewrite_backups/post_5855044192522572590.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 45
 }
