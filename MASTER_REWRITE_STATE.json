@@ -206,8 +206,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 25,
+  "inventory_completed_count": 26,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4690992148902176975.json.gz",
+    "content_sha256": "1f36ce9924b2e1d795e4369796be4332722792c92643863f12d835b07ab68807",
+    "id": "4690992148902176975",
+    "labels": [
+      "Kushal K. Daga",
+      "Rich Habits vs Broke Habits"
+    ],
+    "published": "2026-09-23T08:04:23-07:00",
+    "title": "What Quiet Rich People Do on Payday",
+    "url": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html"
+  },
   "version": 1
 }
