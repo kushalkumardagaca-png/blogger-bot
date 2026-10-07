@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T14:05:19.508824+00:00",
-  "pending": {
-    "id": "7123852462020825588",
-    "title": "Insure Your Income, Not Just Your Phone",
-    "url": "https://dailyyield.blogspot.com/2026/09/insure-your-income-not-just-your-phone.html",
-    "published": "2026-09-27T18:49:56-07:00",
-    "labels": [
-      "Insurance and Protection",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "f79935add320c1fd5c3617a4e9b2f682dd54af73009ab3c8be224d120f1d4d28",
-    "backup": "master_rewrite_backups/post_7123852462020825588.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 29
+  "status": "PASS",
+  "at": "2026-10-07T14:05:26.525555+00:00",
+  "post_id": "7123852462020825588",
+  "url": "https://dailyyield.blogspot.com/2026/09/insure-your-income-not-just-your-phone.html",
+  "old_title": "Insure Your Income, Not Just Your Phone",
+  "title": "Protect Your Pay When Illness Stops Work",
+  "completed": 48,
+  "master_count": 76
 }
