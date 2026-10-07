@@ -422,8 +422,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 52,
+  "inventory_completed_count": 53,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_314352988888289456.json.gz",
+    "content_sha256": "5c4a068613f79c997ac9c1ae2c771898be72db0973b1121538726abad6e01d0f",
+    "id": "314352988888289456",
+    "labels": [
+      "Cash Savings and Emergency Funds",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-28T22:40:09-07:00",
+    "title": "Where to Park Your Emergency Fund",
+    "url": "https://dailyyield.blogspot.com/2026/09/where-to-park-your-emergency-fund.html"
+  },
   "version": 1
 }
