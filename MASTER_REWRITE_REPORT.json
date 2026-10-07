@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T12:40:34.746261+00:00",
-  "pending": {
-    "id": "3867527095511324597",
-    "title": "The Loyalty Tax You're Paying",
-    "url": "https://dailyyield.blogspot.com/2026/09/the-loyalty-tax-youre-paying.html",
-    "published": "2026-09-27T04:37:50-07:00",
-    "labels": [
-      "Career Salary and Raises",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "09f6b6d9d22391853c6fda995c05067eb0f42cc9321d7924e201bf5760295f09",
-    "backup": "master_rewrite_backups/post_3867527095511324597.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 31
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T12:40:36.876845+00:00",
+  "post_id": "3867527095511324597",
+  "package": "master_packages/rewrites/post_3867527095511324597.json",
+  "title": "Stop Paying the Job-Loyalty Penalty"
 }
