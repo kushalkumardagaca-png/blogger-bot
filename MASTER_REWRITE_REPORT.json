@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T16:31:42.977764+00:00",
-  "pending": {
-    "id": "7255018414657547539",
-    "title": "BRRRR With the Ugly Months Included",
-    "url": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html",
-    "published": "2026-09-29T01:31:40-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Real Estate Investing"
-    ],
-    "content_sha256": "752e6b8e83bea8f05a152b9b8e473ef5717ff603d16f4724d6cf3d18e25c4f6c",
-    "backup": "master_rewrite_backups/post_7255018414657547539.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 22
+  "status": "PASS",
+  "at": "2026-10-07T16:31:48.410348+00:00",
+  "post_id": "7255018414657547539",
+  "url": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html",
+  "old_title": "BRRRR With the Ugly Months Included",
+  "title": "Stress-Test Every BRRRR Deal",
+  "completed": 55,
+  "master_count": 76
 }
