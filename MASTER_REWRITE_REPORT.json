@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T05:45:09.901713+00:00",
-  "pending": {
-    "id": "4690992148902176975",
-    "title": "What Quiet Rich People Do on Payday",
-    "url": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
-    "published": "2026-09-23T08:04:23-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Rich Habits vs Broke Habits"
-    ],
-    "content_sha256": "1f36ce9924b2e1d795e4369796be4332722792c92643863f12d835b07ab68807",
-    "backup": "master_rewrite_backups/post_4690992148902176975.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 50
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T05:45:12.078957+00:00",
+  "post_id": "4690992148902176975",
+  "package": "master_packages/rewrites/post_4690992148902176975.json",
+  "title": "Put Every Payday on Autopilot"
 }
