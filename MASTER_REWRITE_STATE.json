@@ -430,8 +430,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 53,
+  "inventory_completed_count": 54,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_7255018414657547539.json.gz",
+    "content_sha256": "752e6b8e83bea8f05a152b9b8e473ef5717ff603d16f4724d6cf3d18e25c4f6c",
+    "id": "7255018414657547539",
+    "labels": [
+      "Kushal K. Daga",
+      "Real Estate Investing"
+    ],
+    "published": "2026-09-29T01:31:40-07:00",
+    "title": "BRRRR With the Ugly Months Included",
+    "url": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html"
+  },
   "version": 1
 }
