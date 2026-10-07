@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T09:38:08.589519+00:00",
-  "post_id": "3640853899029929702",
-  "url": "https://dailyyield.blogspot.com/2026/09/why-your-budget-dies-in-week-two.html",
-  "old_title": "Why Your Budget Dies in Week Two",
-  "title": "Build a Budget That Survives Week Two",
-  "completed": 42,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T10:03:15.899063+00:00",
+  "pending": {
+    "id": "7839033619702786971",
+    "title": "First $1,000: The Scared Person's Plan",
+    "url": "https://dailyyield.blogspot.com/2026/09/first-1000-scared-persons-plan.html",
+    "published": "2026-09-26T18:49:24-07:00",
+    "labels": [
+      "Investing Strategies",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "94967da113cf03c46e025d1b22a5451279d3ab9bc4a5c207081101338ad9906a",
+    "backup": "master_rewrite_backups/post_7839033619702786971.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 34
 }

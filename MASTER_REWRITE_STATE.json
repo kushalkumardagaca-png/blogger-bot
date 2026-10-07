@@ -334,8 +334,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 41,
+  "inventory_completed_count": 42,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_7839033619702786971.json.gz",
+    "content_sha256": "94967da113cf03c46e025d1b22a5451279d3ab9bc4a5c207081101338ad9906a",
+    "id": "7839033619702786971",
+    "labels": [
+      "Investing Strategies",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-26T18:49:24-07:00",
+    "title": "First $1,000: The Scared Person's Plan",
+    "url": "https://dailyyield.blogspot.com/2026/09/first-1000-scared-persons-plan.html"
+  },
   "version": 1
 }
