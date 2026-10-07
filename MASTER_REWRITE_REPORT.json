@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T07:05:13.763276+00:00",
-  "pending": {
-    "id": "4808062258120764865",
-    "title": "Stop Splitting Bills 50/50",
-    "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-    "published": "2026-09-24T18:48:23-07:00",
-    "labels": [
-      "Contrarian Hooks",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "1fe4ff41beccd1ff50dfb344009254a26e30e6c9626e65ced019e620a8241b7e",
-    "backup": "master_rewrite_backups/post_4808062258120764865.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 44
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T07:05:15.989895+00:00",
+  "post_id": "4808062258120764865",
+  "package": "master_packages/rewrites/post_4808062258120764865.json",
+  "title": "Split Household Costs by Capacity"
 }
