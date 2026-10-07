@@ -182,8 +182,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 22,
+  "inventory_completed_count": 23,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_6615350878444001009.json.gz",
+    "content_sha256": "791f83340ca127c04a5ea04b8eeefbe4931ebe59fe538f8799a35e10bbf6dadc",
+    "id": "6615350878444001009",
+    "labels": [
+      "Couples Family and Kids",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-22T23:03:21-07:00",
+    "title": "The First Couples Money Meeting Agenda",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-first-couples-money-meeting-agenda.html"
+  },
   "version": 1
 }
