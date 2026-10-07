@@ -214,8 +214,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 26,
+  "inventory_completed_count": 27,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_7476330954814461730.json.gz",
+    "content_sha256": "3ed779117aeb5c9d71eef133a4e04fb621967aedec61e2c2e9fb342b3b023d2c",
+    "id": "7476330954814461730",
+    "labels": [
+      "Kushal K. Daga",
+      "Recessions Crashes and Defense"
+    ],
+    "published": "2026-09-23T19:43:18-07:00",
+    "title": "Run the Recession Checklist While Employed",
+    "url": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html"
+  },
   "version": 1
 }
