@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-07T05:50:09.962721+00:00",
+  "checkedAt": "2026-10-07T06:01:13.489513+00:00",
   "status": "FAIL",
   "mode": "BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
@@ -8,13 +8,13 @@
     "existing Blogger content changed without baseline approval: page:9217579601621666930, post:1022860638256450673, post:1079265428435182809, post:1152148656719761146, post:115783846078738704, post:1187159577085494350, post:1224431701070336470, post:1244600316209982174, post:1374496040576360177, post:1491878054535573888, post:1525321452486561932, post:1685234226138286098, post:1794738258819020541, post:193247759891078847, post:2005014805006920526, post:2373709041132325539, post:255068634201679306, post:2557941853294839938, post:2758262234277933362, post:2862470767911665544"
   ],
   "warnings": [
-    "28 new live item(s) accepted after threat scan"
+    "30 new live item(s) accepted after threat scan"
   ],
   "details": {
     "pages": 13,
-    "posts": 322,
-    "newItems": 28,
-    "changedItems": 72,
+    "posts": 324,
+    "newItems": 30,
+    "changedItems": 73,
     "removedItems": 0,
     "repositoryFiles": 71,
     "backupCreated": false,
