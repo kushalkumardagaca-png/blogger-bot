@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T05:52:31.014559+00:00",
-  "pending": {
-    "id": "7476330954814461730",
-    "title": "Run the Recession Checklist While Employed",
-    "url": "https://dailyyield.blogspot.com/2026/09/run-recession-checklist-while-employed.html",
-    "published": "2026-09-23T19:43:18-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Recessions Crashes and Defense"
-    ],
-    "content_sha256": "3ed779117aeb5c9d71eef133a4e04fb621967aedec61e2c2e9fb342b3b023d2c",
-    "backup": "master_rewrite_backups/post_7476330954814461730.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 49
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T05:52:33.912001+00:00",
+  "post_id": "7476330954814461730",
+  "package": "master_packages/rewrites/post_7476330954814461730.json",
+  "title": "Build Your Layoff Plan Before You Need It"
 }
