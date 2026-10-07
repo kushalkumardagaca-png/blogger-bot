@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T12:40:40.356534+00:00",
-  "post_id": "3867527095511324597",
-  "url": "https://dailyyield.blogspot.com/2026/09/the-loyalty-tax-youre-paying.html",
-  "old_title": "The Loyalty Tax You're Paying",
-  "title": "Stop Paying the Job-Loyalty Penalty",
-  "completed": 46,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T12:59:12.715513+00:00",
+  "pending": {
+    "id": "8711042237458005134",
+    "title": "\u00a3500 Extra: Overtime, Hustle, or Skill?",
+    "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html",
+    "published": "2026-09-27T07:23:38-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Side Hustles That Work"
+    ],
+    "content_sha256": "08a91ea35a66e8662081047bb474da6832a29a667c5881438d9b37f52f461b91",
+    "backup": "master_rewrite_backups/post_8711042237458005134.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 30
 }
