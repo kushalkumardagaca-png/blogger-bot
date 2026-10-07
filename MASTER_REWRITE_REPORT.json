@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T07:16:04.769231+00:00",
-  "pending": {
-    "id": "2418376376538238746",
-    "title": "$10k at 22 vs $10k at 32",
-    "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
-    "published": "2026-09-24T22:26:44-07:00",
-    "labels": [
-      "Age and Wealth Milestones",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "3ee32fe0335af400ac737a8f4d5a9503dbcfb07f4982da880125d82f0a699d92",
-    "backup": "master_rewrite_backups/post_2418376376538238746.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 43
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T07:16:06.742433+00:00",
+  "post_id": "2418376376538238746",
+  "package": "master_packages/rewrites/post_2418376376538238746.json",
+  "title": "Start Investing Before You Feel Ready"
 }
