@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T16:03:02.081976+00:00",
-  "post_id": "6448805219822825799",
-  "url": "https://dailyyield.blogspot.com/2026/09/buy-options-not-status.html",
-  "old_title": "Buy Options, Not Status",
-  "title": "Build Financial Options, Not Status",
-  "completed": 52,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T16:08:43.345872+00:00",
+  "pending": {
+    "id": "5611067798787673649",
+    "title": "Laid Off: The First 72 Hours",
+    "url": "https://dailyyield.blogspot.com/2026/09/laid-off-first-72-hours.html",
+    "published": "2026-09-28T18:51:35-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Recessions Crashes and Defense"
+    ],
+    "content_sha256": "999c45e7039da59b0db9c6224bfbc0f18f7e381bf64236ecc2825a2bc87509b8",
+    "backup": "master_rewrite_backups/post_5611067798787673649.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 24
 }
