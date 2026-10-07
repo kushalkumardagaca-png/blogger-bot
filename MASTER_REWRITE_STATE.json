@@ -101,6 +101,14 @@
       "url": "https://dailyyield.blogspot.com/2026/09/what-quiet-rich-people-do-on-payday.html",
       "verified_at": "2026-10-07T05:45:15.732402+00:00"
     },
+    "4808062258120764865": {
+      "content_sha256": "9143d9e79413ea1f6edf4b358a59027e460fdecb6e5ced7d88fb5d72b9fd56e8",
+      "old_title": "Stop Splitting Bills 50/50",
+      "status": "rewritten-v2",
+      "title": "Split Household Costs by Capacity",
+      "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
+      "verified_at": "2026-10-07T07:05:19.325279+00:00"
+    },
     "5283900934510767783": {
       "content_sha256": "e18e48e89dbb3adeb6cd5e98ad643f10ecf806824da8cbeab2d19db2c018f695",
       "old_title": "A Two-Tier Emergency Fund",
@@ -256,17 +264,6 @@
   },
   "inventory_completed_count": 32,
   "inventory_master_count": 76,
-  "pending": {
-    "backup": "master_rewrite_backups/post_4808062258120764865.json.gz",
-    "content_sha256": "1fe4ff41beccd1ff50dfb344009254a26e30e6c9626e65ced019e620a8241b7e",
-    "id": "4808062258120764865",
-    "labels": [
-      "Contrarian Hooks",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-09-24T18:48:23-07:00",
-    "title": "Stop Splitting Bills 50/50",
-    "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html"
-  },
+  "pending": null,
   "version": 1
 }
