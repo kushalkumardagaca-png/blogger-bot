@@ -174,8 +174,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 21,
+  "inventory_completed_count": 22,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_5756773504895872461.json.gz",
+    "content_sha256": "e6f5620d2a20d18057c5bef35da20ef4f00bddb175500c59b3e842c563e4942c",
+    "id": "5756773504895872461",
+    "labels": [
+      "Insurance and Protection",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-22T19:42:14-07:00",
+    "title": "Only These Insurance Policies Matter",
+    "url": "https://dailyyield.blogspot.com/2026/09/only-these-insurance-policies-matter.html"
+  },
   "version": 1
 }
