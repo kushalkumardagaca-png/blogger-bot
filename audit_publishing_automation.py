@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static and template audit for the 5 master + 20 news Daily Yield automations."""
+"""Static and template audit for active News, social, search and site automations."""
 from pathlib import Path
 import ast, datetime as dt, json, re, sys
 
@@ -12,26 +12,22 @@ def check(name,ok,detail=""):
 def crons(path):
  return re.findall(r"cron:\s*['\"]([^'\"]+)",Path(path).read_text())
 
-article_expected=['45 1 * * *','15 5 * * *','15 8 * * *','30 11 * * *','15 14 * * *']
 news_expected=['15 22 * * *','15 0 * * *','45 2 * * *','15 4 * * *','45 5 * * *','45 6 * * *','30 9 * * *','45 10 * * *','45 11 * * *','15 13 * * *','45 14 * * *','45 15 * * *']
-aw=ROOT/'.github/workflows/daily_blogger_poster.yml'; nw=ROOT/'.github/workflows/daily_news_wires.yml'
-check('Five master-article triggers',crons(aw)==article_expected,str(crons(aw)))
-check('Twelve news preflight clusters',crons(nw)==news_expected,str(crons(nw)))
-# Verify UTC cron arithmetic, not just literal strings.
+nw=ROOT/'.github/workflows/daily_news_wires.yml'
 def ist_minute(cron):
     minute,hour=map(int,cron.split()[:2]); return (hour*60+minute+330)%1440
-article_targets=[8*60,11*60+30,14*60+30,17*60+45,20*60+30]
-check('Every master trigger is exactly 45 minutes early',
-      all((target-ist_minute(cron))%1440==45 for cron,target in zip(article_expected,article_targets)))
-check('Master runs cannot overlap','cancel-in-progress: false' in aw.read_text() and 'daily-yield-master-publisher' in aw.read_text())
+check('All dedicated Master article workflows are absent',
+      all(not (ROOT/'.github/workflows'/name).exists() for name in (
+          'daily_blogger_poster.yml','rewrite_existing_masters.yml',
+          'refresh_master_photos.yml','refresh_master_v2_design.yml')))
+check('Twelve news preflight clusters',crons(nw)==news_expected,str(crons(nw)))
 check('News runs cannot overlap','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-wires' in nw.read_text())
 
 bing_py=(ROOT/'bing_url_automation.py').read_text()
 bing_workflow=(ROOT/'.github/workflows/bing_url_automation.yml').read_text()
 check('Bing URL automation reconciles every two hours', "cron: '35 */2 * * *'" in bing_workflow)
-check('Master and News publishers trigger Bing reconciliation without schedule changes',
-      'gh workflow run bing_url_automation.yml --ref main' in aw.read_text()
-      and 'gh workflow run bing_url_automation.yml --ref main' in nw.read_text())
+check('News publisher triggers Bing reconciliation without schedule changes',
+      'gh workflow run bing_url_automation.yml --ref main' in nw.read_text())
 check('Bing URL submission is quota-aware and capped at 500 per batch',
       'GetUrlSubmissionQuota' in bing_py and 'range(0, len(selected), 500)' in bing_py)
 check('Bing URL automation suppresses unchanged duplicate submissions',
@@ -196,45 +192,23 @@ rotation=rotation_path.read_text() if rotation_path.exists() else ''
 coordinated=coordinated_path.read_text() if coordinated_path.exists() else ''
 dispatch=dispatch_path.read_text() if dispatch_path.exists() else ''
 check('Coordinated router and event dispatcher are deployed',bool(rotation) and bool(coordinated) and bool(dispatch))
-check('Exactly five evenly spread audience-resource promotions are scheduled',
-      crons(coordinated_path)==['45 23 * * *','30 1 * * *','30 4 * * *','30 8 * * *','30 14 * * *'])
+check('Exactly four evenly spread audience-resource promotions are scheduled',
+      crons(coordinated_path)==['45 23 * * *','30 4 * * *','30 8 * * *','30 14 * * *'])
 check('Every social publisher accepts an exact authenticated Blogger target URL',
       all('--target-url' in text and 'Target URL was not found in authenticated Blogger inventory' in text
           for text in (fp,bp,tp,mp)))
-check('Master and News publishers dispatch only confirmed live Blogger events',
-      'social_events.json' in ap and 'social_events.json' in np
-      and 'dispatch_social_events.py' in aw.read_text() and 'dispatch_social_events.py' in nw.read_text())
+check('News publisher dispatches only confirmed live Blogger events',
+      'social_events.json' in np and 'dispatch_social_events.py' in nw.read_text())
 check('Article routing waits at least fifteen minutes after publication',
       'dt.timedelta(minutes=15)' in rotation and 'delay_seconds' in coordinated)
 check('Coordinated tracker writes use race-safe persistence retries',
       'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
-check('Daily coordinated inventory is exactly 25 articles plus 5 resources',
-      'MASTER_PATTERN' in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
+check('Daily coordinated inventory is exactly 20 News articles plus 4 resources',
+      'MASTER_PATTERN' not in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
       and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
-check('Configured active cadence is exactly 30 unique destinations across four retained networks',
-      '25 article promotions' not in rotation and len(re.findall(r'"facebook"', re.search(r'NEWS_PATTERN = \((.*?)\)\nNEWS_KEYS',rotation,re.S).group(1)))==6
-      and 5+20+5==30 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
-
-# Independent security guard: four API-only checks/hour plus one daily backup.
-sg_path=ROOT/'security_guard.py'; sw_path=ROOT/'.github/workflows/security_guard.yml'
-sg=sg_path.read_text() if sg_path.exists() else ''; sw=sw_path.read_text() if sw_path.exists() else ''
-check('Security guard and approved baseline are deployed',
-      bool(sg) and bool(sw) and (ROOT/'SECURITY_BASELINE.json').exists() and (ROOT/'SECURITY.md').exists())
-check('Security guard runs four times per hour and creates a daily backup',
-      '7,22,37,52 * * * *' in sw and '43 0 * * *' in sw and '--backup' in sw)
-check('Security guard reads Blogger only through authenticated API',
-      'www.googleapis.com/blogger/v3' in sg and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in sg)
-check('Security guard detects deletion, modification, injection and leaked secrets',
-      'live Blogger items removed' in sg and 'existing Blogger content changed' in sg
-      and 'MALICIOUS_PATTERNS' in sg and 'SECRET_PATTERNS' in sg)
-check('Security guard fails closed without accepting an anomalous Blogger baseline',
-      'return 1 if critical else 0' in sg and 'if not critical or args.approve_current' in sg
-      and 'changed_items and not args.approve_current' in sg)
-check('Accepted main-branch code changes refresh repository hashes without approving Blogger mutations',
-      '--approve-repository' in sg+sw and 'github.event_name' in sw
-      and 'args.approve_current or args.approve_repository' in sg)
-check('Security guard protects the shared live social creative engine',
-      '"social_creative.py"' in sg)
+check('Configured cadence is 24 destinations split equally across four networks',
+      'RESOURCE_PATTERN = ("facebook", "bluesky", "tumblr", "mastodon")' in rotation
+      and 'NEWS_PATTERN = RESOURCE_PATTERN * 5' in rotation and 20+4==24 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)

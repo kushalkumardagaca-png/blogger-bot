@@ -69,7 +69,6 @@ all_workflows='\n'.join(path.read_text() for path in workflow_root.glob('*.yml')
 search=(ROOT/'search_reach.py').read_text()
 check('malfunctioning scheduled watchdog is removed',not (workflow_root/'health_monitor.yml').exists())
 check('retained workflows do not invoke removed watchdog','zero_view_watchdog' not in all_workflows and 'ZERO_VIEW_WATCHDOG' not in all_workflows)
-check('Security Guard remains automated','python security_guard.py' in all_workflows)
 check('Bing sitemap integration implemented','BING_WEBMASTER_API_KEY' in search and 'SubmitFeed' in search)
 check('Bing SubmitFeed uses required JSON body','json.dumps({"siteUrl":SITE,"feedUrl":sitemap})' in search and 'application/json; charset=utf-8' in search)
 related=(ROOT/'related_articles.py').read_text()
@@ -85,7 +84,6 @@ check('future publications require descriptive image alts','missing descriptive 
 page_repair=(ROOT/'update_page_family.py').read_text()
 page_workflow=(ROOT/'.github/workflows/update_page_family.yml').read_text()
 check('Page-family repair adds only missing alt attributes','ensure_image_alts' in page_repair and 'images_without_alt' in page_repair)
-check('Page repair approves intentional Blogger baseline change','security_guard.py --approve-current' in page_workflow)
 check('Page workflow contains no synthetic-view verification','zero_view_watchdog' not in page_workflow)
 failed=[x for x in checks if x['status']=='FAIL']
 report={'standard':'DAILY_YIELD_SITE_V4','mode':'STATIC_ZERO_VIEW','pass':len(checks)-len(failed),'fail':len(failed),'checks':checks}

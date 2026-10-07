@@ -1,29 +1,19 @@
 {
-  "checked_at_ist": "2026-10-06T12:30:48+05:30",
+  "checked_at_ist": "2026-10-07T17:33:01+05:30",
   "summary": {
-    "pass": 128,
+    "pass": 119,
     "fail": 0
   },
   "checks": [
     {
-      "name": "Five master-article triggers",
+      "name": "All dedicated Master article workflows are absent",
       "status": "PASS",
-      "detail": "['45 1 * * *', '15 5 * * *', '15 8 * * *', '30 11 * * *', '15 14 * * *']"
+      "detail": ""
     },
     {
       "name": "Twelve news preflight clusters",
       "status": "PASS",
       "detail": "['15 22 * * *', '15 0 * * *', '45 2 * * *', '15 4 * * *', '45 5 * * *', '45 6 * * *', '30 9 * * *', '45 10 * * *', '45 11 * * *', '15 13 * * *', '45 14 * * *', '45 15 * * *']"
-    },
-    {
-      "name": "Every master trigger is exactly 45 minutes early",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Master runs cannot overlap",
-      "status": "PASS",
-      "detail": ""
     },
     {
       "name": "News runs cannot overlap",
@@ -36,7 +26,7 @@
       "detail": ""
     },
     {
-      "name": "Master and News publishers trigger Bing reconciliation without schedule changes",
+      "name": "News publisher triggers Bing reconciliation without schedule changes",
       "status": "PASS",
       "detail": ""
     },
@@ -341,7 +331,7 @@
       "detail": ""
     },
     {
-      "name": "Exactly five evenly spread audience-resource promotions are scheduled",
+      "name": "Exactly four evenly spread audience-resource promotions are scheduled",
       "status": "PASS",
       "detail": ""
     },
@@ -351,7 +341,7 @@
       "detail": ""
     },
     {
-      "name": "Master and News publishers dispatch only confirmed live Blogger events",
+      "name": "News publisher dispatches only confirmed live Blogger events",
       "status": "PASS",
       "detail": ""
     },
@@ -366,47 +356,12 @@
       "detail": ""
     },
     {
-      "name": "Daily coordinated inventory is exactly 25 articles plus 5 resources",
+      "name": "Daily coordinated inventory is exactly 20 News articles plus 4 resources",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Configured active cadence is exactly 30 unique destinations across four retained networks",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Security guard and approved baseline are deployed",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Security guard runs four times per hour and creates a daily backup",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Security guard reads Blogger only through authenticated API",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Security guard detects deletion, modification, injection and leaked secrets",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Security guard fails closed without accepting an anomalous Blogger baseline",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Accepted main-branch code changes refresh repository hashes without approving Blogger mutations",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Security guard protects the shared live social creative engine",
+      "name": "Configured cadence is 24 destinations split equally across four networks",
       "status": "PASS",
       "detail": ""
     },

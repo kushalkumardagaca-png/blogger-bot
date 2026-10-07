@@ -39,13 +39,6 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python repair_family_directory.py
-      - name: Approve intentional authenticated content repair
-        env:
-          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
-          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
-          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
-          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python security_guard.py --approve-current
       - name: Upload recovery backup and verification evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,16 +50,13 @@ jobs:
             FAMILY_DIRECTORY_REPAIR_BACKUP.json.gz
             FAMILY_DIRECTORY_REPAIR_REPORT.json
             FAMILY_DIRECTORY_REPAIR_REPORT.md
-            SECURITY_STATUS.json
-            SECURITY_STATUS.md
-      - name: Persist repair and approved security evidence
+      - name: Persist repair evidence
         if: success()
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "Daily Yield Family Directory Repair"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          files=(FAMILY_DIRECTORY_REPAIR_REPORT.json FAMILY_DIRECTORY_REPAIR_REPORT.md SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md)
           mkdir -p /tmp/dy-family-state
           for file in "${files[@]}"; do [[ -f "$file" ]] && cp "$file" /tmp/dy-family-state/; done
           for attempt in 1 2 3; do

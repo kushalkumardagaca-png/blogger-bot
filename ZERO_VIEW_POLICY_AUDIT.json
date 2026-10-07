@@ -1,6 +1,6 @@
 {
   "policy": "ZERO_SYNTHETIC_VIEWS",
-  "pass": 14,
+  "pass": 12,
   "fail": 0,
   "checks": [
     {
@@ -13,14 +13,6 @@
     },
     {
       "name": "No repository workflow installs or launches a headless browser",
-      "status": "PASS"
-    },
-    {
-      "name": "Security Guard uses authenticated Blogger API",
-      "status": "PASS"
-    },
-    {
-      "name": "Security Guard does not request the public Daily Yield host",
       "status": "PASS"
     },
     {

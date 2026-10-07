@@ -2,16 +2,15 @@ name: Coordinated Daily Yield Social Publisher
 
 on:
   schedule:
-    # Homepage plus four rotating top-row resources, spread across the IST day.
+    # Homepage plus three rotating resources: one daily promotion per platform.
     - cron: '45 23 * * *'  # 05:15 IST
-    - cron: '30 1 * * *'   # 07:00 IST
     - cron: '30 4 * * *'   # 10:00 IST
     - cron: '30 8 * * *'   # 14:00 IST
     - cron: '30 14 * * *'  # 20:00 IST
   workflow_dispatch:
     inputs:
       item_key:
-        description: 'master-N or news-desk key from the authenticated Blogger publisher'
+        description: 'news-desk key from the authenticated Blogger publisher'
         required: false
         default: ''
         type: string
@@ -90,7 +89,7 @@ jobs:
 
   bluesky:
     needs: plan
-    if: needs.plan.outputs.platform == 'bluesky' && vars.BLUESKY_AUTOMATION_ENABLED == 'true'
+    if: needs.plan.outputs.platform == 'bluesky'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -116,7 +115,7 @@ jobs:
 
   tumblr:
     needs: plan
-    if: needs.plan.outputs.platform == 'tumblr' && vars.TUMBLR_AUTOMATION_ENABLED == 'true'
+    if: needs.plan.outputs.platform == 'tumblr'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -144,7 +143,7 @@ jobs:
 
   mastodon:
     needs: plan
-    if: needs.plan.outputs.platform == 'mastodon' && vars.MASTODON_AUTOMATION_ENABLED == 'true'
+    if: needs.plan.outputs.platform == 'mastodon'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:

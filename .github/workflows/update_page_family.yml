@@ -44,14 +44,6 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python update_page_family.py
 
-      - name: Approve intentional Blogger Page changes in Security Guard
-        env:
-          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
-          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
-          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
-          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python security_guard.py --approve-current
-
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -59,19 +51,15 @@ jobs:
           path: |
             page_family_backup.json
             page_family_result.json
-            SECURITY_BASELINE.json
-            SECURITY_STATUS.json
-            SECURITY_STATUS.md
           retention-days: 30
 
-      - name: Persist approved baseline and Page-family evidence safely
+      - name: Persist Page-family evidence safely
         if: success()
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "Daily Yield Page Family Bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          files=(page_family_result.json SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md)
           mkdir -p /tmp/daily-yield-page-state
           for file in "${files[@]}"; do [[ -f "$file" ]] && cp "$file" /tmp/daily-yield-page-state/; done
           for attempt in 1 2 3; do
@@ -83,7 +71,7 @@ jobs:
               echo "No Page-family evidence change."
               exit 0
             fi
-            git commit -m "Record Page-family and approved security evidence [skip ci]"
+            git commit -m "Record Page-family evidence [skip ci]"
             if git push origin HEAD:main; then exit 0; fi
             sleep $((attempt * 2))
           done

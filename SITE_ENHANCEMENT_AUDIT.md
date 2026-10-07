@@ -1,6 +1,6 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **186**
+- Pass: **184**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
@@ -176,7 +176,6 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no Google Business Profile
 - ✅ malfunctioning scheduled watchdog is removed
 - ✅ retained workflows do not invoke removed watchdog
-- ✅ Security Guard remains automated
 - ✅ Bing sitemap integration implemented
 - ✅ Bing SubmitFeed uses required JSON body
 - ✅ future related-article photographs have descriptive alt text
@@ -188,5 +187,4 @@
 - ✅ future publications require one primary H1
 - ✅ future publications require descriptive image alts
 - ✅ Page-family repair adds only missing alt attributes
-- ✅ Page repair approves intentional Blogger baseline change
 - ✅ Page workflow contains no synthetic-view verification

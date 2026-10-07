@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Deterministic 30-item Daily Yield social routing plan.
+"""Balanced Daily Yield social routing for live News and resources.
 
-Every day: 5 master articles + 20 News editions + homepage + 4 rotating
-header Pages. Each destination is assigned to exactly one active network.
-No public Daily Yield URL is requested; publishers retrieve content through the
-Blogger API only after this planner selects the destination URL.
+Every day: 20 News editions plus the homepage and three rotating header Pages.
+Each destination is assigned to exactly one network. The 24 daily destinations
+are divided equally: six per platform, with day-to-day rotation and no platform
+priority. Publishers use the authenticated Blogger API and never create views.
 """
 from __future__ import annotations
 
@@ -16,14 +16,8 @@ from pathlib import Path
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 PLATFORMS = ("facebook", "bluesky", "tumblr", "mastodon")
-MASTER_PATTERN = ("facebook", "bluesky", "facebook", "tumblr", "mastodon")
-RESOURCE_PATTERN = MASTER_PATTERN
-NEWS_PATTERN = (
-    "facebook", "bluesky", "tumblr", "mastodon", "facebook",
-    "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
-    "facebook", "bluesky", "tumblr", "mastodon", "facebook",
-    "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
-)
+RESOURCE_PATTERN = ("facebook", "bluesky", "tumblr", "mastodon")
+NEWS_PATTERN = RESOURCE_PATTERN * 5
 NEWS_KEYS = (
     "australia", "south-korea", "global", "india", "market", "macro",
     "germany", "france", "uk", "japan", "china", "spain", "corporate",
@@ -40,10 +34,9 @@ HEADER_PAGES = (
 )
 RESOURCE_SCHEDULES = {
     "45 23 * * *": 0,  # 05:15 IST
-    "30 1 * * *": 1,   # 07:00 IST
-    "30 4 * * *": 2,   # 10:00 IST
-    "30 8 * * *": 3,   # 14:00 IST
-    "30 14 * * *": 4,  # 20:00 IST
+    "30 4 * * *": 1,   # 10:00 IST
+    "30 8 * * *": 2,   # 14:00 IST
+    "30 14 * * *": 3,  # 20:00 IST
 }
 
 
@@ -58,10 +51,7 @@ def parse_time(value: str) -> dt.datetime | None:
 
 def platform_for(item_key: str, day: dt.date) -> str:
     offset = day.toordinal()
-    if item_key.startswith("master-"):
-        idx = int(item_key.split("-", 1)[1])
-        pattern = MASTER_PATTERN
-    elif item_key.startswith("news-"):
+    if item_key.startswith("news-"):
         desk = item_key.split("-", 1)[1]
         idx = NEWS_KEYS.index(desk)
         pattern = NEWS_PATTERN

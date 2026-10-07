@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 186,
+  "pass": 184,
   "fail": 0,
   "checks": [
     {
@@ -693,10 +693,6 @@
       "status": "PASS"
     },
     {
-      "name": "Security Guard remains automated",
-      "status": "PASS"
-    },
-    {
       "name": "Bing sitemap integration implemented",
       "status": "PASS"
     },
@@ -738,10 +734,6 @@
     },
     {
       "name": "Page-family repair adds only missing alt attributes",
-      "status": "PASS"
-    },
-    {
-      "name": "Page repair approves intentional Blogger baseline change",
       "status": "PASS"
     },
     {

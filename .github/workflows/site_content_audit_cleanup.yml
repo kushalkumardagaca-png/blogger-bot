@@ -1,5 +1,8 @@
 name: Audit news and remove duplicate explore blocks
 on:
+  schedule:
+    # Weekly audit-only content hygiene; repairs still require deliberate dispatch.
+    - cron: '45 18 * * 6'
   workflow_dispatch:
     inputs:
       apply:

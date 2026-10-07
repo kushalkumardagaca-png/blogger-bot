@@ -1,16 +1,14 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 128 PASS · 0 FAIL
+**Result:** 119 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
-- ✅ **Five master-article triggers** — ['45 1 * * *', '15 5 * * *', '15 8 * * *', '30 11 * * *', '15 14 * * *']
+- ✅ **All dedicated Master article workflows are absent**
 - ✅ **Twelve news preflight clusters** — ['15 22 * * *', '15 0 * * *', '45 2 * * *', '15 4 * * *', '45 5 * * *', '45 6 * * *', '30 9 * * *', '45 10 * * *', '45 11 * * *', '15 13 * * *', '45 14 * * *', '45 15 * * *']
-- ✅ **Every master trigger is exactly 45 minutes early**
-- ✅ **Master runs cannot overlap**
 - ✅ **News runs cannot overlap**
 - ✅ **Bing URL automation reconciles every two hours**
-- ✅ **Master and News publishers trigger Bing reconciliation without schedule changes**
+- ✅ **News publisher triggers Bing reconciliation without schedule changes**
 - ✅ **Bing URL submission is quota-aware and capped at 500 per batch**
 - ✅ **Bing URL automation suppresses unchanged duplicate submissions**
 - ✅ **Bing index monitoring uses GetUrlInfo with bounded stages**
@@ -71,20 +69,13 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **Creative engine cannot request a Daily Yield public page**
 - ✅ **Corporate social boilerplate was removed from all active publisher outputs**
 - ✅ **Coordinated router and event dispatcher are deployed**
-- ✅ **Exactly five evenly spread audience-resource promotions are scheduled**
+- ✅ **Exactly four evenly spread audience-resource promotions are scheduled**
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
-- ✅ **Master and News publishers dispatch only confirmed live Blogger events**
+- ✅ **News publisher dispatches only confirmed live Blogger events**
 - ✅ **Article routing waits at least fifteen minutes after publication**
 - ✅ **Coordinated tracker writes use race-safe persistence retries**
-- ✅ **Daily coordinated inventory is exactly 25 articles plus 5 resources**
-- ✅ **Configured active cadence is exactly 30 unique destinations across four retained networks**
-- ✅ **Security guard and approved baseline are deployed**
-- ✅ **Security guard runs four times per hour and creates a daily backup**
-- ✅ **Security guard reads Blogger only through authenticated API**
-- ✅ **Security guard detects deletion, modification, injection and leaked secrets**
-- ✅ **Security guard fails closed without accepting an anomalous Blogger baseline**
-- ✅ **Accepted main-branch code changes refresh repository hashes without approving Blogger mutations**
-- ✅ **Security guard protects the shared live social creative engine**
+- ✅ **Daily coordinated inventory is exactly 20 News articles plus 4 resources**
+- ✅ **Configured cadence is 24 destinations split equally across four networks**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**

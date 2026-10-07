@@ -1,5 +1,8 @@
 name: Add contextual links and repair article images
 on:
+  schedule:
+    # Weekly audit-only link and image hygiene; no automatic Blogger mutation.
+    - cron: '30 18 * * 0'
   workflow_dispatch:
     inputs:
       apply:

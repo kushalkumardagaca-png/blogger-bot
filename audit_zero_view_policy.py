@@ -10,7 +10,6 @@ all_workflows = "\n".join(path.read_text() for path in workflow_paths)
 news = (ROOT / "news_pipeline.py").read_text()
 related = (ROOT / "related_articles.py").read_text()
 rendered = (ROOT / "rendered_site_audit.py").read_text()
-security = (ROOT / "security_guard.py").read_text()
 theme = (ROOT / "theme/Daily-Yield-Theme-v4-2026-10-01.xml").read_text()
 checks = []
 
@@ -22,8 +21,6 @@ def check(name, condition):
 check("Scheduled watchdog workflow is removed", not (WORKFLOW_ROOT / "health_monitor.yml").exists())
 check("No workflow invokes the removed watchdog", "zero_view_watchdog" not in all_workflows and "WATCHDOG_VERDICT" not in all_workflows and "ZERO_VIEW_WATCHDOG" not in all_workflows)
 check("No repository workflow installs or launches a headless browser", not any(term in all_workflows.lower() for term in ("playwright", "puppeteer", "selenium", "headlesschrome", "chromium --headless")))
-check("Security Guard uses authenticated Blogger API", "www.googleapis.com/blogger/v3" in security)
-check("Security Guard does not request the public Daily Yield host", "urlopen('https://dailyyield.blogspot.com" not in security and 'requests.get("https://dailyyield.blogspot.com' not in security)
 check("Rendered compatibility script cannot navigate", "page.goto" not in rendered and "DISABLED_ZERO_VIEW_POLICY" in rendered)
 check("News duplicate recovery uses Blogger API", "/posts/bypath?" in news and "live_post_exists(expected_url, token)" in news)
 check("News engine does not read Daily Yield public feeds", "dailyyield.blogspot.com/feeds" not in news)

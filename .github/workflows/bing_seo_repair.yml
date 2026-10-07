@@ -37,14 +37,6 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python bing_seo_repair.py
 
-      - name: Approve the intentional authenticated content maintenance
-        env:
-          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
-          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
-          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
-          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python security_guard.py --approve-current
-
       - name: Preserve pre-change recovery backup and repair evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,24 +48,20 @@ jobs:
             BING_SEO_REPAIR_BACKUP.json.gz
             BING_SEO_REPAIR_REPORT.json
             BING_SEO_REPAIR_REPORT.md
-            SECURITY_STATUS.json
-            SECURITY_STATUS.md
 
-      - name: Persist repair evidence and approved security state
+      - name: Persist repair evidence
         if: success()
         shell: bash
         run: |
           git config user.name "Daily Yield Bing SEO Repair"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p /tmp/dy-bing-state
-          cp BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md \
-             SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md /tmp/dy-bing-state/
+          cp BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md /tmp/dy-bing-state/
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/dy-bing-state/* .
-            git add BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md \
-                    SECURITY_BASELINE.json SECURITY_STATUS.json SECURITY_STATUS.md
+            git add BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md
             if git diff --staged --quiet; then
               echo "No repair-state change."
               exit 0

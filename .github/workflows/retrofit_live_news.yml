@@ -1,5 +1,8 @@
 name: Retrofit live news to current policy
 on:
+  schedule:
+    # Daily after the final 22:00 IST News desk; idempotently aligns today's News.
+    - cron: '15 17 * * *'
   workflow_dispatch:
 permissions:
   contents: read

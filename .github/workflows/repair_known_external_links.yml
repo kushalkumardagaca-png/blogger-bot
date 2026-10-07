@@ -1,5 +1,8 @@
 name: Repair Verified External Links
 on:
+  schedule:
+    # Weekly repeat-safe repair of only the exact verified malformed-link map.
+    - cron: '15 19 * * 0'
   workflow_dispatch:
 permissions:
   contents: read
