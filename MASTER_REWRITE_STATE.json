@@ -286,8 +286,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 35,
+  "inventory_completed_count": 36,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_6486688981578418368.json.gz",
+    "content_sha256": "bd5a206a1d67b39748457c829a12c0c2f90dfc5863c730adbb739be424be933f",
+    "id": "6486688981578418368",
+    "labels": [
+      "Kushal K. Daga",
+      "Money Audits and Case Studies"
+    ],
+    "published": "2026-09-25T07:26:35-07:00",
+    "title": "Nurse, Two Kids, \u00a318k Debt: Fixed",
+    "url": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html"
+  },
   "version": 1
 }
