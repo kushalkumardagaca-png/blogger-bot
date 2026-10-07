@@ -254,8 +254,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 31,
+  "inventory_completed_count": 32,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4808062258120764865.json.gz",
+    "content_sha256": "1fe4ff41beccd1ff50dfb344009254a26e30e6c9626e65ced019e620a8241b7e",
+    "id": "4808062258120764865",
+    "labels": [
+      "Contrarian Hooks",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-24T18:48:23-07:00",
+    "title": "Stop Splitting Bills 50/50",
+    "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html"
+  },
   "version": 1
 }
