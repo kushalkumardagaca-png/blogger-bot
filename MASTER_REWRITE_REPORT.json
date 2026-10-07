@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T09:10:38.453141+00:00",
-  "pending": {
-    "id": "1403438240302459064",
-    "title": "5% Down in 2026: Ladder or Trap?",
-    "url": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
-    "published": "2026-09-25T18:49:18-07:00",
-    "labels": [
-      "Housing Cars and Big Buys",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "d214bd2782da9a5f2ec23ab2bfd176d4d8d5bd034e9d75e3815b996e05ce5794",
-    "backup": "master_rewrite_backups/post_1403438240302459064.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 39
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T09:10:40.845749+00:00",
+  "post_id": "1403438240302459064",
+  "package": "master_packages/rewrites/post_1403438240302459064.json",
+  "title": "A 5% Down Payment Needs a Cash Buffer"
 }
