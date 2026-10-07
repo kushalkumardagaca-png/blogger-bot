@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T06:01:24.936117+00:00",
-  "post_id": "4058080268134530730",
-  "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html",
-  "old_title": "Emergency Fund Size by Job Type",
-  "title": "Size Your Emergency Fund to Your Income Risk",
-  "completed": 29,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T06:11:12.367985+00:00",
+  "pending": {
+    "id": "1126447614310368625",
+    "title": "House-Hack Before You Landlord",
+    "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html",
+    "published": "2026-09-24T02:07:23-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Real Estate Investing"
+    ],
+    "content_sha256": "7c0c9a4aa7250ed1fca8d9c9a492a2f197a8d2aeb3f35c367f86db88df3157a3",
+    "backup": "master_rewrite_backups/post_1126447614310368625.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 47
 }

@@ -230,8 +230,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 28,
+  "inventory_completed_count": 29,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_1126447614310368625.json.gz",
+    "content_sha256": "7c0c9a4aa7250ed1fca8d9c9a492a2f197a8d2aeb3f35c367f86db88df3157a3",
+    "id": "1126447614310368625",
+    "labels": [
+      "Kushal K. Daga",
+      "Real Estate Investing"
+    ],
+    "published": "2026-09-24T02:07:23-07:00",
+    "title": "House-Hack Before You Landlord",
+    "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html"
+  },
   "version": 1
 }
