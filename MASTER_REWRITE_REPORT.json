@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T05:31:23.982854+00:00",
-  "post_id": "1187159577085494350",
-  "url": "https://dailyyield.blogspot.com/2026/09/what-to-do-with-your-first-paycheck.html",
-  "old_title": "What to Do With Your First Paycheck",
-  "title": "Give Your First Paycheck Four Jobs",
-  "completed": 25,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T05:36:48.679406+00:00",
+  "pending": {
+    "id": "5733569512815684823",
+    "title": "Find \u00a3200/Month in 10 Minutes",
+    "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html",
+    "published": "2026-09-23T05:33:46-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Spending Lifestyle and Frugality"
+    ],
+    "content_sha256": "0681b27504578512f603c25aca73e8f24d8ff04c014645c53f7ea6c132be0927",
+    "backup": "master_rewrite_backups/post_5733569512815684823.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 51
 }

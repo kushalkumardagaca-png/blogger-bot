@@ -198,8 +198,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 24,
+  "inventory_completed_count": 25,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_5733569512815684823.json.gz",
+    "content_sha256": "0681b27504578512f603c25aca73e8f24d8ff04c014645c53f7ea6c132be0927",
+    "id": "5733569512815684823",
+    "labels": [
+      "Kushal K. Daga",
+      "Spending Lifestyle and Frugality"
+    ],
+    "published": "2026-09-23T05:33:46-07:00",
+    "title": "Find \u00a3200/Month in 10 Minutes",
+    "url": "https://dailyyield.blogspot.com/2026/09/find-200month-in-10-minutes.html"
+  },
   "version": 1
 }
