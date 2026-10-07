@@ -382,8 +382,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 47,
+  "inventory_completed_count": 48,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_8825196756986669857.json.gz",
+    "content_sha256": "44f6e534a084cdc513195670bf970bd4ccd505f333f74248e69b0a3b4f714d7a",
+    "id": "8825196756986669857",
+    "labels": [
+      "Couples Family and Kids",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-27T22:29:11-07:00",
+    "title": "Joint vs. Separate vs. Hybrid Accounts",
+    "url": "https://dailyyield.blogspot.com/2026/09/joint-vs-separate-vs-hybrid-accounts.html"
+  },
   "version": 1
 }
