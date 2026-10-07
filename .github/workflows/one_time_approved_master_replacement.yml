@@ -143,3 +143,5 @@ jobs:
             MASTER_REWRITE_REPORT.json
             master_packages/rewrites/*.json
 
+
+# Retry after adding independent authoritative source domains.
