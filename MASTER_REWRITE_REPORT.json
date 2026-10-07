@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T07:43:20.273237+00:00",
-  "pending": {
-    "id": "2786685833728780482",
-    "title": "Covered-Call ETFs: Income or Trap?",
-    "url": "https://dailyyield.blogspot.com/2026/09/covered-call-etfs-income-or-trap.html",
-    "published": "2026-09-25T01:24:41-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Passive Income Reality"
-    ],
-    "content_sha256": "008fcdf5aa8f1def9eac56033e501558f1b2c3d8395e3b953f369dae05501a34",
-    "backup": "master_rewrite_backups/post_2786685833728780482.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 42
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T07:43:22.342398+00:00",
+  "post_id": "2786685833728780482",
+  "package": "master_packages/rewrites/post_2786685833728780482.json",
+  "title": "Covered-Call ETFs Need an Upside Budget"
 }
