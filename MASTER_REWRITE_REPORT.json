@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-07T06:30:31.917550+00:00",
-  "phase": "apply-pending",
-  "error_type": "RuntimeError",
-  "error": "PUBLICATION PREFLIGHT FAILED \u2014 unsupported absolute claim prohibited: guaranteed returns"
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T06:32:06.551285+00:00",
+  "pending": {
+    "backup": "master_rewrite_backups/post_1246197502482808342.json.gz",
+    "content_sha256": "66ff84104fbcdbe2bdcba1e58582862fb872a30af248ffea791dfa8651caabe3",
+    "id": "1246197502482808342",
+    "labels": [
+      "Kushal K. Daga",
+      "Myths Scams and Bad Advice"
+    ],
+    "published": "2026-09-24T05:34:30-07:00",
+    "title": "15 Money Myths Your Uncle Repeats",
+    "url": "https://dailyyield.blogspot.com/2026/09/15-money-myths-your-uncle-repeats.html"
+  },
+  "master_count": 76,
+  "remaining": 46
 }
