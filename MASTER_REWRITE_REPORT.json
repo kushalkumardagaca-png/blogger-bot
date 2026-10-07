@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T09:28:10.240689+00:00",
-  "pending": {
-    "id": "1971188583231907134",
-    "title": "Don't Panic-Pay Cheap Student Loans",
-    "url": "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html",
-    "published": "2026-09-26T01:23:29-07:00",
-    "labels": [
-      "Credit Debt and Optimization",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "98ef4978fdff49c6e9ab917ae68b315fff43d469cae427a33f6269b4bce4677a",
-    "backup": "master_rewrite_backups/post_1971188583231907134.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 37
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T09:28:17.171121+00:00",
+  "post_id": "1971188583231907134",
+  "package": "master_packages/rewrites/post_1971188583231907134.json",
+  "title": "Test Before Prepaying Student Loans"
 }
