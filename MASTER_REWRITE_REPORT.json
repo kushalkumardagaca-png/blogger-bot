@@ -1,7 +1,18 @@
 {
-  "status": "FAIL",
-  "at": "2026-10-07T13:00:08.696754+00:00",
-  "phase": "apply-pending",
-  "error_type": "RuntimeError",
-  "error": "PUBLICATION PREFLIGHT FAILED \u2014 unsupported absolute claim prohibited: guaranteed returns"
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T13:01:02.153151+00:00",
+  "pending": {
+    "backup": "master_rewrite_backups/post_8711042237458005134.json.gz",
+    "content_sha256": "08a91ea35a66e8662081047bb474da6832a29a667c5881438d9b37f52f461b91",
+    "id": "8711042237458005134",
+    "labels": [
+      "Kushal K. Daga",
+      "Side Hustles That Work"
+    ],
+    "published": "2026-09-27T07:23:38-07:00",
+    "title": "\u00a3500 Extra: Overtime, Hustle, or Skill?",
+    "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html"
+  },
+  "master_count": 76,
+  "remaining": 30
 }
