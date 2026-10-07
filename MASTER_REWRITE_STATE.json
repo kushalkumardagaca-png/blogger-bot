@@ -302,8 +302,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 37,
+  "inventory_completed_count": 38,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4067190918070361492.json.gz",
+    "content_sha256": "a08e6a53265cd01c9336f2c1926c1be4cf49cbb5f133141bd000cadbe08fd02b",
+    "id": "4067190918070361492",
+    "labels": [
+      "Automation and Money Systems",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-25T22:25:48-07:00",
+    "title": "Freelance Money on Autopilot",
+    "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html"
+  },
   "version": 1
 }

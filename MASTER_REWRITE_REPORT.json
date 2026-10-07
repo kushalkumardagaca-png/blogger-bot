@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T09:10:44.520422+00:00",
-  "post_id": "1403438240302459064",
-  "url": "https://dailyyield.blogspot.com/2026/09/5-down-in-2026-ladder-or-trap.html",
-  "old_title": "5% Down in 2026: Ladder or Trap?",
-  "title": "A 5% Down Payment Needs a Cash Buffer",
-  "completed": 38,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T09:16:36.145523+00:00",
+  "pending": {
+    "id": "4067190918070361492",
+    "title": "Freelance Money on Autopilot",
+    "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
+    "published": "2026-09-25T22:25:48-07:00",
+    "labels": [
+      "Automation and Money Systems",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "a08e6a53265cd01c9336f2c1926c1be4cf49cbb5f133141bd000cadbe08fd02b",
+    "backup": "master_rewrite_backups/post_4067190918070361492.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 38
 }
