@@ -1,7 +1,7 @@
 {
-  "status": "PACKAGE_READY",
-  "at": "2026-10-07T10:03:17.789424+00:00",
-  "post_id": "7839033619702786971",
-  "package": "master_packages/rewrites/post_7839033619702786971.json",
-  "title": "Invest Your First $1,000 With a Safety Plan"
+  "status": "FAIL",
+  "at": "2026-10-07T10:03:19.753217+00:00",
+  "phase": "apply-pending",
+  "error_type": "RuntimeError",
+  "error": "PUBLICATION PREFLIGHT FAILED \u2014 unsupported absolute claim prohibited: guaranteed returns"
 }
