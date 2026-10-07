@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T07:50:55.060975+00:00",
-  "pending": {
-    "id": "2070861226123418361",
-    "title": "$90k Broke: The New Middle Class",
-    "url": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
-    "published": "2026-09-25T04:39:39-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Middle Class Survival"
-    ],
-    "content_sha256": "daf9a955d8e3b6797c2204049617c6e6df08aa3224bb9192b80d0957363b2db7",
-    "backup": "master_rewrite_backups/post_2070861226123418361.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 41
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T07:50:57.123974+00:00",
+  "post_id": "2070861226123418361",
+  "package": "master_packages/rewrites/post_2070861226123418361.json",
+  "title": "Why a $90,000 Income Can Feel Fragile"
 }
