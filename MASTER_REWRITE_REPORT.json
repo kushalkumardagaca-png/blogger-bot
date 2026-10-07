@@ -1,7 +1,7 @@
 {
-  "status": "PACKAGE_READY",
-  "at": "2026-10-07T03:32:10.729657+00:00",
-  "post_id": "3845366839700982429",
-  "package": "master_packages/rewrites/post_3845366839700982429.json",
-  "title": "Prioritize Tax-Advantaged Room Before Year-End"
+  "status": "FAIL",
+  "at": "2026-10-07T03:32:13.323057+00:00",
+  "phase": "apply-pending",
+  "error_type": "RuntimeError",
+  "error": "PUBLICATION PREFLIGHT FAILED \u2014 hero image failed final availability check"
 }
