@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T09:16:36.145523+00:00",
-  "pending": {
-    "id": "4067190918070361492",
-    "title": "Freelance Money on Autopilot",
-    "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
-    "published": "2026-09-25T22:25:48-07:00",
-    "labels": [
-      "Automation and Money Systems",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "a08e6a53265cd01c9336f2c1926c1be4cf49cbb5f133141bd000cadbe08fd02b",
-    "backup": "master_rewrite_backups/post_4067190918070361492.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 38
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T09:16:38.210215+00:00",
+  "post_id": "4067190918070361492",
+  "package": "master_packages/rewrites/post_4067190918070361492.json",
+  "title": "Build a Control System for Freelance Income"
 }
