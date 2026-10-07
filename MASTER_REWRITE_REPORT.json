@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T09:33:54.686673+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_2691449182304659819.json.gz",
-    "content_sha256": "ff9550ee3424bd14b058b712116de134b5c5a9124dc4381d6f12661a3665fa64",
-    "id": "2691449182304659819",
-    "labels": [
-      "AI Fintech and Future Money",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-09-26T04:37:01-07:00",
-    "title": "I Tested 6 AI Money Coaches",
-    "url": "https://dailyyield.blogspot.com/2026/09/i-tested-6-ai-money-coaches.html"
-  },
-  "master_count": 76,
-  "remaining": 36
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T09:33:56.637150+00:00",
+  "post_id": "2691449182304659819",
+  "package": "master_packages/rewrites/post_2691449182304659819.json",
+  "title": "Test AI Money Coaches Before Trusting Them"
 }
