@@ -1,8 +1,18 @@
 name: Daily Yield Security Guard
 
-# Automatic push and scheduled triggers disabled by user request on 2026-10-07.
-# Manual workflow dispatch remains available for an explicit future action.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'theme/**'
+      - '*.py'
+      - '.github/workflows/**'
+      - 'outreach/**'
+  schedule:
+    # Best-effort near-real-time monitoring. GitHub schedules can be delayed.
+    - cron: '7,22,37,52 * * * *'
+    # Daily recoverable API backup at 06:13 IST.
+    - cron: '43 0 * * *'
   workflow_dispatch:
     inputs:
       approve_current:

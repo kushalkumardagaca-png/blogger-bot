@@ -1,9 +1,24 @@
 name: Replace Legacy Master Articles with Master V2
 # User-authorized gradual migration: one verified legacy Master per run.
 
-# Automatic push and scheduled triggers disabled by user request on 2026-10-07.
-# Manual workflow dispatch remains available for an explicit future action.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'rewrite_existing_masters.py'
+      - 'prepare_master_article.py'
+      - 'master_article_v2.py'
+      - 'photo_selector.py'
+      - 'build_photo_registry.py'
+      - 'master_packages/rewrites/**'
+      - 'assets/master/**'
+      - 'ARENA_REWRITE_MANIFEST.json'
+      - '.github/workflows/rewrite_existing_masters.yml'
+      - 'refresh_master_photos.py'
+  schedule:
+    # Run only after all five new daily Masters have had their production windows.
+    # Existing-post migration must never consume quota ahead of new publishing.
+    - cron: '30 16 * * *'
   workflow_dispatch:
 
 concurrency:

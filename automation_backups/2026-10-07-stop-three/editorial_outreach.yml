@@ -1,8 +1,14 @@
 name: Daily Yield Editorial Outreach
 
-# Automatic push and scheduled triggers disabled by user request on 2026-10-07.
-# Manual workflow dispatch remains available for an explicit future action.
 on:
+  schedule:
+    # Hourly, worldwide. Discovery is continuous; delivery is gated by each recipient's local business window.
+    - cron: '17 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'outreach/**'
+      - '.github/workflows/editorial_outreach.yml'
   workflow_dispatch:
     inputs:
       mode:
