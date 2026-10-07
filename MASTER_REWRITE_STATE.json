@@ -390,8 +390,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 48,
+  "inventory_completed_count": 49,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4516328180677729614.json.gz",
+    "content_sha256": "d6922fdfff81dca2b6ff3ccc24e5e90610a6a8cba3a261023699bd1c1962ab56",
+    "id": "4516328180677729614",
+    "labels": [
+      "Kushal K. Daga",
+      "Starters Students and First Jobs"
+    ],
+    "published": "2026-09-28T01:27:21-07:00",
+    "title": "Your Student Overdraft Isn't Free",
+    "url": "https://dailyyield.blogspot.com/2026/09/your-student-overdraft-isnt-free.html"
+  },
   "version": 1
 }
