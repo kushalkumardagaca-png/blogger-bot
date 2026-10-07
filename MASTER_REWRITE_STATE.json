@@ -406,8 +406,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 50,
+  "inventory_completed_count": 51,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_6448805219822825799.json.gz",
+    "content_sha256": "4bcb0d6405418f950e8786ddde09f93276a60d3d413c866449e91748669f366d",
+    "id": "6448805219822825799",
+    "labels": [
+      "Kushal K. Daga",
+      "Rich Habits vs Broke Habits"
+    ],
+    "published": "2026-09-28T07:29:57-07:00",
+    "title": "Buy Options, Not Status",
+    "url": "https://dailyyield.blogspot.com/2026/09/buy-options-not-status.html"
+  },
   "version": 1
 }
