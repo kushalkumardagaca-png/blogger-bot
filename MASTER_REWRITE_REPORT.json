@@ -1,18 +1,7 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-07T12:31:34.361131+00:00",
-  "pending": {
-    "id": "3406242455506009272",
-    "title": "The 14-Day Pre-5-April Tax Sprint",
-    "url": "https://dailyyield.blogspot.com/2026/09/the-14-day-pre-5-april-tax-sprint.html",
-    "published": "2026-09-27T01:23:02-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Taxes and Account Optimization"
-    ],
-    "content_sha256": "af11012d9ff9fc193fe4957d10f5ca6a9cd82307517f6912f530feac918ab591",
-    "backup": "master_rewrite_backups/post_3406242455506009272.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 32
+  "status": "PACKAGE_READY",
+  "at": "2026-10-07T12:31:36.566711+00:00",
+  "post_id": "3406242455506009272",
+  "package": "master_packages/rewrites/post_3406242455506009272.json",
+  "title": "Finish Your UK Tax-Year Checklist"
 }
