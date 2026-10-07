@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T10:04:12.627948+00:00",
-  "post_id": "7839033619702786971",
-  "url": "https://dailyyield.blogspot.com/2026/09/first-1000-scared-persons-plan.html",
-  "old_title": "First $1,000: The Scared Person's Plan",
-  "title": "Invest Your First $1,000 With a Safety Plan",
-  "completed": 43,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T12:21:27.427208+00:00",
+  "pending": {
+    "id": "6874126328143581453",
+    "title": "Don't Ignore State Pension / Social Security",
+    "url": "https://dailyyield.blogspot.com/2026/09/dont-ignore-state-pension-social.html",
+    "published": "2026-09-26T22:26:29-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Retirement Pensions and FIRE"
+    ],
+    "content_sha256": "786ff0883e1ba1624d23af0e6e6aae8199d85be8ea856dcfeca70bb4c2fcb7f7",
+    "backup": "master_rewrite_backups/post_6874126328143581453.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 33
 }
