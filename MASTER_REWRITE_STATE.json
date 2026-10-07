@@ -358,8 +358,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 44,
+  "inventory_completed_count": 45,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_3867527095511324597.json.gz",
+    "content_sha256": "09f6b6d9d22391853c6fda995c05067eb0f42cc9321d7924e201bf5760295f09",
+    "id": "3867527095511324597",
+    "labels": [
+      "Career Salary and Raises",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-27T04:37:50-07:00",
+    "title": "The Loyalty Tax You're Paying",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-loyalty-tax-youre-paying.html"
+  },
   "version": 1
 }
