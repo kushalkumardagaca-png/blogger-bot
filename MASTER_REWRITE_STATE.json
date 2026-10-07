@@ -262,8 +262,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 32,
+  "inventory_completed_count": 33,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_2418376376538238746.json.gz",
+    "content_sha256": "3ee32fe0335af400ac737a8f4d5a9503dbcfb07f4982da880125d82f0a699d92",
+    "id": "2418376376538238746",
+    "labels": [
+      "Age and Wealth Milestones",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-24T22:26:44-07:00",
+    "title": "$10k at 22 vs $10k at 32",
+    "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html"
+  },
   "version": 1
 }

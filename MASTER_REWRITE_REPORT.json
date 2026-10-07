@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T07:05:19.325881+00:00",
-  "post_id": "4808062258120764865",
-  "url": "https://dailyyield.blogspot.com/2026/09/stop-splitting-bills-5050.html",
-  "old_title": "Stop Splitting Bills 50/50",
-  "title": "Split Household Costs by Capacity",
-  "completed": 33,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T07:16:04.769231+00:00",
+  "pending": {
+    "id": "2418376376538238746",
+    "title": "$10k at 22 vs $10k at 32",
+    "url": "https://dailyyield.blogspot.com/2026/09/10k-at-22-vs-10k-at-32.html",
+    "published": "2026-09-24T22:26:44-07:00",
+    "labels": [
+      "Age and Wealth Milestones",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "3ee32fe0335af400ac737a8f4d5a9503dbcfb07f4982da880125d82f0a699d92",
+    "backup": "master_rewrite_backups/post_2418376376538238746.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 43
 }
