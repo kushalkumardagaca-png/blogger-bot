@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T06:11:18.162816+00:00",
-  "post_id": "1126447614310368625",
-  "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html",
-  "old_title": "House-Hack Before You Landlord",
-  "title": "House Hack Only When the Math Works",
-  "completed": 30,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-07T06:30:26.406299+00:00",
+  "pending": {
+    "id": "1246197502482808342",
+    "title": "15 Money Myths Your Uncle Repeats",
+    "url": "https://dailyyield.blogspot.com/2026/09/15-money-myths-your-uncle-repeats.html",
+    "published": "2026-09-24T05:34:30-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Myths Scams and Bad Advice"
+    ],
+    "content_sha256": "66ff84104fbcdbe2bdcba1e58582862fb872a30af248ffea791dfa8651caabe3",
+    "backup": "master_rewrite_backups/post_1246197502482808342.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 46
 }
