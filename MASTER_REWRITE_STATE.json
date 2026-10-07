@@ -222,8 +222,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 27,
+  "inventory_completed_count": 28,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4058080268134530730.json.gz",
+    "content_sha256": "993e8152de132a5e2ce4fb7659cf3cc005a6bc98bec44a401714eb32be36a38b",
+    "id": "4058080268134530730",
+    "labels": [
+      "Cash Savings and Emergency Funds",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-23T23:03:15-07:00",
+    "title": "Emergency Fund Size by Job Type",
+    "url": "https://dailyyield.blogspot.com/2026/09/emergency-fund-size-by-job-type.html"
+  },
   "version": 1
 }
