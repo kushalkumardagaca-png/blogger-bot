@@ -72,6 +72,14 @@
       "url": "https://dailyyield.blogspot.com/2026/09/90k-broke-new-middle-class.html",
       "verified_at": "2026-10-07T07:51:01.009082+00:00"
     },
+    "2303680525771764438": {
+      "content_sha256": "3ecacee03e04a3083eb9fefa6e7feb342bfeb11d8702ca531bc71d44c52ad3a3",
+      "old_title": "Stop Checking Your Portfolio Daily",
+      "status": "rewritten-v2",
+      "title": "Check Your Portfolio on a Schedule",
+      "url": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html",
+      "verified_at": "2026-10-08T02:49:12.582465+00:00"
+    },
     "2418376376538238746": {
       "content_sha256": "e3b8d1090fb937b0ff3a35324ed10041b50e0181337aa92934fa59159fc8a16a",
       "old_title": "$10k at 22 vs $10k at 32",
@@ -456,17 +464,6 @@
   },
   "inventory_completed_count": 57,
   "inventory_master_count": 76,
-  "pending": {
-    "backup": "master_rewrite_backups/post_2303680525771764438.json.gz",
-    "content_sha256": "00ff7c6a8a9dc1284a65c196b783e41d6d0d61e91aa9f4a65b4fb04673cc6039",
-    "id": "2303680525771764438",
-    "labels": [
-      "Contrarian Hooks",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-09-29T18:53:01-07:00",
-    "title": "Stop Checking Your Portfolio Daily",
-    "url": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html"
-  },
+  "pending": null,
   "version": 1
 }
