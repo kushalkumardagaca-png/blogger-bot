@@ -478,8 +478,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 59,
+  "inventory_completed_count": 60,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_8564410517739387148.json.gz",
+    "content_sha256": "e2275fa88488de85cc701814099b82886e5f9180c3a1b2f8d34e10ea10e9c459",
+    "id": "8564410517739387148",
+    "labels": [
+      "Kushal K. Daga",
+      "Middle Class Survival"
+    ],
+    "published": "2026-09-30T04:38:35-07:00",
+    "title": "Childcare Is the New Mortgage",
+    "url": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html"
+  },
   "version": 1
 }

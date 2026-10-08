@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T04:37:16.082010+00:00",
-  "post_id": "1499457110813036815",
-  "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
-  "old_title": "90 Days of Passive Income: The Truth",
-  "title": "Build Passive Income That Survives",
-  "completed": 60,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T04:57:28.280330+00:00",
+  "pending": {
+    "id": "8564410517739387148",
+    "title": "Childcare Is the New Mortgage",
+    "url": "https://dailyyield.blogspot.com/2026/09/childcare-is-new-mortgage.html",
+    "published": "2026-09-30T04:38:35-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Middle Class Survival"
+    ],
+    "content_sha256": "e2275fa88488de85cc701814099b82886e5f9180c3a1b2f8d34e10ea10e9c459",
+    "backup": "master_rewrite_backups/post_8564410517739387148.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 16
 }
