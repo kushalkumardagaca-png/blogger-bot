@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T07:10:03.512547+00:00",
-  "post_id": "577819612147620529",
-  "url": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
-  "old_title": "Capital Gains, Explained Like a Human",
-  "title": "Calculate Capital Gains Before You Sell",
-  "completed": 70,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T07:11:51.037762+00:00",
+  "pending": {
+    "id": "1766285354349597171",
+    "title": "The Real Price of a Career Break",
+    "url": "https://dailyyield.blogspot.com/2026/10/the-real-price-of-career-break.html",
+    "published": "2026-10-02T04:39:33-07:00",
+    "labels": [
+      "Career Salary and Raises",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "b2bb75cfb6558ffaa833a66ee798319a27aa2c17ecd917c8e12f2b6c90da9638",
+    "backup": "master_rewrite_backups/post_1766285354349597171.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 6
 }

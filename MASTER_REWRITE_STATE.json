@@ -558,8 +558,19 @@
       "verified_at": "2026-10-08T06:07:55.284302+00:00"
     }
   },
-  "inventory_completed_count": 69,
+  "inventory_completed_count": 70,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_1766285354349597171.json.gz",
+    "content_sha256": "b2bb75cfb6558ffaa833a66ee798319a27aa2c17ecd917c8e12f2b6c90da9638",
+    "id": "1766285354349597171",
+    "labels": [
+      "Career Salary and Raises",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-10-02T04:39:33-07:00",
+    "title": "The Real Price of a Career Break",
+    "url": "https://dailyyield.blogspot.com/2026/10/the-real-price-of-career-break.html"
+  },
   "version": 1
 }
