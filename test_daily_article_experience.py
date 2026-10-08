@@ -50,7 +50,11 @@ def test_clean_css_uses_descendant_selectors_and_mobile_card_widths():
     assert "#dyArticle .dya-card{" in out
     assert "#dyArticle.dya-hero" not in out
     assert "#dyArticle.dya-card" not in out
-    assert "flex-basis:78vw" in out
+    assert "flex-basis:86vw" in out
+    assert "min-height:410px" in out
+    assert "object-fit:cover!important" in out
+    assert "object-position:center center!important" in out
+    assert "margin:0!important" in out
     assert "text-align:left" in out
 
 

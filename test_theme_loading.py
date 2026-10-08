@@ -99,7 +99,7 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("c=c[:script_start]+snap+c[script_start:]", source)
         self.assertIn("news_snapshot_at<news_engine_at", source)
         self.assertIn("else{setTimeout(main,0);}", source)
-        self.assertIn("DY_AUTHENTICATED_NEWS_FALLBACK_V3", source)
+        self.assertIn("DY_AUTHENTICATED_NEWS_FALLBACK_V4_LARGE_FRAMED_CARDS", source)
         self.assertIn("rebuild('Global News'", source)
         self.assertIn("rebuild('Country dispatches'", source)
         self.assertIn("rebuild('Specialty desks'", source)
