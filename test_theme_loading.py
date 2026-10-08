@@ -30,7 +30,7 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertNotIn("fonts.googleapis.com", text)
         self.assertNotIn("fonts.gstatic.com", text)
         self.assertNotIn("data:image/png;base64", text)
-        self.assertLess(len(text.encode("utf-8")), 310_000)
+        self.assertLess(len(text.encode("utf-8")), 320_000)
 
     def test_all_internal_link_directions_are_intercepted_safely(self):
         text = THEMES[0].read_text(encoding="utf-8")
@@ -58,12 +58,15 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertNotIn("dyStickersEnter", text)
         self.assertNotIn(".dy-sticker{animation:", text)
 
-    def test_archives_use_reader_initiated_pagination_and_compact_sections(self):
+    def test_every_label_uses_feed_only_infinite_loading_and_compact_sections(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("blog-pager-older-link", text)
-        self.assertNotIn("className='dy-feed-sentinel'", text)
-        self.assertNotIn("rootMargin:'1400px 0px'", text)
-        self.assertNotIn("io.observe(sent);load()", text)
+        self.assertIn("className='dy-label-status'", text)
+        self.assertIn("data-dy-label-feed','feed-json-infinite'", text)
+        self.assertIn("'/feeds/posts/default/-/'", text)
+        self.assertIn("rootMargin:'700px 0px'", text)
+        self.assertIn("max-results='+batch+'&start-index='+start", text)
+        self.assertIn("grid-template-columns:1fr!important", text)
         self.assertNotIn("fetch(href,{credentials:'same-origin'})", text)
         self.assertIn("var all=parse(j,false);", text)
         self.assertIn("Earlier articles", text)

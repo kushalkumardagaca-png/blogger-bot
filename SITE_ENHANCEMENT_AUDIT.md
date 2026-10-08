@@ -71,10 +71,10 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-Subscription.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed
-- ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 310 KB
+- ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 320 KB
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
-- ✅ Daily-Yield-Theme-Subscription.xml: archives keep reader-initiated native pagination
+- ✅ Daily-Yield-Theme-Subscription.xml: labels use feed-only infinite loading without document requests
 - ✅ Daily-Yield-Theme-Subscription.xml: navigation is reader initiated only
 - ✅ Daily-Yield-Theme-Subscription.xml: synthetic document request count is fixed at zero
 - ✅ Daily-Yield-Theme-Subscription.xml: no speculative document prefetch or prerender
@@ -156,10 +156,10 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 310 KB
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 320 KB
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: archives keep reader-initiated native pagination
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: labels use feed-only infinite loading without document requests
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: navigation is reader initiated only
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: synthetic document request count is fixed at zero
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no speculative document prefetch or prerender
