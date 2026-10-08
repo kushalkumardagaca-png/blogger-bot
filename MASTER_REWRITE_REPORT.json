@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T07:09:58.814319+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_577819612147620529.json.gz",
-    "content_sha256": "f238390dd74d099dfe9b434d324f531a7f938fe5176f5e5b6de23e5101abffc3",
-    "id": "577819612147620529",
-    "labels": [
-      "Kushal K. Daga",
-      "Taxes and Account Optimization"
-    ],
-    "published": "2026-10-02T01:32:05-07:00",
-    "title": "Capital Gains, Explained Like a Human",
-    "url": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html"
-  },
-  "master_count": 76,
-  "remaining": 7
+  "status": "PASS",
+  "at": "2026-10-08T07:10:03.512547+00:00",
+  "post_id": "577819612147620529",
+  "url": "https://dailyyield.blogspot.com/2026/10/capital-gains-explained-like-human.html",
+  "old_title": "Capital Gains, Explained Like a Human",
+  "title": "Calculate Capital Gains Before You Sell",
+  "completed": 70,
+  "master_count": 76
 }
