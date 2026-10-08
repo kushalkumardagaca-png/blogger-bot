@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T05:13:29.467493+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_1518139427210986224.json.gz",
-    "content_sha256": "5c911cdaa30a65d1ba93ee65c3a804f9dc31603948f679802619925dbcbd53c8",
-    "id": "1518139427210986224",
-    "labels": [
-      "Kushal K. Daga",
-      "Money Audits and Case Studies"
-    ],
-    "published": "2026-09-30T07:32:12-07:00",
-    "title": "\u00a390k Salary, \u00a34k Net Worth Audit",
-    "url": "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html"
-  },
-  "master_count": 76,
-  "remaining": 15
+  "status": "PASS",
+  "at": "2026-10-08T05:13:34.980368+00:00",
+  "post_id": "1518139427210986224",
+  "url": "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html",
+  "old_title": "\u00a390k Salary, \u00a34k Net Worth Audit",
+  "title": "Turn a High Salary Into Net Worth",
+  "completed": 62,
+  "master_count": 76
 }
