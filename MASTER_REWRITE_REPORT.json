@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T06:07:49.288545+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_9105498753770999311.json.gz",
-    "content_sha256": "857d9b3bc44f926f341dffb4c7ea4e7a0923c49f29d943527f806e20694e75b0",
-    "id": "9105498753770999311",
-    "labels": [
-      "AI Fintech and Future Money",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-10-01T04:39:13-07:00",
-    "title": "A Private AI Advisor on Your Data",
-    "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html"
-  },
-  "master_count": 76,
-  "remaining": 11
+  "status": "PASS",
+  "at": "2026-10-08T06:07:55.285210+00:00",
+  "post_id": "9105498753770999311",
+  "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
+  "old_title": "A Private AI Advisor on Your Data",
+  "title": "Build a Private AI Money Advisor",
+  "completed": 66,
+  "master_count": 76
 }
