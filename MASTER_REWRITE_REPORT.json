@@ -1,17 +1,17 @@
 {
   "status": "BACKUP_READY",
-  "at": "2026-10-08T08:31:04.786477+00:00",
+  "at": "2026-10-08T08:37:03.692809+00:00",
   "pending": {
+    "backup": "master_rewrite_backups/post_3824305036751783911.json.gz",
+    "content_sha256": "87257c3fc2ab83b2e9f65552c4d8f5eb72d1bbf7b64ab59950bfcb3a2df44711",
     "id": "3824305036751783911",
-    "title": "Graduate With a Credit File, Too",
-    "url": "https://dailyyield.blogspot.com/2026/10/graduate-with-credit-file-too.html",
-    "published": "2026-10-03T01:30:07-07:00",
     "labels": [
       "Kushal K. Daga",
       "Starters Students and First Jobs"
     ],
-    "content_sha256": "87257c3fc2ab83b2e9f65552c4d8f5eb72d1bbf7b64ab59950bfcb3a2df44711",
-    "backup": "master_rewrite_backups/post_3824305036751783911.json.gz"
+    "published": "2026-10-03T01:30:07-07:00",
+    "title": "Graduate With a Credit File, Too",
+    "url": "https://dailyyield.blogspot.com/2026/10/graduate-with-credit-file-too.html"
   },
   "master_count": 76,
   "remaining": 2
