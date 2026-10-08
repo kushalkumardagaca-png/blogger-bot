@@ -470,8 +470,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 58,
+  "inventory_completed_count": 59,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_1499457110813036815.json.gz",
+    "content_sha256": "acb84bd1251e8fd5a03a81c964c6b58c8634b1cf521b421dddda8e803410cbce",
+    "id": "1499457110813036815",
+    "labels": [
+      "Kushal K. Daga",
+      "Passive Income Reality"
+    ],
+    "published": "2026-09-30T01:32:57-07:00",
+    "title": "90 Days of Passive Income: The Truth",
+    "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html"
+  },
   "version": 1
 }

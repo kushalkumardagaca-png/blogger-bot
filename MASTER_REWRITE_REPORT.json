@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T03:17:00.361727+00:00",
-  "post_id": "6003168629771257786",
-  "url": "https://dailyyield.blogspot.com/2026/09/only-5-money-goals-for-your-20s.html",
-  "old_title": "Only 5 Money Goals for Your 20s",
-  "title": "Set Five Money Goals in Order",
-  "completed": 59,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T04:37:10.850636+00:00",
+  "pending": {
+    "id": "1499457110813036815",
+    "title": "90 Days of Passive Income: The Truth",
+    "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
+    "published": "2026-09-30T01:32:57-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Passive Income Reality"
+    ],
+    "content_sha256": "acb84bd1251e8fd5a03a81c964c6b58c8634b1cf521b421dddda8e803410cbce",
+    "backup": "master_rewrite_backups/post_1499457110813036815.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 17
 }
