@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T05:22:59.611904+00:00",
-  "pending": {
-    "id": "2392626462720316715",
-    "title": "Your Car Payment Is a Wealth Killer",
-    "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
-    "published": "2026-09-30T18:53:40-07:00",
-    "labels": [
-      "Housing Cars and Big Buys",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "fe26c9a87a920680a5ab0635e3df43115cba403a36005bbbe663ca34f85a37cb",
-    "backup": "master_rewrite_backups/post_2392626462720316715.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 14
+  "status": "PASS",
+  "at": "2026-10-08T05:23:04.427589+00:00",
+  "post_id": "2392626462720316715",
+  "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
+  "old_title": "Your Car Payment Is a Wealth Killer",
+  "title": "Price the Whole Car, Not the Payment",
+  "completed": 63,
+  "master_count": 76
 }
