@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T08:41:42.343175+00:00",
-  "pending": {
-    "id": "7443620275479288667",
-    "title": "The Rule of 5 Before You Buy",
-    "url": "https://dailyyield.blogspot.com/2026/10/the-rule-of-5-before-you-buy.html",
-    "published": "2026-10-03T07:46:37-07:00",
-    "labels": [
-      "Kushal K. Daga",
-      "Spending Lifestyle and Frugality"
-    ],
-    "content_sha256": "12483f93a5042d4e486b3116f4df371cc177001331c404800130a369aa53ac33",
-    "backup": "master_rewrite_backups/post_7443620275479288667.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 1
+  "status": "PASS",
+  "at": "2026-10-08T08:48:11.590639+00:00",
+  "post_id": "7443620275479288667",
+  "url": "https://dailyyield.blogspot.com/2026/10/the-rule-of-5-before-you-buy.html",
+  "old_title": "The Rule of 5 Before You Buy",
+  "title": "Use Five Tests Before You Buy",
+  "completed": 76,
+  "master_count": 76
 }
