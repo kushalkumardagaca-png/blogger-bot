@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-07T16:31:48.410348+00:00",
-  "post_id": "7255018414657547539",
-  "url": "https://dailyyield.blogspot.com/2026/09/brrrr-with-ugly-months-included.html",
-  "old_title": "BRRRR With the Ugly Months Included",
-  "title": "Stress-Test Every BRRRR Deal",
-  "completed": 55,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T02:04:11.520155+00:00",
+  "pending": {
+    "id": "4498405341941524443",
+    "title": "The Market Is Not a Casino",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
+    "published": "2026-09-29T04:38:11-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Myths Scams and Bad Advice"
+    ],
+    "content_sha256": "8d0cf56dd83795f80c59ecbc709121ee59aeb67d4c90a1a2bed0f9cc84ee4f60",
+    "backup": "master_rewrite_backups/post_4498405341941524443.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 21
 }

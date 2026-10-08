@@ -438,8 +438,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 54,
+  "inventory_completed_count": 55,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_4498405341941524443.json.gz",
+    "content_sha256": "8d0cf56dd83795f80c59ecbc709121ee59aeb67d4c90a1a2bed0f9cc84ee4f60",
+    "id": "4498405341941524443",
+    "labels": [
+      "Kushal K. Daga",
+      "Myths Scams and Bad Advice"
+    ],
+    "published": "2026-09-29T04:38:11-07:00",
+    "title": "The Market Is Not a Casino",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html"
+  },
   "version": 1
 }
