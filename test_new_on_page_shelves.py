@@ -27,6 +27,9 @@ def test_article_page_has_first_recent_shelf_and_only_recent_article_cards():
     assert "Article old" not in shelf
     assert out.index('id="dya-new"') < out.index('id="dya-1"')
     assert "age>86400000" in out
+    assert "clamp(440px,56vw,620px)" in out
+    assert "min-height:500px" in out
+    assert "flex-basis:92vw" in out
 
 
 def test_article_recent_shelf_remains_visible_when_empty():
@@ -43,3 +46,6 @@ def test_news_fallback_builds_exact_rolling_24_hour_shelf_before_desks():
     assert "PUBLISHED IN THE LAST 24 HOURS" in out
     assert "dy-auth-recent" in out
     assert "wire(row)" in out
+    assert "clamp(440px,56vw,620px)" in out
+    assert "min-height:500px" in out
+    assert "flex-basis:92vw" in out
