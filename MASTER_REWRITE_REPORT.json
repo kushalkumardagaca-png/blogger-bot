@@ -1,17 +1,17 @@
 {
   "status": "BACKUP_READY",
-  "at": "2026-10-08T06:44:41.646656+00:00",
+  "at": "2026-10-08T06:49:36.821878+00:00",
   "pending": {
+    "backup": "master_rewrite_backups/post_2333084406415618664.json.gz",
+    "content_sha256": "cbcbc90e21bec5af53b40b3aade91c504ec881773d904287325b155b193e7e5f",
     "id": "2333084406415618664",
-    "title": "Coast vs. Barista vs. Fat FIRE",
-    "url": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html",
-    "published": "2026-10-01T22:24:34-07:00",
     "labels": [
       "Kushal K. Daga",
       "Retirement Pensions and FIRE"
     ],
-    "content_sha256": "cbcbc90e21bec5af53b40b3aade91c504ec881773d904287325b155b193e7e5f",
-    "backup": "master_rewrite_backups/post_2333084406415618664.json.gz"
+    "published": "2026-10-01T22:24:34-07:00",
+    "title": "Coast vs. Barista vs. Fat FIRE",
+    "url": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html"
   },
   "master_count": 76,
   "remaining": 8
