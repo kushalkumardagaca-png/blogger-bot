@@ -26,6 +26,7 @@ def test_article_page_has_first_recent_shelf_and_only_recent_article_cards():
     assert "Article fresh" in shelf
     assert "Article old" not in shelf
     assert out.index('id="dya-new"') < out.index('id="dya-1"')
+    assert "age>86400000" in out
 
 
 def test_article_recent_shelf_remains_visible_when_empty():
