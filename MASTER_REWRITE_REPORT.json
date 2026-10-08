@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T07:54:03.339409+00:00",
-  "pending": {
-    "backup": "master_rewrite_backups/post_1007960234772753874.json.gz",
-    "content_sha256": "57c873890884f8e87c1cac3d921fb762a049dcf6de704c301b5cfbbe368364f9",
-    "id": "1007960234772753874",
-    "labels": [
-      "Couples Family and Kids",
-      "Kushal K. Daga"
-    ],
-    "published": "2026-10-02T22:33:21-07:00",
-    "title": "A Money Constitution for Couples",
-    "url": "https://dailyyield.blogspot.com/2026/10/a-money-constitution-for-couples.html"
-  },
-  "master_count": 76,
-  "remaining": 3
+  "status": "PASS",
+  "at": "2026-10-08T07:54:08.765459+00:00",
+  "post_id": "1007960234772753874",
+  "url": "https://dailyyield.blogspot.com/2026/10/a-money-constitution-for-couples.html",
+  "old_title": "A Money Constitution for Couples",
+  "title": "Write the Money Rules for Your Relationship",
+  "completed": 74,
+  "master_count": 76
 }
