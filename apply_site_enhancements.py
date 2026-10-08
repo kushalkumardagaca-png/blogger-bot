@@ -237,11 +237,12 @@ def inject(text: str) -> str:
         text = text.replace(old_home_image, new_home_image, 1)
     elif new_home_image not in text:
         raise RuntimeError('Homepage feed image parser not found')
-    # The newest 150 mixed entries can still be almost entirely News. Merge a
-    # second lightweight summary page so both Article rows have genuine posts.
+    # News can occupy several complete feed pages. Read the total from the first
+    # lightweight response, then retrieve every remaining summary page so the two
+    # Article rails cannot become empty merely because Articles are older than News.
     text = text.replace("fetch('/feeds/posts/summary?alt=json&max-results=150&orderby=published').then(function(r){return r.json();})", "articleInventory()")
     inventory_anchor = "function go(){"
-    inventory_helper = "function articleInventory(){return Promise.all([1,151].map(function(start){return window.DYFeedCache.get('/feeds/posts/summary?alt=json&max-results=150&orderby=published&start-index='+start,300000);})).then(function(parts){var entries=[];parts.forEach(function(j){entries=entries.concat(j.feed&&j.feed.entry||[]);});return {feed:{entry:entries}};});}\nfunction go(){"
+    inventory_helper = "function articleInventory(){var entries=[],start=1,total=Infinity;function enough(){var n=0;entries.forEach(function(e){var cats=(e.category||[]).map(function(c){return c.term;});if(cats.indexOf('News')<0)n++;});return n>=16;}function pull(){return window.DYFeedCache.get('/feeds/posts/summary?alt=json&max-results=40&orderby=published&start-index='+start,300000).then(function(j){var feed=j.feed||{},part=feed.entry||[];total=Number(feed['openSearch$totalResults']&&feed['openSearch$totalResults'].$t||0);entries=entries.concat(part);start+=part.length;if(part.length&&start<=total&&!enough())return pull();return {feed:{entry:entries}};});}return pull();}\nfunction go(){"
     if 'function articleInventory()' in text:
         text = re.sub(r"function articleInventory\(\)\{.*?\}\nfunction go\(\)\{", lambda _m: inventory_helper, text, count=1, flags=re.S)
     else:
@@ -256,8 +257,11 @@ def inject(text: str) -> str:
     card_entry = "if(it.id)a.setAttribute('data-kd-entry',it.id);"
     text = re.sub(re.escape(card_anchor)+r'(?:'+re.escape(card_entry)+r')*', card_anchor+card_entry, text, count=1)
     text = text.replace("out.push({title:e.title&&e.title.$t||'Untitled',href:href,img:img,", "out.push({id:(e.id&&e.id.$t||'').split('post-').pop(),title:e.title&&e.title.$t||'Untitled',href:href,img:img,")
+    # Summary thumbnails can be stale or shared across entries. Article cards start
+    # neutral and are hydrated from each exact Post's first editorial image.
+    text = text.replace("href:href,img:img,\n meta:", "href:href,img:needNews?img:'',\n meta:")
     hydrate_anchor = "function emptyBox(row,title,msg){"
-    hydrate_helper = '''function hydrate(items){var q=items.filter(function(it){return !it.img&&it.id;}).slice(),active=0;function pump(){while(active<4&&q.length){(function(it){active++;window.DYFeedCache.get('/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json',300000).then(function(j){var e=j.entry||{},img=e.media$thumbnail&&e.media$thumbnail.url||'',m=/<img[^>]+src="([^"]+)"/.exec(e.content&&e.content.$t||'');if(!img&&m)img=m[1];if(!img)return;D.querySelectorAll('[data-kd-entry="'+it.id+'"] .kd-th').forEach(function(th){th.textContent='';var im=D.createElement('img');im.src=img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';th.appendChild(im);});}).catch(function(){}).then(function(){active--;pump();});})(q.shift());}}pump();}
+    hydrate_helper = '''function hydrate(items){var q=items.filter(function(it){return it.id;}).slice(),active=0;function pump(){while(active<4&&q.length){(function(it){active++;window.DYFeedCache.get('/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json',300000).then(function(j){var e=j.entry||{},m=/<img[^>]+src=["']([^"']+)["']/.exec(e.content&&e.content.$t||''),img=m&&m[1]||'';if(!img)return;D.querySelectorAll('[data-kd-entry="'+it.id+'"] .kd-th').forEach(function(th){th.textContent='';var im=D.createElement('img');im.src=img;im.alt=it.title||'Daily Yield article preview';im.loading='lazy';im.decoding='async';th.appendChild(im);});}).catch(function(){}).then(function(){active--;pump();});})(q.shift());}}pump();}
 function emptyBox(row,title,msg){'''
     if 'function hydrate(items)' in text:
         text = re.sub(r"function hydrate\(items\).*?\nfunction emptyBox\(row,title,msg\)\{", lambda _m: hydrate_helper, text, count=1, flags=re.S)
