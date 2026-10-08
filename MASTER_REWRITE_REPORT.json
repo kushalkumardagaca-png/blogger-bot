@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T05:40:24.256282+00:00",
-  "post_id": "2373709041132325539",
-  "url": "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
-  "old_title": "The 12-Tab Personal CFO Spreadsheet",
-  "title": "Build a Personal Finance Control Sheet",
-  "completed": 64,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T05:50:52.682145+00:00",
+  "pending": {
+    "id": "5001890081868019899",
+    "title": "Credit Card Bonuses Without the Damage",
+    "url": "https://dailyyield.blogspot.com/2026/10/credit-card-bonuses-without-damage.html",
+    "published": "2026-10-01T01:34:04-07:00",
+    "labels": [
+      "Credit Debt and Optimization",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "c26c26c7bad6c425556f46695597d47650e0636abe97c5b3131000b8993e1478",
+    "backup": "master_rewrite_backups/post_5001890081868019899.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 12
 }
