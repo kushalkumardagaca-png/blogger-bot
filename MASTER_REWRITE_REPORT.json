@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T02:24:01.280138+00:00",
-  "post_id": "3487685101279047331",
-  "url": "https://dailyyield.blogspot.com/2026/09/what-changed-for-your-money-in-2026.html",
-  "old_title": "What Changed for Your Money in 2026",
-  "title": "Recheck Every Money Rule",
-  "completed": 57,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T02:49:07.676208+00:00",
+  "pending": {
+    "id": "2303680525771764438",
+    "title": "Stop Checking Your Portfolio Daily",
+    "url": "https://dailyyield.blogspot.com/2026/09/stop-checking-your-portfolio-daily.html",
+    "published": "2026-09-29T18:53:01-07:00",
+    "labels": [
+      "Contrarian Hooks",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "00ff7c6a8a9dc1284a65c196b783e41d6d0d61e91aa9f4a65b4fb04673cc6039",
+    "backup": "master_rewrite_backups/post_2303680525771764438.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 19
 }
