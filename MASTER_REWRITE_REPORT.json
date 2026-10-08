@@ -1,18 +1,10 @@
 {
-  "status": "BACKUP_READY",
-  "at": "2026-10-08T03:16:54.460685+00:00",
-  "pending": {
-    "id": "6003168629771257786",
-    "title": "Only 5 Money Goals for Your 20s",
-    "url": "https://dailyyield.blogspot.com/2026/09/only-5-money-goals-for-your-20s.html",
-    "published": "2026-09-29T22:25:43-07:00",
-    "labels": [
-      "Age and Wealth Milestones",
-      "Kushal K. Daga"
-    ],
-    "content_sha256": "9569d5a74878cfcb1ea8a6a7a78485a28a10ac26fb88920b82adc7ffc95d4422",
-    "backup": "master_rewrite_backups/post_6003168629771257786.json.gz"
-  },
-  "master_count": 76,
-  "remaining": 18
+  "status": "PASS",
+  "at": "2026-10-08T03:17:00.361727+00:00",
+  "post_id": "6003168629771257786",
+  "url": "https://dailyyield.blogspot.com/2026/09/only-5-money-goals-for-your-20s.html",
+  "old_title": "Only 5 Money Goals for Your 20s",
+  "title": "Set Five Money Goals in Order",
+  "completed": 59,
+  "master_count": 76
 }
