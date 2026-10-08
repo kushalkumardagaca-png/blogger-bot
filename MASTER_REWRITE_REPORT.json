@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T05:23:04.427589+00:00",
-  "post_id": "2392626462720316715",
-  "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
-  "old_title": "Your Car Payment Is a Wealth Killer",
-  "title": "Price the Whole Car, Not the Payment",
-  "completed": 63,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T05:40:19.406012+00:00",
+  "pending": {
+    "id": "2373709041132325539",
+    "title": "The 12-Tab Personal CFO Spreadsheet",
+    "url": "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
+    "published": "2026-09-30T22:25:33-07:00",
+    "labels": [
+      "Automation and Money Systems",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "c8a6b70cb135b78116cb5c11ed42d4a9af08127aa0a0c88ef8bc8bc605251bcd",
+    "backup": "master_rewrite_backups/post_2373709041132325539.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 13
 }
