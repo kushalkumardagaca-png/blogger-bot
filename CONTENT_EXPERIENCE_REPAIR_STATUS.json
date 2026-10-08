@@ -1,39 +1,12 @@
 {
-  "status": "WARNING",
+  "status": "PASS",
   "zero_view": true,
   "posts_checked": 338,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 5,
-  "remaining_duplicate_heroes": 2,
-  "unresolved_duplicate_groups": [
-    {
-      "image_key": "business_finance;_a_practical_study_of_financial_management_in_private_business_concerns_(ia_businessfinancep00loug).pdf",
-      "posts": [
-        {
-          "post_id": "4559693310963899298",
-          "title": "Personal Finance News \u2014 27 September 2026"
-        },
-        {
-          "post_id": "5809539308164270577",
-          "title": "Personal Finance News \u2014 26 September 2026"
-        }
-      ]
-    },
-    {
-      "image_key": "a_survival_of_the_fittest;_a_novel_(ia_survivaloffittes00maso).pdf",
-      "posts": [
-        {
-          "post_id": "824646953557055227",
-          "title": "FIRE Needs More Than One Number"
-        },
-        {
-          "post_id": "7949223128636486384",
-          "title": "Two Paychecks Can Still Break"
-        }
-      ]
-    }
-  ],
-  "pages_repaired": 0,
+  "duplicate_heroes_replaced": 2,
+  "remaining_duplicate_heroes": 0,
+  "unresolved_duplicate_groups": [],
+  "pages_repaired": 1,
   "article_snapshot_entries": 76,
   "news_snapshot_entries": 262,
   "article_category_counts": {
