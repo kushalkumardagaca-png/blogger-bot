@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T06:07:55.285210+00:00",
-  "post_id": "9105498753770999311",
-  "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
-  "old_title": "A Private AI Advisor on Your Data",
-  "title": "Build a Private AI Money Advisor",
-  "completed": 66,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T06:12:26.540251+00:00",
+  "pending": {
+    "id": "7248649539978874711",
+    "title": "Your Secret Money Script, Explained",
+    "url": "https://dailyyield.blogspot.com/2026/10/your-secret-money-script-explained.html",
+    "published": "2026-10-01T07:31:53-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Money Psychology and Mindset"
+    ],
+    "content_sha256": "fcb290d1b23cdd0d028063dc02af8975d1a76bdea4353214bb1b58cd4318b5d3",
+    "backup": "master_rewrite_backups/post_7248649539978874711.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 10
 }
