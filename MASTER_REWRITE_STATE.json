@@ -446,8 +446,19 @@
       "verified_at": "2026-10-06T04:28:57.228494+00:00"
     }
   },
-  "inventory_completed_count": 55,
+  "inventory_completed_count": 56,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_3487685101279047331.json.gz",
+    "content_sha256": "dfccb52160b2fa05a6594e97d189fcb4b15a8f34c3e59144de5249ca99c321ee",
+    "id": "3487685101279047331",
+    "labels": [
+      "2026 Money Moves",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-09-29T07:29:48-07:00",
+    "title": "What Changed for Your Money in 2026",
+    "url": "https://dailyyield.blogspot.com/2026/09/what-changed-for-your-money-in-2026.html"
+  },
   "version": 1
 }

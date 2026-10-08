@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T02:05:33.965751+00:00",
-  "post_id": "4498405341941524443",
-  "url": "https://dailyyield.blogspot.com/2026/09/the-market-is-not-casino.html",
-  "old_title": "The Market Is Not a Casino",
-  "title": "Invest With Rules, Not Bets",
-  "completed": 56,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T02:23:55.828142+00:00",
+  "pending": {
+    "id": "3487685101279047331",
+    "title": "What Changed for Your Money in 2026",
+    "url": "https://dailyyield.blogspot.com/2026/09/what-changed-for-your-money-in-2026.html",
+    "published": "2026-09-29T07:29:48-07:00",
+    "labels": [
+      "2026 Money Moves",
+      "Kushal K. Daga"
+    ],
+    "content_sha256": "dfccb52160b2fa05a6594e97d189fcb4b15a8f34c3e59144de5249ca99c321ee",
+    "backup": "master_rewrite_backups/post_3487685101279047331.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 20
 }
