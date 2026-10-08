@@ -1,0 +1,58 @@
+name: Content Experience Repair
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content_experience_repair.py'
+      - '.github/workflows/content_experience_repair.yml'
+  repository_dispatch:
+    types: [daily-yield-published, daily-yield-news-published]
+  schedule:
+    - cron: '25 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-content-experience-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Repair labels, unique heroes and immediate Page shelves
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python content_experience_repair.py
+      - name: Persist repair evidence
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Content Repair"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/dy-content-repair
+          cp CONTENT_EXPERIENCE_REPAIR_STATUS.json /tmp/dy-content-repair/status.json
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/dy-content-repair/status.json CONTENT_EXPERIENCE_REPAIR_STATUS.json
+          git add CONTENT_EXPERIENCE_REPAIR_STATUS.json
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Update content experience repair status [skip ci]"
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
