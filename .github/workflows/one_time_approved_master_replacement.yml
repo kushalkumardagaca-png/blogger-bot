@@ -25,6 +25,7 @@ jobs:
         run: |
           if ! python rewrite_existing_masters.py backup-next; then
             cat MASTER_REWRITE_REPORT.json
+            python -c "import json; d=json.load(open('MASTER_REWRITE_REPORT.json')); print('::error title=Redacted backup failure::'+d.get('error_type','Error')+': '+d.get('error','unknown failure'))"
             exit 1
           fi
       - name: Persist authenticated backup
