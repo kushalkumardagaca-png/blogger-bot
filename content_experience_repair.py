@@ -113,8 +113,10 @@ def commons_photo(title,desk,used):
    continue
   pages=(r.json().get('query') or {}).get('pages',{})
   for page in pages.values():
-   info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata') or {};url=info.get('thumburl') or info.get('url') or '';base=image_key(info.get('descriptionurl') or info.get('url') or '')
-   if not url or base in used or re.search(r'\.(?:svg|gif|webm|ogv)(?:\?|$)',url,re.I):continue
+   info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata') or {};url=info.get('thumburl') or info.get('url') or '';source_ref=(page.get('title','')+' '+(info.get('descriptionurl') or info.get('url') or ''));base=image_key(info.get('descriptionurl') or info.get('url') or '')
+   # Commons can render a PDF or DjVu cover as a JPEG thumbnail. Those are
+   # documents, not editorial photographs, and previously caused repeat heroes.
+   if not url or base in used or re.search(r'\.(?:svg|gif|webm|ogv)(?:\?|$)',url,re.I) or re.search(r'\.(?:pdf|djvu|tif|tiff)(?:\b|/|$)',source_ref,re.I):continue
    license_name=strip_tags((meta.get('LicenseShortName') or {}).get('value')) or 'Wikimedia Commons licence';artist=strip_tags((meta.get('Artist') or {}).get('value')) or 'Wikimedia Commons contributor'
    used.add(base);return {'url':url,'base':base,'credit':f'Photo: {artist[:100]} · {license_name} · Wikimedia Commons'}
  return None
