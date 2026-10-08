@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T07:18:26.345487+00:00",
-  "post_id": "1766285354349597171",
-  "url": "https://dailyyield.blogspot.com/2026/10/the-real-price-of-career-break.html",
-  "old_title": "The Real Price of a Career Break",
-  "title": "Price Your Career Break Before You Take It",
-  "completed": 71,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T07:20:46.979403+00:00",
+  "pending": {
+    "id": "7117674826205100667",
+    "title": "4 Hustles, 30 Days Each, 1 Winner",
+    "url": "https://dailyyield.blogspot.com/2026/10/4-hustles-30-days-each-1-winner.html",
+    "published": "2026-10-02T07:31:09-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Side Hustles That Work"
+    ],
+    "content_sha256": "8ca7a5a670390cc8d87dad13df4418a3a2746674b482cc2f8c607187120d32a5",
+    "backup": "master_rewrite_backups/post_7117674826205100667.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 5
 }

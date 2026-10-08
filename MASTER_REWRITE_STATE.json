@@ -566,8 +566,19 @@
       "verified_at": "2026-10-08T06:07:55.284302+00:00"
     }
   },
-  "inventory_completed_count": 70,
+  "inventory_completed_count": 71,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_7117674826205100667.json.gz",
+    "content_sha256": "8ca7a5a670390cc8d87dad13df4418a3a2746674b482cc2f8c607187120d32a5",
+    "id": "7117674826205100667",
+    "labels": [
+      "Kushal K. Daga",
+      "Side Hustles That Work"
+    ],
+    "published": "2026-10-02T07:31:09-07:00",
+    "title": "4 Hustles, 30 Days Each, 1 Winner",
+    "url": "https://dailyyield.blogspot.com/2026/10/4-hustles-30-days-each-1-winner.html"
+  },
   "version": 1
 }
