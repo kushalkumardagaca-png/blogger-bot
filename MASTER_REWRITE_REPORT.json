@@ -1,10 +1,18 @@
 {
-  "status": "PASS",
-  "at": "2026-10-08T08:37:08.168913+00:00",
-  "post_id": "3824305036751783911",
-  "url": "https://dailyyield.blogspot.com/2026/10/graduate-with-credit-file-too.html",
-  "old_title": "Graduate With a Credit File, Too",
-  "title": "Build Credit Without Paying Interest",
-  "completed": 75,
-  "master_count": 76
+  "status": "BACKUP_READY",
+  "at": "2026-10-08T08:41:42.343175+00:00",
+  "pending": {
+    "id": "7443620275479288667",
+    "title": "The Rule of 5 Before You Buy",
+    "url": "https://dailyyield.blogspot.com/2026/10/the-rule-of-5-before-you-buy.html",
+    "published": "2026-10-03T07:46:37-07:00",
+    "labels": [
+      "Kushal K. Daga",
+      "Spending Lifestyle and Frugality"
+    ],
+    "content_sha256": "12483f93a5042d4e486b3116f4df371cc177001331c404800130a369aa53ac33",
+    "backup": "master_rewrite_backups/post_7443620275479288667.json.gz"
+  },
+  "master_count": 76,
+  "remaining": 1
 }

@@ -598,8 +598,19 @@
       "verified_at": "2026-10-08T06:07:55.284302+00:00"
     }
   },
-  "inventory_completed_count": 74,
+  "inventory_completed_count": 75,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_7443620275479288667.json.gz",
+    "content_sha256": "12483f93a5042d4e486b3116f4df371cc177001331c404800130a369aa53ac33",
+    "id": "7443620275479288667",
+    "labels": [
+      "Kushal K. Daga",
+      "Spending Lifestyle and Frugality"
+    ],
+    "published": "2026-10-03T07:46:37-07:00",
+    "title": "The Rule of 5 Before You Buy",
+    "url": "https://dailyyield.blogspot.com/2026/10/the-rule-of-5-before-you-buy.html"
+  },
   "version": 1
 }
