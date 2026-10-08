@@ -8,7 +8,6 @@
 
 ## Automated controls
 
-- Security Guard runs four times per hour on a best-effort GitHub Actions schedule.
 - Daily authenticated Blogger API backups are retained as private workflow artifacts for 30 days.
 - Critical source/workflow hashes, existing Page/Post hashes, deletions, credential patterns and common malicious injection primitives are monitored.
 - A detected anomaly fails the workflow and preserves evidence without accepting the changed baseline.
