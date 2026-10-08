@@ -1,0 +1,551 @@
+{
+  "title": "Build a Private AI Money Advisor",
+  "meta_description": "Build a privacy-controlled AI money assistant with minimised data, deterministic calculations, cited evidence, human approval, security and deletion rules.",
+  "entities": [
+    "private AI",
+    "personal finance assistant",
+    "financial data privacy",
+    "generative AI",
+    "data minimisation",
+    "AI governance"
+  ],
+  "geography": [
+    "United Kingdom",
+    "United States"
+  ],
+  "temporal_coverage": "2026",
+  "module_headings": {
+    "contents": "Inside the Private AI Money System",
+    "summary": "Summary: A Private Assistant Should Know Less and Prove More",
+    "faq": "Questions Before Giving Financial Data to AI",
+    "glossary": "Private AI, Data and Control Terms",
+    "sources": "Evidence Notes for AI, Privacy and Consumer Safety",
+    "internal_links": "Internal Links: Related Daily Yield AI and Money Resources",
+    "external_sources": "External Links: Official AI, Privacy and Security Guidance"
+  },
+  "sections": [
+    {
+      "heading": "A Private Money Assistant Starts With a Narrow Job",
+      "paragraphs": [
+        "The opening photograph shows a person actively using an AI chat interface. That is the visible promise, but the useful system is not a magical financial adviser. It is a controlled assistant that can organise authorised household records, explain its calculations, surface questions and prepare decisions for a human to approve.",
+        "Define one initial job in a sentence: reconcile the monthly cash-flow file, classify uncategorised transactions, compare spending with a plan, or prepare questions for a regulated professional. A broad instruction such as “manage my money” hides risk because it gives no testable output, authority boundary or stopping point.",
+        "Keep execution separate from analysis. The assistant may draft a transfer plan, but it should not move money; it may flag an insurance gap, but it should not buy a policy; it may summarise tax records, but it should not file a return without the required review. Advice, execution and legal responsibility remain human jobs.",
+        "Name the user and the decision. A solo worker with variable income needs different context from a couple coordinating bills, a retiree drawing assets or a small-business owner separating accounts. Do not combine household members’ records merely because the software can ingest them. Consent and access must follow the real ownership of the data.",
+        "Write a success measure before selecting a model. Examples include all recommendations citing a source row, arithmetic matching an independent calculator, no prohibited data leaving the approved environment and every proposed action requiring confirmation. Speed and eloquence are secondary to traceability and safe refusal.",
+        "Treat the system as decision support, not a source of truth. Language models can produce plausible errors, misunderstand dates and overlook missing records. A private deployment reduces some disclosure risk but does not make outputs accurate, suitable or regulated. The operating design must assume the model will sometimes be wrong.",
+        "Define what the assistant must never optimise. It should not increase returns by weakening emergency liquidity, reduce taxes through an unverified position or make a household member’s spending invisible. Constraints belong beside goals because an optimiser can otherwise satisfy the number while violating the reason for building the system."
+      ]
+    },
+    {
+      "heading": "Map the Data Before It Touches a Model",
+      "paragraphs": [
+        "Create a data inventory with owner, location, sensitivity, purpose, retention and permitted users. Bank transactions, payslips, tax documents, account numbers, identity records, health-related expenses and family notes do not carry equal risk. If the purpose can be met with totals or categories, do not provide row-level detail.",
+        "Classify fields into required, useful and prohibited. Required fields directly support the defined job. Useful fields may improve context but can be removed without breaking it. Prohibited fields include passwords, recovery codes, full payment-card numbers, identity-document images and any secret the assistant never needs.",
+        "Apply data minimisation before upload or indexing. Replace names with household roles, truncate account identifiers, remove merchant memo text when categories are enough and aggregate old history. Redaction after a model has processed the file may not undo exposure through logs, backups, support systems or retained embeddings.",
+        "Document lawful and ethical permission. One partner cannot quietly train a household assistant on another partner’s private purchases. Employee, client or tenant information may create duties beyond personal preference. The UK [[S5|ICO guidance on generative AI and data protection]] emphasises purpose, transparency and data-protection obligations.",
+        "Set a retention clock for source files, transformed files, vector indexes, prompts, outputs, evaluation cases and logs. “Private” is not a retention policy. Record how each copy will be deleted, including synced devices and backups, and test whether deletion actually propagates.",
+        "Use synthetic examples during design. A fictional statement can establish schema, prompts and tests without exposing real finances. Introduce limited real data only after access, retention, model settings and output review are proven. Production records should never be the easiest test fixture.",
+        "Maintain a field-level transformation log showing what was removed, generalised or substituted before processing. Review a sample after sanitisation because automated redaction can miss information in free text, filenames and document metadata. The safest prompt is the one that never receives unnecessary private detail."
+      ]
+    },
+    {
+      "heading": "Choose an Architecture From the Threat Model",
+      "paragraphs": [
+        "Private can mean local processing, a dedicated cloud account, an enterprise service with contractual controls, or merely an unshared consumer chat. These are not equivalent. Draw the path from source file to parser, storage, retrieval layer, model, logs, monitoring and output so every processor and copy is visible.",
+        "A local model can keep prompts on a controlled device, but the device still needs patching, encryption, backups and physical security. Model installers, plugins and downloaded weights have supply-chain risk. Local operation also shifts responsibility for updates, capacity and deletion to the household.",
+        "A hosted model may offer stronger operations and easier updates while sending data to a provider. Review the exact product tier, data-use terms, retention controls, training defaults, subprocessors, region, support access, export and deletion. A provider’s general privacy page cannot replace the terms for the specific service used.",
+        "Retrieval-augmented generation can supply selected records only when needed instead of placing the full archive in every prompt. It still creates indexes and metadata that may reveal sensitive meaning. Secure the retrieval store, restrict document collections by user and test that one household profile cannot retrieve another’s records.",
+        "Prefer a read-only pipeline. Export files from institutions through official channels, place approved copies in an intake folder and prevent the assistant from signing into financial accounts. Browser agents and plugins expand the attack surface and can turn a bad instruction into an external action.",
+        "Record the selected architecture and rejected alternatives. The decision should state which risks remain: provider retention, device theft, household access, hallucinated analysis, stale data and human over-trust. Architecture is acceptable when residual risk fits the narrow job—not because one option is marketed as private.",
+        "Test network behaviour rather than assuming a local interface means local processing. Monitor documented endpoints, disable optional telemetry where supported and understand update checks. If the application cannot explain where prompts, diagnostic files and crash reports travel, do not expose production financial records to it."
+      ]
+    },
+    {
+      "heading": "Build a Sanitised Financial Data Pack",
+      "paragraphs": [
+        "The midpoint photograph shows a person reviewing a balance sheet and charts beside a computer. It makes the data layer concrete: AI does not understand a financial life from intuition; it receives records prepared by people. The quality, scope and permissions of those records determine what the assistant can safely say.",
+        "Use a stable table with date, account alias, amount, currency, category, counterparty class, recurring flag, source file and review status. Preserve raw exports separately under tighter access, then generate a sanitised working copy. Never overwrite the institution’s original file during cleaning.",
+        "Normalise dates, decimal separators, signs and currencies deterministically. An expense represented as positive in one export and negative in another can reverse the conclusion. Store exchange rates and conversion dates rather than allowing a model to invent a convenient conversion.",
+        "Separate facts from user annotations. A posted transaction is a fact from a source; “possible subscription” is an interpretation; “cancel next month” is an intention. Distinct columns stop the assistant from treating guesses as bank data and make corrections auditable.",
+        "Handle transfers and reimbursements explicitly so they are not counted as income or spending twice. Link both sides where possible and flag unmatched items. The model may suggest a match, but deterministic rules and human confirmation should establish the final classification.",
+        "Add freshness and completeness indicators. Record the latest statement date, missing accounts, partial months and known cash transactions. A monthly report should say “two accounts current through 30 September; card export missing” rather than presenting a precise but incomplete total.",
+        "Create validation reports before AI analysis begins: row count, date range, accounts represented, duplicate count, unmatched transfers, missing categories and control total. The assistant should receive this report with the data so it cannot overlook a known quality defect while producing a persuasive narrative."
+      ]
+    },
+    {
+      "heading": "Make Every Answer Point Back to Evidence",
+      "paragraphs": [
+        "Require citations to source file, row, statement period or policy document for every factual financial claim. If the assistant says dining increased, the output should show comparison dates, included categories, amounts and excluded records. An answer without traceable evidence is a hypothesis, not a finding.",
+        "Keep calculations outside free-form generation when feasible. Code or spreadsheet formulas should total transactions, calculate rates, amortise loans and project cash. The model can explain the result and identify assumptions, but the arithmetic engine should be repeatable and independently testable.",
+        "Use a data dictionary for each field and category. Define gross income, net income, transfer, essential expense, discretionary expense, debt payment and savings contribution. Without definitions, the assistant may change meaning between sessions and produce trends that are not comparable.",
+        "Version source files, transformation rules, prompts, model and reports. A changed result should be explainable by changed data or configuration. Keep a compact run manifest rather than a full sensitive prompt log when audit needs can be satisfied with hashes, dates and approved references.",
+        "Force uncertainty into the output. The assistant should list missing information, conflicting records, assumptions and confidence limits before recommendations. It should ask for clarification instead of silently filling a gap with a common pattern learned from unrelated users.",
+        "Build a refusal route. When evidence is missing, identity is unclear, a request involves credentials or the consequence exceeds the system’s authority, the assistant should stop and direct the user to the source institution or appropriate professional.",
+        "Make evidence visible in the reader’s interface, not buried in an internal identifier. A reviewer should be able to open the cited transaction or document from the finding without searching a large archive. Access checks must run again when the citation is opened; a link must not bypass source permissions."
+      ]
+    },
+    {
+      "heading": "Write a Prompt Contract, Not a Clever Persona",
+      "paragraphs": [
+        "A persona such as “act like a brilliant wealth manager” encourages confidence without controls. Use a prompt contract describing permitted tasks, prohibited data, evidence rules, calculation tools, output schema, uncertainty language, escalation and actions that always require human approval.",
+        "Put durable rules in system configuration and task-specific details in a structured request. Do not paste conflicting policy into every conversation. If the platform does not reliably separate instruction levels or exposes hidden prompts through plugins, reduce the system’s scope.",
+        "Specify an output sequence: data coverage, observations, calculations, options, risks, questions and proposed next actions. Require the assistant to distinguish general education from personalised regulated advice. A polished recommendation must not bypass suitability, tax or legal review.",
+        "Defend against instructions inside documents. A transaction memo, PDF or web page can contain text that tells an agent to ignore rules or send data elsewhere. Treat retrieved content as evidence only, never as authority. [[S8|OWASP’s LLM guidance]] describes prompt injection and excessive agency among material application risks.",
+        "Limit conversation memory. Persistent memory can improve convenience but retain sensitive facts after their purpose ends. Decide which preferences may persist, which require explicit confirmation and which must never be stored. Give users a visible method to inspect and delete saved context.",
+        "Test equivalent wording. A secure assistant should apply the same boundaries when a request is urgent, emotional, indirect or framed as a hypothetical. Refusal must survive “do it just once,” role-play and claims that a senior user already approved the action.",
+        "Keep prompt changes under review. A small wording edit can alter refusals, output order or tool calls. Store the rationale, author, date and evaluation result for each approved version. Do not let the assistant rewrite its own governing prompt or quietly broaden its permitted purpose."
+      ]
+    },
+    {
+      "heading": "Keep Financial Mathematics Deterministic",
+      "paragraphs": [
+        "Use named functions for cash-flow totals, debt interest, savings rates, tax-year grouping and scenario comparisons. Each function should define inputs, units, rounding and error handling. The assistant calls or explains the function; it does not improvise arithmetic in prose.",
+        "Create unit tests with simple cases whose answers can be checked by hand. Include zero balances, negative values, leap years, partial periods, multiple currencies, refunds, duplicate rows and missing dates. A system that passes one tidy sample is not ready for household records.",
+        "Separate forecasts from facts. A projection needs assumptions for income, inflation, rates, market return and timing. Present a range or scenarios, not a single inevitable future. Label nominal and real values and never imply that model fluency removes investment uncertainty.",
+        "Use current official rules when a calculation depends on tax, benefits, consumer law or contribution limits. Store source date and jurisdiction. If a rule cannot be verified, return the calculation as incomplete instead of using remembered training data.",
+        "Reconcile totals to an independent control. Monthly opening balance plus inflows minus outflows should explain closing balance after recognised adjustments. If it does not, stop the report and surface the difference. A narrative cannot repair a broken reconciliation.",
+        "Round only for display. Keep calculation precision in the engine and show readers the meaningful level of accuracy. False precision—such as projecting a retirement balance to the penny—makes uncertainty look like measurement.",
+        "For complex formulas, generate a calculation sheet containing input names, values, source references, formula version and result. This gives a professional or household reviewer an inspectable artefact. The prose explanation may change style; the underlying calculation record should remain stable and reproducible."
+      ]
+    },
+    {
+      "heading": "Evaluate the Assistant With Real Failure Cases",
+      "paragraphs": [
+        "Create an evaluation set before deployment. It should contain ordinary questions, missing data, contradictory files, duplicate transactions, malicious document instructions, requests for credentials, urgent transfer demands and high-stakes tax or investment prompts. Define the safe expected behaviour for each case.",
+        "Score evidence accuracy, arithmetic, coverage, refusal, privacy leakage and action restraint separately. One overall percentage can hide a severe failure. A system that writes clearly but reveals another user’s record fails regardless of its average score.",
+        "Red-team access boundaries with separate test identities. Try similar account aliases, shared filenames, archived folders and direct references to restricted documents. Confirm that search, summaries, logs and exports preserve the same separation as the source store.",
+        "Test model and prompt upgrades against the fixed evaluation set before use. Providers can change behaviour without the household altering a prompt. Record regressions and keep a rollback path. New fluency does not compensate for weaker citation or refusal.",
+        "Include human factors. Ask a reviewer to identify which statements are sourced, calculated, assumed or suggested. If confident language causes reviewers to miss uncertainty, redesign the output. The control must work for the actual user, not only for the developer who understands the system.",
+        "Set release thresholds and absolute blockers. Any cross-user leak, credential request, unauthorised action, invented source or materially wrong calculation blocks deployment. Lower-severity wording defects can enter a repair queue only when they do not distort a decision.",
+        "Retain adversarial cases after a defect is fixed. They become regression tests so the same vulnerability does not return during a model, parser or permission update. Remove real personal details from test fixtures and preserve the failure pattern with synthetic equivalents whenever possible."
+      ]
+    },
+    {
+      "heading": "Secure the Device, Accounts and Model Supply Chain",
+      "paragraphs": [
+        "The late photograph places the words Cyber Security directly on a laptop screen. That is the final operating requirement: private financial AI is an information-security system. Privacy promises do not survive a compromised device, reused password, malicious extension or exposed backup.",
+        "Use supported operating systems, automatic security updates, device encryption, screen lock and separate user accounts. Protect the AI service and source storage with unique credentials and phishing-resistant multi-factor authentication where available. Recovery codes belong offline in controlled storage, never in the assistant’s knowledge base.",
+        "Minimise installed plugins, connectors and model tools. Verify publishers, requested permissions, update path and necessity. A budgeting connector that can read all email or modify cloud files has more authority than the narrow job requires.",
+        "Scan files and validate type before processing. A filename ending in CSV does not prove harmless content. Disable macros, active content and automatic external retrieval. Keep the intake area separate from system configuration and executable code.",
+        "Encrypt backups and test restoration. A backup that cannot be restored offers no resilience; a forgotten unencrypted copy creates exposure. Apply the retention schedule to backups while preserving enough history to recover from corruption or ransomware.",
+        "Prepare an incident response card with isolation, credential rotation, provider contact, affected-data review, household notification and legal escalation. [[S7|FTC phishing guidance]] and official national cyber resources can support response, but the local plan must name who acts first.",
+        "Separate administration from daily use. The account that installs models, changes connectors or grants storage access should not be the account used for routine financial review. Administrative approval should be rare, logged and protected more strongly because it can alter the system’s boundaries."
+      ]
+    },
+    {
+      "heading": "Run the Assistant on a Calendar",
+      "paragraphs": [
+        "Use a repeatable intake-review-output cycle. Import approved files, validate schema, reconcile totals, generate findings, review citations, accept or reject proposed actions and archive the run manifest. Do not leave a permanent agent watching every account simply because continuous access is technically possible.",
+        "A weekly check can classify exceptions and upcoming bills; a monthly close can reconcile accounts and compare plans; a quarterly review can examine subscriptions, debt terms and goals. Match frequency to decisions. More frequent analysis can create noise and impulsive responses.",
+        "Require a human sign-off block with reviewer, date, data coverage, unresolved differences and approved actions. The assistant’s completed report is not the end of the process. Decisions become valid only after the responsible person reviews source evidence and consequences.",
+        "Track corrections. When a category, fact or rule is wrong, fix the source mapping or deterministic transformation rather than merely telling the chat it was mistaken. Session-level corrections disappear and allow the same error to recur.",
+        "Measure usefulness without collecting excessive telemetry. Count resolved exceptions, review time, citation failures, calculation mismatches and accepted actions. Avoid logging full prompts or records when aggregate operational measures suffice.",
+        "Schedule a quarterly access and retention review. Remove former household users, unused service tokens, abandoned indexes, old exports and obsolete devices. A system tends to become less private as integrations accumulate unless deletion is routine.",
+        "Use an exception queue rather than asking the model to resolve every ambiguity automatically. Each item should show source evidence, proposed classification and effect on totals. Human decisions can then update a controlled rule that handles future matching cases consistently."
+      ]
+    },
+    {
+      "heading": "Keep the Human Decision at the Centre",
+      "paragraphs": [
+        "Use the assistant to expand options and questions, not to manufacture certainty. For debt, insurance, tax, benefits, investing and estate planning, identify the decision owner, relevant jurisdiction and point at which a qualified professional is needed.",
+        "Ask the model to present competing options with assumptions and disadvantages. A single “best” answer can hide values such as flexibility, sleep, family support and risk tolerance. Household finance is not optimised by one universal objective function.",
+        "Require confirmation against original documents before a consequential decision. Rates, fees, exclusions and deadlines can be misread during extraction. Link directly to the statement, policy or official rule rather than relying on the assistant’s quotation.",
+        "Do not let conversational warmth create fiduciary trust. The assistant has no feelings, duty of care or personal stake. The [[S3|CFPB report on chatbots in consumer finance]] warns that automated assistance can fail to resolve complex problems and impede access to human help.",
+        "Record dissent between household members rather than averaging it away. If one partner prioritises liquidity and another prioritises debt reduction, the output should show both constraints and request a decision. Software should not silently assign shared values.",
+        "Make exit easy. Users should be able to export source mappings, calculations and accepted decisions in open formats, then delete the service without losing control of their financial records. Dependence on one vendor weakens practical privacy.",
+        "Apply a consequence test: ask what happens if the answer is wrong, late, disclosed or followed literally. Low-impact summaries can tolerate more experimentation than benefit claims, tax elections, debt refinancing or asset sales. Controls and professional review should rise with the plausible harm."
+      ]
+    },
+    {
+      "heading": "Govern a Shared Household Assistant",
+      "paragraphs": [
+        "Define roles such as data owner, operator, reviewer and emergency contact. Access should follow least privilege: a reviewer may see reports without raw identity records; an operator may import files without approving transfers. Shared access should use individual accounts, not one family password.",
+        "Set rules for minors, dependants and guests. Their data may be necessary for a benefit or budget calculation, but necessity does not grant unlimited use. Store the minimum, restrict access and revisit consent or authority as circumstances change.",
+        "Create an approval matrix. Routine category corrections may need one reviewer; a goal change may need both partners; sharing a report with an adviser may require every data owner. No AI output can substitute for these permissions.",
+        "Keep a change log for categories, prompts, permissions, providers and approved purposes. A new feature that analyses email or voice notes materially changes the data map and requires fresh review, even when enabled by a familiar vendor.",
+        "Plan continuity. Document how another authorised person can recover source files and run the monthly process if the usual operator is ill. Continuity must not mean sharing passwords; use proper delegation, recovery instructions and sealed emergency information.",
+        "Resolve disputes outside the model. The assistant can organise facts and show scenarios, but it should not decide which partner is reasonable or infer hidden motives from transactions. Sensitive relationship decisions require people and, where appropriate, professional support.",
+        "Include a visible privacy notice for household users explaining purpose, sources, outputs, retention, access and complaint route in plain language. Technical documentation is not informed participation. Update the notice when new data or features change what the assistant can infer."
+      ]
+    },
+    {
+      "heading": "Delete Data as Deliberately as You Collect It",
+      "paragraphs": [
+        "Create a deletion register covering raw intake, cleaned tables, indexes, caches, prompt history, exports, support tickets and backups. Record owner, location, expiry and deletion method. A button that clears chat history may not remove provider logs or independently uploaded files.",
+        "Test account export and deletion before committing important records. Confirm format, completeness, processing delay and what the provider retains for legal or security purposes. Save the applicable terms and date because product behaviour can change.",
+        "When changing providers or models, do not copy the entire old archive by default. Re-run the purpose and minimisation test, migrate only necessary current data and revoke old tokens. Verify deletion after the new system works.",
+        "Handle derived data. Embeddings, summaries, categories and learned preferences may reveal the source even when raw files are gone. Include them in retention decisions and regenerate them from current authorised records when needed.",
+        "Keep only the evidence necessary to audit accepted financial decisions. A manifest can preserve source hashes, calculation versions and approval without retaining every conversational draft. Balance accountability with exposure rather than treating maximal logging as safety.",
+        "After an incident or household change, suspend automated processing until access and permissions are reviewed. Deletion and containment take priority over report continuity. Restart only after the threat model, keys and affected records are understood.",
+        "Use staged deletion: mark for expiry, remove from active retrieval, purge operational stores and then confirm backup ageing. Log completion without preserving the deleted content. A periodic sample restoration can verify that supposedly expired data does not silently reappear from an old snapshot."
+      ]
+    },
+    {
+      "heading": "Use a Deployment Gate and a Stop Rule",
+      "paragraphs": [
+        "A deployment gate should require a narrow job, approved data inventory, documented architecture, sanitised schema, deterministic calculations, evidence citations, evaluation results, security controls, deletion test and named human reviewer. Missing any item keeps the system in a synthetic-data sandbox.",
+        "Start with one reporting period and read-only output. Compare every total with existing records and examine each cited row. Expand scope only after repeated clean runs. The objective is dependable assistance, not the largest possible context window.",
+        "Write stop conditions: unexplained reconciliation difference, cross-user retrieval, invented citation, request for credentials, provider-term change, unauthorised connector, compromised device or reviewer confusion about whether an output is advice. Stop processing and preserve only the evidence needed to diagnose safely.",
+        "Review cost alongside privacy. Local hardware, hosted subscriptions, storage, professional review and maintenance time all matter. A spreadsheet or conventional budgeting tool may solve the defined job with less risk. AI needs to earn its added complexity.",
+        "Reassess quarterly and whenever household, provider, law or financial purpose changes. Remove jobs that are no longer useful. A private assistant should become smaller when needs shrink rather than retaining data in case it might someday be helpful.",
+        "The durable design is modest: collect less, separate identities, calculate deterministically, cite every claim, require human approval, secure every component and delete on schedule. A trustworthy AI money assistant is not the one that knows everything; it is the one that knows only what its current job requires.",
+        "Document the fallback process before launch. If the model or provider becomes unavailable, the household should still access original records, calculation tools and scheduled obligations. Financial continuity must not depend on an AI conversation history or proprietary index that cannot be reconstructed."
+      ]
+    }
+  ],
+  "summary": [
+    "A private AI money assistant should begin with one narrow, testable job such as reconciling cash flow or preparing review questions. It is decision support, not a magical adviser, account operator or replacement for regulated professional judgement.",
+    "Inventory data before processing it. Record owner, location, sensitivity, purpose, retention and permitted users. Classify required, useful and prohibited fields, remove credentials and identity secrets, aggregate where possible and use synthetic records while designing the system.",
+    "Choose local, dedicated cloud or hosted architecture from a written threat model. Map every parser, store, index, model, log and output. Review exact provider terms, training defaults, retention, subprocessors, deletion and support access rather than accepting a general privacy claim.",
+    "Build a sanitised working table while preserving raw institution exports separately. Normalise dates, currencies and signs; distinguish facts from annotations; link transfers and reimbursements; and report missing accounts or stale periods so incomplete data cannot look precise.",
+    "Require every factual claim to cite a source row or document. Put arithmetic in tested code or spreadsheet formulas, define fields in a data dictionary, version inputs and configurations, disclose uncertainty and refuse requests when evidence or authority is missing.",
+    "Use a prompt contract describing permitted tasks, prohibited data, evidence, output order, escalation and actions requiring human approval. Treat retrieved documents as evidence rather than instructions and limit persistent conversation memory.",
+    "Evaluate ordinary and hostile cases before deployment. Score evidence, arithmetic, coverage, refusal, privacy leakage and action restraint separately. Cross-user disclosure, credentials requests, unauthorised actions, invented sources and material calculation errors are absolute release blockers.",
+    "Secure devices, accounts, plugins and backups. Apply updates, encryption, screen locks, individual user accounts and strong multi-factor authentication. Validate intake files, minimise connectors and prepare an incident-response card.",
+    "Run a calendar-based intake, reconciliation, report and approval cycle rather than granting unnecessary continuous account access. Track corrections in the source transformation, measure usefulness without full sensitive logs and review permissions and retention quarterly.",
+    "Keep humans responsible for decisions. Present options, assumptions and disadvantages; verify consequential details against originals; preserve household disagreements; escalate regulated or high-stakes questions; and support open export and easy exit.",
+    "Govern shared use with named data owners, operators and reviewers. Use individual accounts and least privilege, create an approval matrix, protect dependants’ information and plan continuity without sharing passwords.",
+    "Delete raw files, transformed tables, indexes, caches, prompts, exports and backups on a documented schedule. Include derived data such as embeddings and summaries, test provider deletion and minimise what is retained for audit.",
+    "Deploy only after the job, inventory, architecture, schema, calculations, citations, tests, security, deletion and reviewer all pass. Begin with one read-only reporting period and stop after unexplained differences, invented evidence, access leaks or security changes.",
+    "The governing principle is deliberate limitation: collect less, calculate deterministically, cite every finding, require approval, secure every component and delete on schedule. AI earns a place only when it improves a defined workflow more than a simpler conventional tool.",
+    "Design explicit constraints alongside goals. The assistant must not improve a target by weakening liquidity, hiding household disagreement or relying on an unverified legal or tax position. Raise review and control strength according to the harm an incorrect or disclosed answer could cause.",
+    "Validate each intake before analysis with row counts, date coverage, represented accounts, duplicates, missing categories, unmatched transfers and control totals. Put ambiguous items into a human exception queue, then update controlled transformation rules instead of relying on corrections remembered only inside one chat.",
+    "Keep governance inspectable. Version prompts, formulas and permissions; show citations in the user interface; separate administrator and routine accounts; maintain synthetic regression cases; publish a plain-language household privacy notice; and preserve a non-AI fallback for records, calculations and payment deadlines.",
+    "Deletion must cover active retrieval and backups without retaining the deleted content in audit logs. Verify that expired records do not reappear after restoration. When architecture or provider terms become unclear, move the system back to synthetic data until the path and controls are understood."
+  ],
+  "sources": [
+    {
+      "name": "National Institute of Standards and Technology",
+      "title": "AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "use": "Voluntary framework for governing and managing AI risks."
+    },
+    {
+      "name": "National Institute of Standards and Technology",
+      "title": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence",
+      "use": "Generative-AI-specific risk actions and considerations."
+    },
+    {
+      "name": "Consumer Financial Protection Bureau",
+      "title": "Chatbots in consumer finance",
+      "url": "https://www.consumerfinance.gov/data-research/research-reports/chatbots-in-consumer-finance/chatbots-in-consumer-finance/",
+      "use": "Consumer risks and limitations of automated financial assistance."
+    },
+    {
+      "name": "Federal Trade Commission",
+      "title": "AI and your business",
+      "url": "https://www.ftc.gov/business-guidance/blog/keep-your-ai-claims",
+      "use": "Substantiating AI claims and avoiding deceptive representations."
+    },
+    {
+      "name": "Information Commissioner’s Office",
+      "title": "Guidance on AI and data protection",
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/",
+      "use": "UK data protection principles applied to AI systems."
+    },
+    {
+      "name": "Cybersecurity and Infrastructure Security Agency",
+      "title": "Secure by Design",
+      "url": "https://www.cisa.gov/securebydesign",
+      "use": "Security-by-design principles for technology products and services."
+    },
+    {
+      "name": "Federal Trade Commission",
+      "title": "How to recognize and avoid phishing scams",
+      "url": "https://consumer.ftc.gov/articles/how-recognize-and-avoid-phishing-scams",
+      "use": "Credential and impersonation protection."
+    },
+    {
+      "name": "OWASP Foundation",
+      "title": "Top 10 for Large Language Model Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "use": "Application risks including prompt injection, data disclosure and excessive agency."
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-a-private-ai-money-advisor/photo-1.jpg",
+      "alt": "Person typing into an AI chat interface displayed clearly on a laptop",
+      "caption": "A visible AI conversation establishes the assistant at the opening; controls determine whether it becomes a safe money tool. Photo by Matheus Bertelli on Pexels.",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/man-using-laptop-wit-chat-gpt-16094041/",
+      "license_url": "https://www.pexels.com/license/"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-a-private-ai-money-advisor/photo-2.jpg",
+      "alt": "Person reviewing a balance sheet and financial charts beside a computer keyboard",
+      "caption": "A balance sheet and charts make the controlled financial-data layer visible at the midpoint. Photo by Pavel Danilyuk on Pexels.",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/a-person-holding-a-financial-statement-7658352/",
+      "license_url": "https://www.pexels.com/license/"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/build-a-private-ai-money-advisor/photo-3.jpg",
+      "alt": "Laptop screen displaying the words Cyber Security in a dark workspace",
+      "caption": "The explicit Cyber Security screen reinforces the late-stage requirement to secure every device, account and data copy. Photo by cottonbro studio on Pexels.",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://www.pexels.com/photo/laptop-in-close-up-shot-5483248/",
+      "license_url": "https://www.pexels.com/license/"
+    }
+  ],
+  "visuals": [
+    {
+      "type": "table",
+      "title": "Data Admission Gate",
+      "caption": "Give the assistant only fields needed for the named job.",
+      "source": 5,
+      "after_section": 2,
+      "data": [
+        {
+          "Class": "Required",
+          "Rule": "Necessary for the defined output; retain only for the approved period"
+        },
+        {
+          "Class": "Useful",
+          "Rule": "Include only when measured improvement justifies added exposure"
+        },
+        {
+          "Class": "Prohibited",
+          "Rule": "Passwords, recovery codes, full card numbers and identity secrets never enter"
+        },
+        {
+          "Class": "Synthetic",
+          "Rule": "Use fictional but representative records for design and testing"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Architecture Decision Record",
+      "caption": "Private is a documented data path, not a product label.",
+      "source": 1,
+      "after_section": 3,
+      "data": [
+        {
+          "Layer": "Source",
+          "Question": "Who owns the record and how is it exported?"
+        },
+        {
+          "Layer": "Processing",
+          "Question": "Where do parsing, retrieval and inference occur?"
+        },
+        {
+          "Layer": "Storage",
+          "Question": "Which raw, derived, log and backup copies exist?"
+        },
+        {
+          "Layer": "Exit",
+          "Question": "How are records exported, revoked and deleted?"
+        }
+      ]
+    },
+    {
+      "type": "bar",
+      "title": "Illustrative Release Scorecard",
+      "caption": "Fictional evaluation scores show why one average cannot hide a security failure.",
+      "source": 2,
+      "after_section": 8,
+      "labels": [
+        "Evidence",
+        "Arithmetic",
+        "Refusal",
+        "Access control",
+        "Deletion test"
+      ],
+      "values": [
+        96,
+        100,
+        92,
+        100,
+        88
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Human Approval Matrix",
+      "caption": "The model can prepare; the authorised person decides.",
+      "source": 3,
+      "after_section": 11,
+      "data": [
+        {
+          "Output": "Category suggestion",
+          "Approval": "Data owner confirms before it changes the ledger"
+        },
+        {
+          "Output": "Monthly findings",
+          "Approval": "Reviewer checks coverage, citations and reconciliation"
+        },
+        {
+          "Output": "Financial option",
+          "Approval": "Decision owner verifies terms and suitability"
+        },
+        {
+          "Output": "External action",
+          "Approval": "Performed outside the model through an authorised channel"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Does running an AI model locally make financial data completely private?",
+      "answer": "No. Local processing can reduce provider disclosure, but device security, installers, model files, logs, backups, household access and output accuracy still require controls."
+    },
+    {
+      "question": "Should bank passwords be given to a private AI assistant?",
+      "answer": "No. Use read-only exports or narrowly authorised integrations. Passwords, recovery codes and full payment-card details should remain outside the assistant."
+    },
+    {
+      "question": "Can the model calculate financial projections itself?",
+      "answer": "Use deterministic, tested functions for arithmetic and let the model explain results. Projections must name assumptions, ranges, jurisdiction, source date and missing information."
+    },
+    {
+      "question": "How can an AI financial answer be checked?",
+      "answer": "Require citations to source rows or documents, show calculations and assumptions, reconcile totals independently and verify consequential terms against original records."
+    },
+    {
+      "question": "Is a consumer AI chat account suitable for confidential financial files?",
+      "answer": "Only after reviewing the exact service tier’s terms, training settings, retention, subprocessors, access and deletion. A general privacy claim is insufficient."
+    },
+    {
+      "question": "What is the safest first use?",
+      "answer": "A narrow read-only task using synthetic data, followed by one sanitised reporting period. Expand only after evidence, arithmetic, access and deletion tests repeatedly pass."
+    },
+    {
+      "question": "When should the assistant be stopped?",
+      "answer": "Stop after an unexplained reconciliation difference, invented citation, cross-user retrieval, credential request, compromised device, unauthorised connector or provider-term change."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Data minimisation",
+      "definition": "Collecting and retaining only information necessary for a stated purpose."
+    },
+    {
+      "term": "Threat model",
+      "definition": "A documented view of assets, actors, data paths, possible failures and controls."
+    },
+    {
+      "term": "Retrieval-augmented generation",
+      "definition": "Supplying selected external records to a model when answering a request."
+    },
+    {
+      "term": "Embedding",
+      "definition": "A numerical representation used for similarity search that can still reveal information about its source."
+    },
+    {
+      "term": "Prompt injection",
+      "definition": "Instructions embedded in user or retrieved content that attempt to override system controls."
+    },
+    {
+      "term": "Least privilege",
+      "definition": "Giving each user or component only the access necessary for its current job."
+    },
+    {
+      "term": "Deterministic calculation",
+      "definition": "A repeatable calculation that returns the same output from the same defined inputs."
+    },
+    {
+      "term": "Run manifest",
+      "definition": "A record of data versions, configuration, model, calculations and review associated with one output."
+    },
+    {
+      "term": "Human in the loop",
+      "definition": "A named person reviews evidence and authorises consequential decisions or actions."
+    },
+    {
+      "term": "Residual risk",
+      "definition": "Risk that remains after selected controls are applied."
+    }
+  ],
+  "internal_links": [
+    {
+      "title": "Daily Yield Calculators",
+      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "relevance": "Independently verify financial arithmetic and scenario assumptions."
+    },
+    {
+      "title": "Daily Yield Articles",
+      "url": "https://dailyyield.blogspot.com/p/daily-articles.html",
+      "relevance": "Continue with AI, privacy, budgeting and financial-control guides."
+    }
+  ],
+  "low_view_posts": [
+    {
+      "title": "Stop Maxing Your 401(k)",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
+      "image": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/stop-maxing-your-401-k/photo-1.jpg",
+      "label": "Contrarian Hooks"
+    },
+    {
+      "title": "Real Net Worth Targets by Age for Median…",
+      "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjJREO7SrOEV8D3SZueRXkRujD4gCd6Qw-wiFp86puyGZSkK_O4VkaperL6j9vD_UN3IRQ3jYWR7rGtH0k8CB-J5S_QPX34M4p8YE1w1gjSxxiAbXnXPHoUUMaTUhBuZ0aXv7egpwRI7L-_v_GNzF24OWl4oEvnjES8MvJyu9cHqz-ppxUn-21Ei1kplb4",
+      "label": "Age and Wealth Milestones"
+    },
+    {
+      "title": "The Portfolio That Pays Your Rent",
+      "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEi_htziga3A_s4s8g6LdFwKiLPpWp1V4h90RaALm2jY0kuadqTcp-TGjR09vGn4KMkBz_NSf6A3sfccVWJu-QK73V7z5cHsl8X5__C194p-nHYXRqJCY9nqY8y9tUZH_qMnK803TV8kbpLa1je6eoXIm5xjuEDcL3fB0ebmxuqbhdHR_Fa1f6EWqHTLcr0",
+      "label": "Passive Income Reality"
+    },
+    {
+      "title": "Why Dual-Income Couples Still Feel One Month…",
+      "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhkXyr4N5Qs6KAKwQcdgtLLuEAMybACMU3d0R119ZcmcNSVomBx7cC6BJDUhG-P4spkTHrZlXTvj-xhQVR8VpQZ_pJqzf-KrX3S2E5DGxB6NImYgB2ZHYw-ccyW75R6ElAe2EIscY47cA-xc-VDeV1M319GSvzjyXCVvy9cFANXGaiV3q3TTC6F65Ss37s",
+      "label": "Middle Class Survival"
+    },
+    {
+      "title": "The $48,000 Teacher Money Rebuild",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-48000-teacher-money-rebuild-step-by.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjrFG_NrB3iThUoxNtz0xD6T2_xBuPuA9oekENkKRYsfo5kKQqhosPrxBhQ6Qy0NSICkpSNulRtlAy3qqG67BuTFQXkRi_qS8CM383saDLDeKoSupdgqE0Pp7DyOtCH_ADcB5CpX39LtepRNYgsyqjDMXgVg6zJSN6OK7FfjwPq35MRhL3QAvXhxAuTdgU",
+      "label": "Money Audits and Case Studies"
+    },
+    {
+      "title": "Break the 'I Deserve It' Spend Loop",
+      "url": "https://dailyyield.blogspot.com/2026/09/break-i-deserve-it-spend-loop.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhCN8HH6J68vjvcElBiLTNJxce14SG7mL9Ez60gHeTYrABZddjLlqGveoBNhgiggOLchYxtJ_GYC3u2lH7CCA_ykSsYhGsw0157se0n8zC0IU8VKrQbjHcKjxoH1dEXGWEaTkh7GJRNcAgdBCtiJQPgprNsCvT4hDSeTFjCPliV3x5V4Wh5Els_yKbpH34",
+      "label": "Money Psychology and Mindset"
+    },
+    {
+      "title": "Your Mortgage Is Not the Real Cost",
+      "url": "https://dailyyield.blogspot.com/2026/09/your-mortgage-is-not-real-cost-true.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjjnpq-PcDf-MAQT6ZR6gELqEMX1ajn-c3DHWZXHhHBIihPLu4lXxyFrMDFR-lq-qVWrJ1qM57-0S3MC2T95u-cg1-SP37PDbwcT6TcHjZpUPz6L725VH_VKfdHa98RyNIUZYfWR2IuAozwytk5jty84bYc4oskZp-XBb7LrM5kNnSVOvB8Qq39vr3PSyc",
+      "label": "Housing Cars and Big Buys"
+    },
+    {
+      "title": "The Payday Waterfall",
+      "url": "https://dailyyield.blogspot.com/2026/09/the-payday-waterfall-7-automatic.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEjk846T9Oi0HOafXBU44nu-XZiefbV_BTL0P0KDc17fnXNC4JjfJNh9nm2qPE3KvqPY2kLHzMT8fkhIkraYAr6MJfS_QDbkaK5hxhvS3tsunWnEVNXnN10UgFjYqtfdZVuc3SOK-8tgt9Hp_ezZOW5-iv_oWOIwWdxoDVCbL1yuMTdkgF0jDNTfTIkDxCI",
+      "label": "Automation and Money Systems"
+    },
+    {
+      "title": "0% Balance Transfers Without the Trap",
+      "url": "https://dailyyield.blogspot.com/2026/09/0-balance-transfers-without-trap.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhSSh-BZOYnp3iK7167C8rJux9-EX_ca7mpp50AjVcEbwi2SomaS0WUEhG12oeoBGONvOwtmXdk6-f8GXhtySc4hYurA1BO_aKb9sUcJXpMTBhMG49fZJRwBHUEktyVsTn573M0H8La3iAYTmqws4aHEs-AxciuJthdPQJu6-76_Ldd6l5JhIqHOVhkbII",
+      "label": "Credit Debt and Optimization"
+    },
+    {
+      "title": "AI Found £1,200 I Was Wasting",
+      "url": "https://dailyyield.blogspot.com/2026/09/ai-found-1200-i-was-wasting-step-by.html",
+      "image": "https://blogger.googleusercontent.com/img/a/AVvXsEhixPfE3dR07lHqcLYfBTsFfjB7odOuVyDBfx57KeBnJ2ysaX2wc9otRm_jGnhMXW-zWtUwgd8JO0v4ieKeMSnpAqvZ8rjXX4A1CMm5jluBcjjAL_QcTOBeSMLCIdSCvETnkvOGQBB_C4Z1TquunsXLGzIdfFYIXCfjF2d1omAjwW_3_VfcnY4hCnqRcSI",
+      "label": "AI Fintech and Future Money"
+    },
+    {
+      "title": "Three-Fund Portfolio",
+      "url": "https://dailyyield.blogspot.com/2026/09/3-funds-beat-your-12-etf-portfolio.html",
+      "image": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-2758262234277933362-0.jpg",
+      "label": "Automation and Money Systems"
+    },
+    {
+      "title": "FIRE Got Harder",
+      "url": "https://dailyyield.blogspot.com/2026/09/fire-got-harder-heres-new-math.html",
+      "image": "https://cdn.jsdelivr.net/gh/kushalkumardagaca-png/blog-assets@main/heroes/post-824646953557055227-0.jpg",
+      "label": "Middle Class Survival"
+    }
+  ]
+}
