@@ -22,7 +22,11 @@ jobs:
         with: {python-version: '3.11'}
       - run: pip install pillow imagehash requests
       - name: Back up exact Post
-        run: python rewrite_existing_masters.py backup-next
+        run: |
+          if ! python rewrite_existing_masters.py backup-next; then
+            cat MASTER_REWRITE_REPORT.json
+            exit 1
+          fi
       - name: Persist authenticated backup
         run: |
           set -euo pipefail
