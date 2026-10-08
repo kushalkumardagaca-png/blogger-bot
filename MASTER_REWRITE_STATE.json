@@ -574,8 +574,19 @@
       "verified_at": "2026-10-08T06:07:55.284302+00:00"
     }
   },
-  "inventory_completed_count": 71,
+  "inventory_completed_count": 72,
   "inventory_master_count": 76,
-  "pending": null,
+  "pending": {
+    "backup": "master_rewrite_backups/post_1884059043694963597.json.gz",
+    "content_sha256": "ac9e8ff52d40292afaf080e3ec635e4d176a87c49fb562de257e657d00928c9a",
+    "id": "1884059043694963597",
+    "labels": [
+      "Insurance and Protection",
+      "Kushal K. Daga"
+    ],
+    "published": "2026-10-02T18:52:24-07:00",
+    "title": "Buy Term. Skip the Whole-Life Pitch.",
+    "url": "https://dailyyield.blogspot.com/2026/10/buy-term-skip-whole-life-pitch.html"
+  },
   "version": 1
 }
