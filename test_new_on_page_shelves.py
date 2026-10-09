@@ -58,7 +58,9 @@ def test_news_page_builds_one_shelf_for_every_region_and_subject():
     assert "desks.topics" in out
     assert "Read more →" in out
     assert ".slice(0,8)" in out
-    assert out.index("buildShelfGroup(b,desks.topics") < out.index("buildShelfGroup(a,desks.regions.slice(1)")
+    assert "function buildOrderedShelves(regionAnchor,subjectAnchor)" in out
+    assert out.index("desks.topics.forEach") < out.index("desks.regions.slice(1).forEach")
+    assert "buildOrderedShelves(a,b)" in out
     assert "countrySelector(a||b)" not in out
 
 
