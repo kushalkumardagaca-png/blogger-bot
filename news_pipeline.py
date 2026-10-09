@@ -1023,9 +1023,6 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     n, label, slug, slot, legacy_hero_id, legacy_hero_alt = DESKS[desk]
     current_items = [i for i in items if not i.get("background")]
     background_items = [i for i in items if i.get("background")]
-    volume_note = (f"The strongest {len(current_items)} relevant current items were selected from the complete desk pool."
-                   if len(current_items) >= 12 else
-                   f"All {len(current_items)} relevant current item(s) available to this desk are included.")
     top = [clean_title(i["title"]) for i in current_items[:3]]
     headline_bits = clip_words("; ".join(top[:2]), 90)
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
@@ -1118,9 +1115,12 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     source_hosts = sorted({urllib.parse.urlparse(i.get("url", "")).hostname or "" for i in current_items if i.get("url")})
     subject_list = "; ".join(top) if top else "the linked current-period release"
     method_html = f'''
-    <h2 class="fbk-h2"><b>METHOD</b> Facts, Forecasts and Attributed Views</h2>
-    <p>This edition separates reported developments from attributable forecasts, expectations and analysis; it does not adopt a source's view as a Daily Yield prediction. Its current-period subjects are {htmlmod.escape(subject_list)}. The {len(current_items)} current item(s) come from {len(source_hosts)} distinct source website(s); each link retains the publisher's wording and date so readers can inspect the underlying record.</p>
-    <p>A headline can establish that an announcement or report exists, but it cannot by itself establish investment suitability, causation or what happens next. Compare publication dates, units, geographic scope and revisions before combining figures from different items. Older material is isolated as background, while forward calendar entries are labelled separately. If a linked source changes its document after publication, the source—not this edition—remains the authoritative record.</p>'''
+    <aside class="fbk-method" aria-labelledby="fbkMethodTitle">
+      <span class="fbk-method-label">Reader guidance · not a news headline</span>
+      <h2 class="fbk-h2" id="fbkMethodTitle"><b>METHOD</b> Facts, Forecasts and Attributed Views</h2>
+      <p>This edition separates reported developments from attributable forecasts, expectations and analysis; it does not adopt a source's view as a Daily Yield prediction. Its current-period subjects are {htmlmod.escape(subject_list)}. The {len(current_items)} current item(s) come from {len(source_hosts)} distinct source website(s); each link retains the publisher's wording and date so readers can inspect the underlying record.</p>
+      <p>A headline can establish that an announcement or report exists, but it cannot by itself establish investment suitability, causation or what happens next. Compare publication dates, units, geographic scope and revisions before combining figures from different items. Older material is isolated as background, while forward calendar entries are labelled separately. If a linked source changes its document after publication, the source—not this edition—remains the authoritative record.</p>
+    </aside>'''
 
     signoff = f'''
     <div class="fbk-signoff">
@@ -1142,7 +1142,6 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   </div>
 
   <h1 class="fbk-h1">{htmlmod.escape(title)}</h1>
-  <p class="fbk-lede">{len(current_items)} current, verified finance items from the {label} desk for <strong>{coverage_lead}</strong>{f', plus {len(background_items)} clearly labelled background item(s)' if background_items else ''}. {volume_note} Current coverage always leads. Read the source, not the noise.</p>
   <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}

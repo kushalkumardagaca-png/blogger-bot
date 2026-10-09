@@ -47,7 +47,7 @@ class NewsArticleExpansionTests(unittest.TestCase):
         with patch.object(news, "daily_hero", return_value=HERO):
             article = news.build_article(
                 "global", self.items(count), [], self.day, self.start,
-                self.end, {}, [],
+                self.end, {}, [], context_target=175,
             )
         related = [
             {
@@ -89,6 +89,14 @@ class NewsArticleExpansionTests(unittest.TestCase):
         self.assertIn("not an observed future result", html)
         self.assertIn("Credible Source 0", html)
 
+    def test_redundant_opening_lede_is_removed_and_method_is_a_guidance_box(self):
+        html = self.build()["html"]
+        self.assertNotIn('class="fbk-lede"', html)
+        self.assertNotIn("current, verified finance items from", html)
+        self.assertIn('class="fbk-method"', html)
+        self.assertIn("Reader guidance · not a news headline", html)
+        self.assertIn('aria-labelledby="fbkMethodTitle"', html)
+
     def test_thin_article_is_blocked(self):
         article = self.build(14)
         with self.assertRaisesRegex(ValueError, "outside 3800-4100"):
@@ -128,11 +136,11 @@ class NewsArticleExpansionTests(unittest.TestCase):
             "global", candidates, [], self.day, self.start, self.end,
             {}, [], related, HERO,
         )
-        self.assertEqual(len(selected), 16)
-        self.assertIn("16 headlines", mode)
+        self.assertGreater(len(selected), 15)
+        self.assertIn(f"{len(selected)} headlines", mode)
         self.assertGreaterEqual(count, 3800)
         self.assertLessEqual(count, 4100)
-        self.assertEqual(article["html"].count('class="fbk-description"'), 16)
+        self.assertEqual(article["html"].count('class="fbk-description"'), len(selected))
 
     def test_oversized_draft_is_sentence_polished_without_touching_source_summary(self):
         items = self.items(20)

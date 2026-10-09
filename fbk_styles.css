@@ -37,6 +37,12 @@
 .fbk-signoff .fbk-script{font-family:"Caveat",cursive;font-size:21px;color:#F0C084;display:block;margin-bottom:6px}
 .fbk-signoff p{margin:0 0 8px;font-size:13.5px;color:#EADCC8}
 .fbk-signoff p:last-child{margin-bottom:0}
+.fbk-method{margin:34px 0 22px;padding:20px 22px;background:linear-gradient(145deg,#F7F1E8,#FFFDF8);border:1px solid #D9BF94;border-left:5px solid #9C4522;border-radius:14px;box-shadow:0 12px 28px rgba(75,43,20,.08)}
+.fbk-method-label{display:inline-block;margin:0 0 10px;padding:5px 9px;border-radius:999px;background:#1D1109;color:#F8F0E3;font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.fbk-method .fbk-h2{margin:0 0 12px;font-size:24px}
+.fbk-method .fbk-h2 b{background:#9C4522;color:#FFFDF8;border-radius:5px;padding:4px 7px}
+.fbk-method p{margin:0 0 12px;color:#3E2210;font-size:14.5px;line-height:1.75}
+.fbk-method p:last-child{margin-bottom:0}
 .fbk-hero{margin:4px 0 20px;border-radius:14px;overflow:hidden;border:1px solid #EADCC8;background:#F6E3D3}
 .fbk-hero img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
 /* ===== daily look variants (theme & colours unchanged) ===== */
