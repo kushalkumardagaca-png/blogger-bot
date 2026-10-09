@@ -1,23 +1,27 @@
 {
-  "checkedAt": "2026-10-09T11:54:53.635227+00:00",
-  "status": "FAIL",
+  "checkedAt": "2026-10-09T12:54:45.248950+00:00",
+  "status": "PASS",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "summary": {
-    "items": 382,
-    "posts": 369,
+    "items": 384,
+    "posts": 371,
     "pages": 13,
-    "changed": 0,
+    "changed": 1,
     "policyPagesReady": 5,
-    "failures": 1
+    "failures": 0
   },
-  "changed": [],
-  "failures": [
+  "changed": [
     {
-      "id": "pages:3254393081257151974",
-      "issue": "AdSense disclosure missing"
+      "kind": "page",
+      "id": "3254393081257151974",
+      "title": "TERMS AND CONDITIONS",
+      "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0
     }
   ],
+  "failures": [],
   "notes": [
     "Approval and revenue remain Google decisions.",
     "No ad code is installed before approval.",
