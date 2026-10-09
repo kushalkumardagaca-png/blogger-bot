@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 119 PASS · 0 FAIL
+**Result:** 121 PASS · 0 FAIL
 
 Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
 
@@ -107,10 +107,12 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News finance filter enabled**
 - ✅ **News requires at least one genuinely current item**
 - ✅ **Significance ranks rather than cancels a desk edition**
-- ✅ **News selection is capped at the strongest fifteen current items**
+- ✅ **News selects fifteen complete items from a wider integrity-checked candidate set**
 - ✅ **Every country desk has broad current-news discovery fallback**
 - ✅ **Discovery fallback retains only approved named publishers**
 - ✅ **Older context is capped at three and explicitly labelled**
+- ✅ **News editorial length is fail-closed at 3,800–4,100 visible words**
+- ✅ **News forecasts and analysis remain explicitly attributable**
 - ✅ **News byline is current**
 - ✅ **News publisher brand is Daily Yield**
 - ✅ **News schema uses actual build/publish time**

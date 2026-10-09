@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-09T14:51:43+05:30",
+  "checked_at_ist": "2026-10-09T16:50:20+05:30",
   "summary": {
-    "pass": 119,
+    "pass": 121,
     "fail": 0
   },
   "checks": [
@@ -521,7 +521,7 @@
       "detail": ""
     },
     {
-      "name": "News selection is capped at the strongest fifteen current items",
+      "name": "News selects fifteen complete items from a wider integrity-checked candidate set",
       "status": "PASS",
       "detail": ""
     },
@@ -537,6 +537,16 @@
     },
     {
       "name": "Older context is capped at three and explicitly labelled",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News editorial length is fail-closed at 3,800\u20134,100 visible words",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News forecasts and analysis remain explicitly attributable",
       "status": "PASS",
       "detail": ""
     },

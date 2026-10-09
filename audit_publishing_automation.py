@@ -268,16 +268,23 @@ check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News requires at least one genuinely current item','if current_count == 0' in np)
 check('Significance ranks rather than cancels a desk edition',
       'current = relevant[:selection_cap]' in np and 'finance_significant' not in np)
-check('News selection is capped at the strongest fifteen current items',
-      'selection_cap=15' in np and 'current = relevant[:selection_cap]' in np)
+check('News selects fifteen complete items from a wider integrity-checked candidate set',
+      'selection_cap=20' in np and 'current = relevant[:selection_cap]' in np
+      and '[:15]' in np and 'source-integrity gate excluded' in np)
 check('Every country desk has broad current-news discovery fallback',
       'def discovery_sources(desk)' in np and "med.append(discovery)" in np and "when:1d" in np)
 check('Discovery fallback retains only approved named publishers',
       'GNR_ALLOWED_PUBLISHERS' in np and 'pub not in GNR_ALLOWED_PUBLISHERS' in np)
 check('Older context is capped at three and explicitly labelled',
       'len(background) >= min(3, 10 - len(current))' in np
-      and 'Background—not current-window news.' in np
+      and 'Background, not current-window news.' in np
       and 'Background Context — Not Current-Period News' in np)
+check('News editorial length is fail-closed at 3,800–4,100 visible words',
+      'NEWS_MIN_WORDS = 3800' in np and 'NEWS_MAX_WORDS = 4100' in np
+      and 'assert_news_editorial_length(art["html"])' in np)
+check('News forecasts and analysis remain explicitly attributable',
+      'Reported outlook' in np and 'not an observed future result' in np
+      and 'ANALYSIS_TERMS' in np)
 check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Daga' not in np)
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
