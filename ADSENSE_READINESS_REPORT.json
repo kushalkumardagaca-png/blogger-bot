@@ -1,18 +1,23 @@
 {
-  "checkedAt": "2026-10-05T15:20:14.225814+00:00",
-  "status": "PASS",
+  "checkedAt": "2026-10-09T11:54:53.635227+00:00",
+  "status": "FAIL",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "summary": {
-    "items": 306,
-    "posts": 293,
+    "items": 382,
+    "posts": 369,
     "pages": 13,
     "changed": 0,
     "policyPagesReady": 5,
-    "failures": 0
+    "failures": 1
   },
   "changed": [],
-  "failures": [],
+  "failures": [
+    {
+      "id": "pages:3254393081257151974",
+      "issue": "AdSense disclosure missing"
+    }
+  ],
   "notes": [
     "Approval and revenue remain Google decisions.",
     "No ad code is installed before approval.",
