@@ -51,14 +51,11 @@ def test_news_fallback_builds_exact_rolling_24_hour_shelf_before_desks():
     assert "flex-basis:92vw" in out
 
 
-def test_news_page_builds_one_shelf_for_every_region_and_subject():
+def test_news_country_selector_is_rendered_from_canonical_country_labels():
     out = repair.news_static_fallback([repair.news_item(news("fresh", 2))])
-    assert "function buildShelfGroup" in out
-    assert "desks.regions.slice(1)" in out
-    assert "desks.topics" in out
-    assert "Read all →" in out
-    assert ".slice(0,8)" in out
-    assert "countrySelector(a||b)" not in out
+    assert "News by country" in out
+    assert "Country · United States" in out
+    assert "countrySelector(a||b)" in out
 
 
 def test_legacy_country_news_gains_region_and_country_labels():
