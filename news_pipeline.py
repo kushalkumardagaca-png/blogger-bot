@@ -310,7 +310,7 @@ def parse_rss(xml_text, source):
         if date is None:
             date = extract_date(title + " " + desc_raw)
         items.append({"title": strip_tags(title), "url": link,
-                      "desc": strip_tags(desc_raw)[:400], "date": date,
+                      "desc": strip_tags(desc_raw)[:900], "date": date,
                       "agency": source[0], "prio": source[3]})
     return items
 
@@ -455,6 +455,9 @@ GNR_ALLOWED_PUBLISHERS = {
     "Investing.com", "Investing.com UK", "Investing.com India", "The Local Italy",
     "Olive Press News Spain", "Sur in English", "Idealista", "The Straits Times",
     "Toronto Star", "Business Standard", "Global Banking & Finance Review",
+    "Morningstar", "S&P Global", "Fitch Ratings", "Moody's Ratings",
+    "J.P. Morgan Research", "Goldman Sachs", "BlackRock", "Vanguard",
+    "World Economic Forum", "Harvard Business Review", "Knowledge at Wharton",
 }
 
 def parse_gnr(xml_text, source):
@@ -498,12 +501,27 @@ HINT_RE = {d: re.compile(p, re.I) for d, p in COUNTRY_HINTS.items()}
 # Broad lawful discovery fallback. Google News RSS supplies discovery only; the
 # edition retains the named original publisher and its source link. Country
 # relevance, finance relevance, date, publisher trust and duplicate checks still apply.
+ANALYSIS_TERMS = ("forecast", "outlook", "analyst expectations", "economic consequences")
+ANALYSIS_RE = re.compile(r"\b(forecast|outlook|expect(?:s|ed|ation)?|project(?:s|ed|ion)?|predict(?:s|ed|ion)?|"
+                         r"estimate(?:s|d)?|target|scenario|analyst|strategist|economist|adviser|advisor|"
+                         r"research(?:er)?|opinion|likely|could|may|risk)\b", re.I)
+
 def discovery_sources(desk):
     label = DESKS[desk][1]
     out = []
-    for term in ("finance", "economy", "business", "markets"):
+    for term in ("finance", "economy", "business", "markets") + ANALYSIS_TERMS:
         query = quote_plus(f'{label} {term} when:1d')
         out.append((f'Google News: {label} {term.title()}',
+                    f'https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en',
+                    'gnr', 2))
+    return out
+
+def global_analysis_sources():
+    """Discovery-only feeds for attributable forecasts, expectations and consequences."""
+    out = []
+    for term in ANALYSIS_TERMS:
+        query = quote_plus(f'global finance {term} when:1d')
+        out.append((f'Google News: Global {term.title()}',
                     f'https://news.google.com/rss/search?q={query}&hl=en-US&gl=US&ceid=US:en',
                     'gnr', 2))
     return out
@@ -521,7 +539,7 @@ FINANCE_RE = re.compile(r"\b(rate|inflation|cpi|gdp|growth|recession|econom|mark
 def fetch_desk_items(desk):
     if desk in CATEGORY_DESKS or desk == "global":
         srcs = [s for d, lst in SOURCES.items() for s in lst] + \
-               [s for d, lst in MEDIA.items() for s in lst] + GLOBAL_POOL + GLOBAL_MEDIA
+               [s for d, lst in MEDIA.items() for s in lst] + GLOBAL_POOL + GLOBAL_MEDIA + global_analysis_sources()
         own_off, own_med = set(), set()
     else:
         off = list(SOURCES.get(desk, []))
@@ -567,7 +585,7 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
                      r"reserve|liquidity|repo|policy)", re.I)
 
-def select_items(all_items, win_start, win_end, desk, selection_cap=15, own_off=None, own_med=None):
+def select_items(all_items, win_start, win_end, desk, selection_cap=20, own_off=None, own_med=None):
     """Rank the complete relevant current pool and publish its best 12–15 items.
 
     Significance controls ordering, never whether a desk edition exists. If a
@@ -691,6 +709,47 @@ def dedupe_rendered_stories(items):
     return unique
 
 
+META_DESCRIPTION_RE = re.compile(
+    r'<meta\b[^>]*(?:name|property)=["\'](?:description|og:description|twitter:description)["\'][^>]*content=["\'](.*?)["\']',
+    re.I | re.S)
+META_DESCRIPTION_RE_ALT = re.compile(
+    r'<meta\b[^>]*content=["\'](.*?)["\'][^>]*(?:name|property)=["\'](?:description|og:description|twitter:description)["\']',
+    re.I | re.S)
+
+
+def source_description(url):
+    """Read only publisher-supplied metadata; never manufacture a source summary."""
+    try:
+        page = http_get(url, tries=1, timeout=10)
+    except Exception:
+        return ""
+    candidates = META_DESCRIPTION_RE.findall(page) + META_DESCRIPTION_RE_ALT.findall(page)
+    cleaned = [strip_tags(value) for value in candidates]
+    cleaned = [value for value in cleaned if len(value.split()) >= 12]
+    return max(cleaned, key=len)[:1200] if cleaned else ""
+
+
+def enrich_item_descriptions(items):
+    """Top up sparse feed records from the linked publisher's own page metadata."""
+    targets = [item for item in items if len(strip_tags(item.get("desc", "")).split()) < 12]
+    if not targets:
+        return items
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        descriptions = list(executor.map(lambda item: source_description(item.get("url", "")), targets))
+    for item, description in zip(targets, descriptions):
+        if description:
+            item["desc"] = description
+    return items
+
+
+def item_source_is_usable(item):
+    """A rich wire item needs a named source, secure link and real publisher synopsis."""
+    url = item.get("url", "").strip()
+    return bool(clean_title(item.get("title", "")) and item.get("agency", "").strip()
+                and url.startswith("https://")
+                and len(strip_tags(item.get("desc", "")).split()) >= 12)
+
+
 def load_today_story_keys(day):
     """Inventory already-live News stories so later desks cannot republish them."""
     titles, urls = set(), set()
@@ -779,55 +838,71 @@ WHY = {
 def fmt_day(d):
     return f"{MONTHS[d.month-1]} {d.day}"
 
+CONSEQUENCE = {
+ "inflation": "Inflation changes purchasing power and assumptions about rates, wages, budgets and valuation. Later releases may confirm the direction, revise it, or show that pressure was concentrated. A stronger path can keep borrowing conditions restrictive; a weaker path can support expectations of easier policy. These are conditional channels, not predictions.",
+ "growth": "Growth evidence matters through revenue, tax receipts, employment and confidence, but a headline rate does not show which sectors or households gained. Compare it with earlier estimates, expectations and revisions. Upside and downside surprises can change rate, earnings and fiscal assumptions, although later evidence may alter that interpretation.",
+ "jobs": "Labour evidence connects household income, demand, wage pressure and monetary policy. Useful comparisons include expectations, participation and revisions. Persistent strength can sustain demand and rate pressure, while broad weakness can affect spending and credit quality. The future path remains contingent on later releases.",
+ "rates": "Rates and policy guidance transmit through deposits, loans, mortgages, bonds, currencies and company discount rates. Markets often react to the gap between the decision and expectations. Restrictive policy may raise financing costs; easier policy may support demand while interacting with inflation and currency risk. Neither scenario is guaranteed.",
+ "trade": "Trade and sanctions can affect supply chains, export demand, import costs, currencies and public revenue in several economies. Timing and scale depend on implementation, exemptions, substitution and retaliation. Businesses and investors may therefore focus on exposed sectors and counterparties instead of treating the headline as an economy-wide result.",
+ "fiscal": "Fiscal measures can change disposable income, public borrowing, bond supply and sector demand. Announcements may differ from final legislation, timing and measured effects. Borrowing can influence yields and currencies, while targeted support can alter cash flow. These are possible transmission channels, not certain outcomes.",
+ "housing": "Housing affects affordability, wealth, construction and lenders. Prices, rents, sales and mortgage costs can move differently, so one measure cannot represent the whole market. Future effects depend on income, supply, financing and local rules. A broad outlook is not advice about one property.",
+ "deposits": "Savings developments affect liquidity and returns available without market risk. Compare term, access, tax, inflation and provider protection rather than an advertised rate alone. Policy expectations may influence future rates, but those expectations change. This is general context, not an account recommendation.",
+ "corporate": "Corporate news can affect cash flow, capital needs, competitors, workers and investors, but an announcement is not a completed outcome. For an IPO or valuation, uncertainties include final pricing, demand, dilution, proceeds and later trading. For earnings or transactions, guidance and conditions matter with headline figures.",
+ "enforcement": "Enforcement news concerns a defined process and should not be broadened beyond the source's jurisdiction and words. Possible effects include compliance cost, operating changes, compensation or precedent, depending on the final order. A filed action, settlement, judgment and appeal are different stages.",
+ "regulation": "Rules can alter eligibility, disclosure, costs and business models. Effects depend on jurisdiction, effective date, transition and enforcement. A proposal may change before adoption, while a final rule may need guidance. Forecasts about winners, losers or market size remain scenarios from their authors.",
+ "markets": "Market reports combine observed prices with expectations about cash flow, policy and risk. A target, valuation or strategist view is an attributable estimate, not a fact about where an asset will trade. Useful analysis identifies assumptions, horizon, upside drivers and downside risks; liquidity and new information can change the result.",
+ "crypto": "Digital assets combine price, technology, custody, regulation and counterparty risks. Forecasts are sensitive to liquidity and policy assumptions. Regulation may change access or compliance without validating value. Verify jurisdiction, product structure and methodology; the reported outlook is not personalised investment advice.",
+ "pensions": "Pension changes compound over long periods and can affect contributions, tax, investments and income. Individual consequences depend on age, scheme rules, fees and jurisdiction. Projections assume returns, inflation and longevity, so they are scenarios rather than promises.",
+ "other": "The development may influence expectations, financing or behaviour, but direction and scale depend on details not established by a headline. Separate what happened, what the source expects and what remains conditional. Dates, geography, methodology and revisions matter when comparing reports. A forecast belongs to its named source.",
+}
+READER_LENS = [
+ "Compare the source's base case with upside and downside cases, then watch the next dated evidence that could confirm or challenge its assumptions. Price reaction does not prove a forecast correct, and a credible source can revise its view. Credibility supports scrutiny; it does not remove uncertainty, conflicts, or the need for independent evidence.",
+ "Separate the observed development from the mechanism through which it might affect households, companies, governments or markets. Check the horizon and assumptions before comparing estimates made with different dates or definitions. An expert quotation explains that speaker’s assessment; it does not establish a universal consensus or guaranteed outcome.",
+ "Check whether primary data, filings or policy documents support the interpretation and whether another credible source reaches a different view. Likely, possible and expected do not mean completed, certain or guaranteed. Adviser, educator, agency, researcher and analyst views should be weighed by expertise, evidence, incentives and disclosed methodology.",
+ "Monitor implementation, revisions, guidance and measurable follow-through rather than extrapolating from one report. The linked publisher remains the record for its claim; Daily Yield does not adopt it as a prediction. Consequences can differ across countries, sectors, time horizons and financial positions, even when the same event is involved.",
+]
+
+def clip_word_count(text, maximum):
+    return " ".join(re.sub(r"\s+", " ", text).strip().split()[:maximum])
+
+def source_summary(it, maximum=68):
+    desc = re.sub(r"\s+", " ", strip_tags(it.get("desc", ""))).strip()
+    return clip_word_count(desc, maximum).rstrip(" .") + "."
+
 def compose_item(it, win_end):
-    # Vary sentence form deterministically, but never add a fact that is absent
-    # from the selected source record.
     title = clean_title(it["title"])
-    if len(title) > 140:  # trim long official titles at word boundary
+    if len(title) > 140:
         cut = title[:140].rfind(" ")
         title = title[:cut if cut > 60 else 140].rstrip(" ,;:-(") + "…"
-    if it["desc"] and len(it["desc"]) > 20:
-        desc = it["desc"]
-        cut = desc.find(". ", 60)
-        if 0 < cut < 320:
-            desc = desc[:cut + 1]
-    else:
-        desc = ""
     day = fmt_day(it["date"]) if it["date"] else "Window"
-    is_background = bool(it.get("background"))
-    etitle, eagency = htmlmod.escape(title), htmlmod.escape(it["agency"])
-    core = htmlmod.escape(desc) if desc else etitle
-    form = int(hashlib.sha256((title + it["agency"]).encode()).hexdigest()[:2], 16) % 4
-    if is_background:
-        chip = f"Background · originally {day}"
-        display_title = f"Background context: {etitle}"
-        body = (f"<strong>Background—not current-window news.</strong> "
-                f"<strong>{eagency}</strong> published this on {day}: {core}. "
-                "It is separated from the current-period items so its date and role are clear.")
+    background = bool(it.get("background"))
+    summary = source_summary(it)
+    analysis = bool(ANALYSIS_RE.search(title + " " + summary))
+    kind = item_type(title + " " + summary)
+    variant = int(hashlib.sha256((title + it["agency"]).encode()).hexdigest()[:2], 16) % len(READER_LENS)
+    if background:
+        chip, display = f"Background · originally {day}", "Background context: " + title
+        status = f"Background, not current-window news. {it['agency']} published this on {day}; it is retained only for context."
+    elif analysis:
+        chip, display = f"{day} · Reported outlook", title
+        status = f"This forecast, expectation or analytical view was reported by {it['agency']} on {day}. It is not an observed future result or a fact asserted by Daily Yield."
     else:
-        chip = day
-        display_title = etitle
-        if not desc:
-            options = [
-                f"<strong>{eagency}</strong> published this item on {day}: {etitle}.",
-                f"The {day} item from <strong>{eagency}</strong> is titled: {etitle}.",
-                f"Published {day}, the <strong>{eagency}</strong> source records: {etitle}.",
-                f"For {day}, <strong>{eagency}</strong> published: {etitle}.",
-            ]
-        else:
-            options = [
-                f"<strong>{eagency}</strong> reports: {core}.",
-                f"In its {day} update, <strong>{eagency}</strong> reports: {core}.",
-                f"The {day} account from <strong>{eagency}</strong> says: {core}.",
-                f"According to <strong>{eagency}</strong>: {core}.",
-            ]
-        body = options[form]
-    return f'''    <div class="fbk-item{' fbk-background' if is_background else ''}">
-      <span class="fbk-chip">{chip}</span>
-      <h3>{display_title}</h3>
-      <p>{body}</p>
+        chip, display = f"{day} · Reported development", title
+        status = f"{it['agency']} published this account on {day}. Possible consequences below are conditional context, not a claim that a future result is certain."
+    summary_words = len(summary.split())
+    context_limit = max(98, 173 - summary_words)
+    context_seed = (f"{status} Applied specifically to the source topic — {title} — this lens separates "
+                    f"the reported record from possible effects. {CONSEQUENCE[kind]} {READER_LENS[variant]} "
+                    f"{READER_LENS[(variant + 1) % len(READER_LENS)]}")
+    context = clip_word_count(context_seed, context_limit)
+    etitle, eagency = htmlmod.escape(display), htmlmod.escape(it["agency"])
+    return f'''    <div class="fbk-item{' fbk-background' if background else ''}">
+      <span class="fbk-chip">{htmlmod.escape(chip)}</span>
+      <h3>{etitle}</h3>
+      <p class="fbk-description"><strong>{eagency}:</strong> {htmlmod.escape(summary)}</p>
+      <p class="fbk-context">{htmlmod.escape(context)}</p>
       <a class="fbk-src" href="{htmlmod.escape(it['url'])}" target="_blank" rel="noopener">{"Source:" if it.get("media") else "Official:"} {eagency}</a>
-      {contextual_card(etitle + ' ' + desc)}
+      {contextual_card(htmlmod.escape(title + ' ' + summary))}
     </div>'''
 
 # ---------------------------------------------------------------- daily hero imagery
@@ -1042,8 +1117,8 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     source_hosts = sorted({urllib.parse.urlparse(i.get("url", "")).hostname or "" for i in current_items if i.get("url")})
     subject_list = "; ".join(top) if top else "the linked current-period release"
     method_html = f'''
-    <h2 class="fbk-h2"><b>METHOD</b> How to Read This {htmlmod.escape(label)} Edition</h2>
-    <p>This edition is a source map, not a prediction. Its current-period subjects are {htmlmod.escape(subject_list)}. The {len(current_items)} current item(s) come from {len(source_hosts)} distinct source website(s); each link retains the publisher's wording and date so readers can inspect the underlying record.</p>
+    <h2 class="fbk-h2"><b>METHOD</b> Facts, Forecasts and Attributed Views</h2>
+    <p>This edition separates reported developments from attributable forecasts, expectations and analysis; it does not adopt a source's view as a Daily Yield prediction. Its current-period subjects are {htmlmod.escape(subject_list)}. The {len(current_items)} current item(s) come from {len(source_hosts)} distinct source website(s); each link retains the publisher's wording and date so readers can inspect the underlying record.</p>
     <p>A headline can establish that an announcement or report exists, but it cannot by itself establish investment suitability, causation or what happens next. Compare publication dates, units, geographic scope and revisions before combining figures from different items. Older material is isolated as background, while forward calendar entries are labelled separately. If a linked source changes its document after publication, the source—not this edition—remains the authoritative record.</p>'''
 
     signoff = f'''
@@ -1103,6 +1178,21 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
             "meta": meta, "labels": ["News", label], "html": full_html,
             "canonical": canonical, "n_items": len(items),
             "hero_url": hero_url, "hero_credit": hero_credit, "hero_source": hero["source"]}
+
+NEWS_MIN_WORDS = 3800
+NEWS_MAX_WORDS = 4100
+
+def editorial_word_count(document):
+    """Count reader-visible editorial words, excluding CSS, scripts and markup."""
+    visible = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", document, flags=re.I | re.S)
+    visible = strip_tags(visible)
+    return len(re.findall(r"\b[\w’'-]+\b", visible, flags=re.UNICODE))
+
+def assert_news_editorial_length(document):
+    count = editorial_word_count(document)
+    if not NEWS_MIN_WORDS <= count <= NEWS_MAX_WORDS:
+        raise ValueError(f"News editorial length {count} is outside {NEWS_MIN_WORDS}-{NEWS_MAX_WORDS} words")
+    return count
 
 # ---------------------------------------------------------------- related links
 def fetch_related(desk, prev_url, token):
@@ -1251,6 +1341,18 @@ def run_desk(desk, tracker, dry=False, token=None):
                                            own_off=own_off, own_med=own_med)
     selected_before_body_dedupe = len(items)
     items = dedupe_rendered_stories(items)
+    items = enrich_item_descriptions(items)
+    items = dedupe_rendered_stories(items)
+    before_source_gate = len(items)
+    items = [item for item in items if item_source_is_usable(item)]
+    if len(items) != before_source_gate:
+        print(f"  [{desk}] source-integrity gate excluded {before_source_gate - len(items)} thin or unverifiable item(s)")
+    # The richer format is calibrated for fifteen fully sourced headline packages.
+    # Fetching a slightly wider candidate set prevents metadata failures or duplicate
+    # publisher synopses from leaving a thin edition.
+    rich_current = [item for item in items if not item.get("background")][:15]
+    rich_background = [item for item in items if item.get("background")]
+    items = rich_current + rich_background
     if len(items) != selected_before_body_dedupe:
         print(f"  [{desk}] visible-paragraph duplicate guard excluded "
               f"{selected_before_body_dedupe - len(items)} item(s)")
@@ -1277,8 +1379,9 @@ def run_desk(desk, tracker, dry=False, token=None):
     art["html"] = ensure_family(art["html"])
     art["html"] = ensure_continuous_motion(art["html"])
     art["html"], _ = repair_image_alts(art["html"], art["title"])
+    word_count = assert_news_editorial_length(art["html"])
     assert_publishable(art["title"], art["html"], art["labels"])
-    print(f"  [{desk}] article built: {art['n_items']} items, '{art['title'][:70]}…'")
+    print(f"  [{desk}] article built: {art['n_items']} items, {word_count} editorial words, '{art['title'][:70]}…'")
     url = publish_post(art, token, dry)
     if url or dry:
         # Reserve only stories that actually made the article. This protects the
