@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Deterministic Daily Yield social routing for live News and resources.
 
-Every day: 20 News editions plus the homepage and four rotating header Pages.
-Each destination is assigned to exactly one active network using the established
+Every day: 11 comprehensive News editions plus the homepage and four rotating
+header Pages. Each destination is assigned to exactly one active network using
+the established
 Daily Yield platform pattern. Publishers use the authenticated Blogger API and
 never create synthetic public-page views.
 """
@@ -24,9 +25,8 @@ NEWS_PATTERN = (
     "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
 )
 NEWS_KEYS = (
-    "australia", "south-korea", "global", "india", "market", "macro",
-    "germany", "france", "uk", "japan", "china", "spain", "corporate",
-    "italy", "brazil", "us", "canada", "mexico", "personal", "russia",
+    "americas", "global", "markets", "economy", "banking", "companies",
+    "china", "asia-pacific", "india", "russia", "europe",
 )
 HEADER_PAGES = (
     "https://dailyyield.blogspot.com/p/article.html",

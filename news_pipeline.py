@@ -56,16 +56,14 @@ SESSION_USED_TITLES, SESSION_USED_URLS, SESSION_USED_IMAGES = set(), set(), set(
 # Wikimedia Commons searches produce a new, licensed, desk-relevant photo each day.
 # Results are date-rotated, checked for image availability and attributed in-page.
 HERO_SEARCH = {
- "global": "financial district skyline", "us": "Wall Street New York",
- "china": "Shanghai skyline financial district", "germany": "Frankfurt skyline",
- "india": "Mumbai skyline", "japan": "Tokyo skyline Marunouchi",
- "uk": "City of London skyline", "france": "La Defense Paris",
- "italy": "Milan skyline", "russia": "Moscow International Business Center",
- "canada": "Toronto skyline financial district", "brazil": "Sao Paulo skyline",
- "spain": "Madrid skyline business district", "mexico": "Mexico City skyline",
- "australia": "Sydney skyline business district", "south-korea": "Seoul skyline business district",
- "market": "stock exchange trading floor", "macro": "economic chart statistics",
- "corporate": "office buildings corporate", "personal": "household savings money",
+ "global": "global financial district skyline", "americas": "Americas financial district skyline",
+ "china": "Shanghai skyline financial district", "asia-pacific": "Asia Pacific financial district skyline",
+ "india": "Mumbai skyline", "russia": "Moscow International Business Center",
+ "europe": "European financial district skyline",
+ "markets": "stock exchange commodities digital assets trading",
+ "economy": "economic statistics trade employment",
+ "banking": "banking digital payments household finance",
+ "companies": "office buildings corporate capital markets",
 }
 # Resilient lawful fallback rotation. Each date/desk gets a different curated
 # Unsplash photograph if Commons is unavailable; 25 options cover all 20 desks.
@@ -87,60 +85,86 @@ CURATED_HERO_IDS = [
 
 # desk -> (num, label, slug, slot IST "HH:MM", legacy fallback photo id, fallback alt)
 DESKS = {
- "global":  (1, "Global News", "global-wire-top15", "06:30", "photo-1611974789855-9c2a0a7236a3", "Global financial district skyline at dusk"),
- "us":      (2, "US", "us", "18:00", "photo-1611974789855-9c2a0a7236a3", "United States Treasury building, Washington DC"),
- "china":   (3, "China", "china", "13:00", "photo-1494522855154-9297ac14b55f", "Shanghai financial towers at night"),
- "germany": (4, "Germany", "germany", "10:30", "photo-1560518883-ce09059eeffa", "Frankfurt banking skyline, Germany"),
- "india":   (5, "India", "india", "06:45", "photo-1590283603385-17ffb3a7f29f", "Bombay Stock Exchange building on Dalal Street, Mumbai"),
- "japan":   (6, "Japan", "japan", "12:05", "photo-1493976040374-85c8e12f0c0e", "Tokyo financial district skyline"),
- "uk":      (7, "UK", "uk", "12:00", "photo-1518186285589-2f7649de83e0", "Bank of England and City of London skyline"),
- "france":  (8, "France", "france", "10:35", "photo-1502602898657-3e91760cbb34", "Paris La Défense business district"),
- "italy":   (9, "Italy", "italy", "15:50", "photo-1516483638261-f4dbaf036963", "Milan financial district, Italy"),
- "russia":  (10, "Russia", "russia", "22:00", "photo-1460925895917-afdab827c52f", "Financial market data and economic analysis desk"),
- "canada":  (11, "Canada", "canada", "18:05", "photo-1449824913935-59a10b8d2000", "Toronto financial district skyline"),
- "brazil":  (12, "Brazil", "brazil", "17:00", "photo-1496307653780-42ee777d4833", "São Paulo financial district, Brazil"),
- "spain":   (13, "Spain", "spain", "13:05", "photo-1460925895917-afdab827c52f", "Financial market analysis for Spain"),
- "mexico":  (14, "Mexico", "mexico", "19:30", "photo-1460925895917-afdab827c52f", "Financial market analysis for Mexico"),
- "australia": (15, "Australia", "australia", "04:30", "photo-1506973035872-a4ec16b8e8d9", "Sydney harbour financial district"),
- "south-korea": (16, "South Korea", "south-korea", "04:35", "photo-1538485399081-7191377e8241", "Seoul financial district skyline"),
- "market":  (17, "Market and Trading", "category-market-and-trading", "09:00", "photo-1460925895917-afdab827c52f", "Trading screens and market data in a modern dealing room"),
- "macro":   (18, "Economy and Macro Policy", "category-economy-and-macro-policy", "09:05", "photo-1554224155-8d04cb21cd6c", "Official economic statistics documents and charts"),
- "corporate": (19, "Corporate Finance and Industry", "category-corporate-finance-and-industry", "15:45", "photo-1486406146926-c627a92ad1ab", "Modern corporate headquarters offices"),
- "personal": (20, "Personal Finance", "category-personal-finance", "21:00", "photo-1579621970563-ebec7560ff3e", "Household savings and personal financial planning"),
+ "global":    (1, "Global Finance News", "global-finance-news", "07:00", "photo-1611974789855-9c2a0a7236a3", "Global financial district skyline at dusk"),
+ "americas":  (2, "Americas Finance News", "americas-finance-news", "06:00", "photo-1611974789855-9c2a0a7236a3", "Financial district skyline in the Americas"),
+ "china":     (3, "China Finance News", "china-finance-news", "13:00", "photo-1494522855154-9297ac14b55f", "Shanghai financial towers at night"),
+ "asia-pacific": (4, "Asia-Pacific Finance News", "asia-pacific-finance-news", "13:45", "photo-1493976040374-85c8e12f0c0e", "Asia-Pacific financial district skyline"),
+ "india":     (5, "India Finance News", "india-finance-news", "18:00", "photo-1590283603385-17ffb3a7f29f", "Bombay Stock Exchange building on Dalal Street, Mumbai"),
+ "russia":    (6, "Russia Finance News", "russia-finance-news", "22:00", "photo-1460925895917-afdab827c52f", "Moscow financial district and economic analysis"),
+ "europe":    (7, "Europe Finance News", "europe-finance-news", "23:00", "photo-1560518883-ce09059eeffa", "European financial district skyline"),
+ "markets":   (8, "Markets, Crypto & Commodities", "markets-crypto-commodities", "07:45", "photo-1460925895917-afdab827c52f", "Trading screens, commodities and digital assets"),
+ "economy":   (9, "Economy, Trade & Jobs", "economy-trade-jobs", "08:30", "photo-1554224155-8d04cb21cd6c", "Economic statistics, trade and employment analysis"),
+ "banking":   (10, "Banking, Fintech & Personal Money", "banking-fintech-personal-money", "09:15", "photo-1579621970563-ebec7560ff3e", "Banking, digital payments and household finance"),
+ "companies": (11, "Companies, IPOs & Deals", "companies-ipos-deals", "10:00", "photo-1486406146926-c627a92ad1ab", "Corporate headquarters and capital markets"),
 }
+
+GEOGRAPHIC_DESKS = {"global", "americas", "china", "asia-pacific", "india", "russia", "europe"}
+CATEGORY_DESKS = {"markets", "economy", "banking", "companies"}
+REGION_MEMBERS = {
+ "americas": ("us", "canada", "mexico", "brazil"),
+ "asia-pacific": ("japan", "south-korea", "australia"),
+ "europe": ("uk", "germany", "france", "italy", "spain"),
+}
+
+# Canonical labels used by Blogger, the News page and social creative.
+GEOGRAPHY_LABELS = {
+ "global": "Global Finance News", "americas": "Americas Finance News",
+ "china": "China Finance News", "asia-pacific": "Asia-Pacific Finance News",
+ "india": "India Finance News", "russia": "Russia Finance News",
+ "europe": "Europe Finance News",
+}
+TOPIC_LABELS = {
+ "markets": "Markets, Crypto & Commodities",
+ "economy": "Economy, Trade & Jobs",
+ "banking": "Banking, Fintech & Personal Money",
+ "companies": "Companies, IPOs & Deals",
+}
+COUNTRY_LABELS = {
+ "us": "Country · United States", "canada": "Country · Canada",
+ "mexico": "Country · Mexico", "brazil": "Country · Brazil",
+ "china": "Country · China", "japan": "Country · Japan",
+ "south-korea": "Country · South Korea", "australia": "Country · Australia",
+ "india": "Country · India", "russia": "Country · Russia",
+ "uk": "Country · United Kingdom", "germany": "Country · Germany",
+ "france": "Country · France", "italy": "Country · Italy", "spain": "Country · Spain",
+}
+DESK_COUNTRIES = {
+ "americas": ("us", "canada", "mexico", "brazil"), "china": ("china",),
+ "asia-pacific": ("japan", "south-korea", "australia"), "india": ("india",),
+ "russia": ("russia",), "europe": ("uk", "germany", "france", "italy", "spain"),
+}
+
 
 # keyword filters for category desks (applied to pooled items)
 CATEGORY_FILTERS = {
- "market": ["market", "trading", "exchange", "liquidity", "volatility", "derivatives",
-            "equit", "bond", "yield", "fx", "currency", "bitcoin", "crypto", "index",
-            "clearing", "settlement", "short selling", "margin", "ipo", "listing",
-            "price", "rate", "euro", "dollar", "rupee", "yen", "pound", "commodit",
-            "oil", "gold", "securit", "order", "reserve", "benchmark", "futures"],
- "macro": ["inflation", "cpi", "gdp", "growth", "unemployment", "jobs", "employment",
-           "trade", "tariff", "deficit", "debt", "policy rate", "repo", "interest rate",
-           "quantitative", "fiscal", "budget", "stimulus", "pmi", "retail sales",
-           "industrial", "wage", "monetary", "central bank", "economy", "economic",
-           "outlook", "statistics", "survey", "consum", "producer", "export", "import",
-           "monthly", "quarterly", "annual", "census", "accounts", "fomc", "minutes",
-           "commission", "council", "release", "index", "forecast", "bank", "reserve",
-           "treasury", "ministry", "federal", "national", "personal income"],
- "corporate": ["corporate", "company", "earnings", "merger", "acquisition", "filing",
-               "edgar", "securities", "disclosure", "governance", "capital", "share",
-               "dividend", "buyback", "bankrupt", "restructur", "ipo", "issuer",
-               "regulation", "enforcement", "fine", "penalty", "commission", "approval",
-               "competition", "cartel", "state aid", "business", "industry", "enterprise",
-               "firm", "investment", "licence", "license", "sanction", "order",
-               "settlement", "insolvency", "bank", "market", "trade"],
- "personal": ["deposit", "savings", "mortgage", "house price", "housing", "rent",
-              "pension", "retirement", "insurance", "tax", "payment", "loan", "credit",
-              "household", "consumer", "cost", "price", "food", "fuel", "energy",
-              "investor", "protection", "compensation", "scam", "fraud", "debt",
-              "financial literacy", "wage", "income", "spending", "retail",
-              "digital euro", "cash", "citizen", "individual", "family", "student",
-              "senior", "cyber", "phishing", "misselling", "mis-selling", "grievance",
-              "ombudsman", "advisory", "mutual fund", "provident fund", "small savings",
-              "fintech", "upi", "wallet", "microfinance", "banking"],
+ "markets": ["market", "trading", "exchange", "liquidity", "volatility", "derivatives",
+             "equit", "bond", "yield", "fx", "currency", "bitcoin", "crypto", "token",
+             "index", "futures", "gold", "silver", "oil", "gas", "commodit", "copper",
+             "opec", "energy price", "fund", "etf", "investor", "reserve"],
+ "economy": ["inflation", "cpi", "gdp", "growth", "unemployment", "jobs", "employment",
+             "wage", "trade", "tariff", "sanction", "export", "import", "deficit", "debt",
+             "policy rate", "repo", "interest rate", "fiscal", "budget", "stimulus", "pmi",
+             "retail sales", "industrial", "monetary", "central bank", "economy", "economic",
+             "outlook", "statistics", "survey", "consumer", "producer", "supply chain"],
+ "banking": ["bank", "deposit", "savings", "mortgage", "housing", "house price", "rent",
+             "pension", "retirement", "insurance", "tax", "payment", "loan", "credit",
+             "household", "consumer", "cost of living", "fintech", "upi", "wallet",
+             "digital payment", "open banking", "neobank", "financial literacy", "fraud",
+             "scam", "phishing", "artificial intelligence", "ai ", "cyber"],
+ "companies": ["corporate", "company", "earnings", "revenue", "profit", "merger",
+               "acquisition", "filing", "governance", "capital", "share", "dividend",
+               "buyback", "bankrupt", "restructur", "ipo", "listing", "private equity",
+               "venture capital", "startup", "industry", "enterprise", "firm", "deal",
+               "takeover", "spin-off", "spinoff", "valuation"],
 }
+
+SECTION_ORDER = (
+ ("markets", "Markets, Crypto & Commodities"),
+ ("economy", "Economy, Trade & Jobs"),
+ ("banking", "Banking, Fintech & Personal Money"),
+ ("companies", "Companies, IPOs & Deals"),
+)
+
 
 # ---------------------------------------------------------------- sources
 # kind: rss | html | json   prio: 1 central bank, 2 ministry/official, 3 stats, 4 regulator/other
@@ -225,8 +249,6 @@ SOURCES = {
    ("Consumer Financial Protection Bureau", "https://www.consumerfinance.gov/about-us/newsroom/feed/", "rss", 2),
  ],
 }
-# category desks pool from all country sources (with keyword filter)
-CATEGORY_DESKS = {"market", "macro", "corporate", "personal"}
 
 # ---------------------------------------------------------------- fetch layer
 def http_get(url, tries=2, timeout=14):
@@ -481,6 +503,9 @@ def parse_gnr(xml_text, source):
     return out
 # own-country relevance hints for media items on country desks
 COUNTRY_HINTS = {
+ "americas": r"\b(us|u\.s\.|united states|america|canada|canadian|mexico|mexican|brazil|brazilian|dollar|peso|real|wall street|fed|nyse|nasdaq|toronto|ottawa|banxico|sao paulo)\b",
+ "asia-pacific": r"\b(japan|japanese|south korea|korean|australia|australian|yen|won|tokyo|seoul|sydney|nikkei|kospi|asx|boj|rba)\b",
+ "europe": r"\b(uk|britain|british|germany|german|france|french|italy|italian|spain|spanish|euro|sterling|london|frankfurt|paris|milan|madrid|ecb|bank of england)\b",
  "us": r"\b(us|u\.s\.|united states|america|dollar|wall street|fed|nyse|nasdaq|s&p|washington)\b",
  "china": r"\b(china|chinese|yuan|renminbi|beijing|shanghai|shenzhen|hang seng|alibaba|tencent|byd)\b",
  "germany": r"\b(germany|german|frankfurt|bundesbank|dax|berlin)\b",
@@ -506,8 +531,16 @@ ANALYSIS_RE = re.compile(r"\b(forecast|outlook|expect(?:s|ed|ation)?|project(?:s
                          r"estimate(?:s|d)?|target|scenario|analyst|strategist|economist|adviser|advisor|"
                          r"research(?:er)?|opinion|likely|could|may|risk)\b", re.I)
 
+DISCOVERY_LABELS = {
+    "us": "United States", "canada": "Canada", "mexico": "Mexico", "brazil": "Brazil",
+    "japan": "Japan", "south-korea": "South Korea", "australia": "Australia",
+    "uk": "United Kingdom", "germany": "Germany", "france": "France",
+    "italy": "Italy", "spain": "Spain", "china": "China", "india": "India",
+    "russia": "Russia",
+}
+
 def discovery_sources(desk):
-    label = DESKS[desk][1]
+    label = DISCOVERY_LABELS.get(desk, DESKS.get(desk, (None, desk.replace("-", " ").title()))[1])
     out = []
     for term in ("finance", "economy", "business", "markets") + ANALYSIS_TERMS:
         query = quote_plus(f'{label} {term} when:1d')
@@ -536,19 +569,47 @@ FINANCE_RE = re.compile(r"\b(rate|inflation|cpi|gdp|growth|recession|econom|mark
                         r"business|industr|sanction|fine|penalt|startup|crypt|bitcoin|wealth|"
                         r"money|cash|payment|income|cost|fee|million|billion|trillion)", re.I)
 
+COUNTRY_TO_REGION = {
+    "us": "americas", "canada": "americas", "mexico": "americas", "brazil": "americas",
+    "japan": "asia-pacific", "south-korea": "asia-pacific", "australia": "asia-pacific",
+    "uk": "europe", "germany": "europe", "france": "europe", "italy": "europe", "spain": "europe",
+    "china": "china", "india": "india", "russia": "russia",
+}
+AGENCY_COUNTRIES = {}
+for _country, _sources in list(SOURCES.items()) + list(MEDIA.items()):
+    if _country in COUNTRY_TO_REGION:
+        for _source in _sources:
+            AGENCY_COUNTRIES.setdefault(_source[0], set()).add(_country)
+
+def classify_topic(item):
+    text = (item.get("title", "") + " " + item.get("desc", "")).lower()
+    scores = {key: sum(1 for term in terms if term in text) for key, terms in CATEGORY_FILTERS.items()}
+    return max(scores, key=lambda key: (scores[key], -list(CATEGORY_FILTERS).index(key))) if any(scores.values()) else "economy"
+
+def classify_country(item):
+    text = item.get("title", "") + " " + item.get("desc", "")
+    matches = [country for country, rx in HINT_RE.items()
+               if country in COUNTRY_TO_REGION and rx.search(text)]
+    if matches:
+        return matches[0]
+    agencies = AGENCY_COUNTRIES.get(item.get("agency", ""), set())
+    return next(iter(agencies)) if len(agencies) == 1 else "global"
+
 def fetch_desk_items(desk):
     if desk in CATEGORY_DESKS or desk == "global":
         srcs = [s for d, lst in SOURCES.items() for s in lst] + \
                [s for d, lst in MEDIA.items() for s in lst] + GLOBAL_POOL + GLOBAL_MEDIA + global_analysis_sources()
         own_off, own_med = set(), set()
     else:
-        off = list(SOURCES.get(desk, []))
-        med = list(MEDIA.get(desk, []))
+        members = REGION_MEMBERS.get(desk, (desk,))
+        off = [source for member in members for source in SOURCES.get(member, [])]
+        med = [source for member in members for source in MEDIA.get(member, [])]
         have_media = {s[1] for s in med}
-        for discovery in discovery_sources(desk):
-            if discovery[1] not in have_media:
-                med.append(discovery)
-                have_media.add(discovery[1])
+        for member in members:
+            for discovery in discovery_sources(member):
+                if discovery[1] not in have_media:
+                    med.append(discovery)
+                    have_media.add(discovery[1])
         have = {s[1] for s in off + med}
         srcs = off + med + [s for s in GLOBAL_POOL + GLOBAL_MEDIA if s[1] not in have]
         shared_official = {"European Central Bank", "European Commission"}
@@ -566,6 +627,9 @@ def fetch_desk_items(desk):
                 seen.add(key)
                 seen_urls.add(it["url"])
                 it["desk_pool"] = name
+                it["topic"] = classify_topic(it)
+                it["country"] = classify_country(it)
+                it["region"] = COUNTRY_TO_REGION.get(it["country"], "global")
                 out.append(it)
     return out, own_off, own_med
 
@@ -585,8 +649,8 @@ SALIENT = re.compile(r"\b(rate|inflation|cpi|gdp|growth|unemploy|jobs|trade|tari
                      r"bitcoin|crypto|bank|regulat|circular|merger|earnings|ipo|auction|"
                      r"reserve|liquidity|repo|policy)", re.I)
 
-def select_items(all_items, win_start, win_end, desk, selection_cap=20, own_off=None, own_med=None):
-    """Rank the complete relevant current pool and publish its best 12–15 items.
+def select_items(all_items, win_start, win_end, desk, selection_cap=40, own_off=None, own_med=None):
+    """Rank the complete relevant pool for adaptive 24–34-headline editions.
 
     Significance controls ordering, never whether a desk edition exists. If a
     genuinely small pool has fewer than 12 current items, publish all of them;
@@ -599,9 +663,13 @@ def select_items(all_items, win_start, win_end, desk, selection_cap=20, own_off=
     hint = HINT_RE.get(desk)
 
     def desk_match(i):
-        if desk not in CATEGORY_DESKS:
-            return True
-        return any(k in i["title"].lower() for k in CATEGORY_FILTERS[desk])
+        if desk in CATEGORY_DESKS:
+            return i.get("topic") == desk
+        if desk in REGION_MEMBERS:
+            return i.get("region") == desk or i.get("country") == "global"
+        if desk in {"china", "india", "russia"}:
+            return i.get("country") in {desk, "global"}
+        return True
 
     def score(i):
         s = 100 - i["prio"] * 10
@@ -644,9 +712,30 @@ def select_items(all_items, win_start, win_end, desk, selection_cap=20, own_off=
     else:
         relevant = ranked
 
-    # Significance is represented by the score/order. It is not an exclusion
-    # threshold. The strongest fifteen from the complete current pool lead.
-    current = relevant[:selection_cap]
+    def balanced_take(pool, key_name, targets, limit):
+        """Meet section/geography minimums first, then fill by editorial rank."""
+        chosen, used = [], set()
+        for key, target in targets:
+            for item in [row for row in pool if row.get(key_name) == key][:target]:
+                marker = item.get("url") or story_title_key(item.get("title", ""))
+                if marker not in used:
+                    chosen.append(item); used.add(marker)
+        for item in pool:
+            marker = item.get("url") or story_title_key(item.get("title", ""))
+            if marker in used:
+                continue
+            chosen.append(item); used.add(marker)
+            if len(chosen) >= limit:
+                break
+        return chosen[:limit]
+
+    if desk in CATEGORY_DESKS:
+        geography_targets = (("global", 2), ("india", 4), ("china", 4), ("russia", 3),
+                             ("americas", 7), ("europe", 7), ("asia-pacific", 6))
+        current = balanced_take(relevant, "region", geography_targets, selection_cap)
+    else:
+        topic_targets = tuple((topic, 7) for topic, _label in SECTION_ORDER)
+        current = balanced_take(relevant, "topic", topic_targets, selection_cap)
 
     # Background is a transparent context supplement, never disguised as current news.
     # It is used only below ten current items and is always capped at three.
@@ -869,14 +958,14 @@ def source_summary(it, maximum=68):
     desc = re.sub(r"\s+", " ", strip_tags(it.get("desc", ""))).strip()
     return clip_word_count(desc, maximum).rstrip(" .") + "."
 
-def compose_item(it, win_end, context_target=173):
+def compose_item(it, win_end, context_target=95, summary_target=52):
     title = clean_title(it["title"])
     if len(title) > 140:
         cut = title[:140].rfind(" ")
         title = title[:cut if cut > 60 else 140].rstrip(" ,;:-(") + "…"
     day = fmt_day(it["date"]) if it["date"] else "Window"
     background = bool(it.get("background"))
-    summary = source_summary(it)
+    summary = source_summary(it, maximum=summary_target)
     analysis = bool(ANALYSIS_RE.search(title + " " + summary))
     kind = item_type(title + " " + summary)
     variant = int(hashlib.sha256((title + it["agency"]).encode()).hexdigest()[:2], 16) % len(READER_LENS)
@@ -890,15 +979,19 @@ def compose_item(it, win_end, context_target=173):
         chip, display = f"{day} · Reported development", title
         status = f"{it['agency']} published this account on {day}. Possible consequences below are conditional context, not a claim that a future result is certain."
     summary_words = len(summary.split())
-    context_limit = max(75, context_target - summary_words)
+    context_limit = max(35, context_target - summary_words)
     ordered_lenses = " ".join(READER_LENS[(variant + offset) % len(READER_LENS)]
                                for offset in range(len(READER_LENS)))
     context_seed = (f"{status} Applied specifically to the source topic — {title} — this lens separates "
                     f"the reported record from possible effects. {CONSEQUENCE[kind]} {ordered_lenses}")
     context = clip_word_count(context_seed, context_limit)
     etitle, eagency = htmlmod.escape(display), htmlmod.escape(it["agency"])
+    country_name = DISCOVERY_LABELS.get(it.get("country"), it.get("region", "Global").replace("-", " ").title())
+    topic_name = dict(SECTION_ORDER).get(it.get("topic"), "Economy, Trade & Jobs")
     return f'''    <div class="fbk-item{' fbk-background' if background else ''}">
       <span class="fbk-chip">{htmlmod.escape(chip)}</span>
+      <span class="fbk-chip fbk-chip-muted">{htmlmod.escape(country_name)}</span>
+      <span class="fbk-chip fbk-chip-muted">{htmlmod.escape(topic_name)}</span>
       <h3>{etitle}</h3>
       <p class="fbk-description"><strong>{eagency}:</strong> {htmlmod.escape(summary)}</p>
       <p class="fbk-context">{htmlmod.escape(context)}</p>
@@ -988,13 +1081,15 @@ def daily_hero(desk, edition_date, used_urls=None, previous_url=""):
 CSS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fbk_styles.css")).read() \
     if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "fbk_styles.css")) else "/*missing*/"
 
+TITLE_PREFIXES = {
+    "markets": "Markets & Commodities News",
+    "economy": "Economy, Trade & Jobs News",
+    "banking": "Banking & Personal Money News",
+    "companies": "Companies, IPOs & Deals News",
+}
+
 def desk_title_prefix(desk):
-    n, label, slug, slot, _, _ = DESKS[desk]
-    if desk == "global":
-        return "Global Finance Wire"
-    if desk in CATEGORY_DESKS:
-        return f"{label} News"
-    return f"{label} Finance News"
+    return TITLE_PREFIXES.get(desk, DESKS[desk][1])
 
 def weekday_name(d):
     return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][d.weekday()]
@@ -1019,7 +1114,8 @@ def coverage_window_text(start, end):
     return f"{names[start.month-1]} {start.day} {start.year} to {names[end.month-1]} {end.day} {end.year}"
 
 def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related,
-                  previous_hero="", used_heroes=None, hero_override=None, context_target=173):
+                  previous_hero="", used_heroes=None, hero_override=None,
+                  context_target=95, summary_target=52):
     n, label, slug, slot, legacy_hero_id, legacy_hero_alt = DESKS[desk]
     current_items = [i for i in items if not i.get("background")]
     background_items = [i for i in items if i.get("background")]
@@ -1028,7 +1124,10 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     date_long = f"{weekday_name(edition_date)}, {edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
     win_str = f"{fmt_day(win_start.date())}–{fmt_day(win_end.date())} {win_end.year}"
     coverage_lead = coverage_window_text(win_start, win_end)
-    publish_lead = f"{edition_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][edition_date.month-1]} {edition_date.year}"
+    title_date = edition_date - dt.timedelta(days=1) if desk == "americas" else edition_date
+    publish_lead = f"{title_date.day} {['January','February','March','April','May','June','July','August','September','October','November','December'][title_date.month-1]} {title_date.year}"
+    # The Americas edition publishes after midnight IST but retains the completed
+    # Americas market date in its reader-facing title.
     # Coverage and headlines remain in the description/body; the document title
     # stays compact enough for Bing even while Blogger appends the site name.
     title = compact_title(f"{desk_title_prefix(desk)} — {publish_lead}")
@@ -1037,30 +1136,42 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     if len(meta) > 158:
         meta = meta[:155].rsplit(" ", 1)[0].rstrip(" ,;:.") + "..."
 
-    flag = {"us": "🇺🇸", "china": "🇨🇳", "germany": "🇩🇪", "india": "🇮🇳", "japan": "🇯🇵",
-            "uk": "🇬🇧", "france": "🇫🇷", "italy": "🇮🇹", "russia": "🇷🇺", "canada": "🇨🇦",
-            "brazil": "🇧🇷", "spain": "🇪🇸", "mexico": "🇲🇽", "australia": "🇦🇺",
-            "south-korea": "🇰🇷"}.get(desk, "🌍")
-    tag = f"Daily News · {flag} {label} Wire" if desk not in CATEGORY_DESKS else f"Daily News · 📑 {label}"
+    flag = {"americas": "🌎", "china": "🇨🇳", "asia-pacific": "🌏", "india": "🇮🇳",
+            "russia": "🇷🇺", "europe": "🇪🇺"}.get(desk, "🌐")
+    tag = f"Daily News · {flag} {label}" if desk not in CATEGORY_DESKS else f"Daily News · 📑 {label}"
 
     hero = hero_override or daily_hero(desk, edition_date, used_urls=used_heroes, previous_url=previous_hero)
     hero_url, hero_alt, hero_credit = hero["url"], hero["alt"], hero["credit"]
     SESSION_USED_IMAGES.add(hero_url)
 
-    # Current items form the numbered news sections. Older context is isolated below.
-    third = max(1, len(current_items) // 3)
-    secs = [
-        ("01", "The Tape — What Moved and Who Reported It", "Current-period releases and reporting from established, trusted sources.", current_items[:third]),
-        ("02", "Policy, Data and the Official Record", "Current-period central-bank, ministry and statistics releases.", current_items[third:2*third]),
-        ("03", "Regulation, Markets and the Small Print", "Current-period circulars, filings, enforcement and market plumbing.", current_items[2*third:]),
-    ]
+    # Geographic editions are organised by the four canonical topics; topic
+    # editions are organised by geography so both reading paths stay distinct.
+    if desk in CATEGORY_DESKS:
+        geography_sections = (
+            ("global", "Global and Cross-Border"), ("india", "India"),
+            ("china", "China"), ("russia", "Russia"), ("americas", "Americas"),
+            ("europe", "Europe"), ("asia-pacific", "Asia-Pacific"),
+        )
+        secs = [
+            (str(index).zfill(2), name,
+             f"Current {label.lower()} reporting connected to {name}.",
+             [item for item in current_items if item.get("region", "global") == key])
+            for index, (key, name) in enumerate(geography_sections, 1)
+        ]
+    else:
+        secs = [
+            (str(index).zfill(2), name,
+             f"Current {name.lower()} developments, forecasts and consequences.",
+             [item for item in current_items if item.get("topic", "economy") == key])
+            for index, (key, name) in enumerate(SECTION_ORDER, 1)
+        ]
     sections_html = ""
     for num, name, sub, its in secs:
         if not its:
             continue
         sections_html += f'\n    <h2 class="fbk-h2"><b>{num}</b> {name}</h2>\n    <p class="fbk-sub">{sub}</p>'
         for it in its:
-            sections_html += "\n" + compose_item(it, win_end, context_target=context_target)
+            sections_html += "\n" + compose_item(it, win_end, context_target=context_target, summary_target=summary_target)
 
     background_html = ""
     if background_items:
@@ -1068,7 +1179,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     <h2 class="fbk-h2"><b>BG</b> Background Context — Not Current-Period News</h2>
     <p class="fbk-sub">At most three older items, each retaining its original date and source, reframed only to explain current context.</p>'''
         for it in background_items:
-            background_html += "\n" + compose_item(it, win_end, context_target=context_target)
+            background_html += "\n" + compose_item(it, win_end, context_target=context_target, summary_target=summary_target)
 
     # FX reference block (ECB official)
     fx_html = ""
@@ -1174,8 +1285,14 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     full_html = body + f'''
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'''
 
+    if desk in CATEGORY_DESKS:
+        labels = ["News", "Category Edition", TOPIC_LABELS[desk], *COUNTRY_LABELS.values()]
+    else:
+        country_labels = [COUNTRY_LABELS[country] for country in DESK_COUNTRIES.get(desk, ())]
+        labels = ["News", "Geographic Edition", GEOGRAPHY_LABELS[desk],
+                  *country_labels, *TOPIC_LABELS.values()]
     return {"title": title, "slug": f"{slug}-{edition_date.isoformat()}",
-            "meta": meta, "labels": ["News", label], "html": full_html,
+            "meta": meta, "labels": labels, "html": full_html,
             "canonical": canonical, "n_items": len(items),
             "hero_url": hero_url, "hero_alt": hero_alt,
             "hero_credit": hero_credit, "hero_source": hero["source"]}
@@ -1246,11 +1363,18 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
     background = [item for item in candidate_items if item.get("background")]
     if not current:
         raise ValueError("no current sourced items available")
-    first_count = min(15, len(current))
-    attempts = [(count, 173) for count in range(first_count, len(current) + 1)]
-    # If even every sourced headline is short, deepen consequence and scenario
-    # analysis using the already selected source topic—never invented source facts.
-    attempts.extend((len(current), target) for target in (188, 203, 218, 233))
+    is_category = desk in CATEGORY_DESKS
+    maximum = 34 if is_category else 28
+    desired = 30 if is_category else 24
+    base_context = 72 if is_category else 95
+    summary_target = 42 if is_category else 52
+    current = current[:maximum]
+    first_count = min(desired, len(current))
+    attempts = [(count, base_context) for count in range(first_count, len(current) + 1)]
+    # If every sourced headline is still short, deepen only the item-specific
+    # consequence text while retaining the concise source synopsis.
+    attempts.extend((len(current), target)
+                    for target in (base_context + 10, base_context + 20, base_context + 30))
     seen = set()
     last_count = 0
     for item_count, context_target in attempts:
@@ -1260,7 +1384,7 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
         selected = current[:item_count] + background
         art = build_article(
             desk, selected, upcoming, edition_date, win_start, win_end, fx, related,
-            hero_override=hero, context_target=context_target,
+            hero_override=hero, context_target=context_target, summary_target=summary_target,
         )
         art = finish_news_article(art, related_candidates)
         count = editorial_word_count(art["html"])
@@ -1292,8 +1416,10 @@ def fetch_related(desk, prev_url, token):
     try:
         query = urllib.parse.urlencode({"status": "live", "fetchBodies": "false", "maxResults": "50", "fields": "items(title,url,labels)"})
         data = blogger_call("/posts?" + query, token)
-        kws = {"market": ["market", "invest", "trading"], "macro": ["inflation", "economy", "recession", "gdp"],
-               "corporate": ["corporate", "business", "company"], "personal": ["money", "budget", "savings", "emergency", "salary"]}.get(desk, [])
+        kws = {"markets": ["market", "invest", "trading", "crypto", "gold", "oil"],
+               "economy": ["inflation", "economy", "trade", "jobs", "gdp"],
+               "banking": ["bank", "fintech", "money", "housing", "savings"],
+               "companies": ["corporate", "business", "company", "ipo", "deal"]}.get(desk, [])
         label = DESKS[desk][1].lower()
         for entry in data.get("items", []):
             if "News" in entry.get("labels", []):
@@ -1432,10 +1558,11 @@ def run_desk(desk, tracker, dry=False, token=None):
     items = [item for item in items if item_source_is_usable(item)]
     if len(items) != before_source_gate:
         print(f"  [{desk}] source-integrity gate excluded {before_source_gate - len(items)} thin or unverifiable item(s)")
-    # Keep up to twenty complete candidates. The adaptive polisher starts with
-    # fifteen, adds sourced headlines when short, deepens context only if needed,
-    # and sentence-trims explanatory context when long.
-    rich_current = [item for item in items if not item.get("background")][:20]
+    # Keep enough complete candidates for 24–28-headline geographic editions and
+    # 30–34-headline category editions. The polisher adds concise sourced items
+    # before deepening context, then sentence-trims only explanatory prose.
+    candidate_cap = 34 if desk in CATEGORY_DESKS else 28
+    rich_current = [item for item in items if not item.get("background")][:candidate_cap]
     rich_background = [item for item in items if item.get("background")]
     items = rich_current + rich_background
     if len(items) != selected_before_body_dedupe:

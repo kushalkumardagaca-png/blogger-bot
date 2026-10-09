@@ -159,6 +159,12 @@ def clean(value: str) -> str:
 def topic(item: dict) -> str:
     text = (item.get("title", "") + " " + " ".join(str(x) for x in item.get("labels", []))).lower()
     if item.get("kind") == "page": return "page"
+    # Canonical News labels choose the creative treatment while publication
+    # timing and one-platform routing remain unchanged.
+    if "markets, crypto & commodities" in text: return "market"
+    if "economy, trade & jobs" in text: return "economy"
+    if "banking, fintech & personal money" in text: return "saving"
+    if "companies, ipos & deals" in text: return "general"
     if "news" in text: return "news"
     if any(x in text for x in ("market", "stock", "share", "gold", "oil", "crypto", "invest", "fund")): return "market"
     if any(x in text for x in ("debt", "loan", "emi", "credit card", "mortgage", "apr")): return "debt"

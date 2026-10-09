@@ -12,7 +12,7 @@ def check(name,ok,detail=""):
 def crons(path):
  return re.findall(r"cron:\s*['\"]([^'\"]+)",Path(path).read_text())
 
-news_expected=['15 22 * * *','15 0 * * *','45 2 * * *','15 4 * * *','45 5 * * *','45 6 * * *','30 9 * * *','45 10 * * *','45 11 * * *','15 13 * * *','45 14 * * *','45 15 * * *']
+news_expected=['45 23 * * *','45 0 * * *','30 1 * * *','15 2 * * *','0 3 * * *','45 3 * * *','45 6 * * *','30 7 * * *','45 11 * * *','45 15 * * *','45 16 * * *']
 nw=ROOT/'.github/workflows/daily_news_wires.yml'
 def ist_minute(cron):
     minute,hour=map(int,cron.split()[:2]); return (hour*60+minute+330)%1440
@@ -20,7 +20,7 @@ check('All dedicated Master article workflows are absent',
       all(not (ROOT/'.github/workflows'/name).exists() for name in (
           'daily_blogger_poster.yml','rewrite_existing_masters.yml',
           'refresh_master_photos.yml','refresh_master_v2_design.yml')))
-check('Twelve news preflight clusters',crons(nw)==news_expected,str(crons(nw)))
+check('Eleven news preflight runs',crons(nw)==news_expected,str(crons(nw)))
 check('News runs cannot overlap','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-wires' in nw.read_text())
 
 bing_py=(ROOT/'bing_url_automation.py').read_text()
@@ -203,12 +203,12 @@ check('Article routing waits at least fifteen minutes after publication',
       'dt.timedelta(minutes=15)' in rotation and 'delay_seconds' in coordinated)
 check('Coordinated tracker writes use race-safe persistence retries',
       'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
-check('Daily coordinated inventory is exactly 20 News articles plus 5 resources',
+check('Daily coordinated inventory is exactly 11 News articles plus 5 resources',
       'MASTER_PATTERN' not in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
       and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
-check('Configured cadence restores 25 established destinations across four networks',
+check('Configured cadence preserves established routing across 16 daily destinations',
       'RESOURCE_PATTERN = ("facebook", "bluesky", "facebook", "tumblr", "mastodon")' in rotation
-      and 20+5==25 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
+      and 11+5==16 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
@@ -241,13 +241,13 @@ tree=ast.parse(np); desks=None
 for node in tree.body:
  if isinstance(node,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='DESKS' for t in node.targets):
   desks=ast.literal_eval(node.value);break
-check('Exactly 20 news desks',isinstance(desks,dict) and len(desks)==20,str(len(desks or {})))
+check('Exactly 11 consolidated news desks',isinstance(desks,dict) and len(desks)==11,str(len(desks or {})))
 nums=sorted(v[0] for v in desks.values()); labels=[v[1] for v in desks.values()]
-check('News desk numbers are 1–20',nums==list(range(1,21)))
-check('News labels are unique',len(labels)==len(set(labels))==20)
-expected_clusters=[['australia','south-korea'],['global','india'],['market','macro'],['germany','france'],
-                   ['uk','japan'],['china','spain'],['corporate','italy'],['brazil'],
-                   ['us','canada'],['mexico'],['personal'],['russia']]
+check('News desk numbers are 1–11',nums==list(range(1,12)))
+check('News labels are unique',len(labels)==len(set(labels))==11)
+expected_clusters=[['americas'],['global'],['global','markets'],['markets','economy'],
+                   ['economy','banking'],['banking','companies'],['china'],
+                   ['china','asia-pacific'],['india'],['russia'],['europe']]
 actual_clusters=[]
 for cron in news_expected:
     start=ist_minute(cron)
@@ -257,8 +257,10 @@ for cron in news_expected:
         if delta<=60: due.append(desk)
     actual_clusters.append(sorted(due))
 expected_clusters=[sorted(group) for group in expected_clusters]
-check('Each news preflight selects its intended desk cluster',actual_clusters==expected_clusters,str(actual_clusters))
-check('News labels exactly two per post','"labels": ["News", label]' in np)
+check('Each News preflight selects its intended consolidated desk',actual_clusters==expected_clusters,str(actual_clusters))
+check('News labels encode edition family and canonical taxonomy',
+      '"Category Edition"' in np and '"Geographic Edition"' in np
+      and 'TOPIC_LABELS.values()' in np and 'GEOGRAPHY_LABELS[desk]' in np)
 check('News launch gate is 2026-09-25','LAUNCH_DATE = dt.date(2026, 9, 25)' in np)
 check('News cluster selector covers paired desks','PREFLIGHT_MINUTES = 60' in np)
 check('News duplicate recovery uses Blogger API without synthetic pageviews',
@@ -268,17 +270,19 @@ check('News source policy is current','official institutions plus established, r
 check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News requires at least one genuinely current item','if current_count == 0' in np)
 check('Significance ranks rather than cancels a desk edition',
-      'current = relevant[:selection_cap]' in np and 'finance_significant' not in np)
-check('News starts from fifteen complete items and can add sourced headlines adaptively',
-      'selection_cap=20' in np and 'current = relevant[:selection_cap]' in np
-      and 'first_count = min(15, len(current))' in np
+      'balanced_take(relevant' in np and 'finance_significant' not in np)
+check('News uses adaptive 24–28 geographic and 30–34 category headline ranges',
+      'maximum = 34 if is_category else 28' in np
+      and 'desired = 30 if is_category else 24' in np
       and 'range(first_count, len(current) + 1)' in np
       and 'source-integrity gate excluded' in np)
-check('News adaptive polish expands detail and sentence-trims context without touching summaries',
-      'for target in (188, 203, 218, 233)' in np
-      and 'def reduce_news_context(' in np
-      and 'class="fbk-context"' in np
-      and 'class="fbk-description"' in np)
+check('News adaptive polish protects summaries and sentence-trims only context',
+      'def reduce_news_context(' in np and 'summary_target=summary_target' in np
+      and 'class="fbk-context"' in np and 'class="fbk-description"' in np)
+check('Every geographic edition is organised into four canonical topic sections',
+      'SECTION_ORDER' in np and 'TOPIC_LABELS' in np and 'topic_targets' in np)
+check('Every category edition is balanced across canonical geographies',
+      'geography_targets' in np and '("americas", 7)' in np and '("europe", 7)' in np)
 check('Every country desk has broad current-news discovery fallback',
       'def discovery_sources(desk)' in np and "med.append(discovery)" in np and "when:1d" in np)
 check('Discovery fallback retains only approved named publishers',
@@ -329,7 +333,7 @@ result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'sum
 if '--check-only' not in sys.argv:
  (ROOT/'PUBLISHING_AUTOMATION_AUDIT.json').write_text(json.dumps(result,indent=2))
  lines=['# Daily Yield Publishing Automation — Final Audit','',f"**Result:** {len(checks)-len(failed)} PASS · {len(failed)} FAIL",'',
- 'Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.','']
+ 'Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.','']
  for x in checks:lines.append(f"- {'✅' if x['status']=='PASS' else '❌'} **{x['name']}**"+(f" — {x['detail']}" if x['detail'] else ''))
  (ROOT/'PUBLISHING_AUTOMATION_AUDIT.md').write_text('\n'.join(lines)+'\n')
 print(json.dumps(result['summary']))

@@ -49,3 +49,24 @@ def test_news_fallback_builds_exact_rolling_24_hour_shelf_before_desks():
     assert "clamp(440px,56vw,620px)" in out
     assert "min-height:500px" in out
     assert "flex-basis:92vw" in out
+
+
+def test_news_country_selector_is_rendered_from_canonical_country_labels():
+    out = repair.news_static_fallback([repair.news_item(news("fresh", 2))])
+    assert "News by country" in out
+    assert "Country · United States" in out
+    assert "countrySelector(a||b)" in out
+
+
+def test_legacy_country_news_gains_region_and_country_labels():
+    labels = repair.normalized_labels({"title": "US finance news", "labels": ["News", "US"]}, [])
+    assert labels == ["News", "Geographic Edition", "Americas Finance News",
+                      "Country · United States", "Legacy News"]
+
+
+def test_repair_preserves_canonical_country_label_on_repeated_run():
+    labels = repair.normalized_labels({"title": "US finance news", "labels": [
+        "News", "Geographic Edition", "Americas Finance News",
+        "Country · United States", "Legacy News"]}, [])
+    assert "Americas Finance News" in labels
+    assert "Country · United States" in labels

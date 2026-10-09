@@ -2,7 +2,7 @@ import datetime as dt
 import unittest
 
 from social_rotation import (
-    HEADER_PAGES, NEWS_KEYS, platform_for, resource_url, make_plan,
+    HEADER_PAGES, NEWS_KEYS, NEWS_PATTERN, platform_for, resource_url, make_plan,
 )
 
 
@@ -17,7 +17,11 @@ class SocialRotationTests(unittest.TestCase):
             news_totals[platform_for(key, day)] += 1
         for key in resources:
             resource_totals[platform_for(key, day)] += 1
-        self.assertEqual(sorted(news_totals.values()), [4, 4, 6, 6])
+        self.assertEqual(sum(news_totals.values()), 11)
+        self.assertEqual(sorted(news_totals.values()), [2, 2, 3, 4])
+        # The established 20-slot 30/30/20/20 long-run allocation remains intact.
+        pattern_totals = {name: NEWS_PATTERN.count(name) for name in news_totals}
+        self.assertEqual(sorted(pattern_totals.values()), [4, 4, 6, 6])
         self.assertEqual(sorted(resource_totals.values()), [1, 1, 1, 2])
 
     def test_each_item_rotates_to_another_platform_next_day(self):

@@ -1,20 +1,18 @@
-name: Daily Yield News Wires (20 Daily)
+name: Daily Yield News Wires (11 Daily)
 on:
   schedule:
-    # Each cluster starts 45 minutes before its first editorial slot (IST).
-    # A paired second desk receives 50–60 minutes of runway and runs sequentially.
-    - cron: "15 22 * * *"   # 03:45 IST → Australia 04:30, South Korea 04:35
-    - cron: "15 0 * * *"    # 05:45 IST → Global 06:30, India 06:45
-    - cron: "45 2 * * *"    # 08:15 IST → Market 09:00, Macro 09:05
-    - cron: "15 4 * * *"    # 09:45 IST → Germany 10:30, France 10:35
-    - cron: "45 5 * * *"    # 11:15 IST → UK 12:00, Japan 12:05
-    - cron: "45 6 * * *"    # 12:15 IST → China 13:00, Spain 13:05
-    - cron: "30 9 * * *"    # 15:00 IST → Corporate 15:45, Italy 15:50
-    - cron: "45 10 * * *"   # 16:15 IST → Brazil 17:00
-    - cron: "45 11 * * *"   # 17:15 IST → US 18:00, Canada 18:05
-    - cron: "15 13 * * *"   # 18:45 IST → Mexico 19:30
-    - cron: "45 14 * * *"   # 20:15 IST → Personal Finance 21:00
+    # Each run starts 45 minutes before its editorial slot (IST).
+    - cron: "45 23 * * *"   # 05:15 IST → Americas 06:00
+    - cron: "45 0 * * *"    # 06:15 IST → Global 07:00
+    - cron: "30 1 * * *"    # 07:00 IST → Markets 07:45
+    - cron: "15 2 * * *"    # 07:45 IST → Economy 08:30
+    - cron: "0 3 * * *"     # 08:30 IST → Banking 09:15
+    - cron: "45 3 * * *"    # 09:15 IST → Companies 10:00
+    - cron: "45 6 * * *"    # 12:15 IST → China 13:00
+    - cron: "30 7 * * *"    # 13:00 IST → Asia-Pacific 13:45
+    - cron: "45 11 * * *"   # 17:15 IST → India 18:00
     - cron: "45 15 * * *"   # 21:15 IST → Russia 22:00
+    - cron: "45 16 * * *"   # 22:15 IST → Europe 23:00
   workflow_dispatch:
     inputs:
       desks:
@@ -62,6 +60,10 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+      - name: Trigger authenticated News-page refresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run content_experience_repair.yml --ref main
       - name: Trigger Bing URL submission reconciliation
         env:
           GH_TOKEN: ${{ github.token }}

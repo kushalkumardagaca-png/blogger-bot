@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-09T17:07:17+05:30",
+  "checked_at_ist": "2026-10-09T18:24:09+05:30",
   "summary": {
-    "pass": 122,
+    "pass": 124,
     "fail": 0
   },
   "checks": [
@@ -11,9 +11,9 @@
       "detail": ""
     },
     {
-      "name": "Twelve news preflight clusters",
+      "name": "Eleven news preflight runs",
       "status": "PASS",
-      "detail": "['15 22 * * *', '15 0 * * *', '45 2 * * *', '15 4 * * *', '45 5 * * *', '45 6 * * *', '30 9 * * *', '45 10 * * *', '45 11 * * *', '15 13 * * *', '45 14 * * *', '45 15 * * *']"
+      "detail": "['45 23 * * *', '45 0 * * *', '30 1 * * *', '15 2 * * *', '0 3 * * *', '45 3 * * *', '45 6 * * *', '30 7 * * *', '45 11 * * *', '45 15 * * *', '45 16 * * *']"
     },
     {
       "name": "News runs cannot overlap",
@@ -356,12 +356,12 @@
       "detail": ""
     },
     {
-      "name": "Daily coordinated inventory is exactly 20 News articles plus 5 resources",
+      "name": "Daily coordinated inventory is exactly 11 News articles plus 5 resources",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Configured cadence restores 25 established destinations across four networks",
+      "name": "Configured cadence preserves established routing across 16 daily destinations",
       "status": "PASS",
       "detail": ""
     },
@@ -461,12 +461,12 @@
       "detail": ""
     },
     {
-      "name": "Exactly 20 news desks",
+      "name": "Exactly 11 consolidated news desks",
       "status": "PASS",
-      "detail": "20"
+      "detail": "11"
     },
     {
-      "name": "News desk numbers are 1\u201320",
+      "name": "News desk numbers are 1\u201311",
       "status": "PASS",
       "detail": ""
     },
@@ -476,12 +476,12 @@
       "detail": ""
     },
     {
-      "name": "Each news preflight selects its intended desk cluster",
+      "name": "Each News preflight selects its intended consolidated desk",
       "status": "PASS",
-      "detail": "[['australia', 'south-korea'], ['global', 'india'], ['macro', 'market'], ['france', 'germany'], ['japan', 'uk'], ['china', 'spain'], ['corporate', 'italy'], ['brazil'], ['canada', 'us'], ['mexico'], ['personal'], ['russia']]"
+      "detail": "[['americas'], ['global'], ['global', 'markets'], ['economy', 'markets'], ['banking', 'economy'], ['banking', 'companies'], ['china'], ['asia-pacific', 'china'], ['india'], ['russia'], ['europe']]"
     },
     {
-      "name": "News labels exactly two per post",
+      "name": "News labels encode edition family and canonical taxonomy",
       "status": "PASS",
       "detail": ""
     },
@@ -521,12 +521,22 @@
       "detail": ""
     },
     {
-      "name": "News starts from fifteen complete items and can add sourced headlines adaptively",
+      "name": "News uses adaptive 24\u201328 geographic and 30\u201334 category headline ranges",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "News adaptive polish expands detail and sentence-trims context without touching summaries",
+      "name": "News adaptive polish protects summaries and sentence-trims only context",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every geographic edition is organised into four canonical topic sections",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every category edition is balanced across canonical geographies",
       "status": "PASS",
       "detail": ""
     },
@@ -603,7 +613,7 @@
     {
       "name": "News tracker launch/state is valid",
       "status": "PASS",
-      "detail": "20 desk edition(s) recorded"
+      "detail": "11 desk edition(s) recorded"
     },
     {
       "name": "No obsolete blog URL in production engines",

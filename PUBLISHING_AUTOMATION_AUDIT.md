@@ -1,11 +1,11 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 122 PASS · 0 FAIL
+**Result:** 124 PASS · 0 FAIL
 
-Scope: five daily master articles and twenty daily news wires, including branding, timing, trackers, duplication, schema, sources, labels and current market-page links.
+Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
 - ✅ **All dedicated Master article workflows are absent**
-- ✅ **Twelve news preflight clusters** — ['15 22 * * *', '15 0 * * *', '45 2 * * *', '15 4 * * *', '45 5 * * *', '45 6 * * *', '30 9 * * *', '45 10 * * *', '45 11 * * *', '15 13 * * *', '45 14 * * *', '45 15 * * *']
+- ✅ **Eleven news preflight runs** — ['45 23 * * *', '45 0 * * *', '30 1 * * *', '15 2 * * *', '0 3 * * *', '45 3 * * *', '45 6 * * *', '30 7 * * *', '45 11 * * *', '45 15 * * *', '45 16 * * *']
 - ✅ **News runs cannot overlap**
 - ✅ **Bing URL automation reconciles every two hours**
 - ✅ **News publisher triggers Bing reconciliation without schedule changes**
@@ -74,8 +74,8 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News publisher dispatches only confirmed live Blogger events**
 - ✅ **Article routing waits at least fifteen minutes after publication**
 - ✅ **Coordinated tracker writes use race-safe persistence retries**
-- ✅ **Daily coordinated inventory is exactly 20 News articles plus 5 resources**
-- ✅ **Configured cadence restores 25 established destinations across four networks**
+- ✅ **Daily coordinated inventory is exactly 11 News articles plus 5 resources**
+- ✅ **Configured cadence preserves established routing across 16 daily destinations**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**
@@ -95,11 +95,11 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News packages inject SEO and social metadata**
 - ✅ **News editions include related-reading shelf**
 - ✅ **News editions include continuous gesture motion**
-- ✅ **Exactly 20 news desks** — 20
-- ✅ **News desk numbers are 1–20**
+- ✅ **Exactly 11 consolidated news desks** — 11
+- ✅ **News desk numbers are 1–11**
 - ✅ **News labels are unique**
-- ✅ **Each news preflight selects its intended desk cluster** — [['australia', 'south-korea'], ['global', 'india'], ['macro', 'market'], ['france', 'germany'], ['japan', 'uk'], ['china', 'spain'], ['corporate', 'italy'], ['brazil'], ['canada', 'us'], ['mexico'], ['personal'], ['russia']]
-- ✅ **News labels exactly two per post**
+- ✅ **Each News preflight selects its intended consolidated desk** — [['americas'], ['global'], ['global', 'markets'], ['economy', 'markets'], ['banking', 'economy'], ['banking', 'companies'], ['china'], ['asia-pacific', 'china'], ['india'], ['russia'], ['europe']]
+- ✅ **News labels encode edition family and canonical taxonomy**
 - ✅ **News launch gate is 2026-09-25**
 - ✅ **News cluster selector covers paired desks**
 - ✅ **News duplicate recovery uses Blogger API without synthetic pageviews**
@@ -107,8 +107,10 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News finance filter enabled**
 - ✅ **News requires at least one genuinely current item**
 - ✅ **Significance ranks rather than cancels a desk edition**
-- ✅ **News starts from fifteen complete items and can add sourced headlines adaptively**
-- ✅ **News adaptive polish expands detail and sentence-trims context without touching summaries**
+- ✅ **News uses adaptive 24–28 geographic and 30–34 category headline ranges**
+- ✅ **News adaptive polish protects summaries and sentence-trims only context**
+- ✅ **Every geographic edition is organised into four canonical topic sections**
+- ✅ **Every category edition is balanced across canonical geographies**
 - ✅ **Every country desk has broad current-news discovery fallback**
 - ✅ **Discovery fallback retains only approved named publishers**
 - ✅ **Older context is capped at three and explicitly labelled**
@@ -123,6 +125,6 @@ Scope: five daily master articles and twenty daily news wires, including brandin
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
 - ✅ **Master tracker next-topic state is valid** — next index 76
-- ✅ **News tracker launch/state is valid** — 20 desk edition(s) recorded
+- ✅ **News tracker launch/state is valid** — 11 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
