@@ -1,16 +1,21 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **184**
+- Pass: **200**
 - Fail: **0**
 - Public Daily Yield pageviews: **0**
 
 - ✅ Daily-Yield-Theme-Subscription.xml: valid Blogger XML
 - ✅ Daily-Yield-Theme-Subscription.xml: light-mode reset for former dark preference
-- ✅ Daily-Yield-Theme-Subscription.xml: privacy choice panel
-- ✅ Daily-Yield-Theme-Subscription.xml: homepage consent card follows hero
+- ✅ Daily-Yield-Theme-Subscription.xml: centered privacy choice dialog
+- ✅ Daily-Yield-Theme-Subscription.xml: first and every fifth page privacy schedule
+- ✅ Daily-Yield-Theme-Subscription.xml: cross uses essential cookies only
 - ✅ Daily-Yield-Theme-Subscription.xml: footer privacy control
+- ✅ Daily-Yield-Theme-Subscription.xml: content is blocked behind blurred consent layer
 - ✅ Daily-Yield-Theme-Subscription.xml: footer displays consent state
-- ✅ Daily-Yield-Theme-Subscription.xml: saved analytics choice restored on later pages
+- ✅ Daily-Yield-Theme-Subscription.xml: saved cookie choice restored on later pages
+- ✅ Daily-Yield-Theme-Subscription.xml: all-cookie choice suppresses future reminders
+- ✅ Daily-Yield-Theme-Subscription.xml: essential choice is presented as remind later
+- ✅ Daily-Yield-Theme-Subscription.xml: remind-later control has no box
 - ✅ Daily-Yield-Theme-Subscription.xml: site search
 - ✅ Daily-Yield-Theme-Subscription.xml: back to top
 - ✅ Daily-Yield-Theme-Subscription.xml: mobile menu
@@ -60,7 +65,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: HTTPS destination
 - ✅ Daily-Yield-Theme-Subscription.xml: analytics consent defaults denied before loading
 - ✅ Daily-Yield-Theme-Subscription.xml: Blogger GA4 loader uses saved Measurement ID
-- ✅ Daily-Yield-Theme-Subscription.xml: analytics changes only after choice
+- ✅ Daily-Yield-Theme-Subscription.xml: optional storage changes only after choice
 - ✅ Daily-Yield-Theme-Subscription.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-Subscription.xml: honest advice disclaimer
 - ✅ Daily-Yield-Theme-Subscription.xml: loader covers every internal navigation direction
@@ -71,7 +76,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-Subscription.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed
-- ✅ Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 320 KB
+- ✅ Daily-Yield-Theme-Subscription.xml: compressed Theme transfer budget stays below 110 KB
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-Subscription.xml: labels use feed-only infinite loading without document requests
@@ -80,10 +85,13 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: no speculative document prefetch or prerender
 - ✅ Daily-Yield-Theme-Subscription.xml: safe accelerator accepts feed paths only
 - ✅ Daily-Yield-Theme-Subscription.xml: accelerator never caches Page or label documents
-- ✅ Daily-Yield-Theme-Subscription.xml: homepage feed metadata is session cached
+- ✅ Daily-Yield-Theme-Subscription.xml: homepage feed metadata and exact images are session cached
 - ✅ Daily-Yield-Theme-Subscription.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-Subscription.xml: five tool benches share one compact row
-- ✅ Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height
+- ✅ Daily-Yield-Theme-Subscription.xml: Google follow popup is article-only at 20 percent and waits for cookie choice
+- ✅ Daily-Yield-Theme-Subscription.xml: follow intent suppresses future invitations on this browser
+- ✅ Daily-Yield-Theme-Subscription.xml: broken multi-option subscription desk remains removed
+- ✅ Daily-Yield-Theme-Subscription.xml: contact desk icons retain compact established geometry
 - ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
@@ -91,11 +99,16 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: no Google Business Profile
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: valid Blogger XML
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: light-mode reset for former dark preference
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy choice panel
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage consent card follows hero
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: centered privacy choice dialog
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: first and every fifth page privacy schedule
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: cross uses essential cookies only
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: footer privacy control
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: content is blocked behind blurred consent layer
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: footer displays consent state
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: saved analytics choice restored on later pages
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: saved cookie choice restored on later pages
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: all-cookie choice suppresses future reminders
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: essential choice is presented as remind later
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: remind-later control has no box
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: site search
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: back to top
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: mobile menu
@@ -145,7 +158,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: HTTPS destination
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics consent defaults denied before loading
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Blogger GA4 loader uses saved Measurement ID
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: optional storage changes only after choice
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no external enhancement script
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: honest advice disclaimer
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: loader covers every internal navigation direction
@@ -156,7 +169,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 320 KB
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: compressed Theme transfer budget stays below 110 KB
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: labels use feed-only infinite loading without document requests
@@ -165,10 +178,13 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no speculative document prefetch or prerender
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: safe accelerator accepts feed paths only
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: accelerator never caches Page or label documents
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage feed metadata is session cached
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage feed metadata and exact images are session cached
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: homepage article rails use newest-first chronology
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: five tool benches share one compact row
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Google follow popup is article-only at 20 percent and waits for cookie choice
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: follow intent suppresses future invitations on this browser
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: broken multi-option subscription desk remains removed
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: contact desk icons retain compact established geometry
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating

@@ -13,6 +13,7 @@ from page_family import ensure_family
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
 REPORT=Path('CONTENT_EXPERIENCE_REPAIR_STATUS.json')
+LABEL_INDEX=Path('LABEL_FEED_INDEX.json')
 COMMONS='https://commons.wikimedia.org/w/api.php'
 START='<!-- DY_CONTENT_EXPERIENCE_REPAIR_START -->';END='<!-- DY_CONTENT_EXPERIENCE_REPAIR_END -->'
 NEWS_LABELS=['US','China','Germany','India','Japan','UK','France','Italy','Russia','Canada','Brazil','Spain','Mexico','Australia','South Korea','Market and Trading','Economy and Macro Policy','Corporate Finance and Industry','Personal Finance','Global News']
@@ -318,12 +319,24 @@ def main():
  unresolved_duplicates,dupes=repair_remaining_duplicate_heroes(h)
  # Authenticated verification; no public URL requests.
  verified=list_all('posts',h)
+ # A compact exact-image index lets the Theme render Homepage and label cards
+ # from summary feeds instead of downloading hundreds of kilobytes of Post bodies.
+ def indexed_images(post):
+  urls=srcs(post.get('content',''))
+  primary=urls[0] if urls else ''
+  # Keep the exact opening photograph. If its external host rate-limits a card,
+  # recover with another existing editorial photo from that same Post.
+  fallback=next((u for u in urls[1:] if u!=primary and not re.search(r'https?://(?:thumb|upload)\.wikimedia\.org/',u,re.I)),'')
+  return primary,fallback
+ pairs={p['id']:indexed_images(p) for p in verified}
+ images={pid:pair[0] for pid,pair in pairs.items()};fallbacks={pid:pair[1] for pid,pair in pairs.items()}
+ LABEL_INDEX.write_text(json.dumps({'version':4,'generated_at':datetime.now(timezone.utc).isoformat(),'images':images,'fallbacks':fallbacks},ensure_ascii=False,separators=(',',':'))+'\n',encoding='utf-8')
  # Fail closed if even one canonical Article or Global News shelf would be empty.
  category_counts={cat:sum(any(norm(x)==norm(cat) for x in p.get('labels',[])) for p in posts if 'News' not in p.get('labels',[])) for cat in categories}
  news_counts={desk:sum(desk in p.get('labels',[]) for p in posts if 'News' in p.get('labels',[])) for desk in NEWS_LABELS}
  critical_ok=all(category_counts.values()) and news_counts.get('Global News',0)>0
  status='PASS' if critical_ok and dupes==0 else ('WARNING' if critical_ok else 'FAIL')
- report={'status':status,'zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'unresolved_duplicate_groups':unresolved_duplicates,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts),'article_category_counts':category_counts,'news_desk_counts':news_counts}
+ report={'status':status,'zero_view':True,'posts_checked':len(posts),'labels_normalized':labels_fixed,'duplicate_heroes_replaced':images_fixed,'remaining_duplicate_heroes':dupes,'unresolved_duplicate_groups':unresolved_duplicates,'pages_repaired':pages_fixed,'article_snapshot_entries':sum('News' not in p.get('labels',[]) for p in posts),'news_snapshot_entries':sum('News' in p.get('labels',[]) for p in posts),'label_image_index_entries':sum(bool(x) for x in images.values()),'article_category_counts':category_counts,'news_desk_counts':news_counts}
  REPORT.write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report))
  # A residual image-source limitation is recorded as a warning, not reported as
  # a failed workflow. Missing canonical shelves remains a genuine hard failure.

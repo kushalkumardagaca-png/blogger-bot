@@ -1,7 +1,7 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 184,
+  "pass": 200,
   "fail": 0,
   "checks": [
     {
@@ -13,11 +13,15 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: privacy choice panel",
+      "name": "Daily-Yield-Theme-Subscription.xml: centered privacy choice dialog",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: homepage consent card follows hero",
+      "name": "Daily-Yield-Theme-Subscription.xml: first and every fifth page privacy schedule",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: cross uses essential cookies only",
       "status": "PASS"
     },
     {
@@ -25,11 +29,27 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-Subscription.xml: content is blocked behind blurred consent layer",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-Subscription.xml: footer displays consent state",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: saved analytics choice restored on later pages",
+      "name": "Daily-Yield-Theme-Subscription.xml: saved cookie choice restored on later pages",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: all-cookie choice suppresses future reminders",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: essential choice is presented as remind later",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: remind-later control has no box",
       "status": "PASS"
     },
     {
@@ -229,7 +249,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: analytics changes only after choice",
+      "name": "Daily-Yield-Theme-Subscription.xml: optional storage changes only after choice",
       "status": "PASS"
     },
     {
@@ -273,7 +293,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: Theme transfer budget stays below 320 KB",
+      "name": "Daily-Yield-Theme-Subscription.xml: compressed Theme transfer budget stays below 110 KB",
       "status": "PASS"
     },
     {
@@ -309,7 +329,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: homepage feed metadata is session cached",
+      "name": "Daily-Yield-Theme-Subscription.xml: homepage feed metadata and exact images are session cached",
       "status": "PASS"
     },
     {
@@ -321,7 +341,19 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-Subscription.xml: subscription desk is compact instead of full-height",
+      "name": "Daily-Yield-Theme-Subscription.xml: Google follow popup is article-only at 20 percent and waits for cookie choice",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: follow intent suppresses future invitations on this browser",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: broken multi-option subscription desk remains removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-Subscription.xml: contact desk icons retain compact established geometry",
       "status": "PASS"
     },
     {
@@ -353,11 +385,15 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: privacy choice panel",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: centered privacy choice dialog",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: homepage consent card follows hero",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: first and every fifth page privacy schedule",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: cross uses essential cookies only",
       "status": "PASS"
     },
     {
@@ -365,11 +401,27 @@
       "status": "PASS"
     },
     {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: content is blocked behind blurred consent layer",
+      "status": "PASS"
+    },
+    {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: footer displays consent state",
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: saved analytics choice restored on later pages",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: saved cookie choice restored on later pages",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: all-cookie choice suppresses future reminders",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: essential choice is presented as remind later",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: remind-later control has no box",
       "status": "PASS"
     },
     {
@@ -569,7 +621,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: analytics changes only after choice",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: optional storage changes only after choice",
       "status": "PASS"
     },
     {
@@ -613,7 +665,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Theme transfer budget stays below 320 KB",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: compressed Theme transfer budget stays below 110 KB",
       "status": "PASS"
     },
     {
@@ -649,7 +701,7 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: homepage feed metadata is session cached",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: homepage feed metadata and exact images are session cached",
       "status": "PASS"
     },
     {
@@ -661,7 +713,19 @@
       "status": "PASS"
     },
     {
-      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: subscription desk is compact instead of full-height",
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: Google follow popup is article-only at 20 percent and waits for cookie choice",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: follow intent suppresses future invitations on this browser",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: broken multi-option subscription desk remains removed",
+      "status": "PASS"
+    },
+    {
+      "name": "Daily-Yield-Theme-v4-2026-10-01.xml: contact desk icons retain compact established geometry",
       "status": "PASS"
     },
     {

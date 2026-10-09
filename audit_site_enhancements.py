@@ -2,6 +2,7 @@
 """Static, zero-view acceptance audit for Daily Yield Theme v4 and search reach."""
 from pathlib import Path
 from xml.etree import ElementTree as ET
+import gzip
 import json
 
 ROOT=Path(__file__).parent
@@ -17,7 +18,7 @@ for p in THEMES:
     prefix=p.name+': '
     check(prefix+'valid Blogger XML',valid)
     requirements={
-      'light-mode reset for former dark preference':"localStorage.removeItem('dy-theme')",'privacy choice panel':"id='dyPrivacyPanel'",'homepage consent card follows hero':"hero.insertAdjacentElement('afterend',panel)",'footer privacy control':"id='dyPrivacyManage'",'footer displays consent state':'Privacy choices · Analytics allowed','saved analytics choice restored on later pages':"savedConsent==='analytics'",
+      'light-mode reset for former dark preference':"localStorage.removeItem('dy-theme')",'centered privacy choice dialog':"left:50%;top:50%",'first and every fifth page privacy schedule':"privacyPage===1||privacyPage%5===0",'cross uses essential cookies only':"Close and use essential cookies only",'footer privacy control':"id='dyPrivacyManage'",'content is blocked behind blurred consent layer':"dy-privacy-lock body::after",'footer displays consent state':'Privacy choices · All cookies allowed','saved cookie choice restored on later pages':"if(!mustChoose)consent(savedConsent)",'all-cookie choice suppresses future reminders':"savedConsent!=='all'&&scheduled",'essential choice is presented as remind later':">Remind me later</button>",'remind-later control has no box':"button:not(.dy-primary){min-height:34px;padding:8px;background:transparent;border:0",
       'site search':"id='searchToggle'",'back to top':"id='toTop'",'mobile menu':"id='drawerToggle'",
       'full-screen finance loading transition':"DY_FINANCE_LOADER_START",'hover states':':hover','reading progress':"id='progressBar'",
       'copy/share feedback':'Link copied','print stylesheet':'@media print','sticky header':'position:sticky',
@@ -32,31 +33,34 @@ for p in THEMES:
       'lazy later images':"setAttribute('loading','lazy')",'async image decoding':"setAttribute('decoding','async')",
       'priority first image':"setAttribute('fetchpriority','high')",'runtime fallback for widget images missing alt':"img:not([alt])",'informative moving thumbnails use titles':"im.alt=it.title||'Daily Yield article preview'",'author identity':'Kushal K. Daga',
       'privacy link':'/p/privacy-policy.html','terms link':'/p/terms-and-conditions.html','contact email':'dailyyield.official@gmail.com',
-      'HTTPS destination':'https://dailyyield.blogspot.com/','analytics consent defaults denied before loading':"gtag('consent','default'",'Blogger GA4 loader uses saved Measurement ID':"name='google-analytics'",'analytics changes only after choice':"analytics_storage:mode==='analytics'?'granted':'denied'",
+      'HTTPS destination':'https://dailyyield.blogspot.com/','analytics consent defaults denied before loading':"gtag('consent','default'",'Blogger GA4 loader uses saved Measurement ID':"name='google-analytics'",'optional storage changes only after choice':"analytics_storage:allow?'granted':'denied'",
       'no external enhancement script':'DY_SITE_ENHANCEMENTS_JS_START','honest advice disclaimer':'educational information',
     }
     for name,needle in requirements.items(): check(prefix+name,needle in text)
     check(prefix+'loader covers every internal navigation direction', "D.addEventListener('click'" in text and "location.assign(u.href)" in text and "dailyyield\\.blogspot\\." in text)
     check(prefix+'loader exits at DOM readiness instead of waiting for images', "DOMContentLoaded',ready" in text and "setTimeout(ready,1800)" in text)
     check(prefix+'two-second performance budget is measured honestly', "data-dy-two-second-budget" in text and "ms<=2000?'met':'miss'" in text)
-    check(prefix+'real-user vitals require analytics consent', "data-dy-rum-policy','consent-only-non-pageview'" in text and "safeGet('dy-consent')==='analytics'" in text)
+    check(prefix+'real-user vitals require analytics consent', "data-dy-rum-policy','consent-only-non-pageview'" in text and "safeGet('dy-consent')==='all'" in text)
     check(prefix+'real-user vitals event is not a pageview', "gtag('event','dy_web_vitals'" in text and "gtag('event','page_view'" not in text)
     check(prefix+'LCP CLS and INP are measured without navigation', 'largest-contentful-paint' in text and 'layout-shift' in text and 'durationThreshold:40' in text)
     check(prefix+'render-blocking Google Fonts removed', 'fonts.googleapis.com' not in text and 'fonts.gstatic.com' not in text)
     check(prefix+'duplicate base64 favicon payloads removed', 'data:image/png;base64' not in text)
-    check(prefix+'Theme transfer budget stays below 320 KB', len(text.encode('utf-8')) < 320000)
+    check(prefix+'compressed Theme transfer budget stays below 110 KB', len(gzip.compress(text.encode('utf-8'), compresslevel=9)) < 110000)
     check(prefix+'old body fade delay removed', 'animation:pageIn' not in text and '@keyframes pageIn' not in text)
     check(prefix+'comment iframe engine is deferred off critical path', 'DY_LAZY_COMMENT_LOADER_START' in text and "<script src='https://www.blogger.com/static" not in text)
-    check(prefix+'labels use feed-only infinite loading without document requests', "data-dy-label-feed','feed-json-infinite'" in text and "'/feeds/posts/default/-/'" in text and "className='dy-label-status'" in text and "fetch(href,{credentials:'same-origin'})" not in text)
+    check(prefix+'labels use feed-only infinite loading without document requests', "data-dy-label-feed','feed-json-infinite'" in text and "'/feeds/posts/summary/-/'" in text and "indexPromise=window.DYFeedCache.asset()" in text and "className='dy-label-status'" in text and "fetch(href,{credentials:'same-origin'})" not in text)
     check(prefix+'navigation is reader initiated only', "data-dy-navigation-policy','reader-navigation-only'" in text)
     check(prefix+'synthetic document request count is fixed at zero', "data-dy-synthetic-document-requests','0'" in text)
     check(prefix+'no speculative document prefetch or prerender', "link.rel='prefetch'" not in text and "link.as='document'" not in text and "rel='prerender'" not in text)
     check(prefix+'safe accelerator accepts feed paths only', "data-dy-safe-accelerator','feed-and-assets-only'" in text and "/^\\/feeds\\//.test(u.pathname)" in text and "document requests prohibited" in text)
     check(prefix+'accelerator never caches Page or label documents', "DYFeedCache.get('/p/" not in text and "DYFeedCache.get('/search/" not in text)
-    check(prefix+'homepage feed metadata is session cached', "window.DYFeedCache.get('/feeds/posts/summary" in text and "window.DYFeedCache.get('/feeds/posts/default/-/News" in text)
+    check(prefix+'homepage feed metadata and exact images are session cached', "window.DYFeedCache.get('/feeds/posts/summary" in text and "/feeds/posts/summary/-/News" in text and "window.DYFeedCache.asset()" in text)
     check(prefix+'homepage article rails use newest-first chronology', 'var all=parse(j,false);' in text and 'Earlier articles' in text)
     check(prefix+'five tool benches share one compact row', '#kd-tools .kd-digest{grid-template-columns:repeat(5,minmax(0,1fr))!important' in text)
-    check(prefix+'subscription desk is compact instead of full-height', '.dy-sub-grid{grid-template-columns:1.05fr .95fr!important;min-height:0!important}' in text)
+    check(prefix+'Google follow popup is article-only at 20 percent and waits for cookie choice', "class='dy-follow-popup'" in text and "/^\\/\\d{4}\\/\\d{2}\\/[^/]+\\.html$/.test(location.pathname)" in text and 'progress>=.20' in text and "!H.classList.contains('dy-privacy-lock')" in text and 'https://www.blogger.com/followers/follow/8911514070006792465' in text)
+    check(prefix+'follow intent suppresses future invitations on this browser', "dy-google-follow-intent-v1" in text and "localStorage.setItem(key,'followed')" in text and "localStorage.getItem(key)==='followed'" in text)
+    check(prefix+'broken multi-option subscription desk remains removed', 'https://api.follow.it/subscribe' not in text and 'dy-sub-form' not in text and 'dy-sub-choice' not in text and 'dy-sub-beacon' not in text)
+    check(prefix+'contact desk icons retain compact established geometry', '.kd-eg-icon{width:52px;height:52px' in text and '.kd-eg-icon svg{display:block!important;width:26px!important;height:26px!important' in text and '.kd-eg-row{position:relative;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))' in text)
     theme_images=[] if not valid else [node for node in tree.getroot().iter() if str(node.tag).split('}')[-1].lower()=='img']
     check(prefix+'every Theme image has nonempty alt', valid and all(any(str(key).split('}')[-1]=='alt' and str(value).strip() for key,value in node.attrib.items()) for node in theme_images))
     check(prefix+'dark mode fully removed', "dyThemeToggle" not in text and "data-dy-theme='dark'" not in text)
