@@ -1,15 +1,15 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 371,
+  "posts_checked": 372,
   "labels_normalized": 295,
-  "duplicate_heroes_replaced": 2,
+  "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
-  "pages_repaired": 2,
+  "pages_repaired": 1,
   "article_snapshot_entries": 76,
-  "news_snapshot_entries": 295,
-  "label_image_index_entries": 371,
+  "news_snapshot_entries": 296,
+  "label_image_index_entries": 372,
   "article_category_counts": {
     "Contrarian Hooks": 4,
     "Age and Wealth Milestones": 3,
@@ -38,16 +38,16 @@
     "2026 Money Moves": 3
   },
   "news_desk_counts": {
-    "Global Finance News": 15,
+    "Global Finance News": 16,
     "Americas Finance News": 59,
     "China Finance News": 15,
     "Asia-Pacific Finance News": 45,
     "India Finance News": 15,
     "Russia Finance News": 14,
     "Europe Finance News": 73,
-    "Markets, Crypto & Commodities": 15,
-    "Economy, Trade & Jobs": 15,
-    "Banking, Fintech & Personal Money": 14,
-    "Companies, IPOs & Deals": 15
+    "Markets, Crypto & Commodities": 16,
+    "Economy, Trade & Jobs": 16,
+    "Banking, Fintech & Personal Money": 15,
+    "Companies, IPOs & Deals": 16
   }
 }
