@@ -217,7 +217,8 @@ check('Master articles include continuous gesture motion','ensure_continuous_mot
 check('Master uses three unique licensed 16:9 placement-specific photographs','choose_photos' in prep and "image.resize((1600,900)" in (ROOT/'photo_selector.py').read_text() and "len(photos)!=3" in mv2 and 'PHOTO_USAGE_REGISTRY.json' in (ROOT/'photo_selector.py').read_text())
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('Every News desk uses date-rotated fresh hero selection',
-      'def daily_hero(' in np and 'edition_date.toordinal()' in np and 'previous_hero=prev.get("hero_url"' in np)
+      'def daily_hero(' in np and 'edition_date.toordinal()' in np
+      and 'previous_url=prev.get("hero_url"' in np and 'hero_override=hero' in np)
 check('Daily News heroes avoid cross-desk reuse',
       'used_heroes = {' in np and 'SESSION_USED_IMAGES' in np and 'url not in used_urls' in np)
 check('Licensed Commons hero photographs retain visible attribution',
@@ -268,9 +269,16 @@ check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News requires at least one genuinely current item','if current_count == 0' in np)
 check('Significance ranks rather than cancels a desk edition',
       'current = relevant[:selection_cap]' in np and 'finance_significant' not in np)
-check('News selects fifteen complete items from a wider integrity-checked candidate set',
+check('News starts from fifteen complete items and can add sourced headlines adaptively',
       'selection_cap=20' in np and 'current = relevant[:selection_cap]' in np
-      and '[:15]' in np and 'source-integrity gate excluded' in np)
+      and 'first_count = min(15, len(current))' in np
+      and 'range(first_count, len(current) + 1)' in np
+      and 'source-integrity gate excluded' in np)
+check('News adaptive polish expands detail and sentence-trims context without touching summaries',
+      'for target in (188, 203, 218, 233)' in np
+      and 'def reduce_news_context(' in np
+      and 'class="fbk-context"' in np
+      and 'class="fbk-description"' in np)
 check('Every country desk has broad current-news discovery fallback',
       'def discovery_sources(desk)' in np and "med.append(discovery)" in np and "when:1d" in np)
 check('Discovery fallback retains only approved named publishers',

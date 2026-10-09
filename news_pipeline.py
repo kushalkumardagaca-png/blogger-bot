@@ -869,7 +869,7 @@ def source_summary(it, maximum=68):
     desc = re.sub(r"\s+", " ", strip_tags(it.get("desc", ""))).strip()
     return clip_word_count(desc, maximum).rstrip(" .") + "."
 
-def compose_item(it, win_end):
+def compose_item(it, win_end, context_target=173):
     title = clean_title(it["title"])
     if len(title) > 140:
         cut = title[:140].rfind(" ")
@@ -890,10 +890,11 @@ def compose_item(it, win_end):
         chip, display = f"{day} · Reported development", title
         status = f"{it['agency']} published this account on {day}. Possible consequences below are conditional context, not a claim that a future result is certain."
     summary_words = len(summary.split())
-    context_limit = max(98, 173 - summary_words)
+    context_limit = max(75, context_target - summary_words)
+    ordered_lenses = " ".join(READER_LENS[(variant + offset) % len(READER_LENS)]
+                               for offset in range(len(READER_LENS)))
     context_seed = (f"{status} Applied specifically to the source topic — {title} — this lens separates "
-                    f"the reported record from possible effects. {CONSEQUENCE[kind]} {READER_LENS[variant]} "
-                    f"{READER_LENS[(variant + 1) % len(READER_LENS)]}")
+                    f"the reported record from possible effects. {CONSEQUENCE[kind]} {ordered_lenses}")
     context = clip_word_count(context_seed, context_limit)
     etitle, eagency = htmlmod.escape(display), htmlmod.escape(it["agency"])
     return f'''    <div class="fbk-item{' fbk-background' if background else ''}">
@@ -1018,7 +1019,7 @@ def coverage_window_text(start, end):
     return f"{names[start.month-1]} {start.day} {start.year} to {names[end.month-1]} {end.day} {end.year}"
 
 def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, related,
-                  previous_hero="", used_heroes=None):
+                  previous_hero="", used_heroes=None, hero_override=None, context_target=173):
     n, label, slug, slot, legacy_hero_id, legacy_hero_alt = DESKS[desk]
     current_items = [i for i in items if not i.get("background")]
     background_items = [i for i in items if i.get("background")]
@@ -1045,7 +1046,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
             "south-korea": "🇰🇷"}.get(desk, "🌍")
     tag = f"Daily News · {flag} {label} Wire" if desk not in CATEGORY_DESKS else f"Daily News · 📑 {label}"
 
-    hero = daily_hero(desk, edition_date, used_urls=used_heroes, previous_url=previous_hero)
+    hero = hero_override or daily_hero(desk, edition_date, used_urls=used_heroes, previous_url=previous_hero)
     hero_url, hero_alt, hero_credit = hero["url"], hero["alt"], hero["credit"]
     SESSION_USED_IMAGES.add(hero_url)
 
@@ -1062,7 +1063,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
             continue
         sections_html += f'\n    <h2 class="fbk-h2"><b>{num}</b> {name}</h2>\n    <p class="fbk-sub">{sub}</p>'
         for it in its:
-            sections_html += "\n" + compose_item(it, win_end)
+            sections_html += "\n" + compose_item(it, win_end, context_target=context_target)
 
     background_html = ""
     if background_items:
@@ -1070,7 +1071,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     <h2 class="fbk-h2"><b>BG</b> Background Context — Not Current-Period News</h2>
     <p class="fbk-sub">At most three older items, each retaining its original date and source, reframed only to explain current context.</p>'''
         for it in background_items:
-            background_html += "\n" + compose_item(it, win_end)
+            background_html += "\n" + compose_item(it, win_end, context_target=context_target)
 
     # FX reference block (ECB official)
     fx_html = ""
@@ -1177,7 +1178,8 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     return {"title": title, "slug": f"{slug}-{edition_date.isoformat()}",
             "meta": meta, "labels": ["News", label], "html": full_html,
             "canonical": canonical, "n_items": len(items),
-            "hero_url": hero_url, "hero_credit": hero_credit, "hero_source": hero["source"]}
+            "hero_url": hero_url, "hero_alt": hero_alt,
+            "hero_credit": hero_credit, "hero_source": hero["source"]}
 
 NEWS_MIN_WORDS = 3800
 NEWS_MAX_WORDS = 4100
@@ -1193,6 +1195,90 @@ def assert_news_editorial_length(document):
     if not NEWS_MIN_WORDS <= count <= NEWS_MAX_WORDS:
         raise ValueError(f"News editorial length {count} is outside {NEWS_MIN_WORDS}-{NEWS_MAX_WORDS} words")
     return count
+
+
+def reduce_news_context(document, target=4050):
+    """Sentence-trim explanatory context while preserving source summaries and attribution."""
+    count = editorial_word_count(document)
+    if count <= NEWS_MAX_WORDS:
+        return document, count
+    pattern = re.compile(r'(<p class="fbk-context">)(.*?)(</p>)', re.I | re.S)
+    matches = list(pattern.finditer(document))
+    replacements = {}
+    for match in reversed(matches):
+        if count <= target:
+            break
+        plain = htmlmod.unescape(strip_tags(match.group(2)))
+        sentences = [part.strip() for part in re.split(r"(?<=[.!?])\s+", plain) if part.strip()]
+        # Keep the opening status/attribution and at least one consequence sentence.
+        while len(sentences) > 2 and count > target:
+            removed = sentences.pop()
+            count -= len(re.findall(r"\b[\w’'-]+\b", removed, flags=re.UNICODE))
+        replacements[match.start()] = match.group(1) + htmlmod.escape(" ".join(sentences)) + match.group(3)
+    if replacements:
+        pieces, cursor = [], 0
+        for match in matches:
+            pieces.append(document[cursor:match.start()])
+            pieces.append(replacements.get(match.start(), match.group(0)))
+            cursor = match.end()
+        pieces.append(document[cursor:])
+        document = "".join(pieces)
+    return document, editorial_word_count(document)
+
+
+def finish_news_article(art, related_candidates):
+    """Apply every final reader, SEO, accessibility and navigation enhancement."""
+    current_post = {"id": "pending", "title": art["title"],
+                    "labels": art["labels"], "content": art["html"]}
+    art["html"] = ensure_related_articles(art["html"], current_post, related_candidates)
+    hero_match = re.search(r'<img[^>]+src=["\']([^"\']+)', art["html"], re.I)
+    art["html"] = ensure_seo_meta(art["html"], art["title"], art["meta"],
+                                  hero_match.group(1) if hero_match else "")
+    art["html"] = ensure_family(art["html"])
+    art["html"] = ensure_continuous_motion(art["html"])
+    art["html"], _ = repair_image_alts(art["html"], art["title"])
+    return art
+
+
+def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win_start,
+                              win_end, fx, related, related_candidates, hero):
+    """Adapt headline count and detail, then sentence-trim context into the hard range."""
+    current = [item for item in candidate_items if not item.get("background")]
+    background = [item for item in candidate_items if item.get("background")]
+    if not current:
+        raise ValueError("no current sourced items available")
+    first_count = min(15, len(current))
+    attempts = [(count, 173) for count in range(first_count, len(current) + 1)]
+    # If even every sourced headline is short, deepen consequence and scenario
+    # analysis using the already selected source topic—never invented source facts.
+    attempts.extend((len(current), target) for target in (188, 203, 218, 233))
+    seen = set()
+    last_count = 0
+    for item_count, context_target in attempts:
+        if (item_count, context_target) in seen:
+            continue
+        seen.add((item_count, context_target))
+        selected = current[:item_count] + background
+        art = build_article(
+            desk, selected, upcoming, edition_date, win_start, win_end, fx, related,
+            hero_override=hero, context_target=context_target,
+        )
+        art = finish_news_article(art, related_candidates)
+        count = editorial_word_count(art["html"])
+        last_count = count
+        if count < NEWS_MIN_WORDS:
+            continue
+        if count > NEWS_MAX_WORDS:
+            art["html"], count = reduce_news_context(art["html"])
+        if NEWS_MIN_WORDS <= count <= NEWS_MAX_WORDS:
+            mode = (f"{item_count} headlines · context target {context_target}"
+                    + (" · sentence-polished" if count != last_count else ""))
+            return art, selected, count, mode
+    raise ValueError(
+        f"adaptive News polish could not reach {NEWS_MIN_WORDS}-{NEWS_MAX_WORDS} words; "
+        f"last complete sourced draft was {last_count} words"
+    )
+
 
 # ---------------------------------------------------------------- related links
 def fetch_related(desk, prev_url, token):
@@ -1347,40 +1433,47 @@ def run_desk(desk, tracker, dry=False, token=None):
     items = [item for item in items if item_source_is_usable(item)]
     if len(items) != before_source_gate:
         print(f"  [{desk}] source-integrity gate excluded {before_source_gate - len(items)} thin or unverifiable item(s)")
-    # The richer format is calibrated for fifteen fully sourced headline packages.
-    # Fetching a slightly wider candidate set prevents metadata failures or duplicate
-    # publisher synopses from leaving a thin edition.
-    rich_current = [item for item in items if not item.get("background")][:15]
+    # Keep up to twenty complete candidates. The adaptive polisher starts with
+    # fifteen, adds sourced headlines when short, deepens context only if needed,
+    # and sentence-trims explanatory context when long.
+    rich_current = [item for item in items if not item.get("background")][:20]
     rich_background = [item for item in items if item.get("background")]
     items = rich_current + rich_background
     if len(items) != selected_before_body_dedupe:
         print(f"  [{desk}] visible-paragraph duplicate guard excluded "
               f"{selected_before_body_dedupe - len(items)} item(s)")
     eff_start = win_start
-    current_count = sum(1 for item in items if not item.get("background"))
-    background_count = sum(1 for item in items if item.get("background"))
-    print(f"  [{desk}] {len(items_raw)} raw items -> {current_count} current + "
-          f"{background_count} background selected ({len(upcoming)} upcoming)")
+    current_count = len(rich_current)
+    background_count = len(rich_background)
+    print(f"  [{desk}] {len(items_raw)} raw items -> {current_count} usable current candidate(s) + "
+          f"{background_count} background ({len(upcoming)} upcoming)")
     if current_count == 0:
         print(f"  [{desk}] NO CURRENT ITEMS — edition SKIPPED rather than recycling old news")
         return False
     fx = ecb_reference_rates()
     related = fetch_related(desk, prev.get("url"), token)
+    related_candidates = fetch_public_posts()
+    if not related_candidates:
+        # Authenticated inventory can be temporarily unavailable. Reuse the
+        # already-known Daily Yield destinations without opening public pages.
+        related_candidates = [
+            {"id": f"fallback-{index}", "title": title, "content": "",
+             "labels": ["Daily Yield"], "published": edition_date.isoformat(), "url": url}
+            for index, (title, url) in enumerate(related) if url
+        ]
     used_heroes = {
         entry.get("hero_url") for entry in tracker.get("desks", {}).values()
         if entry.get("edition") == edition_date.isoformat() and entry.get("hero_url")
     }
-    art = build_article(desk, items, upcoming, edition_date, eff_start, win_end, fx, related,
-                        previous_hero=prev.get("hero_url", ""), used_heroes=used_heroes)
-    current_post = {"id": "pending", "title": art["title"], "labels": art["labels"], "content": art["html"]}
-    art["html"] = ensure_related_articles(art["html"], current_post, fetch_public_posts())
-    hero_match = re.search(r'<img[^>]+src=["\']([^"\']+)', art["html"], re.I)
-    art["html"] = ensure_seo_meta(art["html"], art["title"], art["meta"], hero_match.group(1) if hero_match else "")
-    art["html"] = ensure_family(art["html"])
-    art["html"] = ensure_continuous_motion(art["html"])
-    art["html"], _ = repair_image_alts(art["html"], art["title"])
+    hero = daily_hero(desk, edition_date, used_urls=used_heroes,
+                      previous_url=prev.get("hero_url", ""))
+    art, items, word_count, polish_mode = build_fitted_news_article(
+        desk, items, upcoming, edition_date, eff_start, win_end, fx, related,
+        related_candidates, hero,
+    )
     word_count = assert_news_editorial_length(art["html"])
     assert_publishable(art["title"], art["html"], art["labels"])
+    print(f"  [{desk}] adaptive polish: {polish_mode}")
     print(f"  [{desk}] article built: {art['n_items']} items, {word_count} editorial words, '{art['title'][:70]}…'")
     url = publish_post(art, token, dry)
     if url or dry:

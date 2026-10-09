@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-09T16:50:20+05:30",
+  "checked_at_ist": "2026-10-09T16:59:37+05:30",
   "summary": {
-    "pass": 121,
+    "pass": 122,
     "fail": 0
   },
   "checks": [
@@ -521,7 +521,12 @@
       "detail": ""
     },
     {
-      "name": "News selects fifteen complete items from a wider integrity-checked candidate set",
+      "name": "News starts from fifteen complete items and can add sourced headlines adaptively",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News adaptive polish expands detail and sentence-trims context without touching summaries",
       "status": "PASS",
       "detail": ""
     },

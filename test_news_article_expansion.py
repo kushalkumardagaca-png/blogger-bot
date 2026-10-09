@@ -105,6 +105,51 @@ class NewsArticleExpansionTests(unittest.TestCase):
         self.assertTrue(any("Forecast" in name for name in names))
         self.assertTrue(any("Analyst Expectations" in name for name in names))
 
+    def test_adaptive_polish_adds_a_sourced_headline_when_short(self):
+        description = (
+            "Publisher reports an outlook with possible consequences for markets, "
+            "policy, companies and households today."
+        )
+        candidates = [
+            {
+                "title": f"Outlook update {i}", "url": f"https://example.com/adaptive-{i}",
+                "desc": description, "date": self.day, "agency": f"Source {i}",
+                "prio": 2, "media": True,
+            }
+            for i in range(20)
+        ]
+        related = [
+            {"id": f"r{i}", "title": f"Guide {i}", "content": "", "labels": ["Articles"],
+             "published": "2026-10-01T00:00:00Z",
+             "url": f"https://dailyyield.blogspot.com/2026/10/guide-{i}.html"}
+            for i in range(4)
+        ]
+        article, selected, count, mode = news.build_fitted_news_article(
+            "global", candidates, [], self.day, self.start, self.end,
+            {}, [], related, HERO,
+        )
+        self.assertEqual(len(selected), 16)
+        self.assertIn("16 headlines", mode)
+        self.assertGreaterEqual(count, 3800)
+        self.assertLessEqual(count, 4100)
+        self.assertEqual(article["html"].count('class="fbk-description"'), 16)
+
+    def test_oversized_draft_is_sentence_polished_without_touching_source_summary(self):
+        items = self.items(20)
+        with patch.object(news, "daily_hero", return_value=HERO):
+            article = news.build_article(
+                "global", items, [], self.day, self.start, self.end,
+                {}, [], hero_override=HERO, context_target=233,
+            )
+        article = news.finish_news_article(article, [])
+        protected = news.source_summary(items[0])
+        self.assertGreater(news.editorial_word_count(article["html"]), 4100)
+        polished, count = news.reduce_news_context(article["html"])
+        self.assertGreaterEqual(count, 3800)
+        self.assertLessEqual(count, 4100)
+        self.assertIn(protected, polished)
+        self.assertIn("not an observed future result", polished)
+
 
 if __name__ == "__main__":
     unittest.main()
