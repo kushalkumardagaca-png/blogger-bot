@@ -1,6 +1,6 @@
 {
   "status": "FAIL",
-  "generated_at": "2026-10-10T03:52:12.221566+00:00",
+  "generated_at": "2026-10-10T04:02:24.709591+00:00",
   "dry_run": false,
   "published": 0,
   "failed": 3,
@@ -9,19 +9,19 @@
       "desk": "americas",
       "status": "FAIL",
       "error_type": "RuntimeError",
-      "error": "Blogger POST /posts?isDraft=true returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
+      "error": "Blogger PUT /posts/3765356538829628279 returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
     },
     {
       "desk": "markets",
       "status": "FAIL",
-      "error_type": "ValueError",
-      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 5840 words"
+      "error_type": "RuntimeError",
+      "error": "Blogger PUT /posts/1700784563179985190 returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
     },
     {
       "desk": "economy",
       "status": "FAIL",
-      "error_type": "ValueError",
-      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 5732 words"
+      "error_type": "RuntimeError",
+      "error": "Blogger PUT /posts/249107466377745488 returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
     }
   ]
 }
