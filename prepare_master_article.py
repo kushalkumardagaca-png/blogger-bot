@@ -79,6 +79,24 @@ def discover(topic):
    evidence.append({'name':source,'title':work.get('title') or subject,'url':url,'text':text[:7000],'score':7})
    if len(evidence)>=10:break
  except Exception:pass
+ # A trending Master Article needs current reporting as well as durable research.
+ # Reuse the News pipeline's approved-publisher parser so live topics receive
+ # attributable, resolved source URLs without relaxing the evidence boundary.
+ if topic.get('Trending Category'):
+  try:
+   from news_pipeline import parse_gnr
+   queries=[subject,topic.get('Punchy Title','')]
+   for query in dict.fromkeys(x for x in queries if x):
+    feed='https://news.google.com/rss/search?q='+urllib.parse.quote(str(query)+' when:7d')+'&hl=en-US&gl=US&ceid=US:en'
+    response=requests.get(feed,headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=30);response.raise_for_status()
+    for item in parse_gnr(response.text,('Master trend evidence',feed,'gnr',2)):
+     url=item.get('url','');title=item.get('title','');body=plain_page(url);summary=item.get('desc','')
+     text=(title+'. '+(body or summary)).strip()
+     if not url.startswith('https://') or url in seen or len(text)<180:continue
+     seen.add(url);evidence.append({'name':item.get('agency') or 'Established newsroom','title':title or str(query),'url':url,'text':text[:7000],'score':8})
+     if len(evidence)>=12:break
+    if len(evidence)>=12:break
+  except Exception:pass
  trusted=('irs.gov','dol.gov','sec.gov','investor.gov','consumerfinance.gov','federalreserve.gov','rbi.org.in','oecd.org','worldbank.org','imf.org','bis.org','ilo.org')
  queries=[subject+' official research data',subject+' regulator evidence',subject+' academic study statistics']
  for query in queries:

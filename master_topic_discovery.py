@@ -49,7 +49,8 @@ def rss(url,source,category=None):
   for rank,item in enumerate(root.findall('.//item')[:30],1):
    title=clean(item.findtext('title'));link=clean(item.findtext('link'));description=clean(item.findtext('description'));published=parse_date(item.findtext('pubDate') or '')
    traffic=clean(item.findtext('ht:approx_traffic',namespaces=ns));m=re.search(r'[\d,.]+',traffic);volume=float(m.group(0).replace(',','')) if m else 0
-   if title:out.append({'title':title,'description':description,'url':link,'published':published,'source':source,'rank':rank,'volume':volume,'forced_category':category})
+   host=(urllib.parse.urlparse(link).hostname or '').casefold()
+   if title and len(title)<=220 and not any(x in host for x in ('facebook.com','instagram.com','tiktok.com')):out.append({'title':title,'description':description,'url':link,'published':published,'source':source,'rank':rank,'volume':volume,'forced_category':category})
  except Exception:return []
  return out
 
@@ -98,20 +99,24 @@ def cluster(raw):
   else:groups.append({'tokens':tokens,'items':[item]})
  return groups
 
-def classify(text,categories):return max(categories,key=lambda c:category_fit(text,c))
+def classify(text,categories,default=None):
+ ranked=sorted(((category_fit(text,c),c) for c in categories),key=lambda x:x[0],reverse=True)
+ return ranked[0][1] if ranked and ranked[0][0]>0 else (default or categories[0])
 def trend_candidates(raw):
  result=[]
  for group in cluster(raw):
   items=group['items'];title=max(items,key=lambda x:(x.get('volume',0),-x.get('rank',99)))['title'];text=' '.join(x['title']+' '+x.get('description','') for x in items)
   forced=[x.get('forced_category') for x in items if x.get('forced_category')]
   forced_label=max(set(forced),key=forced.count) if forced else None
+  if not forced_label and max(category_fit(text,c) for c in TRENDING_CATEGORIES)==0:continue
   cat=next((c for c in TRENDING_CATEGORIES if c['label']==forced_label),None) or classify(text,TRENDING_CATEGORIES)
+  permanent_defaults={TRENDING_CATEGORIES[0]['label']:EVERGREEN_CATEGORIES[13],TRENDING_CATEGORIES[1]['label']:EVERGREEN_CATEGORIES[5],TRENDING_CATEGORIES[2]['label']:EVERGREEN_CATEGORIES[12],TRENDING_CATEGORIES[3]['label']:EVERGREEN_CATEGORIES[3],TRENDING_CATEGORIES[4]['label']:EVERGREEN_CATEGORIES[0]}
   source_count=len({x['source'] for x in items});coverage=len(items);fresh=max(recency(x['published']) for x in items);volume=max(x.get('volume',0) for x in items)
   search=min(100,25*(volume>0)+20*(volume>=1000)+20*(volume>=10000)+10*source_count+5*min(5,coverage))
   viral=min(100,source_count*20+coverage*8+max(0,20-min(x.get('rank',30) for x in items)))
   relevance=min(100,35+category_fit(text,cat)*160)
   score=.25*fresh+.25*search+.15*min(100,coverage*15)+.10*viral+.10*relevance+.10*80+.05*80
-  result.append({'id':uid(title),'title':title,'category':cat['label'],'evergreen_category':classify(text,EVERGREEN_CATEGORIES)['label'],'recency_score':round(fresh,1),'search_score':round(search,1),'virality_score':round(viral,1),'overall_score':round(score,1),'first_seen':min(x['published'] for x in items),'last_seen':max(x['published'] for x in items),'sources':[{'name':x['source'],'url':x['url'],'published':x['published']} for x in items[:8]],'discovered_from_live_internet':True})
+  result.append({'id':uid(title),'title':title,'category':cat['label'],'evergreen_category':classify(text,EVERGREEN_CATEGORIES,permanent_defaults[cat['label']])['label'],'recency_score':round(fresh,1),'search_score':round(search,1),'virality_score':round(viral,1),'overall_score':round(score,1),'first_seen':min(x['published'] for x in items),'last_seen':max(x['published'] for x in items),'sources':[{'name':x['source'],'url':x['url'],'published':x['published']} for x in items[:8]],'discovered_from_live_internet':True})
  return result
 
 def weekly():

@@ -3,7 +3,7 @@ name: One-Time Master Live Activation
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/master_live_activation.yml']
+    paths: ['.github/workflows/master_live_activation.yml', 'MASTER_DAILY_PLAN.json', 'prepare_master_article.py']
 
 permissions:
   contents: write
