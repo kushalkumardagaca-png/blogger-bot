@@ -139,21 +139,23 @@ def gsc_queries():
  r=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60);r.raise_for_status()
  return [{'query':clean(x['keys'][0]),'clicks':x.get('clicks',0),'impressions':x.get('impressions',0),'position':x.get('position',100)} for x in r.json().get('rows',[])]
 
-def evergreen_candidates(categories):
- queries=gsc_queries();out=[]
+def evergreen_candidates(categories,excluded=None):
+ excluded=set(excluded or ());queries=gsc_queries();out=[]
  for cat in categories:
   matched=[]
   for row in queries:
    fit=category_fit(row['query'],cat)
    if fit:matched.append((fit*50+min(40,row['impressions']/25)+max(0,10-row['position']/10),row))
   matched.sort(reverse=True,key=lambda x:x[0])
-  if matched:
-   row=matched[0][1];topic=row['query'];demand=min(100,20+row['impressions']/20);gap=min(100,35+row['position'])
+  available=[pair for pair in matched if uid(pair[1]['query']) not in excluded]
+  if available:
+   row=available[0][1];topic=row['query'];demand=min(100,20+row['impressions']/20);gap=min(100,35+row['position'])
   else:
    # Live web fallback: the returned headline/question is the topic, never the
    # category's search phrase itself.
    found=[]
    for signal in cat['signals'][:4]:found+=rss('https://www.bing.com/search?format=rss&q='+urllib.parse.quote(signal+' guide question'),'Bing Search',cat['label'])
+   found=[x for x in found if uid(x['title']) not in excluded]
    if not found:continue
    topic=found[0]['title'];demand=50;gap=55
   score=.25*demand+.20*90+.15*gap+.15*85+.10*80+.05*60+.05*70+.05*85
@@ -168,7 +170,7 @@ def daily(date=None):
   rows=sorted((x for x in pool['topics'] if x['category']==cat['label'] and x['id'] not in used),key=lambda x:x['overall_score'],reverse=True)
   if not rows:raise RuntimeError('no unused current topic for '+cat['label'])
   trending.append(rows[0])
- evergreen=evergreen_candidates(evergreen_rotation(date.toordinal()))
+ evergreen=evergreen_candidates(evergreen_rotation(date.toordinal()),used)
  if len(evergreen)!=5:raise RuntimeError(f'only {len(evergreen)} evergreen topics qualified; expected 5')
  enabled=os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true'
  plan={'status':'READY','publication_enabled':enabled,'date':str(date),'generated_at':now().isoformat(),'trending':trending,'evergreen':evergreen,'total':10}

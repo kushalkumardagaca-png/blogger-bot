@@ -40,6 +40,14 @@ def test_discovery_has_no_csv_topic_dependency():
     assert 'discovered_from_live_internet' in source
 
 
+def test_evergreen_discovery_excludes_already_published_topic(monkeypatch):
+    cat=taxonomy.EVERGREEN_CATEGORIES[0]
+    rows=[{'query':'budgeting habits guide','clicks':1,'impressions':200,'position':8},{'query':'lifestyle inflation explained','clicks':0,'impressions':100,'position':12}]
+    monkeypatch.setattr(discovery,'gsc_queries',lambda:rows)
+    selected=discovery.evergreen_candidates([cat],{discovery.uid(rows[0]['query'])})
+    assert selected[0]['title']==rows[1]['query']
+
+
 def test_trend_scoring_clusters_live_observations():
     stamp=dt.datetime.now(dt.timezone.utc).isoformat()
     raw=[
