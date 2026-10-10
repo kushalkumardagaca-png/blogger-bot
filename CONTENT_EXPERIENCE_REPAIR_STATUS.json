@@ -1,5 +1,5 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "zero_view": true,
   "posts_checked": 373,
   "labels_normalized": 0,
@@ -49,5 +49,7 @@
     "Economy, Trade & Jobs": 17,
     "Banking, Fintech & Personal Money": 16,
     "Companies, IPOs & Deals": 17
-  }
+  },
+  "error_type": "RuntimeError",
+  "error": "News desk label missing for economy-trade-jobs-2026-10-10"
 }
