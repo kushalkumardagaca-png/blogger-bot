@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "zero_view": true,
-  "posts_checked": 373,
+  "posts_checked": 376,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
-  "pages_repaired": 0,
+  "pages_repaired": 1,
   "article_snapshot_entries": 76,
-  "news_snapshot_entries": 297,
-  "label_image_index_entries": 373,
+  "news_snapshot_entries": 300,
+  "label_image_index_entries": 376,
   "article_category_counts": {
     "Contrarian Hooks": 4,
     "Age and Wealth Milestones": 3,
@@ -39,17 +39,15 @@
   },
   "news_desk_counts": {
     "Global Finance News": 17,
-    "Americas Finance News": 59,
+    "Americas Finance News": 60,
     "China Finance News": 15,
     "Asia-Pacific Finance News": 45,
     "India Finance News": 15,
     "Russia Finance News": 14,
     "Europe Finance News": 73,
-    "Markets, Crypto & Commodities": 17,
-    "Economy, Trade & Jobs": 17,
+    "Markets, Crypto & Commodities": 18,
+    "Economy, Trade & Jobs": 18,
     "Banking, Fintech & Personal Money": 16,
     "Companies, IPOs & Deals": 17
-  },
-  "error_type": "RuntimeError",
-  "error": "News desk label missing for economy-trade-jobs-2026-10-10"
+  }
 }
