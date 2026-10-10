@@ -34,15 +34,15 @@ def topic_for(kind,item):
  evergreen=item.get('evergreen_category') if kind=='trending' else item['category']
  return {'#':'dynamic-'+item['id'],'Punchy Title':item['title'],'Video Idea':item['title'],'Category':evergreen,'Trending Category':item.get('category') if kind=='trending' else ''}
 def package_path(kind,item):return PACKAGES/f"{dt.datetime.now(IST).date()}-{kind}-{item['id']}.json"
-def build_html(kind,item,package):
+def build_html(kind,item,package,check_remote_images=True):
  stamp=dt.datetime.now(IST);topic=topic_for(kind,item);title,slug,meta,labels,body=render(package,topic,stamp.strftime('%Y-%m-%d'),stamp.strftime('%H:%M'))
  if kind=='trending':labels=[item['category'],item['evergreen_category'],'Master Article','Kushal K. Daga']
  else:labels=[item['category'],'Master Article','Kushal K. Daga']
- first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);assert_publishable(title,body,labels);return title,slug,meta,labels,body
+ first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
 
 def prepare(kind,slot):
  from prepare_master_article import build_package
- plan,item=selected(kind,slot);target=package_path(kind,item);package=build_package(topic_for(kind,item),target);validate(package);title,slug,meta,labels,body=build_html(kind,item,package)
+ plan,item=selected(kind,slot);target=package_path(kind,item);package=build_package(topic_for(kind,item),target);validate(package);title,slug,meta,labels,body=build_html(kind,item,package,check_remote_images=False)
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
  write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
 

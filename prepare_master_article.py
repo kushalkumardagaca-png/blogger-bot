@@ -313,6 +313,8 @@ def verify_evidence(draft,evidence):
    replacement=None;closest=None;closest_gap=10**9
    for _ in range(5):
     candidate=paragraph_list(model_json([{'role':'system','content':'Repair unsupported financial prose conservatively and preserve the requested section depth.'},{'role':'user','content':prompt}],max_tokens=4500));candidate_words=words(' '.join(candidate));gap=abs(candidate_words-target)
+    normalized_candidate=[' '.join(x.casefold().split()) for x in candidate if len(' '.join(x.split()))>=100]
+    if len(normalized_candidate)!=len(set(normalized_candidate)):continue
     if candidate and gap<closest_gap:closest,closest_gap=candidate,gap
     if target-140<=candidate_words<=target+140:replacement=candidate;break
    # The complete package still undergoes its strict 4,000–4,200-word validator;
@@ -336,12 +338,24 @@ def _visual_number(value):
  if len(matches)!=1:raise ValueError(value)
  return float(matches[0].replace(',',''))
 
+def assert_unique_editorial_paragraphs(package):
+ seen=set()
+ for section in package.get('sections',[]):
+  for paragraph in paragraph_list(section.get('paragraphs')):
+   normalized=' '.join(paragraph.casefold().split())
+   if len(normalized)>=100 and normalized in seen:raise ValueError('generated package repeats a substantive editorial paragraph')
+   if len(normalized)>=100:seen.add(normalized)
+ for paragraph in paragraph_list(package.get('summary')):
+  normalized=' '.join(paragraph.casefold().split())
+  if len(normalized)>=100 and normalized in seen:raise ValueError('generated summary repeats a substantive editorial paragraph')
+  if len(normalized)>=100:seen.add(normalized)
+
 def build_package(topic,target):
  global STAGE
  target=Path(target)
  if target.exists():
   try:
-   package=json.loads(target.read_text());validate(package);return package
+   package=json.loads(target.read_text());validate(package);assert_unique_editorial_paragraphs(package);return package
   except (OSError,ValueError,json.JSONDecodeError):target.unlink(missing_ok=True)
  STAGE='source-discovery';evidence=discover(topic)
  STAGE='text-generation';draft=generate_text(topic,evidence)
@@ -415,7 +429,7 @@ def build_package(topic,target):
   briefs=[f"Opening editorial context for {draft['title']}: {'; '.join(headings[:2])}",f"Mid-article mechanism and evidence for {draft['title']}: {'; '.join(headings[3:6])}",f"Later implications and decisions for {draft['title']}: {'; '.join(headings[-3:])}"]
  STAGE='licensed-photo-selection';draft['photos']=choose_photos(briefs,slug,topic.get('#',slug));draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
  STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
- STAGE='final-validation';validate(draft)
+ STAGE='final-validation';validate(draft);assert_unique_editorial_paragraphs(draft)
  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');return draft
 
 def prepare():

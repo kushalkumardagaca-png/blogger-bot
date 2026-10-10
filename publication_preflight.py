@@ -22,7 +22,7 @@ def _source_domains(content):
   if host and host!=own and host not in ignore:out.add(host)
  return out
 
-def assert_publishable(title,content,labels):
+def assert_publishable(title,content,labels,check_remote_images=True):
  issues=[]; labels=labels or []
  if not title or len(title.strip())<20:issues.append('missing/short SEO title (minimum 20 characters)')
  if len(title.strip())>46:issues.append(f'Bing title budget exceeded ({len(title.strip())} characters; maximum 46)')
@@ -76,7 +76,7 @@ def assert_publishable(title,content,labels):
  else:
   hero_alt=re.search(r'\balt=["\']([^"\']*)["\']',img_tags[0],re.I) if img_tags else None
   if not hero_alt or not hero_alt.group(1).strip():issues.append('hero image missing descriptive alt text')
-  if imgs[0].startswith(('http://','https://')) and not image_works(imgs[0]):issues.append('hero image failed final availability check')
+  if check_remote_images and imgs[0].startswith(('http://','https://')) and not image_works(imgs[0]):issues.append('hero image failed final availability check')
  schemas=re.findall(r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',content,re.I|re.S)
  if not schemas:issues.append('JSON-LD schema missing')
  for n,raw in enumerate(schemas,1):
