@@ -156,6 +156,20 @@ def clean(value: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(value)).strip()
 
 
+def select_inventory_target(items: list[dict], target_url: str) -> dict | None:
+    """Resolve an exact routed URL against authenticated Blogger inventory."""
+    from urllib.parse import urldefrag
+    if not target_url.startswith("https://dailyyield.blogspot.com/"):raise ValueError("target is outside Daily Yield")
+    base,fragment=urldefrag(target_url);base=base.rstrip("/")
+    if fragment not in ("","spotlight"):raise ValueError("unapproved Daily Yield campaign fragment")
+    found=next((x for x in items if urldefrag(str(x.get("url","")).rstrip("/"))[0]==base),None)
+    if not found:return None
+    item=dict(found);item["url"]=target_url
+    if fragment=="spotlight":
+        item.update(id="spotlight",kind="page",title="Daily Yield Spotlight: Today's Featured Stories",labels=["Daily Yield Resources","Spotlight"])
+    return item
+
+
 def topic(item: dict) -> str:
     text = (item.get("title", "") + " " + " ".join(str(x) for x in item.get("labels", []))).lower()
     if item.get("kind") == "page": return "page"
@@ -212,6 +226,59 @@ def trim(text: str, limit: int) -> str:
     return (cut or text[:limit - 1]) + "…"
 
 
+GENERIC_HEADINGS = {
+    "contents", "summary", "faq", "frequently asked questions", "glossary", "sources",
+    "internal links", "external sources", "related articles", "follow daily yield",
+    "reader's digest", "daily headlines", "most-used tools", "read more", "the bottom line",
+}
+
+def content_highlights(item: dict, summary: str = "") -> list[str]:
+    """Return one image lead plus two concise supporting ideas from API content."""
+    title=clean(item.get("title","Daily Yield"));content=item.get("content","") or ""
+    labels={str(x).casefold() for x in item.get("labels",[])}
+    is_news="news" in labels or any("news" in x for x in labels)
+    heading_rows=[]
+    for match in re.finditer(r'<(h[1-3])\b[^>]*>(.*?)</\1>',content,flags=re.I|re.S):
+        tag=match.group(1).casefold();value=clean(match.group(2))
+        low=value.casefold().strip(" .:—-")
+        if len(value)<12 or low in GENERIC_HEADINGS or any(low.startswith(x+":") for x in GENERIC_HEADINGS):continue
+        heading_rows.append((tag,value))
+    if is_news:
+        # News article h2 elements are desk modules; h3 elements are the actual
+        # ranked story headlines readers see inside those modules.
+        story_heads=[value for tag,value in heading_rows if tag=="h3"]
+        useful_modules=[value for tag,value in heading_rows if tag=="h2" and not re.match(r'^(?:\d+|bg\b|method\b)',value.casefold())]
+        candidates=story_heads+useful_modules+[title]
+    else:candidates=[title]+[value for _,value in heading_rows]
+    # Summary sentences provide useful fallbacks for sparse Blogger Pages.
+    candidates += [clean(x) for x in re.split(r'(?<=[.!?])\s+',clean(summary)) if len(clean(x))>=28]
+    if item.get("kind")=="page":
+        low=title.casefold()
+        if "calculator" in low:candidates += ["Run the numbers before making the decision","Compare assumptions with practical calculators"]
+        elif "market" in low:candidates += ["Track markets with context, not noise","Compare assets, currencies and global signals"]
+        elif "corporate" in low:candidates += ["Practical finance resources for business decisions","Use clearer context for planning and analysis"]
+        elif "news" in low:candidates += ["Follow the latest financial and economic developments","See the context behind today's biggest changes"]
+        elif "article" in low or "spotlight" in low:candidates += ["Explore original explainers and practical guides","Find useful answers across twenty topic desks"]
+        else:candidates += ["Financial reporting, practical tools and market context","Explore the complete Daily Yield finance desk"]
+    out=[]
+    for value in candidates:
+        value=trim(value,105)
+        key=re.sub(r'[^a-z0-9]+',' ',value.casefold()).strip()
+        if not key or any(key==re.sub(r'[^a-z0-9]+',' ',x.casefold()).strip() for x in out):continue
+        if any(len(set(key.split())&set(re.sub(r'[^a-z0-9]+',' ',x.casefold()).split()))/max(1,len(set(key.split())))>.85 for x in out):continue
+        out.append(value)
+        if len(out)==3:break
+    defaults=("See the central idea at a glance","Understand the context and practical implications","Read the complete Daily Yield explanation")
+    for value in defaults:
+        if len(out)==3:break
+        out.append(value)
+    return out[:3]
+
+
+def _cta(item:dict)->str:
+    if item.get("kind")=="page":return "Open the link above to explore the complete Daily Yield resource."
+    return "Read the complete article for the evidence, context and practical implications—open the link above."
+
 def hashtag_list(item: dict) -> list[str]:
     group = topic(item)
     mapping = {"market":"#Markets", "debt":"#Debt", "tax":"#Tax", "saving":"#MoneyTips", "economy":"#Economy", "news":"#FinanceNews", "page":"#MoneyTools", "general":"#PersonalFinance"}
@@ -219,50 +286,38 @@ def hashtag_list(item: dict) -> list[str]:
 
 
 def build_caption(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
-    meta = creative_meta(item, platform)
-    title, url = clean(item.get("title", "Daily Yield")), item["url"]
-    insight = first_sentence(summary, 210 if platform in ("facebook", "tumblr") else 130)
-    tags = " ".join(hashtag_list(item))
-    content_type = "Source-led news edition" if meta["topic"] == "news" else "Practical decision guide"
-    if platform == "facebook":
-        details = (
-            "Includes visible assumptions, downside analysis and source links.",
-            "Use the worked example, then replace it with your own figures.",
-            "Read the limitations before applying the conclusion.",
-            "A concise framework for testing the decision with real numbers.",
-        )
-        detail = details[(creative_seed(item, platform) // 41) % len(details)]
-        return f"{url}\n\n{title}\n\n{meta['emoji']} {insight}\n{content_type}. {detail}\n\nBy Kushal K. Daga\n{tags}"
-    if platform == "bluesky":
-        fixed = f"{url}\n\n\n\nBy Kushal K. Daga\n{tags}"
-        room = 300 - len(fixed)
-        short_title = trim(title, max(35, min(len(title), room // 2)))
-        remaining = max(0, 300 - len(fixed) - len(short_title) - 1)
-        short_detail = trim(insight, remaining) if remaining >= 25 else ""
-        parts = [url, "", short_title]
-        if short_detail: parts.extend([short_detail])
-        parts.extend(["By Kushal K. Daga", tags])
-        return "\n".join(parts)[:300]
-    if platform == "mastodon":
-        base = f"{url}\n\n{title}\n\n{meta['emoji']} {insight}\n{content_type}.\n\nBy Kushal K. Daga\n{tags}"
-        if len(base) <= 500: return base
-        fixed = f"{url}\n\n\n\n{content_type}.\n\nBy Kushal K. Daga\n{tags}"
-        return fixed.replace("\n\n\n\n", "\n\n" + trim(title, max(45, 500-len(fixed))) + "\n\n")
-    return f"{url}\n\n{title}\n{insight}\nBy Kushal K. Daga\n{tags}"
+    title,url=clean(item.get("title","Daily Yield")),item["url"]
+    lead,second,third=content_highlights(item,summary);tags=" ".join(hashtag_list(item));cta=_cta(item)
+    if platform=="facebook":
+        return f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{cta}\n\nBy Kushal K. Daga\n{tags}"
+    if platform=="bluesky":
+        # Preserve the link at the top and all three ideas inside Bluesky's limit.
+        lead,second,third=trim(lead,48),trim(second,38),trim(third,38)
+        ending="Read the full story → link above.\nBy Kushal K. Daga\n#DailyYield"
+        text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
+        if len(text)>300:
+            excess=len(text)-300;third=trim(third,max(22,len(third)-excess-1));text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
+        return text[:300]
+    if platform=="mastodon":
+        mastodon_cta="Open the link above for the full evidence and context. Which of these three ideas matters most to you?"
+        text=f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{mastodon_cta}\n\nBy Kushal K. Daga\n{tags}"
+        if len(text)<=500:return text
+        return f"{url}\n\n{trim(lead,75)}\n• {trim(second,65)}\n• {trim(third,65)}\n\nRead the complete article—open the link above.\n{tags}"[:500]
+    return f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{cta}\nBy Kushal K. Daga\n{tags}"
 
 
 def tumblr_payload(item: dict, summary: str) -> dict:
-    meta = creative_meta(item, "tumblr")
-    title, url = clean(item.get("title", "Daily Yield")), item["url"]
-    insight = first_sentence(summary, 360)
-    tags = [x.lstrip("#") for x in hashtag_list(item)] + ["moneyblr"]
+    title,url=clean(item.get("title","Daily Yield")),item["url"]
+    lead,second,third=content_highlights(item,summary)
+    tags=[x.lstrip("#") for x in hashtag_list(item)]+["moneyblr"]
     return {
         "content": [
-            {"type":"link", "url":url, "title":"Read on Daily Yield", "description":trim(title, 180)},
-            {"type":"text", "text":title, "subtype":"heading1"},
-            {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":PLATFORM_SIZES["tumblr"][0],"height":PLATFORM_SIZES["tumblr"][1]}], "alt_text":image_alt(item, "tumblr")},
-            {"type":"text", "text":insight},
-            {"type":"text", "text":"By Kushal K. Daga · sourced financial education with visible assumptions and limitations."},
+            {"type":"link", "url":url, "title":"Open on Daily Yield", "description":trim(title,180)},
+            {"type":"text", "text":lead, "subtype":"heading1"},
+            {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":PLATFORM_SIZES["tumblr"][0],"height":PLATFORM_SIZES["tumblr"][1]}], "alt_text":image_alt(item,"tumblr")},
+            {"type":"text", "text":"• "+second+"\n• "+third},
+            {"type":"text", "text":_cta(item)},
+            {"type":"text", "text":"By Kushal K. Daga · Daily Yield"},
         ],
         "state":"published", "tags":",".join(dict.fromkeys(tags)), "source_url":url,
         "send_to_twitter":False, "interactability_reblog":"everyone",
@@ -271,7 +326,8 @@ def tumblr_payload(item: dict, summary: str) -> dict:
 
 def image_alt(item: dict, platform: str) -> str:
     meta = creative_meta(item, platform)
-    return trim(f"Editorial photograph showing {_photo_alt(item, platform)}. Daily Yield overlay: {meta['hook']}. Headline: {clean(item.get('title','Daily Yield'))}", 950)
+    lead=content_highlights(item)[0]
+    return trim(f"Editorial photograph showing {_photo_alt(item, platform)}. Daily Yield overlay: {meta['hook']}. Headline: {lead}", 950)
 
 
 def _font(size: int, bold: bool = False):
@@ -456,7 +512,7 @@ def render_social_card(item: dict, platform: str, destination: Path, summary: st
     draw = ImageDraw.Draw(rgba)
 
     accent = palette["accent"]
-    title = clean(item.get("title", "Daily Yield"))
+    title = content_highlights(item,summary)[0]
     font_scale = max(.82, min(1.08, sx))
     title_font = _font(int((40 if len(title) < 88 else 34) * font_scale), True)
     text_x = int((58 if left_title else 448) * sx)

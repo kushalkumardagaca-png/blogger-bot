@@ -207,10 +207,12 @@ check('Photo selection is semantic and fails closed instead of producing a banne
       and 'banner-only graphic' in creative)
 check('Creative outputs are deterministic per platform, destination and IST day',
       'hashlib.sha256(raw.encode())' in creative and 'datetime.now(IST).date().isoformat()' in creative)
-check('Captions use topic hooks, questions and platform-specific structures',
-      'HOOKS =' in creative and 'QUESTIONS =' in creative and all(f'platform == "{p}"' in creative for p in ('facebook','bluesky','mastodon')))
-check('Creative engine cannot request a Daily Yield public page',
-      'requests.get(url' in creative and 'PHOTO_HOSTS' in creative and 'dailyyield.blogspot.com' not in creative)
+check('Captions use one image lead, two supporting ideas, link-first copy and platform-specific calls to action',
+      'def content_highlights(' in creative and 'lead,second,third=' in creative
+      and 'link above' in creative and all(f'platform=="{p}"' in creative for p in ('facebook','bluesky','mastodon')))
+check('Creative engine uses authenticated inventory and cannot request a Daily Yield public page',
+      'requests.get(url' in creative and 'PHOTO_HOSTS' in creative and '_allowed_photo_host' in creative
+      and 'def select_inventory_target(' in creative and 'target is outside Daily Yield' in creative)
 check('Corporate social boilerplate was removed from all active publisher outputs',
       all(term not in creative for term in ('READ THE FULL REPORT','OPEN THIS DAILY YIELD RESOURCE','Markets · Money · Better decisions')))
 
@@ -220,8 +222,9 @@ rotation=rotation_path.read_text() if rotation_path.exists() else ''
 coordinated=coordinated_path.read_text() if coordinated_path.exists() else ''
 dispatch=dispatch_path.read_text() if dispatch_path.exists() else ''
 check('Coordinated router and event dispatcher are deployed',bool(rotation) and bool(coordinated) and bool(dispatch))
-check('Exactly five established audience-resource promotions are scheduled',
-      crons(coordinated_path)==['45 23 * * *','30 1 * * *','30 4 * * *','30 8 * * *','30 14 * * *'])
+check('Exactly three rotating resource promotions per platform are scheduled daily',
+      crons(coordinated_path)==['30 0 * * *','30 1 * * *','0 3 * * *','0 4 * * *','30 7 * * *','30 8 * * *','0 10 * * *','30 11 * * *','30 13 * * *','30 14 * * *','0 16 * * *','0 17 * * *']
+      and 'Three rotating page/website promotions on every platform' in coordinated)
 check('Every social publisher accepts an exact authenticated Blogger target URL',
       all('--target-url' in text and 'Target URL was not found in authenticated Blogger inventory' in text
           for text in (fp,bp,tp,mp)))
@@ -231,9 +234,11 @@ check('Both article social routes release within five minutes after publication'
       'dt.timedelta(minutes=5)' in rotation and 'route_index' in coordinated and 'delay_seconds' in coordinated)
 check('Coordinated tracker writes use race-safe persistence retries',
       'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
-check('Daily coordinated inventory covers all 21 articles plus five resources',
-      'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_PATTERN' in rotation
-      and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
+check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
+      'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_DESTINATIONS' in rotation
+      and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==5
+      and 'https://dailyyield.blogspot.com/#spotlight' in rotation and 'https://dailyyield.blogspot.com/' in rotation
+      and 'RESOURCE_SCHEDULES' in rotation and 'position not in (0,1,2)' in rotation)
 check('Configured article cadence is exactly 42 weighted social posts daily',
       'Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8' in rotation
       and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))

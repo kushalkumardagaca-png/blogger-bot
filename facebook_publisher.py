@@ -23,7 +23,7 @@ import textwrap
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
-from social_creative import build_caption, creative_meta, render_social_card
+from social_creative import build_caption, creative_meta, render_social_card, select_inventory_target
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -387,7 +387,11 @@ def recent_page_posts(access_token: str) -> list[dict]:
 def reconcile(access_token: str, url: str, caption_hash: str) -> dict | None:
     """Find a possibly successful post after an ambiguous network/API response."""
     try:
+        cutoff=datetime.now(timezone.utc)-timedelta(hours=2)
         for item in recent_page_posts(access_token):
+            try:created=datetime.fromisoformat(str(item.get("created_time","")).replace("Z","+00:00"))
+            except ValueError:continue
+            if created<cutoff:continue
             message = item.get("message", "")
             if url in message and fingerprint(message) == caption_hash:
                 return item
@@ -444,8 +448,7 @@ def main() -> int:
     pages = blogger_pages(blogger_token)
     tracker = load_tracker()
     if args.target_url:
-        wanted = args.target_url.rstrip("/")
-        candidate = next((item for item in posts + pages if item.get("url", "").rstrip("/") == wanted), None)
+        candidate = select_inventory_target(posts + pages, args.target_url)
         if candidate is None:
             raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {args.target_url}")
         if candidate.get("kind") != args.content_mode:

@@ -20,7 +20,7 @@ from pathlib import Path
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
-from social_creative import build_caption, image_alt, render_social_card
+from social_creative import build_caption, image_alt, render_social_card, select_inventory_target
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -233,8 +233,12 @@ def recent_records(session: dict) -> list[dict]:
 
 def reconcile(session: dict, url: str, text_hash: str) -> dict | None:
     try:
+        cutoff=datetime.now(timezone.utc)-timedelta(hours=2)
         for entry in recent_records(session):
             post = entry.get("post", {}); record = post.get("record", {}); text = record.get("text", "")
+            try:created=datetime.fromisoformat(str(post.get("indexedAt") or record.get("createdAt") or "").replace("Z","+00:00"))
+            except ValueError:continue
+            if created<cutoff:continue
             if url in text and hashlib.sha256(text.encode()).hexdigest()[:20] == text_hash:
                 return {"uri": post.get("uri"), "cid": post.get("cid"), "reconciled": True}
     except Exception as exc:
@@ -280,8 +284,7 @@ def main() -> int:
         text = entry.get("post", {}).get("record", {}).get("text", "")
         recent_urls.update(re.findall(r"https://dailyyield\.blogspot\.com/[^\s]*", text))
     if args.target_url:
-        wanted = args.target_url.rstrip("/")
-        item = next((candidate for candidate in posts + pages if candidate.get("url", "").rstrip("/") == wanted), None)
+        item = select_inventory_target(posts + pages, args.target_url)
         if item is None:
             raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {args.target_url}")
         if item.get("kind") != args.content_mode:

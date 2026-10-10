@@ -8,7 +8,8 @@ from PIL import Image, ImageChops, ImageDraw
 
 from social_creative import (
     PLATFORM_SIZES, _curated_entries, _photo_url, _semantic_theme, build_caption,
-    creative_meta, image_alt, render_social_card, tumblr_payload,
+    content_highlights, creative_meta, image_alt, render_social_card,
+    select_inventory_target, tumblr_payload,
 )
 
 
@@ -65,7 +66,7 @@ def test_caption_limits_platform_voice_and_cross_network_difference():
     assert all(story["url"] in text and "#DailyYield" in text for text in captions.values())
     assert all(text.startswith(story["url"]) for text in captions.values())
     assert all("Read the report" not in text and "Clear context" not in text for text in captions.values())
-    assert all("A clear look at compounding interest" in text for text in captions.values())
+    assert all("A clear look at compounding" in text for text in captions.values())
     assert all("By Kushal K. Daga" in text for text in captions.values())
     assert all(text.count("#") <= 2 for text in captions.values())
 
@@ -79,17 +80,39 @@ def test_many_stories_do_not_collapse_to_one_template_or_caption():
     assert len(captions) == len(set(captions))
 
 
-def test_tumblr_is_native_npf_with_conversation_and_descriptive_alt():
+def test_tumblr_is_native_npf_with_three_ideas_cta_and_descriptive_alt():
     story = item(22, "A tax deduction checklist without the jargon", ["Tax"])
     data = tumblr_payload(story, "A practical checklist for keeping the right records and asking better questions.")
     block_types = [block["type"] for block in data["content"]]
-    assert block_types == ["link", "text", "image", "text", "text"]
+    assert block_types == ["link", "text", "image", "text", "text", "text"]
     assert story["url"] == data["source_url"] == data["content"][0]["url"]
     assert data["content"][1]["text"] == story["title"]
+    assert data["content"][3]["text"].count("•") == 2
+    assert "link above" in data["content"][4]["text"]
     assert "Editorial photograph" in data["content"][2]["alt_text"]
-    assert "By Kushal K. Daga" in data["content"][4]["text"]
+    assert "By Kushal K. Daga" in data["content"][5]["text"]
     assert "moneyblr" in data["tags"]
     assert len(data["tags"].split(",")) <= 3
+
+
+def test_news_uses_biggest_content_headline_plus_two_supporting_headlines():
+    story=item(23,"India Finance News",["News"])
+    story["content"]="<h2><b>01</b> Biggest News</h2><h3>Central bank changes its rate guidance</h3><h3>Markets reassess the inflation path</h3><h3>Banks update their lending outlook</h3>"
+    summary="A fourth supporting sentence that should not displace the article headlines."
+    highlights=content_highlights(story,summary)
+    assert highlights==["Central bank changes its rate guidance","Markets reassess the inflation path","Banks update their lending outlook"]
+    caption=build_caption(story,"facebook",summary)
+    assert caption.startswith(story["url"])
+    assert all(value in caption for value in highlights)
+    assert "open the link above" in caption
+
+
+def test_spotlight_fragment_resolves_only_through_authenticated_page_inventory():
+    pages=[{"id":"homepage","kind":"page","title":"Daily Yield","url":"https://dailyyield.blogspot.com/","content":"Today's featured stories and tools."}]
+    chosen=select_inventory_target(pages,"https://dailyyield.blogspot.com/#spotlight")
+    assert chosen["id"]=="spotlight" and chosen["kind"]=="page"
+    assert chosen["title"].startswith("Daily Yield Spotlight")
+    assert chosen["url"].endswith("#spotlight")
 
 
 def test_cards_are_photo_first_accessible_sized_and_visually_distinct():

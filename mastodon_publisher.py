@@ -11,7 +11,7 @@ from pathlib import Path
 import requests
 from cryptography.fernet import Fernet
 from PIL import Image, ImageDraw, ImageFont
-from social_creative import build_caption, image_alt, render_social_card
+from social_creative import build_caption, image_alt, render_social_card, select_inventory_target
 
 IST=timezone(timedelta(hours=5,minutes=30),name="IST")
 BLOG_ID=os.environ.get("BLOGGER_BLOG_ID","8911514070006792465")
@@ -215,7 +215,7 @@ def recent_statuses(token:str,account_id:str)->list[dict]:
 def status_urls(status:dict)->set[str]:
  content=status.get("content","")
  urls=set(re.findall(r'href=["\'](https://dailyyield\.blogspot\.com/[^"\']+)',content,re.I))
- urls.update(re.findall(r"https://dailyyield\.blogspot\.com/[^\s<]+",html.unescape(content)))
+ urls.update(re.findall(r"https://dailyyield\.blogspot\.com/[^\s<]*",html.unescape(content)))
  return {x.rstrip("/.,)") for x in urls}
 
 def post_text(item:dict)->str:
@@ -223,7 +223,11 @@ def post_text(item:dict)->str:
 
 def reconcile(token:str,account_id:str,url:str)->dict|None:
  try:
+  cutoff=datetime.now(timezone.utc)-timedelta(hours=2)
   for status in recent_statuses(token,account_id):
+   try:created=datetime.fromisoformat(str(status.get("created_at","")).replace("Z","+00:00"))
+   except ValueError:continue
+   if created<cutoff:continue
    if url.rstrip("/") in status_urls(status):return status
  except Exception as exc:print(f"Mastodon reconciliation read failed: {exc}",file=sys.stderr)
  return None
@@ -258,7 +262,7 @@ def main()->int:
  if a.verify_only:return 0
  posts,pages=inventory(blogger_token());tracker=load_tracker();recent=recent_statuses(token,account_id);recent_urls=set().union(*(status_urls(x) for x in recent)) if recent else set()
  if a.target_url:
-  wanted=a.target_url.rstrip("/");item=next((candidate for candidate in posts+pages if candidate.get("url","").rstrip("/")==wanted),None)
+  item=select_inventory_target(posts+pages,a.target_url)
   if item is None:raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {a.target_url}")
   if item.get("kind")!=a.content_mode:raise RuntimeError(f"Target kind {item.get('kind')} does not match requested mode {a.content_mode}")
  else:item=choose(posts,pages,tracker,a.content_mode,recent_urls)

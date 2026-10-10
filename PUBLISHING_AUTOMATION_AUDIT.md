@@ -75,16 +75,16 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Creative system mixes article heroes with a broad licensed global lifestyle library**
 - ✅ **Photo selection is semantic and fails closed instead of producing a banner**
 - ✅ **Creative outputs are deterministic per platform, destination and IST day**
-- ✅ **Captions use topic hooks, questions and platform-specific structures**
-- ✅ **Creative engine cannot request a Daily Yield public page**
+- ✅ **Captions use one image lead, two supporting ideas, link-first copy and platform-specific calls to action**
+- ✅ **Creative engine uses authenticated inventory and cannot request a Daily Yield public page**
 - ✅ **Corporate social boilerplate was removed from all active publisher outputs**
 - ✅ **Coordinated router and event dispatcher are deployed**
-- ✅ **Exactly five established audience-resource promotions are scheduled**
+- ✅ **Exactly three rotating resource promotions per platform are scheduled daily**
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
 - ✅ **News publisher dispatches only confirmed live Blogger events**
 - ✅ **Both article social routes release within five minutes after publication**
 - ✅ **Coordinated tracker writes use race-safe persistence retries**
-- ✅ **Daily coordinated inventory covers all 21 articles plus five resources**
+- ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**

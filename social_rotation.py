@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Deterministic Daily Yield social routing for live News and resources.
 
-Every day: 11 comprehensive News editions plus the homepage and four rotating
-header Pages. Each destination is assigned to exactly one active network using
-the established
-Daily Yield platform pattern. Publishers use the authenticated Blogger API and
-never create synthetic public-page views.
+Every day: 21 articles receive their two-network routes and every active social
+platform receives three additional rotating Daily Yield resource promotions.
+Publishers use authenticated Blogger API inventory and never create synthetic
+public-page views.
 """
 from __future__ import annotations
 
@@ -17,7 +16,6 @@ from pathlib import Path
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 PLATFORMS = ("facebook", "bluesky", "tumblr", "mastodon")
-RESOURCE_PATTERN = ("facebook", "bluesky", "facebook", "tumblr", "mastodon")
 NEWS_PATTERN = (
     "facebook", "bluesky", "tumblr", "mastodon", "facebook",
     "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
@@ -49,22 +47,32 @@ def platform_pair_for(item_key:str)->tuple[str,str]:
  pair=DAILY_PLATFORM_PAIRS[DAILY_ARTICLE_KEYS.index(item_key)]
  if pair[0]==pair[1]:raise RuntimeError('social pair must use two different platforms')
  return pair
-HEADER_PAGES = (
-    "https://dailyyield.blogspot.com/p/article.html",
-    "https://dailyyield.blogspot.com/p/daily-news.html",
-    "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-    "https://dailyyield.blogspot.com/p/markets-today.html",
-    "https://dailyyield.blogspot.com/p/global-snapshot.html",
-    "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-    "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+RESOURCE_DESTINATIONS = (
+    ("daily-article", "Daily Article", "https://dailyyield.blogspot.com/p/article.html"),
+    ("daily-news", "Daily News", "https://dailyyield.blogspot.com/p/daily-news.html"),
+    ("markets-today", "Markets Today", "https://dailyyield.blogspot.com/p/markets-today.html"),
+    ("calculators", "Calculators", "https://dailyyield.blogspot.com/p/calculator_0908148622.html"),
+    ("for-corporate", "For Corporate", "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html"),
+    ("spotlight", "Daily Yield Spotlight", "https://dailyyield.blogspot.com/#spotlight"),
+    ("website", "Daily Yield Website", "https://dailyyield.blogspot.com/"),
 )
+# Three audience-friendly resource windows per platform in IST. The 12 schedules
+# produce exactly three page/website promotions on each network every day.
 RESOURCE_SCHEDULES = {
-    "45 23 * * *": 0,  # 05:15 IST
-    "30 1 * * *": 1,   # 07:00 IST
-    "30 4 * * *": 2,   # 10:00 IST
-    "30 8 * * *": 3,   # 14:00 IST
-    "30 14 * * *": 4,  # 20:00 IST
+    "30 0 * * *": ("mastodon", 0),   # 06:00 IST
+    "30 1 * * *": ("facebook", 0),   # 07:00 IST
+    "0 3 * * *": ("bluesky", 0),     # 08:30 IST
+    "0 4 * * *": ("tumblr", 0),      # 09:30 IST
+    "30 7 * * *": ("facebook", 1),   # 13:00 IST
+    "30 8 * * *": ("mastodon", 1),   # 14:00 IST
+    "0 10 * * *": ("bluesky", 1),    # 15:30 IST
+    "30 11 * * *": ("tumblr", 1),    # 17:00 IST
+    "30 13 * * *": ("mastodon", 2),  # 19:00 IST
+    "30 14 * * *": ("facebook", 2),  # 20:00 IST
+    "0 16 * * *": ("tumblr", 2),     # 21:30 IST
+    "0 17 * * *": ("bluesky", 2),    # 22:30 IST
 }
+
 
 
 def parse_time(value: str) -> dt.datetime | None:
@@ -84,8 +92,9 @@ def platform_for(item_key: str, day: dt.date) -> str:
         idx = NEWS_KEYS.index(desk)
         pattern = NEWS_PATTERN
     elif item_key.startswith("resource-"):
-        idx = int(item_key.split("-", 1)[1])
-        pattern = RESOURCE_PATTERN
+        key=item_key.split("-",1)[1]
+        idx=next((i for i,row in enumerate(RESOURCE_DESTINATIONS) if row[0]==key),0)
+        pattern=PLATFORMS
     elif item_key.startswith("master-"):
         parts=item_key.split('-')
         if len(parts)!=3 or parts[1] not in ('trending','evergreen'):raise ValueError(f"unknown social item key: {item_key}")
@@ -97,12 +106,17 @@ def platform_for(item_key: str, day: dt.date) -> str:
     return pattern[(idx + offset) % len(pattern)]
 
 
+def resource_destination(platform: str, position: int, day: dt.date) -> tuple[str,str,str]:
+    if platform not in PLATFORMS or position not in (0,1,2):raise ValueError('invalid resource route')
+    # Distinct offsets prevent all four networks from promoting the same page at
+    # once. Over seven days every platform promotes every destination three times.
+    start=(day.toordinal()*3+PLATFORMS.index(platform)*2)%len(RESOURCE_DESTINATIONS)
+    return RESOURCE_DESTINATIONS[(start+position)%len(RESOURCE_DESTINATIONS)]
+
 def resource_url(slot: int, day: dt.date) -> str:
-    if slot == 0:
-        return "https://dailyyield.blogspot.com/"
-    # Four consecutive header Pages rotate daily; all seven are covered fairly.
-    start = day.toordinal() % len(HEADER_PAGES)
-    return HEADER_PAGES[(start + slot - 1) % len(HEADER_PAGES)]
+    # Backward-compatible helper: slots 0-11 map to the complete daily plan.
+    schedules=list(RESOURCE_SCHEDULES.values());platform,position=schedules[slot]
+    return resource_destination(platform,position,day)[2]
 
 
 def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
@@ -112,13 +126,14 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
         reference_now = reference_now.replace(tzinfo=dt.timezone.utc)
     current = reference_now.astimezone(IST)
     published = parse_time(published_at)
+    scheduled_platform=None;resource_name=""
     if schedule:
         if schedule not in RESOURCE_SCHEDULES:
             raise ValueError(f"unknown coordinated resource schedule: {schedule}")
-        slot = RESOURCE_SCHEDULES[schedule]
-        item_key = f"resource-{slot}"
-        target_url = resource_url(slot, current.date())
-        mode = "page"
+        scheduled_platform,position=RESOURCE_SCHEDULES[schedule]
+        resource_key,resource_name,target_url=resource_destination(scheduled_platform,position,current.date())
+        item_key=f"resource-{resource_key}"
+        mode="page"
     if not item_key or not target_url:
         raise ValueError("item key and target URL are required")
     if not target_url.startswith("https://dailyyield.blogspot.com/"):
@@ -133,7 +148,8 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
         "item_key": item_key,
         "target_url": target_url,
         "content_mode": mode or "post",
-        "platform": (platform_pair_for(item_key)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day)),
+        "platform": (scheduled_platform or (platform_pair_for(item_key)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day))),
+        "resource_name": resource_name,
         "route_index": route_index,
         "delay_seconds": delay,
         "plan_date_ist": day.isoformat(),

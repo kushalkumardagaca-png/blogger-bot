@@ -11,7 +11,7 @@ from pathlib import Path
 import requests
 from cryptography.fernet import Fernet
 from PIL import Image, ImageDraw, ImageFont
-from social_creative import render_social_card, tumblr_payload
+from social_creative import render_social_card, tumblr_payload, select_inventory_target
 
 IST=timezone(timedelta(hours=5,minutes=30),name="IST")
 BLOG_ID=os.environ.get("BLOGGER_BLOG_ID","8911514070006792465")
@@ -147,7 +147,11 @@ def payload(x):
  return tumblr_payload(x, summary(x))
 
 def reconcile(token,url):
+ cutoff=datetime.now(timezone.utc)-timedelta(hours=2)
  for p in recent_posts(token):
+  try:created=datetime.fromtimestamp(float(p.get("timestamp",0)),timezone.utc)
+  except (TypeError,ValueError,OSError):continue
+  if created<cutoff:continue
   if url.rstrip("/") in post_urls(p):return p
  return None
 def publish(token,x):
@@ -171,7 +175,7 @@ def main():
  if a.verify_only:return 0
  posts,pages=inventory(blogger_token());tracker=load_tracker();recent=recent_posts(token)
  if a.target_url:
-  wanted=a.target_url.rstrip("/");x=next((item for item in posts+pages if item.get("url","").rstrip("/")==wanted),None)
+  x=select_inventory_target(posts+pages,a.target_url)
   if x is None:raise RuntimeError(f"Target URL was not found in authenticated Blogger inventory: {a.target_url}")
   if x.get("kind")!=a.content_mode:raise RuntimeError(f"Target kind {x.get('kind')} does not match requested mode {a.content_mode}")
  else:x=choose(posts,pages,tracker,recent,a.content_mode)
