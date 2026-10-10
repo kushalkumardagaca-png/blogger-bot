@@ -21,6 +21,7 @@ import re
 import ssl
 import sys
 import time
+import urllib.error
 import urllib.request
 from urllib.parse import urljoin, quote_plus, urlencode
 import xml.etree.ElementTree as ET
@@ -771,7 +772,7 @@ def story_title_key(title):
     return re.sub(r"[^a-z0-9]+", " ", clean_title(htmlmod.unescape(strip_tags(title or ""))).casefold()).strip()
 
 
-def rendered_story_key(item):
+def rendered_story_key(item, summary_maximum=None):
     """Match the source-led sentence that compose_item will actually display."""
     desc = re.sub(r"\s+", " ", strip_tags(item.get("desc", ""))).strip()
     if len(desc) > 20:
@@ -779,17 +780,19 @@ def rendered_story_key(item):
         if 0 < cut < 320:
             desc = desc[:cut + 1]
         core = desc
+        if summary_maximum:
+            core = " ".join(core.split()[:summary_maximum]).rstrip(" .") + "."
     else:
         core = clean_title(item.get("title", ""))
     value = f"{item.get('agency', '')} {core}"
     return re.sub(r"[^a-z0-9]+", " ", htmlmod.unescape(value).casefold()).strip()
 
 
-def dedupe_rendered_stories(items):
+def dedupe_rendered_stories(items, summary_maximum=None):
     """Prevent two source records from producing an identical visible paragraph."""
     seen, unique = set(), []
     for item in items:
-        key = rendered_story_key(item)
+        key = rendered_story_key(item, summary_maximum)
         if key and key in seen:
             continue
         if key:
@@ -1454,8 +1457,12 @@ def blogger_call(path, token, method="GET", body=None):
     req = urllib.request.Request(url, data=data, method=method, headers={
         "Authorization": "Bearer " + token,
         "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read())
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", "replace")[:1200]
+        raise RuntimeError(f"Blogger {method} {path} returned HTTP {exc.code}: {detail}") from exc
 
 def live_post_exists(url, token):
     """Confirm an existing live post through Blogger API without a public pageview."""
@@ -1473,7 +1480,7 @@ def publish_post(art, token, dry=False):
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
         return None
     # pass 1: draft with slug-title (Blogger derives permalink from it)
-    draft = blogger_call("/posts/", token, "POST", {
+    draft = blogger_call("/posts/?isDraft=true", token, "POST", {
         "kind": "blogger#post", "title": art["slug"], "content": art["html"],
         "labels": art["labels"]})
     # pass 2: publish
@@ -1553,7 +1560,9 @@ def run_desk(desk, tracker, dry=False, token=None):
     selected_before_body_dedupe = len(items)
     items = dedupe_rendered_stories(items)
     items = enrich_item_descriptions(items)
-    items = dedupe_rendered_stories(items)
+    # Match the exact synopsis length rendered by each edition. Two source
+    # records with a shared opening must not become duplicate visible paragraphs.
+    items = dedupe_rendered_stories(items, 42 if desk in CATEGORY_DESKS else 52)
     before_source_gate = len(items)
     items = [item for item in items if item_source_is_usable(item)]
     if len(items) != before_source_gate:

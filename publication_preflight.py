@@ -34,7 +34,9 @@ def assert_publishable(title,content,labels):
  for raw in re.findall(r'<p\b[^>]*>(.*?)</p>',content or '',flags=re.I|re.S):
   value=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',raw))).strip().casefold()
   if len(value)>=100:paragraphs.append(value)
- if len(paragraphs)!=len(set(paragraphs)):issues.append('duplicated substantive paragraph detected')
+ if len(paragraphs)!=len(set(paragraphs)):
+  seen=set();duplicate=next((p for p in paragraphs if p in seen or seen.add(p)), '')
+  issues.append('duplicated substantive paragraph detected: '+duplicate[:180])
  source_minimum=2 if is_news else 3
  if len(_source_domains(content))<source_minimum:issues.append(f'insufficient independent/primary source domains (minimum {source_minimum})')
  for phrase in MASS_TEMPLATE_PHRASES:

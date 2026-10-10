@@ -43,7 +43,9 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: |
-          if [ -n "${{ github.event.inputs.desks }}" ]; then
+          if [ "${{ github.event_name }}" = "push" ]; then
+            python3 news_pipeline.py --desks "americas,markets,economy"
+          elif [ -n "${{ github.event.inputs.desks }}" ]; then
             python3 news_pipeline.py --desks "${{ github.event.inputs.desks }}"
           else
             python3 news_pipeline.py --due
