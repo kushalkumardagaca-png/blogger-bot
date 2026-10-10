@@ -50,9 +50,11 @@ jobs:
           git config user.name "Daily Yield Master Writer"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready
-          git commit -m "Prepare dynamic trending Master package [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          if ! git diff --staged --quiet; then
+            git commit -m "Prepare dynamic trending Master package [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
       - name: Publish only after explicit activation
         if: ${{ inputs.publish }}
         env:
@@ -68,5 +70,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           python dispatch_social_events.py
+          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Record trending Master publication [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
           gh workflow run content_experience_repair.yml --ref main
           gh workflow run bing_url_automation.yml --ref main

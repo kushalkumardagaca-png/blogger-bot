@@ -1,0 +1,49 @@
+name: One-Time Master Automation Validation
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/master_automation_validation.yml']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-master-writer
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests Pillow ImageHash google-api-python-client google-auth pytest
+      - name: Validate taxonomy, discovery and page
+        run: pytest -q test_master_dynamic_system.py test_daily_article_experience.py
+      - name: Prepare one complete article without publishing
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
+        run: python master_dynamic_pipeline.py --kind evergreen --slot 0 --prepare
+      - name: Persist validation evidence
+        if: always()
+        run: |
+          git config user.name "Daily Yield Master Validator"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MASTER_AUTOMATION_STATUS.json master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json scheduled_ready 2>/dev/null || true
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "Record complete Master automation validation [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
