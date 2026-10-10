@@ -972,15 +972,16 @@ def compose_item(it, win_end, context_target=95, summary_target=52):
     analysis = bool(ANALYSIS_RE.search(title + " " + summary))
     kind = item_type(title + " " + summary)
     variant = int(hashlib.sha256((title + it["agency"]).encode()).hexdigest()[:2], 16) % len(READER_LENS)
+    topic_ref = clip_word_count(title, 8).rstrip(" .")
     if background:
         chip, display = f"Background · originally {day}", "Background context: " + title
-        status = f"Background, not current-window news: {title}. {it['agency']} published this on {day}; it is retained only for context."
+        status = f"Background, not current-window news: {topic_ref}. {it['agency']} published it on {day}; retained only for context."
     elif analysis:
         chip, display = f"{day} · Reported outlook", title
-        status = f"This forecast or analytical view about {title} was reported by {it['agency']} on {day}. It is not an observed future result or a fact asserted by Daily Yield."
+        status = f"{it['agency']}'s {day} outlook concerns {topic_ref}; it is an attributed view, not an observed future result."
     else:
         chip, display = f"{day} · Reported development", title
-        status = f"{it['agency']} published its account of {title} on {day}. Possible consequences below are conditional context, not a claim that a future result is certain."
+        status = f"{it['agency']}'s {day} report concerns {topic_ref}; possible consequences remain conditional, not certain."
     summary_words = len(summary.split())
     context_limit = max(35, context_target - summary_words)
     ordered_lenses = " ".join(READER_LENS[(variant + offset) % len(READER_LENS)]
@@ -1329,8 +1330,10 @@ def reduce_news_context(document, target=4050):
             break
         plain = htmlmod.unescape(strip_tags(match.group(2)))
         sentences = [part.strip() for part in re.split(r"(?<=[.!?])\s+", plain) if part.strip()]
-        # Keep the opening status/attribution and at least one consequence sentence.
-        while len(sentences) > 2 and count > target:
+        # Keep the unique opening status/attribution. Consequence sentences are
+        # retained wherever the global word budget permits, then removed from
+        # later items one at a time rather than rejecting a complete edition.
+        while len(sentences) > 1 and count > target:
             removed = sentences.pop()
             count -= len(re.findall(r"\b[\w’'-]+\b", removed, flags=re.UNICODE))
         replacements[match.start()] = match.group(1) + htmlmod.escape(" ".join(sentences)) + match.group(3)
@@ -1480,9 +1483,12 @@ def publish_post(art, token, dry=False):
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
         return None
     # pass 1: draft with slug-title (Blogger derives permalink from it)
+    # Keep draft creation minimal. Blogger intermittently rejects otherwise valid
+    # multi-label inserts; the complete canonical labels are applied in the final
+    # update after Blogger has assigned the post ID and permalink.
     draft = blogger_call("/posts?isDraft=true", token, "POST", {
         "kind": "blogger#post", "title": art["slug"], "content": art["html"],
-        "labels": art["labels"]})
+        "labels": ["News"]})
     # pass 2: publish
     live = blogger_call(f"/posts/{draft['id']}/publish", token, "POST")
     url = live.get("url", "")
