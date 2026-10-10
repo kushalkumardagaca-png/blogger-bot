@@ -1,8 +1,11 @@
 {
-  "status": "FAIL",
+  "status": "PREPARED",
   "publication_enabled": false,
+  "date": "2026-10-10",
   "kind": "evergreen",
   "slot": 0,
-  "error_type": "RuntimeError",
-  "error": "core expansion failed; assembled core remains 3672 words"
+  "topic_id": "1476b081c09137d8",
+  "title": "Mastering Budgeting for Beginners",
+  "package": "master_packages/dynamic/2026-10-10-evergreen-1476b081c09137d8.json",
+  "html": "scheduled_ready/2026-10-10-evergreen-0-mastering-budgeting-for-beginners.html"
 }
