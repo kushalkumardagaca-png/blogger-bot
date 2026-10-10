@@ -1,27 +1,27 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-10T04:02:24.709591+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-10T04:23:37.170136+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 3,
+  "published": 3,
+  "failed": 0,
   "results": [
     {
       "desk": "americas",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "Blogger PUT /posts/3765356538829628279 returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     },
     {
       "desk": "markets",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "Blogger PUT /posts/1700784563179985190 returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     },
     {
       "desk": "economy",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "Blogger PUT /posts/249107466377745488 returned HTTP 400: {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Request contains an invalid argument.\",\n    \"errors\": [\n      {\n        \"message\": \"Request contains an invalid argument.\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ],\n    \"status\": \"INVALID_ARGUMENT\"\n  }\n}\n"
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
