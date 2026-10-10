@@ -1,12 +1,12 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "zero_view": true,
   "posts_checked": 380,
-  "labels_normalized": 76,
+  "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
-  "pages_repaired": 1,
+  "pages_repaired": 0,
   "article_snapshot_entries": 76,
   "news_snapshot_entries": 304,
   "label_image_index_entries": 380,
@@ -44,7 +44,5 @@
     "Economy, Trade & Jobs": 18,
     "Banking, Fintech & Personal Money": 17,
     "Companies, IPOs & Deals": 18
-  },
-  "error_type": "RuntimeError",
-  "error": "Content inventory has an empty article category or missing Global News desk"
+  }
 }
