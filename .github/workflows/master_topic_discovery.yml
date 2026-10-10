@@ -47,8 +47,14 @@ jobs:
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
-        run: python master_topic_discovery.py --${{ steps.mode.outputs.value }}
-      - name: Persist evidence without activating publication
+        run: |
+          for attempt in 1 2; do
+            if python master_topic_discovery.py --${{ steps.mode.outputs.value }}; then exit 0; fi
+            echo "Discovery attempt $attempt failed; retrying transient live sources."
+            sleep $((attempt * 20))
+          done
+          exit 1
+      - name: Persist discovery evidence and diagnostics
         if: always()
         run: |
           git config user.name "Daily Yield Master Discovery"
@@ -56,5 +62,17 @@ jobs:
           git add MASTER_TREND_POOL.json MASTER_DAILY_PLAN.json MASTER_DISCOVERY_STATUS.json 2>/dev/null || true
           if git diff --staged --quiet; then exit 0; fi
           git commit -m "Update dynamic Master topic intelligence [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
+      - name: Preserve discovery diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-discovery-diagnostics-${{ github.run_id }}
+          path: MASTER_DISCOVERY_STATUS.json
+          if-no-files-found: warn
+          retention-days: 30

@@ -49,6 +49,7 @@ def category_fit(text,cat):
 _FINANCE_WORDS={'money','financial','finance','saving','savings','fund','cash','bank','banking','credit','debt','loan','investing','investment','asset','portfolio','budget','income','tax','insurance','mortgage','retirement','payment','fintech','wealth','capital','market'}
 _OFF_TOPIC_MARKERS={'imdb','tv series','television series','film','movie','episode','lyrics','song','album','celebrity','football','cricket'}
 _EDITORIAL_MARKERS={'how','why','what','guide','explained','definition','types','examples','tips','strategy','planning','versus','vs','beginner','beginners','steps','mistakes'}
+_AUTHORITY_MARKERS={'reuters','associated press','bloomberg','wall street journal','wsj','cnbc','bbc','forbes','nerdwallet','investopedia','kiplinger','money.com','economic times','business standard','financial times','yahoo finance','usa today','government','university'}
 
 def evergreen_topic_quality(title,cat,url='',require_editorial=False):
  """Return a strict semantic-fit score; zero rejects ambiguous/web-homepage hits."""
@@ -64,7 +65,8 @@ def evergreen_topic_quality(title,cat,url='',require_editorial=False):
   path=(urllib.parse.urlparse(url).path or '').strip('/')
   editorial=bool(tokens&_EDITORIAL_MARKERS) or '?' in title or len(path.split('/'))>=2
   if not editorial:return 0.0
- return (4.0 if phrase_hit else 0.0)+overlap*2.0+finance+min(2.0,len(tokens)/8)
+ authority=4.0 if any(marker in text for marker in _AUTHORITY_MARKERS) else 0.0
+ return authority+(4.0 if phrase_hit else 0.0)+overlap*2.0+finance+min(2.0,len(tokens)/8)
 def parse_date(value):
  from email.utils import parsedate_to_datetime
  try:return parsedate_to_datetime(value).astimezone(dt.timezone.utc).isoformat()
@@ -107,6 +109,7 @@ def gdelt():
   try:
    r=requests.get('https://api.gdeltproject.org/api/v2/doc/doc',params={'query':'('+query+') finance','mode':'ArtList','maxrecords':25,'format':'json','sort':'HybridRel'},headers={'User-Agent':UA},timeout=45);r.raise_for_status()
    for rank,item in enumerate(r.json().get('articles',[]),1):
+    if str(item.get('language','English')).casefold()!='english':continue
     seen=str(item.get('seendate',''));published=now().isoformat()
     if re.fullmatch(r'\d{14}',seen):published=dt.datetime.strptime(seen,'%Y%m%d%H%M%S').replace(tzinfo=dt.timezone.utc).isoformat()
     title=clean(item.get('title'))
@@ -141,15 +144,31 @@ def trend_candidates(raw):
   cat=next((c for c in TRENDING_CATEGORIES if c['label']==forced_label),None) or classify(text,TRENDING_CATEGORIES)
   permanent_defaults={TRENDING_CATEGORIES[0]['label']:EVERGREEN_CATEGORIES[13],TRENDING_CATEGORIES[1]['label']:EVERGREEN_CATEGORIES[5],TRENDING_CATEGORIES[2]['label']:EVERGREEN_CATEGORIES[12],TRENDING_CATEGORIES[3]['label']:EVERGREEN_CATEGORIES[3],TRENDING_CATEGORIES[4]['label']:EVERGREEN_CATEGORIES[0]}
   source_count=len({x['source'] for x in items});coverage=len({x.get('url') for x in items if x.get('url')});fresh=max(recency(x['published']) for x in items);volume=max(x.get('volume',0) for x in items)
-  # One headline or one provider can seed discovery, but cannot decide a daily
-  # article alone. Require corroboration by a second independent URL.
-  if coverage < 2:continue
   search=min(100,25*(volume>0)+20*(volume>=1000)+20*(volume>=10000)+10*source_count+5*min(5,coverage))
   viral=min(100,source_count*20+coverage*8+max(0,20-min(x.get('rank',30) for x in items)))
   relevance=min(100,35+category_fit(text,cat)*160)
   score=.25*fresh+.25*search+.15*min(100,coverage*15)+.10*viral+.10*relevance+.10*80+.05*80
-  result.append({'id':uid(title),'title':title,'category':cat['label'],'evergreen_category':classify(text,EVERGREEN_CATEGORIES,permanent_defaults[cat['label']])['label'],'recency_score':round(fresh,1),'search_score':round(search,1),'virality_score':round(viral,1),'overall_score':round(score,1),'first_seen':min(x['published'] for x in items),'last_seen':max(x['published'] for x in items),'sources':[{'name':x['source'],'url':x['url'],'published':x['published']} for x in items[:8]],'discovered_from_live_internet':True})
+  result.append({'id':uid(title),'title':title,'category':cat['label'],'evergreen_category':classify(text,EVERGREEN_CATEGORIES,permanent_defaults[cat['label']])['label'],'recency_score':round(fresh,1),'search_score':round(search,1),'virality_score':round(viral,1),'observation_count':coverage,'overall_score':round(score,1),'first_seen':min(x['published'] for x in items),'last_seen':max(x['published'] for x in items),'sources':[{'name':x['source'],'url':x['url'],'published':x['published']} for x in items[:8]],'discovered_from_live_internet':True})
  return result
+
+def corroborate_topic(candidate):
+ """Recheck one candidate against independent live coverage before selection."""
+ headline=re.sub(r'\s+[|–—-]\s+[^|–—-]{2,60}$','',candidate.get('title','')).strip()
+ base=words(headline);observations={x.get('url') for x in candidate.get('sources',[]) if x.get('url')}
+ channels={x.get('name') for x in candidate.get('sources',[]) if x.get('name')}
+ query=' '.join(list(base)[:10]) or headline
+ feeds=(('Google News revalidation','https://news.google.com/rss/search?q='+urllib.parse.quote(query+' when:3d')+'&hl=en-US&gl=US&ceid=US:en'),('Bing News revalidation','https://www.bing.com/news/search?format=rss&q='+urllib.parse.quote(query)))
+ matches=[]
+ for channel,url in feeds:
+  for item in rss(url,channel):
+   other=words(item['title']);overlap=len(base&other)
+   if overlap < max(2,round(len(base)*.3)):continue
+   if item.get('url') and item['url'] not in observations:
+    observations.add(item['url']);channels.add(channel);matches.append({'name':channel,'url':item['url'],'published':item['published']})
+   if len(observations)>=3:break
+  if len(observations)>=3:break
+ if len(observations)<2 or len(channels)<2:return None
+ result=dict(candidate);result['sources']=(candidate.get('sources',[])+matches)[:8];result['corroboration_count']=len(observations);result['revalidated_at']=now().isoformat();return result
 
 def weekly():
  raw=google_trends()+category_news()+gdelt();candidates=trend_candidates(raw);history={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])}
@@ -186,7 +205,9 @@ def evergreen_candidates(categories,excluded=None):
    # Live web fallback: score semantic category fit and reject entertainment,
    # ambiguous single-word matches, and generic corporate homepages.
    found=[]
-   for signal in cat['signals'][:4]:found+=rss('https://www.bing.com/search?format=rss&q='+urllib.parse.quote(signal+' personal finance guide question'),'Bing Search',cat['label'])
+   for signal in cat['signals'][:5]:
+    query='"'+signal+'" (guide OR explained OR question) when:30d'
+    found+=rss('https://news.google.com/rss/search?q='+urllib.parse.quote(query)+'&hl=en-US&gl=US&ceid=US:en','Google News evergreen demand',cat['label'])
    ranked=sorted(((evergreen_topic_quality(x['title'],cat,x.get('url',''),True),x) for x in found if uid(x['title']) not in excluded),key=lambda pair:pair[0],reverse=True)
    ranked=[pair for pair in ranked if pair[0]>0]
    if not ranked:continue
@@ -212,8 +233,12 @@ def daily(date=None):
   # A genuinely new same-day topic may outrank the weekly pool and is allowed.
   revalidated.extend(dict(x,revalidated_at=now().isoformat()) for x in live if x['category']==cat['label'] and x['id'] not in used and x['id'] not in {r['id'] for r in revalidated})
   rows=sorted(revalidated,key=lambda x:x['overall_score'],reverse=True)
-  if not rows:raise RuntimeError('no independently corroborated current topic for '+cat['label'])
-  trending.append(rows[0])
+  chosen=None
+  for candidate in rows[:8]:
+   chosen=corroborate_topic(candidate)
+   if chosen:break
+  if not chosen:raise RuntimeError('no independently corroborated current topic for '+cat['label'])
+  trending.append(chosen)
  evergreen=evergreen_candidates(evergreen_rotation(date.toordinal()),used)
  if len(evergreen)!=5:raise RuntimeError(f'only {len(evergreen)} evergreen topics qualified; expected 5')
  enabled=os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true'
