@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "generated_at": "2026-10-10T02:42:08.828739+00:00",
+  "dry_run": false,
+  "published": 0,
+  "failed": 3,
+  "results": [
+    {
+      "desk": "americas",
+      "status": "FAIL",
+      "error_type": "HTTPError",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "desk": "markets",
+      "status": "FAIL",
+      "error_type": "RuntimeError",
+      "error": "PUBLICATION PREFLIGHT FAILED — duplicated substantive paragraph detected"
+    },
+    {
+      "desk": "economy",
+      "status": "FAIL",
+      "error_type": "RuntimeError",
+      "error": "PUBLICATION PREFLIGHT FAILED — duplicated substantive paragraph detected"
+    }
+  ]
+}
