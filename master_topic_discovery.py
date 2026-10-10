@@ -128,7 +128,7 @@ def gsc_queries():
  required=('GSC_CLIENT_ID','GSC_CLIENT_SECRET','GSC_REFRESH_TOKEN')
  if not all(os.environ.get(x) for x in required):return []
  token=requests.post('https://oauth2.googleapis.com/token',data={'client_id':os.environ['GSC_CLIENT_ID'],'client_secret':os.environ['GSC_CLIENT_SECRET'],'refresh_token':os.environ['GSC_REFRESH_TOKEN'],'grant_type':'refresh_token'},timeout=30);token.raise_for_status();access=token.json()['access_token']
- end=dt.date.today()-dt.timedelta(days=1);start=end-dt.timedelta(days=480);site=urllib.parse.quote(os.environ.get('GSC_SITE_PROPERTY','sc-domain:dailyyield.blogspot.com'),safe='')
+ end=dt.date.today()-dt.timedelta(days=1);start=end-dt.timedelta(days=480);site=urllib.parse.quote(os.environ.get('GSC_SITE_PROPERTY','').strip() or 'sc-domain:dailyyield.blogspot.com',safe='')
  body={'startDate':str(start),'endDate':str(end),'dimensions':['query'],'rowLimit':25000}
  r=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60);r.raise_for_status()
  return [{'query':clean(x['keys'][0]),'clicks':x.get('clicks',0),'impressions':x.get('impressions',0),'position':x.get('position',100)} for x in r.json().get('rows',[])]

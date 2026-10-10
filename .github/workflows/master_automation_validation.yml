@@ -3,7 +3,7 @@ name: One-Time Master Automation Validation
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/master_automation_validation.yml']
+    paths: ['.github/workflows/master_automation_validation.yml', 'prepare_master_article.py', 'master_topic_discovery.py']
 
 permissions:
   contents: write
