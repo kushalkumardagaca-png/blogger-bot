@@ -1,24 +1,12 @@
 {
   "status": "PASS",
-  "generated_at": "2026-10-10T07:01:59.290771+00:00",
+  "generated_at": "2026-10-10T07:40:44.426820+00:00",
   "dry_run": false,
-  "published": 3,
+  "published": 1,
   "failed": 0,
   "results": [
     {
-      "desk": "china",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
-    },
-    {
-      "desk": "banking",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
-    },
-    {
-      "desk": "companies",
+      "desk": "asia-pacific",
       "status": "PASS",
       "published": true,
       "dry_run": false
