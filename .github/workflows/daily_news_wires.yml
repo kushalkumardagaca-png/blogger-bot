@@ -1,8 +1,8 @@
 name: Daily Yield News Wires (11 Daily)
 on:
   # Temporary catch-up trigger: this workflow-file update immediately retries
-  # editions missed by failed scheduled runs after publication and duplicate-text repairs.
-  # Remove after the recovery run passes.
+  # editions missed by failed scheduled runs after publication, duplicate-text,
+  # and Blogger draft-endpoint repairs. Remove after the recovery run passes.
   push:
     branches: [main]
     paths: ['.github/workflows/daily_news_wires.yml']

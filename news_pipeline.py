@@ -1480,7 +1480,7 @@ def publish_post(art, token, dry=False):
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
         return None
     # pass 1: draft with slug-title (Blogger derives permalink from it)
-    draft = blogger_call("/posts/?isDraft=true", token, "POST", {
+    draft = blogger_call("/posts?isDraft=true", token, "POST", {
         "kind": "blogger#post", "title": art["slug"], "content": art["html"],
         "labels": art["labels"]})
     # pass 2: publish
