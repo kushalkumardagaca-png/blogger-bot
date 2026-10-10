@@ -1,9 +1,8 @@
 {
-  "status": "PAUSED_READY_FOR_VALIDATION",
+  "status": "FAIL",
   "publication_enabled": false,
-  "daily_target": 10,
-  "trending_daily": 5,
-  "evergreen_daily": 5,
-  "photos_per_article": 3,
-  "live_activation_requires_owner_command": true
+  "kind": "evergreen",
+  "slot": 0,
+  "error_type": "HTTPError",
+  "error": "400 Client Error: Bad Request for url: https://www.googleapis.com/webmasters/v3/sites//searchAnalytics/query"
 }
