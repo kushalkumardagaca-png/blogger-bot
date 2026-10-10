@@ -1,24 +1,10 @@
 name: Daily Yield News Wires (11 Daily)
 on:
-  # Temporary catch-up trigger: this workflow-file update immediately retries
-  # editions missed by failed scheduled runs after publication, duplicate-text,
-  # and Blogger draft-endpoint repairs. Remove after the recovery run passes.
+  # Recovery mode: scheduled launches are paused so a new cron event cannot
+  # replace the queued catch-up run. Normal schedules return after it passes.
   push:
     branches: [main]
     paths: ['.github/workflows/daily_news_wires.yml']
-  schedule:
-    # Each run starts 45 minutes before its editorial slot (IST).
-    - cron: "45 23 * * *"   # 05:15 IST → Americas 06:00
-    - cron: "45 0 * * *"    # 06:15 IST → Global 07:00
-    - cron: "30 1 * * *"    # 07:00 IST → Markets 07:45
-    - cron: "15 2 * * *"    # 07:45 IST → Economy 08:30
-    - cron: "0 3 * * *"     # 08:30 IST → Banking 09:15
-    - cron: "45 3 * * *"    # 09:15 IST → Companies 10:00
-    - cron: "45 6 * * *"    # 12:15 IST → China 13:00
-    - cron: "30 7 * * *"    # 13:00 IST → Asia-Pacific 13:45
-    - cron: "45 11 * * *"   # 17:15 IST → India 18:00
-    - cron: "45 15 * * *"   # 21:15 IST → Russia 22:00
-    - cron: "45 16 * * *"   # 22:15 IST → Europe 23:00
   workflow_dispatch:
     inputs:
       desks:
