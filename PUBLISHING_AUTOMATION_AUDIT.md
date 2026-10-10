@@ -99,7 +99,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **News desk numbers are 1–11**
 - ✅ **News labels are unique**
 - ✅ **Each News preflight selects its intended consolidated desk** — [['americas'], ['global'], ['global', 'markets'], ['economy', 'markets'], ['banking', 'economy'], ['banking', 'companies'], ['china'], ['asia-pacific', 'china'], ['india'], ['russia'], ['europe']]
-- ✅ **News labels encode edition family and canonical taxonomy**
+- ✅ **News labels encode edition family and canonical taxonomy within Blogger limit**
 - ✅ **News launch gate is 2026-09-25**
 - ✅ **News cluster selector covers paired desks**
 - ✅ **News duplicate recovery uses Blogger API without synthetic pageviews**
