@@ -258,9 +258,10 @@ for cron in news_expected:
     actual_clusters.append(sorted(due))
 expected_clusters=[sorted(group) for group in expected_clusters]
 check('Each News preflight selects its intended consolidated desk',actual_clusters==expected_clusters,str(actual_clusters))
-check('News labels encode edition family and canonical taxonomy',
+check('News labels encode edition family and canonical taxonomy within Blogger limit',
       '"Category Edition"' in np and '"Geographic Edition"' in np
-      and 'TOPIC_LABELS.values()' in np and 'GEOGRAPHY_LABELS[desk]' in np)
+      and 'TOPIC_LABELS[desk]' in np and 'GEOGRAPHY_LABELS[desk]' in np
+      and 'Blogger caps the combined label text' in np)
 check('News launch gate is 2026-09-25','LAUNCH_DATE = dt.date(2026, 9, 25)' in np)
 check('News cluster selector covers paired desks','PREFLIGHT_MINUTES = 60' in np)
 check('News duplicate recovery uses Blogger API without synthetic pageviews',

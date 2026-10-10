@@ -1,6 +1,6 @@
 name: Daily Yield News Wires (11 Daily)
 on:
-  # Recovery mode, final verified retry: scheduled launches are paused so no
+  # Recovery mode, Blogger-label-limit retry: scheduled launches are paused so no
   # cron event can replace this catch-up. Normal schedules return after PASS.
   push:
     branches: [main]

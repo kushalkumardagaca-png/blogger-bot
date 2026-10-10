@@ -60,9 +60,8 @@ class NewsArticleExpansionTests(unittest.TestCase):
         for _key, label in news.SECTION_ORDER:
             self.assertIn(label, article["html"])
         self.assertEqual(article["labels"][0:3], ["News", "Geographic Edition", "India Finance News"])
-        for label in news.TOPIC_LABELS.values():
-            self.assertIn(label, article["labels"])
         self.assertIn("Country · India", article["labels"])
+        self.assertLessEqual(sum(map(len, article["labels"])), 200)
 
     def test_regional_article_carries_each_constituent_country_label(self):
         article, _, _, _ = self.fitted("americas", 28)
@@ -76,8 +75,8 @@ class NewsArticleExpansionTests(unittest.TestCase):
         self.assertGreaterEqual(count, 3800)
         self.assertLessEqual(count, 4100)
         self.assertEqual(article["labels"][0:3], ["News", "Category Edition", "Markets, Crypto & Commodities"])
-        for label in news.COUNTRY_LABELS.values():
-            self.assertIn(label, article["labels"])
+        self.assertLessEqual(sum(map(len, article["labels"])), 200)
+        self.assertNotIn("Country · India", article["labels"])
         for place in ("India", "China", "Russia", "Americas", "Europe", "Asia-Pacific"):
             self.assertIn(place, article["html"])
 

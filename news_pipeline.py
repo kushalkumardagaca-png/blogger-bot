@@ -1289,12 +1289,16 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     full_html = body + f'''
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'''
 
+    # Blogger caps the combined label text on one post at 200 characters.
+    # Keep classification orthogonal: subject editions belong to their subject;
+    # geographic editions belong to their region/countries while their article
+    # body still covers every subject. Cross-product labels exceeded Blogger's
+    # hard limit and caused otherwise valid posts.update calls to return 400.
     if desk in CATEGORY_DESKS:
-        labels = ["News", "Category Edition", TOPIC_LABELS[desk], *COUNTRY_LABELS.values()]
+        labels = ["News", "Category Edition", TOPIC_LABELS[desk]]
     else:
         country_labels = [COUNTRY_LABELS[country] for country in DESK_COUNTRIES.get(desk, ())]
-        labels = ["News", "Geographic Edition", GEOGRAPHY_LABELS[desk],
-                  *country_labels, *TOPIC_LABELS.values()]
+        labels = ["News", "Geographic Edition", GEOGRAPHY_LABELS[desk], *country_labels]
     return {"title": title, "slug": f"{slug}-{edition_date.isoformat()}",
             "meta": meta, "labels": labels, "html": full_html,
             "canonical": canonical, "n_items": len(items),
@@ -1478,19 +1482,37 @@ def live_post_exists(url, token):
         return False
 
 
+def find_incomplete_live_post(art, token):
+    """Recover a slug-title post left live if the final Blogger update failed."""
+    query = urllib.parse.urlencode({"status": "live", "fetchBodies": "false",
+                                    "maxResults": "50",
+                                    "fields": "items(id,title,url,labels)"})
+    recent = blogger_call("/posts?" + query, token)
+    for post in recent.get("items", []):
+        if post.get("title") == art["slug"] and post.get("id"):
+            return post
+    return None
+
+
 def publish_post(art, token, dry=False):
     if dry:
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
         return None
-    # pass 1: draft with slug-title (Blogger derives permalink from it)
-    # Keep draft creation minimal. Blogger intermittently rejects otherwise valid
-    # multi-label inserts; the complete canonical labels are applied in the final
-    # update after Blogger has assigned the post ID and permalink.
-    draft = blogger_call("/posts?isDraft=true", token, "POST", {
-        "kind": "blogger#post", "title": art["slug"], "content": art["html"],
-        "labels": ["News"]})
-    # pass 2: publish
-    live = blogger_call(f"/posts/{draft['id']}/publish", token, "POST")
+    # Resume an incomplete slug-title post before creating anything new. This
+    # makes the three-pass publication transaction retry-safe.
+    live = find_incomplete_live_post(art, token)
+    if live:
+        draft = live
+        print(f"    recovering incomplete live post {draft['id']}")
+    else:
+        # pass 1: draft with slug-title (Blogger derives permalink from it)
+        # Keep draft creation minimal; canonical labels are applied after Blogger
+        # has assigned the post ID and permalink.
+        draft = blogger_call("/posts?isDraft=true", token, "POST", {
+            "kind": "blogger#post", "title": art["slug"], "content": art["html"],
+            "labels": ["News"]})
+        # pass 2: publish
+        live = blogger_call(f"/posts/{draft['id']}/publish", token, "POST")
     url = live.get("url", "")
     if art["slug"] not in url:
         print(f"    !! slug check: expected {art['slug']} in {url}")
