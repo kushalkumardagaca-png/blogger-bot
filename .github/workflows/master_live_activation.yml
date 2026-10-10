@@ -61,12 +61,17 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
         run: python master_dynamic_pipeline.py --kind trending --slot 0 --prepare
-      - name: Commit trending assets before publication
+      - name: Persist trending preparation and assets
+        if: always()
         run: |
-          git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready
-          git commit -m "Prepare first live trending Master package [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for path in master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready; do
+            git add "$path" 2>/dev/null || true
+          done
+          if ! git diff --staged --quiet; then
+            git commit -m "Prepare first live trending Master package [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
       - name: Publish first trending Master article
         env:
           MASTER_PUBLICATION_ENABLED: 'true'

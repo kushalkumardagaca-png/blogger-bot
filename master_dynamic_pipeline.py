@@ -52,8 +52,12 @@ def publish(kind,slot):
  if not target.exists():raise RuntimeError('validated prepared package is absent')
  package=read(target,{});validate(package);title,slug,meta,labels,body=build_html(kind,item,package);res=publish_to_blogger(title,body,labels)
  if not res or not res.get('url'):raise RuntimeError('Blogger did not confirm a live Master Article URL')
- tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['published'].append(record);write(TRACKER,tracker)
- history=read(ROOT/'MASTER_TOPIC_HISTORY.json',{'version':1,'items':[]});history['items'].append(record);write(ROOT/'MASTER_TOPIC_HISTORY.json',history);write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':res['url'],'content_mode':'post','published_at':record['published_at']}]);write(STATUS,{'status':'PASS','publication_enabled':True,**record});print(res['url'])
+ tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['publication_enabled']=True
+ if not any(x.get('topic_id')==item['id'] or x.get('url')==res['url'] for x in tracker['published']):tracker['published'].append(record)
+ write(TRACKER,tracker)
+ history=read(ROOT/'MASTER_TOPIC_HISTORY.json',{'version':1,'items':[]})
+ if not any(x.get('topic_id')==item['id'] or x.get('url')==res['url'] for x in history['items']):history['items'].append(record)
+ write(ROOT/'MASTER_TOPIC_HISTORY.json',history);write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':res['url'],'content_mode':'post','published_at':record['published_at']}]);write(STATUS,{'status':'PASS','publication_enabled':True,**record});print(res['url'])
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--kind',choices=('trending','evergreen'),required=True);p.add_argument('--slot',type=int,choices=range(5),required=True);p.add_argument('--prepare',action='store_true');p.add_argument('--publish',action='store_true');a=p.parse_args()
