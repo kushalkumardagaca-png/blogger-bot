@@ -1,5 +1,10 @@
 name: Daily Yield News Wires (11 Daily)
 on:
+  # Temporary catch-up trigger: this workflow-file update immediately retries
+  # any edition missed by a failed scheduled run. Remove after the recovery run.
+  push:
+    branches: [main]
+    paths: ['.github/workflows/daily_news_wires.yml']
   schedule:
     # Each run starts 45 minutes before its editorial slot (IST).
     - cron: "45 23 * * *"   # 05:15 IST → Americas 06:00
@@ -44,15 +49,24 @@ jobs:
             python3 news_pipeline.py --due
           fi
       - name: Route each live News edition to exactly one social platform
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: python dispatch_social_events.py
-      - name: Commit news tracker
+      - name: Preserve pipeline diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-pipeline-status-${{ github.run_id }}
+          path: NEWS_PIPELINE_STATUS.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit news tracker and diagnostic status
         if: always()
         run: |
           git config user.name "Daily Yield News Bot"
           git config user.email "bot@dailyyield.blogspot.com"
-          git add news_tracker.json || true
+          git add news_tracker.json NEWS_PIPELINE_STATUS.json || true
           if git diff --staged --quiet; then
             echo "No tracker change."
           else
@@ -61,10 +75,12 @@ jobs:
             git push origin main
           fi
       - name: Trigger authenticated News-page refresh
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run content_experience_repair.yml --ref main
       - name: Trigger Bing URL submission reconciliation
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run bing_url_automation.yml --ref main

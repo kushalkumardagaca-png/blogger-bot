@@ -1667,16 +1667,30 @@ def main():
     if not dry:
         token = blogger_token()
     ok, fail = 0, 0
+    results = []
     for desk in desks:
         desk = desk.strip()
         if desk not in DESKS:
-            print(f"  ?? unknown desk '{desk}'"); fail += 1; continue
+            message = f"unknown desk '{desk}'"
+            print(f"  ?? {message}"); fail += 1
+            results.append({"desk": desk, "status": "FAIL", "error_type": "UnknownDesk", "error": message})
+            continue
         try:
-            if run_desk(desk, tracker, dry, token):
+            published = run_desk(desk, tracker, dry, token)
+            if published:
                 ok += 1
+                results.append({"desk": desk, "status": "PASS", "published": not dry, "dry_run": dry})
+            else:
+                results.append({"desk": desk, "status": "SKIPPED", "published": False, "dry_run": dry})
         except Exception as e:
-            print(f"  [{desk}] ERROR: {e}")
+            print(f"  [{desk}] ERROR: {type(e).__name__}: {e}")
+            results.append({"desk": desk, "status": "FAIL", "error_type": type(e).__name__,
+                            "error": str(e)[:1000]})
             fail += 1
+    report = {"status": "FAIL" if fail else "PASS", "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+              "dry_run": dry, "published": ok, "failed": fail, "results": results}
+    with open("NEWS_PIPELINE_STATUS.json", "w", encoding="utf-8") as handle:
+        json.dump(report, handle, indent=2, ensure_ascii=False)
     print(f"\nNews wires: {ok} published, {fail} failed" + (" (DRY RUN)" if dry else ""))
     if fail:
         sys.exit(1)
