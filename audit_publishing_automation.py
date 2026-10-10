@@ -64,6 +64,9 @@ check('Dynamic Master daily plan is five trending plus five evergreen topics',
       "if len(evergreen)!=5" in discovery and "for cat in TRENDING_CATEGORIES" in discovery and "'total':10" in discovery)
 check('Trending Master articles receive one trend and one permanent label',
       "item['category'],item['evergreen_category']" in dynamic)
+check('All ten daily Master slots route to exactly one established social platform',
+      'item_key.startswith("master-")' in (ROOT/'social_rotation.py').read_text()
+      and "parts[1] not in ('trending','evergreen')" in (ROOT/'social_rotation.py').read_text())
 check('Each dynamic Master package requires three licensed photos',
       'choose_photos(briefs' in (ROOT/'prepare_master_article.py').read_text() and 'if len(briefs)!=3' in (ROOT/'photo_selector.py').read_text())
 rv=(ROOT/'reader_value_article.py').read_text(); mv2=(ROOT/'master_article_v2.py').read_text(); prep=(ROOT/'prepare_master_article.py').read_text(); master=ap+rv+mv2+prep

@@ -64,6 +64,12 @@ def platform_for(item_key: str, day: dt.date) -> str:
     elif item_key.startswith("resource-"):
         idx = int(item_key.split("-", 1)[1])
         pattern = RESOURCE_PATTERN
+    elif item_key.startswith("master-"):
+        parts=item_key.split('-')
+        if len(parts)!=3 or parts[1] not in ('trending','evergreen'):raise ValueError(f"unknown social item key: {item_key}")
+        idx=(0 if parts[1]=='trending' else 5)+int(parts[2])
+        if not 0<=idx<10:raise ValueError(f"unknown social item key: {item_key}")
+        pattern=NEWS_PATTERN
     else:
         raise ValueError(f"unknown social item key: {item_key}")
     return pattern[(idx + offset) % len(pattern)]

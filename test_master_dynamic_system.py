@@ -52,6 +52,16 @@ def test_trend_scoring_clusters_live_observations():
     assert rows[0]['discovered_from_live_internet'] is True
 
 
+def test_master_social_keys_route_to_exactly_one_platform():
+    from social_rotation import make_plan, PLATFORMS
+    day='2026-10-10T10:00:00+00:00'
+    for kind in ('trending','evergreen'):
+        for slot in range(5):
+            plan=make_plan(f'master-{kind}-{slot}','https://dailyyield.blogspot.com/2026/10/example.html','post',day,'')
+            assert plan['platform'] in PLATFORMS
+            assert plan['item_key']==f'master-{kind}-{slot}'
+
+
 def test_publication_is_fail_closed_by_default(monkeypatch,tmp_path):
     monkeypatch.delenv('MASTER_PUBLICATION_ENABLED',raising=False)
     import master_dynamic_pipeline as pipeline
