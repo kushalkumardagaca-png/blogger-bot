@@ -42,12 +42,14 @@ def build_html(kind,item,package,check_remote_images=True):
  first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
 
 def prepare(kind,slot):
- from prepare_master_article import build_package
- plan,item=selected(kind,slot);target=package_path(kind,item);package=build_package(topic_for(kind,item),target);validate(package);title,slug,meta,labels,body=build_html(kind,item,package,check_remote_images=False)
+ import prepare_master_article as preparer
+ plan,item=selected(kind,slot);target=package_path(kind,item);package=preparer.build_package(topic_for(kind,item),target);validate(package);title,slug,meta,labels,body=build_html(kind,item,package,check_remote_images=False)
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
  write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
 
 def publish(kind,slot,timed_release=False):
+ # Never allow an ignored event from a prior local attempt to be redispatched.
+ write(SOCIAL,[])
  if os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()!='true':raise RuntimeError('Master publication remains intentionally paused; set MASTER_PUBLICATION_ENABLED=true only after owner activation')
  if timed_release:wait_for_release(MASTER_LIVE[(kind,slot)])
  plan,item=selected(kind,slot);target=package_path(kind,item)
@@ -67,5 +69,10 @@ def main():
   if a.prepare==a.publish:raise RuntimeError('choose exactly one of --prepare or --publish')
   if a.prepare:prepare(a.kind,a.slot)
   else:publish(a.kind,a.slot,timed_release=a.timed_release)
- except Exception as exc:write(STATUS,{'status':'FAIL','publication_enabled':os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true','kind':a.kind,'slot':a.slot,'error_type':type(exc).__name__,'error':str(exc)[:1000]});raise
+ except Exception as exc:
+  try:
+   import prepare_master_article as preparer
+   stage=getattr(preparer,'STAGE','unknown')
+  except Exception:stage='unknown'
+  write(STATUS,{'status':'FAIL','publication_enabled':os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true','kind':a.kind,'slot':a.slot,'stage':stage,'error_type':type(exc).__name__,'error':str(exc)[:1000]});raise
 if __name__=='__main__':main()

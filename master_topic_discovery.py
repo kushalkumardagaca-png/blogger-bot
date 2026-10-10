@@ -31,11 +31,40 @@ def recency(published):
  try:age=max(0,(now()-dt.datetime.fromisoformat(published.replace('Z','+00:00'))).total_seconds()/3600)
  except Exception:age=168
  return max(0,100-age*100/168)
-def words(v):return {x for x in re.findall(r'[a-z0-9]{3,}',clean(v).casefold()) if x not in STOP}
+def words(v):
+ out=set()
+ for token in re.findall(r'[a-z0-9]{3,}',clean(v).casefold()):
+  if token in STOP:continue
+  # Light normalization improves cross-source headline clustering without a
+  # language-model dependency (prices/price, surges/surge, expectations/expectation).
+  if len(token)>4 and token.endswith('s') and not token.endswith('ss'):token=token[:-1]
+  out.add(token)
+ return out
 def category_fit(text,cat):
  hay=words(text);signals=set()
  for phrase in cat['signals']:signals|=words(phrase)
  return len(hay&signals)/max(1,len(signals))
+
+
+_FINANCE_WORDS={'money','financial','finance','saving','savings','fund','cash','bank','banking','credit','debt','loan','investing','investment','asset','portfolio','budget','income','tax','insurance','mortgage','retirement','payment','fintech','wealth','capital','market'}
+_OFF_TOPIC_MARKERS={'imdb','tv series','television series','film','movie','episode','lyrics','song','album','celebrity','football','cricket'}
+_EDITORIAL_MARKERS={'how','why','what','guide','explained','definition','types','examples','tips','strategy','planning','versus','vs','beginner','beginners','steps','mistakes'}
+
+def evergreen_topic_quality(title,cat,url='',require_editorial=False):
+ """Return a strict semantic-fit score; zero rejects ambiguous/web-homepage hits."""
+ text=clean(title).casefold();tokens=words(text)
+ if not text or any(marker in text for marker in _OFF_TOPIC_MARKERS):return 0.0
+ signal_tokens=set();phrase_hit=False
+ for phrase in cat['signals']:
+  signal_tokens|=words(phrase)
+  if clean(phrase).casefold() in text:phrase_hit=True
+ overlap=len(tokens&signal_tokens);finance=len(tokens&_FINANCE_WORDS)
+ if not phrase_hit and overlap<2 and not (overlap>=1 and finance>=2):return 0.0
+ if require_editorial:
+  path=(urllib.parse.urlparse(url).path or '').strip('/')
+  editorial=bool(tokens&_EDITORIAL_MARKERS) or '?' in title or len(path.split('/'))>=2
+  if not editorial:return 0.0
+ return (4.0 if phrase_hit else 0.0)+overlap*2.0+finance+min(2.0,len(tokens)/8)
 def parse_date(value):
  from email.utils import parsedate_to_datetime
  try:return parsedate_to_datetime(value).astimezone(dt.timezone.utc).isoformat()
@@ -111,7 +140,10 @@ def trend_candidates(raw):
   if not forced_label and max(category_fit(text,c) for c in TRENDING_CATEGORIES)==0:continue
   cat=next((c for c in TRENDING_CATEGORIES if c['label']==forced_label),None) or classify(text,TRENDING_CATEGORIES)
   permanent_defaults={TRENDING_CATEGORIES[0]['label']:EVERGREEN_CATEGORIES[13],TRENDING_CATEGORIES[1]['label']:EVERGREEN_CATEGORIES[5],TRENDING_CATEGORIES[2]['label']:EVERGREEN_CATEGORIES[12],TRENDING_CATEGORIES[3]['label']:EVERGREEN_CATEGORIES[3],TRENDING_CATEGORIES[4]['label']:EVERGREEN_CATEGORIES[0]}
-  source_count=len({x['source'] for x in items});coverage=len(items);fresh=max(recency(x['published']) for x in items);volume=max(x.get('volume',0) for x in items)
+  source_count=len({x['source'] for x in items});coverage=len({x.get('url') for x in items if x.get('url')});fresh=max(recency(x['published']) for x in items);volume=max(x.get('volume',0) for x in items)
+  # One headline or one provider can seed discovery, but cannot decide a daily
+  # article alone. Require corroboration by a second independent URL.
+  if coverage < 2:continue
   search=min(100,25*(volume>0)+20*(volume>=1000)+20*(volume>=10000)+10*source_count+5*min(5,coverage))
   viral=min(100,source_count*20+coverage*8+max(0,20-min(x.get('rank',30) for x in items)))
   relevance=min(100,35+category_fit(text,cat)*160)
@@ -147,17 +179,18 @@ def evergreen_candidates(categories,excluded=None):
    fit=category_fit(row['query'],cat)
    if fit:matched.append((fit*50+min(40,row['impressions']/25)+max(0,10-row['position']/10),row))
   matched.sort(reverse=True,key=lambda x:x[0])
-  available=[pair for pair in matched if uid(pair[1]['query']) not in excluded]
+  available=[pair for pair in matched if uid(pair[1]['query']) not in excluded and evergreen_topic_quality(pair[1]['query'],cat)>0]
   if available:
    row=available[0][1];topic=row['query'];demand=min(100,20+row['impressions']/20);gap=min(100,35+row['position'])
   else:
-   # Live web fallback: the returned headline/question is the topic, never the
-   # category's search phrase itself.
+   # Live web fallback: score semantic category fit and reject entertainment,
+   # ambiguous single-word matches, and generic corporate homepages.
    found=[]
-   for signal in cat['signals'][:4]:found+=rss('https://www.bing.com/search?format=rss&q='+urllib.parse.quote(signal+' guide question'),'Bing Search',cat['label'])
-   found=[x for x in found if uid(x['title']) not in excluded]
-   if not found:continue
-   topic=found[0]['title'];demand=50;gap=55
+   for signal in cat['signals'][:4]:found+=rss('https://www.bing.com/search?format=rss&q='+urllib.parse.quote(signal+' personal finance guide question'),'Bing Search',cat['label'])
+   ranked=sorted(((evergreen_topic_quality(x['title'],cat,x.get('url',''),True),x) for x in found if uid(x['title']) not in excluded),key=lambda pair:pair[0],reverse=True)
+   ranked=[pair for pair in ranked if pair[0]>0]
+   if not ranked:continue
+   topic=ranked[0][1]['title'];demand=min(75,48+ranked[0][0]);gap=55
   score=.25*demand+.20*90+.15*gap+.15*85+.10*80+.05*60+.05*70+.05*85
   out.append({'id':uid(topic),'title':topic,'category':cat['label'],'overall_score':round(score,1),'demand_score':round(demand,1),'content_gap_score':round(gap,1),'discovered_from_live_internet':True})
  return out
@@ -165,10 +198,21 @@ def evergreen_candidates(categories,excluded=None):
 def daily(date=None):
  date=date or dt.datetime.now(IST).date();pool=read(POOL,{})
  if len(pool.get('topics',[]))<35:pool=weekly()
+ # Re-observe the live internet every day. The weekly fifty-topic pool supplies
+ # depth and reserves, but it is never consumed blindly.
+ live=trend_candidates(google_trends()+category_news()+gdelt())
+ live_by_id={x['id']:x for x in live}
  used={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])};trending=[]
  for cat in TRENDING_CATEGORIES:
-  rows=sorted((x for x in pool['topics'] if x['category']==cat['label'] and x['id'] not in used),key=lambda x:x['overall_score'],reverse=True)
-  if not rows:raise RuntimeError('no unused current topic for '+cat['label'])
+  revalidated=[]
+  for queued in pool['topics']:
+   current=live_by_id.get(queued.get('id'))
+   if current and current['category']==cat['label'] and current['id'] not in used:
+    current=dict(current);current['revalidated_at']=now().isoformat();revalidated.append(current)
+  # A genuinely new same-day topic may outrank the weekly pool and is allowed.
+  revalidated.extend(dict(x,revalidated_at=now().isoformat()) for x in live if x['category']==cat['label'] and x['id'] not in used and x['id'] not in {r['id'] for r in revalidated})
+  rows=sorted(revalidated,key=lambda x:x['overall_score'],reverse=True)
+  if not rows:raise RuntimeError('no independently corroborated current topic for '+cat['label'])
   trending.append(rows[0])
  evergreen=evergreen_candidates(evergreen_rotation(date.toordinal()),used)
  if len(evergreen)!=5:raise RuntimeError(f'only {len(evergreen)} evergreen topics qualified; expected 5')

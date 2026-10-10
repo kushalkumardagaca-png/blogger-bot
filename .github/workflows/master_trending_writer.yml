@@ -62,7 +62,15 @@ jobs:
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
-        run: python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare
+        run: |
+          for attempt in 1 2; do
+            if python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare; then
+              exit 0
+            fi
+            echo "Preparation attempt $attempt failed; retrying with fresh external responses."
+            sleep $((attempt * 20))
+          done
+          exit 1
       - name: Persist validated package and licensed photo assets first
         run: |
           git config user.name "Daily Yield Master Writer"
@@ -70,8 +78,12 @@ jobs:
           git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready
           if ! git diff --staged --quiet; then
             git commit -m "Prepare dynamic trending Master package [skip ci]"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 3))
+            done
+            exit 1
           fi
       - name: Publish after successful validated preparation
         if: ${{ github.event_name == 'schedule' || inputs.publish }}
@@ -82,17 +94,44 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
-      - name: Route successful publication and refresh page
+      - name: Persist confirmed publication before downstream routing
+        if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
+        run: |
+          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Record trending Master publication [skip ci]"
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 3))
+            done
+            exit 1
+          fi
+      - name: Route confirmed publication to two social networks
+        if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python dispatch_social_events.py
+      - name: Trigger page refresh and Bing reconciliation
         if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          python dispatch_social_events.py
-          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json
-          if ! git diff --staged --quiet; then
-            git commit -m "Record trending Master publication [skip ci]"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
-          gh workflow run content_experience_repair.yml --ref main
-          gh workflow run bing_url_automation.yml --ref main
+          for workflow in content_experience_repair.yml bing_url_automation.yml; do
+            completed=false
+            for attempt in 1 2 3; do
+              if gh workflow run "$workflow" --ref main; then completed=true; break; fi
+              sleep $((attempt * 3))
+            done
+            $completed || exit 1
+          done
+      - name: Preserve Master pipeline diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-trending-diagnostics-${{ github.run_id }}
+          path: |
+            MASTER_AUTOMATION_STATUS.json
+            MASTER_PREPARATION_REPORT.json
+          if-no-files-found: warn
+          retention-days: 30

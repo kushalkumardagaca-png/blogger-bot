@@ -65,27 +65,35 @@ def discover(topic):
   subject=str(query_plan.get('query') or subject)[:300]
  except Exception:pass
  evidence=[];seen=set()
+ # Headlines often contain publisher suffixes and breaking-news phrasing that
+ # produce no scholarly hits. Search several topic-specific formulations rather
+ # than failing the whole live slot on one brittle exact query.
+ headline=re.sub(r'\s+[|–—-]\s+[^|–—-]{2,60}$','',str(topic.get('Punchy Title',''))).strip()
+ context=' '.join(x for x in (headline,str(topic.get('Category','')),str(topic.get('Trending Category',''))) if x)
+ query_variants=list(dict.fromkeys(x[:300] for x in (subject,headline,context) if len(x.strip())>=8))
  # OpenAlex provides topic-ranked scholarly metadata and abstracts without
  # screen-scraping or a private search key. Each work remains linked to its
  # DOI/publisher record so the evidence is auditable.
- try:
-  r=requests.get('https://api.openalex.org/works',params={'search':subject,'filter':'has_abstract:true','per-page':25,'mailto':'dailyyield.official@gmail.com'},timeout=45);r.raise_for_status()
-  for work in r.json().get('results',[]):
-   abstract=_abstract(work.get('abstract_inverted_index'));year=int(work.get('publication_year') or 0)
-   location=work.get('primary_location') or {};url=(location.get('landing_page_url') or work.get('doi') or work.get('id') or '').replace('http://','https://')
-   source=(location.get('source') or {}).get('display_name') or 'OpenAlex scholarly record'
-   if not url.startswith('https://') or url in seen or len(abstract)<450 or year>datetime.now().year:continue
-   seen.add(url);text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
-   evidence.append({'name':source,'title':work.get('title') or subject,'url':url,'text':text[:7000],'score':7})
-   if len(evidence)>=10:break
- except Exception:pass
+ for research_query in query_variants:
+  try:
+   r=requests.get('https://api.openalex.org/works',params={'search':research_query,'filter':'has_abstract:true','per-page':25,'mailto':'dailyyield.official@gmail.com'},timeout=45);r.raise_for_status()
+   for work in r.json().get('results',[]):
+    abstract=_abstract(work.get('abstract_inverted_index'));year=int(work.get('publication_year') or 0)
+    location=work.get('primary_location') or {};url=(location.get('landing_page_url') or work.get('doi') or work.get('id') or '').replace('http://','https://')
+    source=(location.get('source') or {}).get('display_name') or 'OpenAlex scholarly record'
+    if not url.startswith('https://') or url in seen or len(abstract)<450 or year>datetime.now().year:continue
+    seen.add(url);text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
+    evidence.append({'name':source,'title':work.get('title') or research_query,'url':url,'text':text[:7000],'score':7})
+    if len(evidence)>=10:break
+  except Exception:pass
+  if len(evidence)>=10:break
  # A trending Master Article needs current reporting as well as durable research.
  # Reuse the News pipeline's approved-publisher parser so live topics receive
  # attributable, resolved source URLs without relaxing the evidence boundary.
  if topic.get('Trending Category'):
   try:
    from news_pipeline import parse_gnr
-   queries=[subject,topic.get('Punchy Title','')]
+   queries=[subject,headline,context]
    for query in dict.fromkeys(x for x in queries if x):
     feed='https://news.google.com/rss/search?q='+urllib.parse.quote(str(query)+' when:7d')+'&hl=en-US&gl=US&ceid=US:en'
     response=requests.get(feed,headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=30);response.raise_for_status()
