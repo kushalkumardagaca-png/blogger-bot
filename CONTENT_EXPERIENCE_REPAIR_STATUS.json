@@ -1,15 +1,15 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 376,
+  "posts_checked": 379,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 0,
+  "duplicate_heroes_replaced": 2,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
   "pages_repaired": 1,
   "article_snapshot_entries": 76,
-  "news_snapshot_entries": 300,
-  "label_image_index_entries": 376,
+  "news_snapshot_entries": 303,
+  "label_image_index_entries": 379,
   "article_category_counts": {
     "Contrarian Hooks": 4,
     "Age and Wealth Milestones": 3,
@@ -40,14 +40,14 @@
   "news_desk_counts": {
     "Global Finance News": 17,
     "Americas Finance News": 60,
-    "China Finance News": 15,
+    "China Finance News": 16,
     "Asia-Pacific Finance News": 45,
     "India Finance News": 15,
     "Russia Finance News": 14,
     "Europe Finance News": 73,
     "Markets, Crypto & Commodities": 18,
     "Economy, Trade & Jobs": 18,
-    "Banking, Fintech & Personal Money": 16,
-    "Companies, IPOs & Deals": 17
+    "Banking, Fintech & Personal Money": 17,
+    "Companies, IPOs & Deals": 18
   }
 }
