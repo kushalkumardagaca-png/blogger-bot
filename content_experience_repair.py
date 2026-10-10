@@ -229,7 +229,7 @@ def marked(content,block):
  return content+'\n'+block
 
 # Immutable marker for the clean static Article application deployed from authenticated data.
-ARTICLE_SCRATCH_MARK='DY_ARTICLE_FROM_SCRATCH_V5_OVERSIZED_LATEST_CARDS'
+ARTICLE_SCRATCH_MARK='DY_ARTICLE_FROM_SCRATCH_V6_DYNAMIC_MASTER_TAXONOMY'
 
 def article_card(post,cat):
  title=html.escape(post.get('title','Untitled article'));url=html.escape(post.get('url','#'),quote=True);image=(srcs(post.get('content','')) or [cat.get('art','')])[0]
