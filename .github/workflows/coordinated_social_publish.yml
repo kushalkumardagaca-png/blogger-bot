@@ -47,7 +47,7 @@ concurrency:
 
 jobs:
   plan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       platform: ${{ steps.route.outputs.platform }}
       target_url: ${{ steps.route.outputs.target_url }}
@@ -55,7 +55,7 @@ jobs:
       delay_seconds: ${{ steps.route.outputs.delay_seconds }}
       item_key: ${{ steps.route.outputs.item_key }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - id: route
         shell: bash
         run: |
@@ -70,11 +70,11 @@ jobs:
   facebook:
     needs: plan
     if: needs.plan.outputs.platform == 'facebook'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: {python-version: '3.11'}
       - run: python -m pip install --disable-pip-version-check requests pillow
       - name: Wait until five minutes after Blogger publication
@@ -98,11 +98,11 @@ jobs:
   bluesky:
     needs: plan
     if: needs.plan.outputs.platform == 'bluesky'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check requests pillow
       - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
@@ -124,11 +124,11 @@ jobs:
   tumblr:
     needs: plan
     if: needs.plan.outputs.platform == 'tumblr'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check requests cryptography pillow
       - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
@@ -152,11 +152,11 @@ jobs:
   mastodon:
     needs: plan
     if: needs.plan.outputs.platform == 'mastodon'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check requests cryptography pillow
       - run: sleep '${{ needs.plan.outputs.delay_seconds }}'

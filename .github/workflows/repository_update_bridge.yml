@@ -17,11 +17,11 @@ concurrency:
 jobs:
   apply-update:
     if: github.actor == 'kushalkumardagaca-png'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Checkout with encrypted repository deployment credential
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ secrets.ASSETS_PAT }}
