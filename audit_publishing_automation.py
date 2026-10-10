@@ -16,10 +16,17 @@ news_expected=['45 23 * * *','45 0 * * *','30 1 * * *','15 2 * * *','0 3 * * *',
 nw=ROOT/'.github/workflows/daily_news_wires.yml'
 def ist_minute(cron):
     minute,hour=map(int,cron.split()[:2]); return (hour*60+minute+330)%1440
-check('All dedicated Master article workflows are absent',
-      all(not (ROOT/'.github/workflows'/name).exists() for name in (
-          'daily_blogger_poster.yml','rewrite_existing_masters.yml',
-          'refresh_master_photos.yml','refresh_master_v2_design.yml')))
+retired_master=('daily_blogger_poster.yml','rewrite_existing_masters.yml','refresh_master_photos.yml','refresh_master_v2_design.yml')
+new_master=('master_topic_discovery.yml','master_trending_writer.yml','master_evergreen_writer.yml')
+check('Rejected legacy Master workflows remain absent and approved dynamic workflows exist',
+      all(not (ROOT/'.github/workflows'/name).exists() for name in retired_master)
+      and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
+for name in new_master:
+ workflow=(ROOT/'.github/workflows'/name).read_text()
+ check(f'{name} remains owner-paused without a schedule',not crons(ROOT/'.github/workflows'/name) and 'workflow_dispatch:' in workflow)
+check('Dynamic Master publication is protected by an explicit activation gate',
+      'MASTER_PUBLICATION_ENABLED' in (ROOT/'master_dynamic_pipeline.py').read_text()
+      and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text())
 check('Eleven news preflight runs',crons(nw)==news_expected,str(crons(nw)))
 check('News runs cannot overlap','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-wires' in nw.read_text())
 
@@ -42,6 +49,17 @@ check('Bing URL evidence and state are persisted without secrets',
       'BING_URL_AUTOMATION_STATE.json' in bing_workflow and 'BING_WEBMASTER_API_KEY' in bing_workflow)
 
 ap=(ROOT/'auto_blogger_publisher.py').read_text(); np=(ROOT/'news_pipeline.py').read_text()
+taxonomy=(ROOT/'master_taxonomy.py').read_text(); discovery=(ROOT/'master_topic_discovery.py').read_text(); dynamic=(ROOT/'master_dynamic_pipeline.py').read_text()
+check('Master taxonomy is exactly five trending plus fifteen evergreen categories',
+      taxonomy.count('"type": "trending"')==5 and taxonomy.count('"type": "evergreen"')==15)
+check('Dynamic Master discovery has no CSV topic queue',
+      '.csv' not in discovery.casefold() and 'discovered_from_live_internet' in discovery)
+check('Dynamic Master daily plan is five trending plus five evergreen topics',
+      "if len(evergreen)!=5" in discovery and "for cat in TRENDING_CATEGORIES" in discovery and "'total':10" in discovery)
+check('Trending Master articles receive one trend and one permanent label',
+      "item['category'],item['evergreen_category']" in dynamic)
+check('Each dynamic Master package requires three licensed photos',
+      'choose_photos(briefs' in (ROOT/'prepare_master_article.py').read_text() and 'if len(briefs)!=3' in (ROOT/'photo_selector.py').read_text())
 rv=(ROOT/'reader_value_article.py').read_text(); mv2=(ROOT/'master_article_v2.py').read_text(); prep=(ROOT/'prepare_master_article.py').read_text(); master=ap+rv+mv2+prep
 check('Master publisher uses IST','datetime.now(IST)' in ap)
 check('Master tracker advances only after live URL','tracker will not advance' in ap and 'if not api_res or not api_res.get("url")' in ap)

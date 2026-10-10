@@ -1,0 +1,72 @@
+name: Master Trending Writer (Paused)
+
+on:
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: "Trending category slot, 0 through 4"
+        required: true
+        type: choice
+        options: ['0','1','2','3','4']
+      publish:
+        description: "Publish after preparation (also requires repository variable MASTER_PUBLICATION_ENABLED=true)"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: daily-yield-master-writer
+  cancel-in-progress: false
+
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests Pillow ImageHash google-api-python-client google-auth
+      - name: Research, write, validate and select three photos
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
+        run: python master_dynamic_pipeline.py --kind trending --slot "${{ inputs.slot }}" --prepare
+      - name: Persist validated package and licensed photo assets first
+        run: |
+          git config user.name "Daily Yield Master Writer"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready
+          git commit -m "Prepare dynamic trending Master package [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Publish only after explicit activation
+        if: ${{ inputs.publish }}
+        env:
+          MASTER_PUBLICATION_ENABLED: ${{ vars.MASTER_PUBLICATION_ENABLED }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python master_dynamic_pipeline.py --kind trending --slot "${{ inputs.slot }}" --publish
+      - name: Route successful publication and refresh page
+        if: ${{ inputs.publish && success() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python dispatch_social_events.py
+          gh workflow run content_experience_repair.yml --ref main
+          gh workflow run bing_url_automation.yml --ref main

@@ -1,10 +1,14 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 124 PASS · 0 FAIL
+**Result:** 133 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
-- ✅ **All dedicated Master article workflows are absent**
+- ✅ **Rejected legacy Master workflows remain absent and approved dynamic workflows exist**
+- ✅ **master_topic_discovery.yml remains owner-paused without a schedule**
+- ✅ **master_trending_writer.yml remains owner-paused without a schedule**
+- ✅ **master_evergreen_writer.yml remains owner-paused without a schedule**
+- ✅ **Dynamic Master publication is protected by an explicit activation gate**
 - ✅ **Eleven news preflight runs** — ['45 23 * * *', '45 0 * * *', '30 1 * * *', '15 2 * * *', '0 3 * * *', '45 3 * * *', '45 6 * * *', '30 7 * * *', '45 11 * * *', '45 15 * * *', '45 16 * * *']
 - ✅ **News runs cannot overlap**
 - ✅ **Bing URL automation reconciles every two hours**
@@ -15,6 +19,11 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Bing URL automation creates no public Daily Yield requests or Live URL fetches**
 - ✅ **Bing API-key errors are redacted rather than stringified**
 - ✅ **Bing URL evidence and state are persisted without secrets**
+- ✅ **Master taxonomy is exactly five trending plus fifteen evergreen categories**
+- ✅ **Dynamic Master discovery has no CSV topic queue**
+- ✅ **Dynamic Master daily plan is five trending plus five evergreen topics**
+- ✅ **Trending Master articles receive one trend and one permanent label**
+- ✅ **Each dynamic Master package requires three licensed photos**
 - ✅ **Master publisher uses IST**
 - ✅ **Master tracker advances only after live URL**
 - ✅ **Master duplicate recovery**

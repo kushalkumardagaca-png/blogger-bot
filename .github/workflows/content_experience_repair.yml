@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'content_experience_repair.py'
+      - 'master_taxonomy.py'
       - '.github/workflows/content_experience_repair.yml'
   repository_dispatch:
     types: [daily-yield-published, daily-yield-news-published]
