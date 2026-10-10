@@ -1,6 +1,9 @@
-name: Master Topic Discovery (Paused)
+name: Master Topic Discovery (Live)
 
 on:
+  schedule:
+    - cron: '35 18 * * 6'  # Sunday 00:05 IST: weekly pool of 50
+    - cron: '50 18 * * *'  # Daily 00:20 IST: five trending + five evergreen
   workflow_dispatch:
     inputs:
       mode:
@@ -27,13 +30,24 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests
+      - name: Select scheduled discovery mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "35 18 * * 6" ]; then
+            echo "value=weekly" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
+            echo "value=daily" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          fi
       - name: Discover topics from live demand signals
         env:
+          MASTER_PUBLICATION_ENABLED: 'true'
           GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
-        run: python master_topic_discovery.py --${{ inputs.mode }}
+        run: python master_topic_discovery.py --${{ steps.mode.outputs.value }}
       - name: Persist evidence without activating publication
         if: always()
         run: |

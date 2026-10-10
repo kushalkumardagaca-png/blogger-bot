@@ -10,10 +10,11 @@ import argparse, datetime as dt, hashlib, html, json, os, re, urllib.parse
 from collections import defaultdict
 from pathlib import Path
 from xml.etree import ElementTree
+from zoneinfo import ZoneInfo
 import requests
 from master_taxonomy import TRENDING_CATEGORIES, EVERGREEN_CATEGORIES, evergreen_rotation
 
-ROOT=Path(__file__).parent
+ROOT=Path(__file__).parent;IST=ZoneInfo('Asia/Kolkata')
 POOL=ROOT/'MASTER_TREND_POOL.json';PLAN=ROOT/'MASTER_DAILY_PLAN.json';HISTORY=ROOT/'MASTER_TOPIC_HISTORY.json';STATUS=ROOT/'MASTER_DISCOVERY_STATUS.json'
 UA='DailyYieldTopicDiscovery/1.0 (dailyyield.official@gmail.com)'
 STOP={'the','and','for','with','from','into','after','before','about','amid','over','under','what','why','how','your','this','that','says','could','will','new','latest','today'}
@@ -155,7 +156,7 @@ def evergreen_candidates(categories):
  return out
 
 def daily(date=None):
- date=date or dt.date.today();pool=read(POOL,{})
+ date=date or dt.datetime.now(IST).date();pool=read(POOL,{})
  if len(pool.get('topics',[]))<35:pool=weekly()
  used={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])};trending=[]
  for cat in TRENDING_CATEGORIES:
@@ -164,8 +165,9 @@ def daily(date=None):
   trending.append(rows[0])
  evergreen=evergreen_candidates(evergreen_rotation(date.toordinal()))
  if len(evergreen)!=5:raise RuntimeError(f'only {len(evergreen)} evergreen topics qualified; expected 5')
- plan={'status':'READY','publication_enabled':False,'date':str(date),'generated_at':now().isoformat(),'trending':trending,'evergreen':evergreen,'total':10}
- write(PLAN,plan);write(STATUS,{'status':'PASS','stage':'daily','generated_at':plan['generated_at'],'trending':5,'evergreen':5,'publication_enabled':False});return plan
+ enabled=os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true'
+ plan={'status':'READY','publication_enabled':enabled,'date':str(date),'generated_at':now().isoformat(),'trending':trending,'evergreen':evergreen,'total':10}
+ write(PLAN,plan);write(STATUS,{'status':'PASS','stage':'daily','generated_at':plan['generated_at'],'trending':5,'evergreen':5,'publication_enabled':enabled});return plan
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--weekly',action='store_true');p.add_argument('--daily',action='store_true');p.add_argument('--date');a=p.parse_args()

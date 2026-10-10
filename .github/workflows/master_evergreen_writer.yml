@@ -1,6 +1,12 @@
-name: Master Evergreen Writer (Paused)
+name: Master Evergreen Writer (Live)
 
 on:
+  schedule:
+    - cron: '45 20 * * *'  # 02:15 IST
+    - cron: '30 23 * * *'  # 05:00 IST
+    - cron: '30 6 * * *'   # 12:00 IST
+    - cron: '45 10 * * *'  # 16:15 IST
+    - cron: '15 15 * * *'  # 20:45 IST
   workflow_dispatch:
     inputs:
       slot:
@@ -9,7 +15,7 @@ on:
         type: choice
         options: ['0','1','2','3','4']
       publish:
-        description: "Publish after preparation (also requires repository variable MASTER_PUBLICATION_ENABLED=true)"
+        description: "Publish after preparation; scheduled runs publish automatically"
         required: true
         type: boolean
         default: false
@@ -32,6 +38,18 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests Pillow ImageHash google-api-python-client google-auth
+      - name: Select evergreen rotation slot
+        id: slot
+        run: |
+          case "${{ github.event.schedule }}" in
+            '45 20 * * *') value=0 ;;
+            '30 23 * * *') value=1 ;;
+            '30 6 * * *') value=2 ;;
+            '45 10 * * *') value=3 ;;
+            '15 15 * * *') value=4 ;;
+            *) value="${{ inputs.slot }}" ;;
+          esac
+          echo "value=$value" >> "$GITHUB_OUTPUT"
       - name: Research, write, validate and select three photos
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -44,7 +62,7 @@ jobs:
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
-        run: python master_dynamic_pipeline.py --kind evergreen --slot "${{ inputs.slot }}" --prepare
+        run: python master_dynamic_pipeline.py --kind evergreen --slot "${{ steps.slot.outputs.value }}" --prepare
       - name: Persist validated package and licensed photo assets first
         run: |
           git config user.name "Daily Yield Master Writer"
@@ -55,17 +73,17 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
-      - name: Publish only after explicit activation
-        if: ${{ inputs.publish }}
+      - name: Publish after successful validated preparation
+        if: ${{ github.event_name == 'schedule' || inputs.publish }}
         env:
-          MASTER_PUBLICATION_ENABLED: ${{ vars.MASTER_PUBLICATION_ENABLED }}
+          MASTER_PUBLICATION_ENABLED: 'true'
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python master_dynamic_pipeline.py --kind evergreen --slot "${{ inputs.slot }}" --publish
+        run: python master_dynamic_pipeline.py --kind evergreen --slot "${{ steps.slot.outputs.value }}" --publish
       - name: Route successful publication and refresh page
-        if: ${{ inputs.publish && success() }}
+        if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

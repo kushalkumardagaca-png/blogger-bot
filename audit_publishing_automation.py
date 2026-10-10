@@ -21,12 +21,18 @@ new_master=('master_topic_discovery.yml','master_trending_writer.yml','master_ev
 check('Rejected legacy Master workflows remain absent and approved dynamic workflows exist',
       all(not (ROOT/'.github/workflows'/name).exists() for name in retired_master)
       and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
-for name in new_master:
+master_expected={
+ 'master_topic_discovery.yml':['35 18 * * 6','50 18 * * *'],
+ 'master_trending_writer.yml':['15 19 * * *','15 22 * * *','30 5 * * *','15 9 * * *','0 14 * * *'],
+ 'master_evergreen_writer.yml':['45 20 * * *','30 23 * * *','30 6 * * *','45 10 * * *','15 15 * * *'],
+}
+for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
- check(f'{name} remains owner-paused without a schedule',not crons(ROOT/'.github/workflows'/name) and 'workflow_dispatch:' in workflow)
-check('Dynamic Master publication is protected by an explicit activation gate',
+ check(f'{name} has its complete live schedule',crons(ROOT/'.github/workflows'/name)==expected and 'workflow_dispatch:' in workflow,str(crons(ROOT/'.github/workflows'/name)))
+check('Dynamic Master publication has both code gate and explicit live workflow enablement',
       'MASTER_PUBLICATION_ENABLED' in (ROOT/'master_dynamic_pipeline.py').read_text()
-      and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text())
+      and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text()
+      and all("MASTER_PUBLICATION_ENABLED: 'true'" in (ROOT/'.github/workflows'/name).read_text() for name in new_master))
 check('Eleven news preflight runs',crons(nw)==news_expected,str(crons(nw)))
 check('News runs cannot overlap','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-wires' in nw.read_text())
 

@@ -5,10 +5,10 @@
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
 - ✅ **Rejected legacy Master workflows remain absent and approved dynamic workflows exist**
-- ✅ **master_topic_discovery.yml remains owner-paused without a schedule**
-- ✅ **master_trending_writer.yml remains owner-paused without a schedule**
-- ✅ **master_evergreen_writer.yml remains owner-paused without a schedule**
-- ✅ **Dynamic Master publication is protected by an explicit activation gate**
+- ✅ **master_topic_discovery.yml has its complete live schedule** — ['35 18 * * 6', '50 18 * * *']
+- ✅ **master_trending_writer.yml has its complete live schedule** — ['15 19 * * *', '15 22 * * *', '30 5 * * *', '15 9 * * *', '0 14 * * *']
+- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['45 20 * * *', '30 23 * * *', '30 6 * * *', '45 10 * * *', '15 15 * * *']
+- ✅ **Dynamic Master publication has both code gate and explicit live workflow enablement**
 - ✅ **Eleven news preflight runs** — ['45 23 * * *', '45 0 * * *', '30 1 * * *', '15 2 * * *', '0 3 * * *', '45 3 * * *', '45 6 * * *', '30 7 * * *', '45 11 * * *', '45 15 * * *', '45 16 * * *']
 - ✅ **News runs cannot overlap**
 - ✅ **Bing URL automation reconciles every two hours**
