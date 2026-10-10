@@ -1,12 +1,8 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "1476b081c09137d8",
-  "kind": "evergreen",
-  "date": "2026-10-10",
-  "category": "Money Hacks & Financial Habits",
-  "evergreen_category": "Money Hacks & Financial Habits",
-  "title": "Mastering Budgeting for Beginners",
-  "url": "https://dailyyield.blogspot.com/2026/10/mastering-budgeting-for-beginners.html",
-  "published_at": "2026-10-10T03:07:09-07:00"
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 0,
+  "error_type": "RuntimeError",
+  "error": "only 0 usable topic-specific scholarly/primary sources found; minimum 6"
 }
