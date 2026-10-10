@@ -351,6 +351,18 @@ def verify_evidence(draft,evidence):
    # this bounded fallback prevents a safe factual repair being discarded solely
    # because the model missed one section's narrow local target by a few words.
    if not replacement and closest and closest_gap<=max(180,round(target*.32)):replacement=closest
+   if not replacement:
+    # Fail-safe factual redaction: if the model cannot preserve local length,
+    # remove only the fact checker's exact rejected quotation from the original
+    # paragraphs. The complete article still faces another hostile review and
+    # the strict global word-range validator.
+    redacted=[]
+    for paragraph in section.get('paragraphs',[]):
+     value=paragraph
+     for claim in matched:value=re.sub(re.escape(claim),'',value,flags=re.I)
+     value=re.sub(r'\s+',' ',value).strip()
+     if words(value)>=12:redacted.append(value)
+    if redacted and words(' '.join(redacted))>=max(180,target-220):replacement=redacted
    if not replacement:raise RuntimeError('evidence repair could not preserve a safe section word budget')
    section['paragraphs']=replacement;repaired=True
   if not repaired:raise RuntimeError('independent evidence review rejected claims that could not be located safely: '+json.dumps(claims[:5],ensure_ascii=False))
