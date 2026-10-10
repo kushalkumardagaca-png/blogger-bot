@@ -1,11 +1,12 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-10",
-  "kind": "evergreen",
-  "slot": 3,
+  "status": "PASS",
+  "publication_enabled": true,
   "topic_id": "5eaccfcc97a675a4",
+  "kind": "evergreen",
+  "date": "2026-10-10",
+  "category": "Banking Payments & Fintech",
+  "evergreen_category": "Banking Payments & Fintech",
   "title": "Mastering Bank of America & Merrill",
-  "package": "master_packages/dynamic/2026-10-10-evergreen-5eaccfcc97a675a4.json",
-  "html": "scheduled_ready/2026-10-10-evergreen-3-mastering-bank-of-america-merrill.html"
+  "url": "https://dailyyield.blogspot.com/2026/10/mastering-bank-of-america-merrill.html",
+  "published_at": "2026-10-10T03:58:03-07:00"
 }
