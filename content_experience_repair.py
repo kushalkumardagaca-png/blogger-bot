@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import requests
 from page_family import ensure_family
-from master_taxonomy import MASTER_CATEGORIES, LEGACY_CATEGORY_MAP
+from master_taxonomy import MASTER_CATEGORIES, LEGACY_CATEGORY_MAP, TRENDING_LABELS, EVERGREEN_LABELS
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
 REPORT=Path('CONTENT_EXPERIENCE_REPAIR_STATUS.json')
@@ -129,7 +129,19 @@ def normalized_labels(post,categories):
   kind='Category Edition' if mapped in NEWS_TOPICS else 'Geographic Edition'
   country=[LEGACY_COUNTRY_MAP[legacy]] if legacy in LEGACY_COUNTRY_MAP else []
   return ['News',kind,mapped,*country,'Legacy News']
- cat=category_for(post,categories);return [cat,'Kushal K. Daga']
+ # Dynamic trending Masters must retain both classifications. The durable
+ # publication tracker restores them even if an earlier one-label migration ran
+ # between Blogger publication and the page refresh.
+ try:
+  records=json.loads(Path('MASTER_AUTOMATION_TRACKER.json').read_text()).get('published',[])
+ except Exception:records=[]
+ record=next((x for x in records if x.get('url','').rstrip('/')==post.get('url','').rstrip('/') or x.get('title')==post.get('title')),None)
+ if record:
+  permanent=record.get('evergreen_category') or record.get('category');trend=record.get('category') if record.get('kind')=='trending' else None
+  return list(dict.fromkeys([x for x in (trend,permanent,'Master Article','Kushal K. Daga') if x]))
+ trend=next((x for x in old if x in TRENDING_LABELS),None);permanent=next((x for x in old if x in EVERGREEN_LABELS),None)
+ if trend and permanent:return [trend,permanent,'Master Article','Kushal K. Daga']
+ cat=category_for(post,categories);return [cat,'Master Article','Kushal K. Daga']
 
 def commons_photo(title,desk,used):
  country={'Global Finance News':'world financial district','Americas Finance News':'Americas financial district','China Finance News':'China financial district','Asia-Pacific Finance News':'Asia Pacific financial district','India Finance News':'India financial district','Russia Finance News':'Russia financial district','Europe Finance News':'Europe financial district','Markets, Crypto & Commodities':'stock market crypto commodities','Economy, Trade & Jobs':'economy trade employment','Banking, Fintech & Personal Money':'banking payments household finance','Companies, IPOs & Deals':'corporate business capital markets'}
