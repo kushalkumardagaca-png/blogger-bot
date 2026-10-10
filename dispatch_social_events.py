@@ -28,15 +28,17 @@ def main() -> int:
         if fingerprint in seen:
             continue
         seen.add(fingerprint)
-        subprocess.run([
-            "gh", "workflow", "run", WORKFLOW,
-            "-f", f"item_key={key}",
-            "-f", f"target_url={url}",
-            "-f", f"content_mode={mode}",
-            "-f", f"published_at={published}",
-        ], check=True)
-        print(f"Dispatched {key}: {url}")
-    print(f"Dispatched {len(seen)} coordinated social event(s).")
+        for route_index in (0,1):
+            subprocess.run([
+                "gh", "workflow", "run", WORKFLOW,
+                "-f", f"item_key={key}",
+                "-f", f"target_url={url}",
+                "-f", f"content_mode={mode}",
+                "-f", f"published_at={published}",
+                "-f", f"route_index={route_index}",
+            ], check=True)
+        print(f"Dispatched two-network pair for {key}: {url}")
+    print(f"Dispatched {len(seen)*2} coordinated social post(s).")
     return 0
 
 

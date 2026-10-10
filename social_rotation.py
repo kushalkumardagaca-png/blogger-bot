@@ -28,6 +28,27 @@ NEWS_KEYS = (
     "americas", "global", "markets", "economy", "banking", "companies",
     "china", "asia-pacific", "india", "russia", "europe",
 )
+DAILY_ARTICLE_KEYS=(
+ "news-asia-pacific","news-china","news-india","news-russia","news-markets",
+ "news-europe","news-economy","news-americas","news-companies","news-global","news-banking",
+ "master-trending-0","master-evergreen-0","master-trending-1","master-evergreen-1",
+ "master-trending-2","master-evergreen-2","master-trending-3","master-evergreen-3",
+ "master-trending-4","master-evergreen-4",
+)
+# Exactly 42 daily assignments: Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8.
+DAILY_PLATFORM_PAIRS=(
+ ('bluesky','mastodon'),('bluesky','mastodon'),('facebook','tumblr'),('mastodon','tumblr'),('bluesky','facebook'),
+ ('bluesky','mastodon'),('mastodon','facebook'),('facebook','bluesky'),('bluesky','facebook'),('facebook','mastodon'),('facebook','tumblr'),
+ ('mastodon','facebook'),('facebook','tumblr'),('bluesky','facebook'),('facebook','tumblr'),
+ ('bluesky','mastodon'),('facebook','tumblr'),('bluesky','mastodon'),('facebook','tumblr'),
+ ('bluesky','tumblr'),('bluesky','mastodon'),
+)
+
+def platform_pair_for(item_key:str)->tuple[str,str]:
+ if item_key not in DAILY_ARTICLE_KEYS:raise ValueError(f'unknown daily article key: {item_key}')
+ pair=DAILY_PLATFORM_PAIRS[DAILY_ARTICLE_KEYS.index(item_key)]
+ if pair[0]==pair[1]:raise RuntimeError('social pair must use two different platforms')
+ return pair
 HEADER_PAGES = (
     "https://dailyyield.blogspot.com/p/article.html",
     "https://dailyyield.blogspot.com/p/daily-news.html",
@@ -56,6 +77,7 @@ def parse_time(value: str) -> dt.datetime | None:
 
 
 def platform_for(item_key: str, day: dt.date) -> str:
+    if item_key in DAILY_ARTICLE_KEYS:return platform_pair_for(item_key)[0]
     offset = day.toordinal()
     if item_key.startswith("news-"):
         desk = item_key.split("-", 1)[1]
@@ -84,7 +106,7 @@ def resource_url(slot: int, day: dt.date) -> str:
 
 
 def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
-              schedule: str, now: dt.datetime | None = None) -> dict:
+              schedule: str, now: dt.datetime | None = None, route_index: int = 0) -> dict:
     reference_now = now or dt.datetime.now(dt.timezone.utc)
     if reference_now.tzinfo is None:
         reference_now = reference_now.replace(tzinfo=dt.timezone.utc)
@@ -102,15 +124,17 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
     if not target_url.startswith("https://dailyyield.blogspot.com/"):
         raise ValueError("target URL is outside the official Daily Yield domain")
     day = (published.astimezone(IST).date() if published else current.date())
+    if route_index not in (0,1):raise ValueError('route index must be 0 or 1')
     delay = 0
     if published:
-        due = published.astimezone(dt.timezone.utc) + dt.timedelta(minutes=15)
+        due = published.astimezone(dt.timezone.utc) + dt.timedelta(minutes=5)
         delay = max(0, min(20 * 60, int((due - reference_now.astimezone(dt.timezone.utc)).total_seconds())))
     return {
         "item_key": item_key,
         "target_url": target_url,
         "content_mode": mode or "post",
-        "platform": platform_for(item_key, day),
+        "platform": (platform_pair_for(item_key)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day)),
+        "route_index": route_index,
         "delay_seconds": delay,
         "plan_date_ist": day.isoformat(),
     }
@@ -132,9 +156,10 @@ def main() -> int:
     parser.add_argument("--content-mode", choices=("post", "page"), default="post")
     parser.add_argument("--published-at", default="")
     parser.add_argument("--schedule", default="")
+    parser.add_argument("--route-index",type=int,choices=(0,1),default=0)
     args = parser.parse_args()
     write_outputs(make_plan(args.item_key, args.target_url, args.content_mode,
-                            args.published_at, args.schedule))
+                            args.published_at, args.schedule,route_index=args.route_index))
     return 0
 
 

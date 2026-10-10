@@ -12,7 +12,7 @@ def check(name,ok,detail=""):
 def crons(path):
  return re.findall(r"cron:\s*['\"]([^'\"]+)",Path(path).read_text())
 
-news_expected=['45 23 * * *','45 0 * * *','30 1 * * *','15 2 * * *','0 3 * * *','45 3 * * *','45 6 * * *','30 7 * * *','45 11 * * *','45 15 * * *','45 16 * * *']
+news_expected=['30 21 * * *','30 22 * * *','30 0 * * *','30 3 * * *','30 5 * * *','0 6 * * *','30 6 * * *','30 10 * * *','0 11 * * *','30 11 * * *','0 12 * * *']
 nw=ROOT/'.github/workflows/daily_news_wires.yml'
 def ist_minute(cron):
     minute,hour=map(int,cron.split()[:2]); return (hour*60+minute+330)%1440
@@ -23,8 +23,8 @@ check('Rejected legacy Master workflows remain absent and approved dynamic workf
       and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
 master_expected={
  'master_topic_discovery.yml':['35 18 * * 6','50 18 * * *'],
- 'master_trending_writer.yml':['15 19 * * *','15 22 * * *','30 5 * * *','15 9 * * *','0 14 * * *'],
- 'master_evergreen_writer.yml':['45 20 * * *','30 23 * * *','30 6 * * *','45 10 * * *','15 15 * * *'],
+ 'master_trending_writer.yml':['0 1 * * *','0 7 * * *','30 9 * * *','30 12 * * *','30 13 * * *'],
+ 'master_evergreen_writer.yml':['30 1 * * *','30 7 * * *','0 10 * * *','0 13 * * *','0 14 * * *'],
 }
 for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
@@ -34,7 +34,7 @@ check('Dynamic Master publication has both code gate and explicit live workflow 
       and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text()
       and all("MASTER_PUBLICATION_ENABLED: 'true'" in (ROOT/'.github/workflows'/name).read_text() for name in new_master))
 check('Eleven news preflight runs',crons(nw)==news_expected,str(crons(nw)))
-check('News runs cannot overlap','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-wires' in nw.read_text())
+check('News desks have independent non-cancelling precision runs','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-${{' in nw.read_text() and 'timeout-minutes: 180' in nw.read_text())
 
 bing_py=(ROOT/'bing_url_automation.py').read_text()
 bing_workflow=(ROOT/'.github/workflows/bing_url_automation.yml').read_text()
@@ -64,9 +64,10 @@ check('Dynamic Master daily plan is five trending plus five evergreen topics',
       "if len(evergreen)!=5" in discovery and "for cat in TRENDING_CATEGORIES" in discovery and "'total':10" in discovery)
 check('Trending Master articles receive one trend and one permanent label',
       "item['category'],item['evergreen_category']" in dynamic)
-check('All ten daily Master slots route to exactly one established social platform',
-      'item_key.startswith("master-")' in (ROOT/'social_rotation.py').read_text()
-      and "parts[1] not in ('trending','evergreen')" in (ROOT/'social_rotation.py').read_text())
+check('Every article routes to two distinct networks with exact 42-post weighting',
+      'DAILY_PLATFORM_PAIRS' in (ROOT/'social_rotation.py').read_text()
+      and "{'facebook':13,'bluesky':11,'mastodon':10,'tumblr':8}" in (ROOT/'test_social_rotation.py').read_text()
+      and 'for route_index in (0,1)' in (ROOT/'dispatch_social_events.py').read_text())
 check('Each dynamic Master package requires three licensed photos',
       'choose_photos(briefs' in (ROOT/'prepare_master_article.py').read_text() and 'if len(briefs)!=3' in (ROOT/'photo_selector.py').read_text())
 rv=(ROOT/'reader_value_article.py').read_text(); mv2=(ROOT/'master_article_v2.py').read_text(); prep=(ROOT/'prepare_master_article.py').read_text(); master=ap+rv+mv2+prep
@@ -226,16 +227,16 @@ check('Every social publisher accepts an exact authenticated Blogger target URL'
           for text in (fp,bp,tp,mp)))
 check('News publisher dispatches only confirmed live Blogger events',
       'social_events.json' in np and 'dispatch_social_events.py' in nw.read_text())
-check('Article routing waits at least fifteen minutes after publication',
-      'dt.timedelta(minutes=15)' in rotation and 'delay_seconds' in coordinated)
+check('Both article social routes release within five minutes after publication',
+      'dt.timedelta(minutes=5)' in rotation and 'route_index' in coordinated and 'delay_seconds' in coordinated)
 check('Coordinated tracker writes use race-safe persistence retries',
       'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
-check('Daily coordinated inventory is exactly 11 News articles plus 5 resources',
-      'MASTER_PATTERN' not in rotation and 'NEWS_PATTERN' in rotation and 'RESOURCE_PATTERN' in rotation
-      and 'NEWS_KEYS' in rotation and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
-check('Configured cadence preserves established routing across 16 daily destinations',
-      'RESOURCE_PATTERN = ("facebook", "bluesky", "facebook", "tumblr", "mastodon")' in rotation
-      and 11+5==16 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
+check('Daily coordinated inventory covers all 21 articles plus five resources',
+      'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_PATTERN' in rotation
+      and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==7)
+check('Configured article cadence is exactly 42 weighted social posts daily',
+      'Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8' in rotation
+      and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
@@ -272,25 +273,16 @@ check('Exactly 11 consolidated news desks',isinstance(desks,dict) and len(desks)
 nums=sorted(v[0] for v in desks.values()); labels=[v[1] for v in desks.values()]
 check('News desk numbers are 1–11',nums==list(range(1,12)))
 check('News labels are unique',len(labels)==len(set(labels))==11)
-expected_clusters=[['americas'],['global'],['global','markets'],['markets','economy'],
-                   ['economy','banking'],['banking','companies'],['china'],
-                   ['china','asia-pacific'],['india'],['russia'],['europe']]
-actual_clusters=[]
-for cron in news_expected:
-    start=ist_minute(cron)
-    due=[]
-    for desk,values in desks.items():
-        hh,mm=map(int,values[3].split(':')); delta=(hh*60+mm-start)%1440
-        if delta<=60: due.append(desk)
-    actual_clusters.append(sorted(due))
-expected_clusters=[sorted(group) for group in expected_clusters]
-check('Each News preflight selects its intended consolidated desk',actual_clusters==expected_clusters,str(actual_clusters))
+check('Each News schedule explicitly selects one precision-timed desk',
+      all(f'value={desk}' in nw.read_text() for desk in desks)
+      and '--timed-release' in nw.read_text() and 'NEWS_LIVE' in np)
 check('News labels encode edition family and canonical taxonomy within Blogger limit',
       '"Category Edition"' in np and '"Geographic Edition"' in np
       and 'TOPIC_LABELS[desk]' in np and 'GEOGRAPHY_LABELS[desk]' in np
       and 'Blogger caps the combined label text' in np)
 check('News launch gate is 2026-09-25','LAUNCH_DATE = dt.date(2026, 9, 25)' in np)
-check('News cluster selector covers paired desks','PREFLIGHT_MINUTES = 60' in np)
+check('News precision timing is independent of Search Console audience measurements',
+      'from publication_timing import NEWS_LIVE' in np and 'GSC' not in (ROOT/'publication_timing.py').read_text())
 check('News duplicate recovery uses Blogger API without synthetic pageviews',
       'live_post_exists(expected_url, token)' in np and '/posts/bypath?' in np
       and 'response.read().decode("utf-8"' not in np)

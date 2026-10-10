@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-10T16:17:30+05:30",
+  "checked_at_ist": "2026-10-10T18:17:45+05:30",
   "summary": {
     "pass": 134,
     "fail": 0
@@ -18,12 +18,12 @@
     {
       "name": "master_trending_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['15 19 * * *', '15 22 * * *', '30 5 * * *', '15 9 * * *', '0 14 * * *']"
+      "detail": "['0 1 * * *', '0 7 * * *', '30 9 * * *', '30 12 * * *', '30 13 * * *']"
     },
     {
       "name": "master_evergreen_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['45 20 * * *', '30 23 * * *', '30 6 * * *', '45 10 * * *', '15 15 * * *']"
+      "detail": "['30 1 * * *', '30 7 * * *', '0 10 * * *', '0 13 * * *', '0 14 * * *']"
     },
     {
       "name": "Dynamic Master publication has both code gate and explicit live workflow enablement",
@@ -33,10 +33,10 @@
     {
       "name": "Eleven news preflight runs",
       "status": "PASS",
-      "detail": "['45 23 * * *', '45 0 * * *', '30 1 * * *', '15 2 * * *', '0 3 * * *', '45 3 * * *', '45 6 * * *', '30 7 * * *', '45 11 * * *', '45 15 * * *', '45 16 * * *']"
+      "detail": "['30 21 * * *', '30 22 * * *', '30 0 * * *', '30 3 * * *', '30 5 * * *', '0 6 * * *', '30 6 * * *', '30 10 * * *', '0 11 * * *', '30 11 * * *', '0 12 * * *']"
     },
     {
-      "name": "News runs cannot overlap",
+      "name": "News desks have independent non-cancelling precision runs",
       "status": "PASS",
       "detail": ""
     },
@@ -101,7 +101,7 @@
       "detail": ""
     },
     {
-      "name": "All ten daily Master slots route to exactly one established social platform",
+      "name": "Every article routes to two distinct networks with exact 42-post weighting",
       "status": "PASS",
       "detail": ""
     },
@@ -396,7 +396,7 @@
       "detail": ""
     },
     {
-      "name": "Article routing waits at least fifteen minutes after publication",
+      "name": "Both article social routes release within five minutes after publication",
       "status": "PASS",
       "detail": ""
     },
@@ -406,12 +406,12 @@
       "detail": ""
     },
     {
-      "name": "Daily coordinated inventory is exactly 11 News articles plus 5 resources",
+      "name": "Daily coordinated inventory covers all 21 articles plus five resources",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Configured cadence preserves established routing across 16 daily destinations",
+      "name": "Configured article cadence is exactly 42 weighted social posts daily",
       "status": "PASS",
       "detail": ""
     },
@@ -526,9 +526,9 @@
       "detail": ""
     },
     {
-      "name": "Each News preflight selects its intended consolidated desk",
+      "name": "Each News schedule explicitly selects one precision-timed desk",
       "status": "PASS",
-      "detail": "[['americas'], ['global'], ['global', 'markets'], ['economy', 'markets'], ['banking', 'economy'], ['banking', 'companies'], ['china'], ['asia-pacific', 'china'], ['india'], ['russia'], ['europe']]"
+      "detail": ""
     },
     {
       "name": "News labels encode edition family and canonical taxonomy within Blogger limit",
@@ -541,7 +541,7 @@
       "detail": ""
     },
     {
-      "name": "News cluster selector covers paired desks",
+      "name": "News precision timing is independent of Search Console audience measurements",
       "status": "PASS",
       "detail": ""
     },

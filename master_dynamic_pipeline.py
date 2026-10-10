@@ -14,6 +14,7 @@ from brand_identity import ensure_brand_identity
 from continuous_motion import ensure as ensure_continuous_motion
 from master_article_v2 import render, validate
 from publication_preflight import assert_publishable
+from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
 
@@ -46,8 +47,9 @@ def prepare(kind,slot):
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
  write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
 
-def publish(kind,slot):
+def publish(kind,slot,timed_release=False):
  if os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()!='true':raise RuntimeError('Master publication remains intentionally paused; set MASTER_PUBLICATION_ENABLED=true only after owner activation')
+ if timed_release:wait_for_release(MASTER_LIVE[(kind,slot)])
  plan,item=selected(kind,slot);target=package_path(kind,item)
  if not target.exists():raise RuntimeError('validated prepared package is absent')
  package=read(target,{});validate(package);title,slug,meta,labels,body=build_html(kind,item,package);res=publish_to_blogger(title,body,labels)
@@ -60,9 +62,10 @@ def publish(kind,slot):
  write(ROOT/'MASTER_TOPIC_HISTORY.json',history);write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':res['url'],'content_mode':'post','published_at':record['published_at']}]);write(STATUS,{'status':'PASS','publication_enabled':True,**record});print(res['url'])
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--kind',choices=('trending','evergreen'),required=True);p.add_argument('--slot',type=int,choices=range(5),required=True);p.add_argument('--prepare',action='store_true');p.add_argument('--publish',action='store_true');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--kind',choices=('trending','evergreen'),required=True);p.add_argument('--slot',type=int,choices=range(5),required=True);p.add_argument('--prepare',action='store_true');p.add_argument('--publish',action='store_true');p.add_argument('--timed-release',action='store_true');a=p.parse_args()
  try:
   if a.prepare==a.publish:raise RuntimeError('choose exactly one of --prepare or --publish')
-  (prepare if a.prepare else publish)(a.kind,a.slot)
+  if a.prepare:prepare(a.kind,a.slot)
+  else:publish(a.kind,a.slot,timed_release=a.timed_release)
  except Exception as exc:write(STATUS,{'status':'FAIL','publication_enabled':os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true','kind':a.kind,'slot':a.slot,'error_type':type(exc).__name__,'error':str(exc)[:1000]});raise
 if __name__=='__main__':main()

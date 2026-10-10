@@ -6,11 +6,11 @@ Scope: retained Master production code and eleven daily News editions, including
 
 - ✅ **Rejected legacy Master workflows remain absent and approved dynamic workflows exist**
 - ✅ **master_topic_discovery.yml has its complete live schedule** — ['35 18 * * 6', '50 18 * * *']
-- ✅ **master_trending_writer.yml has its complete live schedule** — ['15 19 * * *', '15 22 * * *', '30 5 * * *', '15 9 * * *', '0 14 * * *']
-- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['45 20 * * *', '30 23 * * *', '30 6 * * *', '45 10 * * *', '15 15 * * *']
+- ✅ **master_trending_writer.yml has its complete live schedule** — ['0 1 * * *', '0 7 * * *', '30 9 * * *', '30 12 * * *', '30 13 * * *']
+- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['30 1 * * *', '30 7 * * *', '0 10 * * *', '0 13 * * *', '0 14 * * *']
 - ✅ **Dynamic Master publication has both code gate and explicit live workflow enablement**
-- ✅ **Eleven news preflight runs** — ['45 23 * * *', '45 0 * * *', '30 1 * * *', '15 2 * * *', '0 3 * * *', '45 3 * * *', '45 6 * * *', '30 7 * * *', '45 11 * * *', '45 15 * * *', '45 16 * * *']
-- ✅ **News runs cannot overlap**
+- ✅ **Eleven news preflight runs** — ['30 21 * * *', '30 22 * * *', '30 0 * * *', '30 3 * * *', '30 5 * * *', '0 6 * * *', '30 6 * * *', '30 10 * * *', '0 11 * * *', '30 11 * * *', '0 12 * * *']
+- ✅ **News desks have independent non-cancelling precision runs**
 - ✅ **Bing URL automation reconciles every two hours**
 - ✅ **News publisher triggers Bing reconciliation without schedule changes**
 - ✅ **Bing URL submission is quota-aware and capped at 500 per batch**
@@ -23,7 +23,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Dynamic Master discovery has no CSV topic queue**
 - ✅ **Dynamic Master daily plan is five trending plus five evergreen topics**
 - ✅ **Trending Master articles receive one trend and one permanent label**
-- ✅ **All ten daily Master slots route to exactly one established social platform**
+- ✅ **Every article routes to two distinct networks with exact 42-post weighting**
 - ✅ **Each dynamic Master package requires three licensed photos**
 - ✅ **Master publisher uses IST**
 - ✅ **Master tracker advances only after live URL**
@@ -82,10 +82,10 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Exactly five established audience-resource promotions are scheduled**
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
 - ✅ **News publisher dispatches only confirmed live Blogger events**
-- ✅ **Article routing waits at least fifteen minutes after publication**
+- ✅ **Both article social routes release within five minutes after publication**
 - ✅ **Coordinated tracker writes use race-safe persistence retries**
-- ✅ **Daily coordinated inventory is exactly 11 News articles plus 5 resources**
-- ✅ **Configured cadence preserves established routing across 16 daily destinations**
+- ✅ **Daily coordinated inventory covers all 21 articles plus five resources**
+- ✅ **Configured article cadence is exactly 42 weighted social posts daily**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**
@@ -108,10 +108,10 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Exactly 11 consolidated news desks** — 11
 - ✅ **News desk numbers are 1–11**
 - ✅ **News labels are unique**
-- ✅ **Each News preflight selects its intended consolidated desk** — [['americas'], ['global'], ['global', 'markets'], ['economy', 'markets'], ['banking', 'economy'], ['banking', 'companies'], ['china'], ['asia-pacific', 'china'], ['india'], ['russia'], ['europe']]
+- ✅ **Each News schedule explicitly selects one precision-timed desk**
 - ✅ **News labels encode edition family and canonical taxonomy within Blogger limit**
 - ✅ **News launch gate is 2026-09-25**
-- ✅ **News cluster selector covers paired desks**
+- ✅ **News precision timing is independent of Search Console audience measurements**
 - ✅ **News duplicate recovery uses Blogger API without synthetic pageviews**
 - ✅ **News source policy is current**
 - ✅ **News finance filter enabled**

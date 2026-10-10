@@ -1,49 +1,68 @@
 name: Daily Yield News Wires (11 Daily)
 on:
   schedule:
-    # Each run starts 45 minutes before its editorial slot (IST).
-    - cron: "45 23 * * *"   # 05:15 IST → Americas 06:00
-    - cron: "45 0 * * *"    # 06:15 IST → Global 07:00
-    - cron: "30 1 * * *"    # 07:00 IST → Markets 07:45
-    - cron: "15 2 * * *"    # 07:45 IST → Economy 08:30
-    - cron: "0 3 * * *"     # 08:30 IST → Banking 09:15
-    - cron: "45 3 * * *"    # 09:15 IST → Companies 10:00
-    - cron: "45 6 * * *"    # 12:15 IST → China 13:00
-    - cron: "30 7 * * *"    # 13:00 IST → Asia-Pacific 13:45
-    - cron: "45 11 * * *"   # 17:15 IST → India 18:00
-    - cron: "45 15 * * *"   # 21:15 IST → Russia 22:00
-    - cron: "45 16 * * *"   # 22:15 IST → Europe 23:00
+    # Preparation starts 75 minutes before the precision Blogger release (IST).
+    - cron: "30 21 * * *"   # 03:00 IST → Asia-Pacific live 04:15
+    - cron: "30 22 * * *"   # 04:00 IST → China live 05:15
+    - cron: "30 0 * * *"    # 06:00 IST → India live 07:15
+    - cron: "30 3 * * *"    # 09:00 IST → Russia live 10:15
+    - cron: "30 5 * * *"    # 11:00 IST → Markets live 12:15
+    - cron: "0 6 * * *"     # 11:30 IST → Europe live 12:45
+    - cron: "30 6 * * *"    # 12:00 IST → Economy live 13:15
+    - cron: "30 10 * * *"   # 16:00 IST → Americas live 17:15
+    - cron: "0 11 * * *"    # 16:30 IST → Companies live 17:45
+    - cron: "30 11 * * *"   # 17:00 IST → Global live 18:15
+    - cron: "0 12 * * *"    # 17:30 IST → Banking live 18:45
   workflow_dispatch:
     inputs:
       desks:
-        description: "desk slugs (comma-separated), or blank for desks due in the preflight window"
+        description: "desk slugs (comma-separated); manual runs publish immediately"
         required: false
         default: ""
 permissions:
   contents: write
   actions: write
 concurrency:
-  group: daily-yield-news-wires
+  group: daily-yield-news-${{ github.event.schedule || inputs.desks || github.run_id }}
   cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
-      - name: Run Daily Yield news pipeline
+      - name: Select scheduled desk
+        id: desk
+        shell: bash
+        run: |
+          case "${{ github.event.schedule }}" in
+            '30 21 * * *') value=asia-pacific ;;
+            '30 22 * * *') value=china ;;
+            '30 0 * * *') value=india ;;
+            '30 3 * * *') value=russia ;;
+            '30 5 * * *') value=markets ;;
+            '0 6 * * *') value=europe ;;
+            '30 6 * * *') value=economy ;;
+            '30 10 * * *') value=americas ;;
+            '0 11 * * *') value=companies ;;
+            '30 11 * * *') value=global ;;
+            '0 12 * * *') value=banking ;;
+            *) value="${{ inputs.desks }}" ;;
+          esac
+          echo "value=$value" >> "$GITHUB_OUTPUT"
+      - name: Prepare and precision-publish Daily Yield News
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: |
-          if [ -n "${{ github.event.inputs.desks }}" ]; then
-            python3 news_pipeline.py --desks "${{ github.event.inputs.desks }}"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python3 news_pipeline.py --desks "${{ steps.desk.outputs.value }}" --timed-release
           else
-            python3 news_pipeline.py --due
+            python3 news_pipeline.py --desks "${{ steps.desk.outputs.value }}"
           fi
-      - name: Route each live News edition to exactly one social platform
+      - name: Route each live News edition to two different social platforms
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
@@ -66,8 +85,12 @@ jobs:
             echo "No tracker change."
           else
             git commit -m "Update Daily Yield news tracker [$(date -u)]"
-            git pull --rebase origin main
-            git push origin main
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 2))
+            done
+            exit 1
           fi
       - name: Trigger authenticated News-page refresh
         if: always()

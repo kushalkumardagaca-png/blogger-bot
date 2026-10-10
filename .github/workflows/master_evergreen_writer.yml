@@ -2,11 +2,11 @@ name: Master Evergreen Writer (Live)
 
 on:
   schedule:
-    - cron: '45 20 * * *'  # 02:15 IST
-    - cron: '30 23 * * *'  # 05:00 IST
-    - cron: '30 6 * * *'   # 12:00 IST
-    - cron: '45 10 * * *'  # 16:15 IST
-    - cron: '15 15 * * *'  # 20:45 IST
+    - cron: '30 1 * * *'   # Prepare 07:00 IST → live 08:15
+    - cron: '30 7 * * *'   # Prepare 13:00 IST → live 14:15
+    - cron: '0 10 * * *'   # Prepare 15:30 IST → live 16:45
+    - cron: '0 13 * * *'   # Prepare 18:30 IST → live 19:45
+    - cron: '0 14 * * *'   # Prepare 19:30 IST → live 20:45
   workflow_dispatch:
     inputs:
       slot:
@@ -25,13 +25,13 @@ permissions:
   actions: write
 
 concurrency:
-  group: daily-yield-master-writer
+  group: daily-yield-master-evergreen-${{ github.event.schedule || inputs.slot || github.run_id }}
   cancel-in-progress: false
 
 jobs:
   write:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -42,11 +42,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '45 20 * * *') value=0 ;;
-            '30 23 * * *') value=1 ;;
-            '30 6 * * *') value=2 ;;
-            '45 10 * * *') value=3 ;;
-            '15 15 * * *') value=4 ;;
+            '30 1 * * *') value=0 ;;
+            '30 7 * * *') value=1 ;;
+            '0 10 * * *') value=2 ;;
+            '0 13 * * *') value=3 ;;
+            '0 14 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
@@ -81,7 +81,7 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python master_dynamic_pipeline.py --kind evergreen --slot "${{ steps.slot.outputs.value }}" --publish
+        run: python master_dynamic_pipeline.py --kind evergreen --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
       - name: Route successful publication and refresh page
         if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         env:

@@ -2,11 +2,11 @@ name: Master Trending Writer (Live)
 
 on:
   schedule:
-    - cron: '15 19 * * *'  # 00:45 IST
-    - cron: '15 22 * * *'  # 03:45 IST
-    - cron: '30 5 * * *'   # 11:00 IST
-    - cron: '15 9 * * *'   # 14:45 IST
-    - cron: '0 14 * * *'   # 19:30 IST
+    - cron: '0 1 * * *'    # Prepare 06:30 IST → live 07:45
+    - cron: '0 7 * * *'    # Prepare 12:30 IST → live 13:45
+    - cron: '30 9 * * *'   # Prepare 15:00 IST → live 16:15
+    - cron: '30 12 * * *'  # Prepare 18:00 IST → live 19:15
+    - cron: '30 13 * * *'  # Prepare 19:00 IST → live 20:15
   workflow_dispatch:
     inputs:
       slot:
@@ -25,13 +25,13 @@ permissions:
   actions: write
 
 concurrency:
-  group: daily-yield-master-writer
+  group: daily-yield-master-trending-${{ github.event.schedule || inputs.slot || github.run_id }}
   cancel-in-progress: false
 
 jobs:
   write:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -42,11 +42,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '15 19 * * *') value=0 ;;
-            '15 22 * * *') value=1 ;;
-            '30 5 * * *') value=2 ;;
-            '15 9 * * *') value=3 ;;
-            '0 14 * * *') value=4 ;;
+            '0 1 * * *') value=0 ;;
+            '0 7 * * *') value=1 ;;
+            '30 9 * * *') value=2 ;;
+            '30 12 * * *') value=3 ;;
+            '30 13 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
@@ -81,7 +81,7 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish
+        run: python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
       - name: Route successful publication and refresh page
         if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         env:

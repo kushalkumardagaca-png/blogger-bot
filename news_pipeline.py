@@ -31,6 +31,7 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
+from publication_timing import NEWS_LIVE, wait_for_release
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
 from seo_hygiene import compact_title, repair_image_alts
@@ -1547,7 +1548,7 @@ def append_social_event(desk, url):
     with open(SOCIAL_EVENTS_FILE, "w", encoding="utf-8") as handle:
         json.dump(events, handle, indent=2)
 
-def run_desk(desk, tracker, dry=False, token=None):
+def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
     n, label, slug, slot, _, _ = DESKS[desk]
     now = dt.datetime.now(IST)
     hh, mm = map(int, slot.split(":"))
@@ -1638,6 +1639,8 @@ def run_desk(desk, tracker, dry=False, token=None):
     assert_publishable(art["title"], art["html"], art["labels"])
     print(f"  [{desk}] adaptive polish: {polish_mode}")
     print(f"  [{desk}] article built: {art['n_items']} items, {word_count} editorial words, '{art['title'][:70]}…'")
+    if timed_release and desk in NEWS_LIVE:
+        wait_for_release(NEWS_LIVE[desk], dry=dry)
     url = publish_post(art, token, dry)
     if url or dry:
         # Reserve only stories that actually made the article. This protects the
@@ -1713,7 +1716,7 @@ def main():
             results.append({"desk": desk, "status": "FAIL", "error_type": "UnknownDesk", "error": message})
             continue
         try:
-            published = run_desk(desk, tracker, dry, token)
+            published = run_desk(desk, tracker, dry, token, timed_release="--timed-release" in args)
             if published:
                 ok += 1
                 results.append({"desk": desk, "status": "PASS", "published": not dry, "dry_run": dry})
