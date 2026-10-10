@@ -254,12 +254,18 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
    sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if core_count<4000:
-  for _ in range(3):
-   needed=4050-core_count;expand_prompt=f'''Add approximately {needed} words as 2-6 new paragraphs to the final section {sections[-1]['heading']!r}. Extend only its existing focus with evidence-supported nuance; do not repeat, summarize or introduce unsupported figures. Return strict JSON {{"paragraphs":[...]}}. EXISTING SECTION: {json.dumps(sections[-1],ensure_ascii=False)} EVIDENCE: {evidence_json}'''
-   candidate=paragraph_list(model_json([{'role':'system','content':'Supply only the requested evidence-grounded expansion.'},{'role':'user','content':expand_prompt}],max_tokens=max(1200,needed*3)));added=words(' '.join(candidate))
-   capacity=4150-core_count
-   if added>capacity:candidate=trim_paragraphs(candidate,capacity);added=words(' '.join(candidate))
-   if added>=20:sections[-1]['paragraphs'].extend(candidate);core_count+=added
+  # Rewrite the shortest sections to their larger explicit budgets. Models are
+  # much more reliable at replacing a complete section than appending a loosely
+  # specified fragment, which previously left otherwise sound drafts undersized.
+  for _ in range(6):
+   needed=4050-core_count;section=min(sections,key=lambda x:words(' '.join(x['paragraphs'])));current=words(' '.join(section['paragraphs']));target=min(700,current+needed)
+   expand_prompt=f'''Rewrite this complete section in {target-50} to {target+50} actual words, using 4-7 natural paragraphs. Preserve its distinct focus and supported claims, add evidence-grounded nuance where needed, retain contextual citation tokens, and do not repeat another section or invent figures. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section['heading']} EXISTING SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
+   replacement=None
+   for _attempt in range(3):
+    candidate=paragraph_list(model_json([{'role':'system','content':'Expand one evidence-grounded section to the requested complete word budget.'},{'role':'user','content':expand_prompt}],max_tokens=max(2500,target*3)));count=words(' '.join(candidate));normalized=[' '.join(x.casefold().split()) for x in candidate if len(x)>100]
+    if target-100<=count<=target+100 and len(normalized)==len(set(normalized)):replacement=candidate;break
+   if replacement:
+    section['paragraphs']=replacement;core_count+=words(' '.join(replacement))-current
    if core_count>=4000:break
   if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
  elif core_count>4200:
