@@ -3,6 +3,6 @@
   "publication_enabled": false,
   "kind": "evergreen",
   "slot": 0,
-  "error_type": "HTTPError",
-  "error": "400 Client Error: Bad Request for url: https://www.googleapis.com/webmasters/v3/sites//searchAnalytics/query"
+  "error_type": "RuntimeError",
+  "error": "evidence repair could not preserve the section word budget"
 }
