@@ -289,7 +289,7 @@ check('Discovery fallback retains only approved named publishers',
       'GNR_ALLOWED_PUBLISHERS' in np and 'pub not in GNR_ALLOWED_PUBLISHERS' in np)
 check('Older context is capped at three and explicitly labelled',
       'len(background) >= min(3, 10 - len(current))' in np
-      and 'Background, not current-window news.' in np
+      and 'Background, not current-window news:' in np
       and 'Background Context — Not Current-Period News' in np)
 check('News editorial length is fail-closed at 3,800–4,100 visible words',
       'NEWS_MIN_WORDS = 3800' in np and 'NEWS_MAX_WORDS = 4100' in np

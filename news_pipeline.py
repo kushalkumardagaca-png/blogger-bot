@@ -974,13 +974,13 @@ def compose_item(it, win_end, context_target=95, summary_target=52):
     variant = int(hashlib.sha256((title + it["agency"]).encode()).hexdigest()[:2], 16) % len(READER_LENS)
     if background:
         chip, display = f"Background · originally {day}", "Background context: " + title
-        status = f"Background, not current-window news. {it['agency']} published this on {day}; it is retained only for context."
+        status = f"Background, not current-window news: {title}. {it['agency']} published this on {day}; it is retained only for context."
     elif analysis:
         chip, display = f"{day} · Reported outlook", title
-        status = f"This forecast, expectation or analytical view was reported by {it['agency']} on {day}. It is not an observed future result or a fact asserted by Daily Yield."
+        status = f"This forecast or analytical view about {title} was reported by {it['agency']} on {day}. It is not an observed future result or a fact asserted by Daily Yield."
     else:
         chip, display = f"{day} · Reported development", title
-        status = f"{it['agency']} published this account on {day}. Possible consequences below are conditional context, not a claim that a future result is certain."
+        status = f"{it['agency']} published its account of {title} on {day}. Possible consequences below are conditional context, not a claim that a future result is certain."
     summary_words = len(summary.split())
     context_limit = max(35, context_target - summary_words)
     ordered_lenses = " ".join(READER_LENS[(variant + offset) % len(READER_LENS)]
