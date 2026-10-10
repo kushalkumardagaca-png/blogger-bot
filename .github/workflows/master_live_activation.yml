@@ -40,7 +40,7 @@ jobs:
           git config user.name "Daily Yield Master Activation"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git restore PUBLISHING_AUTOMATION_AUDIT.json PUBLISHING_AUTOMATION_AUDIT.md 2>/dev/null || true
-          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json
+          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json
           git status --short
           git commit -m "Activate first evergreen Master publication [skip ci]"
           git push origin HEAD:main
@@ -80,11 +80,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p /tmp/master-live-final
-          cp MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json /tmp/master-live-final/
+          cp MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json /tmp/master-live-final/
           git fetch origin main
           git reset --hard origin/main
           cp /tmp/master-live-final/* .
-          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json
+          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json
           git commit -m "Activate first trending Master publication [skip ci]"
           for attempt in 1 2 3 4 5; do
             git pull --rebase origin main
