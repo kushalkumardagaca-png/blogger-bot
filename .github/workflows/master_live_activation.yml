@@ -41,10 +41,18 @@ jobs:
         run: |
           git config user.name "Daily Yield Master Activation"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/master-live
+          cp MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json /tmp/master-live/
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/master-live/* .
           git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json
           git commit -m "Activate first evergreen Master publication [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then break; fi
+            sleep $((attempt * 2))
+          done
           python dispatch_social_events.py
       - name: Prepare first trending Master article and three photographs
         env:
@@ -77,10 +85,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          mkdir -p /tmp/master-live-final
+          cp MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json /tmp/master-live-final/
+          git fetch origin main
+          git reset --hard origin/main
+          cp /tmp/master-live-final/* .
           git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json social_events.json
           git commit -m "Activate first trending Master publication [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for attempt in 1 2 3 4 5; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then break; fi
+            sleep $((attempt * 2))
+          done
           python dispatch_social_events.py
           gh workflow run content_experience_repair.yml --ref main
           gh workflow run bing_url_automation.yml --ref main
