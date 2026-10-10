@@ -67,7 +67,9 @@ jobs:
             if python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare; then
               exit 0
             fi
-            echo "Preparation attempt $attempt failed; retrying with fresh external responses."
+            echo "Preparation attempt $attempt failed; rolling back partial package state."
+            git reset --hard HEAD
+            git clean -fd master_packages/dynamic assets/master scheduled_ready
             sleep $((attempt * 20))
           done
           exit 1

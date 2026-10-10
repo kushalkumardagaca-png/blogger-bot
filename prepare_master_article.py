@@ -8,7 +8,7 @@ checked against the permanent global reuse registry, cropped to a common 16:9
 landscape ratio, attributed, and persisted before Blogger publication. No public Daily Yield page is requested.
 """
 from __future__ import annotations
-import base64,csv,gzip,html,json,os,re,sys,time,urllib.parse,urllib.request
+import base64,csv,gzip,html,json,os,re,shutil,sys,time,urllib.parse,urllib.request
 from datetime import datetime
 from pathlib import Path
 from xml.etree import ElementTree
@@ -477,10 +477,21 @@ def build_package(topic,target):
  if len(briefs)!=3 or any(len(x.strip())<20 for x in briefs):
   headings=[str(x.get('heading','')) for x in draft.get('sections',[])]
   briefs=[f"Opening editorial context for {draft['title']}: {'; '.join(headings[:2])}",f"Mid-article mechanism and evidence for {draft['title']}: {'; '.join(headings[3:6])}",f"Later implications and decisions for {draft['title']}: {'; '.join(headings[-3:])}"]
- STAGE='licensed-photo-selection';draft['photos']=choose_photos(briefs,slug,topic.get('#',slug));draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
- STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
- STAGE='final-validation';validate(draft);assert_unique_editorial_paragraphs(draft)
- target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');return draft
+ # Photo selection updates both files and the permanent reuse registry. Keep the
+ # operation transactional so a later GSC/validation failure cannot strand six
+ # photos after a retry or permanently consume unused photo IDs.
+ folder=ASSETS/slug;registry=ROOT/'PHOTO_USAGE_REGISTRY.json';registry_before=registry.read_bytes() if registry.exists() else None
+ if folder.exists():shutil.rmtree(folder)
+ try:
+  STAGE='licensed-photo-selection';draft['photos']=choose_photos(briefs,slug,topic.get('#',slug));draft['sources']=[{'name':e['name'],'title':e['title'],'url':e['url'],'date':'Accessed during article preparation','use':'Topic-specific evidence'} for e in evidence]
+  STAGE='low-exposure-selection';draft['internal_links']=internal_links();draft['low_view_posts']=low_exposure_posts()
+  STAGE='final-validation';validate(draft);assert_unique_editorial_paragraphs(draft)
+  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(draft,indent=2,ensure_ascii=False)+'\n');return draft
+ except Exception:
+  if registry_before is None:registry.unlink(missing_ok=True)
+  else:registry.write_bytes(registry_before)
+  shutil.rmtree(folder,ignore_errors=True);target.unlink(missing_ok=True)
+  raise
 
 def prepare():
  global STAGE
