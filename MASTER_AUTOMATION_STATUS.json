@@ -1,12 +1,11 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "2000d8d7828ac954",
-  "kind": "evergreen",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-10",
-  "category": "Investing & Portfolio Building",
-  "evergreen_category": "Investing & Portfolio Building",
-  "title": "Defining Wealth: What Is an Asset?",
-  "url": "https://dailyyield.blogspot.com/2026/10/defining-wealth-what-is-asset.html",
-  "published_at": "2026-10-10T08:15:01-07:00"
+  "kind": "trending",
+  "slot": 4,
+  "topic_id": "f011033dd488981c",
+  "title": "Cost of Living Crisis: Should You Invest?",
+  "package": "master_packages/dynamic/2026-10-10-trending-f011033dd488981c.json",
+  "html": "scheduled_ready/2026-10-10-trending-4-cost-of-living-crisis-should-you-invest.html"
 }
