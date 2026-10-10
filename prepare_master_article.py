@@ -257,7 +257,7 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
   # Rewrite the shortest sections to their larger explicit budgets. Models are
   # much more reliable at replacing a complete section than appending a loosely
   # specified fragment, which previously left otherwise sound drafts undersized.
-  for _ in range(6):
+  for _ in range(12):
    needed=4050-core_count;section=min(sections,key=lambda x:words(' '.join(x['paragraphs'])));current=words(' '.join(section['paragraphs']));target=min(700,current+needed)
    expand_prompt=f'''Rewrite this complete section in {target-50} to {target+50} actual words, using 4-7 natural paragraphs. Preserve its distinct focus and supported claims, add evidence-grounded nuance where needed, retain contextual citation tokens, and do not repeat another section or invent figures. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section['heading']} EXISTING SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
    replacement=None
@@ -266,6 +266,12 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
     if target-100<=count<=target+100 and len(normalized)==len(set(normalized)):replacement=candidate;break
    if replacement:
     section['paragraphs']=replacement;core_count+=words(' '.join(replacement))-current
+   else:
+    addition_prompt=f'''Add 2-4 new paragraphs totalling approximately {min(needed,260)} actual words to this section. Cover only evidence-supported nuance not already stated, retain useful citation tokens, and do not summarize or repeat. Return strict JSON {{"paragraphs":[...]}}. HEADING: {section['heading']} EXISTING SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
+    addition=paragraph_list(model_json([{'role':'system','content':'Write only new, non-repeating evidence-grounded paragraphs.'},{'role':'user','content':addition_prompt}],max_tokens=2200));capacity=4150-core_count
+    if words(' '.join(addition))>capacity:addition=trim_paragraphs(addition,capacity)
+    existing={' '.join(x.casefold().split()) for s in sections for x in s['paragraphs']};addition=[x for x in addition if ' '.join(x.casefold().split()) not in existing];added=words(' '.join(addition))
+    if added>=20:section['paragraphs'].extend(addition);core_count+=added
    if core_count>=4000:break
   if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
  elif core_count>4200:
