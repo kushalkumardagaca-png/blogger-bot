@@ -1,24 +1,24 @@
 {
   "status": "PASS",
-  "generated_at": "2026-10-10T04:23:37.170136+00:00",
+  "generated_at": "2026-10-10T07:01:59.290771+00:00",
   "dry_run": false,
   "published": 3,
   "failed": 0,
   "results": [
     {
-      "desk": "americas",
+      "desk": "china",
       "status": "PASS",
       "published": true,
       "dry_run": false
     },
     {
-      "desk": "markets",
+      "desk": "banking",
       "status": "PASS",
       "published": true,
       "dry_run": false
     },
     {
-      "desk": "economy",
+      "desk": "companies",
       "status": "PASS",
       "published": true,
       "dry_run": false
