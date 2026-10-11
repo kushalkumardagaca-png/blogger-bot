@@ -1,0 +1,59 @@
+name: Engaged Reader Measurement Retrofit
+
+on:
+  schedule:
+    - cron: '20 20 * * *' # catch every newly published Post daily
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'reader_measurement_retrofit.py'
+      - 'test_reader_measurement_retrofit.py'
+      - '.github/workflows/reader_measurement_retrofit.yml'
+
+permissions:
+  contents: write
+concurrency:
+  group: daily-yield-reader-measurement-retrofit
+  cancel-in-progress: false
+jobs:
+  instrument:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate strict reader definition
+        run: python -m unittest test_reader_measurement_retrofit test_growth_system -v
+      - name: Install measurement through authenticated Blogger API
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python reader_measurement_retrofit.py
+      - name: Upload deployment evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reader-measurement-${{ github.run_id }}
+          retention-days: 90
+          path: READER_MEASUREMENT_STATUS.json
+      - name: Persist deployment evidence
+        if: success()
+        run: |
+          git config user.name 'Daily Yield Reader Measurement'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          cp READER_MEASUREMENT_STATUS.json /tmp/READER_MEASUREMENT_STATUS.json
+          for attempt in 1 2 3; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            cp /tmp/READER_MEASUREMENT_STATUS.json .
+            git add READER_MEASUREMENT_STATUS.json
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m 'Update engaged-reader measurement status [skip ci]'
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt*3))
+          done
+          exit 1
