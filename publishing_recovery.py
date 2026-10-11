@@ -10,7 +10,7 @@ ROOT=Path(__file__).parent; IST=dt.timezone(dt.timedelta(hours=5,minutes=30),nam
 LEDGER=ROOT/'RECOVERY_LEDGER.json'; STATUS=ROOT/'PUBLICATION_RECOVERY_STATUS.json'
 NEWS_TIMES={'asia-pacific':'04:15','china':'05:15','india':'07:15','russia':'10:15','markets':'12:15','europe':'12:45','economy':'13:15','americas':'17:15','companies':'17:45','global':'18:15','banking':'18:45'}
 MASTER_TIMES={'trending':['07:45','13:45','16:15','19:15','20:15'],'evergreen':['08:15','14:15','16:45','19:45','20:45']}
-GRACE=dt.timedelta(minutes=45); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); MAX_RETRIES=3
+GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); MAX_RETRIES=3
 
 def load(path,default):
  try:return json.loads(path.read_text(encoding='utf-8'))
