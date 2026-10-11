@@ -1,0 +1,26 @@
+import datetime as dt,json,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+import publishing_recovery as r
+class RecoveryTests(unittest.TestCase):
+ def setup(self,root,day):
+  (root/'news_tracker.json').write_text(json.dumps({'desks':{'asia-pacific':{'edition':day.isoformat(),'url':'https://dailyyield.blogspot.com/a.html','window_end':day.isoformat()+'T04:15:00+05:30'}}}))
+  (root/'MASTER_DAILY_PLAN.json').write_text(json.dumps({'date':day.isoformat(),'trending':[{'id':'t0'}],'evergreen':[{'id':'e0'}]}))
+  (root/'MASTER_AUTOMATION_TRACKER.json').write_text(json.dumps({'published':[{'topic_id':'t0','kind':'trending','date':day.isoformat(),'url':'https://dailyyield.blogspot.com/t.html','published_at':day.isoformat()+'T07:45:00+05:30'}]}))
+  for p in ('facebook','bluesky','tumblr','mastodon'):(root/f'{p}_tracker.json').write_text('{"published":[]}')
+ def test_recovers_missing_sources_and_exact_social_routes(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);day=dt.date(2026,10,11);self.setup(root,day);now=dt.datetime(2026,10,11,10,0,tzinfo=r.IST)
+   with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
+    report=r.reconcile(now,False)
+   keys={x['key'] for x in report['actions'] if x['type']=='source_recovery'}
+   self.assertIn('news-china',keys);self.assertIn('master-evergreen-0',keys)
+   social=[x for x in report['actions'] if x['type']=='social_replay']
+   self.assertEqual(len([x for x in social if x['key']=='news-asia-pacific']),2)
+   self.assertEqual(report['syntheticViews'],0)
+ def test_retry_cap_and_spacing(self):
+  now=dt.datetime(2026,10,11,12,0,tzinfo=r.IST);key='x';ledger={key:{'attempts':1,'lastAttempt':now.isoformat()}}
+  self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30)))
+  self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(hours=3)))
+  ledger[key]['attempts']=3;self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(days=1)))
+if __name__=='__main__':unittest.main()

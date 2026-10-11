@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-11T17:10:21+05:30",
+  "checked_at_ist": "2026-10-11T17:52:52+05:30",
   "summary": {
-    "pass": 136,
+    "pass": 137,
     "fail": 0
   },
   "checks": [
@@ -407,6 +407,11 @@
     },
     {
       "name": "Coordinated tracker writes use semantic race-safe persistence retries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow",
       "status": "PASS",
       "detail": ""
     },

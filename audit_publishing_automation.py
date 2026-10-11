@@ -241,6 +241,13 @@ persist_social=(ROOT/'persist_social_state.sh').read_text() if (ROOT/'persist_so
 check('Coordinated tracker writes use semantic race-safe persistence retries',
       'persist_social_state.sh' in coordinated and 'merge_social_tracker.py' in persist_social
       and (ROOT/'merge_social_tracker.py').exists())
+recovery_path=ROOT/'.github/workflows/publishing_recovery.yml';recovery_script=ROOT/'publishing_recovery.py'
+recovery=recovery_path.read_text() if recovery_path.exists() else '';recovery_code=recovery_script.read_text() if recovery_script.exists() else ''
+check('Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow',
+      not (ROOT/'.github/workflows/missed_publication_recovery.yml').exists()
+      and bool(recovery) and bool(recovery_code) and "cron: '7,37 * * * *'" in recovery
+      and 'MAX_RETRIES=3' in recovery_code and 'SOCIAL_GRACE' in recovery_code
+      and 'publicDailyYieldRequests' in recovery_code)
 check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
       'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_DESTINATIONS' in rotation
       and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==5
