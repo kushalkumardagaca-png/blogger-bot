@@ -1,15 +1,15 @@
 {
-  "status": "PASS",
-  "generated_at": "2026-10-11T13:42:30.550135+00:00",
+  "status": "FAIL",
+  "generated_at": "2026-10-11T13:58:58.315753+00:00",
   "dry_run": false,
-  "published": 1,
-  "failed": 0,
+  "published": 0,
+  "failed": 1,
   "results": [
     {
-      "desk": "global",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
+      "desk": "banking",
+      "status": "FAIL",
+      "error_type": "ValueError",
+      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 3318 words"
     }
   ]
 }
