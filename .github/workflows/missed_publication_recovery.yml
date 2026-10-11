@@ -1,0 +1,135 @@
+name: One-Time Missed Publication Recovery
+on:
+  push:
+    paths:
+      - '.github/workflows/missed_publication_recovery.yml'
+permissions:
+  contents: write
+  actions: write
+jobs:
+  recover-news:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - run: pip install requests Pillow ImageHash google-api-python-client google-auth
+      - name: Recover Asia-Pacific, China and India News editions
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python news_pipeline.py --desks 'asia-pacific,china,india'
+      - name: Persist recovered News state
+        if: always()
+        run: |
+          git config user.name 'Daily Yield News Recovery'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add news_tracker.json NEWS_PIPELINE_STATUS.json || true
+          if ! git diff --staged --quiet; then
+            git commit -m 'Recover missed News editions [skip ci]'
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 3))
+            done
+            exit 1
+          fi
+      - name: Dispatch social routes for each recovered News edition
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python dispatch_social_events.py
+      - name: Refresh site and Bing state
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run content_experience_repair.yml --ref main
+          gh workflow run bing_url_automation.yml --ref main
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: missed-news-recovery-${{ github.run_id }}
+          path: NEWS_PIPELINE_STATUS.json
+          retention-days: 30
+  recover-trending:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - run: pip install requests Pillow ImageHash google-api-python-client google-auth
+      - name: Rebuild missed trending slot zero
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
+        run: |
+          for attempt in 1 2 3; do
+            if python master_dynamic_pipeline.py --kind trending --slot 0 --prepare; then exit 0; fi
+            git reset --hard HEAD
+            git clean -fd master_packages/dynamic assets/master scheduled_ready
+            sleep $((attempt * 20))
+          done
+          exit 1
+      - name: Persist validated trending package
+        run: |
+          git config user.name 'Daily Yield Master Recovery'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready
+          if ! git diff --staged --quiet; then
+            git commit -m 'Recover missed trending package [skip ci]'
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 3))
+            done
+            exit 1
+          fi
+      - name: Publish or recover exact-title trending article
+        env:
+          MASTER_PUBLICATION_ENABLED: 'true'
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python master_dynamic_pipeline.py --kind trending --slot 0 --publish
+      - name: Persist confirmed trending publication
+        run: |
+          git add MASTER_AUTOMATION_TRACKER.json MASTER_AUTOMATION_STATUS.json MASTER_TOPIC_HISTORY.json
+          if ! git diff --staged --quiet; then
+            git commit -m 'Record recovered trending publication [skip ci]'
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 3))
+            done
+            exit 1
+          fi
+      - name: Dispatch both social routes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python dispatch_social_events.py
+      - name: Refresh site and Bing state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run content_experience_repair.yml --ref main
+          gh workflow run bing_url_automation.yml --ref main
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: missed-trending-recovery-${{ github.run_id }}
+          path: MASTER_AUTOMATION_STATUS.json
+          retention-days: 30
