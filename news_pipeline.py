@@ -953,6 +953,10 @@ READER_LENS = [
  "Separate the observed development from the mechanism through which it might affect households, companies, governments or markets. Check the horizon and assumptions before comparing estimates made with different dates or definitions. An expert quotation explains that speaker’s assessment; it does not establish a universal consensus or guaranteed outcome.",
  "Check whether primary data, filings or policy documents support the interpretation and whether another credible source reaches a different view. Likely, possible and expected do not mean completed, certain or guaranteed. Adviser, educator, agency, researcher and analyst views should be weighed by expertise, evidence, incentives and disclosed methodology.",
  "Monitor implementation, revisions, guidance and measurable follow-through rather than extrapolating from one report. The linked publisher remains the record for its claim; Daily Yield does not adopt it as a prediction. Consequences can differ across countries, sectors, time horizons and financial positions, even when the same event is involved.",
+ "Test the claim against its denominator, comparison period, currency, sample and geographic scope. Nominal and inflation-adjusted values can tell different stories, as can totals and per-person measures. A release date is not always the period measured. Later revisions can materially change an initial estimate without making the original source deceptive.",
+ "Map the sequence from announcement to implementation and then to measurable outcomes. Approvals, financing, closing conditions, technical rollout and customer adoption can each alter timing or scale. For companies, distinguish management targets from reported results; for policy, distinguish consultation, enactment, commencement and enforcement. Missing milestones are uncertainties, not facts to fill in.",
+ "Look for who bears the cost, receives the benefit and has an incentive to frame the result positively or negatively. Distribution may matter more than an aggregate average: borrowers and savers, incumbents and entrants, employers and workers can experience the same change differently. A broad effect should not be presumed for every reader.",
+ "Use the next comparable filing, official release or independently reported datapoint as a checkpoint. One observation may reflect seasonality, base effects or temporary disruption, while a trend requires consistent definitions across periods. Correlation alone does not identify cause. The article therefore presents monitoring questions rather than a trading signal or personal recommendation.",
 ]
 
 def clip_word_count(text, maximum):
@@ -1388,9 +1392,10 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
     context_targets = (base_context + 10, base_context + 20, base_context + 30,
                        base_context + 45, base_context + 60, base_context + 75,
                        base_context + 90, base_context + 120, base_context + 150,
-                       base_context + 180, base_context + 220, base_context + 260)
+                       base_context + 180, base_context + 220, base_context + 260,
+                       base_context + 320, base_context + 380)
     attempts.extend((len(current), target, summary_target) for target in context_targets)
-    attempts.extend((len(current), base_context + 260, target)
+    attempts.extend((len(current), base_context + 380, target)
                     for target in (summary_target + 12, summary_target + 24,
                                    summary_target + 36, summary_target + 54))
     seen = set()
