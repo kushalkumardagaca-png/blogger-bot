@@ -232,8 +232,10 @@ check('News publisher dispatches only confirmed live Blogger events',
       'social_events.json' in np and 'dispatch_social_events.py' in nw.read_text())
 check('Both article social routes release within five minutes after publication',
       'dt.timedelta(minutes=4)' in rotation and 'route_index' in coordinated and 'delay_seconds' in coordinated)
-check('Coordinated tracker writes use race-safe persistence retries',
-      'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
+persist_social=(ROOT/'persist_social_state.sh').read_text() if (ROOT/'persist_social_state.sh').exists() else ''
+check('Coordinated tracker writes use semantic race-safe persistence retries',
+      'persist_social_state.sh' in coordinated and 'merge_social_tracker.py' in persist_social
+      and (ROOT/'merge_social_tracker.py').exists())
 check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
       'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_DESTINATIONS' in rotation
       and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==5

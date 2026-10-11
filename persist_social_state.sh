@@ -19,7 +19,12 @@ for attempt in 1 2 3; do
   git reset --hard origin/main
   for file in "$@"; do
     mkdir -p "$(dirname "$file")"
-    cp "$stash/$file" "$file"
+    if [[ "$file" == *_tracker.json ]] && [[ -f "$file" ]]; then
+      python merge_social_tracker.py "$file" "$stash/$file" "$file.merged"
+      mv "$file.merged" "$file"
+    else
+      cp "$stash/$file" "$file"
+    fi
   done
   git add -- "$@"
   if git diff --staged --quiet; then

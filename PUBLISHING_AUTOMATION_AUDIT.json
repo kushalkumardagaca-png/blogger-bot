@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-11T08:41:00+05:30",
+  "checked_at_ist": "2026-10-11T08:42:20+05:30",
   "summary": {
     "pass": 134,
     "fail": 0
@@ -401,7 +401,7 @@
       "detail": ""
     },
     {
-      "name": "Coordinated tracker writes use race-safe persistence retries",
+      "name": "Coordinated tracker writes use semantic race-safe persistence retries",
       "status": "PASS",
       "detail": ""
     },

@@ -83,7 +83,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
 - ✅ **News publisher dispatches only confirmed live Blogger events**
 - ✅ **Both article social routes release within five minutes after publication**
-- ✅ **Coordinated tracker writes use race-safe persistence retries**
+- ✅ **Coordinated tracker writes use semantic race-safe persistence retries**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
 - ✅ **Master links both market desks**
