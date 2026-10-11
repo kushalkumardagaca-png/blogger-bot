@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-11T18:12:02+05:30",
+  "checked_at_ist": "2026-10-11T18:55:29+05:30",
   "summary": {
-    "pass": 139,
+    "pass": 140,
     "fail": 0
   },
   "checks": [
@@ -467,6 +467,11 @@
     },
     {
       "name": "News hero image is preflight-validated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "News adaptive polish can deepen sparse but sourced editions before failing",
       "status": "PASS",
       "detail": ""
     },

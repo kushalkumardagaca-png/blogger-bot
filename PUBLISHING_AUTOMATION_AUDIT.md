@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 139 PASS · 0 FAIL
+**Result:** 140 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -97,6 +97,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master articles include continuous gesture motion**
 - ✅ **Master uses three unique licensed 16:9 placement-specific photographs**
 - ✅ **News hero image is preflight-validated**
+- ✅ **News adaptive polish can deepen sparse but sourced editions before failing**
 - ✅ **Every News desk uses date-rotated fresh hero selection**
 - ✅ **Daily News heroes avoid cross-desk reuse**
 - ✅ **Licensed Commons hero photographs retain visible attribution**
