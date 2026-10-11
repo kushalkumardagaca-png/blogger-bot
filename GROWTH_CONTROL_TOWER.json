@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T10:23:32.293379+00:00",
+  "generatedAt": "2026-10-11T10:25:18.869981+00:00",
   "deadline": "2026-12-31",
   "targetDistinctDailyEngagedReaders": 10000000,
   "daysRemaining": 81,
@@ -21,22 +21,22 @@
   },
   "acquisition": {
     "search7Day": {
-      "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1.0,
+      "averagePosition": 1.0
     },
     "search28Day": {
-      "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1.0,
+      "averagePosition": 1.0
     },
     "socialOfficialObservations": 185,
     "socialObservedInteractions": 23
   },
   "production": {
-    "masterPublishedTotal": 7,
+    "masterPublishedTotal": 8,
     "newsDesksTracked": 11
   },
   "integrity": {
