@@ -49,8 +49,9 @@ def build(data):
    p['byTopic'][topic]={'summary':posterior([x['_interactions'] for x in subset]),'styles':styles,'layouts':layouts,'hooks':hooks,'hoursUTC':hours}
    bs,bl,bh=best(styles),best(layouts),best(hooks)
    # Require a meaningful topic sample and evidence for every selected cell.
-   if len(subset)>=12 and bs and bl and bh:
-    rec[topic]={'style_index':int(bs[0]),'layout':int(bl[0]),'hook':bh[0],'evidencePosts':len(subset),'engagedPosts':sum(1 for x in subset if x['_interactions']>0),'explorationRate':0.20}
+   engaged_posts=sum(1 for x in subset if x['_interactions']>0)
+   if len(subset)>=12 and engaged_posts>=2 and bs and bl and bh:
+    rec[topic]={'style_index':int(bs[0]),'layout':int(bl[0]),'hook':bh[0],'evidencePosts':len(subset),'engagedPosts':engaged_posts,'explorationRate':0.20}
   report['platforms'][platform]=p
   if rec:report['recommendations'][platform]=rec
  if not raw:report['status']='WAITING_FOR_OFFICIAL_OBSERVATIONS'
