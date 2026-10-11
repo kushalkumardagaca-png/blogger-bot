@@ -28,7 +28,7 @@ PLATFORM_SIZES = {
     "mastodon": (1080, 1080),
     "bluesky": (1200, 675),
 }
-PHOTO_HOSTS = ("images.unsplash.com", "upload.wikimedia.org", "thumb.wikimedia.org", "blogger.googleusercontent.com")
+PHOTO_HOSTS = ("images.unsplash.com", "upload.wikimedia.org", "thumb.wikimedia.org", "blogger.googleusercontent.com", "raw.githubusercontent.com")
 
 # A broad, verified Unsplash editorial library: people and real life first, with
 # homes, pets, banks, work, technology, shops, travel and cities worldwide.
@@ -379,7 +379,7 @@ def _semantic_theme(item: dict, platform: str) -> str:
         ("pets", ("pet", "animal", "veterinary")),
         ("homes", ("home", "house", "housing", "mortgage", "rent", "property", "real estate")),
         ("family", ("family", "parent", "child", "couple", "wedding", "baby")),
-        ("travel", ("travel", "trip", "holiday", "vacation", "flight", "tourism")),
+        ("travel", ("travel", "trip", "holiday", "vacation", "flight", "airline", "airfare", "aviation", "tourism")),
         ("shopping", ("shop", "retail", "grocery", "spending", "consumer", "purchase")),
         ("technology", ("ai", "fintech", "digital", "technology", "crypto", "app")),
         ("global", ("global", "world", "international", "country", "countries", "overseas")),

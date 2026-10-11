@@ -28,6 +28,9 @@ def test_authenticated_article_hero_is_selected_before_any_fallback():
     hero = "https://images.unsplash.com/photo-123?auto=format&fit=crop&w=900"
     story["content"] = f'<figure><img src="{hero}" alt="Editorial market photograph"></figure>'
     assert _photo_url(story) == hero
+    repository_hero="https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/story/photo-1.jpg"
+    story["content"] = f'<img src="{repository_hero}">'
+    assert _photo_url(story) == repository_hero
     story["content"] = '<img src="https://malicious.example/images.unsplash.com/photo.jpg">'
     assert _photo_url(story) == ""
 
