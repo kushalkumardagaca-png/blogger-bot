@@ -344,9 +344,14 @@ Return a compact planning object only. Requirements: title 20-46 characters, pun
   for i,item in enumerate(module_headings):
    if isinstance(item,dict):merged.update(item)
    elif i<len(module_keys):merged[module_keys[i]]=str(item)
-  module_headings=merged;plan['module_headings']=merged
- if not isinstance(module_headings,dict) or any(not str(module_headings.get(key,'')).strip() for key in module_keys):raise RuntimeError('editorial planner omitted topic-specific module headings')
- if len({str(module_headings[key]).casefold().strip() for key in module_keys})!=len(module_keys):raise RuntimeError('editorial planner repeated module headings')
+  module_headings=merged
+ if not isinstance(module_headings,dict):module_headings={}
+ subject=' '.join(str(plan.get('title') or topic.get('Punchy Title') or 'Money Decision').split()[:6])
+ heading_defaults={'contents':f'{subject}: the route map','summary':f'{subject}: decision takeaways','faq':f'{subject}: reader questions','glossary':f'{subject}: terms decoded','sources':f'{subject}: evidence ledger','internal_links':f'{subject}: next Daily Yield reads','external_sources':f'{subject}: primary reading'}
+ for key in module_keys:
+  if not str(module_headings.get(key,'')).strip():module_headings[key]=heading_defaults[key]
+ if len({str(module_headings[key]).casefold().strip() for key in module_keys})!=len(module_keys):module_headings=heading_defaults
+ plan['module_headings']=module_headings
  sections=[];section_target=round(4050/len(section_plans))
  if os.environ.get('OLLAMA_API_URL','').strip():
   bulk_prompt=f'''Write the complete main body for a Daily Yield financial article titled {plan.get('title')!r} using exactly these planned sections: {json.dumps(section_plans,ensure_ascii=False)}. Topic: {json.dumps(topic,ensure_ascii=False)}. Evidence packet: {evidence_json}.

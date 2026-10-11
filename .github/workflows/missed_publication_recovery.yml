@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 8: low-reasoning, extended-budget emergency generation.
+# Recovery revision 9: deterministic repair for incomplete planner headings.
 on:
   push:
     paths:
