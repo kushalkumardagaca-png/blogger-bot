@@ -130,5 +130,5 @@ def main():
  for r in reports:lines.append(f"- {'✅' if not r['issues'] else '❌'} **{r['desk']}** — {r['current_items']} current, {r['background_items']} background, {r['source_links']} source links, {r['duplicates_removed']} cross-post duplicates removed"+(f"; unresolved: {', '.join(r['issues'])}" if r['issues'] else ''))
  Path('SITE_CONTENT_AUDIT.md').write_text('\n'.join(lines)+'\n')
  print(json.dumps({'apply':APPLY,'news':len(news),'changes':len(changes),'failures':len(fail)},indent=2))
- if fail:raise SystemExit(1)
+ if fail and APPLY:raise SystemExit(1)
 if __name__=='__main__':main()

@@ -1385,7 +1385,9 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
     # If every sourced headline is still short, deepen only the item-specific
     # consequence text while retaining the concise source synopsis.
     attempts.extend((len(current), target)
-                    for target in (base_context + 10, base_context + 20, base_context + 30))
+                    for target in (base_context + 10, base_context + 20, base_context + 30,
+                                   base_context + 45, base_context + 60, base_context + 75,
+                                   base_context + 90))
     seen = set()
     last_count = 0
     for item_count, context_target in attempts:

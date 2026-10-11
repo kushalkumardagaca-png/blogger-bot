@@ -63,7 +63,7 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
         run: |
-          for attempt in 1 2; do
+          for attempt in 1 2 3; do
             if python master_dynamic_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare; then
               exit 0
             fi
