@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 7: model-independent evidence and credential-free text fallback.
+# Recovery revision 8: low-reasoning, extended-budget emergency generation.
 on:
   push:
     paths:

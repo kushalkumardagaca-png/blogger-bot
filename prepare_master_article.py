@@ -193,9 +193,11 @@ def _public_model_json(messages,max_tokens):
  endpoint='https://text.pollinations.ai/openai';model=os.environ.get('PUBLIC_FALLBACK_MODEL','').strip() or 'openai';last=None
  for attempt in range(4):
   try:
-   r=requests.post(endpoint,json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,4096),'response_format':{'type':'json_object'},'private':True},timeout=600)
+   request_messages=list(messages)
+   request_messages.append({'role':'user','content':'Return the complete JSON object now. Put no analysis, markdown or commentary in the answer.'})
+   r=requests.post(endpoint,json={'model':model,'messages':request_messages,'temperature':0.15,'max_tokens':min(max_tokens+3000,12000),'reasoning_effort':'low','response_format':{'type':'json_object'},'private':True},timeout=600)
    if not r.ok:raise RuntimeError(f"public fallback HTTP {r.status_code}: {r.text[:500]}")
-   content=r.json()['choices'][0]['message'].get('content') or ''
+   message=r.json()['choices'][0]['message'];content=message.get('content') or message.get('reasoning') or ''
    if isinstance(content,list):text=''.join(str(part.get('text') or '') if isinstance(part,dict) else str(part) for part in content)
    else:text=str(content)
    begin=text.find('{');finish=text.rfind('}')
