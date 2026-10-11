@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "640821546e9a7949",
-  "kind": "evergreen",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-11",
-  "category": "Retirement & Financial Independence",
-  "evergreen_category": "Retirement & Financial Independence",
-  "title": "Decoding IRA Withdrawals and RMD Rules",
-  "url": "https://dailyyield.blogspot.com/2026/10/decoding-ira-withdrawals-and-rmd-rules.html",
-  "published_at": "2026-10-11T01:45:01-07:00"
+  "kind": "trending",
+  "slot": 2,
+  "topic_id": "854a09d345792fee",
+  "replaced_topic_id": null,
+  "title": "Nvidia-Backed IPO Scrapped Amid AI Limits",
+  "package": "master_packages/dynamic/2026-10-11-trending-854a09d345792fee.json",
+  "html": "scheduled_ready/2026-10-11-trending-2-nvidia-backed-ipo-scrapped-amid-ai-limits.html"
 }
