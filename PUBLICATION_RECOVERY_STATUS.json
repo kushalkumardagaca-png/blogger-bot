@@ -1,10 +1,16 @@
 {
-  "generatedAt": "2026-10-11T19:18:49.725772+05:30",
+  "generatedAt": "2026-10-11T19:26:46.570314+05:30",
   "dateIST": "2026-10-11",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 17,
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-banking",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
