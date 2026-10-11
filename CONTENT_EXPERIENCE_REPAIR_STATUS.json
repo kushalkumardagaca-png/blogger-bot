@@ -1,14 +1,14 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 404,
+  "posts_checked": 405,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 22,
+  "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
   "pages_repaired": 1,
   "article_snapshot_entries": 89,
-  "news_snapshot_entries": 315,
+  "news_snapshot_entries": 316,
   "label_image_index_entries": 405,
   "article_category_counts": {
     "Trend \u00b7 Money & Policy Now": 2,
@@ -42,7 +42,7 @@
     "Europe Finance News": 74,
     "Markets, Crypto & Commodities": 19,
     "Economy, Trade & Jobs": 19,
-    "Banking, Fintech & Personal Money": 17,
+    "Banking, Fintech & Personal Money": 18,
     "Companies, IPOs & Deals": 19
   }
 }
