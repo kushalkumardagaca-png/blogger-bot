@@ -1,26 +1,26 @@
 {
   "status": "PASS",
-  "generated_at": "2026-10-11T02:49:42.564346+00:00",
+  "generated_at": "2026-10-11T02:59:17.931612+00:00",
   "dry_run": false,
-  "published": 3,
+  "published": 0,
   "failed": 0,
   "results": [
     {
       "desk": "asia-pacific",
-      "status": "PASS",
-      "published": true,
+      "status": "SKIPPED",
+      "published": false,
       "dry_run": false
     },
     {
       "desk": "china",
-      "status": "PASS",
-      "published": true,
+      "status": "SKIPPED",
+      "published": false,
       "dry_run": false
     },
     {
       "desk": "india",
-      "status": "PASS",
-      "published": true,
+      "status": "SKIPPED",
+      "published": false,
       "dry_run": false
     }
   ]
