@@ -1,18 +1,13 @@
 {
-  "generatedAt": "2026-10-11T17:53:23.517446+05:30",
+  "generatedAt": "2026-10-11T18:09:49.690031+05:30",
   "dateIST": "2026-10-11",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 10,
+  "confirmedPublications": 12,
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-europe",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "master-trending-1",
+      "key": "news-americas",
       "applied": true
     },
     {
