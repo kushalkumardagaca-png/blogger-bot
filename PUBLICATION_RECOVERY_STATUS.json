@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-10-11T17:52:41.125784+05:30",
+  "generatedAt": "2026-10-11T17:53:23.517446+05:30",
   "dateIST": "2026-10-11",
   "status": "PASS",
-  "apply": false,
+  "apply": true,
   "confirmedPublications": 10,
   "actions": [
     {
       "type": "source_recovery",
       "key": "news-europe",
-      "applied": false
+      "applied": true
     },
     {
       "type": "source_recovery",
       "key": "master-trending-1",
-      "applied": false
+      "applied": true
     },
     {
       "type": "source_recovery",
       "key": "master-trending-2",
-      "applied": false
+      "applied": true
     }
   ],
   "retryBlocked": [],
