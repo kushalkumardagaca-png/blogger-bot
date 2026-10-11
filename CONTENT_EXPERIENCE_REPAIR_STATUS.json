@@ -1,15 +1,15 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 400,
+  "posts_checked": 401,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
-  "pages_repaired": 0,
+  "pages_repaired": 1,
   "article_snapshot_entries": 87,
-  "news_snapshot_entries": 313,
-  "label_image_index_entries": 400,
+  "news_snapshot_entries": 314,
+  "label_image_index_entries": 401,
   "article_category_counts": {
     "Trend \u00b7 Money & Policy Now": 2,
     "Trend \u00b7 Markets & Assets in Motion": 1,
@@ -43,6 +43,6 @@
     "Markets, Crypto & Commodities": 19,
     "Economy, Trade & Jobs": 19,
     "Banking, Fintech & Personal Money": 17,
-    "Companies, IPOs & Deals": 18
+    "Companies, IPOs & Deals": 19
   }
 }
