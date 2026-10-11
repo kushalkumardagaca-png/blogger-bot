@@ -258,9 +258,10 @@ check('Configured article cadence is exactly 42 weighted social posts daily',
       and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 master_workflows=(ROOT/'.github/workflows/master_trending_writer.yml').read_text()+(ROOT/'.github/workflows/master_evergreen_writer.yml').read_text()
-check('Concurrent Master tracker writes use semantic merge and retry',
+check('Concurrent Master package, photo, plan and tracker writes use semantic merge and retry',
       master_workflows.count('merge_master_state.py')>=4 and (ROOT/'merge_master_state.py').exists()
-      and 'git reset --hard FETCH_HEAD' in master_workflows)
+      and master_workflows.count('merge_master_preparation.py')>=2 and (ROOT/'merge_master_preparation.py').exists()
+      and 'git reset --hard FETCH_HEAD' in master_workflows and 'files.tar' in master_workflows)
 check('Master generation has repository-native quota and model-independent research fallback',
       '_github_model_json' in prep and '_public_model_json' in prep and '_heuristic_queries' in prep
       and 'models: read' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text()

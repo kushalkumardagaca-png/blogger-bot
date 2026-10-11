@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-11T17:54:49+05:30",
+  "checked_at_ist": "2026-10-11T17:56:00+05:30",
   "summary": {
     "pass": 138,
     "fail": 0
@@ -426,7 +426,7 @@
       "detail": ""
     },
     {
-      "name": "Concurrent Master tracker writes use semantic merge and retry",
+      "name": "Concurrent Master package, photo, plan and tracker writes use semantic merge and retry",
       "status": "PASS",
       "detail": ""
     },

@@ -88,7 +88,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
-- ✅ **Concurrent Master tracker writes use semantic merge and retry**
+- ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
 - ✅ **Master generation has repository-native quota and model-independent research fallback**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
