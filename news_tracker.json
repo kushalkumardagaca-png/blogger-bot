@@ -1,11 +1,35 @@
 {
   "desks": {
-    "russia": {
+    "china": {
       "edition": "2026-10-11",
-      "window_end": "2026-10-11T10:15:00+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-11.html",
-      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Moscow_International_Business_Center2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "hero_credit": "Photo: mos.ru · CC BY 4.0 · Wikimedia Commons",
+      "window_end": "2026-10-11T08:18:24.057160+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-11.html",
+      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Shanghai_ESA366469.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "hero_credit": "Photo: European Space Agency · CC BY-SA 3.0 igo · Wikimedia Commons",
+      "hero_source": "wikimedia-commons"
+    },
+    "companies": {
+      "edition": "2026-10-11",
+      "window_end": "2026-10-11T18:56:15.661611+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-11.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/The_Dean_Hotel%2C_Cork%2C_Sept_2025_04.jpg/1920px-The_Dean_Hotel%2C_Cork%2C_Sept_2025_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: William Murphy · CC BY-SA 4.0 · Wikimedia Commons",
+      "hero_source": "wikimedia-commons"
+    },
+    "economy": {
+      "edition": "2026-10-11",
+      "window_end": "2026-10-11T12:21:26.199036+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-11.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/25_April_2018_-_Celebrating_the_1974_Carnation_Revolution_-_Exchanging_opinions_%2843594547521%29.jpg/1920px-25_April_2018_-_Celebrating_the_1974_Carnation_Revolution_-_Exchanging_opinions_%2843594547521%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Pedro Ribeiro Simões from Lisboa, Portugal · CC BY 2.0 · Wikimedia Commons",
+      "hero_source": "wikimedia-commons"
+    },
+    "global": {
+      "edition": "2026-10-11",
+      "window_end": "2026-10-11T19:08:53.319092+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-11.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Toronto_Skyline_from_CN_Tower%2C_Toronto%2C_Ontario_%2821828256102%29.jpg/1920px-Toronto_Skyline_from_CN_Tower%2C_Toronto%2C_Ontario_%2821828256102%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Ken Lund from Reno, Nevada, USA · CC BY-SA 2.0 · Wikimedia Commons",
       "hero_source": "wikimedia-commons"
     },
     "india": {
@@ -16,20 +40,36 @@
       "hero_credit": "Photo: Vyacheslav Argenberg · CC BY 4.0 · Wikimedia Commons",
       "hero_source": "wikimedia-commons"
     },
+    "russia": {
+      "edition": "2026-10-11",
+      "window_end": "2026-10-11T10:15:00+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-11.html",
+      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Moscow_International_Business_Center2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "hero_credit": "Photo: mos.ru · CC BY 4.0 · Wikimedia Commons",
+      "hero_source": "wikimedia-commons"
+    },
+    "asia-pacific": {
+      "edition": "2026-10-11",
+      "window_end": "2026-10-11T08:17:36.313050+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-11.html",
+      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "hero_credit": "Photo: NASA's Earth Observatory · CC BY 2.0 · Wikimedia Commons",
+      "hero_source": "wikimedia-commons"
+    },
+    "markets": {
+      "edition": "2026-10-11",
+      "window_end": "2026-10-11T12:15:00+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-11.html",
+      "hero_url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&h=900&q=85",
+      "hero_credit": "Editorial photograph · Unsplash",
+      "hero_source": "curated-fallback"
+    },
     "americas": {
       "edition": "2026-10-11",
       "window_end": "2026-10-11T18:10:01.665304+05:30",
       "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-11.html",
       "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/New_York_city_from_Ferry_%284%29.jpg/1920px-New_York_city_from_Ferry_%284%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "hero_credit": "Photo: Ferfive · CC BY 4.0 · Wikimedia Commons",
-      "hero_source": "wikimedia-commons"
-    },
-    "global": {
-      "edition": "2026-10-11",
-      "window_end": "2026-10-11T19:08:53.319092+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-11.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Toronto_Skyline_from_CN_Tower%2C_Toronto%2C_Ontario_%2821828256102%29.jpg/1920px-Toronto_Skyline_from_CN_Tower%2C_Toronto%2C_Ontario_%2821828256102%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Ken Lund from Reno, Nevada, USA · CC BY-SA 2.0 · Wikimedia Commons",
       "hero_source": "wikimedia-commons"
     },
     "europe": {
@@ -41,50 +81,10 @@
       "hero_source": "wikimedia-commons"
     },
     "banking": {
-      "edition": "2026-10-10",
-      "window_end": "2026-10-10T12:30:58.924318+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
-      "hero_url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&h=900&q=85",
-      "hero_credit": "Editorial photograph · Unsplash",
-      "hero_source": "curated-fallback"
-    },
-    "economy": {
       "edition": "2026-10-11",
-      "window_end": "2026-10-11T12:21:26.199036+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-11.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/25_April_2018_-_Celebrating_the_1974_Carnation_Revolution_-_Exchanging_opinions_%2843594547521%29.jpg/1920px-25_April_2018_-_Celebrating_the_1974_Carnation_Revolution_-_Exchanging_opinions_%2843594547521%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Pedro Ribeiro Simões from Lisboa, Portugal · CC BY 2.0 · Wikimedia Commons",
-      "hero_source": "wikimedia-commons"
-    },
-    "asia-pacific": {
-      "edition": "2026-10-11",
-      "window_end": "2026-10-11T08:17:36.313050+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-11.html",
-      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Shanghai_At_Night%2C_A_Growing_City_-_NASA_Earth_Observatory.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "hero_credit": "Photo: NASA's Earth Observatory · CC BY 2.0 · Wikimedia Commons",
-      "hero_source": "wikimedia-commons"
-    },
-    "companies": {
-      "edition": "2026-10-11",
-      "window_end": "2026-10-11T18:56:15.661611+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-11.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/The_Dean_Hotel%2C_Cork%2C_Sept_2025_04.jpg/1920px-The_Dean_Hotel%2C_Cork%2C_Sept_2025_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: William Murphy · CC BY-SA 4.0 · Wikimedia Commons",
-      "hero_source": "wikimedia-commons"
-    },
-    "china": {
-      "edition": "2026-10-11",
-      "window_end": "2026-10-11T08:18:24.057160+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-11.html",
-      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Shanghai_ESA366469.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "hero_credit": "Photo: European Space Agency · CC BY-SA 3.0 igo · Wikimedia Commons",
-      "hero_source": "wikimedia-commons"
-    },
-    "markets": {
-      "edition": "2026-10-11",
-      "window_end": "2026-10-11T12:15:00+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-11.html",
-      "hero_url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&h=900&q=85",
+      "window_end": "2026-10-11T19:42:31.504291+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html",
+      "hero_url": "https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&w=1600&h=900&q=85",
       "hero_credit": "Editorial photograph · Unsplash",
       "hero_source": "curated-fallback"
     }
