@@ -276,7 +276,8 @@ check('Master articles include continuous gesture motion','ensure_continuous_mot
 check('Master uses three unique licensed 16:9 placement-specific photographs','choose_photos' in prep and "image.resize((1600,900)" in (ROOT/'photo_selector.py').read_text() and "len(photos)!=3" in mv2 and 'PHOTO_USAGE_REGISTRY.json' in (ROOT/'photo_selector.py').read_text())
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News adaptive polish can deepen sparse but sourced editions before failing',
-      'base_context + 260' in np and 'reduce_news_context' in np and 'NEWS_MIN_WORDS = 3800' in np)
+      'base_context + 260' in np and 'summary_target + 54' in np
+      and 'reduce_news_context' in np and 'NEWS_MIN_WORDS = 3800' in np)
 check('Every News desk uses date-rotated fresh hero selection',
       'def daily_hero(' in np and 'edition_date.toordinal()' in np
       and 'previous_url=prev.get("hero_url"' in np and 'hero_override=hero' in np)

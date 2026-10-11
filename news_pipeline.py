@@ -1381,24 +1381,28 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
     summary_target = 42 if is_category else 52
     current = current[:maximum]
     first_count = min(desired, len(current))
-    attempts = [(count, base_context) for count in range(first_count, len(current) + 1)]
-    # If every sourced headline is still short, deepen only the item-specific
-    # consequence text while retaining the concise source synopsis.
-    attempts.extend((len(current), target)
-                    for target in (base_context + 10, base_context + 20, base_context + 30,
-                                   base_context + 45, base_context + 60, base_context + 75,
-                                   base_context + 90, base_context + 120, base_context + 150,
-                                   base_context + 180, base_context + 220, base_context + 260))
+    attempts = [(count, base_context, summary_target) for count in range(first_count, len(current) + 1)]
+    # If every sourced headline is still short, deepen the item-specific
+    # consequence text. As a final evidence-preserving step, retain more words
+    # from each publisher's own description rather than generating filler.
+    context_targets = (base_context + 10, base_context + 20, base_context + 30,
+                       base_context + 45, base_context + 60, base_context + 75,
+                       base_context + 90, base_context + 120, base_context + 150,
+                       base_context + 180, base_context + 220, base_context + 260)
+    attempts.extend((len(current), target, summary_target) for target in context_targets)
+    attempts.extend((len(current), base_context + 260, target)
+                    for target in (summary_target + 12, summary_target + 24,
+                                   summary_target + 36, summary_target + 54))
     seen = set()
     last_count = 0
-    for item_count, context_target in attempts:
-        if (item_count, context_target) in seen:
+    for item_count, context_target, attempt_summary_target in attempts:
+        if (item_count, context_target, attempt_summary_target) in seen:
             continue
-        seen.add((item_count, context_target))
+        seen.add((item_count, context_target, attempt_summary_target))
         selected = current[:item_count] + background
         art = build_article(
             desk, selected, upcoming, edition_date, win_start, win_end, fx, related,
-            hero_override=hero, context_target=context_target, summary_target=summary_target,
+            hero_override=hero, context_target=context_target, summary_target=attempt_summary_target,
         )
         art = finish_news_article(art, related_candidates)
         count = editorial_word_count(art["html"])
@@ -1409,6 +1413,7 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
             art["html"], count = reduce_news_context(art["html"])
         if NEWS_MIN_WORDS <= count <= NEWS_MAX_WORDS:
             mode = (f"{item_count} headlines · context target {context_target}"
+                    f" · source-summary target {attempt_summary_target}"
                     + (" · sentence-polished" if count != last_count else ""))
             return art, selected, count, mode
     raise ValueError(
