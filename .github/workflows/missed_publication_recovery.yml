@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 12: clean diagnostics after sentence-safe condensation.
+# Recovery revision 13: bounded complete-sentence condensation.
 on:
   push:
     paths:

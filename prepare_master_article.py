@@ -290,6 +290,19 @@ def trim_paragraphs(value,limit=750):
   if count>=limit-35:break
  return out
 
+def trim_complete_sentences(value,target,min_words=220):
+ """Keep complete source-grounded sentences near a hard word target."""
+ out=[];count=0;stop=False
+ for paragraph in paragraph_list(value):
+  kept=[]
+  for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
+   n=words(sentence)
+   if count>=min_words and count+n>target:stop=True;break
+   kept.append(sentence);count+=n
+  if kept:out.append(' '.join(kept))
+  if stop or count>=target:break
+ return out
+
 def internal_links():
  return [
   {'title':'Daily Article','url':BLOG+'/p/article.html','relevance':'More original Daily Yield explainers.'},
@@ -428,9 +441,9 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
    excess=core_count-4100
    for section in reversed(sections):
     if excess<=0:break
-    current=words(' '.join(section['paragraphs']));target=max(280,current-excess)
-    trimmed=trim_paragraphs(section['paragraphs'],target);trimmed_count=words(' '.join(trimmed))
-    if trimmed_count>=280 and trimmed_count<current:
+    current=words(' '.join(section['paragraphs']));target=max(240,current-excess)
+    trimmed=trim_complete_sentences(section['paragraphs'],target);trimmed_count=words(' '.join(trimmed))
+    if trimmed_count>=220 and trimmed_count<current:
      section['paragraphs']=trimmed;excess-=current-trimmed_count
    core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
   if core_count>4200:raise RuntimeError(f'assembled core remains too large after sentence-safe condensation: {core_count} words')
