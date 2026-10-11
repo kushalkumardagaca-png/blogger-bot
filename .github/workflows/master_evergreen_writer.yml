@@ -22,6 +22,7 @@ on:
 
 permissions:
   contents: write
+  models: read
   actions: write
 
 concurrency:
@@ -53,6 +54,7 @@ jobs:
       - name: Research, write, validate and select three photos
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}

@@ -152,6 +152,23 @@ def discover(topic):
  evidence.sort(key=lambda x:x['score'],reverse=True)
  if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
  return evidence[:10]
+def _github_model_json(messages,max_tokens):
+ token=os.environ.get('GITHUB_TOKEN','').strip()
+ if not token:raise RuntimeError('GITHUB_TOKEN is unavailable for repository-native model fallback')
+ model=os.environ.get('GITHUB_MODELS_MODEL','').strip() or 'openai/gpt-4.1-mini';last=None
+ endpoint='https://models.github.ai/inference/chat/completions'
+ for attempt in range(3):
+  try:
+   r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,4096),'response_format':{'type':'json_object'}},timeout=600)
+   if not r.ok:raise RuntimeError(f"GitHub Models HTTP {r.status_code}: {r.text[:500]}")
+   text=str(r.json()['choices'][0]['message'].get('content') or '');begin=text.find('{');finish=text.rfind('}')
+   if begin<0 or finish<=begin:raise ValueError('GitHub model returned no complete JSON object')
+   return json.loads(text[begin:finish+1])
+  except Exception as exc:
+   last=exc
+   if attempt<2:time.sleep(20*(attempt+1))
+ raise RuntimeError(f'GitHub model fallback failed after 3 attempts: {type(last).__name__}: {str(last)[:300]}')
+
 def model_json(messages,max_tokens=16000):
  local=os.environ.get('OLLAMA_API_URL','').strip().rstrip('/')
  if local:
@@ -184,8 +201,11 @@ def model_json(messages,max_tokens=16000):
     return json.loads(text[begin:finish+1])
    except Exception as exc:
     last=exc
+    if 'HTTP 429' in str(exc):break
     if attempt<4:time.sleep(15*(attempt+1))
+  if os.environ.get('GITHUB_TOKEN','').strip():return _github_model_json(messages,max_tokens)
   raise RuntimeError(f'Gemini failed to return valid JSON after 5 attempts: {type(last).__name__}: {str(last)[:300]}')
+ if os.environ.get('GITHUB_TOKEN','').strip():return _github_model_json(messages,max_tokens)
  endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
  for attempt in range(3):
   request_messages=list(messages)

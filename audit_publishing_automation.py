@@ -245,6 +245,9 @@ check('Configured article cadence is exactly 42 weighted social posts daily',
       'Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8' in rotation
       and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
+check('Master generation has repository-native quota fallback',
+      '_github_model_json' in prep and 'models: read' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text()
+      and 'GITHUB_TOKEN' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text())
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
 check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy2-rail-track' in mv2 and 'pointerdown' in mv2 and 'low_exposure_posts' in prep)

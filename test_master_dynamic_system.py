@@ -60,6 +60,16 @@ def test_trend_scoring_clusters_live_observations():
     assert rows[0]['discovered_from_live_internet'] is True
 
 
+def test_repository_native_model_fallback_parses_json(monkeypatch):
+    import prepare_master_article as preparer
+    class Response:
+        ok=True
+        def json(self):return {'choices':[{'message':{'content':'{"ready":true}'}}]}
+    monkeypatch.setenv('GITHUB_TOKEN','repository-token')
+    monkeypatch.setattr(preparer.requests,'post',lambda *args,**kwargs:Response())
+    assert preparer._github_model_json([{'role':'user','content':'test'}],500)=={'ready':True}
+
+
 def test_trending_fallback_uses_live_same_category_reserve(monkeypatch,tmp_path):
     import json
     import master_dynamic_pipeline as pipeline

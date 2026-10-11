@@ -1,9 +1,0 @@
-{
-  "status": "FAIL",
-  "publication_enabled": false,
-  "kind": "trending",
-  "slot": 0,
-  "stage": "text-generation",
-  "error_type": "RuntimeError",
-  "error": "Gemini failed to return valid JSON after 5 attempts: RuntimeError: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-li"
-}
