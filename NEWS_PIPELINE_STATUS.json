@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-11T11:12:31.100187+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-11T12:24:20.619154+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
-      "desk": "companies",
-      "status": "FAIL",
-      "error_type": "ValueError",
-      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 3293 words"
+      "desk": "europe",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
