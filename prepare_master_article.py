@@ -21,7 +21,7 @@ ROOT=Path(__file__).parent
 # Licensed-photo Master V2 production pipeline, revision 2026-10-05.
 PACKAGES=ROOT/'master_packages';ASSETS=ROOT/'assets/master'
 BLOG='https://dailyyield.blogspot.com'
-STAGE='startup'
+STAGE='startup';GITHUB_MODELS_BROKEN=False
 
 def required(name):
  value=os.environ.get(name,'').strip()
@@ -209,10 +209,11 @@ def _public_model_json(messages,max_tokens):
  raise RuntimeError(f'credential-free model fallback failed after 4 attempts: {type(last).__name__}: {str(last)[:300]}')
 
 def _emergency_model_json(messages,max_tokens):
+ global GITHUB_MODELS_BROKEN
  github_error=None
- if os.environ.get('GITHUB_TOKEN','').strip():
+ if os.environ.get('GITHUB_TOKEN','').strip() and not GITHUB_MODELS_BROKEN:
   try:return _github_model_json(messages,max_tokens)
-  except Exception as exc:github_error=exc
+  except Exception as exc:github_error=exc;GITHUB_MODELS_BROKEN=True
  try:return _public_model_json(messages,max_tokens)
  except Exception as exc:
   if github_error:raise RuntimeError(f'{github_error}; public fallback: {exc}') from exc
@@ -380,6 +381,8 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
    for _ in range(3):
     result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
     parsed=paragraph_list(result);count=words(' '.join(parsed))
+    if count>700:
+     parsed=trim_paragraphs(parsed,700);count=words(' '.join(parsed))
     if 250<=count<=700:accepted=parsed;break
    if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
    sections.append({'heading':heading,'paragraphs':accepted})
