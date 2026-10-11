@@ -85,6 +85,9 @@ jobs:
             echo "No tracker change."
           else
             git commit -m "Update Daily Yield news tracker [$(date -u)]"
+            # The publisher deliberately writes a transient dispatch file. Do
+            # not let that unstaged runtime output block the tracker rebase.
+            git restore social_events.json 2>/dev/null || true
             for attempt in 1 2 3 4 5; do
               git pull --rebase origin main
               if git push origin HEAD:main; then exit 0; fi
