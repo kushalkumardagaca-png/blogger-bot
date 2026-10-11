@@ -82,6 +82,13 @@ def test_trending_fallback_uses_live_same_category_reserve(monkeypatch,tmp_path)
     assert [x['id'] for x in rows]==['original','reserve']
 
 
+def test_model_independent_research_queries_survive_quota_failure():
+    from prepare_master_article import _heuristic_queries
+    queries=_heuristic_queries('Budget airlines lose edge as fuel surcharges come into play - The Hindu')
+    assert 'airline fuel surcharge' in queries
+    assert all('lose' not in x and 'edge' not in x for x in queries)
+
+
 def test_research_relevance_floor_rejects_off_topic_sources():
     from prepare_master_article import _research_terms, _topic_relevance
     terms=_research_terms('budget airlines jet fuel surcharge passenger fares')

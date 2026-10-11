@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 4: evidence-ready live-pool fallback with clean diagnostics.
+# Recovery revision 6: model-independent evidence search plus quota fallback.
 on:
   push:
     paths:

@@ -72,6 +72,21 @@ def _topic_relevance(title,text,terms):
  title_hits=len(_research_terms(title)&terms);body_hits=len(_research_terms(text)&terms)
  return title_hits*3+min(body_hits,5),title_hits,body_hits
 
+_QUERY_FILLER=set('add adds added blur blurs come comes coming edge edges expand expands expanded heading head heads into lose loses losing lift lifts lifted made make makes play plays playing report reports says said unveils unveiled boost boosts boosted'.split())
+def _heuristic_queries(headline):
+ """Model-independent compact searches for quota and outage conditions."""
+ ordered=[]
+ for raw in re.findall(r"[a-z0-9][a-z0-9'-]{2,}",str(headline).casefold()):
+  normalized=next(iter(_research_terms(raw)), '')
+  if not normalized or normalized in _QUERY_FILLER or normalized in ordered:continue
+  ordered.append(normalized)
+ if len(ordered)<2:return []
+ out=[]
+ if len(ordered)<=7:out.append(' '.join(ordered))
+ for size in (3,2):
+  for index in range(len(ordered)-size+1):out.append(' '.join(ordered[index:index+size]))
+ return list(dict.fromkeys(out))[:8]
+
 def discover(topic):
  terms=[]
  for value in (topic.get('Punchy Title',''),topic.get('Video Idea','')):
@@ -90,9 +105,10 @@ def discover(topic):
  # produce no scholarly hits. Search several topic-specific formulations rather
  # than failing the whole live slot on one brittle exact query.
  headline=re.sub(r'\s+[|–—-]\s+[^|–—-]{2,60}$','',str(topic.get('Punchy Title',''))).strip()
+ heuristic_queries=_heuristic_queries(headline)
  context=' '.join(x for x in (headline,str(topic.get('Category','')),str(topic.get('Trending Category',''))) if x)
- query_variants=list(dict.fromkeys(x[:300] for x in (*academic_queries,subject,headline,context) if len(x.strip())>=8))
- relevance_terms=_research_terms(' '.join(query_variants))
+ query_variants=list(dict.fromkeys(x[:300] for x in (*academic_queries,*heuristic_queries,subject,headline,context) if len(x.strip())>=8))
+ relevance_terms=_research_terms(' '.join([subject,headline,*heuristic_queries,*academic_queries]))
  if len(relevance_terms)<3:raise RuntimeError('topic query did not yield enough concrete relevance terms')
  # OpenAlex provides topic-ranked scholarly metadata and abstracts without
  # screen-scraping or a private search key. Each work remains linked to its
@@ -107,7 +123,7 @@ def discover(topic):
     if not url.startswith('https://') or url in seen or len(abstract)<450 or year>datetime.now().year:continue
     text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
     relevance,title_hits,body_hits=_topic_relevance(work.get('title',''),text,relevance_terms)
-    if relevance<6 or (title_hits<1 and body_hits<4):continue
+    if relevance<6 or title_hits<2:continue
     seen.add(url)
     evidence.append({'name':source,'title':work.get('title') or research_query,'url':url,'text':text[:7000],'score':7+min(relevance,5)/10})
     if len(evidence)>=10:break
@@ -119,7 +135,7 @@ def discover(topic):
  if topic.get('Trending Category'):
   try:
    from news_pipeline import parse_gnr
-   queries=[*news_queries,subject,headline,context]
+   queries=[*news_queries,*heuristic_queries,subject,headline,context]
    for query in dict.fromkeys(x for x in queries if x):
     feed='https://news.google.com/rss/search?q='+urllib.parse.quote(str(query)+' when:7d')+'&hl=en-US&gl=US&ceid=US:en'
     response=requests.get(feed,headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=30);response.raise_for_status()

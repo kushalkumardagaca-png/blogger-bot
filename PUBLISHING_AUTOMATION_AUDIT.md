@@ -86,7 +86,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Coordinated tracker writes use semantic race-safe persistence retries**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
-- ✅ **Master generation has repository-native quota fallback**
+- ✅ **Master generation has repository-native quota and model-independent research fallback**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**

@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-11T09:17:15+05:30",
+  "checked_at_ist": "2026-10-11T09:37:18+05:30",
   "summary": {
     "pass": 135,
     "fail": 0
@@ -416,7 +416,7 @@
       "detail": ""
     },
     {
-      "name": "Master generation has repository-native quota fallback",
+      "name": "Master generation has repository-native quota and model-independent research fallback",
       "status": "PASS",
       "detail": ""
     },
