@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Generic, idempotent publication and two-network social recovery."""
+"""Generic, idempotent publication and two-network social recovery.
+
+Permanent recovery generation 2: race-safe Master persistence is active.
+"""
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess
 from pathlib import Path
