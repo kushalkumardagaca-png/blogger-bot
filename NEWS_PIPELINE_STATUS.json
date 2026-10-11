@@ -1,15 +1,15 @@
 {
   "status": "FAIL",
-  "generated_at": "2026-10-10T22:37:39.417254+00:00",
+  "generated_at": "2026-10-11T00:55:10.152148+00:00",
   "dry_run": false,
   "published": 0,
   "failed": 1,
   "results": [
     {
-      "desk": "china",
+      "desk": "india",
       "status": "FAIL",
       "error_type": "ValueError",
-      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 3627 words"
+      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 3553 words"
     }
   ]
 }
