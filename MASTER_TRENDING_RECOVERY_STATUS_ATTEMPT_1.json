@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 0,
+  "stage": "source-discovery",
+  "error_type": "RuntimeError",
+  "error": "only 1 usable topic-specific scholarly/primary sources found; minimum 6"
+}
