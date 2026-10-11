@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 138 PASS · 0 FAIL
+**Result:** 139 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -83,6 +83,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Exactly three rotating resource promotions per platform are scheduled daily**
 - ✅ **Every social publisher accepts an exact authenticated Blogger target URL**
 - ✅ **News publisher dispatches only confirmed live Blogger events**
+- ✅ **Concurrent News desk writes use semantic merge and retry**
 - ✅ **Both article social routes release within five minutes after publication**
 - ✅ **Coordinated tracker writes use semantic race-safe persistence retries**
 - ✅ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**

@@ -235,6 +235,9 @@ check('Every social publisher accepts an exact authenticated Blogger target URL'
           for text in (fp,bp,tp,mp)))
 check('News publisher dispatches only confirmed live Blogger events',
       'social_events.json' in np and 'dispatch_social_events.py' in nw.read_text())
+check('Concurrent News desk writes use semantic merge and retry',
+      'merge_news_state.py' in nw.read_text() and (ROOT/'merge_news_state.py').exists()
+      and 'git reset --hard FETCH_HEAD' in nw.read_text())
 check('Both article social routes release within five minutes after publication',
       'dt.timedelta(minutes=4)' in rotation and 'route_index' in coordinated and 'delay_seconds' in coordinated)
 persist_social=(ROOT/'persist_social_state.sh').read_text() if (ROOT/'persist_social_state.sh').exists() else ''

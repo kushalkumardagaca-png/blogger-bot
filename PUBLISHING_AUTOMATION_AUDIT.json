@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-11T17:56:00+05:30",
+  "checked_at_ist": "2026-10-11T18:12:02+05:30",
   "summary": {
-    "pass": 138,
+    "pass": 139,
     "fail": 0
   },
   "checks": [
@@ -397,6 +397,11 @@
     },
     {
       "name": "News publisher dispatches only confirmed live Blogger events",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Concurrent News desk writes use semantic merge and retry",
       "status": "PASS",
       "detail": ""
     },
