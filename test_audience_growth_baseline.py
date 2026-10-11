@@ -17,9 +17,11 @@ class AudienceGrowthBaselineTests(unittest.TestCase):
     def test_report_never_invents_readers_from_search_clicks(self):
         daily = [row("2026-10-01", 4, 100, 8), row("2026-10-02", 6, 150, 7)]
         pages = [row("https://dailyyield.blogspot.com/example", 10, 250, 7.4)]
+        queries = [row("emergency fund", 8, 210, 7.1)]
+        query_pages = [{"keys": ["emergency fund", "https://dailyyield.blogspot.com/example"], "clicks": 8, "impressions": 210, "ctr": 8/210, "position": 7.1}]
         countries = [row("ind", 7, 170, 7)]
         devices = [row("MOBILE", 8, 200, 7.2)]
-        with patch.object(baseline, "query", side_effect=[daily, pages, countries, devices]):
+        with patch.object(baseline, "query", side_effect=[daily, pages, queries, query_pages, countries, devices]):
             report = baseline.build_report("token", date(2026, 10, 4))
         self.assertEqual(report["syntheticViews"], 0)
         self.assertEqual(report["availableThrough"], "2026-10-02")

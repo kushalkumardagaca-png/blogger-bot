@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-10-11T10:23:32.293379+00:00",
+  "deadline": "2026-12-31",
+  "targetDistinctDailyEngagedReaders": 10000000,
+  "daysRemaining": 81,
+  "primaryMetric": {
+    "status": "NOT_CONFIGURED",
+    "metricDefinition": "Distinct consented users triggering article_read after at least 30 active seconds and 50% article depth.",
+    "dau": null,
+    "average7Day": null,
+    "average28Day": null,
+    "newUsers28Day": null,
+    "returningUsers28Day": null,
+    "daily": []
+  },
+  "pace": {
+    "currentVerifiedDAU": null,
+    "targetGap": null,
+    "requiredDailyCompoundGrowth": null,
+    "onTarget": false
+  },
+  "acquisition": {
+    "search7Day": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "averagePosition": null
+    },
+    "search28Day": {
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "averagePosition": null
+    },
+    "socialOfficialObservations": 185,
+    "socialObservedInteractions": 23
+  },
+  "production": {
+    "masterPublishedTotal": 7,
+    "newsDesksTracked": 11
+  },
+  "integrity": {
+    "syntheticViews": 0,
+    "publicDailyYieldRequests": 0,
+    "impressionsAreReaders": false,
+    "searchClicksAreReaders": false
+  },
+  "status": "MEASUREMENT_INSTRUMENTED_REPORTING_NOT_CONFIGURED"
+}

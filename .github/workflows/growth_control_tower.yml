@@ -1,0 +1,87 @@
+name: Daily Yield Growth Control Tower
+
+on:
+  schedule:
+    - cron: '50 2 * * *' # 08:20 IST, after acquisition and social evidence
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'growth_control_tower.py'
+      - 'growth_opportunity_engine.py'
+      - 'test_growth_system.py'
+      - 'audience_growth_baseline.py'
+      - 'apply_site_enhancements.py'
+      - '.github/workflows/growth_control_tower.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-growth-control-tower
+  cancel-in-progress: false
+
+jobs:
+  measure-and-control:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Permanent growth release gate
+        run: |
+          python -m unittest test_growth_system test_audience_growth_baseline test_social_performance test_social_rotation -v
+          python -m py_compile growth_control_tower.py growth_opportunity_engine.py audience_growth_baseline.py
+          python audit_publishing_automation.py
+      - name: Refresh authenticated Search Console evidence
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python audience_growth_baseline.py
+      - name: Build controlled demand-opportunity queue
+        run: python growth_opportunity_engine.py
+      - name: Build truthful engaged-reader control tower
+        env:
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GA4_CLIENT_ID: ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET: ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN: ${{ secrets.GA4_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python growth_control_tower.py
+      - name: Preserve control evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: growth-control-tower-${{ github.run_id }}
+          retention-days: 90
+          path: |
+            GROWTH_CONTROL_TOWER.json
+            GROWTH_CONTROL_TOWER.md
+            GROWTH_OPPORTUNITIES.json
+            AUDIENCE_GROWTH_BASELINE.json
+            AUDIENCE_GROWTH_BASELINE.md
+            PUBLISHING_AUTOMATION_AUDIT.json
+      - name: Persist latest evidence race-safely
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/dy-growth
+          cp GROWTH_CONTROL_TOWER.json GROWTH_CONTROL_TOWER.md GROWTH_OPPORTUNITIES.json AUDIENCE_GROWTH_BASELINE.json AUDIENCE_GROWTH_BASELINE.md /tmp/dy-growth/
+          git config user.name 'Daily Yield Growth Control'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            cp /tmp/dy-growth/* .
+            git add GROWTH_CONTROL_TOWER.json GROWTH_CONTROL_TOWER.md GROWTH_OPPORTUNITIES.json AUDIENCE_GROWTH_BASELINE.json AUDIENCE_GROWTH_BASELINE.md
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m 'Update growth control evidence [skip ci]'
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt*3))
+          done
+          exit 1

@@ -92,6 +92,8 @@ def build_report(token: str, today: date | None = None) -> dict:
     start28 = end - timedelta(days=27)
     daily = query(token, start90, end, ["date"])
     pages = query(token, start28, end, ["page"])
+    queries = query(token, start28, end, ["query"])
+    query_pages = query(token, start28, end, ["query", "page"])
     countries = query(token, start28, end, ["country"])
     devices = query(token, start28, end, ["device"])
     returned_dates = sorted(row["keys"][0] for row in daily if row.get("keys"))
@@ -107,6 +109,13 @@ def build_report(token: str, today: date | None = None) -> dict:
             "last28Days": aggregate(rows_for_window(daily, 28, end)),
             "last90Days": aggregate(rows_for_window(daily, 90, end)),
             "topPages28Days": ranked(pages, "page"),
+            "topQueries28Days": ranked(queries, "query", 100),
+            "queryPage28Days": [
+                {"query": (row.get("keys") or ["", ""])[0],
+                 "page": ((row.get("keys") or ["", ""]) + [""])[1],
+                 **aggregate([row])}
+                for row in sorted(query_pages, key=lambda item: (item.get("impressions", 0), item.get("clicks", 0)), reverse=True)[:1000]
+            ],
             "countries28Days": ranked(countries, "country", 20),
             "devices28Days": ranked(devices, "device", 10),
         },
