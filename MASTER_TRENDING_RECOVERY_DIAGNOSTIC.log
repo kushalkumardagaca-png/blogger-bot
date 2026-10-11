@@ -1,0 +1,65 @@
+=== sanitized attempt 1 ===
+Traceback (most recent call last):
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 98, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 90, in main
+    if a.prepare:prepare(a.kind,a.slot)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 60, in prepare
+    target=package_path(kind,candidate);package=preparer.build_package(topic_for(kind,candidate),target);validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 442, in build_package
+    STAGE='text-generation';draft=generate_text(topic,evidence)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 307, in generate_text
+    result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 188, in model_json
+    raise RuntimeError(f'Gemini failed to return valid JSON after 5 attempts: {type(last).__name__}: {str(last)[:300]}')
+RuntimeError: Gemini failed to return valid JSON after 5 attempts: RuntimeError: Gemini HTTP 429: {
+  "error": {
+    "code": 429,
+    "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-li
+=== sanitized attempt 2 ===
+Traceback (most recent call last):
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 98, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 90, in main
+    if a.prepare:prepare(a.kind,a.slot)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 64, in prepare
+    else:raise last or RuntimeError('no evidence-ready trending candidate remained')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 60, in prepare
+    target=package_path(kind,candidate);package=preparer.build_package(topic_for(kind,candidate),target);validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 441, in build_package
+    STAGE='source-discovery';evidence=discover(topic)
+                                      ^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 153, in discover
+    if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: only 1 usable topic-specific scholarly/primary sources found; minimum 6
+=== sanitized attempt 3 ===
+Traceback (most recent call last):
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 98, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 90, in main
+    if a.prepare:prepare(a.kind,a.slot)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 64, in prepare
+    else:raise last or RuntimeError('no evidence-ready trending candidate remained')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/master_dynamic_pipeline.py", line 60, in prepare
+    target=package_path(kind,candidate);package=preparer.build_package(topic_for(kind,candidate),target);validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 441, in build_package
+    STAGE='source-discovery';evidence=discover(topic)
+                                      ^^^^^^^^^^^^^^^
+  File "/home/runner/work/blogger-bot/blogger-bot/prepare_master_article.py", line 153, in discover
+    if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: only 1 usable topic-specific scholarly/primary sources found; minimum 6
