@@ -1,10 +1,16 @@
 {
-  "generatedAt": "2026-10-11T18:24:47.706197+05:30",
+  "generatedAt": "2026-10-11T18:51:29.924000+05:30",
   "dateIST": "2026-10-11",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 14,
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-companies",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
