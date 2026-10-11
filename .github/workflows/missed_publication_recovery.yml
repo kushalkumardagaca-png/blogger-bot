@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 11: sentence-safe condensation for quota-fallback drafts.
+# Recovery revision 12: clean diagnostics after sentence-safe condensation.
 on:
   push:
     paths:
