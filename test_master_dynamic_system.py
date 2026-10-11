@@ -60,6 +60,15 @@ def test_trend_scoring_clusters_live_observations():
     assert rows[0]['discovered_from_live_internet'] is True
 
 
+def test_research_relevance_floor_rejects_off_topic_sources():
+    from prepare_master_article import _research_terms, _topic_relevance
+    terms=_research_terms('budget airlines jet fuel surcharge passenger fares')
+    relevant=_topic_relevance('Airlines add jet fuel surcharges to fares','Carriers respond to fuel costs.',terms)
+    irrelevant=_topic_relevance('Airport security screening technology','A study of biometric queues and terminal design.',terms)
+    assert relevant[0] >= 6 and relevant[1] >= 2
+    assert irrelevant[0] < 5
+
+
 def test_master_social_keys_route_to_exactly_one_platform():
     from social_rotation import make_plan, PLATFORMS
     day='2026-10-10T10:00:00+00:00'

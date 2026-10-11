@@ -54,6 +54,24 @@ def _abstract(index):
    if 0<=pos<size:tokens[pos]=word
  return ' '.join(tokens)
 
+_RESEARCH_STOPWORDS=set('a an and are as at be best by can category current daily do for from guide how in into is it latest master money news of on or our should that the their this to today trend trending versus via what when where which who why will with your'.split())
+def _research_terms(value):
+ out=set()
+ for token in re.findall(r"[a-z0-9][a-z0-9'-]{2,}",str(value).casefold()):
+  token=token.strip("'-")
+  if token in _RESEARCH_STOPWORDS or token.isdigit():continue
+  if len(token)>5 and token.endswith('ies'):token=token[:-3]+'y'
+  elif len(token)>5 and token.endswith('ing'):token=token[:-3]
+  elif len(token)>4 and token.endswith('ed'):token=token[:-2]
+  elif len(token)>4 and token.endswith('s'):token=token[:-1]
+  if len(token)>=3:out.add(token)
+ return out
+
+def _topic_relevance(title,text,terms):
+ """Conservative lexical floor before evidence reaches the writing model."""
+ title_hits=len(_research_terms(title)&terms);body_hits=len(_research_terms(text)&terms)
+ return title_hits*3+min(body_hits,5),title_hits,body_hits
+
 def discover(topic):
  terms=[]
  for value in (topic.get('Punchy Title',''),topic.get('Video Idea','')):
@@ -71,6 +89,8 @@ def discover(topic):
  headline=re.sub(r'\s+[|–—-]\s+[^|–—-]{2,60}$','',str(topic.get('Punchy Title',''))).strip()
  context=' '.join(x for x in (headline,str(topic.get('Category','')),str(topic.get('Trending Category',''))) if x)
  query_variants=list(dict.fromkeys(x[:300] for x in (subject,headline,context) if len(x.strip())>=8))
+ relevance_terms=_research_terms(' '.join(query_variants))
+ if len(relevance_terms)<3:raise RuntimeError('topic query did not yield enough concrete relevance terms')
  # OpenAlex provides topic-ranked scholarly metadata and abstracts without
  # screen-scraping or a private search key. Each work remains linked to its
  # DOI/publisher record so the evidence is auditable.
@@ -82,8 +102,11 @@ def discover(topic):
     location=work.get('primary_location') or {};url=(location.get('landing_page_url') or work.get('doi') or work.get('id') or '').replace('http://','https://')
     source=(location.get('source') or {}).get('display_name') or 'OpenAlex scholarly record'
     if not url.startswith('https://') or url in seen or len(abstract)<450 or year>datetime.now().year:continue
-    seen.add(url);text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
-    evidence.append({'name':source,'title':work.get('title') or research_query,'url':url,'text':text[:7000],'score':7})
+    text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
+    relevance,title_hits,body_hits=_topic_relevance(work.get('title',''),text,relevance_terms)
+    if relevance<6 or (title_hits<1 and body_hits<4):continue
+    seen.add(url)
+    evidence.append({'name':source,'title':work.get('title') or research_query,'url':url,'text':text[:7000],'score':7+min(relevance,5)/10})
     if len(evidence)>=10:break
   except Exception:pass
   if len(evidence)>=10:break
@@ -101,7 +124,9 @@ def discover(topic):
      url=item.get('url','');title=item.get('title','');body=plain_page(url);summary=item.get('desc','')
      text=(title+'. '+(body or summary)).strip()
      if not url.startswith('https://') or url in seen or len(text)<180:continue
-     seen.add(url);evidence.append({'name':item.get('agency') or 'Established newsroom','title':title or str(query),'url':url,'text':text[:7000],'score':8})
+     relevance,title_hits,body_hits=_topic_relevance(title,text,relevance_terms)
+     if relevance<5 or title_hits<1:continue
+     seen.add(url);evidence.append({'name':item.get('agency') or 'Established newsroom','title':title or str(query),'url':url,'text':text[:7000],'score':8+min(relevance,5)/10})
      if len(evidence)>=12:break
     if len(evidence)>=12:break
   except Exception:pass
@@ -116,7 +141,9 @@ def discover(topic):
     if not (host.endswith('.gov') or host.endswith('.gov.in') or host.endswith('.edu') or any(host==x or host.endswith('.'+x) for x in trusted)):continue
     text=plain_page(url)
     if len(text)<500:continue
-    seen.add(url);evidence.append({'name':host,'title':title,'url':url,'text':text,'score':9})
+    relevance,title_hits,body_hits=_topic_relevance(title,text,relevance_terms)
+    if relevance<5 or (title_hits<1 and body_hits<4):continue
+    seen.add(url);evidence.append({'name':host,'title':title,'url':url,'text':text,'score':9+min(relevance,5)/10})
   except Exception:pass
  evidence.sort(key=lambda x:x['score'],reverse=True)
  if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
