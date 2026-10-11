@@ -387,7 +387,9 @@ def _semantic_theme(item: dict, platform: str) -> str:
         ("work", ("career", "salary", "job", "office", "business", "company", "startup")),
     )
     for theme, words in explicit:
-        if any(word in text for word in words): return theme
+        # Whole terms only: substring checks misclassified "education" as cat
+        # and "Daily" as AI, producing unrelated social photographs.
+        if any(re.search(r"(?<![a-z0-9])" + re.escape(word) + r"(?![a-z0-9])", text) for word in words): return theme
     themes = TOPIC_THEMES[topic(item)]
     return themes[(creative_seed(item, platform) // 53) % len(themes)]
 

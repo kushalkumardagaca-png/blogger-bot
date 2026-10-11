@@ -49,6 +49,11 @@ def test_global_lifestyle_library_routes_explicit_real_life_subjects():
         assert _curated_entries(story, "facebook")[0][1]
 
 
+def test_semantic_theme_does_not_match_keywords_inside_unrelated_words():
+    story=item(71,"Markets & Commodities News",["News","Financial Education","Markets, Crypto & Commodities"])
+    assert _semantic_theme(story,"bluesky") != "cats"
+
+
 def test_signature_is_deterministic_and_platform_specific():
     story = item(7, "How inflation changes a monthly budget", ["Economy"])
     a = creative_meta(story, "facebook", "2026-10-02")
