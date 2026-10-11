@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 0,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "Gemini failed: RuntimeError: Gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, he; emergency fallback failed: GitHub model fallback failed after 3 attempts: JSONDecodeError: Expecting value: line 1 column 1 (char 0); public fallback: credential-free model fallback failed after 4 attempts: ValueError: public fallback returned no complete JSON object"
+}
