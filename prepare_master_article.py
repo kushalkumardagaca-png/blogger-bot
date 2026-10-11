@@ -422,7 +422,18 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
    if not replacement:continue
    actual_cut=current-words(' '.join(replacement));section['paragraphs']=replacement;excess-=max(0,actual_cut)
   core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
-  if core_count>4200:raise RuntimeError(f'assembled core remains too large after safe condensation: {core_count} words')
+  if core_count>4200:
+   # Emergency models may ignore a requested condensation budget. Preserve only
+   # complete original sentences and trim from later sections, never fabricate.
+   excess=core_count-4100
+   for section in reversed(sections):
+    if excess<=0:break
+    current=words(' '.join(section['paragraphs']));target=max(280,current-excess)
+    trimmed=trim_paragraphs(section['paragraphs'],target);trimmed_count=words(' '.join(trimmed))
+    if trimmed_count>=280 and trimmed_count<current:
+     section['paragraphs']=trimmed;excess-=current-trimmed_count
+   core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
+  if core_count>4200:raise RuntimeError(f'assembled core remains too large after sentence-safe condensation: {core_count} words')
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if not 4000<=core_count<=4200:raise RuntimeError(f'normalized core is {core_count} words before validation')
  summary_prompt=f'''Using only this completed article and its evidence, write a 650-730 word after-article summary in 6-10 natural paragraphs. Do not add facts, headings, FAQ material or a new direct-answer opening. Return strict JSON {{"paragraphs":[...]}}. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''

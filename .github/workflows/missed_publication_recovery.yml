@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 10: trim overlong sections and bypass a failed provider.
+# Recovery revision 11: sentence-safe condensation for quota-fallback drafts.
 on:
   push:
     paths:
