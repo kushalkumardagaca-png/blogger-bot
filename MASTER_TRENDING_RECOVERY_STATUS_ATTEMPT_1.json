@@ -1,9 +1,0 @@
-{
-  "status": "FAIL",
-  "publication_enabled": false,
-  "kind": "trending",
-  "slot": 0,
-  "stage": "text-generation",
-  "error_type": "RuntimeError",
-  "error": "GitHub model fallback failed after 3 attempts: JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
-}

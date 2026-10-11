@@ -177,13 +177,44 @@ def _github_model_json(messages,max_tokens):
   try:
    r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,4096),'response_format':{'type':'json_object'}},timeout=600)
    if not r.ok:raise RuntimeError(f"GitHub Models HTTP {r.status_code}: {r.text[:500]}")
-   text=str(r.json()['choices'][0]['message'].get('content') or '');begin=text.find('{');finish=text.rfind('}')
+   content=r.json()['choices'][0]['message'].get('content') or ''
+   if isinstance(content,list):text=''.join(str(part.get('text') or part.get('content') or '') if isinstance(part,dict) else str(part) for part in content)
+   else:text=str(content)
+   begin=text.find('{');finish=text.rfind('}')
    if begin<0 or finish<=begin:raise ValueError('GitHub model returned no complete JSON object')
    return json.loads(text[begin:finish+1])
   except Exception as exc:
    last=exc
    if attempt<2:time.sleep(20*(attempt+1))
  raise RuntimeError(f'GitHub model fallback failed after 3 attempts: {type(last).__name__}: {str(last)[:300]}')
+
+def _public_model_json(messages,max_tokens):
+ """Credential-free emergency path used only when configured providers are exhausted."""
+ endpoint='https://text.pollinations.ai/openai';model=os.environ.get('PUBLIC_FALLBACK_MODEL','').strip() or 'openai';last=None
+ for attempt in range(4):
+  try:
+   r=requests.post(endpoint,json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,4096),'response_format':{'type':'json_object'},'private':True},timeout=600)
+   if not r.ok:raise RuntimeError(f"public fallback HTTP {r.status_code}: {r.text[:500]}")
+   content=r.json()['choices'][0]['message'].get('content') or ''
+   if isinstance(content,list):text=''.join(str(part.get('text') or '') if isinstance(part,dict) else str(part) for part in content)
+   else:text=str(content)
+   begin=text.find('{');finish=text.rfind('}')
+   if begin<0 or finish<=begin:raise ValueError('public fallback returned no complete JSON object')
+   return json.loads(text[begin:finish+1])
+  except Exception as exc:
+   last=exc
+   if attempt<3:time.sleep(15*(attempt+1))
+ raise RuntimeError(f'credential-free model fallback failed after 4 attempts: {type(last).__name__}: {str(last)[:300]}')
+
+def _emergency_model_json(messages,max_tokens):
+ github_error=None
+ if os.environ.get('GITHUB_TOKEN','').strip():
+  try:return _github_model_json(messages,max_tokens)
+  except Exception as exc:github_error=exc
+ try:return _public_model_json(messages,max_tokens)
+ except Exception as exc:
+  if github_error:raise RuntimeError(f'{github_error}; public fallback: {exc}') from exc
+  raise
 
 def model_json(messages,max_tokens=16000):
  local=os.environ.get('OLLAMA_API_URL','').strip().rstrip('/')
@@ -219,9 +250,9 @@ def model_json(messages,max_tokens=16000):
     last=exc
     if 'HTTP 429' in str(exc):break
     if attempt<4:time.sleep(15*(attempt+1))
-  if os.environ.get('GITHUB_TOKEN','').strip():return _github_model_json(messages,max_tokens)
-  raise RuntimeError(f'Gemini failed to return valid JSON after 5 attempts: {type(last).__name__}: {str(last)[:300]}')
- if os.environ.get('GITHUB_TOKEN','').strip():return _github_model_json(messages,max_tokens)
+  try:return _emergency_model_json(messages,max_tokens)
+  except Exception as fallback:raise RuntimeError(f'Gemini failed: {type(last).__name__}: {str(last)[:180]}; emergency fallback failed: {fallback}') from fallback
+ if os.environ.get('GITHUB_TOKEN','').strip():return _emergency_model_json(messages,max_tokens)
  endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
  for attempt in range(3):
   request_messages=list(messages)

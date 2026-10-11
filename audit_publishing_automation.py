@@ -246,7 +246,7 @@ check('Configured article cadence is exactly 42 weighted social posts daily',
       and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
 
 check('Master generation has repository-native quota and model-independent research fallback',
-      '_github_model_json' in prep and '_heuristic_queries' in prep
+      '_github_model_json' in prep and '_public_model_json' in prep and '_heuristic_queries' in prep
       and 'models: read' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text()
       and 'GITHUB_TOKEN' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text())
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)

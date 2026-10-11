@@ -1,5 +1,5 @@
 name: One-Time Missed Publication Recovery
-# Recovery revision 6: model-independent evidence search plus quota fallback.
+# Recovery revision 7: model-independent evidence and credential-free text fallback.
 on:
   push:
     paths:

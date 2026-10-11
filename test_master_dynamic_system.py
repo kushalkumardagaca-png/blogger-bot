@@ -60,11 +60,20 @@ def test_trend_scoring_clusters_live_observations():
     assert rows[0]['discovered_from_live_internet'] is True
 
 
-def test_repository_native_model_fallback_parses_json(monkeypatch):
+def test_credential_free_emergency_model_returns_strict_json(monkeypatch):
     import prepare_master_article as preparer
     class Response:
         ok=True
-        def json(self):return {'choices':[{'message':{'content':'{"ready":true}'}}]}
+        def json(self):return {'choices':[{'message':{'content':'```json\n{"fallback":true}\n```'}}]}
+    monkeypatch.setattr(preparer.requests,'post',lambda *args,**kwargs:Response())
+    assert preparer._public_model_json([{'role':'user','content':'test'}],500)=={'fallback':True}
+
+
+def test_repository_native_model_fallback_parses_content_parts(monkeypatch):
+    import prepare_master_article as preparer
+    class Response:
+        ok=True
+        def json(self):return {'choices':[{'message':{'content':[{'type':'text','text':'```json\n{"ready":true}\n```'}]}}]}
     monkeypatch.setenv('GITHUB_TOKEN','repository-token')
     monkeypatch.setattr(preparer.requests,'post',lambda *args,**kwargs:Response())
     assert preparer._github_model_json([{'role':'user','content':'test'}],500)=={'ready':True}
