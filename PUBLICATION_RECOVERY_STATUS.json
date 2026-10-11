@@ -1,10 +1,16 @@
 {
-  "generatedAt": "2026-10-12T04:19:17.589306+05:30",
+  "generatedAt": "2026-10-12T04:50:09.266355+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 0,
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-asia-pacific",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
