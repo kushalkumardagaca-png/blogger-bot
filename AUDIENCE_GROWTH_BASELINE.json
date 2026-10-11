@@ -1,32 +1,58 @@
 {
-  "checkedAt": "2026-10-11T01:49:39.843909+00:00",
+  "checkedAt": "2026-10-11T10:24:30.066758+00:00",
   "mode": "AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "property": "sc-domain:dailyyield.blogspot.com",
   "requestedThrough": "2026-10-10",
-  "availableThrough": "2026-10-06",
+  "availableThrough": "2026-10-08",
   "searchAcquisition": {
     "last7Days": {
-      "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1.0,
+      "averagePosition": 1.0
     },
     "last28Days": {
-      "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1.0,
+      "averagePosition": 1.0
     },
     "last90Days": {
-      "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "clicks": 1,
+      "impressions": 1,
+      "ctr": 1.0,
+      "averagePosition": 1.0
     },
-    "topPages28Days": [],
-    "countries28Days": [],
-    "devices28Days": []
+    "topPages28Days": [
+      {
+        "page": "https://dailyyield.blogspot.com/?m=1",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1.0,
+        "averagePosition": 1.0
+      }
+    ],
+    "topQueries28Days": [],
+    "queryPage28Days": [],
+    "countries28Days": [
+      {
+        "country": "ind",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1.0,
+        "averagePosition": 1.0
+      }
+    ],
+    "devices28Days": [
+      {
+        "device": "MOBILE",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1.0,
+        "averagePosition": 1.0
+      }
+    ]
   },
   "readerMeasurement": {
     "status": "NOT_AVAILABLE_FROM_SEARCH_CONSOLE",

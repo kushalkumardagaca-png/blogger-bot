@@ -1,17 +1,17 @@
 # Daily Yield Audience Growth Baseline
 
-- **Checked:** 2026-10-11T01:49:39.843909+00:00
+- **Checked:** 2026-10-11T10:24:30.066758+00:00
 - **Mode:** AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS
 - **Synthetic views:** 0
-- **Search data available through:** 2026-10-06
+- **Search data available through:** 2026-10-08
 
 ## Authenticated Google search acquisition
 
 | Window | Clicks | Impressions | CTR | Average position |
 |---|---:|---:|---:|---:|
-| 7 days | 0 | 0 | 0.00% | — |
-| 28 days | 0 | 0 | 0.00% | — |
-| 90 days | 0 | 0 | 0.00% | — |
+| 7 days | 1 | 1 | 100.00% | 1.0 |
+| 28 days | 1 | 1 | 100.00% | 1.0 |
+| 90 days | 1 | 1 | 100.00% | 1.0 |
 
 ## Reader measurement
 
@@ -19,4 +19,4 @@ DAU, WAU, MAU and retention are deliberately not inferred from Search Console. C
 
 ## Top search entry pages — 28 days
 
-- No final page rows returned.
+- `https://dailyyield.blogspot.com/?m=1` — 1 clicks · 1 impressions
