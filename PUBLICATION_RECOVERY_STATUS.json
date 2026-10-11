@@ -1,21 +1,10 @@
 {
-  "generatedAt": "2026-10-11T18:09:49.690031+05:30",
+  "generatedAt": "2026-10-11T18:24:47.706197+05:30",
   "dateIST": "2026-10-11",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 12,
-  "actions": [
-    {
-      "type": "source_recovery",
-      "key": "news-americas",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "master-trending-2",
-      "applied": true
-    }
-  ],
+  "confirmedPublications": 14,
+  "actions": [],
   "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
