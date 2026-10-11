@@ -142,7 +142,9 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
     if route_index not in (0,1):raise ValueError('route index must be 0 or 1')
     delay = 0
     if published:
-        due = published.astimezone(dt.timezone.utc) + dt.timedelta(minutes=5)
+        # Start one minute inside the five-minute SLA so API and workflow overhead
+        # cannot push either confirmed post past the reader-visible deadline.
+        due = published.astimezone(dt.timezone.utc) + dt.timedelta(minutes=4)
         delay = max(0, min(20 * 60, int((due - reference_now.astimezone(dt.timezone.utc)).total_seconds())))
     return {
         "item_key": item_key,

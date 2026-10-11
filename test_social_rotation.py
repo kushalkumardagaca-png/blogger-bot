@@ -14,7 +14,7 @@ class SocialRotationTests(unittest.TestCase):
   now=dt.datetime(2026,10,1,5,0,tzinfo=dt.timezone.utc);published=now.isoformat();url='https://dailyyield.blogspot.com/2026/10/india.html'
   first=make_plan('news-india',url,'post',published,'',now=now,route_index=0)
   second=make_plan('news-india',url,'post',published,'',now=now,route_index=1)
-  self.assertNotEqual(first['platform'],second['platform']);self.assertEqual(first['delay_seconds'],300);self.assertEqual(second['delay_seconds'],300)
+  self.assertNotEqual(first['platform'],second['platform']);self.assertEqual(first['delay_seconds'],240);self.assertEqual(second['delay_seconds'],240)
  def test_exactly_three_resource_posts_per_platform_daily(self):
   self.assertEqual(len(RESOURCE_SCHEDULES),12)
   self.assertEqual(Counter(platform for platform,_ in RESOURCE_SCHEDULES.values()),{p:3 for p in PLATFORMS})

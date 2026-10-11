@@ -231,7 +231,7 @@ check('Every social publisher accepts an exact authenticated Blogger target URL'
 check('News publisher dispatches only confirmed live Blogger events',
       'social_events.json' in np and 'dispatch_social_events.py' in nw.read_text())
 check('Both article social routes release within five minutes after publication',
-      'dt.timedelta(minutes=5)' in rotation and 'route_index' in coordinated and 'delay_seconds' in coordinated)
+      'dt.timedelta(minutes=4)' in rotation and 'route_index' in coordinated and 'delay_seconds' in coordinated)
 check('Coordinated tracker writes use race-safe persistence retries',
       'persist_social_state.sh' in coordinated and (ROOT/'persist_social_state.sh').exists())
 check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
