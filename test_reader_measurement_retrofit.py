@@ -5,8 +5,11 @@ class ReaderMeasurementRetrofitTests(unittest.TestCase):
  def test_threshold_consent_and_idempotent_marker(self):
   self.assertIn('active>=30&&depth>=50',r.SNIPPET)
   self.assertIn("localStorage.getItem('dy-consent')==='all'",r.SNIPPET)
-  self.assertIn("gtag('event','article_read'",r.SNIPPET)
+  self.assertIn("event('article_read'",r.SNIPPET)
   self.assertEqual(r.SNIPPET.count(r.MARK),2)
+  self.assertIn('data-dy-follow-intent',r.SNIPPET)
+  self.assertIn('data-dy-share-intent',r.SNIPPET)
+  self.assertIn("event('follow_intent'",r.SNIPPET)
  def test_no_public_site_request(self):
   text=Path('reader_measurement_retrofit.py').read_text()
   self.assertNotIn('requests.get',text);self.assertNotIn('dailyyield.blogspot.com',text)
