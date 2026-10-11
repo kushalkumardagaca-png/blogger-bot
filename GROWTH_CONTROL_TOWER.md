@@ -2,8 +2,8 @@
 
 - **Status:** MEASUREMENT_INSTRUMENTED_REPORTING_NOT_CONFIGURED
 - **Verified distinct daily engaged readers:** Not yet reportable
-- **Target:** 10,000,000 by 2026-12-31
-- **Days remaining:** 81
+- **Target:** 10,000,000 by 2027-09-30
+- **Days remaining:** 354
 - **Synthetic views:** 0
 
 ## Primary metric

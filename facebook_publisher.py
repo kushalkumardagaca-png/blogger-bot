@@ -484,6 +484,7 @@ def main() -> int:
         "facebook_post_id": facebook_id,
         "caption_hash": fingerprint(caption),
         "score": rank,
+        "creative": creative_meta(candidate, "facebook"),
         "published_at": datetime.now(IST).isoformat(),
         "reconciled": bool(result.get("reconciled")),
     })

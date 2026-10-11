@@ -7,7 +7,7 @@ from unittest.mock import patch
 from PIL import Image, ImageChops, ImageDraw
 
 from social_creative import (
-    PLATFORM_SIZES, _curated_entries, _photo_url, _semantic_theme, build_caption,
+    PLATFORM_SIZES, _curated_entries, _photo_url, _semantic_theme, attributed_url, build_caption,
     content_highlights, creative_meta, image_alt, render_social_card,
     select_inventory_target, tumblr_payload,
 )
@@ -93,7 +93,8 @@ def test_tumblr_is_native_npf_with_three_ideas_cta_and_descriptive_alt():
     data = tumblr_payload(story, "A practical checklist for keeping the right records and asking better questions.")
     block_types = [block["type"] for block in data["content"]]
     assert block_types == ["link", "text", "image", "text", "text", "text"]
-    assert story["url"] == data["source_url"] == data["content"][0]["url"]
+    assert data["source_url"] == data["content"][0]["url"] == attributed_url(story,"tumblr")
+    assert data["source_url"].startswith(story["url"]+"?") and "utm_source=tumblr" in data["source_url"]
     assert data["content"][1]["text"] == story["title"]
     assert data["content"][3]["text"].count("•") == 2
     assert "link above" in data["content"][4]["text"]

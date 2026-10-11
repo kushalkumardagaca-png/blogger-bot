@@ -20,7 +20,7 @@ from pathlib import Path
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
-from social_creative import build_caption, image_alt, render_social_card, select_inventory_target
+from social_creative import build_caption, creative_meta, image_alt, render_social_card, select_inventory_target
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
@@ -306,6 +306,7 @@ def main() -> int:
     tracker["published"].append({
         "kind": item.get("kind"), "blogger_id": item["id"], "title": item.get("title"), "url": item["url"],
         "bluesky_uri": uri, "cid": result.get("cid"), "text_hash": text_hash, "score": rank,
+        "creative": creative_meta(item, "bluesky"),
         "published_at": datetime.now(IST).isoformat(), "reconciled": bool(result.get("reconciled")),
     })
     tracker["pending"] = None; tracker["last_success_at"] = datetime.now(IST).isoformat(); tracker["last_bluesky_uri"] = uri

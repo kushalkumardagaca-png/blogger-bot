@@ -1,8 +1,46 @@
 {
-  "generatedAt": "2026-10-11T10:25:18.869981+00:00",
-  "deadline": "2026-12-31",
+  "generatedAt": "2026-10-11T11:40:40.579802+00:00",
+  "deadline": "2027-09-30",
   "targetDistinctDailyEngagedReaders": 10000000,
-  "daysRemaining": 81,
+  "daysRemaining": 354,
+  "stretchTrajectory": {
+    "planningBaselineUnverified": 300,
+    "requiredDailyGrowth": 0.029856,
+    "requiredWeeklyMultiplier": 1.2287,
+    "checkpoints": [
+      {
+        "daysFromNow": 30,
+        "date": "2026-11-10",
+        "planningReaders": 725
+      },
+      {
+        "daysFromNow": 60,
+        "date": "2026-12-10",
+        "planningReaders": 1753
+      },
+      {
+        "daysFromNow": 90,
+        "date": "2027-01-09",
+        "planningReaders": 4236
+      },
+      {
+        "daysFromNow": 180,
+        "date": "2027-04-09",
+        "planningReaders": 59826
+      },
+      {
+        "daysFromNow": 270,
+        "date": "2027-07-08",
+        "planningReaders": 844840
+      },
+      {
+        "daysFromNow": 354,
+        "date": "2027-09-30",
+        "planningReaders": 10000000
+      }
+    ],
+    "warning": "Planning trajectory only; the baseline is not a verified distinct-reader metric."
+  },
   "primaryMetric": {
     "status": "NOT_CONFIGURED",
     "metricDefinition": "Distinct consented users triggering article_read after at least 30 active seconds and 50% article depth.",

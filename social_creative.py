@@ -9,11 +9,12 @@ from __future__ import annotations
 
 import hashlib
 import html
+import json
 import re
 from datetime import datetime, timezone, timedelta
 from io import BytesIO
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
@@ -194,19 +195,35 @@ def creative_seed(item: dict, platform: str, day: str | None = None) -> int:
     return int(hashlib.sha256(raw.encode()).hexdigest()[:16], 16)
 
 
+def _optimizer_choice(platform: str, group: str) -> dict:
+    try:
+        data=json.loads(Path("SOCIAL_OPTIMIZER_STATE.json").read_text(encoding="utf-8"))
+        return data.get("recommendations",{}).get(platform,{}).get(group,{})
+    except (OSError,json.JSONDecodeError,AttributeError):return {}
+
+
 def creative_meta(item: dict, platform: str, day: str | None = None) -> dict:
     seed = creative_seed(item, platform, day)
     group = topic(item)
     hooks = HOOKS[group]
     questions = QUESTIONS[group]
+    style_index=seed % len(PALETTES);layout=(seed // 31) % 5;hook=hooks[(seed // 11) % len(hooks)];adaptive=False
+    choice=_optimizer_choice(platform,group)
+    # Deterministic 20% exploration prevents a sparse early winner from freezing
+    # creative diversity. Recommendations themselves require >=12 observations.
+    if choice and seed%5:
+        style_index=int(choice.get("style_index",style_index))%len(PALETTES)
+        layout=int(choice.get("layout",layout))%5
+        if choice.get("hook") in hooks:hook=choice["hook"]
+        adaptive=True
     return {
         "seed": f"{seed:016x}", "topic": group,
-        "style": PALETTES[seed % len(PALETTES)]["name"],
-        "style_index": seed % len(PALETTES),
-        "hook": hooks[(seed // 11) % len(hooks)],
+        "style": PALETTES[style_index]["name"],
+        "style_index": style_index,
+        "hook": hook,
         "emoji": EMOJIS[(seed // 17) % len(EMOJIS)],
         "question": questions[(seed // 23) % len(questions)],
-        "layout": (seed // 31) % 5,
+        "layout": layout,"adaptive":adaptive,
     }
 
 
@@ -285,19 +302,30 @@ def hashtag_list(item: dict) -> list[str]:
     return ["#DailyYield", mapping[group]]
 
 
+def attributed_url(item: dict, platform: str, day: str | None = None) -> str:
+    """Add first-party campaign attribution without changing the canonical URL."""
+    raw=item["url"];parsed=urlparse(raw);meta=creative_meta(item,platform,day)
+    query=dict(parse_qsl(parsed.query,keep_blank_values=True))
+    query.update({"utm_source":platform,"utm_medium":"social","utm_campaign":"dy_growth","utm_content":f"{meta['topic'][:4]}-s{meta['style_index']}l{meta['layout']}"})
+    return urlunparse(parsed._replace(query=urlencode(query)))
+
+
 def build_caption(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
-    title,url=clean(item.get("title","Daily Yield")),item["url"]
+    title,url=clean(item.get("title","Daily Yield")),attributed_url(item,platform)
     lead,second,third=content_highlights(item,summary);tags=" ".join(hashtag_list(item));cta=_cta(item)
     if platform=="facebook":
         return f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{cta}\n\nBy Kushal K. Daga\n{tags}"
     if platform=="bluesky":
         # Preserve the link at the top and all three ideas inside Bluesky's limit.
         lead,second,third=trim(lead,48),trim(second,38),trim(third,38)
-        ending="Read the full story → link above.\nBy Kushal K. Daga\n#DailyYield"
+        ending="Read more → link above.\nBy Kushal K. Daga · #DailyYield"
         text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
-        if len(text)>300:
-            excess=len(text)-300;third=trim(third,max(22,len(third)-excess-1));text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
-        return text[:300]
+        while len(text)>300:
+            values=[lead,second,third];idx=max(range(3),key=lambda i:len(values[i]))
+            if len(values[idx])<=18:break
+            values[idx]=trim(values[idx],len(values[idx])-5);lead,second,third=values
+            text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
+        return text
     if platform=="mastodon":
         mastodon_cta="Open the link above for the full evidence and context. Which of these three ideas matters most to you?"
         text=f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{mastodon_cta}\n\nBy Kushal K. Daga\n{tags}"
@@ -307,7 +335,7 @@ def build_caption(item: dict, platform: str, summary: str, limit: int | None = N
 
 
 def tumblr_payload(item: dict, summary: str) -> dict:
-    title,url=clean(item.get("title","Daily Yield")),item["url"]
+    title,url=clean(item.get("title","Daily Yield")),attributed_url(item,"tumblr")
     lead,second,third=content_highlights(item,summary)
     tags=[x.lstrip("#") for x in hashtag_list(item)]+["moneyblr"]
     return {

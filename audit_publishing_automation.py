@@ -195,9 +195,14 @@ creative_path=ROOT/'social_creative.py'; creative=creative_path.read_text() if c
 check('Shared social creative engine is deployed across all four active networks',
       bool(creative) and all('social_creative import' in text for text in (fp,bp,tp,mp)))
 check('Creative system is photo-first with at least ten treatments and five compositions',
-      len(re.findall(r'\{"name":',creative))>=10 and '"layout": (seed // 31) % 5' in creative
+      len(re.findall(r'\{"name":',creative))>=10 and 'layout=(seed // 31) % 5' in creative
+      and 'int(choice.get("layout",layout))%5' in creative
       and 'ImageOps.fit(source, size' in creative and 'PLATFORM_SIZES' in creative
       and 'full-bleed editorial photograph' in creative)
+check('Organic social attribution and guarded evidence-led optimization are active',
+      'utm_campaign' in creative and 'dy_growth' in creative and 'seed%5' in creative
+      and (ROOT/'social_growth_optimizer.py').exists()
+      and 'SOCIAL_OPTIMIZER_STATE.json' in (ROOT/'.github/workflows/social_performance.yml').read_text())
 check('Creative system mixes article heroes with a broad licensed global lifestyle library',
       'Use the hero embedded in authenticated Blogger content' in creative
       and all(f'"{theme}"' in creative for theme in ('people','family','pets','homes','banking','work','technology','shopping','travel','global'))

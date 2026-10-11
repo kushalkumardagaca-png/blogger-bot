@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
+from social_creative import creative_meta
 
 ROOT = Path(__file__).parent
 REPORT = ROOT / "SOCIAL_PERFORMANCE.json"
@@ -36,8 +37,11 @@ def get_json(url: str, **kwargs) -> dict:
 
 
 def base(entry: dict, platform: str) -> dict:
+    day=str(entry.get("published_at", ""))[:10] or None
+    creative=entry.get("creative") or creative_meta(entry,platform,day)
     return {
         "platform": platform,
+        "creative": creative,
         "social_id": (entry.get("facebook_post_id") or entry.get("bluesky_uri") or
                       entry.get("mastodon_status_id") or entry.get("tumblr_post_id") or ""),
         "title": entry.get("title", ""),

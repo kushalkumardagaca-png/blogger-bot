@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 135 PASS · 0 FAIL
+**Result:** 136 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -72,6 +72,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Mastodon uses platform-native copy, descriptive alt text and shared creative cards**
 - ✅ **Shared social creative engine is deployed across all four active networks**
 - ✅ **Creative system is photo-first with at least ten treatments and five compositions**
+- ✅ **Organic social attribution and guarded evidence-led optimization are active**
 - ✅ **Creative system mixes article heroes with a broad licensed global lifestyle library**
 - ✅ **Photo selection is semantic and fails closed instead of producing a banner**
 - ✅ **Creative outputs are deterministic per platform, destination and IST day**

@@ -11,7 +11,7 @@ from pathlib import Path
 import requests
 from cryptography.fernet import Fernet
 from PIL import Image, ImageDraw, ImageFont
-from social_creative import render_social_card, tumblr_payload, select_inventory_target
+from social_creative import creative_meta, render_social_card, tumblr_payload, select_inventory_target
 
 IST=timezone(timedelta(hours=5,minutes=30),name="IST")
 BLOG_ID=os.environ.get("BLOGGER_BLOG_ID","8911514070006792465")
@@ -183,7 +183,7 @@ def main():
  rank=score(x) if x.get("kind")=="post" else page_score(x);print(f"Selected {x.get('kind')} score={rank}: {x.get('title')} [{x.get('id')}]")
  if a.dry_run:print(json.dumps(payload(x),ensure_ascii=False));return 0
  tracker["pending"]={"kind":x.get("kind"),"blogger_id":x["id"],"url":x["url"],"selected_at":datetime.now(IST).isoformat()};save_tracker(tracker)
- result=publish(token,x);pid=str(result["id"]);tracker["published"].append({"kind":x.get("kind"),"blogger_id":x["id"],"title":x.get("title"),"url":x["url"],"tumblr_post_id":pid,"tumblr_url":f"https://www.tumblr.com/{TUMBLR_BLOG}/{pid}","score":rank,"published_at":datetime.now(IST).isoformat(),"reconciled":bool(result.get("reconciled"))});tracker["pending"]=None;tracker["last_success_at"]=datetime.now(IST).isoformat();tracker["last_tumblr_post_id"]=pid;save_tracker(tracker);print(f"Published Tumblr post {pid} for Blogger {x.get('kind')} {x['id']}.");return 0
+ result=publish(token,x);pid=str(result["id"]);tracker["published"].append({"kind":x.get("kind"),"blogger_id":x["id"],"title":x.get("title"),"url":x["url"],"tumblr_post_id":pid,"tumblr_url":f"https://www.tumblr.com/{TUMBLR_BLOG}/{pid}","score":rank,"creative":creative_meta(x,"tumblr"),"published_at":datetime.now(IST).isoformat(),"reconciled":bool(result.get("reconciled"))});tracker["pending"]=None;tracker["last_success_at"]=datetime.now(IST).isoformat();tracker["last_tumblr_post_id"]=pid;save_tracker(tracker);print(f"Published Tumblr post {pid} for Blogger {x.get('kind')} {x['id']}.");return 0
 if __name__=="__main__":
  try:raise SystemExit(main())
  except Exception as e:print(f"TUMBLR_PUBLISHER_ERROR: {e}",file=sys.stderr);raise

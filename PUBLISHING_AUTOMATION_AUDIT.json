@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-11T15:53:56+05:30",
+  "checked_at_ist": "2026-10-11T17:10:21+05:30",
   "summary": {
-    "pass": 135,
+    "pass": 136,
     "fail": 0
   },
   "checks": [
@@ -342,6 +342,11 @@
     },
     {
       "name": "Creative system is photo-first with at least ten treatments and five compositions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Organic social attribution and guarded evidence-led optimization are active",
       "status": "PASS",
       "detail": ""
     },

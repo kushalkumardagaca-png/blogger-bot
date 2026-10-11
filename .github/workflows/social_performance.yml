@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - 'social_performance.py'
+      - 'social_growth_optimizer.py'
+      - 'social_creative.py'
+      - 'test_social_growth_optimizer.py'
       - '.github/workflows/social_performance.yml'
   schedule:
     - cron: '10 21 * * *'  # 02:40 IST; measurement only, no publishing
@@ -25,7 +28,9 @@ jobs:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with: {python-version: '3.12'}
-      - run: python -m pip install --disable-pip-version-check requests
+      - run: python -m pip install --disable-pip-version-check requests pillow
+      - name: Validate guarded optimizer
+        run: python -m unittest test_social_growth_optimizer test_social_performance -v
       - name: Collect genuine platform metrics without opening Daily Yield
         env:
           FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
@@ -33,11 +38,13 @@ jobs:
           FACEBOOK_GRAPH_VERSION: 'v26.0'
           TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
         run: python social_performance.py
+      - name: Optimize creative mix without reducing exploration
+        run: python social_growth_optimizer.py
       - name: Persist genuine social evidence
         run: |
           git config user.name 'Daily Yield Social Performance Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
-          git add SOCIAL_PERFORMANCE.json
+          git add SOCIAL_PERFORMANCE.json SOCIAL_OPTIMIZER_STATE.json
           if git diff --staged --quiet; then
             echo 'No social performance change.'
           else

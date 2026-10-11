@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).parent
 OUT=ROOT/'GROWTH_CONTROL_TOWER.json'; MD=ROOT/'GROWTH_CONTROL_TOWER.md'
-TARGET=10_000_000; DEADLINE=date(2026,12,31)
+TARGET=10_000_000; DEADLINE=date(2027,9,30)
 
 def load(name,default):
  try:return json.loads((ROOT/name).read_text(encoding='utf-8'))
@@ -67,7 +67,12 @@ def build(today=None):
  items=social.get('items',[]); interactions=sum(sum(float(v) for v in x.get('metrics',{}).values() if isinstance(v,(int,float))) for x in items)
  days=max(0,(DEADLINE-today).days); current=analytics.get('dau'); required=None
  if isinstance(current,(int,float)) and current>0 and days>0:required=round((TARGET/current)**(1/days)-1,6)
+ planning_baseline=300;planning_rate=(TARGET/planning_baseline)**(1/days)-1 if days else 0
+ checkpoints=[]
+ for offset in (30,60,90,180,270,days):
+  if 0<offset<=days:checkpoints.append({'daysFromNow':offset,'date':(today+timedelta(days=offset)).isoformat(),'planningReaders':round(planning_baseline*((1+planning_rate)**offset))})
  return {'generatedAt':datetime.now(timezone.utc).isoformat(),'deadline':DEADLINE.isoformat(),'targetDistinctDailyEngagedReaders':TARGET,'daysRemaining':days,
+  'stretchTrajectory':{'planningBaselineUnverified':planning_baseline,'requiredDailyGrowth':round(planning_rate,6),'requiredWeeklyMultiplier':round((1+planning_rate)**7,4),'checkpoints':checkpoints,'warning':'Planning trajectory only; the baseline is not a verified distinct-reader metric.'},
   'primaryMetric':analytics,
   'pace':{'currentVerifiedDAU':current,'targetGap':TARGET-current if isinstance(current,(int,float)) else None,'requiredDailyCompoundGrowth':required,'onTarget':bool(current and current>=TARGET)},
   'acquisition':{'search7Day':search.get('last7Days'),'search28Day':search.get('last28Days'),'socialOfficialObservations':len(items),'socialObservedInteractions':round(interactions)},

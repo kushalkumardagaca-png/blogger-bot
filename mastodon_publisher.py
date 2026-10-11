@@ -11,7 +11,7 @@ from pathlib import Path
 import requests
 from cryptography.fernet import Fernet
 from PIL import Image, ImageDraw, ImageFont
-from social_creative import build_caption, image_alt, render_social_card, select_inventory_target
+from social_creative import build_caption, creative_meta, image_alt, render_social_card, select_inventory_target
 
 IST=timezone(timedelta(hours=5,minutes=30),name="IST")
 BLOG_ID=os.environ.get("BLOGGER_BLOG_ID","8911514070006792465")
@@ -274,7 +274,7 @@ def main()->int:
  result=publish(token,account_id,item,text);sid=str(result.get("id",""))
  if not sid:raise RuntimeError(f"Mastodon returned no status id: {result}")
  status_url=result.get("url") or f"https://mastodon.social/@dailyyield/{sid}"
- tracker["published"].append({"kind":item.get("kind"),"blogger_id":item["id"],"title":item.get("title"),"url":item["url"],"mastodon_status_id":sid,"mastodon_url":status_url,"score":rank,"published_at":datetime.now(IST).isoformat(),"reconciled":bool(result.get("reconciled"))})
+ tracker["published"].append({"kind":item.get("kind"),"blogger_id":item["id"],"title":item.get("title"),"url":item["url"],"mastodon_status_id":sid,"mastodon_url":status_url,"score":rank,"creative":creative_meta(item,"mastodon"),"published_at":datetime.now(IST).isoformat(),"reconciled":bool(result.get("reconciled"))})
  tracker["pending"]=None;tracker["last_success_at"]=datetime.now(IST).isoformat();tracker["last_mastodon_status_id"]=sid;save_tracker(tracker)
  print(f"Published Mastodon status {sid} for Blogger {item.get('kind')} {item['id']}.");return 0
 if __name__=="__main__":
