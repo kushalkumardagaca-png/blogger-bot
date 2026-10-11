@@ -18,7 +18,7 @@ from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
 
-ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata')
+ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata')
 
 def read(path,default):
  try:return json.loads(path.read_text())
@@ -41,11 +41,31 @@ def build_html(kind,item,package,check_remote_images=True):
  else:labels=[item['category'],'Master Article','Kushal K. Daga']
  first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
 
+def trending_candidates(plan,item):
+ """Use only live-internet reserves from the same approved category."""
+ used={x.get('id') for x in plan.get('trending',[])}
+ used.update(x.get('topic_id') for x in read(TRACKER,{}).get('published',[]))
+ rows=[x for x in read(POOL,{}).get('topics',[]) if x.get('category')==item.get('category') and x.get('id') not in used and x.get('discovered_from_live_internet')]
+ def evidence_rank(row):
+  names=' '.join(str(x.get('name','')) for x in row.get('sources',[])).casefold()
+  newsroom=4 if 'reuters' in names else 3 if 'bbc' in names else 2 if 'bloomberg' in names else 0
+  return (newsroom,int(row.get('observation_count') or 0),float(row.get('overall_score') or 0))
+ return [item]+sorted(rows,key=evidence_rank,reverse=True)[:4]
+
 def prepare(kind,slot):
  import prepare_master_article as preparer
- plan,item=selected(kind,slot);target=package_path(kind,item);package=preparer.build_package(topic_for(kind,item),target);validate(package);title,slug,meta,labels,body=build_html(kind,item,package,check_remote_images=False)
+ plan,item=selected(kind,slot);original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
+ for candidate in attempts:
+  try:
+   target=package_path(kind,candidate);package=preparer.build_package(topic_for(kind,candidate),target);validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
+  except RuntimeError as exc:
+   last=exc
+   if kind!='trending' or getattr(preparer,'STAGE','')!='source-discovery' or 'minimum 6' not in str(exc):raise
+ else:raise last or RuntimeError('no evidence-ready trending candidate remained')
+ if item.get('id')!=original.get('id'):
+  plan['trending'][slot]=item;write(PLAN,plan)
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
- write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
+ write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'replaced_topic_id':original.get('id') if item.get('id')!=original.get('id') else None,'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
 
 def publish(kind,slot,timed_release=False):
  # Never allow an ignored event from a prior local attempt to be redispatched.

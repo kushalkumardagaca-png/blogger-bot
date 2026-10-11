@@ -78,9 +78,12 @@ def discover(topic):
   value=str(value).strip()
   if value and value not in terms:terms.append(value)
  subject=' '.join(terms)
+ academic_queries=[];news_queries=[]
  try:
-  query_plan=model_json([{'role':'system','content':'Convert an editorial headline into neutral academic database search concepts. Remove hooks, commands and rhetoric.'},{'role':'user','content':'Return strict JSON {"query":"6 to 12 concrete financial research terms"} for: '+subject}],max_tokens=500)
+  query_plan=model_json([{'role':'system','content':'Convert an editorial headline into concise, neutral evidence searches. Remove publisher suffixes, hooks, commands and rhetoric.'},{'role':'user','content':'Return strict JSON {"query":"6 to 12 concrete financial research terms","academic_queries":["three searches of 3 to 7 terms each"],"news_queries":["three current-reporting searches of 3 to 7 terms each"]} for: '+subject}],max_tokens=800)
   subject=str(query_plan.get('query') or subject)[:300]
+  academic_queries=[str(x).strip()[:160] for x in query_plan.get('academic_queries',[]) if 3<=len(str(x).split())<=9][:3]
+  news_queries=[str(x).strip()[:160] for x in query_plan.get('news_queries',[]) if 3<=len(str(x).split())<=9][:3]
  except Exception:pass
  evidence=[];seen=set()
  # Headlines often contain publisher suffixes and breaking-news phrasing that
@@ -88,7 +91,7 @@ def discover(topic):
  # than failing the whole live slot on one brittle exact query.
  headline=re.sub(r'\s+[|–—-]\s+[^|–—-]{2,60}$','',str(topic.get('Punchy Title',''))).strip()
  context=' '.join(x for x in (headline,str(topic.get('Category','')),str(topic.get('Trending Category',''))) if x)
- query_variants=list(dict.fromkeys(x[:300] for x in (subject,headline,context) if len(x.strip())>=8))
+ query_variants=list(dict.fromkeys(x[:300] for x in (*academic_queries,subject,headline,context) if len(x.strip())>=8))
  relevance_terms=_research_terms(' '.join(query_variants))
  if len(relevance_terms)<3:raise RuntimeError('topic query did not yield enough concrete relevance terms')
  # OpenAlex provides topic-ranked scholarly metadata and abstracts without
@@ -116,7 +119,7 @@ def discover(topic):
  if topic.get('Trending Category'):
   try:
    from news_pipeline import parse_gnr
-   queries=[subject,headline,context]
+   queries=[*news_queries,subject,headline,context]
    for query in dict.fromkeys(x for x in queries if x):
     feed='https://news.google.com/rss/search?q='+urllib.parse.quote(str(query)+' when:7d')+'&hl=en-US&gl=US&ceid=US:en'
     response=requests.get(feed,headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=30);response.raise_for_status()
@@ -131,7 +134,8 @@ def discover(topic):
     if len(evidence)>=12:break
   except Exception:pass
  trusted=('irs.gov','dol.gov','sec.gov','investor.gov','consumerfinance.gov','federalreserve.gov','rbi.org.in','oecd.org','worldbank.org','imf.org','bis.org','ilo.org')
- queries=[subject+' official research data',subject+' regulator evidence',subject+' academic study statistics']
+ official_seed=academic_queries[0] if academic_queries else subject
+ queries=[official_seed+' official research data',subject+' regulator evidence',subject+' academic study statistics']
  for query in queries:
   try:
    root=ElementTree.fromstring(requests.get('https://www.bing.com/search?format=rss&q='+urllib.parse.quote(query),headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=20).text)

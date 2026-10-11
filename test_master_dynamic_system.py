@@ -60,6 +60,18 @@ def test_trend_scoring_clusters_live_observations():
     assert rows[0]['discovered_from_live_internet'] is True
 
 
+def test_trending_fallback_uses_live_same_category_reserve(monkeypatch,tmp_path):
+    import json
+    import master_dynamic_pipeline as pipeline
+    pool=tmp_path/'pool.json';tracker=tmp_path/'tracker.json'
+    pool.write_text(json.dumps({'topics':[{'id':'reserve','title':'Policy shift - Reuters','category':'Trend · Test','evergreen_category':'Taxes Benefits & Financial Planning','sources':[{'name':'Reuters'}],'overall_score':40,'discovered_from_live_internet':True},{'id':'wrong','title':'Other','category':'Trend · Other','sources':[{'name':'Reuters'}],'discovered_from_live_internet':True}]}))
+    tracker.write_text('{"published":[]}')
+    monkeypatch.setattr(pipeline,'POOL',pool);monkeypatch.setattr(pipeline,'TRACKER',tracker)
+    original={'id':'original','title':'Thin topic','category':'Trend · Test','evergreen_category':'Taxes Benefits & Financial Planning'}
+    rows=pipeline.trending_candidates({'trending':[original]},original)
+    assert [x['id'] for x in rows]==['original','reserve']
+
+
 def test_research_relevance_floor_rejects_off_topic_sources():
     from prepare_master_article import _research_terms, _topic_relevance
     terms=_research_terms('budget airlines jet fuel surcharge passenger fares')

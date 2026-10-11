@@ -77,7 +77,7 @@ jobs:
         run: |
           git config user.name "Daily Yield Master Writer"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json scheduled_ready
+          git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json MASTER_DAILY_PLAN.json scheduled_ready
           if ! git diff --staged --quiet; then
             git commit -m "Prepare dynamic trending Master package [skip ci]"
             for attempt in 1 2 3 4 5; do
