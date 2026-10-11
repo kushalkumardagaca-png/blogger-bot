@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 0,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "assembled core remains too large after sentence-safe condensation: 4612 words"
+}
