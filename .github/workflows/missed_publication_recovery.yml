@@ -1,4 +1,5 @@
 name: One-Time Missed Publication Recovery
+# Recovery revision 4: evidence-ready live-pool fallback with clean diagnostics.
 on:
   push:
     paths:
