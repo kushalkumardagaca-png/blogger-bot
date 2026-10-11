@@ -1,15 +1,27 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-11T00:55:10.152148+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-11T02:49:42.564346+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 3,
+  "failed": 0,
   "results": [
     {
+      "desk": "asia-pacific",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
+    },
+    {
+      "desk": "china",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
+    },
+    {
       "desk": "india",
-      "status": "FAIL",
-      "error_type": "ValueError",
-      "error": "adaptive News polish could not reach 3800-4100 words; last complete sourced draft was 3553 words"
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
