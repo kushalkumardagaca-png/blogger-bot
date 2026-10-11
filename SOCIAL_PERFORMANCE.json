@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T11:44:15.772078+00:00",
+  "generated_at": "2026-10-11T21:26:12.632540+00:00",
   "method": "Official social APIs only; no Daily Yield page requests and no synthetic views.",
   "limitations": "Impressions are recorded only where the platform API supplies them. Engagement counts are not treated as impressions.",
   "platforms": {
@@ -9,18 +9,497 @@
     },
     "bluesky": {
       "status": "ok",
-      "observations": 74
+      "observations": 83
     },
     "mastodon": {
       "status": "ok",
-      "observations": 59
+      "observations": 65
     },
     "tumblr": {
       "status": "ok",
-      "observations": 62
+      "observations": 67
     }
   },
   "items": [
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "511fd05bb4c1faf0",
+        "topic": "page",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "SAVE FOR YOUR NEXT DECISION",
+        "emoji": "🧾",
+        "question": "Which decision will you use this resource for?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxmiezg72y2x",
+      "title": "FOR CORPORATE",
+      "destination": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "published_at": "2026-10-11T22:35:18.268708+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "9156b6ef9061b3d6",
+        "topic": "page",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "SAVE FOR YOUR NEXT DECISION",
+        "emoji": "⚡",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "social_id": "830194421122416640",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "destination": "https://dailyyield.blogspot.com/",
+      "published_at": "2026-10-11T21:41:37.785835+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "2eab2e8fe8c52255",
+        "topic": "debt",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "START WITH THE EFFECTIVE COST",
+        "emoji": "⚡",
+        "question": "Which balance has the highest effective cost?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117422945883610795",
+      "title": "Coastal Real Estate Valuation Realities",
+      "destination": "https://dailyyield.blogspot.com/2026/10/coastal-real-estate-valuation-realities.html",
+      "published_at": "2026-10-11T20:49:22.563803+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 1,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "4a66e0b5415dde0f",
+        "topic": "debt",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "COMPARE THE RATE AND THE CASH BUFFER",
+        "emoji": "🧾",
+        "question": "Which balance has the highest effective cost?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxmchgxvla2u",
+      "title": "Coastal Real Estate Valuation Realities",
+      "destination": "https://dailyyield.blogspot.com/2026/10/coastal-real-estate-valuation-realities.html",
+      "published_at": "2026-10-11T20:49:17.100128+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "a86dbb20040ff18d",
+        "topic": "saving",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "MAKE THE NEXT STEP MEASURABLE",
+        "emoji": "🧾",
+        "question": "Which assumption should you stress-test first?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "830189242241236992",
+      "title": "Balancing Budgets And Cost Pressures",
+      "destination": "https://dailyyield.blogspot.com/2026/10/balancing-budgets-and-cost-pressures.html",
+      "published_at": "2026-10-11T20:19:18.287629+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "8f1fcbf476dddc6e",
+        "topic": "saving",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "BUILD MARGIN BEFORE CHASING RETURN",
+        "emoji": "🌐",
+        "question": "What amount can you sustain in a difficult month?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxmarrwv5u2m",
+      "title": "Balancing Budgets And Cost Pressures",
+      "destination": "https://dailyyield.blogspot.com/2026/10/balancing-budgets-and-cost-pressures.html",
+      "published_at": "2026-10-11T20:19:16.660436+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "ad29f6ca247ce844",
+        "topic": "saving",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "TEST THE PLAN WITH REAL CASH FLOW",
+        "emoji": "🔎",
+        "question": "What amount can you sustain in a difficult month?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "830187425902067712",
+      "title": "Banking & Personal Money News",
+      "destination": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html",
+      "published_at": "2026-10-11T19:50:26.199876+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "e986eda5cb761fbb",
+        "topic": "general",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "CHECK THE DOWNSIDE, NOT JUST THE CLAIM",
+        "emoji": "⚡",
+        "question": "What evidence would make you choose differently?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "830187356765208576",
+      "title": "Fighting Denied Insurance Claims",
+      "destination": "https://dailyyield.blogspot.com/2026/10/fighting-denied-insurance-claims.html",
+      "published_at": "2026-10-11T19:49:20.167906+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "90cd4b6f8b7a4b2f",
+        "topic": "general",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "ONE DECISION, CLEAR ASSUMPTIONS",
+        "emoji": "🌐",
+        "question": "What evidence would make you choose differently?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117422592086333766",
+      "title": "Fintech’s Evolution, Disruption, and Future",
+      "destination": "https://dailyyield.blogspot.com/2026/10/fintechs-evolution-disruption-and-future.html",
+      "published_at": "2026-10-11T19:19:23.979823+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "318195dc1ac2a51b",
+        "topic": "general",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "🔎",
+        "question": "Which number would decide this for you?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxm5gous7j2x",
+      "title": "Fintech’s Evolution, Disruption, and Future",
+      "destination": "https://dailyyield.blogspot.com/2026/10/fintechs-evolution-disruption-and-future.html",
+      "published_at": "2026-10-11T19:19:23.018946+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "260c4770199c51cf",
+        "topic": "news",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "emoji": "🧠",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "117422582170579957",
+      "title": "Global Finance News — 11 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-11.html",
+      "published_at": "2026-10-11T19:16:53.005774+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "f849b0d41c8a6f42",
+        "topic": "page",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "A USEFUL DAILY YIELD RESOURCE",
+        "emoji": "⚡",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "social_id": "117422569233440534",
+      "title": "DAILY NEWS",
+      "destination": "https://dailyyield.blogspot.com/p/daily-news.html",
+      "published_at": "2026-10-11T19:13:35.316899+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "6cff0da24711caad",
+        "topic": "general",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "PUT THE TRADE-OFFS ON ONE PAGE",
+        "emoji": "🧮",
+        "question": "What evidence would make you choose differently?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxm4mzzt362g",
+      "title": "Companies, IPOs & Deals News — 11 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-11.html",
+      "published_at": "2026-10-11T19:05:08.089289+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "a4ff7eafc8a2bf57",
+        "topic": "news",
+        "style": "teal voltage",
+        "style_index": 5,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "🌐",
+        "question": "Which linked source deserves a closer read?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxm26rwiuf2s",
+      "title": "Americas Finance News — 10 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-11.html",
+      "published_at": "2026-10-11T18:21:16.827935+05:30",
+      "metrics": {
+        "likes": 1,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "b3aff19aa483f30c",
+        "topic": "general",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "📌",
+        "question": "Which number would decide this for you?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxlzmbody62y",
+      "title": "Nvidia-Backed IPO Scrapped Amid AI Limits",
+      "destination": "https://dailyyield.blogspot.com/2026/10/nvidia-backed-ipo-scrapped-amid-ai.html",
+      "published_at": "2026-10-11T18:10:55.935263+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "4cd9565f77010418",
+        "topic": "general",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "🧮",
+        "question": "What evidence would make you choose differently?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117422322794878899",
+      "title": "Nvidia-Backed IPO Scrapped Amid AI Limits",
+      "destination": "https://dailyyield.blogspot.com/2026/10/nvidia-backed-ipo-scrapped-amid-ai.html",
+      "published_at": "2026-10-11T18:10:54.960738+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "52e48ffc9b150710",
+        "topic": "news",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "emoji": "📌",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117422274800933001",
+      "title": "Europe Finance News — 11 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-11.html",
+      "published_at": "2026-10-11T17:58:42.646060+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "79781971de921ba2",
+        "topic": "news",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "📊",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 1,
+        "adaptive": true
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxlywaeqjo2m",
+      "title": "Europe Finance News — 11 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-11.html",
+      "published_at": "2026-10-11T17:58:36.197564+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "6a04de79a81465a6",
+        "topic": "market",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "WHAT THE NUMBERS CAN SUPPORT",
+        "emoji": "🌐",
+        "question": "What downside would make this unsuitable for you?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxlyot4ptv2l",
+      "title": "Inside India's Currency Management Overhaul",
+      "destination": "https://dailyyield.blogspot.com/2026/10/inside-indias-currency-management.html",
+      "published_at": "2026-10-11T17:54:27.496138+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "f2036bfe8dbabc2d",
+        "topic": "page",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "SAVE FOR YOUR NEXT DECISION",
+        "emoji": "⚡",
+        "question": "Which decision will you use this resource for?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "830177699403284481",
+      "title": "Daily Yield Spotlight: Today's Featured Stories",
+      "destination": "https://dailyyield.blogspot.com/#spotlight",
+      "published_at": "2026-10-11T17:15:50.242297+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
     {
       "platform": "tumblr",
       "creative": {
@@ -167,12 +646,12 @@
       "creative": {
         "seed": "42bcdd17b9136707",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧠",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxlfxn6eqj2d",
@@ -192,13 +671,13 @@
       "creative": {
         "seed": "b2476d2acd12be5b",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "rose terminal",
+        "style_index": 9,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117420468578619394",
       "title": "Russia Finance News — 11 October 2026",
@@ -216,13 +695,13 @@
       "creative": {
         "seed": "584dfd770cac65a0",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "830151491193012224",
       "title": "Russia Finance News — 11 October 2026",
@@ -285,13 +764,13 @@
       "creative": {
         "seed": "12a4df29ff3b36fa",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "830144305120329728",
       "title": "India Finance News — 11 October 2026",
@@ -307,13 +786,13 @@
       "creative": {
         "seed": "a6107a3ce8a83cd6",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "mango grid",
+        "style_index": 8,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "📌",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117420014917223978",
       "title": "China Finance News — 11 October 2026",
@@ -331,12 +810,12 @@
       "creative": {
         "seed": "04e84a99a49a1e6c",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxkysodypx2r",
@@ -356,13 +835,13 @@
       "creative": {
         "seed": "45772148176d61e5",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "cobalt pop",
+        "style_index": 1,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧠",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "117420013946108075",
       "title": "Asia-Pacific Finance News — 11 October 2026",
@@ -640,11 +1119,11 @@
         "topic": "news",
         "style": "mango grid",
         "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "830088633594904576",
       "title": "India Finance News — 10 October 2026",
@@ -684,13 +1163,13 @@
       "creative": {
         "seed": "2212990582fd2029",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "cobalt pop",
+        "style_index": 1,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧮",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117415385303298260",
       "title": "Banking & Personal Money News",
@@ -780,12 +1259,12 @@
       "creative": {
         "seed": "9cb5968d8d03954c",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📊",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxio66x2o32l",
@@ -805,13 +1284,13 @@
       "creative": {
         "seed": "ce46de9cd2a7944b",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧮",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 1,
+        "adaptive": false
       },
       "social_id": "117414707275062162",
       "title": "Americas Finance News — 9 October 2026",
@@ -853,13 +1332,13 @@
       "creative": {
         "seed": "20c19eaa6a68c1c0",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117410991106072078",
       "title": "US Finance News — 9 October 2026",
@@ -877,13 +1356,13 @@
       "creative": {
         "seed": "748e629f908dce6e",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "829994413010944000",
       "title": "Brazil Finance News — 9 October 2026",
@@ -899,12 +1378,12 @@
       "creative": {
         "seed": "4c71ad7f2b0ba672",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxgphjunar2m",
@@ -924,13 +1403,13 @@
       "creative": {
         "seed": "710fcf1e86ba0b34",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 1,
+        "adaptive": false
       },
       "social_id": "117409735148610971",
       "title": "Spain Finance News — 9 October 2026",
@@ -948,12 +1427,12 @@
       "creative": {
         "seed": "ec14e75c0e173463",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📊",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxggpjb5im2y",
@@ -995,12 +1474,12 @@
       "creative": {
         "seed": "1a8dca8a754ac18a",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📊",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxg6f6i25a2o",
@@ -1020,13 +1499,13 @@
       "creative": {
         "seed": "7c95dfa1d7bfd6b4",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "violet mint",
+        "style_index": 2,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117408769131756604",
       "title": "Economy and Macro Policy News — 9 October 2026",
@@ -1044,13 +1523,13 @@
       "creative": {
         "seed": "c6c31a2a7aef6448",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
+        "style": "night signal",
+        "style_index": 4,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧾",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "829964276844363776",
       "title": "Market and Trading News — 9 October 2026",
@@ -1090,12 +1569,12 @@
       "creative": {
         "seed": "38ab513efade9854",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxfrd24ul22m",
@@ -1137,13 +1616,13 @@
       "creative": {
         "seed": "ecc4857098dd3f1c",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧠",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117407716016788495",
       "title": "South Korea Finance News — 9 October 2026",
@@ -1161,12 +1640,12 @@
       "creative": {
         "seed": "482276396135765a",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxfjzc2tsu2y",
@@ -1213,11 +1692,11 @@
         "topic": "news",
         "style": "sky sticker",
         "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧾",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117405229189509897",
       "title": "Canada Finance News — 8 October 2026",
@@ -1235,13 +1714,13 @@
       "creative": {
         "seed": "999a4096482e9d8c",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829907648643301376",
       "title": "US Finance News — 8 October 2026",
@@ -1257,12 +1736,12 @@
       "creative": {
         "seed": "2c1fb8f9b6d488a8",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxedbawoxc2q",
@@ -1306,12 +1785,12 @@
       "creative": {
         "seed": "0419ce26cceae1b5",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📊",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxdwaibqni2m",
@@ -1331,13 +1810,13 @@
       "creative": {
         "seed": "0617b87c6cd72185",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829889126738329600",
       "title": "China Finance News — 8 October 2026",
@@ -1353,12 +1832,12 @@
       "creative": {
         "seed": "1f739d1a1ff2af77",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxdsf26py32q",
@@ -1378,13 +1857,13 @@
       "creative": {
         "seed": "fced43f65fc6d588",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117403483417950596",
       "title": "Germany Finance News — 8 October 2026",
@@ -1402,13 +1881,13 @@
       "creative": {
         "seed": "e314c713f96e047c",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "829873636298178560",
       "title": "Economy and Macro Policy News — 8 October 2026",
@@ -1424,12 +1903,12 @@
       "creative": {
         "seed": "4f0c42705b8267bf",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxdih25nqx2y",
@@ -1520,13 +1999,13 @@
       "creative": {
         "seed": "b657cc99355cfeba",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829856691156893696",
       "title": "Australia Finance News — 8 October 2026",
@@ -1542,12 +2021,12 @@
       "creative": {
         "seed": "40a133e5b97eb9ca",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxcdpbwq7n2z",
@@ -1591,13 +2070,13 @@
       "creative": {
         "seed": "e476e6c4d753d80b",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "829817028856725504",
       "title": "Canada Finance News — 7 October 2026",
@@ -1613,12 +2092,12 @@
       "creative": {
         "seed": "c628b873ef362809",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxbojm7fef2r",
@@ -1638,13 +2117,13 @@
       "creative": {
         "seed": "4c236a09a82f5656",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "📌",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 1,
+        "adaptive": false
       },
       "social_id": "117399023649974189",
       "title": "Italy Finance News — 7 October 2026",
@@ -1684,12 +2163,12 @@
       "creative": {
         "seed": "fed470dbb51f8939",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxbbvhfyis2p",
@@ -1709,13 +2188,13 @@
       "creative": {
         "seed": "d063834c0461b64f",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "🧮",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "117397823677461931",
       "title": "France Finance News — 7 October 2026",
@@ -1733,13 +2212,13 @@
       "creative": {
         "seed": "4aec2d29ec332f86",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧾",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "829789148074459136",
       "title": "Germany Finance News — 7 October 2026",
@@ -1780,13 +2259,13 @@
       "creative": {
         "seed": "5c42370f15cd24a9",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117396898331411021",
       "title": "India Finance News — 7 October 2026",
@@ -1854,13 +2333,13 @@
       "creative": {
         "seed": "f9d5d810d858b756",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829766245225267200",
       "title": "South Korea Finance News — 7 October 2026",
@@ -1876,13 +2355,13 @@
       "creative": {
         "seed": "e4e4482a51d29ac4",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧾",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117394611122032984",
       "title": "Personal Finance News — 6 October 2026",
@@ -1900,13 +2379,13 @@
       "creative": {
         "seed": "24064fef9539f968",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829732123973992448",
       "title": "Mexico Finance News — 6 October 2026",
@@ -1922,12 +2401,12 @@
       "creative": {
         "seed": "9f4e53f830315a6f",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx7fp2ibn32m",
@@ -1971,13 +2450,13 @@
       "creative": {
         "seed": "52c292a0e96757bd",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "📊",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "829717716366721024",
       "title": "Corporate Finance and Industry News",
@@ -1993,12 +2472,12 @@
       "creative": {
         "seed": "52fd8dac47657f31",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx75xlo4sx2x",
@@ -2018,12 +2497,12 @@
       "creative": {
         "seed": "ce3885eb1f126b34",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx6v5t7pkk2z",
@@ -2043,13 +2522,13 @@
       "creative": {
         "seed": "cbaf68ded604d4af",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117392470487034507",
       "title": "UK Finance News — 6 October 2026",
@@ -2089,12 +2568,12 @@
       "creative": {
         "seed": "bb82baccc628749d",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧠",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx6mvsiy3z2y",
@@ -2114,13 +2593,13 @@
       "creative": {
         "seed": "511ffb6e2dbedcdf",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 1,
+        "adaptive": false
       },
       "social_id": "117391777537301347",
       "title": "Market and Trading News — 6 October 2026",
@@ -2163,12 +2642,12 @@
       "creative": {
         "seed": "18471d3ecbaaf8b1",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧠",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx67rgh6cd2m",
@@ -2210,13 +2689,13 @@
       "creative": {
         "seed": "c359b6c1788a66b9",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "117389177240838346",
       "title": "Russia Finance News — 5 October 2026",
@@ -2278,12 +2757,12 @@
       "creative": {
         "seed": "94d9b682dff205f4",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧮",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx52imbnzy2q",
@@ -2327,12 +2806,12 @@
       "creative": {
         "seed": "cd6fb62c705db1e6",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx4ru5bjur2y",
@@ -2374,12 +2853,12 @@
       "creative": {
         "seed": "9890c6f7304bc52e",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx4ewivoky2o",
@@ -2399,13 +2878,13 @@
       "creative": {
         "seed": "9ef7756fa111074f",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧠",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "829613015278272512",
       "title": "UK Finance News — 5 October 2026",
@@ -2421,13 +2900,13 @@
       "creative": {
         "seed": "ba54017f621346e5",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "rose terminal",
+        "style_index": 9,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117386812821276871",
       "title": "Japan Finance News — 5 October 2026",
@@ -2445,12 +2924,12 @@
       "creative": {
         "seed": "dd5a92e8e22a6f47",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx44m4pv6b2x",
@@ -2494,12 +2973,12 @@
       "creative": {
         "seed": "188f1b376bf49c75",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx3x5orqrz2y",
@@ -2519,13 +2998,13 @@
       "creative": {
         "seed": "3d348c30ce0df4d0",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "829593049143427072",
       "title": "India Finance News — 5 October 2026",
@@ -2565,12 +3044,12 @@
       "creative": {
         "seed": "2a86591110ed92ec",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx3hzu5sgi2g",
@@ -2615,13 +3094,13 @@
       "creative": {
         "seed": "0c229e6eab552177",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
+        "style": "sky sticker",
+        "style_index": 7,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🌐",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "829560392852389888",
       "title": "Russia Finance News — 4 October 2026",
@@ -2662,12 +3141,12 @@
       "creative": {
         "seed": "3e7652861aeb6bb1",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx2ozn5k5z2l",
@@ -2692,8 +3171,8 @@
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "117383293712668875",
       "title": "Canada Finance News — 4 October 2026",
@@ -2736,12 +3215,12 @@
       "creative": {
         "seed": "b8d62ebf4d1fe40c",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mx2c3v6efx2g",
@@ -2763,11 +3242,11 @@
         "topic": "news",
         "style": "mango grid",
         "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🌐",
         "question": "Does this report change a decision—or only the context?",
         "layout": 1,
-        "adaptive": true
+        "adaptive": false
       },
       "social_id": "829542172225323008",
       "title": "Brazil Finance News — 4 October 2026",
@@ -2783,13 +3262,13 @@
       "creative": {
         "seed": "86622361e5536bad",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "cobalt pop",
+        "style_index": 1,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "📊",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 1,
+        "adaptive": false
       },
       "social_id": "117382384418232056",
       "title": "China Finance News — 4 October 2026",
@@ -2807,12 +3286,12 @@
       "creative": {
         "seed": "9d0f6a5a0d771542",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📊",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwzrchqnhj2r",
@@ -2832,13 +3311,13 @@
       "creative": {
         "seed": "22eaa144a9d9d683",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
         "layout": 1,
-        "adaptive": true
+        "adaptive": false
       },
       "social_id": "829523288309022720",
       "title": "Japan Finance News — 4 October 2026",
@@ -2854,13 +3333,13 @@
       "creative": {
         "seed": "adba7c6d24bbf69e",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧠",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "117380817203234935",
       "title": "Germany Finance News — 4 October 2026",
@@ -2924,12 +3403,12 @@
       "creative": {
         "seed": "e45091153001cc31",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwyjq55kgr2d",
@@ -2949,13 +3428,13 @@
       "creative": {
         "seed": "ce858d9dbe31100e",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "lavender zine",
+        "style_index": 6,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "📊",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117377589867136292",
       "title": "Mexico Finance News — 3 October 2026",
@@ -2998,13 +3477,13 @@
       "creative": {
         "seed": "dc3d04689a164378",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829465413577572352",
       "title": "US Finance News — 3 October 2026",
@@ -3045,13 +3524,13 @@
       "creative": {
         "seed": "f43e6724bbf2842a",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "mango grid",
+        "style_index": 8,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "117375768824203975",
       "title": "Spain Finance News — 3 October 2026",
@@ -3091,12 +3570,12 @@
       "creative": {
         "seed": "7c360c02c878bbae",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwx7yik6572d",
@@ -3116,13 +3595,13 @@
       "creative": {
         "seed": "55fe7cc9e5c6f832",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
+        "style": "night signal",
+        "style_index": 4,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧮",
         "question": "Which linked source deserves a closer read?",
         "layout": 2,
-        "adaptive": true
+        "adaptive": false
       },
       "social_id": "117375170061039871",
       "title": "France Finance News — 3 October 2026",
@@ -3140,12 +3619,12 @@
       "creative": {
         "seed": "649ab887673d2e71",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwx3iqy6sb2z",
@@ -3209,12 +3688,12 @@
       "creative": {
         "seed": "fd25a510da701401",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwwo3e2dsl2x",
@@ -3236,11 +3715,11 @@
         "topic": "news",
         "style": "sky sticker",
         "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 1,
+        "adaptive": false
       },
       "social_id": "117373732336366853",
       "title": "South Korea Finance News — 3 October 2026",
@@ -3258,13 +3737,13 @@
       "creative": {
         "seed": "17d0d3a2be620d71",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
+        "style": "hot coral",
+        "style_index": 3,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "🧠",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 0,
+        "adaptive": false
       },
       "social_id": "829403701834924032",
       "title": "Australia Finance News — 3 October 2026",
@@ -3280,13 +3759,13 @@
       "creative": {
         "seed": "c1e8f5b3204639f5",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "📊",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "117371959771009374",
       "title": "Personal Finance News — 2 October 2026",
@@ -3328,12 +3807,12 @@
       "creative": {
         "seed": "7c4d95e0f80fc27e",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwvivaliwd2i",
@@ -3497,13 +3976,13 @@
       "creative": {
         "seed": "798e7b29613a391e",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "THE SOURCE-LED UPDATE",
         "emoji": "🧾",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "829345321198960640",
       "title": "Spain Finance News — 2 October 2026",
@@ -3519,13 +3998,13 @@
       "creative": {
         "seed": "bf9011a61e6a815e",
         "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
-        "adaptive": true
+        "layout": 4,
+        "adaptive": false
       },
       "social_id": "117369818876116343",
       "title": "UK Finance News · 2 October 2026 · Coverage October 1 to 2 — Economic activity and social change in the UK, real-time indicators: 1 October 2026…",
@@ -3567,12 +4046,12 @@
       "creative": {
         "seed": "a1370a567dfc1b89",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧮",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwukz5szay2o",
@@ -3592,13 +4071,13 @@
       "creative": {
         "seed": "bb19fe95b9610cca",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "829336046492893184",
       "title": "Germany Finance News · 2 October 2026 · Coverage October 1 to 2 — North and South Korea trade accusations over landmines that injured three soldiers; German…",
@@ -3614,12 +4093,12 @@
       "creative": {
         "seed": "18d670f14abd5152",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🔎",
         "question": "Which linked source deserves a closer read?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwufmpojxq2b",
@@ -3712,13 +4191,13 @@
       "creative": {
         "seed": "8912833de31d194e",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📌",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 3,
+        "adaptive": false
       },
       "social_id": "829313050293174272",
       "title": "South Korea Finance News · 2 October 2026 · Coverage October 1 to 2 — S. Korean won weakens against U.S. dollar on lingering worries over higher yields; LS…",
@@ -3765,7 +4244,7 @@
         "emoji": "🌐",
         "question": "Which linked source deserves a closer read?",
         "layout": 2,
-        "adaptive": true
+        "adaptive": false
       },
       "social_id": "117366524676256059",
       "title": "Russia Finance News · 1 October 2026 · Coverage September 30 to October 1 — FACTBOX: Key takeaways from Russia's draft federal budget for 2027-2029; All prerequisites…",
@@ -3783,12 +4262,12 @@
       "creative": {
         "seed": "01ca82579105a4ed",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwt5fpqq232i",
@@ -3830,13 +4309,13 @@
       "creative": {
         "seed": "7d3adee462c2dd83",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "📊",
         "question": "Which linked source deserves a closer read?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "829279285661581312",
       "title": "Mexico Finance News · 1 October 2026 · Coverage September 30 to October 1 — France woos Mexico as a stronger trade partner, citing US uncertainties; Mexico stocks…",
@@ -3877,12 +4356,12 @@
       "creative": {
         "seed": "be5d290563f013a4",
         "topic": "news",
-        "style": "cobalt pop",
-        "style_index": 1,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
+        "layout": 1,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mwstek6ajo2f",
@@ -3924,13 +4403,13 @@
       "creative": {
         "seed": "a8de4801d7cdb863",
         "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
+        "style": "cobalt pop",
+        "style_index": 1,
         "hook": "THE NEWS BEHIND THE HEADLINE",
         "emoji": "📊",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": true
+        "layout": 2,
+        "adaptive": false
       },
       "social_id": "829264715109793792",
       "title": "Corporate Finance and Industry News · 1 October 2026 · Coverage September 30 to October 1 — Oil prices rise as Chinese refiners reportedly ban October fuel exports; Brent crude back…",
