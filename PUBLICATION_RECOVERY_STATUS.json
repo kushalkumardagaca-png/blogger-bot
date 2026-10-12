@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-12T18:08:40.664569+05:30",
+  "generatedAt": "2026-10-12T18:21:16.036867+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 11,
+  "confirmedPublications": 12,
   "actions": [
     {
       "type": "source_recovery",
@@ -12,7 +12,7 @@
     },
     {
       "type": "source_recovery",
-      "key": "news-companies",
+      "key": "master-trending-0",
       "applied": true
     },
     {
@@ -21,9 +21,7 @@
       "applied": true
     }
   ],
-  "retryBlocked": [
-    "source:2026-10-12:master-trending-0"
-  ],
+  "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
