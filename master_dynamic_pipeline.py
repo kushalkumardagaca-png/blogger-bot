@@ -53,7 +53,7 @@ def trending_candidates(plan,item):
  # A topic already published on an earlier date must never be regenerated as
  # today's primary merely because it remains in a newly generated plan.
  primary=[] if item.get('id') in published_ids else [item]
- return primary+sorted(rows,key=evidence_rank,reverse=True)[:4]
+ return primary+sorted(rows,key=evidence_rank,reverse=True)[:12]
 
 def prepare(kind,slot):
  import prepare_master_article as preparer
