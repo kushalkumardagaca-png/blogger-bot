@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-11T19:42:03+05:30",
+  "checked_at_ist": "2026-10-12T18:20:55+05:30",
   "summary": {
-    "pass": 140,
+    "pass": 141,
     "fail": 0
   },
   "checks": [
@@ -472,6 +472,11 @@
     },
     {
       "name": "News adaptive polish can deepen sparse but sourced editions before failing",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Timed News publication refreshes an expired Blogger access token once",
       "status": "PASS",
       "detail": ""
     },

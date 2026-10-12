@@ -1472,7 +1472,7 @@ def blogger_token():
 
 import urllib.parse
 
-def blogger_call(path, token, method="GET", body=None):
+def blogger_call(path, token, method="GET", body=None, _auth_retry=True):
     url = f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}{path}"
     data = json.dumps(body).encode() if body else None
     req = urllib.request.Request(url, data=data, method=method, headers={
@@ -1483,6 +1483,13 @@ def blogger_call(path, token, method="GET", body=None):
             return json.loads(r.read())
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", "replace")[:1200]
+        # Timed News jobs may research and wait near a publication slot long
+        # enough for Google's one-hour access token to expire. Refresh once on
+        # an authentication response and replay the same idempotent request;
+        # never loop or conceal a genuinely revoked refresh credential.
+        if exc.code == 401 and _auth_retry:
+            fresh_token = blogger_token()
+            return blogger_call(path, fresh_token, method, body, _auth_retry=False)
         raise RuntimeError(f"Blogger {method} {path} returned HTTP {exc.code}: {detail}") from exc
 
 def live_post_exists(url, token):

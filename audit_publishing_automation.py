@@ -278,6 +278,8 @@ check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_
 check('News adaptive polish can deepen sparse but sourced editions before failing',
       'base_context + 380' in np and 'summary_target + 54' in np
       and 'reduce_news_context' in np and 'NEWS_MIN_WORDS = 3800' in np)
+check('Timed News publication refreshes an expired Blogger access token once',
+      'exc.code == 401 and _auth_retry' in np and '_auth_retry=False' in np)
 check('Every News desk uses date-rotated fresh hero selection',
       'def daily_hero(' in np and 'edition_date.toordinal()' in np
       and 'previous_url=prev.get("hero_url"' in np and 'hero_override=hero' in np)
