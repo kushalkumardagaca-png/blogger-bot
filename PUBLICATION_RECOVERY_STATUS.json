@@ -1,13 +1,28 @@
 {
-  "generatedAt": "2026-10-12T17:24:33.344801+05:30",
+  "generatedAt": "2026-10-12T18:08:40.664569+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 11,
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-americas",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "news-companies",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-1",
+      "applied": true
+    }
+  ],
   "retryBlocked": [
-    "source:2026-10-12:master-trending-0",
-    "source:2026-10-12:master-evergreen-1"
+    "source:2026-10-12:master-trending-0"
   ],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
