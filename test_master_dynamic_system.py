@@ -69,6 +69,11 @@ def test_credential_free_emergency_model_returns_strict_json(monkeypatch):
     assert preparer._public_model_json([{'role':'user','content':'test'}],500)=={'fallback':True}
 
 
+def test_model_json_repairs_complete_mechanically_malformed_object():
+    import prepare_master_article as preparer
+    assert preparer._parse_model_json('{"ready": true,}')=={'ready':True}
+
+
 def test_repository_native_model_fallback_parses_content_parts(monkeypatch):
     import prepare_master_article as preparer
     class Response:

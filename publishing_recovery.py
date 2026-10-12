@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 16: resilient model fallback, bounded serial recovery and wrong-post cleanup are active.
+Permanent recovery generation 17: repaired model JSON, bounded serial recovery and wrong-post cleanup are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess

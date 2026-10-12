@@ -168,6 +168,22 @@ def discover(topic):
  evidence.sort(key=lambda x:x['score'],reverse=True)
  if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
  return evidence[:10]
+def _parse_model_json(text):
+ text=str(text or '');begin=text.find('{');finish=text.rfind('}')
+ if begin<0 or finish<=begin:raise ValueError('model returned no complete JSON object')
+ candidate=text[begin:finish+1]
+ try:return json.loads(candidate)
+ except json.JSONDecodeError:
+  # Providers occasionally return a complete but mechanically malformed object
+  # (unescaped line breaks, trailing commas or truncated quoting). Repair syntax
+  # only; semantic and evidence validators still run afterward.
+  try:
+   from json_repair import repair_json
+   repaired=repair_json(candidate,return_objects=True)
+   if isinstance(repaired,dict):return repaired
+  except Exception:pass
+  raise
+
 def _github_model_json(messages,max_tokens):
  token=os.environ.get('GITHUB_TOKEN','').strip()
  if not token:raise RuntimeError('GITHUB_TOKEN is unavailable for repository-native model fallback')
@@ -180,9 +196,7 @@ def _github_model_json(messages,max_tokens):
    content=r.json()['choices'][0]['message'].get('content') or ''
    if isinstance(content,list):text=''.join(str(part.get('text') or part.get('content') or '') if isinstance(part,dict) else str(part) for part in content)
    else:text=str(content)
-   begin=text.find('{');finish=text.rfind('}')
-   if begin<0 or finish<=begin:raise ValueError('GitHub model returned no complete JSON object')
-   return json.loads(text[begin:finish+1])
+   return _parse_model_json(text)
   except Exception as exc:
    last=exc
    if attempt<1:time.sleep(15)
@@ -203,9 +217,7 @@ def _public_model_json(messages,max_tokens):
     else:text=str(content)
    except (ValueError,KeyError,TypeError,IndexError):
     text=r.text
-   begin=text.find('{');finish=text.rfind('}')
-   if begin<0 or finish<=begin:raise ValueError('public fallback returned no complete JSON object')
-   return json.loads(text[begin:finish+1])
+   return _parse_model_json(text)
   except Exception as exc:
    last=exc
    if attempt<1:time.sleep(15)
@@ -232,8 +244,7 @@ def model_json(messages,max_tokens=16000):
    if attempt:request_messages.append({'role':'user','content':'Return one complete strict JSON object only. Repair any missing required fields and do not use markdown.'})
    try:
     r=requests.post(local+'/api/chat',json={'model':model,'messages':request_messages,'stream':False,'format':'json','options':{'temperature':0.2,'num_predict':min(max_tokens,8192),'num_ctx':32768}},timeout=1200);r.raise_for_status();text=str(r.json()['message']['content']);begin=text.find('{');finish=text.rfind('}')
-    if begin<0 or finish<=begin:raise ValueError('local model returned no complete JSON object')
-    return json.loads(text[begin:finish+1])
+    return _parse_model_json(text)
    except Exception as exc:
     last=exc
     if attempt<3:time.sleep(8*(attempt+1))
@@ -250,9 +261,8 @@ def model_json(messages,max_tokens=16000):
    try:
     r=requests.post(endpoint,headers={'x-goog-api-key':key,'Content-Type':'application/json'},json=body,timeout=120)
     if not r.ok:raise RuntimeError(f"Gemini HTTP {r.status_code}: {r.text[:500]}")
-    payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts']);begin=text.find('{');finish=text.rfind('}')
-    if begin<0 or finish<=begin:raise ValueError('Gemini returned no complete JSON object')
-    return json.loads(text[begin:finish+1])
+    payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts'])
+    return _parse_model_json(text)
    except Exception as exc:
     last=exc
     if 'HTTP 429' in str(exc):break
@@ -266,8 +276,7 @@ def model_json(messages,max_tokens=16000):
   if attempt:request_messages.append({'role':'user','content':'Return one complete strict JSON object only; never truncate JSON.'})
   try:
    r=requests.post(endpoint,headers=headers,json={'model':model,'messages':request_messages,'temperature':0.25,'max_tokens':max_tokens,'response_format':{'type':'json_object'},'reasoning_effort':'low'},timeout=600);r.raise_for_status();payload=r.json();text=str(payload['choices'][0]['message'].get('content') or '').strip();begin=text.find('{');finish=text.rfind('}')
-   if begin<0 or finish<=begin:raise ValueError('model returned no complete JSON object')
-   return json.loads(text[begin:finish+1])
+   return _parse_model_json(text)
   except Exception as exc:last=exc
  raise RuntimeError(f'model failed to return valid JSON after 3 attempts: {type(last).__name__}: {str(last)[:300]}')
 

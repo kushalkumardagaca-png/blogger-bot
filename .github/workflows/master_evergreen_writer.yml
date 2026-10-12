@@ -38,7 +38,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - run: pip install requests Pillow ImageHash google-api-python-client google-auth
+      - run: pip install requests Pillow ImageHash json-repair google-api-python-client google-auth
       - name: Select evergreen rotation slot
         id: slot
         run: |
