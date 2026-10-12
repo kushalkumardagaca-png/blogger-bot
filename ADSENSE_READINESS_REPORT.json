@@ -1,18 +1,23 @@
 {
-  "checkedAt": "2026-10-11T14:12:36.319054+00:00",
-  "status": "PASS",
+  "checkedAt": "2026-10-12T12:51:32.735871+00:00",
+  "status": "FAIL",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "summary": {
-    "items": 416,
-    "posts": 403,
+    "items": 434,
+    "posts": 421,
     "pages": 13,
     "changed": 0,
     "policyPagesReady": 5,
-    "failures": 0
+    "failures": 1
   },
   "changed": [],
-  "failures": [],
+  "failures": [
+    {
+      "id": "posts:7917175397372471855",
+      "issue": "URL changed"
+    }
+  ],
   "notes": [
     "Approval and revenue remain Google decisions.",
     "No ad code is installed before approval.",
