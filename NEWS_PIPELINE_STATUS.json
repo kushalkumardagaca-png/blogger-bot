@@ -1,12 +1,12 @@
 {
   "status": "FAIL",
-  "generated_at": "2026-10-12T11:45:00.099927+00:00",
+  "generated_at": "2026-10-12T12:15:00.201516+00:00",
   "dry_run": false,
   "published": 0,
   "failed": 1,
   "results": [
     {
-      "desk": "americas",
+      "desk": "companies",
       "status": "FAIL",
       "error_type": "RuntimeError",
       "error": "Blogger GET /posts?status=live&fetchBodies=false&maxResults=50&fields=items%28id%2Ctitle%2Curl%2Clabels%29 returned HTTP 401: {\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.\",\n    \"errors\": [\n      {\n        \"message\": \"Invalid Credentials\",\n        \"domain\": \"global\",\n        \"reason\": \"authError\",\n        \"location\": \"Authorization\",\n        \"locationType\": \"header\"\n      }\n    ],\n    \"status\": \"UNAUTHENTICATED\"\n  }\n}\n"
