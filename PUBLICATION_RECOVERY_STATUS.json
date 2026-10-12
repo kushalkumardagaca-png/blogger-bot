@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T23:50:42.326850+05:30",
+  "generatedAt": "2026-10-12T23:55:55.648124+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
@@ -7,13 +7,14 @@
   "actions": [
     {
       "type": "source_recovery",
-      "key": "master-trending-0",
+      "key": "master-trending-3",
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "source:2026-10-12:master-trending-0"
+  ],
   "masterRecoveryDeferred": [
-    "source:2026-10-12:master-trending-3",
     "source:2026-10-12:master-evergreen-3",
     "source:2026-10-12:master-trending-4",
     "source:2026-10-12:master-evergreen-4"
