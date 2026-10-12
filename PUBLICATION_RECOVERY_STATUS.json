@@ -1,23 +1,13 @@
 {
-  "generatedAt": "2026-10-12T18:21:16.036867+05:30",
+  "generatedAt": "2026-10-12T18:33:47.670755+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 12,
+  "confirmedPublications": 14,
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-americas",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
       "key": "master-trending-0",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "master-evergreen-1",
       "applied": true
     }
   ],
