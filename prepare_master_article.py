@@ -175,7 +175,7 @@ def _github_model_json(messages,max_tokens):
  endpoint='https://models.github.ai/inference/chat/completions'
  for attempt in range(2):
   try:
-   r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,4096),'response_format':{'type':'json_object'}},timeout=120)
+   r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,8192),'response_format':{'type':'json_object'}},timeout=120)
    if not r.ok:raise RuntimeError(f"GitHub Models HTTP {r.status_code}: {r.text[:500]}")
    content=r.json()['choices'][0]['message'].get('content') or ''
    if isinstance(content,list):text=''.join(str(part.get('text') or part.get('content') or '') if isinstance(part,dict) else str(part) for part in content)
@@ -197,9 +197,12 @@ def _public_model_json(messages,max_tokens):
    request_messages.append({'role':'user','content':'Return the complete JSON object now. Put no analysis, markdown or commentary in the answer.'})
    r=requests.post(endpoint,json={'model':model,'messages':request_messages,'temperature':0.15,'max_tokens':min(max_tokens+3000,12000),'reasoning_effort':'low','response_format':{'type':'json_object'},'private':True},timeout=120)
    if not r.ok:raise RuntimeError(f"public fallback HTTP {r.status_code}: {r.text[:500]}")
-   message=r.json()['choices'][0]['message'];content=message.get('content') or message.get('reasoning') or ''
-   if isinstance(content,list):text=''.join(str(part.get('text') or '') if isinstance(part,dict) else str(part) for part in content)
-   else:text=str(content)
+   try:
+    message=r.json()['choices'][0]['message'];content=message.get('content') or message.get('reasoning') or ''
+    if isinstance(content,list):text=''.join(str(part.get('text') or '') if isinstance(part,dict) else str(part) for part in content)
+    else:text=str(content)
+   except (ValueError,KeyError,TypeError,IndexError):
+    text=r.text
    begin=text.find('{');finish=text.rfind('}')
    if begin<0 or finish<=begin:raise ValueError('public fallback returned no complete JSON object')
    return json.loads(text[begin:finish+1])
@@ -209,11 +212,12 @@ def _public_model_json(messages,max_tokens):
  raise RuntimeError(f'credential-free model fallback failed after 2 bounded attempts: {type(last).__name__}: {str(last)[:300]}')
 
 def _emergency_model_json(messages,max_tokens):
- global GITHUB_MODELS_BROKEN
  github_error=None
- if os.environ.get('GITHUB_TOKEN','').strip() and not GITHUB_MODELS_BROKEN:
+ # A transient failure on one section must not disable repository-native models
+ # for every later section in the same article.
+ if os.environ.get('GITHUB_TOKEN','').strip():
   try:return _github_model_json(messages,max_tokens)
-  except Exception as exc:github_error=exc;GITHUB_MODELS_BROKEN=True
+  except Exception as exc:github_error=exc
  try:return _public_model_json(messages,max_tokens)
  except Exception as exc:
   if github_error:raise RuntimeError(f'{github_error}; public fallback: {exc}') from exc
@@ -391,12 +395,14 @@ Return strict JSON {{"sections":[{{"heading":"exact planned heading","paragraphs
    prompt=f'''Write section {number} of {len(section_plans)} for a Daily Yield financial article titled {plan.get('title')!r}. Heading: {heading!r}. Focus: {focus}. Topic: {json.dumps(topic,ensure_ascii=False)}. Prior headings: {json.dumps(prior)}. Evidence packet: {evidence_json}.
 Write approximately {section_target} actual words in 4-7 natural paragraphs. Establish context before conclusions. Use only evidence-supported facts; identify uncertainty, jurisdiction and limitations naturally. Add contextual source tokens such as [[S1|descriptive anchor]] and useful Daily Yield internal tokens such as [[I1|descriptive anchor]]. Do not include the heading, summary, FAQ, glossary, generic method prose, invented quotation, unsupported number, personal anecdote or repeated material. Return strict JSON {{"paragraphs":[...]}} only.'''
    accepted=None
-   for _ in range(3):
+   for attempt in range(3):
     result=model_json([{'role':'system','content':'Write rigorous, natural financial journalism. Obey the exact word budget and source boundaries.'},{'role':'user','content':prompt}],max_tokens=3500)
     parsed=paragraph_list(result);count=words(' '.join(parsed))
     if count>700:
      parsed=trim_paragraphs(parsed,700);count=words(' '.join(parsed))
     if 250<=count<=700:accepted=parsed;break
+    if count<250:
+     prompt+=f'\nYour prior response contained only {count} words. Rewrite it as a complete 4-7 paragraph section of at least 300 actual words; develop mechanisms, affected groups, uncertainty and dated evidence without filler.'
    if not accepted:raise RuntimeError(f'section {number} failed its substantive section gate; last count {count}')
    sections.append({'heading':heading,'paragraphs':accepted})
  core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections))
