@@ -1,0 +1,37 @@
+name: Master Generation Stale-Run Reaper
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/master_stale_run_reaper.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  reap:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Cancel only Master generators stalled beyond 45 minutes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          now=$(date -u +%s)
+          gh run list --repo "$GH_REPO" --status in_progress --limit 100 \
+            --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt] | @tsv' |
+          while IFS=$'\t' read -r run_id started_at; do
+            [ -n "$run_id" ] || continue
+            started=$(date -u -d "$started_at" +%s)
+            age=$((now-started))
+            if [ "$age" -gt 2700 ]; then
+              echo "Cancelling stale Master run $run_id after ${age}s"
+              gh run cancel "$run_id" --repo "$GH_REPO" || true
+            fi
+          done
