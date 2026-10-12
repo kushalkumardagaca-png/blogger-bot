@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 11: refreshed live-topic plan and token-safe reconciliation are active.
+Permanent recovery generation 12: serialized Master recovery, durable failure diagnosis and wrong-post cleanup are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess
@@ -10,6 +10,7 @@ ROOT=Path(__file__).parent; IST=dt.timezone(dt.timedelta(hours=5,minutes=30),nam
 LEDGER=ROOT/'RECOVERY_LEDGER.json'; STATUS=ROOT/'PUBLICATION_RECOVERY_STATUS.json'
 NEWS_TIMES={'asia-pacific':'04:15','china':'05:15','india':'07:15','russia':'10:15','markets':'12:15','europe':'12:45','economy':'13:15','americas':'17:15','companies':'17:45','global':'18:15','banking':'18:45'}
 MASTER_TIMES={'trending':['07:45','13:45','16:15','19:15','20:15'],'evergreen':['08:15','14:15','16:45','19:45','20:45']}
+WRONG_MASTER_REPAIRS=[{'key':'master-trending-0','duplicateUrl':'https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html','titlePhrase':'Budget Airlines'}]
 GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); MAX_RETRIES=3
 
 def load(path,default):
@@ -59,14 +60,23 @@ def reconcile(now,apply=False):
   if may_retry(ledger,lk,now):
    call(['gh','workflow','run','daily_news_wires.yml','--ref','main','-f',f'desks={desk}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
   else:blocked.append(lk)
- for kind,times in MASTER_TIMES.items():
-  for slot,t in enumerate(times):
-   key=f'master-{kind}-{slot}'
-   if now<due(day,t)+GRACE or key in by_key:continue
-   lk=f'source:{day}:{key}'
-   if may_retry(ledger,lk,now):
-    call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
-   else:blocked.append(lk)
+ master_deferred=[];master_dispatched=False
+ master_slots=sorted((due(day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times))
+ for slot_due,kind,slot in master_slots:
+  key=f'master-{kind}-{slot}'
+  if now<slot_due+GRACE or key in by_key:continue
+  lk=f'source:{day}:{key}'
+  if not may_retry(ledger,lk,now):blocked.append(lk);continue
+  # Model and image providers throttle bursts. Dispatch only the oldest eligible
+  # missing Master slot per recovery pass; later half-hourly passes advance the
+  # queue while the three-hour ledger spacing prevents duplicate work.
+  if master_dispatched:master_deferred.append(lk);continue
+  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply});master_dispatched=True
+ for repair in WRONG_MASTER_REPAIRS:
+  replacement=by_key.get(repair['key']);lk=f"cleanup:{day}:{repair['key']}"
+  if not replacement or lk in ledger:continue
+  cmd=['gh','workflow','run','cleanup_wrong_master_post.yml','--ref','main','-f',f"duplicate_url={repair['duplicateUrl']}",'-f',f"replacement_url={replacement['url']}",'-f',f"expected_title_phrase={repair['titlePhrase']}"]
+  call(cmd,apply);mark(ledger,lk,now);actions.append({'type':'wrong_publication_cleanup','key':repair['key'],'duplicateUrl':repair['duplicateUrl'],'replacementUrl':replacement['url'],'applied':apply})
  platform_urls={p:tracker_urls(p) for p in ('facebook','bluesky','tumblr','mastodon')}
  for item in inventory:
   published=parse(item.get('published_at'))
@@ -79,7 +89,7 @@ def reconcile(now,apply=False):
     call(cmd,apply);mark(ledger,lk,now);actions.append({'type':'social_replay','key':item['key'],'platform':platform,'routeIndex':route_index,'applied':apply})
    else:blocked.append(lk)
  if apply:save(LEDGER,ledger)
- report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS','apply':apply,'confirmedPublications':len(inventory),'actions':actions,'retryBlocked':blocked,'syntheticViews':0,'publicDailyYieldRequests':0}
+ report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS','apply':apply,'confirmedPublications':len(inventory),'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
  save(STATUS,report);return report
 
 def main():

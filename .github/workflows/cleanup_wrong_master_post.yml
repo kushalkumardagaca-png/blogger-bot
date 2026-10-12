@@ -1,0 +1,41 @@
+name: Cleanup Confirmed Wrong Master Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      duplicate_url:
+        description: Wrong duplicate Blogger URL
+        required: true
+        type: string
+      replacement_url:
+        description: Confirmed live replacement URL
+        required: true
+        type: string
+      expected_title_phrase:
+        description: Required phrase in the wrong post title
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Confirm replacement and delete only the proven duplicate
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: >-
+          python cleanup_wrong_master_post.py
+          --duplicate-url "${{ inputs.duplicate_url }}"
+          --replacement-url "${{ inputs.replacement_url }}"
+          --expected-title-phrase "${{ inputs.expected_title_phrase }}"

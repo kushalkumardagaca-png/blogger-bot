@@ -75,6 +75,23 @@ jobs:
             sleep $((attempt * 20))
           done
           exit 1
+      - name: Persist failed preparation diagnosis
+        if: failure()
+        run: |
+          set -euo pipefail
+          cp MASTER_AUTOMATION_STATUS.json /tmp/master-failure.json
+          git config user.name "Daily Yield Master Writer"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            mkdir -p master_failures
+            cp /tmp/master-failure.json "master_failures/${{ github.run_id }}-trending-${{ steps.slot.outputs.value }}.json"
+            git add master_failures
+            git commit -m "Record trending generation failure [skip ci]" || exit 0
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail
