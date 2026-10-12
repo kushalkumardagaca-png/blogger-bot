@@ -1,24 +1,12 @@
 {
-  "generatedAt": "2026-10-13T00:26:31.142590+05:30",
+  "generatedAt": "2026-10-13T00:51:09.676151+05:30",
   "dateIST": "2026-10-13",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 0,
-  "actions": [
-    {
-      "type": "source_recovery",
-      "key": "master-evergreen-3",
-      "applied": true
-    }
-  ],
-  "retryBlocked": [
-    "source:2026-10-12:master-trending-0",
-    "source:2026-10-12:master-trending-3"
-  ],
-  "masterRecoveryDeferred": [
-    "source:2026-10-12:master-trending-4",
-    "source:2026-10-12:master-evergreen-4"
-  ],
+  "actions": [],
+  "retryBlocked": [],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
