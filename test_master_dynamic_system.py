@@ -91,6 +91,18 @@ def test_trending_fallback_uses_live_same_category_reserve(monkeypatch,tmp_path)
     assert [x['id'] for x in rows]==['original','reserve']
 
 
+def test_trending_fallback_excludes_topic_published_on_an_earlier_date(monkeypatch,tmp_path):
+    import json
+    import master_dynamic_pipeline as pipeline
+    pool=tmp_path/'pool.json';tracker=tmp_path/'tracker.json'
+    pool.write_text(json.dumps({'topics':[{'id':'reserve','title':'Fresh policy shift - Reuters','category':'Trend · Test','evergreen_category':'Taxes Benefits & Financial Planning','sources':[{'name':'Reuters'}],'overall_score':50,'discovered_from_live_internet':True}]}))
+    tracker.write_text(json.dumps({'published':[{'topic_id':'original','date':'2026-10-11','url':'https://example.test/old'}]}))
+    monkeypatch.setattr(pipeline,'POOL',pool);monkeypatch.setattr(pipeline,'TRACKER',tracker)
+    original={'id':'original','title':'Already used','category':'Trend · Test','evergreen_category':'Taxes Benefits & Financial Planning'}
+    rows=pipeline.trending_candidates({'trending':[original]},original)
+    assert [x['id'] for x in rows]==['reserve']
+
+
 def test_model_independent_research_queries_survive_quota_failure():
     from prepare_master_article import _heuristic_queries
     queries=_heuristic_queries('Budget airlines lose edge as fuel surcharges come into play - The Hindu')

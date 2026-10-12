@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 7: expiring-token renewal and all-slot reconciliation are active.
+Permanent recovery generation 8: fresh-topic enforcement and all-slot reconciliation are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess

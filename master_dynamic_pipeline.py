@@ -43,14 +43,17 @@ def build_html(kind,item,package,check_remote_images=True):
 
 def trending_candidates(plan,item):
  """Use only live-internet reserves from the same approved category."""
- used={x.get('id') for x in plan.get('trending',[])}
- used.update(x.get('topic_id') for x in read(TRACKER,{}).get('published',[]))
+ published_ids={x.get('topic_id') for x in read(TRACKER,{}).get('published',[])}
+ used={x.get('id') for x in plan.get('trending',[])} | published_ids
  rows=[x for x in read(POOL,{}).get('topics',[]) if x.get('category')==item.get('category') and x.get('id') not in used and x.get('discovered_from_live_internet')]
  def evidence_rank(row):
   names=' '.join(str(x.get('name','')) for x in row.get('sources',[])).casefold()
   newsroom=4 if 'reuters' in names else 3 if 'bbc' in names else 2 if 'bloomberg' in names else 0
   return (newsroom,int(row.get('observation_count') or 0),float(row.get('overall_score') or 0))
- return [item]+sorted(rows,key=evidence_rank,reverse=True)[:4]
+ # A topic already published on an earlier date must never be regenerated as
+ # today's primary merely because it remains in a newly generated plan.
+ primary=[] if item.get('id') in published_ids else [item]
+ return primary+sorted(rows,key=evidence_rank,reverse=True)[:4]
 
 def prepare(kind,slot):
  import prepare_master_article as preparer
@@ -77,10 +80,10 @@ def publish(kind,slot,timed_release=False):
  package=read(target,{});validate(package);title,slug,meta,labels,body=build_html(kind,item,package);res=publish_to_blogger(title,body,labels)
  if not res or not res.get('url'):raise RuntimeError('Blogger did not confirm a live Master Article URL')
  tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['publication_enabled']=True
- if not any(x.get('topic_id')==item['id'] or x.get('url')==res['url'] for x in tracker['published']):tracker['published'].append(record)
+ if not any((x.get('topic_id')==item['id'] and x.get('date')==plan['date']) or x.get('url')==res['url'] for x in tracker['published']):tracker['published'].append(record)
  write(TRACKER,tracker)
  history=read(ROOT/'MASTER_TOPIC_HISTORY.json',{'version':1,'items':[]})
- if not any(x.get('topic_id')==item['id'] or x.get('url')==res['url'] for x in history['items']):history['items'].append(record)
+ if not any((x.get('topic_id')==item['id'] and x.get('date')==plan['date']) or x.get('url')==res['url'] for x in history['items']):history['items'].append(record)
  write(ROOT/'MASTER_TOPIC_HISTORY.json',history);write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':res['url'],'content_mode':'post','published_at':record['published_at']}]);write(STATUS,{'status':'PASS','publication_enabled':True,**record});print(res['url'])
 
 def main():
