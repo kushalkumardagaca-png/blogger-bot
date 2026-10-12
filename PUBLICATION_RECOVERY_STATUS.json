@@ -1,10 +1,16 @@
 {
-  "generatedAt": "2026-10-12T19:34:22.700148+05:30",
+  "generatedAt": "2026-10-12T20:00:01.803501+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 16,
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "master-trending-3",
+      "applied": true
+    }
+  ],
   "retryBlocked": [
     "source:2026-10-12:master-trending-0"
   ],
