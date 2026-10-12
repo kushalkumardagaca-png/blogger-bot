@@ -187,18 +187,21 @@ def _parse_model_json(text):
 def _github_model_json(messages,max_tokens):
  token=os.environ.get('GITHUB_TOKEN','').strip()
  if not token:raise RuntimeError('GITHUB_TOKEN is unavailable for repository-native model fallback')
- model=os.environ.get('GITHUB_MODELS_MODEL','').strip() or 'openai/gpt-4.1-mini';last=None
+ model=os.environ.get('GITHUB_MODELS_MODEL','').strip() or 'openai/gpt-4.1-mini';last=None;invalid_text=''
  endpoint='https://models.github.ai/inference/chat/completions'
  for attempt in range(2):
   try:
-   r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':messages,'temperature':0.2,'max_tokens':min(max_tokens,8192),'response_format':{'type':'json_object'}},timeout=120)
+   request_messages=list(messages)
+   if invalid_text:
+    request_messages += [{'role':'assistant','content':invalid_text[-12000:]},{'role':'user','content':'Repair the preceding response into one complete valid JSON object. Preserve required fields, finish truncated values, and output JSON only.'}]
+   r=requests.post(endpoint,headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':model,'messages':request_messages,'temperature':0.15,'max_tokens':min(max_tokens,8192),'response_format':{'type':'json_object'}},timeout=120)
    if not r.ok:raise RuntimeError(f"GitHub Models HTTP {r.status_code}: {r.text[:500]}")
    content=r.json()['choices'][0]['message'].get('content') or ''
    if isinstance(content,list):text=''.join(str(part.get('text') or part.get('content') or '') if isinstance(part,dict) else str(part) for part in content)
    else:text=str(content)
    return _parse_model_json(text)
   except Exception as exc:
-   last=exc
+   last=exc;invalid_text=locals().get('text','')
    if attempt<1:time.sleep(15)
  raise RuntimeError(f'GitHub model fallback failed after 2 bounded attempts: {type(last).__name__}: {str(last)[:300]}')
 

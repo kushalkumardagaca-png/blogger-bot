@@ -27,14 +27,19 @@ def write(path,value):path.parent.mkdir(parents=True,exist_ok=True);path.write_t
 def selected(kind,slot):
  plan=read(PLAN,{})
  if plan.get('status')!='READY':raise RuntimeError('daily dynamic Master plan is not READY')
- if plan.get('date')!=str(dt.datetime.now(IST).date()):raise RuntimeError('daily dynamic Master plan is stale')
+ today=dt.datetime.now(IST).date();plan_date=dt.date.fromisoformat(str(plan.get('date')))
+ if plan_date!=today:
+  allowed=os.environ.get('MASTER_BACKFILL','').casefold()=='true' and plan_date==today-dt.timedelta(days=1)
+  if not allowed:raise RuntimeError('daily dynamic Master plan is stale')
  rows=plan.get(kind,[])
  if not 0<=slot<len(rows):raise RuntimeError(f'{kind} slot {slot} is unavailable')
  return plan,rows[slot]
 def topic_for(kind,item):
  evergreen=item.get('evergreen_category') if kind=='trending' else item['category']
  return {'#':'dynamic-'+item['id'],'Punchy Title':item['title'],'Video Idea':item['title'],'Category':evergreen,'Trending Category':item.get('category') if kind=='trending' else ''}
-def package_path(kind,item):return PACKAGES/f"{dt.datetime.now(IST).date()}-{kind}-{item['id']}.json"
+def package_path(kind,item):
+ plan_date=read(PLAN,{}).get('date') or str(dt.datetime.now(IST).date())
+ return PACKAGES/f"{plan_date}-{kind}-{item['id']}.json"
 def build_html(kind,item,package,check_remote_images=True):
  stamp=dt.datetime.now(IST);topic=topic_for(kind,item);title,slug,meta,labels,body=render(package,topic,stamp.strftime('%Y-%m-%d'),stamp.strftime('%H:%M'))
  if kind=='trending':labels=[item['category'],item['evergreen_category'],'Master Article','Kushal K. Daga']

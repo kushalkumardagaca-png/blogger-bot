@@ -64,6 +64,7 @@ jobs:
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
+          MASTER_BACKFILL: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
         run: |
           for attempt in 1 2; do
             if python master_dynamic_pipeline.py --kind evergreen --slot "${{ steps.slot.outputs.value }}" --prepare; then
@@ -123,6 +124,7 @@ jobs:
         if: ${{ github.event_name == 'schedule' || inputs.publish }}
         env:
           MASTER_PUBLICATION_ENABLED: 'true'
+          MASTER_BACKFILL: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}

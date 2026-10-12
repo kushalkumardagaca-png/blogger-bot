@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 17: repaired model JSON, bounded serial recovery and wrong-post cleanup are active.
+Permanent recovery generation 18: repaired model JSON, overnight backfill and wrong-post cleanup are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess
@@ -61,11 +61,17 @@ def reconcile(now,apply=False):
    call(['gh','workflow','run','daily_news_wires.yml','--ref','main','-f',f'desks={desk}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
   else:blocked.append(lk)
  master_deferred=[];master_dispatched=False
- master_slots=sorted((due(day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times))
+ master_day=day
+ try:
+  planned_day=dt.date.fromisoformat(str(load(ROOT/'MASTER_DAILY_PLAN.json',{}).get('date')))
+  if planned_day==day-dt.timedelta(days=1) and now.astimezone(IST).hour<6:master_day=planned_day
+ except (TypeError,ValueError):pass
+ master_by_key={x['key']:x for x in published_inventory(master_day)}
+ master_slots=sorted((due(master_day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times))
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
-  if now<slot_due+GRACE or key in by_key:continue
-  lk=f'source:{day}:{key}'
+  if now<slot_due+GRACE or key in master_by_key:continue
+  lk=f'source:{master_day}:{key}'
   if not may_retry(ledger,lk,now):blocked.append(lk);continue
   # Model and image providers throttle bursts. Dispatch only the oldest eligible
   # missing Master slot per recovery pass; later half-hourly passes advance the
@@ -73,7 +79,7 @@ def reconcile(now,apply=False):
   if master_dispatched:master_deferred.append(lk);continue
   call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply});master_dispatched=True
  for repair in WRONG_MASTER_REPAIRS:
-  replacement=by_key.get(repair['key']);lk=f"cleanup:{day}:{repair['key']}"
+  replacement=master_by_key.get(repair['key']);lk=f"cleanup:{master_day}:{repair['key']}"
   if not replacement or lk in ledger:continue
   cmd=['gh','workflow','run','cleanup_wrong_master_post.yml','--ref','main','-f',f"duplicate_url={repair['duplicateUrl']}",'-f',f"replacement_url={replacement['url']}",'-f',f"expected_title_phrase={repair['titlePhrase']}"]
   call(cmd,apply);mark(ledger,lk,now);actions.append({'type':'wrong_publication_cleanup','key':repair['key'],'duplicateUrl':repair['duplicateUrl'],'replacementUrl':replacement['url'],'applied':apply})
