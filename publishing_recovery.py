@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 10: deep fresh-topic reserve and token-safe reconciliation are active.
+Permanent recovery generation 11: refreshed live-topic plan and token-safe reconciliation are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess
