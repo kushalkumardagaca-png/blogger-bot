@@ -1,10 +1,16 @@
 {
-  "generatedAt": "2026-10-12T07:52:58.385959+05:30",
+  "generatedAt": "2026-10-12T08:22:25.441378+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 3,
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "master-trending-0",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
