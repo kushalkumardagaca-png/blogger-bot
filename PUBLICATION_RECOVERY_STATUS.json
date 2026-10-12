@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T21:23:47.310405+05:30",
+  "generatedAt": "2026-10-12T21:27:44.496085+05:30",
   "dateIST": "2026-10-12",
   "status": "PASS",
   "apply": true,
@@ -7,16 +7,31 @@
   "actions": [
     {
       "type": "source_recovery",
+      "key": "master-trending-0",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-3",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-4",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-3",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
       "key": "master-evergreen-4",
       "applied": true
     }
   ],
-  "retryBlocked": [
-    "source:2026-10-12:master-trending-0",
-    "source:2026-10-12:master-trending-3",
-    "source:2026-10-12:master-trending-4",
-    "source:2026-10-12:master-evergreen-3"
-  ],
+  "retryBlocked": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
