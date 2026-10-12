@@ -1,24 +1,11 @@
 {
   "status": "WARNING",
   "zero_view": true,
-  "posts_checked": 424,
+  "posts_checked": 425,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 1,
-  "remaining_duplicate_heroes": 2,
+  "duplicate_heroes_replaced": 2,
+  "remaining_duplicate_heroes": 1,
   "unresolved_duplicate_groups": [
-    {
-      "image_key": "hello_boston_-_flickr_-_dalecruse.jpg",
-      "posts": [
-        {
-          "post_id": "5849095594285978796",
-          "title": "Global Finance News \u2014 12 October 2026"
-        },
-        {
-          "post_id": "2159780762419668959",
-          "title": "Global Finance News \u2014 9 October 2026"
-        }
-      ]
-    },
     {
       "image_key": "fileicon-ogg.png",
       "posts": [
@@ -35,7 +22,7 @@
   ],
   "pages_repaired": 1,
   "article_snapshot_entries": 97,
-  "news_snapshot_entries": 327,
+  "news_snapshot_entries": 328,
   "label_image_index_entries": 425,
   "article_category_counts": {
     "Trend \u00b7 Money & Policy Now": 3,
@@ -60,7 +47,7 @@
     "Family Life Stages & Consumer Safety": 16
   },
   "news_desk_counts": {
-    "Global Finance News": 18,
+    "Global Finance News": 19,
     "Americas Finance News": 63,
     "China Finance News": 18,
     "Asia-Pacific Finance News": 48,
