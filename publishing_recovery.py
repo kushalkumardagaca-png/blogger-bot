@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 26: duration-aware starts, no terminal article retry ceiling, overnight package prewarming and evidence-backed completion are active.
+Permanent recovery generation 27: finance-domain evidence filtering, deterministic verified-core completion, duration-aware starts and no terminal article retry ceiling are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

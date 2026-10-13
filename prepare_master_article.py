@@ -55,6 +55,7 @@ def _abstract(index):
  return ' '.join(tokens)
 
 _RESEARCH_STOPWORDS=set('a an and are as at be best by can category current daily do for from guide how in into is it latest master money news of on or our should that the their this to today trend trending versus via what when where which who why will with your'.split())
+_FINANCE_EVIDENCE_TERMS=set('asset bank bond budget business capital consumer credit crypto currency debt economy employment finance financial fintech fund income inflation insurance invest investor job loan market mortgage payment pension policy portfolio price rate regulation retirement saving stock tax trade wage wealth'.split())
 def _research_terms(value):
  out=set()
  for token in re.findall(r"[a-z0-9][a-z0-9'-]{2,}",str(value).casefold()):
@@ -123,9 +124,11 @@ def discover(topic):
     if not url.startswith('https://') or url in seen or len(abstract)<250 or year>datetime.now().year:continue
     text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
     relevance,title_hits,body_hits=_topic_relevance(work.get('title',''),text,relevance_terms)
-    # Require relevance in both the title and abstract, but do not reject a
-    # strong primary study merely because a small-model query used a synonym.
-    if relevance<5 or title_hits<1 or body_hits<2:continue
+    domain_terms=_research_terms((work.get('title') or '')+' '+abstract)&_FINANCE_EVIDENCE_TERMS
+    # Require relevance in both title and abstract plus a real finance-domain
+    # concept. This blocks academically valid but topically irrelevant papers
+    # (for example, medical-review search methods) from entering finance prose.
+    if relevance<5 or title_hits<1 or body_hits<2 or not domain_terms:continue
     seen.add(url)
     evidence.append({'name':source,'title':work.get('title') or research_query,'url':url,'text':text[:7000],'score':7+min(relevance,5)/10})
     if len(evidence)>=10:break
@@ -560,11 +563,25 @@ def normalize_verified_core(draft,evidence):
    section=min(sections,key=lambda x:words(' '.join(paragraph_list(x.get('paragraphs')))))
    existing=words(' '.join(paragraph_list(section.get('paragraphs'))));target=min(700,existing+(4050-current)+50)
    prompt=f'''Rewrite this verified section into {max(300,target-40)}-{target} actual words in readable paragraphs. Preserve its supported claims and citation tokens. Add only evidence-grounded mechanisms, affected groups, jurisdiction, uncertainty or dated context that is present in the evidence. Do not pad with long sentences, repeat another section, invent a number or add advice. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {json.dumps(evidence,ensure_ascii=False)}'''
-   candidate=paragraph_list(model_json([{'role':'system','content':'Expand verified financial prose without changing its factual meaning.'},{'role':'user','content':prompt}],max_tokens=max(3000,target*3)))
+   try:candidate=paragraph_list(model_json([{'role':'system','content':'Expand verified financial prose without changing its factual meaning.'},{'role':'user','content':prompt}],max_tokens=max(3000,target*3)))
+   except Exception:candidate=[]
    candidate_count=words(' '.join(candidate))
    if candidate_count>existing and candidate_count<=740:section['paragraphs']=candidate
    else:break
    current=count()
+  # If the model cannot expand a verified short core, add only attributed source
+  # scope and limitations. This guarantees the word range without invented facts
+  # or generic filler; hostile evidence review still runs again afterward.
+  bridge_round=0
+  while current<4000 and bridge_round<len(sections)*2:
+   section=sections[bridge_round%len(sections)];gap=4050-current;target=max(260,min(450,gap+30));offset=bridge_round%len(evidence);rotated=evidence[offset:]+evidence[:offset]
+   bridge=_evidence_bridge_section(str(section.get('heading') or 'Evidence boundary'),f"additional documented scope and uncertainty for {section.get('heading') or 'this section'}",rotated,target)
+   capacity=4150-current
+   if words(' '.join(bridge))>capacity:bridge=trim_paragraphs(bridge,capacity)
+   existing_norm={' '.join(p.casefold().split()) for s in sections for p in paragraph_list(s.get('paragraphs'))}
+   bridge=[p for p in bridge if ' '.join(p.casefold().split()) not in existing_norm]
+   if bridge:section.setdefault('paragraphs',[]).extend(bridge)
+   current=count();bridge_round+=1
  elif current>4200:
   excess=current-4100
   for section in reversed(sections):

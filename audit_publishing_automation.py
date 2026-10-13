@@ -292,6 +292,11 @@ check('Omitted local-model sections use attributed evidence rather than filler',
 check('Transient Ollama failures use fallback only after bounded local attempts',
       'Local Ollama remains primary' in prep and 'try:return _emergency_model_json(messages,max_tokens)' in prep
       and 'except Exception:result={}' in prep)
+check('Verified short cores complete from attributed evidence without model padding',
+      'bridge_round=0' in prep and 'while current<4000' in prep
+      and 'additional documented scope and uncertainty' in prep)
+check('Scholarly evidence must contain a finance-domain concept',
+      '_FINANCE_EVIDENCE_TERMS' in prep and 'or not domain_terms:continue' in prep)
 check('Current Master generation has no custom age timeout or age cancellation',
       'timeout-minutes:' not in master_workflows
       and '13800' not in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()

@@ -4,7 +4,7 @@ from unittest.mock import Mock,patch
 import pytest
 from master_article_v2 import render,validate,words
 from publication_preflight import assert_publishable
-from prepare_master_article import _compact_evidence_packet,_evidence_bridge_section,_visual_number,model_json
+from prepare_master_article import _compact_evidence_packet,_evidence_bridge_section,_visual_number,model_json,normalize_verified_core
 
 
 def package():
@@ -86,6 +86,14 @@ def test_omitted_local_section_has_a_bounded_attributed_fallback():
     assert words(' '.join(paragraphs))>=240
     assert len(paragraphs)==5 and all(f'[[S{i}|' in paragraphs[i-1] for i in range(1,6))
     assert sum('does not by itself establish causation' in p for p in paragraphs)>=4
+
+def test_short_verified_core_has_evidence_only_deterministic_completion():
+    draft=package();draft['sections']=[{'heading':s['heading'],'paragraphs':[' '.join(s['paragraphs'][0].split()[:390])]} for s in draft['sections']]
+    evidence=[{'name':f'Official source {i}','title':f'Financial evidence {i}','text':('Financial evidence defines market scope jurisdiction observation period and uncertainty without a universal prediction. '*9)} for i in range(1,7)]
+    with patch('prepare_master_article.model_json',side_effect=RuntimeError('offline')):
+        normalize_verified_core(draft,evidence)
+    total=words(' '.join(' '.join(s['paragraphs']) for s in draft['sections']))
+    assert 4000<=total<=4200
 
 def test_visual_number_accepts_single_decorated_number_only():
     assert _visual_number('15%')==15
