@@ -17,21 +17,22 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Cancel only local-model Master generators stalled beyond 150 minutes
+      - name: Cancel obsolete or stalled local-model Master generators
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          CURRENT_SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
           now=$(date -u +%s)
           gh run list --repo "$GH_REPO" --status in_progress --limit 100 \
-            --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt] | @tsv' |
-          while IFS=$'\t' read -r run_id started_at; do
+            --json databaseId,workflowName,startedAt,headSha | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt,.headSha] | @tsv' |
+          while IFS=$'\t' read -r run_id started_at head_sha; do
             [ -n "$run_id" ] || continue
             started=$(date -u -d "$started_at" +%s)
             age=$((now-started))
-            if [ "$age" -gt 9000 ]; then
-              echo "Cancelling stale Master run $run_id after ${age}s"
+            if [ "$age" -gt 9000 ] || { [ "$head_sha" != "$CURRENT_SHA" ] && [ "$age" -gt 1800 ]; }; then
+              echo "Cancelling obsolete/stale Master run $run_id after ${age}s"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
             fi
           done

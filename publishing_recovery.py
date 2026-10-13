@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 21: early local generation, bounded self-retry and photo-conflict protection are active.
+Permanent recovery generation 22: faster quota-free parallel recovery, bounded self-retry and photo-conflict protection are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, json, subprocess
@@ -60,7 +60,7 @@ def reconcile(now,apply=False):
   if may_retry(ledger,lk,now):
    call(['gh','workflow','run','daily_news_wires.yml','--ref','main','-f',f'desks={desk}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
   else:blocked.append(lk)
- master_deferred=[];master_dispatched=False
+ master_deferred=[]
  master_day=day
  try:
   planned_day=dt.date.fromisoformat(str(load(ROOT/'MASTER_DAILY_PLAN.json',{}).get('date')))
@@ -73,11 +73,10 @@ def reconcile(now,apply=False):
   if now<slot_due+GRACE or key in master_by_key:continue
   lk=f'source:{master_day}:{key}'
   if not may_retry(ledger,lk,now):blocked.append(lk);continue
-  # Model and image providers throttle bursts. Dispatch only the oldest eligible
-  # missing Master slot per recovery pass; later half-hourly passes advance the
-  # queue while the three-hour ledger spacing prevents duplicate work.
-  if master_dispatched:master_deferred.append(lk);continue
-  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply});master_dispatched=True
+  # Every Master workflow owns a separate local model runner, so missing slots
+  # can recover concurrently without a shared API quota. Photo-registry merge
+  # guards reject any cross-article image collision before publication.
+  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
  for repair in WRONG_MASTER_REPAIRS:
   replacement=master_by_key.get(repair['key']);lk=f"cleanup:{master_day}:{repair['key']}"
   if not replacement or lk in ledger:continue

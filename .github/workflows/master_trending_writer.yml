@@ -49,7 +49,7 @@ jobs:
           curl -fsSL https://ollama.com/install.sh | sh
           nohup ollama serve >/tmp/ollama.log 2>&1 &
           for attempt in {1..30}; do curl -fsS http://127.0.0.1:11434/api/tags >/dev/null && break; sleep 2; done
-          ollama pull qwen2.5:3b
+          ollama pull qwen2.5:1.5b
       - name: Select trending category slot
         id: slot
         run: |
@@ -65,7 +65,7 @@ jobs:
       - name: Research, write, validate and select three photos
         env:
           OLLAMA_API_URL: http://127.0.0.1:11434
-          OLLAMA_MODEL: qwen2.5:3b
+          OLLAMA_MODEL: qwen2.5:1.5b
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
