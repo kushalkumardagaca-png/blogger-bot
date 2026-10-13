@@ -1,9 +1,15 @@
 {
-  "generatedAt": "2026-10-13T12:00:05.908586+05:30",
+  "generatedAt": "2026-10-13T12:04:01.149403+05:30",
   "dateIST": "2026-10-13",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 4,
+  "overdueMissing": [
+    "master-trending-0",
+    "master-evergreen-0",
+    "master-trending-1",
+    "master-evergreen-1"
+  ],
   "actions": [],
   "retryBlocked": [
     "source:2026-10-13:master-trending-0",
