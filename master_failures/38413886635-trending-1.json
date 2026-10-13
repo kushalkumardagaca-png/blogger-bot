@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "engine": "master-v3-fresh",
+  "kind": "trending",
+  "slot": 1,
+  "error_type": "RuntimeError",
+  "error": "bounded section 1 did not pass after four provider attempts: 464 words, 7 paragraphs, citations [], unsupported numbers ['1987,', '1987', '1987,']"
+}
