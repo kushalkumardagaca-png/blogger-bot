@@ -23,8 +23,8 @@ check('Rejected legacy Master workflows remain absent and approved dynamic workf
       and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
 master_expected={
  'master_topic_discovery.yml':['35 18 * * 6','50 18 * * *'],
- 'master_trending_writer.yml':['30 21 * * *','30 0 * * *','30 5 * * *','30 7 * * *','30 11 * * *'],
- 'master_evergreen_writer.yml':['30 23 * * *','30 2 * * *','30 6 * * *','0 11 * * *','30 13 * * *'],
+ 'master_trending_writer.yml':['0 22 * * *','0 1 * * *','0 6 * * *','0 8 * * *','30 12 * * *'],
+ 'master_evergreen_writer.yml':['30 0 * * *','30 3 * * *','30 7 * * *','0 12 * * *','30 14 * * *'],
 }
 for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
@@ -256,6 +256,7 @@ check('Permanent all-slot and social dead-letter recovery replaces the one-time 
       and bool(recovery) and bool(recovery_code) and "cron: '7,37 * * * *'" in recovery
       and 'MAX_RETRIES=3' in recovery_code and 'SOCIAL_GRACE' in recovery_code
       and 'implementation_revision' in recovery_code and "row.get('revision')!=revision" in recovery_code
+      and "key.startswith(('source:','prewarm:'))" in recovery_code
       and 'PREWARM=dt.timedelta(hours=3,minutes=15)' in recovery_code and "'publish=false'" in recovery_code
       and 'publicDailyYieldRequests' in recovery_code)
 check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
@@ -291,12 +292,18 @@ check('Omitted local-model sections use attributed evidence rather than filler',
 check('Transient Ollama failures use fallback only after bounded local attempts',
       'Local Ollama remains primary' in prep and 'try:return _emergency_model_json(messages,max_tokens)' in prep
       and 'except Exception:result={}' in prep)
-check('Master stale-run reaper allows legitimate CPU generation to approach workflow timeout',
-      '13800' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
-      and master_workflows.count('timeout-minutes: 240')==2)
-check('Master preparation starts three hours and fifteen minutes before release',
-      'Prepare 03:00 IST → live 06:15' in master_workflows
-      and 'Prepare 19:00 IST → live 22:15' in master_workflows)
+check('Current Master generation has no custom age timeout or age cancellation',
+      'timeout-minutes:' not in master_workflows
+      and '13800' not in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
+      and 'age=' not in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text())
+check('Trending starts 150 minutes plus 15 spare before release',
+      'Trending generation budget: 150 minutes plus 15 minutes spare' in master_workflows
+      and 'Prepare 03:30 IST → live 06:15' in master_workflows
+      and 'Prepare 18:00 IST → live 20:45' in master_workflows)
+check('Evergreen starts 120 minutes plus 15 spare before release',
+      'Evergreen generation budget: 120 minutes plus 15 minutes spare' in master_workflows
+      and 'Prepare 06:00 IST → live 08:15' in master_workflows
+      and 'Prepare 20:00 IST → live 22:15' in master_workflows)
 check('Superseded pre-repair Master runs cannot block repaired same-slot recovery',
       'repair_epoch' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
       and 'started" -lt "$repair_epoch' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text())

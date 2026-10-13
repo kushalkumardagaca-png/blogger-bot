@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T13:15:07+05:30",
+  "checked_at_ist": "2026-10-13T15:15:02+05:30",
   "summary": {
-    "pass": 152,
+    "pass": 153,
     "fail": 0
   },
   "checks": [
@@ -18,12 +18,12 @@
     {
       "name": "master_trending_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['30 21 * * *', '30 0 * * *', '30 5 * * *', '30 7 * * *', '30 11 * * *']"
+      "detail": "['0 22 * * *', '0 1 * * *', '0 6 * * *', '0 8 * * *', '30 12 * * *']"
     },
     {
       "name": "master_evergreen_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['30 23 * * *', '30 2 * * *', '30 6 * * *', '0 11 * * *', '30 13 * * *']"
+      "detail": "['30 0 * * *', '30 3 * * *', '30 7 * * *', '0 12 * * *', '30 14 * * *']"
     },
     {
       "name": "All ten Master packages are prepared in five staggered overnight batches",
@@ -471,12 +471,17 @@
       "detail": ""
     },
     {
-      "name": "Master stale-run reaper allows legitimate CPU generation to approach workflow timeout",
+      "name": "Current Master generation has no custom age timeout or age cancellation",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Master preparation starts three hours and fifteen minutes before release",
+      "name": "Trending starts 150 minutes plus 15 spare before release",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Evergreen starts 120 minutes plus 15 spare before release",
       "status": "PASS",
       "detail": ""
     },

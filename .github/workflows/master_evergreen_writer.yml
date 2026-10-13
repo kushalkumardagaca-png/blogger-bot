@@ -2,11 +2,12 @@ name: Master Evergreen Writer (Live)
 
 on:
   schedule:
-    - cron: '30 23 * * *'  # Prepare 05:00 IST → live 08:15
-    - cron: '30 2 * * *'   # Prepare 08:00 IST → live 11:15
-    - cron: '30 6 * * *'   # Prepare 12:00 IST → live 15:15
-    - cron: '0 11 * * *'   # Prepare 16:30 IST → live 19:45
-    - cron: '30 13 * * *'  # Prepare 19:00 IST → live 22:15
+    # Evergreen generation budget: 120 minutes plus 15 minutes spare.
+    - cron: '30 0 * * *'   # Prepare 06:00 IST → live 08:15
+    - cron: '30 3 * * *'   # Prepare 09:00 IST → live 11:15
+    - cron: '30 7 * * *'   # Prepare 13:00 IST → live 15:15
+    - cron: '0 12 * * *'   # Prepare 17:30 IST → live 19:45
+    - cron: '30 14 * * *'  # Prepare 20:00 IST → live 22:15
   workflow_dispatch:
     inputs:
       slot:
@@ -37,7 +38,6 @@ concurrency:
 jobs:
   write:
     runs-on: ubuntu-24.04
-    timeout-minutes: 240
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -54,11 +54,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '30 23 * * *') value=0 ;;
-            '30 2 * * *') value=1 ;;
-            '30 6 * * *') value=2 ;;
-            '0 11 * * *') value=3 ;;
-            '30 13 * * *') value=4 ;;
+            '30 0 * * *') value=0 ;;
+            '30 3 * * *') value=1 ;;
+            '30 7 * * *') value=2 ;;
+            '0 12 * * *') value=3 ;;
+            '30 14 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"

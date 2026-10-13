@@ -23,7 +23,6 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          now=$(date -u +%s)
           # One-time safety epoch for the bounded-context/source-discovery repair.
           # Runs started before this deployment use superseded generation code and
           # may block the repaired same-slot recovery because concurrency queues.
@@ -33,15 +32,11 @@ jobs:
           while IFS=$'\t' read -r run_id started_at; do
             [ -n "$run_id" ] || continue
             started=$(date -u -d "$started_at" +%s)
-            age=$((now-started))
-            # Cancel only superseded pre-repair runs or a genuinely wedged new
-            # run. A fixed deployment epoch is safe; ordinary state commits that
-            # advance main do not make a healthy run obsolete.
+            # Cancel only superseded pre-repair runs. Current generation is
+            # never cancelled for age; permanent recovery restarts an article if
+            # the hosting platform itself eventually terminates a runner.
             if [ "$started" -lt "$repair_epoch" ]; then
               echo "Cancelling superseded pre-repair Master run $run_id"
-              gh run cancel "$run_id" --repo "$GH_REPO" || true
-            elif [ "$age" -gt 13800 ]; then
-              echo "Cancelling stalled Master run $run_id after ${age}s"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
             fi
           done

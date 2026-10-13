@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 25: overnight full-package prewarming, repaired-code rearming, evidence-backed completion and photo-conflict protection are active.
+Permanent recovery generation 26: duration-aware starts, no terminal article retry ceiling, overnight package prewarming and evidence-backed completion are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -38,7 +38,11 @@ def may_retry(ledger,key,now,revision=None):
  # version exhausted or recently used its bounded attempts. Generated tracker
  # commits do not alter this content fingerprint.
  if row.get('revision')!=revision:return True
- if int(row.get('attempts',0))>=MAX_RETRIES:return False
+ # Source and preparation recovery have no terminal attempt ceiling during the
+ # IST publication day. Each attempt remains time-spaced and individually
+ # bounded, but an article is never abandoned because an arbitrary counter was
+ # reached. Social replay retains a three-attempt cap to avoid duplicate posts.
+ if not key.startswith(('source:','prewarm:')) and int(row.get('attempts',0))>=MAX_RETRIES:return False
  last=parse(row.get('lastAttempt',''));return not last or now-last>=RETRY
 def mark(ledger,key,now,revision=None):
  revision=revision or implementation_revision();row=ledger.setdefault(key,{})
