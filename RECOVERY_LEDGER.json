@@ -80,42 +80,57 @@
     "lastAttempt": "2026-10-13T05:19:14.073575+05:30"
   },
   "source:2026-10-13:master-trending-0": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   },
   "source:2026-10-13:master-evergreen-0": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   },
   "source:2026-10-13:master-trending-1": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   },
   "source:2026-10-13:master-evergreen-1": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   },
   "source:2026-10-13:master-trending-2": {
     "attempts": 1,
     "lastAttempt": "2026-10-13T11:34:57.873170+05:30"
   },
   "prewarm:2026-10-13:master-trending-2": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   },
   "prewarm:2026-10-13:master-evergreen-2": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   },
   "prewarm:2026-10-13:master-trending-3": {
-    "revision": "999132af1b19ff98",
+    "revision": "8cdf317ad918865c",
     "attempts": 1,
-    "lastAttempt": "2026-10-13T13:04:23.665568+05:30"
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
+  },
+  "source:2026-10-13:news-europe": {
+    "revision": "8cdf317ad918865c",
+    "attempts": 1,
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
+  },
+  "social:2026-10-13:news-economy:0": {
+    "revision": "8cdf317ad918865c",
+    "attempts": 1,
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
+  },
+  "social:2026-10-13:news-economy:1": {
+    "revision": "8cdf317ad918865c",
+    "attempts": 1,
+    "lastAttempt": "2026-10-13T13:15:32.266502+05:30"
   }
 }
