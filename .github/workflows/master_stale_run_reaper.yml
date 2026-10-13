@@ -30,7 +30,10 @@ jobs:
             [ -n "$run_id" ] || continue
             started=$(date -u -d "$started_at" +%s)
             age=$((now-started))
-            if [ "$age" -gt 7200 ]; then
+            # The quota-free CPU writer can legitimately need more than two
+            # hours for 4,000 verified words plus photographs. Let the workflow
+            # approach its own 180-minute timeout; cancel only a truly wedged run.
+            if [ "$age" -gt 10200 ]; then
               echo "Cancelling stalled Master run $run_id after ${age}s"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
             fi

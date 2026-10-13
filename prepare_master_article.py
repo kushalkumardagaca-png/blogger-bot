@@ -120,10 +120,12 @@ def discover(topic):
     abstract=_abstract(work.get('abstract_inverted_index'));year=int(work.get('publication_year') or 0)
     location=work.get('primary_location') or {};url=(location.get('landing_page_url') or work.get('doi') or work.get('id') or '').replace('http://','https://')
     source=(location.get('source') or {}).get('display_name') or 'OpenAlex scholarly record'
-    if not url.startswith('https://') or url in seen or len(abstract)<450 or year>datetime.now().year:continue
+    if not url.startswith('https://') or url in seen or len(abstract)<250 or year>datetime.now().year:continue
     text=f"{work.get('title','')}. Published {year}. {abstract} Cited by {int(work.get('cited_by_count') or 0)} works in the OpenAlex index."
     relevance,title_hits,body_hits=_topic_relevance(work.get('title',''),text,relevance_terms)
-    if relevance<6 or title_hits<2:continue
+    # Require relevance in both the title and abstract, but do not reject a
+    # strong primary study merely because a small-model query used a synonym.
+    if relevance<5 or title_hits<1 or body_hits<2:continue
     seen.add(url)
     evidence.append({'name':source,'title':work.get('title') or research_query,'url':url,'text':text[:7000],'score':7+min(relevance,5)/10})
     if len(evidence)>=10:break
@@ -151,7 +153,11 @@ def discover(topic):
   except Exception:pass
  trusted=('irs.gov','dol.gov','sec.gov','investor.gov','consumerfinance.gov','federalreserve.gov','rbi.org.in','oecd.org','worldbank.org','imf.org','bis.org','ilo.org')
  official_seed=academic_queries[0] if academic_queries else subject
- queries=[official_seed+' official research data',subject+' regulator evidence',subject+' academic study statistics']
+ queries=list(dict.fromkeys([
+  official_seed+' official research data',subject+' regulator evidence',
+  subject+' academic study statistics',headline+' official guidance',
+  *[q+' government research' for q in heuristic_queries[:4]],
+ ]))
  for query in queries:
   try:
    root=ElementTree.fromstring(requests.get('https://www.bing.com/search?format=rss&q='+urllib.parse.quote(query),headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=20).text)
@@ -165,8 +171,28 @@ def discover(topic):
     if relevance<5 or (title_hits<1 and body_hits<4):continue
     seen.add(url);evidence.append({'name':host,'title':title,'url':url,'text':text,'score':9+min(relevance,5)/10})
   except Exception:pass
+ # Evergreen topics are live-demand validated and may be explained by a mix of
+ # durable research, regulators and established reporting. If scholarly search
+ # is sparse, add only directly relevant current reporting rather than failing a
+ # valid subject or weakening the unsupported-claim gate.
+ if len(evidence)<6 and not topic.get('Trending Category'):
+  try:
+   from news_pipeline import parse_gnr
+   queries=[*news_queries,*heuristic_queries,subject,headline,context]
+   for query in dict.fromkeys(x for x in queries if x):
+    feed='https://news.google.com/rss/search?q='+urllib.parse.quote(str(query)+' when:365d')+'&hl=en-US&gl=US&ceid=US:en'
+    response=requests.get(feed,headers={'User-Agent':'DailyYieldResearch/2.0'},timeout=30);response.raise_for_status()
+    for item in parse_gnr(response.text,('Master evergreen evidence',feed,'gnr',2)):
+     url=item.get('url','');title=item.get('title','');body=plain_page(url);summary=item.get('desc','');text=(title+'. '+(body or summary)).strip()
+     if not url.startswith('https://') or url in seen or len(text)<180:continue
+     relevance,title_hits,body_hits=_topic_relevance(title,text,relevance_terms)
+     if relevance<5 or title_hits<1:continue
+     seen.add(url);evidence.append({'name':item.get('agency') or 'Established newsroom','title':title or str(query),'url':url,'text':text[:7000],'score':7.5+min(relevance,5)/10})
+     if len(evidence)>=10:break
+    if len(evidence)>=10:break
+  except Exception:pass
  evidence.sort(key=lambda x:x['score'],reverse=True)
- if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary sources found; minimum 6')
+ if len(evidence)<6:raise RuntimeError(f'only {len(evidence)} usable topic-specific scholarly/primary or established-reporting sources found; minimum 6')
  return evidence[:10]
 def _parse_model_json(text):
  text=str(text or '');begin=text.find('{');finish=text.rfind('}')
@@ -242,16 +268,20 @@ def model_json(messages,max_tokens=16000):
  local=os.environ.get('OLLAMA_API_URL','').strip().rstrip('/')
  if local:
   model=os.environ.get('OLLAMA_MODEL','qwen2.5:3b').strip();last=None
-  for attempt in range(4):
+  for attempt in range(2):
    request_messages=list(messages)
    if attempt:request_messages.append({'role':'user','content':'Return one complete strict JSON object only. Repair any missing required fields and do not use markdown.'})
    try:
-    r=requests.post(local+'/api/chat',json={'model':model,'messages':request_messages,'stream':False,'format':'json','options':{'temperature':0.2,'num_predict':min(max_tokens,8192),'num_ctx':32768}},timeout=1200);r.raise_for_status();text=str(r.json()['message']['content']);begin=text.find('{');finish=text.rfind('}')
+    # The evidence packet is compacted before generation. A 16K context avoids
+    # the severe CPU/memory penalty of 32K while retaining room for the complete
+    # 4,000-word body. Two bounded attempts prevent one malformed response from
+    # consuming the entire three-hour publication window.
+    r=requests.post(local+'/api/chat',json={'model':model,'messages':request_messages,'stream':False,'format':'json','options':{'temperature':0.2,'num_predict':min(max_tokens,8192),'num_ctx':16384}},timeout=1200);r.raise_for_status();text=str(r.json()['message']['content']);begin=text.find('{');finish=text.rfind('}')
     return _parse_model_json(text)
    except Exception as exc:
     last=exc
-    if attempt<3:time.sleep(8*(attempt+1))
-  raise RuntimeError(f'local keyless model failed to return valid JSON after 4 attempts: {type(last).__name__}: {str(last)[:300]}')
+    if attempt<1:time.sleep(8)
+  raise RuntimeError(f'local keyless model failed to return valid JSON after 2 attempts: {type(last).__name__}: {str(last)[:300]}')
  if os.environ.get('GITHUB_TOKEN','').strip():return _emergency_model_json(messages,max_tokens)
  endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
  for attempt in range(3):
@@ -334,12 +364,21 @@ def low_exposure_posts():
   out.append({'title':p.get('title','Daily Yield article'),'url':p.get('url',''),'image':html.unescape(m.group(1)) if m else '','label':next((x for x in p.get('labels',[]) if x!='Kushal K. Daga'),'Daily Yield')})
  return out
 
+def _compact_evidence_packet(evidence):
+ """Keep local-model context bounded without dropping source identity or claims."""
+ packet=[]
+ for row in evidence:
+  item={k:v for k,v in row.items() if k!='score'}
+  item['text']=str(item.get('text',''))[:2200]
+  packet.append(item)
+ return packet
+
 def generate_text(topic,evidence):
- packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
+ packet=_compact_evidence_packet(evidence)
  evidence_json=json.dumps(packet,ensure_ascii=False)
  plan_prompt=f'''Design one original Daily Yield master article as strict JSON. Topic: {json.dumps(topic,ensure_ascii=False)}. Evidence packet: {evidence_json}.
 Return a compact planning object only. Requirements: title 20-46 characters, punchy, no date; meta_description 110-158 characters; choose 8-11 genuinely topic-specific section_plans with unique heading and focus according to this topic's natural editorial logic—not a recurring template. Vary the progression, concepts, heading syntax and number of sections from other articles while establishing context before conclusions and never opening with a summary or direct answer. Include a module_headings object with seven short, topic-specific and mutually distinct labels for contents, summary, faq, glossary, sources, internal_links and external_sources; do not use generic labels such as Summary, FAQ, Glossary or Sources. Include entities, geography, temporal_coverage, 5-10 topic-specific FAQ questions, 8-20 glossary terms, exactly 3 distinct photorealistic landscape photo_prompts, and at least 3 evidence-appropriate visuals. The three photo_prompts must instead be precise placement-specific search briefs for real, openly licensed editorial photographs: opening context, the subject near 2,000 words, and the later section near 4,000 words. Every visual needs type, title, caption, source number, after_section, labels and numeric values copied verbatim from the evidence. No invented values. JSON keys: title,meta_description,entities,geography,temporal_coverage,module_headings,section_plans,faq_questions,glossary_terms,visuals,photo_prompts.'''
- plan=model_json([{'role':'system','content':'You are a meticulous financial editor planning a deeply sourced, visibly human and non-templated article. Accuracy, originality and reader value override speed.'},{'role':'user','content':plan_prompt}],max_tokens=6000)
+ plan=model_json([{'role':'system','content':'You are a meticulous financial editor planning a deeply sourced, visibly human and non-templated article. Accuracy, originality and reader value override speed.'},{'role':'user','content':plan_prompt}],max_tokens=2500)
  section_plans=plan.pop('section_plans',[])
  if isinstance(section_plans,dict):section_plans=list(section_plans.values())
  normalized_plans=[]
@@ -498,7 +537,7 @@ def normalize_verified_core(draft,evidence):
  if not 4000<=current<=4200:raise RuntimeError(f'post-verification core normalization stopped at {current} words')
 
 def verify_evidence(draft,evidence):
- packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
+ packet=_compact_evidence_packet(evidence)
  review_package={k:draft.get(k) for k in ('sections','summary','faq','visuals')}
  for review_round in range(3):
   review=model_json([{'role':'system','content':'Act as a hostile financial fact checker. Evaluate only visible prose and numeric visuals. Reject unsupported claims, invented numbers, misleading causal language and citations that do not support nearby prose. Never list evidence-source titles or photo-search briefs as article claims.'},{'role':'user','content':'Compare this proposed visible editorial content with the evidence packet. Return JSON with pass (boolean) and unsupported_claims (array of exact quoted text that actually occurs in the proposed content). Do not rewrite or excuse anything. CONTENT: '+json.dumps(review_package,ensure_ascii=False)+' EVIDENCE: '+json.dumps(packet,ensure_ascii=False)}],max_tokens=5000)

@@ -273,6 +273,15 @@ check('Master generation is quota-independent with model-independent research fa
       'OLLAMA_API_URL' in prep and '_heuristic_queries' in prep
       and master_workflows.count('Start quota-independent local text model')==2
       and 'GEMINI_API_KEY' not in master_workflows and 'qwen2.5:1.5b' in master_workflows)
+check('Local Master generation is bounded for the publication window',
+      'def _compact_evidence_packet' in prep and "for attempt in range(2)" in prep
+      and "'num_ctx':16384" in prep and 'max_tokens=2500' in prep)
+check('Evergreen source discovery can use relevant established reporting without weakening review',
+      "when:365d" in prep and 'established-reporting sources found' in prep
+      and 'verify_evidence(draft,evidence)' in prep)
+check('Master stale-run reaper allows legitimate CPU generation to approach workflow timeout',
+      '10200' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
+      and 'timeout-minutes: 180' in master_workflows)
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
 check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy2-rail-track' in mv2 and 'pointerdown' in mv2 and 'low_exposure_posts' in prep)

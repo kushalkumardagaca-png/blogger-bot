@@ -4,7 +4,7 @@ from unittest.mock import Mock,patch
 import pytest
 from master_article_v2 import render,validate,words
 from publication_preflight import assert_publishable
-from prepare_master_article import _visual_number,model_json
+from prepare_master_article import _compact_evidence_packet,_visual_number,model_json
 
 
 def package():
@@ -72,6 +72,13 @@ def test_keyless_local_model_precedes_configured_cloud_keys():
         assert model_json([{'role':'user','content':'Return JSON'}],100)=={'answer':'local'}
     assert post.call_args.args[0]=='http://127.0.0.1:11434/api/chat'
     assert post.call_args.kwargs['json']['model']=='qwen2.5:3b'
+
+def test_local_evidence_packet_is_bounded_without_losing_attribution():
+    rows=[{'name':'Official source','title':'Document','url':'https://example.gov/doc','text':'x'*9000,'score':9}]
+    compact=_compact_evidence_packet(rows)
+    assert len(compact[0]['text'])==2200
+    assert compact[0]['name']=='Official source' and compact[0]['url'].startswith('https://')
+    assert 'score' not in compact[0]
 
 def test_visual_number_accepts_single_decorated_number_only():
     assert _visual_number('15%')==15

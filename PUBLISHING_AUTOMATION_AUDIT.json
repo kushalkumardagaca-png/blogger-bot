@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T12:03:36+05:30",
+  "checked_at_ist": "2026-10-13T12:13:34+05:30",
   "summary": {
-    "pass": 144,
+    "pass": 147,
     "fail": 0
   },
   "checks": [
@@ -442,6 +442,21 @@
     },
     {
       "name": "Master generation is quota-independent with model-independent research fallback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Local Master generation is bounded for the publication window",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Evergreen source discovery can use relevant established reporting without weakening review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master stale-run reaper allows legitimate CPU generation to approach workflow timeout",
       "status": "PASS",
       "detail": ""
     },
