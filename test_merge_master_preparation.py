@@ -10,4 +10,8 @@ class PreparationMergeTests(unittest.TestCase):
   a={'items':[{'sha256':'a','usages':[{'id':1}]}],'authenticated_items':1}
   b={'items':[{'sha256':'a','usages':[{'id':2}]},{'sha256':'b'}],'authenticated_items':2}
   out=merge_registry(a,b);self.assertEqual({x['sha256'] for x in out['items']},{'a','b'});self.assertEqual(len(out['items'][0]['usages']),2)
+ def test_registry_rejects_concurrent_cross_article_photo_reuse(self):
+  a={'items':[{'sha256':'same','source_id':'commons:1','article_key':'article-a'}]}
+  b={'items':[{'sha256':'same','source_id':'commons:1','article_key':'article-b'}]}
+  with self.assertRaisesRegex(RuntimeError,'concurrent photo conflict'):merge_registry(a,b)
 if __name__=='__main__':unittest.main()

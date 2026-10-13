@@ -2,11 +2,11 @@ name: Master Trending Writer (Live)
 
 on:
   schedule:
-    - cron: '0 1 * * *'    # Prepare 06:30 IST → live 07:45
-    - cron: '0 7 * * *'    # Prepare 12:30 IST → live 13:45
-    - cron: '30 9 * * *'   # Prepare 15:00 IST → live 16:15
-    - cron: '30 12 * * *'  # Prepare 18:00 IST → live 19:15
-    - cron: '30 13 * * *'  # Prepare 19:00 IST → live 20:15
+    - cron: '0 0 * * *'    # Prepare 05:30 IST → live 07:45
+    - cron: '30 5 * * *'   # Prepare 11:00 IST → live 13:45
+    - cron: '0 8 * * *'    # Prepare 13:30 IST → live 16:15
+    - cron: '0 11 * * *'   # Prepare 16:30 IST → live 19:15
+    - cron: '0 12 * * *'   # Prepare 17:30 IST → live 20:15
   workflow_dispatch:
     inputs:
       slot:
@@ -19,6 +19,11 @@ on:
         required: true
         type: boolean
         default: false
+      retry_attempt:
+        description: "Internal bounded recovery attempt"
+        required: false
+        type: string
+        default: '0'
 
 permissions:
   contents: write
@@ -49,11 +54,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '0 1 * * *') value=0 ;;
-            '0 7 * * *') value=1 ;;
-            '30 9 * * *') value=2 ;;
-            '30 12 * * *') value=3 ;;
-            '30 13 * * *') value=4 ;;
+            '0 0 * * *') value=0 ;;
+            '30 5 * * *') value=1 ;;
+            '0 8 * * *') value=2 ;;
+            '0 11 * * *') value=3 ;;
+            '0 12 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
@@ -100,6 +105,17 @@ jobs:
             sleep $((attempt * 3))
           done
           exit 1
+      - name: Requeue one bounded recovery after a failed generation
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          current="${{ inputs.retry_attempt || '0' }}"
+          if [ "$current" -lt 2 ]; then
+            next=$((current+1))
+            gh workflow run master_trending_writer.yml --ref main -f slot="${{ steps.slot.outputs.value }}" -f publish=true -f retry_attempt="$next"
+            echo "Queued bounded retry $next for trending slot ${{ steps.slot.outputs.value }}"
+          fi
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail

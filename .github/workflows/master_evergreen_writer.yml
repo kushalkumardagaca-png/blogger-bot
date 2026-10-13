@@ -2,11 +2,11 @@ name: Master Evergreen Writer (Live)
 
 on:
   schedule:
-    - cron: '30 1 * * *'   # Prepare 07:00 IST → live 08:15
-    - cron: '30 7 * * *'   # Prepare 13:00 IST → live 14:15
-    - cron: '0 10 * * *'   # Prepare 15:30 IST → live 16:45
-    - cron: '0 13 * * *'   # Prepare 18:30 IST → live 19:45
-    - cron: '0 14 * * *'   # Prepare 19:30 IST → live 20:45
+    - cron: '15 0 * * *'   # Prepare 05:45 IST → live 08:15
+    - cron: '0 6 * * *'    # Prepare 11:30 IST → live 14:15
+    - cron: '30 8 * * *'   # Prepare 14:00 IST → live 16:45
+    - cron: '30 11 * * *'  # Prepare 17:00 IST → live 19:45
+    - cron: '30 12 * * *'  # Prepare 18:00 IST → live 20:45
   workflow_dispatch:
     inputs:
       slot:
@@ -19,6 +19,11 @@ on:
         required: true
         type: boolean
         default: false
+      retry_attempt:
+        description: "Internal bounded recovery attempt"
+        required: false
+        type: string
+        default: '0'
 
 permissions:
   contents: write
@@ -49,11 +54,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '30 1 * * *') value=0 ;;
-            '30 7 * * *') value=1 ;;
-            '0 10 * * *') value=2 ;;
-            '0 13 * * *') value=3 ;;
-            '0 14 * * *') value=4 ;;
+            '15 0 * * *') value=0 ;;
+            '0 6 * * *') value=1 ;;
+            '30 8 * * *') value=2 ;;
+            '30 11 * * *') value=3 ;;
+            '30 12 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
@@ -100,6 +105,17 @@ jobs:
             sleep $((attempt * 3))
           done
           exit 1
+      - name: Requeue one bounded recovery after a failed generation
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          current="${{ inputs.retry_attempt || '0' }}"
+          if [ "$current" -lt 2 ]; then
+            next=$((current+1))
+            gh workflow run master_evergreen_writer.yml --ref main -f slot="${{ steps.slot.outputs.value }}" -f publish=true -f retry_attempt="$next"
+            echo "Queued bounded retry $next for evergreen slot ${{ steps.slot.outputs.value }}"
+          fi
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail
