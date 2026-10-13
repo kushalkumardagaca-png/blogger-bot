@@ -24,16 +24,23 @@ jobs:
         run: |
           set -euo pipefail
           now=$(date -u +%s)
+          # One-time safety epoch for the bounded-context/source-discovery repair.
+          # Runs started before this deployment use superseded generation code and
+          # may block the repaired same-slot recovery because concurrency queues.
+          repair_epoch=$(date -u -d '2026-10-13T06:43:52Z' +%s)
           gh run list --repo "$GH_REPO" --status in_progress --limit 100 \
             --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt] | @tsv' |
           while IFS=$'\t' read -r run_id started_at; do
             [ -n "$run_id" ] || continue
             started=$(date -u -d "$started_at" +%s)
             age=$((now-started))
-            # The quota-free CPU writer can legitimately need more than two
-            # hours for 4,000 verified words plus photographs. Let the workflow
-            # approach its own 180-minute timeout; cancel only a truly wedged run.
-            if [ "$age" -gt 10200 ]; then
+            # Cancel only superseded pre-repair runs or a genuinely wedged new
+            # run. A fixed deployment epoch is safe; ordinary state commits that
+            # advance main do not make a healthy run obsolete.
+            if [ "$started" -lt "$repair_epoch" ]; then
+              echo "Cancelling superseded pre-repair Master run $run_id"
+              gh run cancel "$run_id" --repo "$GH_REPO" || true
+            elif [ "$age" -gt 10200 ]; then
               echo "Cancelling stalled Master run $run_id after ${age}s"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
             fi

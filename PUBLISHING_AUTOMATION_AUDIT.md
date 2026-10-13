@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 147 PASS · 0 FAIL
+**Result:** 148 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -95,6 +95,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Local Master generation is bounded for the publication window**
 - ✅ **Evergreen source discovery can use relevant established reporting without weakening review**
 - ✅ **Master stale-run reaper allows legitimate CPU generation to approach workflow timeout**
+- ✅ **Superseded pre-repair Master runs cannot block repaired same-slot recovery**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**

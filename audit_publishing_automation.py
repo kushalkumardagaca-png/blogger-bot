@@ -283,6 +283,9 @@ check('Evergreen source discovery can use relevant established reporting without
 check('Master stale-run reaper allows legitimate CPU generation to approach workflow timeout',
       '10200' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
       and 'timeout-minutes: 180' in master_workflows)
+check('Superseded pre-repair Master runs cannot block repaired same-slot recovery',
+      'repair_epoch' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
+      and 'started" -lt "$repair_epoch' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text())
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
 check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy2-rail-track' in mv2 and 'pointerdown' in mv2 and 'low_exposure_posts' in prep)
