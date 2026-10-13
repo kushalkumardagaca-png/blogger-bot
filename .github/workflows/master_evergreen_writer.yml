@@ -39,6 +39,12 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests Pillow ImageHash json-repair google-api-python-client google-auth
+      - name: Start quota-independent local text model
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          nohup ollama serve >/tmp/ollama.log 2>&1 &
+          for attempt in {1..30}; do curl -fsS http://127.0.0.1:11434/api/tags >/dev/null && break; sleep 2; done
+          ollama pull qwen2.5:3b
       - name: Select evergreen rotation slot
         id: slot
         run: |
@@ -53,9 +59,8 @@ jobs:
           echo "value=$value" >> "$GITHUB_OUTPUT"
       - name: Research, write, validate and select three photos
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GITHUB_TOKEN: ${{ github.token }}
-          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          OLLAMA_API_URL: http://127.0.0.1:11434
+          OLLAMA_MODEL: qwen2.5:3b
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}

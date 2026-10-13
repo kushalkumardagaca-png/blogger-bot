@@ -252,26 +252,6 @@ def model_json(messages,max_tokens=16000):
     last=exc
     if attempt<3:time.sleep(8*(attempt+1))
   raise RuntimeError(f'local keyless model failed to return valid JSON after 4 attempts: {type(last).__name__}: {str(last)[:300]}')
- key=os.environ.get('GEMINI_API_KEY','').strip()
- if key:
-  model=os.environ.get('GEMINI_MODEL','').strip() or 'gemini-3.5-flash-lite';last=None
-  system='\n'.join(x['content'] for x in messages if x.get('role')=='system');conversation=[x for x in messages if x.get('role')!='system']
-  contents=[{'role':'model' if x.get('role')=='assistant' else 'user','parts':[{'text':x['content']}]} for x in conversation]
-  endpoint=f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent'
-  for attempt in range(2):
-   body={'contents':contents+([{'role':'user','parts':[{'text':'Return one complete strict JSON object only. Do not use markdown.'}]}] if attempt else []),'generationConfig':{'responseMimeType':'application/json','temperature':0.2,'maxOutputTokens':max_tokens}}
-   if system:body['systemInstruction']={'parts':[{'text':system}]}
-   try:
-    r=requests.post(endpoint,headers={'x-goog-api-key':key,'Content-Type':'application/json'},json=body,timeout=120)
-    if not r.ok:raise RuntimeError(f"Gemini HTTP {r.status_code}: {r.text[:500]}")
-    payload=r.json();text=''.join(p.get('text','') for p in payload['candidates'][0]['content']['parts'])
-    return _parse_model_json(text)
-   except Exception as exc:
-    last=exc
-    if 'HTTP 429' in str(exc):break
-    if attempt<1:time.sleep(15)
-  try:return _emergency_model_json(messages,max_tokens)
-  except Exception as fallback:raise RuntimeError(f'Gemini failed: {type(last).__name__}: {str(last)[:180]}; emergency fallback failed: {fallback}') from fallback
  if os.environ.get('GITHUB_TOKEN','').strip():return _emergency_model_json(messages,max_tokens)
  endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
  for attempt in range(3):
@@ -479,6 +459,32 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
  support=model_json([{'role':'system','content':'Create accurate topic-specific reader support, not generic boilerplate.'},{'role':'user','content':support_prompt}],max_tokens=5000)
  plan['sections']=sections;plan['summary']=summary;plan['faq']=support.get('faq',[]);plan['glossary']=support.get('glossary',[])
  return plan
+def normalize_verified_core(draft,evidence):
+ """Rewrite verified prose into the hard 4,000-4,200 range without padding."""
+ sections=draft.get('sections',[])
+ def count():return words(' '.join(' '.join(paragraph_list(x.get('paragraphs'))) for x in sections))
+ current=count()
+ if current<4000:
+  for _ in range(8):
+   if current>=4000:break
+   section=min(sections,key=lambda x:words(' '.join(paragraph_list(x.get('paragraphs')))))
+   existing=words(' '.join(paragraph_list(section.get('paragraphs'))));target=min(700,existing+(4050-current)+50)
+   prompt=f'''Rewrite this verified section into {max(300,target-40)}-{target} actual words in readable paragraphs. Preserve its supported claims and citation tokens. Add only evidence-grounded mechanisms, affected groups, jurisdiction, uncertainty or dated context that is present in the evidence. Do not pad with long sentences, repeat another section, invent a number or add advice. Return strict JSON {{"paragraphs":[...]}}. SECTION: {json.dumps(section,ensure_ascii=False)} EVIDENCE: {json.dumps(evidence,ensure_ascii=False)}'''
+   candidate=paragraph_list(model_json([{'role':'system','content':'Expand verified financial prose without changing its factual meaning.'},{'role':'user','content':prompt}],max_tokens=max(3000,target*3)))
+   candidate_count=words(' '.join(candidate))
+   if candidate_count>existing and candidate_count<=740:section['paragraphs']=candidate
+   else:break
+   current=count()
+ elif current>4200:
+  excess=current-4100
+  for section in reversed(sections):
+   if excess<=0:break
+   paragraphs=paragraph_list(section.get('paragraphs'));before=words(' '.join(paragraphs));target=max(260,before-excess)
+   trimmed=trim_complete_sentences(paragraphs,target);after=words(' '.join(trimmed))
+   if 240<=after<before:section['paragraphs']=trimmed;excess-=before-after
+  current=count()
+ if not 4000<=current<=4200:raise RuntimeError(f'post-verification core normalization stopped at {current} words')
+
 def verify_evidence(draft,evidence):
  packet=[{k:v for k,v in e.items() if k!='score'} for e in evidence]
  review_package={k:draft.get(k) for k in ('sections','summary','faq','visuals')}
@@ -611,6 +617,10 @@ def build_package(topic,target):
   draft['visuals']=model_json([{'role':'system','content':'Repair data visuals without inventing or transforming any number.'},{'role':'user','content':repair_prompt}],max_tokens=2500).get('visuals',[])
  if visual_error:raise RuntimeError('data visual repair failed: '+visual_error)
  STAGE='evidence-verification';verify_evidence(draft,evidence)
+ before_normalization=words(' '.join(' '.join(paragraph_list(x.get('paragraphs'))) for x in draft.get('sections',[])))
+ normalize_verified_core(draft,evidence)
+ after_normalization=words(' '.join(' '.join(paragraph_list(x.get('paragraphs'))) for x in draft.get('sections',[])))
+ if after_normalization!=before_normalization:verify_evidence(draft,evidence)
  prior=[]
  for path in PACKAGES.rglob('*.json'):
   if path.resolve()==target.resolve():continue

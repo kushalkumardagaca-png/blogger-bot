@@ -6,7 +6,7 @@ provide search context; live feeds, trend velocity and first-party GSC queries
 produce the article candidates. This module never requests a public Daily Yield URL.
 """
 from __future__ import annotations
-import argparse, datetime as dt, hashlib, html, json, os, re, urllib.parse
+import argparse, csv, datetime as dt, hashlib, html, json, os, re, urllib.parse, urllib.request
 from collections import defaultdict
 from pathlib import Path
 from xml.etree import ElementTree
@@ -15,7 +15,7 @@ import requests
 from master_taxonomy import TRENDING_CATEGORIES, EVERGREEN_CATEGORIES, evergreen_rotation
 
 ROOT=Path(__file__).parent;IST=ZoneInfo('Asia/Kolkata')
-POOL=ROOT/'MASTER_TREND_POOL.json';PLAN=ROOT/'MASTER_DAILY_PLAN.json';HISTORY=ROOT/'MASTER_TOPIC_HISTORY.json';STATUS=ROOT/'MASTER_DISCOVERY_STATUS.json'
+POOL=ROOT/'MASTER_TREND_POOL.json';PLAN=ROOT/'MASTER_DAILY_PLAN.json';HISTORY=ROOT/'MASTER_TOPIC_HISTORY.json';STATUS=ROOT/'MASTER_DISCOVERY_STATUS.json';EVERGREEN_REFERENCE=ROOT/'MASTER_EVERGREEN_REFERENCE.csv'
 UA='DailyYieldTopicDiscovery/1.0 (dailyyield.official@gmail.com)'
 STOP={'the','and','for','with','from','into','after','before','about','amid','over','under','what','why','how','your','this','that','says','could','will','new','latest','today'}
 
@@ -117,6 +117,29 @@ def gdelt():
   except Exception:continue
  return out
 
+def recent_news_headlines():
+ """Seed trends from Daily Yield's previous News cycle through Blogger API, never a public pageview."""
+ required=('BLOGGER_BLOG_ID','BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_REFRESH_TOKEN')
+ if not all(os.environ.get(x) for x in required):return []
+ try:
+  data=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()
+  with urllib.request.urlopen(urllib.request.Request('https://oauth2.googleapis.com/token',data=data,method='POST'),timeout=30) as response:access=json.load(response)['access_token']
+ except Exception:return []
+ tracker=read(ROOT/'news_tracker.json',{}).get('desks',{});out=[]
+ for desk,row in tracker.items():
+  url=str(row.get('url',''));published=str(row.get('window_end') or now().isoformat())
+  if not url.startswith('https://dailyyield.blogspot.com/'):continue
+  try:
+   path=urllib.parse.urlparse(url).path;query=urllib.parse.urlencode({'path':path,'fields':'content,url,title'})
+   endpoint=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}/posts/bypath?{query}"
+   with urllib.request.urlopen(urllib.request.Request(endpoint,headers={'Authorization':'Bearer '+access}),timeout=45) as response:post=json.load(response)
+   headings=[clean(x) for x in re.findall(r'<h3[^>]*>(.*?)</h3>',post.get('content',''),re.I|re.S)]
+   for rank,title in enumerate(headings[:34],1):
+    if len(words(title))<3:continue
+    out.append({'title':title,'description':f'Headline selected from the sourced {desk} News edition for independent revalidation.','url':url+'#master-seed-'+str(rank),'published':published,'source':'Daily Yield prior News cycle','rank':rank,'volume':0,'forced_category':None})
+  except Exception:continue
+ return out
+
 def cluster(raw):
  groups=[]
  for item in raw:
@@ -171,7 +194,7 @@ def corroborate_topic(candidate):
  result=dict(candidate);result['sources']=(candidate.get('sources',[])+matches)[:8];result['corroboration_count']=len(observations);result['revalidated_at']=now().isoformat();return result
 
 def weekly():
- raw=google_trends()+category_news()+gdelt();candidates=trend_candidates(raw);history={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])}
+ raw=recent_news_headlines()+google_trends()+category_news()+gdelt();candidates=trend_candidates(raw);history={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])}
  selected=[]
  for cat in TRENDING_CATEGORIES:
   rows=sorted((x for x in candidates if x['category']==cat['label'] and x['id'] not in history),key=lambda x:x['overall_score'],reverse=True)[:10]
@@ -189,6 +212,27 @@ def gsc_queries():
  body={'startDate':str(start),'endDate':str(end),'dimensions':['query'],'rowLimit':25000}
  r=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60);r.raise_for_status()
  return [{'query':clean(x['keys'][0]),'clicks':x.get('clicks',0),'impressions':x.get('impressions',0),'position':x.get('position',100)} for x in r.json().get('rows',[])]
+
+def revalidated_reference_evergreen(cat,excluded):
+ """Use the retired CSV only as a seed; live demand must independently validate it."""
+ if not EVERGREEN_REFERENCE.exists():return None
+ ranked=[]
+ try:
+  with EVERGREEN_REFERENCE.open(encoding='utf-8-sig',newline='') as handle:
+   for row in csv.DictReader(handle):
+    title=clean(row.get('Punchy Title'));idea=clean(row.get('Video Idea'));candidate=(title+' '+idea).strip()
+    if not title or uid(title) in excluded:continue
+    score=evergreen_topic_quality(candidate,cat)
+    if score>0:ranked.append((score,title,idea))
+ except (OSError,csv.Error):return None
+ for score,title,idea in sorted(ranked,reverse=True)[:8]:
+  query='"'+clean(title)+'" finance'
+  observations=rss('https://www.bing.com/news/search?format=rss&q='+urllib.parse.quote(query),'Bing live evergreen validation',cat['label'])
+  observations+=rss('https://news.google.com/rss/search?q='+urllib.parse.quote(query+' when:365d')+'&hl=en-US&gl=US&ceid=US:en','Google live evergreen validation',cat['label'])
+  urls={x.get('url') for x in observations if x.get('url')}
+  if len(urls)>=2:
+   return {'title':title,'demand':min(72,50+len(urls)*3),'gap':58,'reference_observations':len(urls)}
+ return None
 
 def evergreen_candidates(categories,excluded=None):
  excluded=set(excluded or ());queries=gsc_queries();out=[]
@@ -210,8 +254,12 @@ def evergreen_candidates(categories,excluded=None):
     found+=rss('https://news.google.com/rss/search?q='+urllib.parse.quote(query)+'&hl=en-US&gl=US&ceid=US:en','Google News evergreen demand',cat['label'])
    ranked=sorted(((evergreen_topic_quality(x['title'],cat,x.get('url',''),True),x) for x in found if uid(x['title']) not in excluded),key=lambda pair:pair[0],reverse=True)
    ranked=[pair for pair in ranked if pair[0]>0]
-   if not ranked:continue
-   topic=ranked[0][1]['title'];demand=min(75,48+ranked[0][0]);gap=55
+   if ranked:
+    topic=ranked[0][1]['title'];demand=min(75,48+ranked[0][0]);gap=55
+   else:
+    reference=revalidated_reference_evergreen(cat,excluded)
+    if not reference:continue
+    topic=reference['title'];demand=reference['demand'];gap=reference['gap']
   score=.25*demand+.20*90+.15*gap+.15*85+.10*80+.05*60+.05*70+.05*85
   out.append({'id':uid(topic),'title':topic,'category':cat['label'],'overall_score':round(score,1),'demand_score':round(demand,1),'content_gap_score':round(gap,1),'discovered_from_live_internet':True})
  return out
@@ -221,7 +269,7 @@ def daily(date=None):
  if len(pool.get('topics',[]))<35:pool=weekly()
  # Re-observe the live internet every day. The weekly fifty-topic pool supplies
  # depth and reserves, but it is never consumed blindly.
- live=trend_candidates(google_trends()+category_news()+gdelt())
+ live=trend_candidates(recent_news_headlines()+google_trends()+category_news()+gdelt())
  live_by_id={x['id']:x for x in live}
  used={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])};trending=[]
  for cat in TRENDING_CATEGORIES:

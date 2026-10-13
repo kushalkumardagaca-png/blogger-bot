@@ -33,11 +33,12 @@ def test_page_has_five_trending_then_fifteen_evergreen_shelves():
     assert 'lostpointercapture' in page
 
 
-def test_discovery_has_no_csv_topic_dependency():
+def test_historical_evergreen_reference_is_only_a_live_revalidated_fallback():
     source=Path('master_topic_discovery.py').read_text()
-    assert '.csv' not in source.casefold()
-    assert '500_topics_evenly_mixed' not in source
+    assert 'revalidated_reference_evergreen' in source
+    assert "len(urls)>=2" in source
     assert 'discovered_from_live_internet' in source
+    assert 'recent_news_headlines()' in source
 
 
 def test_evergreen_discovery_excludes_already_published_topic(monkeypatch):
