@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 3,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "all bounded section writers failed: github_text: Expecting value: line 1 column 1 (char 0) | github_text: Expecting value: line 1 column 1 (char 0)"
+}
