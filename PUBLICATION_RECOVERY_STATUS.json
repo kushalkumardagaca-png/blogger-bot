@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-13T18:05:55.765868+05:30",
+  "generatedAt": "2026-10-13T18:45:48.603723+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 9,
+  "confirmedPublications": 10,
   "overdueMissing": [
     "master-trending-0",
     "master-evergreen-0",
@@ -15,21 +15,16 @@
   ],
   "actions": [
     {
-      "type": "preparation_recovery",
-      "key": "master-trending-4",
-      "applied": true
-    },
-    {
       "type": "social_replay",
-      "key": "news-companies",
-      "platform": "bluesky",
+      "key": "news-global",
+      "platform": "facebook",
       "routeIndex": 0,
       "applied": true
     },
     {
       "type": "social_replay",
-      "key": "news-companies",
-      "platform": "facebook",
+      "key": "news-global",
+      "platform": "mastodon",
       "routeIndex": 1,
       "applied": true
     }
@@ -41,7 +36,9 @@
     "source:2026-10-13:master-evergreen-1",
     "source:2026-10-13:master-trending-2",
     "source:2026-10-13:master-evergreen-2",
-    "source:2026-10-13:master-trending-3"
+    "source:2026-10-13:master-trending-3",
+    "social:2026-10-13:news-companies:0",
+    "social:2026-10-13:news-companies:1"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
