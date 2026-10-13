@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T12:32:12+05:30",
+  "checked_at_ist": "2026-10-13T13:03:53+05:30",
   "summary": {
-    "pass": 149,
+    "pass": 150,
     "fail": 0
   },
   "checks": [
@@ -452,6 +452,11 @@
     },
     {
       "name": "Evergreen source discovery can use relevant established reporting without weakening review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Omitted local-model sections use attributed evidence rather than filler",
       "status": "PASS",
       "detail": ""
     },

@@ -281,6 +281,9 @@ check('Local Master generation is bounded for the publication window',
 check('Evergreen source discovery can use relevant established reporting without weakening review',
       "when:365d" in prep and 'established-reporting sources found' in prep
       and 'verify_evidence(draft,evidence)' in prep)
+check('Omitted local-model sections use attributed evidence rather than filler',
+      'def _evidence_bridge_section' in prep and 'does not by itself establish causation' in prep
+      and '_evidence_bridge_section(heading,focus,evidence)' in prep)
 check('Master stale-run reaper allows legitimate CPU generation to approach workflow timeout',
       '13800' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
       and master_workflows.count('timeout-minutes: 240')==2)

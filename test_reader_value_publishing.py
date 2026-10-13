@@ -4,7 +4,7 @@ from unittest.mock import Mock,patch
 import pytest
 from master_article_v2 import render,validate,words
 from publication_preflight import assert_publishable
-from prepare_master_article import _compact_evidence_packet,_visual_number,model_json
+from prepare_master_article import _compact_evidence_packet,_evidence_bridge_section,_visual_number,model_json
 
 
 def package():
@@ -79,6 +79,13 @@ def test_local_evidence_packet_is_bounded_without_losing_attribution():
     assert len(compact[0]['text'])==2200
     assert compact[0]['name']=='Official source' and compact[0]['url'].startswith('https://')
     assert 'score' not in compact[0]
+
+def test_omitted_local_section_has_a_bounded_attributed_fallback():
+    evidence=[{'name':f'Official source {i}','title':f'Research record {i}','text':('Documented evidence defines scope jurisdiction observation period and uncertainty without making a universal prediction. '*8)} for i in range(1,6)]
+    paragraphs=_evidence_bridge_section('Debt trade-offs','how evidence boundaries affect household decisions',evidence)
+    assert words(' '.join(paragraphs))>=240
+    assert len(paragraphs)==5 and all(f'[[S{i}|' in paragraphs[i-1] for i in range(1,6))
+    assert all('does not by itself establish causation' in p for p in paragraphs)
 
 def test_visual_number_accepts_single_decorated_number_only():
     assert _visual_number('15%')==15
