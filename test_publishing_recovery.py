@@ -21,8 +21,10 @@ class RecoveryTests(unittest.TestCase):
    self.assertEqual(report['status'],'DEGRADED')
    self.assertIn('news-china',report['overdueMissing'])
  def test_retry_cap_and_spacing(self):
-  now=dt.datetime(2026,10,11,12,0,tzinfo=r.IST);key='x';ledger={key:{'attempts':1,'lastAttempt':now.isoformat()}}
-  self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30)))
-  self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(hours=3)))
-  ledger[key]['attempts']=3;self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(days=1)))
+  now=dt.datetime(2026,10,11,12,0,tzinfo=r.IST);key='x';revision='same-code';ledger={key:{'attempts':1,'lastAttempt':now.isoformat(),'revision':revision}}
+  self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30),revision))
+  self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(hours=3),revision))
+  ledger[key]['attempts']=3;self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(days=1),revision))
+  self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(minutes=1),'repaired-code'))
+  r.mark(ledger,key,now,'repaired-code');self.assertEqual(ledger[key]['attempts'],1);self.assertEqual(ledger[key]['revision'],'repaired-code')
 if __name__=='__main__':unittest.main()

@@ -4,7 +4,7 @@
 Permanent recovery generation 22: faster quota-free parallel recovery, bounded self-retry and photo-conflict protection are active.
 """
 from __future__ import annotations
-import argparse, datetime as dt, json, subprocess
+import argparse, datetime as dt, hashlib, json, subprocess
 from pathlib import Path
 ROOT=Path(__file__).parent; IST=dt.timezone(dt.timedelta(hours=5,minutes=30),name='IST')
 LEDGER=ROOT/'RECOVERY_LEDGER.json'; STATUS=ROOT/'PUBLICATION_RECOVERY_STATUS.json'
@@ -23,12 +23,26 @@ def parse(v):
  except Exception:return None
 def due(day,value):
  h,m=map(int,value.split(':'));return dt.datetime.combine(day,dt.time(h,m),IST)
-def may_retry(ledger,key,now):
- row=ledger.get(key,{})
+def implementation_revision():
+ """Fingerprint reliability code, excluding generated-state commits."""
+ digest=hashlib.sha256()
+ for name in ('prepare_master_article.py','master_dynamic_pipeline.py','publishing_recovery.py','.github/workflows/master_trending_writer.yml','.github/workflows/master_evergreen_writer.yml'):
+  path=ROOT/name
+  if path.exists():digest.update(name.encode());digest.update(path.read_bytes())
+ return digest.hexdigest()[:16]
+
+def may_retry(ledger,key,now,revision=None):
+ row=ledger.get(key,{});revision=revision or implementation_revision()
+ # A repaired implementation gets one immediate fresh retry even when the old
+ # version exhausted or recently used its bounded attempts. Generated tracker
+ # commits do not alter this content fingerprint.
+ if row.get('revision')!=revision:return True
  if int(row.get('attempts',0))>=MAX_RETRIES:return False
  last=parse(row.get('lastAttempt',''));return not last or now-last>=RETRY
-def mark(ledger,key,now):
- row=ledger.setdefault(key,{});row['attempts']=int(row.get('attempts',0))+1;row['lastAttempt']=now.isoformat()
+def mark(ledger,key,now,revision=None):
+ revision=revision or implementation_revision();row=ledger.setdefault(key,{})
+ if row.get('revision')!=revision:row.clear();row['revision']=revision
+ row['attempts']=int(row.get('attempts',0))+1;row['lastAttempt']=now.isoformat()
 def call(args,apply):
  if apply:subprocess.run(args,check=True)
 
