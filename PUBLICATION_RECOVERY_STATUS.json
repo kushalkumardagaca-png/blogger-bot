@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:06:54.972745+05:30",
+  "generatedAt": "2026-10-13T19:30:06.128379+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
@@ -13,27 +13,7 @@
     "master-evergreen-2",
     "master-trending-3"
   ],
-  "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-4",
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "facebook",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "tumblr",
-      "routeIndex": 1,
-      "applied": true
-    }
-  ],
+  "actions": [],
   "retryBlocked": [
     "source:2026-10-13:master-trending-0",
     "source:2026-10-13:master-evergreen-0",
@@ -43,7 +23,9 @@
     "source:2026-10-13:master-evergreen-2",
     "source:2026-10-13:master-trending-3",
     "social:2026-10-13:news-global:0",
-    "social:2026-10-13:news-global:1"
+    "social:2026-10-13:news-global:1",
+    "social:2026-10-13:news-banking:0",
+    "social:2026-10-13:news-banking:1"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
