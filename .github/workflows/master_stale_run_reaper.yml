@@ -23,10 +23,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          # One-time safety epoch for the bounded-context/source-discovery repair.
-          # Runs started before this deployment use superseded generation code and
-          # may block the repaired same-slot recovery because concurrency queues.
-          repair_epoch=$(date -u -d '2026-10-13T06:43:52Z' +%s)
+          # One-time safety epoch for the verified root-cause repair. Runs before
+          # this deployment lack the live repository-model token and the pre-gate
+          # deterministic core/summary/visual completion paths, so continuing them
+          # only consumes runners on code proven incapable of reliable completion.
+          repair_epoch=$(date -u -d '2026-10-13T14:03:47Z' +%s)
           gh run list --repo "$GH_REPO" --status in_progress --limit 100 \
             --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt] | @tsv' |
           while IFS=$'\t' read -r run_id started_at; do
