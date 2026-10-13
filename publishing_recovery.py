@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 32: 12/13 October Master backfill is retired, recovery is current-date-only from 14 October, advance packages are reused at release, and bounded-section V3 safeguards remain active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 33: current-date article readiness is checked every ten minutes, failed source/prewarm attempts can retry after thirty minutes, 12/13 October backfill remains retired, advance packages are reused at embargoed release, and bounded-section V3 safeguards remain active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -11,7 +11,7 @@ LEDGER=ROOT/'RECOVERY_LEDGER.json'; STATUS=ROOT/'PUBLICATION_RECOVERY_STATUS.jso
 NEWS_TIMES={'asia-pacific':'04:15','china':'05:15','india':'07:15','russia':'10:15','markets':'12:15','europe':'12:45','economy':'13:15','americas':'17:15','companies':'17:45','global':'18:15','banking':'18:45'}
 MASTER_TIMES={'trending':['06:15','09:15','14:15','16:15','20:45'],'evergreen':['08:15','11:15','15:15','19:45','22:15']}
 WRONG_MASTER_REPAIRS=[{'key':'master-trending-0','duplicateUrl':'https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html','titlePhrase':'Budget Airlines'}]
-GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); MAX_RETRIES=3
+GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); ARTICLE_RETRY=dt.timedelta(minutes=30); MAX_RETRIES=3
 PREWARM=dt.timedelta(hours=3,minutes=15)
 
 def load(path,default):
@@ -43,7 +43,8 @@ def may_retry(ledger,key,now,revision=None):
  # bounded, but an article is never abandoned because an arbitrary counter was
  # reached. Social replay retains a three-attempt cap to avoid duplicate posts.
  if not key.startswith(('source:','prewarm:')) and int(row.get('attempts',0))>=MAX_RETRIES:return False
- last=parse(row.get('lastAttempt',''));return not last or now-last>=RETRY
+ last=parse(row.get('lastAttempt',''));spacing=ARTICLE_RETRY if key.startswith(('source:','prewarm:')) else RETRY
+ return not last or now-last>=spacing
 def mark(ledger,key,now,revision=None):
  revision=revision or implementation_revision();row=ledger.setdefault(key,{})
  if row.get('revision')!=revision:row.clear();row['revision']=revision
