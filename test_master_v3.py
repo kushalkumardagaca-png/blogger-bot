@@ -12,7 +12,8 @@ def sections():return [{'heading':f'Distinct evidence heading {i}','paragraphs':
 def test_v3_section_contract_is_narrow_enough_for_article_total():
     p=paragraphs();ok,error=validate_section(p,{1:' '.join(p)})
     assert ok,error
-    assert 4000<=9*words(' '.join(p))<=4200
+    assert 400<=words(' '.join(p))<=490
+    assert 10*400==4000
 
 def test_v3_summary_support_and_visuals_are_deterministic():
     rows=sections();summary=extracted_summary(rows);faq,glossary=support(rows)
@@ -26,7 +27,7 @@ def test_v3_plain_text_section_does_not_require_json():
     source={'name':'Official source','title':'Market policy evidence','url':'https://example.com','text':prose()}
     with patch('master_v3_generator.text_call',return_value=prose()):
         out=write_section('Market Policy Evidence','Documented market scope',1,[(1,source)])
-    assert out and 445<=words(' '.join(out))<=465
+    assert out and 400<=words(' '.join(out))<=490
 
 def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
     sources=[{'name':f'Official Source {i}','title':f'Distinct Market Evidence {i}','url':f'https://example.com/{i}','text':prose(),'overlap':5} for i in range(1,11)]

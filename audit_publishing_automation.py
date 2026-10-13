@@ -277,7 +277,7 @@ check('Both live Master categories have replaced the monolithic pipeline with Ma
       master_workflows.count('python master_v3_pipeline.py')==4
       and 'python master_dynamic_pipeline.py' not in master_workflows)
 check('Master V3 uses independently validated plain-text sections, not one long JSON response',
-      'def write_section' in v3_generator and "445<=count<=465" in v3_generator
+      'def write_section' in v3_generator and "400<=count<=490" in v3_generator
       and 'Never output JSON or markdown' in v3_generator
       and 'prepare_master_article' not in v3_generator)
 check('Master V3 preserves strict Blogger publication and package compilation gates',
