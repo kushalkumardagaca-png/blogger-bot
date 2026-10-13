@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 31: Master V3 now normalizes citation placement, accepts safe bounded section variance, assembles ten sections to guarantee the 4,000-word floor, and retains source gates and publication recovery; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 32: 12/13 October Master backfill is retired, recovery is current-date-only from 14 October, advance packages are reused at release, and bounded-section V3 safeguards remain active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -80,14 +80,12 @@ def reconcile(now,apply=False):
    call(['gh','workflow','run','daily_news_wires.yml','--ref','main','-f',f'desks={desk}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
   else:blocked.append(lk)
  master_deferred=[]
+ # From 14 October onward, recovery is current-date only. Never dispatch the
+ # explicitly abandoned 12/13 October backlog during the next morning.
  master_day=day
- try:
-  planned_day=dt.date.fromisoformat(str(load(ROOT/'MASTER_DAILY_PLAN.json',{}).get('date')))
-  if planned_day==day-dt.timedelta(days=1) and now.astimezone(IST).hour<6:master_day=planned_day
- except (TypeError,ValueError):pass
  master_by_key={x['key']:x for x in published_inventory(master_day)}
  daily_plan=load(ROOT/'MASTER_DAILY_PLAN.json',{});plan_rows={kind:daily_plan.get(kind,[]) if daily_plan.get('date')==master_day.isoformat() else [] for kind in ('trending','evergreen')}
- master_slots=sorted((due(master_day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times) if slot<len(plan_rows[kind]))
+ master_slots=[] if master_day<dt.date(2026,10,14) else sorted((due(master_day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times) if slot<len(plan_rows[kind]))
  # If GitHub's scheduler misses a preparation cron during a deployment, prepare
  # the validated package before release rather than waiting until the article is
  # already overdue. A later publish recovery reuses this committed package.

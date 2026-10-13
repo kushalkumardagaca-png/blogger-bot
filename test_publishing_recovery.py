@@ -10,7 +10,7 @@ class RecoveryTests(unittest.TestCase):
   for p in ('facebook','bluesky','tumblr','mastodon'):(root/f'{p}_tracker.json').write_text('{"published":[]}')
  def test_recovers_missing_sources_and_exact_social_routes(self):
   with tempfile.TemporaryDirectory() as td:
-   root=Path(td);day=dt.date(2026,10,11);self.setup(root,day);now=dt.datetime(2026,10,11,10,0,tzinfo=r.IST)
+   root=Path(td);day=dt.date(2026,10,14);self.setup(root,day);now=dt.datetime(2026,10,14,10,0,tzinfo=r.IST)
    with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
     report=r.reconcile(now,False)
    keys={x['key'] for x in report['actions'] if x['type']=='source_recovery'}
@@ -22,11 +22,18 @@ class RecoveryTests(unittest.TestCase):
    self.assertIn('news-china',report['overdueMissing'])
  def test_prewarm_recovers_a_missed_future_preparation_cron(self):
   with tempfile.TemporaryDirectory() as td:
-   root=Path(td);day=dt.date(2026,10,11);self.setup(root,day);now=dt.datetime(2026,10,11,7,0,tzinfo=r.IST)
+   root=Path(td);day=dt.date(2026,10,14);self.setup(root,day);now=dt.datetime(2026,10,14,7,0,tzinfo=r.IST)
    with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
     report=r.reconcile(now,False)
    warm=[x for x in report['actions'] if x['type']=='preparation_recovery']
    self.assertEqual([x['key'] for x in warm],['master-evergreen-0'])
+ def test_master_recovery_does_not_backfill_12_or_13_october(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);day=dt.date(2026,10,13);self.setup(root,day);now=dt.datetime(2026,10,13,23,30,tzinfo=r.IST)
+   with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
+    report=r.reconcile(now,False)
+   assert not any(x.get('key','').startswith('master-') and x.get('type') in ('source_recovery','preparation_recovery') for x in report['actions'])
+   assert not any(x.startswith('master-') for x in report['overdueMissing'])
  def test_retry_cap_and_spacing(self):
   now=dt.datetime(2026,10,11,12,0,tzinfo=r.IST);key='x';revision='same-code';ledger={key:{'attempts':1,'lastAttempt':now.isoformat(),'revision':revision}}
   self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30),revision))

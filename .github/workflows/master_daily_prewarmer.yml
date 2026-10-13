@@ -1,14 +1,15 @@
-name: Master Daily Package Prewarmer
+name: Master V3 Daily Advance Prewarmer
 
 on:
   schedule:
-    # MASTER_DAILY_PLAN is created at 00:20 IST. Prepare each Trending/Evergreen
-    # pair well before its live window so publication jobs only validate and post.
-    - cron: '20 19 * * *'  # 00:50 IST → slots 0
-    - cron: '50 19 * * *'  # 01:20 IST → slots 1
-    - cron: '20 20 * * *'  # 01:50 IST → slots 2
-    - cron: '50 20 * * *'  # 02:20 IST → slots 3
-    - cron: '20 21 * * *'  # 02:50 IST → slots 4
+    # The daily plan is due at 00:20 IST. Begin all complete packages shortly
+    # afterward, leaving 4h35m-5h35m before the earliest Master release and much
+    # larger margins for later slots.
+    - cron: '10 19 * * *'  # 00:40 IST → slot pair 0
+    - cron: '25 19 * * *'  # 00:55 IST → slot pair 1
+    - cron: '40 19 * * *'  # 01:10 IST → slot pair 2
+    - cron: '55 19 * * *'  # 01:25 IST → slot pair 3
+    - cron: '10 20 * * *'  # 01:40 IST → slot pair 4
   workflow_dispatch:
     inputs:
       batch:
@@ -22,7 +23,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: daily-yield-master-prewarm-${{ github.event.schedule || inputs.batch || github.run_id }}
+  group: daily-yield-master-v3-prewarm-${{ github.event.schedule || inputs.batch || github.run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -35,15 +36,15 @@ jobs:
         shell: bash
         run: |
           case "${{ github.event.schedule }}" in
-            '20 19 * * *') value=0 ;;
-            '50 19 * * *') value=1 ;;
-            '20 20 * * *') value=2 ;;
-            '50 20 * * *') value=3 ;;
-            '20 21 * * *') value=4 ;;
+            '10 19 * * *') value=0 ;;
+            '25 19 * * *') value=1 ;;
+            '40 19 * * *') value=2 ;;
+            '55 19 * * *') value=3 ;;
+            '10 20 * * *') value=4 ;;
             *) value="${{ inputs.batch }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
-      - name: Prepare both packages without publishing early
+      - name: Prepare both complete packages without publishing early
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -51,4 +52,4 @@ jobs:
           slot='${{ steps.slot.outputs.value }}'
           gh workflow run master_trending_writer.yml --ref main -f slot="$slot" -f publish=false -f retry_attempt=0
           gh workflow run master_evergreen_writer.yml --ref main -f slot="$slot" -f publish=false -f retry_attempt=0
-          echo "Dispatched validated text, evidence and three-photo preparation for slot $slot."
+          echo "Dispatched complete V3 evidence, text, validation and three-photo preparation for slot $slot."

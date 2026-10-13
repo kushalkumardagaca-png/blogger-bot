@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T21:35:24+05:30",
+  "checked_at_ist": "2026-10-13T22:02:47+05:30",
   "summary": {
-    "pass": 165,
+    "pass": 167,
     "fail": 0
   },
   "checks": [
@@ -452,6 +452,16 @@
     },
     {
       "name": "Master V3 preserves strict Blogger publication and package compilation gates",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master V3 permanently excludes 12/13 October and all historical backfill",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Scheduled Master release reuses a complete advance package",
       "status": "PASS",
       "detail": ""
     },

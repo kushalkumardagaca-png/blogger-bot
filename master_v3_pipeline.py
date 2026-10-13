@@ -18,7 +18,7 @@ from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
 
-ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata')
+ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata');PRODUCTION_START=dt.date(2026,10,14)
 
 def read(path,default):
  try:return json.loads(path.read_text())
@@ -28,9 +28,8 @@ def selected(kind,slot):
  plan=read(PLAN,{})
  if plan.get('status')!='READY':raise RuntimeError('daily dynamic Master plan is not READY')
  today=dt.datetime.now(IST).date();plan_date=dt.date.fromisoformat(str(plan.get('date')))
- if plan_date!=today:
-  allowed=os.environ.get('MASTER_BACKFILL','').casefold()=='true' and plan_date==today-dt.timedelta(days=1)
-  if not allowed:raise RuntimeError('daily dynamic Master plan is stale')
+ if plan_date<PRODUCTION_START:raise RuntimeError('Master V3 intentionally does not publish 12 or 13 October backfill')
+ if plan_date!=today:raise RuntimeError('Master V3 publishes only the current IST date; historical backfill is disabled')
  rows=plan.get(kind,[])
  if not 0<=slot<len(rows):raise RuntimeError(f'{kind} slot {slot} is unavailable')
  return plan,rows[slot]
@@ -65,7 +64,11 @@ def prepare(kind,slot):
  plan,item=selected(kind,slot);original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
  for candidate in attempts:
   try:
-   target=package_path(kind,candidate);package=generator.build(candidate,kind,target);validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
+   target=package_path(kind,candidate)
+   if target.exists():
+    package=read(target,{});validate(package)
+   else:package=generator.build(candidate,kind,target)
+   validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
   except RuntimeError as exc:
    last=exc
    if kind!='trending' or 'source gate' not in str(exc):raise

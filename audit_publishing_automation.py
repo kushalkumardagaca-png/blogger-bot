@@ -31,7 +31,7 @@ for name,expected in master_expected.items():
  check(f'{name} has its complete live schedule',crons(ROOT/'.github/workflows'/name)==expected and 'workflow_dispatch:' in workflow,str(crons(ROOT/'.github/workflows'/name)))
 prewarmer=ROOT/'.github/workflows/master_daily_prewarmer.yml';prewarm_text=prewarmer.read_text() if prewarmer.exists() else ''
 check('All ten Master packages are prepared in five staggered overnight batches',
-      crons(prewarmer)==['20 19 * * *','50 19 * * *','20 20 * * *','50 20 * * *','20 21 * * *']
+      crons(prewarmer)==['10 19 * * *','25 19 * * *','40 19 * * *','55 19 * * *','10 20 * * *']
       and prewarm_text.count('publish=false')==2 and 'master_trending_writer.yml' in prewarm_text and 'master_evergreen_writer.yml' in prewarm_text)
 check('Dynamic Master publication has both code gate and explicit live workflow enablement',
       'MASTER_PUBLICATION_ENABLED' in (ROOT/'master_dynamic_pipeline.py').read_text()
@@ -283,6 +283,13 @@ check('Master V3 uses independently validated plain-text sections, not one long 
 check('Master V3 preserves strict Blogger publication and package compilation gates',
       'MASTER_PUBLICATION_ENABLED' in v3_pipeline and 'validate(package)' in v3_pipeline
       and 'assert_publishable' in v3_pipeline)
+check('Master V3 permanently excludes 12/13 October and all historical backfill',
+      'PRODUCTION_START=dt.date(2026,10,14)' in v3_pipeline
+      and 'publishes only the current IST date' in v3_pipeline
+      and 'master_day=day' in (ROOT/'publishing_recovery.py').read_text())
+check('Scheduled Master release reuses a complete advance package',
+      'if target.exists()' in v3_pipeline and 'package=read(target,{})' in v3_pipeline
+      and 'validate(package)' in v3_pipeline)
 check('Master V3 deterministically assembles summary, support and three evidence visuals',
       'def extracted_summary' in v3_generator and 'def support' in v3_generator
       and 'def visuals' in v3_generator)

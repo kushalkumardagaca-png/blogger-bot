@@ -23,12 +23,12 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          # One-time cutover epoch for Master V3. The names below identify only
-          # retired V2 workflows; V3 has different workflow names and is never
-          # cancelled for age by this cleanup.
-          repair_epoch=$(date -u -d '2026-10-13T14:48:00Z' +%s)
+          # Owner-directed retirement: do not finish or publish any 12/13 October
+          # Master attempt. Runs begun before this epoch belong to that abandoned
+          # backlog. Runs for 14 October and later are never cancelled for age.
+          repair_epoch=$(date -u -d '2026-10-13T16:15:00Z' +%s)
           gh run list --repo "$GH_REPO" --status in_progress --limit 100 \
-            --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt] | @tsv' |
+            --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)" or .workflowName=="Master V3 Trending Publisher (Live)" or .workflowName=="Master V3 Evergreen Publisher (Live)") | [.databaseId,.startedAt] | @tsv' |
           while IFS=$'\t' read -r run_id started_at; do
             [ -n "$run_id" ] || continue
             started=$(date -u -d "$started_at" +%s)
