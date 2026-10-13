@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 29: repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 30: both Master categories use the fresh V3 bounded-section engine with deterministic assembly, live fallback, parallel non-blocking recovery and no article retry ceiling.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T19:33:27+05:30",
+  "checked_at_ist": "2026-10-13T19:40:39+05:30",
   "summary": {
-    "pass": 159,
+    "pass": 161,
     "fail": 0
   },
   "checks": [
@@ -477,6 +477,16 @@
     },
     {
       "name": "Master workflows actually expose the repository model token to generation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Both live Master categories use the fresh bounded-section V3 engine",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Fresh Master engine avoids monolithic 4,000-word model responses",
       "status": "PASS",
       "detail": ""
     },
