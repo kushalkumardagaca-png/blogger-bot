@@ -12,7 +12,7 @@ def check(name,ok,detail=""):
 def crons(path):
  return re.findall(r"cron:\s*['\"]([^'\"]+)",Path(path).read_text())
 
-news_expected=['30 19 * * *','30 20 * * *','30 23 * * *','30 2 * * *','30 4 * * *','30 5 * * *','30 6 * * *','30 10 * * *','30 11 * * *','30 12 * * *','30 13 * * *']
+news_expected=['30 21 * * *','30 22 * * *','30 0 * * *','30 3 * * *','30 5 * * *','0 6 * * *','30 6 * * *','30 10 * * *','0 11 * * *','30 11 * * *','0 12 * * *']
 nw=ROOT/'.github/workflows/daily_news_wires.yml'
 def ist_minute(cron):
     minute,hour=map(int,cron.split()[:2]); return (hour*60+minute+330)%1440
@@ -23,8 +23,8 @@ check('Rejected legacy Master workflows remain absent and approved dynamic workf
       and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
 master_expected={
  'master_topic_discovery.yml':['35 18 * * 6','50 18 * * *'],
- 'master_trending_writer.yml':['0 20 * * *','0 23 * * *','0 2 * * *','0 7 * * *','0 13 * * *'],
- 'master_evergreen_writer.yml':['0 21 * * *','0 0 * * *','0 6 * * *','0 8 * * *','0 14 * * *'],
+ 'master_trending_writer.yml':['0 22 * * *','0 1 * * *','0 6 * * *','0 8 * * *','0 12 * * *'],
+ 'master_evergreen_writer.yml':['0 0 * * *','0 3 * * *','0 7 * * *','30 11 * * *','0 14 * * *'],
 }
 for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
@@ -229,8 +229,8 @@ coordinated=coordinated_path.read_text() if coordinated_path.exists() else ''
 dispatch=dispatch_path.read_text() if dispatch_path.exists() else ''
 check('Coordinated router and event dispatcher are deployed',bool(rotation) and bool(coordinated) and bool(dispatch))
 check('Exactly three rotating resource promotions per platform are scheduled daily',
-      crons(coordinated_path)==['0 19 * * *','0 21 * * *','0 23 * * *','0 1 * * *','0 3 * * *','0 5 * * *','0 7 * * *','0 9 * * *','0 11 * * *','0 13 * * *','0 15 * * *','0 17 * * *']
-      and 'Twelve evenly spaced Page/website promotions' in coordinated)
+      crons(coordinated_path)==['15 23 * * *','15 1 * * *','15 3 * * *','15 5 * * *','30 6 * * *','15 8 * * *','15 10 * * *','30 11 * * *','30 13 * * *','30 14 * * *','0 16 * * *','45 17 * * *']
+      and 'Audience-local global windows' in coordinated)
 check('Every social publisher accepts an exact authenticated Blogger target URL',
       all('--target-url' in text and 'Target URL was not found in authenticated Blogger inventory' in text
           for text in (fp,bp,tp,mp)))
@@ -312,12 +312,11 @@ def _cron_ist(v):
  m,h=map(int,v.split()[:2]);return (h*60+m+330)%1440
 _article_minutes=sorted([_minute(x) for x in _NEWS_LIVE.values()]+[_minute(x) for x in _MASTER_LIVE.values()])
 _article_gaps=[b-a for a,b in zip(_article_minutes,_article_minutes[1:])]+[1440-_article_minutes[-1]+_article_minutes[0]]
-check('Twenty-one articles are hourly with one four-hour overnight gap',len(_article_minutes)==21 and _article_gaps.count(60)==20 and _article_gaps.count(240)==1)
+check('Twenty-one articles preserve audience windows with one six-hour overnight gap',len(_article_minutes)==21 and _article_gaps.count(60)==14 and _article_gaps.count(30)==5 and _article_gaps.count(90)==1 and _article_gaps.count(360)==1)
 _resource_crons=re.findall(r'\"([^\"]+\")', '') if False else []
 from social_rotation import RESOURCE_SCHEDULES as _RESOURCE_SCHEDULES
 _resource_minutes=sorted(_cron_ist(x) for x in _RESOURCE_SCHEDULES)
-_resource_gaps=[b-a for a,b in zip(_resource_minutes,_resource_minutes[1:])]+[1440-_resource_minutes[-1]+_resource_minutes[0]]
-check('Twelve Page promotions are evenly spaced every two hours',len(_resource_minutes)==12 and _resource_gaps==[120]*12)
+check('Twelve Page promotions cover Asia, Europe, India and US reader windows',_resource_minutes==[285,405,525,645,720,825,945,1020,1140,1200,1290,1395])
 
 # Literal DESKS inventory without executing network code.
 tree=ast.parse(np); desks=None

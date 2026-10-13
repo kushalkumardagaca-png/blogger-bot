@@ -1,19 +1,19 @@
 name: Daily Yield News Wires (11 Daily)
 on:
   schedule:
-    # Preparation starts 75 minutes before release. The complete 21-article
-    # cadence is hourly from 02:15 through 22:15 IST, then quiet for four hours.
-    - cron: "30 19 * * *"   # 01:00 IST → Asia-Pacific live 02:15
-    - cron: "30 20 * * *"   # 02:00 IST → China live 03:15
-    - cron: "30 23 * * *"   # 05:00 IST → India live 06:15
-    - cron: "30 2 * * *"    # 08:00 IST → Russia live 09:15
-    - cron: "30 4 * * *"    # 10:00 IST → Markets live 11:15
-    - cron: "30 5 * * *"    # 11:00 IST → Europe live 12:15
+    # Preparation starts 75 minutes before each audience-aligned release.
+    # News keeps its geographic reader windows; Masters fill the daytime gaps.
+    - cron: "30 21 * * *"   # 03:00 IST → Asia-Pacific live 04:15
+    - cron: "30 22 * * *"   # 04:00 IST → China live 05:15
+    - cron: "30 0 * * *"    # 06:00 IST → India live 07:15
+    - cron: "30 3 * * *"    # 09:00 IST → Russia live 10:15
+    - cron: "30 5 * * *"    # 11:00 IST → Markets live 12:15
+    - cron: "0 6 * * *"     # 11:30 IST → Europe live 12:45
     - cron: "30 6 * * *"    # 12:00 IST → Economy live 13:15
     - cron: "30 10 * * *"   # 16:00 IST → Americas live 17:15
-    - cron: "30 11 * * *"   # 17:00 IST → Companies live 18:15
-    - cron: "30 12 * * *"   # 18:00 IST → Global live 19:15
-    - cron: "30 13 * * *"   # 19:00 IST → Banking live 20:15
+    - cron: "0 11 * * *"    # 16:30 IST → Companies live 17:45
+    - cron: "30 11 * * *"   # 17:00 IST → Global live 18:15
+    - cron: "0 12 * * *"    # 17:30 IST → Banking live 18:45
   workflow_dispatch:
     inputs:
       desks:
@@ -37,17 +37,17 @@ jobs:
         shell: bash
         run: |
           case "${{ github.event.schedule }}" in
-            '30 19 * * *') value=asia-pacific ;;
-            '30 20 * * *') value=china ;;
-            '30 23 * * *') value=india ;;
-            '30 2 * * *') value=russia ;;
-            '30 4 * * *') value=markets ;;
-            '30 5 * * *') value=europe ;;
+            '30 21 * * *') value=asia-pacific ;;
+            '30 22 * * *') value=china ;;
+            '30 0 * * *') value=india ;;
+            '30 3 * * *') value=russia ;;
+            '30 5 * * *') value=markets ;;
+            '0 6 * * *') value=europe ;;
             '30 6 * * *') value=economy ;;
             '30 10 * * *') value=americas ;;
-            '30 11 * * *') value=companies ;;
-            '30 12 * * *') value=global ;;
-            '30 13 * * *') value=banking ;;
+            '0 11 * * *') value=companies ;;
+            '30 11 * * *') value=global ;;
+            '0 12 * * *') value=banking ;;
             *) value="${{ inputs.desks }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"

@@ -2,11 +2,11 @@ name: Master Trending Writer (Live)
 
 on:
   schedule:
-    - cron: '0 20 * * *'   # Prepare 01:30 IST → live 04:15
-    - cron: '0 23 * * *'   # Prepare 04:30 IST → live 07:15
-    - cron: '0 2 * * *'    # Prepare 07:30 IST → live 10:15
-    - cron: '0 7 * * *'    # Prepare 12:30 IST → live 15:15
-    - cron: '0 13 * * *'   # Prepare 18:30 IST → live 21:15
+    - cron: '0 22 * * *'   # Prepare 03:30 IST → live 06:15
+    - cron: '0 1 * * *'    # Prepare 06:30 IST → live 09:15
+    - cron: '0 6 * * *'    # Prepare 11:30 IST → live 14:15
+    - cron: '0 8 * * *'    # Prepare 13:30 IST → live 16:15
+    - cron: '0 12 * * *'   # Prepare 17:30 IST → live 20:45
   workflow_dispatch:
     inputs:
       slot:
@@ -54,11 +54,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '0 20 * * *') value=0 ;;
-            '0 23 * * *') value=1 ;;
-            '0 2 * * *') value=2 ;;
-            '0 7 * * *') value=3 ;;
-            '0 13 * * *') value=4 ;;
+            '0 22 * * *') value=0 ;;
+            '0 1 * * *') value=1 ;;
+            '0 6 * * *') value=2 ;;
+            '0 8 * * *') value=3 ;;
+            '0 12 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"

@@ -2,20 +2,20 @@ name: Coordinated Daily Yield Social Publisher
 
 on:
   schedule:
-    # Twelve evenly spaced Page/website promotions: one every two IST hours.
-    # Daily platform rotation still preserves exactly three posts per app.
-    - cron: '0 19 * * *'   # 00:30 IST
-    - cron: '0 21 * * *'   # 02:30 IST
-    - cron: '0 23 * * *'   # 04:30 IST
-    - cron: '0 1 * * *'    # 06:30 IST
-    - cron: '0 3 * * *'    # 08:30 IST
-    - cron: '0 5 * * *'    # 10:30 IST
-    - cron: '0 7 * * *'    # 12:30 IST
-    - cron: '0 9 * * *'    # 14:30 IST
-    - cron: '0 11 * * *'   # 16:30 IST
-    - cron: '0 13 * * *'   # 18:30 IST
-    - cron: '0 15 * * *'   # 20:30 IST
-    - cron: '0 17 * * *'   # 22:30 IST
+    # Audience-local global windows: Asia morning, Europe working day, India
+    # evening and US morning/afternoon. Daily rotation keeps three per app.
+    - cron: '15 23 * * *'  # 04:45 IST
+    - cron: '15 1 * * *'   # 06:45 IST
+    - cron: '15 3 * * *'   # 08:45 IST
+    - cron: '15 5 * * *'   # 10:45 IST
+    - cron: '30 6 * * *'   # 12:00 IST
+    - cron: '15 8 * * *'   # 13:45 IST
+    - cron: '15 10 * * *'  # 15:45 IST
+    - cron: '30 11 * * *'  # 17:00 IST
+    - cron: '30 13 * * *'  # 19:00 IST
+    - cron: '30 14 * * *'  # 20:00 IST
+    - cron: '0 16 * * *'   # 21:30 IST
+    - cron: '45 17 * * *'  # 23:15 IST
   workflow_dispatch:
     inputs:
       item_key:

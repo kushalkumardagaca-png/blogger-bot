@@ -71,18 +71,18 @@ RESOURCE_DESTINATIONS = (
 # Three audience-friendly resource windows per platform in IST. The 12 schedules
 # produce exactly three page/website promotions on each network every day.
 RESOURCE_SCHEDULES = {
-    "0 19 * * *": ("mastodon", 0),  # 00:30 IST
-    "0 21 * * *": ("facebook", 0),  # 02:30 IST
-    "0 23 * * *": ("bluesky", 0),   # 04:30 IST
-    "0 1 * * *": ("tumblr", 0),     # 06:30 IST
-    "0 3 * * *": ("mastodon", 1),   # 08:30 IST
-    "0 5 * * *": ("facebook", 1),   # 10:30 IST
-    "0 7 * * *": ("bluesky", 1),    # 12:30 IST
-    "0 9 * * *": ("tumblr", 1),     # 14:30 IST
-    "0 11 * * *": ("mastodon", 2),  # 16:30 IST
-    "0 13 * * *": ("facebook", 2),  # 18:30 IST
-    "0 15 * * *": ("bluesky", 2),   # 20:30 IST
-    "0 17 * * *": ("tumblr", 2),    # 22:30 IST
+    "15 23 * * *": ("mastodon", 0), # 04:45 IST: Asia-Pacific morning
+    "15 1 * * *": ("facebook", 0),  # 06:45 IST: China/India morning
+    "15 3 * * *": ("bluesky", 0),   # 08:45 IST: India commute
+    "15 5 * * *": ("tumblr", 0),    # 10:45 IST: Europe morning
+    "30 6 * * *": ("mastodon", 1),  # 12:00 IST: Europe lunch approach
+    "15 8 * * *": ("facebook", 1),  # 13:45 IST: India/Europe overlap
+    "15 10 * * *": ("bluesky", 1),  # 15:45 IST: Europe midday
+    "30 11 * * *": ("tumblr", 1),   # 17:00 IST: India evening
+    "30 13 * * *": ("mastodon", 2), # 19:00 IST: India prime/US morning
+    "30 14 * * *": ("facebook", 2), # 20:00 IST: India prime/US morning
+    "0 16 * * *": ("bluesky", 2),   # 21:30 IST: US midday
+    "45 17 * * *": ("tumblr", 2),   # 23:15 IST: US afternoon
 }
 
 
