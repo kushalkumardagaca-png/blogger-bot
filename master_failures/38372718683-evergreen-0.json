@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 0,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "local keyless model failed to return valid JSON after 2 attempts: ValueError: model returned no complete JSON object"
+}
