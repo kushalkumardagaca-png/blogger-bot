@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-12T18:20:55+05:30",
+  "checked_at_ist": "2026-10-13T10:45:41+05:30",
   "summary": {
-    "pass": 141,
+    "pass": 142,
     "fail": 0
   },
   "checks": [
@@ -18,12 +18,12 @@
     {
       "name": "master_trending_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['0 1 * * *', '0 7 * * *', '30 9 * * *', '30 12 * * *', '30 13 * * *']"
+      "detail": "['0 0 * * *', '30 5 * * *', '0 8 * * *', '0 11 * * *', '0 12 * * *']"
     },
     {
       "name": "master_evergreen_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['30 1 * * *', '30 7 * * *', '0 10 * * *', '0 13 * * *', '0 14 * * *']"
+      "detail": "['15 0 * * *', '0 6 * * *', '30 8 * * *', '30 11 * * *', '30 12 * * *']"
     },
     {
       "name": "Dynamic Master publication has both code gate and explicit live workflow enablement",
@@ -86,7 +86,7 @@
       "detail": ""
     },
     {
-      "name": "Dynamic Master discovery has no CSV topic queue",
+      "name": "Historical evergreen references are never a blind topic queue",
       "status": "PASS",
       "detail": ""
     },
@@ -431,12 +431,17 @@
       "detail": ""
     },
     {
+      "name": "Article and Page application choices rotate across all four networks by IST day",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "Concurrent Master package, photo, plan and tracker writes use semantic merge and retry",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "Master generation has repository-native quota and model-independent research fallback",
+      "name": "Master generation is quota-independent with model-independent research fallback",
       "status": "PASS",
       "detail": ""
     },

@@ -86,7 +86,8 @@ def reconcile(now,apply=False):
  for item in inventory:
   published=parse(item.get('published_at'))
   if published and now-published.astimezone(IST)<SOCIAL_GRACE:continue
-  for route_index,platform in enumerate(platform_pair_for(item['key'])):
+  route_day=parse(item.get('published_at')).astimezone(IST).date() if parse(item.get('published_at')) else day
+  for route_index,platform in enumerate(platform_pair_for(item['key'],route_day)):
    if item['url'].split('#')[0].rstrip('/') in platform_urls[platform]:continue
    lk=f'social:{day}:{item["key"]}:{route_index}'
    if may_retry(ledger,lk,now):

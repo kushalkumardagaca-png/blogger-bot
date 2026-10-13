@@ -1,13 +1,13 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 141 PASS · 0 FAIL
+**Result:** 142 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
 - ✅ **Rejected legacy Master workflows remain absent and approved dynamic workflows exist**
 - ✅ **master_topic_discovery.yml has its complete live schedule** — ['35 18 * * 6', '50 18 * * *']
-- ✅ **master_trending_writer.yml has its complete live schedule** — ['0 1 * * *', '0 7 * * *', '30 9 * * *', '30 12 * * *', '30 13 * * *']
-- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['30 1 * * *', '30 7 * * *', '0 10 * * *', '0 13 * * *', '0 14 * * *']
+- ✅ **master_trending_writer.yml has its complete live schedule** — ['0 0 * * *', '30 5 * * *', '0 8 * * *', '0 11 * * *', '0 12 * * *']
+- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['15 0 * * *', '0 6 * * *', '30 8 * * *', '30 11 * * *', '30 12 * * *']
 - ✅ **Dynamic Master publication has both code gate and explicit live workflow enablement**
 - ✅ **Eleven news preflight runs** — ['30 21 * * *', '30 22 * * *', '30 0 * * *', '30 3 * * *', '30 5 * * *', '0 6 * * *', '30 6 * * *', '30 10 * * *', '0 11 * * *', '30 11 * * *', '0 12 * * *']
 - ✅ **News desks have independent non-cancelling precision runs**
@@ -20,7 +20,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Bing API-key errors are redacted rather than stringified**
 - ✅ **Bing URL evidence and state are persisted without secrets**
 - ✅ **Master taxonomy is exactly five trending plus fifteen evergreen categories**
-- ✅ **Dynamic Master discovery has no CSV topic queue**
+- ✅ **Historical evergreen references are never a blind topic queue**
 - ✅ **Dynamic Master daily plan is five trending plus five evergreen topics**
 - ✅ **Trending Master articles receive one trend and one permanent label**
 - ✅ **Every article routes to two distinct networks with exact 42-post weighting**
@@ -89,8 +89,9 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
+- ✅ **Article and Page application choices rotate across all four networks by IST day**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
-- ✅ **Master generation has repository-native quota and model-independent research fallback**
+- ✅ **Master generation is quota-independent with model-independent research fallback**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include measured 10–15-item continuous discovery shelf**

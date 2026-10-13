@@ -16,6 +16,17 @@ from pathlib import Path
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 PLATFORMS = ("facebook", "bluesky", "tumblr", "mastodon")
+# User-approved cross-day application rotation. The anchor preserves today's
+# established routes; each following IST date advances Facebook → Tumblr →
+# Bluesky → Mastodon → Facebook. A cyclic permutation preserves the exact daily
+# post count while preventing any desk, Master slot or Page from staying on one app.
+ROTATION_PLATFORMS=("facebook","tumblr","bluesky","mastodon")
+ROTATION_ANCHOR=dt.date(2026,10,13)
+
+def rotate_platform(platform:str,day:dt.date)->str:
+ if platform not in ROTATION_PLATFORMS:raise ValueError(f'unknown social platform: {platform}')
+ phase=(day-ROTATION_ANCHOR).days%len(ROTATION_PLATFORMS)
+ return ROTATION_PLATFORMS[(ROTATION_PLATFORMS.index(platform)+phase)%len(ROTATION_PLATFORMS)]
 NEWS_PATTERN = (
     "facebook", "bluesky", "tumblr", "mastodon", "facebook",
     "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
@@ -42,9 +53,10 @@ DAILY_PLATFORM_PAIRS=(
  ('bluesky','tumblr'),('bluesky','mastodon'),
 )
 
-def platform_pair_for(item_key:str)->tuple[str,str]:
+def platform_pair_for(item_key:str,day:dt.date|None=None)->tuple[str,str]:
  if item_key not in DAILY_ARTICLE_KEYS:raise ValueError(f'unknown daily article key: {item_key}')
- pair=DAILY_PLATFORM_PAIRS[DAILY_ARTICLE_KEYS.index(item_key)]
+ route_day=day or dt.datetime.now(IST).date();base=DAILY_PLATFORM_PAIRS[DAILY_ARTICLE_KEYS.index(item_key)]
+ pair=(rotate_platform(base[0],route_day),rotate_platform(base[1],route_day))
  if pair[0]==pair[1]:raise RuntimeError('social pair must use two different platforms')
  return pair
 RESOURCE_DESTINATIONS = (
@@ -85,7 +97,7 @@ def parse_time(value: str) -> dt.datetime | None:
 
 
 def platform_for(item_key: str, day: dt.date) -> str:
-    if item_key in DAILY_ARTICLE_KEYS:return platform_pair_for(item_key)[0]
+    if item_key in DAILY_ARTICLE_KEYS:return platform_pair_for(item_key,day)[0]
     offset = day.toordinal()
     if item_key.startswith("news-"):
         desk = item_key.split("-", 1)[1]
@@ -116,7 +128,7 @@ def resource_destination(platform: str, position: int, day: dt.date) -> tuple[st
 def resource_url(slot: int, day: dt.date) -> str:
     # Backward-compatible helper: slots 0-11 map to the complete daily plan.
     schedules=list(RESOURCE_SCHEDULES.values());platform,position=schedules[slot]
-    return resource_destination(platform,position,day)[2]
+    return resource_destination(rotate_platform(platform,day),position,day)[2]
 
 
 def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
@@ -130,7 +142,8 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
     if schedule:
         if schedule not in RESOURCE_SCHEDULES:
             raise ValueError(f"unknown coordinated resource schedule: {schedule}")
-        scheduled_platform,position=RESOURCE_SCHEDULES[schedule]
+        base_platform,position=RESOURCE_SCHEDULES[schedule]
+        scheduled_platform=rotate_platform(base_platform,current.date())
         resource_key,resource_name,target_url=resource_destination(scheduled_platform,position,current.date())
         item_key=f"resource-{resource_key}"
         mode="page"
@@ -150,7 +163,7 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
         "item_key": item_key,
         "target_url": target_url,
         "content_mode": mode or "post",
-        "platform": (scheduled_platform or (platform_pair_for(item_key)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day))),
+        "platform": (scheduled_platform or (platform_pair_for(item_key,day)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day))),
         "resource_name": resource_name,
         "route_index": route_index,
         "delay_seconds": delay,

@@ -23,8 +23,8 @@ check('Rejected legacy Master workflows remain absent and approved dynamic workf
       and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
 master_expected={
  'master_topic_discovery.yml':['35 18 * * 6','50 18 * * *'],
- 'master_trending_writer.yml':['0 1 * * *','0 7 * * *','30 9 * * *','30 12 * * *','30 13 * * *'],
- 'master_evergreen_writer.yml':['30 1 * * *','30 7 * * *','0 10 * * *','0 13 * * *','0 14 * * *'],
+ 'master_trending_writer.yml':['0 0 * * *','30 5 * * *','0 8 * * *','0 11 * * *','0 12 * * *'],
+ 'master_evergreen_writer.yml':['15 0 * * *','0 6 * * *','30 8 * * *','30 11 * * *','30 12 * * *'],
 }
 for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
@@ -58,8 +58,9 @@ ap=(ROOT/'auto_blogger_publisher.py').read_text(); np=(ROOT/'news_pipeline.py').
 taxonomy=(ROOT/'master_taxonomy.py').read_text(); discovery=(ROOT/'master_topic_discovery.py').read_text(); dynamic=(ROOT/'master_dynamic_pipeline.py').read_text()
 check('Master taxonomy is exactly five trending plus fifteen evergreen categories',
       taxonomy.count('"type": "trending"')==5 and taxonomy.count('"type": "evergreen"')==15)
-check('Dynamic Master discovery has no CSV topic queue',
-      '.csv' not in discovery.casefold() and 'discovered_from_live_internet' in discovery)
+check('Historical evergreen references are never a blind topic queue',
+      'revalidated_reference_evergreen' in discovery and 'len(urls)>=2' in discovery
+      and 'discovered_from_live_internet' in discovery and 'recent_news_headlines()' in discovery)
 check('Dynamic Master daily plan is five trending plus five evergreen topics',
       "if len(evergreen)!=5" in discovery and "for cat in TRENDING_CATEGORIES" in discovery and "'total':10" in discovery)
 check('Trending Master articles receive one trend and one permanent label',
@@ -259,16 +260,19 @@ check('Daily coordinated inventory covers all 21 articles plus twelve rotating r
 check('Configured article cadence is exactly 42 weighted social posts daily',
       'Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8' in rotation
       and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
+check('Article and Page application choices rotate across all four networks by IST day',
+      'ROTATION_PLATFORMS' in rotation and 'rotate_platform(base_platform,current.date())' in rotation
+      and 'platform_pair_for(item_key,day)' in rotation)
 
 master_workflows=(ROOT/'.github/workflows/master_trending_writer.yml').read_text()+(ROOT/'.github/workflows/master_evergreen_writer.yml').read_text()
 check('Concurrent Master package, photo, plan and tracker writes use semantic merge and retry',
       master_workflows.count('merge_master_state.py')>=4 and (ROOT/'merge_master_state.py').exists()
       and master_workflows.count('merge_master_preparation.py')>=2 and (ROOT/'merge_master_preparation.py').exists()
       and 'git reset --hard FETCH_HEAD' in master_workflows and 'files.tar' in master_workflows)
-check('Master generation has repository-native quota and model-independent research fallback',
-      '_github_model_json' in prep and '_public_model_json' in prep and '_heuristic_queries' in prep
-      and 'models: read' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text()
-      and 'GITHUB_TOKEN' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text())
+check('Master generation is quota-independent with model-independent research fallback',
+      'OLLAMA_API_URL' in prep and '_heuristic_queries' in prep
+      and master_workflows.count('Start quota-independent local text model')==2
+      and 'GEMINI_API_KEY' not in master_workflows and 'qwen2.5:1.5b' in master_workflows)
 check('Master links both market desks','/p/markets-today.html' in prep and '/p/global-snapshot.html' in prep)
 check('Master posts cannot enter News hub',"return title,slug,meta,[category,AUTHOR],body" in mv2)
 check('Master articles include measured 10–15-item continuous discovery shelf','10<=len(low)<=15' in mv2 and 'dy2-rail-track' in mv2 and 'pointerdown' in mv2 and 'low_exposure_posts' in prep)
