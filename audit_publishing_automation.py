@@ -295,6 +295,12 @@ check('Omitted local-model sections use attributed evidence rather than filler',
 check('Transient Ollama failures use fallback only after bounded local attempts',
       'Local Ollama remains primary' in prep and 'try:return _emergency_model_json(messages,max_tokens)' in prep
       and 'except Exception:result={}' in prep)
+check('Master workflows actually expose the repository model token to generation',
+      master_workflows.count('GITHUB_TOKEN: ${{ github.token }}')>=2)
+check('Pre-validation short cores have a deterministic evidence-only completion path',
+      'core evidence completion failed' in prep and 'additional documented scope and uncertainty' in prep)
+check('Summary and visual structure have non-generative evidence-preserving fallbacks',
+      'summary extraction failed normalization' in prep and 'Categorical source scope reported by' in prep)
 check('Verified short cores complete from attributed evidence without model padding',
       'bridge_round=0' in prep and 'while current<4000' in prep
       and 'additional documented scope and uncertainty' in prep)

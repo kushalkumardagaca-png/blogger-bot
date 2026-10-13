@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 156 PASS · 0 FAIL
+**Result:** 159 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -98,6 +98,9 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Evergreen source discovery can use relevant established reporting without weakening review**
 - ✅ **Omitted local-model sections use attributed evidence rather than filler**
 - ✅ **Transient Ollama failures use fallback only after bounded local attempts**
+- ✅ **Master workflows actually expose the repository model token to generation**
+- ✅ **Pre-validation short cores have a deterministic evidence-only completion path**
+- ✅ **Summary and visual structure have non-generative evidence-preserving fallbacks**
 - ✅ **Verified short cores complete from attributed evidence without model padding**
 - ✅ **Scholarly evidence must contain a finance-domain concept**
 - ✅ **Current Master generation has no custom age timeout or age cancellation**

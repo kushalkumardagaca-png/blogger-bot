@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 28: non-blocking parallel recovery, finance-domain evidence filtering, deterministic verified-core completion and no terminal article retry ceiling are active.
+Permanent recovery generation 29: repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

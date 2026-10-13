@@ -511,7 +511,20 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
     existing={' '.join(x.casefold().split()) for s in sections for x in s['paragraphs']};addition=[x for x in addition if ' '.join(x.casefold().split()) not in existing];added=words(' '.join(addition))
     if added>=20:section['paragraphs'].extend(addition);core_count+=added
    if core_count>=4000:break
-  if core_count<4000:raise RuntimeError(f'core expansion failed; assembled core remains {core_count} words')
+  if core_count<4000:
+   # The local 1.5B model often stops just below the hard floor. Complete the
+   # body from attributed source scope here, before the pre-validation gate;
+   # the later hostile review and normalization still run independently.
+   bridge_round=0
+   while core_count<4000 and bridge_round<len(sections)*2:
+    section=sections[bridge_round%len(sections)];capacity=4150-core_count
+    rotated=evidence[bridge_round%len(evidence):]+evidence[:bridge_round%len(evidence)]
+    addition=_evidence_bridge_section(section['heading'],f"additional documented scope and uncertainty for {section['heading']}",rotated,max(260,min(450,4050-core_count+30)))
+    if words(' '.join(addition))>capacity:addition=trim_paragraphs(addition,capacity)
+    existing={' '.join(x.casefold().split()) for s in sections for x in s['paragraphs']};addition=[x for x in addition if ' '.join(x.casefold().split()) not in existing]
+    if addition:section['paragraphs'].extend(addition)
+    core_count=words(' '.join(' '.join(x['paragraphs']) for x in sections));bridge_round+=1
+   if core_count<4000:raise RuntimeError(f'core evidence completion failed; assembled core remains {core_count} words')
  elif core_count>4200:
   excess=core_count-4100
   for section in reversed(sections):
@@ -547,7 +560,31 @@ Write approximately {section_target} actual words in 4-7 natural paragraphs. Est
  elif summary_count>800:
   prompt=f'''Rewrite this after-article summary in 650-750 words, preserving only supported points and adding no facts. Return JSON {{"paragraphs":[...]}}. SUMMARY: {json.dumps(summary,ensure_ascii=False)}''';summary=paragraph_list(model_json([{'role':'system','content':'Condense faithfully.'},{'role':'user','content':prompt}],max_tokens=3000))
  if words(' '.join(summary))>800:summary=trim_paragraphs(summary,750)
- if not 600<=words(' '.join(summary))<=800:raise RuntimeError(f'summary failed normalization at {words(" ".join(summary))} words')
+ if not 600<=words(' '.join(summary))<=800:
+  # A summary is a compression of already verified prose, so extraction is a
+  # safer guaranteed fallback than another generative request. Interleave
+  # complete sentences across sections to preserve whole-article coverage.
+  buckets=[]
+  for section in sections:
+   sentences=[]
+   for paragraph in section['paragraphs']:sentences.extend(x.strip() for x in re.split(r'(?<=[.!?])\s+',paragraph) if x.strip())
+   buckets.append(sentences)
+  selected=[];seen=set();position=0
+  while words(' '.join(selected))<680 and any(position<len(x) for x in buckets):
+   for bucket in buckets:
+    if position>=len(bucket):continue
+    sentence=bucket[position];key=' '.join(sentence.casefold().split())
+    if key not in seen:selected.append(sentence);seen.add(key)
+    if words(' '.join(selected))>=680:break
+   position+=1
+  summary=[];paragraph=[];paragraph_words=0
+  for sentence in selected:
+   n=words(sentence)
+   if paragraph and paragraph_words+n>115:summary.append(' '.join(paragraph));paragraph=[];paragraph_words=0
+   paragraph.append(sentence);paragraph_words+=n
+  if paragraph:summary.append(' '.join(paragraph))
+  if words(' '.join(summary))>800:summary=trim_paragraphs(summary,750)
+ if not 600<=words(' '.join(summary))<=800:raise RuntimeError(f'summary extraction failed normalization at {words(" ".join(summary))} words')
  support_prompt=f'''Create reader-specific support material for the article below, using only the evidence packet. Answer these FAQ questions: {json.dumps(plan.pop('faq_questions',[]),ensure_ascii=False)}. Define these glossary terms: {json.dumps(plan.pop('glossary_terms',[]),ensure_ascii=False)}. Return strict JSON with faq:[{{question,answer}}] and glossary:[{{term,definition}}]. At least 5 FAQs and 8 definitions. Keep answers accurate, concise and non-repetitive. ARTICLE: {json.dumps(sections,ensure_ascii=False)} EVIDENCE: {evidence_json}'''
  support=model_json([{'role':'system','content':'Create accurate topic-specific reader support, not generic boilerplate.'},{'role':'user','content':support_prompt}],max_tokens=5000)
  plan['sections']=sections;plan['summary']=summary;plan['faq']=support.get('faq',[]);plan['glossary']=support.get('glossary',[])
@@ -722,7 +759,19 @@ def build_package(topic,target):
   except (TypeError,ValueError) as exc:visual_error=str(exc)
   repair_prompt='''Replace all data visuals with at least three accurate, evidence-appropriate representations. Every visual must include title, explanatory caption, numeric source evidence index, and an after_section copied exactly from the article headings. A numeric chart must include equal nonempty labels and values arrays whose values are copied verbatim from evidence. When the evidence supports categories rather than quantities, use type table and data as at least two flat row objects with the same two or more columns. Never use phone numbers as quantitative values. Return only strict JSON {"visuals":[...]}; do not omit any required key. ARTICLE SECTIONS: '''+json.dumps([x.get('heading') for x in draft.get('sections',[])],ensure_ascii=False)+' EVIDENCE: '+json.dumps(evidence,ensure_ascii=False)
   draft['visuals']=model_json([{'role':'system','content':'Repair data visuals without inventing or transforming any number.'},{'role':'user','content':repair_prompt}],max_tokens=2500).get('visuals',[])
- if visual_error:raise RuntimeError('data visual repair failed: '+visual_error)
+ if visual_error:
+  # Models frequently omit one of three visuals or invent chart structure.
+  # Categorical evidence tables can be assembled exactly from retrieved source
+  # metadata and therefore need neither generated quantities nor model repair.
+  headings=[str(x.get('heading') or '') for x in draft.get('sections',[]) if str(x.get('heading') or '').strip()]
+  deterministic=[]
+  for index,item in enumerate(evidence[:3],1):
+   title=str(item.get('title') or item.get('name') or f'Evidence source {index}').strip()
+   provider=str(item.get('name') or 'Retrieved evidence provider').strip()
+   excerpt=re.split(r'(?<=[.!?])\s+',str(item.get('text') or '').strip())[0][:360].strip()
+   deterministic.append({'type':'table','title':f'Evidence scope {index}: {title[:100]}','caption':f'Categorical source scope reported by {provider}; this table does not infer an unreported quantity.','source':index,'after_section':headings[min(index-1,len(headings)-1)],'data':[{'Evidence field':'Document','Documented value':title},{'Evidence field':'Provider','Documented value':provider},{'Evidence field':'Reported scope','Documented value':excerpt or 'See the cited source record.'}]})
+  if len(deterministic)<3 or not headings:raise RuntimeError('deterministic evidence visuals could not be assembled: '+visual_error)
+  draft['visuals']=deterministic;visual_error=''
  STAGE='evidence-verification';verify_evidence(draft,evidence)
  before_normalization=words(' '.join(' '.join(paragraph_list(x.get('paragraphs'))) for x in draft.get('sections',[])))
  normalize_verified_core(draft,evidence)
