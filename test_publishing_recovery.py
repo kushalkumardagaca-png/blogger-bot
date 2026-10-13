@@ -20,6 +20,13 @@ class RecoveryTests(unittest.TestCase):
    self.assertEqual(report['syntheticViews'],0)
    self.assertEqual(report['status'],'DEGRADED')
    self.assertIn('news-china',report['overdueMissing'])
+ def test_prewarm_recovers_a_missed_future_preparation_cron(self):
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);day=dt.date(2026,10,11);self.setup(root,day);now=dt.datetime(2026,10,11,7,0,tzinfo=r.IST)
+   with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
+    report=r.reconcile(now,False)
+   warm=[x for x in report['actions'] if x['type']=='preparation_recovery']
+   self.assertEqual([x['key'] for x in warm],['master-evergreen-0'])
  def test_retry_cap_and_spacing(self):
   now=dt.datetime(2026,10,11,12,0,tzinfo=r.IST);key='x';revision='same-code';ledger={key:{'attempts':1,'lastAttempt':now.isoformat(),'revision':revision}}
   self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30),revision))

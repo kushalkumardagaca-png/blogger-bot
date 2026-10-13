@@ -12,6 +12,7 @@ NEWS_TIMES={'asia-pacific':'04:15','china':'05:15','india':'07:15','russia':'10:
 MASTER_TIMES={'trending':['06:15','09:15','14:15','16:15','20:45'],'evergreen':['08:15','11:15','15:15','19:45','22:15']}
 WRONG_MASTER_REPAIRS=[{'key':'master-trending-0','duplicateUrl':'https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html','titlePhrase':'Budget Airlines'}]
 GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); MAX_RETRIES=3
+PREWARM=dt.timedelta(hours=3,minutes=15)
 
 def load(path,default):
  try:return json.loads(path.read_text(encoding='utf-8'))
@@ -81,7 +82,17 @@ def reconcile(now,apply=False):
   if planned_day==day-dt.timedelta(days=1) and now.astimezone(IST).hour<6:master_day=planned_day
  except (TypeError,ValueError):pass
  master_by_key={x['key']:x for x in published_inventory(master_day)}
- master_slots=sorted((due(master_day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times))
+ daily_plan=load(ROOT/'MASTER_DAILY_PLAN.json',{});plan_rows={kind:daily_plan.get(kind,[]) if daily_plan.get('date')==master_day.isoformat() else [] for kind in ('trending','evergreen')}
+ master_slots=sorted((due(master_day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times) if slot<len(plan_rows[kind]))
+ # If GitHub's scheduler misses a preparation cron during a deployment, prepare
+ # the validated package before release rather than waiting until the article is
+ # already overdue. A later publish recovery reuses this committed package.
+ for slot_due,kind,slot in master_slots:
+  key=f'master-{kind}-{slot}'
+  if key in master_by_key or not slot_due-PREWARM<=now<slot_due+GRACE:continue
+  lk=f'prewarm:{master_day}:{key}'
+  if not may_retry(ledger,lk,now):continue
+  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=false','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'preparation_recovery','key':key,'applied':apply})
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
   if now<slot_due+GRACE or key in master_by_key:continue
