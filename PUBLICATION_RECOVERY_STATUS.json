@@ -1,29 +1,15 @@
 {
-  "generatedAt": "2026-10-13T11:34:57.873170+05:30",
+  "generatedAt": "2026-10-13T11:54:56.679541+05:30",
   "dateIST": "2026-10-13",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 4,
-  "actions": [
-    {
-      "type": "source_recovery",
-      "key": "master-trending-1",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "master-evergreen-1",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "master-trending-2",
-      "applied": true
-    }
-  ],
+  "actions": [],
   "retryBlocked": [
     "source:2026-10-13:master-trending-0",
-    "source:2026-10-13:master-evergreen-0"
+    "source:2026-10-13:master-evergreen-0",
+    "source:2026-10-13:master-trending-1",
+    "source:2026-10-13:master-evergreen-1"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
