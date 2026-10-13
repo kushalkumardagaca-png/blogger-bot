@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-13T17:11:28.743515+05:30",
+  "generatedAt": "2026-10-13T17:16:31.218944+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 7,
+  "confirmedPublications": 8,
   "overdueMissing": [
     "master-trending-0",
     "master-evergreen-0",
@@ -52,6 +52,20 @@
     {
       "type": "source_recovery",
       "key": "master-trending-3",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-americas",
+      "platform": "facebook",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-americas",
+      "platform": "bluesky",
+      "routeIndex": 1,
       "applied": true
     }
   ],
