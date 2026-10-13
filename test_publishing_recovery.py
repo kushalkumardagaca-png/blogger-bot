@@ -18,6 +18,8 @@ class RecoveryTests(unittest.TestCase):
    social=[x for x in report['actions'] if x['type']=='social_replay']
    self.assertEqual(len([x for x in social if x['key']=='news-asia-pacific']),2)
    self.assertEqual(report['syntheticViews'],0)
+   self.assertEqual(report['status'],'DEGRADED')
+   self.assertIn('news-china',report['overdueMissing'])
  def test_retry_cap_and_spacing(self):
   now=dt.datetime(2026,10,11,12,0,tzinfo=r.IST);key='x';ledger={key:{'attempts':1,'lastAttempt':now.isoformat()}}
   self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30)))
