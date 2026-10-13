@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 0,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "V3 section 3 failed validation after bounded provider recovery: 302 words; required 400-490"
+}
