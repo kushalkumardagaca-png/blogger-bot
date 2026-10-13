@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T16:24:26.335553+05:30",
+  "generatedAt": "2026-10-13T16:54:06.821151+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
@@ -10,9 +10,21 @@
     "master-trending-1",
     "master-evergreen-1",
     "master-trending-2",
-    "master-evergreen-2"
+    "master-evergreen-2",
+    "master-trending-3"
   ],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-3",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-3",
+      "applied": true
+    }
+  ],
   "retryBlocked": [
     "source:2026-10-13:master-trending-0",
     "source:2026-10-13:master-evergreen-0",
