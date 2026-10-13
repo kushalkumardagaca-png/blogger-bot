@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T12:15:56+05:30",
+  "checked_at_ist": "2026-10-13T12:31:04+05:30",
   "summary": {
-    "pass": 148,
+    "pass": 149,
     "fail": 0
   },
   "checks": [
@@ -18,12 +18,12 @@
     {
       "name": "master_trending_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['0 22 * * *', '0 1 * * *', '0 6 * * *', '0 8 * * *', '0 12 * * *']"
+      "detail": "['30 21 * * *', '30 0 * * *', '30 5 * * *', '30 7 * * *', '30 11 * * *']"
     },
     {
       "name": "master_evergreen_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['0 0 * * *', '0 3 * * *', '0 7 * * *', '30 11 * * *', '0 14 * * *']"
+      "detail": "['30 23 * * *', '30 2 * * *', '30 6 * * *', '0 11 * * *', '30 13 * * *']"
     },
     {
       "name": "Dynamic Master publication has both code gate and explicit live workflow enablement",
@@ -457,6 +457,11 @@
     },
     {
       "name": "Master stale-run reaper allows legitimate CPU generation to approach workflow timeout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master preparation starts three hours and fifteen minutes before release",
       "status": "PASS",
       "detail": ""
     },

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 22: faster quota-free parallel recovery, bounded self-retry and photo-conflict protection are active.
+Permanent recovery generation 23: repaired-code rearming, earlier preparation, parallel local generation and photo-conflict protection are active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

@@ -40,7 +40,7 @@ jobs:
             if [ "$started" -lt "$repair_epoch" ]; then
               echo "Cancelling superseded pre-repair Master run $run_id"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
-            elif [ "$age" -gt 10200 ]; then
+            elif [ "$age" -gt 13800 ]; then
               echo "Cancelling stalled Master run $run_id after ${age}s"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
             fi

@@ -23,8 +23,8 @@ check('Rejected legacy Master workflows remain absent and approved dynamic workf
       and all((ROOT/'.github/workflows'/name).exists() for name in new_master))
 master_expected={
  'master_topic_discovery.yml':['35 18 * * 6','50 18 * * *'],
- 'master_trending_writer.yml':['0 22 * * *','0 1 * * *','0 6 * * *','0 8 * * *','0 12 * * *'],
- 'master_evergreen_writer.yml':['0 0 * * *','0 3 * * *','0 7 * * *','30 11 * * *','0 14 * * *'],
+ 'master_trending_writer.yml':['30 21 * * *','30 0 * * *','30 5 * * *','30 7 * * *','30 11 * * *'],
+ 'master_evergreen_writer.yml':['30 23 * * *','30 2 * * *','30 6 * * *','0 11 * * *','30 13 * * *'],
 }
 for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
@@ -281,8 +281,11 @@ check('Evergreen source discovery can use relevant established reporting without
       "when:365d" in prep and 'established-reporting sources found' in prep
       and 'verify_evidence(draft,evidence)' in prep)
 check('Master stale-run reaper allows legitimate CPU generation to approach workflow timeout',
-      '10200' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
-      and 'timeout-minutes: 180' in master_workflows)
+      '13800' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
+      and master_workflows.count('timeout-minutes: 240')==2)
+check('Master preparation starts three hours and fifteen minutes before release',
+      'Prepare 03:00 IST → live 06:15' in master_workflows
+      and 'Prepare 19:00 IST → live 22:15' in master_workflows)
 check('Superseded pre-repair Master runs cannot block repaired same-slot recovery',
       'repair_epoch' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
       and 'started" -lt "$repair_epoch' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text())

@@ -1,13 +1,13 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 148 PASS · 0 FAIL
+**Result:** 149 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
 - ✅ **Rejected legacy Master workflows remain absent and approved dynamic workflows exist**
 - ✅ **master_topic_discovery.yml has its complete live schedule** — ['35 18 * * 6', '50 18 * * *']
-- ✅ **master_trending_writer.yml has its complete live schedule** — ['0 22 * * *', '0 1 * * *', '0 6 * * *', '0 8 * * *', '0 12 * * *']
-- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['0 0 * * *', '0 3 * * *', '0 7 * * *', '30 11 * * *', '0 14 * * *']
+- ✅ **master_trending_writer.yml has its complete live schedule** — ['30 21 * * *', '30 0 * * *', '30 5 * * *', '30 7 * * *', '30 11 * * *']
+- ✅ **master_evergreen_writer.yml has its complete live schedule** — ['30 23 * * *', '30 2 * * *', '30 6 * * *', '0 11 * * *', '30 13 * * *']
 - ✅ **Dynamic Master publication has both code gate and explicit live workflow enablement**
 - ✅ **Eleven news preflight runs** — ['30 21 * * *', '30 22 * * *', '30 0 * * *', '30 3 * * *', '30 5 * * *', '0 6 * * *', '30 6 * * *', '30 10 * * *', '0 11 * * *', '30 11 * * *', '0 12 * * *']
 - ✅ **News desks have independent non-cancelling precision runs**
@@ -95,6 +95,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Local Master generation is bounded for the publication window**
 - ✅ **Evergreen source discovery can use relevant established reporting without weakening review**
 - ✅ **Master stale-run reaper allows legitimate CPU generation to approach workflow timeout**
+- ✅ **Master preparation starts three hours and fifteen minutes before release**
 - ✅ **Superseded pre-repair Master runs cannot block repaired same-slot recovery**
 - ✅ **Master links both market desks**
 - ✅ **Master posts cannot enter News hub**
