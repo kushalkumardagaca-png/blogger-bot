@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "engine": "master-v3-fresh",
+  "kind": "trending",
+  "slot": 2,
+  "error_type": "RuntimeError",
+  "error": "bounded section 2 did not pass after four provider attempts: 451 words, 4 paragraphs, citations [], unsupported numbers ['2023,', '2040', '0', '1995', '2020']"
+}
