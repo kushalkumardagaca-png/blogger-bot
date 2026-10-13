@@ -290,6 +290,12 @@ check('Master V3 permanently excludes 12/13 October and all historical backfill'
 check('Scheduled Master release reuses a complete advance package',
       'if target.exists()' in v3_pipeline and 'package=read(target,{})' in v3_pipeline
       and 'validate(package)' in v3_pipeline)
+check('Every Master publishing path enforces the public release embargo',
+      'wait_for_release(MASTER_LIVE[(kind,slot)])' in v3_pipeline
+      and 'if timed_release:wait_for_release' not in v3_pipeline)
+check('Failed prewarming retries remain preparation-only',
+      master_workflows.count("github.event_name == 'schedule' && 'true' || inputs.publish")==2
+      and '-f publish=true -f retry_attempt' not in master_workflows)
 check('Master V3 deterministically assembles summary, support and three evidence visuals',
       'def extracted_summary' in v3_generator and 'def support' in v3_generator
       and 'def visuals' in v3_generator)

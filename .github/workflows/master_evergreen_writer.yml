@@ -116,7 +116,7 @@ jobs:
           current="${{ inputs.retry_attempt || '0' }}"
           if [ "$current" -lt 2 ]; then
             next=$((current+1))
-            gh workflow run master_evergreen_writer.yml --ref main -f slot="${{ steps.slot.outputs.value }}" -f publish=true -f retry_attempt="$next"
+            gh workflow run master_evergreen_writer.yml --ref main -f slot="${{ steps.slot.outputs.value }}" -f publish="${{ github.event_name == 'schedule' && 'true' || inputs.publish }}" -f retry_attempt="$next"
             echo "Queued bounded retry $next for evergreen slot ${{ steps.slot.outputs.value }}"
           fi
       - name: Persist validated package and licensed photo assets first

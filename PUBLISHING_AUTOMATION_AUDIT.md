@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 167 PASS · 0 FAIL
+**Result:** 169 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -96,6 +96,8 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master V3 preserves strict Blogger publication and package compilation gates**
 - ✅ **Master V3 permanently excludes 12/13 October and all historical backfill**
 - ✅ **Scheduled Master release reuses a complete advance package**
+- ✅ **Every Master publishing path enforces the public release embargo**
+- ✅ **Failed prewarming retries remain preparation-only**
 - ✅ **Master V3 deterministically assembles summary, support and three evidence visuals**
 - ✅ **Manual Master recovery runs cannot be blocked behind an older same-slot attempt**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**

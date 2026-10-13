@@ -82,7 +82,10 @@ def publish(kind,slot,timed_release=False):
  # Never allow an ignored event from a prior local attempt to be redispatched.
  write(SOCIAL,[])
  if os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()!='true':raise RuntimeError('Master publication remains intentionally paused; set MASTER_PUBLICATION_ENABLED=true only after owner activation')
- if timed_release:wait_for_release(MASTER_LIVE[(kind,slot)])
+ # The public release time is an embargo, not merely a scheduled-workflow hint.
+ # Prewarm retries and manual recovery may finish early, but every publishing
+ # path waits for the exact audience-facing slot before calling Blogger.
+ wait_for_release(MASTER_LIVE[(kind,slot)])
  plan,item=selected(kind,slot);target=package_path(kind,item)
  if not target.exists():raise RuntimeError('validated prepared package is absent')
  package=read(target,{});validate(package);title,slug,meta,labels,body=build_html(kind,item,package);res=publish_to_blogger(title,body,labels)
