@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "engine": "master-v3-fresh",
+  "kind": "evergreen",
+  "slot": 4,
+  "error_type": "RuntimeError",
+  "error": "bounded section 1 did not pass after four provider attempts: 465 words, 4 paragraphs, citations [], unsupported numbers []"
+}
