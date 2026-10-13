@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T20:57:39.135957+05:30",
+  "generatedAt": "2026-10-13T21:24:13.227577+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
@@ -12,9 +12,16 @@
     "master-trending-2",
     "master-evergreen-2",
     "master-trending-3",
-    "master-evergreen-3"
+    "master-evergreen-3",
+    "master-trending-4"
   ],
-  "actions": [],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "master-trending-4",
+      "applied": true
+    }
+  ],
   "retryBlocked": [
     "source:2026-10-13:master-trending-0",
     "source:2026-10-13:master-evergreen-0",
