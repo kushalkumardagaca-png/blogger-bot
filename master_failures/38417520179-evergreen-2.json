@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 2,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "V3 section 1 failed validation after bounded provider recovery: every paragraph needs a supplied source token"
+}
