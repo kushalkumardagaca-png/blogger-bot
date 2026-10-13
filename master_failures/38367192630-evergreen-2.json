@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 2,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "core expansion failed; assembled core remains 3289 words"
+}
