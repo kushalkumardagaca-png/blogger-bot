@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T21:24:13.227577+05:30",
+  "generatedAt": "2026-10-13T21:35:48.338841+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
@@ -17,21 +17,57 @@
   ],
   "actions": [
     {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-0",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-0",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-1",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-1",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-2",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-2",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-3",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-3",
+      "applied": true
+    },
+    {
       "type": "source_recovery",
       "key": "master-trending-4",
       "applied": true
     }
   ],
-  "retryBlocked": [
-    "source:2026-10-13:master-trending-0",
-    "source:2026-10-13:master-evergreen-0",
-    "source:2026-10-13:master-trending-1",
-    "source:2026-10-13:master-evergreen-1",
-    "source:2026-10-13:master-trending-2",
-    "source:2026-10-13:master-evergreen-2",
-    "source:2026-10-13:master-trending-3",
-    "source:2026-10-13:master-evergreen-3"
-  ],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
