@@ -272,6 +272,20 @@ check('Article and Page application choices rotate across all four networks by I
       and 'platform_pair_for(item_key,day)' in rotation)
 
 master_workflows=(ROOT/'.github/workflows/master_trending_writer.yml').read_text()+(ROOT/'.github/workflows/master_evergreen_writer.yml').read_text()
+v3_generator=(ROOT/'master_v3_generator.py').read_text();v3_pipeline=(ROOT/'master_v3_pipeline.py').read_text()
+check('Both live Master categories have replaced the monolithic pipeline with Master V3',
+      master_workflows.count('python master_v3_pipeline.py')==4
+      and 'python master_dynamic_pipeline.py' not in master_workflows)
+check('Master V3 uses independently validated plain-text sections, not one long JSON response',
+      'def write_section' in v3_generator and "445<=count<=465" in v3_generator
+      and 'Never output JSON or markdown' in v3_generator
+      and 'prepare_master_article' not in v3_generator)
+check('Master V3 preserves strict Blogger publication and package compilation gates',
+      'MASTER_PUBLICATION_ENABLED' in v3_pipeline and 'validate(package)' in v3_pipeline
+      and 'assert_publishable' in v3_pipeline)
+check('Master V3 deterministically assembles summary, support and three evidence visuals',
+      'def extracted_summary' in v3_generator and 'def support' in v3_generator
+      and 'def visuals' in v3_generator)
 check('Manual Master recovery runs cannot be blocked behind an older same-slot attempt',
       master_workflows.count("github.event_name == 'schedule' && github.event.schedule || github.run_id")==2
       and master_workflows.count('cancel-in-progress: false')>=2)

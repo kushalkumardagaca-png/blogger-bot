@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 30: both Master categories use the fresh V3 bounded-section engine with deterministic assembly, live fallback, parallel non-blocking recovery and no article retry ceiling.
+Permanent recovery generation 30: fresh Master V3 section-isolated generation, source gates, deterministic assembly and publication recovery are active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -27,7 +27,7 @@ def due(day,value):
 def implementation_revision():
  """Fingerprint reliability code, excluding generated-state commits."""
  digest=hashlib.sha256()
- for name in ('prepare_master_article.py','master_dynamic_pipeline.py','publishing_recovery.py','.github/workflows/master_trending_writer.yml','.github/workflows/master_evergreen_writer.yml'):
+ for name in ('master_v3_generator.py','master_v3_pipeline.py','publishing_recovery.py','.github/workflows/master_trending_writer.yml','.github/workflows/master_evergreen_writer.yml'):
   path=ROOT/name
   if path.exists():digest.update(name.encode());digest.update(path.read_bytes())
  return digest.hexdigest()[:16]

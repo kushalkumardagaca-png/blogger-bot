@@ -1,4 +1,4 @@
-name: Master Trending Writer (Live)
+name: Master V3 Trending Publisher (Live)
 
 on:
   schedule:
@@ -80,14 +80,14 @@ jobs:
           MASTER_BACKFILL: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
         run: |
           for attempt in 1 2; do
-            if python master_fresh_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare; then
+            if python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare; then
               exit 0
             fi
             echo "Preparation attempt $attempt failed."
             if [ "$attempt" -eq 2 ]; then exit 1; fi
             echo "Rolling back partial package state before the final retry."
             git reset --hard HEAD
-            git clean -fd master_packages/fresh assets/master scheduled_ready
+            git clean -fd master_packages/dynamic assets/master scheduled_ready
             sleep $((attempt * 20))
           done
           exit 1
@@ -126,7 +126,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p /tmp/master-preparation
           cp PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json MASTER_DAILY_PLAN.json /tmp/master-preparation/
-          git add master_packages/fresh assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json MASTER_DAILY_PLAN.json scheduled_ready
+          git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json MASTER_DAILY_PLAN.json scheduled_ready
           git diff --cached --name-only | grep -Ev '^(PHOTO_USAGE_REGISTRY|MASTER_AUTOMATION_STATUS|MASTER_DAILY_PLAN)\.json$' > /tmp/master-preparation/files.txt || true
           if [ -s /tmp/master-preparation/files.txt ]; then tar -cf /tmp/master-preparation/files.tar -T /tmp/master-preparation/files.txt; fi
           git reset --hard HEAD
@@ -137,7 +137,7 @@ jobs:
             mv /tmp/master-preparation/merged.plan.json MASTER_DAILY_PLAN.json
             mv /tmp/master-preparation/merged.registry.json PHOTO_USAGE_REGISTRY.json
             cp /tmp/master-preparation/MASTER_AUTOMATION_STATUS.json .
-            git add master_packages/fresh assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json MASTER_DAILY_PLAN.json scheduled_ready
+            git add master_packages/dynamic assets/master PHOTO_USAGE_REGISTRY.json MASTER_AUTOMATION_STATUS.json MASTER_DAILY_PLAN.json scheduled_ready
             if git diff --staged --quiet; then exit 0; fi
             git commit -m "Prepare dynamic trending Master package [skip ci]"
             if git push origin HEAD:main; then exit 0; fi
@@ -153,7 +153,7 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python master_fresh_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
+        run: python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
       - name: Persist confirmed publication before downstream routing
         if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         run: |

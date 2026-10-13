@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 161 PASS · 0 FAIL
+**Result:** 163 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -91,6 +91,10 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
 - ✅ **Article and Page application choices rotate across all four networks by IST day**
+- ✅ **Both live Master categories have replaced the monolithic pipeline with Master V3**
+- ✅ **Master V3 uses independently validated plain-text sections, not one long JSON response**
+- ✅ **Master V3 preserves strict Blogger publication and package compilation gates**
+- ✅ **Master V3 deterministically assembles summary, support and three evidence visuals**
 - ✅ **Manual Master recovery runs cannot be blocked behind an older same-slot attempt**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
 - ✅ **Master generation is quota-independent with model-independent research fallback**
@@ -99,8 +103,6 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Omitted local-model sections use attributed evidence rather than filler**
 - ✅ **Transient Ollama failures use fallback only after bounded local attempts**
 - ✅ **Master workflows actually expose the repository model token to generation**
-- ✅ **Both live Master categories use the fresh bounded-section V3 engine**
-- ✅ **Fresh Master engine avoids monolithic 4,000-word model responses**
 - ✅ **Pre-validation short cores have a deterministic evidence-only completion path**
 - ✅ **Summary and visual structure have non-generative evidence-preserving fallbacks**
 - ✅ **Verified short cores complete from attributed evidence without model padding**

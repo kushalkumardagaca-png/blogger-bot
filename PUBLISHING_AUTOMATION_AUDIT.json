@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T19:40:39+05:30",
+  "checked_at_ist": "2026-10-13T20:17:44+05:30",
   "summary": {
-    "pass": 161,
+    "pass": 163,
     "fail": 0
   },
   "checks": [
@@ -441,6 +441,26 @@
       "detail": ""
     },
     {
+      "name": "Both live Master categories have replaced the monolithic pipeline with Master V3",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master V3 uses independently validated plain-text sections, not one long JSON response",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master V3 preserves strict Blogger publication and package compilation gates",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master V3 deterministically assembles summary, support and three evidence visuals",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "Manual Master recovery runs cannot be blocked behind an older same-slot attempt",
       "status": "PASS",
       "detail": ""
@@ -477,16 +497,6 @@
     },
     {
       "name": "Master workflows actually expose the repository model token to generation",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Both live Master categories use the fresh bounded-section V3 engine",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Fresh Master engine avoids monolithic 4,000-word model responses",
       "status": "PASS",
       "detail": ""
     },

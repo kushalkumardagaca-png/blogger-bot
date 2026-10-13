@@ -23,10 +23,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
-          # Safety epoch for the complete V3 replacement. Runs before this
-          # deployment execute the retired monolithic generator, so continuing
-          # them only consumes runners needed by the fresh bounded-section engine.
-          repair_epoch=$(date -u -d '2026-10-13T14:10:50Z' +%s)
+          # One-time cutover epoch for Master V3. The names below identify only
+          # retired V2 workflows; V3 has different workflow names and is never
+          # cancelled for age by this cleanup.
+          repair_epoch=$(date -u -d '2026-10-13T14:48:00Z' +%s)
           gh run list --repo "$GH_REPO" --status in_progress --limit 100 \
             --json databaseId,workflowName,startedAt | jq -r '.[] | select(.workflowName=="Master Trending Writer (Live)" or .workflowName=="Master Evergreen Writer (Live)") | [.databaseId,.startedAt] | @tsv' |
           while IFS=$'\t' read -r run_id started_at; do
