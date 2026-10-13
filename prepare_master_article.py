@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Research and prepare one strict Master Article V2 package before publication.
 
-Text is produced through the repository's Gemini key (with an optional
-OpenAI-compatible fallback) from a topic-specific evidence packet. Three distinct,
+Text is produced by a quota-independent local model from a topic-specific
+evidence packet. Three distinct,
 openly licensed photographs are selected for their exact editorial placements,
 checked against the permanent global reuse registry, cropped to a common 16:9
 landscape ratio, attributed, and persisted before Blogger publication. No public Daily Yield page is requested.
@@ -347,7 +347,19 @@ Return a compact planning object only. Requirements: title 20-46 characters, pun
   if isinstance(item,dict):normalized_plans.append(item)
   elif isinstance(item,list) and len(item)>=2:normalized_plans.append({'heading':str(item[0]),'focus':str(item[1])})
  section_plans=normalized_plans
- if not 8<=len(section_plans)<=11:raise RuntimeError('editorial planner did not return 8-11 topic-specific sections')
+ if not 8<=len(section_plans)<=11:
+  # Small local models occasionally return a sound plan in the wrong container
+  # or too few sections. Build a topic-specific evidence map deterministically
+  # instead of failing the daily slot or inventing a generic fixed outline.
+  section_plans=[];seen_heads=set()
+  for index,source in enumerate(evidence[:10],1):
+   raw=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',str(source.get('title') or source.get('name') or f'Evidence angle {index}')))).strip()
+   heading=' '.join(raw.split()[:11]).strip(' .,:;-')
+   if len(heading)<12 or heading.casefold() in seen_heads:heading=f"{plan.get('title') or topic.get('Punchy Title','Financial evidence')}: angle {index}"
+   seen_heads.add(heading.casefold())
+   section_plans.append({'heading':heading,'focus':f"Explain the distinct evidence, mechanism, affected groups, jurisdiction and uncertainty reported by source {index}, without extending beyond that source."})
+   if len(section_plans)>=9:break
+  if len(section_plans)<8:raise RuntimeError('fewer than eight distinct evidence sources remained for a substantive article structure')
  module_keys=('contents','summary','faq','glossary','sources','internal_links','external_sources');module_headings=plan.get('module_headings') or {}
  if isinstance(module_headings,list):
   merged={}
