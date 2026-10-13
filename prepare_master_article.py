@@ -347,7 +347,7 @@ Return a compact planning object only. Requirements: title 20-46 characters, pun
   if isinstance(item,dict):normalized_plans.append(item)
   elif isinstance(item,list) and len(item)>=2:normalized_plans.append({'heading':str(item[0]),'focus':str(item[1])})
  section_plans=normalized_plans
- if not 8<=len(section_plans)<=11:
+ if not 8<=len(section_plans)<=11 or any(not str(x.get('heading','')).strip() or not str(x.get('focus','')).strip() for x in section_plans):
   # Small local models occasionally return a sound plan in the wrong container
   # or too few sections. Build a topic-specific evidence map deterministically
   # instead of failing the daily slot or inventing a generic fixed outline.
