@@ -1,18 +1,13 @@
 {
-  "generatedAt": "2026-10-13T08:41:07.572559+05:30",
+  "generatedAt": "2026-10-13T08:52:47.821289+05:30",
   "dateIST": "2026-10-13",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 3,
-  "actions": [
-    {
-      "type": "source_recovery",
-      "key": "master-evergreen-0",
-      "applied": true
-    }
-  ],
+  "actions": [],
   "retryBlocked": [
-    "source:2026-10-13:master-trending-0"
+    "source:2026-10-13:master-trending-0",
+    "source:2026-10-13:master-evergreen-0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
