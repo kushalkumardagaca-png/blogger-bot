@@ -281,6 +281,12 @@ def model_json(messages,max_tokens=16000):
    except Exception as exc:
     last=exc
     if attempt<1:time.sleep(8)
+  # Local Ollama remains primary. Repository-native and credential-free models
+  # are emergency fallbacks only after both bounded local attempts fail, so a
+  # transient Ollama 500 or truncated JSON cannot erase a daily publication.
+  if os.environ.get('GITHUB_TOKEN','').strip():
+   try:return _emergency_model_json(messages,max_tokens)
+   except Exception as fallback:raise RuntimeError(f'local keyless model failed after 2 attempts ({type(last).__name__}: {str(last)[:180]}); emergency fallback failed: {fallback}') from fallback
   raise RuntimeError(f'local keyless model failed to return valid JSON after 2 attempts: {type(last).__name__}: {str(last)[:300]}')
  if os.environ.get('GITHUB_TOKEN','').strip():return _emergency_model_json(messages,max_tokens)
  endpoint=required('MASTER_TEXT_API_URL');token=required('MASTER_TEXT_API_KEY');model=required('MASTER_TEXT_MODEL');headers={'Content-Type':'application/json','Authorization':'Bearer '+token};last=None
@@ -373,7 +379,7 @@ def _compact_evidence_packet(evidence):
   packet.append(item)
  return packet
 
-def _evidence_bridge_section(heading,focus,evidence):
+def _evidence_bridge_section(heading,focus,evidence,target=450):
  """Fail-closed prose for a section omitted by a small local model.
 
  The fallback quotes only a short attributed source fragment and spends most of
@@ -381,7 +387,7 @@ def _evidence_bridge_section(heading,focus,evidence):
  causal claim, and the complete package still undergoes hostile fact review.
  """
  paragraphs=[]
- for index,row in enumerate(evidence[:5],1):
+ for index,row in enumerate(evidence[:6],1):
   title=re.sub(r'\s+',' ',html.unescape(str(row.get('title') or row.get('name') or f'Evidence source {index}'))).strip()
   source=str(row.get('name') or 'the cited source').strip()
   clean=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',str(row.get('text') or '')))).strip()
@@ -394,7 +400,9 @@ def _evidence_bridge_section(heading,focus,evidence):
    "Its jurisdiction, observation period, definitions and later revisions therefore remain necessary boundaries for interpretation."
   )
  if words(' '.join(paragraphs))<240:raise RuntimeError('evidence packet could not support a safe omitted-section fallback')
- return paragraphs
+ trimmed=trim_paragraphs(paragraphs,target+15)
+ if words(' '.join(trimmed))<max(240,target-65):raise RuntimeError('evidence packet could not meet the safe omitted-section budget')
+ return trimmed
 
 def generate_text(topic,evidence):
  packet=_compact_evidence_packet(evidence)
@@ -440,7 +448,8 @@ Return a compact planning object only. Requirements: title 20-46 characters, pun
  if os.environ.get('OLLAMA_API_URL','').strip():
   bulk_prompt=f'''Write the complete main body for a Daily Yield financial article titled {plan.get('title')!r} using exactly these planned sections: {json.dumps(section_plans,ensure_ascii=False)}. Topic: {json.dumps(topic,ensure_ascii=False)}. Evidence packet: {evidence_json}.
 Return strict JSON {{"sections":[{{"heading":"exact planned heading","paragraphs":["..."]}}]}}. Preserve every planned heading exactly and in order. Write 4,030-4,150 actual main-body words total, distributed naturally across the sections in 4-7 paragraphs each. Establish context before conclusions; vary pacing and paragraph shape. Use only evidence-supported facts, identify uncertainty and jurisdiction naturally, and add contextual source tokens such as [[S1|descriptive anchor]] plus useful internal tokens such as [[I1|descriptive anchor]]. Do not include a summary, FAQ, glossary, generic method prose, invented quotation, unsupported number, personal anecdote, repeated introduction or repeated conclusion.'''
-  result=model_json([{'role':'system','content':'Write rigorous, natural, non-templated financial journalism as one coherent article. Accuracy and the total word budget are mandatory.'},{'role':'user','content':bulk_prompt}],max_tokens=8192)
+  try:result=model_json([{'role':'system','content':'Write rigorous, natural, non-templated financial journalism as one coherent article. Accuracy and the total word budget are mandatory.'},{'role':'user','content':bulk_prompt}],max_tokens=8192)
+  except Exception:result={}
   raw_sections=result.get('sections') or []
   if isinstance(raw_sections,dict):raw_sections=list(raw_sections.values())
   for number,item in enumerate(raw_sections if isinstance(raw_sections,list) else []):
@@ -450,12 +459,15 @@ Return strict JSON {{"sections":[{{"heading":"exact planned heading","paragraphs
   while len(sections)<len(section_plans):
    number=len(sections);item=section_plans[number];heading=str(item.get('heading','')).strip();focus=str(item.get('focus','')).strip()
    missing_prompt=f'''Write only the missing section {number+1} of {len(section_plans)} for {plan.get('title')!r}. Heading: {heading}. Focus: {focus}. Write approximately {section_target} words in 4-7 paragraphs using only this evidence: {evidence_json}. Add contextual source tokens, avoid repetition and return strict JSON {{"paragraphs":[...]}}.'''
-   addition=paragraph_list(model_json([{'role':'system','content':'Complete one missing evidence-grounded article section accurately.'},{'role':'user','content':missing_prompt}],max_tokens=3500))
+   try:addition=paragraph_list(model_json([{'role':'system','content':'Complete one missing evidence-grounded article section accurately.'},{'role':'user','content':missing_prompt}],max_tokens=3500))
+   except Exception:addition=[]
    # A small model may return a valid but short section after completing most of
    # a 4,000-word body. Let normalization expand useful prose; if it omits the
    # section entirely, build a tightly attributed evidence bridge rather than
    # failing the publication slot or inventing filler.
-   if words(' '.join(addition))<120:addition=_evidence_bridge_section(heading,focus,evidence)
+   if words(' '.join(addition))<120:
+    rotated=evidence[number%len(evidence):]+evidence[:number%len(evidence)]
+    addition=_evidence_bridge_section(heading,focus,rotated,section_target)
    sections.append({'heading':heading,'paragraphs':addition})
  else:
   for number,item in enumerate(section_plans,1):

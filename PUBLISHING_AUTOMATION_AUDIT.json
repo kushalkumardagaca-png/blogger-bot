@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T13:03:53+05:30",
+  "checked_at_ist": "2026-10-13T13:15:07+05:30",
   "summary": {
-    "pass": 150,
+    "pass": 152,
     "fail": 0
   },
   "checks": [
@@ -24,6 +24,11 @@
       "name": "master_evergreen_writer.yml has its complete live schedule",
       "status": "PASS",
       "detail": "['30 23 * * *', '30 2 * * *', '30 6 * * *', '0 11 * * *', '30 13 * * *']"
+    },
+    {
+      "name": "All ten Master packages are prepared in five staggered overnight batches",
+      "status": "PASS",
+      "detail": ""
     },
     {
       "name": "Dynamic Master publication has both code gate and explicit live workflow enablement",
@@ -457,6 +462,11 @@
     },
     {
       "name": "Omitted local-model sections use attributed evidence rather than filler",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Transient Ollama failures use fallback only after bounded local attempts",
       "status": "PASS",
       "detail": ""
     },

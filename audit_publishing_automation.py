@@ -29,6 +29,10 @@ master_expected={
 for name,expected in master_expected.items():
  workflow=(ROOT/'.github/workflows'/name).read_text()
  check(f'{name} has its complete live schedule',crons(ROOT/'.github/workflows'/name)==expected and 'workflow_dispatch:' in workflow,str(crons(ROOT/'.github/workflows'/name)))
+prewarmer=ROOT/'.github/workflows/master_daily_prewarmer.yml';prewarm_text=prewarmer.read_text() if prewarmer.exists() else ''
+check('All ten Master packages are prepared in five staggered overnight batches',
+      crons(prewarmer)==['20 19 * * *','50 19 * * *','20 20 * * *','50 20 * * *','20 21 * * *']
+      and prewarm_text.count('publish=false')==2 and 'master_trending_writer.yml' in prewarm_text and 'master_evergreen_writer.yml' in prewarm_text)
 check('Dynamic Master publication has both code gate and explicit live workflow enablement',
       'MASTER_PUBLICATION_ENABLED' in (ROOT/'master_dynamic_pipeline.py').read_text()
       and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text()
@@ -283,7 +287,10 @@ check('Evergreen source discovery can use relevant established reporting without
       and 'verify_evidence(draft,evidence)' in prep)
 check('Omitted local-model sections use attributed evidence rather than filler',
       'def _evidence_bridge_section' in prep and 'does not by itself establish causation' in prep
-      and '_evidence_bridge_section(heading,focus,evidence)' in prep)
+      and '_evidence_bridge_section(heading,focus,rotated,section_target)' in prep)
+check('Transient Ollama failures use fallback only after bounded local attempts',
+      'Local Ollama remains primary' in prep and 'try:return _emergency_model_json(messages,max_tokens)' in prep
+      and 'except Exception:result={}' in prep)
 check('Master stale-run reaper allows legitimate CPU generation to approach workflow timeout',
       '13800' in (ROOT/'.github/workflows/master_stale_run_reaper.yml').read_text()
       and master_workflows.count('timeout-minutes: 240')==2)

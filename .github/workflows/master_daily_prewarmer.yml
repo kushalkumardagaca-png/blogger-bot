@@ -1,0 +1,54 @@
+name: Master Daily Package Prewarmer
+
+on:
+  schedule:
+    # MASTER_DAILY_PLAN is created at 00:20 IST. Prepare each Trending/Evergreen
+    # pair well before its live window so publication jobs only validate and post.
+    - cron: '20 19 * * *'  # 00:50 IST → slots 0
+    - cron: '50 19 * * *'  # 01:20 IST → slots 1
+    - cron: '20 20 * * *'  # 01:50 IST → slots 2
+    - cron: '50 20 * * *'  # 02:20 IST → slots 3
+    - cron: '20 21 * * *'  # 02:50 IST → slots 4
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: 'Trending and Evergreen slot to prepare, 0 through 4'
+        required: true
+        type: choice
+        options: ['0','1','2','3','4']
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: daily-yield-master-prewarm-${{ github.event.schedule || inputs.batch || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Select package pair
+        id: slot
+        shell: bash
+        run: |
+          case "${{ github.event.schedule }}" in
+            '20 19 * * *') value=0 ;;
+            '50 19 * * *') value=1 ;;
+            '20 20 * * *') value=2 ;;
+            '50 20 * * *') value=3 ;;
+            '20 21 * * *') value=4 ;;
+            *) value="${{ inputs.batch }}" ;;
+          esac
+          echo "value=$value" >> "$GITHUB_OUTPUT"
+      - name: Prepare both packages without publishing early
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          slot='${{ steps.slot.outputs.value }}'
+          gh workflow run master_trending_writer.yml --ref main -f slot="$slot" -f publish=false -f retry_attempt=0
+          gh workflow run master_evergreen_writer.yml --ref main -f slot="$slot" -f publish=false -f retry_attempt=0
+          echo "Dispatched validated text, evidence and three-photo preparation for slot $slot."
