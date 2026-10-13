@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T12:58:01.947840+05:30",
+  "generatedAt": "2026-10-13T13:04:23.665568+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
@@ -10,13 +10,44 @@
     "master-trending-1",
     "master-evergreen-1"
   ],
-  "actions": [],
-  "retryBlocked": [
-    "source:2026-10-13:master-trending-0",
-    "source:2026-10-13:master-evergreen-0",
-    "source:2026-10-13:master-trending-1",
-    "source:2026-10-13:master-evergreen-1"
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-3",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-0",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-0",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-1",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-1",
+      "applied": true
+    }
   ],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
