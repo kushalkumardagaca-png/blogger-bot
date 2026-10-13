@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 3,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "summary failed normalization at 242 words"
+}
