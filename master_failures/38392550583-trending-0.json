@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 0,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "core expansion failed; assembled core remains 3924 words"
+}
