@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 2,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "keyless writer could not complete a missing section"
+}
