@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 4,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "V3 section 1 failed validation after bounded provider recovery: 223 words; required 445-465"
+}
