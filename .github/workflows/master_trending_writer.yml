@@ -32,7 +32,9 @@ permissions:
   actions: write
 
 concurrency:
-  group: daily-yield-master-trending-${{ github.event.schedule || inputs.slot || github.run_id }}
+  # Scheduled releases remain isolated by cron. Every manual recovery receives
+  # its own runner so a slow earlier attempt can never block a repaired article.
+  group: daily-yield-master-trending-${{ github.event_name == 'schedule' && github.event.schedule || github.run_id }}
   cancel-in-progress: false
 
 jobs:

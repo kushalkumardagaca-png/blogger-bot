@@ -272,6 +272,9 @@ check('Article and Page application choices rotate across all four networks by I
       and 'platform_pair_for(item_key,day)' in rotation)
 
 master_workflows=(ROOT/'.github/workflows/master_trending_writer.yml').read_text()+(ROOT/'.github/workflows/master_evergreen_writer.yml').read_text()
+check('Manual Master recovery runs cannot be blocked behind an older same-slot attempt',
+      master_workflows.count("github.event_name == 'schedule' && github.event.schedule || github.run_id")==2
+      and master_workflows.count('cancel-in-progress: false')>=2)
 check('Concurrent Master package, photo, plan and tracker writes use semantic merge and retry',
       master_workflows.count('merge_master_state.py')>=4 and (ROOT/'merge_master_state.py').exists()
       and master_workflows.count('merge_master_preparation.py')>=2 and (ROOT/'merge_master_preparation.py').exists()

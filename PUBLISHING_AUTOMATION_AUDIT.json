@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T17:10:54+05:30",
+  "checked_at_ist": "2026-10-13T17:16:07+05:30",
   "summary": {
-    "pass": 155,
+    "pass": 156,
     "fail": 0
   },
   "checks": [
@@ -437,6 +437,11 @@
     },
     {
       "name": "Article and Page application choices rotate across all four networks by IST day",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Manual Master recovery runs cannot be blocked behind an older same-slot attempt",
       "status": "PASS",
       "detail": ""
     },
