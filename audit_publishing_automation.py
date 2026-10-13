@@ -311,14 +311,13 @@ check('Transient Ollama failures use fallback only after bounded local attempts'
       and 'except Exception:result={}' in prep)
 check('Master workflows actually expose the repository model token to generation',
       master_workflows.count('GITHUB_TOKEN: ${{ github.token }}')>=2)
-check('Both live Master categories use the fresh bounded-section V3 engine',
-      master_workflows.count('python master_fresh_pipeline.py')>=4
+check('Both live Master categories use the independent V3 engine exclusively',
+      master_workflows.count('python master_v3_pipeline.py')==4
       and 'python master_dynamic_pipeline.py' not in master_workflows
-      and (ROOT/'master_fresh_pipeline.py').exists())
-check('Fresh Master engine avoids monolithic 4,000-word model responses',
-      'SECTION_ANGLES' in (ROOT/'master_fresh_pipeline.py').read_text()
-      and '430-470 actual words' in (ROOT/'master_fresh_pipeline.py').read_text()
-      and "'engine':'master-v3-fresh'" in (ROOT/'master_fresh_pipeline.py').read_text())
+      and 'python master_fresh_pipeline.py' not in master_workflows)
+check('Live Master V3 avoids monolithic 4,000-word model responses',
+      'def write_section' in v3_generator and 'Write 450-460 words' in v3_generator
+      and "'engine':'master-v3-fresh'" not in v3_pipeline)
 check('Pre-validation short cores have a deterministic evidence-only completion path',
       'core evidence completion failed' in prep and 'additional documented scope and uncertainty' in prep)
 check('Summary and visual structure have non-generative evidence-preserving fallbacks',

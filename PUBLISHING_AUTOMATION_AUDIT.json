@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T20:17:44+05:30",
+  "checked_at_ist": "2026-10-13T20:19:17+05:30",
   "summary": {
-    "pass": 163,
+    "pass": 165,
     "fail": 0
   },
   "checks": [
@@ -497,6 +497,16 @@
     },
     {
       "name": "Master workflows actually expose the repository model token to generation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Both live Master categories use the independent V3 engine exclusively",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Live Master V3 avoids monolithic 4,000-word model responses",
       "status": "PASS",
       "detail": ""
     },
