@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 0,
+  "stage": "text-generation",
+  "error_type": "RuntimeError",
+  "error": "data visual repair failed: fewer than three data visuals"
+}
