@@ -1266,9 +1266,31 @@
       },
       "published_at": "2026-10-13T19:40:00.044107+05:30",
       "reconciled": false
+    },
+    {
+      "kind": "page",
+      "blogger_id": "1685707888914861815",
+      "title": "DAILY ARTICLE",
+      "url": "https://dailyyield.blogspot.com/p/article.html",
+      "mastodon_status_id": "117434188597080692",
+      "mastodon_url": "https://mastodon.social/@dailyyield/117434188597080692",
+      "score": 25,
+      "creative": {
+        "seed": "7a100924c9c1821f",
+        "topic": "page",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "A USEFUL DAILY YIELD RESOURCE",
+        "emoji": "🧾",
+        "question": "Which decision will you use this resource for?",
+        "layout": 2,
+        "adaptive": true
+      },
+      "published_at": "2026-10-13T20:28:32.745548+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-13T19:40:00.044119+05:30",
-  "last_mastodon_status_id": "117433997715287655"
+  "last_success_at": "2026-10-13T20:28:32.745558+05:30",
+  "last_mastodon_status_id": "117434188597080692"
 }
