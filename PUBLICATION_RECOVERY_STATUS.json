@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:59:54.021219+05:30",
+  "generatedAt": "2026-10-13T20:01:40.474195+05:30",
   "dateIST": "2026-10-13",
   "status": "DEGRADED",
   "apply": true,
@@ -69,13 +69,6 @@
       "key": "news-global",
       "platform": "facebook",
       "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-global",
-      "platform": "mastodon",
-      "routeIndex": 1,
       "applied": true
     },
     {
