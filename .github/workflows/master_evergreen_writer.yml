@@ -2,11 +2,11 @@ name: Master Evergreen Writer (Live)
 
 on:
   schedule:
-    - cron: '15 0 * * *'   # Prepare 05:45 IST → live 08:15
+    - cron: '0 21 * * *'   # Prepare 02:30 IST → live 05:15
+    - cron: '0 0 * * *'    # Prepare 05:30 IST → live 08:15
     - cron: '0 6 * * *'    # Prepare 11:30 IST → live 14:15
-    - cron: '30 8 * * *'   # Prepare 14:00 IST → live 16:45
-    - cron: '30 11 * * *'  # Prepare 17:00 IST → live 19:45
-    - cron: '30 12 * * *'  # Prepare 18:00 IST → live 20:45
+    - cron: '0 8 * * *'    # Prepare 13:30 IST → live 16:15
+    - cron: '0 14 * * *'   # Prepare 19:30 IST → live 22:15
   workflow_dispatch:
     inputs:
       slot:
@@ -54,11 +54,11 @@ jobs:
         id: slot
         run: |
           case "${{ github.event.schedule }}" in
-            '15 0 * * *') value=0 ;;
-            '0 6 * * *') value=1 ;;
-            '30 8 * * *') value=2 ;;
-            '30 11 * * *') value=3 ;;
-            '30 12 * * *') value=4 ;;
+            '0 21 * * *') value=0 ;;
+            '0 0 * * *') value=1 ;;
+            '0 6 * * *') value=2 ;;
+            '0 8 * * *') value=3 ;;
+            '0 14 * * *') value=4 ;;
             *) value="${{ inputs.slot }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"

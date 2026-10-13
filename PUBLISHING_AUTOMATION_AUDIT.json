@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T10:45:41+05:30",
+  "checked_at_ist": "2026-10-13T11:33:33+05:30",
   "summary": {
-    "pass": 142,
+    "pass": 144,
     "fail": 0
   },
   "checks": [
@@ -18,12 +18,12 @@
     {
       "name": "master_trending_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['0 0 * * *', '30 5 * * *', '0 8 * * *', '0 11 * * *', '0 12 * * *']"
+      "detail": "['0 20 * * *', '0 23 * * *', '0 2 * * *', '0 7 * * *', '0 13 * * *']"
     },
     {
       "name": "master_evergreen_writer.yml has its complete live schedule",
       "status": "PASS",
-      "detail": "['15 0 * * *', '0 6 * * *', '30 8 * * *', '30 11 * * *', '30 12 * * *']"
+      "detail": "['0 21 * * *', '0 0 * * *', '0 6 * * *', '0 8 * * *', '0 14 * * *']"
     },
     {
       "name": "Dynamic Master publication has both code gate and explicit live workflow enablement",
@@ -33,7 +33,7 @@
     {
       "name": "Eleven news preflight runs",
       "status": "PASS",
-      "detail": "['30 21 * * *', '30 22 * * *', '30 0 * * *', '30 3 * * *', '30 5 * * *', '0 6 * * *', '30 6 * * *', '30 10 * * *', '0 11 * * *', '30 11 * * *', '0 12 * * *']"
+      "detail": "['30 19 * * *', '30 20 * * *', '30 23 * * *', '30 2 * * *', '30 4 * * *', '30 5 * * *', '30 6 * * *', '30 10 * * *', '30 11 * * *', '30 12 * * *', '30 13 * * *']"
     },
     {
       "name": "News desks have independent non-cancelling precision runs",
@@ -547,6 +547,16 @@
     },
     {
       "name": "News editions include continuous gesture motion",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Twenty-one articles are hourly with one four-hour overnight gap",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Twelve Page promotions are evenly spaced every two hours",
       "status": "PASS",
       "detail": ""
     },

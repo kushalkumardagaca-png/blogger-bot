@@ -71,18 +71,18 @@ RESOURCE_DESTINATIONS = (
 # Three audience-friendly resource windows per platform in IST. The 12 schedules
 # produce exactly three page/website promotions on each network every day.
 RESOURCE_SCHEDULES = {
-    "30 0 * * *": ("mastodon", 0),   # 06:00 IST
-    "30 1 * * *": ("facebook", 0),   # 07:00 IST
-    "0 3 * * *": ("bluesky", 0),     # 08:30 IST
-    "0 4 * * *": ("tumblr", 0),      # 09:30 IST
-    "30 7 * * *": ("facebook", 1),   # 13:00 IST
-    "30 8 * * *": ("mastodon", 1),   # 14:00 IST
-    "0 10 * * *": ("bluesky", 1),    # 15:30 IST
-    "30 11 * * *": ("tumblr", 1),    # 17:00 IST
-    "30 13 * * *": ("mastodon", 2),  # 19:00 IST
-    "30 14 * * *": ("facebook", 2),  # 20:00 IST
-    "0 16 * * *": ("tumblr", 2),     # 21:30 IST
-    "0 17 * * *": ("bluesky", 2),    # 22:30 IST
+    "0 19 * * *": ("mastodon", 0),  # 00:30 IST
+    "0 21 * * *": ("facebook", 0),  # 02:30 IST
+    "0 23 * * *": ("bluesky", 0),   # 04:30 IST
+    "0 1 * * *": ("tumblr", 0),     # 06:30 IST
+    "0 3 * * *": ("mastodon", 1),   # 08:30 IST
+    "0 5 * * *": ("facebook", 1),   # 10:30 IST
+    "0 7 * * *": ("bluesky", 1),    # 12:30 IST
+    "0 9 * * *": ("tumblr", 1),     # 14:30 IST
+    "0 11 * * *": ("mastodon", 2),  # 16:30 IST
+    "0 13 * * *": ("facebook", 2),  # 18:30 IST
+    "0 15 * * *": ("bluesky", 2),   # 20:30 IST
+    "0 17 * * *": ("tumblr", 2),    # 22:30 IST
 }
 
 

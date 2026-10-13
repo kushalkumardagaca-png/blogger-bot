@@ -8,8 +8,8 @@ import argparse, datetime as dt, json, subprocess
 from pathlib import Path
 ROOT=Path(__file__).parent; IST=dt.timezone(dt.timedelta(hours=5,minutes=30),name='IST')
 LEDGER=ROOT/'RECOVERY_LEDGER.json'; STATUS=ROOT/'PUBLICATION_RECOVERY_STATUS.json'
-NEWS_TIMES={'asia-pacific':'04:15','china':'05:15','india':'07:15','russia':'10:15','markets':'12:15','europe':'12:45','economy':'13:15','americas':'17:15','companies':'17:45','global':'18:15','banking':'18:45'}
-MASTER_TIMES={'trending':['07:45','13:45','16:15','19:15','20:15'],'evergreen':['08:15','14:15','16:45','19:45','20:45']}
+NEWS_TIMES={'asia-pacific':'02:15','china':'03:15','india':'06:15','russia':'09:15','markets':'11:15','europe':'12:15','economy':'13:15','americas':'17:15','companies':'18:15','global':'19:15','banking':'20:15'}
+MASTER_TIMES={'trending':['04:15','07:15','10:15','15:15','21:15'],'evergreen':['05:15','08:15','14:15','16:15','22:15']}
 WRONG_MASTER_REPAIRS=[{'key':'master-trending-0','duplicateUrl':'https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html','titlePhrase':'Budget Airlines'}]
 GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); MAX_RETRIES=3
 
