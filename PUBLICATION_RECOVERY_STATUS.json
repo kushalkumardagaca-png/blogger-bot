@@ -1,22 +1,11 @@
 {
-  "generatedAt": "2026-10-14T05:01:49.026880+05:30",
+  "generatedAt": "2026-10-14T05:27:53.074412+05:30",
   "dateIST": "2026-10-14",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 1,
+  "confirmedPublications": 2,
   "overdueMissing": [],
-  "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-0",
-      "applied": true
-    }
-  ],
+  "actions": [],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
