@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - name: Cancel only Master generators stalled beyond 45 minutes
+      - name: Cancel only local-model Master generators stalled beyond 150 minutes
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -30,7 +30,7 @@ jobs:
             [ -n "$run_id" ] || continue
             started=$(date -u -d "$started_at" +%s)
             age=$((now-started))
-            if [ "$age" -gt 2700 ]; then
+            if [ "$age" -gt 9000 ]; then
               echo "Cancelling stale Master run $run_id after ${age}s"
               gh run cancel "$run_id" --repo "$GH_REPO" || true
             fi
