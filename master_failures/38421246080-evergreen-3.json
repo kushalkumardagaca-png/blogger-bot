@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 3,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "V3 source gate found 2 topic-specific sources; eight required"
+}
