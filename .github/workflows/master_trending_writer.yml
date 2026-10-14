@@ -1,6 +1,10 @@
 name: Master V3 Trending Publisher (Live)
 
 on:
+  push:
+    paths:
+      # Repository-authenticated live recovery trigger; file contains slot 0-4.
+      - '.github/master-trending-live-trigger'
   schedule:
     # Trending generation budget: 150 minutes plus 15 minutes spare.
     - cron: '0 22 * * *'   # Prepare 03:30 IST → live 06:15
@@ -61,8 +65,15 @@ jobs:
             '0 6 * * *') value=2 ;;
             '0 8 * * *') value=3 ;;
             '30 12 * * *') value=4 ;;
-            *) value="${{ inputs.slot }}" ;;
+            *)
+              if [ "${{ github.event_name }}" = push ]; then
+                value="$(tr -d '[:space:]' < .github/master-trending-live-trigger)"
+              else
+                value="${{ inputs.slot }}"
+              fi
+              ;;
           esac
+          case "$value" in 0|1|2|3|4) ;; *) echo "Invalid trending slot: $value" >&2; exit 2;; esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
       - name: Research, write, validate and select three photos
         id: prepare
@@ -156,7 +167,7 @@ jobs:
           done
           exit 1
       - name: Publish after successful validated preparation
-        if: ${{ github.event_name == 'schedule' || inputs.publish }}
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish }}
         env:
           MASTER_PUBLICATION_ENABLED: 'true'
           MASTER_BACKFILL: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
@@ -164,9 +175,9 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
+        run: python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name != 'workflow_dispatch' && '--timed-release' || '' }}
       - name: Persist confirmed publication before downstream routing
-        if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
+        if: ${{ (github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish) && success() }}
         run: |
           set -euo pipefail
           mkdir -p /tmp/master-state
@@ -188,12 +199,12 @@ jobs:
           done
           exit 1
       - name: Route confirmed publication to two social networks
-        if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
+        if: ${{ (github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish) && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: python dispatch_social_events.py
       - name: Trigger page refresh and Bing reconciliation
-        if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
+        if: ${{ (github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish) && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
