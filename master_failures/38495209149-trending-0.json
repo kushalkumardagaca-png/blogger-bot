@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 0,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "V3 section 2 failed validation after bounded provider recovery: every paragraph needs a supplied source token"
+}
