@@ -43,7 +43,7 @@ def test_v3_has_quota_independent_section_completion():
     assert len(out)>=4 and 400<=words(' '.join(out))<=490
 
 def test_deterministic_completion_is_bounded_with_long_source_metadata():
-    source={'name':'Very Long Official Research Institution Name Repeated Across Metadata','title':' '.join(['Extremely detailed evidence title']*20),'url':'https://example.com','text':prose()*3}
+    source={'name':'Very Long Official Research Institution Name Repeated Across Metadata','title':' '.join(['Extremely detailed evidence title']*20),'url':'https://example.com','text':('evidence/item-value,'*1000)+prose()*3}
     out=deterministic_section(' '.join(['Detailed financial evidence boundary']*10),[(1,source)])
     assert 4<=len(out)<=6 and 400<=words(' '.join(out))<=490
 

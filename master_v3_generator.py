@@ -134,11 +134,12 @@ def deterministic_section(section_heading,sources):
   'The useful distinction is between what the source reports and assumptions it did not test.',
   'The cited record is one bounded part of the evidence and cannot support broader certainty.',
  )
- paragraphs=[];heading=' '.join(clean(section_heading).split()[:12])
+ tokenized=lambda value:re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",clean(value))
+ paragraphs=[];heading=' '.join(tokenized(section_heading)[:12])
  for cursor in range(6):
-  source_id,row=sources[cursor%len(sources)];tokens=clean(row.get('text','')).split();start=(cursor*31)%max(1,len(tokens)-24);excerpt=' '.join(tokens[start:start+22]).strip(' ,;:')
+  source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));start=(cursor*31)%max(1,len(tokens)-24);excerpt=' '.join(tokens[start:start+22]).strip(' ,;:')
   if not excerpt:continue
-  title=' '.join(clean(row.get('title') or row.get('name') or 'Retrieved evidence').split()[:12]);provider=' '.join(clean(row.get('name') or 'cited provider').split()[:5]);boundary=boundaries[cursor%len(boundaries)]
+  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:12]);provider=' '.join(tokenized(row.get('name') or 'cited provider')[:5]);boundary=boundaries[cursor%len(boundaries)]
   paragraphs.append(f'[[S{source_id}|{provider} evidence]] frames {heading} through “{title}.” The retrieved record states, in part, “{excerpt}.” {boundary} This passage is used only for its documented scope, while unsupported predictions and recommendations remain outside this section.')
   if len(paragraphs)>=4 and words(' '.join(paragraphs))>=420:break
  # Keep four or more separately attributed paragraphs and hard-bound the total.
