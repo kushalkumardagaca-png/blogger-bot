@@ -1,16 +1,24 @@
 {
-  "generatedAt": "2026-10-14T13:35:07.270051+05:30",
+  "generatedAt": "2026-10-14T13:53:08.341849+05:30",
   "dateIST": "2026-10-14",
-  "status": "DEGRADED",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 10,
-  "overdueMissing": [
-    "master-evergreen-1"
-  ],
+  "confirmedPublications": 11,
+  "overdueMissing": [],
   "actions": [
     {
-      "type": "source_recovery",
-      "key": "master-evergreen-1",
+      "type": "preparation_recovery",
+      "key": "master-trending-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-3",
       "applied": true
     }
   ],
