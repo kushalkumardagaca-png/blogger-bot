@@ -14,4 +14,9 @@ class PreparationMergeTests(unittest.TestCase):
   a={'items':[{'sha256':'same','source_id':'commons:1','article_key':'article-a'}]}
   b={'items':[{'sha256':'same','source_id':'commons:1','article_key':'article-b'}]}
   with self.assertRaisesRegex(RuntimeError,'concurrent photo conflict'):merge_registry(a,b)
+ def test_historical_duplicate_snapshot_is_not_a_concurrent_addition(self):
+  rows=[{'sha256':'one','source_id':'commons:legacy','article_key':'article-a'},
+        {'sha256':'two','source_id':'commons:legacy','article_key':'article-b'}]
+  out=merge_registry({'items':rows},{'items':rows+[{'sha256':'new','source_id':'commons:2','article_key':'article-c'}]})
+  self.assertEqual({x['sha256'] for x in out['items']},{'one','two','new'})
 if __name__=='__main__':unittest.main()

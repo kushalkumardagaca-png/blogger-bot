@@ -16,16 +16,24 @@ def merge_plan(current,incoming,status):
 def merge_registry(current,incoming):
  # Concurrent writers may start from the same photo registry. Never silently
  # allow the same licensed photograph to enter two different Master Articles.
- current_assets={}
+ current_assets={};current_pairs=set()
  for row in current.get('items',[]):
+  article=str(row.get('article_key') or '')
   for field in ('sha256','source_id','original_url'):
    value=str(row.get(field) or '')
-   if value:current_assets[(field,value)]=row
+   if value:
+    current_assets[(field,value)]=row
+    current_pairs.add((field,value,article))
  for row in incoming.get('items',[]):
   incoming_article=str(row.get('article_key') or '')
   if not incoming_article:continue
   for field in ('sha256','source_id','original_url'):
-   value=str(row.get(field) or '');prior=current_assets.get((field,value)) if value else None
+   value=str(row.get(field) or '')
+   # Incoming is a full registry snapshot. Historical rows already present in
+   # current are not concurrent additions, even if old baseline data contains
+   # a duplicated identifier. Validate only genuinely new article/asset pairs.
+   if not value or (field,value,incoming_article) in current_pairs:continue
+   prior=current_assets.get((field,value))
    if prior and str(prior.get('article_key') or '') not in ('',incoming_article):
     raise RuntimeError(f'concurrent photo conflict for {field}; retry preparation against the current registry')
  out={**current}
