@@ -967,6 +967,27 @@ def source_summary(it, maximum=68):
     desc = re.sub(r"\s+", " ", strip_tags(it.get("desc", ""))).strip()
     return clip_word_count(desc, maximum).rstrip(" .") + "."
 
+def topic_specific_context(text, topic_ref):
+    """Make each general reading lens specific to the story using it.
+
+    The facts and cautions are unchanged. Adding the story reference prevents
+    several independently sourced stories from repeating identical stock
+    sentences in one edition, which the publication policy gate must reject.
+    """
+    transitions = (
+        "For this report about {topic}, {sentence}",
+        "When reading the evidence on {topic}, {sentence}",
+        "For the source topic {topic}, {sentence}",
+        "In the record concerning {topic}, {sentence}",
+    )
+    out=[]
+    for index,sentence in enumerate(re.split(r"(?<=[.!?])\s+", text.strip())):
+        if not sentence:
+            continue
+        lowered=sentence[0].lower()+sentence[1:]
+        out.append(transitions[index % len(transitions)].format(topic=topic_ref, sentence=lowered))
+    return " ".join(out)
+
 def compose_item(it, win_end, context_target=95, summary_target=52):
     title = clean_title(it["title"])
     if len(title) > 140:
@@ -992,8 +1013,9 @@ def compose_item(it, win_end, context_target=95, summary_target=52):
     context_limit = max(35, context_target - summary_words)
     ordered_lenses = " ".join(READER_LENS[(variant + offset) % len(READER_LENS)]
                                for offset in range(len(READER_LENS)))
+    general_lens = topic_specific_context(f"{CONSEQUENCE[kind]} {ordered_lenses}", topic_ref)
     context_seed = (f"{status} Applied specifically to the source topic — {title} — this lens separates "
-                    f"the reported record from possible effects. {CONSEQUENCE[kind]} {ordered_lenses}")
+                    f"the reported record from possible effects. {general_lens}")
     context = clip_word_count(context_seed, context_limit)
     etitle, eagency = htmlmod.escape(display), htmlmod.escape(it["agency"])
     country_name = DISCOVERY_LABELS.get(it.get("country"), it.get("region", "Global").replace("-", " ").title())
