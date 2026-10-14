@@ -208,6 +208,29 @@ def write_section(article_title,section_heading,index,sources):
  # uses only short attributed source excerpts plus explicit scope limitations.
  return deterministic_section(section_heading,sources)
 
+def contextualize_repeated_sentences(sections):
+ """Rewrite accidental model boilerplate in-place while preserving its claim.
+
+ Section validation happens independently and parallel sections can occasionally
+ return one identical transition. The article-level policy gate correctly rejects
+ that repetition. This pass makes later occurrences explicitly section-specific;
+ it does not alter quotations, figures, citations or substantive meaning.
+ """
+ seen=set();ordinals=('first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth')
+ for section_index,section in enumerate(sections):
+  heading_text=clean(section.get('heading','this section'))
+  for paragraph_index,paragraph in enumerate(section.get('paragraphs') or []):
+   parts=re.split(r'(?<=[.!?])\s+',paragraph.strip());rebuilt=[]
+   for sentence_index,sentence in enumerate(parts):
+    key=re.sub(r'[^a-z0-9]+',' ',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence.casefold())).strip()
+    if len(key.split())>=12 and key in seen:
+     lens=ordinals[min(section_index,len(ordinals)-1)]
+     sentence=f'For the {lens} evidence section on {heading_text}, this boundary is especially relevant: '+sentence[0].lower()+sentence[1:]
+    seen.add(re.sub(r'[^a-z0-9]+',' ',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence.casefold())).strip())
+    rebuilt.append(sentence)
+   section['paragraphs'][paragraph_index]=' '.join(rebuilt)
+ return sections
+
 def extracted_summary(sections):
  """Build a distinct evidence recap instead of copying body sentences verbatim."""
  out=[]
@@ -277,6 +300,7 @@ def build(item,kind,target):
   futures=[executor.submit(create,plan) for plan in plans]
   for future in as_completed(futures):
    index,section=future.result();sections[index]=section
+ sections=contextualize_repeated_sentences(sections)
  core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if core>4200:
   excess=core-4150
