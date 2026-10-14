@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-14T01:08:08.935966+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-14T02:23:14.042721+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
       "desk": "india",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "PUBLICATION PREFLIGHT FAILED — duplicated substantive paragraph detected: securities and exchange board of india's oct 13 report concerns notice of attachment dated october 13,2026 issued against; possible consequences remain conditional, not certain."
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
