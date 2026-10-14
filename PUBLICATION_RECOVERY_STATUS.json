@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T23:08:38.885814+05:30",
+  "generatedAt": "2026-10-14T23:18:15.337502+05:30",
   "dateIST": "2026-10-14",
   "status": "DEGRADED",
   "apply": true,
@@ -7,10 +7,14 @@
   "overdueMissing": [
     "master-evergreen-4"
   ],
-  "actions": [],
-  "retryBlocked": [
-    "source:2026-10-14:master-evergreen-4"
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-4",
+      "applied": true
+    }
   ],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
