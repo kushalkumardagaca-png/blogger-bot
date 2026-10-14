@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T10:47:33.588321+05:30",
+  "generatedAt": "2026-10-14T10:48:24.330006+05:30",
   "dateIST": "2026-10-14",
   "status": "DEGRADED",
   "apply": true,
@@ -10,11 +10,6 @@
     "master-trending-1"
   ],
   "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-1",
-      "applied": true
-    },
     {
       "type": "source_recovery",
       "key": "master-trending-0",
