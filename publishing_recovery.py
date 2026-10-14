@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Repository changes to this recovery controller intentionally trigger an immediate reconciliation.
 """Generic, idempotent publication and two-network social recovery.
 
 Permanent recovery generation 52: Blogger December 2026 policy gates now cover Blogger publications, corpus originality, transparent automation disclosure, deceptive claims, privacy, image safety and social copy; older packages rebuild automatically and recovery remains oldest-first.
