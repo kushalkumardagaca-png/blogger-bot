@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-14T12:19:49.364336+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-14T12:39:53.886643+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
-      "desk": "banking",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content"
+      "desk": "americas",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
