@@ -32,9 +32,9 @@ permissions:
   actions: write
 
 concurrency:
-  # Shared photo and package state has one writer. Oldest-first recovery ensures
-  # this lane carries the earliest missing article before later slots.
-  group: daily-yield-master-v3-state-writer
+  # Suppress duplicate attempts for the same article without letting a future
+  # embargo wait block recovery of a different overdue Master slot.
+  group: daily-yield-master-v3-evergreen-${{ inputs.slot || github.event.schedule || github.run_id }}
   cancel-in-progress: false
 
 jobs:

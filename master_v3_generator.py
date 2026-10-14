@@ -79,7 +79,12 @@ def text_call(prompt,max_tokens=1400):
  return (_ for _ in ()).throw(RuntimeError('all bounded section writers failed: '+' | '.join(errors)[-1000:]))
 
 def discover_sources(item,kind):
- title=item['title'];query=' '.join(terms(title)[:8]);out=[];seen=set()
+ title=item['title'];base_terms=terms(title);expanded=re.sub(r'\brmds?\b','required minimum distributions',title,flags=re.I)
+ query_variants=[]
+ for value in (' '.join(base_terms[:8]),' '.join(terms(expanded)[:8]),' '.join(base_terms[:4]),' '.join(base_terms[-6:]),' '.join(terms(item.get('category',''))[:5]+base_terms[:3])):
+  value=clean(value)
+  if value and value not in query_variants:query_variants.append(value)
+ out=[];seen=set()
  def add(name,source_title,url,text):
   url=str(url or '').replace('http://','https://',1)
   key=clean(source_title).casefold()
@@ -92,24 +97,38 @@ def discover_sources(item,kind):
    r=requests.get(source['url'],headers={'User-Agent':UA},timeout=30);body=clean(r.text)
    add(source.get('name'),title,source['url'],body)
   except Exception:pass
- for suffix in (' finance',' policy markets',' household money'):
+ # Topic-triggered primary-source discovery keeps high-stakes evergreen articles
+ # anchored in current official material instead of relying only on news search.
+ official=[];topic=' '.join(base_terms)
+ if 'rmd' in topic or ('required' in topic and 'distribution' in topic):
+  official=[('Internal Revenue Service','Required minimum distributions FAQs','https://www.irs.gov/retirement-plans/retirement-plan-and-ira-required-minimum-distributions-faqs'),('Internal Revenue Service','Publication 590-B: Distributions from Individual Retirement Arrangements','https://www.irs.gov/publications/p590b'),('Internal Revenue Service','Retirement topics: required minimum distributions','https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds')]
+ for name,source_title,url in official:
   try:
-   url='https://news.google.com/rss/search?q='+urllib.parse.quote(query+suffix+' when:30d')+'&hl=en-US&gl=US&ceid=US:en'
-   root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=30).content)
-   for node in root.findall('.//item'):
-    add(clean(node.findtext('source') or 'Google News'),node.findtext('title'),node.findtext('link'),node.findtext('description'))
+   r=requests.get(url,headers={'User-Agent':UA},timeout=30);r.raise_for_status();add(name,source_title,url,clean(r.text))
   except Exception:pass
- try:
-  params={'search':query,'per-page':25,'select':'id,display_name,publication_year,authorships,abstract_inverted_index,primary_location'}
-  for work in requests.get('https://api.openalex.org/works',params=params,headers={'User-Agent':UA},timeout=45).json().get('results',[]):
-   inv=work.get('abstract_inverted_index') or {};size=max((max(v) for v in inv.values() if v),default=-1)+1;tokens=['']*size
-   for word,positions in inv.items():
-    for pos in positions:
-     if pos<size:tokens[pos]=word
-   loc=work.get('primary_location') or {};landing=loc.get('landing_page_url') or work.get('id');name=((loc.get('source') or {}).get('display_name') or 'OpenAlex research index')
-   add(name,work.get('display_name'),landing,' '.join(tokens))
-  
- except Exception:pass
+ horizon='30d' if kind=='trending' else '365d'
+ for query in query_variants:
+  for suffix in ('',' finance'):
+   if len(out)>=12:break
+   try:
+    url='https://news.google.com/rss/search?q='+urllib.parse.quote(query+suffix+f' when:{horizon}')+'&hl=en-US&gl=US&ceid=US:en'
+    root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=30).content)
+    for node in root.findall('.//item'):
+     add(clean(node.findtext('source') or 'Google News'),node.findtext('title'),node.findtext('link'),node.findtext('description'))
+   except Exception:pass
+  if len(out)>=12:break
+ for query in query_variants:
+  if len(out)>=12:break
+  try:
+   params={'search':query,'per-page':25,'select':'id,display_name,publication_year,authorships,abstract_inverted_index,primary_location'}
+   for work in requests.get('https://api.openalex.org/works',params=params,headers={'User-Agent':UA},timeout=45).json().get('results',[]):
+    inv=work.get('abstract_inverted_index') or {};size=max((max(v) for v in inv.values() if v),default=-1)+1;tokens=['']*size
+    for word,positions in inv.items():
+     for pos in positions:
+      if pos<size:tokens[pos]=word
+    loc=work.get('primary_location') or {};landing=loc.get('landing_page_url') or work.get('id');name=((loc.get('source') or {}).get('display_name') or 'OpenAlex research index')
+    add(name,work.get('display_name'),landing,' '.join(tokens))
+  except Exception:pass
  out.sort(key=lambda x:x['overlap'],reverse=True)
  if len(out)<8:raise RuntimeError(f'V3 source gate found {len(out)} topic-specific sources; eight required')
  return out[:10]

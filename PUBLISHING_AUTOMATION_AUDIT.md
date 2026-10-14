@@ -104,7 +104,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Every Master publishing path enforces the public release embargo**
 - ✅ **Master retries are centrally ordered rather than self-dispatched**
 - ✅ **Master V3 deterministically assembles summary, support and three evidence visuals**
-- ✅ **All Master package and photo state writers are globally serialized**
+- ✅ **Duplicate Master attempts are serialized without cross-slot embargo blocking**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
 - ✅ **Persistence and Blogger failures return to permanent ordered recovery**
 - ✅ **Master generation is quota-independent with model-independent research fallback**
