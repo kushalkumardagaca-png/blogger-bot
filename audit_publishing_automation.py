@@ -281,12 +281,16 @@ check('Master V3 uses independently validated plain-text sections, not one long 
       and 'Never output JSON or markdown' in v3_generator
       and 'prepare_master_article' not in v3_generator)
 check('Short section attempts accumulate instead of discarding usable prose',
-      'pool=[];seen=set()' in v3_generator and 'for attempt in range(6)' in v3_generator
-      and 'accumulated bounded provider recovery' in v3_generator)
-check('Owner-authorized GitHub Models is primary and local Ollama is emergency fallback',
+      'pool=[];seen=set()' in v3_generator and 'for attempt in range(2)' in v3_generator
+      and 'deterministic_section(section_heading,sources)' in v3_generator)
+check('Fast model acceleration has a quota-independent completion path',
       'for fn in (github_text,ollama_text)' in v3_generator
+      and 'def deterministic_section' in v3_generator
       and master_workflows.count('models: read')>=2
       and master_workflows.count('GITHUB_TOKEN: ${{ github.token }}')>=2)
+check('Bounded provider waits preserve the under-thirty-minute generation target',
+      'timeout=60' in v3_generator and 'timeout=90' in v3_generator
+      and 'for attempt in range(2)' in v3_generator)
 check('Ten bounded sections use controlled three-worker parallel generation',
       'ThreadPoolExecutor(max_workers=3' in v3_generator and 'as_completed(futures)' in v3_generator)
 check('Overnight pair dispatch retries each category independently',
