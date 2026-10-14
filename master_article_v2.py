@@ -5,7 +5,7 @@ import html, json, math, re
 from urllib.parse import urlparse
 from page_family import family_block
 from social_identity import SOCIAL_PROFILES
-from content_policy_guard import POLICY_VERSION,automation_disclosure,audit_text
+from content_policy_guard import POLICY_VERSION,automation_disclosure,audit_text,normalize_sentence,sentences
 
 BLOG="https://dailyyield.blogspot.com"
 AUTHOR="Kushal K. Daga"
@@ -62,7 +62,12 @@ def validate(package):
     if len(package.get("glossary") or [])<8: errors.append("at least eight topic-specific glossary definitions are required")
     low=package.get("low_view_posts") or []
     if not 10<=len(low)<=15: errors.append("low-view shelf requires 10–15 genuinely measured Posts")
-    errors.extend('content policy: '+x for x in audit_text(title,core+' '+" ".join(summary),'master-package',False))
+    policy_issues=audit_text(title,core+' '+" ".join(summary),'master-package',False)
+    errors.extend('content policy: '+x for x in policy_issues)
+    if 'repeated substantive sentence within the content' in policy_issues:
+        normalized=[normalize_sentence(x) for x in sentences(core+' '+" ".join(summary))];seen=set()
+        duplicate=next((x for x in normalized if len(x.split())>=12 and (x in seen or seen.add(x))), '')
+        if duplicate:errors.append('duplicate diagnostic: '+duplicate[:180])
     if errors: raise ValueError("MASTER V2 REJECTED — "+"; ".join(errors))
     return {"core_words":count,"summary_words":summary_count}
 
