@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-10-14T18:51:00.997542+05:30",
+  "generatedAt": "2026-10-14T19:30:29.551209+05:30",
   "dateIST": "2026-10-14",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 16,
+  "confirmedPublications": 17,
   "overdueMissing": [
-    "news-global"
+    "news-banking"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-global",
+      "key": "news-banking",
       "applied": true
     },
     {
@@ -21,6 +21,11 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-4",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
       "applied": true
     }
   ],
