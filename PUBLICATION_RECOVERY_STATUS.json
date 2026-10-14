@@ -1,23 +1,11 @@
 {
-  "generatedAt": "2026-10-14T19:30:29.551209+05:30",
+  "generatedAt": "2026-10-14T20:06:49.913367+05:30",
   "dateIST": "2026-10-14",
-  "status": "DEGRADED",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 17,
-  "overdueMissing": [
-    "news-banking"
-  ],
+  "confirmedPublications": 19,
+  "overdueMissing": [],
   "actions": [
-    {
-      "type": "source_recovery",
-      "key": "news-banking",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-3",
-      "applied": true
-    },
     {
       "type": "preparation_recovery",
       "key": "master-trending-4",
