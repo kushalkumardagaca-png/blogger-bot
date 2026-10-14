@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-10-14T06:14:19.984038+05:30",
+  "generatedAt": "2026-10-14T06:50:42.170912+05:30",
   "dateIST": "2026-10-14",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 2,
-  "overdueMissing": [],
+  "overdueMissing": [
+    "master-trending-0"
+  ],
   "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-0",
-      "applied": true
-    },
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-0",
@@ -19,6 +16,11 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-1",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-0",
       "applied": true
     }
   ],
