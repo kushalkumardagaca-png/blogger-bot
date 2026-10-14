@@ -109,17 +109,6 @@ jobs:
             sleep $((attempt * 3))
           done
           exit 1
-      - name: Requeue one bounded recovery after a failed generation
-        if: failure()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          current="${{ inputs.retry_attempt || '0' }}"
-          if [ "$current" -lt 2 ]; then
-            next=$((current+1))
-            gh workflow run master_trending_writer.yml --ref main -f slot="${{ steps.slot.outputs.value }}" -f publish="${{ github.event_name == 'schedule' && 'true' || inputs.publish }}" -f retry_attempt="$next"
-            echo "Queued bounded retry $next for trending slot ${{ steps.slot.outputs.value }}"
-          fi
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail
@@ -195,16 +184,6 @@ jobs:
             done
             $completed || exit 1
           done
-      - name: Requeue after package persistence or publication failure
-        if: ${{ failure() && steps.prepare.outcome == 'success' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          current="${{ inputs.retry_attempt || '0' }}"
-          if [ "$current" -lt 4 ]; then
-            next=$((current+1))
-            gh workflow run master_trending_writer.yml --ref main -f slot="${{ steps.slot.outputs.value }}" -f publish="${{ github.event_name == 'schedule' && 'true' || inputs.publish }}" -f retry_attempt="$next"
-          fi
       - name: Preserve Master pipeline diagnostics
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-14T10:48:07+05:30",
+  "checked_at_ist": "2026-10-14T10:52:07+05:30",
   "summary": {
     "pass": 175,
     "fail": 0
@@ -496,7 +496,7 @@
       "detail": ""
     },
     {
-      "name": "Failed prewarming retries remain preparation-only",
+      "name": "Master retries are centrally ordered rather than self-dispatched",
       "status": "PASS",
       "detail": ""
     },
@@ -516,7 +516,7 @@
       "detail": ""
     },
     {
-      "name": "Successful generation is requeued after persistence or Blogger failure",
+      "name": "Persistence and Blogger failures return to permanent ordered recovery",
       "status": "PASS",
       "detail": ""
     },

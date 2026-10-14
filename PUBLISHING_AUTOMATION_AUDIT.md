@@ -102,11 +102,11 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master V3 permanently excludes 12/13 October and all historical backfill**
 - ✅ **Scheduled Master release reuses a complete advance package**
 - ✅ **Every Master publishing path enforces the public release embargo**
-- ✅ **Failed prewarming retries remain preparation-only**
+- ✅ **Master retries are centrally ordered rather than self-dispatched**
 - ✅ **Master V3 deterministically assembles summary, support and three evidence visuals**
 - ✅ **All Master package and photo state writers are globally serialized**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
-- ✅ **Successful generation is requeued after persistence or Blogger failure**
+- ✅ **Persistence and Blogger failures return to permanent ordered recovery**
 - ✅ **Master generation is quota-independent with model-independent research fallback**
 - ✅ **Local Master generation is bounded for the publication window**
 - ✅ **Evergreen source discovery can use relevant established reporting without weakening review**

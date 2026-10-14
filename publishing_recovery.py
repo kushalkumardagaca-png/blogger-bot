@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 43: overdue publication recovery takes precedence over future prewarming in the serialized state-writer lane, and the 06:15 slot is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 44: workflows no longer self-dispatch retries that can replace the oldest pending writer; permanent oldest-first recovery owns retries, and the 06:15 slot is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
