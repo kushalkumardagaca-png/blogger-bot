@@ -13,7 +13,7 @@ def main():
  target=[x for x in matches if str(x.get('tumblr_post_id'))==a.post_id]
  if len(target)!=1:raise RuntimeError('refusing cleanup: requested post is not exactly one tracked duplicate')
  token=refresh_access();verify_account(token)
- request('DELETE',f'{API}/blog/{TUMBLR_BLOG}/post/delete',headers=auth(token),params={'id':a.post_id},retries=2)
+ request('POST',f'{API}/blog/{TUMBLR_BLOG}/post/delete',headers=auth(token),data={'id':a.post_id},retries=2)
  data['published']=[x for x in data.get('published',[]) if str(x.get('tumblr_post_id'))!=a.post_id]
  TRACKER.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n')
  print(json.dumps({'status':'PASS','deleted_tumblr_post_id':a.post_id,'destination':a.url}))
