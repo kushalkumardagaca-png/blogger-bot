@@ -32,9 +32,9 @@ permissions:
   actions: write
 
 concurrency:
-  # Serialize duplicate attempts for one slot while allowing distinct slots to
-  # prepare in parallel. This prevents same-article photo/package merge races.
-  group: daily-yield-master-v3-trending-${{ inputs.slot || github.event.schedule || github.run_id }}
+  # Shared photo and package state has one writer. Oldest-first recovery ensures
+  # this lane carries the earliest missing article before later slots.
+  group: daily-yield-master-v3-state-writer
   cancel-in-progress: false
 
 jobs:

@@ -316,9 +316,8 @@ check('Failed prewarming retries remain preparation-only',
 check('Master V3 deterministically assembles summary, support and three evidence visuals',
       'def extracted_summary' in v3_generator and 'def support' in v3_generator
       and 'def visuals' in v3_generator)
-check('Duplicate Master attempts are serialized per category and slot',
-      'group: daily-yield-master-v3-trending-${{ inputs.slot' in master_workflows
-      and 'group: daily-yield-master-v3-evergreen-${{ inputs.slot' in master_workflows
+check('All Master package and photo state writers are globally serialized',
+      master_workflows.count('group: daily-yield-master-v3-state-writer')==2
       and master_workflows.count('cancel-in-progress: false')>=2)
 check('Concurrent Master package, photo, plan and tracker writes use semantic merge and retry',
       master_workflows.count('merge_master_state.py')>=4 and (ROOT/'merge_master_state.py').exists()

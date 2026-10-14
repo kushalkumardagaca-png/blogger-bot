@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-14T10:29:40+05:30",
+  "checked_at_ist": "2026-10-14T10:47:10+05:30",
   "summary": {
     "pass": 175,
     "fail": 0
@@ -506,7 +506,7 @@
       "detail": ""
     },
     {
-      "name": "Duplicate Master attempts are serialized per category and slot",
+      "name": "All Master package and photo state writers are globally serialized",
       "status": "PASS",
       "detail": ""
     },
