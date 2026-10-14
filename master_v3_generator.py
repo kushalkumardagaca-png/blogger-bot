@@ -235,6 +235,22 @@ def contextualize_repeated_sentences(sections):
    section['paragraphs'][paragraph_index]=' '.join(rebuilt)
  return sections
 
+def remove_repeated_sentences(sections):
+ """Remove later exact boilerplate copies when contextual rewriting cannot help."""
+ seen=set()
+ for section in sections:
+  cleaned=[]
+  for paragraph in section.get('paragraphs') or []:
+   parts=re.split(r'(?<=[.!?])\s+',paragraph.strip());kept=[]
+   for sentence in parts:
+    key=re.sub(r'[^a-z0-9]+',' ',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence.casefold())).strip()
+    if len(key.split())>=12 and key in seen:continue
+    if len(key.split())>=12:seen.add(key)
+    kept.append(sentence)
+   if kept:cleaned.append(' '.join(kept))
+  section['paragraphs']=cleaned
+ return sections
+
 def extracted_summary(sections):
  """Build a distinct evidence recap instead of copying body sentences verbatim."""
  out=[]
@@ -322,12 +338,13 @@ def build(item,kind,target):
  # assembly. This catches cross-module repetition that cannot be visible while
  # ten sections are being generated independently.
  combined=sections+[{'heading':'Evidence-led takeaways','paragraphs':summary}]
- for _ in range(16):
+ for attempt in range(16):
   if words(' '.join(combined[-1]['paragraphs']))>800:
    combined[-1]['paragraphs']=parse_paragraphs(sentence_trim(' '.join(combined[-1]['paragraphs']),760))
   assembled=' '.join(' '.join(x.get('paragraphs') or []) for x in combined)
   if 'repeated substantive sentence within the content' not in audit_text(title,assembled,'master-package',False):break
-  contextualize_repeated_sentences(combined)
+  if attempt<8:contextualize_repeated_sentences(combined)
+  else:remove_repeated_sentences(combined)
  else:raise RuntimeError('assembled Master prose could not be made sentence-distinct')
  sections=combined[:-1];summary=combined[-1]['paragraphs']
  faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
