@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 4,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "assembled Master prose could not be made sentence-distinct"
+}
