@@ -1,16 +1,11 @@
 {
-  "generatedAt": "2026-10-14T14:01:11.167286+05:30",
+  "generatedAt": "2026-10-14T14:24:14.358472+05:30",
   "dateIST": "2026-10-14",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 11,
+  "confirmedPublications": 12,
   "overdueMissing": [],
   "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-2",
-      "applied": true
-    },
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-2",
@@ -19,13 +14,6 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-3",
-      "applied": true
-    },
-    {
-      "type": "wrong_publication_cleanup",
-      "key": "master-trending-0",
-      "duplicateUrl": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
-      "replacementUrl": "https://dailyyield.blogspot.com/2026/10/ifs-budget-will-be-work-of-fiction.html",
       "applied": true
     }
   ],
