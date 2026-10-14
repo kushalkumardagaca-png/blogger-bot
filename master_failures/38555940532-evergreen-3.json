@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 3,
+  "stage": "master-v3",
+  "error_type": "ValueError",
+  "error": "MASTER V2 REJECTED — content policy: repeated substantive sentence within the content"
+}
