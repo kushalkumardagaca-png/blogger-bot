@@ -6,8 +6,12 @@ from pathlib import Path
 def merge(current,incoming,list_key):
  out={**current,**incoming};combined={};order=[]
  for row in list(current.get(list_key,[]))+list(incoming.get(list_key,[])):
-  key=str(row.get('topic_id') or row.get('url') or row.get('title'))
-  if not key:continue
+  identity=str(row.get('topic_id') or row.get('url') or row.get('title'))
+  # A revalidated evergreen topic may legitimately recur on another edition.
+  # Publication identity is therefore date + topic, while topic-history lists
+  # retain their existing global topic identity.
+  key=(str(row.get('date') or ''),identity) if list_key=='published' else identity
+  if not identity:continue
   if key not in combined:order.append(key);combined[key]=dict(row)
   else:combined[key].update(row)
  rows=[combined[k] for k in order];rows.sort(key=lambda x:(str(x.get('date','')),str(x.get('published_at','')),str(x.get('topic_id',''))))
