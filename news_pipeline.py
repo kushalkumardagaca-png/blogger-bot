@@ -31,6 +31,7 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
+from content_policy_guard import automation_disclosure
 from publication_timing import NEWS_LIVE, wait_for_release
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
@@ -1009,6 +1010,7 @@ def compose_item(it, win_end, context_target=95, summary_target=52):
     </div>'''
 
 # ---------------------------------------------------------------- daily hero imagery
+MINOR_IMAGE_TERMS=re.compile(r'\b(?:child|children|kid|kids|minor|schoolchild|schoolgirl|schoolboy|teenager|young girl|young boy|student|pupil)\b',re.I)
 def _meta_value(metadata, key, default=""):
     value = metadata.get(key, default)
     if isinstance(value, dict):
@@ -1062,6 +1064,8 @@ def daily_hero(desk, edition_date, used_urls=None, previous_url=""):
             if url == previous_url or url in used_urls or url in SESSION_USED_IMAGES:
                 continue
             title = _meta_value(metadata, "ImageDescription") or page.get("title", "Wikimedia Commons photograph")
+            if MINOR_IMAGE_TERMS.search(str(page.get('title',''))+' '+title):
+                continue
             artist = _meta_value(metadata, "Artist", "Wikimedia Commons contributor")
             candidates.append({
                 "url": url, "alt": clip_words(title, 150),
@@ -1271,6 +1275,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
 {method_html}
 {related_html}
 {signoff}
+{automation_disclosure('news edition')}
 </div>'''
 
     canonical = "https://dailyyield.blogspot.com/PLACEHOLDER-CANONICAL"

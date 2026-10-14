@@ -1,0 +1,112 @@
+#!/usr/bin/env python3
+"""Blogger December 2026 content-policy guardrails.
+
+The guard does not try to disguise automation. It requires useful, distinct,
+honestly attributed output and fails closed on deceptive, dangerous, private,
+repetitive or commercially manipulative material.
+"""
+from __future__ import annotations
+import html,os,re
+from collections import Counter
+
+POLICY_VERSION="BLOGGER_CONTENT_POLICY_2026_12"
+DISCLOSURE_MARKER="DY_AUTOMATION_DISCLOSURE_2026_12"
+
+# These phrases are acceptable only when expressly negated or quoted as a risk.
+DECEPTIVE_PATTERNS=(
+ r"\bguaranteed\s+(?:return|profit|income|approval|win)s?\b",
+ r"\brisk[- ]free\s+(?:investment|profit|return|income)\b",
+ r"\b(?:double|triple)\s+your\s+money\b",
+ r"\bget\s+rich\s+quick\b",
+ r"\bzero\s+risk\b",
+ r"\bsecret\s+(?:loophole|system)\s+(?:banks|governments|experts)\s+do(?:n['’]t| not)\s+want\s+you\s+to\s+know\b",
+)
+FAKE_EXPERIENCE_PATTERNS=(
+ r"\bI\s+(?:personally\s+)?(?:tested|used|bought|invested in|earned from|made money from)\b",
+ r"\bwe\s+(?:personally\s+)?(?:tested|used|bought|invested in|earned from|made money from)\b",
+)
+REGULATED_PROMOTION_PATTERNS=(
+ r"\b(?:buy|order|shop|sign up for)\b.{0,35}\b(?:tobacco|vape|weapon|firearm|illegal drug|unapproved supplement)\b",
+ r"\b(?:best|recommended|join|deposit at)\b.{0,25}\b(?:casino|sportsbook|betting site)\b",
+)
+DANGEROUS_PATTERNS=(
+ r"\bhow to\s+(?:phish|steal credentials|evade sanctions|launder money|make a bomb)\b",
+ r"\bdownload\s+(?:this\s+)?(?:malware|ransomware|credential stealer)\b",
+)
+# Strict formats reduce false positives in ordinary financial reporting.
+PRIVATE_DATA_PATTERNS=(
+ ("US Social Security number",r"(?<!\d)\d{3}-\d{2}-\d{4}(?!\d)"),
+ ("payment-card-like number",r"(?<!\d)(?:\d[ -]?){15,18}\d(?!\d)"),
+ ("Indian Aadhaar-like number",r"(?<!\d)[2-9]\d{3}[ -]?\d{4}[ -]?\d{4}(?!\d)"),
+ ("private key",r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+)
+REPETITIVE_FALLBACK_PHRASES=(
+ "This passage is used only for its documented scope, while unsupported predictions and recommendations remain outside this section.",
+ "The cited record is one bounded part of the evidence and cannot support broader certainty.",
+ "The record establishes context, not a universal forecast, causal conclusion or personal recommendation.",
+)
+NEGATION_WORDS=("not ","no ","never ","avoid ","warning","scam","fraud","false","misleading","does not")
+
+
+def plain(value:str)->str:
+ value=re.sub(r"<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>"," ",value or "",flags=re.I|re.S)
+ return re.sub(r"\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",value))).strip()
+
+def sentences(value:str)->list[str]:
+ text=plain(value)
+ return [x.strip() for x in re.split(r"(?<=[.!?])\s+",text) if len(re.findall(r"[A-Za-z][A-Za-z'’\-]*",x))>=10]
+
+def normalize_sentence(value:str)->str:
+ value=re.sub(r"https?://\S+"," ",value.casefold())
+ value=re.sub(r"\[\[s\d+\|[^]]+\]\]"," ",value)
+ return re.sub(r"[^a-z0-9]+"," ",value).strip()
+
+def _affirmative_match(text:str,pattern:str)->bool:
+ for match in re.finditer(pattern,text,flags=re.I|re.S):
+  lead=text[max(0,match.start()-70):match.start()].casefold()
+  if not any(word in lead for word in NEGATION_WORDS):return True
+ return False
+
+def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=False)->list[str]:
+ text=plain(content);issues=[]
+ for pattern in DECEPTIVE_PATTERNS:
+  if _affirmative_match(text,pattern):issues.append("deceptive financial or commercial promise")
+ for pattern in FAKE_EXPERIENCE_PATTERNS:
+  if re.search(pattern,text,re.I):issues.append("unsupported first-person product or investment experience")
+ for pattern in REGULATED_PROMOTION_PATTERNS:
+  if re.search(pattern,text,re.I|re.S):issues.append("promotion of a regulated or prohibited product")
+ for pattern in DANGEROUS_PATTERNS:
+  if re.search(pattern,text,re.I):issues.append("dangerous or illegal facilitation language")
+ for name,pattern in PRIVATE_DATA_PATTERNS:
+  if re.search(pattern,text,re.I):issues.append("possible exposed "+name)
+ for phrase in REPETITIVE_FALLBACK_PHRASES:
+  if phrase.casefold() in text.casefold():issues.append("repetitive deterministic fallback sentence")
+ if re.search(r"\bCertified Accountant\b",text,re.I) and os.environ.get("DY_VERIFIED_CERTIFIED_ACCOUNTANT","").casefold()!="true":
+  issues.append("unverified professional qualification")
+ seq=[normalize_sentence(x) for x in sentences(content)];seq=[x for x in seq if len(x.split())>=10]
+ counts=Counter(seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]
+ if duplicates:issues.append("repeated substantive sentence within the content")
+ if len(seq)>=12 and len(counts)/len(seq)<0.94:issues.append("insufficient sentence-level originality")
+ for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content or '',flags=re.I):
+  if re.match(r'\s*(?:javascript|vbscript|data):',html.unescape(href),re.I):issues.append('unsafe active link scheme')
+ for src in re.findall(r'<script\b[^>]*src=["\']([^"\']+)',content or '',flags=re.I):
+  if not re.match(r'https://(?:[^/]+\.)?(?:google\.com|gstatic\.com|blogger\.com|blogspot\.com)/',html.unescape(src),re.I):issues.append('unapproved external script host')
+ if require_disclosure and DISCLOSURE_MARKER not in content:issues.append("transparent automation disclosure missing")
+ # A byline is allowed, but automated output must never falsely claim personal review.
+ if re.search(r"(?:personally|manually)\s+(?:reviewed|approved)\s+by\s+Kushal",text,re.I):issues.append("unsupported personal-review claim")
+ return sorted(set(issues))
+
+def assert_policy_compliant(title:str,content:str,channel:str="blog",require_disclosure:bool=False)->bool:
+ issues=audit_text(title,content,channel,require_disclosure)
+ if issues:raise RuntimeError("BLOGGER CONTENT POLICY GATE FAILED — "+"; ".join(issues))
+ return True
+
+def automation_disclosure(kind:str="article")->str:
+ return f'''<!-- {DISCLOSURE_MARKER} --><aside class="dy-policy-disclosure" aria-label="Editorial process disclosure"><strong>How this {html.escape(kind)} was produced</strong><p>Daily Yield uses automated tools to assist source collection, drafting, validation, formatting, scheduling and distribution. The byline identifies the publisher responsible for the publication; it does not state that every automated draft was personally reviewed. Material claims must remain attributable to the linked sources. Report a correction through the Contact page or Blogger’s Report Abuse link.</p></aside>'''
+
+def assert_social_compliant(text:str)->bool:
+ issues=audit_text("social post",text,"social",False)
+ if len(re.findall(r"#[A-Za-z0-9_]+",text))>4:issues.append("excessive hashtagging")
+ if re.search(r"\b(?:act now|limited time|don['’]t miss out|must buy)\b",text,re.I):issues.append("manufactured urgency")
+ if issues:raise RuntimeError("SOCIAL CONTENT POLICY GATE FAILED — "+"; ".join(sorted(set(issues))))
+ return True

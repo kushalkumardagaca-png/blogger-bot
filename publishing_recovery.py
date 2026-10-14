@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 51: publication-state merge keys records by edition date plus topic so a revalidated evergreen cannot erase another day's record; authenticated wrong-post cleanup remains observable and idempotent; current-day recovery remains oldest-first.
+Permanent recovery generation 52: Blogger December 2026 policy gates now cover Blogger publications, corpus originality, transparent automation disclosure, deceptive claims, privacy, image safety and social copy; older packages rebuild automatically and recovery remains oldest-first.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

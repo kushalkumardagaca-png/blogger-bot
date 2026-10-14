@@ -4,6 +4,7 @@ from unittest.mock import Mock,patch
 import pytest
 from master_article_v2 import render,validate,words
 from publication_preflight import assert_publishable
+from content_policy_guard import POLICY_VERSION
 from prepare_master_article import _compact_evidence_packet,_evidence_bridge_section,_visual_number,model_json,normalize_verified_core
 
 
@@ -17,9 +18,9 @@ def package():
         'Summary two '+('application alternative risk source '*87),
     ]
     return {
-      'title':'Build a Stronger Cash Buffer','meta_description':'A source-led examination of cash reserves, household risk, competing priorities and practical decisions under uncertain income.','sections':sections,'summary':summary,
-      'faq':[{'question':f'Question {i}?','answer':'A topic-specific answer based on the evidence and its limitations.'} for i in range(5)],
-      'glossary':[{'term':f'Term {i}','definition':'A definition used specifically in this article.'} for i in range(8)],
+      'policy_version':POLICY_VERSION,'title':'Build a Stronger Cash Buffer','meta_description':'A source-led examination of cash reserves, household risk, competing priorities and practical decisions under uncertain income.','sections':sections,'summary':summary,
+      'faq':[{'question':f'Question {i}?','answer':f'Answer {i} addresses a distinct topic-specific mechanism, its evidence boundary and its practical limitation.'} for i in range(5)],
+      'glossary':[{'term':f'Term {i}','definition':f'Definition {i} explains a distinct concept used specifically in this article and its evidence context.'} for i in range(8)],
       'visuals':[{'type':kind,'title':f'Evidence view {i}','caption':'Illustrative sourced comparison.','source':1,'after_section':i+2,'labels':['A','B'],'values':[1,2]} for i,kind in enumerate(('table','pie','line'))],
       'photos':[{'url':f'https://images.example/photo-{i}.jpg','alt':f'Topic-specific financial photograph {i}','caption':'Topic-specific editorial photograph.','width':1600,'height':900} for i in range(3)],
       'sources':[{'name':f'Official source {i}','title':f'Source document {i}','url':f'https://source{i}.gov/document','date':'2026','use':'Evidence'} for i in range(6)],

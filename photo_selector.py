@@ -9,6 +9,7 @@ from PIL import Image,ImageStat
 from io import BytesIO
 ROOT=Path(__file__).parent;REGISTRY=ROOT/'PHOTO_USAGE_REGISTRY.json';UA='DailyYieldPhotoEditor/1.0 (dailyyield.official@gmail.com)'
 ALLOW=('cc0','public domain','cc by 2.0','cc by 2.5','cc by 3.0','cc by 4.0')
+MINOR_TERMS=re.compile(r'\b(?:child|children|kid|kids|minor|schoolchild|schoolgirl|schoolboy|teenager|young girl|young boy|student|pupil)\b',re.I)
 STOP={'the','and','with','from','into','that','this','photo','photograph','editorial','landscape','horizontal','realistic','without','showing','financial','finance','opening','context','article','subject','mid','later','mechanism','evidence','implications','decisions','stop','maxing'}
 def clean(v):return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',str(v or '')))).strip()
 def load_registry():
@@ -32,6 +33,7 @@ def commons_candidates(brief):
   info=(p.get('imageinfo') or [{}])[0];m=info.get('extmetadata') or {};val=lambda k:clean((m.get(k) or {}).get('value',''))
   license_name=val('LicenseShortName') or val('UsageTerms');license_url=val('LicenseUrl');desc=val('ImageDescription');artist=val('Artist') or info.get('user','Unknown creator')
   combined=(license_name+' '+license_url).casefold()
+  if MINOR_TERMS.search(clean(p.get('title',''))+' '+desc):continue
   if not any(x in combined for x in ALLOW):continue
   if any(x in combined for x in ('noncommercial','no derivatives','gfdl')):continue
   w=int(info.get('width') or 0);h=int(info.get('height') or 0)

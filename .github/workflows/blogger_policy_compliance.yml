@@ -1,0 +1,65 @@
+name: Blogger Content Policy Compliance
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'deploy_blogger_policy_compliance.py'
+      - 'content_policy_guard.py'
+      - 'markets_today_page.html'
+      - '.github/workflows/blogger_policy_compliance.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-blogger-policy-compliance
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Update and verify policy pages
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python deploy_blogger_policy_compliance.py
+      - name: Remove unverified credential language from Markets Today
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python deploy_markets_today.py
+      - name: Persist compliance evidence
+        run: |
+          set -euo pipefail
+          cp BLOGGER_POLICY_DEPLOYMENT_STATUS.json /tmp/policy-status.json
+          git config user.name "Daily Yield Policy Compliance"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            cp /tmp/policy-status.json BLOGGER_POLICY_DEPLOYMENT_STATUS.json
+            git add BLOGGER_POLICY_DEPLOYMENT_STATUS.json
+            git commit -m "Record Blogger policy compliance deployment [skip ci]" || true
+            git push origin HEAD:main && exit 0
+            sleep $((attempt * 2))
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blogger-policy-compliance-${{ github.run_id }}
+          path: |
+            BLOGGER_POLICY_DEPLOYMENT_STATUS.json
+            markets_today_deploy_result.json
+          if-no-files-found: ignore

@@ -18,6 +18,7 @@ from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 import requests
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
+from content_policy_guard import assert_social_compliant
 
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
 SIZE = (1200, 630)
@@ -310,7 +311,7 @@ def attributed_url(item: dict, platform: str, day: str | None = None) -> str:
     return urlunparse(parsed._replace(query=urlencode(query)))
 
 
-def build_caption(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
+def _build_caption_unchecked(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
     title,url=clean(item.get("title","Daily Yield")),attributed_url(item,platform)
     lead,second,third=content_highlights(item,summary);tags=" ".join(hashtag_list(item));cta=_cta(item)
     if platform=="facebook":
@@ -334,11 +335,16 @@ def build_caption(item: dict, platform: str, summary: str, limit: int | None = N
     return f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{cta}\nBy Kushal K. Daga\n{tags}"
 
 
+def build_caption(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
+    text=_build_caption_unchecked(item,platform,summary,limit)
+    assert_social_compliant(text)
+    return text
+
 def tumblr_payload(item: dict, summary: str) -> dict:
     title,url=clean(item.get("title","Daily Yield")),attributed_url(item,"tumblr")
     lead,second,third=content_highlights(item,summary)
     tags=[x.lstrip("#") for x in hashtag_list(item)]+["moneyblr"]
-    return {
+    payload={
         "content": [
             {"type":"link", "url":url, "title":"Open on Daily Yield", "description":trim(title,180)},
             {"type":"text", "text":lead, "subtype":"heading1"},
@@ -350,6 +356,8 @@ def tumblr_payload(item: dict, summary: str) -> dict:
         "state":"published", "tags":",".join(dict.fromkeys(tags)), "source_url":url,
         "send_to_twitter":False, "interactability_reblog":"everyone",
     }
+    assert_social_compliant(" ".join(str(block.get('text') or block.get('title') or '') for block in payload['content']))
+    return payload
 
 
 def image_alt(item: dict, platform: str) -> str:

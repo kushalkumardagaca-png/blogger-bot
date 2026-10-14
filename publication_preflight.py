@@ -2,6 +2,7 @@
 import html,json,re
 from urllib.parse import urlsplit
 from image_safety import image_works
+from content_policy_guard import assert_policy_compliant
 
 MASS_TEMPLATE_PHRASES=(
  'This forensic framework eliminates redundant intermediary friction',
@@ -83,6 +84,8 @@ def assert_publishable(title,content,labels,check_remote_images=True):
   try:json.loads(html.unescape(raw).strip())
   except Exception as e:issues.append(f'JSON-LD schema {n} invalid: {e}')
  if 'News' in labels and 'class="fbk-src' not in content:issues.append('news source links missing')
+ try:assert_policy_compliant(title,content,'news' if is_news else 'master',require_disclosure=True)
+ except RuntimeError as exc:issues.append(str(exc))
  if issues:raise RuntimeError('PUBLICATION PREFLIGHT FAILED — '+'; '.join(issues))
  print(f'Publication preflight PASS: {title[:70]}')
  return True

@@ -52,7 +52,15 @@ def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
     photos=[{'url':f'https://example.com/photo-{i}.jpg','alt':'Relevant financial editorial photograph','caption':'Photo: Creator / CC BY 4.0','width':1600,'height':900} for i in range(1,4)]
     low=[{'title':f'Article {i}','url':f'https://dailyyield.blogspot.com/{i}','image':'','label':'Daily Yield'} for i in range(15)]
     item={'id':'v3-test','title':'Household Market Evidence','category':'Money Decisions','sources':[]}
-    with patch('master_v3_generator.discover_sources',return_value=sources),patch('master_v3_generator.write_section',return_value=paragraphs()),patch('master_v3_generator.photo_set',return_value=photos),patch('master_v3_generator.low_exposure_posts',return_value=low):
+    def distinct_section(article_title,heading,index,source_rows):
+        rows=[]
+        for paragraph in range(4):
+            sentences=[]
+            for angle in range(10):
+                sentences.append(f'{heading} examines household mechanism angle {paragraph} {angle} through attributable evidence and explicit limits.')
+            rows.append(' '.join(sentences)+' [[S1|documented source]]')
+        return rows
+    with patch('master_v3_generator.discover_sources',return_value=sources),patch('master_v3_generator.write_section',side_effect=distinct_section),patch('master_v3_generator.photo_set',return_value=photos),patch('master_v3_generator.low_exposure_posts',return_value=low):
         package=build(item,'evergreen',tmp_path/'package.json')
     result=validate(package)
     assert 4000<=result['core_words']<=4200 and 600<=result['summary_words']<=800

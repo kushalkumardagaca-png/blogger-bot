@@ -17,6 +17,7 @@ from publication_preflight import assert_publishable
 from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
+from content_policy_guard import POLICY_VERSION
 
 ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata');PRODUCTION_START=dt.date(2026,10,14)
 
@@ -66,7 +67,11 @@ def prepare(kind,slot):
   try:
    target=package_path(kind,candidate)
    if target.exists():
-    package=read(target,{});validate(package)
+    package=read(target,{})
+    # Policy-versioned packages are immutable and reusable; older automated
+    # prose is rebuilt rather than grandfathered into publication.
+    if package.get('policy_version')!=POLICY_VERSION:package=generator.build(candidate,kind,target)
+    else:validate(package)
    else:package=generator.build(candidate,kind,target)
    validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
   except RuntimeError as exc:

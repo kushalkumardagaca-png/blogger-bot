@@ -1,0 +1,80 @@
+{
+  "checked_at": "2026-10-14T10:18:57.434789+00:00",
+  "policy_version": "BLOGGER_CONTENT_POLICY_2026_12",
+  "summary": {
+    "pass": 14,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "Every Blogger publication passes the central policy guard",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Automated posts disclose the production process",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master packages are policy-versioned and older prose is rebuilt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Deterministic Master completion avoids the retired repeated disclaimer",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Corpus originality blocks reused sentences and highly similar articles",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Deceptive promises, fake experience and manufactured urgency are blocked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Sensitive identifiers and unsafe scripts are blocked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Social captions and Tumblr payloads pass policy checks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Images indicating minors are rejected from automated selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Policy, correction, privacy and Report Abuse notices deploy idempotently",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Policy deployment updates Blogger and persists evidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Unverified Certified Accountant claim is absent from deployable site sources",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Custom theme retains Blogger Report Abuse mechanism",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Publication quota cannot override compliance",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

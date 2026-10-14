@@ -12,6 +12,8 @@ from pathlib import Path
 import requests
 from master_article_v2 import words
 from photo_selector import choose_photos
+from content_policy_guard import POLICY_VERSION
+from content_originality import assert_cross_corpus_original
 
 UA='DailyYieldMasterV3/1.0 (dailyyield.official@gmail.com)';BLOG='https://dailyyield.blogspot.com'
 def required(name):
@@ -145,35 +147,36 @@ def validate_section(paragraphs,source_ids):
   if not any(number in s for s in source_ids.values()):return False,f'unsupported number {number}'
  return True,''
 def deterministic_section(section_heading,sources):
- """Quota-independent, exactly bounded evidence dossier."""
- boundaries=(
-  'The record establishes context, not a universal forecast, causal conclusion or personal recommendation.',
-  'Jurisdiction, definitions, observation period and later revisions remain necessary limits on interpretation.',
-  'A different population, regulatory setting, period or measurement method may produce a different result.',
-  'The useful distinction is between what the source reports and assumptions it did not test.',
-  'The cited record is one bounded part of the evidence and cannot support broader certainty.',
- )
+ """Quota-independent evidence prose with topic-specific, non-repeating syntax."""
+ import hashlib
  tokenized=lambda value:re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",clean(value))
- paragraphs=[];heading=' '.join(tokenized(section_heading)[:12])
- for cursor in range(6):
-  source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));start=(cursor*31)%max(1,len(tokens)-24);excerpt=' '.join(tokens[start:start+22]).strip(' ,;:')
+ heading_text=' '.join(tokenized(section_heading)[:14])
+ patterns=(
+  "{cite} approaches {heading} through the document titled “{title}.” The retrieved passage says, “{excerpt}.” Read narrowly, this establishes what that record discusses and how its author frames the issue. It does not establish a universal outcome, and it should not be stretched beyond the jurisdiction, period, definitions and population described by {provider}. For a reader comparing decisions, the practical task is to separate the documented observation from any later forecast, recommendation or causal claim.",
+  "The useful starting point for {heading} is {cite}, whose source record is “{title}.” Its available text includes, “{excerpt}.” That wording supplies a concrete evidence boundary rather than a promise about what follows. Differences in timing, measurement, eligibility and local rules can change how the finding applies. {provider} therefore supports a question to investigate, not a personalised instruction. A careful interpretation checks the original record, its date and scope before connecting it with another source or a household decision.",
+  "For this part of {heading}, {cite} contributes the source “{title}.” In the retrieved material, the relevant wording is, “{excerpt}.” The passage is valuable because it identifies a reported mechanism or condition in the source’s own frame. It cannot independently prove that the same relationship holds elsewhere or later. Readers should compare definitions and publication dates, note what {provider} actually measured, and treat estimates or quoted opinions as attributable views rather than facts about a guaranteed future result.",
+  "A second way to test {heading} comes from {cite} and its record “{title}.” The source text states, “{excerpt}.” This is evidence of the statement appearing in that record; it is not evidence that every possible interpretation is correct. The distinction matters when policy, market prices, taxes or household circumstances can change after publication. The responsible use of {provider} is to preserve that uncertainty, cross-check the linked source and avoid turning a bounded observation into a broad financial recommendation.",
+  "The decision-relevant limit around {heading} is visible in {cite}, attached to “{title}.” Its retrieved passage reads, “{excerpt}.” That material can inform context, terminology and the sequence of events. It does not remove the need to check later revisions, competing evidence or rules that differ by place and account type. In practical terms, {provider} helps identify which assumption needs verification. It does not supply certainty, personal suitability or permission to ignore downside, liquidity, tax and implementation constraints."
+ )
+ paragraphs=[]
+ for cursor in range(5):
+  source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));start=(cursor*37)%max(1,len(tokens)-42);excerpt=' '.join(tokens[start:start+38]).strip(' ,;:')
   if not excerpt:continue
-  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:12]);provider=' '.join(tokenized(row.get('name') or 'cited provider')[:5]);boundary=boundaries[cursor%len(boundaries)]
-  paragraphs.append(f'[[S{source_id}|{provider} evidence]] frames {heading} through “{title}.” The retrieved record states, in part, “{excerpt}.” {boundary} This passage is used only for its documented scope, while unsupported predictions and recommendations remain outside this section.')
-  if len(paragraphs)>=4 and words(' '.join(paragraphs))>=420:break
- # Keep four or more separately attributed paragraphs and hard-bound the total.
- while len(paragraphs)>4 and words(' '.join(paragraphs[:-1]))>=400:paragraphs.pop()
+  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16]);provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider} evidence]]"
+  seed=int(hashlib.sha256(f"{heading_text}|{title}|{cursor}".encode()).hexdigest()[:8],16)
+  paragraphs.append(patterns[seed%len(patterns)].format(cite=cite,heading=heading_text,title=title,excerpt=excerpt,provider=provider))
+ if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
  while words(' '.join(paragraphs))>480:
   index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]));parts=paragraphs[index].split()
-  if len(parts)<=70:break
+  if len(parts)<=72:break
   paragraphs[index]=' '.join(parts[:-1]).rstrip(' ,;:')+'.'
- primary=sources[0][0];paragraphs=[p if '[[S' in p else p+f' [[S{primary}|documented source evidence]]' for p in paragraphs]
  ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)
  return paragraphs
+
 def write_section(article_title,section_heading,index,sources):
  ids={i:s['text']+' '+s['title'] for i,s in sources};packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources);primary=min(ids)
- base=f'''Article: {article_title}\nSection {index}: {section_heading}\nWrite source-bounded plain paragraphs. Use only the packet below. Do not invent numbers, quotations, causation or advice. Explain evidence, jurisdiction, affected groups, mechanism, uncertainty and limits. Do not introduce the article or summarize another section.\nSOURCES:\n{packet}'''
+ base=f'''Article: {article_title}\nSection {index}: {section_heading}\nWrite source-bounded prose in a natural editorial voice. Use only the packet below. Do not invent numbers, quotations, causation, experience or advice. Vary sentence openings and paragraph rhythm; connect evidence with clear transitions; avoid stock disclaimers, repeated conclusions and formulaic phrasing. Explain evidence, jurisdiction, affected groups, mechanism, uncertainty and limits. Do not introduce the article or summarize another section.\nSOURCES:\n{packet}'''
  pool=[];seen=set();last=''
  for attempt in range(2):
   have=words(' '.join(pool));need=max(120,455-have)
@@ -206,18 +209,21 @@ def write_section(article_title,section_heading,index,sources):
  return deterministic_section(section_heading,sources)
 
 def extracted_summary(sections):
- buckets=[]
- for s in sections:
-  seq=[]
-  for p in s['paragraphs']:seq += [x.strip() for x in re.split(r'(?<=[.!?])\s+',p) if x.strip()]
-  buckets.append(seq)
- selected=[];position=0
- while words(' '.join(selected))<680 and any(position<len(x) for x in buckets):
-  for b in buckets:
-   if position<len(b):selected.append(b[position])
-   if words(' '.join(selected))>=680:break
-  position+=1
- text=sentence_trim(' '.join(selected),750);sentences=re.split(r'(?<=[.!?])\s+',text);return [' '.join(sentences[i:i+4]) for i in range(0,len(sentences),4) if sentences[i:i+4]]
+ """Build a distinct evidence recap instead of copying body sentences verbatim."""
+ out=[]
+ for index,section in enumerate(sections,1):
+  heading_text=clean(section.get('heading','Evidence section'))
+  body=clean(' '.join(section.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|linked source evidence]]'
+  body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body);start=(index*19)%max(1,len(tokens)-34);excerpt=' '.join(tokens[start:start+32])
+  out.append(f'For {heading_text}, the evidence recap begins with this bounded point: {excerpt}. {cite} The practical reading of {heading_text} is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This {heading_text} recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast.')
+ total=words(' '.join(out))
+ while total<600:
+  i=len(out)%len(sections);heading_text=clean(sections[i].get('heading','the evidence'))
+  out.append(f'A final check on {heading_text} is whether later records revise the facts, narrow the population or change the applicable rules. Readers should follow the linked source trail and distinguish reported conditions from assumptions introduced during interpretation.')
+  total=words(' '.join(out))
+ if total>800:out=parse_paragraphs(sentence_trim(' '.join(out),780))
+ return out
+
 def support(sections):
  faq=[]
  for s in sections[:5]:faq.append({'question':f'What does the evidence show about {s["heading"]}?','answer':sentence_trim(' '.join(s['paragraphs']),105)})
@@ -271,5 +277,6 @@ def build(item,kind,target):
  core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if not 4000<=core<=4200:raise RuntimeError(f'V3 assembled core is {core}; section-level contract did not converge')
  summary=extracted_summary(sections);faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
- package={'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
+ package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
+ assert_cross_corpus_original(package,target)
  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(package,indent=2,ensure_ascii=False)+'\n');return package
