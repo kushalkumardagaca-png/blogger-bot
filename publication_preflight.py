@@ -88,7 +88,9 @@ def assert_publishable(title,content,labels,check_remote_images=True):
  except RuntimeError as exc:
   issues.append(str(exc))
   if 'repeated substantive sentence' in str(exc):
-   repetition_content=re.sub(r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>', ' ', content or '', flags=re.I|re.S)
+   repetition_content=content or ''
+   for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>'):
+    repetition_content=re.sub(pattern,' ',repetition_content,flags=re.I|re.S)
    normalized=[normalize_sentence(x) for x in sentences(repetition_content)];seen=set()
    duplicate=next((x for x in normalized if len(x.split())>=12 and (x in seen or seen.add(x))), '')
    if duplicate:issues.append('rendered duplicate diagnostic: '+duplicate[:180])
