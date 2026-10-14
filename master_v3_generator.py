@@ -216,17 +216,23 @@ def contextualize_repeated_sentences(sections):
  that repetition. This pass makes later occurrences explicitly section-specific;
  it does not alter quotations, figures, citations or substantive meaning.
  """
- seen=set();ordinals=('first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth')
+ seen=set();counts={};ordinals=('first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth','eleventh','twelfth')
+ normalized=lambda value:re.sub(r'[^a-z0-9]+',' ',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',value.casefold())).strip()
  for section_index,section in enumerate(sections):
   heading_text=clean(section.get('heading','this section'))
   for paragraph_index,paragraph in enumerate(section.get('paragraphs') or []):
    parts=re.split(r'(?<=[.!?])\s+',paragraph.strip());rebuilt=[]
    for sentence_index,sentence in enumerate(parts):
-    key=re.sub(r'[^a-z0-9]+',' ',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence.casefold())).strip()
+    key=normalized(sentence);counts[key]=counts.get(key,0)+1
     if len(key.split())>=12 and key in seen:
-     lens=ordinals[min(section_index,len(ordinals)-1)]
-     sentence=f'For the {lens} evidence section on {heading_text}, this boundary is especially relevant: '+sentence[0].lower()+sentence[1:]
-    seen.add(re.sub(r'[^a-z0-9]+',' ',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence.casefold())).strip())
+     occurrence=ordinals[min(counts[key]-1,len(ordinals)-1)]
+     sentence=f'A {occurrence} distinct evidence boundary for {heading_text} is that '+sentence[0].lower()+sentence[1:]
+     # If identical wording recurs beyond the ordinal vocabulary, keep adding a
+     # section/paragraph-specific clause until the normalized sentence is unique.
+     while normalized(sentence) in seen:
+      paragraph_lens=ordinals[min(paragraph_index,len(ordinals)-1)]
+      sentence=f'Within the {paragraph_lens} paragraph on {heading_text}, '+sentence[0].lower()+sentence[1:]
+    seen.add(normalized(sentence))
     rebuilt.append(sentence)
    section['paragraphs'][paragraph_index]=' '.join(rebuilt)
  return sections
@@ -261,8 +267,11 @@ def support(sections):
            f'The useful next step for a reader examining {heading} is to compare the linked record with newer evidence and personal circumstances before acting.')
    faq.append({'question':f'What does the evidence show about {s["heading"]}?','answer':sentence_trim(answer,115)})
   candidates=[x for x in terms(s['heading']) if len(x)>4]
-  term=' '.join(candidates[:2]).title() or f'Evidence Scope {len(glossary)+1}'
-  if term in used:term=f'{term} Context'
+  base_term=' '.join(candidates[:2]).title() or f'Evidence Scope {len(glossary)+1}'
+  term=base_term;suffixes=('Context','Additional Context','Further Context','Practical Context','Source Context','Reader Context','Decision Context')
+  suffix_index=0
+  while term in used:
+   term=f'{base_term} {suffixes[suffix_index]}';suffix_index+=1
   used.add(term)
   definition=(f'In this article, {term} describes the part of {heading} supported by the cited record, including this bounded context: {excerpt}. '
               f'The {term} label does not imply that the same conditions apply to every place, period or reader.')

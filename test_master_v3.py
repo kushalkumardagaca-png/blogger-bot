@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from master_article_v2 import words
 from master_article_v2 import validate
-from master_v3_generator import build,deterministic_section,extracted_summary,support,validate_section,visuals,write_section
+from master_v3_generator import build,contextualize_repeated_sentences,deterministic_section,extracted_summary,support,validate_section,visuals,write_section
 
 def paragraphs():
     base=('Markets connect household choices with documented policy boundaries and uncertainty through evidence. '*50).split()[:440]
@@ -46,6 +46,13 @@ def test_deterministic_completion_is_bounded_with_long_source_metadata():
     source={'name':'Very Long Official Research Institution Name Repeated Across Metadata','title':' '.join(['Extremely detailed evidence title']*20),'url':'https://example.com','text':('evidence/item-value,'*1000)+prose()*3}
     out=deterministic_section(' '.join(['Detailed financial evidence boundary']*10),[(1,source)])
     assert 4<=len(out)<=6 and 400<=words(' '.join(out))<=490
+
+def test_repeated_transition_is_unique_even_when_it_occurs_many_times():
+    repeated='This sufficiently long general evidence boundary sentence can recur across independently generated paragraphs and must become unique before publication.'
+    rows=[{'heading':'A distinct section heading','paragraphs':[repeated,repeated,repeated,repeated]}]
+    result=contextualize_repeated_sentences(rows)
+    assert len(set(result[0]['paragraphs']))==4
+
 
 def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
     sources=[{'name':f'Official Source {i}','title':f'Distinct Market Evidence {i}','url':f'https://example.com/{i}','text':prose(),'overlap':5} for i in range(1,11)]
