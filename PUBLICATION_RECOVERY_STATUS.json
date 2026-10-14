@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T13:58:31.381757+05:30",
+  "generatedAt": "2026-10-14T14:00:01.736833+05:30",
   "dateIST": "2026-10-14",
   "status": "PASS",
   "apply": true,
@@ -19,6 +19,13 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-3",
+      "applied": true
+    },
+    {
+      "type": "wrong_publication_cleanup",
+      "key": "master-trending-0",
+      "duplicateUrl": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
+      "replacementUrl": "https://dailyyield.blogspot.com/2026/10/ifs-budget-will-be-work-of-fiction.html",
       "applied": true
     }
   ],
