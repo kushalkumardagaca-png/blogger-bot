@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 33: current-date article readiness is checked every ten minutes, failed source/prewarm attempts can retry after thirty minutes, 12/13 October backfill remains retired, advance packages are reused at embargoed release, and bounded-section V3 safeguards remain active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 34: short safe section outputs accumulate instead of being discarded, prewarm pair dispatch retries independently, readiness is checked every ten minutes, and current-date recovery remains active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
