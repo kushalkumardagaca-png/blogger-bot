@@ -275,8 +275,18 @@
     "lastAttempt": "2026-10-14T15:49:34.370098+05:30"
   },
   "prewarm:2026-10-14:master-evergreen-3": {
-    "revision": "33806c410da8a128",
+    "revision": "7200677833d6e11a",
     "attempts": 1,
-    "lastAttempt": "2026-10-14T17:27:46.304210+05:30"
+    "lastAttempt": "2026-10-14T18:00:15.956500+05:30"
+  },
+  "source:2026-10-14:news-americas": {
+    "revision": "7200677833d6e11a",
+    "attempts": 1,
+    "lastAttempt": "2026-10-14T18:00:15.956500+05:30"
+  },
+  "prewarm:2026-10-14:master-trending-4": {
+    "revision": "7200677833d6e11a",
+    "attempts": 1,
+    "lastAttempt": "2026-10-14T18:00:15.956500+05:30"
   }
 }

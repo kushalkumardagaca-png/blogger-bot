@@ -1,14 +1,26 @@
 {
-  "generatedAt": "2026-10-14T17:27:46.304210+05:30",
+  "generatedAt": "2026-10-14T18:00:15.956500+05:30",
   "dateIST": "2026-10-14",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 14,
-  "overdueMissing": [],
+  "overdueMissing": [
+    "news-americas"
+  ],
   "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-americas",
+      "applied": true
+    },
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-3",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-4",
       "applied": true
     }
   ],
