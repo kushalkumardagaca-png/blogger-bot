@@ -319,6 +319,8 @@ check('Master V3 deterministically assembles summary, support and three evidence
 check('Duplicate Master attempts are serialized without cross-slot embargo blocking',
       'group: daily-yield-master-v3-trending-${{ inputs.slot' in master_workflows
       and 'group: daily-yield-master-v3-evergreen-${{ inputs.slot' in master_workflows
+      and "github.event.schedule == '0 6 * * *' && '2'" in master_workflows
+      and "github.event.schedule == '30 7 * * *' && '2'" in master_workflows
       and 'group: daily-yield-master-v3-state-writer' not in master_workflows
       and master_workflows.count('cancel-in-progress: false')>=2)
 check('Concurrent Master package, photo, plan and tracker writes use semantic merge and retry',

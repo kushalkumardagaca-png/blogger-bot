@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 47: duplicate writers are serialized per article so future embargo waits cannot block an overdue slot; evergreen research broadens independently and prioritizes relevant official sources; current-day recovery remains oldest-first with no article retry ceiling.
+Permanent recovery generation 48: scheduled and recovery attempts now resolve to the same per-article concurrency key while different slots remain non-blocking; evergreen research prioritizes relevant official sources; current-day recovery remains oldest-first with no article retry ceiling.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

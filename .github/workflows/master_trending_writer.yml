@@ -34,7 +34,7 @@ permissions:
 concurrency:
   # Suppress duplicate attempts for the same article without letting a future
   # embargo wait block recovery of a different overdue Master slot.
-  group: daily-yield-master-v3-trending-${{ inputs.slot || github.event.schedule || github.run_id }}
+  group: daily-yield-master-v3-trending-${{ inputs.slot || (github.event.schedule == '0 22 * * *' && '0') || (github.event.schedule == '0 1 * * *' && '1') || (github.event.schedule == '0 6 * * *' && '2') || (github.event.schedule == '0 8 * * *' && '3') || (github.event.schedule == '30 12 * * *' && '4') || github.run_id }}
   cancel-in-progress: false
 
 jobs:
