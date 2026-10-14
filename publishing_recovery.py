@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 36: fast model acceleration is optional, every section has quota-independent deterministic evidence completion, provider waits are bounded for the under-thirty-minute target, and current-date recovery remains active; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 37: deterministic evidence completion now enforces the section ceiling before validation, fast model acceleration remains optional, and current-date recovery is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

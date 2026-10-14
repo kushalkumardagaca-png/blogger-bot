@@ -138,11 +138,16 @@ def deterministic_section(section_heading,sources):
  while words(' '.join(paragraphs))<420 and cursor<10:
   source_id,row=sources[cursor%len(sources)];raw=clean(row.get('text',''));tokens=raw.split();start=(cursor*37)%max(1,len(tokens)-36);excerpt=' '.join(tokens[start:start+32]).strip(' ,;:')
   if not excerpt:cursor+=1;continue
-  title=clean(row.get('title') or row.get('name') or 'Retrieved evidence');provider=clean(row.get('name') or 'the cited provider')
+  title=' '.join(clean(row.get('title') or row.get('name') or 'Retrieved evidence').split()[:16]);provider=' '.join(clean(row.get('name') or 'the cited provider').split()[:8])
   boundary=boundaries[cursor%len(boundaries)]
-  paragraphs.append(f'[[S{source_id}|{provider} evidence]] frames {section_heading} through the retrieved record titled “{title}.” The source states, in part, “{excerpt}.” {boundary} This attributed passage therefore supports a narrow description of the documented setting while leaving unsupported predictions, recommendations and broader claims outside the section.')
-  cursor+=1
- if words(' '.join(paragraphs))>490:paragraphs=parse_paragraphs(sentence_trim(' '.join(paragraphs),470))
+  paragraph=f'[[S{source_id}|{provider} evidence]] frames {section_heading} through the retrieved record titled “{title}.” The source states, in part, “{excerpt}.” {boundary} This attributed passage therefore supports a narrow description of the documented setting while leaving unsupported predictions, recommendations and broader claims outside the section.'
+  projected=words(' '.join(paragraphs+[paragraph]))
+  if projected>490 and words(' '.join(paragraphs))>=400:break
+  paragraphs.append(paragraph);cursor+=1
+ while len(paragraphs)>4 and words(' '.join(paragraphs))>490:
+  if words(' '.join(paragraphs[:-1]))>=400:paragraphs.pop()
+  else:break
+ if words(' '.join(paragraphs))>490:paragraphs=parse_paragraphs(sentence_trim(' '.join(paragraphs),480))
  primary=sources[0][0];paragraphs=[p if '[[S' in p else p+f' [[S{primary}|documented source evidence]]' for p in paragraphs]
  ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)
