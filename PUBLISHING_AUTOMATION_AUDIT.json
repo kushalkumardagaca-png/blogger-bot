@@ -1,5 +1,5 @@
 {
-  "checked_at_ist": "2026-10-14T09:01:01+05:30",
+  "checked_at_ist": "2026-10-14T09:21:47+05:30",
   "summary": {
     "pass": 175,
     "fail": 0
@@ -506,7 +506,7 @@
       "detail": ""
     },
     {
-      "name": "Manual Master recovery runs cannot be blocked behind an older same-slot attempt",
+      "name": "Duplicate Master attempts are serialized per category and slot",
       "status": "PASS",
       "detail": ""
     },

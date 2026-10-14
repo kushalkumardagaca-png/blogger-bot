@@ -32,9 +32,9 @@ permissions:
   actions: write
 
 concurrency:
-  # Scheduled releases remain isolated by cron. Every manual recovery receives
-  # its own runner so a slow earlier attempt can never block a repaired article.
-  group: daily-yield-master-evergreen-${{ github.event_name == 'schedule' && github.event.schedule || github.run_id }}
+  # Serialize duplicate attempts for one slot while allowing distinct slots to
+  # prepare in parallel. This prevents same-article photo/package merge races.
+  group: daily-yield-master-v3-evergreen-${{ inputs.slot || github.event.schedule || github.run_id }}
   cancel-in-progress: false
 
 jobs:
