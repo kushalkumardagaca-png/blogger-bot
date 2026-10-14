@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "trending",
+  "slot": 1,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "deterministic evidence section failed: 1574 words; required 400-490"
+}
