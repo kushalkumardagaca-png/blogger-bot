@@ -1,7 +1,7 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "duplicate_url": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
   "replacement_url": "https://dailyyield.blogspot.com/2026/10/ifs-budget-will-be-work-of-fiction.html",
-  "checked_at": "2026-10-14T08:30:20.723849+00:00",
-  "log": "Traceback (most recent call last):\n  File \"/home/runner/work/blogger-bot/blogger-bot/cleanup_wrong_master_post.py\", line 39, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/blogger-bot/blogger-bot/cleanup_wrong_master_post.py\", line 30, in main\n    if not replacement or replacement.get('status')!='LIVE':raise RuntimeError('replacement is not confirmed LIVE; refusing cleanup')\n                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: replacement is not confirmed LIVE; refusing cleanup\n"
+  "checked_at": "2026-10-14T08:31:29.875953+00:00",
+  "log": "{\"status\": \"PASS\", \"action\": \"deleted_wrong_duplicate\", \"duplicate\": \"https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html\", \"replacement\": \"https://dailyyield.blogspot.com/2026/10/ifs-budget-will-be-work-of-fiction.html\"}\n"
 }
