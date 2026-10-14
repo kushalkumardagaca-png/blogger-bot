@@ -276,8 +276,8 @@
   },
   "prewarm:2026-10-14:master-evergreen-3": {
     "revision": "7200677833d6e11a",
-    "attempts": 1,
-    "lastAttempt": "2026-10-14T18:00:15.956500+05:30"
+    "attempts": 2,
+    "lastAttempt": "2026-10-14T18:51:00.997542+05:30"
   },
   "source:2026-10-14:news-americas": {
     "revision": "7200677833d6e11a",
@@ -286,8 +286,8 @@
   },
   "prewarm:2026-10-14:master-trending-4": {
     "revision": "7200677833d6e11a",
-    "attempts": 1,
-    "lastAttempt": "2026-10-14T18:00:15.956500+05:30"
+    "attempts": 2,
+    "lastAttempt": "2026-10-14T18:51:00.997542+05:30"
   },
   "source:2026-10-14:news-companies": {
     "revision": "7200677833d6e11a",
@@ -303,5 +303,10 @@
     "revision": "7200677833d6e11a",
     "attempts": 1,
     "lastAttempt": "2026-10-14T18:12:55.959826+05:30"
+  },
+  "source:2026-10-14:news-global": {
+    "revision": "7200677833d6e11a",
+    "attempts": 1,
+    "lastAttempt": "2026-10-14T18:51:00.997542+05:30"
   }
 }
