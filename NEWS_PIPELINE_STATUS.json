@@ -1,15 +1,15 @@
 {
-  "status": "PASS",
-  "generated_at": "2026-10-14T07:45:03.857739+00:00",
+  "status": "FAIL",
+  "generated_at": "2026-10-14T10:58:55.199035+00:00",
   "dry_run": false,
-  "published": 1,
-  "failed": 0,
+  "published": 0,
+  "failed": 1,
   "results": [
     {
-      "desk": "economy",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
+      "desk": "americas",
+      "status": "FAIL",
+      "error_type": "RuntimeError",
+      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content"
     }
   ]
 }
