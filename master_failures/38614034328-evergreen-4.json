@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "publication_enabled": false,
+  "kind": "evergreen",
+  "slot": 4,
+  "stage": "master-v3",
+  "error_type": "RuntimeError",
+  "error": "Master V3 publishes only the current IST date; historical backfill is disabled"
+}
