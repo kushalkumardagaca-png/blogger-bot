@@ -68,7 +68,9 @@ def github_text(prompt,max_tokens=1400):
  return str(r.json()['choices'][0]['message'].get('content') or '')
 def text_call(prompt,max_tokens=1400):
  errors=[]
- for fn in (ollama_text,github_text):
+ # Owner-authorized repository-native GitHub Models is the fast primary writer.
+ # The quota-independent local model remains an emergency fallback only.
+ for fn in (github_text,ollama_text):
   for _ in range(2):
    try:
     text=fn(prompt,max_tokens)
@@ -193,11 +195,23 @@ def photo_set(title,category,slug,key):
 def build(item,kind,target):
  sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=clean(title)[:46].strip(' -:')
  if len(title)<12:title=clean(re.sub(r'^Trend\s*[·:-]?\s*','',item['category'],flags=re.I)+' Evidence Guide')[:46]
- sections=[]
+ plans=[];used_headings=set()
  for index in range(10):
   primary=(index%len(sources))+1;secondary=((index+3)%len(sources))+1;h=heading(sources[index%len(sources)],index+1)
-  if h.casefold() in {x['heading'].casefold() for x in sections}:h=f'{h}: evidence angle {index+1}'
-  paragraphs=write_section(title,h,index+1,[(primary,sources[primary-1]),(secondary,sources[secondary-1])]);sections.append({'heading':h,'paragraphs':paragraphs})
+  if h.casefold() in used_headings:h=f'{h}: evidence angle {index+1}'
+  used_headings.add(h.casefold());plans.append((index,h,primary,secondary))
+ # Independent bounded sections can be written concurrently. Three workers stay
+ # below aggressive repository-model burst limits while reducing normal text
+ # generation from ten sequential calls to four short waves.
+ from concurrent.futures import ThreadPoolExecutor,as_completed
+ sections=[None]*len(plans)
+ def create(plan):
+  index,h,primary,secondary=plan
+  return index,{'heading':h,'paragraphs':write_section(title,h,index+1,[(primary,sources[primary-1]),(secondary,sources[secondary-1])])}
+ with ThreadPoolExecutor(max_workers=3,thread_name_prefix='master-v3-section') as executor:
+  futures=[executor.submit(create,plan) for plan in plans]
+  for future in as_completed(futures):
+   index,section=future.result();sections[index]=section
  core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
  if core>4200:
   excess=core-4150

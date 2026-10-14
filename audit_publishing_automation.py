@@ -283,6 +283,12 @@ check('Master V3 uses independently validated plain-text sections, not one long 
 check('Short section attempts accumulate instead of discarding usable prose',
       'pool=[];seen=set()' in v3_generator and 'for attempt in range(6)' in v3_generator
       and 'accumulated bounded provider recovery' in v3_generator)
+check('Owner-authorized GitHub Models is primary and local Ollama is emergency fallback',
+      'for fn in (github_text,ollama_text)' in v3_generator
+      and master_workflows.count('models: read')>=2
+      and master_workflows.count('GITHUB_TOKEN: ${{ github.token }}')>=2)
+check('Ten bounded sections use controlled three-worker parallel generation',
+      'ThreadPoolExecutor(max_workers=3' in v3_generator and 'as_completed(futures)' in v3_generator)
 check('Overnight pair dispatch retries each category independently',
       'for attempt in 1 2 3 4 5' in prewarm_text
       and 'dispatch master_trending_writer.yml' in prewarm_text

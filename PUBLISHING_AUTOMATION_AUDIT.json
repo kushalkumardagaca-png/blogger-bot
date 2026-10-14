@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-14T07:20:28+05:30",
+  "checked_at_ist": "2026-10-14T08:17:48+05:30",
   "summary": {
-    "pass": 171,
+    "pass": 173,
     "fail": 0
   },
   "checks": [
@@ -452,6 +452,16 @@
     },
     {
       "name": "Short section attempts accumulate instead of discarding usable prose",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Owner-authorized GitHub Models is primary and local Ollama is emergency fallback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Ten bounded sections use controlled three-worker parallel generation",
       "status": "PASS",
       "detail": ""
     },
