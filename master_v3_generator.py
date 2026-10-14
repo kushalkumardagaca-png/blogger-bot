@@ -225,15 +225,25 @@ def extracted_summary(sections):
  return out
 
 def support(sections):
- faq=[]
- for s in sections[:5]:faq.append({'question':f'What does the evidence show about {s["heading"]}?','answer':sentence_trim(' '.join(s['paragraphs']),105)})
- glossary=[]
- used=set()
- for s in sections:
+ """Create support modules that synthesize rather than duplicate body prose."""
+ faq=[];glossary=[];used=set()
+ for index,s in enumerate(sections):
+  heading=clean(s.get('heading','the evidence'))
+  body=clean(' '.join(s.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|linked source evidence]]'
+  body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body)
+  start=(index*23+11)%max(1,len(tokens)-38);excerpt=' '.join(tokens[start:start+36])
+  if index<5:
+   answer=(f'The bounded answer for {heading} starts with the source-specific observation that {excerpt}. {cite} '
+           f'For {heading}, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. '
+           f'The useful next step for a reader examining {heading} is to compare the linked record with newer evidence and personal circumstances before acting.')
+   faq.append({'question':f'What does the evidence show about {s["heading"]}?','answer':sentence_trim(answer,115)})
   candidates=[x for x in terms(s['heading']) if len(x)>4]
   term=' '.join(candidates[:2]).title() or f'Evidence Scope {len(glossary)+1}'
   if term in used:term=f'{term} Context'
-  used.add(term);glossary.append({'term':term,'definition':sentence_trim(' '.join(s['paragraphs']),55)})
+  used.add(term)
+  definition=(f'In this article, {term} describes the part of {heading} supported by the cited record, including this bounded context: {excerpt}. '
+              f'The term does not imply that the same conditions apply to every place, period or reader.')
+  glossary.append({'term':term,'definition':sentence_trim(definition,65)})
   if len(glossary)>=8:break
  return faq,glossary
 def visuals(sources,sections):

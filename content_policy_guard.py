@@ -36,8 +36,7 @@ DANGEROUS_PATTERNS=(
 # Strict formats reduce false positives in ordinary financial reporting.
 PRIVATE_DATA_PATTERNS=(
  ("US Social Security number",r"(?<!\d)\d{3}-\d{2}-\d{4}(?!\d)"),
- ("payment-card-like number",r"(?<!\d)(?:\d[ -]?){15,18}\d(?!\d)"),
- ("Indian Aadhaar-like number",r"(?<!\d)[2-9]\d{3}[ -]?\d{4}[ -]?\d{4}(?!\d)"),
+ ("Indian Aadhaar-like number",r"(?<!\d)[2-9]\d{3}[ -]\d{4}[ -]\d{4}(?!\d)"),
  ("private key",r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
 )
 REPETITIVE_FALLBACK_PHRASES=(
@@ -67,6 +66,22 @@ def _affirmative_match(text:str,pattern:str)->bool:
   if not any(word in lead for word in NEGATION_WORDS):return True
  return False
 
+def _luhn_valid(value:str)->bool:
+ """Return true only for a structurally plausible payment-card number.
+
+ Financial articles commonly place many unrelated figures next to one another. A
+ bare digit-count regex therefore creates false privacy alarms; Luhn validation
+ preserves the fail-closed gate for actual card-like identifiers.
+ """
+ digits=re.sub(r"\D","",value)
+ if not 13<=len(digits)<=19 or len(set(digits))==1:return False
+ total=0
+ for index,char in enumerate(reversed(digits)):
+  number=int(char)
+  if index%2:number=number*2-9 if number>4 else number*2
+  total+=number
+ return total%10==0
+
 def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=False)->list[str]:
  text=plain(content);issues=[]
  for pattern in DECEPTIVE_PATTERNS:
@@ -79,6 +94,9 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
   if re.search(pattern,text,re.I):issues.append("dangerous or illegal facilitation language")
  for name,pattern in PRIVATE_DATA_PATTERNS:
   if re.search(pattern,text,re.I):issues.append("possible exposed "+name)
+ card_candidates=re.findall(r"(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)",text)
+ if any(_luhn_valid(candidate) for candidate in card_candidates):
+  issues.append("possible exposed payment-card-like number")
  for phrase in REPETITIVE_FALLBACK_PHRASES:
   if phrase.casefold() in text.casefold():issues.append("repetitive deterministic fallback sentence")
  if re.search(r"\bCertified Accountant\b",text,re.I) and os.environ.get("DY_VERIFIED_CERTIFIED_ACCOUNTANT","").casefold()!="true":
