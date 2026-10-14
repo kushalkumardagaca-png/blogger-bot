@@ -225,13 +225,11 @@ def contextualize_repeated_sentences(sections):
    for sentence_index,sentence in enumerate(parts):
     key=normalized(sentence);counts[key]=counts.get(key,0)+1
     if len(key.split())>=12 and key in seen:
-     occurrence=ordinals[min(counts[key]-1,len(ordinals)-1)]
-     sentence=f'A {occurrence} distinct evidence boundary for {heading_text} is that '+sentence[0].lower()+sentence[1:]
-     # If identical wording recurs beyond the ordinal vocabulary, keep adding a
-     # section/paragraph-specific clause until the normalized sentence is unique.
+     section_lens=ordinals[min(section_index,len(ordinals)-1)];paragraph_lens=ordinals[min(paragraph_index,len(ordinals)-1)];sentence_lens=ordinals[min(sentence_index,len(ordinals)-1)]
+     sentence=(f'In the {section_lens} section’s {paragraph_lens} paragraph, the {sentence_lens} evidence point for {heading_text} is that '
+               +sentence[0].lower()+sentence[1:])
      while normalized(sentence) in seen:
-      paragraph_lens=ordinals[min(paragraph_index,len(ordinals)-1)]
-      sentence=f'Within the {paragraph_lens} paragraph on {heading_text}, '+sentence[0].lower()+sentence[1:]
+      sentence='At this separate evidence location, '+sentence[0].lower()+sentence[1:]
     seen.add(normalized(sentence))
     rebuilt.append(sentence)
    section['paragraphs'][paragraph_index]=' '.join(rebuilt)
