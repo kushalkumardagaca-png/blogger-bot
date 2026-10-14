@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "stage": "package-persistence",
+  "run_id": "38517207286",
+  "log": "HEAD is now at b2a0c27 Persist exact Master package failure diagnostics\nFrom https://github.com/kushalkumardagaca-png/blogger-bot\n * branch            main       -> FETCH_HEAD\n   b2a0c27..08a46e6  main       -> origin/main\nHEAD is now at 08a46e6 Update permanent recovery evidence [skip ci]\nTraceback (most recent call last):\n  File \"/home/runner/work/blogger-bot/blogger-bot/merge_master_preparation.py\", line 55, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/runner/work/blogger-bot/blogger-bot/merge_master_preparation.py\", line 54, in main\n    Path(str(prefix)+'.registry.json').write_text(json.dumps(merge_registry(cr,ir),indent=2,ensure_ascii=False)+'\\n')\n                                                             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/blogger-bot/blogger-bot/merge_master_preparation.py\", line 30, in merge_registry\n    raise RuntimeError(f'concurrent photo conflict for {field}; retry preparation against the current registry')\nRuntimeError: concurrent photo conflict for source_id; retry preparation against the current registry\n"
+}
