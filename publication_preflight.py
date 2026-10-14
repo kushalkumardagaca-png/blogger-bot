@@ -2,7 +2,7 @@
 import html,json,re
 from urllib.parse import urlsplit
 from image_safety import image_works
-from content_policy_guard import assert_policy_compliant
+from content_policy_guard import assert_policy_compliant,normalize_sentence,sentences
 
 MASS_TEMPLATE_PHRASES=(
  'This forensic framework eliminates redundant intermediary friction',
@@ -85,7 +85,13 @@ def assert_publishable(title,content,labels,check_remote_images=True):
   except Exception as e:issues.append(f'JSON-LD schema {n} invalid: {e}')
  if 'News' in labels and 'class="fbk-src' not in content:issues.append('news source links missing')
  try:assert_policy_compliant(title,content,'news' if is_news else 'master',require_disclosure=True)
- except RuntimeError as exc:issues.append(str(exc))
+ except RuntimeError as exc:
+  issues.append(str(exc))
+  if 'repeated substantive sentence' in str(exc):
+   repetition_content=re.sub(r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>', ' ', content or '', flags=re.I|re.S)
+   normalized=[normalize_sentence(x) for x in sentences(repetition_content)];seen=set()
+   duplicate=next((x for x in normalized if len(x.split())>=12 and (x in seen or seen.add(x))), '')
+   if duplicate:issues.append('rendered duplicate diagnostic: '+duplicate[:180])
  if issues:raise RuntimeError('PUBLICATION PREFLIGHT FAILED — '+'; '.join(issues))
  print(f'Publication preflight PASS: {title[:70]}')
  return True
