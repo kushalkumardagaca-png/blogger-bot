@@ -1,12 +1,12 @@
 {
   "status": "FAIL",
-  "generated_at": "2026-10-14T11:32:56.996557+00:00",
+  "generated_at": "2026-10-14T12:00:05.317991+00:00",
   "dry_run": false,
   "published": 0,
   "failed": 1,
   "results": [
     {
-      "desk": "companies",
+      "desk": "global",
       "status": "FAIL",
       "error_type": "RuntimeError",
       "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content"
