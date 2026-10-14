@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 42: all Master package/photo state writers share one serialized lane, overdue recovery remains oldest-first, and the 06:15 slot is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 43: overdue publication recovery takes precedence over future prewarming in the serialized state-writer lane, and the 06:15 slot is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -87,12 +87,15 @@ def reconcile(now,apply=False):
  master_by_key={x['key']:x for x in published_inventory(master_day)}
  daily_plan=load(ROOT/'MASTER_DAILY_PLAN.json',{});plan_rows={kind:daily_plan.get(kind,[]) if daily_plan.get('date')==master_day.isoformat() else [] for kind in ('trending','evergreen')}
  master_slots=[] if master_day<dt.date(2026,10,14) else sorted((due(master_day,t),kind,slot) for kind,times in MASTER_TIMES.items() for slot,t in enumerate(times) if slot<len(plan_rows[kind]))
+ # Do not let a future prewarm occupy the single state-writer lane while any
+ # earlier article is overdue. Publication recovery always takes precedence.
+ has_overdue_master=any(now>=slot_due+GRACE and f'master-{kind}-{slot}' not in master_by_key for slot_due,kind,slot in master_slots)
  # If GitHub's scheduler misses a preparation cron during a deployment, prepare
  # the validated package before release rather than waiting until the article is
  # already overdue. A later publish recovery reuses this committed package.
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
-  if key in master_by_key or not slot_due-PREWARM<=now<slot_due+GRACE:continue
+  if has_overdue_master or key in master_by_key or not slot_due-PREWARM<=now<slot_due+GRACE:continue
   lk=f'prewarm:{master_day}:{key}'
   if not may_retry(ledger,lk,now):continue
   call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=false','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'preparation_recovery','key':key,'applied':apply})
