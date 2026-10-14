@@ -257,7 +257,7 @@ check('Permanent all-slot and social dead-letter recovery replaces the one-time 
       and 'MAX_RETRIES=3' in recovery_code and 'SOCIAL_GRACE' in recovery_code
       and 'implementation_revision' in recovery_code and "row.get('revision')!=revision" in recovery_code
       and "key.startswith(('source:','prewarm:'))" in recovery_code
-      and 'PREWARM=dt.timedelta(hours=3,minutes=15)' in recovery_code and 'ARTICLE_RETRY=dt.timedelta(minutes=30)' in recovery_code and "'publish=false'" in recovery_code
+      and 'PREWARM=dt.timedelta(hours=3,minutes=15)' in recovery_code and 'ARTICLE_RETRY=dt.timedelta(minutes=30)' in recovery_code and 'source_dispatched=False' in recovery_code and "'publish=false'" in recovery_code
       and 'publicDailyYieldRequests' in recovery_code)
 check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
       'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_DESTINATIONS' in rotation

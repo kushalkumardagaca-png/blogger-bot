@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 40: deterministic evidence fields are lexically tokenized before hard word bounding, duplicate attempts remain serialized per slot, and the 06:15 recovery is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
+Permanent recovery generation 41: overdue Master recovery is oldest-first to prevent cross-slot photo/package races, deterministic evidence remains hard-bounded, and the 06:15 slot is rearmed; repository-model fallback is wired into the live job, pre-gate core/summary/visual completion is deterministic, parallel recovery is non-blocking and no article retry ceiling is active.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -96,15 +96,18 @@ def reconcile(now,apply=False):
   lk=f'prewarm:{master_day}:{key}'
   if not may_retry(ledger,lk,now):continue
   call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=false','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'preparation_recovery','key':key,'applied':apply})
+ source_dispatched=False
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
   if now<slot_due+GRACE or key in master_by_key:continue
   lk=f'source:{master_day}:{key}'
   if not may_retry(ledger,lk,now):blocked.append(lk);continue
-  # Every Master workflow owns a separate local model runner, so missing slots
-  # can recover concurrently without a shared API quota. Photo-registry merge
-  # guards reject any cross-article image collision before publication.
-  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
+  if source_dispatched:
+   master_deferred.append(key);continue
+  # Recover the oldest overdue Master first. This prevents unrelated missing
+  # slots from racing the shared photo registry and package state; the next
+  # ten-minute reconciliation advances to the next slot after confirmation.
+  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply});source_dispatched=True
  for repair in WRONG_MASTER_REPAIRS:
   replacement=master_by_key.get(repair['key']);lk=f"cleanup:{master_day}:{repair['key']}"
   if not replacement or lk in ledger:continue
