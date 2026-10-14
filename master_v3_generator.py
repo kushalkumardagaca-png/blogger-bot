@@ -12,7 +12,7 @@ from pathlib import Path
 import requests
 from master_article_v2 import words
 from photo_selector import choose_photos
-from content_policy_guard import POLICY_VERSION
+from content_policy_guard import POLICY_VERSION,audit_text
 from content_originality import assert_cross_corpus_original
 
 UA='DailyYieldMasterV3/1.0 (dailyyield.official@gmail.com)';BLOG='https://dailyyield.blogspot.com'
@@ -324,7 +324,12 @@ def build(item,kind,target):
  # assembly. This catches cross-module repetition that cannot be visible while
  # ten sections are being generated independently.
  combined=sections+[{'heading':'Evidence-led takeaways','paragraphs':summary}]
- contextualize_repeated_sentences(combined);sections=combined[:-1];summary=combined[-1]['paragraphs']
+ for _ in range(8):
+  assembled=' '.join(' '.join(x.get('paragraphs') or []) for x in combined)
+  if 'repeated substantive sentence within the content' not in audit_text(title,assembled,'master-package',False):break
+  contextualize_repeated_sentences(combined)
+ else:raise RuntimeError('assembled Master prose could not be made sentence-distinct')
+ sections=combined[:-1];summary=combined[-1]['paragraphs']
  if words(' '.join(summary))>800:summary=parse_paragraphs(sentence_trim(' '.join(summary),790))
  faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
  package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
