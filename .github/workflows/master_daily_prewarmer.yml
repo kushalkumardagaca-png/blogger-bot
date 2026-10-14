@@ -50,6 +50,19 @@ jobs:
         run: |
           set -euo pipefail
           slot='${{ steps.slot.outputs.value }}'
-          gh workflow run master_trending_writer.yml --ref main -f slot="$slot" -f publish=false -f retry_attempt=0
-          gh workflow run master_evergreen_writer.yml --ref main -f slot="$slot" -f publish=false -f retry_attempt=0
+          dispatch() {
+            local workflow="$1"
+            for attempt in 1 2 3 4 5; do
+              if gh workflow run "$workflow" --ref main -f slot="$slot" -f publish=false -f retry_attempt=0; then return 0; fi
+              sleep $((attempt * 5))
+            done
+            echo "Unable to dispatch $workflow after five attempts" >&2
+            return 1
+          }
+          # Dispatch independently so a transient API failure for one category
+          # cannot silently prevent its paired category from preparing.
+          failed=0
+          dispatch master_trending_writer.yml || failed=1
+          dispatch master_evergreen_writer.yml || failed=1
+          [ "$failed" -eq 0 ] || exit 1
           echo "Dispatched complete V3 evidence, text, validation and three-photo preparation for slot $slot."

@@ -32,7 +32,7 @@ for name,expected in master_expected.items():
 prewarmer=ROOT/'.github/workflows/master_daily_prewarmer.yml';prewarm_text=prewarmer.read_text() if prewarmer.exists() else ''
 check('All ten Master packages are prepared in five staggered overnight batches',
       crons(prewarmer)==['10 19 * * *','25 19 * * *','40 19 * * *','55 19 * * *','10 20 * * *']
-      and prewarm_text.count('publish=false')==2 and 'master_trending_writer.yml' in prewarm_text and 'master_evergreen_writer.yml' in prewarm_text)
+      and prewarm_text.count('publish=false')>=1 and 'master_trending_writer.yml' in prewarm_text and 'master_evergreen_writer.yml' in prewarm_text)
 check('Dynamic Master publication has both code gate and explicit live workflow enablement',
       'MASTER_PUBLICATION_ENABLED' in (ROOT/'master_dynamic_pipeline.py').read_text()
       and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text()
@@ -280,6 +280,13 @@ check('Master V3 uses independently validated plain-text sections, not one long 
       'def write_section' in v3_generator and "400<=count<=490" in v3_generator
       and 'Never output JSON or markdown' in v3_generator
       and 'prepare_master_article' not in v3_generator)
+check('Short section attempts accumulate instead of discarding usable prose',
+      'pool=[];seen=set()' in v3_generator and 'for attempt in range(6)' in v3_generator
+      and 'accumulated bounded provider recovery' in v3_generator)
+check('Overnight pair dispatch retries each category independently',
+      'for attempt in 1 2 3 4 5' in prewarm_text
+      and 'dispatch master_trending_writer.yml' in prewarm_text
+      and 'dispatch master_evergreen_writer.yml' in prewarm_text)
 check('Master V3 preserves strict Blogger publication and package compilation gates',
       'MASTER_PUBLICATION_ENABLED' in v3_pipeline and 'validate(package)' in v3_pipeline
       and 'assert_publishable' in v3_pipeline)

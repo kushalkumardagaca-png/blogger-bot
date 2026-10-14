@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-13T22:16:04+05:30",
+  "checked_at_ist": "2026-10-14T07:20:28+05:30",
   "summary": {
-    "pass": 169,
+    "pass": 171,
     "fail": 0
   },
   "checks": [
@@ -447,6 +447,16 @@
     },
     {
       "name": "Master V3 uses independently validated plain-text sections, not one long JSON response",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Short section attempts accumulate instead of discarding usable prose",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Overnight pair dispatch retries each category independently",
       "status": "PASS",
       "detail": ""
     },

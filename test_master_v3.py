@@ -29,6 +29,13 @@ def test_v3_plain_text_section_does_not_require_json():
         out=write_section('Market Policy Evidence','Documented market scope',1,[(1,source)])
     assert out and 400<=words(' '.join(out))<=490
 
+def test_v3_accumulates_safe_short_attempts():
+    source={'name':'Official source','title':'Market policy evidence','url':'https://example.com','text':prose()}
+    first='\n\n'.join(paragraphs()[:2]);attempts=[first.replace('Markets',word) for word in ('Markets','Households','Consumers','Investors','Workers','Families')]
+    with patch('master_v3_generator.text_call',side_effect=attempts):
+        out=write_section('Market Policy Evidence','Documented market scope',1,[(1,source)])
+    assert len(out)>=4 and 400<=words(' '.join(out))<=490
+
 def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
     sources=[{'name':f'Official Source {i}','title':f'Distinct Market Evidence {i}','url':f'https://example.com/{i}','text':prose(),'overlap':5} for i in range(1,11)]
     photos=[{'url':f'https://example.com/photo-{i}.jpg','alt':'Relevant financial editorial photograph','caption':'Photo: Creator / CC BY 4.0','width':1600,'height':900} for i in range(1,4)]

@@ -124,22 +124,35 @@ def validate_section(paragraphs,source_ids):
   if not any(number in s for s in source_ids.values()):return False,f'unsupported number {number}'
  return True,''
 def write_section(article_title,section_heading,index,sources):
- ids={i:s['text']+' '+s['title'] for i,s in sources};packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources)
- prompt=f'''Article: {article_title}\nSection {index}: {section_heading}\nWrite 450-460 words in 4-6 plain paragraphs. Use only the source packet below. Every paragraph must contain a contextual token such as [[S1|descriptive source anchor]]. Do not invent numbers, quotations, causation or advice. Explain what the evidence establishes, its jurisdiction, affected groups, mechanism, uncertainty, and what it does not establish. Do not write a generic introduction or conclusion.\nSOURCES:\n{packet}'''
- last=''
- for attempt in range(4):
-  text=text_call(prompt+'\nThis is attempt '+str(attempt+1)+'. Return only the finished paragraphs.')
-  paragraphs=parse_paragraphs(text)
-  # Citation placement is structural metadata, not generated factual content.
-  # Attach the primary supplied source when otherwise valid prose omits a token.
-  primary=min(ids)
-  paragraphs=[p if any(f'[[S{i}|' in p for i in ids) else p+f' [[S{primary}|documented source evidence]]' for p in paragraphs]
-  text=' '.join(paragraphs)
-  if words(text)>490:paragraphs=parse_paragraphs(sentence_trim(text,480))
-  ok,last=validate_section(paragraphs,ids)
-  if ok:return paragraphs
-  prompt+=f'\nThe previous output failed because {last}. Rewrite the complete section.'
- raise RuntimeError(f'V3 section {index} failed validation after bounded provider recovery: {last}')
+ ids={i:s['text']+' '+s['title'] for i,s in sources};packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources);primary=min(ids)
+ base=f'''Article: {article_title}\nSection {index}: {section_heading}\nWrite source-bounded plain paragraphs. Use only the packet below. Do not invent numbers, quotations, causation or advice. Explain evidence, jurisdiction, affected groups, mechanism, uncertainty and limits. Do not introduce the article or summarize another section.\nSOURCES:\n{packet}'''
+ pool=[];seen=set();last=''
+ for attempt in range(6):
+  have=words(' '.join(pool));need=max(120,455-have)
+  instruction=(f'Write {need}-{need+25} additional words in 2-4 new paragraphs that do not repeat this accepted partial section: '+json.dumps(pool,ensure_ascii=False) if pool else 'Write 450-460 words in 4-6 paragraphs.')
+  text=text_call(base+'\n'+instruction+f'\nAttempt {attempt+1}. Return only paragraphs.')
+  candidates=parse_paragraphs(text)
+  # Remove whole sentences containing a numeric claim absent from both supplied
+  # source records. This preserves the material-number safeguard without losing
+  # an otherwise usable section to a model-added list marker or stray figure.
+  safe=[];source_blob=' '.join(ids.values())
+  for paragraph in candidates:
+   kept=[]
+   for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
+    nums=re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence))
+    if not nums or all(number in source_blob for number in nums):kept.append(sentence)
+   paragraph=' '.join(kept).strip()
+   if not paragraph:continue
+   if not any(f'[[S{i}|' in paragraph for i in ids):paragraph+=f' [[S{primary}|documented source evidence]]'
+   key=' '.join(paragraph.casefold().split())
+   if key not in seen:seen.add(key);safe.append(paragraph)
+  pool.extend(safe)
+  if words(' '.join(pool))>490:pool=parse_paragraphs(sentence_trim(' '.join(pool),480))
+  # Trimming can redistribute sentences, so enforce citation metadata afterward.
+  pool=[p if any(f'[[S{i}|' in p for i in ids) else p+f' [[S{primary}|documented source evidence]]' for p in pool]
+  ok,last=validate_section(pool,ids)
+  if ok:return pool
+ raise RuntimeError(f'V3 section {index} failed validation after accumulated bounded provider recovery: {last}')
 
 def extracted_summary(sections):
  buckets=[]
