@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from master_article_v2 import words
 from master_article_v2 import validate
-from master_v3_generator import build,extracted_summary,support,validate_section,visuals,write_section
+from master_v3_generator import build,deterministic_section,extracted_summary,support,validate_section,visuals,write_section
 
 def paragraphs():
     base=('Markets connect household choices with documented policy boundaries and uncertainty through evidence. '*50).split()[:440]
@@ -41,6 +41,11 @@ def test_v3_has_quota_independent_section_completion():
     with patch('master_v3_generator.text_call',side_effect=RuntimeError('all providers unavailable')):
         out=write_section('Market Policy Evidence','Documented market scope',1,[(1,source)])
     assert len(out)>=4 and 400<=words(' '.join(out))<=490
+
+def test_deterministic_completion_is_bounded_with_long_source_metadata():
+    source={'name':'Very Long Official Research Institution Name Repeated Across Metadata','title':' '.join(['Extremely detailed evidence title']*20),'url':'https://example.com','text':prose()*3}
+    out=deterministic_section(' '.join(['Detailed financial evidence boundary']*10),[(1,source)])
+    assert 4<=len(out)<=6 and 400<=words(' '.join(out))<=490
 
 def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
     sources=[{'name':f'Official Source {i}','title':f'Distinct Market Evidence {i}','url':f'https://example.com/{i}','text':prose(),'overlap':5} for i in range(1,11)]

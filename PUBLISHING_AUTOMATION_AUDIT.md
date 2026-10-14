@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 174 PASS · 0 FAIL
+**Result:** 175 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -106,6 +106,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master V3 deterministically assembles summary, support and three evidence visuals**
 - ✅ **Manual Master recovery runs cannot be blocked behind an older same-slot attempt**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
+- ✅ **Successful generation is requeued after persistence or Blogger failure**
 - ✅ **Master generation is quota-independent with model-independent research fallback**
 - ✅ **Local Master generation is bounded for the publication window**
 - ✅ **Evergreen source discovery can use relevant established reporting without weakening review**

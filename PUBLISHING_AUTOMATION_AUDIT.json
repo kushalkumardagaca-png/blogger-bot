@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-14T08:42:37+05:30",
+  "checked_at_ist": "2026-10-14T09:01:01+05:30",
   "summary": {
-    "pass": 174,
+    "pass": 175,
     "fail": 0
   },
   "checks": [
@@ -512,6 +512,11 @@
     },
     {
       "name": "Concurrent Master package, photo, plan and tracker writes use semantic merge and retry",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Successful generation is requeued after persistence or Blogger failure",
       "status": "PASS",
       "detail": ""
     },

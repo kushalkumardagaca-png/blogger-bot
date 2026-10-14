@@ -126,28 +126,27 @@ def validate_section(paragraphs,source_ids):
   if not any(number in s for s in source_ids.values()):return False,f'unsupported number {number}'
  return True,''
 def deterministic_section(section_heading,sources):
- """Quota-independent evidence dossier used when both writers are unavailable."""
+ """Quota-independent, exactly bounded evidence dossier."""
  boundaries=(
-  'This record is used only for its documented scope; it does not by itself establish a universal forecast, a causal conclusion, or personal financial advice.',
-  'Its jurisdiction, definitions, observation period and later revisions remain essential limits on interpretation, especially when readers compare different markets.',
-  'The evidence identifies context rather than certainty. A different population, regulatory setting, time period or measurement method may produce a different result.',
-  'The practical value lies in separating what the source reports from assumptions that the source did not test, quantify or recommend.',
-  'Readers should treat the cited record as one bounded part of the wider evidence base, not as permission to generalize beyond the people and conditions studied.',
+  'The record establishes context, not a universal forecast, causal conclusion or personal recommendation.',
+  'Jurisdiction, definitions, observation period and later revisions remain necessary limits on interpretation.',
+  'A different population, regulatory setting, period or measurement method may produce a different result.',
+  'The useful distinction is between what the source reports and assumptions it did not test.',
+  'The cited record is one bounded part of the evidence and cannot support broader certainty.',
  )
- paragraphs=[];cursor=0
- while words(' '.join(paragraphs))<420 and cursor<10:
-  source_id,row=sources[cursor%len(sources)];raw=clean(row.get('text',''));tokens=raw.split();start=(cursor*37)%max(1,len(tokens)-36);excerpt=' '.join(tokens[start:start+32]).strip(' ,;:')
-  if not excerpt:cursor+=1;continue
-  title=' '.join(clean(row.get('title') or row.get('name') or 'Retrieved evidence').split()[:16]);provider=' '.join(clean(row.get('name') or 'the cited provider').split()[:8])
-  boundary=boundaries[cursor%len(boundaries)]
-  paragraph=f'[[S{source_id}|{provider} evidence]] frames {section_heading} through the retrieved record titled “{title}.” The source states, in part, “{excerpt}.” {boundary} This attributed passage therefore supports a narrow description of the documented setting while leaving unsupported predictions, recommendations and broader claims outside the section.'
-  projected=words(' '.join(paragraphs+[paragraph]))
-  if projected>490 and words(' '.join(paragraphs))>=400:break
-  paragraphs.append(paragraph);cursor+=1
- while len(paragraphs)>4 and words(' '.join(paragraphs))>490:
-  if words(' '.join(paragraphs[:-1]))>=400:paragraphs.pop()
-  else:break
- if words(' '.join(paragraphs))>490:paragraphs=parse_paragraphs(sentence_trim(' '.join(paragraphs),480))
+ paragraphs=[];heading=' '.join(clean(section_heading).split()[:12])
+ for cursor in range(6):
+  source_id,row=sources[cursor%len(sources)];tokens=clean(row.get('text','')).split();start=(cursor*31)%max(1,len(tokens)-24);excerpt=' '.join(tokens[start:start+22]).strip(' ,;:')
+  if not excerpt:continue
+  title=' '.join(clean(row.get('title') or row.get('name') or 'Retrieved evidence').split()[:12]);provider=' '.join(clean(row.get('name') or 'cited provider').split()[:5]);boundary=boundaries[cursor%len(boundaries)]
+  paragraphs.append(f'[[S{source_id}|{provider} evidence]] frames {heading} through “{title}.” The retrieved record states, in part, “{excerpt}.” {boundary} This passage is used only for its documented scope, while unsupported predictions and recommendations remain outside this section.')
+  if len(paragraphs)>=4 and words(' '.join(paragraphs))>=420:break
+ # Keep four or more separately attributed paragraphs and hard-bound the total.
+ while len(paragraphs)>4 and words(' '.join(paragraphs[:-1]))>=400:paragraphs.pop()
+ while words(' '.join(paragraphs))>480:
+  index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]));parts=paragraphs[index].split()
+  if len(parts)<=70:break
+  paragraphs[index]=' '.join(parts[:-1]).rstrip(' ,;:')+'.'
  primary=sources[0][0];paragraphs=[p if '[[S' in p else p+f' [[S{primary}|documented source evidence]]' for p in paragraphs]
  ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)

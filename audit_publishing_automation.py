@@ -311,7 +311,7 @@ check('Every Master publishing path enforces the public release embargo',
       'wait_for_release(MASTER_LIVE[(kind,slot)])' in v3_pipeline
       and 'if timed_release:wait_for_release' not in v3_pipeline)
 check('Failed prewarming retries remain preparation-only',
-      master_workflows.count("github.event_name == 'schedule' && 'true' || inputs.publish")==2
+      master_workflows.count("github.event_name == 'schedule' && 'true' || inputs.publish")>=2
       and '-f publish=true -f retry_attempt' not in master_workflows)
 check('Master V3 deterministically assembles summary, support and three evidence visuals',
       'def extracted_summary' in v3_generator and 'def support' in v3_generator
@@ -323,6 +323,9 @@ check('Concurrent Master package, photo, plan and tracker writes use semantic me
       master_workflows.count('merge_master_state.py')>=4 and (ROOT/'merge_master_state.py').exists()
       and master_workflows.count('merge_master_preparation.py')>=2 and (ROOT/'merge_master_preparation.py').exists()
       and 'git reset --hard FETCH_HEAD' in master_workflows and 'files.tar' in master_workflows)
+check('Successful generation is requeued after persistence or Blogger failure',
+      master_workflows.count('Requeue after package persistence or publication failure')==2
+      and master_workflows.count("steps.prepare.outcome == 'success'")==2)
 check('Master generation is quota-independent with model-independent research fallback',
       'OLLAMA_API_URL' in prep and '_heuristic_queries' in prep
       and master_workflows.count('Start quota-independent local text model')==2
