@@ -265,7 +265,7 @@ def support(sections):
   if term in used:term=f'{term} Context'
   used.add(term)
   definition=(f'In this article, {term} describes the part of {heading} supported by the cited record, including this bounded context: {excerpt}. '
-              f'The term does not imply that the same conditions apply to every place, period or reader.')
+              f'The {term} label does not imply that the same conditions apply to every place, period or reader.')
   glossary.append({'term':term,'definition':sentence_trim(definition,65)})
   if len(glossary)>=8:break
  return faq,glossary
