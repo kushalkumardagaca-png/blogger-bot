@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 49: wrong-post cleanup persists pass/fail evidence and retries idempotently until confirmed; scheduled and recovery attempts share per-article concurrency keys; current-day recovery remains oldest-first with no article retry ceiling.
+Permanent recovery generation 50: authenticated Blogger getByPath existence and exact canonical URL confirm live cleanup targets when the API omits status; cleanup persists evidence and retries idempotently; current-day recovery remains oldest-first.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess

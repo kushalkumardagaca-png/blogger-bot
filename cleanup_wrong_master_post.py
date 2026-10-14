@@ -27,11 +27,18 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--duplicate-url',required=True);p.add_argument('--replacement-url',required=True);p.add_argument('--expected-title-phrase',required=True);a=p.parse_args()
  if a.duplicate_url.rstrip('/')==a.replacement_url.rstrip('/'):raise RuntimeError('duplicate and replacement URLs are identical')
  access=token();replacement=by_url(a.replacement_url,access)
- if not replacement or replacement.get('status')!='LIVE':raise RuntimeError('replacement is not confirmed LIVE; refusing cleanup')
+ # Blogger's getByPath response may omit `status` even for a publicly live post.
+ # Authenticated existence plus an exact canonical URL proves the replacement;
+ # reject only an explicit non-LIVE status.
+ replacement_status=str((replacement or {}).get('status') or '').upper()
+ replacement_url=str((replacement or {}).get('url') or '').rstrip('/')
+ if not replacement or replacement_url!=a.replacement_url.rstrip('/') or (replacement_status and replacement_status!='LIVE'):
+  raise RuntimeError('replacement is not confirmed LIVE; refusing cleanup')
  duplicate=by_url(a.duplicate_url,access)
  if not duplicate:
   print(json.dumps({'status':'PASS','action':'already_absent','duplicate':a.duplicate_url}));return
- if duplicate.get('status')!='LIVE':
+ duplicate_status=str(duplicate.get('status') or '').upper()
+ if duplicate_status and duplicate_status!='LIVE':
   print(json.dumps({'status':'PASS','action':'already_not_live','duplicate':a.duplicate_url}));return
  if a.expected_title_phrase.casefold() not in str(duplicate.get('title','')).casefold():raise RuntimeError('duplicate title safety phrase did not match; refusing cleanup')
  call('/posts/'+urllib.parse.quote(str(duplicate['id'])),access,method='DELETE')
