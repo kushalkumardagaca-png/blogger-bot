@@ -17,7 +17,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   cleanup:
@@ -28,14 +28,43 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Confirm replacement and delete only the proven duplicate
+      - name: Confirm replacement, delete only the proven duplicate, and persist evidence
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: >-
-          python cleanup_wrong_master_post.py
-          --duplicate-url "${{ inputs.duplicate_url }}"
-          --replacement-url "${{ inputs.replacement_url }}"
-          --expected-title-phrase "${{ inputs.expected_title_phrase }}"
+          DUPLICATE_URL: ${{ inputs.duplicate_url }}
+          REPLACEMENT_URL: ${{ inputs.replacement_url }}
+          EXPECTED_TITLE_PHRASE: ${{ inputs.expected_title_phrase }}
+        run: |
+          set -uo pipefail
+          set +e
+          python cleanup_wrong_master_post.py \
+            --duplicate-url "$DUPLICATE_URL" \
+            --replacement-url "$REPLACEMENT_URL" \
+            --expected-title-phrase "$EXPECTED_TITLE_PHRASE" > /tmp/cleanup.log 2>&1
+          code=$?
+          set -e
+          export CLEANUP_CODE="$code"
+          python - <<'PY'
+          import datetime,json,os,pathlib
+          code=int(os.environ['CLEANUP_CODE'])
+          log=pathlib.Path('/tmp/cleanup.log').read_text(errors='replace')[-8000:]
+          result={'status':'PASS' if code==0 else 'FAIL','duplicate_url':os.environ['DUPLICATE_URL'],'replacement_url':os.environ['REPLACEMENT_URL'],'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'log':log}
+          pathlib.Path('/tmp/cleanup-status.json').write_text(json.dumps(result,indent=2)+'\n')
+          PY
+          git config user.name "Daily Yield Cleanup"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          pushed=false
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            cp /tmp/cleanup-status.json WRONG_MASTER_CLEANUP_STATUS.json
+            git add WRONG_MASTER_CLEANUP_STATUS.json
+            git commit -m "Record wrong Master cleanup result [skip ci]" || true
+            if git push origin HEAD:main; then pushed=true; break; fi
+            sleep $((attempt * 2))
+          done
+          $pushed || exit 1
+          cat /tmp/cleanup.log
+          exit "$code"

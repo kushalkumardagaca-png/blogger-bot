@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generic, idempotent publication and two-network social recovery.
 
-Permanent recovery generation 48: scheduled and recovery attempts now resolve to the same per-article concurrency key while different slots remain non-blocking; evergreen research prioritizes relevant official sources; current-day recovery remains oldest-first with no article retry ceiling.
+Permanent recovery generation 49: wrong-post cleanup persists pass/fail evidence and retries idempotently until confirmed; scheduled and recovery attempts share per-article concurrency keys; current-day recovery remains oldest-first with no article retry ceiling.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, json, subprocess
@@ -42,8 +42,8 @@ def may_retry(ledger,key,now,revision=None):
  # IST publication day. Each attempt remains time-spaced and individually
  # bounded, but an article is never abandoned because an arbitrary counter was
  # reached. Social replay retains a three-attempt cap to avoid duplicate posts.
- if not key.startswith(('source:','prewarm:')) and int(row.get('attempts',0))>=MAX_RETRIES:return False
- last=parse(row.get('lastAttempt',''));spacing=ARTICLE_RETRY if key.startswith(('source:','prewarm:')) else RETRY
+ if not key.startswith(('source:','prewarm:','cleanup:')) and int(row.get('attempts',0))>=MAX_RETRIES:return False
+ last=parse(row.get('lastAttempt',''));spacing=ARTICLE_RETRY if key.startswith(('source:','prewarm:','cleanup:')) else RETRY
  return not last or now-last>=spacing
 def mark(ledger,key,now,revision=None):
  revision=revision or implementation_revision();row=ledger.setdefault(key,{})
@@ -111,9 +111,12 @@ def reconcile(now,apply=False):
   # slots from racing the shared photo registry and package state; the next
   # ten-minute reconciliation advances to the next slot after confirmation.
   call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply});source_dispatched=True
+ cleanup_state=load(ROOT/'WRONG_MASTER_CLEANUP_STATUS.json',{})
  for repair in WRONG_MASTER_REPAIRS:
   replacement=master_by_key.get(repair['key']);lk=f"cleanup:{master_day}:{repair['key']}"
-  if not replacement or lk in ledger:continue
+  completed=cleanup_state.get('status')=='PASS' and cleanup_state.get('duplicate_url')==repair['duplicateUrl']
+  if not replacement or completed:continue
+  if not may_retry(ledger,lk,now):blocked.append(lk);continue
   cmd=['gh','workflow','run','cleanup_wrong_master_post.yml','--ref','main','-f',f"duplicate_url={repair['duplicateUrl']}",'-f',f"replacement_url={replacement['url']}",'-f',f"expected_title_phrase={repair['titlePhrase']}"]
   call(cmd,apply);mark(ledger,lk,now);actions.append({'type':'wrong_publication_cleanup','key':repair['key'],'duplicateUrl':repair['duplicateUrl'],'replacementUrl':replacement['url'],'applied':apply})
  platform_urls={p:tracker_urls(p) for p in ('facebook','bluesky','tumblr','mastodon')}
