@@ -101,7 +101,11 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
   if phrase.casefold() in text.casefold():issues.append("repetitive deterministic fallback sentence")
  if re.search(r"\bCertified Accountant\b",text,re.I) and os.environ.get("DY_VERIFIED_CERTIFIED_ACCOUNTANT","").casefold()!="true":
   issues.append("unverified professional qualification")
- seq=[normalize_sentence(x) for x in sentences(content)];seq=[x for x in seq if len(x.split())>=10]
+ # Seamless carousels may contain an accessibility-hidden clone of visible cards.
+ # Scan the full text for harmful material, but do not count that non-reader clone
+ # as repeated editorial prose.
+ repetition_content=re.sub(r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>', ' ', content or '', flags=re.I|re.S)
+ seq=[normalize_sentence(x) for x in sentences(repetition_content)];seq=[x for x in seq if len(x.split())>=10]
  counts=Counter(seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]
  if duplicates:issues.append("repeated substantive sentence within the content")
  if len(seq)>=12 and len(counts)/len(seq)<0.94:issues.append("insufficient sentence-level originality")

@@ -14,4 +14,8 @@ class ContentPolicyGuardTests(unittest.TestCase):
  def test_repeated_substantive_sentence_fails(self):
   sentence='This sufficiently long substantive sentence explains a distinct financial mechanism for readers to evaluate carefully.'
   self.assertIn('repeated substantive sentence within the content',audit_text('x',sentence+' '+sentence))
+ def test_accessibility_hidden_carousel_clone_is_not_editorial_repetition(self):
+  sentence='This sufficiently long substantive sentence explains a distinct financial mechanism for readers to evaluate carefully.'
+  content=f'<p>{sentence}</p><div aria-hidden="true"><p>{sentence}</p></div>'
+  self.assertNotIn('repeated substantive sentence within the content',audit_text('x',content))
 if __name__=='__main__':unittest.main()
