@@ -1,35 +1,23 @@
 {
-  "generatedAt": "2026-10-15T08:23:00.108135+05:30",
+  "generatedAt": "2026-10-15T08:50:24.761646+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 3,
   "overdueMissing": [
-    "news-india"
+    "news-india",
+    "master-evergreen-0"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-india",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
       "key": "master-evergreen-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-1",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-1",
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "source:2026-10-15:news-india"
+  ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
