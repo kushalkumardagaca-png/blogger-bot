@@ -1684,9 +1684,31 @@
       },
       "published_at": "2026-10-15T16:58:02.186965+05:30",
       "reconciled": false
+    },
+    {
+      "kind": "page",
+      "blogger_id": "spotlight",
+      "title": "Daily Yield Spotlight: Today's Featured Stories",
+      "url": "https://dailyyield.blogspot.com/#spotlight",
+      "mastodon_status_id": "117444799428984087",
+      "mastodon_url": "https://mastodon.social/@dailyyield/117444799428984087",
+      "score": 0,
+      "creative": {
+        "seed": "514033e5c90749ac",
+        "topic": "page",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "A USEFUL DAILY YIELD RESOURCE",
+        "emoji": "📊",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "published_at": "2026-10-15T17:27:01.208865+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-15T16:58:02.186977+05:30",
-  "last_mastodon_status_id": "117444685462870821"
+  "last_success_at": "2026-10-15T17:27:01.208880+05:30",
+  "last_mastodon_status_id": "117444799428984087"
 }
