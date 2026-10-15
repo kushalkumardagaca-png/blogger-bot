@@ -288,11 +288,18 @@ def scrub_repeated_sentences(content:str)->tuple[str,int]:
   segment,paragraphs=drop_repeated_paragraphs(segment)
   removed+=paragraphs
   segment=SENTENCE_BLOCKS.sub(fix_block,segment)
-  # Stock sentences that sit outside a recognised block are removed as well.
-  plain,index=_visible_text(segment);drops=[]
+  # Anything outside a recognised block (tables, plain containers, captions) is
+  # scanned as a reader sees it, so no duplicate or stock sentence survives.
+  plain,index=_visible_text(segment);drops=[];leftover_seen=set()
   for start,end in _sentence_spans(plain):
    key=normalize_sentence(plain[start:end])
-   if key and any(phrase in key for phrase in banned):drops.append((start,end));removed+=1
+   if not key:continue
+   if any(phrase in key for phrase in banned):
+    drops.append((start,end));removed+=1;continue
+   if len(key.split())>=10:
+    if key in leftover_seen:
+     drops.append((start,end));removed+=1;continue
+    leftover_seen.add(key)
   return _drop_plain_ranges(segment,index,drops) if drops else segment
  output=[];cursor=0
  for match in PROTECTED_BLOCKS.finditer(content or ""):

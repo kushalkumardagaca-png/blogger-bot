@@ -62,7 +62,7 @@ jobs:
           set -uo pipefail
           mode='${{ inputs.mode }}'
           if [ -z "$mode" ]; then
-            if [ '${{ github.event_name }}' = 'push' ]; then mode=validate; else mode=apply; fi
+            if [ '${{ github.event_name }}' = 'push' ]; then mode=validate_apply; else mode=apply; fi
           fi
           run_and_report() {
             if ! "$@" > /tmp/revival.log 2>&1; then
@@ -75,6 +75,7 @@ jobs:
           case "$mode" in
             survey)   run_and_report python -u revive_quarantine.py --survey ;;
             validate) run_and_report python -u revive_quarantine.py --survey; run_and_report python -u revive_quarantine.py --dry-run --force ;;
+            validate_apply) run_and_report python -u revive_quarantine.py --survey; run_and_report python -u revive_quarantine.py --apply ;;
             dry_run)  run_and_report python -u revive_quarantine.py --dry-run ${{ inputs.force && '--force' || '' }} ;;
             *)        run_and_report python -u revive_quarantine.py --apply ${{ inputs.force && '--force' || '' }} ;;
           esac

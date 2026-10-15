@@ -645,8 +645,10 @@ def run(apply: bool, force: bool) -> dict:
     except Exception as exc:
         row["status"] = "repair_failed"
         row["error"] = str(exc)[:1200]
-        current["next_due_at"] = (now + dt.timedelta(hours=SPACING_HOURS)).isoformat()
-        row["next_due_at"] = current["next_due_at"]
+        # A blocked article never consumes the eight-hour slot: the next run moves
+        # on to the following article at the same spacing.
+        row["next_due_at"] = current.get("next_due_at", "")
+        current["last_run"] = now.isoformat()
         save(STATE, current)
         print(json.dumps({"status": "REPAIR_FAILED", "draft_id": item["draft_id"], "title": item["title_now"], "error": str(exc)[:600]}))
         return {"status": "REPAIR_FAILED", "draft_id": item["draft_id"], "error": str(exc)[:600]}
