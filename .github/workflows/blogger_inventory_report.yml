@@ -2,6 +2,9 @@ name: Blogger Inventory Report
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/blogger-inventory-trigger'
 
 permissions:
   contents: write
