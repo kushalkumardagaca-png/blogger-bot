@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-15T18:26:28.052076+00:00",
+ "generated_at": "2026-10-15T19:10:06.924767+00:00",
  "pools": [
   {
    "pool": "master/059ada08d696d8a3",
-   "entries": 1,
+   "entries": 7,
    "used": 0,
    "target": 10,
    "title": "How to Measure Side-Hustle Profit After Costs and Time"
@@ -17,31 +17,24 @@
   },
   {
    "pool": "master/475ff8aafbb145d8",
-   "entries": 3,
+   "entries": 1,
    "used": 0,
    "target": 10,
    "title": "How to Read Inflation Signals Without Guessing Rate Moves"
   },
   {
    "pool": "master/5cdade0cae61cd5e",
-   "entries": 3,
+   "entries": 2,
    "used": 0,
    "target": 10,
    "title": "Oil prices climb as traders weigh Saudi supply risk, Russian diesel fl"
   },
   {
    "pool": "master/60bb07eaede8bd02",
-   "entries": 6,
+   "entries": 3,
    "used": 0,
    "target": 10,
    "title": "How to Build a Small-Business Cash-Flow Stress Test"
-  },
-  {
-   "pool": "master/94c9cb25362ce09d",
-   "entries": 0,
-   "used": 0,
-   "target": 10,
-   "title": "AT&T to Sell AT&T Mexico to Grupo Televisa and Fintech Holdings - PR N"
   },
   {
    "pool": "master/9ab3f4430e4a3945",
@@ -52,10 +45,17 @@
   },
   {
    "pool": "master/9d7ee94a8a72272f",
-   "entries": 6,
+   "entries": 2,
    "used": 0,
    "target": 10,
    "title": "Social Security Administration announces 3.6% cost-of-living adjustmen"
+  },
+  {
+   "pool": "master/a95c0e33a1c7e31c",
+   "entries": 0,
+   "used": 0,
+   "target": 10,
+   "title": "Kremlin-backed money launderer used London fintech to make payments - "
   },
   {
    "pool": "master/dfa96f6d0bb54262",
@@ -66,7 +66,7 @@
   },
   {
    "pool": "master/f36627b824852543",
-   "entries": 4,
+   "entries": 2,
    "used": 0,
    "target": 10,
    "title": "How to Evaluate Healthcare AI Investments Without Hype"
@@ -79,19 +79,19 @@
   },
   {
    "pool": "news/asia-pacific",
-   "entries": 34,
+   "entries": 32,
    "rotation": 0,
    "target": 45
   },
   {
    "pool": "news/banking",
-   "entries": 21,
+   "entries": 20,
    "rotation": 0,
    "target": 45
   },
   {
    "pool": "news/china",
-   "entries": 25,
+   "entries": 24,
    "rotation": 0,
    "target": 45
   },
@@ -103,7 +103,7 @@
   },
   {
    "pool": "news/economy",
-   "entries": 31,
+   "entries": 26,
    "rotation": 0,
    "target": 45
   },
@@ -127,7 +127,7 @@
   },
   {
    "pool": "news/markets",
-   "entries": 32,
+   "entries": 37,
    "rotation": 0,
    "target": 45
   },
@@ -140,6 +140,6 @@
  ],
  "master_pools": 10,
  "news_pools": 11,
- "master_photos": 51,
- "news_photos": 361
+ "master_photos": 45,
+ "news_photos": 357
 }
