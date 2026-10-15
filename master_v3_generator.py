@@ -240,6 +240,36 @@ def write_section(article_title,section_heading,index,sources):
  # uses only short attributed source excerpts plus explicit scope limitations.
  return deterministic_section(section_heading,sources)
 
+def drop_later_duplicate_sentences(blocks):
+ """Delete every later copy of a sentence the sections already used.
+
+ The publication gate measures repetition across the whole rendered article, so
+ a sentence written twice in independently generated sections has to go. The
+ first real occurrence is always kept, only the later copy is removed, and only
+ sentences of ten words or more are considered, so ordinary connective wording
+ is never touched.
+ """
+ from content_policy_guard import normalize_sentence
+ seen=set();removed=0
+ for block in blocks:
+  paragraphs=[]
+  for paragraph in block.get('paragraphs') or []:
+   keep=[]
+   for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
+    key=normalize_sentence(sentence)
+    if key and len(key.split())>=10:
+     if key in seen:
+      removed+=1;continue
+     seen.add(key)
+    keep.append(sentence)
+   joined=' '.join(x.strip() for x in keep if x.strip())
+   if joined:paragraphs.append(joined)
+  # The list is replaced even when it becomes empty: leaving the later copy in
+  # place would keep the very repetition that stopped the publication.
+  block['paragraphs']=paragraphs
+ return removed
+
+
 def contextualize_repeated_sentences(sections):
  """Rewrite accidental model boilerplate in-place while preserving its claim.
 
@@ -414,7 +444,12 @@ def build(item,kind,target):
   if 'repeated substantive sentence within the content' not in audit_text(title,assembled,'master-package',False):break
   if attempt<8:contextualize_repeated_sentences(combined)
   else:remove_repeated_sentences(combined)
- else:raise RuntimeError('assembled Master prose could not be made sentence-distinct')
+ else:
+  dropped=drop_later_duplicate_sentences(combined)
+  still=audit_text(title,' '.join(' '.join(x.get('paragraphs') or []) for x in combined),'master-package',False)
+  if not dropped or 'repeated substantive sentence within the content' in still:
+   raise RuntimeError('assembled Master prose could not be made sentence-distinct')
+  print(f'Dropped {dropped} later duplicate sentence(s) while assembling the article.')
  sections=combined[:-1];summary=combined[-1]['paragraphs']
  faq,glossary=support(sections)
  # FAQ answers and glossary definitions are rendered prose too, so include them in
@@ -425,6 +460,12 @@ def build(item,kind,target):
   if 'repeated substantive sentence within the content' not in audit_text(title,assembled,'master-package',False):break
   if attempt<8:contextualize_repeated_sentences(blocks)
   else:remove_repeated_sentences(blocks)
+ else:
+  dropped=drop_later_duplicate_sentences(blocks)
+  still=audit_text(title,' '.join(' '.join(b.get('paragraphs') or []) for b in blocks),'master-package',False)
+  if not dropped or 'repeated substantive sentence within the content' in still:
+   raise RuntimeError('assembled Master prose could not be made sentence-distinct')
+  print(f'Dropped {dropped} later duplicate sentence(s) in the closing modules.')
  sections=blocks[:len(sections)];summary=blocks[len(sections)]['paragraphs']
  for i,block in enumerate(blocks[len(sections)+1:len(sections)+1+len(faq)]):faq[i]['answer']=block['paragraphs'][0] if block['paragraphs'] else faq[i]['answer']
  for i,block in enumerate(blocks[len(sections)+1+len(faq):]):glossary[i]['definition']=block['paragraphs'][0] if block['paragraphs'] else glossary[i]['definition']

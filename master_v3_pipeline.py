@@ -52,13 +52,20 @@ def build_html(kind,item,package,check_remote_images=True):
  # A verbatim sentence can still collide across rendered modules (for example a
  # FAQ answer repeating body prose). Remove the later copy rather than failing a
  # safe article; if the collision is not a repeated sentence the error is re-raised.
- from editorial_integrity import repair_repeated_prose
- for attempt in range(4):
+ from editorial_integrity import repair_repeated_prose,scrub_repeated_sentences
+ for attempt in range(8):
   try:
    assert_publishable(title,body,labels,check_remote_images=check_remote_images);break
   except RuntimeError as exc:
-   if 'repeated substantive sentence' not in str(exc) or attempt==3:raise
+   message=str(exc)
+   repeat_issue=('repeated substantive sentence' in message
+                 or 'duplicated substantive paragraph' in message)
+   if not repeat_issue or attempt==7:raise
    body,removed=repair_repeated_prose(body)
+   if not removed:
+    # The reader-visible duplicates the gate measures are always removable, so a
+    # later copy is dropped outright rather than failing a safe article.
+    body,removed=scrub_repeated_sentences(body)
    if not removed:raise
    print(f'Removed {removed} repeated rendered sentence(s) before publication.')
  return title,slug,meta,labels,body
