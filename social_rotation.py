@@ -132,7 +132,8 @@ def resource_url(slot: int, day: dt.date) -> str:
 
 
 def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
-              schedule: str, now: dt.datetime | None = None, route_index: int = 0) -> dict:
+              schedule: str, now: dt.datetime | None = None, route_index: int = 0,
+              platforms: tuple[str, ...] | None = None) -> dict:
     reference_now = now or dt.datetime.now(dt.timezone.utc)
     if reference_now.tzinfo is None:
         reference_now = reference_now.replace(tzinfo=dt.timezone.utc)
@@ -149,10 +150,17 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
         mode="page"
     if not item_key or not target_url:
         raise ValueError("item key and target URL are required")
+    if platforms:
+        # A supervised revival may name its own rotation of networks. The list is
+        # validated here so no route can leave the approved Daily Yield accounts.
+        if any(x not in PLATFORMS for x in platforms) or len(set(platforms)) != len(platforms):
+            raise ValueError(f"invalid platform rotation: {platforms}")
+        if len(platforms) < 2:
+            raise ValueError("a coordinated route needs at least two networks")
     if not target_url.startswith("https://dailyyield.blogspot.com/"):
         raise ValueError("target URL is outside the official Daily Yield domain")
     day = (published.astimezone(IST).date() if published else current.date())
-    if route_index not in (0,1):raise ValueError('route index must be 0 or 1')
+    if route_index not in (0,1,2):raise ValueError('route index must be 0, 1 or 2')
     delay = 0
     if published:
         # Start one minute inside the five-minute SLA so API and workflow overhead
@@ -163,7 +171,7 @@ def make_plan(item_key: str, target_url: str, mode: str, published_at: str,
         "item_key": item_key,
         "target_url": target_url,
         "content_mode": mode or "post",
-        "platform": (scheduled_platform or (platform_pair_for(item_key,day)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day))),
+        "platform": (scheduled_platform or (platforms[route_index] if platforms and route_index < len(platforms) else (platform_pair_for(item_key,day)[route_index] if item_key in DAILY_ARTICLE_KEYS else platform_for(item_key, day)))),
         "resource_name": resource_name,
         "route_index": route_index,
         "delay_seconds": delay,
@@ -187,10 +195,13 @@ def main() -> int:
     parser.add_argument("--content-mode", choices=("post", "page"), default="post")
     parser.add_argument("--published-at", default="")
     parser.add_argument("--schedule", default="")
-    parser.add_argument("--route-index",type=int,choices=(0,1),default=0)
+    parser.add_argument("--route-index",type=int,choices=(0,1,2),default=0)
+    parser.add_argument("--platforms",default="")
     args = parser.parse_args()
+    platforms=tuple(x.strip() for x in args.platforms.split(',') if x.strip()) or None
     write_outputs(make_plan(args.item_key, args.target_url, args.content_mode,
-                            args.published_at, args.schedule,route_index=args.route_index))
+                            args.published_at, args.schedule,route_index=args.route_index,
+                            platforms=platforms))
     return 0
 
 

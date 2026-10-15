@@ -1,0 +1,267 @@
+{
+  "created_at": "2026-10-15T13:01:59.076320+00:00",
+  "purpose": "Restore the 18 quarantined drafts to public view one at a time, eight hours apart, after each passes the full publication benchmark, with a three-network social post on a rotating set of networks.",
+  "cadence_hours": 8,
+  "owner_decision": "User instruction of 15 October 2026: make them live one by one every eight hours.",
+  "rules": [
+    "Verify against the current publication benchmark before publishing; repair any gap.",
+    "One article per eight-hour slot, at most one article per run.",
+    "Never publish without a passing preflight and a verified stored Blogger post.",
+    "Three social networks per article, one post each, each article on a different combination in rotation.",
+    "No synthetic pageviews and no credential exposure."
+  ],
+  "items": [
+    {
+      "order": 1,
+      "draft_id": "6779600207608409311",
+      "title_now": "From digital India to intelligent India",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-14T03:45:01-07:00",
+      "quarantined_updated": "2026-10-14T23:04:44-07:00",
+      "social_route": [
+        "facebook",
+        "tumblr",
+        "bluesky"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 2,
+      "draft_id": "6893610896651799359",
+      "title_now": "Sold a property? Eight different ways to reduc",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-14T02:45:01-07:00",
+      "quarantined_updated": "2026-10-14T23:04:45-07:00",
+      "social_route": [
+        "tumblr",
+        "bluesky",
+        "mastodon"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 3,
+      "draft_id": "8023797526917435508",
+      "title_now": "What to expect from Europe’s most valuable com",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-14T01:45:01-07:00",
+      "quarantined_updated": "2026-10-14T23:04:46-07:00",
+      "social_route": [
+        "bluesky",
+        "mastodon",
+        "facebook"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 4,
+      "draft_id": "4798885766859226553",
+      "title_now": "How RMDs Determine Withdrawals From a $1 Milli",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-14T01:18:20-07:00",
+      "quarantined_updated": "2026-10-14T23:04:47-07:00",
+      "social_route": [
+        "mastodon",
+        "facebook",
+        "tumblr"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 5,
+      "draft_id": "8656941344223656311",
+      "title_now": "Gold price holds critical $4,100 support, but",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-13T23:34:03-07:00",
+      "quarantined_updated": "2026-10-14T23:04:52-07:00",
+      "social_route": [
+        "facebook",
+        "tumblr",
+        "bluesky"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 6,
+      "draft_id": "8549378344780817191",
+      "title_now": "IFS: budget will be ‘work of fiction’ without",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-13T23:08:16-07:00",
+      "quarantined_updated": "2026-10-14T23:04:53-07:00",
+      "social_route": [
+        "tumblr",
+        "bluesky",
+        "mastodon"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 7,
+      "draft_id": "4654575691668632397",
+      "title_now": "Global Market: Singapore's US stock trading pu",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-13T22:58:17-07:00",
+      "quarantined_updated": "2026-10-14T23:04:55-07:00",
+      "social_route": [
+        "bluesky",
+        "mastodon",
+        "facebook"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 8,
+      "draft_id": "3982102288480941665",
+      "title_now": "0% Capital Gains Tax Guide",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-11T04:15:02-07:00",
+      "quarantined_updated": "2026-10-14T23:05:43-07:00",
+      "social_route": [
+        "mastodon",
+        "facebook",
+        "tumblr"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 9,
+      "draft_id": "2436300762236386235",
+      "title_now": "Your Tax Refund Is a Trap",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-05T06:42:11-07:00",
+      "quarantined_updated": "2026-10-14T23:07:34-07:00",
+      "social_route": [
+        "facebook",
+        "tumblr",
+        "bluesky"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 10,
+      "draft_id": "3824305036751783911",
+      "title_now": "Build Credit Without Paying Interest",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-10-03T01:30:07-07:00",
+      "quarantined_updated": "2026-10-14T23:08:29-07:00",
+      "social_route": [
+        "tumblr",
+        "bluesky",
+        "mastodon"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 11,
+      "draft_id": "4498405341941524443",
+      "title_now": "Invest With Rules, Not Bets",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-29T04:38:11-07:00",
+      "quarantined_updated": "2026-10-14T23:10:05-07:00",
+      "social_route": [
+        "bluesky",
+        "mastodon",
+        "facebook"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 12,
+      "draft_id": "7255018414657547539",
+      "title_now": "Stress-Test Every BRRRR Deal",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-29T01:31:40-07:00",
+      "quarantined_updated": "2026-10-14T23:10:08-07:00",
+      "social_route": [
+        "mastodon",
+        "facebook",
+        "tumblr"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 13,
+      "draft_id": "314352988888289456",
+      "title_now": "Park Your Emergency Fund Safely",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-28T22:40:09-07:00",
+      "quarantined_updated": "2026-10-14T23:10:14-07:00",
+      "social_route": [
+        "facebook",
+        "tumblr",
+        "bluesky"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 14,
+      "draft_id": "5611067798787673649",
+      "title_now": "Your First 72 Hours After a Layoff",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-28T18:51:35-07:00",
+      "quarantined_updated": "2026-10-14T23:10:18-07:00",
+      "social_route": [
+        "tumblr",
+        "bluesky",
+        "mastodon"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 15,
+      "draft_id": "7839033619702786971",
+      "title_now": "Invest Your First $1,000 With a Safety Plan",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-26T18:49:24-07:00",
+      "quarantined_updated": "2026-10-14T23:11:02-07:00",
+      "social_route": [
+        "bluesky",
+        "mastodon",
+        "facebook"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 16,
+      "draft_id": "3640853899029929702",
+      "title_now": "Build a Budget That Survives Week Two",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-26T07:24:20-07:00",
+      "quarantined_updated": "2026-10-14T23:11:08-07:00",
+      "social_route": [
+        "mastodon",
+        "facebook",
+        "tumblr"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 17,
+      "draft_id": "2691449182304659819",
+      "title_now": "Test AI Money Coaches Before Trusting Them",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-26T04:37:01-07:00",
+      "quarantined_updated": "2026-10-14T23:11:11-07:00",
+      "social_route": [
+        "facebook",
+        "tumblr",
+        "bluesky"
+      ],
+      "status": "pending"
+    },
+    {
+      "order": 18,
+      "draft_id": "1246197502482808342",
+      "title_now": "Test Money Advice Before You Trust It",
+      "label_in_quarantine_log": null,
+      "original_published": "2026-09-24T05:34:30-07:00",
+      "quarantined_updated": "2026-10-14T23:11:46-07:00",
+      "social_route": [
+        "tumblr",
+        "bluesky",
+        "mastodon"
+      ],
+      "status": "pending"
+    }
+  ]
+}

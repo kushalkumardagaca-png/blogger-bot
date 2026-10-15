@@ -40,11 +40,16 @@ on:
         default: ''
         type: string
       route_index:
-        description: '0 or 1: two different networks per article'
+        description: '0 to 2: which network of the assigned rotation to post to'
         required: false
         default: '0'
         type: choice
-        options: ['0','1']
+        options: ['0','1','2']
+      extra_platforms:
+        description: 'Optional comma-separated rotation for a supervised revival, e.g. facebook,tumblr,bluesky'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: write
@@ -73,7 +78,8 @@ jobs:
             --content-mode '${{ inputs.content_mode || 'page' }}' \
             --published-at '${{ inputs.published_at }}' \
             --schedule '${{ github.event.schedule }}' \
-            --route-index '${{ inputs.route_index || '0' }}'
+            --route-index '${{ inputs.route_index || '0' }}' \
+            --platforms '${{ inputs.extra_platforms }}'
 
   facebook:
     needs: plan
