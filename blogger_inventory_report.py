@@ -40,6 +40,28 @@ def inventory(tok,status):
 
 def key(value):return ' '.join(re.findall(r'[a-z0-9]+',str(value or '').casefold()))
 
+QUARANTINE_IDS=(
+ ('8304416218719683957','Best life insurance companies for seniors'),
+ ('6779600207608409311','From digital India to intelligent India'),
+ ('6893610896651799359','Sold a property? Eight different ways'),
+ ('8023797526917435508','What to expect from Europe’s most valuable'),
+ ('4798885766859226553','How RMDs Determine Withdrawals'),
+ ('8656941344223656311','Gold price holds critical support'),
+ ('8549378344780817191','IFS budget'),
+ ('4654575691668632397','Global Market Singapore'),
+ ('3982102288480941665','0% Capital Gains Tax Guide'),
+ ('2436300762236386235','Your Tax Refund Is a Trap'),
+ ('3824305036751783911','Graduate with credit file'),
+ ('4498405341941524443','The market is not a casino'),
+ ('7255018414657547539','BRRRR with ugly months'),
+ ('314352988888289456','Where to park your emergency fund'),
+ ('5611067798787673649','Laid off first 72 hours'),
+ ('7839033619702786971','First 1000 scared persons plan'),
+ ('3640853899029929702','Why your budget dies in week two'),
+ ('2691449182304659819','I tested 6 AI money coaches'),
+ ('1246197502482808342','15 money myths your uncle repeats'),
+)
+
 def main():
  tok=token()
  live=inventory(tok,'LIVE');drafts=inventory(tok,'DRAFT');scheduled=inventory(tok,'SCHEDULED')
@@ -57,6 +79,14 @@ def main():
   except Exception: continue
   if day_ist==dt.datetime.now(IST).date().isoformat(): today_live.append({'id':x['id'],'title':x.get('title'),'url':x.get('url'),'published_ist':stamp})
  def tokens(value):return set(re.findall(r'[a-z0-9]{4,}',str(value or '').casefold()))
+ quarantined=[]
+ for post_id,label in QUARANTINE_IDS:
+  try:
+   row=call('/posts/'+post_id+'?fetchBody=true',tok)
+   quarantined.append({'post_id':post_id,'label':label,'current_status':row.get('status'),'url':row.get('url'),'updated':row.get('updated'),'has_current_disclosure':'DY_AUTOMATION_DISCLOSURE_GREEN_V2' in (row.get('content') or '')})
+  except Exception as exc:
+   quarantined.append({'post_id':post_id,'label':label,'current_status':'LOOKUP_FAILED','detail':str(exc)[:120]})
+ still_live=[x for x in quarantined if x.get('current_status')=='LIVE']
  plan=json.loads((ROOT/'MASTER_DAILY_PLAN.json').read_text()) if (ROOT/'MASTER_DAILY_PLAN.json').exists() else {}
  day=dt.datetime.now(IST).date().isoformat()
  expected=[]
@@ -76,7 +106,8 @@ def main():
   'master_plan_today':expected,'news_live_today':news_rows,'live_posts_published_today_ist':today_live,'zero_public_pageviews':True}
  (ROOT/'BLOGGER_INVENTORY_STATUS.json').write_text(json.dumps(report,indent=2)+'\n')
  print(json.dumps({'live':len(live),'draft':len(drafts),'scheduled':len(scheduled),'draft_duplicates':len(duplicate_drafts),'draft_unique':len(unique_drafts),
-  'master_live_today':sum(1 for x in expected if x['live']),'master_expected_today':len(expected),'news_live_today':len(news_rows)},indent=2))
+  'master_live_today':sum(1 for x in expected if x['live']),'master_expected_today':len(expected),'news_live_today':len(news_rows),'quarantine_still_live':len(still_live)},indent=2))
+ for row in still_live:print(' QUARANTINED BUT STILL LIVE:',row.get('post_id'),row.get('label'),row.get('url'))
  for row in unique_drafts:print(' UNIQUE DRAFT:',row['updated'],row['title'])
  for row in duplicate_drafts:print(' DRAFT COPY OF LIVE POST:',row['title'],'->',row['live_url'])
  for row in expected:
