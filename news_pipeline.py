@@ -31,7 +31,7 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
-from editorial_integrity import find_duplicate,stamp
+from editorial_integrity import assert_green_operating_state,assert_saved_green,find_duplicate,stamp
 from content_policy_guard import automation_disclosure
 from publication_timing import NEWS_LIVE, wait_for_release
 from page_family import ensure_family
@@ -1547,12 +1547,14 @@ def publish_post(art, token, dry=False):
     if dry:
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
         return None
+    assert_green_operating_state()
     # Stop same-title, same-canonical and near-duplicate editions before draft
     # creation. The authenticated read creates no public pageview.
     query = urllib.parse.urlencode({"status":"live","fetchBodies":"true","maxResults":"50","fields":"items(id,title,url,content,labels)"})
     recent = blogger_call("/posts?"+query, token).get("items",[])
     existing,reason=find_duplicate(art["title"],art["html"],recent,art.get("canonical",''))
     if existing:
+        assert_saved_green(existing)
         print(f"    duplicate-safe recovery ({reason}): {existing.get('url')}")
         return existing.get('url','')
     art["html"]=stamp(art["html"],art["title"],"news-desk")
@@ -1581,6 +1583,8 @@ def publish_post(art, token, dry=False):
     upd = blogger_call(f"/posts/{draft['id']}", token, "PUT", {
         "kind": "blogger#post", "id": draft["id"], "title": art["title"],
         "content": final_html, "labels": art["labels"]})
+    stored=blogger_call(f"/posts/{draft['id']}?fetchBody=true",token)
+    assert_saved_green(stored)
     return upd.get("url", url)
 
 # ---------------------------------------------------------------- orchestration

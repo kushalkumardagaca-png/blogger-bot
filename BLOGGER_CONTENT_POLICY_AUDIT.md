@@ -1,6 +1,6 @@
 # Blogger Content Policy Audit
 
-**20 passed · 0 failed**
+**23 passed · 0 failed**
 
 - **PASS** — Every Blogger publication passes the central policy guard
 - **PASS** — Automated posts disclose the production process
@@ -22,3 +22,6 @@
 - **PASS** — Master evidence presentation rotates safe semantic structures
 - **PASS** — Financial rankings and affiliate links require visible disclosure
 - **PASS** — Live corpus audit removes exact duplicate records and retrofits disclosures
+- **PASS** — Every live insert requires a fresh whole-site PASS and unchanged official policy
+- **PASS** — Blogger stored content is re-read and verified after publication
+- **PASS** — Whole live corpus is automatically remediated every day

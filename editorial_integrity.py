@@ -6,8 +6,9 @@ explainable content/structure fingerprint, and makes retries recover the existin
 Blogger object instead of creating another one. It performs no public page views.
 """
 from __future__ import annotations
-import hashlib,html,re
+import datetime as dt,hashlib,html,json,re
 from difflib import SequenceMatcher
+from pathlib import Path
 from urllib.parse import urlsplit
 
 STOP=set('a an and are as at be by for from how in into is it of on or that the this to today versus via what when where which who why will with your'.split())
@@ -73,3 +74,43 @@ def find_duplicate(title:str,content:str,posts:list[dict],expected_url:str='',ig
   reason=duplicate_reason(title,content,post,expected_url)
   if reason:return post,reason
  return None,None
+
+def _read_status(path:Path)->dict:
+ try:return json.loads(path.read_text())
+ except (OSError,json.JSONDecodeError) as exc:raise RuntimeError(f'GREEN OPERATING GATE FAILED — unreadable {path.name}: {exc}')
+def _age_hours(value:str)->float:
+ stamp=dt.datetime.fromisoformat(str(value).replace('Z','+00:00'))
+ if stamp.tzinfo is None:stamp=stamp.replace(tzinfo=dt.timezone.utc)
+ return (dt.datetime.now(dt.timezone.utc)-stamp).total_seconds()/3600
+
+def assert_green_operating_state(root:Path|None=None,max_age_hours:float=36)->bool:
+ """Fail publication closed when whole-site or official-policy monitoring is stale."""
+ root=root or Path(__file__).parent
+ corpus=_read_status(root/'BLOGGER_CORPUS_POLICY_STATUS.json');policy=_read_status(root/'BLOGGER_POLICY_MONITOR_STATUS.json')
+ issues=[]
+ if corpus.get('status')!='PASS':issues.append('live Blogger corpus status is not PASS')
+ if corpus.get('remaining_live_policy_flags'):issues.append('live corpus has policy flags')
+ if corpus.get('unsafe_active_links'):issues.append('live corpus has unsafe links')
+ if int(corpus.get('image_rights_gap_posts') or 0):issues.append('live corpus has image-rights gaps')
+ if policy.get('status')!='PASS' or policy.get('wording_changed'):issues.append('official Blogger policy requires review')
+ for name,row in (('corpus',corpus),('policy',policy)):
+  try:
+   if _age_hours(row.get('checked_at',''))>max_age_hours:issues.append(f'{name} audit is stale')
+  except Exception:issues.append(f'{name} audit timestamp is invalid')
+ if issues:raise RuntimeError('GREEN OPERATING GATE FAILED — '+'; '.join(issues))
+ return True
+
+def assert_saved_green(post:dict)->bool:
+ """Verify Blogger's stored response, not merely the pre-insert package."""
+ from content_policy_guard import DISCLOSURE_MARKER,audit_text
+ title=str(post.get('title',''));content=str(post.get('content',''));issues=[]
+ if post.get('status') not in (None,'LIVE'):issues.append('Blogger post is not live')
+ if DISCLOSURE_MARKER not in content:issues.append('current transparency disclosure missing')
+ if MARK not in content:issues.append('editorial integrity fingerprint missing')
+ if not post.get('url'):issues.append('canonical Blogger URL missing')
+ for tag in re.findall(r'<img\b[^>]*>',content,re.I):
+  alt=re.search(r'\balt=["\']([^"\']*)',tag,re.I)
+  if not alt or not html.unescape(alt.group(1)).strip():issues.append('image alternative text missing');break
+ issues.extend(audit_text(title,content,'stored-blogger-post',require_disclosure=True))
+ if issues:raise RuntimeError('STORED BLOGGER GREEN VERIFICATION FAILED — '+'; '.join(sorted(set(issues))))
+ return True

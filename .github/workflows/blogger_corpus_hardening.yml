@@ -9,7 +9,8 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: '35 20 * * 0'
+    # Daily whole-site verification finishes before the main IST publication day.
+    - cron: '55 18 * * *'
 
 permissions:
   contents: write
@@ -34,7 +35,7 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-          APPLY_CORPUS_REMEDIATION: ${{ github.event_name == 'workflow_dispatch' && inputs.apply && 'true' || 'false' }}
+          APPLY_CORPUS_REMEDIATION: ${{ (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.apply)) && 'true' || 'false' }}
         run: python harden_live_corpus.py
       - name: Persist compact policy and image-rights evidence
         run: |

@@ -61,7 +61,7 @@ from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from publication_preflight import assert_publishable
-from editorial_integrity import find_duplicate,stamp
+from editorial_integrity import assert_green_operating_state,assert_saved_green,find_duplicate,stamp
 from page_family import ensure_family
 from seo_hygiene import compact_title, repair_image_alts
 from seo_meta import ensure_seo_meta
@@ -128,6 +128,7 @@ def get_standardized_category(raw_cat):
 
 def publish_to_blogger(title, content, labels):
     """Publish once, recover safely on retries, and align canonical URLs to Blogger."""
+    assert_green_operating_state()
     client_id = os.environ.get("BLOGGER_CLIENT_ID")
     client_secret = os.environ.get("BLOGGER_CLIENT_SECRET")
     refresh_token = os.environ.get("BLOGGER_REFRESH_TOKEN")
@@ -154,6 +155,7 @@ def publish_to_blogger(title, content, labels):
         if not page:break
     existing,reason=find_duplicate(title,content,posts)
     if existing:
+        assert_saved_green(existing)
         print(f"Existing post recovered ({reason}); no duplicate published: {existing.get('url')}")
         return existing
 
@@ -170,8 +172,12 @@ def publish_to_blogger(title, content, labels):
         res = service.posts().update(blogId=BLOG_ID, postId=res["id"], body={
             "kind": "blogger#post", "id": res["id"], "title": title,
             "content": patched, "labels": labels}).execute()
+    # Re-read Blogger's stored object so a normalization or partial update can
+    # never be mistaken for a Green publication.
+    stored=service.posts().get(blogId=BLOG_ID,postId=res['id'],fetchBody=True).execute()
+    assert_saved_green(stored)
     print(f"Successfully published live to Blogger! Post ID: {res.get('id')} | URL: {res.get('url', live_url)}")
-    return res
+    return stored
 
 def main():
     # A workflow consumes only events created by this exact publication run.

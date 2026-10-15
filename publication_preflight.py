@@ -3,6 +3,7 @@ import html,json,re
 from urllib.parse import urlsplit
 from image_safety import image_works
 from content_policy_guard import assert_policy_compliant,normalize_sentence,sentences
+from editorial_integrity import assert_green_operating_state
 
 MASS_TEMPLATE_PHRASES=(
  'This forensic framework eliminates redundant intermediary friction',
@@ -24,6 +25,9 @@ def _source_domains(content):
  return out
 
 def assert_publishable(title,content,labels,check_remote_images=True):
+ # Generation, manual publication, retries, recovery and repair routes all stop
+ # when the last whole-site audit is not Green or official policy changed.
+ assert_green_operating_state()
  issues=[]; labels=labels or []
  if not title or len(title.strip())<20:issues.append('missing/short SEO title (minimum 20 characters)')
  if len(title.strip())>46:issues.append(f'Bing title budget exceeded ({len(title.strip())} characters; maximum 46)')

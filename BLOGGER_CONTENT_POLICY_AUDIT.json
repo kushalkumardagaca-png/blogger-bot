@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-15T06:13:29.735991+00:00",
+  "checked_at": "2026-10-15T06:32:56.899090+00:00",
   "policy_version": "BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2",
   "summary": {
-    "pass": 20,
+    "pass": 23,
     "fail": 0
   },
   "checks": [
@@ -103,6 +103,21 @@
     },
     {
       "name": "Live corpus audit removes exact duplicate records and retrofits disclosures",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every live insert requires a fresh whole-site PASS and unchanged official policy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Blogger stored content is re-read and verified after publication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Whole live corpus is automatically remediated every day",
       "status": "PASS",
       "detail": ""
     }
