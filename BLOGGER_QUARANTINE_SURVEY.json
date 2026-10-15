@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-15T13:32:13.955587+00:00",
+  "generated_at": "2026-10-15T13:40:07.158251+00:00",
   "drafts": 18,
-  "preflight_pass": 17,
+  "preflight_pass": 18,
   "rows": [
     {
       "title": "From digital India to intelligent India",
@@ -30,7 +30,7 @@
         "tumblr",
         "bluesky"
       ],
-      "status_now": "DRAFT",
+      "status_now": null,
       "labels": [
         "Banking Payments & Fintech",
         "Kushal K. Daga",
@@ -38,20 +38,14 @@
         "Trend · Technology & Future Money"
       ],
       "before_title": "From digital India to intelligent India",
-      "before_words": 12030,
-      "before_bytes": 164671,
-      "repairs_planned": [
-        "removed 23 repeated prose sentence(s)",
-        "removed 183 banned or duplicated sentence(s)",
-        "added the disclosed worked example",
-        "added the editorial method note",
-        "added the contextual Daily Yield card"
-      ]
+      "before_words": 6955,
+      "before_bytes": 129584,
+      "repairs_planned": []
     },
     {
       "title": "Sold a property? Eight different ways to reduc",
       "title_length": 46,
-      "words": 6714,
+      "words": 6712,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
@@ -358,7 +352,7 @@
     {
       "title": "Your Tax Refund Is a Trap",
       "title_length": 25,
-      "words": 6350,
+      "words": 6346,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
@@ -552,7 +546,7 @@
     {
       "title": "Park Your Emergency Fund Safely",
       "title_length": 31,
-      "words": 4691,
+      "words": 4689,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
@@ -735,7 +729,7 @@
     {
       "title": "Test AI Money Coaches Before Trusting Them",
       "title_length": 42,
-      "words": 5147,
+      "words": 5141,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
@@ -780,14 +774,10 @@
     {
       "title": "Test Money Advice Before You Trust It",
       "title_length": 37,
-      "words": 6295,
-      "preflight": "FAIL",
-      "issues": [
-        "BLOGGER CONTENT POLICY GATE FAILED — deceptive financial or commercial promise"
-      ],
-      "policy_issues": [
-        "deceptive financial or commercial promise"
-      ],
+      "words": 6294,
+      "preflight": "PASS",
+      "issues": [],
+      "policy_issues": [],
       "promise_evidence": [
         "Guaranteed Myth 11: You Must Time the Market to Win Myth 12: Student L",
         "guaranteed investment is safe because everyone is buying",
@@ -825,6 +815,7 @@
       "before_words": 6360,
       "before_bytes": 104268,
       "repairs_planned": [
+        "rewrote 1 promise-shaped phrase(s) into plain wording",
         "removed 14 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
