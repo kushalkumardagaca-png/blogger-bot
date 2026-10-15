@@ -1,12 +1,11 @@
 {
-  "generatedAt": "2026-10-15T18:14:24.464053+05:30",
+  "generatedAt": "2026-10-15T18:56:45.950812+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 12,
+  "confirmedPublications": 14,
   "overdueMissing": [
     "news-companies",
-    "master-trending-2",
     "master-evergreen-2",
     "master-trending-3"
   ],
@@ -18,14 +17,13 @@
     },
     {
       "type": "source_recovery",
-      "key": "master-trending-2",
+      "key": "master-evergreen-2",
       "attempt": 1,
       "applied": true
     }
   ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [
-    "master-evergreen-2",
     "master-trending-3"
   ],
   "syntheticViews": 0,
