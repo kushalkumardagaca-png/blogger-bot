@@ -48,7 +48,20 @@ def build_html(kind,item,package,check_remote_images=True):
  published_at=dt.datetime.now(IST);topic=topic_for(kind,item);title,slug,meta,labels,body=render(package,topic,published_at.strftime('%Y-%m-%d'),published_at.strftime('%H:%M'))
  if kind=='trending':labels=[item['category'],item['evergreen_category'],'Master Article','Kushal K. Daga']
  else:labels=[item['category'],'Master Article','Kushal K. Daga']
- first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);body=stamp(body,title,str(package.get('structure_profile','standard')));assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
+ first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);body=stamp(body,title,str(package.get('structure_profile','standard')))
+ # A verbatim sentence can still collide across rendered modules (for example a
+ # FAQ answer repeating body prose). Remove the later copy rather than failing a
+ # safe article; if the collision is not a repeated sentence the error is re-raised.
+ from editorial_integrity import repair_repeated_prose
+ for attempt in range(4):
+  try:
+   assert_publishable(title,body,labels,check_remote_images=check_remote_images);break
+  except RuntimeError as exc:
+   if 'repeated substantive sentence' not in str(exc) or attempt==3:raise
+   body,removed=repair_repeated_prose(body)
+   if not removed:raise
+   print(f'Removed {removed} repeated rendered sentence(s) before publication.')
+ return title,slug,meta,labels,body
 
 def trending_candidates(plan,item):
  """Use only live-internet reserves from the same approved category."""

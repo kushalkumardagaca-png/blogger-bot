@@ -416,7 +416,19 @@ def build(item,kind,target):
   else:remove_repeated_sentences(combined)
  else:raise RuntimeError('assembled Master prose could not be made sentence-distinct')
  sections=combined[:-1];summary=combined[-1]['paragraphs']
- faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
+ faq,glossary=support(sections)
+ # FAQ answers and glossary definitions are rendered prose too, so include them in
+ # the same sentence-distinctness repair before the package is written.
+ blocks=sections+[{'heading':'Evidence-led takeaways','paragraphs':summary}]+[{'heading':f'Reader question {i}','paragraphs':[x['answer']]} for i,x in enumerate(faq)]+[{'heading':f'Decoded term {i}','paragraphs':[x['definition']]} for i,x in enumerate(glossary)]
+ for attempt in range(16):
+  assembled=' '.join(' '.join(b.get('paragraphs') or []) for b in blocks)
+  if 'repeated substantive sentence within the content' not in audit_text(title,assembled,'master-package',False):break
+  if attempt<8:contextualize_repeated_sentences(blocks)
+  else:remove_repeated_sentences(blocks)
+ sections=blocks[:len(sections)];summary=blocks[len(sections)]['paragraphs']
+ for i,block in enumerate(blocks[len(sections)+1:len(sections)+1+len(faq)]):faq[i]['answer']=block['paragraphs'][0] if block['paragraphs'] else faq[i]['answer']
+ for i,block in enumerate(blocks[len(sections)+1+len(faq):]):glossary[i]['definition']=block['paragraphs'][0] if block['paragraphs'] else glossary[i]['definition']
+ slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
  package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','structure_profile':profile[0],'module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections,profile),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,clean(re.sub(r'^Trend\s*[·:\-]?\s*','',item['category'],flags=re.I).replace('Trending','')) or item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url','retrieved_at')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
  contextualize_cross_corpus_repeats(package,target)
  assert_cross_corpus_original(package,target)

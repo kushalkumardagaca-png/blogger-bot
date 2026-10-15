@@ -114,3 +114,30 @@ def assert_saved_green(post:dict)->bool:
  issues.extend(audit_text(title,content,'stored-blogger-post',require_disclosure=True))
  if issues:raise RuntimeError('STORED BLOGGER GREEN VERIFICATION FAILED — '+'; '.join(sorted(set(issues))))
  return True
+
+PROSE_BLOCKS=re.compile(r'(<(?:p|dd)\b[^>]*>)(.*?)(</(?:p|dd)>)',re.I|re.S)
+def repair_repeated_prose(content:str)->tuple[str,int]:
+ """Remove a later verbatim prose sentence so a late policy check cannot fail.
+
+ Only paragraph-level editorial prose is touched; source ledgers, tables,
+ navigation and captions keep their text. The first occurrence is never altered.
+ """
+ seen=set();removed=0
+ def fix(match):
+  nonlocal removed
+  opening,body,closing=match.group(1),match.group(2),match.group(3)
+  if '<' in body:return match.group(0)
+  parts=re.split(r'(?<=[.!?])\s+',body.strip())
+  kept=[]
+  for sentence in parts:
+   key=' '.join(re.findall(r'[a-z0-9]+',html.unescape(sentence).casefold()))
+   if len(key.split())>=14:
+    if key in seen:
+     removed+=1
+     continue
+    seen.add(key)
+   kept.append(sentence)
+  if not kept:return match.group(0)
+  return opening+' '.join(kept)+closing
+ repaired=PROSE_BLOCKS.sub(fix,content)
+ return repaired,removed
