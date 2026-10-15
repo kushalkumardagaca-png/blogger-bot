@@ -103,23 +103,6 @@ jobs:
             sleep $((attempt * 20))
           done
           exit 1
-      - name: Persist failed preparation diagnosis
-        if: failure()
-        run: |
-          set -euo pipefail
-          cp MASTER_AUTOMATION_STATUS.json /tmp/master-failure.json
-          git config user.name "Daily Yield Master Writer"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for attempt in 1 2 3 4 5; do
-            git fetch origin main && git reset --hard FETCH_HEAD
-            mkdir -p master_failures
-            cp /tmp/master-failure.json "master_failures/${{ github.run_id }}-trending-${{ steps.slot.outputs.value }}.json"
-            git add master_failures
-            git commit -m "Record trending generation failure [skip ci]" || exit 0
-            if git push origin HEAD:main; then exit 0; fi
-            sleep $((attempt * 3))
-          done
-          exit 1
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail
@@ -144,26 +127,6 @@ jobs:
             git commit -m "Prepare dynamic trending Master package [skip ci]"
             if git push origin HEAD:main; then exit 0; fi
             sleep $((attempt * 3))
-          done
-          exit 1
-      - name: Persist package-state failure diagnosis
-        if: ${{ failure() && steps.prepare.outcome == 'success' }}
-        run: |
-          set -euo pipefail
-          mkdir -p master_failures
-          python - <<'PYDIAG'
-          import json,os,pathlib
-          log=pathlib.Path('/tmp/master-persistence.log').read_text(errors='replace')[-12000:]
-          pathlib.Path('master_failures/${{ github.run_id }}-trending-persistence.json').write_text(json.dumps({'status':'FAIL','stage':'package-persistence','run_id':'${{ github.run_id }}','log':log},indent=2)+'\n')
-          PYDIAG
-          git config user.name "Daily Yield Master Writer"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add master_failures/
-          git commit -m "Record Master package persistence failure [skip ci]" || true
-          for attempt in 1 2 3 4 5; do
-            git pull --rebase origin main && git push origin HEAD:main && exit 0
-            git rebase --abort || true
-            sleep $((attempt * 2))
           done
           exit 1
       - name: Publish after successful validated preparation
@@ -224,5 +187,6 @@ jobs:
           path: |
             MASTER_AUTOMATION_STATUS.json
             MASTER_PREPARATION_REPORT.json
+            /tmp/master-persistence.log
           if-no-files-found: warn
           retention-days: 30

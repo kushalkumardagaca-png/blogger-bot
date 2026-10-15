@@ -22,4 +22,8 @@ class ContentPolicyGuardTests(unittest.TestCase):
   sentence='This sufficiently long source title describes a financial document for readers who want to inspect the evidence.'
   content=f'<p>{sentence}</p><section class="dy2-links"><ol><li>{sentence}</li></ol></section>'
   self.assertNotIn('repeated substantive sentence within the content',audit_text('x',content))
+ def test_repeated_source_card_controls_are_not_editorial_prose(self):
+  utility='Source: The Economic Times Continue to original report for documentation and context.'
+  content=''.join(f'<a class="fbk-src" href="https://example.com/{i}">{utility}</a>' for i in range(4))
+  self.assertNotIn('repeated substantive sentence within the content',audit_text('x',content))
 if __name__=='__main__':unittest.main()

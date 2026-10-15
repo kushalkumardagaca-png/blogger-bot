@@ -117,7 +117,7 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  # Scan the full text for harmful material, but do not count that non-reader clone
  # as repeated editorial prose.
  repetition_content=content or ''
- for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>'):
+ for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>',r'<a\b[^>]*class=["\'][^"\']*\b(?:fbk-src|dy-context|dy-related)\b[^"\']*["\'][^>]*>.*?</a>'):
   repetition_content=re.sub(pattern,' ',repetition_content,flags=re.I|re.S)
  seq=[normalize_sentence(x) for x in sentences(repetition_content)];seq=[x for x in seq if len(x.split())>=10]
  counts=Counter(seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]

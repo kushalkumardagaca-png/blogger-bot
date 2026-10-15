@@ -55,6 +55,12 @@ def evergreen_topic_quality(title,cat,url='',require_editorial=False):
  """Return a strict semantic-fit score; zero rejects ambiguous/web-homepage hits."""
  text=clean(title).casefold();tokens=words(text)
  if not text or any(marker in text for marker in _OFF_TOPIC_MARKERS):return 0.0
+ # Evergreen slots must be durable educational questions, not publisher-
+ # suffixed headlines, surveys presented as news, rankings, or implied income
+ # promises discovered in a live feed. Such pages may validate demand, but may
+ # not become the article title.
+ if re.search(r'\s[-–—|]\s(?:yahoo finance|forbes|reuters|bloomberg|cnbc)\b',text):return 0.0
+ if any(marker in text for marker in (' ranked:', 'fastest', 'survey shows', 'named his', '$')):return 0.0
  signal_tokens=set();phrase_hit=False
  for phrase in cat['signals']:
   signal_tokens|=words(phrase)

@@ -93,7 +93,7 @@ def assert_publishable(title,content,labels,check_remote_images=True):
   issues.append(str(exc))
   if 'repeated substantive sentence' in str(exc):
    repetition_content=content or ''
-   for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>'):
+   for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>',r'<a\b[^>]*class=["\'][^"\']*\b(?:fbk-src|dy-context|dy-related)\b[^"\']*["\'][^>]*>.*?</a>'):
     repetition_content=re.sub(pattern,' ',repetition_content,flags=re.I|re.S)
    normalized=[normalize_sentence(x) for x in sentences(repetition_content)];seen=set()
    duplicate=next((x for x in normalized if len(x.split())>=12 and (x in seen or seen.add(x))), '')

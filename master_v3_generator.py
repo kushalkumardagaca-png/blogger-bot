@@ -13,7 +13,7 @@ import requests
 from master_article_v2 import words
 from photo_selector import choose_photos
 from content_policy_guard import POLICY_VERSION,audit_text
-from content_originality import assert_cross_corpus_original
+from content_originality import assert_cross_corpus_original,contextualize_cross_corpus_repeats
 
 UA='DailyYieldMasterV3/1.0 (dailyyield.official@gmail.com)';BLOG='https://dailyyield.blogspot.com'
 def required(name):
@@ -104,6 +104,8 @@ def discover_sources(item,kind):
  official=[];topic=' '.join(base_terms)
  if 'rmd' in topic or ('required' in topic and 'distribution' in topic):
   official=[('Internal Revenue Service','Required minimum distributions FAQs','https://www.irs.gov/retirement-plans/retirement-plan-and-ira-required-minimum-distributions-faqs'),('Internal Revenue Service','Publication 590-B: Distributions from Individual Retirement Arrangements','https://www.irs.gov/publications/p590b'),('Internal Revenue Service','Retirement topics: required minimum distributions','https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-required-minimum-distributions-rmds')]
+ elif {'side','hustle'}<=set(base_terms) or 'gig' in base_terms:
+  official=[('Internal Revenue Service','Gig economy tax center','https://www.irs.gov/businesses/gig-economy-tax-center'),('Internal Revenue Service','Manage taxes for a gig economy business','https://www.irs.gov/businesses/small-businesses-self-employed/manage-taxes-for-your-gig-work'),('U.S. Small Business Administration','Calculate your startup costs','https://www.sba.gov/business-guide/plan-your-business/calculate-your-startup-costs')]
  for name,source_title,url in official:
   try:
    r=requests.get(url,headers={'User-Agent':UA},timeout=30);r.raise_for_status();add(name,source_title,url,clean(r.text))
@@ -119,6 +121,20 @@ def discover_sources(item,kind):
      add(clean(node.findtext('source') or 'Google News'),node.findtext('title'),node.findtext('link'),node.findtext('description'))
    except Exception:pass
   if len(out)>=12:break
+ # News search can stop at seven domains for a narrow evergreen subject even
+ # when useful primary and academic guidance exists. Search normal web RSS for
+ # government, university and methodology pages before using OpenAlex; the
+ # same topical-overlap and minimum-text checks still apply.
+ if len(out)<12:
+  evidence_terms=' '.join(base_terms[:6])
+  for query in (f'{evidence_terms} site:.gov guide data',f'{evidence_terms} site:.edu research',f'{evidence_terms} report methodology statistics finance'):
+   try:
+    url='https://www.bing.com/search?format=rss&q='+urllib.parse.quote(query)
+    root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=30).content)
+    for node in root.findall('.//item'):
+     add('Bing web evidence',node.findtext('title'),node.findtext('link'),node.findtext('description'))
+   except Exception:pass
+   if len(out)>=12:break
  for query in query_variants:
   if len(out)>=12:break
   try:
@@ -372,5 +388,6 @@ def build(item,kind,target):
  sections=combined[:-1];summary=combined[-1]['paragraphs']
  faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
  package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','structure_profile':profile[0],'module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections,profile),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url','retrieved_at')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
+ contextualize_cross_corpus_repeats(package,target)
  assert_cross_corpus_original(package,target)
  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(package,indent=2,ensure_ascii=False)+'\n');return package

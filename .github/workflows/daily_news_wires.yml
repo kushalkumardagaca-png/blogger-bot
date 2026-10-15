@@ -64,7 +64,7 @@ jobs:
             python3 news_pipeline.py --desks "${{ steps.desk.outputs.value }}"
           fi
       - name: Route each live News edition to two different social platforms
-        if: always()
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
         run: python dispatch_social_events.py
@@ -76,8 +76,8 @@ jobs:
           path: NEWS_PIPELINE_STATUS.json
           if-no-files-found: warn
           retention-days: 30
-      - name: Commit news tracker and diagnostic status
-        if: always()
+      - name: Commit only confirmed successful News state
+        if: success()
         run: |
           set -euo pipefail
           git config user.name "Daily Yield News Bot"
@@ -98,12 +98,12 @@ jobs:
           done
           exit 1
       - name: Trigger authenticated News-page refresh
-        if: always()
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run content_experience_repair.yml --ref main
       - name: Trigger Bing URL submission reconciliation
-        if: always()
+        if: success()
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run bing_url_automation.yml --ref main
