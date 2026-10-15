@@ -1,15 +1,15 @@
 {
-  "status": "PASS",
-  "generated_at": "2026-10-15T07:15:11.384858+00:00",
+  "status": "FAIL",
+  "generated_at": "2026-10-15T07:22:02.263402+00:00",
   "dry_run": false,
-  "published": 1,
-  "failed": 0,
+  "published": 0,
+  "failed": 1,
   "results": [
     {
-      "desk": "europe",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
+      "desk": "economy",
+      "status": "FAIL",
+      "error_type": "RuntimeError",
+      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: source bbc business continue with daily yield global snapshot place this development in the broader global market context"
     }
   ]
 }
