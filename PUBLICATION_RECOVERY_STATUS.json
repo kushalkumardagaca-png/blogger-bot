@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T16:21:11.130227+05:30",
+  "generatedAt": "2026-10-15T16:23:40.859367+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
@@ -13,14 +13,15 @@
   "actions": [
     {
       "type": "source_recovery",
-      "key": "master-evergreen-0",
+      "key": "master-evergreen-1",
       "attempt": 2,
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "source:2026-10-15:master-evergreen-0"
+  ],
   "masterRecoveryDeferred": [
-    "master-evergreen-1",
     "master-trending-2",
     "master-evergreen-2"
   ],
