@@ -1924,9 +1924,32 @@
       },
       "published_at": "2026-10-15T13:59:04.220896+05:30",
       "reconciled": true
+    },
+    {
+      "kind": "page",
+      "blogger_id": "9217579601621666930",
+      "title": "DAILY NEWS",
+      "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+      "bluesky_uri": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxvopad6xn2y",
+      "cid": "bafyreih4usovk5p6de4vdigpk7j5qa4b7ewdb2d473z3czea7oc4cvxknu",
+      "text_hash": "64b3c17028bde55edbd1",
+      "score": 28,
+      "creative": {
+        "seed": "f3ab5ae885dfa55d",
+        "topic": "page",
+        "style": "teal voltage",
+        "style_index": 5,
+        "hook": "A USEFUL DAILY YIELD RESOURCE",
+        "emoji": "🧮",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "published_at": "2026-10-15T14:22:21.117522+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-15T13:59:04.220906+05:30",
-  "last_bluesky_uri": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxvnatlkvc2y"
+  "last_success_at": "2026-10-15T14:22:21.117534+05:30",
+  "last_bluesky_uri": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxvopad6xn2y"
 }
