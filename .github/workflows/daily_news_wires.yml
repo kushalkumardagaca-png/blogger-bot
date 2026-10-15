@@ -91,6 +91,9 @@ jobs:
           git config user.email "bot@dailyyield.blogspot.com"
           mkdir -p /tmp/news-state
           cp news_tracker.json NEWS_PIPELINE_STATUS.json /tmp/news-state/
+          # The prepared photo pools and their rotation state travel with the
+          # pipeline state, so a repaired or republished desk keeps using fresh
+          # photographs rather than starting its rotation again.
           git restore social_events.json 2>/dev/null || true
           for attempt in 1 2 3 4 5; do
             git fetch origin main && git reset --hard FETCH_HEAD
@@ -98,6 +101,8 @@ jobs:
             mv news_tracker.merged.json news_tracker.json
             cp /tmp/news-state/NEWS_PIPELINE_STATUS.json .
             git add news_tracker.json NEWS_PIPELINE_STATUS.json
+            git add -A photo_library 2>/dev/null || true
+            git add -A PHOTO_LIBRARY_STATUS.json 2>/dev/null || true
             if git diff --staged --quiet; then echo "No tracker change."; exit 0; fi
             git commit -m "Update Daily Yield news tracker [$(date -u)]"
             if git push origin HEAD:main; then exit 0; fi
