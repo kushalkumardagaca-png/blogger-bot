@@ -15,21 +15,23 @@ def test_authenticated_repair_writes_compact_exact_image_index():
     assert "git add CONTENT_EXPERIENCE_REPAIR_STATUS.json LABEL_FEED_INDEX.json" in workflow
 
 
-def test_theme_uses_summary_feeds_and_shared_image_index_for_fast_cards():
+def test_theme_uses_full_current_feeds_with_shared_index_as_fast_override():
     text = Path("theme/Daily-Yield-Theme-Subscription.xml").read_text(encoding="utf-8")
     assert "var inlineIndex={\"version\":4,\"generated_at\":" in text
     assert "\"fallbacks\":{" in text
     assert "function asset(){return Promise.resolve(inlineIndex)}" in text
     assert "raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/LABEL_FEED_INDEX.json" not in text
-    assert "/feeds/posts/summary/-/Kushal%20K.%20Daga?alt=json&max-results=16" in text
-    assert "/feeds/posts/summary/-/News?alt=json&max-results=15" in text
-    assert "'/feeds/posts/summary/-/'" in text
+    assert "/feeds/posts/default/-/Kushal%20K.%20Daga?alt=json&max-results=16" in text
+    assert "/feeds/posts/default/-/News?alt=json&max-results=15" in text
+    assert "'/feeds/posts/default/-/'" in text
     assert "indexPromise=window.DYFeedCache.asset()" in text
     assert "fallbackIndex=x.fallbacks||{}" in text
     assert "data-dy-fallback" in text
     assert "data-dy-fallback-used" in text
     assert "window.__dyImageFallbacks=parts[1].fallbacks||{}" in text
-    assert "/feeds/posts/default/-/News?alt=json&max-results=15" not in text
+    assert "box.querySelectorAll('style,script,noscript,template')" in text
+    assert "data-dy-card-image" in text
+    assert "img.replaceWith(ph)" in text
 
 
 def test_post_images_recover_from_an_existing_photo_in_the_same_article():

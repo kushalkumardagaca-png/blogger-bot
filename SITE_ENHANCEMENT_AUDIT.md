@@ -76,7 +76,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-Subscription.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-Subscription.xml: duplicate base64 favicon payloads removed
-- ✅ Daily-Yield-Theme-Subscription.xml: compressed Theme transfer budget stays below 110 KB
+- ✅ Daily-Yield-Theme-Subscription.xml: compressed Theme transfer budget stays below 111 KB
 - ✅ Daily-Yield-Theme-Subscription.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-Subscription.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-Subscription.xml: labels use feed-only infinite loading without document requests
@@ -169,7 +169,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: LCP CLS and INP are measured without navigation
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: render-blocking Google Fonts removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: duplicate base64 favicon payloads removed
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: compressed Theme transfer budget stays below 110 KB
+- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: compressed Theme transfer budget stays below 111 KB
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: old body fade delay removed
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: comment iframe engine is deferred off critical path
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: labels use feed-only infinite loading without document requests

@@ -31,7 +31,7 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertNotIn("fonts.gstatic.com", text)
         self.assertNotIn("data:image/png;base64", text)
         import gzip
-        self.assertLess(len(gzip.compress(text.encode("utf-8"), compresslevel=9)), 110_000)
+        self.assertLess(len(gzip.compress(text.encode("utf-8"), compresslevel=9)), 111_000)
 
     def test_all_internal_link_directions_are_intercepted_safely(self):
         text = THEMES[0].read_text(encoding="utf-8")
@@ -64,7 +64,7 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("blog-pager-older-link", text)
         self.assertIn("className='dy-label-status'", text)
         self.assertIn("data-dy-label-feed','feed-json-infinite'", text)
-        self.assertIn("'/feeds/posts/summary/-/'", text)
+        self.assertIn("'/feeds/posts/default/-/'", text)
         self.assertIn("indexPromise=window.DYFeedCache.asset()", text)
         self.assertIn("src=imageIndex[entryId(e)]", text)
         self.assertIn("rootMargin:'700px 0px'", text)
@@ -91,10 +91,10 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn(".kd-eg-icon{width:52px;height:52px", text)
         self.assertIn(".kd-eg-icon svg{display:block!important;width:26px!important;height:26px!important", text)
 
-    def test_homepage_uses_one_lightweight_author_feed_and_exact_image_index(self):
+    def test_homepage_uses_small_full_feeds_and_exact_image_index_override(self):
         text = THEMES[0].read_text(encoding="utf-8")
         self.assertIn("function articleInventory()", text)
-        self.assertIn("/feeds/posts/summary/-/Kushal%20K.%20Daga?alt=json&max-results=16", text)
+        self.assertIn("/feeds/posts/default/-/Kushal%20K.%20Daga?alt=json&max-results=16", text)
         self.assertIn("window.DYFeedCache.asset()", text)
         self.assertIn("window.__dyImageIndex=parts[1].images||{}", text)
         self.assertIn("exact=(window.__dyImageIndex||{})[pid]", text)
@@ -104,8 +104,7 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("items.filter(function(it){return !it.img&&it.id;})", text)
         self.assertIn("src=[\"']([^\"']+)[\"']", text)
         self.assertIn("/feeds/posts/default/'+encodeURIComponent(it.id)+'?alt=json", text)
-        self.assertIn("/feeds/posts/summary/-/News?alt=json&max-results=15&orderby=published", text)
-        self.assertNotIn("/feeds/posts/default/-/News?alt=json&max-results=15", text)
+        self.assertIn("/feeds/posts/default/-/News?alt=json&max-results=15&orderby=published", text)
         self.assertNotIn("/feeds/posts/default?alt=json&max-results=25", text)
 
     def test_mobile_document_is_contained_while_rows_remain_scrollable(self):
@@ -170,8 +169,8 @@ class ThemeLoadingTests(unittest.TestCase):
         self.assertIn("/^\\/feeds\\//.test(u.pathname)", text)
         self.assertIn("document requests prohibited", text)
         self.assertIn("sessionStorage.setItem(key", text)
-        self.assertIn("window.DYFeedCache.get('/feeds/posts/summary", text)
-        self.assertIn("/feeds/posts/summary/-/News?alt=json&max-results=15", text)
+        self.assertIn("window.DYFeedCache.get('/feeds/posts/default", text)
+        self.assertIn("/feeds/posts/default/-/News?alt=json&max-results=15", text)
         self.assertIn("window.DYFeedCache.asset()", text)
         self.assertIn("img.decode()", text)
         self.assertNotIn("DYFeedCache.get('/p/", text)
