@@ -1,29 +1,22 @@
 {
-  "generatedAt": "2026-10-15T22:43:41.713135+05:30",
+  "generatedAt": "2026-10-15T23:18:14.262161+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 17,
+  "confirmedPublications": 20,
   "overdueMissing": [
-    "master-trending-3",
-    "master-evergreen-3",
-    "master-trending-4",
-    "master-evergreen-4"
+    "master-evergreen-3"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "master-trending-3",
-      "attempt": 6,
+      "key": "master-evergreen-3",
+      "attempt": 1,
       "applied": true
     }
   ],
   "retryBlocked": [],
-  "masterRecoveryDeferred": [
-    "master-evergreen-3",
-    "master-trending-4",
-    "master-evergreen-4"
-  ],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
