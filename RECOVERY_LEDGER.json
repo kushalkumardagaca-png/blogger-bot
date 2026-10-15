@@ -331,13 +331,13 @@
   },
   "prewarm:2026-10-15:master-evergreen-0": {
     "revision": "16bb9f9473ead925",
-    "attempts": 3,
-    "lastAttempt": "2026-10-15T07:16:45.213353+05:30"
+    "attempts": 4,
+    "lastAttempt": "2026-10-15T08:23:00.108135+05:30"
   },
   "prewarm:2026-10-15:master-trending-1": {
     "revision": "16bb9f9473ead925",
-    "attempts": 2,
-    "lastAttempt": "2026-10-15T07:16:45.213353+05:30"
+    "attempts": 3,
+    "lastAttempt": "2026-10-15T08:23:00.108135+05:30"
   },
   "source:2026-10-15:master-trending-0": {
     "revision": "16bb9f9473ead925",
@@ -346,7 +346,12 @@
   },
   "source:2026-10-15:news-india": {
     "revision": "16bb9f9473ead925",
+    "attempts": 2,
+    "lastAttempt": "2026-10-15T08:23:00.108135+05:30"
+  },
+  "prewarm:2026-10-15:master-evergreen-1": {
+    "revision": "16bb9f9473ead925",
     "attempts": 1,
-    "lastAttempt": "2026-10-15T07:44:46.446603+05:30"
+    "lastAttempt": "2026-10-15T08:23:00.108135+05:30"
   }
 }
