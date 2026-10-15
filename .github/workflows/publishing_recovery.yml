@@ -31,6 +31,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python publishing_recovery.py --apply
+      # Failure evidence stays in retained artifacts; only a successful recovery
+      # ledger is allowed to reach main.
       - name: Preserve recovery evidence
         if: always()
         uses: actions/upload-artifact@v4

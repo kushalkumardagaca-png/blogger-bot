@@ -363,7 +363,8 @@ def photo_set(title,category,slug,key):
  elif any(x in text for x in ('family','housing','multigenerational')):
   primary=['multigenerational family home adults','family housing planning table','residential homes neighborhood adults']
  else:primary=[f'{category} people workplace',f'{category} documents planning desk',f'{category} public institution exterior']
- variants=[primary,[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior']]
+ variants=[primary,[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior'],
+           ['business meeting office table','office workers computers finance','financial district buildings']]
  errors=[]
  for briefs in variants:
   try:return choose_photos(briefs,slug,key)
@@ -415,7 +416,7 @@ def build(item,kind,target):
  else:raise RuntimeError('assembled Master prose could not be made sentence-distinct')
  sections=combined[:-1];summary=combined[-1]['paragraphs']
  faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
- package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','structure_profile':profile[0],'module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections,profile),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url','retrieved_at')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
+ package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','structure_profile':profile[0],'module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections,profile),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,clean(re.sub(r'^Trend\s*[·:\-]?\s*','',item['category'],flags=re.I).replace('Trending','')) or item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url','retrieved_at')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
  contextualize_cross_corpus_repeats(package,target)
  assert_cross_corpus_original(package,target)
  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(package,indent=2,ensure_ascii=False)+'\n');return package

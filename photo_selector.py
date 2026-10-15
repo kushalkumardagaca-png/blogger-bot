@@ -17,14 +17,25 @@ def load_registry():
  return {'version':1,'baseline_complete':False,'items':[]}
 def save_registry(r):REGISTRY.write_text(json.dumps(r,indent=2,ensure_ascii=False)+'\n')
 def terms(text):return [x for x in re.findall(r'[a-z0-9]{3,}',str(text).casefold()) if x not in STOP][:14]
+# Broad editorial subject words. They never satisfy the match on their own, but
+# let a photo that clearly shows the article's world (workplace, money, trade)
+# qualify when it also carries one distinctive brief term.
+TOPICAL={'office','business','people','worker','workplace','building','buildings','street','city','market','money','bank','banking','shop','store','industry','factory','farm','table','meeting','computer','laptop','documents','storefront','family','house','home','school','hospital','train','plane','truck','port','energy','oil','gas','power','solar','wind','water','construction','handshake','signature','newspaper','journal','library','university','laboratory','research'}
+def content_match(brief_terms,candidate_terms):
+ overlap=brief_terms&candidate_terms
+ if len(overlap)>=2:return True
+ return len(overlap)>=1 and len(candidate_terms&TOPICAL)>=2
 def commons_candidates(brief):
  tokens=terms(brief);queries=[' '.join(tokens[:3])]+tokens[:6]
  text=str(brief).casefold();lexicons=((('retirement','pension','401','ira'),('retirement','older couple','financial planning','workplace meeting')),(('housing','mortgage','property','real estate'),('residential houses','home buying','apartment buildings')),(('career','salary','job','workplace'),('office workers','workplace meeting','professional working')),(('invest','stock','market','portfolio'),('stock exchange','financial district','business analysis')),(('saving','budget','debt','credit'),('household budgeting','savings','payment card')),(('tax','government','regulation'),('government office','tax forms','parliament building')))
  for keys,extra in lexicons:
   if any(k in text for k in keys):queries.extend(extra)
+ # General finance/workplace imagery keeps the pool deep enough that a narrow
+ # topic headline never exhausts content-matched, correctly licensed coverage.
+ queries.extend(('business meeting office tables','office workers computers','financial district buildings','small business shop owner','family household finances'))
  pages={}
  for q in dict.fromkeys(x for x in queries if x.strip()):
-  params={'action':'query','format':'json','generator':'search','gsrnamespace':6,'gsrlimit':25,'gsrsearch':q,'prop':'imageinfo','iiprop':'url|size|extmetadata','iiurlwidth':1600}
+  params={'action':'query','format':'json','generator':'search','gsrnamespace':6,'gsrlimit':50,'gsrsearch':q,'prop':'imageinfo','iiprop':'url|size|extmetadata','iiurlwidth':1600}
   try:
    r=requests.get('https://commons.wikimedia.org/w/api.php',params=params,headers={'User-Agent':UA},timeout=60);r.raise_for_status();pages.update(r.json().get('query',{}).get('pages',{}))
   except Exception:continue
@@ -55,14 +66,14 @@ def choose_photos(briefs,slug,article_key):
   candidates=commons_candidates(brief);bt=set(terms(brief));ranked=[]
   for c in candidates:
    if c['source_id'] in used_ids or c['original_url'] in used_urls:continue
-   text=(c['title']+' '+c['description']).casefold();overlap=len(bt&set(terms(text)))
+   text=(c['title']+' '+c['description']).casefold();ct=set(terms(text));overlap=len(bt&ct)
    # A high-resolution but unrelated image is not content-matched. Also keep
    # charts, logos, maps and illustrations out of the three-photo requirement.
-   if overlap<2 or re.search(r'\b(?:chart|diagram|illustration|infographic|logo|map|coat of arms|flag)\b',text):continue
+   if not content_match(bt,ct) or re.search(r'\b(?:chart|diagram|illustration|infographic|logo|map|coat of arms|flag)\b',text):continue
    ratio=c['width']/c['height'];crop_penalty=abs(ratio-16/9)
    ranked.append((overlap*20+min(c['width'],5000)/500-crop_penalty*5,c))
   ranked.sort(key=lambda x:x[0],reverse=True);winner=None
-  for semantic,c in ranked[:12]:
+  for semantic,c in ranked[:24]:
    try:
     rr=requests.get(c['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
     image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
