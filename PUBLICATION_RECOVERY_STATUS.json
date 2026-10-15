@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-15T08:50:24.761646+05:30",
+  "generatedAt": "2026-10-15T09:28:45.298393+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 3,
+  "confirmedPublications": 4,
   "overdueMissing": [
     "news-india",
     "master-evergreen-0"
@@ -11,13 +11,16 @@
   "actions": [
     {
       "type": "source_recovery",
+      "key": "news-india",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
       "key": "master-evergreen-0",
       "applied": true
     }
   ],
-  "retryBlocked": [
-    "source:2026-10-15:news-india"
-  ],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
