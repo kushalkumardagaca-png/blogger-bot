@@ -35,6 +35,21 @@ jobs:
             tail -c 900 /tmp/inventory.log | sed 's/%/%25/g;s/\r//g' | while IFS= read -r line; do echo "::error::$line"; done
             exit "$code"
           fi
+      - name: Publish inventory result as readable annotations
+        if: success()
+        run: |
+          python - <<'PYFACTS'
+          import json
+          d=json.load(open('BLOGGER_INVENTORY_STATUS.json'))
+          print(f"::notice::live={d['live_posts']} draft={d['draft_posts']} scheduled={d['scheduled_posts']} draft_copies_of_live={len(d['drafts_matching_a_live_post'])} unique_drafts={len(d['drafts_with_no_live_match'])}")
+          for row in d['draft_unique' if False else 'drafts_with_no_live_match']:
+              print(f"::notice title=Unique draft::{(row.get('updated') or '')[:16]} {str(row.get('title'))[:70]}")
+          for row in d['drafts_matching_a_live_post']:
+              print(f"::notice title=Draft copy of a live post::{str(row.get('title'))[:70]} -> {row.get('live_url')}")
+          missing=[x for x in d['master_plan_today'] if not x['live']]
+          for row in missing:print(f"::warning title=Master still missing today::{row['key']} {row['title']}")
+          print(f"::notice::master_live_today={sum(1 for x in d['master_plan_today'] if x['live'])} of {len(d['master_plan_today'])}; news_live_today={len(d['news_live_today'])}")
+          PYFACTS
       - name: Preserve inventory evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,6 +60,7 @@ jobs:
           if-no-files-found: warn
       - name: Persist inventory evidence
         if: success()
+        continue-on-error: true
         run: |
           set -euo pipefail
           git config user.name 'Daily Yield Inventory'
