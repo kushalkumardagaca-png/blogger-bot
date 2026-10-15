@@ -1,0 +1,37 @@
+name: News Desk Recovery
+
+# Re-runs a single News desk on demand without leaving the repository tooling:
+# write the desk slug into .github/news-recovery-request (for example "banking")
+# and push. The desk is republished immediately with the release embargo lifted,
+# which is exactly how an interrupted edition is repaired.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/news-recovery-request'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Requested desk
+        id: want
+        run: |
+          value="$(tr -d '[:space:]' < .github/news-recovery-request)"
+          if [ -z "$value" ]; then
+            echo "::error title=Nothing requested::.github/news-recovery-request is empty"
+            exit 1
+          fi
+          echo "value=$value" >> "$GITHUB_OUTPUT"
+      - name: Re-run the desk
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run daily_news_wires.yml --ref main -f desks="${{ steps.want.outputs.value }}"
+          echo "Requested immediate republication of: ${{ steps.want.outputs.value }}"

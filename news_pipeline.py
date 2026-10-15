@@ -33,7 +33,7 @@ from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
 import news_coverage
 from editorial_integrity import assert_green_operating_state,assert_saved_green,find_duplicate,stamp
-from content_policy_guard import automation_disclosure
+from content_policy_guard import automation_disclosure,DISCLOSURE_MARKER
 from publication_timing import NEWS_LIVE, wait_for_release
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
@@ -772,6 +772,27 @@ def select_items(all_items, win_start, win_end, desk, selection_cap=40, own_off=
         {"items": coverage.get("total"), "minimums": coverage.get("buckets_short_of_minimum"),
          "counts": coverage.get("counts"), "lead": coverage.get("lead_headline", "")[:70],
          "demand": coverage.get("demand_source")}, ensure_ascii=False))
+
+    # A country or sub-section the edition must carry is never left short while
+    # material for it exists nearby: the window is widened backwards (clearly
+    # labelled as context) and the edition is balanced again.
+    short = coverage.get("buckets_short_of_minimum") or coverage.get("buckets_never_covered") or {}
+    if short:
+        widest = lo - dt.timedelta(days=3)
+        want = set(short)
+        extras = curate([i for i in all_items
+                         if i.get("date") and widest <= i["date"] < lo and desk_match(i)
+                         and news_coverage._bucket_key(i, desk) in want])
+        marker = {i.get("url") or story_title_key(i.get("title", "")) for i in current}
+        extras = [i for i in extras if (i.get("url") or story_title_key(i.get("title", ""))) not in marker]
+        if extras:
+            for extra in extras:
+                extra["background"] = True
+            current, coverage = news_coverage.enforce(current + extras, desk)
+            globals().setdefault("LAST_COVERAGE_REPORT", {})[desk] = coverage
+            print("  [" + desk + "] coverage widened with %d dated context item(s): %s"
+                  % (len(extras), json.dumps({"still_short": coverage.get("buckets_short_of_minimum"),
+                                              "counts": coverage.get("counts")})))
 
     upcoming = [i for i in all_items
                 if i.get("date") and hi < i["date"] <= hi + dt.timedelta(days=7)][:6]
@@ -1582,9 +1603,28 @@ def publish_post(art, token, dry=False):
     recent = blogger_call("/posts?"+query, token).get("items",[])
     existing,reason=find_duplicate(art["title"],art["html"],recent,art.get("canonical",''))
     if existing:
-        assert_saved_green(existing)
-        print(f"    duplicate-safe recovery ({reason}): {existing.get('url')}")
-        return existing.get('url','')
+        # A post left behind by an interrupted run is repaired and re-verified,
+        # never simply rejected: without this, one partial live post makes every
+        # later retry of the same desk fail on the same check.
+        try:
+            assert_saved_green(existing)
+            print(f"    duplicate-safe recovery ({reason}): {existing.get('url')}")
+            return existing.get('url','')
+        except RuntimeError as exc:
+            print(f"    repairing the post left by an interrupted run ({existing.get('id')}): {str(exc)[:200]}")
+            repaired=stamp(art["html"],art["title"],"news-desk")
+            if DISCLOSURE_MARKER not in repaired:
+                repaired+="\n"+automation_disclosure("news edition")
+            canonical=art.get("canonical","")
+            if canonical and existing.get("url"):
+                repaired=repaired.replace(canonical,existing["url"])
+            blogger_call(f"/posts/{existing['id']}",token,"PUT",{
+                "kind":"blogger#post","id":existing["id"],"title":art["title"],
+                "content":repaired,"labels":art["labels"]})
+            stored=blogger_call(f"/posts/{existing['id']}?fetchBody=true",token)
+            assert_saved_green(stored)
+            print(f"    interrupted-run post repaired and verified: {stored.get('url')}")
+            return stored.get('url') or existing.get('url','')
     art["html"]=stamp(art["html"],art["title"],"news-desk")
     # Resume an incomplete slug-title post before creating anything new. This
     # makes the three-pass publication transaction retry-safe.
