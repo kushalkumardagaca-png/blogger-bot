@@ -158,6 +158,7 @@ def write_run_summary(report):
   with open(path,'a',encoding='utf-8') as handle:
    handle.write(f"### Recovery reconciliation — {report['status']} — {report['generatedAt']}\n\n")
    handle.write(f"Confirmed publications today: {report['confirmedPublications']}\n\n")
+   handle.write(f"Implementation revision checked by this run: {implementation_revision()}\n\n")
    if report['overdueMissing']:handle.write('Overdue and still being retried: '+', '.join(report['overdueMissing'])+'\n\n')
    else:handle.write('No overdue current-day article remains.\n\n')
    handle.write('| action | key | applied |\n|---|---|---|\n')
