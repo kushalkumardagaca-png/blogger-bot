@@ -19,6 +19,7 @@ on:
       - 'desk_index_design.py'
       - 'desk_index_redesign.py'
       - 'test_desk_index.py'
+      - '.github/desk-index-apply-request'
       - '.github/workflows/desk_index_redesign.yml'
 
 permissions:
@@ -47,7 +48,9 @@ jobs:
         run: |
           set -uo pipefail
           mode='${{ inputs.mode }}'
-          [ -n "$mode" ] || mode=survey
+          if [ -z "$mode" ]; then
+            if [ -f '.github/desk-index-apply-request' ]; then mode=apply; else mode=survey; fi
+          fi
           run_and_report() {
             if ! "$@" > /tmp/desk-index.log 2>&1; then
               echo "::error title=Desk index step failed ($1)::$(tail -c 900 /tmp/desk-index.log | tr '\n' '|')"
