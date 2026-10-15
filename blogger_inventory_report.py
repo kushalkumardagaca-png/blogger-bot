@@ -50,19 +50,30 @@ def main():
   match=live_keys.get(key(d.get('title')))
   if match:duplicate_drafts.append({'draft_id':d['id'],'title':d.get('title'),'live_id':match['id'],'live_url':match.get('url'),'draft_updated':d.get('updated')})
   else:unique_drafts.append({'id':d['id'],'title':d.get('title'),'published':d.get('published'),'updated':d.get('updated'),'url':d.get('url')})
+ today_live=[]
+ for x in live:
+  stamp=str(x.get('published') or '')
+  try: day_ist=dt.datetime.fromisoformat(stamp.replace('Z','+00:00')).astimezone(IST).date().isoformat()
+  except Exception: continue
+  if day_ist==dt.datetime.now(IST).date().isoformat(): today_live.append({'id':x['id'],'title':x.get('title'),'url':x.get('url'),'published_ist':stamp})
+ def tokens(value):return set(re.findall(r'[a-z0-9]{4,}',str(value or '').casefold()))
  plan=json.loads((ROOT/'MASTER_DAILY_PLAN.json').read_text()) if (ROOT/'MASTER_DAILY_PLAN.json').exists() else {}
  day=dt.datetime.now(IST).date().isoformat()
  expected=[]
  for kind in ('trending','evergreen'):
   for slot,item in enumerate(plan.get(kind,[]) or []):
-   title=str(item.get('title',''));hit=live_keys.get(key(title))
+   title=str(item.get('title',''));want=tokens(title)
+   hit=None
+   for cand in live:
+    have=tokens(cand.get('title'))
+    if have and want and len(want&have)/max(1,min(len(want),len(have)))>=0.6:hit=cand;break
    expected.append({'key':f'master-{kind}-{slot}','title':title[:70],'live':bool(hit),'url':(hit or {}).get('url')})
  news=json.loads((ROOT/'news_tracker.json').read_text()) if (ROOT/'news_tracker.json').exists() else {}
  news_rows=[{'key':'news-'+desk,'edition':row.get('edition'),'url':row.get('url')} for desk,row in (news.get('desks') or {}).items() if row.get('edition')==day]
  report={'status':'PASS','checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'date_ist':day,
   'live_posts':len(live),'draft_posts':len(drafts),'scheduled_posts':len(scheduled),
   'drafts_matching_a_live_post':duplicate_drafts,'drafts_with_no_live_match':unique_drafts,
-  'master_plan_today':expected,'news_live_today':news_rows,'zero_public_pageviews':True}
+  'master_plan_today':expected,'news_live_today':news_rows,'live_posts_published_today_ist':today_live,'zero_public_pageviews':True}
  (ROOT/'BLOGGER_INVENTORY_STATUS.json').write_text(json.dumps(report,indent=2)+'\n')
  print(json.dumps({'live':len(live),'draft':len(drafts),'scheduled':len(scheduled),'draft_duplicates':len(duplicate_drafts),'draft_unique':len(unique_drafts),
   'master_live_today':sum(1 for x in expected if x['live']),'master_expected_today':len(expected),'news_live_today':len(news_rows)},indent=2))
