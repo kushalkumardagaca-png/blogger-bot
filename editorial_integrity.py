@@ -163,41 +163,152 @@ PROTECTED_BLOCKS=re.compile('|'.join((
  r'<aside\b[^>]*dy-policy-disclosure.*?</aside\s*>',
 )),re.I|re.S)
 
+def _visible_text(segment:str)->tuple[str,list[int]]:
+    """Return the readable text of an HTML segment plus the source index of each character.
+
+    Each tag becomes a single space, exactly as the publication gate reads the
+    article, so a sentence that spans a link or an emphasis tag is still seen as
+    one sentence. Synthetic characters carry index -1 and are never used as a
+    deletion boundary.
+    """
+    characters:list[str]=[];index:list[int]=[];position=0;length=len(segment)
+    while position<length:
+        character=segment[position]
+        if character=="<":
+            closing=segment.find(">",position)
+            if closing<0:break
+            characters.append(" ");index.append(-1);position=closing+1;continue
+        if character=="&":
+            entity=re.match(r"&(?:#[0-9]{2,6}|#x[0-9a-fA-F]{2,6}|[a-zA-Z]{2,8});",segment[position:position+12])
+            if entity:
+                characters.append(html.unescape(entity.group(0)));index.append(position);position+=len(entity.group(0));continue
+        characters.append(character);index.append(position);position+=1
+    return "".join(characters),index
+
+
+def _sentence_spans(text:str)->list[tuple[int,int]]:
+    spans=[];start=0
+    for match in re.finditer(r"[.!?]+(?=\s|$)",text):
+        spans.append((start,match.end()));start=match.end()
+    if start<len(text):spans.append((start,len(text)))
+    return spans
+
+
+def _source_bounds(index:list[int],start:int,end:int)->tuple[int,int]|None:
+    """Translate a plain-text range into a safe source range, skipping synthetic gaps."""
+    source_start=next((index[position] for position in range(start,min(end,len(index))) if index[position]>=0),None)
+    source_end=next((index[position] for position in range(min(end,len(index))-1,start-1,-1) if index[position]>=0),None)
+    if source_start is None or source_end is None or source_end<source_start:
+        return None
+    return source_start,source_end+1
+
+
+def _drop_plain_ranges(segment:str,index:list[int],ranges:list[tuple[int,int]],replacement:str="")->str:
+    """Delete (or overwrite) plain-text ranges inside an HTML segment, latest first."""
+    for start,end in sorted(ranges,key=lambda x:x[0],reverse=True):
+        if end<=start:continue
+        bounds=_source_bounds(index,start,end)
+        if not bounds:continue
+        source_start,source_end=bounds
+        while source_end<len(segment) and segment[source_end] in " \t\r\n":source_end+=1
+        segment=segment[:source_start]+replacement+segment[source_end:]
+    return segment
+
+
+PARAGRAPH=re.compile(r"<p\b[^>]*>(.*?)</p\s*>",re.I|re.S)
+def drop_repeated_paragraphs(segment:str)->tuple[str,int]:
+    """Remove a stock repeating paragraph and every later duplicate paragraph.
+
+    The publication gate refuses an article that repeats a whole substantive
+    paragraph, and a paragraph made of one short phrase repeated is exactly the
+    machine-generated padding Blogger's spam rules warn about. Both are removed
+    here; the first real occurrence of any paragraph is always preserved.
+    """
+    seen=set();removed=0;pieces=[];cursor=0
+    for match in PARAGRAPH.finditer(segment):
+        body=match.group(1)
+        if "<script" in body.casefold():
+            continue
+        text=re.sub(r"\s+"," ",html.unescape(re.sub(r"<[^>]+>"," ",body))).strip()
+        key=text.casefold()
+        drop=False
+        words=re.findall(r"[a-z0-9']+",key)
+        if len(words)>=6 and len(set(words))<=3:
+            # A paragraph built from one phrase repeated is machine padding, not
+            # reader value, so even its first occurrence is removed.
+            drop=True
+        elif len(text)>=100:
+            if key in seen:drop=True
+            else:seen.add(key)
+        if drop:
+            removed+=1
+            pieces.append(segment[cursor:match.start()])
+            cursor=match.end()
+    if not removed:return segment,0
+    pieces.append(segment[cursor:])
+    return "".join(pieces),removed
+
+
+SENTENCE_BLOCKS=re.compile(r"<(p|li|dd|blockquote|figcaption|h[2-4])\b([^>]*)>(.*?)</\1\s*>",re.I|re.S)
 def scrub_repeated_sentences(content:str)->tuple[str,int]:
  """Remove banned stock sentences and every later duplicate sentence.
 
  The publication gate measures repetition on the rendered text of the whole
- article, including sentences that sit beside links or emphasis tags. This repair
- therefore works sentence by sentence across the text runs of the document while
- leaving scripts, styles and the controlled Daily Yield furniture untouched. The
- first occurrence of any sentence is always preserved.
+ article, so this repair reads every sentence as a reader sees it, including
+ sentences that run across a link or an emphasis tag, and deletes the offending
+ sentence from the markup. Paragraphs built from one repeated phrase are machine
+ padding and are removed outright. Scripts, styles, headings of the article's own
+ title and the controlled Daily Yield furniture are never touched, and the first
+ real occurrence of a sentence and of a paragraph is always preserved.
  """
  from content_policy_guard import REPETITIVE_FALLBACK_PHRASES,normalize_sentence
- banned=[normalize_sentence(x) for x in REPETITIVE_FALLBACK_PHRASES if normalize_sentence(x)]
+ banned=[x for x in (normalize_sentence(item) for item in REPETITIVE_FALLBACK_PHRASES) if x]
  seen=set();removed=0
+ def scrub_warnings_and_duplicates(inner:str)->tuple[str,int]:
+  nonlocal removed
+  plain,index=_visible_text(inner);drops=[]
+  for start,end in _sentence_spans(plain):
+   key=normalize_sentence(plain[start:end])
+   if not key:continue
+   if any(phrase in key for phrase in banned):
+    drops.append((start,end));removed+=1;continue
+   if len(key.split())>=10:
+    if key in seen:
+     drops.append((start,end));removed+=1;continue
+    seen.add(key)
+  if not drops:return inner,0
+  return _drop_plain_ranges(inner,index,drops),len(drops)
+ def fix_block(match:"re.Match[str]")->str:
+  tag,attributes,inner=match.group(1),match.group(2),match.group(3)
+  if "<script" in inner.casefold() or "<style" in inner.casefold():return match.group(0)
+  repaired,_count=scrub_warnings_and_duplicates(inner)
+  return match.group(0) if repaired==inner else f"<{tag}{attributes}>{repaired}</{tag}>"
  def scrub(segment:str)->str:
   nonlocal removed
-  parts=re.split(r'(<[^>]+>)',segment)
-  for index,part in enumerate(parts):
-   if part.startswith('<') or not part.strip():continue
-   kept=[]
-   for sentence in re.split(r'(?<=[.!?])\s+',part):
-    key=normalize_sentence(sentence)
-    if not key:
-     kept.append(sentence);continue
-    if any(phrase in key for phrase in banned):
-     removed+=1;continue
-    if len(key.split())>=10:
-     if key in seen:
-      removed+=1;continue
-     seen.add(key)
-    kept.append(sentence)
-   parts[index]=' '.join(x for x in kept if x.strip())
-  return ''.join(parts)
+  segment,paragraphs=drop_repeated_paragraphs(segment)
+  removed+=paragraphs
+  segment=SENTENCE_BLOCKS.sub(fix_block,segment)
+  # Stock sentences that sit outside a recognised block are removed as well.
+  plain,index=_visible_text(segment);drops=[]
+  for start,end in _sentence_spans(plain):
+   key=normalize_sentence(plain[start:end])
+   if key and any(phrase in key for phrase in banned):drops.append((start,end));removed+=1
+  return _drop_plain_ranges(segment,index,drops) if drops else segment
  output=[];cursor=0
- for match in PROTECTED_BLOCKS.finditer(content or ''):
-  output.append(scrub((content or '')[cursor:match.start()]));output.append(match.group(0));cursor=match.end()
- output.append(scrub((content or '')[cursor:]))
- cleaned=''.join(output)
- cleaned=re.sub(r'<p\b[^>]*>\s*</p>','',cleaned,flags=re.I)
+ for match in PROTECTED_BLOCKS.finditer(content or ""):
+  output.append(scrub((content or "")[cursor:match.start()]));output.append(match.group(0));cursor=match.end()
+ output.append(scrub((content or "")[cursor:]))
+ cleaned="".join(output)
+ cleaned=re.sub(r"<p\b[^>]*>\s*</p>","",cleaned,flags=re.I)
  return cleaned,removed
+
+
+def replace_plain_ranges(segment:str,index:list[int],edits:list[tuple[int,int,str]])->str:
+ """Rewrite reader-visible text ranges inside markup, without touching structure."""
+ for start,end,replacement in sorted(edits,key=lambda x:x[0],reverse=True):
+  if end<=start:continue
+  bounds=_source_bounds(index,start,end)
+  if not bounds:continue
+  source_start,source_end=bounds
+  segment=segment[:source_start]+replacement+segment[source_end:]
+ return segment

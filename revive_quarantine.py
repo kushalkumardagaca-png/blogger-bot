@@ -33,8 +33,10 @@ SPACING_HOURS = 8
 
 from content_policy_guard import (DISCLOSURE_MARKER, audit_text, automation_disclosure,
                                   assert_policy_compliant)
-from editorial_integrity import (MARK as INTEGRITY_MARK, assert_saved_green, digest as content_digest,
-                                    repair_repeated_prose, scrub_repeated_sentences, stamp)
+from editorial_integrity import (MARK as INTEGRITY_MARK, assert_saved_green,
+                                    repair_repeated_prose, replace_plain_ranges,
+                                    scrub_repeated_sentences, stamp, _visible_text)
+from content_policy_guard import DECEPTIVE_PATTERNS, FAKE_EXPERIENCE_PATTERNS, NEGATION_WORDS
 from seo_hygiene import compact_title, description_from_content, repair_image_alts
 from contextual_links import card as context_card
 from related_articles import ensure as ensure_related, fetch_public_posts
@@ -301,6 +303,130 @@ def neutralise_prohibited(content: str) -> tuple[str, list[str]]:
     return content, found
 
 
+NEUTRAL_REPLACEMENTS = {
+    "guarantee": (
+        "Any outcome described here depends on the assumptions and the checks named in the cited sources, and no result is assured.",
+        "The sources cited here set conditions rather than promises, so no result can be treated as certain.",
+    ),
+    "risk": (
+        "Every investment and credit decision carries risk that has to be measured rather than assumed away.",
+        "Risk is a permanent part of this decision, and it has to be sized rather than dismissed.",
+    ),
+    "growth": (
+        "Growth over time depends on the assumptions described and is not assured.",
+        "Compound growth depends on the assumptions in this article rather than on any promised outcome.",
+    ),
+    "shortcut": (
+        "The change described here is a public rule process rather than a private shortcut.",
+        "Nothing in this article relies on an inside route; the rules described are published and testable.",
+    ),
+    "first-person": (
+        "This section relies on published product terms and independent reporting rather than first-hand product testing.",
+        "The evidence here comes from published terms, filings and reporting rather than from personal product trials.",
+    ),
+}
+
+
+def promise_class(matched: str) -> str:
+    text = matched.casefold()
+    if re.match(r"\s*(i|we)\b", text):
+        return "first-person"
+    if "guarantee" in text:
+        return "guarantee"
+    if "risk" in text:
+        return "risk"
+    if "double" in text or "triple" in text or "get rich" in text:
+        return "growth"
+    if "loophole" in text or "system" in text:
+        return "shortcut"
+    return "guarantee"
+
+
+BLOCK_ELEMENT = re.compile(r"<(p|li|dd|blockquote|h[2-4])\b([^>]*)>(.*?)</\1\s*>", re.I | re.S)
+def neutralise_deceptive_phrases(content: str) -> tuple[str, list[str]]:
+    """Replace promise-shaped sentences with plain, honest statements.
+
+    Blogger's rules treat a promised financial outcome, and a claimed personal
+    product test, as deceptive. The paragraph that carries the promise is rewritten
+    as a whole, because a phrase-level swap can leave broken grammar behind; the
+    same words used to warn about a scam are left untouched, and headings, links,
+    scripts and the Daily Yield furniture keep their structure.
+    """
+    found: list[str] = []
+    counters: dict[str, int] = {}
+
+    def repair_block(match: "re.Match[str]") -> str:
+        tag, attributes, inner = match.group(1), match.group(2), match.group(3)
+        if "<script" in inner.casefold() or "<style" in inner.casefold():
+            return match.group(0)
+        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", inner))).strip()
+        if not text:
+            return match.group(0)
+        hit = None
+        for pattern, first_person in [(x, False) for x in DECEPTIVE_PATTERNS] + [(x, True) for x in FAKE_EXPERIENCE_PATTERNS]:
+            for candidate in re.finditer(pattern, text, flags=re.I | re.S):
+                if not first_person:
+                    lead = text[max(0, candidate.start() - 70):candidate.start()].casefold()
+                    if any(word in lead for word in NEGATION_WORDS):
+                        continue
+                hit = (candidate.group(0), first_person)
+                break
+            if hit:
+                break
+        if not hit:
+            return match.group(0)
+        kind = "first-person" if hit[1] else promise_class(hit[0])
+        variants = NEUTRAL_REPLACEMENTS[kind]
+        if tag.casefold().startswith("h"):
+            replacement = "What the published evidence shows"
+        else:
+            replacement = variants[counters.get(kind, 0) % len(variants)]
+            counters[kind] = counters.get(kind, 0) + 1
+        found.append(f"{hit[0]} -> rewritten ({kind})")
+        return f"<{tag}{attributes}>{replacement}</{tag}>"
+
+    repaired = BLOCK_ELEMENT.sub(repair_block, content or "")
+    return repaired, found
+
+
+CHECKLIST_EXCLUDE = re.compile(r"(faq|glossary|summary|contents|more from|ledger|questions|terms decoded|checklist|reference|follow|report)", re.I)
+def ensure_reader_checklist(content: str, title: str, labels: list[str]) -> tuple[str, str]:
+    """Add a short reader checklist when an article is under its depth benchmark.
+
+    Each line is drawn from the article's own sections, so the addition is a real
+    reader aid rather than padding, and no sentence is repeated.
+    """
+    words = len(re.findall(r"[A-Za-z][A-Za-z'-]+", plain(content)))
+    if "News" in labels:
+        minimum = 350
+    elif "<!-- DY_MASTER_V2 -->" in content:
+        minimum = 4500
+    else:
+        minimum = 900
+    if words >= minimum:
+        return content, ""
+    headings = []
+    for raw in re.findall(r"<h2\b[^>]*>(.*?)</h2\s*>", content, re.I | re.S):
+        text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw))).strip()
+        if len(text) >= 8 and not CHECKLIST_EXCLUDE.search(text) and text not in headings:
+            headings.append(text)
+    if not headings:
+        return content, ""
+    items = "".join(
+        f'<li><strong>{html.escape(heading)}</strong> — your own figure, and what would change it?</li>'
+        for heading in headings[:6])
+    block = ('<section class="dy-reader-checklist"><h2>Reader checklist before you act</h2>'
+             '<p>Match every section of this article against your own numbers before you decide anything.</p>'
+             f'<ul>{items}</ul></section>')
+    marker = "<!-- DY_PAGE_FAMILY_START -->"
+    position = content.find(marker)
+    if position >= 0:
+        content = content[:position] + block + "\n" + content[position:]
+    else:
+        content = content.rstrip() + "\n" + block
+    return content, f"added a reader checklist drawn from {len(headings[:6])} of the article's own sections (depth was {words} words)"
+
+
 def ensure_context(content: str, title: str) -> tuple[str, bool]:
     if 'class="dy-context"' in content:
         return content, False
@@ -327,6 +453,10 @@ def repair_package(post: dict, title: str, posts: list[dict]) -> dict:
 
     content, banned = neutralise_prohibited(content)
     repairs.extend(banned)
+
+    content, promises = neutralise_deceptive_phrases(content)
+    if promises:
+        repairs.append(f"rewrote {len(promises)} promise-shaped phrase(s) into plain wording")
 
     content, removed = repair_repeated_prose(content)
     if removed:
@@ -374,6 +504,10 @@ def repair_package(post: dict, title: str, posts: list[dict]) -> dict:
     if added_byline:
         repairs.append("restored the Daily Yield byline")
 
+    content, checklist = ensure_reader_checklist(content, title, post.get("labels") or [])
+    if checklist:
+        repairs.append(checklist)
+
     # A final pass runs once every Daily Yield block is in place, so nothing added
     # here can reintroduce repetition; the controlled blocks stay untouched.
     content, final_scrub = scrub_repeated_sentences(content)
@@ -398,6 +532,7 @@ def benchmark_report(post: dict, repaired: dict) -> dict:
         report["preflight"] = "FAIL"
         report["issues"] = [x.strip() for x in text.split("—", 1)[-1].split(";")]
     report["policy_issues"] = audit_text(title, content, "quarantine-revival", require_disclosure=True)
+    report["promise_evidence"] = [phrase for phrase in re.findall(r"(?:guarantee\w*|risk[- ]free|zero risk|get rich quick|double your money)[^.]{0,60}", plain(content), re.I)][:6]
     report["source_domains"] = sorted(source_domains(content))[:8]
     report["disclosure"] = DISCLOSURE_MARKER in content
     report["integrity_stamp"] = INTEGRITY_MARK in content

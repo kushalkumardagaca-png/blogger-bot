@@ -187,5 +187,52 @@ class RepetitionRepairTests(unittest.TestCase):
         self.assertEqual(rq.next_pending(state, "an-older-revision")["draft_id"], item["draft_id"])
 
 
+class PromiseAndDepthRepairTests(unittest.TestCase):
+    def test_promise_shaped_paragraph_is_rewritten(self):
+        from content_policy_guard import audit_text
+        content = ('<h1>Build Credit Without Paying Interest</h1>'
+                   '<p>Some lenders advertise guaranteed approval for applicants with a thin credit file.</p>'
+                   '<p>A zero risk approach does not exist, because payment history moves the score.</p>')
+        repaired, found = rq.neutralise_deceptive_phrases(content)
+        self.assertTrue(found)
+        self.assertNotIn("deceptive financial or commercial promise", audit_text("Build Credit Without Paying Interest", repaired))
+        self.assertIn("<h1>Build Credit Without Paying Interest</h1>", repaired)
+
+    def test_first_person_product_claim_is_removed(self):
+        from content_policy_guard import audit_text
+        content = "<p>I personally tested six secured-card products and paid every balance in full.</p>"
+        repaired, found = rq.neutralise_deceptive_phrases(content)
+        self.assertTrue(any("first-person" in item for item in found))
+        self.assertNotIn("unsupported first-person product or investment experience", audit_text("t", repaired))
+
+    def test_warning_about_a_scam_is_never_rewritten(self):
+        content = "<p>Warnings about scammers say that promised returns should never persuade a saver.</p>"
+        repaired, found = rq.neutralise_deceptive_phrases(content)
+        self.assertEqual(found, [])
+        self.assertEqual(repaired, content)
+
+    def test_deep_article_is_left_alone(self):
+        long_content = "<h2>A section</h2>" + "<p>" + ("A distinct and factual sentence about money decisions and their documented limits. " * 120) + "</p>"
+        repaired, note = rq.ensure_reader_checklist(long_content, "t", ["Master Article"])
+        self.assertEqual(note, "")
+        self.assertNotIn("dy-reader-checklist", repaired)
+
+    def test_short_article_gains_a_reader_checklist(self):
+        content = "".join(f"<h2>Section {i} about one money decision</h2><p>Sentence {i} explains one part of that decision in enough words to count.</p>" for i in range(6))
+        repaired, note = rq.ensure_reader_checklist(content, "t", ["Master Article"])
+        self.assertIn("dy-reader-checklist", repaired)
+        self.assertIn("depth was", note)
+
+    def test_stock_repeating_paragraph_is_removed(self):
+        from editorial_integrity import scrub_repeated_sentences
+        stock = "<p>" + "documented source evidence " * 6 + "</p>"
+        duplicate = "<p>" + ("A full factual paragraph about settlement timing and daily bank reconciliation. " * 3) + "</p>"
+        cleaned, removed = scrub_repeated_sentences(f"<h1>H</h1>{duplicate}{duplicate}{stock}")
+        self.assertGreaterEqual(removed, 1)
+        self.assertNotIn("documented source evidence", cleaned)
+        # The unique reader text survives exactly once.
+        self.assertEqual(cleaned.count("settlement timing"), 1)
+
+
 if __name__ == "__main__":
     unittest.main()
