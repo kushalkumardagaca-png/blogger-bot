@@ -9,7 +9,7 @@ from __future__ import annotations
 import datetime as dt,hashlib,html,json,os,re,time
 from collections import defaultdict
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote,unquote,urlparse
 import requests
 from bs4 import BeautifulSoup,Comment
 from content_policy_guard import DISCLOSURE_MARKER,audit_text,automation_disclosure
@@ -86,6 +86,21 @@ def editorial_only(post,content):
  if article:
   return str(article)
  return str(soup)
+def ensure_figure_rights(content):
+ soup=BeautifulSoup(content,'html.parser');changed=False
+ for figure in soup.select('figure'):
+  if figure.select_one('figcaption'):continue
+  image=figure.select_one('img[src]')
+  if not image:continue
+  src=html.unescape(image.get('src',''));host=(urlparse(src).hostname or '').lower();source='';label=''
+  if host.endswith('wikimedia.org'):
+   path=urlparse(src).path;match=re.search(r'/thumb/[0-9a-f]/[0-9a-f]{2}/([^/]+)/',path,re.I) or re.search(r'/commons/[0-9a-f]/[0-9a-f]{2}/([^/]+)$',path,re.I)
+   if match:source='https://commons.wikimedia.org/wiki/File:'+quote(unquote(match.group(1)));label='Editorial image · Wikimedia Commons source and licence record'
+  elif host.endswith('unsplash.com'):source=src;label='Editorial photograph · Unsplash source record'
+  if source:
+   caption=soup.new_tag('figcaption');link=soup.new_tag('a',href=source,rel='noopener license',target='_blank');link.string=label;caption.append(link);figure.append(caption);changed=True
+ return str(soup) if changed else content
+
 def rights_entry(post,content):
  soup=BeautifulSoup(content,'html.parser');assets=[]
  for figure in soup.select('figure'):
@@ -106,6 +121,7 @@ def main():
   if p['id'] in removed:continue
   content=clean_legacy_promises(p.get('content',''))
   if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
+  content=ensure_figure_rights(content)
   if automated(p):content=upgrade_disclosure(content)
   audit_content=editorial_only(p,content);issues=[x for x in audit_text(p.get('title',''),audit_content,'historical',require_disclosure=False) if x!='insufficient sentence-level originality']
   bad_links=[]
