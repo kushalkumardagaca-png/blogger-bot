@@ -7,7 +7,7 @@ R=Path(__file__).parent;checks=[]
 def check(name,ok,detail=''):checks.append({'name':name,'status':'PASS' if ok else 'FAIL','detail':detail})
 pre=(R/'publication_preflight.py').read_text();guard=(R/'content_policy_guard.py').read_text();master=(R/'master_v3_generator.py').read_text();renderer=(R/'master_article_v2.py').read_text();news=(R/'news_pipeline.py').read_text();social=(R/'social_creative.py').read_text();deploy=(R/'deploy_blogger_policy_compliance.py').read_text();workflow=(R/'.github/workflows/blogger_policy_compliance.yml').read_text();themes='\n'.join(p.read_text() for p in (R/'theme').glob('*.xml'))
 check('Every Blogger publication passes the central policy guard','assert_policy_compliant' in pre and 'require_disclosure=True' in pre)
-check('Automated posts disclose the production process','automation_disclosure' in renderer and 'automation_disclosure' in news and 'DY_AUTOMATION_DISCLOSURE_2026_12' in guard)
+check('Automated posts disclose the production process','automation_disclosure' in renderer and 'automation_disclosure' in news and 'DY_AUTOMATION_DISCLOSURE_GREEN_V2' in guard)
 check('Master packages are policy-versioned and older prose is rebuilt','POLICY_VERSION' in master and "package.get('policy_version')!=POLICY_VERSION" in (R/'master_v3_pipeline.py').read_text())
 check('Deterministic Master completion avoids the retired repeated disclaimer', 'This passage is used only for its documented scope' not in master)
 check('Corpus originality blocks reused sentences and highly similar articles',(R/'content_originality.py').exists() and 'assert_cross_corpus_original' in master)

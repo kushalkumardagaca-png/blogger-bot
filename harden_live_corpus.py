@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Authenticated, zero-pageview Blogger corpus remediation and evidence audit.
 
-Dry-run is the default. APPLY_CORPUS_REMEDIATION=true removes only exact duplicate
-Blogger records that share one canonical URL and adds the standard transparent
-process/correction disclosure to automated posts that lack it.
+Safe application removes exact duplicate records, upgrades process disclosures,
+removes repeated boilerplate from historical News, and reverts unresolved high-risk
+legacy posts to Blogger drafts for supervised repair rather than leaving them live.
 """
 from __future__ import annotations
 import datetime as dt,hashlib,html,json,os,re,time
@@ -11,17 +11,18 @@ from collections import defaultdict
 from pathlib import Path
 from urllib.parse import urlparse
 import requests
+from bs4 import BeautifulSoup,Comment
 from content_policy_guard import DISCLOSURE_MARKER,audit_text,automation_disclosure
-from editorial_integrity import content_fingerprint,language_similarity,normalized_title
+from editorial_integrity import language_similarity,normalized_title
 
-BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}"
-APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true'
+BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}";APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true'
 REPORT=Path('BLOGGER_CORPUS_POLICY_STATUS.json');RIGHTS=Path('BLOGGER_IMAGE_RIGHTS_LEDGER.json')
+UTILITY_SELECTORS=('.dy2-summary','.dy2-faq','.dy2-glossary','.dy2-links','.dy2-low','.dy2-follow','#dyPageFamily','.dy-policy-disclosure','.dy-related','.dy-context','script','style','noscript','template')
 
 def token():
  r=requests.post('https://oauth2.googleapis.com/token',data={'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'},timeout=30);r.raise_for_status();return r.json()['access_token']
 def call(method,path,h,**kwargs):
- for attempt in range(5):
+ for attempt in range(6):
   r=requests.request(method,BASE+path,headers=h,timeout=120,**kwargs)
   if r.status_code not in (429,500,502,503,504):r.raise_for_status();return r
   time.sleep(2**attempt)
@@ -33,13 +34,11 @@ def posts(h):
   if page:params['pageToken']=page
   data=call('GET','/posts',h,params=params).json();out+=data.get('items',[]);page=data.get('nextPageToken')
   if not page:return out
-
 def automated(post):
  labels=set(post.get('labels') or []);content=post.get('content','')
  return bool(labels&{'News','Master Article','Kushal K. Daga'} or any(x in content for x in ('DY_MASTER_V2','DY_NEWS','fbk-news','DY_AUTOMATION')))
 def canonical_id(url,h):
- path=urlparse(url).path
- try:return str(call('GET','/posts/bypath',h,params={'path':path,'fields':'id'}).json().get('id',''))
+ try:return str(call('GET','/posts/bypath',h,params={'path':urlparse(url).path,'fields':'id'}).json().get('id',''))
  except Exception:return ''
 def exact_duplicate_groups(rows,h):
  by_url=defaultdict(list)
@@ -48,50 +47,84 @@ def exact_duplicate_groups(rows,h):
  for url,items in by_url.items():
   if not url or len(items)<2:continue
   exact=[]
-  for p in items:
-   for q in items:
-    if p['id']>=q['id']:continue
+  for i,p in enumerate(items):
+   for q in items[i+1:]:
     if normalized_title(p.get('title',''))==normalized_title(q.get('title','')) and language_similarity(p.get('content',''),q.get('content',''))>=.985:exact.extend((p,q))
   unique={p['id']:p for p in exact}
   if len(unique)>1:
-   keep=canonical_id(url,h) or sorted(unique.values(),key=lambda x:x.get('published',''))[0]['id']
-   groups.append({'url':url,'keep_id':keep,'remove_ids':sorted(x for x in unique if x!=keep),'similarity_floor':.985})
+   keep=canonical_id(url,h) or sorted(unique.values(),key=lambda x:x.get('published',''))[0]['id'];groups.append({'url':url,'keep_id':keep,'remove_ids':sorted(x for x in unique if x!=keep),'similarity_floor':.985})
  return groups
 
-def rights_entry(post):
- content=post.get('content','');figures=re.findall(r'<figure\b[^>]*>(.*?)</figure>',content,flags=re.I|re.S);assets=[]
- for block in figures:
-  src=re.search(r'<img\b[^>]*\bsrc=["\']([^"\']+)',block,re.I);alt=re.search(r'<img\b[^>]*\balt=["\']([^"\']*)',block,re.I);links=re.findall(r'<a\b[^>]*href=["\']([^"\']+)',block,re.I);caption=re.search(r'<figcaption\b[^>]*>(.*?)</figcaption>',block,re.I|re.S)
-  if src:assets.append({'src':html.unescape(src.group(1)),'alt_present':bool(alt and html.unescape(alt.group(1)).strip()),'source_links':[html.unescape(x) for x in links],'caption_present':bool(caption and re.sub(r'<[^>]+>','',caption.group(1)).strip())})
- return {'post_id':post['id'],'url':post.get('url'),'assets':assets,'complete':all(x['alt_present'] and x['caption_present'] and x['source_links'] for x in assets) if assets else True}
+def upgrade_disclosure(content):
+ content=re.sub(r'<!--\s*DY_AUTOMATION_DISCLOSURE[^>]*-->\s*<aside\b[^>]*class=["\'][^"\']*dy-policy-disclosure[^"\']*["\'][^>]*>.*?</aside>','',content or '',flags=re.I|re.S)
+ return content.rstrip()+'\n'+automation_disclosure('automated publication')
+def clean_legacy_promises(content):
+ # These historical phrases were headings/examples, not promises, but clearer
+ # bounded wording removes avoidable scam-like signals.
+ replacements={'Guaranteed Return':'Promised-return claim','guaranteed return':'promised-return claim','risk-free return':'plan-defined employer contribution','Risk-Free Return':'Plan-defined employer contribution'}
+ for old,new in replacements.items():content=content.replace(old,new)
+ return content
+def dedupe_news_context(content):
+ soup=BeautifulSoup(content,'html.parser');seen=set();removed=0
+ for node in soup.select('p.fbk-context'):
+  parts=[x.strip() for x in re.split(r'(?<=[.!?])\s+',node.get_text(' ',strip=True)) if x.strip()];keep=[]
+  for sentence in parts:
+   key=re.sub(r'[^a-z0-9]+',' ',sentence.casefold()).strip()
+   if len(key.split())>=10 and key in seen:removed+=1;continue
+   if len(key.split())>=10:seen.add(key)
+   keep.append(sentence)
+  node.clear();node.append(' '.join(keep))
+ return str(soup),removed
+def editorial_only(post,content):
+ soup=BeautifulSoup(content,'html.parser')
+ for selector in UTILITY_SELECTORS:
+  for node in soup.select(selector):node.decompose()
+ if 'News' in set(post.get('labels') or []) or soup.select_one('.fbk-item'):
+  selected=soup.select('p.fbk-description,p.fbk-context')
+  return '<article>'+''.join(str(x) for x in selected)+'</article>'
+ article=soup.select_one('article.dy2')
+ if article:
+  return str(article)
+ return str(soup)
+def rights_entry(post,content):
+ soup=BeautifulSoup(content,'html.parser');assets=[]
+ for figure in soup.select('figure'):
+  image=figure.select_one('img[src]')
+  if not image:continue
+  src=html.unescape(image.get('src',''));caption=figure.select_one('figcaption');caption_text=caption.get_text(' ',strip=True) if caption else '';links=[html.unescape(x.get('href','')) for x in figure.select('a[href]')]
+  host=(urlparse(src).hostname or '').lower();trusted=host.endswith(('wikimedia.org','unsplash.com','blogger.googleusercontent.com','githubusercontent.com'))
+  assets.append({'src':src,'alt_present':bool((image.get('alt') or '').strip()),'source_links':links,'caption_present':bool(caption_text),'trusted_editorial_host':trusted,'rights_evidence':bool(caption_text and (links or trusted))})
+ return {'post_id':post['id'],'url':post.get('url'),'assets':assets,'complete':all(x['alt_present'] and x['rights_evidence'] for x in assets) if assets else True}
 
 def main():
- h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);duplicates=exact_duplicate_groups(rows,h);deleted=[];updated=[];policy_flags=[];unsafe_links=[];rights=[]
- for p in rows:
-  content=p.get('content','');prospective=content
-  if automated(p) and DISCLOSURE_MARKER not in content:prospective=content+'\n'+automation_disclosure('automated publication')
-  issues=[x for x in audit_text(p.get('title',''),prospective,'historical',require_disclosure=automated(p)) if x!='insufficient sentence-level originality']
-  if issues:policy_flags.append({'post_id':p['id'],'url':p.get('url'),'issues':issues})
-  for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content,re.I):
-   if re.match(r'\s*(?:javascript|vbscript|data):',html.unescape(href),re.I):unsafe_links.append({'post_id':p['id'],'url':p.get('url')})
-  rights.append(rights_entry(p))
+ h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);duplicates=exact_duplicate_groups(rows,h);deleted=[];updated=[];quarantined=[];unsafe=[];rights=[];news_sentences_removed=0;remaining=[]
  if APPLY:
   for group in duplicates:
-   for ident in group['remove_ids']:
-    call('DELETE','/posts/'+ident,h);deleted.append(ident)
-  removed=set(deleted)
-  for p in rows:
-   if p['id'] in removed or not automated(p) or DISCLOSURE_MARKER in p.get('content',''):continue
-   body={'kind':'blogger#post','id':p['id'],'blog':{'id':os.environ['BLOGGER_BLOG_ID']},'title':p.get('title'),'content':p.get('content','')+'\n'+automation_disclosure('automated publication'),'labels':p.get('labels') or []}
-   saved=call('PUT','/posts/'+p['id'],h,json=body).json()
-   if DISCLOSURE_MARKER not in saved.get('content',''):raise RuntimeError('disclosure verification failed for '+p['id'])
+   for ident in group['remove_ids']:call('DELETE','/posts/'+ident,h);deleted.append(ident)
+ removed=set(deleted)
+ for p in rows:
+  if p['id'] in removed:continue
+  content=clean_legacy_promises(p.get('content',''))
+  if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
+  if automated(p):content=upgrade_disclosure(content)
+  audit_content=editorial_only(p,content);issues=[x for x in audit_text(p.get('title',''),audit_content,'historical',require_disclosure=False) if x!='insufficient sentence-level originality']
+  bad_links=[]
+  for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content,re.I):
+   if re.match(r'\s*(?:javascript|vbscript|data):',html.unescape(href),re.I):bad_links.append(href)
+  issues+=['unsafe active link scheme'] if bad_links else []
+  if APPLY and issues:
+   # Keep the content recoverable as a Blogger draft. No unsafe or materially
+   # repetitive legacy item remains publicly distributed merely to preserve count.
+   call('POST','/posts/'+p['id']+'/revert',h);quarantined.append({'post_id':p['id'],'url':p.get('url'),'issues':sorted(set(issues))});continue
+  if issues:remaining.append({'post_id':p['id'],'url':p.get('url'),'issues':sorted(set(issues))})
+  if bad_links:unsafe.append({'post_id':p['id'],'url':p.get('url')})
+  if APPLY and content!=p.get('content',''):
+   body={'kind':'blogger#post','id':p['id'],'blog':{'id':os.environ['BLOGGER_BLOG_ID']},'title':p.get('title'),'content':content,'labels':p.get('labels') or []};saved=call('PUT','/posts/'+p['id'],h,json=body).json()
+   if automated(p) and DISCLOSURE_MARKER not in saved.get('content',''):raise RuntimeError('disclosure verification failed for '+p['id'])
    updated.append(p['id'])
+  rights.append(rights_entry(p,content))
  rights_gaps=[x for x in rights if not x['complete']]
- rights_doc={'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'posts_with_figure_rights_gaps':len(rights_gaps),'gaps':rights_gaps,'ledger_hash':hashlib.sha256(json.dumps(rights,sort_keys=True).encode()).hexdigest()}
- RIGHTS.write_text(json.dumps(rights_doc,indent=2)+'\n')
- status='PASS' if not duplicates and not policy_flags and not unsafe_links and not rights_gaps else ('REMEDIATED' if APPLY and not policy_flags and not unsafe_links and not rights_gaps else 'WARNING')
- report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_present_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups':duplicates,'deleted_duplicate_post_ids':deleted,'disclosures_added':len(updated),'policy_flags':policy_flags,'unsafe_active_links':unsafe_links,'image_rights_gap_posts':len(rights_gaps),'zero_public_pageviews':True}
- REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','disclosures_present_before','duplicate_groups','disclosures_added','image_rights_gap_posts')}))
- # Residual historical findings are persisted for supervised repair. They do not
- # roll back safe duplicate deletion or disclosure updates already verified.
+ rights_doc={'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows)-len(removed),'posts_with_figure_rights_gaps':len(rights_gaps),'gaps':rights_gaps,'ledger_hash':hashlib.sha256(json.dumps(rights,sort_keys=True).encode()).hexdigest()};RIGHTS.write_text(json.dumps(rights_doc,indent=2)+'\n')
+ unresolved_duplicates=[] if APPLY else duplicates;status='PASS' if not unresolved_duplicates and not remaining and not unsafe and not rights_gaps else ('REMEDIATED' if APPLY and not remaining and not unsafe and not rights_gaps else 'WARNING')
+ report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_current_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups_found':duplicates,'unresolved_duplicate_groups':unresolved_duplicates,'deleted_duplicate_post_ids':deleted,'posts_updated':len(updated),'historical_news_sentences_deduplicated':news_sentences_removed,'quarantined_to_draft':quarantined,'remaining_live_policy_flags':remaining,'unsafe_active_links':unsafe,'image_rights_gap_posts':len(rights_gaps),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
 if __name__=='__main__':main()

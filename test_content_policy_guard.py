@@ -8,7 +8,7 @@ class ContentPolicyGuardTests(unittest.TestCase):
   issues=audit_text('x','I personally tested this investment. Card 4111 1111 1111 1111.')
   self.assertTrue(any('experience' in x for x in issues));self.assertTrue(any('payment-card' in x for x in issues))
  def test_disclosure_is_machine_verifiable_and_human_readable(self):
-  block=automation_disclosure('article');self.assertIn('DY_AUTOMATION_DISCLOSURE_2026_12',block);self.assertIn('does not state',block)
+  block=automation_disclosure('article');self.assertIn('DY_AUTOMATION_DISCLOSURE_GREEN_V2',block);self.assertIn('does not state',block)
  def test_social_manufactured_urgency_fails(self):
   with self.assertRaisesRegex(RuntimeError,'manufactured urgency'):assert_social_compliant('Act now and read this')
  def test_repeated_substantive_sentence_fails(self):

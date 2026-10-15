@@ -10,7 +10,7 @@ import html,os,re
 from collections import Counter
 
 POLICY_VERSION="BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2"
-DISCLOSURE_MARKER="DY_AUTOMATION_DISCLOSURE_2026_12"
+DISCLOSURE_MARKER="DY_AUTOMATION_DISCLOSURE_GREEN_V2"
 
 # These phrases are acceptable only when expressly negated or quoted as a risk.
 DECEPTIVE_PATTERNS=(
@@ -36,7 +36,8 @@ DANGEROUS_PATTERNS=(
 # Strict formats reduce false positives in ordinary financial reporting.
 PRIVATE_DATA_PATTERNS=(
  ("US Social Security number",r"(?<!\d)\d{3}-\d{2}-\d{4}(?!\d)"),
- ("Indian Aadhaar-like number",r"(?<!\d)[2-9]\d{3}[ -]\d{4}[ -]\d{4}(?!\d)"),
+ # Aadhaar-like formatting is evaluated with nearby identity context below;
+ # financial examples commonly contain unrelated 4-4-4 grouped figures.
  ("private key",r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
 )
 REPETITIVE_FALLBACK_PHRASES=(
@@ -94,6 +95,9 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
   if re.search(pattern,text,re.I):issues.append("dangerous or illegal facilitation language")
  for name,pattern in PRIVATE_DATA_PATTERNS:
   if re.search(pattern,text,re.I):issues.append("possible exposed "+name)
+ for match in re.finditer(r"(?<!\d)[2-9]\d{3}[ -]\d{4}[ -]\d{4}(?!\d)",text):
+  context=text[max(0,match.start()-80):match.end()+80]
+  if re.search(r"\b(?:aadhaar|identity|identification|id number)\b",context,re.I):issues.append("possible exposed Indian Aadhaar-like number")
  card_candidates=re.findall(r"(?<!\d)(?:\d[ -]?){12,18}\d(?!\d)",text)
  if any(_luhn_valid(candidate) for candidate in card_candidates):
   issues.append("possible exposed payment-card-like number")
@@ -134,7 +138,7 @@ def assert_policy_compliant(title:str,content:str,channel:str="blog",require_dis
  return True
 
 def automation_disclosure(kind:str="article")->str:
- return f'''<!-- {DISCLOSURE_MARKER} --><aside class="dy-policy-disclosure" aria-label="Editorial process disclosure"><strong>How this {html.escape(kind)} was produced</strong><p>Daily Yield uses automated tools to assist source collection, drafting, validation, formatting, scheduling and distribution. The byline identifies the publisher responsible for the publication; it does not state that every automated draft was personally reviewed. Material claims must remain attributable to the linked sources. Report a correction through the Contact page or Blogger’s Report Abuse link.</p></aside>'''
+ return f'''<!-- {DISCLOSURE_MARKER} --><aside class="dy-policy-disclosure" aria-label="Editorial process disclosure"><strong>How this {html.escape(kind)} was produced</strong><p>Daily Yield uses automated tools to assist source collection, drafting, validation, formatting, scheduling and distribution. The byline identifies the publisher responsible for the publication; it does not state that every automated draft was personally reviewed. Material claims must remain attributable to the linked sources. No paid placement or affiliate compensation is represented unless a specific disclosure says otherwise. Report a correction through the Contact page or Blogger’s Report Abuse link.</p></aside>'''
 
 def assert_social_compliant(text:str)->bool:
  issues=audit_text("social post",text,"social",False)

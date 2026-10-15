@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - run: pip install requests
+      - run: pip install requests beautifulsoup4
       - name: Audit authenticated live corpus and apply only safe idempotent repairs
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
