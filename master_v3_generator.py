@@ -175,17 +175,33 @@ def deterministic_section(section_heading,sources):
   "The decision-relevant limit around {heading} is visible in {cite}, attached to “{title}.” Its retrieved passage reads, “{excerpt}.” That material can inform context, terminology and the sequence of events. It does not remove the need to check later revisions, competing evidence or rules that differ by place and account type. In practical terms, {provider} helps identify which assumption needs verification. It does not supply certainty, personal suitability or permission to ignore downside, liquidity, tax and implementation constraints."
  )
  paragraphs=[]
- for cursor in range(5):
+ for cursor in range(10):
   source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));start=(cursor*37)%max(1,len(tokens)-42);excerpt=' '.join(tokens[start:start+38]).strip(' ,;:')
   if not excerpt:continue
   title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16]);provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider} evidence]]"
   seed=int(hashlib.sha256(f"{heading_text}|{title}|{cursor}".encode()).hexdigest()[:8],16)
   paragraphs.append(patterns[seed%len(patterns)].format(cite=cite,heading=heading_text,title=title,excerpt=excerpt,provider=provider))
  if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
+ # Retrieved titles can contain a quarter marker or list number that is absent
+ # from the two stored evidence texts. Remove only the affected sentence rather
+ # than allowing the deterministic quota fallback to publish an unsupported
+ # figure or fail the entire current-day slot.
+ source_blob=' '.join(r['text']+' '+r['title'] for _,r in sources);cleaned=[]
+ for paragraph in paragraphs:
+  kept=[]
+  for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
+   nums=re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence))
+   if not nums or all(number in source_blob for number in nums):kept.append(sentence)
+  if kept:cleaned.append(' '.join(kept))
+ paragraphs=cleaned
+ if len(paragraphs)>6:
+  paragraphs=[' '.join(paragraphs[i:i+2]) for i in range(0,len(paragraphs),2)]
  while words(' '.join(paragraphs))>480:
   index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]));parts=paragraphs[index].split()
-  if len(parts)<=72:break
+  if len(parts)<=35:break
   paragraphs[index]=' '.join(parts[:-1]).rstrip(' ,;:')+'.'
+ primary=sources[0][0]
+ paragraphs=[p if any(f'[[S{i}|' in p for i,_ in sources) else p+f' [[S{primary}|documented source evidence]]' for p in paragraphs]
  ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)
  return paragraphs
