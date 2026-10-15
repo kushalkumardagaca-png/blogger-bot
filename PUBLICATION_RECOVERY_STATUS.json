@@ -1,32 +1,28 @@
 {
-  "generatedAt": "2026-10-15T22:07:02.700294+05:30",
+  "generatedAt": "2026-10-15T22:43:41.713135+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 16,
+  "confirmedPublications": 17,
   "overdueMissing": [
-    "news-banking",
     "master-trending-3",
     "master-evergreen-3",
-    "master-trending-4"
+    "master-trending-4",
+    "master-evergreen-4"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-banking",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
       "key": "master-trending-3",
-      "attempt": 5,
+      "attempt": 6,
       "applied": true
     }
   ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [
     "master-evergreen-3",
-    "master-trending-4"
+    "master-trending-4",
+    "master-evergreen-4"
   ],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
