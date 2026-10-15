@@ -1,0 +1,41 @@
+name: Master Slot Recovery
+
+# Recovers a Master article that today's schedule did not deliver.
+# Put "evergreen:3" or "trending:3" (kind:slot) into
+# .github/master-recovery-request and push. The article is written now and
+# released as soon as its embargo allows, so no slot is ever abandoned.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/master-recovery-request'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Requested slot
+        id: want
+        run: |
+          value="$(tr -d '[:space:]' < .github/master-recovery-request)"
+          case "$value" in
+            evergreen:[0-4]) file=master_evergreen_writer.yml ;;
+            trending:[0-4])  file=master_trending_writer.yml ;;
+            *) echo "::error title=Unusable request::write evergreen:0-4 or trending:0-4 into .github/master-recovery-request"; exit 1 ;;
+          esac
+          echo "kind=${value%%:*}" >> "$GITHUB_OUTPUT"
+          echo "slot=${value##*:}" >> "$GITHUB_OUTPUT"
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+      - name: Write and release the article
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run "${{ steps.want.outputs.file }}" --ref main \
+            -f slot="${{ steps.want.outputs.slot }}" -f publish=true -f retry_attempt=0
+          echo "Requested ${{ steps.want.outputs.kind }} slot ${{ steps.want.outputs.slot }}"
