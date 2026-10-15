@@ -31,6 +31,7 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
+import news_coverage
 from editorial_integrity import assert_green_operating_state,assert_saved_green,find_duplicate,stamp
 from content_policy_guard import automation_disclosure
 from publication_timing import NEWS_LIVE, wait_for_release
@@ -761,6 +762,17 @@ def select_items(all_items, win_start, win_end, desk, selection_cap=40, own_off=
             if len(background) >= min(3, 10 - len(current)):
                 break
 
+    # Reader-priority coverage: every sub-section of a country desk carries at
+    # least two stories, every country of a sub-section desk carries at least
+    # two, no single bucket exceeds ten, and the edition is then ordered by
+    # search demand, story size and audience appetite (news_coverage.py).
+    current, coverage = news_coverage.enforce(current, desk)
+    globals().setdefault("LAST_COVERAGE_REPORT", {})[desk] = coverage
+    print("  [" + desk + "] coverage: " + json.dumps(
+        {"items": coverage.get("total"), "minimums": coverage.get("buckets_short_of_minimum"),
+         "counts": coverage.get("counts"), "lead": coverage.get("lead_headline", "")[:70],
+         "demand": coverage.get("demand_source")}, ensure_ascii=False))
+
     upcoming = [i for i in all_items
                 if i.get("date") and hi < i["date"] <= hi + dt.timedelta(days=7)][:6]
     return current + background, upcoming, lo
@@ -1059,9 +1071,25 @@ def curated_daily_hero(desk, edition_date, used_urls, previous_url=""):
 
 
 def daily_hero(desk, edition_date, used_urls=None, previous_url=""):
-    """Choose a fresh licensed image for this desk/date without reusing yesterday's."""
+    """Choose a fresh licensed image for this desk/date without reusing yesterday's.
+
+    The prepared per-desk photo pool (40-50 licence-verified photographs, used in
+    strict rotation) is tried first, so a desk edition no longer depends on a live
+    search succeeding at release time.
+    """
     used_urls = set(used_urls or ())
     fallback = curated_daily_hero(desk, edition_date, used_urls, previous_url)
+    try:
+        import photo_library
+        avoid = set(used_urls) | ({previous_url} if previous_url else set())
+        entry = photo_library.next_news_photo(desk, avoid=avoid)
+        if entry and entry.get("download_url"):
+            return {"url": entry["download_url"],
+                    "alt": f"Daily financial news editorial photograph for {DESKS[desk][1]}",
+                    "credit": f"Photo: {entry.get('creator') or 'Unknown creator'} / {entry.get('licence') or 'licensed'}",
+                    "source": "prepared-pool"}
+    except Exception:
+        pass
     params = {
         "action": "query", "format": "json", "formatversion": "2", "origin": "*",
         "generator": "search", "gsrsearch": HERO_SEARCH[desk] + " filetype:bitmap", "gsrnamespace": "6", "gsrlimit": "30",

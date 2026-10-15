@@ -1,0 +1,27 @@
+[
+ {
+  "desk": "india",
+  "mode": "country-desk-topics",
+  "minimum_per_bucket": 2,
+  "maximum_per_bucket": 10,
+  "counts": {
+   "markets": 9,
+   "economy": 9,
+   "banking": 9,
+   "companies": 9
+  },
+  "total": 36,
+  "buckets_short_of_minimum": {},
+  "buckets_never_covered": [],
+  "lead_headline": "India banking story 0",
+  "order_top5": [
+   "India banking story 0",
+   "India banking story 1",
+   "India banking story 2",
+   "India banking story 3",
+   "India banking story 4"
+  ],
+  "demand_source": "test",
+  "generated_at": "2026-10-15T16:30:03.272577+00:00"
+ }
+]
