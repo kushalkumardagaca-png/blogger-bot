@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-15T07:04:05.733632+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-15T07:15:11.384858+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
-      "desk": "india",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: 3965 of 2021 ram kishore taparia pan abjpt1453c in the matter of cosboard industries ltd"
+      "desk": "europe",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
