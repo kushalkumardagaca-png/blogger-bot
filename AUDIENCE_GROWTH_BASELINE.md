@@ -1,15 +1,15 @@
 # Daily Yield Audience Growth Baseline
 
-- **Checked:** 2026-10-14T03:14:01.463409+00:00
+- **Checked:** 2026-10-15T02:04:26.466925+00:00
 - **Mode:** AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS
 - **Synthetic views:** 0
-- **Search data available through:** 2026-10-11
+- **Search data available through:** 2026-10-12
 
 ## Authenticated Google search acquisition
 
 | Window | Clicks | Impressions | CTR | Average position |
 |---|---:|---:|---:|---:|
-| 7 days | 1 | 1 | 100.00% | 1.0 |
+| 7 days | 0 | 0 | 0.00% | — |
 | 28 days | 1 | 1 | 100.00% | 1.0 |
 | 90 days | 1 | 1 | 100.00% | 1.0 |
 
