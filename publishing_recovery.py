@@ -100,18 +100,24 @@ def reconcile(now,apply=False):
   lk=f'prewarm:{master_day}:{key}'
   if not may_retry(ledger,lk,now):continue
   call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=false','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'preparation_recovery','key':key,'applied':apply})
- source_dispatched=False
+ source_dispatched=0
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
   if now<slot_due+GRACE or key in master_by_key:continue
   lk=f'source:{master_day}:{key}'
   if not may_retry(ledger,lk,now):blocked.append(lk);continue
-  if source_dispatched:
+  # One attempt per cycle normally, so two live generators never race the shared
+  # photo registry. A slot that has already been attempted three or more times
+  # today must not starve the remaining healthy slots, so one extra dispatch is
+  # allowed from the fourth attempt onward.
+  budget=1+(1 if int(ledger.get(lk,{}).get('attempts',0))>=3 else 0)
+  if source_dispatched>=budget:
    master_deferred.append(key);continue
   # Recover the oldest overdue Master first. This prevents unrelated missing
   # slots from racing the shared photo registry and package state; the next
   # ten-minute reconciliation advances to the next slot after confirmation.
-  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true','-f','retry_attempt=0'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply});source_dispatched=True
+  attempt=int(ledger.get(lk,{}).get('attempts',0))+1
+  call(['gh','workflow','run',f'master_{kind}_writer.yml','--ref','main','-f',f'slot={slot}','-f','publish=true','-f',f'retry_attempt={attempt}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'attempt':attempt,'applied':apply});source_dispatched+=1
  cleanup_state=load(ROOT/'WRONG_MASTER_CLEANUP_STATUS.json',{})
  for repair in WRONG_MASTER_REPAIRS:
   replacement=master_by_key.get(repair['key']);lk=f"cleanup:{master_day}:{repair['key']}"
@@ -155,7 +161,7 @@ def write_run_summary(report):
    if report['overdueMissing']:handle.write('Overdue and still being retried: '+', '.join(report['overdueMissing'])+'\n\n')
    else:handle.write('No overdue current-day article remains.\n\n')
    handle.write('| action | key | applied |\n|---|---|---|\n')
-   for action in report['actions']:handle.write(f"| {action['type']} | {action['key']} | {action['applied']} |\n")
+   for action in report['actions']:handle.write(f"| {action['type']} | {action['key']} | attempt {action.get('attempt','-')} | {action['applied']} |\n")
  except OSError:return
 
 def main():
