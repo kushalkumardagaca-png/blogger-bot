@@ -41,16 +41,11 @@ jobs:
           python - <<'PYFACTS'
           import json
           d=json.load(open('BLOGGER_INVENTORY_STATUS.json'))
-          print(f"::notice::live={d['live_posts']} draft={d['draft_posts']} scheduled={d['scheduled_posts']} draft_copies_of_live={len(d['drafts_matching_a_live_post'])} unique_drafts={len(d['drafts_with_no_live_match'])}")
           for row in d.get('quarantine_still_live') or []:
-              print(f"::error title=Quarantined post is still live::{row.get('post_id')} {row.get('label')} {row.get('url')}")
-              print(f"::error title=Quarantine disclosure missing::post {row.get('post_id')} disclosure={row.get('has_current_disclosure')}")
-          for row in d['draft_unique' if False else 'drafts_with_no_live_match']:
+              print(f"::error title=Quarantined post is still LIVE::{row.get('label')} | {row.get('url')} | disclosure={row.get('has_current_disclosure')}")
+          print(f"::notice::live={d['live_posts']} draft={d['draft_posts']} scheduled={d['scheduled_posts']} draft_copies_of_live={len(d['drafts_matching_a_live_post'])} unique_drafts={len(d['drafts_with_no_live_match'])} quarantine_still_live={len(d.get('quarantine_still_live') or [])}")
+          for row in d['drafts_with_no_live_match']:
               print(f"::notice title=Unique draft::{(row.get('updated') or '')[:16]} {str(row.get('title'))[:70]}")
-          for row in d['drafts_matching_a_live_post']:
-              print(f"::notice title=Draft copy of a live post::{str(row.get('title'))[:70]} -> {row.get('live_url')}")
-          missing=[x for x in d['master_plan_today'] if not x['live']]
-          for row in missing:print(f"::warning title=Master still missing today::{row['key']} {row['title']}")
           print(f"::notice::master_live_today={sum(1 for x in d['master_plan_today'] if x['live'])} of {len(d['master_plan_today'])}; news_live_today={len(d['news_live_today'])}")
           PYFACTS
       - name: Preserve inventory evidence
