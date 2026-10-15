@@ -43,6 +43,7 @@ jobs:
           d=json.load(open('BLOGGER_INVENTORY_STATUS.json'))
           for row in d.get('quarantine_still_live') or []:
               print(f"::error title=Quarantined post is still LIVE::{row.get('label')} | {row.get('url')} | disclosure={row.get('has_current_disclosure')}")
+          print('::notice title=Quarantine statuses::'+' | '.join(f"{r.get('post_id')}:{r.get('current_status')}" for r in d.get('quarantine_audit') or []))
           print(f"::notice::live={d['live_posts']} draft={d['draft_posts']} scheduled={d['scheduled_posts']} draft_copies_of_live={len(d['drafts_matching_a_live_post'])} unique_drafts={len(d['drafts_with_no_live_match'])} quarantine_still_live={len(d.get('quarantine_still_live') or [])}")
           for row in d['drafts_with_no_live_match']:
               print(f"::notice title=Unique draft::{(row.get('updated') or '')[:16]} {str(row.get('title'))[:70]}")
