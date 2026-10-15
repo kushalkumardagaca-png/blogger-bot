@@ -364,12 +364,13 @@ def photo_set(title,category,slug,key):
   primary=['multigenerational family home adults','family housing planning table','residential homes neighborhood adults']
  else:primary=[f'{category} people workplace',f'{category} documents planning desk',f'{category} public institution exterior']
  variants=[primary,[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior'],
-           ['business meeting office table','office workers computers finance','financial district buildings']]
+           ['business meeting office table','office workers computers finance','financial district buildings'],
+           ['small business shop owner working','household budgeting papers desk','city office buildings street']]
  errors=[]
  for briefs in variants:
   try:return choose_photos(briefs,slug,key)
   except Exception as exc:errors.append(str(exc))
- raise RuntimeError('V3 photo search exhausted two independently broadened searches: '+' | '.join(errors))
+ raise RuntimeError('V3 photo search exhausted every independently broadened search: '+' | '.join(errors))
 def build(item,kind,target):
  sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=clean(title)[:46].strip(' -:')
  profile=structure_profile(item.get('_structure_slot',item.get('id','')),title)

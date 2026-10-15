@@ -61,7 +61,7 @@ def choose_photos(briefs,slug,article_key):
  registry=load_registry()
  if not registry.get('baseline_complete'):raise RuntimeError('global photo baseline is not complete')
  used_ids={x.get('source_id') for x in registry['items']};used_urls={x.get('original_url') or x.get('url') for x in registry['items']};used_hashes={x.get('sha256') for x in registry['items']};used_phashes=[x.get('phash') for x in registry['items'] if x.get('phash')]
- folder=ROOT/'assets'/'master'/slug;folder.mkdir(parents=True,exist_ok=True);selected=[]
+ folder=ROOT/'assets'/'master'/slug;folder.mkdir(parents=True,exist_ok=True);selected=[];funnel={}
  for placement,brief in enumerate(briefs,1):
   candidates=commons_candidates(brief);bt=set(terms(brief));ranked=[]
   for c in candidates:
@@ -73,7 +73,10 @@ def choose_photos(briefs,slug,article_key):
    ratio=c['width']/c['height'];crop_penalty=abs(ratio-16/9)
    ranked.append((overlap*20+min(c['width'],5000)/500-crop_penalty*5,c))
   ranked.sort(key=lambda x:x[0],reverse=True);winner=None
-  for semantic,c in ranked[:24]:
+  # Keep count of why a placement failed so the run summary explains the cause
+  # instead of only reporting that no photograph was available.
+  funnel[f'placement-{placement}-candidates']=len(candidates);funnel[f'placement-{placement}-matched']=len(ranked)
+  for semantic,c in ranked:
    try:
     rr=requests.get(c['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
     image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
@@ -84,7 +87,7 @@ def choose_photos(briefs,slug,article_key):
     if sha in used_hashes or any(distance(ph,x)<=6 for x in used_phashes):continue
     winner=(c,image,sha,ph,semantic+contrast/10);break
    except Exception:continue
-  if not winner:raise RuntimeError(f'no unique licensed professional photograph passed for placement {placement}')
+  if not winner:raise RuntimeError(f'no unique licensed professional photograph passed for placement {placement} '+json.dumps(funnel,sort_keys=True))
   c,image,sha,ph,score=winner;w,h=image.size;target=16/9
   if w/h>target:nw=int(h*target);image=image.crop(((w-nw)//2,0,(w+nw)//2,h))
   else:nh=int(w/target);image=image.crop((0,(h-nh)//2,w,(h+nh)//2))
