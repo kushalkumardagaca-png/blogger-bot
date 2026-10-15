@@ -89,6 +89,45 @@ def call(path: str, tok: str, method: str = "GET", body: dict | None = None, par
     raise RuntimeError(f"{method} {path} did not complete")
 
 
+_LIST_CACHE: dict[str, list[dict]] = {}
+
+
+def fetch_all(tok: str, status: str, refresh: bool = False) -> list[dict]:
+    """List every post in one Blogger status, with bodies, through the API.
+
+    Blogger's single-post read does not return quarantined drafts reliably, so the
+    controller always works from the authenticated inventory instead.
+    """
+    key = status.upper()
+    if not refresh and _LIST_CACHE.get(key):
+        return _LIST_CACHE[key]
+    rows: list[dict] = []
+    page: str | None = None
+    for _ in range(40):
+        params = {
+            "status": status, "fetchBodies": "true", "maxResults": 50,
+            "fields": "items(id,title,url,content,labels,published,updated,status),nextPageToken",
+        }
+        if page:
+            params["pageToken"] = page
+        data = call("/posts", tok, params=params)
+        rows.extend(data.get("items", []))
+        page = data.get("nextPageToken")
+        if not page:
+            break
+    _LIST_CACHE[key] = rows
+    return rows
+
+
+def post_by_id(tok: str, post_id: str, refresh: bool = False) -> dict:
+    """Return one stored post from the authenticated inventory, refreshing as needed."""
+    for status in ("draft", "live"):
+        for row in fetch_all(tok, status, refresh):
+            if str(row.get("id")) == str(post_id):
+                return row
+    raise RuntimeError(f"post {post_id} is not present in the authenticated Blogger inventory")
+
+
 # --------------------------------------------------------------------- state helpers
 def load(path: Path, default):
     try:
@@ -341,7 +380,7 @@ def survey(tok: str) -> dict:
     rows = []
     posts = fetch_public_posts(limit=100)
     for item in plan_items():
-        post = call(f"/posts/{item['draft_id']}", tok, params={"fetchBody": "true"})
+        post = post_by_id(tok, item["draft_id"])
         title = compact_title(post.get("title") or item["title_now"])
         repaired = repair_package(post, title, posts)
         report = benchmark_report(post, repaired)
@@ -364,7 +403,7 @@ def survey(tok: str) -> dict:
 # --------------------------------------------------------------------- publication
 def prepare(item: dict, tok: str, posts: list[dict]) -> dict:
     """Read the stored draft and build the fully repaired publication package."""
-    post = call(f"/posts/{item['draft_id']}", tok, params={"fetchBody": "true"})
+    post = post_by_id(tok, item["draft_id"])
     if post.get("status") == "LIVE":
         return {"result": "already_live", "post": post, "url": post.get("url"), "title": post.get("title")}
     title = compact_title(post.get("title") or item["title_now"])
@@ -384,6 +423,9 @@ def publish_one(item: dict, tok: str, posts: list[dict], apply: bool) -> dict:
                 "words": len(re.findall(r"[A-Za-z][A-Za-z'-]+", plain(prepared["content"])))}
     post, title = prepared["post"], prepared["title"]
 
+    fresh = post_by_id(tok, item["draft_id"], refresh=True)
+    if fresh.get("status") not in (None, "DRAFT"):
+        raise RuntimeError(f"revival expects a quarantined draft, found {fresh.get('status')}")
     draft = call(f"/posts/{item['draft_id']}", tok, "PUT", {
         "kind": "blogger#post", "id": item["draft_id"], "blog": {"id": _required("BLOGGER_BLOG_ID")},
         "title": title, "content": prepared["content"], "labels": post.get("labels") or [],
@@ -391,7 +433,7 @@ def publish_one(item: dict, tok: str, posts: list[dict], apply: bool) -> dict:
     if draft.get("status") not in (None, "DRAFT"):
         raise RuntimeError(f"post was expected to stay a draft before release, found {draft.get('status')}")
     live = call(f"/posts/{item['draft_id']}/publish", tok, "POST")
-    stored = call(f"/posts/{item['draft_id']}", tok, params={"fetchBody": "true"})
+    stored = post_by_id(tok, item["draft_id"], refresh=True)
     assert_saved_green(stored)
     return {
         "result": "published", "url": stored.get("url") or live.get("url"), "title": title,
