@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-15T18:56:45.950812+05:30",
+  "generatedAt": "2026-10-15T19:41:36.630579+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 14,
+  "confirmedPublications": 15,
   "overdueMissing": [
     "news-companies",
-    "master-evergreen-2",
+    "news-banking",
     "master-trending-3"
   ],
   "actions": [
@@ -17,15 +17,18 @@
     },
     {
       "type": "source_recovery",
-      "key": "master-evergreen-2",
+      "key": "news-banking",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-3",
       "attempt": 1,
       "applied": true
     }
   ],
   "retryBlocked": [],
-  "masterRecoveryDeferred": [
-    "master-trending-3"
-  ],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
