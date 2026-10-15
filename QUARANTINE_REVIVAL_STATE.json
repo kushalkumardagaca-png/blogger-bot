@@ -1,13 +1,35 @@
 {
-  "next_due_at": "",
+  "next_due_at": "2026-10-16T03:02:14.045167+05:30",
   "items": {
     "6779600207608409311": {
-      "status": "repair_failed",
-      "attempts": 3,
-      "last_attempt": "2026-10-15T18:59:59.266880+05:30",
+      "status": "live",
+      "attempts": 4,
+      "last_attempt": "2026-10-15T19:02:14.045167+05:30",
       "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: the study concludes by highlighting key benefits challenges and future research directions for scalable and inclusive smart education in india",
       "next_due_at": "2026-10-16T02:59:59.266880+05:30",
-      "revision": "3e069d0b9826e5a3"
+      "revision": "cd75bcee417e11b3",
+      "url": "https://dailyyield.blogspot.com/2026/10/from-digital-india-to-intelligent-india.html",
+      "title_published": "From digital India to intelligent India",
+      "published_at": "2026-10-15T06:32:18-07:00",
+      "repairs": [
+        "removed 23 repeated prose sentence(s)",
+        "removed 183 banned or duplicated sentence(s)",
+        "added the disclosed worked example",
+        "added the editorial method note",
+        "added the contextual Daily Yield card"
+      ],
+      "social_route": [
+        "facebook",
+        "tumblr",
+        "bluesky"
+      ],
+      "social_commands": [
+        "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-01 -f target_url=https://dailyyield.blogspot.com/2026/10/from-digital-india-to-intelligent-india.html -f content_mode=post -f published_at=2026-10-15T06:32:18-07:00 -f route_index=0 -f extra_platforms=facebook,tumblr,bluesky",
+        "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-01 -f target_url=https://dailyyield.blogspot.com/2026/10/from-digital-india-to-intelligent-india.html -f content_mode=post -f published_at=2026-10-15T06:32:18-07:00 -f route_index=1 -f extra_platforms=facebook,tumblr,bluesky",
+        "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-01 -f target_url=https://dailyyield.blogspot.com/2026/10/from-digital-india-to-intelligent-india.html -f content_mode=post -f published_at=2026-10-15T06:32:18-07:00 -f route_index=2 -f extra_platforms=facebook,tumblr,bluesky"
+      ]
     }
-  }
+  },
+  "last_run": "2026-10-15T19:02:14.045167+05:30",
+  "implementation_revision": "cd75bcee417e11b3"
 }
