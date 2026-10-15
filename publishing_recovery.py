@@ -143,6 +143,21 @@ def reconcile(now,apply=False):
  report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if not overdue else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
  save(STATUS,report);return report
 
+def write_run_summary(report):
+ """Publish the reconciliation result in the run summary, not in main."""
+ import os
+ path=os.environ.get('GITHUB_STEP_SUMMARY')
+ if not path:return
+ try:
+  with open(path,'a',encoding='utf-8') as handle:
+   handle.write(f"### Recovery reconciliation — {report['status']}\n\n")
+   handle.write(f"Confirmed publications today: {report['confirmedPublications']}\n\n")
+   if report['overdueMissing']:handle.write('Overdue and still being retried: '+', '.join(report['overdueMissing'])+'\n\n')
+   else:handle.write('No overdue current-day article remains.\n\n')
+   handle.write('| action | key | applied |\n|---|---|---|\n')
+   for action in report['actions']:handle.write(f"| {action['type']} | {action['key']} | {action['applied']} |\n")
+ except OSError:return
+
 def main():
- p=argparse.ArgumentParser();p.add_argument('--apply',action='store_true');a=p.parse_args();r=reconcile(dt.datetime.now(IST),a.apply);print(json.dumps({'status':r['status'],'confirmed':r['confirmedPublications'],'actions':len(r['actions']),'apply':r['apply'],'syntheticViews':0}));return 0
+ p=argparse.ArgumentParser();p.add_argument('--apply',action='store_true');a=p.parse_args();r=reconcile(dt.datetime.now(IST),a.apply);write_run_summary(r);print(json.dumps({'status':r['status'],'confirmed':r['confirmedPublications'],'actions':len(r['actions']),'apply':r['apply'],'syntheticViews':0}));return 0
 if __name__=='__main__':raise SystemExit(main())
