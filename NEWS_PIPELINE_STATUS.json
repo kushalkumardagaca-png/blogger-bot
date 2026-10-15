@@ -1,14 +1,14 @@
 {
   "status": "PASS",
-  "generated_at": "2026-10-15T16:56:38.004275+00:00",
+  "generated_at": "2026-10-15T17:02:25.859006+00:00",
   "dry_run": false,
-  "published": 1,
+  "published": 0,
   "failed": 0,
   "results": [
     {
-      "desk": "banking",
-      "status": "PASS",
-      "published": true,
+      "desk": "americas",
+      "status": "SKIPPED",
+      "published": false,
       "dry_run": false
     }
   ]
