@@ -1,27 +1,11 @@
 {
-  "generatedAt": "2026-10-15T23:50:58.853345+05:30",
-  "dateIST": "2026-10-15",
-  "status": "DEGRADED",
+  "generatedAt": "2026-10-16T00:37:06.494575+05:30",
+  "dateIST": "2026-10-16",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 20,
-  "overdueMissing": [
-    "master-evergreen-3"
-  ],
-  "actions": [
-    {
-      "type": "source_recovery",
-      "key": "master-evergreen-3",
-      "attempt": 2,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-4",
-      "platform": "mastodon",
-      "routeIndex": 1,
-      "applied": true
-    }
-  ],
+  "confirmedPublications": 0,
+  "overdueMissing": [],
+  "actions": [],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
