@@ -51,7 +51,7 @@ jobs:
           set -uo pipefail
           scope="$PHOTO_SCOPE"
           if [ -z "$scope" ]; then scope=both; fi
-          if ! python -u photo_library_build.py --scope "$scope" > /tmp/pool.log 2>&1; then
+          if ! timeout 6300 python -u photo_library_build.py --scope "$scope" --minutes 100 > /tmp/pool.log 2>&1; then
             echo "::error title=Photo pool build failed::$(tail -c 800 /tmp/pool.log | tr '\n' '|')"
             cat /tmp/pool.log
             exit 1

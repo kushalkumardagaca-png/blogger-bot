@@ -25,6 +25,7 @@ import hashlib
 import html
 import json
 import re
+from concurrent.futures import ThreadPoolExecutor
 import time
 import urllib.parse
 from pathlib import Path
@@ -169,7 +170,7 @@ def reachable(entry: dict) -> bool:
     if not url.startswith("https://"):
         return False
     try:
-        response = requests.get(url, headers={"User-Agent": UA}, timeout=30, stream=True)
+        response = requests.get(url, headers={"User-Agent": UA}, timeout=15, stream=True)
         if response.status_code != 200:
             return False
         if not str(response.headers.get("Content-Type", "")).startswith("image/"):
@@ -245,11 +246,16 @@ def gather(queries: list[str], wanted: set[str], want: int, exclude: set[str]) -
     candidates.sort(key=lambda x: (x["match"], min(int(x.get("width") or 0), 5000)), reverse=True)
     kept: list[dict] = []
     seen_titles: set[str] = set()
+    # Links are checked side by side: the pools are built nightly and a single
+    # desk can offer well over a hundred candidates.
+    probe = candidates[: max(want * 4, 24)]
+    with ThreadPoolExecutor(max_workers=10) as workers:
+        live = dict(zip([str(x.get("source_id")) for x in probe], workers.map(reachable, probe)))
     for entry in candidates:
         title = re.sub(r"[^a-z0-9]+", " ", str(entry.get("title", "")).casefold()).strip()
         if title and title in seen_titles:
             continue
-        if not reachable(entry):
+        if not live.get(str(entry.get("source_id")), False):
             continue
         seen_titles.add(title)
         entry.pop("match", None)
