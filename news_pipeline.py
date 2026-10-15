@@ -1580,13 +1580,14 @@ def live_post_exists(url, token):
         return False
 
 
-def live_current_edition(url, token, edition_date):
-    """Is the live post at this address actually today's edition?
+def live_current_edition(url, token, edition_date, alt_dates=()):
+    """Is the live post at this address actually the edition that is due?
 
-    A post can exist at today's address and still carry an older edition: that
-    is what silently retired the Americas desk on 15 October. The address alone
-    is never treated as proof; the stored text has to carry today's date and
-    pass the same green verification as a fresh publication.
+    An address can be occupied by an older edition, so the address alone is
+    never treated as proof: the post has to carry the expected edition date in
+    its own heading or title and pass the same green verification as a fresh
+    publication. The Americas edition deliberately keeps the completed Americas
+    market date in its title, so that date is accepted for it.
     """
     if not url:
         return False
@@ -1597,9 +1598,10 @@ def live_current_edition(url, token, edition_date):
         post = blogger_call("/posts/bypath?" + query, token)
         if post.get("status") != "LIVE":
             return False
-        marker = f"{edition_date.day} {edition_date.strftime('%B %Y')}"
-        text = (post.get("content") or "") + (post.get("title") or "")
-        if marker not in text:
+        heading = headline_of(post.get("content", ""), post.get("title", ""))
+        markers = [f"{day.day} {day.strftime('%B %Y')}" for day in (edition_date, *alt_dates)]
+        heading = heading.casefold()
+        if not any(marker.casefold() in heading for marker in markers):
             return False
         assert_saved_green(post)
         return True
@@ -1620,6 +1622,14 @@ def find_incomplete_live_post(art, token):
 
 
 EDITION_DATE_RE = re.compile(r"(\d{1,2} (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4})")
+
+
+def headline_of(content, fallback=""):
+    """The edition's own reader-facing heading, as rendered."""
+    found = re.search(r"<h1\b[^>]*>(.*?)</h1>", content or "", re.S | re.I)
+    if found:
+        return re.sub(r"\s+", " ", htmlmod.unescape(strip_tags(found.group(1)))).strip().casefold()
+    return re.sub(r"\s+", " ", htmlmod.unescape(strip_tags(fallback or ""))).strip().casefold()
 
 
 def edition_marker(title, html=""):
@@ -1669,11 +1679,16 @@ def publish_post(art, token, dry=False):
         stored=existing
         if not stored.get("content"):
             stored=blogger_call(f"/posts/{existing['id']}?fetchBody=true",token)
+        expected=headline_of(art["html"],art["title"])
+        present=headline_of(stored.get("content",""),stored.get("title",""))
         markers=edition_marker(art["title"],art["html"])
-        seen=(stored.get("content") or "")+(stored.get("title") or "")
-        carrying_today=any(m in seen for m in markers) if markers else True
+        carrying_today=bool(expected) and expected==present
+        if not carrying_today and not expected:
+            carrying_today=any(m in (stored.get("content") or "")+(stored.get("title") or "")
+                               for m in markers) if markers else True
         if not carrying_today:
-            print(f"    duplicate-safe recovery ({reason}) holds an older edition {'/'.join(markers)}; refreshing it")
+            print(f"    duplicate-safe recovery ({reason}) holds a different edition "
+                  f"({'/'.join(markers) or present[:60] or 'undated'}); refreshing it")
             return reissue(stored, "older-edition post refreshed with today's edition")
         try:
             assert_saved_green(stored)
@@ -1740,15 +1755,18 @@ def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
     hh, mm = map(int, slot.split(":"))
     slot_dt = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
     prev = tracker["desks"].get(desk, {})
+    # The Americas edition keeps the completed Americas market date in its title
+    # by design, so yesterday's date is a valid heading for it.
+    alt_dates = (now.date() - dt.timedelta(days=1),) if desk == "americas" else ()
     if prev.get("edition") == now.date().isoformat():
-        if dry or live_current_edition(prev.get("url", ""), token, now.date()):
+        if dry or live_current_edition(prev.get("url", ""), token, now.date(), alt_dates):
             print(f"  [{desk}] already published today ({prev.get('url','?')}) — skip")
             return False
         print(f"  [{desk}] the record says today but the live post does not carry "
               f"today's edition — republishing")
     # Recover safely if Blogger published successfully but a previous tracker push failed.
     expected_url = f"{BLOG}/{now:%Y/%m}/{slug}-{now.date().isoformat()}.html"
-    if not dry and live_current_edition(expected_url, token, now.date()):
+    if not dry and live_current_edition(expected_url, token, now.date(), alt_dates):
         tracker["desks"][desk] = {**prev, "edition": now.date().isoformat(),
                                   "window_end": now.isoformat(), "url": expected_url}
         save_tracker(tracker)

@@ -125,6 +125,22 @@ class LiveEditionTests(unittest.TestCase):
                                            "content": "<h1>Americas Finance News \u2014 15 October 2026</h1>"}
         self.assertTrue(np.live_current_edition("https://dailyyield.blogspot.com/p.html", "t", self.day))
 
+    def test_americas_edition_keeps_the_completed_market_date(self):
+        # by design the Americas heading carries the previous day
+        np.blogger_call = lambda *a, **k: {"status": "LIVE", "url": "https://x", "id": "1",
+                                           "title": "Americas Finance News \u2014 14 October 2026",
+                                           "content": "<h1>Americas Finance News \u2014 14 October 2026</h1>"}
+        import datetime as _dt
+        url = "https://dailyyield.blogspot.com/p.html"
+        self.assertFalse(np.live_current_edition(url, "t", self.day))
+        self.assertTrue(np.live_current_edition(url, "t", self.day, (_dt.date(2026, 10, 14),)))
+
+    def test_other_desk_does_not_accept_yesterdays_heading(self):
+        np.blogger_call = lambda *a, **k: {"status": "LIVE", "url": "https://x", "id": "1",
+                                           "title": "Europe Finance News \u2014 14 October 2026",
+                                           "content": "<h1>Europe Finance News \u2014 14 October 2026</h1>"}
+        self.assertFalse(np.live_current_edition("https://dailyyield.blogspot.com/p.html", "t", self.day))
+
     def test_missing_or_draft_post_is_not_current(self):
         np.blogger_call = lambda *a, **k: {"status": "DRAFT", "url": "https://x", "id": "1", "content": ""}
         self.assertFalse(np.live_current_edition("https://dailyyield.blogspot.com/p.html", "t", self.day))
