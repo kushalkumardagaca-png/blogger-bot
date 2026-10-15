@@ -1,12 +1,13 @@
 {
-  "next_due_at": "2026-10-16T02:45:13.997086+05:30",
+  "next_due_at": "2026-10-16T02:51:00.546150+05:30",
   "items": {
     "6779600207608409311": {
       "status": "repair_failed",
-      "attempts": 1,
-      "last_attempt": "2026-10-15T18:45:13.997086+05:30",
-      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — insufficient sentence-level originality; repeated substantive sentence within the content; repetitive deterministic fallback sentence; rendered duplicate diagnostic: this passage is used only for its documented scope while unsupported predictions and recommendations remain outside this section",
-      "next_due_at": "2026-10-16T02:45:13.997086+05:30"
+      "attempts": 2,
+      "last_attempt": "2026-10-15T18:51:00.546150+05:30",
+      "error": "PUBLICATION PREFLIGHT FAILED — duplicated substantive paragraph detected: documented source evidence documented source evidence documented source evidence documented source evidence documented source evidence",
+      "next_due_at": "2026-10-16T02:51:00.546150+05:30",
+      "revision": "5adb879a562019f2"
     }
   }
 }
