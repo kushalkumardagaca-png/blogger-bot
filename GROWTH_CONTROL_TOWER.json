@@ -1,40 +1,40 @@
 {
-  "generatedAt": "2026-10-14T03:14:01.551966+00:00",
+  "generatedAt": "2026-10-15T02:19:01.585496+00:00",
   "deadline": "2027-09-30",
   "targetDistinctDailyEngagedReaders": 10000000,
-  "daysRemaining": 351,
+  "daysRemaining": 350,
   "stretchTrajectory": {
     "planningBaselineUnverified": 300,
-    "requiredDailyGrowth": 0.030115,
-    "requiredWeeklyMultiplier": 1.2308,
+    "requiredDailyGrowth": 0.030202,
+    "requiredWeeklyMultiplier": 1.2316,
     "checkpoints": [
       {
         "daysFromNow": 30,
-        "date": "2026-11-13",
-        "planningReaders": 731
+        "date": "2026-11-14",
+        "planningReaders": 732
       },
       {
         "daysFromNow": 60,
-        "date": "2026-12-13",
-        "planningReaders": 1779
+        "date": "2026-12-14",
+        "planningReaders": 1788
       },
       {
         "daysFromNow": 90,
-        "date": "2027-01-12",
-        "planningReaders": 4333
+        "date": "2027-01-13",
+        "planningReaders": 4367
       },
       {
         "daysFromNow": 180,
-        "date": "2027-04-12",
-        "planningReaders": 62596
+        "date": "2027-04-13",
+        "planningReaders": 63558
       },
       {
         "daysFromNow": 270,
-        "date": "2027-07-11",
-        "planningReaders": 904188
+        "date": "2027-07-12",
+        "planningReaders": 925122
       },
       {
-        "daysFromNow": 351,
+        "daysFromNow": 350,
         "date": "2027-09-30",
         "planningReaders": 10000000
       }
@@ -59,10 +59,10 @@
   },
   "acquisition": {
     "search7Day": {
-      "clicks": 1,
-      "impressions": 1,
-      "ctr": 1.0,
-      "averagePosition": 1.0
+      "clicks": 0,
+      "impressions": 0,
+      "ctr": 0,
+      "averagePosition": null
     },
     "search28Day": {
       "clicks": 1,
@@ -71,10 +71,10 @@
       "averagePosition": 1.0
     },
     "socialOfficialObservations": 260,
-    "socialObservedInteractions": 15
+    "socialObservedInteractions": 14
   },
   "production": {
-    "masterPublishedTotal": 20,
+    "masterPublishedTotal": 30,
     "newsDesksTracked": 11
   },
   "integrity": {
