@@ -1,17 +1,21 @@
 {
-  "generated_at": "2026-10-15T13:21:00.488365+00:00",
+  "generated_at": "2026-10-15T13:29:59.196687+00:00",
   "drafts": 18,
-  "preflight_pass": 10,
+  "preflight_pass": 11,
   "rows": [
     {
       "title": "From digital India to intelligent India",
       "title_length": 39,
-      "words": 6252,
+      "words": 7231,
       "preflight": "FAIL",
       "issues": [
-        "duplicated substantive paragraph detected: documented source evidence documented source evidence documented source evidence documented source evidence documented source evidence"
+        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
+        "rendered duplicate diagnostic: the study concludes by highlighting key benefits challenges and future research directions for scalable and inclusive smart education in india"
       ],
-      "policy_issues": [],
+      "policy_issues": [
+        "repeated substantive sentence within the content"
+      ],
+      "promise_evidence": [],
       "source_domains": [
         "article.sciencepublishinggroup.com",
         "commons.wikimedia.org",
@@ -43,7 +47,7 @@
       "before_bytes": 164671,
       "repairs_planned": [
         "removed 23 repeated prose sentence(s)",
-        "removed 219 banned or duplicated sentence(s)",
+        "removed 173 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -52,10 +56,11 @@
     {
       "title": "Sold a property? Eight different ways to reduc",
       "title_length": 46,
-      "words": 5791,
+      "words": 6714,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [],
       "source_domains": [
         "commons.wikimedia.org",
         "creativecommons.org",
@@ -86,19 +91,26 @@
       "before_bytes": 144459,
       "repairs_planned": [
         "removed 18 repeated prose sentence(s)",
-        "removed 199 banned or duplicated sentence(s)",
+        "removed 162 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
-        "added the contextual Daily Yield card"
+        "added the contextual Daily Yield card",
+        "final repetition pass removed 1 sentence(s)"
       ]
     },
     {
       "title": "What to expect from Europe’s most valuable com",
       "title_length": 46,
-      "words": 5615,
-      "preflight": "PASS",
-      "issues": [],
-      "policy_issues": [],
+      "words": 6767,
+      "preflight": "FAIL",
+      "issues": [
+        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
+        "rendered duplicate diagnostic: the major finding is that since enlargement the eu has not had such strong direct and far reaching effects as it did before accession"
+      ],
+      "policy_issues": [
+        "repeated substantive sentence within the content"
+      ],
+      "promise_evidence": [],
       "source_domains": [
         "cdr.lib.unc.edu",
         "commons.wikimedia.org",
@@ -130,7 +142,7 @@
       "before_bytes": 148767,
       "repairs_planned": [
         "removed 30 repeated prose sentence(s)",
-        "removed 203 banned or duplicated sentence(s)",
+        "removed 159 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -139,10 +151,16 @@
     {
       "title": "How RMDs Determine Withdrawals From a $1 Milli",
       "title_length": 46,
-      "words": 4581,
-      "preflight": "PASS",
-      "issues": [],
-      "policy_issues": [],
+      "words": 6169,
+      "preflight": "FAIL",
+      "issues": [
+        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
+        "rendered duplicate diagnostic: we are not responsible for their content exthideicons false mailtoclass mailto telclass mailtolabel link sends email tellabel link is a phone number extusefontawesome true exticonp"
+      ],
+      "policy_issues": [
+        "repeated substantive sentence within the content"
+      ],
+      "promise_evidence": [],
       "source_domains": [
         "commons.wikimedia.org",
         "creativecommons.org",
@@ -171,7 +189,7 @@
       "before_bytes": 176245,
       "repairs_planned": [
         "removed 36 repeated prose sentence(s)",
-        "removed 183 banned or duplicated sentence(s)",
+        "removed 154 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -180,15 +198,16 @@
     {
       "title": "Gold price holds critical $4,100 support, but",
       "title_length": 45,
-      "words": 4923,
+      "words": 6031,
       "preflight": "FAIL",
       "issues": [
         "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
-        "rendered duplicate diagnostic: inflation 2020 2022 betting on black gold oil speculation and u s"
+        "rendered duplicate diagnostic: the econometric approach employed by the study involves a unit root testing procedure that allows the timing of significant breaks to be estimated"
       ],
       "policy_issues": [
         "repeated substantive sentence within the content"
       ],
+      "promise_evidence": [],
       "source_domains": [
         "commons.wikimedia.org",
         "creativecommons.org",
@@ -220,7 +239,7 @@
       "before_bytes": 152854,
       "repairs_planned": [
         "removed 38 repeated prose sentence(s)",
-        "removed 203 banned or duplicated sentence(s)",
+        "removed 172 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -229,12 +248,16 @@
     {
       "title": "IFS: budget will be ‘work of fiction’ without",
       "title_length": 45,
-      "words": 5286,
+      "words": 6249,
       "preflight": "FAIL",
       "issues": [
-        "duplicated substantive paragraph detected: documented source evidence documented source evidence documented source evidence documented source evidence"
+        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
+        "rendered duplicate diagnostic: following the literature review i discuss my personal positioning in relation to the issues and topics i discuss and explore in this project"
       ],
-      "policy_issues": [],
+      "policy_issues": [
+        "repeated substantive sentence within the content"
+      ],
+      "promise_evidence": [],
       "source_domains": [
         "commons.wikimedia.org",
         "creativecommons.org",
@@ -265,7 +288,7 @@
       "before_bytes": 140360,
       "repairs_planned": [
         "removed 35 repeated prose sentence(s)",
-        "removed 200 banned or duplicated sentence(s)",
+        "removed 164 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -274,10 +297,16 @@
     {
       "title": "Global Market: Singapore's US stock trading pu",
       "title_length": 46,
-      "words": 6044,
-      "preflight": "PASS",
-      "issues": [],
-      "policy_issues": [],
+      "words": 6874,
+      "preflight": "FAIL",
+      "issues": [
+        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
+        "rendered duplicate diagnostic: documented source evidence documented source evidence theoretical analysis in this paper delves into the mechanisms through which stock index futures influence stock market prices"
+      ],
+      "policy_issues": [
+        "repeated substantive sentence within the content"
+      ],
+      "promise_evidence": [],
       "source_domains": [
         "commons.wikimedia.org",
         "creativecommons.org",
@@ -308,7 +337,7 @@
       "before_bytes": 169781,
       "repairs_planned": [
         "removed 12 repeated prose sentence(s)",
-        "removed 230 banned or duplicated sentence(s)",
+        "removed 184 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -317,15 +346,11 @@
     {
       "title": "0% Capital Gains Tax Guide",
       "title_length": 26,
-      "words": 5540,
-      "preflight": "FAIL",
-      "issues": [
-        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
-        "rendered duplicate diagnostic: for tax year 2026 the statutory exemption amount for unmarried individuals is established at 90 100 operating alongside specific phase out parameters that can inadvertently alter a"
-      ],
-      "policy_issues": [
-        "repeated substantive sentence within the content"
-      ],
+      "words": 5880,
+      "preflight": "PASS",
+      "issues": [],
+      "policy_issues": [],
+      "promise_evidence": [],
       "source_domains": [
         "commons.wikimedia.org",
         "creativecommons.org",
@@ -354,7 +379,7 @@
       "before_words": 6152,
       "before_bytes": 117849,
       "repairs_planned": [
-        "removed 61 banned or duplicated sentence(s)",
+        "removed 24 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -363,14 +388,13 @@
     {
       "title": "Your Tax Refund Is a Trap",
       "title_length": 25,
-      "words": 6434,
-      "preflight": "FAIL",
-      "issues": [
-        "BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content",
-        "rendered duplicate diagnostic: when structured improperly it quietly siphons away cash that could otherwise be working for you throughout the year"
-      ],
-      "policy_issues": [
-        "repeated substantive sentence within the content"
+      "words": 6350,
+      "preflight": "PASS",
+      "issues": [],
+      "policy_issues": [],
+      "promise_evidence": [
+        "guaranteed financial return equivalent to the interest rate you would ",
+        "guarantees either an excessive interest-free loan to the government An"
       ],
       "source_domains": [
         "commons.wikimedia.org",
@@ -402,7 +426,7 @@
       "before_bytes": 114777,
       "repairs_planned": [
         "removed 1 repeated prose sentence(s)",
-        "removed 28 banned or duplicated sentence(s)",
+        "removed 26 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -411,13 +435,17 @@
     {
       "title": "Build Credit Without Paying Interest",
       "title_length": 36,
-      "words": 6192,
-      "preflight": "FAIL",
-      "issues": [
-        "BLOGGER CONTENT POLICY GATE FAILED — deceptive financial or commercial promise"
-      ],
-      "policy_issues": [
-        "deceptive financial or commercial promise"
+      "words": 6127,
+      "preflight": "PASS",
+      "issues": [],
+      "policy_issues": [],
+      "promise_evidence": [
+        "guarantees acceptance",
+        "guaranteeing an instant score increase is selling certainty that the sys",
+        "guarantees a score or approval",
+        "guaranteed bridge to approval",
+        "guarantees approval",
+        "guarantees approval"
       ],
       "source_domains": [
         "consumer.ftc.gov",
@@ -446,7 +474,8 @@
       "before_words": 6086,
       "before_bytes": 100547,
       "repairs_planned": [
-        "removed 4 banned or duplicated sentence(s)",
+        "rewrote 1 promise-shaped phrase(s) into plain wording",
+        "removed 6 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -459,6 +488,14 @@
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [
+        "guarantee positive returns",
+        "guaranteed profit",
+        "guarantee execution price",
+        "Guaranteed high return with little risk is a warning",
+        "guarantee profit",
+        "guarantee safety? No"
+      ],
       "source_domains": [
         "register.fca.org.uk",
         "www.actionfraud.police.uk",
@@ -502,6 +539,12 @@
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [
+        "guaranteed",
+        "guaranteed-rent or unusually optimistic opinion requires separate scru",
+        "guaranteed exit and should never be presented to partners as completed",
+        "guarantees and household exposure"
+      ],
       "source_domains": [
         "www.blogger.com",
         "www.fca.org.uk",
@@ -543,6 +586,9 @@
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [
+        "guaranteed interest"
+      ],
       "source_domains": [
         "www.bankofengland.co.uk",
         "www.blogger.com",
@@ -585,6 +631,10 @@
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [
+        "guarantee",
+        "guaranteed interest saved with the shorter runway"
+      ],
       "source_domains": [
         "nationalcareers.service.gov.uk",
         "register.fca.org.uk",
@@ -623,13 +673,15 @@
     {
       "title": "Invest Your First $1,000 With a Safety Plan",
       "title_length": 43,
-      "words": 4476,
-      "preflight": "FAIL",
-      "issues": [
-        "insufficient reader-value depth (4476 words",
-        "minimum 4500)"
-      ],
+      "words": 4561,
+      "preflight": "PASS",
+      "issues": [],
       "policy_issues": [],
+      "promise_evidence": [
+        "guarantee",
+        "risk-free profits, secrecy, urgency, fake endorsements, requests for ",
+        "risk-free profits as warnings"
+      ],
       "source_domains": [
         "adviserinfo.sec.gov",
         "brokercheck.finra.org",
@@ -659,18 +711,21 @@
       "before_bytes": 95555,
       "repairs_planned": [
         "removed 88 repeated prose sentence(s)",
+        "removed 2 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
-        "added the contextual Daily Yield card"
+        "added the contextual Daily Yield card",
+        "added a reader checklist drawn from 6 of the article's own sections (depth was 4456 words)"
       ]
     },
     {
       "title": "Build a Budget That Survives Week Two",
       "title_length": 37,
-      "words": 4500,
+      "words": 4536,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [],
       "source_domains": [
         "adviserinfo.sec.gov",
         "consumer.ftc.gov",
@@ -700,19 +755,23 @@
       "before_bytes": 98106,
       "repairs_planned": [
         "removed 87 repeated prose sentence(s)",
-        "removed 3 banned or duplicated sentence(s)",
+        "removed 7 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
-        "added the contextual Daily Yield card"
+        "added the contextual Daily Yield card",
+        "added a reader checklist drawn from 6 of the article's own sections (depth was 4434 words)"
       ]
     },
     {
       "title": "Test AI Money Coaches Before Trusting Them",
       "title_length": 42,
-      "words": 5213,
+      "words": 5147,
       "preflight": "PASS",
       "issues": [],
       "policy_issues": [],
+      "promise_evidence": [
+        "risk-free"
+      ],
       "source_domains": [
         "adviserinfo.sec.gov",
         "consumer.ftc.gov",
@@ -742,7 +801,7 @@
       "before_bytes": 99056,
       "repairs_planned": [
         "removed 44 repeated prose sentence(s)",
-        "removed 3 banned or duplicated sentence(s)",
+        "removed 7 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"
@@ -751,13 +810,21 @@
     {
       "title": "Test Money Advice Before You Trust It",
       "title_length": 37,
-      "words": 6330,
+      "words": 6295,
       "preflight": "FAIL",
       "issues": [
         "BLOGGER CONTENT POLICY GATE FAILED — deceptive financial or commercial promise"
       ],
       "policy_issues": [
         "deceptive financial or commercial promise"
+      ],
+      "promise_evidence": [
+        "Guaranteed Myth 11: You Must Time the Market to Win Myth 12: Student L",
+        "guaranteed investment is safe because everyone is buying",
+        "guaranteed, everyone and secret are warning labels because financial d",
+        "guarantees a return",
+        "guaranteed investment returns",
+        "guarantees a number before reviewing documents"
       ],
       "source_domains": [
         "files.consumerfinance.gov",
@@ -788,7 +855,7 @@
       "before_words": 6360,
       "before_bytes": 104268,
       "repairs_planned": [
-        "removed 17 banned or duplicated sentence(s)",
+        "removed 14 banned or duplicated sentence(s)",
         "added the disclosed worked example",
         "added the editorial method note",
         "added the contextual Daily Yield card"

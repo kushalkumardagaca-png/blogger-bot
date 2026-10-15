@@ -1,13 +1,13 @@
 {
-  "next_due_at": "2026-10-16T02:51:00.546150+05:30",
+  "next_due_at": "2026-10-16T02:59:59.266880+05:30",
   "items": {
     "6779600207608409311": {
       "status": "repair_failed",
-      "attempts": 2,
-      "last_attempt": "2026-10-15T18:51:00.546150+05:30",
-      "error": "PUBLICATION PREFLIGHT FAILED — duplicated substantive paragraph detected: documented source evidence documented source evidence documented source evidence documented source evidence documented source evidence",
-      "next_due_at": "2026-10-16T02:51:00.546150+05:30",
-      "revision": "5adb879a562019f2"
+      "attempts": 3,
+      "last_attempt": "2026-10-15T18:59:59.266880+05:30",
+      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: the study concludes by highlighting key benefits challenges and future research directions for scalable and inclusive smart education in india",
+      "next_due_at": "2026-10-16T02:59:59.266880+05:30",
+      "revision": "3e069d0b9826e5a3"
     }
   }
 }
