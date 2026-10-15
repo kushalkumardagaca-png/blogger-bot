@@ -277,13 +277,16 @@ def apply(tok: str, dry_run: bool = False) -> dict:
         stored_content = stored.get("content") or ""
         checks = {
             "board_present": '<nav class="dxi"' in stored_content,
-            "old_index_gone": "kc-ilinks" not in stored_content,
+            # The replaced markup must be gone. The page's older inline CSS rules
+            # are inert and stay in place; only markup matters here.
+            "old_index_gone": not re.search(r'<a class="(?:kc-icard|pr-index-heading)"', stored_content),
+            "old_nav_gone": not re.search(r'<nav[^>]*class="kc-index"', stored_content),
             "cards": stored_content.count('class="dxi-card"'),
             "groups": stored_content.count('class="dxi-group"'),
             "links_kept": all(item["href"] in stored_content for group in current["groups"] for item in group["items"]),
             "style_present": "dyDeskIndexStyle" in stored_content,
         }
-        status = "PASS" if checks["board_present"] and checks["old_index_gone"] and checks["links_kept"] else "FAIL"
+        status = "PASS" if all(checks[k] for k in ("board_present", "old_index_gone", "old_nav_gone", "links_kept", "style_present")) else "FAIL"
         results.append({"page": target["title"], "status": status, "url": page.get("url"), "checks": checks})
         print(json.dumps({"page": target["title"], "status": status, **checks}, ensure_ascii=False))
     document = {"generated_at": dt.datetime.now(dt.timezone.utc).isoformat(), "apply": not dry_run,
