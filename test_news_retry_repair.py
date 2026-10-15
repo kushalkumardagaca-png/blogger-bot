@@ -64,6 +64,30 @@ class RepairPathTests(unittest.TestCase):
         self.assertTrue(url)
         self.assertNotIn(("PUT", "/posts/42"), self.calls)
 
+    def test_older_edition_post_is_refreshed_with_todays_content(self):
+        # the Americas desk case: a green post still carrying yesterday's edition
+        self.stored = {"id": "77", "url": "https://dailyyield.blogspot.com/2026/10/americas.html",
+                       "title": "Americas Finance News \u2014 14 October 2026", "status": "LIVE",
+                       "content": np.stamp("<h1>Americas Finance News \u2014 14 October 2026</h1><p>old</p>",
+                                            "Americas Finance News \u2014 14 October 2026", "news-desk")
+                       + np.automation_disclosure("news edition")}
+        np.find_duplicate = lambda *a, **k: (dict(self.stored), "same slug path")
+        art = article("Americas Finance News \u2014 15 October 2026")
+        url = np.publish_post(art, "token")
+        self.assertEqual(url, self.stored["url"])
+        self.assertIn(("PUT", "/posts/77"), self.calls)
+        self.assertIn("15 October 2026", self.put_payload.get("title", ""))
+
+    def test_same_edition_post_is_not_rewritten(self):
+        html = np.stamp(article()["html"], "Banking & Personal Money News", "news-desk")
+        html += np.automation_disclosure("news edition")
+        html = html.replace("Banking & Personal Money News", "Banking & Personal Money News \u2014 15 October 2026")
+        self.stored.update({"title": "Banking & Personal Money News \u2014 15 October 2026",
+                            "content": html})
+        np.find_duplicate = lambda *a, **k: (dict(self.stored), "same slug path")
+        np.publish_post(article("Banking & Personal Money News \u2014 15 October 2026"), "token")
+        self.assertNotIn(("PUT", "/posts/42"), self.calls)
+
     def test_repair_that_still_fails_raises(self):
         def broken_put(path, token, method="GET", payload=None, **kwargs):
             self.calls.append((method, path))

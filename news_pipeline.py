@@ -1592,6 +1592,22 @@ def find_incomplete_live_post(art, token):
     return None
 
 
+EDITION_DATE_RE = re.compile(r"(\d{1,2} (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4})")
+
+
+def edition_marker(title, html=""):
+    """The edition dates this edition can be recognised by.
+
+    The title date is authoritative when present; otherwise the first dates in
+    the body are used. An edition with no recognisable date is never treated as
+    stale, so a healthy post is never rewritten needlessly.
+    """
+    found = EDITION_DATE_RE.findall(title or "")
+    if not found:
+        found = EDITION_DATE_RE.findall(html or "")[:2]
+    return found[:3]
+
+
 def publish_post(art, token, dry=False):
     if dry:
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
@@ -1603,28 +1619,42 @@ def publish_post(art, token, dry=False):
     recent = blogger_call("/posts?"+query, token).get("items",[])
     existing,reason=find_duplicate(art["title"],art["html"],recent,art.get("canonical",''))
     if existing:
-        # A post left behind by an interrupted run is repaired and re-verified,
-        # never simply rejected: without this, one partial live post makes every
-        # later retry of the same desk fail on the same check.
-        try:
-            assert_saved_green(existing)
-            print(f"    duplicate-safe recovery ({reason}): {existing.get('url')}")
-            return existing.get('url','')
-        except RuntimeError as exc:
-            print(f"    repairing the post left by an interrupted run ({existing.get('id')}): {str(exc)[:200]}")
+        # A post left behind by an interrupted run is repaired and re-verified;
+        # a post still carrying an older edition is refreshed with today's; a
+        # healthy post of exactly this edition is simply reported. Blindly
+        # returning an old edition's post is what silently retired the Americas
+        # desk on 15 October.
+        def reissue(target, note):
             repaired=stamp(art["html"],art["title"],"news-desk")
             if DISCLOSURE_MARKER not in repaired:
                 repaired+="\n"+automation_disclosure("news edition")
             canonical=art.get("canonical","")
-            if canonical and existing.get("url"):
-                repaired=repaired.replace(canonical,existing["url"])
-            blogger_call(f"/posts/{existing['id']}",token,"PUT",{
-                "kind":"blogger#post","id":existing["id"],"title":art["title"],
+            if canonical and target.get("url"):
+                repaired=repaired.replace(canonical,target["url"])
+            blogger_call(f"/posts/{target['id']}",token,"PUT",{
+                "kind":"blogger#post","id":target["id"],"title":art["title"],
                 "content":repaired,"labels":art["labels"]})
-            stored=blogger_call(f"/posts/{existing['id']}?fetchBody=true",token)
+            stored=blogger_call(f"/posts/{target['id']}?fetchBody=true",token)
             assert_saved_green(stored)
-            print(f"    interrupted-run post repaired and verified: {stored.get('url')}")
-            return stored.get('url') or existing.get('url','')
+            print(f"    {note}: {stored.get('url')}")
+            return stored.get('url') or target.get('url','')
+
+        stored=existing
+        if not stored.get("content"):
+            stored=blogger_call(f"/posts/{existing['id']}?fetchBody=true",token)
+        markers=edition_marker(art["title"],art["html"])
+        seen=(stored.get("content") or "")+(stored.get("title") or "")
+        carrying_today=any(m in seen for m in markers) if markers else True
+        if not carrying_today:
+            print(f"    duplicate-safe recovery ({reason}) holds an older edition {'/'.join(markers)}; refreshing it")
+            return reissue(stored, "older-edition post refreshed with today's edition")
+        try:
+            assert_saved_green(stored)
+            print(f"    duplicate-safe recovery ({reason}): {stored.get('url')}")
+            return stored.get('url','')
+        except RuntimeError as exc:
+            print(f"    repairing the post left by an interrupted run ({stored.get('id')}): {str(exc)[:200]}")
+            return reissue(stored, "interrupted-run post repaired and verified")
     art["html"]=stamp(art["html"],art["title"],"news-desk")
     # Resume an incomplete slug-title post before creating anything new. This
     # makes the three-pass publication transaction retry-safe.
