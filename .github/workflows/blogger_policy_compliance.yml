@@ -6,6 +6,7 @@ on:
     paths:
       - 'deploy_blogger_policy_compliance.py'
       - 'content_policy_guard.py'
+      - 'harden_live_corpus.py'
       - 'markets_today_page.html'
       - '.github/workflows/blogger_policy_compliance.yml'
 
@@ -40,16 +41,28 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python deploy_markets_today.py
+      - name: Remove exact duplicate records and retrofit transparent disclosures
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          APPLY_CORPUS_REMEDIATION: 'true'
+        run: python harden_live_corpus.py
       - name: Persist compliance evidence
         run: |
           set -euo pipefail
           cp BLOGGER_POLICY_DEPLOYMENT_STATUS.json /tmp/policy-status.json
+          cp BLOGGER_CORPUS_POLICY_STATUS.json /tmp/corpus-status.json
+          cp BLOGGER_IMAGE_RIGHTS_LEDGER.json /tmp/rights-status.json
           git config user.name "Daily Yield Policy Compliance"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           for attempt in 1 2 3 4 5; do
             git fetch origin main && git reset --hard FETCH_HEAD
             cp /tmp/policy-status.json BLOGGER_POLICY_DEPLOYMENT_STATUS.json
-            git add BLOGGER_POLICY_DEPLOYMENT_STATUS.json
+            cp /tmp/corpus-status.json BLOGGER_CORPUS_POLICY_STATUS.json
+            cp /tmp/rights-status.json BLOGGER_IMAGE_RIGHTS_LEDGER.json
+            git add BLOGGER_POLICY_DEPLOYMENT_STATUS.json BLOGGER_CORPUS_POLICY_STATUS.json BLOGGER_IMAGE_RIGHTS_LEDGER.json
             git commit -m "Record Blogger policy compliance deployment [skip ci]" || true
             git push origin HEAD:main && exit 0
             sleep $((attempt * 2))
@@ -61,5 +74,7 @@ jobs:
           name: blogger-policy-compliance-${{ github.run_id }}
           path: |
             BLOGGER_POLICY_DEPLOYMENT_STATUS.json
+            BLOGGER_CORPUS_POLICY_STATUS.json
+            BLOGGER_IMAGE_RIGHTS_LEDGER.json
             markets_today_deploy_result.json
           if-no-files-found: ignore
