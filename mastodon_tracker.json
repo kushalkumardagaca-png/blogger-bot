@@ -1772,9 +1772,31 @@
       },
       "published_at": "2026-10-15T22:30:58.649284+05:30",
       "reconciled": false
+    },
+    {
+      "kind": "page",
+      "blogger_id": "homepage",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "url": "https://dailyyield.blogspot.com/",
+      "mastodon_status_id": "117446260150506090",
+      "mastodon_url": "https://mastodon.social/@dailyyield/117446260150506090",
+      "score": 59,
+      "creative": {
+        "seed": "a5c2bf079c1e2074",
+        "topic": "page",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "USE THE TOOL, CHECK THE ASSUMPTIONS",
+        "emoji": "📌",
+        "question": "Which decision will you use this resource for?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "published_at": "2026-10-15T23:38:29.968183+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-15T22:30:58.649297+05:30",
-  "last_mastodon_status_id": "117445994632316481"
+  "last_success_at": "2026-10-15T23:38:29.968195+05:30",
+  "last_mastodon_status_id": "117446260150506090"
 }
