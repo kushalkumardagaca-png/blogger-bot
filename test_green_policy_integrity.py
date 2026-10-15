@@ -51,3 +51,13 @@ def test_blogger_stored_post_must_preserve_green_markers_and_alt_text():
     assert assert_saved_green(post)
     post['content']=post['content'].replace(' alt="Relevant evidence photograph"','')
     with pytest.raises(RuntimeError,match='alternative text'):assert_saved_green(post)
+
+
+def test_publishing_modules_never_shadow_the_integrity_fingerprint():
+    import re
+    from pathlib import Path
+    for name in ('master_v3_pipeline.py','master_dynamic_pipeline.py','news_pipeline.py','auto_blogger_publisher.py'):
+        source=Path(name).read_text()
+        assert not re.search(r'\bstamp\s*=\s*dt\.datetime',source),f'{name} shadows the integrity stamp helper'
+    for name in ('master_v3_pipeline.py','news_pipeline.py','auto_blogger_publisher.py'):
+        assert 'stamp(' in Path(name).read_text(),f'{name} no longer fingerprints published content'
