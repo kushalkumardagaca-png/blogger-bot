@@ -1,26 +1,14 @@
 {
-  "generatedAt": "2026-10-15T13:46:57.610203+05:30",
+  "generatedAt": "2026-10-15T14:26:09.351081+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 7,
+  "confirmedPublications": 9,
   "overdueMissing": [
-    "news-markets",
-    "news-economy",
     "master-evergreen-0",
     "master-evergreen-1"
   ],
   "actions": [
-    {
-      "type": "source_recovery",
-      "key": "news-markets",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "news-economy",
-      "applied": true
-    },
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
