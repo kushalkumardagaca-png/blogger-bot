@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-15T04:35:25.846224+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-15T04:45:03.605022+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
-      "desk": "india",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: source the economic times continue with daily yield markets today check the wider cross asset market picture and reference data"
+      "desk": "russia",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
