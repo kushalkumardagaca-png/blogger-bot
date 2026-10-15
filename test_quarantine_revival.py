@@ -134,5 +134,58 @@ class RepairGateTests(unittest.TestCase):
             sr.make_plan("revive-01", "https://dailyyield.blogspot.com/2026/10/x.html", "post", "", "", route_index=0, platforms=("twitter", "facebook"))
 
 
+class RepetitionRepairTests(unittest.TestCase):
+    """The gate that quarantined the drafts must be satisfied, not bypassed."""
+
+    def test_banned_stock_sentence_is_removed_everywhere(self):
+        from content_policy_guard import REPETITIVE_FALLBACK_PHRASES
+        from editorial_integrity import scrub_repeated_sentences
+        phrase = REPETITIVE_FALLBACK_PHRASES[1]
+        content = f"<p>{phrase}</p><p>A unique sentence about market plumbing and settlement timing appears here.</p><p>{phrase}</p>"
+        cleaned, removed = scrub_repeated_sentences(content)
+        self.assertEqual(removed, 2)
+        self.assertNotIn(phrase, cleaned)
+
+    def test_later_duplicate_inside_a_tagged_block_is_removed(self):
+        from editorial_integrity import scrub_repeated_sentences
+        sentence = "Singapore households now hold a large share of their savings in listed equities and funds."
+        content = (f"<p>{sentence}</p><p><strong>Context.</strong> {sentence} The desk adds one more distinct line here.</p>")
+        cleaned, removed = scrub_repeated_sentences(content)
+        self.assertEqual(removed, 1)
+        self.assertEqual(cleaned.count(sentence), 1)
+
+    def test_first_occurrence_and_controlled_blocks_are_preserved(self):
+        from editorial_integrity import scrub_repeated_sentences
+        sentence = "Required minimum distributions depend on the previous year end balance and an age factor."
+        content = (f"{rq.READER_SNIPPET}<p>{sentence}</p><p>{sentence}</p>"
+                   "<!-- DY_PAGE_FAMILY_START --><p>Daily Yield directory entry.</p>")
+        cleaned, _ = scrub_repeated_sentences(content)
+        self.assertEqual(cleaned.count(sentence), 1)
+        self.assertIn("DY_PAGE_FAMILY_START", cleaned)
+        self.assertIn("DY_ENGAGED_READER_V2", cleaned)
+
+    def test_repair_package_clears_the_recorded_gate_failures(self):
+        from content_policy_guard import REPETITIVE_FALLBACK_PHRASES, audit_text
+        phrase = REPETITIVE_FALLBACK_PHRASES[1]
+        sentence = "Analysts keep returning to the same cross-border comparison when they discuss valuation gaps."
+        post = {"id": "1", "title": "From digital India to intelligent India", "labels": ["News"],
+                "url": "https://dailyyield.blogspot.com/2026/10/x.html",
+                "content": f"<p>{sentence}</p><p>{phrase}</p><p>{sentence}</p>"}
+        repaired = rq.repair_package(post, post["title"], [])
+        self.assertNotIn(phrase, repaired["content"])
+        self.assertNotIn("repetitive deterministic fallback sentence", audit_text(post["title"], repaired["content"]))
+
+    def test_failed_draft_is_retried_after_the_repair_code_changes(self):
+        state = {"next_due_at": "", "items": {}}
+        item = rq.plan_items()[0]
+        row = rq.item_state(state, item["draft_id"])
+        row["status"] = "repair_failed"
+        row["revision"] = rq.implementation_revision()
+        # A failure at the current revision steps aside for the next article.
+        self.assertNotEqual(rq.next_pending(state, rq.implementation_revision())["draft_id"], item["draft_id"])
+        # A fixed implementation re-opens it as the first article again.
+        self.assertEqual(rq.next_pending(state, "an-older-revision")["draft_id"], item["draft_id"])
+
+
 if __name__ == "__main__":
     unittest.main()

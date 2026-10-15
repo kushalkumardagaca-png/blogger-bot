@@ -150,3 +150,54 @@ def repair_repeated_prose(content:str)->tuple[str,int]:
  repaired=PROSE_BLOCKS.sub(fix,content)
  repaired=re.sub(r'<p\b[^>]*>\s*</p>','',repaired,flags=re.I)
  return repaired,removed
+
+# Blocks that carry controlled, already-reviewed text. Their wording is unique and
+# must never be rewritten by a repetition repair.
+PROTECTED_BLOCKS=re.compile('|'.join((
+ r'<script\b.*?</script\s*>',
+ r'<style\b.*?</style\s*>',
+ r'<!--\s*DY_ENGAGED_READER_V2.*?<!--\s*/DY_ENGAGED_READER_V2\s*-->',
+ r'<!--\s*DY_RELATED_ARTICLES_START.*?<!--\s*DY_RELATED_ARTICLES_END\s*-->',
+ r'<!--\s*DY_CONTINUOUS_MOTION_START.*?<!--\s*DY_CONTINUOUS_MOTION_END\s*-->',
+ r'<!--\s*DY_PAGE_FAMILY_START.*',
+ r'<aside\b[^>]*dy-policy-disclosure.*?</aside\s*>',
+)),re.I|re.S)
+
+def scrub_repeated_sentences(content:str)->tuple[str,int]:
+ """Remove banned stock sentences and every later duplicate sentence.
+
+ The publication gate measures repetition on the rendered text of the whole
+ article, including sentences that sit beside links or emphasis tags. This repair
+ therefore works sentence by sentence across the text runs of the document while
+ leaving scripts, styles and the controlled Daily Yield furniture untouched. The
+ first occurrence of any sentence is always preserved.
+ """
+ from content_policy_guard import REPETITIVE_FALLBACK_PHRASES,normalize_sentence
+ banned=[normalize_sentence(x) for x in REPETITIVE_FALLBACK_PHRASES if normalize_sentence(x)]
+ seen=set();removed=0
+ def scrub(segment:str)->str:
+  nonlocal removed
+  parts=re.split(r'(<[^>]+>)',segment)
+  for index,part in enumerate(parts):
+   if part.startswith('<') or not part.strip():continue
+   kept=[]
+   for sentence in re.split(r'(?<=[.!?])\s+',part):
+    key=normalize_sentence(sentence)
+    if not key:
+     kept.append(sentence);continue
+    if any(phrase in key for phrase in banned):
+     removed+=1;continue
+    if len(key.split())>=10:
+     if key in seen:
+      removed+=1;continue
+     seen.add(key)
+    kept.append(sentence)
+   parts[index]=' '.join(x for x in kept if x.strip())
+  return ''.join(parts)
+ output=[];cursor=0
+ for match in PROTECTED_BLOCKS.finditer(content or ''):
+  output.append(scrub((content or '')[cursor:match.start()]));output.append(match.group(0));cursor=match.end()
+ output.append(scrub((content or '')[cursor:]))
+ cleaned=''.join(output)
+ cleaned=re.sub(r'<p\b[^>]*>\s*</p>','',cleaned,flags=re.I)
+ return cleaned,removed

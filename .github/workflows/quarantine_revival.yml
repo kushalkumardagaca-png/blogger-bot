@@ -93,14 +93,16 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/dy-revival
           cp QUARANTINE_REVIVAL_STATE.json /tmp/dy-revival/
+          if [ -f BLOGGER_QUARANTINE_SURVEY.json ]; then cp BLOGGER_QUARANTINE_SURVEY.json /tmp/dy-revival/; fi
           git config user.name 'Daily Yield Revival Control'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           for attempt in 1 2 3; do
             git fetch origin main && git reset --hard FETCH_HEAD
             cp /tmp/dy-revival/* .
             git add QUARANTINE_REVIVAL_STATE.json
+            if [ -f BLOGGER_QUARANTINE_SURVEY.json ]; then git add BLOGGER_QUARANTINE_SURVEY.json; fi
             if git diff --staged --quiet; then exit 0; fi
-            git commit -m 'Update quarantine revival state [skip ci]'
+            git commit -m 'Update quarantine revival state and benchmark survey [skip ci]'
             if git push origin HEAD:main; then exit 0; fi
             sleep $((attempt*3))
           done

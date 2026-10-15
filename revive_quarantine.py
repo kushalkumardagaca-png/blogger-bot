@@ -20,7 +20,7 @@ a public Daily Yield page, never creates pageviews, and never prints a secret.
 """
 from __future__ import annotations
 
-import argparse, datetime as dt, html, json, os, re, subprocess, sys, urllib.parse, urllib.request
+import argparse, datetime as dt, hashlib, html, json, os, re, subprocess, sys, urllib.parse, urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -33,7 +33,8 @@ SPACING_HOURS = 8
 
 from content_policy_guard import (DISCLOSURE_MARKER, audit_text, automation_disclosure,
                                   assert_policy_compliant)
-from editorial_integrity import MARK as INTEGRITY_MARK, assert_saved_green, repair_repeated_prose, stamp
+from editorial_integrity import (MARK as INTEGRITY_MARK, assert_saved_green, digest as content_digest,
+                                    repair_repeated_prose, scrub_repeated_sentences, stamp)
 from seo_hygiene import compact_title, description_from_content, repair_image_alts
 from contextual_links import card as context_card
 from related_articles import ensure as ensure_related, fetch_public_posts
@@ -148,6 +149,17 @@ def parse(value: str) -> dt.datetime | None:
         return None
 
 
+def implementation_revision() -> str:
+    """Fingerprint the repair code so a fixed implementation retries a failed draft."""
+    digest = hashlib.sha256()
+    for name in ("revive_quarantine.py", "editorial_integrity.py", "content_policy_guard.py", "publication_preflight.py"):
+        path = ROOT / name
+        if path.exists():
+            digest.update(name.encode())
+            digest.update(path.read_bytes())
+    return digest.hexdigest()[:16]
+
+
 def plan_items() -> list[dict]:
     plan = load(PLAN, None)
     if not plan or not plan.get("items"):
@@ -172,11 +184,17 @@ def due_now(current: dict, now: dt.datetime) -> bool:
     return True
 
 
-def next_pending(current: dict) -> dict | None:
+def next_pending(current: dict, revision: str | None = None) -> dict | None:
+    """Oldest unfinished article first; a repaired implementation re-opens a failure."""
+    revision = revision or implementation_revision()
     for item in plan_items():
         row = item_state(current, item["draft_id"])
-        if row.get("status") not in ("live", "repair_failed", "abandoned"):
-            return item
+        status = row.get("status")
+        if status in ("live", "abandoned"):
+            continue
+        if status == "repair_failed" and row.get("revision") == revision:
+            continue
+        return item
     return None
 
 
@@ -314,6 +332,10 @@ def repair_package(post: dict, title: str, posts: list[dict]) -> dict:
     if removed:
         repairs.append(f"removed {removed} repeated prose sentence(s)")
 
+    content, scrubbed = scrub_repeated_sentences(content)
+    if scrubbed:
+        repairs.append(f"removed {scrubbed} banned or duplicated sentence(s)")
+
     content, alts = repair_image_alts(content, title)
     if alts:
         repairs.append(f"repaired {alts} image description(s)")
@@ -351,6 +373,12 @@ def repair_package(post: dict, title: str, posts: list[dict]) -> dict:
     content, added_byline = ensure_byline(content)
     if added_byline:
         repairs.append("restored the Daily Yield byline")
+
+    # A final pass runs once every Daily Yield block is in place, so nothing added
+    # here can reintroduce repetition; the controlled blocks stay untouched.
+    content, final_scrub = scrub_repeated_sentences(content)
+    if final_scrub:
+        repairs.append(f"final repetition pass removed {final_scrub} sentence(s)")
 
     content = stamp(content, title, "quarantine-revival")
     return {"content": content, "repairs": repairs, "description": description, "title": title}
@@ -465,7 +493,8 @@ def run(apply: bool, force: bool) -> dict:
     now = dt.datetime.now(IST)
     if not force and not due_now(current, now):
         return {"status": "WAITING", "next_due_at": current.get("next_due_at", "")}
-    item = next_pending(current)
+    revision = implementation_revision()
+    item = next_pending(current, revision)
     if item is None:
         current["next_due_at"] = ""
         save(STATE, current)
@@ -473,6 +502,7 @@ def run(apply: bool, force: bool) -> dict:
     row = item_state(current, item["draft_id"])
     row["attempts"] = int(row.get("attempts", 0)) + 1
     row["last_attempt"] = now.isoformat()
+    row["revision"] = revision
     tok = token()
     posts = fetch_public_posts(limit=100)
     try:
@@ -507,6 +537,7 @@ def run(apply: bool, force: bool) -> dict:
         row["note"] = "already live before this revival run"
     current["next_due_at"] = (now + dt.timedelta(hours=SPACING_HOURS)).isoformat()
     current["last_run"] = now.isoformat()
+    current["implementation_revision"] = revision
     save(STATE, current)
     remaining = len([x for x in plan_items() if item_state(current, x["draft_id"]).get("status") not in ("live", "repair_failed", "abandoned")])
     print(json.dumps({**{k: v for k, v in outcome.items() if k != "repairs"}, "remaining_pending": remaining, "next_due_at": current["next_due_at"]}, ensure_ascii=False))
