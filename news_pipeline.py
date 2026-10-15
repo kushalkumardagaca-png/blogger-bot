@@ -1580,6 +1580,33 @@ def live_post_exists(url, token):
         return False
 
 
+def live_current_edition(url, token, edition_date):
+    """Is the live post at this address actually today's edition?
+
+    A post can exist at today's address and still carry an older edition: that
+    is what silently retired the Americas desk on 15 October. The address alone
+    is never treated as proof; the stored text has to carry today's date and
+    pass the same green verification as a fresh publication.
+    """
+    if not url:
+        return False
+    try:
+        path = urllib.parse.urlparse(url).path
+        query = urllib.parse.urlencode({"path": path, "fetchBody": "true",
+                                        "fields": "id,url,status,title,content"})
+        post = blogger_call("/posts/bypath?" + query, token)
+        if post.get("status") != "LIVE":
+            return False
+        marker = f"{edition_date.day} {edition_date.strftime('%B %Y')}"
+        text = (post.get("content") or "") + (post.get("title") or "")
+        if marker not in text:
+            return False
+        assert_saved_green(post)
+        return True
+    except Exception:
+        return False
+
+
 def find_incomplete_live_post(art, token):
     """Recover a slug-title post left live if the final Blogger update failed."""
     query = urllib.parse.urlencode({"status": "live", "fetchBodies": "false",
@@ -1714,11 +1741,14 @@ def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
     slot_dt = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
     prev = tracker["desks"].get(desk, {})
     if prev.get("edition") == now.date().isoformat():
-        print(f"  [{desk}] already published today ({prev.get('url','?')}) — skip")
-        return False
+        if dry or live_current_edition(prev.get("url", ""), token, now.date()):
+            print(f"  [{desk}] already published today ({prev.get('url','?')}) — skip")
+            return False
+        print(f"  [{desk}] the record says today but the live post does not carry "
+              f"today's edition — republishing")
     # Recover safely if Blogger published successfully but a previous tracker push failed.
     expected_url = f"{BLOG}/{now:%Y/%m}/{slug}-{now.date().isoformat()}.html"
-    if not dry and live_post_exists(expected_url, token):
+    if not dry and live_current_edition(expected_url, token, now.date()):
         tracker["desks"][desk] = {**prev, "edition": now.date().isoformat(),
                                   "window_end": now.isoformat(), "url": expected_url}
         save_tracker(tracker)

@@ -101,6 +101,36 @@ class RepairPathTests(unittest.TestCase):
             np.publish_post(article(), "token")
 
 
+class LiveEditionTests(unittest.TestCase):
+    """An address occupied by an older edition must never count as published."""
+
+    def setUp(self):
+        self.day = __import__("datetime").date(2026, 10, 15)
+        self._call = np.blogger_call
+        self._green = np.assert_saved_green
+        np.assert_saved_green = lambda *a, **k: True
+
+    def tearDown(self):
+        np.blogger_call, np.assert_saved_green = self._call, self._green
+
+    def test_yesterdays_edition_at_todays_address_is_not_current(self):
+        np.blogger_call = lambda *a, **k: {"status": "LIVE", "url": "https://x", "id": "1",
+                                           "title": "Americas Finance News \u2014 14 October 2026",
+                                           "content": "<h1>Americas Finance News \u2014 14 October 2026</h1>"}
+        self.assertFalse(np.live_current_edition("https://dailyyield.blogspot.com/p.html", "t", self.day))
+
+    def test_todays_edition_is_current(self):
+        np.blogger_call = lambda *a, **k: {"status": "LIVE", "url": "https://x", "id": "1",
+                                           "title": "Americas Finance News \u2014 15 October 2026",
+                                           "content": "<h1>Americas Finance News \u2014 15 October 2026</h1>"}
+        self.assertTrue(np.live_current_edition("https://dailyyield.blogspot.com/p.html", "t", self.day))
+
+    def test_missing_or_draft_post_is_not_current(self):
+        np.blogger_call = lambda *a, **k: {"status": "DRAFT", "url": "https://x", "id": "1", "content": ""}
+        self.assertFalse(np.live_current_edition("https://dailyyield.blogspot.com/p.html", "t", self.day))
+        self.assertFalse(np.live_current_edition("", "t", self.day))
+
+
 class RenderingGuardTests(unittest.TestCase):
     def test_stamp_is_idempotent(self):
         html = article()["html"]
