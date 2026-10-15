@@ -79,13 +79,18 @@ def main():
   except Exception: continue
   if day_ist==dt.datetime.now(IST).date().isoformat(): today_live.append({'id':x['id'],'title':x.get('title'),'url':x.get('url'),'published_ist':stamp})
  def tokens(value):return set(re.findall(r'[a-z0-9]{4,}',str(value or '').casefold()))
+ live_ids={str(x.get('id')):x for x in live}
+ draft_ids={str(x.get('id')):x for x in drafts}
  quarantined=[]
  for post_id,label in QUARANTINE_IDS:
-  try:
-   row=call('/posts/'+post_id+'?fetchBody=true',tok)
-   quarantined.append({'post_id':post_id,'label':label,'current_status':row.get('status'),'url':row.get('url'),'updated':row.get('updated'),'has_current_disclosure':'DY_AUTOMATION_DISCLOSURE_GREEN_V2' in (row.get('content') or '')})
-  except Exception as exc:
-   quarantined.append({'post_id':post_id,'label':label,'current_status':'LOOKUP_FAILED','detail':str(exc)[:120]})
+  row=live_ids.get(post_id) or {}
+  if post_id in live_ids:status='LIVE'
+  elif post_id in draft_ids:status='DRAFT'
+  else:status='DELETED_OR_UNKNOWN'
+  quarantined.append({'post_id':post_id,'label':label,'current_status':status,
+   'url':row.get('url') or (draft_ids.get(post_id) or {}).get('url'),
+   'title_now':row.get('title') or (draft_ids.get(post_id) or {}).get('title'),
+   'updated':row.get('updated') or (draft_ids.get(post_id) or {}).get('updated')})
  still_live=[x for x in quarantined if x.get('current_status')=='LIVE']
  plan=json.loads((ROOT/'MASTER_DAILY_PLAN.json').read_text()) if (ROOT/'MASTER_DAILY_PLAN.json').exists() else {}
  day=dt.datetime.now(IST).date().isoformat()
