@@ -1,17 +1,17 @@
 {
   "status": "PASS",
   "zero_view": true,
-  "posts_checked": 458,
+  "posts_checked": 459,
   "labels_normalized": 0,
-  "duplicate_heroes_replaced": 0,
+  "duplicate_heroes_replaced": 34,
   "remaining_duplicate_heroes": 0,
   "unresolved_duplicate_groups": [],
-  "pages_repaired": 1,
-  "article_snapshot_entries": 106,
+  "pages_repaired": 2,
+  "article_snapshot_entries": 107,
   "news_snapshot_entries": 352,
-  "label_image_index_entries": 458,
+  "label_image_index_entries": 459,
   "article_category_counts": {
-    "Trend \u00b7 Money & Policy Now": 3,
+    "Trend \u00b7 Money & Policy Now": 4,
     "Trend \u00b7 Markets & Assets in Motion": 3,
     "Trend \u00b7 Companies & Deals Trending": 3,
     "Trend \u00b7 Technology & Future Money": 2,
@@ -30,7 +30,7 @@
     "Business Startups & Entrepreneurship": 1,
     "Companies Technology & Industry": 5,
     "Economy Policy & Global Finance": 4,
-    "Family Life Stages & Consumer Safety": 15
+    "Family Life Stages & Consumer Safety": 16
   },
   "news_desk_counts": {
     "Global Finance News": 21,
