@@ -121,23 +121,32 @@ def repair_repeated_prose(content:str)->tuple[str,int]:
 
  Only paragraph-level editorial prose is touched; source ledgers, tables,
  navigation and captions keep their text. The first occurrence is never altered.
+ A sentence is treated as repeated exactly as the publication gate treats it, so
+ the repair can never leave behind something the gate would still reject. When a
+ whole paragraph repeats, the paragraph itself is removed.
  """
+ from content_policy_guard import normalize_sentence
  seen=set();removed=0
  def fix(match):
   nonlocal removed
   opening,body,closing=match.group(1),match.group(2),match.group(3)
   if '<' in body:return match.group(0)
-  parts=re.split(r'(?<=[.!?])\s+',body.strip())
-  kept=[]
+  parts=[x for x in re.split(r'(?<=[.!?])\s+',body.strip()) if x.strip()]
+  if not parts:return match.group(0)
+  kept=[];dropped=0
   for sentence in parts:
-   key=' '.join(re.findall(r'[a-z0-9]+',html.unescape(sentence).casefold()))
-   if len(key.split())>=14:
+   key=normalize_sentence(sentence)
+   if len(key.split())>=10:
     if key in seen:
-     removed+=1
+     removed+=1;dropped+=1
      continue
     seen.add(key)
    kept.append(sentence)
-  if not kept:return match.group(0)
+  if not kept:
+   # Every sentence in this block already appeared earlier, so the duplicate
+   # paragraph goes as a whole instead of being reported as unrepairable.
+   return '' if dropped else match.group(0)
   return opening+' '.join(kept)+closing
  repaired=PROSE_BLOCKS.sub(fix,content)
+ repaired=re.sub(r'<p\b[^>]*>\s*</p>','',repaired,flags=re.I)
  return repaired,removed

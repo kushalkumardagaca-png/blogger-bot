@@ -59,16 +59,24 @@ jobs:
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
           GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
+          set -uo pipefail
           mode='${{ inputs.mode }}'
           if [ -z "$mode" ]; then
             if [ '${{ github.event_name }}' = 'push' ]; then mode=validate; else mode=apply; fi
           fi
+          run_and_report() {
+            if ! "$@" > /tmp/revival.log 2>&1; then
+              echo "::error title=Revival step failed ($1)::$(tail -c 900 /tmp/revival.log | tr '\n' '|')"
+              cat /tmp/revival.log
+              exit 1
+            fi
+            cat /tmp/revival.log
+          }
           case "$mode" in
-            survey)   python revive_quarantine.py --survey ;;
-            validate) python revive_quarantine.py --survey; python revive_quarantine.py --dry-run --force ;;
-            dry_run)  python revive_quarantine.py --dry-run ${{ inputs.force && '--force' || '' }} ;;
-            *)        python revive_quarantine.py --apply ${{ inputs.force && '--force' || '' }} ;;
+            survey)   run_and_report python -u revive_quarantine.py --survey ;;
+            validate) run_and_report python -u revive_quarantine.py --survey; run_and_report python -u revive_quarantine.py --dry-run --force ;;
+            dry_run)  run_and_report python -u revive_quarantine.py --dry-run ${{ inputs.force && '--force' || '' }} ;;
+            *)        run_and_report python -u revive_quarantine.py --apply ${{ inputs.force && '--force' || '' }} ;;
           esac
       - name: Keep the evidence in a retained artifact
         if: always()
