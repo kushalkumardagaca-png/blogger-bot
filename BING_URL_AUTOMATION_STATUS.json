@@ -1,21 +1,21 @@
 {
-  "checkedAt": "2026-10-14T23:45:30.276670+00:00",
+  "checkedAt": "2026-10-15T01:05:57.031997+00:00",
   "status": "PASS",
   "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "site": "https://dailyyield.blogspot.com/",
   "quota": {
-    "dailyAvailable": 0,
+    "dailyAvailable": 100,
     "monthlyAvailable": 1700
   },
   "summary": {
     "inventory": 472,
-    "candidates": 244,
-    "submitted": 0,
-    "quotaDeferred": 244,
-    "inspected": 0,
+    "candidates": 247,
+    "submitted": 100,
+    "quotaDeferred": 147,
+    "inspected": 10,
     "knownToBing": 0,
-    "pendingMonitoring": 228,
+    "pendingMonitoring": 324,
     "removedAlerts": 1
   },
   "errors": [],
