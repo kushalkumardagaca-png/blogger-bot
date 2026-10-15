@@ -103,10 +103,13 @@ jobs:
             sleep $((attempt * 20))
           done
           exit 1
-      # Failure detail stays in the run summary and retained artifacts, never in main.
+      # Failure detail stays in the run summary, the run annotation and retained
+      # artifacts. It is never committed to main.
       - name: Show failure reason in the run summary
         if: failure()
         run: |
+          reason=$(python -c "import json;d=json.load(open('MASTER_AUTOMATION_STATUS.json'));print(d.get('error','no persisted reason'))" 2>/dev/null || echo 'no persisted reason')
+          echo "::error title=Master generation blocked::$reason"
           {
             echo '### Master generation did not publish';
             echo '```json';
