@@ -148,9 +148,11 @@ def publish_to_blogger(title, content, labels):
     # post rather than creating a second Blogger record after a retry/race.
     posts=[];page=None
     for _ in range(10):
-        batch=service.posts().list(blogId=BLOG_ID,status='live',fetchBodies=True,
+        # The Blogger API client validates this enum locally, so it must be the
+        # documented uppercase value; lowercase fails before the request is sent.
+        batch=service.posts().list(blogId=BLOG_ID,status='LIVE',fetchBodies=True,
             maxResults=50,pageToken=page).execute() if page else service.posts().list(
-            blogId=BLOG_ID,status='live',fetchBodies=True,maxResults=50).execute()
+            blogId=BLOG_ID,status='LIVE',fetchBodies=True,maxResults=50).execute()
         posts.extend(batch.get('items',[]));page=batch.get('nextPageToken')
         if not page:break
     existing,reason=find_duplicate(title,content,posts)

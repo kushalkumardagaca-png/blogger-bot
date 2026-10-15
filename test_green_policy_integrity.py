@@ -61,3 +61,11 @@ def test_publishing_modules_never_shadow_the_integrity_fingerprint():
         assert not re.search(r'\bstamp\s*=\s*dt\.datetime',source),f'{name} shadows the integrity stamp helper'
     for name in ('master_v3_pipeline.py','news_pipeline.py','auto_blogger_publisher.py'):
         assert 'stamp(' in Path(name).read_text(),f'{name} no longer fingerprints published content'
+
+
+def test_blogger_client_calls_use_documented_status_values():
+    import re
+    from pathlib import Path
+    source=Path('auto_blogger_publisher.py').read_text()
+    calls=re.findall(r"status=['\"]([A-Za-z_]+)['\"]",source)
+    assert calls and all(value=='LIVE' for value in calls),calls
