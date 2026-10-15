@@ -92,6 +92,16 @@ jobs:
             sleep $((attempt * 20))
           done
           exit 1
+      # Failure detail stays in the run summary and retained artifacts, never in main.
+      - name: Show failure reason in the run summary
+        if: failure()
+        run: |
+          {
+            echo '### Master generation did not publish';
+            echo '```json';
+            cat MASTER_AUTOMATION_STATUS.json 2>/dev/null || echo '{}';
+            echo '```';
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail
