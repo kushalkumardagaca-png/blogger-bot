@@ -1,19 +1,16 @@
 {
-  "generatedAt": "2026-10-15T07:16:45.213353+05:30",
+  "generatedAt": "2026-10-15T07:44:46.446603+05:30",
   "dateIST": "2026-10-15",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 3,
-  "overdueMissing": [],
+  "overdueMissing": [
+    "news-india"
+  ],
   "actions": [
     {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-1",
+      "type": "source_recovery",
+      "key": "news-india",
       "applied": true
     }
   ],
