@@ -1,0 +1,63 @@
+name: Blogger Corpus Policy Hardening
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: 'Apply exact-duplicate removal and missing disclosure retrofit'
+        required: true
+        type: boolean
+        default: false
+  schedule:
+    - cron: '35 20 * * 0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-blogger-corpus-hardening
+  cancel-in-progress: false
+
+jobs:
+  audit-and-remediate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Audit authenticated live corpus and apply only safe idempotent repairs
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          APPLY_CORPUS_REMEDIATION: ${{ github.event_name == 'workflow_dispatch' && inputs.apply && 'true' || 'false' }}
+        run: python harden_live_corpus.py
+      - name: Persist compact policy and image-rights evidence
+        run: |
+          set -euo pipefail
+          cp BLOGGER_CORPUS_POLICY_STATUS.json /tmp/corpus-status.json
+          cp BLOGGER_IMAGE_RIGHTS_LEDGER.json /tmp/rights-status.json
+          git config user.name "Daily Yield Policy Hardening"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            cp /tmp/corpus-status.json BLOGGER_CORPUS_POLICY_STATUS.json
+            cp /tmp/rights-status.json BLOGGER_IMAGE_RIGHTS_LEDGER.json
+            git add BLOGGER_CORPUS_POLICY_STATUS.json BLOGGER_IMAGE_RIGHTS_LEDGER.json
+            git commit -m "Record live Blogger corpus policy audit [skip ci]" || true
+            git push origin HEAD:main && exit 0
+            sleep $((attempt * 2))
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blogger-corpus-policy-${{ github.run_id }}
+          path: |
+            BLOGGER_CORPUS_POLICY_STATUS.json
+            BLOGGER_IMAGE_RIGHTS_LEDGER.json
+          if-no-files-found: error

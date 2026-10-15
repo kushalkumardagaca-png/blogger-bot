@@ -23,9 +23,9 @@ REPL=[
  ('CA Kushal Daga','Kushal K. Daga'),
  ('Kushal Kumar Daga','Kushal K. Daga'),
  ('CA Kushal','Kushal K. Daga'),
- ('CHARTERED ACCOUNTANT','CERTIFIED ACCOUNTANT'),
- ('Chartered Accountant','Certified Accountant'),
- ('chartered accountant','Certified Accountant'),
+ ('CHARTERED ACCOUNTANT','SOURCE-LED PUBLISHER'),
+ ('Chartered Accountant','source-led publisher'),
+ ('chartered accountant','source-led publisher'),
  ('https://financebycakushal.blogspot.com','https://dailyyield.blogspot.com'),
  ('http://financebycakushal.blogspot.com','https://dailyyield.blogspot.com'),
 ]
@@ -51,7 +51,7 @@ def text_rewrite(s):
  s=s.replace('"alternateName": ["Kushal Daga", "Kushal K. Daga", "Kushal Jain", "Finance by Kushal"]',
              '"alternateName": ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"]')
  s=s.replace('“Kushal K. Daga” refers to Certified Accountant Kushal K. Daga',
-             '“CA Kushal” refers to Certified Accountant Kushal K. Daga')
+             '“CA Kushal” is an earlier search name and does not state a professional qualification')
  return s
 
 def slim_images(s, stat):
@@ -85,7 +85,7 @@ def main():
    title=item.get('title','');content=item.get('content',''); stat={'images':0,'bytes':0}
    nt=text_rewrite(title);nc=slim_images(text_rewrite(content),stat)
    if kind=='pages' and title.strip().upper()=='ABOUT US' and 'data-dy-entity-map' not in nc:
-    nc += '''\n<aside data-dy-entity-map="v1" style="max-width:760px;margin:28px auto;padding:16px 18px;border:1px solid #EADCC8;border-radius:12px;font:400 14px/1.7 Inter,Arial,sans-serif;color:#6E5D4B"><strong style="color:#241610">Daily Yield identity:</strong> Daily Yield is the finance publication of Kushal K. Daga, also known as Kushal Daga and Kushal Jain. “CA Kushal” refers to Certified Accountant Kushal K. Daga. “Finance by Kushal” is an earlier search name for Daily Yield.</aside>'''
+    nc += '''\n<aside data-dy-entity-map="v1" style="max-width:760px;margin:28px auto;padding:16px 18px;border:1px solid #EADCC8;border-radius:12px;font:400 14px/1.7 Inter,Arial,sans-serif;color:#6E5D4B"><strong style="color:#241610">Daily Yield identity:</strong> Daily Yield is the finance publication of Kushal K. Daga, also known as Kushal Daga and Kushal Jain. “CA Kushal” is an earlier search name and does not state a professional qualification. “Finance by Kushal” is an earlier search name for Daily Yield.</aside>'''
    old_labels=item.get('labels',[]); new_labels=[text_rewrite(x) for x in old_labels]
    if nt==title and nc==content and new_labels==old_labels:continue
    backup.append({'kind':kind,'id':item['id'],'title':title,'content':content,

@@ -78,7 +78,7 @@ check('Each dynamic Master package requires three licensed photos',
 rv=(ROOT/'reader_value_article.py').read_text(); mv2=(ROOT/'master_article_v2.py').read_text(); prep=(ROOT/'prepare_master_article.py').read_text(); master=ap+rv+mv2+prep
 check('Master publisher uses IST','datetime.now(IST)' in ap)
 check('Master tracker advances only after live URL','tracker will not advance' in ap and 'if not api_res or not api_res.get("url")' in ap)
-check('Master duplicate recovery','posts().search' in ap and 'Existing exact-title post recovered' in ap)
+check('Master duplicate recovery','find_duplicate(title,content,posts)' in ap and 'no duplicate published' in ap and 'fetchBodies=True' in ap)
 check('Master canonical repaired to live URL','predicted.group(0)' in ap and 'posts().update' in ap)
 check('Master packages always rebuilt fresh','Always rebuild with the current date' in ap and 'Loading pre-compiled' not in ap)
 check('Master byline is current','AUTHOR="Kushal K. Daga"' in mv2 and 'By <strong>{AUTHOR}</strong>' in mv2 and 'By CA Kushal K. Daga' not in master)

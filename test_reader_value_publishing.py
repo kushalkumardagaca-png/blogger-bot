@@ -22,8 +22,8 @@ def package():
       'faq':[{'question':f'Question {i}?','answer':f'Answer {i} addresses a distinct topic-specific mechanism, its evidence boundary and its practical limitation.'} for i in range(5)],
       'glossary':[{'term':f'Term {i}','definition':f'Definition {i} explains a distinct concept used specifically in this article and its evidence context.'} for i in range(8)],
       'visuals':[{'type':kind,'title':f'Evidence view {i}','caption':'Illustrative sourced comparison.','source':1,'after_section':i+2,'labels':['A','B'],'values':[1,2]} for i,kind in enumerate(('table','pie','line'))],
-      'photos':[{'url':f'https://images.example/photo-{i}.jpg','alt':f'Topic-specific financial photograph {i}','caption':'Topic-specific editorial photograph.','width':1600,'height':900} for i in range(3)],
-      'sources':[{'name':f'Official source {i}','title':f'Source document {i}','url':f'https://source{i}.gov/document','date':'2026','use':'Evidence'} for i in range(6)],
+      'photos':[{'url':f'https://images.example/photo-{i}.jpg','alt':f'Topic-specific financial photograph {i}','caption':'Topic-specific editorial photograph.','width':1600,'height':900,'source_page':f'https://commons.wikimedia.org/{i}','license':'CC BY 4.0','license_url':'https://creativecommons.org/licenses/by/4.0/','creator':'Creator'} for i in range(3)],
+      'sources':[{'name':f'Official source {i}','title':f'Source document {i}','url':f'https://source{i}.gov/document','date':'2026','use':'Evidence','retrieved_at':'2026-10-15'} for i in range(6)],
       'internal_links':[{'title':'Daily Yield Calculators','url':'https://dailyyield.blogspot.com/p/calculator_0908148622.html','relevance':'Model the assumptions.'}],
       'low_view_posts':[{'title':f'Discovery article {i}','url':f'https://dailyyield.blogspot.com/2026/10/article-{i}.html','image':f'https://images.example/card-{i}.jpg','label':'Daily Article'} for i in range(10)]}
 

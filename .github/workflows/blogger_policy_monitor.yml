@@ -1,0 +1,35 @@
+name: Monitor Official Blogger Policy
+on:
+  schedule:
+    - cron: '20 19 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: daily-yield-blogger-policy-monitor
+  cancel-in-progress: false
+jobs:
+  monitor:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - run: python monitor_blogger_policy.py
+      - name: Persist official policy fingerprint
+        run: |
+          set -euo pipefail
+          cp BLOGGER_POLICY_MONITOR_STATUS.json /tmp/policy-monitor.json
+          git config user.name "Daily Yield Policy Monitor"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main && git reset --hard FETCH_HEAD
+            cp /tmp/policy-monitor.json BLOGGER_POLICY_MONITOR_STATUS.json
+            git add BLOGGER_POLICY_MONITOR_STATUS.json
+            git commit -m "Record official Blogger policy fingerprint [skip ci]" || true
+            git push origin HEAD:main && exit 0
+            sleep $((attempt * 2))
+          done
+          exit 1

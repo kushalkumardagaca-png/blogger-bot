@@ -7,7 +7,7 @@ assembly, and builds summary/support/visual structures deterministically from th
 verified article and source records.
 """
 from __future__ import annotations
-import html,json,os,re,time,urllib.parse,xml.etree.ElementTree as ET
+import hashlib,html,json,os,re,time,urllib.parse,xml.etree.ElementTree as ET
 from pathlib import Path
 import requests
 from master_article_v2 import words
@@ -93,7 +93,7 @@ def discover_sources(item,kind):
   if not url.startswith('https://') or key in seen or len(clean(text))<120:return
   overlap=len(set(terms(title))&set(terms(source_title+' '+text)))
   if overlap<2:return
-  seen.add(key);out.append({'name':clean(name) or 'Retrieved source','title':clean(source_title),'url':url,'text':clean(text)[:6000],'overlap':overlap})
+  seen.add(key);out.append({'name':clean(name) or 'Retrieved source','title':clean(source_title),'url':url,'text':clean(text)[:6000],'overlap':overlap,'retrieved_at':time.strftime('%Y-%m-%d',time.gmtime())})
  for source in item.get('sources',[]):
   try:
    r=requests.get(source['url'],headers={'User-Agent':UA},timeout=30);body=clean(r.text)
@@ -292,9 +292,31 @@ def support(sections):
   glossary.append({'term':term,'definition':sentence_trim(definition,65)})
   if len(glossary)>=8:break
  return faq,glossary
-def visuals(sources,sections):
- out=[]
- for i,s in enumerate(sources[:3],1):out.append({'type':'table','title':f'Evidence scope {i}: {s["title"][:90]}','caption':f'Categorical scope from {s["name"]}; no unreported quantity is inferred.','source':i,'after_section':sections[i-1]['heading'],'data':[{'Evidence field':'Document','Documented value':s['title']},{'Evidence field':'Provider','Documented value':s['name']},{'Evidence field':'Scope','Documented value':sentence_trim(s['text'],45)}]})
+STRUCTURE_PROFILES=(
+ ('mechanism-first',('cards','table','timeline')),
+ ('decision-path',('timeline','matrix','cards')),
+ ('stakeholder-lens',('matrix','cards','table')),
+ ('evidence-contrast',('table','matrix','timeline')),
+ ('risk-and-response',('cards','timeline','matrix')),
+ ('jurisdiction-map',('matrix','table','cards')),
+ ('scenario-route',('timeline','cards','table')),
+ ('source-triangulation',('table','cards','matrix')),
+ ('assumption-check',('cards','matrix','timeline')),
+ ('trade-off-map',('matrix','timeline','table')),
+ ('reader-workflow',('timeline','table','cards')),
+ ('institutional-lens',('table','timeline','matrix')),
+)
+def structure_profile(key,title):
+ if isinstance(key,int):return STRUCTURE_PROFILES[key%len(STRUCTURE_PROFILES)]
+ seed=int(hashlib.sha256((str(key)+'|'+title.casefold()).encode()).hexdigest()[:12],16)
+ return STRUCTURE_PROFILES[seed%len(STRUCTURE_PROFILES)]
+def visuals(sources,sections,profile=STRUCTURE_PROFILES[0]):
+ """Rotate evidence-safe presentation methods without manufacturing numbers."""
+ out=[];kinds=profile[1]
+ for i,s in enumerate(sources[:3],1):
+  kind=kinds[(i-1)%len(kinds)];scope=sentence_trim(s['text'],45)
+  rows=[{'Evidence field':'Document','Documented value':s['title']},{'Evidence field':'Provider','Documented value':s['name']},{'Evidence field':'Bounded finding','Documented value':scope}]
+  out.append({'type':kind,'title':f'{profile[0].replace("-"," ").title()} view {i}: {s["title"][:72]}','caption':f'{kind.title()} presentation of categorical evidence from {s["name"]}; no unreported quantity is inferred.','source':i,'after_section':sections[(i*3-2)%len(sections)]['heading'],'data':rows})
  return out
 def photo_set(title,category,slug,key):
  variants=[[f'{title} {category} people workplace wide editorial',f'{category} documents planning desk wide editorial',f'{title} city institutions professional wide editorial'],[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior']]
@@ -305,6 +327,7 @@ def photo_set(title,category,slug,key):
  raise RuntimeError('V3 photo search exhausted two independently broadened searches: '+' | '.join(errors))
 def build(item,kind,target):
  sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=clean(title)[:46].strip(' -:')
+ profile=structure_profile(item.get('_structure_slot',item.get('id','')),title)
  if len(title)<12:title=clean(re.sub(r'^Trend\s*[·:-]?\s*','',item['category'],flags=re.I)+' Evidence Guide')[:46]
  plans=[];used_headings=set()
  for index in range(10):
@@ -348,6 +371,6 @@ def build(item,kind,target):
  else:raise RuntimeError('assembled Master prose could not be made sentence-distinct')
  sections=combined[:-1];summary=combined[-1]['paragraphs']
  faq,glossary=support(sections);slug=re.sub(r'[^a-z0-9]+','-',title.casefold()).strip('-')
- package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
+ package={'policy_version':POLICY_VERSION,'title':title,'meta_description':f'An evidence-led examination of {title}, including mechanisms, affected groups, jurisdiction and uncertainty.'[:158],'entities':[x['name'] for x in sources[:7]],'geography':'Jurisdictions identified in the cited evidence','temporal_coverage':'Current evidence record','structure_profile':profile[0],'module_headings':{'contents':'Evidence route map','summary':'Evidence-led takeaways','faq':'Reader questions','glossary':'Terms decoded','sources':'Evidence ledger','internal_links':'More from Daily Yield','external_sources':'Primary reading'},'visuals':visuals(sources,sections,profile),'sections':sections,'summary':summary,'faq':faq,'glossary':glossary,'photos':photo_set(title,item['category'],slug,item['id']),'sources':[{k:s[k] for k in ('name','title','url','retrieved_at')} for s in sources],'internal_links':internal_links(),'low_view_posts':low_exposure_posts()}
  assert_cross_corpus_original(package,target)
  target.parent.mkdir(parents=True,exist_ok=True);target.write_text(json.dumps(package,indent=2,ensure_ascii=False)+'\n');return package

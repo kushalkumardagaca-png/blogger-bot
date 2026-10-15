@@ -1,6 +1,6 @@
 # Blogger Content Policy Audit
 
-**14 passed · 0 failed**
+**20 passed · 0 failed**
 
 - **PASS** — Every Blogger publication passes the central policy guard
 - **PASS** — Automated posts disclose the production process
@@ -16,3 +16,9 @@
 - **PASS** — Unverified Certified Accountant claim is absent from deployable site sources
 - **PASS** — Custom theme retains Blogger Report Abuse mechanism
 - **PASS** — Publication quota cannot override compliance
+- **PASS** — Every Master day rejects duplicate and near-duplicate planned topics
+- **PASS** — Blogger inserts recover title URL and content duplicates before creation
+- **PASS** — Articles carry auditable topic content structure and profile fingerprints
+- **PASS** — Master evidence presentation rotates safe semantic structures
+- **PASS** — Financial rankings and affiliate links require visible disclosure
+- **PASS** — Live corpus audit removes exact duplicate records and retrofits disclosures

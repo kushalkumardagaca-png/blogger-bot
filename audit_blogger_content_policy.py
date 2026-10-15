@@ -20,7 +20,14 @@ check('Policy deployment updates Blogger and persists evidence','deploy_blogger_
 check('Unverified Certified Accountant claim is absent from deployable site sources','Certified Accountant' not in themes and 'Certified Accountant' not in (R/'markets_today_page.html').read_text())
 check('Custom theme retains Blogger Report Abuse mechanism','https://www.blogger.com/go/report-abuse' in themes)
 check('Publication quota cannot override compliance','A publication quota never overrides these safeguards' in deploy)
-result={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'policy_version':'BLOGGER_CONTENT_POLICY_2026_12','summary':{'pass':sum(x['status']=='PASS' for x in checks),'fail':sum(x['status']=='FAIL' for x in checks)},'checks':checks}
+integrity=(R/'editorial_integrity.py').read_text();corpus=(R/'harden_live_corpus.py').read_text();corpus_workflow=(R/'.github/workflows/blogger_corpus_hardening.yml').read_text()
+check('Every Master day rejects duplicate and near-duplicate planned topics','assert_unique_plan(plan)' in (R/'master_v3_pipeline.py').read_text() and 'DAILY TOPIC DIVERSITY GATE FAILED' in integrity)
+check('Blogger inserts recover title URL and content duplicates before creation','find_duplicate' in integrity and 'same canonical path' in integrity and 'near-duplicate article content' in integrity and 'find_duplicate(title,content,posts)' in (R/'auto_blogger_publisher.py').read_text())
+check('Articles carry auditable topic content structure and profile fingerprints','DY_EDITORIAL_INTEGRITY_V1' in integrity and 'body=stamp(' in (R/'master_v3_pipeline.py').read_text())
+check('Master evidence presentation rotates safe semantic structures','STRUCTURE_PROFILES' in master and all(x in master for x in ("'cards'","'matrix'","'timeline'")))
+check('Financial rankings and affiliate links require visible disclosure','unsupported financial ranking or fake-review risk' in guard and 'undisclosed affiliate or commercial link' in guard)
+check('Live corpus audit removes exact duplicate records and retrofits disclosures','exact_duplicate_groups' in corpus and "call('DELETE','/posts/'" in corpus and 'automation_disclosure' in corpus and 'harden_live_corpus.py' in corpus_workflow)
+result={'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'policy_version':'BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2','summary':{'pass':sum(x['status']=='PASS' for x in checks),'fail':sum(x['status']=='FAIL' for x in checks)},'checks':checks}
 (R/'BLOGGER_CONTENT_POLICY_AUDIT.json').write_text(json.dumps(result,indent=2)+'\n');(R/'BLOGGER_CONTENT_POLICY_AUDIT.md').write_text('# Blogger Content Policy Audit\n\n'+f"**{result['summary']['pass']} passed · {result['summary']['fail']} failed**\n\n"+'\n'.join(f"- **{x['status']}** — {x['name']}" for x in checks)+'\n')
 print(json.dumps(result['summary']))
 if result['summary']['fail']:raise SystemExit(1)

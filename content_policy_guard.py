@@ -9,7 +9,7 @@ from __future__ import annotations
 import html,os,re
 from collections import Counter
 
-POLICY_VERSION="BLOGGER_CONTENT_POLICY_2026_12"
+POLICY_VERSION="BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2"
 DISCLOSURE_MARKER="DY_AUTOMATION_DISCLOSURE_2026_12"
 
 # These phrases are acceptable only when expressly negated or quoted as a risk.
@@ -99,8 +99,16 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
   issues.append("possible exposed payment-card-like number")
  for phrase in REPETITIVE_FALLBACK_PHRASES:
   if phrase.casefold() in text.casefold():issues.append("repetitive deterministic fallback sentence")
- if re.search(r"\bCertified Accountant\b",text,re.I) and os.environ.get("DY_VERIFIED_CERTIFIED_ACCOUNTANT","").casefold()!="true":
+ qualification=r"(?:Certified Accountant|Chartered Accountant|CPA|CFA|licensed financial adviser|registered investment adviser)"
+ if re.search(r"(?:Kushal(?: K\. Daga)?|the author|the publisher|\bI am\b|\bwe are\b).{0,55}\b"+qualification+r"\b",text,re.I) and os.environ.get("DY_VERIFIED_PROFESSIONAL_QUALIFICATION","").casefold()!="true":
   issues.append("unverified professional qualification")
+ # Rankings and testimonials are unusually risky in finance. A superlative
+ # product/company title must include a visible methodology and commercial-
+ # relationship statement; otherwise it can resemble a fake review.
+ if re.search(r"\bbest\b.{0,45}\b(?:compan(?:y|ies)|bank|broker|insurer|insurance|card|loan|app|platform|fund)s?\b",title or '',re.I):
+  if not re.search(r"\b(?:selection|comparison|ranking) methodology\b",text,re.I) or not re.search(r"\b(?:no paid placement|not a paid ranking|commercial relationship|affiliate compensation)\b",text,re.I):issues.append("unsupported financial ranking or fake-review risk")
+ affiliate_links=re.findall(r'<a\b[^>]*href=["\']([^"\']*(?:affiliate|aff_id|affid|referral|utm_medium=affiliate)[^"\']*)',content or '',flags=re.I)
+ if affiliate_links and not re.search(r"\b(?:affiliate|commercial relationship|paid placement|commission)\b",text,re.I):issues.append("undisclosed affiliate or commercial link")
  # Seamless carousels may contain an accessibility-hidden clone of visible cards.
  # Scan the full text for harmful material, but do not count that non-reader clone
  # as repeated editorial prose.

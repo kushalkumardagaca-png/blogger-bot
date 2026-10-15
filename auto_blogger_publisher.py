@@ -61,6 +61,7 @@ from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from publication_preflight import assert_publishable
+from editorial_integrity import find_duplicate,stamp
 from page_family import ensure_family
 from seo_hygiene import compact_title, repair_image_alts
 from seo_meta import ensure_seo_meta
@@ -141,14 +142,22 @@ def publish_to_blogger(title, content, labels):
         client_secret=client_secret)
     service = build("blogger", "v3", credentials=creds, cache_discovery=False)
 
-    # If Blogger accepted a prior attempt but the tracker push failed, recover it
-    # instead of publishing a duplicate copy.
-    found = service.posts().search(blogId=BLOG_ID, q=title, fetchBodies=False).execute()
-    for post in found.get("items", []):
-        if post.get("title", "").strip() == title.strip():
-            print(f"Existing exact-title post recovered; no duplicate published: {post.get('url')}")
-            return post
+    # Query the authenticated inventory before every insert. Exact titles,
+    # canonical-path collisions and near-duplicate topics recover the existing
+    # post rather than creating a second Blogger record after a retry/race.
+    posts=[];page=None
+    for _ in range(10):
+        batch=service.posts().list(blogId=BLOG_ID,status='live',fetchBodies=True,
+            maxResults=50,pageToken=page).execute() if page else service.posts().list(
+            blogId=BLOG_ID,status='live',fetchBodies=True,maxResults=50).execute()
+        posts.extend(batch.get('items',[]));page=batch.get('nextPageToken')
+        if not page:break
+    existing,reason=find_duplicate(title,content,posts)
+    if existing:
+        print(f"Existing post recovered ({reason}); no duplicate published: {existing.get('url')}")
+        return existing
 
+    content=stamp(content,title)
     body = {"kind": "blogger#post", "blog": {"id": BLOG_ID},
             "title": title, "content": content, "labels": labels}
     res = service.posts().insert(blogId=BLOG_ID, body=body, isDraft=False).execute()

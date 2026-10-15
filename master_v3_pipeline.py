@@ -18,6 +18,7 @@ from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
 from content_policy_guard import POLICY_VERSION
+from editorial_integrity import assert_unique_plan,stamp
 
 ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata');PRODUCTION_START=dt.date(2026,10,14)
 
@@ -28,6 +29,9 @@ def write(path,value):path.parent.mkdir(parents=True,exist_ok=True);path.write_t
 def selected(kind,slot):
  plan=read(PLAN,{})
  if plan.get('status')!='READY':raise RuntimeError('daily dynamic Master plan is not READY')
+ # Every Master route validates the whole ten-topic day before selecting one
+ # slot, so two concurrent slots cannot intentionally publish the same subject.
+ assert_unique_plan(plan)
  today=dt.datetime.now(IST).date();plan_date=dt.date.fromisoformat(str(plan.get('date')))
  if plan_date<PRODUCTION_START:raise RuntimeError('Master V3 intentionally does not publish 12 or 13 October backfill')
  if plan_date!=today:raise RuntimeError('Master V3 publishes only the current IST date; historical backfill is disabled')
@@ -44,7 +48,7 @@ def build_html(kind,item,package,check_remote_images=True):
  stamp=dt.datetime.now(IST);topic=topic_for(kind,item);title,slug,meta,labels,body=render(package,topic,stamp.strftime('%Y-%m-%d'),stamp.strftime('%H:%M'))
  if kind=='trending':labels=[item['category'],item['evergreen_category'],'Master Article','Kushal K. Daga']
  else:labels=[item['category'],'Master Article','Kushal K. Daga']
- first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
+ first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);body=stamp(body,title,str(package.get('structure_profile','standard')));assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
 
 def trending_candidates(plan,item):
  """Use only live-internet reserves from the same approved category."""
@@ -65,6 +69,7 @@ def prepare(kind,slot):
  plan,item=selected(kind,slot);original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
  for candidate in attempts:
   try:
+   candidate=dict(candidate);candidate['_structure_slot']=slot+(0 if kind=='trending' else 5)
    target=package_path(kind,candidate)
    if target.exists():
     package=read(target,{})

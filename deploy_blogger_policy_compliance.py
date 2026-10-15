@@ -42,6 +42,6 @@ def main():
   r=requests.put(BASE+'/pages/'+page['id'],headers=h,json=body,timeout=90);r.raise_for_status();saved=r.json()
   if START not in saved.get('content',''):raise RuntimeError('policy block verification failed: '+path)
   results.append({'path':path,'title':saved.get('title'),'status':'UPDATED','url':saved.get('url')})
- Path('BLOGGER_POLICY_DEPLOYMENT_STATUS.json').write_text(json.dumps({'status':'PASS','policy_version':'BLOGGER_CONTENT_POLICY_2026_12','deployed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'pages':results},indent=2)+'\n')
+ Path('BLOGGER_POLICY_DEPLOYMENT_STATUS.json').write_text(json.dumps({'status':'PASS','policy_version':'BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2','deployed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'pages':results},indent=2)+'\n')
  print(json.dumps(results))
 if __name__=='__main__':main()

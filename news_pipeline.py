@@ -31,6 +31,7 @@ from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
+from editorial_integrity import find_duplicate,stamp
 from content_policy_guard import automation_disclosure
 from publication_timing import NEWS_LIVE, wait_for_release
 from page_family import ensure_family
@@ -1546,6 +1547,15 @@ def publish_post(art, token, dry=False):
     if dry:
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
         return None
+    # Stop same-title, same-canonical and near-duplicate editions before draft
+    # creation. The authenticated read creates no public pageview.
+    query = urllib.parse.urlencode({"status":"live","fetchBodies":"true","maxResults":"50","fields":"items(id,title,url,content,labels)"})
+    recent = blogger_call("/posts?"+query, token).get("items",[])
+    existing,reason=find_duplicate(art["title"],art["html"],recent,art.get("canonical",''))
+    if existing:
+        print(f"    duplicate-safe recovery ({reason}): {existing.get('url')}")
+        return existing.get('url','')
+    art["html"]=stamp(art["html"],art["title"],"news-desk")
     # Resume an incomplete slug-title post before creating anything new. This
     # makes the three-pass publication transaction retry-safe.
     live = find_incomplete_live_post(art, token)

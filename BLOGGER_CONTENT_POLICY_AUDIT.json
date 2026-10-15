@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-10-15T02:17:48.913562+00:00",
-  "policy_version": "BLOGGER_CONTENT_POLICY_2026_12",
+  "checked_at": "2026-10-15T05:51:08.853423+00:00",
+  "policy_version": "BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2",
   "summary": {
-    "pass": 14,
+    "pass": 20,
     "fail": 0
   },
   "checks": [
@@ -73,6 +73,36 @@
     },
     {
       "name": "Publication quota cannot override compliance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every Master day rejects duplicate and near-duplicate planned topics",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Blogger inserts recover title URL and content duplicates before creation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Articles carry auditable topic content structure and profile fingerprints",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master evidence presentation rotates safe semantic structures",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Financial rankings and affiliate links require visible disclosure",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Live corpus audit removes exact duplicate records and retrofits disclosures",
       "status": "PASS",
       "detail": ""
     }

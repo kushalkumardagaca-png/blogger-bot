@@ -21,7 +21,7 @@ def test_v3_summary_support_and_visuals_are_deterministic():
     charts=visuals(sources,rows)
     assert 600<=words(' '.join(summary))<=800
     assert len(faq)>=5 and len(glossary)>=8 and len(charts)==3
-    assert all(x['type']=='table' and len(x['data'])>=2 for x in charts)
+    assert all(x['type'] in {'table','cards','matrix','timeline'} and len(x['data'])>=2 for x in charts)
 
 def test_v3_plain_text_section_does_not_require_json():
     source={'name':'Official source','title':'Market policy evidence','url':'https://example.com','text':prose()}
@@ -55,8 +55,8 @@ def test_repeated_transition_is_unique_even_when_it_occurs_many_times():
 
 
 def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
-    sources=[{'name':f'Official Source {i}','title':f'Distinct Market Evidence {i}','url':f'https://example.com/{i}','text':prose(),'overlap':5} for i in range(1,11)]
-    photos=[{'url':f'https://example.com/photo-{i}.jpg','alt':'Relevant financial editorial photograph','caption':'Photo: Creator / CC BY 4.0','width':1600,'height':900} for i in range(1,4)]
+    sources=[{'name':f'Official Source {i}','title':f'Distinct Market Evidence {i}','url':f'https://example.com/{i}','text':prose(),'overlap':5,'retrieved_at':'2026-10-15'} for i in range(1,11)]
+    photos=[{'url':f'https://example.com/photo-{i}.jpg','alt':'Relevant financial editorial photograph','caption':'Photo: Creator / CC BY 4.0','width':1600,'height':900,'source_page':f'https://commons.wikimedia.org/{i}','license':'CC BY 4.0','license_url':'https://creativecommons.org/licenses/by/4.0/','creator':'Creator'} for i in range(1,4)]
     low=[{'title':f'Article {i}','url':f'https://dailyyield.blogspot.com/{i}','image':'','label':'Daily Yield'} for i in range(15)]
     item={'id':'v3-test','title':'Household Market Evidence','category':'Money Decisions','sources':[]}
     def distinct_section(article_title,heading,index,source_rows):
