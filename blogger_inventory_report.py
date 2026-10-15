@@ -103,7 +103,8 @@ def main():
  report={'status':'PASS','checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'date_ist':day,
   'live_posts':len(live),'draft_posts':len(drafts),'scheduled_posts':len(scheduled),
   'drafts_matching_a_live_post':duplicate_drafts,'drafts_with_no_live_match':unique_drafts,
-  'master_plan_today':expected,'news_live_today':news_rows,'live_posts_published_today_ist':today_live,'zero_public_pageviews':True}
+  'master_plan_today':expected,'news_live_today':news_rows,'live_posts_published_today_ist':today_live,'zero_public_pageviews':True,
+  'quarantine_audit':quarantined,'quarantine_still_live':still_live}
  (ROOT/'BLOGGER_INVENTORY_STATUS.json').write_text(json.dumps(report,indent=2)+'\n')
  print(json.dumps({'live':len(live),'draft':len(drafts),'scheduled':len(scheduled),'draft_duplicates':len(duplicate_drafts),'draft_unique':len(unique_drafts),
   'master_live_today':sum(1 for x in expected if x['live']),'master_expected_today':len(expected),'news_live_today':len(news_rows),'quarantine_still_live':len(still_live)},indent=2))
