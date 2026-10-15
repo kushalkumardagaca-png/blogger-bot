@@ -351,7 +351,19 @@ def visuals(sources,sections,profile=STRUCTURE_PROFILES[0]):
   out.append({'type':kind,'title':f'{profile[0].replace("-"," ").title()} view {i}: {s["title"][:72]}','caption':f'{kind.title()} presentation of categorical evidence from {s["name"]}; no unreported quantity is inferred.','source':i,'after_section':sections[(i*3-2)%len(sections)]['heading'],'data':rows})
  return out
 def photo_set(title,category,slug,key):
- variants=[[f'{title} {category} people workplace wide editorial',f'{category} documents planning desk wide editorial',f'{title} city institutions professional wide editorial'],[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior']]
+ text=(title+' '+category).casefold()
+ if any(x in text for x in ('career','side hustle','income')):
+  primary=['freelancer working laptop home office','small business owner bookkeeping desk','business team meeting office']
+ elif any(x in text for x in ('startup','entrepreneur','small business')):
+  primary=['small business owner working storefront','entrepreneur bookkeeping office desk','business team planning meeting']
+ elif any(x in text for x in ('technology','healthcare ai','companies')):
+  primary=['healthcare technology professionals computer','technology company engineers office','medical data research workplace']
+ elif any(x in text for x in ('economy','inflation','policy')):
+  primary=['central bank government building exterior','grocery prices household shopping','economists policy meeting office']
+ elif any(x in text for x in ('family','housing','multigenerational')):
+  primary=['multigenerational family home adults','family housing planning table','residential homes neighborhood adults']
+ else:primary=[f'{category} people workplace',f'{category} documents planning desk',f'{category} public institution exterior']
+ variants=[primary,[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior']]
  errors=[]
  for briefs in variants:
   try:return choose_photos(briefs,slug,key)
