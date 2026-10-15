@@ -1,11 +1,12 @@
 {
-  "generatedAt": "2026-10-15T12:33:09.036417+05:30",
+  "generatedAt": "2026-10-15T13:14:32.138221+05:30",
   "dateIST": "2026-10-15",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 5,
+  "confirmedPublications": 6,
   "overdueMissing": [
     "news-india",
+    "news-markets",
     "master-evergreen-0",
     "master-evergreen-1"
   ],
@@ -13,6 +14,11 @@
     {
       "type": "source_recovery",
       "key": "news-india",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "news-markets",
       "applied": true
     },
     {
