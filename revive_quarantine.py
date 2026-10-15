@@ -327,6 +327,15 @@ NEUTRAL_REPLACEMENTS = {
 }
 
 
+SHORT_NEUTRAL = {
+    "guarantee": "conditional",
+    "risk": "measured",
+    "growth": "uncertain",
+    "shortcut": "publicly documented",
+    "first-person": "documented",
+}
+
+
 def promise_class(matched: str) -> str:
     text = matched.casefold()
     if re.match(r"\s*(i|we)\b", text):
@@ -386,7 +395,49 @@ def neutralise_deceptive_phrases(content: str) -> tuple[str, list[str]]:
         return f"<{tag}{attributes}>{replacement}</{tag}>"
 
     repaired = BLOCK_ELEMENT.sub(repair_block, content or "")
-    return repaired, found
+
+    # Anything outside a recognised container (a plain div, a table cell or a
+    # caption) gets the same treatment, so no promise-shaped wording can remain.
+    from editorial_integrity import _sentence_spans, _source_bounds
+    plain, index = _visible_text(repaired)
+    rough = repaired
+    for start, end in reversed(_sentence_spans(plain)):
+        sentence = plain[start:end]
+        hit = None
+        for pattern, first_person in [(x, False) for x in DECEPTIVE_PATTERNS] + [(x, True) for x in FAKE_EXPERIENCE_PATTERNS]:
+            for candidate in re.finditer(pattern, sentence, flags=re.I | re.S):
+                if not first_person:
+                    lead = sentence[max(0, candidate.start() - 70):candidate.start()].casefold()
+                    if any(word in lead for word in NEGATION_WORDS):
+                        continue
+                hit = (candidate.group(0), first_person)
+                break
+            if hit:
+                break
+        if not hit:
+            continue
+        bounds = _source_bounds(index, start, end)
+        if not bounds:
+            continue
+        source_start, source_end = bounds
+        kind = "first-person" if hit[1] else promise_class(hit[0])
+        variants = NEUTRAL_REPLACEMENTS[kind]
+        if "<" in rough[source_start:source_end]:
+            # The sentence carries inline markup, so only the promise-shaped words
+            # are swapped; the surrounding sentence and its links stay intact.
+            offset = sentence.find(hit[0])
+            phrase = _source_bounds(index, start + max(0, offset), start + max(0, offset) + len(hit[0])) if offset >= 0 else None
+            if not phrase:
+                continue
+            phrase_start, phrase_end = phrase
+            rough = rough[:phrase_start] + SHORT_NEUTRAL[kind] + rough[phrase_end:]
+            found.append(f"{hit[0]} -> rewritten phrase (markup preserved, {kind})")
+        else:
+            replacement = variants[counters.get(kind, 0) % len(variants)]
+            counters[kind] = counters.get(kind, 0) + 1
+            rough = rough[:source_start] + replacement + rough[source_end:]
+            found.append(f"{hit[0]} -> rewritten sentence outside a block ({kind})")
+    return rough, found
 
 
 CHECKLIST_EXCLUDE = re.compile(r"(faq|glossary|summary|contents|more from|ledger|questions|terms decoded|checklist|reference|follow|report)", re.I)
