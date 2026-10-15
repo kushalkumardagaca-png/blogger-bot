@@ -1,14 +1,14 @@
 {
   "status": "PASS",
-  "generated_at": "2026-10-15T17:02:25.859006+00:00",
+  "generated_at": "2026-10-15T17:39:47.120465+00:00",
   "dry_run": false,
-  "published": 0,
+  "published": 1,
   "failed": 0,
   "results": [
     {
       "desk": "americas",
-      "status": "SKIPPED",
-      "published": false,
+      "status": "PASS",
+      "published": true,
       "dry_run": false
     }
   ]
