@@ -1,0 +1,73 @@
+name: Desk Index Redesign
+
+# Replaces the tool index on the Boardroom, Markets and Calculator pages with the
+# designed board. The reader-facing links, numbers, names and icons are preserved
+# exactly; only the layout, grouping and styling change.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'survey = read the current index; dry_run = build and validate; apply = write to the pages'
+        required: false
+        default: survey
+        type: choice
+        options: [survey, dry_run, apply]
+  push:
+    branches: [main]
+    paths:
+      - 'desk_index_design.py'
+      - 'desk_index_redesign.py'
+      - 'test_desk_index.py'
+      - '.github/workflows/desk_index_redesign.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-desk-index
+  cancel-in-progress: false
+
+jobs:
+  redesign:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - name: Validate the index design rules
+        run: python -m unittest test_desk_index -v
+      - name: Survey, validate or apply the designed index
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          set -uo pipefail
+          mode='${{ inputs.mode }}'
+          [ -n "$mode" ] || mode=survey
+          run_and_report() {
+            if ! "$@" > /tmp/desk-index.log 2>&1; then
+              echo "::error title=Desk index step failed ($1)::$(tail -c 900 /tmp/desk-index.log | tr '\n' '|')"
+              cat /tmp/desk-index.log
+              exit 1
+            fi
+            cat /tmp/desk-index.log
+          }
+          case "$mode" in
+            survey)  run_and_report python -u desk_index_redesign.py --survey ;;
+            dry_run) run_and_report python -u desk_index_redesign.py --dry-run ;;
+            *)       run_and_report python -u desk_index_redesign.py --survey
+                     run_and_report python -u desk_index_redesign.py --apply ;;
+          esac
+      - name: Keep the survey and result evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: desk-index-${{ github.run_id }}
+          retention-days: 90
+          path: |
+            DESK_INDEX_SURVEY.json
+            DESK_INDEX_REDESIGN_STATUS.json
