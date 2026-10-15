@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "5cdade0cae61cd5e",
-  "kind": "trending",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-15",
-  "category": "Trend · Markets & Assets in Motion",
-  "evergreen_category": "Insurance & Risk Protection",
+  "kind": "trending",
+  "slot": 1,
+  "topic_id": "5cdade0cae61cd5e",
+  "replaced_topic_id": null,
   "title": "Oil prices climb as traders weigh Saudi supply",
-  "url": "https://dailyyield.blogspot.com/2026/10/oil-prices-climb-as-traders-weigh-saudi.html",
-  "published_at": "2026-10-14T20:45:01-07:00"
+  "package": "master_packages/dynamic/2026-10-15-trending-5cdade0cae61cd5e.json",
+  "html": "scheduled_ready/2026-10-15-trending-1-oil-prices-climb-as-traders-weigh-saudi-supply.html"
 }
