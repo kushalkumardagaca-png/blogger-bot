@@ -436,12 +436,22 @@
   },
   "prewarm:2026-10-16:master-trending-2": {
     "revision": "ea9355cef87aebd3",
-    "attempts": 1,
-    "lastAttempt": "2026-10-16T12:00:12.887055+05:30"
+    "attempts": 2,
+    "lastAttempt": "2026-10-16T12:47:04.760568+05:30"
   },
   "prewarm:2026-10-16:master-evergreen-2": {
     "revision": "ea9355cef87aebd3",
+    "attempts": 2,
+    "lastAttempt": "2026-10-16T12:47:04.760568+05:30"
+  },
+  "social:2026-10-16:news-europe:0": {
+    "revision": "ea9355cef87aebd3",
     "attempts": 1,
-    "lastAttempt": "2026-10-16T12:00:12.887055+05:30"
+    "lastAttempt": "2026-10-16T12:47:04.760568+05:30"
+  },
+  "social:2026-10-16:news-europe:1": {
+    "revision": "ea9355cef87aebd3",
+    "attempts": 1,
+    "lastAttempt": "2026-10-16T12:47:04.760568+05:30"
   }
 }
