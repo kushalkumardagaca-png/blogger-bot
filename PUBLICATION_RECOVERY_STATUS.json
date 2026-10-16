@@ -1,11 +1,17 @@
 {
-  "generatedAt": "2026-10-16T20:49:27.983966+05:30",
+  "generatedAt": "2026-10-16T21:27:51.708401+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 20,
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
+      "applied": true
+    }
+  ],
   "retryBlocked": [
     "social:2026-10-16:news-banking:1"
   ],
