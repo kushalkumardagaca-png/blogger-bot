@@ -5,11 +5,326 @@
 - **Synthetic views:** 0
 - **Inventory:** 478 items · 465 Posts · 13 Pages
 - **Policy Pages ready:** 5/5
-- **Items changed:** 1
+- **Items changed:** 316
 - **Failures:** 364
 
 ## Changes
-- Page: ABOUT US — disclosure=True, repaired alts=0
+- Post: Russia Finance News — 16 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 16 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 16 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 16 October 2026 — disclosure=False, repaired alts=0
+- Post: Companies, IPOs & Deals News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Markets & Commodities News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy, Trade & Jobs News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Europe Finance News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 15 October 2026 — disclosure=False, repaired alts=0
+- Post: Banking & Personal Money News — disclosure=False, repaired alts=0
+- Post: Global Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Companies, IPOs & Deals News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy, Trade & Jobs News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Europe Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Markets & Commodities News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 14 October 2026 — disclosure=False, repaired alts=0
+- Post: Banking & Personal Money News — disclosure=False, repaired alts=0
+- Post: Global Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Companies, IPOs & Deals News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Europe Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy, Trade & Jobs News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Markets & Commodities News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 13 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Banking & Personal Money News — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Companies, IPOs & Deals News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Europe Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy, Trade & Jobs News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Markets & Commodities News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 12 October 2026 — disclosure=False, repaired alts=0
+- Post: Banking & Personal Money News — disclosure=False, repaired alts=0
+- Post: Global Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Companies, IPOs & Deals News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Europe Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy, Trade & Jobs News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Markets & Commodities News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 11 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Asia-Pacific Finance News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Companies, IPOs & Deals News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Banking & Personal Money News — disclosure=False, repaired alts=0
+- Post: China Finance News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy, Trade & Jobs News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Markets & Commodities News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Americas Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 10 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance and Industry News — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy and Macro Policy News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Market and Trading News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance Wire — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 9 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance and Industry News — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy and Macro Policy News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Market and Trading News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance Wire — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 6 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance and Industry News — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy and Macro Policy News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Market and Trading News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance Wire — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 5 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance and Industry News — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy and Macro Policy News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Market and Trading News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance Wire — 4 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance and Industry News — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Economy and Macro Policy News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Market and Trading News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance Wire — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 3 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance and Industry News — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 2 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 1 October 2026 (2) — disclosure=False, repaired alts=0
+- Post: US Finance News — 1 October 2026 (2) — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 1 October 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 30 September 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 29 September 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 28 September 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 27 September 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Mexico Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Canada Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Italy Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Spain Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: France Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Germany Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Macro Policy News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Market News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: India Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Global Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: South Korea Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Australia Finance News — 26 September 2026 — disclosure=False, repaired alts=0
+- Post: Brazil Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: Russia Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: Personal Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: China Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: US Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: Corporate Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: UK Finance News — 25 September 2026 — disclosure=False, repaired alts=0
+- Post: Japan Finance News — 25 September 2026 — disclosure=False, repaired alts=0
 
 ## Failures
 - {'id': 'posts:664919442370721038', 'issue': 'inaccurate name claim published: Kushal Jain'}
