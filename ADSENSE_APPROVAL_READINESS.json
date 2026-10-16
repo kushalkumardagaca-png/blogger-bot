@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-16T02:45:01.843908+00:00",
+ "checkedAt": "2026-10-16T02:54:18.093068+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
@@ -24,14 +24,14 @@
   },
   {
    "check": "policy page /disclaimer",
-   "pass": false,
-   "detail": "/p/disclaimer.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/disclaimer.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "policy page /terms",
-   "pass": false,
-   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/terms-and-conditions.html → HTTP 200",
    "blocking": true
   },
   {
@@ -48,7 +48,7 @@
   },
   {
    "check": "about: publisher's own address",
-   "pass": false,
+   "pass": true,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -84,7 +84,7 @@
   },
   {
    "check": "advertising declared in the policy pages",
-   "pass": false,
+   "pass": true,
    "detail": "advertising and Google AdSense are described in the policy pages",
    "blocking": true
   },
@@ -115,7 +115,7 @@
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 461 URLs listed",
+   "detail": "HTTP 200, 462 URLs listed",
    "blocking": true
   },
   {
@@ -126,7 +126,7 @@
   },
   {
    "check": "robots meta allows indexing",
-   "pass": false,
+   "pass": true,
    "detail": "the homepage is indexable",
    "blocking": true
   },
@@ -151,24 +151,6 @@
    "blocking": true
   },
   {
-   "check": "policy page /disclaimer",
-   "pass": false,
-   "detail": "/p/disclaimer.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "policy page /terms",
-   "pass": false,
-   "detail": "/p/terms-and-conditions.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's own address",
-   "pass": false,
-   "detail": "kushalkumardaga.ca@gmail.com",
-   "blocking": true
-  },
-  {
    "check": "contact: publisher named",
    "pass": false,
    "detail": "the accountable publisher is named in the text",
@@ -187,12 +169,6 @@
    "blocking": true
   },
   {
-   "check": "advertising declared in the policy pages",
-   "pass": false,
-   "detail": "advertising and Google AdSense are described in the policy pages",
-   "blocking": true
-  },
-  {
    "check": "robots.txt readable and permits reading",
    "pass": false,
    "detail": "HTTP 0",
@@ -208,12 +184,6 @@
    "check": "sitemap declared",
    "pass": false,
    "detail": "sitemap line present in robots.txt",
-   "blocking": true
-  },
-  {
-   "check": "robots meta allows indexing",
-   "pass": false,
-   "detail": "the homepage is indexable",
    "blocking": true
   }
  ],
