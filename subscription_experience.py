@@ -60,7 +60,7 @@ NEW_ENGAGE = '''<section class='kd-sec kd-engage' id='kd-engage'><h2>Read it? Qu
 <div class='kd-eg-row'>
 <a class='kd-eg' href='mailto:dailyyield.official@gmail.com'><span class='kd-eg-icon'><svg aria-hidden='true' viewBox='0 0 24 24'><rect height='14' rx='2' width='18' x='3' y='5'/><path d='m4.5 7 7.5 5.5L19.5 7'/></svg></span><span class='kd-eg-copy'><strong>Email the editorial desk</strong><small>dailyyield.official@gmail.com</small></span><span aria-hidden='true' class='kd-eg-arrow'>&#8594;</span></a>
 <a class='kd-eg' href='https://dailyyield.blogspot.com/p/contact-us_01883938366.html'><span class='kd-eg-icon'><svg aria-hidden='true' viewBox='0 0 24 24'><path d='M5 5h14v11H9l-4 4Z'/><path d='M8 9h8M8 12h5'/></svg></span><span class='kd-eg-copy'><strong>Open the contact desk</strong><small>Corrections, questions and partnership enquiries</small></span><span aria-hidden='true' class='kd-eg-arrow'>&#8594;</span></a>
-</div><p class='kd-eg-fine'>Replies usually arrive within 24&#8211;48 hours &#183; comments remain open on every Post</p></section>'''
+</div><p class='kd-eg-fine'>Replies usually arrive within 2&#8211;3 working days &#183; comments remain open on every Post</p></section>'''
 
 
 def _replace_marked(text: str, start: str, end: str, replacement: str) -> str:

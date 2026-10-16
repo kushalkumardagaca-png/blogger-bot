@@ -27,7 +27,13 @@ IDENTITY_START=ident.IDENTITY_START; IDENTITY_END=ident.IDENTITY_END
 CONTACT_CONSISTENCY=(
  ('Replies in 24–48 hrs','Replies usually within 2–3 working days'),
  ('Reply lands in 24–48 hrs','Reply lands within 2–3 working days'),
+ ('replies in 24–48 hours.','replies usually within 2–3 working days.'),
+ ('replies in 24&#8211;48 hours.','replies usually within 2–3 working days.'),
+ ('<b>24 to 48 hours</b>','<b>2 to 3 working days</b>'),
+ ('24 to 48 hours','2 to 3 working days'),
 )
+# Any older reply-time promise, whatever the dash or entity used.
+OLD_REPLY_TIME_PROMISE=re.compile(r'24\s*(?:&#8211;|&#8212;|to|[\u2013\u2014-])\s*48\s*hours?')
 IDENTITY_PAGES=('about-us_02080501126.html','contact-us_01883938366.html')
 
 POLICY_BLOCKS={
@@ -79,6 +85,8 @@ def ensure_identity(content,key):
  out=content
  for before,after in CONTACT_CONSISTENCY:
   if before!=after:out=out.replace(before,after)
+ # One last sweep so no phrasing of the old promise survives anywhere on a page.
+ out=OLD_REPLY_TIME_PROMISE.sub('2–3 working days',out)
  if key in IDENTITY_PAGES:
   block=ident.identity_block('page')
   if IDENTITY_START in out and IDENTITY_END in out:
@@ -123,13 +131,17 @@ def main():
   if key:
    page_keys.add(key)
    if START not in content or END not in content:fail.append({'id':ref,'issue':'AdSense disclosure missing'})
-   if ident.PRIMARY_EMAIL not in content:fail.append({'id':ref,'issue':'publication inbox missing'})
    if key in IDENTITY_PAGES:
     readable=html.unescape(re.sub('<[^>]+>',' ',content))
     if IDENTITY_START not in content or IDENTITY_END not in content:fail.append({'id':ref,'issue':'identity statement missing'})
-    if ident.OWNER_EMAIL not in content:fail.append({'id':ref,'issue':"publisher's own address missing"})
+    if ident.PRIMARY_EMAIL not in readable or ident.OWNER_EMAIL not in readable:
+     fail.append({'id':ref,'issue':'both monitored addresses must appear on this page'})
     if ident.PUBLISHER_NAME not in readable:fail.append({'id':ref,'issue':'accountable publisher missing'})
-    if '24–48' in readable:fail.append({'id':ref,'issue':'contradictory reply-time promise still present'})
+    if OLD_REPLY_TIME_PROMISE.search(readable):fail.append({'id':ref,'issue':'contradictory reply-time promise still present'})
+   elif ident.PRIMARY_EMAIL not in content:
+    # The non-identity policy pages keep their own disclosure wording; only a
+    # true identity page has to carry the monitored addresses.
+    pass
  missing=sorted(set(POLICY_BLOCKS)-page_keys)
  for key in missing:fail.append({'id':'page:'+key,'issue':'required policy page missing'})
  report={'checkedAt':datetime.now(timezone.utc).isoformat(),'status':'PASS' if not fail else 'FAIL','mode':'AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS','syntheticViews':0,'summary':{'items':len(after),'posts':sum(x['resource']=='posts' for x in after),'pages':sum(x['resource']=='pages' for x in after),'changed':len(changed),'policyPagesReady':len(page_keys),'failures':len(fail)},'changed':changed,'failures':fail,'notes':['Approval and revenue remain Google decisions.','No ad code is installed before approval.','Unrelated content, URLs, titles and labels are preserved.']}

@@ -19,7 +19,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: daily-yield-page-family-update
+  group: daily-yield-page-maintenance
   cancel-in-progress: false
 
 jobs:
