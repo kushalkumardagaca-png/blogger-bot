@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from seo_hygiene import image_alt_failures, repair_image_alts
 import identity_contact as ident
+import brand_seo
 import reader_prose
 
 BLOG_ID=os.environ.get('BLOGGER_BLOG_ID','8911514070006792465')
@@ -138,12 +139,17 @@ def main():
   # Machine-assembled pages carried unnamed source links, repeated links and
   # leftover drafting shorthand; the reader-quality pass repairs that too.
   new,prose_repaired=reader_prose.normalise(new)
+  # Every page and article carries the same statement of who writes it, the same
+  # reader questions answered, and the same linked entity data, so one author and
+  # one publication are recognised across the whole site.
+  new,brand_repaired=brand_seo.enrich(new,'page' if item['resource']=='pages' else 'article',
+                                      item.get('title',''),item.get('url',''))
   key=policy_key(item.get('url',''))
   if key:
    new=ensure_identity(new,key)
    new=ensure_block(new,key)
   if new!=content or labels_repaired:
-   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired,'proseRepaired':prose_repaired})
+   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired,'proseRepaired':prose_repaired,'brandSeoAdded':brand_repaired})
  def verify(items):
   """Return the failures that are really on the stored copies, plus the pages seen."""
   found=[];keys=set()

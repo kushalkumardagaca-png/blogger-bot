@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Retrofit today's already-live news posts to the current title/coverage policy."""
+
+import brand_seo
+
 from pathlib import Path
 import datetime as dt, html, json, os, re, urllib.parse, urllib.request
 from news_pipeline import BLOG, DESKS, HINT_RE, IST, clip_words, coverage_window_text, desk_title_prefix

@@ -4,6 +4,7 @@ from __future__ import annotations
 import gzip,json,re
 from datetime import datetime,timezone
 from pathlib import Path
+import brand_seo
 import requests
 
 ROOT=Path(__file__).parent

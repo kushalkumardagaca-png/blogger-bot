@@ -80,3 +80,40 @@ class ReaderProseTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BrandSeoTests(unittest.TestCase):
+    """Every page and article must name the publication and the author the same way."""
+
+    def setUp(self):
+        import brand_seo
+        self.bs = brand_seo
+
+    def test_every_page_carries_the_four_brand_phrases(self):
+        out, changed = self.bs.enrich("<p>Body</p>", "article", "EU budget talks", "https://x/y.html")
+        self.assertTrue(changed)
+        for phrase in self.bs.BRAND_QUERIES:
+            self.assertIn(phrase, out, phrase)
+
+    def test_the_block_is_repeat_safe_and_carries_entity_data(self):
+        once, _ = self.bs.enrich("<p>Body</p>", "article", "T", "https://x/y.html")
+        twice, changed = self.bs.enrich(once, "article", "T", "https://x/y.html")
+        self.assertEqual(once, twice)
+        self.assertFalse(changed)
+        self.assertEqual(1, twice.count('application/ld+json'))
+        self.assertIn('#organization', twice)
+        for key, value in self.bs.report(twice).items():
+            self.assertTrue(value, key)
+
+    def test_a_description_names_the_publication_once(self):
+        text = self.bs.front_meta("EU budget", "")
+        self.assertIn("Daily Yield", text)
+        self.assertLessEqual(len(text), 158)
+        self.assertEqual(1, text.count("Daily Yield"))
+
+    def test_no_article_claims_a_professional_qualification_beside_the_name(self):
+        out, _ = self.bs.enrich("<p>Body</p>", "article", "T", "https://x/y.html")
+        plain = re.sub(r"<[^>]+>", " ", out)
+        for match in re.finditer(r"Kushal.{0,55}(?:Certified Accountant|Chartered Accountant|CPA|CFA)",
+                                 plain, re.I | re.S):
+            self.fail(f"qualification claim stated beside the author's name: {match.group(0)[:80]}")

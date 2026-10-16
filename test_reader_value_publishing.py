@@ -39,7 +39,7 @@ def test_master_v2_separates_core_and_summary_word_requirements():
     assert 'dy2-data-table' in body and 'dy2-data-pie' in body and 'dy2-data-line' in body
     assert body.index('<h1>') < body.index('class="dy2-by"') < body.index('class="dy2-photo"')
     assert body.index('class="dy2-summary"')<body.index('class="dy2-faq"')<body.index('class="dy2-glossary"')<body.index('class="dy2-low"')<body.index('class="dy2-follow"')<body.index('DY_PAGE_FAMILY_START')
-    assert labels==['Cash Savings and Emergency Funds','Kushal Daga']
+    assert labels==['Cash Savings and Emergency Funds','Kushal Daga','Daily Yield']
     assert '#08744f' not in body and '#073b2b' not in body
     assert 'dy2-answer' in body and 'grid-template-rows' in body and 'prefers-reduced-motion' in body
     assert body.count('class="dy2-rail-group"')==2 and body.count('aria-hidden="true"')>=1

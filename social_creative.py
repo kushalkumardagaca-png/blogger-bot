@@ -297,29 +297,79 @@ def _cta(item:dict)->str:
     if item.get("kind")=="page":return "Open the link above to explore the complete Daily Yield resource."
     return "Read the complete article for the evidence, context and practical implications—open the link above."
 
-def hashtag_list(item: dict) -> list[str]:
+# Each platform rewards a different label pattern, so the same story is labelled
+# natively instead of one way everywhere:
+#   Facebook  — 3-6 mixed-case hashtags in the caption text
+#   Instagram/Pinterest-style feeds are not automated yet and use the Facebook set
+#   Tumblr    — tag list (no # needed) plus the community tags that carry discovery
+#   Mastodon  — CamelCase hashtags; the last one is the discovery tag
+#   Bluesky   — no hashtag stuffing; two tags, one brand and one subject
+# Every set names the publication and the author, which is how a search for the
+# brand inside a platform finds the account.
+BRAND_TAGS = ("#DailyYield", "#KushalDaga", "#CAKushalDaga", "#DailyYieldWebsite")
+COMMUNITY_TAGS = ("#PersonalFinance", "#MoneyTips", "#FinanceNews", "#FinancialLiteracy",
+                  "#Investing", "#MoneyMatters", "#Finance")
+TOPIC_TAGS = {
+    "market": "#Markets", "debt": "#Debt", "tax": "#Tax", "saving": "#Savings",
+    "economy": "#Economy", "news": "#FinanceNews", "page": "#MoneyTools",
+    "general": "#PersonalFinance",
+}
+# Where a platform supports a separate tag field (Tumblr), the extra discovery
+# labels go there instead of in the caption, so no caption carries more than the
+# four labels the social gate and the platforms both prefer.
+TUMBLR_FIELD_TAGS = ("moneyblr", "finance", "daily yield", "kushal daga", "ca kushal daga")
+
+
+def hashtag_list(item: dict, platform: str | None = None) -> list[str]:
+    """The label set that fits the platform it is posted on."""
     group = topic(item)
-    mapping = {"market":"#Markets", "debt":"#Debt", "tax":"#Tax", "saving":"#MoneyTips", "economy":"#Economy", "news":"#FinanceNews", "page":"#MoneyTools", "general":"#PersonalFinance"}
-    return ["#DailyYield", mapping[group]]
+    if platform == "bluesky":
+        # Bluesky rewards relevance over volume, so the brand and the author only.
+        return ["#DailyYield", "#KushalDaga"]
+    if platform == "tumblr":
+        return ["#DailyYield", "#KushalDaga", "#CAKushalDaga", TOPIC_TAGS[group]]
+    # Four labels is the ceiling the social gate allows and the sweet spot the
+    # platforms reward: two name the publication and the author, one names the
+    # subject, one carries the audience discovery.
+    if platform == "mastodon":
+        tags = ["#DailyYield", "#KushalDaga", "#CAKushalDaga", TOPIC_TAGS[group]]
+    else:                                     # Facebook and any feed-style platform
+        tags = ["#DailyYield", "#KushalDaga", "#CAKushalDaga", TOPIC_TAGS[group]]
+    return tags
+
+
+def brand_signature(platform: str) -> str:
+    """The one line that ties the account, the writer and the site together."""
+    if platform == "facebook":
+        return ("By Kushal Daga · Daily Yield — finance news and money guides at dailyyield.blogspot.com, "
+                "written as CA Kushal Daga.")
+    if platform == "tumblr":
+        return "By Kushal Daga · Daily Yield — finance news, money guides and calculators (CA Kushal Daga)."
+    if platform == "mastodon":
+        return "By Kushal Daga · Daily Yield · dailyyield.blogspot.com"
+    return "Kushal Daga · Daily Yield"
+
 
 
 def attributed_url(item: dict, platform: str, day: str | None = None) -> str:
     """Add first-party campaign attribution without changing the canonical URL."""
     raw=item["url"];parsed=urlparse(raw);meta=creative_meta(item,platform,day)
     query=dict(parse_qsl(parsed.query,keep_blank_values=True))
-    query.update({"utm_source":platform,"utm_medium":"social","utm_campaign":"dy_growth","utm_content":f"{meta['topic'][:4]}-s{meta['style_index']}l{meta['layout']}"})
+    query.update({"utm_source":platform,"utm_medium":"social","utm_campaign":"dy_growth"})
+    if platform!="bluesky":   # Bluesky counts every character of the link
+        query["utm_content"]=f"{meta['topic'][:4]}-s{meta['style_index']}l{meta['layout']}"
     return urlunparse(parsed._replace(query=urlencode(query)))
 
 
 def _build_caption_unchecked(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
     title,url=clean(item.get("title","Daily Yield")),attributed_url(item,platform)
-    lead,second,third=content_highlights(item,summary);tags=" ".join(hashtag_list(item));cta=_cta(item)
+    lead,second,third=content_highlights(item,summary);tags=" ".join(hashtag_list(item,platform));signature=brand_signature(platform);cta=_cta(item)
     if platform=="facebook":
-        return f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{cta}\n\nBy Kushal Daga\n{tags}"
+        return f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{cta}\n\n{signature}\n{tags}"
     if platform=="bluesky":
         # Preserve the link at the top and all three ideas inside Bluesky's limit.
         lead,second,third=trim(lead,48),trim(second,38),trim(third,38)
-        ending="Read more → link above.\nBy Kushal Daga · #DailyYield"
+        ending="By Kushal Daga · Daily Yield\n#DailyYield #KushalDaga"
         text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
         while len(text)>300:
             values=[lead,second,third];idx=max(range(3),key=lambda i:len(values[i]))
@@ -329,10 +379,10 @@ def _build_caption_unchecked(item: dict, platform: str, summary: str, limit: int
         return text
     if platform=="mastodon":
         mastodon_cta="Open the link above for the full evidence and context. Which of these three ideas matters most to you?"
-        text=f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{mastodon_cta}\n\nBy Kushal Daga\n{tags}"
+        text=f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{mastodon_cta}\n\n{signature}\n{tags}"
         if len(text)<=500:return text
-        return f"{url}\n\n{trim(lead,75)}\n• {trim(second,65)}\n• {trim(third,65)}\n\nRead the complete article—open the link above.\n{tags}"[:500]
-    return f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{cta}\nBy Kushal Daga\n{tags}"
+        return f"{url}\n\n{trim(lead,75)}\n• {trim(second,65)}\n• {trim(third,65)}\n\nRead the complete article—open the link above.\n{signature}\n{tags}"[:500]
+    return f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{cta}\n{signature}\n{tags}"
 
 
 def build_caption(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
@@ -343,7 +393,7 @@ def build_caption(item: dict, platform: str, summary: str, limit: int | None = N
 def tumblr_payload(item: dict, summary: str) -> dict:
     title,url=clean(item.get("title","Daily Yield")),attributed_url(item,"tumblr")
     lead,second,third=content_highlights(item,summary)
-    tags=[x.lstrip("#") for x in hashtag_list(item)]+["moneyblr"]
+    tags=[x.lstrip("#") for x in hashtag_list(item,"tumblr")]+list(TUMBLR_FIELD_TAGS)
     payload={
         "content": [
             {"type":"link", "url":url, "title":"Open on Daily Yield", "description":trim(title,180)},

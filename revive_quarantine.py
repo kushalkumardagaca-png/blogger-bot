@@ -20,6 +20,8 @@ a public Daily Yield page, never creates pageviews, and never prints a secret.
 """
 from __future__ import annotations
 
+import brand_seo
+
 import argparse, datetime as dt, hashlib, html, json, os, re, subprocess, sys, urllib.parse, urllib.request
 from pathlib import Path
 
@@ -274,7 +276,7 @@ def ensure_jsonld(content: str, title: str, url: str, description: str) -> tuple
 
 def ensure_byline(content: str) -> tuple[str, bool]:
     """Keep one visible publisher byline; the structured-data author does not count."""
-    if 'class="dy-byline"' in (content or "") or re.search(r"By\s+(?:<strong>)?Kushal K\. Daga", content or "", re.I):
+    if 'class="dy-byline"' in (content or "") or re.search(r"By\s+(?:<strong>)?Kushal(?:\s+K\.)?\s+Daga", content or "", re.I):
         return content, False
     byline = ('<p class="dy-byline">By <strong>Kushal Daga</strong> · Daily Yield · '
               'Educational finance information, not personal advice.</p>')
@@ -546,6 +548,13 @@ def repair_package(post: dict, title: str, posts: list[dict]) -> dict:
     content, added_reader = ensure_reader_block(content)
     if added_reader:
         repairs.append("added the engaged-reader follow and share block")
+
+    # Brand and entity layer: the same author statement, reader questions and
+    # linked entity data that every other Daily Yield page carries.
+    content, brand_added = brand_seo.enrich(content, "article", title, post.get("url") or "")
+    if brand_added:
+        repairs.append("added the Daily Yield / Kushal Daga brand and entity block")
+    description = brand_seo.front_meta(title, description)
 
     content, added_schema = ensure_jsonld(content, title, post.get("url") or "", description)
     if added_schema:

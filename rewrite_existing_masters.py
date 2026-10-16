@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse,gzip,hashlib,json,os,re
 from datetime import datetime,timezone
 from pathlib import Path
+import brand_seo
 import requests
 from brand_identity import ensure_brand_identity
 from continuous_motion import ensure as ensure_continuous_motion

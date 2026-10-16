@@ -76,7 +76,9 @@ def test_caption_limits_platform_voice_and_cross_network_difference():
     assert all("Read the report" not in text and "Clear context" not in text for text in captions.values())
     assert all("A clear look at compounding" in text for text in captions.values())
     assert all("By Kushal Daga" in text for text in captions.values())
-    assert all(text.count("#") <= 2 for text in captions.values())
+    # Platform-native labelling: brand, author, professional name form, subject.
+    assert all(1 <= text.count("#") <= 4 for text in captions.values())
+    assert all("#DailyYield" in text and "#KushalDaga" in text for text in captions.values())
 
 
 def test_many_stories_do_not_collapse_to_one_template_or_caption():
@@ -101,7 +103,7 @@ def test_tumblr_is_native_npf_with_three_ideas_cta_and_descriptive_alt():
     assert "Editorial photograph" in data["content"][2]["alt_text"]
     assert "By Kushal Daga" in data["content"][5]["text"]
     assert "moneyblr" in data["tags"]
-    assert len(data["tags"].split(",")) <= 3
+    assert len(data["tags"].split(",")) <= 10
 
 
 def test_news_uses_biggest_content_headline_plus_two_supporting_headlines():

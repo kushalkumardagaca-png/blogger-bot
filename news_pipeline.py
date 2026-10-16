@@ -18,6 +18,7 @@ import html as htmlmod
 import json
 
 from identity_contact import BYLINE, LEGAL_NAME
+import brand_seo
 import os
 import re
 import ssl
@@ -1374,6 +1375,12 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     }
     full_html = body + f'''
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'''
+    # The identity block, the reader questions and the entity data are attached to
+    # every edition, then the description is closed with the brand so a search
+    # result and a social card both name the publication and the author.
+    if brand_seo.MARKER_START not in full_html:
+        full_html, _ = brand_seo.enrich(full_html, "article", title, canonical)
+    meta = brand_seo.front_meta(title, meta)
 
     # Blogger caps the combined label text on one post at 200 characters.
     # Keep classification orthogonal: subject editions belong to their subject;
@@ -1381,10 +1388,11 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     # body still covers every subject. Cross-product labels exceeded Blogger's
     # hard limit and caused otherwise valid posts.update calls to return 400.
     if desk in CATEGORY_DESKS:
-        labels = ["News", "Category Edition", TOPIC_LABELS[desk]]
+        labels = ["News", "Category Edition", TOPIC_LABELS[desk], "Daily Yield", "Kushal Daga"]
     else:
         country_labels = [COUNTRY_LABELS[country] for country in DESK_COUNTRIES.get(desk, ())]
-        labels = ["News", "Geographic Edition", GEOGRAPHY_LABELS[desk], *country_labels]
+        labels = ["News", "Geographic Edition", GEOGRAPHY_LABELS[desk], *country_labels,
+                  "Daily Yield", "Kushal Daga"]
     return {"title": title, "slug": f"{slug}-{edition_date.isoformat()}",
             "meta": meta, "labels": labels, "html": full_html,
             "canonical": canonical, "n_items": len(items),
