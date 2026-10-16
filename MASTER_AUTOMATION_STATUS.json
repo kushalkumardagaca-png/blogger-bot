@@ -1,12 +1,12 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "2981fca874eebe67",
+  "kind": "evergreen",
   "date": "2026-10-16",
-  "kind": "trending",
-  "slot": 4,
-  "topic_id": "4a38f6f7b9ebfc3a",
-  "replaced_topic_id": null,
-  "title": "Social Security to Adjust Cost of Living by 3.",
-  "package": "master_packages/dynamic/2026-10-16-trending-4a38f6f7b9ebfc3a.json",
-  "html": "scheduled_ready/2026-10-16-trending-4-social-security-to-adjust-cost-of-living-by-3.html"
+  "category": "Investing & Portfolio Building",
+  "evergreen_category": "Investing & Portfolio Building",
+  "title": "Retirement planning: Why costs, asset allocati",
+  "url": "https://dailyyield.blogspot.com/2026/10/retirement-planning-why-costs-asset.html",
+  "published_at": "2026-10-16T09:45:08-07:00"
 }
