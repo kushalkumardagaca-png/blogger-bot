@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-16T13:09:00.445461+00:00",
+ "checkedAt": "2026-10-16T16:11:32.818194+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
@@ -18,8 +18,8 @@
   },
   {
    "check": "policy page /privacy",
-   "pass": false,
-   "detail": "/p/privacy-policy.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/privacy-policy.html → HTTP 200",
    "blocking": true
   },
   {
@@ -138,7 +138,7 @@
   },
   {
    "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": false,
+   "pass": true,
    "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   },
@@ -169,7 +169,7 @@
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 473 URLs listed",
+   "detail": "HTTP 200, 475 URLs listed",
    "blocking": true
   },
   {
@@ -210,18 +210,6 @@
   }
  ],
  "blockingIssues": [
-  {
-   "check": "policy page /privacy",
-   "pass": false,
-   "detail": "/p/privacy-policy.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": false,
-   "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
-   "blocking": true
-  },
   {
    "check": "no retired byline on the homepage",
    "pass": false,

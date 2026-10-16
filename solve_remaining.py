@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Finish, from the automation's own side, the last places the old wording survives.
+"""Recheck: which stored description box still holds the retired text.
+
+Finish, from the automation's own side, the last places the old wording survives.
 
 Three things are attempted here, all without asking the publisher to type anything:
 
