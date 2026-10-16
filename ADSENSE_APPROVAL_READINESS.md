@@ -1,7 +1,7 @@
 # Daily Yield — AdSense approval readiness (live site check)
 
 - **Status:** FAIL
-- **Checked:** 2026-10-16T11:16:46.814346+00:00
+- **Checked:** 2026-10-16T12:36:04.671613+00:00
 - **Public pages read:** 9 (ordinary HTTP, no synthetic views)
 
 ## Checks
@@ -13,7 +13,7 @@
 - **PASS** — about: public author name: Kushal Daga
 - **PASS** — about: publisher's legal name: Kushal Kumar Daga
 - **PASS** — about: name relationship explained: the site says the public author name is the short form of the legal name used on records
-- **FAIL** — about: retired initials byline gone: the retired initials byline is no longer published
+- **PASS** — about: retired initials byline gone: the retired initials byline is no longer published
 - **PASS** — about: publication inbox: dailyyield.official@gmail.com
 - **PASS** — about: publisher's own address: kushalkumardaga.ca@gmail.com
 - **PASS** — about: no contradictory reply time: one reply-time promise only
@@ -21,7 +21,7 @@
 - **PASS** — contact: public author name: Kushal Daga
 - **PASS** — contact: publisher's legal name: Kushal Kumar Daga
 - **PASS** — contact: name relationship explained: the site says the public author name is the short form of the legal name used on records
-- **FAIL** — contact: retired initials byline gone: the retired initials byline is no longer published
+- **PASS** — contact: retired initials byline gone: the retired initials byline is no longer published
 - **PASS** — contact: publication inbox: dailyyield.official@gmail.com
 - **PASS** — contact: publisher's own address: kushalkumardaga.ca@gmail.com
 - **PASS** — contact: no contradictory reply time: one reply-time promise only
@@ -31,7 +31,7 @@
 - **PASS** — robots.txt readable and permits reading: HTTP 200
 - **PASS** — Mediapartners-Google explicitly allowed: the AdSense crawler is named in robots.txt
 - **PASS** — sitemap declared: sitemap line present in robots.txt
-- **PASS** — sitemap.xml serves URLs: HTTP 200, 470 URLs listed
+- **PASS** — sitemap.xml serves URLs: HTTP 200, 472 URLs listed
 - **PASS** — no raw code shown to readers: no CSS text leaks outside style blocks on the homepage
 - **PASS** — no inaccurate name claim on the homepage: the homepage does not present an unrelated surname as an alias of the author
 - **FAIL** — no retired byline on the homepage: the homepage carries the public author name, not the retired initials form

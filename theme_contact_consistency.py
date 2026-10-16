@@ -88,6 +88,13 @@ def apply(text: str) -> tuple[str, list[str]]:
     if fixed != text:
         text = fixed
         changes.append("footer states the public author name and the legal name behind it")
+    # The theme must never echo Blogger's stored description text.
+    if STORED_META_BLOCK_RE.search(text):
+        text = STORED_META_BLOCK_RE.sub("", text, count=1)
+        changes.append("removed the theme's echo of Blogger's stored description")
+    if STORED_OG_DESCRIPTION_RE.search(text):
+        text = STORED_OG_DESCRIPTION_RE.sub("", text, count=1)
+        changes.append("og:description now uses the corrected site description only")
     if VISIBLE_DESCRIPTION_RE.search(text):
         text = VISIBLE_DESCRIPTION_RE.sub(f"<p class='description'>{SITE_DESCRIPTION}</p>", text, count=1)
         changes.append("header description states the current published name")
@@ -113,10 +120,19 @@ def audit(text: str) -> list[str]:
         issues.append("theme does not carry the public author name")
     if PRIMARY_EMAIL not in text:
         issues.append("theme does not show the publication inbox")
+    # The theme must never echo Blogger's stored description text.
+    if STORED_META_BLOCK_RE.search(text):
+        text = STORED_META_BLOCK_RE.sub("", text, count=1)
+        changes.append("removed the theme's echo of Blogger's stored description")
+    if STORED_OG_DESCRIPTION_RE.search(text):
+        text = STORED_OG_DESCRIPTION_RE.sub("", text, count=1)
+        changes.append("og:description now uses the corrected site description only")
     if VISIBLE_DESCRIPTION_RE.search(text):
         issues.append("theme still prints the blog's stored description")
     if SITE_DESCRIPTION not in text:
         issues.append("theme does not carry the current site description")
+    if "data:blog.metaDescription" in text:
+        issues.append("theme still echoes Blogger's stored description text")
     return issues
 
 
@@ -142,6 +158,22 @@ VISIBLE_DESCRIPTION_RE = re.compile(
     r"<p class='description'>\s*<data:description/>\s*</p>")
 
 META_MARKER_START = "<!-- DY_HONEST_META_START -->"
+# Blogger's own head output repeats whatever "Search description" text is stored in
+# its settings screen, and the theme's old fallback echoed that same stored text into
+# og:description as well. Both are removed here: the corrected descriptions above are
+# the only ones the theme emits, so the stored text can no longer be shown to a reader
+# or a search engine through the theme. (The stored text itself lives in a Blogger
+# settings box that its API does not expose; the theme override is what removes it
+# from the page, and the settings box is the only part left for the Blogger screen.)
+# The fallback block nests an inner conditional, so the removal matches the whole
+# outer conditional (which ends with two closing tags) rather than the inner one.
+STORED_META_BLOCK_RE = re.compile(
+    r"(?:<!--\s*Bing-safe server-rendered fallback\..*?-->\s*)?"
+    r"<b:if cond='!data:blog\.metaDescription'>.*?</b:if>\s*</b:if>\s*", re.S)
+STORED_OG_DESCRIPTION_RE = re.compile(
+    r"<b:if cond='data:blog\.metaDescription'>\s*"
+    r"<meta expr:content='data:blog\.metaDescription' property='og:description'/>\s*"
+    r"</b:if>\s*", re.S)
 META_MARKER_END = "<!-- DY_HONEST_META_END -->"
 
 PAGE_DESCRIPTIONS = {

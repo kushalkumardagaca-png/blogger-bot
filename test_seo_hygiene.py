@@ -1,6 +1,8 @@
 import unittest
 from pathlib import Path
 
+import theme_contact_consistency as tcc
+
 from seo_hygiene import (
     MAX_TITLE_CHARS, compact_title, description_from_content,
     image_alt_failures, repair_image_alts, unique_title,
@@ -47,7 +49,12 @@ class SeoHygieneTests(unittest.TestCase):
 
     def test_theme_has_server_description_fallback_and_single_item_page_name(self):
         theme = Path("theme/Daily-Yield-Theme-v4-2026-10-01.xml").read_text(encoding="utf-8")
-        self.assertIn("Bing-safe server-rendered fallback", theme)
+        # The corrected descriptions are now unconditional and stated before Blogger's
+        # own head output, so no page can fall back to Blogger's stored description.
+        self.assertIn(tcc.META_MARKER_START, theme)
+        self.assertIn(tcc.SITE_DESCRIPTION, theme)
+        self.assertNotIn("<b:if cond='!data:blog.metaDescription'>", theme)
+        self.assertNotIn("data:blog.metaDescription", theme)
         self.assertIn("<title><data:blog.pageName/></title>", theme)
         self.assertNotIn("<title><data:blog.pageName/> | Daily Yield Finance</title>", theme)
         self.assertIn("img:not([alt]),img[alt=\"\"]", theme)

@@ -52,23 +52,9 @@
 </b:if>
 <!-- DY_HONEST_META_END -->
 <b:include data='blog' name='all-head-content'/>
-<!-- Bing-safe server-rendered fallback. Blogger's all-head-content remains the
-     sole standard-description source when an editor-provided value exists. -->
-<b:if cond='!data:blog.metaDescription'>
- <b:if cond='data:view.isHomepage'>
-  <meta content='Daily Yield explains finance, markets and money with sourced news, practical calculators, clear analysis and educational tools for global readers.' name='description'/>
- <b:elseif cond='data:view.isSingleItem'/>
-  <meta expr:content='data:blog.pageName + &quot; — Sourced financial context, practical explanations and clear takeaways from Daily Yield.&quot;' name='description'/>
- <b:else/>
-  <meta content='Explore Daily Yield finance education, market coverage, practical money guides, calculators and sourced financial analysis.' name='description'/>
- </b:if>
-</b:if>
 <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
 <meta expr:content='data:blog.pageTitle' property='og:title'/>
 <meta expr:content='data:blog.title' property='og:site_name'/>
-<b:if cond='data:blog.metaDescription'>
-<meta expr:content='data:blog.metaDescription' property='og:description'/>
-</b:if>
 <meta content='#F8F0E3' name='theme-color'/>
 <b:skin><![CDATA[/*
 -----------------------------------------------
