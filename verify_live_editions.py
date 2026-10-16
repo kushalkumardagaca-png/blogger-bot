@@ -63,6 +63,9 @@ def main() -> int:
         return 0
     day = dt.datetime.now(IST).date()
     tracker = json.loads((ROOT / "news_tracker.json").read_text(encoding="utf-8")).get("desks", {})
+    # The recovery controller calls the engine's own function. Print its verdict
+    # beside this script's step-by-step verdict so a disagreement is visible.
+    disagreements = []
     rows = []
     for desk, row in sorted(tracker.items()):
         url = row.get("url", "")
@@ -70,15 +73,24 @@ def main() -> int:
             continue
         verdict = verify(url, token, day)
         verdict["desk"] = desk
+        verdict["engineFunctionSays"] = news_pipeline.live_current_edition(
+            url, token, day, alt_dates=(day - dt.timedelta(days=1),))
+        if verdict["ok"] != verdict["engineFunctionSays"]:
+            disagreements.append(desk)
         verdict["recordedEdition"] = row.get("edition", "")
         rows.append(verdict)
     OUT.write_text(json.dumps({"checkedAt": dt.datetime.now(dt.timezone.utc).isoformat(),
                                "dateIST": day.isoformat(), "rows": rows,
                                "confirmed": sum(1 for r in rows if r["ok"]),
+                               "engineFunctionAgrees": not disagreements,
+                               "disagreements": disagreements,
                                "syntheticViews": 0, "publicDailyYieldRequests": 0}, indent=1) + "\n",
                    encoding="utf-8")
     for row in rows:
-        print(f"{row['desk']:13s} {'OK ' if row['ok'] else 'NO '} {row['reason'][:110]}")
+        print(f"{row['desk']:13s} script={'OK' if row['ok'] else 'NO'} engine="
+              f"{'OK' if row.get('engineFunctionSays') else 'NO'} | {row['reason'][:95]}")
+    if disagreements:
+        print(json.dumps({"disagreements": disagreements}))
     print(json.dumps({"confirmed": sum(1 for r in rows if r["ok"]), "checked": len(rows)}))
     return 0
 
