@@ -144,35 +144,67 @@ def main():
    new=ensure_block(new,key)
   if new!=content or labels_repaired:
    patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired,'proseRepaired':prose_repaired})
- after=inventory(token);fail=[];page_keys=set()
- for item in after:
-  ref=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
+ def verify(items):
+  """Return the failures that are really on the stored copies, plus the pages seen."""
+  found=[];keys=set()
+  for item in items:
+   ref=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
+   if item.get('url')!=urls.get(ref):found.append({'id':ref,'issue':'URL changed'})
+   if not item.get('title','').strip():found.append({'id':ref,'issue':'empty title'})
+   readable=html.unescape(re.sub('<[^>]+>',' ',content)).strip()
+   controlled_move=item.get('url','').endswith('/p/share-market_0718113516.html')
+   if len(readable)<200 and not controlled_move:found.append({'id':ref,'issue':'insufficient readable content'})
+   if image_alt_failures(content):found.append({'id':ref,'issue':'missing image alt','count':len(image_alt_failures(content))})
+   for problem in ident.name_problems(content):found.append({'id':ref,'issue':problem})
+   for problem in reader_prose.problems(content):found.append({'id':ref,'issue':problem})
+   if key:
+    keys.add(key)
+    if START not in content or END not in content:found.append({'id':ref,'issue':'AdSense disclosure missing'})
+    if key in IDENTITY_PAGES:
+     page_text=html.unescape(re.sub('<[^>]+>',' ',content))
+     if IDENTITY_START not in content or IDENTITY_END not in content:found.append({'id':ref,'issue':'identity statement missing'})
+     if ident.PRIMARY_EMAIL not in page_text or ident.OWNER_EMAIL not in page_text:
+      found.append({'id':ref,'issue':'both monitored addresses must appear on this page'})
+     if ident.BYLINE not in page_text:found.append({'id':ref,'issue':'public author name missing'})
+     if ident.LEGAL_NAME not in page_text:found.append({'id':ref,'issue':"publisher's legal name missing"})
+     if OLD_REPLY_TIME_PROMISE.search(page_text):found.append({'id':ref,'issue':'contradictory reply-time promise still present'})
+  missing=sorted(set(POLICY_BLOCKS)-keys)
+  for key in missing:found.append({'id':'page:'+key,'issue':'required policy page missing'})
+  return found,keys
+ # The blog's own name and description appear in the head of every page and in
+ # search results, so they are part of the site's public identity. The Blogger
+ # API is the only way to change them.
+ blog_changed=None;blog_problem=None
+ try:
+  h={'Authorization':'Bearer '+token}
+  blog=request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}",headers=h)
+  wanted=(f"{ident.PUBLICATION} publishes finance news, practical money guides, market insights and "
+          f"transparent calculations, written by {ident.BYLINE}. Contact {ident.PRIMARY_EMAIL} "
+          f"or {ident.OWNER_EMAIL}.")
+  if ident.name_problems(blog.get('description','') or '') or (blog.get('description') or '').strip()!=wanted:
+   body={'kind':'blogger#blog','id':BLOG_ID,'name':blog.get('name') or 'DAILY YIELD',
+         'description':wanted,'url':blog.get('url','https://dailyyield.blogspot.com/')}
+   request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}",method='PUT',headers=h,body=body)
+   blog_changed={'kind':'blog','id':BLOG_ID,'title':'Blog name and description','url':blog.get('url',''),
+                 'policyDisclosure':False,'imageAltsRepaired':0,'nameClaimRepaired':True,'proseRepaired':False}
+   changed.append(blog_changed)
+  stored=request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}",headers=h).get('description','')
+  for problem in ident.name_problems(stored):blog_problem={'id':'blog:'+BLOG_ID,'issue':problem}
+ except Exception as exc:
+  blog_problem={'id':'blog:'+BLOG_ID,'issue':f'blog name and description could not be checked: {type(exc).__name__}'}
 
-  if item.get('url')!=urls.get(ref):fail.append({'id':ref,'issue':'URL changed'})
-  if not item.get('title','').strip():fail.append({'id':ref,'issue':'empty title'})
-  readable=html.unescape(re.sub('<[^>]+>',' ',content)).strip()
-  controlled_move=item.get('url','').endswith('/p/share-market_0718113516.html')
-  if len(readable)<200 and not controlled_move:fail.append({'id':ref,'issue':'insufficient readable content'})
-  if image_alt_failures(content):fail.append({'id':ref,'issue':'missing image alt','count':len(image_alt_failures(content))})
-  for problem in ident.name_problems(content):fail.append({'id':ref,'issue':problem})
-  for problem in reader_prose.problems(content):fail.append({'id':ref,'issue':problem})
-  if key:
-   page_keys.add(key)
-   if START not in content or END not in content:fail.append({'id':ref,'issue':'AdSense disclosure missing'})
-   if key in IDENTITY_PAGES:
-    readable=html.unescape(re.sub('<[^>]+>',' ',content))
-    if IDENTITY_START not in content or IDENTITY_END not in content:fail.append({'id':ref,'issue':'identity statement missing'})
-    if ident.PRIMARY_EMAIL not in readable or ident.OWNER_EMAIL not in readable:
-     fail.append({'id':ref,'issue':'both monitored addresses must appear on this page'})
-    if ident.BYLINE not in readable:fail.append({'id':ref,'issue':'public author name missing'})
-    if ident.LEGAL_NAME not in readable:fail.append({'id':ref,'issue':"publisher's legal name missing"})
-    if OLD_REPLY_TIME_PROMISE.search(readable):fail.append({'id':ref,'issue':'contradictory reply-time promise still present'})
-   elif ident.PRIMARY_EMAIL not in content:
-    # The non-identity policy pages keep their own disclosure wording; only a
-    # true identity page has to carry the monitored addresses.
-    pass
- missing=sorted(set(POLICY_BLOCKS)-page_keys)
- for key in missing:fail.append({'id':'page:'+key,'issue':'required policy page missing'})
+ after=inventory(token)
+ fail,page_keys=verify(after)
+ if blog_problem:fail.append(blog_problem)
+ if fail:
+  # Blogger can serve a cached copy for a short time after a write. A repair that
+  # has landed must not be reported as a failure, so every failing item is read
+  # once more before it is judged. Anything that is still wrong is still a failure.
+  time.sleep(30)
+  second=inventory(token)
+  still,page_keys=verify(second)
+  lingering={(f['id'],f['issue']) for f in fail}&{(f['id'],f['issue']) for f in still}
+  fail=[f for f in fail if (f['id'],f['issue']) in lingering]
  report={'checkedAt':datetime.now(timezone.utc).isoformat(),'status':'PASS' if not fail else 'FAIL','mode':'AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS','syntheticViews':0,'summary':{'items':len(after),'posts':sum(x['resource']=='posts' for x in after),'pages':sum(x['resource']=='pages' for x in after),'changed':len(changed),'policyPagesReady':len(page_keys),'failures':len(fail)},'changed':changed,'failures':fail,'notes':['Approval and revenue remain Google decisions.','No ad code is installed before approval.','Unrelated content, URLs, titles and labels are preserved.']}
  REPORT_JSON.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
  s=report['summary'];lines=['# Daily Yield AdSense Readiness','',f"- **Status:** {report['status']}",'- **Public Daily Yield requests:** 0','- **Synthetic views:** 0',f"- **Inventory:** {s['items']} items · {s['posts']} Posts · {s['pages']} Pages",f"- **Policy Pages ready:** {s['policyPagesReady']}/5",f"- **Items changed:** {s['changed']}",f"- **Failures:** {s['failures']}",'','## Changes']+[f"- {x['kind'].title()}: {x['title']} — disclosure={x['policyDisclosure']}, repaired alts={x['imageAltsRepaired']}" for x in changed]

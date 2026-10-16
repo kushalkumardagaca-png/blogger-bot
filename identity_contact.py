@@ -152,6 +152,8 @@ def disclosure_contact_html() -> str:
 # is matched by shape rather than by one exact string. Any list that names a name
 # the publisher does not have is rebuilt from NAME_ALIASES.
 ALIAS_LIST_RE = re.compile(r'("alternateName"\s*:\s*\[)([^\[\]]*)(\])')
+# The keywords line is one JSON string holding a comma-separated list.
+KEYWORDS_RE = re.compile(r'(?P<head>"keywords"\s*:\s*")(?P<value>(?:[^"\\]|\\.)*)"')
 
 
 def _canonical_aliases(inner: str) -> str | None:
@@ -200,6 +202,24 @@ def repair_names(text: str) -> tuple[str, bool]:
         return match.group(0) if canonical is None else f"{match.group(1)}{canonical}{match.group(3)}"
 
     out = ALIAS_LIST_RE.sub(swap, out)
+    # The keyword line is a comma-separated list of names and phrases, so the same
+    # cleanup has to be applied inside it: no unowned surname, no retired byline,
+    # and no duplicate of a name that is already in the list.
+    def clean_keywords(match: "re.Match[str]") -> str:
+        terms, seen = [], set()
+        for term in match.group("value").split(","):
+            term = term.strip()
+            if not term or any(v in term for v in WRONG_NAME_VARIANTS):
+                continue
+            term = re.sub(r"Kushal\s+K\.?\s+Daga", BYLINE, term)
+            key = term.casefold()
+            if key not in seen:
+                seen.add(key); terms.append(term)
+        if LEGAL_NAME.casefold() not in seen:
+            terms.append(LEGAL_NAME)
+        return f'{match.group("head")}{", ".join(terms)}"'
+
+    out = KEYWORDS_RE.sub(clean_keywords, out)
     return out, out != text
 
 

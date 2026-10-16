@@ -201,6 +201,17 @@ class LegalNameTests(unittest.TestCase):
         self.assertIn("By <strong>Kushal Daga</strong>", fixed)
         self.assertFalse(ident.repair_names(fixed)[1])
 
+    def test_a_json_ld_keyword_line_is_cleaned_and_stays_clean(self):
+        live = ('"keywords": "finance news today, Daily Yield, Kushal Daga, CA Kushal, '
+                'Kushal Jain, Kushal Daga, Finance, Finance by Kushal"')
+        fixed, changed = ident.repair_names(live)
+        self.assertTrue(changed)
+        self.assertNotIn("Kushal Jain", fixed)
+        self.assertIn(ident.LEGAL_NAME, fixed)
+        self.assertEqual(1, fixed.count('Kushal Daga'))
+        self.assertEqual((fixed, False), ident.repair_names(fixed))
+        self.assertEqual([], ident.name_problems(fixed))
+
     def test_structured_data_aliases_include_the_legal_name(self):
         import news_pipeline as np
         self.assertIn("Kushal Kumar Daga", np.PERSON_ALIASES)
