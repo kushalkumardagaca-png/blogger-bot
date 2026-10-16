@@ -130,6 +130,11 @@ def main():
   # An unrelated surname was once published as an alias of the author; that is a
   # materially inaccurate declaration, so it is corrected on every item.
   new,name_repaired=ident.repair_names(new)
+  labels=item.get('labels') or [];labels_repaired=False
+  if item['resource']=='posts' and any(ident.name_problems(label) for label in labels):
+   relabelled=[ident.repair_names(label)[0] for label in labels]
+   labels_repaired=relabelled!=labels
+   item['labels']=relabelled;name_repaired=name_repaired or labels_repaired
   # Machine-assembled pages carried unnamed source links, repeated links and
   # leftover drafting shorthand; the reader-quality pass repairs that too.
   new,prose_repaired=reader_prose.normalise(new)
@@ -137,7 +142,7 @@ def main():
   if key:
    new=ensure_identity(new,key)
    new=ensure_block(new,key)
-  if new!=content:
+  if new!=content or labels_repaired:
    patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired,'proseRepaired':prose_repaired})
  after=inventory(token);fail=[];page_keys=set()
  for item in after:
