@@ -5,10 +5,7 @@
 - **Synthetic views:** 0
 - **Inventory:** 475 items · 462 Posts · 13 Pages
 - **Policy Pages ready:** 5/5
-- **Items changed:** 3
+- **Items changed:** 0
 - **Failures:** 0
 
 ## Changes
-- Page: TERMS AND CONDITIONS — disclosure=True, repaired alts=0
-- Page: CONTACT US — disclosure=True, repaired alts=0
-- Page: ABOUT US — disclosure=True, repaired alts=0
