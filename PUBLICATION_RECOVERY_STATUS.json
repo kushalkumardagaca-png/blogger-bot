@@ -1,23 +1,14 @@
 {
-  "generatedAt": "2026-10-16T23:16:08.822475+05:30",
+  "generatedAt": "2026-10-16T23:16:37.095450+05:30",
   "dateIST": "2026-10-16",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 10,
-  "confirmedByLivePost": 10,
+  "confirmedPublications": 19,
+  "confirmedByLivePost": 19,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [
     "news-banking",
-    "master-trending-0",
-    "master-trending-1",
-    "master-trending-2",
-    "master-trending-3",
-    "master-trending-4",
-    "master-evergreen-0",
-    "master-evergreen-1",
-    "master-evergreen-2",
-    "master-evergreen-3",
-    "master-evergreen-4"
+    "master-trending-2"
   ],
   "expiredSlots": [
     "news-banking"
