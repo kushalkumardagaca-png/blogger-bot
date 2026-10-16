@@ -1,7 +1,7 @@
 # Daily Yield — AdSense approval readiness (live site check)
 
 - **Status:** FAIL
-- **Checked:** 2026-10-16T10:01:03.677318+00:00
+- **Checked:** 2026-10-16T11:04:27.755577+00:00
 - **Public pages read:** 9 (ordinary HTTP, no synthetic views)
 
 ## Checks
@@ -34,8 +34,8 @@
 - **PASS** — sitemap.xml serves URLs: HTTP 200, 470 URLs listed
 - **PASS** — no raw code shown to readers: no CSS text leaks outside style blocks on the homepage
 - **PASS** — no inaccurate name claim on the homepage: the homepage does not present an unrelated surname as an alias of the author
-- **FAIL** — no retired byline on the homepage: the homepage carries the public author name, not the retired initials form
-- **PASS** — robots meta allows indexing: the homepage is indexable
+- **PASS** — no retired byline on the homepage: the homepage carries the public author name, not the retired initials form
+- **FAIL** — robots meta allows indexing: the homepage is indexable
 - **PASS** — newest articles show no drafting artefacts: the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown
 - **PASS** — no ad code before approval: only Blogger's own AdSense tag may be present before approval
 

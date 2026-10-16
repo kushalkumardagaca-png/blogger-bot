@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-16T10:01:03.677318+00:00",
+ "checkedAt": "2026-10-16T11:04:27.755577+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
@@ -180,13 +180,13 @@
   },
   {
    "check": "no retired byline on the homepage",
-   "pass": false,
+   "pass": true,
    "detail": "the homepage carries the public author name, not the retired initials form",
    "blocking": true
   },
   {
    "check": "robots meta allows indexing",
-   "pass": true,
+   "pass": false,
    "detail": "the homepage is indexable",
    "blocking": true
   },
@@ -217,9 +217,9 @@
    "blocking": true
   },
   {
-   "check": "no retired byline on the homepage",
+   "check": "robots meta allows indexing",
    "pass": false,
-   "detail": "the homepage carries the public author name, not the retired initials form",
+   "detail": "the homepage is indexable",
    "blocking": true
   }
  ],
