@@ -1,13 +1,13 @@
 {
- "checkedAt": "2026-10-16T06:26:08.304213+00:00",
+ "checkedAt": "2026-10-16T06:28:51.250467+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
   {
    "check": "policy page /about",
-   "pass": false,
-   "detail": "/p/about-us_02080501126.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/about-us_02080501126.html → HTTP 200",
    "blocking": true
   },
   {
@@ -36,31 +36,31 @@
   },
   {
    "check": "about: publisher's legal name",
-   "pass": false,
+   "pass": true,
    "detail": "Kushal Kumar Daga",
    "blocking": true
   },
   {
    "check": "about: editorial byline",
-   "pass": false,
+   "pass": true,
    "detail": "Kushal K. Daga",
    "blocking": true
   },
   {
    "check": "about: name relationship explained",
-   "pass": false,
+   "pass": true,
    "detail": "the site explains that the byline is the same person's name",
    "blocking": true
   },
   {
    "check": "about: publication inbox",
-   "pass": false,
+   "pass": true,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "about: publisher's own address",
-   "pass": false,
+   "pass": true,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -126,25 +126,25 @@
   },
   {
    "check": "ads.txt published",
-   "pass": false,
-   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
+   "pass": true,
+   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
    "blocking": true
   },
   {
    "check": "robots.txt readable and permits reading",
-   "pass": false,
-   "detail": "HTTP 0",
+   "pass": true,
+   "detail": "HTTP 200",
    "blocking": true
   },
   {
    "check": "Mediapartners-Google explicitly allowed",
-   "pass": false,
+   "pass": true,
    "detail": "the AdSense crawler is named in robots.txt",
    "blocking": true
   },
   {
    "check": "sitemap declared",
-   "pass": false,
+   "pass": true,
    "detail": "sitemap line present in robots.txt",
    "blocking": true
   },
@@ -168,8 +168,14 @@
   },
   {
    "check": "robots meta allows indexing",
-   "pass": false,
+   "pass": true,
    "detail": "the homepage is indexable",
+   "blocking": true
+  },
+  {
+   "check": "newest articles show no drafting artefacts",
+   "pass": false,
+   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: Best Tax-Free Savings Account Rates in Canada: 52 link(s) still labelled with a generic source phrase",
    "blocking": true
   },
   {
@@ -180,12 +186,6 @@
   }
  ],
  "blockingIssues": [
-  {
-   "check": "policy page /about",
-   "pass": false,
-   "detail": "/p/about-us_02080501126.html → HTTP 0",
-   "blocking": true
-  },
   {
    "check": "policy page /contact",
    "pass": false,
@@ -202,36 +202,6 @@
    "check": "policy page /terms",
    "pass": false,
    "detail": "/p/terms-and-conditions.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's legal name",
-   "pass": false,
-   "detail": "Kushal Kumar Daga",
-   "blocking": true
-  },
-  {
-   "check": "about: editorial byline",
-   "pass": false,
-   "detail": "Kushal K. Daga",
-   "blocking": true
-  },
-  {
-   "check": "about: name relationship explained",
-   "pass": false,
-   "detail": "the site explains that the byline is the same person's name",
-   "blocking": true
-  },
-  {
-   "check": "about: publication inbox",
-   "pass": false,
-   "detail": "dailyyield.official@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's own address",
-   "pass": false,
-   "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
   {
@@ -265,33 +235,9 @@
    "blocking": true
   },
   {
-   "check": "ads.txt published",
+   "check": "newest articles show no drafting artefacts",
    "pass": false,
-   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
-   "blocking": true
-  },
-  {
-   "check": "robots.txt readable and permits reading",
-   "pass": false,
-   "detail": "HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "Mediapartners-Google explicitly allowed",
-   "pass": false,
-   "detail": "the AdSense crawler is named in robots.txt",
-   "blocking": true
-  },
-  {
-   "check": "sitemap declared",
-   "pass": false,
-   "detail": "sitemap line present in robots.txt",
-   "blocking": true
-  },
-  {
-   "check": "robots meta allows indexing",
-   "pass": false,
-   "detail": "the homepage is indexable",
+   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: Best Tax-Free Savings Account Rates in Canada: 52 link(s) still labelled with a generic source phrase",
    "blocking": true
   }
  ],
