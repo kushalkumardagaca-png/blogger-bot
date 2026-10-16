@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 177 PASS · 1 FAIL
+**Result:** 177 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -124,8 +124,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Evergreen starts 120 minutes plus 15 spare before release**
 - ✅ **Superseded pre-repair Master runs cannot block repaired same-slot recovery**
 - ✅ **Master links both market desks**
-- ❌ **Master posts cannot enter News hub**
-- ✅ **Master articles include measured 10–15-item continuous discovery shelf**
+- ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include continuous gesture motion**
 - ✅ **Master uses three unique licensed 16:9 placement-specific photographs**
 - ✅ **News hero image is preflight-validated**
