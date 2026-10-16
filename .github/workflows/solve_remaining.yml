@@ -34,18 +34,21 @@ jobs:
         run: python solve_remaining.py
       - name: Persist the solver report
         if: always()
+        shell: bash
         run: |
           set -euo pipefail
           git config user.name "Daily Yield Arena Controller"
           git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-solver-state
+          cp REMAINING_SOLVER_REPORT.json /tmp/dy-solver-state/ 2>/dev/null || true
           for attempt in 1 2 3; do
             git fetch origin main
-            git checkout main
             git reset --hard origin/main
-            cp /tmp/keep.json /dev/null 2>/dev/null || true
+            cp /tmp/dy-solver-state/* . 2>/dev/null || true
             git add REMAINING_SOLVER_REPORT.json 2>/dev/null || true
-            if git diff --cached --quiet; then break; fi
+            if git diff --staged --quiet; then exit 0; fi
             git commit -m "Record the remaining naming items the API could and could not reach [skip ci]" || true
-            if git push origin main; then break; fi
-            sleep 8
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
           done
+          exit 1
