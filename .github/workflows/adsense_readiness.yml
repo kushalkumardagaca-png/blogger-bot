@@ -21,10 +21,7 @@ permissions:
   contents: write
 
 concurrency:
-  # One queue for every workflow that edits the live Pages and Posts: two runs
-  # writing the same page at the same time is what made the Page-family update
-  # and the family-directory repair fail on 16 October.
-  group: daily-yield-page-maintenance
+  group: daily-yield-security-guard
   cancel-in-progress: false
 
 jobs:

@@ -15,7 +15,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: daily-yield-page-maintenance
+  group: daily-yield-security-guard
   cancel-in-progress: false
 
 jobs:
@@ -58,6 +58,7 @@ jobs:
           git config user.name "Daily Yield Family Directory Repair"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p /tmp/dy-family-state
+          files=(FAMILY_DIRECTORY_REPAIR_BACKUP.json.gz FAMILY_DIRECTORY_REPAIR_REPORT.json FAMILY_DIRECTORY_REPAIR_REPORT.md)
           for file in "${files[@]}"; do [[ -f "$file" ]] && cp "$file" /tmp/dy-family-state/; done
           for attempt in 1 2 3; do
             git fetch origin main

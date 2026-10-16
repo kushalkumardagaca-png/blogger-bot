@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: daily-yield-page-maintenance
+  group: daily-yield-content-experience-repair
   cancel-in-progress: false
 
 jobs:

@@ -6,7 +6,7 @@ pre-change backup, changes only marked policy disclosures and missing image alt
 text, and preserves every URL, title, label and unrelated content byte.
 """
 from __future__ import annotations
-import gzip, html, json, os, re, urllib.parse, urllib.request
+import gzip, html, json, os, re, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from seo_hygiene import image_alt_failures, repair_image_alts
@@ -101,10 +101,24 @@ def ensure_block(content,key):
  pattern=re.compile(re.escape(START)+'.*?'+re.escape(END),re.S)
  return pattern.sub(block,content,count=1) if pattern.search(content) else content.rstrip()+"\n"+block+"\n"
 
-def patch(token,item,content):
+def patch(token,item,content,attempts=3):
+ """Store the corrected page or post, retrying a transient Blogger conflict.
+
+ Two maintenance runs touching the same page at the same moment, or a burst of
+ updates, can make one call fail with a conflict or a temporary server error.
+ A retry keeps a correct page from being reported as an unrepaired one.
+ """
  body={'title':item['title'],'content':content}
  if item['resource']=='posts':body['labels']=item.get('labels',[])
- return request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}/{item['resource']}/{item['id']}",method='PATCH',headers={'Authorization':'Bearer '+token},body=body)
+ url=f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}/{item['resource']}/{item['id']}"
+ last=None
+ for attempt in range(1,attempts+1):
+  try:
+   return request(url,method='PATCH',headers={'Authorization':'Bearer '+token},body=body)
+  except Exception as exc:
+   last=exc
+   time.sleep(2*attempt)
+ raise last
 
 def main():
  token=oauth();before=inventory(token);urls={f"{x['resource']}:{x['id']}":x['url'] for x in before}
