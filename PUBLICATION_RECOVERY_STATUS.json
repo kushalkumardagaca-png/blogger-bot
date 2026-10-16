@@ -1,11 +1,29 @@
 {
-  "generatedAt": "2026-10-16T05:34:19.188523+05:30",
+  "generatedAt": "2026-10-16T06:16:13.090374+05:30",
   "dateIST": "2026-10-16",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 1,
-  "overdueMissing": [],
-  "actions": [],
+  "confirmedPublications": 2,
+  "overdueMissing": [
+    "news-china"
+  ],
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-china",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-0",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-1",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
