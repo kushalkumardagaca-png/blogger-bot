@@ -196,6 +196,12 @@ def main() -> int:
         lines.append("- ✅ Every live Post and Page contains the exact canonical responsive family directory.")
     REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(json.dumps({key: report[key] for key in ("status", "postsChecked", "pagesChecked", "itemsChanged", "syntheticViews")}))
+    # Say exactly which items did not converge, so a failure is diagnosable from
+    # the run annotations alone (the job log needs an authenticated token).
+    for row in failures[:20]:
+        print("::error title=Family directory not restored::"
+              + json.dumps({"kind": row["kind"], "id": row["id"], "title": row["title"],
+                            "issues": row["issues"]}, ensure_ascii=True))
     return 1 if failures else 0
 
 

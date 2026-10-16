@@ -38,7 +38,14 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python repair_family_directory.py
+        run: |
+          set -uo pipefail
+          if ! python -u repair_family_directory.py > /tmp/family.log 2>&1; then
+            echo "::error title=Family directory repair failed::$(tail -c 1200 /tmp/family.log | tr '\n' '|')"
+            tail -40 /tmp/family.log
+            exit 1
+          fi
+          tail -20 /tmp/family.log
       - name: Upload recovery backup and verification evidence
         if: always()
         uses: actions/upload-artifact@v4
