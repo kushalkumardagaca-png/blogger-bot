@@ -125,7 +125,11 @@ def verified_inventory(day,rows):
  for row in rows:
   try:
    if row['kind'] == 'news':
-    ok=news_pipeline.live_current_edition(row['url'],token,day,alt_dates=(day-dt.timedelta(days=1),))
+    # The Americas edition keeps the completed Americas market date by design, so
+    # yesterday counts for that desk alone. Everywhere else yesterday's date is
+    # proof of exactly the opposite: that the address still holds an older edition.
+    alt=(day-dt.timedelta(days=1),) if row.get('slot')=='americas' else ()
+    ok=news_pipeline.live_current_edition(row['url'],token,day,alt_dates=alt)
    else:
     ok=master_live_on(row['url'],token,day)
   except Exception:
@@ -219,7 +223,7 @@ def reconcile(now,apply=False):
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
   if now>=slot_due+GRACE and key not in master_by_key:overdue.append(key)
- report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if not overdue else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'confirmedByLivePost':len(inventory),'liveVerification':verify_note or 'each record checked against the live post','recordsThatFailedLiveVerification':unverified,'expiredSlots':expired,'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
+ report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if (not overdue and not unverified) else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'confirmedByLivePost':len(inventory),'liveVerification':verify_note or 'each record checked against the live post','recordsThatFailedLiveVerification':unverified,'expiredSlots':expired,'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
  save(STATUS,report);return report
 
 def write_run_summary(report):

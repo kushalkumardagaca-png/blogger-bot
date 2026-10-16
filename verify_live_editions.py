@@ -55,7 +55,7 @@ def verify(url: str, token: str, day: dt.date) -> dict:
     return {**detail, "ok": True, "reason": "live post carries this edition and passes the green checks"}
 
 
-def engine_trace(url: str, token: str, day: dt.date) -> dict:
+def engine_trace(url: str, token: str, day: dt.date, alt: tuple = ()) -> dict:
     """Run the engine's own function with its internals recorded.
 
     The engine swallows any exception and answers False, which is right in
@@ -85,8 +85,7 @@ def engine_trace(url: str, token: str, day: dt.date) -> dict:
     news_pipeline.blogger_call = traced_call
     news_pipeline.assert_saved_green = traced_green
     try:
-        verdict = news_pipeline.live_current_edition(url, token, day,
-                                                     alt_dates=(day - dt.timedelta(days=1),))
+        verdict = news_pipeline.live_current_edition(url, token, day, alt_dates=alt)
     except Exception as exc:  # noqa: BLE001
         steps.append(f"engine raised: {type(exc).__name__}: {str(exc)[:180]}")
         verdict = False
@@ -107,13 +106,29 @@ def main() -> int:
     # beside this script's step-by-step verdict so a disagreement is visible.
     disagreements = []
     rows = []
+    master_tracker = json.loads((ROOT / "MASTER_AUTOMATION_TRACKER.json").read_text(encoding="utf-8"))
+    plan = json.loads((ROOT / "MASTER_DAILY_PLAN.json").read_text(encoding="utf-8"))
+    for row in master_tracker.get("published", []):
+        if row.get("date") != day.isoformat() or not row.get("url"):
+            continue
+        verdict = {"desk": f"master-{row.get('kind','?')}", "url": row["url"], "day": day.isoformat()}
+        try:
+            news_pipeline.blogger_call  # noqa: B018 - presence check only
+            from publishing_recovery import master_live_on
+            ok = master_live_on(row["url"], token, day)
+            verdict.update({"ok": ok, "reason": "Master article carries today's published date"
+                            if ok else "Master article does not carry today's published date or fails the green checks"})
+        except Exception as exc:  # noqa: BLE001
+            verdict.update({"ok": False, "reason": f"master check failed: {str(exc)[:200]}"})
+        verdict["title"] = (row.get("title") or "")[:60]
+        rows.append(verdict)
     for desk, row in sorted(tracker.items()):
         url = row.get("url", "")
         if not url:
             continue
         verdict = verify(url, token, day)
         verdict["desk"] = desk
-        trace = engine_trace(url, token, day)
+        trace = engine_trace(url, token, day, alt=(day - dt.timedelta(days=1),) if desk == "americas" else ())
         verdict["engineFunctionSays"] = trace["verdict"]
         verdict["engineSteps"] = trace["steps"]
         if verdict["ok"] != verdict["engineFunctionSays"]:
