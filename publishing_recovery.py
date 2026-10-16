@@ -88,26 +88,11 @@ def live_token():
 
 
 def master_live_on(url,token,day):
- """A Master article is identified by its own JSON-LD date, not by a date line.
-
- Master titles carry no edition date ("Best Financial Habits For Gen Z"), so the
- date the article publishes itself under is read from its stored schema instead.
- """
- import news_pipeline,re as _re,urllib.parse as _up
- if not url:return False
- path=_up.urlparse(url).path
- query=_up.urlencode({"path":path,"fetchBody":"true","fields":"id,url,status,title,content"})
- post=news_pipeline.blogger_call("/posts/bypath?"+query,token)
- if post.get('status')!='LIVE':return False
- body=post.get('content') or ''
- found=_re.search(r'"datePublished"\s*:\s*"(\d{4})-(\d{2})-(\d{2})',body)
- if not found:
-  found=_re.search(r'Published\s+(\d{4})-(\d{2})-(\d{2})',body)
- if not found:return False
- stamped=dt.date(int(found.group(1)),int(found.group(2)),int(found.group(3)))
- if stamped!=day:return False
- news_pipeline.assert_saved_green(post)
- return True
+ """See news_pipeline.master_edition_check: the article proves its own date."""
+ import news_pipeline
+ ok,reason=news_pipeline.master_edition_check(url,token,day)
+ if not ok:print(f"    master record {url.rsplit('/',1)[-1][:40]} not verified: {reason}")
+ return ok
 
 
 def verified_inventory(day,rows):

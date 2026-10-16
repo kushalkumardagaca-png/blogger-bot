@@ -1634,6 +1634,39 @@ def live_current_edition(url, token, edition_date, alt_dates=()):
         return False
 
 
+def master_edition_check(url, token, day):
+    """Verify a Master article against its own published date, with the reason.
+
+    Master titles carry no edition date ("Best Financial Habits For Gen Z"), so the
+    date the article publishes itself under is read from the stored page: the ISO
+    form in its structured data or the "Published 2026-10-16" line, or the written
+    form in its dateline. The stored post must also pass the same green checks as a
+    fresh publication. Returns (ok, reason) so a failure always names its cause.
+    """
+    if not url:
+        return False, "no recorded address"
+    try:
+        path = urllib.parse.urlparse(url).path
+        query = urllib.parse.urlencode({"path": path, "fetchBody": "true",
+                                        "fields": "id,url,status,title,content"})
+        post = blogger_call("/posts/bypath?" + query, token)
+    except Exception as exc:  # noqa: BLE001
+        return False, f"by-path read failed: {type(exc).__name__}: {str(exc)[:160]}"
+    if post.get("status") not in (None, "LIVE"):
+        return False, "stored post is not live"
+    body = post.get("content") or ""
+    iso = f"{day:%Y-%m-%d}"
+    written = f"{day.day} {day.strftime('%B %Y')}"
+    if iso not in body and written not in body:
+        return False, (f"stored page carries neither {iso} nor {written} as its "
+                       f"published date")
+    try:
+        assert_saved_green(post)
+    except Exception as exc:  # noqa: BLE001
+        return False, f"green verification: {str(exc)[:200]}"
+    return True, "stored page carries today's published date and passes the green checks"
+
+
 def find_incomplete_live_post(art, token):
     """Recover a slug-title post left live if the final Blogger update failed."""
     query = urllib.parse.urlencode({"status": "live", "fetchBodies": "false",

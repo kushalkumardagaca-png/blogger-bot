@@ -112,14 +112,8 @@ def main() -> int:
         if row.get("date") != day.isoformat() or not row.get("url"):
             continue
         verdict = {"desk": f"master-{row.get('kind','?')}", "url": row["url"], "day": day.isoformat()}
-        try:
-            news_pipeline.blogger_call  # noqa: B018 - presence check only
-            from publishing_recovery import master_live_on
-            ok = master_live_on(row["url"], token, day)
-            verdict.update({"ok": ok, "reason": "Master article carries today's published date"
-                            if ok else "Master article does not carry today's published date or fails the green checks"})
-        except Exception as exc:  # noqa: BLE001
-            verdict.update({"ok": False, "reason": f"master check failed: {str(exc)[:200]}"})
+        ok, reason = news_pipeline.master_edition_check(row["url"], token, day)
+        verdict.update({"ok": ok, "reason": reason})
         verdict["title"] = (row.get("title") or "")[:60]
         rows.append(verdict)
     for desk, row in sorted(tracker.items()):
