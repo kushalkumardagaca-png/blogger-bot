@@ -219,7 +219,7 @@ def reconcile(now,apply=False):
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
   if now>=slot_due+GRACE and key not in master_by_key:overdue.append(key)
- report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if not overdue else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'confirmedByLivePost':len(inventory),'recordsThatFailedLiveVerification':unverified,'expiredSlots':expired,'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
+ report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if not overdue else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'confirmedByLivePost':len(inventory),'liveVerification':verify_note or 'each record checked against the live post','recordsThatFailedLiveVerification':unverified,'expiredSlots':expired,'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
  save(STATUS,report);return report
 
 def write_run_summary(report):
