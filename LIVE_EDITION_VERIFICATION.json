@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-16T17:21:47.387987+00:00",
+ "checkedAt": "2026-10-16T17:25:51.086120+00:00",
  "dateIST": "2026-10-16",
  "rows": [
   {
@@ -12,6 +12,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "americas",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -24,6 +27,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "asia-pacific",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -36,6 +42,9 @@
    "reason": "the post's own date line is not this edition's date",
    "desk": "banking",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -48,6 +57,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "china",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -60,6 +72,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "companies",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -72,6 +87,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "economy",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -84,6 +102,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "europe",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -96,6 +117,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "global",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -108,6 +132,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "india",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -120,6 +147,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "markets",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   },
   {
@@ -132,6 +162,9 @@
    "reason": "live post carries this edition and passes the green checks",
    "desk": "russia",
    "engineFunctionSays": false,
+   "engineSteps": [
+    "read /posts/bypath \u2192 status None"
+   ],
    "recordedEdition": "2026-10-16"
   }
  ],
