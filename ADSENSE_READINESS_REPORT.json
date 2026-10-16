@@ -1,18 +1,52 @@
 {
-  "checkedAt": "2026-10-15T17:45:06.410429+00:00",
-  "status": "PASS",
+  "checkedAt": "2026-10-16T02:53:24.999550+00:00",
+  "status": "FAIL",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "summary": {
-    "items": 470,
-    "posts": 457,
+    "items": 475,
+    "posts": 462,
     "pages": 13,
-    "changed": 0,
+    "changed": 3,
     "policyPagesReady": 5,
-    "failures": 0
+    "failures": 2
   },
-  "changed": [],
-  "failures": [],
+  "changed": [
+    {
+      "kind": "page",
+      "id": "304220949515133754",
+      "title": "PRIVACY POLICY",
+      "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0
+    },
+    {
+      "kind": "page",
+      "id": "4698688245681185879",
+      "title": "CONTACT US",
+      "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0
+    },
+    {
+      "kind": "page",
+      "id": "2716668129166401912",
+      "title": "ABOUT US",
+      "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0
+    }
+  ],
+  "failures": [
+    {
+      "id": "pages:3945823007631424733",
+      "issue": "publication inbox missing"
+    },
+    {
+      "id": "pages:4698688245681185879",
+      "issue": "contradictory reply-time promise still present"
+    }
+  ],
   "notes": [
     "Approval and revenue remain Google decisions.",
     "No ad code is installed before approval.",
