@@ -1,7 +1,87 @@
 {
- "checkedAt": "2026-10-16T17:25:51.086120+00:00",
+ "checkedAt": "2026-10-16T17:41:28.853008+00:00",
  "dateIST": "2026-10-16",
  "rows": [
+  {
+   "desk": "master-trending",
+   "url": "https://dailyyield.blogspot.com/2026/10/eu-eyes-160-billion-cut-from-initial.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "EU Eyes \u20ac160 Billion Cut From Initial Budget H"
+  },
+  {
+   "desk": "master-evergreen",
+   "url": "https://dailyyield.blogspot.com/2026/10/best-financial-habits-for-gen-z.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Best Financial Habits For Gen Z: Budgeting, Sm"
+  },
+  {
+   "desk": "master-trending",
+   "url": "https://dailyyield.blogspot.com/2026/10/spanish-stock-market-pays-out-35716.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Spanish stock market pays out \u20ac35.716 billion"
+  },
+  {
+   "desk": "master-evergreen",
+   "url": "https://dailyyield.blogspot.com/2026/10/best-tax-free-savings-account-rates-in.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Best Tax-Free Savings Account Rates in Canada"
+  },
+  {
+   "desk": "master-trending",
+   "url": "https://dailyyield.blogspot.com/2026/10/meta-and-google-backed-jio-platforms-to.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Meta- and Google-backed Jio Platforms to raise"
+  },
+  {
+   "desk": "master-evergreen",
+   "url": "https://dailyyield.blogspot.com/2026/10/why-using-personal-loan-to-pay-off.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Why using a personal loan to pay off credit ca"
+  },
+  {
+   "desk": "master-trending",
+   "url": "https://dailyyield.blogspot.com/2026/10/fairfax-financial-buying-majority-stake.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Fairfax Financial Buying Majority Stake in Ind"
+  },
+  {
+   "desk": "master-evergreen",
+   "url": "https://dailyyield.blogspot.com/2026/10/bangladesh-needs-digital-banking-but.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Bangladesh needs digital banking, but not more"
+  },
+  {
+   "desk": "master-trending",
+   "url": "https://dailyyield.blogspot.com/2026/10/social-security-to-adjust-cost-of.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Social Security to Adjust Cost of Living by 3."
+  },
+  {
+   "desk": "master-evergreen",
+   "url": "https://dailyyield.blogspot.com/2026/10/retirement-planning-why-costs-asset.html",
+   "day": "2026-10-16",
+   "ok": false,
+   "reason": "Master article does not carry today's published date or fails the green checks",
+   "title": "Retirement planning: Why costs, asset allocati"
+  },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-16.html",
    "day": "2026-10-16",
@@ -11,9 +91,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "americas",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -26,9 +107,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "asia-pacific",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -56,9 +138,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "china",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -71,9 +154,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "companies",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -86,9 +170,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "economy",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -101,9 +186,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "europe",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -116,9 +202,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "global",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -131,9 +218,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "india",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -146,9 +234,10 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "markets",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   },
@@ -161,27 +250,17 @@
    "ok": true,
    "reason": "live post carries this edition and passes the green checks",
    "desk": "russia",
-   "engineFunctionSays": false,
+   "engineFunctionSays": true,
    "engineSteps": [
-    "read /posts/bypath \u2192 status None"
+    "read /posts/bypath \u2192 status None",
+    "green verification passed"
    ],
    "recordedEdition": "2026-10-16"
   }
  ],
  "confirmed": 10,
- "engineFunctionAgrees": false,
- "disagreements": [
-  "americas",
-  "asia-pacific",
-  "china",
-  "companies",
-  "economy",
-  "europe",
-  "global",
-  "india",
-  "markets",
-  "russia"
- ],
+ "engineFunctionAgrees": true,
+ "disagreements": [],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0
 }
