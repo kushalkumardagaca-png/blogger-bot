@@ -156,6 +156,21 @@ class LegalNameTests(unittest.TestCase):
         self.assertEqual(ident.NAME_ALIASES[0], ident.LEGAL_NAME)
         self.assertTrue(all("Jain" not in alias for alias in ident.NAME_ALIASES))
 
+    def test_pretty_printed_alias_list_is_still_repaired(self):
+        """Structured data arrives both compactly and pretty-printed; both must be fixed."""
+        pretty = '\n'.join(('"author": {', '  "@type": "Person",', '  "name": "Kushal K. Daga",',
+                             '  "alternateName": [', '    "Kushal Daga",', '    "CA Kushal",',
+                             '    "Kushal Jain",', '    "Finance by Kushal"', '  ],', '}'))
+        fixed, changed = ident.repair_names(pretty)
+        self.assertTrue(changed)
+        self.assertNotIn("Kushal Jain", fixed)
+        self.assertIn(ident.LEGAL_NAME, fixed)
+        self.assertEqual([], ident.name_problems(fixed))
+        self.assertEqual((fixed, False), ident.repair_names(fixed))
+        # an honest list is left exactly as it is
+        honest = '"alternateName": ["Kushal Kumar Daga", "Kushal Daga"]'
+        self.assertEqual((honest, False), ident.repair_names(honest))
+
     def test_inaccurate_name_claims_are_repaired_and_the_repair_is_repeat_safe(self):
         published = ("Daily Yield is the finance publication of Kushal K. Daga, also known as "
                      "Kushal Daga and Kushal Jain.")

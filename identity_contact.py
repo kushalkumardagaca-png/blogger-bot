@@ -20,6 +20,8 @@ claimed because none is published.
 from __future__ import annotations
 
 import html
+import json
+import re
 
 PUBLICATION = "Daily Yield"
 SITE = "https://dailyyield.blogspot.com"
@@ -121,9 +123,35 @@ def disclosure_contact_html() -> str:
             f'{mailto(OWNER_EMAIL)}; both inboxes are monitored and replies take {RESPONSE_TIME}.')
 
 
+# Structured data is emitted both compactly and pretty-printed, so the alias list
+# is matched by shape rather than by one exact string. Any list that names a name
+# the publisher does not have is rebuilt from NAME_ALIASES.
+ALIAS_LIST_RE = re.compile(r'("alternateName"\s*:\s*\[)([^\[\]]*)(\])')
+
+
+def _canonical_aliases(inner: str) -> str | None:
+    """Return the honest alias list for a JSON-LD array body, or None when it is fine."""
+    found = re.findall(r'"([^"]*)"', inner)
+    if not found:
+        return None
+    if not any(v in found for v in WRONG_NAME_VARIANTS) and LEGAL_NAME in found:
+        return None
+    ordered = []
+    for alias in NAME_ALIASES:
+        if alias not in ordered:
+            ordered.append(alias)
+    return ", ".join(json.dumps(alias, ensure_ascii=False) for alias in ordered)
+
+
 def repair_names(text: str) -> tuple[str, bool]:
     """Replace the inaccurate name claims with the honest ones, safely again and again."""
     out = text
+
+    def swap(match: "re.Match[str]") -> str:
+        canonical = _canonical_aliases(match.group(2))
+        return match.group(0) if canonical is None else f"{match.group(1)}{canonical}{match.group(3)}"
+
+    out = ALIAS_LIST_RE.sub(swap, out)
     for before, after in IDENTITY_STATEMENT_FIXES + STRUCTURED_NAME_FIXES:
         out = out.replace(before, after)
     return out, out != text
