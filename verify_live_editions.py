@@ -55,6 +55,46 @@ def verify(url: str, token: str, day: dt.date) -> dict:
     return {**detail, "ok": True, "reason": "live post carries this edition and passes the green checks"}
 
 
+def engine_trace(url: str, token: str, day: dt.date) -> dict:
+    """Run the engine's own function with its internals recorded.
+
+    The engine swallows any exception and answers False, which is right in
+    production and useless for diagnosis, so this records each step instead.
+    """
+    original_call, original_green = news_pipeline.blogger_call, news_pipeline.assert_saved_green
+    steps: list[str] = []
+
+    def traced_call(path, tok, method="GET", body=None, **kwargs):
+        try:
+            reply = original_call(path, tok, method, body, **kwargs)
+            steps.append(f"read {path.split('?')[0]} → status {reply.get('status')!r}")
+            return reply
+        except Exception as exc:  # noqa: BLE001
+            steps.append(f"read {path.split('?')[0]} failed: {type(exc).__name__}: {str(exc)[:180]}")
+            raise
+
+    def traced_green(post):
+        try:
+            result = original_green(post)
+            steps.append("green verification passed")
+            return result
+        except Exception as exc:  # noqa: BLE001
+            steps.append(f"green verification failed: {str(exc)[:200]}")
+            raise
+
+    news_pipeline.blogger_call = traced_call
+    news_pipeline.assert_saved_green = traced_green
+    try:
+        verdict = news_pipeline.live_current_edition(url, token, day,
+                                                     alt_dates=(day - dt.timedelta(days=1),))
+    except Exception as exc:  # noqa: BLE001
+        steps.append(f"engine raised: {type(exc).__name__}: {str(exc)[:180]}")
+        verdict = False
+    finally:
+        news_pipeline.blogger_call, news_pipeline.assert_saved_green = original_call, original_green
+    return {"verdict": bool(verdict), "steps": steps}
+
+
 def main() -> int:
     token = publishing_recovery.live_token()
     if not token:
@@ -73,8 +113,9 @@ def main() -> int:
             continue
         verdict = verify(url, token, day)
         verdict["desk"] = desk
-        verdict["engineFunctionSays"] = news_pipeline.live_current_edition(
-            url, token, day, alt_dates=(day - dt.timedelta(days=1),))
+        trace = engine_trace(url, token, day)
+        verdict["engineFunctionSays"] = trace["verdict"]
+        verdict["engineSteps"] = trace["steps"]
         if verdict["ok"] != verdict["engineFunctionSays"]:
             disagreements.append(desk)
         verdict["recordedEdition"] = row.get("edition", "")
@@ -88,7 +129,9 @@ def main() -> int:
                    encoding="utf-8")
     for row in rows:
         print(f"{row['desk']:13s} script={'OK' if row['ok'] else 'NO'} engine="
-              f"{'OK' if row.get('engineFunctionSays') else 'NO'} | {row['reason'][:95]}")
+              f"{'OK' if row.get('engineFunctionSays') else 'NO'} | {row['reason'][:80]}")
+        if row.get('engineSteps'):
+            print("      engine steps: " + " ; ".join(row["engineSteps"])[:260])
     if disagreements:
         print(json.dumps({"disagreements": disagreements}))
     print(json.dumps({"confirmed": sum(1 for r in rows if r["ok"]), "checked": len(rows)}))
