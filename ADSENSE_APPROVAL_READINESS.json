@@ -1,54 +1,66 @@
 {
- "checkedAt": "2026-10-16T03:29:21.386227+00:00",
- "status": "PASS",
+ "checkedAt": "2026-10-16T06:14:27.752303+00:00",
+ "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
   {
    "check": "policy page /about",
-   "pass": true,
-   "detail": "/p/about-us_02080501126.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/about-us_02080501126.html → HTTP 0",
    "blocking": true
   },
   {
    "check": "policy page /contact",
-   "pass": true,
-   "detail": "/p/contact-us_01883938366.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/contact-us_01883938366.html → HTTP 0",
    "blocking": true
   },
   {
    "check": "policy page /privacy",
-   "pass": true,
-   "detail": "/p/privacy-policy.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/privacy-policy.html → HTTP 0",
    "blocking": true
   },
   {
    "check": "policy page /disclaimer",
-   "pass": true,
-   "detail": "/p/disclaimer.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/disclaimer.html → HTTP 0",
    "blocking": true
   },
   {
    "check": "policy page /terms",
-   "pass": true,
-   "detail": "/p/terms-and-conditions.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/terms-and-conditions.html → HTTP 0",
    "blocking": true
   },
   {
-   "check": "about: publisher named",
-   "pass": true,
-   "detail": "the accountable publisher is named in the text",
+   "check": "about: publisher's legal name",
+   "pass": false,
+   "detail": "Kushal Kumar Daga",
+   "blocking": true
+  },
+  {
+   "check": "about: editorial byline",
+   "pass": false,
+   "detail": "Kushal K. Daga",
+   "blocking": true
+  },
+  {
+   "check": "about: name relationship explained",
+   "pass": false,
+   "detail": "the site explains that the byline is the same person's name",
    "blocking": true
   },
   {
    "check": "about: publication inbox",
-   "pass": true,
+   "pass": false,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "about: publisher's own address",
-   "pass": true,
+   "pass": false,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -59,20 +71,38 @@
    "blocking": true
   },
   {
-   "check": "contact: publisher named",
+   "check": "about: no inaccurate name claim",
    "pass": true,
-   "detail": "the accountable publisher is named in the text",
+   "detail": "no unrelated surname is published as an alias",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's legal name",
+   "pass": false,
+   "detail": "Kushal Kumar Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: editorial byline",
+   "pass": false,
+   "detail": "Kushal K. Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: name relationship explained",
+   "pass": false,
+   "detail": "the site explains that the byline is the same person's name",
    "blocking": true
   },
   {
    "check": "contact: publication inbox",
-   "pass": true,
+   "pass": false,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "contact: publisher's own address",
-   "pass": true,
+   "pass": false,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -83,8 +113,14 @@
    "blocking": true
   },
   {
-   "check": "advertising declared in the policy pages",
+   "check": "contact: no inaccurate name claim",
    "pass": true,
+   "detail": "no unrelated surname is published as an alias",
+   "blocking": true
+  },
+  {
+   "check": "advertising declared in the policy pages",
+   "pass": false,
    "detail": "advertising and Google AdSense are described in the policy pages",
    "blocking": true
   },
@@ -96,32 +132,38 @@
   },
   {
    "check": "robots.txt readable and permits reading",
-   "pass": true,
-   "detail": "HTTP 200",
+   "pass": false,
+   "detail": "HTTP 0",
    "blocking": true
   },
   {
    "check": "Mediapartners-Google explicitly allowed",
-   "pass": true,
+   "pass": false,
    "detail": "the AdSense crawler is named in robots.txt",
    "blocking": true
   },
   {
    "check": "sitemap declared",
-   "pass": true,
+   "pass": false,
    "detail": "sitemap line present in robots.txt",
    "blocking": true
   },
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 462 URLs listed",
+   "detail": "HTTP 200, 465 URLs listed",
    "blocking": true
   },
   {
    "check": "no raw code shown to readers",
    "pass": true,
    "detail": "no CSS text leaks outside style blocks on the homepage",
+   "blocking": true
+  },
+  {
+   "check": "no inaccurate name claim on the homepage",
+   "pass": true,
+   "detail": "the homepage does not present an unrelated surname as an alias of the author",
    "blocking": true
   },
   {
@@ -137,7 +179,122 @@
    "blocking": false
   }
  ],
- "blockingIssues": [],
+ "blockingIssues": [
+  {
+   "check": "policy page /about",
+   "pass": false,
+   "detail": "/p/about-us_02080501126.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /contact",
+   "pass": false,
+   "detail": "/p/contact-us_01883938366.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /privacy",
+   "pass": false,
+   "detail": "/p/privacy-policy.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /disclaimer",
+   "pass": false,
+   "detail": "/p/disclaimer.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /terms",
+   "pass": false,
+   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "about: publisher's legal name",
+   "pass": false,
+   "detail": "Kushal Kumar Daga",
+   "blocking": true
+  },
+  {
+   "check": "about: editorial byline",
+   "pass": false,
+   "detail": "Kushal K. Daga",
+   "blocking": true
+  },
+  {
+   "check": "about: name relationship explained",
+   "pass": false,
+   "detail": "the site explains that the byline is the same person's name",
+   "blocking": true
+  },
+  {
+   "check": "about: publication inbox",
+   "pass": false,
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "about: publisher's own address",
+   "pass": false,
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's legal name",
+   "pass": false,
+   "detail": "Kushal Kumar Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: editorial byline",
+   "pass": false,
+   "detail": "Kushal K. Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: name relationship explained",
+   "pass": false,
+   "detail": "the site explains that the byline is the same person's name",
+   "blocking": true
+  },
+  {
+   "check": "contact: publication inbox",
+   "pass": false,
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's own address",
+   "pass": false,
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "advertising declared in the policy pages",
+   "pass": false,
+   "detail": "advertising and Google AdSense are described in the policy pages",
+   "blocking": true
+  },
+  {
+   "check": "robots.txt readable and permits reading",
+   "pass": false,
+   "detail": "HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "Mediapartners-Google explicitly allowed",
+   "pass": false,
+   "detail": "the AdSense crawler is named in robots.txt",
+   "blocking": true
+  },
+  {
+   "check": "sitemap declared",
+   "pass": false,
+   "detail": "sitemap line present in robots.txt",
+   "blocking": true
+  }
+ ],
  "manualStepsRequired": [
   "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
   "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",
