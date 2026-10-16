@@ -1,18 +1,11 @@
 {
-  "generatedAt": "2026-10-16T06:16:13.090374+05:30",
+  "generatedAt": "2026-10-16T06:49:48.883672+05:30",
   "dateIST": "2026-10-16",
-  "status": "DEGRADED",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 2,
-  "overdueMissing": [
-    "news-china"
-  ],
+  "confirmedPublications": 3,
+  "overdueMissing": [],
   "actions": [
-    {
-      "type": "source_recovery",
-      "key": "news-china",
-      "applied": true
-    },
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-0",
