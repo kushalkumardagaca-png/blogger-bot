@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-16T13:03:23.096017+00:00",
+  "apiOnly": true,
+  "publicRequests": 0,
+  "syntheticViews": 0,
+  "blogBefore": {
+    "name": "DAILY YIELD",
+    "description": "Clear finance news, practical money guides, market insights and transparent calculations by Certified Accountant Kushal K. Daga.",
+    "customMetaData": ""
+  },
+  "blogAttempts": [
+    {
+      "attempt": "description_and_metadata",
+      "ok": false,
+      "error": "HTTPError <!DOCTYPE html>\n<html lang=en>\n  <meta charset=utf-8>\n  <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\n  <title>Error 404 (Not Found)!!1</title>\n  <style>\n    *{ma"
+    },
+    {
+      "attempt": "description_only",
+      "ok": false,
+      "error": "HTTPError <!DOCTYPE html>\n<html lang=en>\n  <meta charset=utf-8>\n  <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\n  <title>Error 404 (Not Found)!!1</title>\n  <style>\n    *{ma"
+    }
+  ],
+  "blogDescriptionLanded": false,
+  "stepErrors": {
+    "pageSearchDescription": "HTTPError {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid field selection customMetaData\",\n    \"errors\": [\n      {\n        \"message\": \"Invalid field selection customMetaData\",\n        \"domain\": \"global\""
+  },
+  "privacyVendorSentence": "added and read back",
+  "userActionRequired": [
+    "Blogger → Settings → Blog description: paste the corrected site description (Blogger's API does not expose this box).",
+    "Blogger → Pages → Search description box for ABOUT US, CONTACT US, PRIVACY POLICY and DISCLAIMER: paste the corrected text (the API cannot write this box)."
+  ],
+  "status": "PARTIAL"
+}
