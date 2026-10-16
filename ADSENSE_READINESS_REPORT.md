@@ -5,11 +5,23 @@
 - **Synthetic views:** 0
 - **Inventory:** 483 items · 470 Posts · 13 Pages
 - **Policy Pages ready:** 5/5
-- **Items changed:** 471
+- **Items changed:** 483
 - **Failures:** 0
 
 ## Changes
+- Page: TERMS AND CONDITIONS — disclosure=True, repaired alts=0
+- Page: GLOBAL SNAPSHOT — disclosure=False, repaired alts=0
 - Page: MARKETS TODAY — disclosure=False, repaired alts=0
+- Page: GLOBAL SNAPSHOT — MOVED — disclosure=False, repaired alts=0
+- Page: PRIVACY POLICY — disclosure=True, repaired alts=0
+- Page: DAILY NEWS — disclosure=False, repaired alts=0
+- Page: MONEY ATLAS — disclosure=False, repaired alts=0
+- Page: FOR CORPORATE — disclosure=False, repaired alts=0
+- Page: DISCLAIMER — disclosure=True, repaired alts=0
+- Page: CONTACT US — disclosure=True, repaired alts=0
+- Page: CALCULATOR — disclosure=False, repaired alts=0
+- Page: DAILY ARTICLE — disclosure=False, repaired alts=0
+- Page: ABOUT US — disclosure=True, repaired alts=0
 - Post: Fairfax Financial Buying Majority Stake in Ind — disclosure=False, repaired alts=0
 - Post: Why using a personal loan to pay off credit ca — disclosure=False, repaired alts=0
 - Post: Meta- and Google-backed Jio Platforms to raise — disclosure=False, repaired alts=0

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-16T11:12:01.258596+00:00",
+  "checkedAt": "2026-10-16T11:42:51.489192+00:00",
   "status": "PASS",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
@@ -7,11 +7,33 @@
     "items": 483,
     "posts": 470,
     "pages": 13,
-    "changed": 471,
+    "changed": 483,
     "policyPagesReady": 5,
     "failures": 0
   },
   "changed": [
+    {
+      "kind": "page",
+      "id": "3254393081257151974",
+      "title": "TERMS AND CONDITIONS",
+      "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "8504888514217789256",
+      "title": "GLOBAL SNAPSHOT",
+      "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
     {
       "kind": "page",
       "id": "5236051989054453802",
@@ -20,7 +42,118 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "5512428640739964675",
+      "title": "GLOBAL SNAPSHOT — MOVED",
+      "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "304220949515133754",
+      "title": "PRIVACY POLICY",
+      "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "9217579601621666930",
+      "title": "DAILY NEWS",
+      "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "8572476015753638755",
+      "title": "MONEY ATLAS",
+      "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "6065205676235626846",
+      "title": "FOR CORPORATE",
+      "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "3945823007631424733",
+      "title": "DISCLAIMER",
+      "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "4698688245681185879",
+      "title": "CONTACT US",
+      "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "7468827438203976743",
+      "title": "CALCULATOR",
+      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "1685707888914861815",
+      "title": "DAILY ARTICLE",
+      "url": "https://dailyyield.blogspot.com/p/article.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
+    },
+    {
+      "kind": "page",
+      "id": "2716668129166401912",
+      "title": "ABOUT US",
+      "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -29,8 +162,9 @@
       "url": "https://dailyyield.blogspot.com/2026/10/fairfax-financial-buying-majority-stake.html",
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
-      "nameClaimRepaired": true,
-      "proseRepaired": 0
+      "nameClaimRepaired": false,
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -40,7 +174,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -50,7 +185,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -60,7 +196,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -70,7 +207,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -80,7 +218,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -90,7 +229,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -100,7 +240,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -110,7 +251,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -120,7 +262,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -130,7 +273,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -140,7 +284,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -150,7 +295,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -160,7 +306,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -170,7 +317,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -180,7 +328,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -190,7 +339,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -200,7 +350,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -210,7 +361,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -220,7 +372,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -230,7 +383,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -240,7 +394,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -250,7 +405,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -260,7 +416,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -270,7 +427,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -280,7 +438,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -290,7 +449,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -300,7 +460,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -310,7 +471,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -320,7 +482,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -330,7 +493,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -340,7 +504,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -350,7 +515,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -360,7 +526,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -370,7 +537,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -380,7 +548,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -390,7 +559,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -400,7 +570,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -410,7 +581,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -420,7 +592,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -430,7 +603,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -440,7 +614,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -450,7 +625,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -460,7 +636,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -470,7 +647,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -480,7 +658,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -490,7 +669,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -500,7 +680,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -510,7 +691,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -520,7 +702,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -530,7 +713,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -540,7 +724,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -550,7 +735,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -560,7 +746,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -570,7 +757,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -580,7 +768,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -590,7 +779,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -600,7 +790,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -610,7 +801,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -620,7 +812,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -630,7 +823,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -640,7 +834,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -650,7 +845,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -660,7 +856,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -670,7 +867,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -680,7 +878,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -690,7 +889,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -700,7 +900,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -710,7 +911,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -720,7 +922,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -730,7 +933,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -740,7 +944,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -750,7 +955,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -760,7 +966,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -770,7 +977,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -780,7 +988,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -790,7 +999,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -800,7 +1010,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -810,7 +1021,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -820,7 +1032,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -830,7 +1043,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -840,7 +1054,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -850,7 +1065,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -860,7 +1076,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -870,7 +1087,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -880,7 +1098,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -890,7 +1109,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -900,7 +1120,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -910,7 +1131,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -920,7 +1142,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -930,7 +1153,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -940,7 +1164,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -950,7 +1175,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -960,7 +1186,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -970,7 +1197,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -980,7 +1208,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -990,7 +1219,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1000,7 +1230,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1010,7 +1241,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1020,7 +1252,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1030,7 +1263,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1040,7 +1274,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1050,7 +1285,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1060,7 +1296,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1070,7 +1307,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1080,7 +1318,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1090,7 +1329,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1100,7 +1340,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1110,7 +1351,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1120,7 +1362,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1130,7 +1373,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1140,7 +1384,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1150,7 +1395,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1160,7 +1406,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1170,7 +1417,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1180,7 +1428,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1190,7 +1439,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1200,7 +1450,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1210,7 +1461,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1220,7 +1472,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1230,7 +1483,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1240,7 +1494,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1250,7 +1505,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1260,7 +1516,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1270,7 +1527,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1280,7 +1538,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1290,7 +1549,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1300,7 +1560,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1310,7 +1571,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1320,7 +1582,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1330,7 +1593,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1340,7 +1604,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1350,7 +1615,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1360,7 +1626,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1370,7 +1637,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1380,7 +1648,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1390,7 +1659,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1400,7 +1670,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1410,7 +1681,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1420,7 +1692,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1430,7 +1703,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1440,7 +1714,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1450,7 +1725,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1460,7 +1736,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1470,7 +1747,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1480,7 +1758,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1490,7 +1769,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1500,7 +1780,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1510,7 +1791,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1520,7 +1802,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1530,7 +1813,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1540,7 +1824,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1550,7 +1835,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1560,7 +1846,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1570,7 +1857,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1580,7 +1868,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1590,7 +1879,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1600,7 +1890,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1610,7 +1901,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1620,7 +1912,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1630,7 +1923,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1640,7 +1934,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1650,7 +1945,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1660,7 +1956,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1670,7 +1967,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1680,7 +1978,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1690,7 +1989,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1700,7 +2000,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1710,7 +2011,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1720,7 +2022,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1730,7 +2033,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1740,7 +2044,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1750,7 +2055,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1760,7 +2066,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1770,7 +2077,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1780,7 +2088,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1790,7 +2099,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1800,7 +2110,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1810,7 +2121,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1820,7 +2132,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1830,7 +2143,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1840,7 +2154,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1850,7 +2165,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1860,7 +2176,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1870,7 +2187,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1880,7 +2198,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1890,7 +2209,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1900,7 +2220,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1910,7 +2231,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1920,7 +2242,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1930,7 +2253,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1940,7 +2264,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1950,7 +2275,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1960,7 +2286,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1970,7 +2297,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1980,7 +2308,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -1990,7 +2319,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2000,7 +2330,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2010,7 +2341,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2020,7 +2352,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2030,7 +2363,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2040,7 +2374,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2050,7 +2385,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2060,7 +2396,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2070,7 +2407,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2080,7 +2418,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2090,7 +2429,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2100,7 +2440,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2110,7 +2451,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2120,7 +2462,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2130,7 +2473,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2140,7 +2484,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2150,7 +2495,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2160,7 +2506,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2170,7 +2517,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2180,7 +2528,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2190,7 +2539,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2200,7 +2550,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2210,7 +2561,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2220,7 +2572,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2230,7 +2583,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2240,7 +2594,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2250,7 +2605,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2260,7 +2616,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2270,7 +2627,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2280,7 +2638,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2290,7 +2649,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2300,7 +2660,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2310,7 +2671,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2320,7 +2682,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2330,7 +2693,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2340,7 +2704,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2350,7 +2715,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2360,7 +2726,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2370,7 +2737,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2380,7 +2748,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2390,7 +2759,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2400,7 +2770,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2410,7 +2781,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2420,7 +2792,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2430,7 +2803,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2440,7 +2814,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2450,7 +2825,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2460,7 +2836,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2470,7 +2847,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2480,7 +2858,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2490,7 +2869,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2500,7 +2880,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2510,7 +2891,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2520,7 +2902,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2530,7 +2913,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2540,7 +2924,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2550,7 +2935,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2560,7 +2946,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2570,7 +2957,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2580,7 +2968,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2590,7 +2979,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2600,7 +2990,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2610,7 +3001,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2620,7 +3012,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2630,7 +3023,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2640,7 +3034,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2650,7 +3045,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2660,7 +3056,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2670,7 +3067,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2680,7 +3078,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2690,7 +3089,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2700,7 +3100,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2710,7 +3111,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2720,7 +3122,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2730,7 +3133,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2740,7 +3144,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2750,7 +3155,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2760,7 +3166,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2770,7 +3177,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2780,7 +3188,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2790,7 +3199,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2800,7 +3210,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2810,7 +3221,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2820,7 +3232,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2830,7 +3243,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2840,7 +3254,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2850,7 +3265,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2860,7 +3276,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2870,7 +3287,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2880,7 +3298,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2890,7 +3309,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2900,7 +3320,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2910,7 +3331,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2920,7 +3342,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2930,7 +3353,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2940,7 +3364,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2950,7 +3375,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2960,7 +3386,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2970,7 +3397,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2980,7 +3408,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -2990,7 +3419,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3000,7 +3430,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3010,7 +3441,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3020,7 +3452,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3030,7 +3463,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3040,7 +3474,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3050,7 +3485,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3060,7 +3496,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3070,7 +3507,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3080,7 +3518,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3090,7 +3529,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3100,7 +3540,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3110,7 +3551,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3120,7 +3562,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3130,7 +3573,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3140,7 +3584,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3150,7 +3595,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3160,7 +3606,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3170,7 +3617,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3180,7 +3628,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3190,7 +3639,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3200,7 +3650,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3210,7 +3661,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3220,7 +3672,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3230,7 +3683,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3240,7 +3694,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3250,7 +3705,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3260,7 +3716,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3270,7 +3727,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3280,7 +3738,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3290,7 +3749,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3300,7 +3760,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3310,7 +3771,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3320,7 +3782,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3330,7 +3793,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3340,7 +3804,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3350,7 +3815,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3360,7 +3826,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3370,7 +3837,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3380,7 +3848,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3390,7 +3859,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3400,7 +3870,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3410,7 +3881,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3420,7 +3892,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3430,7 +3903,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3440,7 +3914,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3450,7 +3925,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3460,7 +3936,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3470,7 +3947,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3480,7 +3958,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3490,7 +3969,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3500,7 +3980,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3510,7 +3991,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3520,7 +4002,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3530,7 +4013,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3540,7 +4024,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3550,7 +4035,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3560,7 +4046,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3570,7 +4057,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3580,7 +4068,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3590,7 +4079,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3600,7 +4090,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3610,7 +4101,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3620,7 +4112,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3630,7 +4123,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3640,7 +4134,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3650,7 +4145,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3660,7 +4156,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3670,7 +4167,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3680,7 +4178,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3690,7 +4189,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3700,7 +4200,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3710,7 +4211,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3720,7 +4222,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3730,7 +4233,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3740,7 +4244,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3750,7 +4255,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3760,7 +4266,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3770,7 +4277,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3780,7 +4288,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3790,7 +4299,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3800,7 +4310,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3810,7 +4321,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3820,7 +4332,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3830,7 +4343,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3840,7 +4354,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3850,7 +4365,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3860,7 +4376,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3870,7 +4387,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3880,7 +4398,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3890,7 +4409,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3900,7 +4420,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3910,7 +4431,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3920,7 +4442,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3930,7 +4453,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3940,7 +4464,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3950,7 +4475,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3960,7 +4486,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3970,7 +4497,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3980,7 +4508,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -3990,7 +4519,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4000,7 +4530,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4010,7 +4541,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4020,7 +4552,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4030,7 +4563,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4040,7 +4574,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4050,7 +4585,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4060,7 +4596,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4070,7 +4607,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4080,7 +4618,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4090,7 +4629,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4100,7 +4640,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4110,7 +4651,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4120,7 +4662,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4130,7 +4673,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4140,7 +4684,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4150,7 +4695,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4160,7 +4706,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4170,7 +4717,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4180,7 +4728,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4190,7 +4739,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4200,7 +4750,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4210,7 +4761,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4220,7 +4772,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4230,7 +4783,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4240,7 +4794,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4250,7 +4805,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4260,7 +4816,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4270,7 +4827,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4280,7 +4838,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4290,7 +4849,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4300,7 +4860,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4310,7 +4871,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4320,7 +4882,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4330,7 +4893,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4340,7 +4904,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4350,7 +4915,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4360,7 +4926,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4370,7 +4937,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4380,7 +4948,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4390,7 +4959,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4400,7 +4970,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4410,7 +4981,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4420,7 +4992,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4430,7 +5003,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4440,7 +5014,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4450,7 +5025,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4460,7 +5036,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4470,7 +5047,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4480,7 +5058,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4490,7 +5069,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4500,7 +5080,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4510,7 +5091,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4520,7 +5102,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4530,7 +5113,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4540,7 +5124,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4550,7 +5135,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4560,7 +5146,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4570,7 +5157,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4580,7 +5168,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4590,7 +5179,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4600,7 +5190,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4610,7 +5201,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4620,7 +5212,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4630,7 +5223,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4640,7 +5234,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4650,7 +5245,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4660,7 +5256,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4670,7 +5267,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4680,7 +5278,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4690,7 +5289,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4700,7 +5300,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4710,7 +5311,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     },
     {
       "kind": "post",
@@ -4720,7 +5322,8 @@
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": false,
-      "proseRepaired": 0
+      "proseRepaired": 0,
+      "brandSeoAdded": true
     }
   ],
   "failures": [],
