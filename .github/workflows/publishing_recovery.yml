@@ -30,6 +30,10 @@ jobs:
       - name: Recover overdue source slots and missing social routes
         env:
           GH_TOKEN: ${{ github.token }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python publishing_recovery.py --apply
       # Failure evidence stays in retained artifacts; only a successful recovery
       # ledger is allowed to reach main.

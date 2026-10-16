@@ -12,7 +12,15 @@ LEDGER=ROOT/'RECOVERY_LEDGER.json'; STATUS=ROOT/'PUBLICATION_RECOVERY_STATUS.jso
 NEWS_TIMES={'asia-pacific':'04:15','china':'05:15','india':'07:15','russia':'10:15','markets':'12:15','europe':'12:45','economy':'13:15','americas':'17:15','companies':'17:45','global':'18:15','banking':'18:45'}
 MASTER_TIMES={'trending':['06:15','09:15','14:15','16:15','20:45'],'evergreen':['08:15','11:15','15:15','19:45','22:15']}
 WRONG_MASTER_REPAIRS=[{'key':'master-trending-0','duplicateUrl':'https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html','titlePhrase':'Budget Airlines'}]
-GRACE=dt.timedelta(minutes=20); SOCIAL_GRACE=dt.timedelta(minutes=10); RETRY=dt.timedelta(hours=3); ARTICLE_RETRY=dt.timedelta(minutes=30); MAX_RETRIES=3
+GRACE=dt.timedelta(minutes=20)
+SOCIAL_GRACE=dt.timedelta(minutes=10)
+# The last moment an edition may still be produced at all. After this the slot is
+# recorded as expired and is never backfilled: a late edition arrives when its
+# readers have gone and duplicates the desk for the day.
+NEWS_WINDOW=dt.timedelta(minutes=95)
+RETRY=dt.timedelta(hours=3)
+ARTICLE_RETRY=dt.timedelta(minutes=30)
+MAX_RETRIES=3
 PREWARM=dt.timedelta(hours=3,minutes=15)
 
 def load(path,default):
@@ -69,14 +77,53 @@ def published_inventory(day):
     out.append({'key':f'master-{kind}-{slot}','url':row['url'],'published_at':row.get('published_at',''),'kind':kind,'slot':slot})
  return out
 
+def live_token():
+ """Access token for the authenticated blog read. A public request would add a
+ pageview, so the verification talks to the Blogger API instead."""
+ try:
+  import news_pipeline
+  return news_pipeline.blogger_token()
+ except Exception:
+  return ''
+
+
+def verified_inventory(day,rows):
+ """Keep only the records whose address really carries the day's edition.
+
+ Twenty minutes ago this controller trusted news_tracker.json, and the Banking
+ desk stayed missing for a whole day because the record said published. The
+ record is now only a claim: the live post has to prove it.
+ """
+ import news_pipeline
+ token=live_token()
+ if not token:
+  return rows,[x['key'] for x in rows],'no token: records accepted as claims'
+ kept,unverified=[],[]
+ for row in rows:
+  try:
+   ok=news_pipeline.live_current_edition(row['url'],token,day,alt_dates=(day-dt.timedelta(days=1),))
+  except Exception:
+   ok=False
+  (kept if ok else unverified).append(row if ok else row['key'])
+ return kept,unverified,''
+
+
 def tracker_urls(platform):
  return {str(x.get('url','')).split('#')[0].rstrip('/') for x in load(ROOT/f'{platform}_tracker.json',{}).get('published',[]) if x.get('url')}
 def reconcile(now,apply=False):
  from social_rotation import platform_pair_for
- day=now.astimezone(IST).date();ledger=load(LEDGER,{});inventory=published_inventory(day);by_key={x['key']:x for x in inventory};actions=[];blocked=[]
+ day=now.astimezone(IST).date();ledger=load(LEDGER,{});inventory=published_inventory(day)
+ inventory,unverified,verify_note=verified_inventory(day,inventory)
+ by_key={x['key']:x for x in inventory};actions=[];blocked=[]
+ expired=[]
  for desk,t in NEWS_TIMES.items():
   key='news-'+desk
   if now<due(day,t)+GRACE or key in by_key:continue
+  if now>due(day,t)+NEWS_WINDOW:
+   # Past its window an edition is not produced at all: a late edition would
+   # land when its readers have gone and would double the desk for the day.
+   expired.append(key)
+   continue
   lk=f'source:{day}:{key}'
   if may_retry(ledger,lk,now):
    call(['gh','workflow','run','daily_news_wires.yml','--ref','main','-f',f'desks={desk}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
@@ -146,7 +193,7 @@ def reconcile(now,apply=False):
  for slot_due,kind,slot in master_slots:
   key=f'master-{kind}-{slot}'
   if now>=slot_due+GRACE and key not in master_by_key:overdue.append(key)
- report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if not overdue else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
+ report={'generatedAt':now.isoformat(),'dateIST':day.isoformat(),'status':'PASS' if not overdue else 'DEGRADED','apply':apply,'confirmedPublications':len(inventory),'confirmedByLivePost':len(inventory),'recordsThatFailedLiveVerification':unverified,'expiredSlots':expired,'overdueMissing':overdue,'actions':actions,'retryBlocked':blocked,'masterRecoveryDeferred':master_deferred,'syntheticViews':0,'publicDailyYieldRequests':0}
  save(STATUS,report);return report
 
 def write_run_summary(report):

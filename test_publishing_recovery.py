@@ -14,7 +14,11 @@ class RecoveryTests(unittest.TestCase):
    with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
     report=r.reconcile(now,False)
    keys={x['key'] for x in report['actions'] if x['type']=='source_recovery'}
-   self.assertIn('news-china',keys);self.assertIn('master-evergreen-0',keys)
+   # A News slot four hours past its window is expired rather than produced late;
+   # the Master slot is still recovered because its own recovery window is longer.
+   self.assertIn('master-evergreen-0',keys)
+   self.assertNotIn('news-china',keys)
+   self.assertIn('news-china',report['expiredSlots'])
    social=[x for x in report['actions'] if x['type']=='social_replay']
    self.assertEqual(len([x for x in social if x['key']=='news-asia-pacific']),2)
    self.assertEqual(report['syntheticViews'],0)
@@ -44,4 +48,26 @@ class RecoveryTests(unittest.TestCase):
   self.assertFalse(r.may_retry(ledger,source,now+dt.timedelta(minutes=29),revision))
   self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(minutes=1),'repaired-code'))
   r.mark(ledger,key,now,'repaired-code');self.assertEqual(ledger[key]['attempts'],1);self.assertEqual(ledger[key]['revision'],'repaired-code')
+
+ def test_a_slot_past_its_window_is_expired_not_backfilled(self):
+  # The Banking edition of 16 October was still missing three hours after its
+  # slot. A late edition is not produced: the slot is recorded as expired so the
+  # daily difference stays honest and nothing publishes when readers have gone.
+  with tempfile.TemporaryDirectory() as td:
+   root=Path(td);day=dt.date(2026,10,16);self.setup(root,day);now=dt.datetime(2026,10,16,22,30,tzinfo=r.IST)
+   with patch.object(r,'ROOT',root),patch.object(r,'LEDGER',root/'RECOVERY_LEDGER.json'),patch.object(r,'STATUS',root/'STATUS.json'):
+    report=r.reconcile(now,False)
+   self.assertIn('news-banking',report['expiredSlots'])
+   self.assertNotIn('news-banking',{x['key'] for x in report['actions']})
+
+ def test_a_record_that_the_live_post_does_not_confirm_is_not_trusted(self):
+  # news_tracker.json claimed the Banking desk was published on 16 October while
+  # the live post still carried an older edition. The record is only a claim.
+  rows=[{'key':'news-banking','url':'https://dailyyield.blogspot.com/2026/10/x.html','kind':'news','slot':'banking'}]
+  with patch.object(r,'live_token',lambda: 'token'), \
+       patch('news_pipeline.live_current_edition',lambda *a,**k: False):
+   kept,unverified,note=r.verified_inventory(dt.date(2026,10,16),rows)
+  self.assertEqual(kept,[])
+  self.assertEqual(unverified,['news-banking'])
+
 if __name__=='__main__':unittest.main()

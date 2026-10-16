@@ -1,0 +1,61 @@
+name: Draft Box Hygiene
+
+# Keeps the Blogger draft list empty except for drafts that are waiting for a
+# scheduled release (the approved revival queue). A draft that can no longer be
+# published is backed up and removed, so no article is ever produced and then
+# left sitting unpublished.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 0 * * *'   # 05:50 IST daily
+  push:
+    branches: [main]
+    paths:
+      - 'draft_inventory_sweep.py'
+      - '.github/workflows/draft_hygiene.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-draft-hygiene-${{ github.event.schedule || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Report the draft box, then clear everything that cannot publish
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          python draft_inventory_sweep.py
+          python draft_inventory_sweep.py --apply
+      - name: Persist the inventory evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-drafts
+          cp DRAFT_INVENTORY_STATUS.json DRAFT_SWEEP_BACKUP.json /tmp/dy-drafts/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-drafts/* . 2>/dev/null || true
+            git add DRAFT_INVENTORY_STATUS.json DRAFT_SWEEP_BACKUP.json 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record draft box hygiene evidence [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1

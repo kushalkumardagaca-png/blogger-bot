@@ -35,6 +35,7 @@ from related_articles import ensure as ensure_related_articles, fetch_public_pos
 from image_safety import FALLBACK_MARKET, FALLBACK_PERSONAL, safe_image
 from publication_preflight import assert_publishable
 import news_coverage
+import editorial_integrity
 from editorial_integrity import assert_green_operating_state,assert_saved_green,find_duplicate,stamp
 from content_policy_guard import automation_disclosure,DISCLOSURE_MARKER
 from publication_timing import NEWS_LIVE, wait_for_release
@@ -1610,10 +1611,19 @@ def live_current_edition(url, token, edition_date, alt_dates=()):
         post = blogger_call("/posts/bypath?" + query, token)
         if post.get("status") != "LIVE":
             return False
-        heading = headline_of(post.get("content", ""), post.get("title", ""))
+        body = post.get("content", "")
+        # The edition's own date line counts as proof, not only the heading: an
+        # undated desk ("Banking & Personal Money News") declares its edition in
+        # the kicker and byline, and that is what a reader sees first.
+        declared = [headline_of(body, post.get("title", ""))]
+        for pattern in (r"fbk-date[^>]*>(.*?)<", r"Published\s+([^<\u00b7]{0,60})",
+                        r"Last reviewed\s+([^<\u00b7]{0,60})"):
+            found = re.search(pattern, body, re.S)
+            if found:
+                declared.append(htmlmod.unescape(strip_tags(found.group(1))))
+        declared_text = " ".join(declared).casefold()
         markers = [f"{day.day} {day.strftime('%B %Y')}" for day in (edition_date, *alt_dates)]
-        heading = heading.casefold()
-        if not any(marker.casefold() in heading for marker in markers):
+        if not any(marker.casefold() in declared_text for marker in markers):
             return False
         assert_saved_green(post)
         return True
@@ -1634,6 +1644,67 @@ def find_incomplete_live_post(art, token):
 
 
 EDITION_DATE_RE = re.compile(r"(\d{1,2} (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4})")
+
+
+# A desk whose title carries no date (Banking & Personal Money News, and any
+# future one) cannot be told from its own older editions by title. The editorial
+# integrity stamp inside the body is the edition's identity: it records a
+# fingerprint of exactly the prose this run produced. A stored post is therefore
+# treated as today's edition only when its stamp fingerprint equals this run's —
+# never because the headline matches.
+EDITION_STAMP_FINGERPRINT_RE = re.compile(r"content=([0-9a-f]{8,})")
+EDITION_IDENTITY_PROFILE = "news-desk"
+
+
+def edition_identity(art):
+    """The fingerprint this run's edition will be stored under."""
+    return editorial_integrity.content_fingerprint(art["html"])
+
+
+def stored_is_this_edition(stored, art):
+    """Is the stored post carrying *this* edition, not one of its older ones?
+
+    Two proofs are accepted, in this order:
+
+    1. The edition dates match. A dated desk names its edition in the title
+       ("India Finance News \u2014 16 October 2026"), so an equal date is proof and
+       a different date is disproof.
+    2. The prose fingerprint matches. An undated desk ("Banking & Personal Money
+       News") shares its title with every earlier edition of itself, so only the
+       editorial-integrity stamp can tell them apart. A post without that stamp,
+       or with a different fingerprint, is not this edition.
+    """
+    marker_now = edition_marker(art.get("title", ""), art.get("html", ""))
+    marker_stored = edition_marker(stored.get("title", ""), stored.get("content", ""))
+    if marker_now and marker_stored:
+        return marker_now[0].casefold() == marker_stored[0].casefold()
+    content = stored.get("content") or ""
+    stamp = editorial_integrity.MARK
+    if stamp not in content:
+        return False
+    found = EDITION_STAMP_FINGERPRINT_RE.search(content.split(stamp, 1)[1][:220])
+    if not found:
+        return False
+    return found.group(1) == edition_identity(art)
+
+
+def stored_edition_topic(stored):
+    """The topic digest of a stored post's stamp, for honest diagnostics."""
+    content = stored.get("content") or ""
+    stamp = editorial_integrity.MARK
+    if stamp not in content:
+        return ""
+    found = re.search(r"topic=([0-9a-f]+)", content.split(stamp, 1)[1][:220])
+    return found.group(1) if found else ""
+
+
+def assert_edition_identity(stored, art):
+    """Refuse to report success unless the stored post really is this edition."""
+    if not stored_is_this_edition(stored, art):
+        raise RuntimeError(
+            "EDITION IDENTITY FAILED — the stored post does not carry this edition's "
+            "fingerprint; the desk was not published and must be retried")
+    return True
 
 
 def headline_of(content, fallback=""):
@@ -1693,17 +1764,16 @@ def publish_post(art, token, dry=False):
             stored=blogger_call(f"/posts/{existing['id']}?fetchBody=true",token)
         expected=headline_of(art["html"],art["title"])
         present=headline_of(stored.get("content",""),stored.get("title",""))
-        markers=edition_marker(art["title"],art["html"])
-        carrying_today=bool(expected) and expected==present
-        if not carrying_today and not expected:
-            carrying_today=any(m in (stored.get("content") or "")+(stored.get("title") or "")
-                               for m in markers) if markers else True
+        # Same headline is NOT the same edition. This desk's older editions share
+        # its title, and accepting them silently retired the desk for a whole day.
+        carrying_today=stored_is_this_edition(stored, art)
         if not carrying_today:
             print(f"    duplicate-safe recovery ({reason}) holds a different edition "
-                  f"({'/'.join(markers) or present[:60] or 'undated'}); refreshing it")
+                  f"({present[:60] or 'undated'}); refreshing it with today's edition")
             return reissue(stored, "older-edition post refreshed with today's edition")
         try:
             assert_saved_green(stored)
+            assert_edition_identity(stored, art)
             print(f"    duplicate-safe recovery ({reason}): {stored.get('url')}")
             return stored.get('url','')
         except RuntimeError as exc:
@@ -1723,8 +1793,19 @@ def publish_post(art, token, dry=False):
         draft = blogger_call("/posts?isDraft=true", token, "POST", {
             "kind": "blogger#post", "title": art["slug"], "content": art["html"],
             "labels": ["News"]})
-        # pass 2: publish
-        live = blogger_call(f"/posts/{draft['id']}/publish", token, "POST")
+        try:
+            # pass 2: publish
+            live = blogger_call(f"/posts/{draft['id']}/publish", token, "POST")
+        except Exception:
+            # A failed transaction must not leave an article sitting in the draft
+            # box: the working copy is dropped and the edition is retried as a
+            # whole, so nothing is ever produced that cannot be published.
+            try:
+                blogger_call(f"/posts/{draft['id']}", token, "DELETE")
+                print(f"    failed publish: draft {draft['id']} discarded, slot retried as a whole")
+            except Exception as cleanup_error:  # noqa: BLE001
+                print(f"    !! draft cleanup failed for {draft['id']}: {cleanup_error}")
+            raise
     url = live.get("url", "")
     if art["slug"] not in url:
         print(f"    !! slug check: expected {art['slug']} in {url}")
@@ -1737,6 +1818,7 @@ def publish_post(art, token, dry=False):
         "content": final_html, "labels": art["labels"]})
     stored=blogger_call(f"/posts/{draft['id']}?fetchBody=true",token)
     assert_saved_green(stored)
+    assert_edition_identity(stored, art)
     return upd.get("url", url)
 
 # ---------------------------------------------------------------- orchestration
@@ -1761,11 +1843,32 @@ def append_social_event(desk, url):
     with open(SOCIAL_EVENTS_FILE, "w", encoding="utf-8") as handle:
         json.dump(events, handle, indent=2)
 
+# An edition is only meaningful inside its own window. After this many minutes
+# past its slot an edition is recorded as expired and is never produced late:
+# a backfilled edition arrives when its readers have gone and would publish a
+# second edition into the same day.
+SLOT_GRACE = dt.timedelta(minutes=90)
+
+
 def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
     n, label, slug, slot, _, _ = DESKS[desk]
     now = dt.datetime.now(IST)
     hh, mm = map(int, slot.split(":"))
     slot_dt = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
+    # Expired slots are recorded honestly and left alone. The daily report counts
+    # them as the difference between the timetable and what went live.
+    if not dry and now > slot_dt + SLOT_GRACE and not live_current_edition(
+            tracker["desks"].get(desk, {}).get("url", ""), token, now.date()):
+        prev = tracker["desks"].get(desk, {})
+        if prev.get("edition") != now.date().isoformat() or prev.get("expiredSlot") != slot:
+            tracker["desks"][desk] = {**prev, "edition": prev.get("edition"),
+                                      "expiredSlot": slot,
+                                      "expired_at": now.isoformat(),
+                                      "expired_reason": f"slot {slot} passed by more than {SLOT_GRACE.seconds//60} minutes; not backfilled"}
+            save_tracker(tracker)
+            print(f"  [{desk}] slot {slot} expired "
+                  f"({int((now - slot_dt).total_seconds()//60)} min late) — not backfilled")
+        return False
     prev = tracker["desks"].get(desk, {})
     # The Americas edition keeps the completed Americas market date in its title
     # by design, so yesterday's date is a valid heading for it.

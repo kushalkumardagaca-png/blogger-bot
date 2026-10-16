@@ -51,6 +51,16 @@ jobs:
             *) value="${{ inputs.desks }}" ;;
           esac
           echo "value=$value" >> "$GITHUB_OUTPUT"
+          # GitHub's scheduler can start a run late (the China edition of 16 October
+          # began after its own slot and published 62 minutes behind the timetable).
+          # When that happens the scheduled desk either is already live or has left
+          # its window, so this run takes the earliest desk that can still publish
+          # on time instead of producing a late edition nobody is waiting for.
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            chosen="$(python3 select_news_desk.py "$value")"
+            echo "value=$chosen" >> "$GITHUB_OUTPUT"
+            echo "Desk selected for this run: $chosen (scheduled: $value)"
+          fi
       - name: Prepare and precision-publish Daily Yield News
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
