@@ -182,6 +182,11 @@ def replace_marked(text: str, start: str, end: str, package: str) -> str:
 
 
 def inject(text: str) -> str:
+    # Contact promises must match the Contact page in every theme build.
+    import theme_contact_consistency
+    text, changes = theme_contact_consistency.apply(text)
+    for change in changes:
+        print('theme contact consistency:', change)
     image_repairs = {
         "<img class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>": "<img alt='Comment author profile photo' class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>",
         "<img src='https://resources.blogblog.com/img/icon_delete13.gif'/>": "<img alt='Delete comment' src='https://resources.blogblog.com/img/icon_delete13.gif'/>",

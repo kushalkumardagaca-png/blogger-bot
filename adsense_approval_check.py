@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""AdSense-approval readiness audit for Daily Yield.
+
+Run after the AdSense Readiness workflow has published its page updates. It reads
+the live site over ordinary HTTP (a handful of requests, no synthetic views) and
+reports, in plain words, whether each point that can be *checked* is in place:
+who publishes the site, both monitored addresses, consistent reply times, the
+required policy pages, the ad declaration files, the sitemap and the robots
+rules.
+
+Honest limits: approval itself is Google's decision, and this file cannot see
+into the AdSense account. What it can do is prove the site says one consistent,
+verifiable thing about itself, which is what a Dishonest declarations review is
+about.
+"""
+from __future__ import annotations
+
+import json
+import re
+import sys
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+
+BLOG = "https://dailyyield.blogspot.com"
+UA = {"User-Agent": "DailyYieldAdSenseCheck/1.0 (dailyyield.official@gmail.com)"}
+PRIMARY = "dailyyield.official@gmail.com"
+OWNER = "kushalkumardaga.ca@gmail.com"
+
+PAGES = {
+    "about": "/p/about-us_02080501126.html",
+    "contact": "/p/contact-us_01883938366.html",
+    "privacy": "/p/privacy-policy.html",
+    "disclaimer": "/p/disclaimer.html",
+    "terms": "/p/terms-and-conditions.html",
+}
+
+
+def get(path: str) -> tuple[int, str]:
+    url = path if path.startswith("http") else BLOG + path
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+            raw = r.read()
+            try:
+                return r.status, raw.decode("utf-8", "replace")
+            except Exception:
+                return r.status, ""
+    except Exception as exc:
+        return 0, str(exc)
+
+
+def visible(html_text: str) -> str:
+    text = re.sub(r"<script.*?</script>", " ", html_text, flags=re.S | re.I)
+    text = re.sub(r"<style.*?</style>", " ", text, flags=re.S | re.I)
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", text))
+
+
+def check_site() -> dict:
+    findings: list[dict] = []
+
+    def add(name: str, ok: bool, detail: str, blocking: bool = True) -> None:
+        findings.append({"check": name, "pass": bool(ok), "detail": detail, "blocking": blocking})
+
+    pages: dict[str, str] = {}
+    for name, path in PAGES.items():
+        status, body = get(path)
+        pages[name] = visible(body) if status == 200 else ""
+        add(f"policy page /{name}", status == 200, f"{path} → HTTP {status}")
+
+    for name in ("about", "contact"):
+        text = pages.get(name, "")
+        add(f"{name}: publisher named", "Kushal K. Daga" in text,
+            "the accountable publisher is named in the text")
+        add(f"{name}: publication inbox", PRIMARY in text, PRIMARY)
+        add(f"{name}: publisher's own address", OWNER in text, OWNER)
+        add(f"{name}: no contradictory reply time", "24\u201348" not in text,
+            "one reply-time promise only")
+
+    terms = pages.get("terms", "") + pages.get("privacy", "")
+    add("advertising declared in the policy pages",
+        "adsense" in terms.casefold() and "advertis" in terms.casefold(),
+        "advertising and Google AdSense are described in the policy pages")
+
+    status, ads = get("/ads.txt")
+    add("ads.txt published", status == 200 and "google.com, pub-" in ads,
+        f"HTTP {status}: {ads.strip()[:80] or 'empty'}")
+
+    status, robots = get("/robots.txt")
+    add("robots.txt readable and permits reading",
+        status == 200 and "user-agent: *" in robots.casefold() and "disallow: /search" in robots.casefold(),
+        f"HTTP {status}")
+    add("Mediapartners-Google explicitly allowed",
+        "mediapartners-google" in robots.casefold(),
+        "the AdSense crawler is named in robots.txt")
+    add("sitemap declared", "sitemap:" in robots.casefold(), "sitemap line present in robots.txt")
+
+    status, sitemap = get("/sitemap.xml")
+    add("sitemap.xml serves URLs", status == 200 and "<loc>" in sitemap,
+        f"HTTP {status}, {sitemap.count('<loc>') if status == 200 else 0} URLs listed")
+
+    status, home = get("/")
+    masked = re.sub(r"<style.*?</style>", " ", home, flags=re.S | re.I)
+    add("no raw code shown to readers", "cursor:grab" not in masked and "touch-action" not in masked,
+        "no CSS text leaks outside style blocks on the homepage")
+    add("robots meta allows indexing",
+        "index,follow" in masked.casefold() or "index, follow" in masked.casefold(),
+        "the homepage is indexable")
+    add("no ad code before approval",
+        "adsbygoogle" not in masked or "data-ad-client" in masked,
+        "only Blogger's own AdSense tag may be present before approval", False)
+
+    blocking = [f for f in findings if f["blocking"] and not f["pass"]]
+    report = {
+        "checkedAt": datetime.now(timezone.utc).isoformat(),
+        "status": "PASS" if not blocking else "FAIL",
+        "publicPagesRead": len(PAGES) + 4,
+        "syntheticViews": 0,
+        "checks": findings,
+        "blockingIssues": blocking,
+        "manualStepsRequired": [
+            "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
+            "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",
+            "Use the 'Review your application' button and tick the confirmation box only after the site updates above are live.",
+        ],
+    }
+    return report
+
+
+def main() -> int:
+    report = check_site()
+    Path("ADSENSE_APPROVAL_READINESS.json").write_text(
+        json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    lines = ["# Daily Yield — AdSense approval readiness (live site check)", "",
+             f"- **Status:** {report['status']}",
+             f"- **Checked:** {report['checkedAt']}",
+             "- **Public pages read:** {} (ordinary HTTP, no synthetic views)".format(report["publicPagesRead"]),
+             "", "## Checks"]
+    for f in report["checks"]:
+        mark = "PASS" if f["pass"] else ("FAIL" if f["blocking"] else "note")
+        lines.append(f"- **{mark}** — {f['check']}: {f['detail']}")
+    if report["manualStepsRequired"]:
+        lines += ["", "## Steps only the account holder can complete"]
+        lines += [f"{i}. {s}" for i, s in enumerate(report["manualStepsRequired"], 1)]
+    Path("ADSENSE_APPROVAL_READINESS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(json.dumps({"status": report["status"], "blocking": len(report["blockingIssues"])}))
+    for issue in report["blockingIssues"]:
+        print("::error title=AdSense readiness check::" + issue["check"] + " — " + issue["detail"])
+    return 0 if report["status"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

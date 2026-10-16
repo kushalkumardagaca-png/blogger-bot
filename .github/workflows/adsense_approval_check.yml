@@ -1,0 +1,60 @@
+name: AdSense Approval Readiness Check
+
+# Reads the live Daily Yield pages over ordinary HTTP and reports, in plain words,
+# whether the identity, contact, policy, ads.txt, sitemap and robots points that a
+# reviewer can verify are all in place. Runs after the AdSense Readiness workflow so
+# the check sees the published pages.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 2 * * *'   # 08:15 IST daily, before the AdSense working day
+  push:
+    branches: [main]
+    paths:
+      - 'adsense_approval_check.py'
+      - 'identity_contact.py'
+      - '.github/workflows/adsense_approval_check.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-adsense-approval-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - name: Check the live site against the review points
+        id: check
+        continue-on-error: true
+        run: python -u adsense_approval_check.py
+      - name: Persist the evidence
+        if: always()
+        run: |
+          set -euo pipefail
+          git config user.name 'Daily Yield AdSense Readiness'
+          git config user.email 'dailyyield.official@gmail.com'
+          mkdir -p /tmp/dy-ads-check
+          cp ADSENSE_APPROVAL_READINESS.json ADSENSE_APPROVAL_READINESS.md /tmp/dy-ads-check/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main && git reset --hard origin/main
+            cp /tmp/dy-ads-check/* . 2>/dev/null || true
+            git add ADSENSE_APPROVAL_READINESS.json ADSENSE_APPROVAL_READINESS.md 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m 'Record AdSense approval readiness evidence [skip ci]'
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
+      - name: Report the outcome
+        if: steps.check.outcome == 'failure'
+        run: |
+          echo '::error title=AdSense readiness::some blocking points are still open; see ADSENSE_APPROVAL_READINESS.md'
+          exit 1

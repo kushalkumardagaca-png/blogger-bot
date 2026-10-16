@@ -10,12 +10,25 @@ import gzip, html, json, os, re, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from seo_hygiene import image_alt_failures, repair_image_alts
+import identity_contact as ident
 
 BLOG_ID=os.environ.get('BLOGGER_BLOG_ID','8911514070006792465')
 BACKUP=Path('ADSENSE_READINESS_BACKUP.json.gz')
 REPORT_JSON=Path('ADSENSE_READINESS_REPORT.json')
 REPORT_MD=Path('ADSENSE_READINESS_REPORT.md')
 START='<!-- DY_ADSENSE_READINESS_START -->'; END='<!-- DY_ADSENSE_READINESS_END -->'
+
+# The identity statement lives in one module, so the blog, the policy pages and
+# the article footers cannot disagree about who publishes the site.
+IDENTITY_START=ident.IDENTITY_START; IDENTITY_END=ident.IDENTITY_END
+# Two live inconsistencies that read as misleading on review: the Contact page
+# promised replies in two different time frames, and its email line showed a
+# single address while the blog is administered from another one.
+CONTACT_CONSISTENCY=(
+ ('Replies in 24–48 hrs','Replies usually within 2–3 working days'),
+ ('Reply lands in 24–48 hrs','Reply lands within 2–3 working days'),
+)
+IDENTITY_PAGES=('about-us_02080501126.html','contact-us_01883938366.html')
 
 POLICY_BLOCKS={
  'privacy-policy.html': '''<section aria-labelledby="dy-ads-privacy" class="dy-adsense-disclosure"><h2 id="dy-ads-privacy">Advertising, Google AdSense and your choices</h2><p>Daily Yield has applied to participate in Google AdSense and may display Google-served advertising after approval. Google and its advertising partners may use cookies, local storage, device information and similar technologies to deliver, limit, measure and protect advertising. Depending on your location and choices, ads may be personalised, non-personalised or limited.</p><p>Advertising consent is requested where required. You can revisit available choices through the <strong>Privacy choices</strong> control in the Daily Yield footer. You can also review <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">how Google uses information from sites and apps</a>, <a href="https://policies.google.com/technologies/ads" rel="noopener" target="_blank">Google advertising technologies</a> and <a href="https://adssettings.google.com/" rel="noopener" target="_blank">Google Ads Settings</a>.</p><p>Daily Yield does not ask readers to click advertisements. An advertisement does not constitute editorial endorsement, financial advice or a recommendation by Daily Yield or Kushal K. Daga.</p></section>''',
@@ -61,6 +74,20 @@ def policy_key(url):
  path=urllib.parse.urlsplit(url).path
  return next((k for k in POLICY_BLOCKS if path.endswith('/'+k)),None)
 
+def ensure_identity(content,key):
+ """Add the identity statement and remove two contradictory reply-time promises."""
+ out=content
+ for before,after in CONTACT_CONSISTENCY:
+  if before!=after:out=out.replace(before,after)
+ if key in IDENTITY_PAGES:
+  block=ident.identity_block('page')
+  if IDENTITY_START in out and IDENTITY_END in out:
+   out=re.sub(re.escape(IDENTITY_START)+r'.*?'+re.escape(IDENTITY_END),lambda _m:block,out,flags=re.S)
+  else:
+   out=out+block
+ return out
+
+
 def ensure_block(content,key):
  block=START+STYLE+POLICY_BLOCKS[key]+END
  pattern=re.compile(re.escape(START)+'.*?'+re.escape(END),re.S)
@@ -78,21 +105,31 @@ def main():
  for item in before:
   content=item.get('content','');new,alts_repaired=repair_image_alts(content,item.get('title','Daily Yield'))
   key=policy_key(item.get('url',''))
-  if key:new=ensure_block(new,key)
+  if key:
+   new=ensure_identity(new,key)
+   new=ensure_block(new,key)
   if new!=content:
    patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired})
  after=inventory(token);fail=[];page_keys=set()
  for item in after:
-  ident=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
-  if item.get('url')!=urls.get(ident):fail.append({'id':ident,'issue':'URL changed'})
-  if not item.get('title','').strip():fail.append({'id':ident,'issue':'empty title'})
+  ref=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
+
+  if item.get('url')!=urls.get(ref):fail.append({'id':ref,'issue':'URL changed'})
+  if not item.get('title','').strip():fail.append({'id':ref,'issue':'empty title'})
   readable=html.unescape(re.sub('<[^>]+>',' ',content)).strip()
   controlled_move=item.get('url','').endswith('/p/share-market_0718113516.html')
-  if len(readable)<200 and not controlled_move:fail.append({'id':ident,'issue':'insufficient readable content'})
-  if image_alt_failures(content):fail.append({'id':ident,'issue':'missing image alt','count':len(image_alt_failures(content))})
+  if len(readable)<200 and not controlled_move:fail.append({'id':ref,'issue':'insufficient readable content'})
+  if image_alt_failures(content):fail.append({'id':ref,'issue':'missing image alt','count':len(image_alt_failures(content))})
   if key:
    page_keys.add(key)
-   if START not in content or END not in content:fail.append({'id':ident,'issue':'AdSense disclosure missing'})
+   if START not in content or END not in content:fail.append({'id':ref,'issue':'AdSense disclosure missing'})
+   if ident.PRIMARY_EMAIL not in content:fail.append({'id':ref,'issue':'publication inbox missing'})
+   if key in IDENTITY_PAGES:
+    readable=html.unescape(re.sub('<[^>]+>',' ',content))
+    if IDENTITY_START not in content or IDENTITY_END not in content:fail.append({'id':ref,'issue':'identity statement missing'})
+    if ident.OWNER_EMAIL not in content:fail.append({'id':ref,'issue':"publisher's own address missing"})
+    if ident.PUBLISHER_NAME not in readable:fail.append({'id':ref,'issue':'accountable publisher missing'})
+    if '24–48' in readable:fail.append({'id':ref,'issue':'contradictory reply-time promise still present'})
  missing=sorted(set(POLICY_BLOCKS)-page_keys)
  for key in missing:fail.append({'id':'page:'+key,'issue':'required policy page missing'})
  report={'checkedAt':datetime.now(timezone.utc).isoformat(),'status':'PASS' if not fail else 'FAIL','mode':'AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS','syntheticViews':0,'summary':{'items':len(after),'posts':sum(x['resource']=='posts' for x in after),'pages':sum(x['resource']=='pages' for x in after),'changed':len(changed),'policyPagesReady':len(page_keys),'failures':len(fail)},'changed':changed,'failures':fail,'notes':['Approval and revenue remain Google decisions.','No ad code is installed before approval.','Unrelated content, URLs, titles and labels are preserved.']}

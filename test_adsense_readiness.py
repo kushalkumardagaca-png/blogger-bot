@@ -31,3 +31,38 @@ class AdSenseReadinessTests(unittest.TestCase):
   self.assertIn('alt="Example — editorial photograph"',final)
 
 if __name__=='__main__':unittest.main()
+
+
+class AdSenseIdentityTests(unittest.TestCase):
+ def test_identity_block_names_both_monitored_addresses(self):
+  import identity_contact as ident
+  block=ident.identity_block('page')
+  self.assertIn(ident.PRIMARY_EMAIL,block)
+  self.assertIn(ident.OWNER_EMAIL,block)
+  self.assertIn('Kushal K. Daga',block)
+  self.assertIn('no postal address is published',block)
+
+ def test_identity_block_is_repeat_safe_on_the_policy_pages(self):
+  original='<article><h1>Contact Us</h1><p>Existing text remains.</p></article>'
+  once=a.ensure_identity(original,'contact-us_01883938366.html')
+  twice=a.ensure_identity(once,'contact-us_01883938366.html')
+  self.assertEqual(once.count(a.IDENTITY_START),1)
+  self.assertEqual(once,twice)
+  self.assertIn(original.split('</h1>')[0],once)
+
+ def test_contradictory_reply_time_is_replaced(self):
+  page='<p>Replies in 24–48 hrs</p><p>Reply lands within 2–3 working days</p>'
+  out=a.ensure_identity(page,'contact-us_01883938366.html')
+  self.assertNotIn('24–48',out)
+  self.assertIn('Replies usually within 2–3 working days',out)
+
+ def test_pages_without_the_identity_requirement_are_left_alone(self):
+  page='<p>Fine print stays exactly as written.</p>'
+  self.assertEqual(a.ensure_identity(page,'terms-and-conditions.html'),page)
+
+ def test_article_footer_routes_to_both_inboxes(self):
+  from content_policy_guard import automation_disclosure
+  block=automation_disclosure('article')
+  self.assertIn('dailyyield.official@gmail.com',block)
+  self.assertIn('kushalkumardaga.ca@gmail.com',block)
+  self.assertIn('Report abuse',block)

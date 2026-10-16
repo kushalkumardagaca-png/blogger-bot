@@ -136,7 +136,7 @@ def ensure_subscription_privacy(content, current_path=""):
 <h2 id="dySubscriptionPrivacyTitle" style="margin-top:0">Following Daily Yield with Google</h2>
 <p>Daily Yield provides an optional Follow button that opens Google’s official Blogger follow flow. Google may ask you to sign in and confirm before adding Daily Yield to your Blogger Reading List. Daily Yield cannot sign you in, bypass Google’s confirmation or silently follow the site on your behalf.</p>
 <p>If you continue, Google processes the account and Reading List information required to provide that feature under your Google account settings and Google’s own privacy terms. Daily Yield does not receive your Google password.</p>
-<p>You can manage or remove followed blogs through Blogger Reading List. The standard contact address for Daily Yield remains dailyyield.official@gmail.com.</p>
+<p>You can manage or remove followed blogs through Blogger Reading List. The two contact addresses for Daily Yield remain dailyyield.official@gmail.com and kushalkumardaga.ca@gmail.com.</p>
 </section>
 """ + PRIVACY_SUB_END
     return content + "\n" + block

@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'adsense_readiness.py'
+      - 'identity_contact.py'
+      - 'theme/**.xml'
       - 'seo_hygiene.py'
       - 'publication_preflight.py'
       - 'reader_value_article.py'
