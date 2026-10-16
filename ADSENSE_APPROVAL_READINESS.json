@@ -1,19 +1,19 @@
 {
- "checkedAt": "2026-10-16T06:28:51.250467+00:00",
+ "checkedAt": "2026-10-16T09:48:07.374919+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
   {
    "check": "policy page /about",
-   "pass": true,
-   "detail": "/p/about-us_02080501126.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/about-us_02080501126.html → HTTP 0",
    "blocking": true
   },
   {
    "check": "policy page /contact",
-   "pass": false,
-   "detail": "/p/contact-us_01883938366.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/contact-us_01883938366.html → HTTP 200",
    "blocking": true
   },
   {
@@ -35,32 +35,38 @@
    "blocking": true
   },
   {
+   "check": "about: public author name",
+   "pass": false,
+   "detail": "Kushal Daga",
+   "blocking": true
+  },
+  {
    "check": "about: publisher's legal name",
-   "pass": true,
+   "pass": false,
    "detail": "Kushal Kumar Daga",
    "blocking": true
   },
   {
-   "check": "about: editorial byline",
-   "pass": true,
-   "detail": "Kushal K. Daga",
+   "check": "about: name relationship explained",
+   "pass": false,
+   "detail": "the site says the public author name is the short form of the legal name used on records",
    "blocking": true
   },
   {
-   "check": "about: name relationship explained",
+   "check": "about: retired initials byline gone",
    "pass": true,
-   "detail": "the site explains that the byline is the same person's name",
+   "detail": "the retired initials byline is no longer published",
    "blocking": true
   },
   {
    "check": "about: publication inbox",
-   "pass": true,
+   "pass": false,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "about: publisher's own address",
-   "pass": true,
+   "pass": false,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -77,32 +83,38 @@
    "blocking": true
   },
   {
+   "check": "contact: public author name",
+   "pass": true,
+   "detail": "Kushal Daga",
+   "blocking": true
+  },
+  {
    "check": "contact: publisher's legal name",
-   "pass": false,
+   "pass": true,
    "detail": "Kushal Kumar Daga",
    "blocking": true
   },
   {
-   "check": "contact: editorial byline",
-   "pass": false,
-   "detail": "Kushal K. Daga",
+   "check": "contact: name relationship explained",
+   "pass": true,
+   "detail": "the site says the public author name is the short form of the legal name used on records",
    "blocking": true
   },
   {
-   "check": "contact: name relationship explained",
+   "check": "contact: retired initials byline gone",
    "pass": false,
-   "detail": "the site explains that the byline is the same person's name",
+   "detail": "the retired initials byline is no longer published",
    "blocking": true
   },
   {
    "check": "contact: publication inbox",
-   "pass": false,
+   "pass": true,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "contact: publisher's own address",
-   "pass": false,
+   "pass": true,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -126,8 +138,8 @@
   },
   {
    "check": "ads.txt published",
-   "pass": true,
-   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
+   "pass": false,
+   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
    "blocking": true
   },
   {
@@ -151,7 +163,7 @@
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 465 URLs listed",
+   "detail": "HTTP 200, 470 URLs listed",
    "blocking": true
   },
   {
@@ -167,15 +179,21 @@
    "blocking": true
   },
   {
-   "check": "robots meta allows indexing",
+   "check": "no retired byline on the homepage",
    "pass": true,
+   "detail": "the homepage carries the public author name, not the retired initials form",
+   "blocking": true
+  },
+  {
+   "check": "robots meta allows indexing",
+   "pass": false,
    "detail": "the homepage is indexable",
    "blocking": true
   },
   {
    "check": "newest articles show no drafting artefacts",
    "pass": false,
-   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: Best Tax-Free Savings Account Rates in Canada: 52 link(s) still labelled with a generic source phrase",
+   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: What to expect from Europe’s most valuable com: 35 link(s) still labelled with a generic source phrase; 24 drafting note(s) left in the text; 24 drafting note(s) left in the text",
    "blocking": true
   },
   {
@@ -187,9 +205,9 @@
  ],
  "blockingIssues": [
   {
-   "check": "policy page /contact",
+   "check": "policy page /about",
    "pass": false,
-   "detail": "/p/contact-us_01883938366.html → HTTP 0",
+   "detail": "/p/about-us_02080501126.html → HTTP 0",
    "blocking": true
   },
   {
@@ -205,39 +223,57 @@
    "blocking": true
   },
   {
-   "check": "contact: publisher's legal name",
+   "check": "about: public author name",
+   "pass": false,
+   "detail": "Kushal Daga",
+   "blocking": true
+  },
+  {
+   "check": "about: publisher's legal name",
    "pass": false,
    "detail": "Kushal Kumar Daga",
    "blocking": true
   },
   {
-   "check": "contact: editorial byline",
+   "check": "about: name relationship explained",
    "pass": false,
-   "detail": "Kushal K. Daga",
+   "detail": "the site says the public author name is the short form of the legal name used on records",
    "blocking": true
   },
   {
-   "check": "contact: name relationship explained",
-   "pass": false,
-   "detail": "the site explains that the byline is the same person's name",
-   "blocking": true
-  },
-  {
-   "check": "contact: publication inbox",
+   "check": "about: publication inbox",
    "pass": false,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
-   "check": "contact: publisher's own address",
+   "check": "about: publisher's own address",
    "pass": false,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
   {
+   "check": "contact: retired initials byline gone",
+   "pass": false,
+   "detail": "the retired initials byline is no longer published",
+   "blocking": true
+  },
+  {
+   "check": "ads.txt published",
+   "pass": false,
+   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
+   "blocking": true
+  },
+  {
+   "check": "robots meta allows indexing",
+   "pass": false,
+   "detail": "the homepage is indexable",
+   "blocking": true
+  },
+  {
    "check": "newest articles show no drafting artefacts",
    "pass": false,
-   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: Best Tax-Free Savings Account Rates in Canada: 52 link(s) still labelled with a generic source phrase",
+   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: What to expect from Europe’s most valuable com: 35 link(s) still labelled with a generic source phrase; 24 drafting note(s) left in the text; 24 drafting note(s) left in the text",
    "blocking": true
   }
  ],
