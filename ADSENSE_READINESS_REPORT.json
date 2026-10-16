@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-16T09:55:06.288875+00:00",
+  "checkedAt": "2026-10-16T10:04:28.470770+00:00",
   "status": "FAIL",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
@@ -7,11 +7,21 @@
     "items": 483,
     "posts": 470,
     "pages": 13,
-    "changed": 476,
+    "changed": 480,
     "policyPagesReady": 5,
-    "failures": 845
+    "failures": 365
   },
   "changed": [
+    {
+      "kind": "page",
+      "id": "3254393081257151974",
+      "title": "TERMS AND CONDITIONS",
+      "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0
+    },
     {
       "kind": "page",
       "id": "8504888514217789256",
@@ -34,6 +44,16 @@
     },
     {
       "kind": "page",
+      "id": "5512428640739964675",
+      "title": "GLOBAL SNAPSHOT — MOVED",
+      "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0
+    },
+    {
+      "kind": "page",
       "id": "304220949515133754",
       "title": "PRIVACY POLICY",
       "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
@@ -44,12 +64,52 @@
     },
     {
       "kind": "page",
+      "id": "8572476015753638755",
+      "title": "MONEY ATLAS",
+      "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0
+    },
+    {
+      "kind": "page",
+      "id": "6065205676235626846",
+      "title": "FOR CORPORATE",
+      "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0
+    },
+    {
+      "kind": "page",
+      "id": "3945823007631424733",
+      "title": "DISCLAIMER",
+      "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
+      "proseRepaired": 0
+    },
+    {
+      "kind": "page",
       "id": "4698688245681185879",
       "title": "CONTACT US",
       "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
       "policyDisclosure": true,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": true,
+      "proseRepaired": 0
+    },
+    {
+      "kind": "page",
+      "id": "7468827438203976743",
+      "title": "CALCULATOR",
+      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "policyDisclosure": false,
+      "imageAltsRepaired": 0,
+      "nameClaimRepaired": false,
       "proseRepaired": 0
     },
     {
@@ -187,16 +247,6 @@
       "id": "7627976069312756400",
       "title": "EU Eyes €160 Billion Cut From Initial Budget H",
       "url": "https://dailyyield.blogspot.com/2026/10/eu-eyes-160-billion-cut-from-initial.html",
-      "policyDisclosure": false,
-      "imageAltsRepaired": 0,
-      "nameClaimRepaired": true,
-      "proseRepaired": 0
-    },
-    {
-      "kind": "post",
-      "id": "6893610896651799359",
-      "title": "Sold a property? Eight different ways to reduc",
-      "url": "https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to.html",
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": true,
@@ -677,16 +727,6 @@
       "id": "4653367058767878921",
       "title": "Americas Finance News — 11 October 2026",
       "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12.html",
-      "policyDisclosure": false,
-      "imageAltsRepaired": 0,
-      "nameClaimRepaired": true,
-      "proseRepaired": 0
-    },
-    {
-      "kind": "post",
-      "id": "7917175397372471855",
-      "title": "Bangladesh Startup Funding Drops",
-      "url": "https://dailyyield.blogspot.com/2026/10/bangladesh-startup-funding-drops.html",
       "policyDisclosure": false,
       "imageAltsRepaired": 0,
       "nameClaimRepaired": true,
@@ -4775,3384 +4815,1464 @@
   ],
   "failures": [
     {
-      "id": "pages:8504888514217789256",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "pages:5236051989054453802",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "pages:304220949515133754",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "pages:4698688245681185879",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "pages:4698688245681185879",
-      "issue": "both monitored addresses must appear on this page"
-    },
-    {
-      "id": "pages:4698688245681185879",
-      "issue": "public author name missing"
-    },
-    {
-      "id": "pages:2716668129166401912",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "pages:2716668129166401912",
-      "issue": "both monitored addresses must appear on this page"
-    },
-    {
-      "id": "posts:8747417613780689123",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8055389252776002109",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8023797526917435508",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8023797526917435508",
-      "issue": "35 link(s) still labelled with a generic source phrase"
-    },
-    {
-      "id": "posts:8023797526917435508",
-      "issue": "24 drafting note(s) left in the text"
-    },
-    {
-      "id": "posts:8023797526917435508",
-      "issue": "24 drafting note(s) left in the text"
-    },
-    {
-      "id": "posts:8356697770530035367",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4563454953032332919",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1493972825104492801",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1493972825104492801",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7806533046947701970",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:664919442370721038",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:664919442370721038",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8291393601553833053",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3102919282818220478",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4098245360762980951",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4098245360762980951",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4149379313573794618",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4149379313573794618",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7627976069312756400",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2295309860945414494",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2295309860945414494",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8799173720433476146",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:50508409100805419",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:9023812846107728662",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4765322871632329517",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4765322871632329517",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2421318385064853324",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6779600207608409311",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4499989432552412339",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8964941381599329168",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8964941381599329168",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5598188491028049064",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5508175457332514552",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5508175457332514552",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:592088317168952255",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6066778244772837378",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6066778244772837378",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6244831159932950646",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6244831159932950646",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5558523116997618457",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5558523116997618457",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6932309168123575505",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6932309168123575505",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8044800567329380462",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8044800567329380462",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5898067771096342038",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1850876032189829686",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4060502836086260770",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4060502836086260770",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7305090550981004438",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7305090550981004438",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2283440779727151028",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6875432953247800043",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6875432953247800043",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1394204476854205548",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1394204476854205548",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5987285018807056661",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5987285018807056661",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1930349544337193488",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1930349544337193488",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1327008160644487841",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1327008160644487841",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4419039076441729919",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4419039076441729919",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5979745421799098842",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5979745421799098842",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4122019545776418234",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4122019545776418234",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7942003561033657119",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7942003561033657119",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8936239960255667007",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8936239960255667007",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3053663501746829932",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3053663501746829932",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6440924687029284362",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6440924687029284362",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6752182675801639496",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6752182675801639496",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:9110135660101638977",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:9110135660101638977",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5279813430769227467",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5279813430769227467",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2944979484002140309",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2944979484002140309",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3774491320026884499",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3774491320026884499",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6198179080179508205",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6198179080179508205",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:528786193061592833",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:528786193061592833",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:825963634831791122",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:825963634831791122",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2499320937107075131",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2499320937107075131",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5863032681003617641",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5863032681003617641",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5849095594285978796",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5849095594285978796",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4182636857771329459",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4182636857771329459",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9114523213623152669",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9114523213623152669",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4653367058767878921",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4653367058767878921",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3558117834732925749",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3558117834732925749",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5404346285805003109",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3732839907904396174",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5305676119975498294",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7721768890204257344",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7721768890204257344",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8346521417971222619",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8346521417971222619",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5701917770607627658",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5701917770607627658",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1015742751486820159",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1015742751486820159",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5680418422067263371",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4385884134229151079",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4385884134229151079",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7297416450054863519",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7297416450054863519",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7579368902743746876",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7579368902743746876",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5807931384399290858",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4770596769544807782",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6615935574461620333",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6615935574461620333",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8760215737341581721",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7674640489272907651",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7512430975901570945",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7512430975901570945",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4941446647180758450",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4941446647180758450",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:441428781263562499",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:441428781263562499",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5309039604018476257",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5309039604018476257",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8440843476942158982",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1166266494028589772",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7233333976757185447",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6506721843679871346",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6506721843679871346",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:943062772594238272",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5505177037483463182",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5505177037483463182",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8159514658740310801",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8159514658740310801",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2122568688867455249",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2122568688867455249",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7956949454543531501",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7956949454543531501",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:298987823827450140",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:298987823827450140",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7856067051374791672",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7242936735281106431",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8934759392828970541",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2517283804580291463",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2517283804580291463",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3996763115306790577",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1728449732468068976",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6121654008990265419",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3508131612868663036",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3508131612868663036",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5411360429708207151",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5411360429708207151",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6416571193713380748",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6416571193713380748",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:265974413574679494",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:265974413574679494",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:249107466377745488",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:249107466377745488",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1700784563179985190",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1700784563179985190",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3765356538829628279",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3765356538829628279",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4321713008132800657",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4321713008132800657",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2159780762419668959",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2159780762419668959",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1283814357164919153",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1283814357164919153",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1213809574013812625",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1213809574013812625",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2623189629388682178",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2623189629388682178",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2343631790620996025",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2343631790620996025",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4329692400309862229",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4329692400309862229",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3923558914059133817",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3923558914059133817",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4503926661552527887",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4503926661552527887",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3644713591392052280",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3644713591392052280",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1365618236906218504",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1365618236906218504",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4054147490024048150",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4054147490024048150",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:319775129861437718",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:319775129861437718",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2480836368321778359",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2480836368321778359",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3247681811902798859",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3247681811902798859",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2979365795944313069",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2979365795944313069",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6459982346606846382",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6459982346606846382",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5663920214676671146",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5663920214676671146",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4250817183859290165",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4250817183859290165",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3642714645055323544",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3642714645055323544",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2086402769837356848",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2086402769837356848",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1987294778846987824",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1987294778846987824",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1124459578583235421",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1124459578583235421",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5976976945670049457",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5976976945670049457",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7088831973636579413",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7088831973636579413",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4518309045726699028",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4518309045726699028",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1243917476458440522",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1243917476458440522",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9204978929483913360",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9204978929483913360",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5213255900658508187",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5213255900658508187",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6046828668896748547",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6046828668896748547",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6519938804499910889",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6519938804499910889",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6464871470548798984",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6464871470548798984",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3719754414711676298",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3719754414711676298",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1146781738200323490",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1146781738200323490",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4659526555789622713",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4659526555789622713",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8188495491336954127",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8188495491336954127",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1506964555052672098",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1506964555052672098",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1588416772214254069",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1588416772214254069",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8091879574722465162",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8091879574722465162",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6126351177979088020",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6126351177979088020",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6928555553102007726",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6928555553102007726",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1267822633016363240",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1267822633016363240",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7805587522923081516",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7805587522923081516",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:403244398836150074",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:403244398836150074",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7567295669208024780",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7567295669208024780",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8373179465591875563",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8373179465591875563",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3906642234484602271",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3906642234484602271",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8195532941961466665",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8195532941961466665",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6406555063724104861",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6406555063724104861",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8655037016349971031",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8655037016349971031",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6864184901007014403",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6864184901007014403",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6144789579006508886",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6144789579006508886",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3109300077794838580",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3109300077794838580",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8974318104922843334",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8974318104922843334",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2078401247278256120",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2078401247278256120",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3819542896221889448",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3819542896221889448",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2500756184123204747",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2500756184123204747",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8424036406237802934",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8424036406237802934",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6338924420211395140",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6338924420211395140",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1650136372517124910",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1650136372517124910",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5655979092044783562",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5655979092044783562",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3296585567368267652",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3296585567368267652",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3920629068723264205",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3920629068723264205",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4096440118536242903",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4096440118536242903",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7376915665513040680",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7376915665513040680",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5944176563098972409",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5944176563098972409",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:937169609871614685",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:937169609871614685",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4872291976348006361",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4872291976348006361",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5457841022293819304",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5457841022293819304",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1441598247842515795",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1441598247842515795",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4754694742189980745",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4754694742189980745",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4554326019201695451",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4554326019201695451",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7702526215843382727",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7702526215843382727",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2131183753015156738",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2131183753015156738",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4770909723609986743",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4770909723609986743",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5060456186676893977",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5060456186676893977",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3999216954256354022",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3999216954256354022",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9185981256107977926",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9185981256107977926",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4849617287925200568",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4849617287925200568",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4773816842762603402",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4773816842762603402",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4241027143860885131",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4241027143860885131",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2338107994704127487",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2338107994704127487",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:57952324199187304",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:57952324199187304",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3954264095832469965",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3954264095832469965",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3442600443400729974",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3442600443400729974",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3979313414915210815",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3979313414915210815",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8349257710837842951",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8349257710837842951",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6612585196075280264",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6612585196075280264",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6054016105714886332",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6054016105714886332",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9058975335781746111",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9058975335781746111",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7060712805516241030",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7060712805516241030",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3845366839700982429",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6951903988431941856",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6951903988431941856",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3000292393265106707",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3000292393265106707",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6445645307688480581",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6445645307688480581",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7411146526370632431",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7411146526370632431",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8594486389302937562",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7919917676289078104",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7919917676289078104",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6243381812873175381",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6243381812873175381",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5131310480958239502",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5131310480958239502",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7961948819417398860",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7961948819417398860",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1224431701070336470",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5283900934510767783",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8855727893502199247",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8855727893502199247",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:9090794225984393149",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4437161255878108427",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4437161255878108427",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1063873294343467917",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1063873294343467917",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7430932756267789505",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7430932756267789505",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7539208873847258637",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7539208873847258637",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7379873073788189964",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3853953066895570500",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3853953066895570500",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5805918358850977102",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5805918358850977102",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6812626816465387916",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6812626816465387916",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1968451890589280606",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1968451890589280606",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3354774331177128079",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3354774331177128079",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8837021812610866691",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8837021812610866691",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:229202460931910419",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:229202460931910419",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4432434648714199065",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4432434648714199065",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6002847844933215206",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6002847844933215206",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6656356680841125757",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6656356680841125757",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1189890035012609567",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1189890035012609567",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7880504546833796577",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7880504546833796577",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:424542317912604382",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:424542317912604382",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1132583668251750835",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1132583668251750835",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7269705468830606778",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7269705468830606778",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6705981824863856048",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6705981824863856048",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1491878054535573888",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1491878054535573888",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3354573029890676948",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3354573029890676948",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1916711467989940356",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1916711467989940356",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5715277917410069452",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5715277917410069452",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7443620275479288667",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8692987777881824271",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8692987777881824271",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9150949963237525136",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9150949963237525136",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1850827666127980508",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1850827666127980508",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:915852663858125554",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:915852663858125554",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3468962202153168979",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3468962202153168979",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:332980622017107325",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:332980622017107325",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3235780247739134014",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3235780247739134014",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1007960234772753874",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8233701864497037469",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8233701864497037469",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7509329855154139182",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7509329855154139182",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1064654714094741604",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1064654714094741604",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:769802491907818695",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:769802491907818695",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1884059043694963597",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1838531017002841703",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1838531017002841703",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8521744947047722622",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8521744947047722622",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1134526280711723914",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1134526280711723914",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1732882384791246050",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1732882384791246050",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8604263644681996802",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8604263644681996802",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8681953723978380210",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8681953723978380210",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7117674826205100667",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8116771357609802510",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8116771357609802510",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3374488531251831353",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3374488531251831353",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6110897283203249229",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6110897283203249229",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1766285354349597171",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1379109366375175777",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1379109366375175777",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1504093871376035088",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1504093871376035088",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:955420358948638066",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:955420358948638066",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:577819612147620529",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2005014805006920526",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2005014805006920526",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3093831134407049207",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3093831134407049207",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3582600754100729351",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3582600754100729351",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1875628838135514595",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1875628838135514595",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2333084406415618664",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4732705071384887954",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4732705071384887954",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1241153471079039627",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1241153471079039627",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7126642917481377533",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7126642917481377533",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6527694942512355244",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6527694942512355244",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1799455763474408220",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7592536897293931312",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7592536897293931312",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:888647573326388172",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:888647573326388172",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7836621888717460852",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7836621888717460852",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5158064681276983892",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5158064681276983892",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:626954337147022449",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:626954337147022449",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:255068634201679306",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:255068634201679306",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7248649539978874711",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1697237802506427825",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1697237802506427825",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:132048976709130267",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:132048976709130267",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7963636691459098956",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7963636691459098956",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3571951616049148857",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3571951616049148857",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7632338182974546049",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7632338182974546049",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:9105498753770999311",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:553934405300545275",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:553934405300545275",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2586213142082697872",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2586213142082697872",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2370753968758385048",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2370753968758385048",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5001890081868019899",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:537381809861598684",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:537381809861598684",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:9028432246850261596",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:9028432246850261596",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:983834499565146723",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:983834499565146723",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5545386663868376235",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5545386663868376235",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2373709041132325539",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7819017210363133781",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7819017210363133781",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:967337411893740866",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:967337411893740866",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6190892833991317126",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6190892833991317126",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3794916987021150590",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3794916987021150590",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2392626462720316715",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2678078863814343955",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2678078863814343955",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:309111306060639526",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:309111306060639526",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2542420316692426930",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2542420316692426930",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:635769679322746121",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:635769679322746121",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1610593295668865715",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1610593295668865715",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3042075322183164827",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3042075322183164827",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1518139427210986224",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5921749039774626930",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5921749039774626930",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3417859541869662007",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3417859541869662007",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4378017040434071616",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4378017040434071616",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8564410517739387148",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6754930054304268139",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6754930054304268139",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5019452690942245047",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5019452690942245047",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2913845025272989831",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2913845025272989831",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1499457110813036815",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1152148656719761146",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1152148656719761146",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:48092243194050927",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:48092243194050927",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8686096611857118978",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8686096611857118978",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3369513303010484098",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3369513303010484098",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6003168629771257786",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2849933272866910243",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2849933272866910243",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:416760661369375574",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:416760661369375574",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7732982655147361005",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7732982655147361005",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8099889816920857108",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8099889816920857108",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2303680525771764438",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:734722129897789265",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:734722129897789265",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4173730771472877576",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4173730771472877576",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3338477738272234964",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3338477738272234964",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4294031392271634610",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4294031392271634610",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9100032476497143186",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9100032476497143186",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1079265428435182809",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1079265428435182809",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3487685101279047331",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7115176249025195517",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7115176249025195517",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7003750694659761692",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7003750694659761692",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1559881385941953973",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1559881385941953973",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6981062378758319524",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6981062378758319524",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3890352632686960222",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3890352632686960222",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5797453094847355471",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5797453094847355471",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6059871633623862310",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6059871633623862310",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:9007144551320250681",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:9007144551320250681",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1810052964905988018",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1810052964905988018",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7667045939093536899",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7667045939093536899",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3888811538986935233",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3888811538986935233",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5530506896553639228",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5530506896553639228",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5793837205624436935",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5793837205624436935",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5663946889586320606",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5663946889586320606",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1470400056182955354",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1470400056182955354",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1954269198646496705",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1954269198646496705",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4156483657490223145",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4156483657490223145",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2829755268130449976",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2829755268130449976",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5244611819587678418",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5244611819587678418",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1022860638256450673",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1022860638256450673",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6448805219822825799",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6158169707232928737",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6158169707232928737",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1692610470499812937",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1692610470499812937",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6398572425484507020",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6398572425484507020",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2045026967272748700",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2086262243563462858",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2086262243563462858",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1176196356811634898",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1176196356811634898",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8220571972089630701",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8220571972089630701",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4516328180677729614",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3308607986117894116",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3308607986117894116",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6136867085515829924",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6136867085515829924",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2456526586094870954",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2456526586094870954",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7828478888559605544",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7828478888559605544",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8825196756986669857",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7610007741627454383",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7610007741627454383",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7064447949502231390",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7064447949502231390",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7120917028774007604",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7120917028774007604",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4839715618924227739",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4839715618924227739",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7123852462020825588",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7080232271061962890",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7080232271061962890",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6334994565996995329",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6334994565996995329",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3566483254293904115",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3566483254293904115",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8595229389581582705",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8595229389581582705",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:5984345327493779721",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:5984345327493779721",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4559693310963899298",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4559693310963899298",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8711042237458005134",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2220914668880365188",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2220914668880365188",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2949080403088347215",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2949080403088347215",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9051696550888128467",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9051696550888128467",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3867527095511324597",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5838514800314490393",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5838514800314490393",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7973170617751893872",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7973170617751893872",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:538540418347251104",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:538540418347251104",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3406242455506009272",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3692047325956181058",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3692047325956181058",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4208803768759667992",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4208803768759667992",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6008980440625951868",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6008980440625951868",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:7952741125342031934",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:7952741125342031934",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6874126328143581453",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2148070858167788668",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2148070858167788668",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:193247759891078847",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:193247759891078847",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6486100444408340779",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6486100444408340779",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5949797759482040830",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5949797759482040830",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6563970637452730738",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6563970637452730738",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1525321452486561932",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1525321452486561932",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2983561509636256187",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2983561509636256187",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6643967970978131215",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6643967970978131215",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8141949697072344971",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8141949697072344971",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:5809539308164270577",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:5809539308164270577",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8973398431497020572",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8973398431497020572",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:133946527053973582",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:133946527053973582",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7833492098676155691",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7833492098676155691",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:4252136656968625158",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:4252136656968625158",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4802097022733879661",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4802097022733879661",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3265098780048862172",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3265098780048862172",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1971188583231907134",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7978855042342948180",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7978855042342948180",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:6017439504908254782",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:6017439504908254782",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4827012825782525705",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4827012825782525705",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1107194767136752071",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1107194767136752071",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4067190918070361492",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4996598231152424846",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4996598231152424846",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1685234226138286098",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1685234226138286098",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6787552373366780877",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6787552373366780877",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1244600316209982174",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1244600316209982174",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1403438240302459064",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6622106669535090283",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6622106669535090283",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:115783846078738704",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:115783846078738704",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:9115764774433521189",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:9115764774433521189",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2557941853294839938",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2557941853294839938",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:2972395376134557585",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:2972395376134557585",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3288071481427933520",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3288071481427933520",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:749521336862589933",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:749521336862589933",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6486688981578418368",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8683335223431479047",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8683335223431479047",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:6882231783502356233",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:6882231783502356233",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2070861226123418361",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:1496481957315805113",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:1496481957315805113",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2786685833728780482",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:1374496040576360177",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:1374496040576360177",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:2129270346434103164",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:2129270346434103164",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2418376376538238746",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:4562345940833333639",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:4562345940833333639",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:9219122336676981755",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:9219122336676981755",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:3580047848347313026",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:3580047848347313026",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:778009067188225768",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:778009067188225768",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4808062258120764865",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:8605540625196160085",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:8605540625196160085",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:3885410382183430593",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:3885410382183430593",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     },
     {
       "id": "posts:7434389172805313190",
       "issue": "inaccurate name claim published: Kushal Jain"
     },
     {
-      "id": "posts:7434389172805313190",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
       "id": "posts:8502389971570439316",
       "issue": "inaccurate name claim published: Kushal Jain"
-    },
-    {
-      "id": "posts:8502389971570439316",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5855044192522572590",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1126447614310368625",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4058080268134530730",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7476330954814461730",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4690992148902176975",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5733569512815684823",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1187159577085494350",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6615350878444001009",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5756773504895872461",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5309215588489880357",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:6406126111566056260",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:4165288479268683898",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:824646953557055227",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2758262234277933362",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:2862470767911665544",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8372498042597820613",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:727827414976743220",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:1794738258819020541",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8754928028995933789",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:3041537970389212664",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:7949223128636486384",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:5564629106804601974",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:8780956659587017395",
-      "issue": "retired initials byline still published: Kushal K. Daga"
-    },
-    {
-      "id": "posts:76036352328662163",
-      "issue": "retired initials byline still published: Kushal K. Daga"
     }
   ],
   "notes": [
