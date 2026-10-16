@@ -173,38 +173,48 @@ def main():
   return found,keys
  # The blog's own name and description appear in the head of every page and in
  # search results, so they are part of the site's public identity. The Blogger
- # API is the only way to change them.
- blog_changed=None;blog_problem=None
+ # API is the only way to change them, so it is done here and then read back.
+ blog_error=None
  try:
-  h={'Authorization':'Bearer '+token}
-  blog=request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}",headers=h)
+  h={'Authorization':'Bearer '+token};endpoint=f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}"
+  blog=request(endpoint,headers=h)
   wanted=(f"{ident.PUBLICATION} publishes finance news, practical money guides, market insights and "
           f"transparent calculations, written by {ident.BYLINE}. Contact {ident.PRIMARY_EMAIL} "
           f"or {ident.OWNER_EMAIL}.")
   if ident.name_problems(blog.get('description','') or '') or (blog.get('description') or '').strip()!=wanted:
+   # Blogger accepts the update with the full resource; the name and URL are sent
+   # back unchanged so nothing else on the blog is touched.
    body={'kind':'blogger#blog','id':BLOG_ID,'name':blog.get('name') or 'DAILY YIELD',
          'description':wanted,'url':blog.get('url','https://dailyyield.blogspot.com/')}
-   request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}",method='PUT',headers=h,body=body)
-   blog_changed={'kind':'blog','id':BLOG_ID,'title':'Blog name and description','url':blog.get('url',''),
-                 'policyDisclosure':False,'imageAltsRepaired':0,'nameClaimRepaired':True,'proseRepaired':False}
-   changed.append(blog_changed)
-  stored=request(f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}",headers=h).get('description','')
-  for problem in ident.name_problems(stored):blog_problem={'id':'blog:'+BLOG_ID,'issue':problem}
+   request(endpoint,method='PUT',headers=h,body=body)
+   changed.append({'kind':'blog','id':BLOG_ID,'title':'Blog name and description','url':blog.get('url',''),
+                   'policyDisclosure':False,'imageAltsRepaired':0,'nameClaimRepaired':True,'proseRepaired':False})
+  stored=request(endpoint,headers=h).get('description','')
+  if ident.name_problems(stored):blog_error=f"blog description still names the old name: {stored[:120]}"
  except Exception as exc:
-  blog_problem={'id':'blog:'+BLOG_ID,'issue':f'blog name and description could not be checked: {type(exc).__name__}'}
+  detail=''
+  if hasattr(exc,'read'):
+   try:detail=' '+exc.read().decode('utf-8','replace')[:240]
+   except Exception:detail=''
+  blog_error=f"blog name and description could not be updated: {type(exc).__name__}{detail}"
 
  after=inventory(token)
  fail,page_keys=verify(after)
+ item_fail=list(fail)
+ if blog_error:item_fail.append({'id':'blog:'+BLOG_ID,'issue':blog_error})
+ after=inventory(token)
+ fail,page_keys=verify(after)
  if blog_problem:fail.append(blog_problem)
- if fail:
+ fail=list(item_fail)
+ if fail and any(not str(f['id']).startswith('blog:') for f in fail):
   # Blogger can serve a cached copy for a short time after a write. A repair that
   # has landed must not be reported as a failure, so every failing item is read
-  # once more before it is judged. Anything that is still wrong is still a failure.
+  # once more before it is judged. Anything that is still wrong is still a failure,
+  # and a blog-level problem is never dismissed by re-reading cached pages.
   time.sleep(30)
-  second=inventory(token)
-  still,page_keys=verify(second)
-  lingering={(f['id'],f['issue']) for f in fail}&{(f['id'],f['issue']) for f in still}
-  fail=[f for f in fail if (f['id'],f['issue']) in lingering]
+  still,page_keys=verify(inventory(token))
+  lingering={(f['id'],f['issue']) for f in still}
+  fail=[f for f in fail if str(f['id']).startswith('blog:') or (f['id'],f['issue']) in lingering]
  report={'checkedAt':datetime.now(timezone.utc).isoformat(),'status':'PASS' if not fail else 'FAIL','mode':'AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS','syntheticViews':0,'summary':{'items':len(after),'posts':sum(x['resource']=='posts' for x in after),'pages':sum(x['resource']=='pages' for x in after),'changed':len(changed),'policyPagesReady':len(page_keys),'failures':len(fail)},'changed':changed,'failures':fail,'notes':['Approval and revenue remain Google decisions.','No ad code is installed before approval.','Unrelated content, URLs, titles and labels are preserved.']}
  REPORT_JSON.write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
  s=report['summary'];lines=['# Daily Yield AdSense Readiness','',f"- **Status:** {report['status']}",'- **Public Daily Yield requests:** 0','- **Synthetic views:** 0',f"- **Inventory:** {s['items']} items · {s['posts']} Posts · {s['pages']} Pages",f"- **Policy Pages ready:** {s['policyPagesReady']}/5",f"- **Items changed:** {s['changed']}",f"- **Failures:** {s['failures']}",'','## Changes']+[f"- {x['kind'].title()}: {x['title']} — disclosure={x['policyDisclosure']}, repaired alts={x['imageAltsRepaired']}" for x in changed]
