@@ -1,5 +1,5 @@
 {
-  "next_due_at": "2026-10-16T13:52:50.454780+05:30",
+  "next_due_at": "2026-10-16T21:53:58.126857+05:30",
   "items": {
     "6779600207608409311": {
       "status": "live",
@@ -55,8 +55,34 @@
         "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-02 -f target_url=https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to.html -f content_mode=post -f published_at=2026-10-15T17:22:56-07:00 -f route_index=1 -f extra_platforms=tumblr,bluesky,mastodon",
         "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-02 -f target_url=https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to.html -f content_mode=post -f published_at=2026-10-15T17:22:56-07:00 -f route_index=2 -f extra_platforms=tumblr,bluesky,mastodon"
       ]
+    },
+    "8023797526917435508": {
+      "status": "live",
+      "attempts": 1,
+      "last_attempt": "2026-10-16T13:53:58.126857+05:30",
+      "revision": "34a697fb73158386",
+      "url": "https://dailyyield.blogspot.com/2026/10/what-to-expect-from-europes-most.html",
+      "title_published": "What to expect from Europe’s most valuable com",
+      "published_at": "2026-10-16T01:24:02-07:00",
+      "repairs": [
+        "removed 30 repeated prose sentence(s)",
+        "removed 160 banned or duplicated sentence(s)",
+        "added the disclosed worked example",
+        "added the editorial method note",
+        "added the contextual Daily Yield card"
+      ],
+      "social_route": [
+        "bluesky",
+        "mastodon",
+        "facebook"
+      ],
+      "social_commands": [
+        "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-03 -f target_url=https://dailyyield.blogspot.com/2026/10/what-to-expect-from-europes-most.html -f content_mode=post -f published_at=2026-10-16T01:24:02-07:00 -f route_index=0 -f extra_platforms=bluesky,mastodon,facebook",
+        "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-03 -f target_url=https://dailyyield.blogspot.com/2026/10/what-to-expect-from-europes-most.html -f content_mode=post -f published_at=2026-10-16T01:24:02-07:00 -f route_index=1 -f extra_platforms=bluesky,mastodon,facebook",
+        "gh workflow run coordinated_social_publish.yml --ref main -f item_key=revive-03 -f target_url=https://dailyyield.blogspot.com/2026/10/what-to-expect-from-europes-most.html -f content_mode=post -f published_at=2026-10-16T01:24:02-07:00 -f route_index=2 -f extra_platforms=bluesky,mastodon,facebook"
+      ]
     }
   },
-  "last_run": "2026-10-16T05:52:50.454780+05:30",
-  "implementation_revision": "58a3638afaa485d8"
+  "last_run": "2026-10-16T13:53:58.126857+05:30",
+  "implementation_revision": "34a697fb73158386"
 }
