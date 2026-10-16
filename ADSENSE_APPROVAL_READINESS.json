@@ -1,13 +1,13 @@
 {
- "checkedAt": "2026-10-16T09:48:07.374919+00:00",
+ "checkedAt": "2026-10-16T10:01:03.677318+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
   {
    "check": "policy page /about",
-   "pass": false,
-   "detail": "/p/about-us_02080501126.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/about-us_02080501126.html → HTTP 200",
    "blocking": true
   },
   {
@@ -24,49 +24,49 @@
   },
   {
    "check": "policy page /disclaimer",
-   "pass": false,
-   "detail": "/p/disclaimer.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/disclaimer.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "policy page /terms",
-   "pass": false,
-   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/terms-and-conditions.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "about: public author name",
-   "pass": false,
+   "pass": true,
    "detail": "Kushal Daga",
    "blocking": true
   },
   {
    "check": "about: publisher's legal name",
-   "pass": false,
+   "pass": true,
    "detail": "Kushal Kumar Daga",
    "blocking": true
   },
   {
    "check": "about: name relationship explained",
-   "pass": false,
+   "pass": true,
    "detail": "the site says the public author name is the short form of the legal name used on records",
    "blocking": true
   },
   {
    "check": "about: retired initials byline gone",
-   "pass": true,
+   "pass": false,
    "detail": "the retired initials byline is no longer published",
    "blocking": true
   },
   {
    "check": "about: publication inbox",
-   "pass": false,
+   "pass": true,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "about: publisher's own address",
-   "pass": false,
+   "pass": true,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -138,8 +138,8 @@
   },
   {
    "check": "ads.txt published",
-   "pass": false,
-   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
+   "pass": true,
+   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
    "blocking": true
   },
   {
@@ -180,20 +180,20 @@
   },
   {
    "check": "no retired byline on the homepage",
-   "pass": true,
+   "pass": false,
    "detail": "the homepage carries the public author name, not the retired initials form",
    "blocking": true
   },
   {
    "check": "robots meta allows indexing",
-   "pass": false,
+   "pass": true,
    "detail": "the homepage is indexable",
    "blocking": true
   },
   {
    "check": "newest articles show no drafting artefacts",
-   "pass": false,
-   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: What to expect from Europe’s most valuable com: 35 link(s) still labelled with a generic source phrase; 24 drafting note(s) left in the text; 24 drafting note(s) left in the text",
+   "pass": true,
+   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown",
    "blocking": true
   },
   {
@@ -205,51 +205,9 @@
  ],
  "blockingIssues": [
   {
-   "check": "policy page /about",
+   "check": "about: retired initials byline gone",
    "pass": false,
-   "detail": "/p/about-us_02080501126.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "policy page /disclaimer",
-   "pass": false,
-   "detail": "/p/disclaimer.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "policy page /terms",
-   "pass": false,
-   "detail": "/p/terms-and-conditions.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "about: public author name",
-   "pass": false,
-   "detail": "Kushal Daga",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's legal name",
-   "pass": false,
-   "detail": "Kushal Kumar Daga",
-   "blocking": true
-  },
-  {
-   "check": "about: name relationship explained",
-   "pass": false,
-   "detail": "the site says the public author name is the short form of the legal name used on records",
-   "blocking": true
-  },
-  {
-   "check": "about: publication inbox",
-   "pass": false,
-   "detail": "dailyyield.official@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's own address",
-   "pass": false,
-   "detail": "kushalkumardaga.ca@gmail.com",
+   "detail": "the retired initials byline is no longer published",
    "blocking": true
   },
   {
@@ -259,21 +217,9 @@
    "blocking": true
   },
   {
-   "check": "ads.txt published",
+   "check": "no retired byline on the homepage",
    "pass": false,
-   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
-   "blocking": true
-  },
-  {
-   "check": "robots meta allows indexing",
-   "pass": false,
-   "detail": "the homepage is indexable",
-   "blocking": true
-  },
-  {
-   "check": "newest articles show no drafting artefacts",
-   "pass": false,
-   "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown — first offender: What to expect from Europe’s most valuable com: 35 link(s) still labelled with a generic source phrase; 24 drafting note(s) left in the text; 24 drafting note(s) left in the text",
+   "detail": "the homepage carries the public author name, not the retired initials form",
    "blocking": true
   }
  ],
