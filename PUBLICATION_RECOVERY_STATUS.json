@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T19:01:27.105527+05:30",
+  "generatedAt": "2026-10-16T19:41:38.517201+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
@@ -20,16 +20,11 @@
       "type": "preparation_recovery",
       "key": "master-evergreen-4",
       "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "facebook",
-      "routeIndex": 1,
-      "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "social:2026-10-16:news-banking:1"
+  ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
