@@ -1,16 +1,24 @@
 {
   "status": "PASS",
   "apply": true,
-  "checked_at": "2026-10-16T06:20:52.045034+00:00",
-  "posts_checked": 465,
-  "automated_posts": 465,
-  "disclosures_current_before": 465,
+  "checked_at": "2026-10-16T09:54:55.034027+00:00",
+  "posts_checked": 471,
+  "automated_posts": 471,
+  "disclosures_current_before": 471,
   "duplicate_groups_found": [],
   "unresolved_duplicate_groups": [],
   "deleted_duplicate_post_ids": [],
-  "posts_updated": 465,
+  "posts_updated": 470,
   "historical_news_sentences_deduplicated": 0,
-  "quarantined_to_draft": [],
+  "quarantined_to_draft": [
+    {
+      "post_id": "6893610896651799359",
+      "url": "https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to.html",
+      "issues": [
+        "repeated substantive sentence within the content"
+      ]
+    }
+  ],
   "remaining_live_policy_flags": [],
   "unsafe_active_links": [],
   "image_rights_gap_posts": 0,
