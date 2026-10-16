@@ -1,11 +1,17 @@
 {
-  "generatedAt": "2026-10-16T10:49:43.623674+05:30",
+  "generatedAt": "2026-10-16T11:25:32.753704+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 7,
+  "confirmedPublications": 8,
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-2",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
