@@ -1,15 +1,40 @@
 {
-  "generatedAt": "2026-10-17T04:47:34.702810+05:30",
+  "generatedAt": "2026-10-17T05:16:44.349301+05:30",
   "dateIST": "2026-10-17",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 1,
-  "confirmedByLivePost": 1,
+  "confirmedPublications": 2,
+  "confirmedByLivePost": 2,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-0",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-0",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-china",
+      "platform": "bluesky",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-china",
+      "platform": "mastodon",
+      "routeIndex": 1,
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
