@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 175 PASS · 0 FAIL
+**Result:** 178 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -154,6 +154,9 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **News launch gate is 2026-09-25**
 - ✅ **News precision timing is independent of Search Console audience measurements**
 - ✅ **News duplicate recovery uses Blogger API without synthetic pageviews**
+- ✅ **News treats a post at today's address as published only when it carries today's edition**
+- ✅ **News repairs or refreshes a duplicate instead of stopping on it**
+- ✅ **News widens its window rather than leaving a country or sub-section short**
 - ✅ **News source policy is current**
 - ✅ **News finance filter enabled**
 - ✅ **News requires at least one genuinely current item**

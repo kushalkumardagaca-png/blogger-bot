@@ -22,7 +22,7 @@ check("Scheduled watchdog workflow is removed", not (WORKFLOW_ROOT / "health_mon
 check("No workflow invokes the removed watchdog", "zero_view_watchdog" not in all_workflows and "WATCHDOG_VERDICT" not in all_workflows and "ZERO_VIEW_WATCHDOG" not in all_workflows)
 check("No repository workflow installs or launches a headless browser", not any(term in all_workflows.lower() for term in ("playwright", "puppeteer", "selenium", "headlesschrome", "chromium --headless")))
 check("Rendered compatibility script cannot navigate", "page.goto" not in rendered and "DISABLED_ZERO_VIEW_POLICY" in rendered)
-check("News duplicate recovery uses Blogger API", "/posts/bypath?" in news and "live_post_exists(expected_url, token)" in news)
+check("News duplicate recovery uses Blogger API", "/posts/bypath?" in news and "live_current_edition(expected_url, token, now.date(), alt_dates)" in news)
 check("News engine does not read Daily Yield public feeds", "dailyyield.blogspot.com/feeds" not in news)
 check("Related shelf uses Blogger API", "www.googleapis.com/blogger/v3" in related and "dailyyield.blogspot.com/feeds" not in related)
 check("Theme performs no speculative document prefetch", "link.rel='prefetch'" not in theme and "link.as='document'" not in theme and "rel='prerender'" not in theme)

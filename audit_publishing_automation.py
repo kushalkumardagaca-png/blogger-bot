@@ -445,8 +445,16 @@ check('News launch gate is 2026-09-25','LAUNCH_DATE = dt.date(2026, 9, 25)' in n
 check('News precision timing is independent of Search Console audience measurements',
       'from publication_timing import NEWS_LIVE' in np and 'GSC' not in (ROOT/'publication_timing.py').read_text())
 check('News duplicate recovery uses Blogger API without synthetic pageviews',
-      'live_post_exists(expected_url, token)' in np and '/posts/bypath?' in np
+      'live_current_edition(expected_url, token, now.date(), alt_dates)' in np
+      and '/posts/bypath?' in np
       and 'response.read().decode("utf-8"' not in np)
+check('News treats a post at today\'s address as published only when it carries today\'s edition',
+      'def live_current_edition(' in np and 'assert_saved_green(post)' in np
+      and "markers = [f\"{day.day} {day.strftime('%B %Y')}\"" in np)
+check('News repairs or refreshes a duplicate instead of stopping on it',
+      'interrupted-run post repaired and verified' in np and 'older-edition post refreshed' in np)
+check('News widens its window rather than leaving a country or sub-section short',
+      'coverage widened with' in np and 'news_coverage.enforce(current + extras, desk)' in np)
 check('News source policy is current','official institutions plus established, reputable newsrooms' in np)
 check('News finance filter enabled','FINANCE_RE.search' in np)
 check('News requires at least one genuinely current item','if current_count == 0' in np)

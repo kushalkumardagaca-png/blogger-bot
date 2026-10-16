@@ -18,6 +18,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,17 +37,29 @@ PAGES = {
 }
 
 
-def get(path: str) -> tuple[int, str]:
+BROWSER_UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+              "Chrome/126.0 Safari/537.36 DailyYieldAdSenseCheck/1.0")
+
+
+def get(path: str, attempts: int = 3) -> tuple[int, str]:
+    """Read one public page politely, with retries for rate limiting.
+
+    A hosted blog can answer a burst of requests from one address with 429/503,
+    and a single throttled reply must not be reported as a missing policy page.
+    """
     url = path if path.startswith("http") else BLOG + path
-    try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
-            raw = r.read()
-            try:
+    last = ""
+    for attempt in range(1, attempts + 1):
+        try:
+            request = urllib.request.Request(url, headers={**UA, "User-Agent": BROWSER_UA,
+                                                           "Accept": "text/html,application/xhtml+xml,*/*"})
+            with urllib.request.urlopen(request, timeout=60) as r:
+                raw = r.read()
                 return r.status, raw.decode("utf-8", "replace")
-            except Exception:
-                return r.status, ""
-    except Exception as exc:
-        return 0, str(exc)
+        except Exception as exc:  # noqa: BLE001 — the reason is reported, not hidden
+            last = f"{exc.__class__.__name__}: {exc}"
+            time.sleep(2 * attempt)
+    return 0, last
 
 
 def visible(html_text: str) -> str:
@@ -64,6 +77,7 @@ def check_site() -> dict:
     pages: dict[str, str] = {}
     for name, path in PAGES.items():
         status, body = get(path)
+        time.sleep(1.2)   # polite spacing between page reads
         pages[name] = visible(body) if status == 200 else ""
         add(f"policy page /{name}", status == 200, f"{path} → HTTP {status}")
 
