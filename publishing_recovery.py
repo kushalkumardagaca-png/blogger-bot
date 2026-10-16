@@ -87,6 +87,29 @@ def live_token():
   return ''
 
 
+def master_live_on(url,token,day):
+ """A Master article is identified by its own JSON-LD date, not by a date line.
+
+ Master titles carry no edition date ("Best Financial Habits For Gen Z"), so the
+ date the article publishes itself under is read from its stored schema instead.
+ """
+ import news_pipeline,re as _re,urllib.parse as _up
+ if not url:return False
+ path=_up.urlparse(url).path
+ query=_up.urlencode({"path":path,"fetchBody":"true","fields":"id,url,status,title,content"})
+ post=news_pipeline.blogger_call("/posts/bypath?"+query,token)
+ if post.get('status')!='LIVE':return False
+ body=post.get('content') or ''
+ found=_re.search(r'"datePublished"\s*:\s*"(\d{4})-(\d{2})-(\d{2})',body)
+ if not found:
+  found=_re.search(r'Published\s+(\d{4})-(\d{2})-(\d{2})',body)
+ if not found:return False
+ stamped=dt.date(int(found.group(1)),int(found.group(2)),int(found.group(3)))
+ if stamped!=day:return False
+ news_pipeline.assert_saved_green(post)
+ return True
+
+
 def verified_inventory(day,rows):
  """Keep only the records whose address really carries the day's edition.
 
@@ -101,7 +124,10 @@ def verified_inventory(day,rows):
  kept,unverified=[],[]
  for row in rows:
   try:
-   ok=news_pipeline.live_current_edition(row['url'],token,day,alt_dates=(day-dt.timedelta(days=1),))
+   if row['kind'] == 'news':
+    ok=news_pipeline.live_current_edition(row['url'],token,day,alt_dates=(day-dt.timedelta(days=1),))
+   else:
+    ok=master_live_on(row['url'],token,day)
   except Exception:
    ok=False
   (kept if ok else unverified).append(row if ok else row['key'])

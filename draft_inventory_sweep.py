@@ -114,11 +114,46 @@ def backup(entries: list[dict], kept: list[dict], removed: list[dict]) -> None:
     BACKUP.write_text(json.dumps(entries[-6:], indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
+def restore(access: str) -> int:
+    """Re-create the drafts kept in the backup, newest sweep first."""
+    try:
+        entries = json.loads(BACKUP.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        print(json.dumps({"status": "NOTHING_TO_RESTORE"}))
+        return 0
+    restored, failed = [], []
+    for entry in entries:
+        for row in entry.get("removed", []):
+            if not row.get("content"):
+                continue
+            try:
+                api("/posts?isDraft=true", access, "POST") if False else None
+                body = json.dumps({"kind": "blogger#post", "title": row.get("title", ""),
+                                   "content": row["content"], "labels": row.get("labels", [])}).encode()
+                request = urllib.request.Request(
+                    f"https://www.googleapis.com/blogger/v3/blogs/{required('BLOGGER_BLOG_ID')}/posts?isDraft=true",
+                    data=body, method="POST",
+                    headers={"Authorization": "Bearer " + access, "Content-Type": "application/json"})
+                with urllib.request.urlopen(request, timeout=60) as response:
+                    created = json.load(response)
+                restored.append({"id": created.get("id"), "title": row.get("title", "")})
+                time.sleep(1.5)
+            except Exception as exc:  # noqa: BLE001
+                failed.append({"title": row.get("title", ""), "error": str(exc)[:200]})
+    print(json.dumps({"status": "RESTORED" if restored else "NOTHING_RESTORED",
+                      "restored": len(restored), "failed": len(failed)}))
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true", help="delete the leftover drafts")
+    parser.add_argument("--restore", action="store_true",
+                        help="bring drafts back from DRAFT_SWEEP_BACKUP.json (the sweep is reversible)")
     args = parser.parse_args()
     access = token()
+    if args.restore:
+        return restore(access)
     found = drafts(access)
     keep, stale = classify(found, revival_queue())
     deleted, failures = [], []
