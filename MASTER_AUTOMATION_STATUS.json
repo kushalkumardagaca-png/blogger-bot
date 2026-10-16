@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "f1c98d1ff3f94446",
-  "kind": "evergreen",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-16",
-  "category": "Saving & Emergency Planning",
-  "evergreen_category": "Saving & Emergency Planning",
+  "kind": "evergreen",
+  "slot": 1,
+  "topic_id": "f1c98d1ff3f94446",
+  "replaced_topic_id": null,
   "title": "Best Tax-Free Savings Account Rates in Canada",
-  "url": "https://dailyyield.blogspot.com/2026/10/best-tax-free-savings-account-rates-in.html",
-  "published_at": "2026-10-15T22:45:09-07:00"
+  "package": "master_packages/dynamic/2026-10-16-evergreen-f1c98d1ff3f94446.json",
+  "html": "scheduled_ready/2026-10-16-evergreen-1-best-tax-free-savings-account-rates-in-canada.html"
 }
