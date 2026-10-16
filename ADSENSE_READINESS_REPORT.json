@@ -1,17 +1,34 @@
 {
-  "checkedAt": "2026-10-16T03:31:01.588868+00:00",
+  "checkedAt": "2026-10-16T06:13:19.343941+00:00",
   "status": "PASS",
   "mode": "AUTHENTICATED_BLOGGER_API_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "summary": {
-    "items": 475,
-    "posts": 462,
+    "items": 478,
+    "posts": 465,
     "pages": 13,
-    "changed": 0,
+    "changed": 2,
     "policyPagesReady": 5,
     "failures": 0
   },
-  "changed": [],
+  "changed": [
+    {
+      "kind": "page",
+      "id": "4698688245681185879",
+      "title": "CONTACT US",
+      "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0
+    },
+    {
+      "kind": "page",
+      "id": "2716668129166401912",
+      "title": "ABOUT US",
+      "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+      "policyDisclosure": true,
+      "imageAltsRepaired": 0
+    }
+  ],
   "failures": [],
   "notes": [
     "Approval and revenue remain Google decisions.",
