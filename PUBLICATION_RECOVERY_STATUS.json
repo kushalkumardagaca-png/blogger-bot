@@ -1,20 +1,14 @@
 {
-  "generatedAt": "2026-10-16T23:41:49.315050+05:30",
-  "dateIST": "2026-10-16",
-  "status": "DEGRADED",
+  "generatedAt": "2026-10-17T00:24:08.358506+05:30",
+  "dateIST": "2026-10-17",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 20,
-  "confirmedByLivePost": 20,
+  "confirmedPublications": 0,
+  "confirmedByLivePost": 0,
   "liveVerification": "each record checked against the live post",
-  "recordsThatFailedLiveVerification": [
-    "news-banking"
-  ],
-  "expiredSlots": [
-    "news-banking"
-  ],
-  "overdueMissing": [
-    "news-banking"
-  ],
+  "recordsThatFailedLiveVerification": [],
+  "expiredSlots": [],
+  "overdueMissing": [],
   "actions": [],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
