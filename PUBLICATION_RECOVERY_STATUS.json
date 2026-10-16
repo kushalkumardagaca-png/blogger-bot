@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T11:25:32.753704+05:30",
+  "generatedAt": "2026-10-16T12:00:12.887055+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
@@ -9,6 +9,11 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-2",
       "applied": true
     }
   ],
