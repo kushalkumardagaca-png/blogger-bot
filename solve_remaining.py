@@ -205,12 +205,34 @@ def add_vendor_sentence(token: str, report: dict) -> None:
 
 
 def main() -> int:
+    report_path = REPORT
+    try:
+        return _run()
+    except Exception as exc:  # noqa: BLE001 - the report must always be written
+        import traceback
+        fallback = {"status": "ERROR", "ranAt": datetime.now(timezone.utc).isoformat(),
+                    "error": error_text(exc), "traceback": traceback.format_exc()[-1500:]}
+        try:
+            previous = json.loads(report_path.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            previous = {}
+        previous.update(fallback)
+        report_path.write_text(json.dumps(previous, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(json.dumps(fallback, ensure_ascii=False)[:800])
+        return 0
+
+
+def _run() -> int:
     token = oauth()
     report: dict = {"checkedAt": datetime.now(timezone.utc).isoformat(), "apiOnly": True,
                     "publicRequests": 0, "syntheticViews": 0}
-    try_blog_description(token, report)
-    try_page_search_description(token, report)
-    add_vendor_sentence(token, report)
+    for step, call in (("blogDescription", try_blog_description),
+                       ("pageSearchDescription", try_page_search_description),
+                       ("privacyVendorSentence", add_vendor_sentence)):
+        try:
+            call(token, report)
+        except Exception as exc:  # noqa: BLE001
+            report.setdefault("stepErrors", {})[step] = error_text(exc)
 
     remaining = []
     if not report.get("blogDescriptionLanded"):
