@@ -1,0 +1,225 @@
+{
+ "checkedAt": "2026-10-16T02:45:01.843908+00:00",
+ "status": "FAIL",
+ "publicPagesRead": 9,
+ "syntheticViews": 0,
+ "checks": [
+  {
+   "check": "policy page /about",
+   "pass": true,
+   "detail": "/p/about-us_02080501126.html → HTTP 200",
+   "blocking": true
+  },
+  {
+   "check": "policy page /contact",
+   "pass": false,
+   "detail": "/p/contact-us_01883938366.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /privacy",
+   "pass": false,
+   "detail": "/p/privacy-policy.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /disclaimer",
+   "pass": false,
+   "detail": "/p/disclaimer.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /terms",
+   "pass": false,
+   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "about: publisher named",
+   "pass": true,
+   "detail": "the accountable publisher is named in the text",
+   "blocking": true
+  },
+  {
+   "check": "about: publication inbox",
+   "pass": true,
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "about: publisher's own address",
+   "pass": false,
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "about: no contradictory reply time",
+   "pass": true,
+   "detail": "one reply-time promise only",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher named",
+   "pass": false,
+   "detail": "the accountable publisher is named in the text",
+   "blocking": true
+  },
+  {
+   "check": "contact: publication inbox",
+   "pass": false,
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's own address",
+   "pass": false,
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: no contradictory reply time",
+   "pass": true,
+   "detail": "one reply-time promise only",
+   "blocking": true
+  },
+  {
+   "check": "advertising declared in the policy pages",
+   "pass": false,
+   "detail": "advertising and Google AdSense are described in the policy pages",
+   "blocking": true
+  },
+  {
+   "check": "ads.txt published",
+   "pass": true,
+   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
+   "blocking": true
+  },
+  {
+   "check": "robots.txt readable and permits reading",
+   "pass": false,
+   "detail": "HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "Mediapartners-Google explicitly allowed",
+   "pass": false,
+   "detail": "the AdSense crawler is named in robots.txt",
+   "blocking": true
+  },
+  {
+   "check": "sitemap declared",
+   "pass": false,
+   "detail": "sitemap line present in robots.txt",
+   "blocking": true
+  },
+  {
+   "check": "sitemap.xml serves URLs",
+   "pass": true,
+   "detail": "HTTP 200, 461 URLs listed",
+   "blocking": true
+  },
+  {
+   "check": "no raw code shown to readers",
+   "pass": true,
+   "detail": "no CSS text leaks outside style blocks on the homepage",
+   "blocking": true
+  },
+  {
+   "check": "robots meta allows indexing",
+   "pass": false,
+   "detail": "the homepage is indexable",
+   "blocking": true
+  },
+  {
+   "check": "no ad code before approval",
+   "pass": true,
+   "detail": "only Blogger's own AdSense tag may be present before approval",
+   "blocking": false
+  }
+ ],
+ "blockingIssues": [
+  {
+   "check": "policy page /contact",
+   "pass": false,
+   "detail": "/p/contact-us_01883938366.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /privacy",
+   "pass": false,
+   "detail": "/p/privacy-policy.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /disclaimer",
+   "pass": false,
+   "detail": "/p/disclaimer.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "policy page /terms",
+   "pass": false,
+   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "about: publisher's own address",
+   "pass": false,
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher named",
+   "pass": false,
+   "detail": "the accountable publisher is named in the text",
+   "blocking": true
+  },
+  {
+   "check": "contact: publication inbox",
+   "pass": false,
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's own address",
+   "pass": false,
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "advertising declared in the policy pages",
+   "pass": false,
+   "detail": "advertising and Google AdSense are described in the policy pages",
+   "blocking": true
+  },
+  {
+   "check": "robots.txt readable and permits reading",
+   "pass": false,
+   "detail": "HTTP 0",
+   "blocking": true
+  },
+  {
+   "check": "Mediapartners-Google explicitly allowed",
+   "pass": false,
+   "detail": "the AdSense crawler is named in robots.txt",
+   "blocking": true
+  },
+  {
+   "check": "sitemap declared",
+   "pass": false,
+   "detail": "sitemap line present in robots.txt",
+   "blocking": true
+  },
+  {
+   "check": "robots meta allows indexing",
+   "pass": false,
+   "detail": "the homepage is indexable",
+   "blocking": true
+  }
+ ],
+ "manualStepsRequired": [
+  "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
+  "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",
+  "Use the 'Review your application' button and tick the confirmation box only after the site updates above are live."
+ ]
+}
