@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from seo_hygiene import image_alt_failures, repair_image_alts
 import identity_contact as ident
+import reader_prose
 
 BLOG_ID=os.environ.get('BLOGGER_BLOG_ID','8911514070006792465')
 BACKUP=Path('ADSENSE_READINESS_BACKUP.json.gz')
@@ -129,12 +130,15 @@ def main():
   # An unrelated surname was once published as an alias of the author; that is a
   # materially inaccurate declaration, so it is corrected on every item.
   new,name_repaired=ident.repair_names(new)
+  # Machine-assembled pages carried unnamed source links, repeated links and
+  # leftover drafting shorthand; the reader-quality pass repairs that too.
+  new,prose_repaired=reader_prose.normalise(new)
   key=policy_key(item.get('url',''))
   if key:
    new=ensure_identity(new,key)
    new=ensure_block(new,key)
   if new!=content:
-   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired})
+   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired,'proseRepaired':prose_repaired})
  after=inventory(token);fail=[];page_keys=set()
  for item in after:
   ref=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
@@ -146,6 +150,7 @@ def main():
   if len(readable)<200 and not controlled_move:fail.append({'id':ref,'issue':'insufficient readable content'})
   if image_alt_failures(content):fail.append({'id':ref,'issue':'missing image alt','count':len(image_alt_failures(content))})
   for problem in ident.name_problems(content):fail.append({'id':ref,'issue':problem})
+  for problem in reader_prose.problems(content):fail.append({'id':ref,'issue':problem})
   if key:
    page_keys.add(key)
    if START not in content or END not in content:fail.append({'id':ref,'issue':'AdSense disclosure missing'})

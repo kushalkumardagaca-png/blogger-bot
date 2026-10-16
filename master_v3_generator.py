@@ -41,6 +41,11 @@ def low_exposure_posts():
  return out
 STOP=set('a an and are as at be best by can do for from guide how in into is it latest of on or that the their this to today versus via what when where which who why will with your'.split())
 
+def tokenized(value):return re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",clean(value))
+def citation_label(record):
+ """Anchor text for a source link: the publication's own name, never a phrase."""
+ name=' '.join(tokenized((record or {}).get('name') or 'the cited record')[:6]).strip(' ,;:')
+ return name or 'the cited record'
 def clean(value):return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',str(value or '')))).strip()
 def terms(value):return [x for x in re.findall(r'[a-z0-9]{3,}',str(value).casefold()) if x not in STOP and not x.isdigit()]
 def sentence_trim(text,limit):
@@ -165,7 +170,6 @@ def validate_section(paragraphs,source_ids):
 def deterministic_section(section_heading,sources):
  """Quota-independent evidence prose with topic-specific, non-repeating syntax."""
  import hashlib
- tokenized=lambda value:re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",clean(value))
  heading_text=' '.join(tokenized(section_heading)[:14])
  patterns=(
   "{cite} approaches {heading} through the document titled “{title}.” The retrieved passage says, “{excerpt}.” Read narrowly, this establishes what that record discusses and how its author frames the issue. It does not establish a universal outcome, and it should not be stretched beyond the jurisdiction, period, definitions and population described by {provider}. For a reader comparing decisions, the practical task is to separate the documented observation from any later forecast, recommendation or causal claim.",
@@ -178,7 +182,7 @@ def deterministic_section(section_heading,sources):
  for cursor in range(10):
   source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));start=(cursor*37)%max(1,len(tokens)-42);excerpt=' '.join(tokens[start:start+38]).strip(' ,;:')
   if not excerpt:continue
-  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16]);provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider} evidence]]"
+  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16]);provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider}]]"
   seed=int(hashlib.sha256(f"{heading_text}|{title}|{cursor}".encode()).hexdigest()[:8],16)
   paragraphs.append(patterns[seed%len(patterns)].format(cite=cite,heading=heading_text,title=title,excerpt=excerpt,provider=provider))
  if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
@@ -200,14 +204,14 @@ def deterministic_section(section_heading,sources):
   index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]));parts=paragraphs[index].split()
   if len(parts)<=35:break
   paragraphs[index]=' '.join(parts[:-1]).rstrip(' ,;:')+'.'
- primary=sources[0][0]
- paragraphs=[p if any(f'[[S{i}|' in p for i,_ in sources) else p+f' [[S{primary}|documented source evidence]]' for p in paragraphs]
+ primary=sources[0][0];primary_name=citation_label(sources[0][1])
+ paragraphs=[p if any(f'[[S{i}|' in p for i,_ in sources) else p+f' [[S{primary}|{primary_name}]]' for p in paragraphs]
  ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)
  return paragraphs
 
 def write_section(article_title,section_heading,index,sources):
- ids={i:s['text']+' '+s['title'] for i,s in sources};packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources);primary=min(ids)
+ ids={i:s['text']+' '+s['title'] for i,s in sources};primary_name=citation_label(sources[0][1]);packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources);primary=min(ids)
  base=f'''Article: {article_title}\nSection {index}: {section_heading}\nWrite source-bounded prose in a natural editorial voice. Use only the packet below. Do not invent numbers, quotations, causation, experience or advice. Vary sentence openings and paragraph rhythm; connect evidence with clear transitions; avoid stock disclaimers, repeated conclusions and formulaic phrasing. Explain evidence, jurisdiction, affected groups, mechanism, uncertainty and limits. Do not introduce the article or summarize another section.\nSOURCES:\n{packet}'''
  pool=[];seen=set();last=''
  for attempt in range(2):
@@ -227,13 +231,13 @@ def write_section(article_title,section_heading,index,sources):
     if not nums or all(number in source_blob for number in nums):kept.append(sentence)
    paragraph=' '.join(kept).strip()
    if not paragraph:continue
-   if not any(f'[[S{i}|' in paragraph for i in ids):paragraph+=f' [[S{primary}|documented source evidence]]'
+   if not any(f'[[S{i}|' in paragraph for i in ids):paragraph+=f' [[S{primary}|{primary_name}]]'
    key=' '.join(paragraph.casefold().split())
    if key not in seen:seen.add(key);safe.append(paragraph)
   pool.extend(safe)
   if words(' '.join(pool))>490:pool=parse_paragraphs(sentence_trim(' '.join(pool),480))
   # Trimming can redistribute sentences, so enforce citation metadata afterward.
-  pool=[p if any(f'[[S{i}|' in p for i in ids) else p+f' [[S{primary}|documented source evidence]]' for p in pool]
+  pool=[p if any(f'[[S{i}|' in p for i in ids) else p+f' [[S{primary}|{primary_name}]]' for p in pool]
   ok,last=validate_section(pool,ids)
   if ok:return pool
  # Completion never depends on a provider quota or model response. The fallback
@@ -318,7 +322,7 @@ def extracted_summary(sections):
  out=[]
  for index,section in enumerate(sections,1):
   heading_text=clean(section.get('heading','Evidence section'))
-  body=clean(' '.join(section.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|linked source evidence]]'
+  body=clean(' '.join(section.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|the cited record]]'
   body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body);start=(index*19)%max(1,len(tokens)-34);excerpt=' '.join(tokens[start:start+32])
   out.append(f'For {heading_text}, the evidence recap begins with this bounded point: {excerpt}. {cite} The practical reading of {heading_text} is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This {heading_text} recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast.')
  total=words(' '.join(out))
@@ -334,7 +338,7 @@ def support(sections):
  faq=[];glossary=[];used=set()
  for index,s in enumerate(sections):
   heading=clean(s.get('heading','the evidence'))
-  body=clean(' '.join(s.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|linked source evidence]]'
+  body=clean(' '.join(s.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|the cited record]]'
   body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body)
   start=(index*23+11)%max(1,len(tokens)-38);excerpt=' '.join(tokens[start:start+36])
   if index<5:

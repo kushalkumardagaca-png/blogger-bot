@@ -1,4 +1,5 @@
 
+import reader_prose
 from PIL import Image, ImageDraw
 import io
 import base64
@@ -162,6 +163,11 @@ def publish_to_blogger(title, content, labels):
         return existing
 
     content=stamp(content,title)
+    # Nothing machine-assembled reaches a reader: the finished page is run through
+    # the reader-quality pass first, so leftover drafting shorthand, unnamed
+    # source links and repeated links are repaired before publication.
+    content,prose_fixes=reader_prose.normalise(content)
+    if prose_fixes:print(f"Reader-quality pass repaired {prose_fixes} detail(s) before publication")
     body = {"kind": "blogger#post", "blog": {"id": BLOG_ID},
             "title": title, "content": content, "labels": labels}
     res = service.posts().insert(blogId=BLOG_ID, body=body, isDraft=False).execute()

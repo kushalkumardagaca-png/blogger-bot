@@ -17,6 +17,8 @@ from __future__ import annotations
 
 import json
 import re
+
+import reader_prose
 import sys
 import time
 import urllib.request
@@ -127,6 +129,26 @@ def check_site() -> dict:
     add("robots meta allows indexing",
         "index,follow" in masked.casefold() or "index, follow" in masked.casefold(),
         "the homepage is indexable")
+    # The newest live articles are read straight from the public feed, because a
+    # reader deciding whether this site is worth their time sees exactly this.
+    feed_status, feed = get("/feeds/posts/default?alt=json&max-results=12")
+    try:
+        entries = json.loads(feed)["feed"].get("entry", [])
+    except Exception:
+        entries = []
+    offenders = []
+    for entry in entries:
+        body = (entry.get("content", {}) or {}).get("$t", "")
+        if not body:
+            continue
+        marks = reader_prose.problems(body)
+        if marks:
+            offenders.append(f"{entry.get('title', {}).get('$t', 'untitled')}: {'; '.join(marks)}")
+    add("newest articles show no drafting artefacts",
+        feed_status == 200 and entries and not offenders,
+        "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown"
+        + (f" — first offender: {offenders[0]}" if offenders else ""))
+
     add("no ad code before approval",
         "adsbygoogle" not in masked or "data-ad-client" in masked,
         "only Blogger's own AdSense tag may be present before approval", False)

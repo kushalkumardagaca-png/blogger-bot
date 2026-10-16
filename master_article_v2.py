@@ -5,6 +5,7 @@ import html, json, math, re
 from urllib.parse import urlparse
 from page_family import family_block
 from social_identity import SOCIAL_PROFILES
+import reader_prose
 from content_policy_guard import POLICY_VERSION,automation_disclosure,audit_text,normalize_sentence,sentences
 
 BLOG="https://dailyyield.blogspot.com"
@@ -80,6 +81,7 @@ def linked_text(text,sources,internals):
     out=[];pos=0
     for m in re.finditer(r"\[\[([SI]\d+)\|([^\]]+)\]\]",text or ""):
         out.append(esc(text[pos:m.start()]));ref=refs.get(m.group(1));anchor=m.group(2)
+        if ref and reader_prose.is_generic_label(anchor):anchor=reader_prose.source_label(ref.get("url",""))
         if ref: out.append(f'<a href="{esc(ref["url"])}" rel="noopener" target="_blank">{esc(anchor)}</a>' if m.group(1).startswith("S") else f'<a href="{esc(ref["url"])}">{esc(anchor)}</a>')
         else: out.append(esc(anchor))
         pos=m.end()
