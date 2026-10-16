@@ -88,6 +88,9 @@ def apply(text: str) -> tuple[str, list[str]]:
     if fixed != text:
         text = fixed
         changes.append("footer states the public author name and the legal name behind it")
+    if VISIBLE_DESCRIPTION_RE.search(text):
+        text = VISIBLE_DESCRIPTION_RE.sub(f"<p class='description'>{SITE_DESCRIPTION}</p>", text, count=1)
+        changes.append("header description states the current published name")
     text, meta_done = apply_meta(text)
     if meta_done:
         changes.append("policy-page descriptions state the correct reply time and both addresses")
@@ -110,6 +113,10 @@ def audit(text: str) -> list[str]:
         issues.append("theme does not carry the public author name")
     if PRIMARY_EMAIL not in text:
         issues.append("theme does not show the publication inbox")
+    if VISIBLE_DESCRIPTION_RE.search(text):
+        issues.append("theme still prints the blog's stored description")
+    if SITE_DESCRIPTION not in text:
+        issues.append("theme does not carry the current site description")
     return issues
 
 
@@ -124,6 +131,16 @@ def audit(text: str) -> list[str]:
 # corrected text first, so a reader, a search engine or a reviewer reads the
 # truthful version at the top of the page head whatever the stored field says.
 # ---------------------------------------------------------------------------
+# The one site-wide description. Blogger stores the blog's own description and
+# meta description in its settings, and those older strings still name the
+# retired byline; the theme can put the correct text first on every page, so a
+# reader, a search engine or a reviewer reads the honest version either way.
+SITE_DESCRIPTION = ("Daily Yield publishes finance news, practical money guides, market insights and "
+                    "transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com "
+                    "or kushalkumardaga.ca@gmail.com.")
+VISIBLE_DESCRIPTION_RE = re.compile(
+    r"<p class='description'>\s*<data:description/>\s*</p>")
+
 META_MARKER_START = "<!-- DY_HONEST_META_START -->"
 META_MARKER_END = "<!-- DY_HONEST_META_END -->"
 
@@ -154,6 +171,18 @@ def meta_block() -> str:
         lines.append(f"  <meta content='{description}' property='og:description'/>")
         lines.append(f"  <meta content='{description}' name='twitter:description'/>")
         lines.append("</b:if>")
+    # Then the homepage, then every other page, so no page can fall back to the
+    # blog's older stored description.
+    def metas(description: str, indent: str = "  ") -> list[str]:
+        return [f"{indent}<meta content='{description}' name='description'/>",
+                f"{indent}<meta content='{description}' property='og:description'/>",
+                f"{indent}<meta content='{description}' name='twitter:description'/>"]
+
+    lines.append("<b:if cond='data:view.isHomepage'>")
+    lines += metas(SITE_DESCRIPTION)
+    lines.append("<b:else/>")
+    lines += metas(SITE_DESCRIPTION)
+    lines.append("</b:if>")
     lines.append(META_MARKER_END)
     return "\n".join(lines)
 

@@ -47,7 +47,11 @@ class IdentityModuleTests(unittest.TestCase):
 
 class ThemeConsistencyTests(unittest.TestCase):
     def sample(self):
-        return ("<div class='ft-identity'><b>Daily Yield</b><span class='ft-by'>By Kushal K. Daga</span></div>"
+        """A realistic theme fragment: Blogger's head include, the stored description
+        paragraph, the identity card and the footer contact card."""
+        return ("<b:include data='blog' name='all-head-content'/>"
+                "<p class='description'><data:description/></p>"
+                "<div class='ft-identity'><b>Daily Yield</b><span class='ft-by'>By Kushal K. Daga</span></div>"
                 "<div class='ft-contact'><span class='ft-eyebrow'>Start a conversation</span>"
                 f"<a class='ft-email' href='mailto:{ident.PRIMARY_EMAIL}'>{ident.PRIMARY_EMAIL}</a>"
                 "<p>Replies within 24&#8211;48 hours. Comments answered fastest.</p></div>"
