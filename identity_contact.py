@@ -87,6 +87,8 @@ STRUCTURED_NAME_FIXES = (
  ('\"alternateName\": [\"Kushal Kumar Daga\", \"Kushal Daga\", \"Kushal K. Daga\", \"Finance by Kushal\"]',
   '\"alternateName\": [' + alias_list_json() + ']'),
 )
+# Publishing the corrected packages means the live pass has to run again after
+# they change, so the note below is deliberate and repeat-safe.
 OPERATING_FROM = "India"
 # The inbox shown on the site for readers, corrections and business enquiries.
 PRIMARY_EMAIL = "dailyyield.official@gmail.com"
