@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-16T12:47:04.760568+05:30",
+  "generatedAt": "2026-10-16T13:26:37.713455+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 10,
+  "confirmedPublications": 11,
   "overdueMissing": [],
   "actions": [
     {
@@ -17,17 +17,8 @@
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "bluesky",
-      "routeIndex": 1,
+      "type": "preparation_recovery",
+      "key": "master-trending-3",
       "applied": true
     }
   ],
