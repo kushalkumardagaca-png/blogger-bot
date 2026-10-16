@@ -126,12 +126,15 @@ def main():
  changed=[]
  for item in before:
   content=item.get('content','');new,alts_repaired=repair_image_alts(content,item.get('title','Daily Yield'))
+  # An unrelated surname was once published as an alias of the author; that is a
+  # materially inaccurate declaration, so it is corrected on every item.
+  new,name_repaired=ident.repair_names(new)
   key=policy_key(item.get('url',''))
   if key:
    new=ensure_identity(new,key)
    new=ensure_block(new,key)
   if new!=content:
-   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired})
+   patch(token,item,new);changed.append({'kind':item['resource'][:-1],'id':item['id'],'title':item['title'],'url':item['url'],'policyDisclosure':bool(key),'imageAltsRepaired':alts_repaired,'nameClaimRepaired':name_repaired})
  after=inventory(token);fail=[];page_keys=set()
  for item in after:
   ref=f"{item['resource']}:{item['id']}";content=item.get('content','');key=policy_key(item.get('url',''))
@@ -142,6 +145,7 @@ def main():
   controlled_move=item.get('url','').endswith('/p/share-market_0718113516.html')
   if len(readable)<200 and not controlled_move:fail.append({'id':ref,'issue':'insufficient readable content'})
   if image_alt_failures(content):fail.append({'id':ref,'issue':'missing image alt','count':len(image_alt_failures(content))})
+  for problem in ident.name_problems(content):fail.append({'id':ref,'issue':problem})
   if key:
    page_keys.add(key)
    if START not in content or END not in content:fail.append({'id':ref,'issue':'AdSense disclosure missing'})
@@ -150,7 +154,8 @@ def main():
     if IDENTITY_START not in content or IDENTITY_END not in content:fail.append({'id':ref,'issue':'identity statement missing'})
     if ident.PRIMARY_EMAIL not in readable or ident.OWNER_EMAIL not in readable:
      fail.append({'id':ref,'issue':'both monitored addresses must appear on this page'})
-    if ident.PUBLISHER_NAME not in readable:fail.append({'id':ref,'issue':'accountable publisher missing'})
+    if ident.LEGAL_NAME not in readable:fail.append({'id':ref,'issue':"publisher's legal name missing"})
+    if ident.BYLINE not in readable:fail.append({'id':ref,'issue':'editorial byline missing'})
     if OLD_REPLY_TIME_PROMISE.search(readable):fail.append({'id':ref,'issue':'contradictory reply-time promise still present'})
    elif ident.PRIMARY_EMAIL not in content:
     # The non-identity policy pages keep their own disclosure wording; only a
