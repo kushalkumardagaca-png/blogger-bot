@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-16T13:03:23.096017+00:00",
+  "checkedAt": "2026-10-16T13:12:23.059196+00:00",
   "apiOnly": true,
   "publicRequests": 0,
   "syntheticViews": 0,
@@ -21,10 +21,13 @@
     }
   ],
   "blogDescriptionLanded": false,
+  "gdataDescriptionAttempt": {
+    "result": "settings feed refused the write: HTTPError <HTML>\n<HEAD>\n<TITLE>Not Found</TITLE>\n</HEAD>\n<BODY BGCOLOR=\"#FFFFFF\" TEXT=\"#000000\">\n<H1>Not Found</H1>\n<H2>Error 404</H2>\n</BODY>\n</HTML>\n"
+  },
   "stepErrors": {
     "pageSearchDescription": "HTTPError {\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid field selection customMetaData\",\n    \"errors\": [\n      {\n        \"message\": \"Invalid field selection customMetaData\",\n        \"domain\": \"global\""
   },
-  "privacyVendorSentence": "added and read back",
+  "privacyVendorSentence": "already present",
   "userActionRequired": [
     "Blogger → Settings → Blog description: paste the corrected site description (Blogger's API does not expose this box).",
     "Blogger → Pages → Search description box for ABOUT US, CONTACT US, PRIVACY POLICY and DISCLAIMER: paste the corrected text (the API cannot write this box)."
