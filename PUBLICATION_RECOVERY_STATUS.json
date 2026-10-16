@@ -1,14 +1,13 @@
 {
-  "generatedAt": "2026-10-16T23:16:37.095450+05:30",
+  "generatedAt": "2026-10-16T23:41:49.315050+05:30",
   "dateIST": "2026-10-16",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 19,
-  "confirmedByLivePost": 19,
+  "confirmedPublications": 20,
+  "confirmedByLivePost": 20,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [
-    "news-banking",
-    "master-trending-2"
+    "news-banking"
   ],
   "expiredSlots": [
     "news-banking"
