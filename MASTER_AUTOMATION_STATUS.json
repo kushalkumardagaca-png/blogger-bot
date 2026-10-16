@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "91d096eb2e57245c",
-  "kind": "trending",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-16",
-  "category": "Trend · Markets & Assets in Motion",
-  "evergreen_category": "Markets Trading & Crypto",
+  "kind": "trending",
+  "slot": 1,
+  "topic_id": "91d096eb2e57245c",
+  "replaced_topic_id": null,
   "title": "Spanish stock market pays out €35.716 billion",
-  "url": "https://dailyyield.blogspot.com/2026/10/spanish-stock-market-pays-out-35716.html",
-  "published_at": "2026-10-15T20:45:10-07:00"
+  "package": "master_packages/dynamic/2026-10-16-trending-91d096eb2e57245c.json",
+  "html": "scheduled_ready/2026-10-16-trending-1-spanish-stock-market-pays-out-35-716-billion.html"
 }
