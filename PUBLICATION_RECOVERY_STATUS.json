@@ -1,11 +1,17 @@
 {
-  "generatedAt": "2026-10-16T16:28:02.029789+05:30",
+  "generatedAt": "2026-10-16T17:05:18.238372+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
   "confirmedPublications": 14,
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-3",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
