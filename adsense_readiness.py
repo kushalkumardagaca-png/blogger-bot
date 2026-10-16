@@ -202,10 +202,6 @@ def main():
  fail,page_keys=verify(after)
  item_fail=list(fail)
  if blog_error:item_fail.append({'id':'blog:'+BLOG_ID,'issue':blog_error})
- after=inventory(token)
- fail,page_keys=verify(after)
- if blog_problem:fail.append(blog_problem)
- fail=list(item_fail)
  if fail and any(not str(f['id']).startswith('blog:') for f in fail):
   # Blogger can serve a cached copy for a short time after a write. A repair that
   # has landed must not be reported as a failure, so every failing item is read
