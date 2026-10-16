@@ -1,12 +1,13 @@
 {
-  "generatedAt": "2026-10-16T23:06:25.094384+05:30",
+  "generatedAt": "2026-10-16T23:11:11.501086+05:30",
   "dateIST": "2026-10-16",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 11,
-  "confirmedByLivePost": 11,
+  "confirmedPublications": 10,
+  "confirmedByLivePost": 10,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [
+    "news-banking",
     "master-trending-0",
     "master-trending-1",
     "master-trending-2",
@@ -18,17 +19,13 @@
     "master-evergreen-3",
     "master-evergreen-4"
   ],
-  "expiredSlots": [],
-  "overdueMissing": [],
-  "actions": [
-    {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "facebook",
-      "routeIndex": 1,
-      "applied": true
-    }
+  "expiredSlots": [
+    "news-banking"
   ],
+  "overdueMissing": [
+    "news-banking"
+  ],
+  "actions": [],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
