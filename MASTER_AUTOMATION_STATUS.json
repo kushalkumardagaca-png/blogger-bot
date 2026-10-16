@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "cc027b678dd1cba0",
-  "kind": "evergreen",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-16",
-  "category": "Banking Payments & Fintech",
-  "evergreen_category": "Banking Payments & Fintech",
+  "kind": "evergreen",
+  "slot": 3,
+  "topic_id": "cc027b678dd1cba0",
+  "replaced_topic_id": null,
   "title": "Bangladesh needs digital banking, but not more",
-  "url": "https://dailyyield.blogspot.com/2026/10/bangladesh-needs-digital-banking-but.html",
-  "published_at": "2026-10-16T07:15:08-07:00"
+  "package": "master_packages/dynamic/2026-10-16-evergreen-cc027b678dd1cba0.json",
+  "html": "scheduled_ready/2026-10-16-evergreen-3-bangladesh-needs-digital-banking-but-not-more.html"
 }
