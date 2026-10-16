@@ -156,5 +156,36 @@ class RenderingGuardTests(unittest.TestCase):
         self.assertEqual(once.count("DY_EDITORIAL_INTEGRITY_V1"), 1)
 
 
+
+
+class ByPathLivenessTests(unittest.TestCase):
+    """A by-path read does not return `status`; that absence must not read as dead.
+
+    The recovery controller rejected every healthy edition on 16 October because
+    this rule treated a missing field as "not live".
+    """
+
+    def setUp(self):
+        self._call = np.blogger_call
+        self._green = np.assert_saved_green
+        np.assert_saved_green = lambda *a, **k: True
+        self.addCleanup(self.restore)
+
+    def restore(self):
+        np.blogger_call, np.assert_saved_green = self._call, self._green
+
+    def test_a_by_path_reply_without_a_status_field_still_counts(self):
+        np.blogger_call = lambda *a, **k: {
+            "id": "1", "url": "https://x/p.html",
+            "title": "India Finance News \u2014 16 October 2026",
+            "content": '<div class="fbk-kicker"><span class="fbk-date">Thursday, 16 October 2026 \u00b7 IST</span></div>'
+                       '<h1 class="fbk-h1">India Finance News \u2014 16 October 2026</h1>'}
+        self.assertTrue(np.live_current_edition("https://x/p.html", "t", __import__("datetime").date(2026, 10, 16)))
+
+    def test_an_explicitly_non_live_reply_is_still_rejected(self):
+        np.blogger_call = lambda *a, **k: {"id": "1", "url": "https://x/p.html", "status": "DRAFT",
+                                           "title": "t", "content": "<h1>t</h1>"}
+        self.assertFalse(np.live_current_edition("https://x/p.html", "t", __import__("datetime").date(2026, 10, 16)))
+
 if __name__ == "__main__":
     unittest.main()

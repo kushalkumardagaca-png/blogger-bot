@@ -1588,7 +1588,7 @@ def live_post_exists(url, token):
         path = urllib.parse.urlparse(url).path
         query = urllib.parse.urlencode({"path": path, "fields": "id,url,status"})
         post = blogger_call("/posts/bypath?" + query, token)
-        return post.get("status") == "LIVE" and post.get("url", "").rstrip("/") == url.rstrip("/")
+        return post.get("status") in (None, "LIVE") and post.get("url", "").rstrip("/") == url.rstrip("/")
     except Exception:
         return False
 
@@ -1609,7 +1609,10 @@ def live_current_edition(url, token, edition_date, alt_dates=()):
         query = urllib.parse.urlencode({"path": path, "fetchBody": "true",
                                         "fields": "id,url,status,title,content"})
         post = blogger_call("/posts/bypath?" + query, token)
-        if post.get("status") != "LIVE":
+        # The by-path read is quiet about `status`, and a draft is not addressable
+        # by path at all, so absence of the field is not evidence of a draft; only
+        # an explicit non-LIVE value is.
+        if post.get("status") not in (None, "LIVE"):
             return False
         body = post.get("content", "")
         # The edition's own date line counts as proof, not only the heading: an
