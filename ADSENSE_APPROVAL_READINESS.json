@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-16T06:14:27.752303+00:00",
+ "checkedAt": "2026-10-16T06:26:08.304213+00:00",
  "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
@@ -18,8 +18,8 @@
   },
   {
    "check": "policy page /privacy",
-   "pass": false,
-   "detail": "/p/privacy-policy.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/privacy-policy.html → HTTP 200",
    "blocking": true
   },
   {
@@ -120,14 +120,14 @@
   },
   {
    "check": "advertising declared in the policy pages",
-   "pass": false,
+   "pass": true,
    "detail": "advertising and Google AdSense are described in the policy pages",
    "blocking": true
   },
   {
    "check": "ads.txt published",
-   "pass": true,
-   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
+   "pass": false,
+   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
    "blocking": true
   },
   {
@@ -168,7 +168,7 @@
   },
   {
    "check": "robots meta allows indexing",
-   "pass": true,
+   "pass": false,
    "detail": "the homepage is indexable",
    "blocking": true
   },
@@ -190,12 +190,6 @@
    "check": "policy page /contact",
    "pass": false,
    "detail": "/p/contact-us_01883938366.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "policy page /privacy",
-   "pass": false,
-   "detail": "/p/privacy-policy.html → HTTP 0",
    "blocking": true
   },
   {
@@ -271,9 +265,9 @@
    "blocking": true
   },
   {
-   "check": "advertising declared in the policy pages",
+   "check": "ads.txt published",
    "pass": false,
-   "detail": "advertising and Google AdSense are described in the policy pages",
+   "detail": "HTTP 0: HTTPError: HTTP Error 429: Too Many Requests",
    "blocking": true
   },
   {
@@ -292,6 +286,12 @@
    "check": "sitemap declared",
    "pass": false,
    "detail": "sitemap line present in robots.txt",
+   "blocking": true
+  },
+  {
+   "check": "robots meta allows indexing",
+   "pass": false,
+   "detail": "the homepage is indexable",
    "blocking": true
   }
  ],
