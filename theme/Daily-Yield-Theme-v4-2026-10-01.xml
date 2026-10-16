@@ -16,6 +16,33 @@
 <b:else/>
 <title><data:blog.pageTitle/></title>
 </b:if>
+<!-- DY_HONEST_META_START -->
+<b:if cond='data:blog.canonicalUrl == &quot;https://dailyyield.blogspot.com/p/about-us_02080501126.html&quot;'>
+  <meta content='Daily Yield is an independent finance publication written and published by Kushal K. Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' name='description'/>
+  <meta content='Daily Yield is an independent finance publication written and published by Kushal K. Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' property='og:description'/>
+  <meta content='Daily Yield is an independent finance publication written and published by Kushal K. Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' name='twitter:description'/>
+</b:if>
+<b:if cond='data:blog.canonicalUrl == &quot;https://dailyyield.blogspot.com/p/contact-us_01883938366.html&quot;'>
+  <meta content='Contact Daily Yield about a report, a correction or a topic request at dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com; replies usually within 2–3 working days.' name='description'/>
+  <meta content='Contact Daily Yield about a report, a correction or a topic request at dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com; replies usually within 2–3 working days.' property='og:description'/>
+  <meta content='Contact Daily Yield about a report, a correction or a topic request at dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com; replies usually within 2–3 working days.' name='twitter:description'/>
+</b:if>
+<b:if cond='data:blog.canonicalUrl == &quot;https://dailyyield.blogspot.com/p/privacy-policy.html&quot;'>
+  <meta content='How Daily Yield handles cookies, analytics, advertising and reader messages, the choices readers have, and how to reach a human about privacy.' name='description'/>
+  <meta content='How Daily Yield handles cookies, analytics, advertising and reader messages, the choices readers have, and how to reach a human about privacy.' property='og:description'/>
+  <meta content='How Daily Yield handles cookies, analytics, advertising and reader messages, the choices readers have, and how to reach a human about privacy.' name='twitter:description'/>
+</b:if>
+<b:if cond='data:blog.canonicalUrl == &quot;https://dailyyield.blogspot.com/p/disclaimer.html&quot;'>
+  <meta content='Daily Yield publishes general financial education, not personal advice: the source, accuracy and advertising-independence terms readers are entitled to know.' name='description'/>
+  <meta content='Daily Yield publishes general financial education, not personal advice: the source, accuracy and advertising-independence terms readers are entitled to know.' property='og:description'/>
+  <meta content='Daily Yield publishes general financial education, not personal advice: the source, accuracy and advertising-independence terms readers are entitled to know.' name='twitter:description'/>
+</b:if>
+<b:if cond='data:blog.canonicalUrl == &quot;https://dailyyield.blogspot.com/p/terms-and-conditions.html&quot;'>
+  <meta content='The terms for using Daily Yield: acceptable use, original work and sources, third-party services, availability, liability and how to reach the desk.' name='description'/>
+  <meta content='The terms for using Daily Yield: acceptable use, original work and sources, third-party services, availability, liability and how to reach the desk.' property='og:description'/>
+  <meta content='The terms for using Daily Yield: acceptable use, original work and sources, third-party services, availability, liability and how to reach the desk.' name='twitter:description'/>
+</b:if>
+<!-- DY_HONEST_META_END -->
 <b:include data='blog' name='all-head-content'/>
 <!-- Bing-safe server-rendered fallback. Blogger's all-head-content remains the
      sole standard-description source when an editor-provided value exists. -->
@@ -2683,7 +2710,7 @@ window.__dyLoadStart=(window.performance&&performance.now)?performance.now():Dat
  <a aria-label='Email' href='mailto:dailyyield.official@gmail.com'><svg aria-hidden='true' viewBox='0 0 24 24'><rect height='13' rx='1.5' width='18' x='3' y='5.5'/><path d='m4 7.5 8 5.5 8-5.5'/></svg></a>
  </div>
  </div>
- <div class='ft-contact'><span class='ft-eyebrow'>Start a conversation</span><a class='ft-email' href='mailto:dailyyield.official@gmail.com'>dailyyield.official@gmail.com</a><a class='ft-email' href='mailto:kushalkumardaga.ca@gmail.com'>kushalkumardaga.ca@gmail.com</a><a class='ft-email' href='mailto:kushalkumardaga.ca@gmail.com'>kushalkumardaga.ca@gmail.com</a><p>Replies usually within 2–3 working days. Comments answered fastest.</p></div></div><div class='ft-groups'><nav aria-labelledby='footer-explore-title' class='ft-group ft-explore'><span class='ft-eyebrow'>01 / The working desk</span><h2 id='footer-explore-title'>Explore</h2><ul class='ft-page-links'><li><a href='https://dailyyield.blogspot.com/'>Home</a></li><li><a href='https://dailyyield.blogspot.com/p/daily-news.html'>Daily News</a></li><li><a href='https://dailyyield.blogspot.com/p/calculator_0908148622.html'>Calculator</a></li><li><a href='https://dailyyield.blogspot.com/p/for-corporate_01804417406.html'>For Corporate</a></li><li><a href='https://dailyyield.blogspot.com/p/money-atlas_01486068069.html'>Money Atlas</a></li><li><a href='https://dailyyield.blogspot.com/p/markets-today.html'>Markets Today</a></li><li><a href='https://dailyyield.blogspot.com/p/global-snapshot.html'>Global Snapshot</a></li><li><a href='https://dailyyield.blogspot.com/p/article.html'>Daily Article</a></li></ul><details class='ft-topics'><summary>Browse article topics</summary><div class='fd-rooms'>
+ <div class='ft-contact'><span class='ft-eyebrow'>Start a conversation</span><a class='ft-email' href='mailto:dailyyield.official@gmail.com'>dailyyield.official@gmail.com</a><a class='ft-email' href='mailto:kushalkumardaga.ca@gmail.com'>kushalkumardaga.ca@gmail.com</a><a class='ft-email' href='mailto:kushalkumardaga.ca@gmail.com'>kushalkumardaga.ca@gmail.com</a><a class='ft-email' href='mailto:kushalkumardaga.ca@gmail.com'>kushalkumardaga.ca@gmail.com</a><p>Replies usually within 2–3 working days. Comments answered fastest.</p></div></div><div class='ft-groups'><nav aria-labelledby='footer-explore-title' class='ft-group ft-explore'><span class='ft-eyebrow'>01 / The working desk</span><h2 id='footer-explore-title'>Explore</h2><ul class='ft-page-links'><li><a href='https://dailyyield.blogspot.com/'>Home</a></li><li><a href='https://dailyyield.blogspot.com/p/daily-news.html'>Daily News</a></li><li><a href='https://dailyyield.blogspot.com/p/calculator_0908148622.html'>Calculator</a></li><li><a href='https://dailyyield.blogspot.com/p/for-corporate_01804417406.html'>For Corporate</a></li><li><a href='https://dailyyield.blogspot.com/p/money-atlas_01486068069.html'>Money Atlas</a></li><li><a href='https://dailyyield.blogspot.com/p/markets-today.html'>Markets Today</a></li><li><a href='https://dailyyield.blogspot.com/p/global-snapshot.html'>Global Snapshot</a></li><li><a href='https://dailyyield.blogspot.com/p/article.html'>Daily Article</a></li></ul><details class='ft-topics'><summary>Browse article topics</summary><div class='fd-rooms'>
  <a href='https://dailyyield.blogspot.com/search/label/personal%20finance'>personal finance</a>
  <a href='https://dailyyield.blogspot.com/search/label/Money%20Management'>Money Management</a>
  <a href='https://dailyyield.blogspot.com/search/label/Economic%20Trends'>Economic Trends</a>

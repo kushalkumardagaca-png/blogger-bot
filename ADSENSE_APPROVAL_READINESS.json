@@ -1,6 +1,6 @@
 {
- "checkedAt": "2026-10-16T02:54:18.093068+00:00",
- "status": "FAIL",
+ "checkedAt": "2026-10-16T03:19:55.923232+00:00",
+ "status": "PASS",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
@@ -12,14 +12,14 @@
   },
   {
    "check": "policy page /contact",
-   "pass": false,
-   "detail": "/p/contact-us_01883938366.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/contact-us_01883938366.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "policy page /privacy",
-   "pass": false,
-   "detail": "/p/privacy-policy.html → HTTP 0",
+   "pass": true,
+   "detail": "/p/privacy-policy.html → HTTP 200",
    "blocking": true
   },
   {
@@ -60,19 +60,19 @@
   },
   {
    "check": "contact: publisher named",
-   "pass": false,
+   "pass": true,
    "detail": "the accountable publisher is named in the text",
    "blocking": true
   },
   {
    "check": "contact: publication inbox",
-   "pass": false,
+   "pass": true,
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "contact: publisher's own address",
-   "pass": false,
+   "pass": true,
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
@@ -96,19 +96,19 @@
   },
   {
    "check": "robots.txt readable and permits reading",
-   "pass": false,
-   "detail": "HTTP 0",
+   "pass": true,
+   "detail": "HTTP 200",
    "blocking": true
   },
   {
    "check": "Mediapartners-Google explicitly allowed",
-   "pass": false,
+   "pass": true,
    "detail": "the AdSense crawler is named in robots.txt",
    "blocking": true
   },
   {
    "check": "sitemap declared",
-   "pass": false,
+   "pass": true,
    "detail": "sitemap line present in robots.txt",
    "blocking": true
   },
@@ -137,56 +137,7 @@
    "blocking": false
   }
  ],
- "blockingIssues": [
-  {
-   "check": "policy page /contact",
-   "pass": false,
-   "detail": "/p/contact-us_01883938366.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "policy page /privacy",
-   "pass": false,
-   "detail": "/p/privacy-policy.html → HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "contact: publisher named",
-   "pass": false,
-   "detail": "the accountable publisher is named in the text",
-   "blocking": true
-  },
-  {
-   "check": "contact: publication inbox",
-   "pass": false,
-   "detail": "dailyyield.official@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "contact: publisher's own address",
-   "pass": false,
-   "detail": "kushalkumardaga.ca@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "robots.txt readable and permits reading",
-   "pass": false,
-   "detail": "HTTP 0",
-   "blocking": true
-  },
-  {
-   "check": "Mediapartners-Google explicitly allowed",
-   "pass": false,
-   "detail": "the AdSense crawler is named in robots.txt",
-   "blocking": true
-  },
-  {
-   "check": "sitemap declared",
-   "pass": false,
-   "detail": "sitemap line present in robots.txt",
-   "blocking": true
-  }
- ],
+ "blockingIssues": [],
  "manualStepsRequired": [
   "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
   "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",

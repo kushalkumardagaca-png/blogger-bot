@@ -93,3 +93,28 @@ class PageSourceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PageDescriptionTests(unittest.TestCase):
+    """A stored search description must never contradict the page itself."""
+
+    def test_every_policy_page_gets_a_corrected_description(self):
+        for url, description in tcc.PAGE_DESCRIPTIONS.items():
+            self.assertIn(url, url)
+            self.assertNotRegex(description, r"24\s*[\u2013-]\s*48")
+            self.assertLessEqual(len(description), 200)
+        contact = tcc.PAGE_DESCRIPTIONS["https://dailyyield.blogspot.com/p/contact-us_01883938366.html"]
+        self.assertIn(ident.OWNER_EMAIL, contact)
+
+    def test_corrected_descriptions_are_placed_before_blogger_head_output(self):
+        theme = "<b:include data='blog' name='all-head-content'/>"
+        out, done = tcc.apply_meta(theme)
+        self.assertTrue(done)
+        self.assertLess(out.index(tcc.META_MARKER_START), out.index("<b:include data='blog'"))
+
+    def test_repeat_safe(self):
+        theme = "<b:include data='blog' name='all-head-content'/>"
+        once, _ = tcc.apply_meta(theme)
+        twice, done = tcc.apply_meta(once)
+        self.assertEqual(once, twice)
+        self.assertEqual(twice.count(tcc.META_MARKER_START), 1)

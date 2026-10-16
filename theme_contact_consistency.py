@@ -58,6 +58,9 @@ def apply(text: str) -> tuple[str, list[str]]:
         if before in text:
             text = text.replace(before, after)
             changes.append("correction instructions show both addresses")
+    text, meta_done = apply_meta(text)
+    if meta_done:
+        changes.append("policy-page descriptions state the correct reply time and both addresses")
     return text, changes
 
 
@@ -72,3 +75,60 @@ def audit(text: str) -> list[str]:
     if PRIMARY_EMAIL not in text:
         issues.append("theme does not show the publication inbox")
     return issues
+
+
+# ---------------------------------------------------------------------------
+# Meta descriptions.
+#
+# Blogger stores each Page's "Search description" in the blog itself, and that
+# field cannot be written through the Blogger API (the documented customMetaData
+# field is ignored for descriptions). The Contact page still carried an older
+# search description promising replies "in 24–48 hours", which is exactly the kind
+# of contradiction the Dishonest declarations rule is about. The theme can put the
+# corrected text first, so a reader, a search engine or a reviewer reads the
+# truthful version at the top of the page head whatever the stored field says.
+# ---------------------------------------------------------------------------
+META_MARKER_START = "<!-- DY_HONEST_META_START -->"
+META_MARKER_END = "<!-- DY_HONEST_META_END -->"
+
+PAGE_DESCRIPTIONS = {
+    "https://dailyyield.blogspot.com/p/about-us_02080501126.html":
+        "Daily Yield is an independent finance publication written and published by Kushal K. Daga. "
+        "Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.",
+    "https://dailyyield.blogspot.com/p/contact-us_01883938366.html":
+        "Contact Daily Yield about a report, a correction or a topic request at dailyyield.official@gmail.com "
+        "or kushalkumardaga.ca@gmail.com; replies usually within 2–3 working days.",
+    "https://dailyyield.blogspot.com/p/privacy-policy.html":
+        "How Daily Yield handles cookies, analytics, advertising and reader messages, the choices readers have, "
+        "and how to reach a human about privacy.",
+    "https://dailyyield.blogspot.com/p/disclaimer.html":
+        "Daily Yield publishes general financial education, not personal advice: the source, accuracy and "
+        "advertising-independence terms readers are entitled to know.",
+    "https://dailyyield.blogspot.com/p/terms-and-conditions.html":
+        "The terms for using Daily Yield: acceptable use, original work and sources, third-party services, "
+        "availability, liability and how to reach the desk.",
+}
+
+
+def meta_block() -> str:
+    lines = [META_MARKER_START]
+    for url, description in PAGE_DESCRIPTIONS.items():
+        lines.append(f"<b:if cond='data:blog.canonicalUrl == &quot;{url}&quot;'>")
+        lines.append(f"  <meta content='{description}' name='description'/>")
+        lines.append(f"  <meta content='{description}' property='og:description'/>")
+        lines.append(f"  <meta content='{description}' name='twitter:description'/>")
+        lines.append("</b:if>")
+    lines.append(META_MARKER_END)
+    return "\n".join(lines)
+
+
+def apply_meta(text: str) -> tuple[str, bool]:
+    """Put the corrected descriptions ahead of Blogger's own head output."""
+    block = meta_block()
+    if META_MARKER_START in text:
+        text = re.sub(re.escape(META_MARKER_START) + r".*?" + re.escape(META_MARKER_END), lambda _m: block, text, flags=re.S)
+        return text, True
+    anchor = "<b:include data='blog' name='all-head-content'/>"
+    if anchor not in text:
+        return text, False
+    return text.replace(anchor, block + "\n" + anchor, 1), True
