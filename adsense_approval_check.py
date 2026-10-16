@@ -106,6 +106,11 @@ def check_site() -> dict:
         "adsense" in terms.casefold() and "advertis" in terms.casefold(),
         "advertising and Google AdSense are described in the policy pages")
 
+    privacy = pages.get("privacy", "")
+    add("privacy page names third-party cookie vendors and the ad opt-out",
+        "third-party vendor" in privacy.casefold() and "aboutads.info" in privacy.casefold(),
+        "third-party vendor cookie use and an opt-out route are named on the privacy page")
+
     status, ads = get("/ads.txt")
     add("ads.txt published", status == 200 and "google.com, pub-" in ads,
         f"HTTP {status}: {ads.strip()[:80] or 'empty'}")

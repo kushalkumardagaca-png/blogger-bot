@@ -204,6 +204,46 @@ def add_vendor_sentence(token: str, report: dict) -> None:
         report["privacyVendorSentence"] = "could not be written: " + error_text(exc)
 
 
+def try_gdata_description(token: str, report: dict) -> None:
+    """Last route for the blog's stored description: Blogger's settings feed.
+
+    The current Blogger API exposes no update for a blog, so the older settings feed
+    is tried once. A failure here settles the question: the box is then reachable
+    only from the Blogger screen.
+    """
+    headers = {"Authorization": "Bearer " + token, "GData-Version": "2",
+               "Content-Type": "application/atom+xml"}
+    feed = f"https://www.blogger.com/feeds/{BLOG_ID}/settings"
+    attempt = {}
+    try:
+        with urllib.request.urlopen(urllib.request.Request(feed, headers=headers), timeout=60) as r:
+            body = r.read().decode("utf-8", "replace")
+        attempt["readFeed"] = len(body)
+        entry = re.search(r"<entry>(?:(?!</entry>).)*?Description(?:(?!</entry>).)*?</entry>", body, re.S)
+        if not entry:
+            attempt["result"] = "settings feed reachable but carried no description entry"
+        else:
+            updated = entry.group(0)
+            updated = re.sub(r"<title[^>]*>.*?</title>", "<title type='text'>Description</title>", updated, count=1)
+            updated = re.sub(
+                r"(<ns0:value[^>]*>|<content[^>]*>).*?(</ns0:value>|</content>)",
+                lambda m: f"{m.group(1)}{html.escape(BLOG_DESCRIPTION)}{m.group(2)}", updated, count=1, flags=re.S)
+            link = re.search(r"<link rel='edit'[^>]*href='([^']+)'", updated) or re.search(
+                r'<link[^>]*rel="edit"[^>]*href="([^"]+)"', updated)
+            if not link:
+                attempt["result"] = "no edit link in the description entry"
+            else:
+                put = urllib.request.Request(link.group(1), data=updated.encode("utf-8"),
+                                             headers=headers, method="PUT")
+                with urllib.request.urlopen(put, timeout=60) as r:
+                    attempt["result"] = f"settings feed accepted the write (HTTP {r.status})"
+    except Exception as exc:  # noqa: BLE001
+        attempt["result"] = "settings feed refused the write: " + error_text(exc)
+    report["gdataDescriptionAttempt"] = attempt
+    if "accepted" in attempt.get("result", ""):
+        report["blogDescriptionLanded"] = True
+
+
 def main() -> int:
     report_path = REPORT
     try:
@@ -227,6 +267,7 @@ def _run() -> int:
     report: dict = {"checkedAt": datetime.now(timezone.utc).isoformat(), "apiOnly": True,
                     "publicRequests": 0, "syntheticViews": 0}
     for step, call in (("blogDescription", try_blog_description),
+                       ("gdataDescription", try_gdata_description),
                        ("pageSearchDescription", try_page_search_description),
                        ("privacyVendorSentence", add_vendor_sentence)):
         try:
