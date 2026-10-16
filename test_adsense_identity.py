@@ -75,8 +75,9 @@ class ThemeConsistencyTests(unittest.TestCase):
     def test_audit_flags_the_old_theme(self):
         problems = tcc.audit("Replies within 24&#8211;48 hours.")
         self.assertTrue(any("24" in p for p in problems))
-        self.assertTrue(any("publisher" in p for p in problems))
-        self.assertEqual(tcc.audit(tcc.apply(self.sample())[0]), [])
+        self.assertTrue(any("own monitored address" in p for p in problems))
+        self.assertTrue(any("legal name" in p for p in problems))
+        self.assertEqual(tcc.audit(tcc.apply(self.sample() + f"<p>{ident.LEGAL_NAME}</p>")[0]), [])
 
     def test_repository_themes_pass_the_audit(self):
         for path in sorted((ROOT / "theme").glob("*.xml")):
@@ -125,3 +126,55 @@ class PageDescriptionTests(unittest.TestCase):
         twice, done = tcc.apply_meta(once)
         self.assertEqual(once, twice)
         self.assertEqual(twice.count(tcc.META_MARKER_START), 1)
+
+
+class LegalNameTests(unittest.TestCase):
+    """The legal name, the byline and the site must tell one story."""
+
+    def test_legal_name_and_byline_are_both_stated(self):
+        self.assertEqual(ident.LEGAL_NAME, "Kushal Kumar Daga")
+        self.assertEqual(ident.BYLINE, "Kushal K. Daga")
+        block = ident.identity_block()
+        self.assertIn(ident.LEGAL_NAME, block)
+        self.assertIn(ident.BYLINE, block)
+        self.assertIn("abbreviated form of that name", block)
+        self.assertIn("Where a legal, payment or platform record requires a full name", block)
+
+    def test_article_footer_names_the_legal_person(self):
+        from content_policy_guard import automation_disclosure
+        block = automation_disclosure("article")
+        self.assertIn("Kushal Kumar Daga", block)
+        self.assertIn("Kushal K. Daga", block)
+        self.assertIn("same name", block)
+
+    def test_none_of_the_honest_strings_claims_an_unrelated_surname(self):
+        from content_policy_guard import automation_disclosure
+        import importlib
+        for text in (ident.identity_block(), ident.contact_sentence(), automation_disclosure("article")):
+            self.assertEqual(ident.name_problems(text), [], text[:60])
+        self.assertNotIn("Jain", ident.NAME_EXPLAINER)
+        self.assertEqual(ident.NAME_ALIASES[0], ident.LEGAL_NAME)
+        self.assertTrue(all("Jain" not in alias for alias in ident.NAME_ALIASES))
+
+    def test_inaccurate_name_claims_are_repaired_and_the_repair_is_repeat_safe(self):
+        published = ("Daily Yield is the finance publication of Kushal K. Daga, also known as "
+                     "Kushal Daga and Kushal Jain.")
+        fixed, changed = ident.repair_names(published)
+        self.assertTrue(changed)
+        self.assertIn("Kushal Kumar Daga", fixed)
+        self.assertEqual(ident.name_problems(fixed), [])
+        again, changed_again = ident.repair_names(fixed)
+        self.assertFalse(changed_again)
+
+    def test_structured_data_aliases_include_the_legal_name(self):
+        import news_pipeline as np
+        self.assertIn("Kushal Kumar Daga", np.PERSON_ALIASES)
+        self.assertTrue(all("Jain" not in alias for alias in np.PERSON_ALIASES))
+        self.assertIn("Kushal Kumar Daga", np.SEO_QUERY_TERMS)
+
+    def test_theme_footer_states_the_legal_name_behind_the_byline(self):
+        for path in sorted((ROOT / "theme").glob("*.xml")):
+            with self.subTest(theme=path.name):
+                text = path.read_text(encoding="utf-8")
+                self.assertIn(ident.LEGAL_NAME, text)
+                self.assertIn("abbreviated form of the same name", text)

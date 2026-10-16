@@ -42,9 +42,9 @@ from seo_hygiene import compact_title, repair_image_alts
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 BLOG = "https://dailyyield.blogspot.com"
-SEO_QUERY_TERMS = ["Daily Yield", "Kushal Daga", "CA Kushal", "Kushal Jain",
+SEO_QUERY_TERMS = ["Daily Yield", "Kushal Kumar Daga", "Kushal Daga", "CA Kushal",
                    "Kushal K. Daga", "Finance", "Finance by Kushal"]
-PERSON_ALIASES = ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"]
+PERSON_ALIASES = ["Kushal Kumar Daga", "Kushal Daga", "CA Kushal", "Finance by Kushal"]
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -1358,6 +1358,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "datePublished": win_end.isoformat(timespec="seconds"),
         "dateModified": win_end.isoformat(timespec="seconds"),
         "author": {"@type": "Person", "name": "Kushal K. Daga",
+                   "alternateName": "Kushal Kumar Daga",
                    "alternateName": PERSON_ALIASES,
                    "url": f"{BLOG}/p/about-us_02080501126.html"},
         "publisher": {"@type": "Organization", "name": "Daily Yield", "url": BLOG + "/"},

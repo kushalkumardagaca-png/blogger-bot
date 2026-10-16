@@ -16,6 +16,9 @@ DISCLOSURE_MARKER="DY_AUTOMATION_DISCLOSURE_GREEN_V2"
 FOOTER_CONTACT=("Report a correction or ask a question at dailyyield.official@gmail.com or "
  "kushalkumardaga.ca@gmail.com; both inboxes are monitored and replies take usually "
  "within 2–3 working days. ")
+# The byline is an abbreviation of the publisher's legal name, not a second person.
+FOOTER_NAME_NOTE=("The publisher's legal name is Kushal Kumar Daga; “Kushal K. Daga” is the "
+ "abbreviated form of the same name used as the editorial byline. ")
 
 # These phrases are acceptable only when expressly negated or quoted as a risk.
 DECEPTIVE_PATTERNS=(
@@ -143,7 +146,7 @@ def assert_policy_compliant(title:str,content:str,channel:str="blog",require_dis
  return True
 
 def automation_disclosure(kind:str="article")->str:
- return f'''<!-- {DISCLOSURE_MARKER} --><aside class="dy-policy-disclosure" aria-label="Editorial process disclosure"><strong>How this {html.escape(kind)} was produced</strong><p>Daily Yield uses automated tools to assist source collection, drafting, validation, formatting, scheduling and distribution. The byline identifies the publisher responsible for the publication; it does not state that every automated draft was personally reviewed. Material claims must remain attributable to the linked sources. No paid placement or affiliate compensation is represented unless a specific disclosure says otherwise. {FOOTER_CONTACT[:-1]} Report abuse through Blogger’s Report Abuse link.</p></aside>'''
+ return f'''<!-- {DISCLOSURE_MARKER} --><aside class="dy-policy-disclosure" aria-label="Editorial process disclosure"><strong>How this {html.escape(kind)} was produced</strong><p>Daily Yield uses automated tools to assist source collection, drafting, validation, formatting, scheduling and distribution. The byline identifies the publisher responsible for the publication; it does not state that every automated draft was personally reviewed. {FOOTER_NAME_NOTE} Material claims must remain attributable to the linked sources. No paid placement or affiliate compensation is represented unless a specific disclosure says otherwise. {FOOTER_CONTACT[:-1]} Report abuse through Blogger’s Report Abuse link.</p></aside>'''
 
 def assert_social_compliant(text:str)->bool:
  issues=audit_text("social post",text,"social",False)

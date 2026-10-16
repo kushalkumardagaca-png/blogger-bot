@@ -27,6 +27,8 @@ BLOG = "https://dailyyield.blogspot.com"
 UA = {"User-Agent": "DailyYieldAdSenseCheck/1.0 (dailyyield.official@gmail.com)"}
 PRIMARY = "dailyyield.official@gmail.com"
 OWNER = "kushalkumardaga.ca@gmail.com"
+LEGAL_NAME = "Kushal Kumar Daga"
+BYLINE = "Kushal K. Daga"
 
 PAGES = {
     "about": "/p/about-us_02080501126.html",
@@ -83,12 +85,16 @@ def check_site() -> dict:
 
     for name in ("about", "contact"):
         text = pages.get(name, "")
-        add(f"{name}: publisher named", "Kushal K. Daga" in text,
-            "the accountable publisher is named in the text")
+        add(f"{name}: publisher's legal name", LEGAL_NAME in text, LEGAL_NAME)
+        add(f"{name}: editorial byline", BYLINE in text, BYLINE)
+        add(f"{name}: name relationship explained",
+            "abbreviated" in text.casefold(), "the site explains that the byline is the same person's name")
         add(f"{name}: publication inbox", PRIMARY in text, PRIMARY)
         add(f"{name}: publisher's own address", OWNER in text, OWNER)
         add(f"{name}: no contradictory reply time", "24\u201348" not in text,
             "one reply-time promise only")
+        add(f"{name}: no inaccurate name claim", "Kushal Jain" not in text,
+            "no unrelated surname is published as an alias")
 
     terms = pages.get("terms", "") + pages.get("privacy", "")
     add("advertising declared in the policy pages",
@@ -116,6 +122,8 @@ def check_site() -> dict:
     masked = re.sub(r"<style.*?</style>", " ", home, flags=re.S | re.I)
     add("no raw code shown to readers", "cursor:grab" not in masked and "touch-action" not in masked,
         "no CSS text leaks outside style blocks on the homepage")
+    add("no inaccurate name claim on the homepage", "Kushal Jain" not in masked,
+        "the homepage does not present an unrelated surname as an alias of the author")
     add("robots meta allows indexing",
         "index,follow" in masked.casefold() or "index, follow" in masked.casefold(),
         "the homepage is indexable")

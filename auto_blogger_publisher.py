@@ -77,9 +77,9 @@ CSV_FILE = "500_topics_evenly_mixed.csv"
 
 # Permanent entity SEO map. Topic intent remains primary; these variants identify
 # the same publication/person without changing the visible author byline.
-SEO_QUERY_TERMS = ["Daily Yield", "Kushal Daga", "CA Kushal", "Kushal Jain",
+SEO_QUERY_TERMS = ["Daily Yield", "Kushal Kumar Daga", "Kushal Daga", "CA Kushal",
                    "Kushal K. Daga", "Finance", "Finance by Kushal"]
-PERSON_ALIASES = ["Kushal Daga", "CA Kushal", "Kushal Jain", "Finance by Kushal"]
+PERSON_ALIASES = ["Kushal Kumar Daga", "Kushal Daga", "CA Kushal", "Finance by Kushal"]
 
 # Exact 25 Master Categories Taxonomy (No commas within categories)
 CATEGORIES_25 = [

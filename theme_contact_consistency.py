@@ -19,6 +19,8 @@ import re
 PRIMARY_EMAIL = "dailyyield.official@gmail.com"
 OWNER_EMAIL = "kushalkumardaga.ca@gmail.com"
 REPLY_TIME = "2\u20133 working days"
+LEGAL_NAME = "Kushal Kumar Daga"
+BYLINE = "Kushal K. Daga"
 
 REPLY_TIME_FIXES = (
     ("Replies usually arrive within 24&#8211;48 hours", f"Replies usually arrive within {REPLY_TIME}"),
@@ -37,6 +39,13 @@ FOOTER_CONTACT_RE = re.compile(re.escape(PRIMARY_ANCHOR) + r"(?:" + re.escape(OW
 
 DESK_CARD = (f"<strong>Email the editorial desk</strong><small>{PRIMARY_EMAIL}</small>",
              f"<strong>Email the editorial desk</strong><small>{PRIMARY_EMAIL} or {OWNER_EMAIL}</small>")
+
+# The footer masthead keeps the editorial byline and adds one plain sentence so
+# the legal name and the byline can never look like two different people.
+FOOTER_BYLINE = "<span class='ft-by'>By Kushal K. Daga</span>"
+FOOTER_BYLINE_WITH_NOTE = ("<span class='ft-by'>By Kushal K. Daga</span>"
+                           "<p class='ft-legal'>Published by Kushal Kumar Daga \u2014 "
+                           "\u201cKushal K. Daga\u201d is the abbreviated form of the same name used as the byline.</p>")
 
 CORRECTION_ANSWER = (f"Use the Daily Yield Contact desk or email {PRIMARY_EMAIL} with the page URL and the correction details.",
                      f"Use the Daily Yield Contact desk or email {PRIMARY_EMAIL} or {OWNER_EMAIL}; both inboxes are monitored and replies take usually within {REPLY_TIME}.")
@@ -64,6 +73,9 @@ def apply(text: str) -> tuple[str, list[str]]:
         if before in text:
             text = text.replace(before, after)
             changes.append("correction instructions show both addresses")
+    if FOOTER_BYLINE in text and FOOTER_BYLINE_WITH_NOTE not in text:
+        text = text.replace(FOOTER_BYLINE, FOOTER_BYLINE_WITH_NOTE, 1)
+        changes.append("footer states the legal name behind the byline")
     text, meta_done = apply_meta(text)
     if meta_done:
         changes.append("policy-page descriptions state the correct reply time and both addresses")
@@ -78,6 +90,8 @@ def audit(text: str) -> list[str]:
         issues.append("theme still promises 24–48 hour replies")
     if OWNER_EMAIL not in text:
         issues.append("theme does not show the publisher's own monitored address")
+    if LEGAL_NAME not in text:
+        issues.append("theme does not state the publisher's legal name")
     if PRIMARY_EMAIL not in text:
         issues.append("theme does not show the publication inbox")
     return issues
