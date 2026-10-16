@@ -65,6 +65,13 @@ class ThemeConsistencyTests(unittest.TestCase):
         self.assertEqual(once, twice)
         self.assertEqual(second_changes, [])
 
+    def test_footer_card_never_stacks_copies_of_an_address(self):
+        once, _ = tcc.apply(self.sample())
+        twice, _ = tcc.apply(once)
+        self.assertEqual(twice.count(tcc.OWNER_ANCHOR), 1)
+        self.assertEqual(twice.count(tcc.PRIMARY_ANCHOR), 1)
+        self.assertIn("Replies usually within 2\u20133 working days", twice)
+
     def test_audit_flags_the_old_theme(self):
         problems = tcc.audit("Replies within 24&#8211;48 hours.")
         self.assertTrue(any("24" in p for p in problems))

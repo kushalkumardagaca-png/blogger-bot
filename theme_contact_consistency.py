@@ -28,9 +28,12 @@ REPLY_TIME_FIXES = (
     ("Usually within 2\u20133 working days.", f"Usually within {REPLY_TIME}."),
 )
 
-SECOND_ADDRESS = (f"<a class='ft-email' href='mailto:{PRIMARY_EMAIL}'>{PRIMARY_EMAIL}</a>",
-                  f"<a class='ft-email' href='mailto:{PRIMARY_EMAIL}'>{PRIMARY_EMAIL}</a>"
-                  f"<a class='ft-email' href='mailto:{OWNER_EMAIL}'>{OWNER_EMAIL}</a>")
+PRIMARY_ANCHOR = f"<a class='ft-email' href='mailto:{PRIMARY_EMAIL}'>{PRIMARY_EMAIL}</a>"
+OWNER_ANCHOR = f"<a class='ft-email' href='mailto:{OWNER_EMAIL}'>{OWNER_EMAIL}</a>"
+# One primary address followed by exactly one publisher address, wherever the
+# footer contact card appears. Written as a rule rather than a fixed string so
+# running the repair twice can never stack copies of the same address.
+FOOTER_CONTACT_RE = re.compile(re.escape(PRIMARY_ANCHOR) + r"(?:" + re.escape(OWNER_ANCHOR) + r")*")
 
 DESK_CARD = (f"<strong>Email the editorial desk</strong><small>{PRIMARY_EMAIL}</small>",
              f"<strong>Email the editorial desk</strong><small>{PRIMARY_EMAIL} or {OWNER_EMAIL}</small>")
@@ -48,9 +51,12 @@ def apply(text: str) -> tuple[str, list[str]]:
         if before in text and before != after:
             text = text.replace(before, after)
             changes.append(f"reply time unified: {before!r} → {after!r}")
-    if SECOND_ADDRESS[0] in text and OWNER_EMAIL not in text.split("ft-groups")[0]:
-        text = text.replace(SECOND_ADDRESS[0], SECOND_ADDRESS[1])
-        changes.append("footer shows both monitored addresses")
+    if PRIMARY_ANCHOR in text:
+        wanted = PRIMARY_ANCHOR + OWNER_ANCHOR
+        fixed, count = FOOTER_CONTACT_RE.subn(wanted, text)
+        if fixed != text:
+            text = fixed
+            changes.append(f"footer contact card set to both monitored addresses ({count} place(s))")
     if DESK_CARD[0] in text and DESK_CARD[0] != DESK_CARD[1]:
         text = text.replace(DESK_CARD[0], DESK_CARD[1])
         changes.append("editorial desk card shows both addresses")
@@ -126,8 +132,9 @@ def apply_meta(text: str) -> tuple[str, bool]:
     """Put the corrected descriptions ahead of Blogger's own head output."""
     block = meta_block()
     if META_MARKER_START in text:
-        text = re.sub(re.escape(META_MARKER_START) + r".*?" + re.escape(META_MARKER_END), lambda _m: block, text, flags=re.S)
-        return text, True
+        replaced = re.sub(re.escape(META_MARKER_START) + r".*?" + re.escape(META_MARKER_END),
+                          lambda _m: block, text, flags=re.S)
+        return replaced, replaced != text
     anchor = "<b:include data='blog' name='all-head-content'/>"
     if anchor not in text:
         return text, False
