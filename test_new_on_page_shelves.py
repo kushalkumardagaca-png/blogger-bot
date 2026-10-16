@@ -11,7 +11,7 @@ def config():
 
 
 def article(pid, hours):
-    return {"id": pid, "title": f"Article {pid}", "url": f"/{pid}", "published": (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat(), "labels": ["Test Desk", "Kushal K. Daga"], "content": f'<img src="https://example.com/{pid}.jpg">'}
+    return {"id": pid, "title": f"Article {pid}", "url": f"/{pid}", "published": (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat(), "labels": ["Test Desk", "Kushal Daga"], "content": f'<img src="https://example.com/{pid}.jpg">'}
 
 
 def news(pid, hours):

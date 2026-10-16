@@ -315,11 +315,11 @@ def _build_caption_unchecked(item: dict, platform: str, summary: str, limit: int
     title,url=clean(item.get("title","Daily Yield")),attributed_url(item,platform)
     lead,second,third=content_highlights(item,summary);tags=" ".join(hashtag_list(item));cta=_cta(item)
     if platform=="facebook":
-        return f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{cta}\n\nBy Kushal K. Daga\n{tags}"
+        return f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{cta}\n\nBy Kushal Daga\n{tags}"
     if platform=="bluesky":
         # Preserve the link at the top and all three ideas inside Bluesky's limit.
         lead,second,third=trim(lead,48),trim(second,38),trim(third,38)
-        ending="Read more → link above.\nBy Kushal K. Daga · #DailyYield"
+        ending="Read more → link above.\nBy Kushal Daga · #DailyYield"
         text=f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{ending}"
         while len(text)>300:
             values=[lead,second,third];idx=max(range(3),key=lambda i:len(values[i]))
@@ -329,10 +329,10 @@ def _build_caption_unchecked(item: dict, platform: str, summary: str, limit: int
         return text
     if platform=="mastodon":
         mastodon_cta="Open the link above for the full evidence and context. Which of these three ideas matters most to you?"
-        text=f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{mastodon_cta}\n\nBy Kushal K. Daga\n{tags}"
+        text=f"{url}\n\n{lead}\n\n• {second}\n• {third}\n\n{mastodon_cta}\n\nBy Kushal Daga\n{tags}"
         if len(text)<=500:return text
         return f"{url}\n\n{trim(lead,75)}\n• {trim(second,65)}\n• {trim(third,65)}\n\nRead the complete article—open the link above.\n{tags}"[:500]
-    return f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{cta}\nBy Kushal K. Daga\n{tags}"
+    return f"{url}\n\n{lead}\n• {second}\n• {third}\n\n{cta}\nBy Kushal Daga\n{tags}"
 
 
 def build_caption(item: dict, platform: str, summary: str, limit: int | None = None) -> str:
@@ -351,7 +351,7 @@ def tumblr_payload(item: dict, summary: str) -> dict:
             {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":PLATFORM_SIZES["tumblr"][0],"height":PLATFORM_SIZES["tumblr"][1]}], "alt_text":image_alt(item,"tumblr")},
             {"type":"text", "text":"• "+second+"\n• "+third},
             {"type":"text", "text":_cta(item)},
-            {"type":"text", "text":"By Kushal K. Daga · Daily Yield"},
+            {"type":"text", "text":"By Kushal Daga · Daily Yield"},
         ],
         "state":"published", "tags":",".join(dict.fromkeys(tags)), "source_url":url,
         "send_to_twitter":False, "interactability_reblog":"everyone",

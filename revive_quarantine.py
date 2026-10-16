@@ -264,7 +264,7 @@ def ensure_jsonld(content: str, title: str, url: str, description: str) -> tuple
         "description": description,
         "url": url,
         "mainEntityOfPage": {"@type": "WebPage", "@id": url},
-        "author": {"@type": "Person", "name": "Kushal K. Daga"},
+        "author": {"@type": "Person", "name": "Kushal Daga"},
         "publisher": {"@type": "Organization", "name": "Daily Yield"},
         "isAccessibleForFree": True,
     }
@@ -276,7 +276,7 @@ def ensure_byline(content: str) -> tuple[str, bool]:
     """Keep one visible publisher byline; the structured-data author does not count."""
     if 'class="dy-byline"' in (content or "") or re.search(r"By\s+(?:<strong>)?Kushal K\. Daga", content or "", re.I):
         return content, False
-    byline = ('<p class="dy-byline">By <strong>Kushal K. Daga</strong> · Daily Yield · '
+    byline = ('<p class="dy-byline">By <strong>Kushal Daga</strong> · Daily Yield · '
               'Educational finance information, not personal advice.</p>')
     match = re.search(r"(<h1\b.*?</h1>)", content or "", re.I | re.S)
     if match:

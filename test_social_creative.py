@@ -75,7 +75,7 @@ def test_caption_limits_platform_voice_and_cross_network_difference():
     assert all(text.startswith(story["url"]) for text in captions.values())
     assert all("Read the report" not in text and "Clear context" not in text for text in captions.values())
     assert all("A clear look at compounding" in text for text in captions.values())
-    assert all("By Kushal K. Daga" in text for text in captions.values())
+    assert all("By Kushal Daga" in text for text in captions.values())
     assert all(text.count("#") <= 2 for text in captions.values())
 
 
@@ -99,7 +99,7 @@ def test_tumblr_is_native_npf_with_three_ideas_cta_and_descriptive_alt():
     assert data["content"][3]["text"].count("•") == 2
     assert "link above" in data["content"][4]["text"]
     assert "Editorial photograph" in data["content"][2]["alt_text"]
-    assert "By Kushal K. Daga" in data["content"][5]["text"]
+    assert "By Kushal Daga" in data["content"][5]["text"]
     assert "moneyblr" in data["tags"]
     assert len(data["tags"].split(",")) <= 3
 

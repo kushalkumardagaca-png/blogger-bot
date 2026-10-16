@@ -138,10 +138,10 @@ def normalized_labels(post,categories):
  record=next((x for x in records if x.get('url','').rstrip('/')==post.get('url','').rstrip('/') or x.get('title')==post.get('title')),None)
  if record:
   permanent=record.get('evergreen_category') or record.get('category');trend=record.get('category') if record.get('kind')=='trending' else None
-  return list(dict.fromkeys([x for x in (trend,permanent,'Master Article','Kushal K. Daga') if x]))
+  return list(dict.fromkeys([x for x in (trend,permanent,'Master Article','Kushal Daga') if x]))
  trend=next((x for x in old if x in TRENDING_LABELS),None);permanent=next((x for x in old if x in EVERGREEN_LABELS),None)
- if trend and permanent:return [trend,permanent,'Master Article','Kushal K. Daga']
- cat=category_for(post,categories);return [cat,'Master Article','Kushal K. Daga']
+ if trend and permanent:return [trend,permanent,'Master Article','Kushal Daga']
+ cat=category_for(post,categories);return [cat,'Master Article','Kushal Daga']
 
 def commons_photo(title,desk,used):
  country={'Global Finance News':'world financial district','Americas Finance News':'Americas financial district','China Finance News':'China financial district','Asia-Pacific Finance News':'Asia Pacific financial district','India Finance News':'India financial district','Russia Finance News':'Russia financial district','Europe Finance News':'Europe financial district','Markets, Crypto & Commodities':'stock market crypto commodities','Economy, Trade & Jobs':'economy trade employment','Banking, Fintech & Personal Money':'banking payments household finance','Companies, IPOs & Deals':'corporate business capital markets'}
@@ -193,7 +193,7 @@ def repair_remaining_duplicate_heroes(h,rounds=3):
   changed=0;unresolved=[]
   for key,items in duplicate_groups.items():
    for post in items[1:]:
-    labels=post.get('labels',[]);desk=next((x for x in labels if x not in ('News','2026 Money Moves','Kushal K. Daga')),labels[0] if labels else 'Personal Finance')
+    labels=post.get('labels',[]);desk=next((x for x in labels if x not in ('News','2026 Money Moves','Kushal Daga')),labels[0] if labels else 'Personal Finance')
     pic=commons_photo(post.get('title',''),desk,used)
     if not pic:
      unresolved.append({'image_key':key,'post_id':post.get('id'),'title':post.get('title','')});continue
@@ -343,7 +343,7 @@ def main():
   hero=clean_src((srcs(p.get('content','')) or [''])[0]);hero_key=image_key(hero);duplicate=bool(hero_key and hero_key in hero_owner);content=p.get('content','')
   if hero_key:used.add(hero_key)
   if duplicate:
-   desk=next((x for x in new if x not in ('News','2026 Money Moves','Kushal K. Daga')),new[0]);pic=commons_photo(p.get('title',''),desk,used)
+   desk=next((x for x in new if x not in ('News','2026 Money Moves','Kushal Daga')),new[0]);pic=commons_photo(p.get('title',''),desk,used)
    if pic:content=replace_hero(content,pic);images_fixed+=1;hero_key=pic['base']
   if hero_key:hero_owner.setdefault(hero_key,p['id'])
   labels_changed={norm(x) for x in new}!={norm(x) for x in old}

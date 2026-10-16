@@ -22,7 +22,7 @@ from social_identity import ensure_social_identity
 ROOT=Path(__file__).parent
 STATE=ROOT/'MASTER_REWRITE_STATE.json';REPORT=ROOT/'MASTER_REWRITE_REPORT.json'
 BACKUPS=ROOT/'master_rewrite_backups';PACKAGES=ROOT/'master_packages'/'rewrites'
-AUTHOR='Kushal K. Daga';MARKER='<!-- DY_MASTER_V2 -->'
+AUTHOR='Kushal Daga';MARKER='<!-- DY_MASTER_V2 -->'
 
 def required(name):
  value=os.environ.get(name,'').strip()

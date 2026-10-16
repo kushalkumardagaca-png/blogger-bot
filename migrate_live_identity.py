@@ -19,11 +19,10 @@ IMG_RE=re.compile(r'data:image/(jpeg|png|webp);base64,([A-Za-z0-9+/=]+)')
 REPL=[
  ('FINANCE BY CA KUSHAL','DAILY YIELD'),
  ('Finance by CA Kushal','Daily Yield'),
- ('CA Kushal K. Daga','Kushal K. Daga'),
- ('CA Kushal Daga','Kushal K. Daga'),
- # The legal name is never rewritten: the site states both the legal name and
- # the abbreviated byline (identity_contact.py).
- ('CA Kushal','Kushal K. Daga'),
+ ('CA Kushal Daga','Kushal Daga'),
+ # The public author name and the legal name are both stated on the site
+ # (identity_contact.py), so neither is rewritten here.
+ ('CA Kushal','Kushal Daga'),
  ('CHARTERED ACCOUNTANT','SOURCE-LED PUBLISHER'),
  ('Chartered Accountant','source-led publisher'),
  ('chartered accountant','source-led publisher'),
@@ -49,9 +48,9 @@ def text_rewrite(s):
           r'\1\n        "alternateName": "Finance by Kushal",', s)
  # The legacy-name cleanup above is intentionally reversed only in declared SEO
  # aliases/explanation; the canonical name and every byline remain unchanged.
- s=s.replace('"alternateName": ["Kushal Daga", "Kushal K. Daga", "Kushal Jain", "Finance by Kushal"]',
-             '"alternateName": ["Kushal Kumar Daga", "Kushal Daga", "CA Kushal", "Finance by Kushal"]')
- s=s.replace('“Kushal K. Daga” refers to Certified Accountant Kushal K. Daga',
+ s=s.replace('"alternateName": ["Kushal Daga", "Kushal Daga", "Kushal Jain", "Finance by Kushal"]',
+             '"alternateName": ["Kushal Daga", "Kushal Kumar Daga", "CA Kushal", "Finance by Kushal"]')
+ s=s.replace('“Kushal Daga” refers to Certified Accountant Kushal Daga',
              '“CA Kushal” is an earlier search name and does not state a professional qualification')
  return s
 
@@ -86,7 +85,7 @@ def main():
    title=item.get('title','');content=item.get('content',''); stat={'images':0,'bytes':0}
    nt=text_rewrite(title);nc=slim_images(text_rewrite(content),stat)
    if kind=='pages' and title.strip().upper()=='ABOUT US' and 'data-dy-entity-map' not in nc:
-    nc += '''\n<aside data-dy-entity-map="v1" style="max-width:760px;margin:28px auto;padding:16px 18px;border:1px solid #EADCC8;border-radius:12px;font:400 14px/1.7 Inter,Arial,sans-serif;color:#6E5D4B"><strong style="color:#241610">Daily Yield identity:</strong> Daily Yield is the finance publication of Kushal Kumar Daga, whose articles carry the abbreviated byline “Kushal K. Daga”. “CA Kushal” refers to Certified Accountant Kushal Kumar Daga. “Finance by Kushal” is an earlier search name for Daily Yield.</aside>'''
+    nc += '''\n<aside data-dy-entity-map="v1" style="max-width:760px;margin:28px auto;padding:16px 18px;border:1px solid #EADCC8;border-radius:12px;font:400 14px/1.7 Inter,Arial,sans-serif;color:#6E5D4B"><strong style="color:#241610">Daily Yield identity:</strong> Daily Yield is the finance publication of Kushal Daga. Kushal Kumar Daga is the publisher's legal name, used on ownership, payment and platform records. “CA Kushal” refers to Certified Accountant Kushal Daga. “Finance by Kushal” is an earlier search name for Daily Yield.</aside>'''
    old_labels=item.get('labels',[]); new_labels=[text_rewrite(x) for x in old_labels]
    if nt==title and nc==content and new_labels==old_labels:continue
    backup.append({'kind':kind,'id':item['id'],'title':title,'content':content,

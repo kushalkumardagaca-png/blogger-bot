@@ -31,7 +31,7 @@ for p in THEMES:
       'OpenAI search policy':"name='OAI-SearchBot'",'WebSite schema':'SearchAction','favicon':"rel='icon'",
       'responsive mobile CSS':'@media(max-width:560px)','keyboard focus':':focus-visible','reduced motion':'prefers-reduced-motion',
       'lazy later images':"setAttribute('loading','lazy')",'async image decoding':"setAttribute('decoding','async')",
-      'priority first image':"setAttribute('fetchpriority','high')",'runtime fallback for widget images missing alt':"img:not([alt])",'informative moving thumbnails use titles':"im.alt=it.title||'Daily Yield article preview'",'author identity':'Kushal K. Daga',
+      'priority first image':"setAttribute('fetchpriority','high')",'runtime fallback for widget images missing alt':"img:not([alt])",'informative moving thumbnails use titles':"im.alt=it.title||'Daily Yield article preview'",'author identity':'Kushal Daga',
       'privacy link':'/p/privacy-policy.html','terms link':'/p/terms-and-conditions.html','contact email':'dailyyield.official@gmail.com',
       'HTTPS destination':'https://dailyyield.blogspot.com/','analytics consent defaults denied before loading':"gtag('consent','default'",'Blogger GA4 loader uses saved Measurement ID':"name='google-analytics'",'optional storage changes only after choice':"analytics_storage:allow?'granted':'denied'",
       'no external enhancement script':'DY_SITE_ENHANCEMENTS_JS_START','honest advice disclaimer':'educational information',

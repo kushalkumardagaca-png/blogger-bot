@@ -47,7 +47,7 @@ def main():
   r=requests.get(api()+'/posts/'+post_id,headers=headers(access),timeout=60);r.raise_for_status();live=r.json()
   package=json.loads((ROOT/target['package']).read_text());validate(package)
   published=datetime.fromisoformat(live['published'].replace('Z','+00:00')).astimezone(timezone.utc)
-  now=datetime.now(timezone.utc);labels=live.get('labels') or [];category=next((x for x in labels if x!='Kushal K. Daga'),'Daily Article')
+  now=datetime.now(timezone.utc);labels=live.get('labels') or [];category=next((x for x in labels if x not in ('Kushal K. Daga','Kushal Daga')),'Daily Article')
   topic={'#':'refresh','Category':category,'Punchy Title':package['title']}
   title,slug,meta,new_labels,body=render(package,topic,published.strftime('%Y-%m-%d'),published.strftime('%H:%M'),canonical_url=live.get('url'),modified_date=now.strftime('%Y-%m-%d'),modified_time=now.strftime('%H:%M'))
   payload={'kind':'blogger#post','id':post_id,'title':title,'content':body,'labels':labels}

@@ -13,7 +13,7 @@ class MasterPublisherTests(unittest.TestCase):
    v2='''<!-- DY_MASTER_V2 --><article><h1>Build a Stronger Cash Buffer</h1><div id="dyPageFamily"></div><!-- DY_CONTINUOUS_MOTION_START --></article>'''
    old=os.getcwd();os.chdir(root)
    try:
-    with patch.object(publisher,'TRACKER_FILE','published_tracker.json'),patch.object(publisher,'CSV_FILE','topics.csv'),patch.object(publisher,'SOCIAL_EVENTS_FILE','social_events.json'),patch.object(publisher,'build_reader_value_article',return_value=('Build a Stronger Cash Buffer','build-a-stronger-cash-buffer','A compliant description.',['Cash Savings and Emergency Funds','Kushal K. Daga'],v2)),patch.object(publisher,'assert_publishable',return_value=True),patch.object(publisher,'publish_to_blogger',return_value={'id':'1','url':'https://dailyyield.blogspot.com/2026/10/build-a-stronger-cash-buffer.html'}) as publish:
+    with patch.object(publisher,'TRACKER_FILE','published_tracker.json'),patch.object(publisher,'CSV_FILE','topics.csv'),patch.object(publisher,'SOCIAL_EVENTS_FILE','social_events.json'),patch.object(publisher,'build_reader_value_article',return_value=('Build a Stronger Cash Buffer','build-a-stronger-cash-buffer','A compliant description.',['Cash Savings and Emergency Funds','Kushal Daga'],v2)),patch.object(publisher,'assert_publishable',return_value=True),patch.object(publisher,'publish_to_blogger',return_value={'id':'1','url':'https://dailyyield.blogspot.com/2026/10/build-a-stronger-cash-buffer.html'}) as publish:
      publisher.main()
     content=publish.call_args.args[1]
     self.assertIn('DY_MASTER_V2',content);self.assertNotIn('class="dy-context"',content);self.assertNotIn('class="dy-related"',content)

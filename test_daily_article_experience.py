@@ -15,7 +15,7 @@ def cfg():
 
 
 def post(pid, title, label, news=False):
-    labels = ["News", label] if news else [label, "Kushal K. Daga"]
+    labels = ["News", label] if news else [label, "Kushal Daga"]
     return {"id": pid, "title": title, "url": f"https://dailyyield.blogspot.com/2026/10/{pid}.html", "published": "2026-10-04T00:00:00Z", "labels": labels, "content": f'<img src="https://example.com/{pid}.jpg"><p>Useful article.</p>'}
 
 

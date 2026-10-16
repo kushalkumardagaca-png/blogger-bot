@@ -16,6 +16,8 @@ import email.utils
 import hashlib
 import html as htmlmod
 import json
+
+from identity_contact import BYLINE, LEGAL_NAME
 import os
 import re
 import ssl
@@ -42,9 +44,11 @@ from seo_hygiene import compact_title, repair_image_alts
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 BLOG = "https://dailyyield.blogspot.com"
-SEO_QUERY_TERMS = ["Daily Yield", "Kushal Kumar Daga", "Kushal Daga", "CA Kushal",
-                   "Kushal K. Daga", "Finance", "Finance by Kushal"]
-PERSON_ALIASES = ["Kushal Kumar Daga", "Kushal Daga", "CA Kushal", "Finance by Kushal"]
+SEO_QUERY_TERMS = ["Daily Yield", BYLINE, "Kushal Daga finance", "CA Kushal",
+                   LEGAL_NAME, "Finance", "Finance by Kushal"]
+# The public author name first, then the legal name that belongs on ownership,
+# payment and platform records, so search engines see one person with one name.
+PERSON_ALIASES = [BYLINE, LEGAL_NAME, "CA Kushal", "Finance by Kushal"]
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -1338,7 +1342,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
   </div>
 
   <h1 class="fbk-h1">{htmlmod.escape(title)}</h1>
-  <div class="fbk-byline"><strong>By Kushal K. Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
+  <div class="fbk-byline"><strong>By Kushal Daga</strong> · Published {date_long} · Last reviewed {date_long} · IST</div>
   <p class="fbk-note">Recency rule: every item below is news of <strong>{win_str}</strong> (or weekend trading inside that window). Levels from before the window appear only as labelled last-close references. Events before the window appear only in the Week Ahead, marked as background. Every item links to a <em>genuine, trustworthy source</em> — official releases from central banks, ministries, statistical offices, regulators and exchanges, plus reporting from established, reputable newsrooms.</p>
 {sections_html}
 {background_html}
@@ -1357,8 +1361,7 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         "headline": clip_words(title, 110), "description": meta, "inLanguage": "en",
         "datePublished": win_end.isoformat(timespec="seconds"),
         "dateModified": win_end.isoformat(timespec="seconds"),
-        "author": {"@type": "Person", "name": "Kushal K. Daga",
-                   "alternateName": "Kushal Kumar Daga",
+        "author": {"@type": "Person", "name": "Kushal Daga",
                    "alternateName": PERSON_ALIASES,
                    "url": f"{BLOG}/p/about-us_02080501126.html"},
         "publisher": {"@type": "Organization", "name": "Daily Yield", "url": BLOG + "/"},

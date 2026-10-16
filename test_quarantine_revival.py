@@ -97,7 +97,7 @@ class RepairGateTests(unittest.TestCase):
         self.assertIn("application/ld+json", content)
         content, byline = rq.ensure_byline(content)
         self.assertTrue(byline)
-        self.assertIn("Kushal K. Daga", content)
+        self.assertIn("Kushal Daga", content)
 
     def test_context_card_is_not_duplicated(self):
         first, added = rq.ensure_context("<article><p>Body</p></article>", "A finance headline")

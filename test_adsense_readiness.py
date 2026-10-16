@@ -39,7 +39,7 @@ class AdSenseIdentityTests(unittest.TestCase):
   block=ident.identity_block('page')
   self.assertIn(ident.PRIMARY_EMAIL,block)
   self.assertIn(ident.OWNER_EMAIL,block)
-  self.assertIn('Kushal K. Daga',block)
+  self.assertIn('Kushal Daga',block)
   self.assertIn('no postal address is published',block)
 
  def test_identity_block_is_repeat_safe_on_the_policy_pages(self):

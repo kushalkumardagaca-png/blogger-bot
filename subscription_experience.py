@@ -91,7 +91,7 @@ def build(source: Path, output: Path) -> dict[str, int]:
     text = text.replace(body_close, JS + "\n" + body_close, 1)
 
     # Sync footer promotion with the four currently active profiles.
-    identity_pos = text.find("<span class='ft-by'>By Kushal K. Daga</span>")
+    identity_pos = text.find("<span class='ft-by'>By Kushal Daga</span>")
     if identity_pos < 0:
         raise ValueError("Footer identity anchor not found")
     old_social = re.search(r"<div class='fd-soc'>.*?</div>", text[identity_pos:], re.S)

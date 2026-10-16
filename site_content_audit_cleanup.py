@@ -66,7 +66,7 @@ def audit_news(post,content,title,labels,desk):
  if not title.startswith(desk_title:=DESKS[desk][1].replace('Global News','Global Finance Wire')): # informational; robust check below
   if desk_for({'labels':labels})!=desk:issues.append('desk-title')
  if ' · Coverage ' not in title:issues.append('coverage-title')
- if 'By Kushal K. Daga' not in content:issues.append('byline')
+ if not any(name in content for name in ('Kushal Daga','Kushal K. Daga')):issues.append('byline')
  if '"@type": "NewsArticle"' not in content and '"@type":"NewsArticle"' not in content:issues.append('schema')
  if post.get('url','') not in content:issues.append('canonical')
  if not re.search(r'<figure class="fbk-hero">\s*<img ',content,re.I):issues.append('hero')

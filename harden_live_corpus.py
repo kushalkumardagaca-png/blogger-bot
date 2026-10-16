@@ -36,7 +36,7 @@ def posts(h):
   if not page:return out
 def automated(post):
  labels=set(post.get('labels') or []);content=post.get('content','')
- return bool(labels&{'News','Master Article','Kushal K. Daga'} or any(x in content for x in ('DY_MASTER_V2','DY_NEWS','fbk-news','DY_AUTOMATION')))
+ return bool(labels&{'News','Master Article','Kushal Daga'} or any(x in content for x in ('DY_MASTER_V2','DY_NEWS','fbk-news','DY_AUTOMATION')))
 def canonical_id(url,h):
  try:return str(call('GET','/posts/bypath',h,params={'path':urlparse(url).path,'fields':'id'}).json().get('id',''))
  except Exception:return ''

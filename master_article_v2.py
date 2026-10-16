@@ -9,7 +9,7 @@ import reader_prose
 from content_policy_guard import POLICY_VERSION,automation_disclosure,audit_text,normalize_sentence,sentences
 
 BLOG="https://dailyyield.blogspot.com"
-AUTHOR="Kushal K. Daga"
+AUTHOR="Kushal Daga"
 MASTER_V2_VERSION="2.0"
 CORE_MIN,CORE_MAX=4000,4200
 SUMMARY_MIN,SUMMARY_MAX=600,800

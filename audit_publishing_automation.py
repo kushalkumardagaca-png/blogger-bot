@@ -81,7 +81,7 @@ check('Master tracker advances only after live URL','tracker will not advance' i
 check('Master duplicate recovery','find_duplicate(title,content,posts)' in ap and 'no duplicate published' in ap and 'fetchBodies=True' in ap)
 check('Master canonical repaired to live URL','predicted.group(0)' in ap and 'posts().update' in ap)
 check('Master packages always rebuilt fresh','Always rebuild with the current date' in ap and 'Loading pre-compiled' not in ap)
-check('Master byline is current','AUTHOR="Kushal K. Daga"' in mv2 and 'By <strong>{AUTHOR}</strong>' in mv2 and 'By CA Kushal K. Daga' not in master)
+check('Master byline is current','AUTHOR="Kushal Daga"' in mv2 and 'By <strong>{AUTHOR}</strong>' in mv2 and 'By CA Kushal Daga' not in master)
 check('Master publisher brand is Daily Yield','"name":"Daily Yield"' in mv2 and 'Finance by CA Kushal' not in master)
 check('Inactive LinkedIn, X and Reddit profiles are absent from future master output',
       all(term not in master.casefold() for term in ('linkedin.com/','x.com/','twitter.com/','reddit.com/')))
@@ -172,7 +172,7 @@ check('Tumblr creates modern NPF posts with shared creative media and alt text',
       and 'render_social_card(x, "tumblr"' in tp and '/posts' in tp)
 check('Tumblr preserves title, summary, direct link, byline and platform-native tags',
       'def summary(' in tp and 'tumblr_payload' in tp
-      and 'By Kushal K. Daga' in (ROOT/'social_creative.py').read_text())
+      and 'By Kushal Daga' in (ROOT/'social_creative.py').read_text())
 check('Tumblr rotates Pages and posts using its own tracker',
       '/pages"' in tp and 'PAGE_WINDOWS' in tp and 'tumblr_tracker.json' in tp)
 check('Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes',
@@ -486,7 +486,7 @@ check('News editorial length is fail-closed at 3,800–4,100 visible words',
 check('News forecasts and analysis remain explicitly attributable',
       'Reported outlook' in np and 'not an observed future result' in np
       and 'ANALYSIS_TERMS' in np)
-check('News byline is current','By Kushal K. Daga' in np and 'By CA Kushal K. Daga' not in np)
+check('News byline is current','By Kushal Daga' in np and 'By CA Kushal Daga' not in np)
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
 check('News meta description capped','if len(meta) > 158' in np)

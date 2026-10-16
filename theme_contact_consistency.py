@@ -19,8 +19,11 @@ import re
 PRIMARY_EMAIL = "dailyyield.official@gmail.com"
 OWNER_EMAIL = "kushalkumardaga.ca@gmail.com"
 REPLY_TIME = "2\u20133 working days"
+# The public author name used everywhere a reader looks, and the legal name
+# that belongs on ownership, payment and platform records.
 LEGAL_NAME = "Kushal Kumar Daga"
-BYLINE = "Kushal K. Daga"
+BYLINE = "Kushal Daga"
+RETIRED_BYLINE_RE = re.compile(r"Kushal\s+K\.?\s+Daga")
 
 REPLY_TIME_FIXES = (
     ("Replies usually arrive within 24&#8211;48 hours", f"Replies usually arrive within {REPLY_TIME}"),
@@ -40,12 +43,13 @@ FOOTER_CONTACT_RE = re.compile(re.escape(PRIMARY_ANCHOR) + r"(?:" + re.escape(OW
 DESK_CARD = (f"<strong>Email the editorial desk</strong><small>{PRIMARY_EMAIL}</small>",
              f"<strong>Email the editorial desk</strong><small>{PRIMARY_EMAIL} or {OWNER_EMAIL}</small>")
 
-# The footer masthead keeps the editorial byline and adds one plain sentence so
-# the legal name and the byline can never look like two different people.
-FOOTER_BYLINE = "<span class='ft-by'>By Kushal K. Daga</span>"
-FOOTER_BYLINE_WITH_NOTE = ("<span class='ft-by'>By Kushal K. Daga</span>"
-                           "<p class='ft-legal'>Published by Kushal Kumar Daga \u2014 "
-                           "\u201cKushal K. Daga\u201d is the abbreviated form of the same name used as the byline.</p>")
+# The footer masthead carries the one public author name, plus one plain sentence
+# that ties it to the legal name used on ownership and payment records.
+FOOTER_BYLINE = f"<span class='ft-by'>By {BYLINE}</span>"
+FOOTER_LEGAL_NOTE = (f"<p class='ft-legal'>Published by Daily Yield. Written by {BYLINE}, the short form "
+                     f"of the publisher's legal name, {LEGAL_NAME}, which is the name used on "
+                     f"ownership, payment and platform records.</p>")
+FOOTER_BYLINE_WITH_NOTE = FOOTER_BYLINE + FOOTER_LEGAL_NOTE
 
 CORRECTION_ANSWER = (f"Use the Daily Yield Contact desk or email {PRIMARY_EMAIL} with the page URL and the correction details.",
                      f"Use the Daily Yield Contact desk or email {PRIMARY_EMAIL} or {OWNER_EMAIL}; both inboxes are monitored and replies take usually within {REPLY_TIME}.")
@@ -73,9 +77,17 @@ def apply(text: str) -> tuple[str, list[str]]:
         if before in text:
             text = text.replace(before, after)
             changes.append("correction instructions show both addresses")
-    if FOOTER_BYLINE in text and FOOTER_BYLINE_WITH_NOTE not in text:
-        text = text.replace(FOOTER_BYLINE, FOOTER_BYLINE_WITH_NOTE, 1)
-        changes.append("footer states the legal name behind the byline")
+    # Retire the initials byline wherever the theme still carries it, and set the
+    # footer identity line to the public name plus the legal-name sentence. Matching
+    # the whole paragraph means the previous wording is replaced instead of stacked.
+    if RETIRED_BYLINE_RE.search(text):
+        text = RETIRED_BYLINE_RE.sub(BYLINE, text)
+        changes.append("theme byline moved to the public author name")
+    footer_re = re.compile(re.escape(FOOTER_BYLINE) + r"(?:<p class='ft-legal'>.*?</p>)?", re.S)
+    fixed, count = footer_re.subn(FOOTER_BYLINE + FOOTER_LEGAL_NOTE, text, count=1)
+    if fixed != text:
+        text = fixed
+        changes.append("footer states the public author name and the legal name behind it")
     text, meta_done = apply_meta(text)
     if meta_done:
         changes.append("policy-page descriptions state the correct reply time and both addresses")
@@ -92,6 +104,10 @@ def audit(text: str) -> list[str]:
         issues.append("theme does not show the publisher's own monitored address")
     if LEGAL_NAME not in text:
         issues.append("theme does not state the publisher's legal name")
+    if RETIRED_BYLINE_RE.search(text):
+        issues.append("theme still carries the retired initials byline")
+    if f"By {BYLINE}" not in text:
+        issues.append("theme does not carry the public author name")
     if PRIMARY_EMAIL not in text:
         issues.append("theme does not show the publication inbox")
     return issues
@@ -113,7 +129,7 @@ META_MARKER_END = "<!-- DY_HONEST_META_END -->"
 
 PAGE_DESCRIPTIONS = {
     "https://dailyyield.blogspot.com/p/about-us_02080501126.html":
-        "Daily Yield is an independent finance publication written and published by Kushal K. Daga. "
+        "Daily Yield is an independent finance publication written and published by Kushal Daga. "
         "Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.",
     "https://dailyyield.blogspot.com/p/contact-us_01883938366.html":
         "Contact Daily Yield about a report, a correction or a topic request at dailyyield.official@gmail.com "

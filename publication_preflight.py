@@ -58,7 +58,7 @@ def assert_publishable(title,content,labels,check_remote_images=True):
   if content.count('class="dy2-data ')<3:issues.append('at least three evidence-based data representations required')
   order=[content.find(x) for x in ('class="dy2-summary"','class="dy2-faq"','class="dy2-glossary"','class="dy2-low"','class="dy2-follow"','DY_PAGE_FAMILY_START')]
   if any(x<0 for x in order) or order!=sorted(order):issues.append('Master V2 closing-section order is invalid')
- if 'Kushal K. Daga' not in content:issues.append('current byline missing')
+ if not any(name in content for name in ('Kushal Daga','Kushal K. Daga')):issues.append('current byline missing')
  if 'challenge-platform' in content or '/cdn-cgi/challenge-platform/' in content:issues.append('invalid copied challenge script')
  if not master_v2 and 'class="dy-context"' not in content:issues.append('contextual internal-link card missing')
  if not master_v2 and 'class="dy-related"' not in content:issues.append('related-reading shelf missing')

@@ -37,7 +37,7 @@ def low_exposure_posts():
  rr=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access.json()['access_token']},json=body,timeout=60);rr.raise_for_status();scores={row['keys'][0].rstrip('/'):(float(row.get('clicks',0)),float(row.get('impressions',0))) for row in rr.json().get('rows',[])}
  chosen=sorted(posts,key=lambda p:(*scores.get(p.get('url','').rstrip('/'),(0,0)),p.get('published','')))[:15];out=[]
  for p in chosen:
-  match=re.search(r'<img[^>]+src=["\']([^"\']+)',p.get('content',''),re.I);out.append({'title':p.get('title','Daily Yield article'),'url':p.get('url',''),'image':html.unescape(match.group(1)) if match else '','label':next((x for x in p.get('labels',[]) if x!='Kushal K. Daga'),'Daily Yield')})
+  match=re.search(r'<img[^>]+src=["\']([^"\']+)',p.get('content',''),re.I);out.append({'title':p.get('title','Daily Yield article'),'url':p.get('url',''),'image':html.unescape(match.group(1)) if match else '','label':next((x for x in p.get('labels',[]) if x not in ('Kushal K. Daga','Kushal Daga')),'Daily Yield')})
  return out
 STOP=set('a an and are as at be best by can do for from guide how in into is it latest of on or that the their this to today versus via what when where which who why will with your'.split())
 

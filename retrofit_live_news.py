@@ -54,7 +54,7 @@ def retrofit(post):
   obj=json.loads(m.group(1));obj['headline']=clip_words(title,110)
   obj['description']=clip_words(f"{desk_title_prefix(desk)}, coverage {coverage}: {'; '.join(ordered_heads[:3])}",158)
   obj['mainEntityOfPage']={'@id':post['url']};obj['@id']=post['url']
-  obj['author']={'@type':'Person','name':'Kushal K. Daga','alternateName':'Kushal Kumar Daga','url':BLOG+'/p/about-us_02080501126.html'}
+  obj['author']={'@type':'Person','name':'Kushal Daga','alternateName':'Kushal Kumar Daga','url':BLOG+'/p/about-us_02080501126.html'}
   obj['publisher']={'@type':'Organization','name':'Daily Yield','url':BLOG+'/'}
   kws=str(obj.get('keywords',''));obj['keywords']=re.sub(r'last \d+ (?:hours|days)',f'coverage {coverage}',kws,flags=re.I)
   return '<script type="application/ld+json">'+json.dumps(obj,ensure_ascii=False)+'</script>'

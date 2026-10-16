@@ -17,8 +17,9 @@ FOOTER_CONTACT=("Report a correction or ask a question at dailyyield.official@gm
  "kushalkumardaga.ca@gmail.com; both inboxes are monitored and replies take usually "
  "within 2–3 working days. ")
 # The byline is an abbreviation of the publisher's legal name, not a second person.
-FOOTER_NAME_NOTE=("The publisher's legal name is Kushal Kumar Daga; “Kushal K. Daga” is the "
- "abbreviated form of the same name used as the editorial byline. ")
+FOOTER_NAME_NOTE=("Daily Yield is written and published by Kushal Daga, the short form of the "
+ "publisher's legal name, Kushal Kumar Daga, which is the name used on ownership, payment "
+ "and platform records. ")
 
 # These phrases are acceptable only when expressly negated or quoted as a risk.
 DECEPTIVE_PATTERNS=(

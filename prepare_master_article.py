@@ -370,7 +370,7 @@ def low_exposure_posts():
  out=[]
  for p in chosen:
   m=re.search(r'<img[^>]+src=["\']([^"\']+)',p.get('content',''),re.I)
-  out.append({'title':p.get('title','Daily Yield article'),'url':p.get('url',''),'image':html.unescape(m.group(1)) if m else '','label':next((x for x in p.get('labels',[]) if x!='Kushal K. Daga'),'Daily Yield')})
+  out.append({'title':p.get('title','Daily Yield article'),'url':p.get('url',''),'image':html.unescape(m.group(1)) if m else '','label':next((x for x in p.get('labels',[]) if x not in ('Kushal K. Daga','Kushal Daga')),'Daily Yield')})
  return out
 
 def _compact_evidence_packet(evidence):

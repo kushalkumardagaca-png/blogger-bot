@@ -30,7 +30,7 @@ UA = {"User-Agent": "DailyYieldAdSenseCheck/1.0 (dailyyield.official@gmail.com)"
 PRIMARY = "dailyyield.official@gmail.com"
 OWNER = "kushalkumardaga.ca@gmail.com"
 LEGAL_NAME = "Kushal Kumar Daga"
-BYLINE = "Kushal K. Daga"
+BYLINE = "Kushal Daga"
 
 PAGES = {
     "about": "/p/about-us_02080501126.html",
@@ -87,10 +87,13 @@ def check_site() -> dict:
 
     for name in ("about", "contact"):
         text = pages.get(name, "")
+        add(f"{name}: public author name", BYLINE in text, BYLINE)
         add(f"{name}: publisher's legal name", LEGAL_NAME in text, LEGAL_NAME)
-        add(f"{name}: editorial byline", BYLINE in text, BYLINE)
         add(f"{name}: name relationship explained",
-            "abbreviated" in text.casefold(), "the site explains that the byline is the same person's name")
+            "legal name" in text.casefold() and "short form" in text.casefold(),
+            "the site says the public author name is the short form of the legal name used on records")
+        add(f"{name}: retired initials byline gone", not re.search(r"Kushal\s+K\.?\s+Daga", text),
+            "the retired initials byline is no longer published")
         add(f"{name}: publication inbox", PRIMARY in text, PRIMARY)
         add(f"{name}: publisher's own address", OWNER in text, OWNER)
         add(f"{name}: no contradictory reply time", "24\u201348" not in text,
@@ -126,6 +129,8 @@ def check_site() -> dict:
         "no CSS text leaks outside style blocks on the homepage")
     add("no inaccurate name claim on the homepage", "Kushal Jain" not in masked,
         "the homepage does not present an unrelated surname as an alias of the author")
+    add("no retired byline on the homepage", not re.search(r"Kushal\s+K\.?\s+Daga", masked),
+        "the homepage carries the public author name, not the retired initials form")
     add("robots meta allows indexing",
         "index,follow" in masked.casefold() or "index, follow" in masked.casefold(),
         "the homepage is indexable")

@@ -42,8 +42,8 @@ def package_path(kind,item):
  return PACKAGES/f"{plan_date}-{kind}-{item['id']}.json"
 def build_html(kind,item,package,check_remote_images=True):
  published_at=dt.datetime.now(IST);topic=topic_for(kind,item);title,slug,meta,labels,body=render(package,topic,published_at.strftime('%Y-%m-%d'),published_at.strftime('%H:%M'))
- if kind=='trending':labels=[item['category'],item['evergreen_category'],'Master Article','Kushal K. Daga']
- else:labels=[item['category'],'Master Article','Kushal K. Daga']
+ if kind=='trending':labels=[item['category'],item['evergreen_category'],'Master Article','Kushal Daga']
+ else:labels=[item['category'],'Master Article','Kushal Daga']
  first=re.search(r'<img[^>]+src=["\']([^"\']+)',body,re.I);body=ensure_seo_meta(body,title,meta,first.group(1) if first else '');body=ensure_social_identity(ensure_brand_identity(body));body=ensure_continuous_motion(body);assert_publishable(title,body,labels,check_remote_images=check_remote_images);return title,slug,meta,labels,body
 
 def trending_candidates(plan,item):

@@ -10,7 +10,7 @@ ROOT=Path(__file__).parent
 REPORT=ROOT/'MASTER_PHOTO_REFRESH_REPORT.json'
 BACKUPS=ROOT/'master_photo_refresh_backups'
 TARGETS=['9090794225984393149','5283900934510767783','1224431701070336470','8594486389302937562','5564629106804601974']
-AUTHOR='Kushal K. Daga';MARKER='<!-- DY_MASTER_V2 -->'
+AUTHOR='Kushal Daga';MARKER='<!-- DY_MASTER_V2 -->'
 
 def save(status,**data):
  REPORT.write_text(json.dumps({'status':status,'at':datetime.now(timezone.utc).isoformat(),**data},indent=2)+'\n')
