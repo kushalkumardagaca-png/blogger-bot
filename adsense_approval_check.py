@@ -123,7 +123,14 @@ def check_site() -> dict:
     add("sitemap.xml serves URLs", status == 200 and "<loc>" in sitemap,
         f"HTTP {status}, {sitemap.count('<loc>') if status == 200 else 0} URLs listed")
 
-    status, home = get("/")
+    # The homepage is read last, after several page reads, so the request is given
+    # more room: a hosted blog can throttle a burst from one address, and a
+    # throttled reply must never be reported as a site defect.
+    time.sleep(3)
+    status, home = get("/", attempts=5)
+    if status != 200:
+        add("homepage could be read", False,
+            f"the homepage did not answer ({status}) — the homepage checks below could not be completed")
     masked = re.sub(r"<style.*?</style>", " ", home, flags=re.S | re.I)
     add("no raw code shown to readers", "cursor:grab" not in masked and "touch-action" not in masked,
         "no CSS text leaks outside style blocks on the homepage")
