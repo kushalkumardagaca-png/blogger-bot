@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-16T17:36:36.891777+05:30",
+  "generatedAt": "2026-10-16T18:19:20.148024+05:30",
   "dateIST": "2026-10-16",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 15,
+  "confirmedPublications": 17,
   "overdueMissing": [],
   "actions": [
     {
@@ -14,6 +14,20 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-4",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-global",
+      "platform": "mastodon",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-global",
+      "platform": "bluesky",
+      "routeIndex": 1,
       "applied": true
     }
   ],
