@@ -17,7 +17,7 @@ SOCIAL_GRACE=dt.timedelta(minutes=10)
 # The last moment an edition may still be produced at all. After this the slot is
 # recorded as expired and is never backfilled: a late edition arrives when its
 # readers have gone and duplicates the desk for the day.
-NEWS_WINDOW=dt.timedelta(minutes=95)
+NEWS_WINDOW=dt.timedelta(minutes=30)
 RETRY=dt.timedelta(hours=3)
 ARTICLE_RETRY=dt.timedelta(minutes=30)
 MAX_RETRIES=3

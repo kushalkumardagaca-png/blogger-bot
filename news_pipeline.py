@@ -1883,7 +1883,7 @@ def append_social_event(desk, url):
 # past its slot an edition is recorded as expired and is never produced late:
 # a backfilled edition arrives when its readers have gone and would publish a
 # second edition into the same day.
-SLOT_GRACE = dt.timedelta(minutes=90)
+SLOT_GRACE = dt.timedelta(minutes=30)
 
 
 def run_desk(desk, tracker, dry=False, token=None, timed_release=False):

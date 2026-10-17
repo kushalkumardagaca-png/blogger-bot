@@ -1,0 +1,67 @@
+name: Slot and Social Guarantee
+
+# The owner's rule: all 21 articles and all 42 social posts, inside a 30-minute
+# tolerance either way. This guard runs every ten minutes, names any slot that is
+# at risk, retries it while its window is open, and records anything that could
+# not be delivered instead of hiding it.
+on:
+  schedule:
+    - cron: '3,13,23,33,43,53 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'slot_guard.py'
+      - 'social_guard.py'
+      - '.github/workflows/slot_guarantee.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: daily-yield-slot-guarantee
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: pip install --quiet requests
+      - name: Check every slot and every social pair
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          set -uo pipefail
+          python slot_guard.py --apply || echo "slot guard reported an error"
+          python social_guard.py --apply || echo "social guard reported an error"
+      - name: Persist the guarantee evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-guard
+          cp SLOT_GUARANTEE_STATUS.json SOCIAL_GUARANTEE_STATUS.json SLOT_GUARD_LEDGER.json SOCIAL_GUARD_LEDGER.json /tmp/dy-guard/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-guard/* . 2>/dev/null || true
+            git add SLOT_GUARANTEE_STATUS.json SOCIAL_GUARANTEE_STATUS.json SLOT_GUARD_LEDGER.json SOCIAL_GUARD_LEDGER.json 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record slot and social guarantee evidence [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
