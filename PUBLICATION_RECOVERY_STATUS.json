@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-17T19:38:55.680851+05:30",
+  "generatedAt": "2026-10-17T20:13:07.852197+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 17,
-  "confirmedByLivePost": 17,
+  "confirmedPublications": 18,
+  "confirmedByLivePost": 18,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,11 +15,6 @@
     {
       "type": "source_recovery",
       "key": "news-economy",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-3",
       "applied": true
     },
     {
