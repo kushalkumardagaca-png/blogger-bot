@@ -41,9 +41,11 @@ class RecoveryTests(unittest.TestCase):
   self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(minutes=30),revision))
   self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(hours=3),revision))
   ledger[key]['attempts']=3;self.assertFalse(r.may_retry(ledger,key,now+dt.timedelta(days=1),revision))
+  # A source retry is spaced ten minutes apart and has no attempt ceiling: an
+  # overdue desk is chased all day rather than abandoned.
   source='source:2026-10-11:master-trending-0';ledger[source]={'attempts':99,'lastAttempt':now.isoformat(),'revision':revision}
-  self.assertTrue(r.may_retry(ledger,source,now+dt.timedelta(minutes=31),revision))
-  self.assertFalse(r.may_retry(ledger,source,now+dt.timedelta(minutes=29),revision))
+  self.assertTrue(r.may_retry(ledger,source,now+dt.timedelta(minutes=11),revision))
+  self.assertFalse(r.may_retry(ledger,source,now+dt.timedelta(minutes=9),revision))
   self.assertTrue(r.may_retry(ledger,key,now+dt.timedelta(minutes=1),'repaired-code'))
   r.mark(ledger,key,now,'repaired-code');self.assertEqual(ledger[key]['attempts'],1);self.assertEqual(ledger[key]['revision'],'repaired-code')
 
