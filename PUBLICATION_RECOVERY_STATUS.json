@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T22:29:26.273896+05:30",
+  "generatedAt": "2026-10-17T22:58:56.401231+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
@@ -9,7 +9,8 @@
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "news-economy"
+    "news-economy",
+    "master-evergreen-4"
   ],
   "actions": [
     {
@@ -18,8 +19,9 @@
       "applied": true
     },
     {
-      "type": "preparation_recovery",
+      "type": "source_recovery",
       "key": "master-evergreen-4",
+      "attempt": 1,
       "applied": true
     }
   ],

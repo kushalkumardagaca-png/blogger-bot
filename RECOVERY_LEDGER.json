@@ -541,8 +541,8 @@
   },
   "source:2026-10-17:news-economy": {
     "revision": "86c3d572ca5aff77",
-    "attempts": 5,
-    "lastAttempt": "2026-10-17T22:29:26.273896+05:30"
+    "attempts": 6,
+    "lastAttempt": "2026-10-17T22:58:56.401231+05:30"
   },
   "prewarm:2026-10-17:master-evergreen-3": {
     "revision": "520c112839ad8656",
@@ -568,5 +568,10 @@
     "revision": "86c3d572ca5aff77",
     "attempts": 5,
     "lastAttempt": "2026-10-17T22:29:26.273896+05:30"
+  },
+  "source:2026-10-17:master-evergreen-4": {
+    "revision": "86c3d572ca5aff77",
+    "attempts": 1,
+    "lastAttempt": "2026-10-17T22:58:56.401231+05:30"
   }
 }
