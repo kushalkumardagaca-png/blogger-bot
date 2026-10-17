@@ -66,11 +66,11 @@ def todays_slots(day: dt.date) -> list[dict]:
 
 
 def confirmed_publish_time(row: dict, token: str, day: dt.date):
-    """Ask the live blog when this slot's artwork went live. Returns a datetime or None."""
+    """Ask the live blog whether this slot's article really is today's. Time or None."""
     url = row.get("url", "")
-    if not url:
+    if not url or not token:
         return None
-    if row["kind"] == "news":
+    if row.get("kind", "news") == "news":
         ok = news_pipeline.live_current_edition(
             url, token, day,
             alt_dates=(day - dt.timedelta(days=1),) if row.get("desk") == "americas" else ())
@@ -93,7 +93,7 @@ def inventory(day: dt.date) -> dict[str, dict]:
     tracker = load(ROOT / "news_tracker.json", {}).get("desks", {})
     for desk, row in tracker.items():
         if row.get("edition") == day.isoformat():
-            found[f"news-{desk}"] = {"url": row.get("url", ""), "desk": desk,
+            found[f"news-{desk}"] = {"url": row.get("url", ""), "desk": desk, "kind": "news",
                                      "publishedAt": row.get("window_end", "")}
     master = load(ROOT / "MASTER_AUTOMATION_TRACKER.json", {}).get("published", [])
     plan = load(ROOT / "MASTER_DAILY_PLAN.json", {})
@@ -106,7 +106,7 @@ def inventory(day: dt.date) -> dict[str, dict]:
                             and x.get("kind") == kind
                             and x.get("date") == day.isoformat()), None)
                 if row:
-                    found[f"master-{kind}-{index}"] = {"url": row.get("url", ""),
+                    found[f"master-{kind}-{index}"] = {"url": row.get("url", ""), "kind": kind,
                                                        "publishedAt": row.get("published_at", "")}
     return found
 
@@ -147,6 +147,9 @@ def main() -> int:
     now = dt.datetime.fromisoformat(args.now).astimezone(IST) if args.now else dt.datetime.now(IST)
     day = now.date()
     token = publishing_recovery.live_token()
+    if not token:
+        print(json.dumps({"status": "NO_CREDENTIALS",
+                          "note": "the guard cannot verify the live blog without the Blogger token"}))
     records = inventory(day)
     ledger = load(LEDGER, {})
     rows, dispatched = [], 0
