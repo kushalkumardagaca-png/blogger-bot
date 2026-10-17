@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T14:15:53.835763+05:30",
+ "generatedAt": "2026-10-17T14:18:50.909606+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 11,
  "expectedPosts": 22,
  "articlesWithBothPosts": 10,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -140,8 +140,8 @@
     "mastodon": 0
    },
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   }
  ],
