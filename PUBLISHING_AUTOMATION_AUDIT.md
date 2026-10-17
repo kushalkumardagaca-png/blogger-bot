@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 175 PASS · 2 FAIL
+**Result:** 178 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -87,7 +87,8 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Concurrent News desk writes use semantic merge and retry**
 - ✅ **Both article social routes release within five minutes after publication**
 - ✅ **Coordinated tracker writes use semantic race-safe persistence retries**
-- ❌ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**
+- ✅ **Every new URL is announced to the search engines without human submission**
+- ✅ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily**
 - ✅ **Article and Page application choices rotate across all four networks by IST day**
@@ -106,7 +107,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master V3 deterministically assembles summary, support and three evidence visuals**
 - ✅ **Duplicate Master attempts are serialized without cross-slot embargo blocking**
 - ✅ **Concurrent Master package, photo, plan and tracker writes use semantic merge and retry**
-- ❌ **Persistence and Blogger failures return to permanent ordered recovery**
+- ✅ **Persistence and Blogger failures return to permanent ordered recovery**
 - ✅ **Master generation is quota-independent with model-independent research fallback**
 - ✅ **Local Master generation is bounded for the publication window**
 - ✅ **Evergreen source discovery can use relevant established reporting without weakening review**

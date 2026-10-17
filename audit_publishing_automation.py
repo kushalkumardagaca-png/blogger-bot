@@ -251,13 +251,21 @@ check('Coordinated tracker writes use semantic race-safe persistence retries',
       and (ROOT/'merge_social_tracker.py').exists())
 recovery_path=ROOT/'.github/workflows/publishing_recovery.yml';recovery_script=ROOT/'publishing_recovery.py'
 recovery=recovery_path.read_text() if recovery_path.exists() else '';recovery_code=recovery_script.read_text() if recovery_script.exists() else ''
+check('Every new URL is announced to the search engines without human submission',
+      (ROOT/'indexnow_submit.py').exists() and (ROOT/'bing_index_queue.py').exists()
+      and 'indexnow_submit.py' in (ROOT/'.github/workflows/daily_news_wires.yml').read_text(encoding='utf-8')
+      and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text(encoding='utf-8')
+      and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text(encoding='utf-8')
+      and 'BING_WEBMASTER_API_KEY' in (ROOT/'.github/workflows/search_indexing.yml').read_text(encoding='utf-8')
+      and 'pending' in (ROOT/'indexnow_submit.py').read_text(encoding='utf-8'))
+
 check('Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow',
       not (ROOT/'.github/workflows/missed_publication_recovery.yml').exists()
       and bool(recovery) and bool(recovery_code) and "cron: '7,17,27,37,47,57 * * * *'" in recovery
       and 'MAX_RETRIES=3' in recovery_code and 'SOCIAL_GRACE' in recovery_code
       and 'implementation_revision' in recovery_code and "row.get('revision')!=revision" in recovery_code
       and "key.startswith(('source:','prewarm:','cleanup:'))" in recovery_code
-      and 'PREWARM=dt.timedelta(hours=3,minutes=15)' in recovery_code and 'ARTICLE_RETRY=dt.timedelta(minutes=30)' in recovery_code and 'source_dispatched' in recovery_code and 'has_overdue_master' in recovery_code and "'publish=false'" in recovery_code
+      and 'PREWARM=dt.timedelta(hours=3,minutes=15)' in recovery_code and 'ARTICLE_RETRY=dt.timedelta(minutes=10)' in recovery_code and 'source_dispatched' in recovery_code and 'has_overdue_master' in recovery_code and "'publish=false'" in recovery_code
       and 'publicDailyYieldRequests' in recovery_code)
 check('Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts',
       'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_DESTINATIONS' in rotation
@@ -329,7 +337,7 @@ check('Concurrent Master package, photo, plan and tracker writes use semantic me
       and 'git reset --hard FETCH_HEAD' in master_workflows and 'files.tar' in master_workflows)
 check('Persistence and Blogger failures return to permanent ordered recovery',
       master_workflows.count('gh workflow run master_')==0
-      and 'ARTICLE_RETRY=dt.timedelta(minutes=30)' in recovery_code
+      and 'ARTICLE_RETRY=dt.timedelta(minutes=10)' in recovery_code
       and 'source_dispatched' in recovery_code and 'master_deferred' in recovery_code)
 check('Master generation is quota-independent with model-independent research fallback',
       'OLLAMA_API_URL' in prep and '_heuristic_queries' in prep
