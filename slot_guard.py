@@ -159,6 +159,7 @@ def main() -> int:
         record = {"key": slot["key"], "slot": slot["slot"], "due": slot["due"].isoformat(),
                   "live": bool(published_at)}
         record["state"] = classify(slot["due"], now, published_at)
+        record["minutesFromSlot"] = int((now - slot["due"]).total_seconds() // 60)
         if published_at:
             record["publishedAt"] = published_at.isoformat()
             if record["state"] == "late":
@@ -172,7 +173,7 @@ def main() -> int:
                 if args.apply:
                     ledger[key] = now.isoformat()
                     dispatched += 1
-        else:
+        elif record["state"] == "missed":
             record["minutesLate"] = int((now - slot["due"]).total_seconds() // 60)
         rows.append(record)
     if args.apply:
