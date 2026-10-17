@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T21:36:57.165401+00:00",
+  "generatedAt": "2026-10-17T21:34:59.419013+00:00",
   "status": "ACTIVE",
   "method": "Official API interactions with conservative smoothing; 20% exploration retained.",
   "syntheticViews": 0,
@@ -18,10 +18,10 @@
     "bluesky": {
       "summary": {
         "observations": 100,
-        "engagedPosts": 3,
-        "interactions": 3.0,
-        "smoothedEngagedPostRate": 0.0455,
-        "interactionsPerPost": 0.03
+        "engagedPosts": 2,
+        "interactions": 2.0,
+        "smoothedEngagedPostRate": 0.0364,
+        "interactionsPerPost": 0.02
       },
       "byTopic": {
         "debt": {
@@ -137,10 +137,10 @@
         },
         "general": {
           "summary": {
-            "observations": 15,
+            "observations": 17,
             "engagedPosts": 0,
             "interactions": 0.0,
-            "smoothedEngagedPostRate": 0.08,
+            "smoothedEngagedPostRate": 0.0741,
             "interactionsPerPost": 0.0
           },
           "styles": {
@@ -166,10 +166,10 @@
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 2,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "5": {
@@ -180,10 +180,17 @@
               "interactionsPerPost": 0.0
             },
             "6": {
-              "observations": 3,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
+            "7": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "9": {
@@ -203,24 +210,24 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 6,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "2": {
-              "observations": 3,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "3": {
-              "observations": 3,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "4": {
@@ -233,10 +240,10 @@
           },
           "hooks": {
             "A PRACTICAL WAY TO TEST THE IDEA": {
-              "observations": 5,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "CHECK THE DOWNSIDE, NOT JUST THE CLAIM": {
@@ -247,28 +254,21 @@
               "interactionsPerPost": 0.0
             },
             "ONE DECISION, CLEAR ASSUMPTIONS": {
+              "observations": 6,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.125,
+              "interactionsPerPost": 0.0
+            },
+            "PUT THE TRADE-OFFS ON ONE PAGE": {
               "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
-            },
-            "PUT THE TRADE-OFFS ON ONE PAGE": {
-              "observations": 3,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
-              "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
-            "06": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
             "13": {
               "observations": 1,
               "engagedPosts": 0,
@@ -284,17 +284,17 @@
               "interactionsPerPost": 0.0
             },
             "16": {
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "17": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "17": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "18": {
@@ -312,20 +312,20 @@
               "interactionsPerPost": 0.0
             },
             "20": {
-              "observations": 3,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             }
           }
         },
         "market": {
           "summary": {
-            "observations": 11,
+            "observations": 13,
             "engagedPosts": 0,
             "interactions": 0.0,
-            "smoothedEngagedPostRate": 0.0952,
+            "smoothedEngagedPostRate": 0.087,
             "interactionsPerPost": 0.0
           },
           "styles": {
@@ -358,17 +358,17 @@
               "interactionsPerPost": 0.0
             },
             "7": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "8": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
+            "8": {
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "9": {
@@ -381,17 +381,17 @@
           },
           "layouts": {
             "0": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "2": {
@@ -439,19 +439,19 @@
               "interactionsPerPost": 0.0
             },
             "WHAT THE NUMBERS CAN SUPPORT": {
-              "observations": 2,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
             "09": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "11": {
@@ -469,10 +469,10 @@
               "interactionsPerPost": 0.0
             },
             "13": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "17": {
@@ -514,29 +514,13 @@
         },
         "news": {
           "summary": {
-            "observations": 44,
+            "observations": 38,
             "engagedPosts": 2,
             "interactions": 2.0,
-            "smoothedEngagedPostRate": 0.0741,
-            "interactionsPerPost": 0.0455
+            "smoothedEngagedPostRate": 0.0833,
+            "interactionsPerPost": 0.0526
           },
           "styles": {
-            "0": {
-              "observations": 30,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.075,
-              "interactionsPerPost": 0.0333
-            },
-            "5": {
-              "observations": 14,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.125,
-              "interactionsPerPost": 0.0714
-            }
-          },
-          "layouts": {
             "0": {
               "observations": 13,
               "engagedPosts": 1,
@@ -544,11 +528,27 @@
               "smoothedEngagedPostRate": 0.1304,
               "interactionsPerPost": 0.0769
             },
+            "5": {
+              "observations": 25,
+              "engagedPosts": 1,
+              "interactions": 1.0,
+              "smoothedEngagedPostRate": 0.0857,
+              "interactionsPerPost": 0.04
+            }
+          },
+          "layouts": {
+            "0": {
+              "observations": 12,
+              "engagedPosts": 1,
+              "interactions": 1.0,
+              "smoothedEngagedPostRate": 0.1364,
+              "interactionsPerPost": 0.0833
+            },
             "1": {
-              "observations": 6,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "2": {
@@ -559,34 +559,41 @@
               "interactionsPerPost": 1.0
             },
             "3": {
-              "observations": 22,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.0625,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 2,
+              "observations": 15,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.08,
               "interactionsPerPost": 0.0
             }
           },
           "hooks": {
             "CURRENT REPORTS, CLEARLY DATED": {
-              "observations": 15,
+              "observations": 24,
               "engagedPosts": 1,
               "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.12,
-              "interactionsPerPost": 0.0667
+              "smoothedEngagedPostRate": 0.0882,
+              "interactionsPerPost": 0.0417
+            },
+            "THE SOURCE-LED UPDATE": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
             },
             "WHAT CHANGED — AND WHAT DID NOT": {
-              "observations": 29,
+              "observations": 13,
               "engagedPosts": 1,
               "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.0769,
-              "interactionsPerPost": 0.0345
+              "smoothedEngagedPostRate": 0.1304,
+              "interactionsPerPost": 0.0769
             }
           },
           "hoursUTC": {
@@ -598,10 +605,10 @@
               "interactionsPerPost": 0.0
             },
             "05": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "06": {
@@ -619,10 +626,10 @@
               "interactionsPerPost": 0.0
             },
             "08": {
-              "observations": 4,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "10": {
@@ -630,13 +637,6 @@
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1429,
-              "interactionsPerPost": 0.0
-            },
-            "11": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "12": {
@@ -653,14 +653,14 @@
               "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
-            "15": {
-              "observations": 3,
+            "14": {
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
-            "16": {
+            "15": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
@@ -688,13 +688,6 @@
               "smoothedEngagedPostRate": 0.2727,
               "interactionsPerPost": 1.0
             },
-            "21": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
             "23": {
               "observations": 1,
               "engagedPosts": 0,
@@ -706,11 +699,11 @@
         },
         "page": {
           "summary": {
-            "observations": 18,
-            "engagedPosts": 1,
-            "interactions": 1.0,
-            "smoothedEngagedPostRate": 0.1071,
-            "interactionsPerPost": 0.0556
+            "observations": 20,
+            "engagedPosts": 0,
+            "interactions": 0.0,
+            "smoothedEngagedPostRate": 0.0667,
+            "interactionsPerPost": 0.0
           },
           "styles": {
             "0": {
@@ -727,6 +720,13 @@
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
+            "2": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
             "4": {
               "observations": 3,
               "engagedPosts": 0,
@@ -735,11 +735,11 @@
               "interactionsPerPost": 0.0
             },
             "5": {
-              "observations": 3,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.2308,
-              "interactionsPerPost": 0.3333
+              "observations": 2,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
             },
             "6": {
               "observations": 2,
@@ -749,10 +749,10 @@
               "interactionsPerPost": 0.0
             },
             "7": {
-              "observations": 1,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "8": {
@@ -779,10 +779,10 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 4,
+              "observations": 6,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.125,
               "interactionsPerPost": 0.0
             },
             "2": {
@@ -793,18 +793,18 @@
               "interactionsPerPost": 0.0
             },
             "3": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 4,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.2143,
-              "interactionsPerPost": 0.25
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
             }
           },
           "hooks": {
@@ -817,33 +817,33 @@
             },
             "A USEFUL DAILY YIELD RESOURCE": {
               "observations": 5,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.2,
-              "interactionsPerPost": 0.2
-            },
-            "SAVE FOR YOUR NEXT DECISION": {
-              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1333,
+              "interactionsPerPost": 0.0
+            },
+            "SAVE FOR YOUR NEXT DECISION": {
+              "observations": 5,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "USE THE TOOL, CHECK THE ASSUMPTIONS": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
             "05": {
-              "observations": 2,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.25,
-              "interactionsPerPost": 0.5
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
             },
             "07": {
               "observations": 1,
@@ -857,6 +857,13 @@
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
+            "09": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "10": {
@@ -895,10 +902,10 @@
               "interactionsPerPost": 0.0
             },
             "16": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "20": {
@@ -909,10 +916,10 @@
               "interactionsPerPost": 0.0
             },
             "21": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "22": {
@@ -1174,10 +1181,10 @@
       "byTopic": {
         "economy": {
           "summary": {
-            "observations": 3,
+            "observations": 2,
             "engagedPosts": 0,
             "interactions": 0.0,
-            "smoothedEngagedPostRate": 0.1538,
+            "smoothedEngagedPostRate": 0.1667,
             "interactionsPerPost": 0.0
           },
           "styles": {
@@ -1194,23 +1201,9 @@
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
-            },
-            "8": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
             }
           },
           "layouts": {
-            "1": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
             "2": {
               "observations": 1,
               "engagedPosts": 0,
@@ -1228,21 +1221,14 @@
           },
           "hooks": {
             "WHAT THE RELEASE ACTUALLY SAYS": {
-              "observations": 3,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
-            "10": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
             "13": {
               "observations": 2,
               "engagedPosts": 0,
@@ -1262,17 +1248,10 @@
           },
           "styles": {
             "0": {
-              "observations": 3,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
-              "interactionsPerPost": 0.0
-            },
-            "1": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "2": {
@@ -1283,10 +1262,10 @@
               "interactionsPerPost": 0.0
             },
             "3": {
-              "observations": 5,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "4": {
@@ -1303,6 +1282,13 @@
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
+            "8": {
+              "observations": 2,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
             "9": {
               "observations": 3,
               "engagedPosts": 0,
@@ -1313,31 +1299,31 @@
           },
           "layouts": {
             "0": {
-              "observations": 6,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "2": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
-            "3": {
-              "observations": 5,
+            "2": {
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "3": {
+              "observations": 6,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.125,
               "interactionsPerPost": 0.0
             },
             "4": {
@@ -1357,10 +1343,10 @@
               "interactionsPerPost": 0.0
             },
             "CHECK THE DOWNSIDE, NOT JUST THE CLAIM": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "ONE DECISION, CLEAR ASSUMPTIONS": {
@@ -1371,10 +1357,10 @@
               "interactionsPerPost": 0.0
             },
             "PUT THE TRADE-OFFS ON ONE PAGE": {
-              "observations": 6,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             }
           },
@@ -1387,10 +1373,10 @@
               "interactionsPerPost": 0.0
             },
             "14": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "16": {
@@ -1415,17 +1401,17 @@
               "interactionsPerPost": 0.0
             },
             "19": {
-              "observations": 4,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "20": {
-              "observations": 1,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "23": {
@@ -1489,17 +1475,10 @@
               "interactionsPerPost": 0.0
             },
             "8": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "9": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           },
@@ -1511,18 +1490,11 @@
               "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
-            "1": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
             "2": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -1533,33 +1505,33 @@
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           },
           "hooks": {
             "CONTEXT BEFORE A MARKET DECISION": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "PRICE IS NOT THE WHOLE STORY": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
-            "READ THE RISK BEFORE THE RETURN": {
-              "observations": 5,
+            "PRICE IS NOT THE WHOLE STORY": {
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "READ THE RISK BEFORE THE RETURN": {
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "WHAT THE NUMBERS CAN SUPPORT": {
@@ -1586,10 +1558,10 @@
               "interactionsPerPost": 0.0
             },
             "11": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "12": {
@@ -1604,13 +1576,6 @@
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1538,
-              "interactionsPerPost": 0.0
-            },
-            "21": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "22": {
@@ -1646,17 +1611,17 @@
               "interactionsPerPost": 0.0
             },
             "2": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "4": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "4": {
-              "observations": 3,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "5": {
@@ -1667,10 +1632,10 @@
               "interactionsPerPost": 0.0
             },
             "6": {
-              "observations": 2,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "7": {
@@ -1681,10 +1646,10 @@
               "interactionsPerPost": 0.0
             },
             "8": {
-              "observations": 3,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "9": {
@@ -1711,33 +1676,33 @@
               "interactionsPerPost": 0.0
             },
             "2": {
-              "observations": 2,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "3": {
-              "observations": 7,
+              "observations": 6,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1176,
+              "smoothedEngagedPostRate": 0.125,
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 5,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             }
           },
           "hooks": {
             "CURRENT REPORTS, CLEARLY DATED": {
-              "observations": 5,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "THE NEWS BEHIND THE HEADLINE": {
@@ -1748,10 +1713,10 @@
               "interactionsPerPost": 0.0
             },
             "THE SOURCE-LED UPDATE": {
-              "observations": 6,
+              "observations": 7,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
+              "smoothedEngagedPostRate": 0.1176,
               "interactionsPerPost": 0.0
             },
             "WHAT CHANGED — AND WHAT DID NOT": {
@@ -1785,24 +1750,17 @@
               "interactionsPerPost": 0.0
             },
             "07": {
-              "observations": 3,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
-              "interactionsPerPost": 0.0
-            },
-            "08": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "10": {
               "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1429,
+              "interactionsPerPost": 0.0
+            },
+            "10": {
+              "observations": 5,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "12": {
@@ -1813,10 +1771,10 @@
               "interactionsPerPost": 0.0
             },
             "17": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "18": {
@@ -1852,31 +1810,24 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "2": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "3": {
-              "observations": 4,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
-              "interactionsPerPost": 0.0
-            },
-            "4": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "2": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "3": {
+              "observations": 6,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.125,
               "interactionsPerPost": 0.0
             },
             "5": {
@@ -1894,10 +1845,10 @@
               "interactionsPerPost": 0.0
             },
             "7": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "8": {
@@ -1910,31 +1861,31 @@
           },
           "layouts": {
             "0": {
-              "observations": 4,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
-              "interactionsPerPost": 0.0
-            },
-            "1": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
-            "2": {
-              "observations": 7,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1176,
-              "interactionsPerPost": 0.0
-            },
-            "3": {
+            "1": {
               "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "2": {
+              "observations": 6,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.125,
+              "interactionsPerPost": 0.0
+            },
+            "3": {
+              "observations": 5,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "4": {
@@ -1947,24 +1898,24 @@
           },
           "hooks": {
             "A PRACTICAL MONEY RESOURCE": {
+              "observations": 5,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1333,
+              "interactionsPerPost": 0.0
+            },
+            "A USEFUL DAILY YIELD RESOURCE": {
+              "observations": 7,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1176,
+              "interactionsPerPost": 0.0
+            },
+            "SAVE FOR YOUR NEXT DECISION": {
               "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1429,
-              "interactionsPerPost": 0.0
-            },
-            "A USEFUL DAILY YIELD RESOURCE": {
-              "observations": 6,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
-              "interactionsPerPost": 0.0
-            },
-            "SAVE FOR YOUR NEXT DECISION": {
-              "observations": 6,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.125,
               "interactionsPerPost": 0.0
             },
             "USE THE TOOL, CHECK THE ASSUMPTIONS": {
@@ -1991,10 +1942,17 @@
               "interactionsPerPost": 0.0
             },
             "09": {
-              "observations": 4,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "11": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "12": {
@@ -2033,10 +1991,10 @@
               "interactionsPerPost": 0.0
             },
             "20": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "21": {
@@ -2047,10 +2005,10 @@
               "interactionsPerPost": 0.0
             },
             "23": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             }
           }
@@ -2072,13 +2030,6 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "2": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
@@ -2100,19 +2051,19 @@
               "interactionsPerPost": 0.0
             },
             "9": {
-              "observations": 1,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           },
           "layouts": {
             "0": {
-              "observations": 3,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "1": {
@@ -2130,10 +2081,10 @@
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 2,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             }
           },
@@ -2146,10 +2097,10 @@
               "interactionsPerPost": 0.0
             },
             "MAKE THE NEXT STEP MEASURABLE": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS": {
@@ -2157,13 +2108,6 @@
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
-            "TEST THE PLAN WITH REAL CASH FLOW": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             }
           },
@@ -2183,17 +2127,17 @@
               "interactionsPerPost": 0.0
             },
             "18": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "19": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "20": {
@@ -2207,10 +2151,10 @@
         },
         "tax": {
           "summary": {
-            "observations": 4,
+            "observations": 5,
             "engagedPosts": 0,
             "interactions": 0.0,
-            "smoothedEngagedPostRate": 0.1429,
+            "smoothedEngagedPostRate": 0.1333,
             "interactionsPerPost": 0.0
           },
           "styles": {
@@ -2229,10 +2173,10 @@
               "interactionsPerPost": 0.0
             },
             "8": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           },
@@ -2244,6 +2188,13 @@
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
+            "1": {
+              "observations": 2,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
             "2": {
               "observations": 1,
               "engagedPosts": 0,
@@ -2252,13 +2203,6 @@
               "interactionsPerPost": 0.0
             },
             "3": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "4": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
@@ -2275,17 +2219,17 @@
               "interactionsPerPost": 0.0
             },
             "ELIGIBILITY BEFORE THE TAX SAVING": {
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "KEEP THE RECORD, VERIFY THE RULE": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "KEEP THE RECORD, VERIFY THE RULE": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             }
           },
@@ -2305,17 +2249,10 @@
               "interactionsPerPost": 0.0
             },
             "15": {
-              "observations": 1,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "16": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           }
@@ -2325,10 +2262,10 @@
     "mastodon": {
       "summary": {
         "observations": 80,
-        "engagedPosts": 6,
-        "interactions": 6.0,
-        "smoothedEngagedPostRate": 0.0889,
-        "interactionsPerPost": 0.075
+        "engagedPosts": 5,
+        "interactions": 5.0,
+        "smoothedEngagedPostRate": 0.0778,
+        "interactionsPerPost": 0.0625
       },
       "byTopic": {
         "debt": {
@@ -2414,10 +2351,10 @@
           },
           "styles": {
             "0": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "4": {
@@ -2433,21 +2370,14 @@
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
-            },
-            "9": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
             }
           },
           "layouts": {
             "1": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -2456,34 +2386,55 @@
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
+            },
+            "4": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
             }
           },
           "hooks": {
-            "WHAT THE RELEASE ACTUALLY SAYS": {
-              "observations": 4,
+            "MACRO DATA WITH LIMITS ATTACHED": {
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "WHAT THE RELEASE ACTUALLY SAYS": {
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
             "13": {
-              "observations": 4,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "23": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             }
           }
         },
         "general": {
           "summary": {
-            "observations": 13,
-            "engagedPosts": 1,
-            "interactions": 1.0,
-            "smoothedEngagedPostRate": 0.1304,
-            "interactionsPerPost": 0.0769
+            "observations": 11,
+            "engagedPosts": 0,
+            "interactions": 0.0,
+            "smoothedEngagedPostRate": 0.0952,
+            "interactionsPerPost": 0.0
           },
           "styles": {
             "0": {
@@ -2494,17 +2445,17 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "2": {
               "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
+            "2": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -2536,27 +2487,20 @@
               "interactionsPerPost": 0.0
             },
             "8": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
-            },
-            "9": {
-              "observations": 1,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.2727,
-              "interactionsPerPost": 1.0
             }
           },
           "layouts": {
             "0": {
-              "observations": 8,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.125
+              "observations": 6,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.125,
+              "interactionsPerPost": 0.0
             },
             "1": {
               "observations": 5,
@@ -2568,42 +2512,35 @@
           },
           "hooks": {
             "A PRACTICAL WAY TO TEST THE IDEA": {
-              "observations": 4,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
-              "interactionsPerPost": 0.0
-            },
-            "CHECK THE DOWNSIDE, NOT JUST THE CLAIM": {
-              "observations": 2,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.25,
-              "interactionsPerPost": 0.5
-            },
-            "ONE DECISION, CLEAR ASSUMPTIONS": {
-              "observations": 4,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
-              "interactionsPerPost": 0.0
-            },
-            "PUT THE TRADE-OFFS ON ONE PAGE": {
               "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
-            }
-          },
-          "hoursUTC": {
-            "12": {
+            },
+            "CHECK THE DOWNSIDE, NOT JUST THE CLAIM": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
+            "ONE DECISION, CLEAR ASSUMPTIONS": {
+              "observations": 3,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1538,
+              "interactionsPerPost": 0.0
+            },
+            "PUT THE TRADE-OFFS ON ONE PAGE": {
+              "observations": 4,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1429,
+              "interactionsPerPost": 0.0
+            }
+          },
+          "hoursUTC": {
             "13": {
               "observations": 1,
               "engagedPosts": 0,
@@ -2619,10 +2556,10 @@
               "interactionsPerPost": 0.0
             },
             "16": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "17": {
@@ -2633,10 +2570,10 @@
               "interactionsPerPost": 0.0
             },
             "18": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "19": {
@@ -2645,13 +2582,6 @@
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
-            },
-            "20": {
-              "observations": 1,
-              "engagedPosts": 1,
-              "interactions": 1.0,
-              "smoothedEngagedPostRate": 0.2727,
-              "interactionsPerPost": 1.0
             },
             "23": {
               "observations": 1,
@@ -2664,11 +2594,11 @@
         },
         "market": {
           "summary": {
-            "observations": 6,
+            "observations": 7,
             "engagedPosts": 4,
             "interactions": 4.0,
-            "smoothedEngagedPostRate": 0.375,
-            "interactionsPerPost": 0.6667
+            "smoothedEngagedPostRate": 0.3529,
+            "interactionsPerPost": 0.5714
           },
           "styles": {
             "0": {
@@ -2679,11 +2609,11 @@
               "interactionsPerPost": 1.0
             },
             "2": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 2,
               "interactions": 2.0,
-              "smoothedEngagedPostRate": 0.3333,
-              "interactionsPerPost": 1.0
+              "smoothedEngagedPostRate": 0.3077,
+              "interactionsPerPost": 0.6667
             },
             "3": {
               "observations": 1,
@@ -2730,10 +2660,10 @@
               "interactionsPerPost": 1.0
             },
             "3": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "4": {
@@ -2765,9 +2695,23 @@
               "interactions": 1.0,
               "smoothedEngagedPostRate": 0.2308,
               "interactionsPerPost": 0.3333
+            },
+            "WHAT THE NUMBERS CAN SUPPORT": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
+            "06": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
             "09": {
               "observations": 1,
               "engagedPosts": 0,
@@ -2800,10 +2744,10 @@
         },
         "news": {
           "summary": {
-            "observations": 25,
+            "observations": 27,
             "engagedPosts": 0,
             "interactions": 0.0,
-            "smoothedEngagedPostRate": 0.0571,
+            "smoothedEngagedPostRate": 0.0541,
             "interactionsPerPost": 0.0
           },
           "styles": {
@@ -2815,17 +2759,17 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "2": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -2836,10 +2780,10 @@
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "5": {
@@ -2857,24 +2801,24 @@
               "interactionsPerPost": 0.0
             },
             "7": {
-              "observations": 4,
+              "observations": 5,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1333,
               "interactionsPerPost": 0.0
             },
             "8": {
+              "observations": 2,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1667,
+              "interactionsPerPost": 0.0
+            },
+            "9": {
               "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1538,
-              "interactionsPerPost": 0.0
-            },
-            "9": {
-              "observations": 4,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             }
           },
@@ -2887,10 +2831,10 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 5,
+              "observations": 6,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.125,
               "interactionsPerPost": 0.0
             },
             "2": {
@@ -2901,17 +2845,17 @@
               "interactionsPerPost": 0.0
             },
             "3": {
-              "observations": 3,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "4": {
-              "observations": 5,
+              "observations": 7,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1176,
               "interactionsPerPost": 0.0
             }
           },
@@ -2924,40 +2868,40 @@
               "interactionsPerPost": 0.0
             },
             "THE NEWS BEHIND THE HEADLINE": {
+              "observations": 5,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1333,
+              "interactionsPerPost": 0.0
+            },
+            "THE SOURCE-LED UPDATE": {
               "observations": 8,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1111,
               "interactionsPerPost": 0.0
             },
-            "THE SOURCE-LED UPDATE": {
-              "observations": 5,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
-              "interactionsPerPost": 0.0
-            },
             "WHAT CHANGED — AND WHAT DID NOT": {
-              "observations": 5,
+              "observations": 7,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1333,
+              "smoothedEngagedPostRate": 0.1176,
               "interactionsPerPost": 0.0
             }
           },
           "hoursUTC": {
             "04": {
+              "observations": 4,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1429,
+              "interactionsPerPost": 0.0
+            },
+            "05": {
               "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
               "smoothedEngagedPostRate": 0.1538,
-              "interactionsPerPost": 0.0
-            },
-            "05": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "06": {
@@ -2974,13 +2918,6 @@
               "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
-            "08": {
-              "observations": 2,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
-              "interactionsPerPost": 0.0
-            },
             "10": {
               "observations": 4,
               "engagedPosts": 0,
@@ -2989,10 +2926,10 @@
               "interactionsPerPost": 0.0
             },
             "12": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "13": {
@@ -3002,18 +2939,25 @@
               "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
-            "17": {
-              "observations": 2,
+            "14": {
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "17": {
+              "observations": 1,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "18": {
-              "observations": 3,
+              "observations": 4,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1429,
               "interactionsPerPost": 0.0
             },
             "19": {
@@ -3049,17 +2993,17 @@
               "interactionsPerPost": 0.0
             },
             "1": {
-              "observations": 4,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "2": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -3084,10 +3028,10 @@
               "interactionsPerPost": 0.0
             },
             "6": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "7": {
@@ -3114,10 +3058,10 @@
           },
           "layouts": {
             "0": {
-              "observations": 4,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1429,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "1": {
@@ -3128,10 +3072,10 @@
               "interactionsPerPost": 0.0
             },
             "2": {
-              "observations": 8,
+              "observations": 9,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1111,
+              "smoothedEngagedPostRate": 0.1053,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -3158,17 +3102,17 @@
               "interactionsPerPost": 0.0
             },
             "A USEFUL DAILY YIELD RESOURCE": {
-              "observations": 8,
+              "observations": 7,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1111,
+              "smoothedEngagedPostRate": 0.1176,
               "interactionsPerPost": 0.0
             },
             "SAVE FOR YOUR NEXT DECISION": {
-              "observations": 2,
+              "observations": 3,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1538,
               "interactionsPerPost": 0.0
             },
             "USE THE TOOL, CHECK THE ASSUMPTIONS": {
@@ -3180,11 +3124,18 @@
             }
           },
           "hoursUTC": {
-            "06": {
-              "observations": 3,
+            "05": {
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1818,
+              "interactionsPerPost": 0.0
+            },
+            "06": {
+              "observations": 2,
+              "engagedPosts": 0,
+              "interactions": 0.0,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "07": {
@@ -3209,17 +3160,17 @@
               "interactionsPerPost": 0.0
             },
             "12": {
-              "observations": 1,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "14": {
-              "observations": 3,
+              "observations": 2,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1538,
+              "smoothedEngagedPostRate": 0.1667,
               "interactionsPerPost": 0.0
             },
             "16": {
@@ -3268,20 +3219,13 @@
         },
         "saving": {
           "summary": {
-            "observations": 9,
+            "observations": 8,
             "engagedPosts": 0,
             "interactions": 0.0,
-            "smoothedEngagedPostRate": 0.1053,
+            "smoothedEngagedPostRate": 0.1111,
             "interactionsPerPost": 0.0
           },
           "styles": {
-            "0": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
             "2": {
               "observations": 1,
               "engagedPosts": 0,
@@ -3327,10 +3271,10 @@
               "interactionsPerPost": 0.0
             },
             "2": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "3": {
@@ -3350,10 +3294,10 @@
           },
           "hooks": {
             "MAKE THE NEXT STEP MEASURABLE": {
-              "observations": 2,
+              "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1667,
+              "smoothedEngagedPostRate": 0.1818,
               "interactionsPerPost": 0.0
             },
             "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS": {
@@ -3387,13 +3331,6 @@
               "interactionsPerPost": 0.0
             },
             "15": {
-              "observations": 1,
-              "engagedPosts": 0,
-              "interactions": 0.0,
-              "smoothedEngagedPostRate": 0.1818,
-              "interactionsPerPost": 0.0
-            },
-            "16": {
               "observations": 1,
               "engagedPosts": 0,
               "interactions": 0.0,
@@ -3516,10 +3453,10 @@
   "recommendations": {
     "bluesky": {
       "news": {
-        "style_index": 5,
-        "layout": 4,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "evidencePosts": 44,
+        "style_index": 0,
+        "layout": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "evidencePosts": 38,
         "engagedPosts": 2,
         "explorationRate": 0.2
       }
