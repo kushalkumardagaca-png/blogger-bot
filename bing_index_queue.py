@@ -99,6 +99,7 @@ def main() -> int:
               "sitemapUrls": len(urls), "alreadySent": len(urls) - len(unsent),
               "neverSent": len(unsent), "apply": args.apply}
     if not key:
+        state["lastResult"] = {**report, "status": "NO_KEY"}
         state["queue"] = unsent[:500]
         save(STATE, state)
         print(json.dumps({**report, "status": "NO_KEY",
@@ -130,6 +131,7 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001
             report["error"] = str(exc)[:200]
             break
+    state["lastResult"] = {k: v for k, v in report.items() if k != "queue"}
     state["queue"] = [u for u in urls if u not in state.get("sent", {})][:500]
     state["lastRun"] = datetime.now(timezone.utc).isoformat()
     save(STATE, state)

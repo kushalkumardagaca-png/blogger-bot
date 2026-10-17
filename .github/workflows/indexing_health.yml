@@ -1,0 +1,46 @@
+name: Indexing Health
+
+# Records, weekly and on demand, exactly which search-engine channels are working,
+# so a silent quota change or a refused key is noticed instead of assumed away.
+on:
+  schedule:
+    - cron: '20 1 * * 1'   # Monday 06:50 IST
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['indexing_health.py', '.github/workflows/indexing_health.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  health:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Ask Bing what it accepts
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: python indexing_health.py || echo "health check reported an error"
+      - name: Record the answer
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-health && cp INDEXING_HEALTH.json /tmp/dy-health/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-health/* . 2>/dev/null || true
+            git add INDEXING_HEALTH.json 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record search indexing health [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
