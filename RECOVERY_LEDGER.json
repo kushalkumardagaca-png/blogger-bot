@@ -520,18 +520,28 @@
     "lastAttempt": "2026-10-17T11:03:01.216600+05:30"
   },
   "prewarm:2026-10-17:master-trending-2": {
-    "revision": "6668e89cb3886908",
-    "attempts": 4,
-    "lastAttempt": "2026-10-17T13:23:36.355205+05:30"
+    "revision": "de6463330fc670cd",
+    "attempts": 1,
+    "lastAttempt": "2026-10-17T13:45:49.411389+05:30"
   },
   "prewarm:2026-10-17:master-evergreen-2": {
-    "revision": "6668e89cb3886908",
-    "attempts": 3,
-    "lastAttempt": "2026-10-17T13:23:36.355205+05:30"
+    "revision": "de6463330fc670cd",
+    "attempts": 1,
+    "lastAttempt": "2026-10-17T13:45:49.411389+05:30"
   },
   "prewarm:2026-10-17:master-trending-3": {
-    "revision": "6668e89cb3886908",
+    "revision": "de6463330fc670cd",
     "attempts": 1,
-    "lastAttempt": "2026-10-17T13:23:36.355205+05:30"
+    "lastAttempt": "2026-10-17T13:45:49.411389+05:30"
+  },
+  "source:2026-10-17:news-markets": {
+    "revision": "de6463330fc670cd",
+    "attempts": 1,
+    "lastAttempt": "2026-10-17T13:45:49.411389+05:30"
+  },
+  "source:2026-10-17:news-economy": {
+    "revision": "de6463330fc670cd",
+    "attempts": 1,
+    "lastAttempt": "2026-10-17T13:45:49.411389+05:30"
   }
 }

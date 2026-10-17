@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T13:23:36.355205+05:30",
+  "generatedAt": "2026-10-17T13:45:49.411389+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
@@ -7,13 +7,22 @@
   "confirmedByLivePost": 9,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
-  "expiredSlots": [
-    "news-markets"
-  ],
+  "expiredSlots": [],
   "overdueMissing": [
-    "news-markets"
+    "news-markets",
+    "news-economy"
   ],
   "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-markets",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "news-economy",
+      "applied": true
+    },
     {
       "type": "preparation_recovery",
       "key": "master-trending-2",
