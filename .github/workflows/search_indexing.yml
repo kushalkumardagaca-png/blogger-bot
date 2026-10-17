@@ -1,0 +1,61 @@
+name: Search Engine Indexing
+
+# Everything that tells Google and Bing about the site, with no human in the loop:
+#  * IndexNow ping for every new article (in the publish workflows themselves),
+#  * this daily pass, which delivers anything still not known to Bing inside the
+#    provider's own quota and re-pins the sitemaps.
+# Reads the sitemap only, so no Daily Yield page is opened and no pageview is added.
+on:
+  schedule:
+    - cron: '45 20 * * *'   # 02:15 IST daily
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'bing_index_queue.py'
+      - 'indexnow_submit.py'
+      - '.github/workflows/search_indexing.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Deliver the queue to Bing inside its quota
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_KEY_LOCATION: ${{ secrets.INDEXNOW_KEY_LOCATION }}
+        run: |
+          set -uo pipefail
+          python bing_index_queue.py --apply || echo "Bing queue reported an error"
+          # Anything the API could not take goes out through IndexNow instead,
+          # which has no quota.
+          python indexnow_submit.py --apply || echo "IndexNow reported an error"
+      - name: Persist the indexing evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-index
+          cp BING_INDEX_QUEUE.json INDEXNOW_STATE.json /tmp/dy-index/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-index/* . 2>/dev/null || true
+            git add BING_INDEX_QUEUE.json INDEXNOW_STATE.json 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record search indexing state [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1

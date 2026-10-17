@@ -1,8 +1,8 @@
 {
-  "checked_at_ist": "2026-10-17T13:45:34+05:30",
+  "checked_at_ist": "2026-10-17T20:16:16+05:30",
   "summary": {
-    "pass": 177,
-    "fail": 0
+    "pass": 175,
+    "fail": 2
   },
   "checks": [
     {
@@ -422,7 +422,7 @@
     },
     {
       "name": "Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {
@@ -517,7 +517,7 @@
     },
     {
       "name": "Persistence and Blogger failures return to permanent ordered recovery",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
     },
     {

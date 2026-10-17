@@ -154,6 +154,23 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
         run: python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name != 'workflow_dispatch' && '--timed-release' || '' }}
+      - name: Tell the search engines the new article is live
+        if: success()
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_KEY_LOCATION: ${{ secrets.INDEXNOW_KEY_LOCATION }}
+        run: |
+          set -uo pipefail
+          python - <<'PY'
+          import json, pathlib, subprocess, datetime
+          ist = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+          today = datetime.datetime.now(ist).date().isoformat()
+          rows = json.loads(pathlib.Path("MASTER_AUTOMATION_TRACKER.json").read_text(encoding="utf-8")).get("published", [])
+          urls = [r.get("url", "") for r in rows if r.get("date") == today and r.get("url")]
+          if urls:
+              subprocess.run(["python", "indexnow_submit.py", "--apply",
+                              *sum([["--url", u] for u in urls], [])], check=False)
+          PY
       - name: Persist confirmed publication before downstream routing
         if: ${{ (github.event_name == 'schedule' || github.event_name == 'push' || inputs.publish) && success() }}
         run: |
