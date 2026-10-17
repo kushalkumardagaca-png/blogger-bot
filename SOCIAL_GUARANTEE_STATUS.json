@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T08:15:38.487339+05:30",
+ "generatedAt": "2026-10-17T08:30:20.957569+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 5,
  "expectedPosts": 10,
- "articlesWithBothPosts": 4,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 5,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -60,20 +60,16 @@
    "key": "master-evergreen-bd1d8d0f0a19907d",
    "title": "ET Alpha Wealth Summit 2.0: Why next market cy",
    "url": "https://dailyyield.blogspot.com/2026/10/et-alpha-wealth-summit-20-why-next.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "tumblr": 0,
+    "tumblr": 1,
     "mastodon": 0
-   },
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
