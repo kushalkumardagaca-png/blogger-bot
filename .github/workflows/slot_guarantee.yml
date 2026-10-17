@@ -7,6 +7,14 @@ name: Slot and Social Guarantee
 on:
   schedule:
     - cron: '3,13,23,33,43,53 * * * *'
+  # Every time an article is published, the guard re-checks the whole day straight
+  # away, so a failure is caught in minutes rather than at the next ten-minute tick.
+  workflow_run:
+    workflows:
+      - 'Daily Yield News Wires (11 Daily)'
+      - 'Master V3 Evergreen Publisher (Live)'
+      - 'Master V3 Trending Publisher (Live)'
+    types: [completed]
   workflow_dispatch:
   push:
     branches: [main]
