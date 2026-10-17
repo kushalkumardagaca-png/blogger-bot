@@ -28,7 +28,7 @@ import urllib.error
 import urllib.request
 from urllib.parse import urljoin, quote_plus, urlencode
 import xml.etree.ElementTree as ET
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, wait
 from contextual_links import STYLE as CONTEXT_STYLE, card as contextual_card
 from continuous_motion import ensure as ensure_continuous_motion
 from related_articles import ensure as ensure_related_articles, fetch_public_posts
@@ -627,8 +627,25 @@ def fetch_desk_items(desk):
         own_off = {s[0] for s in off if s[0] not in shared_official}
         own_med = {s[0] for s in med}
     seen, seen_urls, out = set(), set(), []
+    # A desk must never hang on a slow or silent source. The pool of sources is
+    # wide, and one unreachable feed used to stall the whole desk past the slot;
+    # the deadline makes the desk proceed with whatever has answered in time.
+    deadline = float(os.environ.get("DESK_FETCH_SECONDS", "150"))
     with ThreadPoolExecutor(max_workers=12) as ex:
-        for name, items in ex.map(fetch_source, srcs):
+        futures = {ex.submit(fetch_source, src): src[0] for src in srcs}
+        finished, running = wait(futures, timeout=deadline)
+        for future in running:
+            future.cancel()
+        if running:
+            print(f"[{desk}] {len(running)} sources did not answer within {deadline:.0f}s and were skipped",
+                  flush=True)
+        results = []
+        for future in finished:
+            try:
+                results.append(future.result(timeout=0))
+            except Exception:
+                continue
+        for name, items in results:
             for it in items:
                 if it["date"] is None:
                     continue
@@ -1447,6 +1464,64 @@ def reduce_news_context(document, target=4050):
     return document, editorial_word_count(document)
 
 
+def _item_spans(document):
+    """Every complete fbk-item block, with the heading of the section it sits in."""
+    spans = []
+    cursor = 0
+    while True:
+        start = document.find('<div class="fbk-item">', cursor)
+        if start == -1:
+            break
+        depth, index = 0, start
+        while index < len(document):
+            if document.startswith("<div", index):
+                depth += 1
+                index += 4
+            elif document.startswith("</div>", index):
+                depth -= 1
+                index += 6
+                if depth == 0:
+                    break
+            else:
+                index += 1
+        headings = [m for m in re.finditer(r'<h2 class="fbk-h2">(.*?)</h2>', document[:start], re.S)]
+        section = re.sub(r"<[^>]+>", "", headings[-1].group(1)).strip() if headings else ""
+        spans.append({"start": start, "end": index, "section": section})
+        cursor = index
+    return spans
+
+
+def trim_news_items(document, floor=None, ceiling=None):
+    """Drop whole sourced items to reach the word ceiling, never emptying a section.
+
+    Every remaining item keeps its own publisher link and date, so nothing on the
+    page loses attribution; what is removed is simply one more headline from the
+    section that carries the most of them. This exists because a wide desk can
+    produce far more sourced text than the edition budget, and rejecting the whole
+    edition was costing readers an entire desk's coverage.
+    """
+    floor = NEWS_MIN_WORDS if floor is None else floor
+    ceiling = NEWS_MAX_WORDS if ceiling is None else ceiling
+    count = editorial_word_count(document)
+    if count <= ceiling:
+        return document, count
+    while count > ceiling:
+        spans = _item_spans(document)
+        groups: dict[str, list[dict]] = {}
+        for span in spans:
+            groups.setdefault(span["section"], []).append(span)
+        removable = [g for g in groups.values() if len(g) > 1]
+        if not removable:
+            break
+        target = max(removable, key=len)[-1]
+        candidate = document[:target["start"]] + document[target["end"]:]
+        candidate_count = editorial_word_count(candidate)
+        if candidate_count < floor:
+            break
+        document, count = candidate, candidate_count
+    return document, count
+
+
 def finish_news_article(art, related_candidates):
     """Apply every final reader, SEO, accessibility and navigation enhancement."""
     current_post = {"id": "pending", "title": art["title"],
@@ -1506,6 +1581,12 @@ def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win
             continue
         if count > NEWS_MAX_WORDS:
             art["html"], count = reduce_news_context(art["html"])
+        if count > NEWS_MAX_WORDS:
+            # Sentence trimming only reaches explanatory context; a desk whose
+            # sources simply produce more reporting than the budget allows is
+            # fitted by removing whole items from its busiest section instead of
+            # throwing the edition away.
+            art["html"], count = trim_news_items(art["html"])
         if NEWS_MIN_WORDS <= count <= NEWS_MAX_WORDS:
             mode = (f"{item_count} headlines · context target {context_target}"
                     f" · source-summary target {attempt_summary_target}"

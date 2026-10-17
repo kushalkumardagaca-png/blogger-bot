@@ -2,7 +2,7 @@
  "kind": "news",
  "desk": "economy",
  "target": 45,
- "rotation": 0,
+ "rotation": 3,
  "built_at": "2026-10-16T20:17:05.766635+00:00",
  "entries": [
   {
@@ -533,5 +533,10 @@
    "query": "employment factory workers",
    "checked_at": "2026-10-16T20:17:05.766568+00:00"
   }
- ]
+ ],
+ "last_used": {
+  "index": 2,
+  "at": "2026-10-17T17:42:23.487481+00:00",
+  "source_id": "commons:185330989"
+ }
 }

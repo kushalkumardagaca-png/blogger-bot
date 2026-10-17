@@ -1,5 +1,45 @@
 [
  {
+  "desk": "economy",
+  "mode": "topic-desk-countries",
+  "minimum_per_bucket": 2,
+  "maximum_per_bucket": 10,
+  "counts": {
+   "global": 6,
+   "us": 5,
+   "india": 5,
+   "canada": 4,
+   "china": 4,
+   "russia": 4,
+   "uk": 4,
+   "south-korea": 3,
+   "japan": 2,
+   "france": 2,
+   "mexico": 1
+  },
+  "total": 40,
+  "buckets_short_of_minimum": {
+   "mexico": 1
+  },
+  "buckets_never_covered": [
+   "brazil",
+   "australia",
+   "germany",
+   "italy",
+   "spain"
+  ],
+  "lead_headline": "These tech stocks are a buy ahead of their earnings reports, Bank of America says",
+  "order_top5": [
+   "These tech stocks are a buy ahead of their earnings reports, Bank of A",
+   "AI stocks plunge. Inflation heats up. Where we're still finding opport",
+   "Big US bank stocks head for longest weekly losing streak since 2008",
+   "AI rapidly improving, could vastly boost US GDP, Anthropic's Clark tel",
+   "'Everyone laughed' when he started a pumpkin farm—now it brings in $2 "
+  ],
+  "demand_source": "google-trends-rss",
+  "generated_at": "2026-10-17T17:38:02.458227+00:00"
+ },
+ {
   "desk": "india",
   "mode": "country-desk-topics",
   "minimum_per_bucket": 2,
@@ -22,6 +62,6 @@
    "India banking story 4"
   ],
   "demand_source": "test",
-  "generated_at": "2026-10-17T17:27:24.660858+00:00"
+  "generated_at": "2026-10-17T17:42:43.028362+00:00"
  }
 ]
