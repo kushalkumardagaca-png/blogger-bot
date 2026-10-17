@@ -1,15 +1,26 @@
 {
-  "generatedAt": "2026-10-17T05:35:50.576701+05:30",
+  "generatedAt": "2026-10-17T06:19:00.369518+05:30",
   "dateIST": "2026-10-17",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 2,
-  "confirmedByLivePost": 2,
+  "confirmedPublications": 3,
+  "confirmedByLivePost": 3,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-0",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-1",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
