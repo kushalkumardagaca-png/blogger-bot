@@ -74,6 +74,10 @@ jobs:
           else
             args=""
           fi
+          # Prepared ahead, released on time: each scheduled run starts well before
+          # its desk's slot so research and rendering finish early and the edition
+          # waits for its minute instead of being written against the clock.
+          echo "Run start: $(TZ=Asia/Kolkata date '+%H:%M IST') for desk ${{ steps.desk.outputs.value }}"
           if ! python3 -u news_pipeline.py --desks "${{ steps.desk.outputs.value }}" $args > /tmp/news.log 2>&1; then
             echo "::error title=News publish failed (${{ steps.desk.outputs.value }})::$(tail -c 1200 /tmp/news.log | tr '\n' '|')"
             grep -E "Error|error|Traceback|raise|FAIL|failed|gate|outside|Exception" /tmp/news.log | tail -30

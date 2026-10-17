@@ -1,0 +1,45 @@
+name: Daily Delivery Report
+
+# After the last slot of the day, proves what happened: all 21 articles, all 42
+# posts, and anything that did not arrive — named, not glossed.
+on:
+  schedule:
+    - cron: '20 17 * * *'   # 22:50 IST, after the 22:15 slot
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'slot_day_report.py'
+      - '.github/workflows/daily_delivery_report.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python slot_day_report.py
+      - name: Persist the report
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            git checkout origin/main -- SLOT_DAY_REPORT.md 2>/dev/null || true
+            python slot_day_report.py
+            git add SLOT_DAY_REPORT.md
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record the daily delivery report [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1

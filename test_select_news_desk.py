@@ -44,26 +44,22 @@ class DeskSelectionTests(unittest.TestCase):
                              snd.load_published(self.now(19, 30), self.tracker_path))
         self.assertEqual(desk, "banking")
 
-    def test_an_expired_slot_never_publishes_and_says_so(self):
-        # The Banking slot of 16 October was still missing at 22:30, long after
-        # its 18:45 window. Nothing is published for it; the selector reports the
-        # expiry so the run log shows why, and the News engine's own grace rule
-        # then records the slot as expired rather than filling it late.
+    def test_a_slot_past_its_range_is_still_published(self):
+        # The Banking slot of 16 October was missing at 22:30, long after 18:45.
+        # It is still produced — the edition matters more than the clock — and the
+        # selector says plainly how late it is.
         now = self.now(22, 30)
         desk, reason = snd.choose("banking", now, snd.load_published(now, self.tracker_path))
-        self.assertIn("past its window", reason)
-        self.assertIn("no desk can still publish on time", reason)
-        self.assertTrue(snd.choose("banking", now, {"banking"})[0])
+        self.assertEqual(desk, "banking")
+        self.assertIn("publishing it now", reason)
 
-    def test_a_delayed_china_run_does_not_publish_china_late(self):
-        # GitHub started the China run after its 05:15 slot and the edition went
-        # live at 06:17. Once its window has closed the desk is left alone and the
-        # run prepares the next edition that can still be on time.
+    def test_a_delayed_china_run_still_publishes_china(self):
+        # GitHub started the China run after its 05:15 slot. The edition is still
+        # produced, and the run log records how late it started.
         now = self.now(6, 55)
         desk, reason = snd.choose("china", now, snd.load_published(now, self.tracker_path))
-        self.assertNotEqual(desk, "china")
-        self.assertEqual(desk, "india")
-        self.assertIn("on time", reason)
+        self.assertEqual(desk, "china")
+        self.assertIn("late", reason)
 
     def test_a_desk_already_live_is_not_repeated(self):
         now = self.now(12, 20)
@@ -72,11 +68,15 @@ class DeskSelectionTests(unittest.TestCase):
         self.assertNotEqual(desk, "markets")
         self.assertIn("already live", reason)
 
-    def test_nothing_available_returns_the_scheduled_desk_for_a_visible_failure(self):
+    def test_the_most_overdue_desk_is_caught_up_first(self):
+        # Every desk already live except banking: the run still publishes it rather
+        # than doing nothing, and the reason names the lateness.
         now = self.now(23, 50)
-        desk, reason = snd.choose("banking", now, snd.load_published(now, self.tracker_path))
-        self.assertIn(reason, ("no desk can still publish on time", reason))
-        self.assertTrue(desk)
+        published = {"asia-pacific", "china", "india", "russia", "markets", "europe",
+                     "economy", "americas", "companies", "global"}
+        desk, reason = snd.choose("global", now, published)
+        self.assertEqual(desk, "banking")
+        self.assertIn("overdue", reason)
 
 
 if __name__ == "__main__":

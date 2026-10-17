@@ -45,8 +45,9 @@ class ToleranceTests(unittest.TestCase):
     def test_a_slot_that_is_due_and_open_is_pending(self):
         self.assertEqual(sg.classify(at(18, 45), at(19, 5), None), "pending")
 
-    def test_a_slot_whose_window_closed_is_missed_and_never_backfilled(self):
-        self.assertEqual(sg.classify(at(18, 45), at(19, 40), None), "missed")
+    def test_a_slot_whose_range_passed_is_overdue_and_still_published(self):
+        # The owner's rule: missing the range never cancels that day's article.
+        self.assertEqual(sg.classify(at(18, 45), at(19, 40), None), "overdue")
 
     def test_a_slot_not_yet_due_is_upcoming(self):
         self.assertEqual(sg.classify(at(18, 45), at(17, 0), None), "upcoming")

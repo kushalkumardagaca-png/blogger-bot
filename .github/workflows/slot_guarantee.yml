@@ -6,7 +6,10 @@ name: Slot and Social Guarantee
 # not be delivered instead of hiding it.
 on:
   schedule:
-    - cron: '3,13,23,33,43,53 * * * *'
+    # GitHub honours roughly one schedule per ten minutes per workflow, so the
+    # guard asks for the tightest cadence that survives throttling. Each firing
+    # re-checks all 21 slots and retries anything not yet live.
+    - cron: '2,12,22,32,42,52 * * * *'
   # Every time an article is published, the guard re-checks the whole day straight
   # away, so a failure is caught in minutes rather than at the next ten-minute tick.
   workflow_run:

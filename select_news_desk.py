@@ -16,8 +16,8 @@ The rule this script applies:
 * if nothing qualifies, the scheduled desk is returned unchanged so the failure
   is visible in the run log rather than hidden.
 
-A slot is expired after ``SLOT_GRACE`` minutes (the same window the News engine
-uses) and is never produced late.
+A slot is never cancelled: a late desk is published as soon as the run finds it,
+and the most overdue missing desk is chosen first.
 """
 from __future__ import annotations
 
@@ -50,24 +50,34 @@ def load_published(now: dt.datetime, tracker_path: Path = TRACKER) -> set[str]:
 
 
 def choose(scheduled: str, now: dt.datetime, published: set[str]) -> tuple[str, str]:
-    """Return (desk, reason) for this run."""
-    def usable(desk: str) -> bool:
-        return desk not in published and now <= slot_datetime(desk, now) + SLOT_GRACE
+    """Return (desk, reason) for this run.
 
-    if scheduled in LIVE and usable(scheduled):
-        return scheduled, "scheduled desk still inside its window"
+    Nothing is ever cancelled. The scheduled desk keeps the run when its edition is
+    still missing; if it is already live the run takes the most overdue desk that
+    has no edition today, so a missed slot is caught up instead of lost.
+    """
+    if scheduled in LIVE and scheduled not in published:
+        minutes = int((now - slot_datetime(scheduled, now)).total_seconds() // 60)
+        if minutes <= SLOT_GRACE.total_seconds() // 60:
+            return scheduled, "scheduled desk inside its window"
+        return scheduled, f"scheduled desk is {minutes} min late; publishing it now"
     if scheduled in LIVE and scheduled in published:
         reason = "scheduled desk already live"
-    elif scheduled in LIVE:
-        reason = "scheduled desk past its window; a late edition is not produced"
     else:
         reason = "no scheduled desk for this run"
+    # Most overdue first: the oldest missing edition is the most valuable to fill.
+    overdue = sorted((slot_datetime(desk, now), desk) for desk in LIVE
+                     if desk not in published and slot_datetime(desk, now) <= now)
+    if overdue:
+        desk = overdue[0][1]
+        minutes = int((now - overdue[0][0]).total_seconds() // 60)
+        return desk, f"{reason}; catching up the most overdue edition ({desk}, {minutes} min late)"
     ahead = sorted((slot_datetime(desk, now), desk) for desk in LIVE
-                   if usable(desk) and slot_datetime(desk, now) > now
+                   if desk not in published and slot_datetime(desk, now) > now
                    and slot_datetime(desk, now) - now <= MAX_WAIT)
     if ahead:
-        return ahead[0][1], f"{reason}; taking the next desk that can still publish on time"
-    return scheduled, f"{reason}; no desk can still publish on time"
+        return ahead[0][1], f"{reason}; preparing the next edition ahead of its slot"
+    return scheduled, f"{reason}; nothing is due"
 
 
 def main() -> int:

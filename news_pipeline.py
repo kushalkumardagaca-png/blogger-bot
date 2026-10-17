@@ -1891,20 +1891,19 @@ def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
     now = dt.datetime.now(IST)
     hh, mm = map(int, slot.split(":"))
     slot_dt = now.replace(hour=hh, minute=mm, second=0, microsecond=0)
-    # Expired slots are recorded honestly and left alone. The daily report counts
-    # them as the difference between the timetable and what went live.
-    if not dry and now > slot_dt + SLOT_GRACE and not live_current_edition(
-            tracker["desks"].get(desk, {}).get("url", ""), token, now.date()):
+    # A slot running late is still published. The timetable is the target and the
+    # 30-minute range is what we aim for, but a late edition is worth more than a
+    # missing one: the desk is produced as soon as it can be and the lateness is
+    # recorded honestly, never hidden.
+    if not dry and now > slot_dt + SLOT_GRACE:
         prev = tracker["desks"].get(desk, {})
-        if prev.get("edition") != now.date().isoformat() or prev.get("expiredSlot") != slot:
-            tracker["desks"][desk] = {**prev, "edition": prev.get("edition"),
-                                      "expiredSlot": slot,
-                                      "expired_at": now.isoformat(),
-                                      "expired_reason": f"slot {slot} passed by more than {SLOT_GRACE.seconds//60} minutes; not backfilled"}
+        lateness = int((now - slot_dt).total_seconds() // 60)
+        if prev.get("lateSlot") != slot:
+            tracker["desks"][desk] = {**prev, "lateSlot": slot,
+                                      "late_minutes_at_start": lateness}
             save_tracker(tracker)
-            print(f"  [{desk}] slot {slot} expired "
-                  f"({int((now - slot_dt).total_seconds()//60)} min late) — not backfilled")
-        return False
+            print(f"  [{desk}] slot {slot} is {lateness} min late — publishing now "
+                  f"rather than skipping the day")
     prev = tracker["desks"].get(desk, {})
     # The Americas edition keeps the completed Americas market date in its title
     # by design, so yesterday's date is a valid heading for it.

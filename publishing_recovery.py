@@ -17,7 +17,7 @@ SOCIAL_GRACE=dt.timedelta(minutes=10)
 # The last moment an edition may still be produced at all. After this the slot is
 # recorded as expired and is never backfilled: a late edition arrives when its
 # readers have gone and duplicates the desk for the day.
-NEWS_WINDOW=dt.timedelta(minutes=30)
+NEWS_WINDOW=dt.timedelta(minutes=30)  # the target range, not a cancellation point
 RETRY=dt.timedelta(hours=3)
 ARTICLE_RETRY=dt.timedelta(minutes=30)
 MAX_RETRIES=3
@@ -134,11 +134,8 @@ def reconcile(now,apply=False):
  for desk,t in NEWS_TIMES.items():
   key='news-'+desk
   if now<due(day,t)+GRACE or key in by_key:continue
-  if now>due(day,t)+NEWS_WINDOW:
-   # Past its window an edition is not produced at all: a late edition would
-   # land when its readers have gone and would double the desk for the day.
-   expired.append(key)
-   continue
+  # A late edition is still produced. The window only changes the wording in the
+  # report; it never cancels the day's edition.
   lk=f'source:{day}:{key}'
   if may_retry(ledger,lk,now):
    call(['gh','workflow','run','daily_news_wires.yml','--ref','main','-f',f'desks={desk}'],apply);mark(ledger,lk,now);actions.append({'type':'source_recovery','key':key,'applied':apply})
@@ -192,6 +189,8 @@ def reconcile(now,apply=False):
  for item in inventory:
   published=parse(item.get('published_at'))
   if published and now-published.astimezone(IST)<SOCIAL_GRACE:continue
+  # A late edition is followed by its social posts at the next reconciliation;
+  # SOCIAL_GRACE only stops a post racing the publisher that just created it.
   route_day=parse(item.get('published_at')).astimezone(IST).date() if parse(item.get('published_at')) else day
   for route_index,platform in enumerate(platform_pair_for(item['key'],route_day)):
    if item['url'].split('#')[0].rstrip('/') in platform_urls[platform]:continue

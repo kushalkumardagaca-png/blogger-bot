@@ -107,6 +107,8 @@ def main() -> int:
     trackers = tracker_rows()
     ledger = load(LEDGER, {})
     rows, dispatched, missing = [], 0, 0
+    # Articles are chased whatever their lateness: a late edition is still owed its
+    # two posts, because the audience is still there when the article lands.
     for article in todays_articles(day):
         counts = covered_by(article, trackers)
         have = sum(1 for value in counts.values() if value)

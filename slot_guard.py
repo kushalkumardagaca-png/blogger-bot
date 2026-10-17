@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guarantee the 21 daily slots: on time, or named as missed.
+"""Guarantee the 21 daily slots: on time where possible, always published.
 
 The owner's rule is a 30-minute tolerance either way: every one of the day's 21
 articles must be live within half an hour of its slot, and an article must never
@@ -11,8 +11,8 @@ today's slots, whether the live blog proves the edition was published:
 * **on time**    — live within 30 minutes of the slot;
 * **late**      — live, but after the 30-minute tolerance (recorded, not hidden);
 * **pending**    — due, still inside the window, nothing live yet → dispatch now;
-* **missed**     — the window has closed with nothing live → recorded, never
-                   published afterwards.
+* **overdue**    — the range has passed with nothing live → recorded and chased
+                   until the edition publishes; the minutes late are reported.
 
 It reads the blog through the authenticated API (no pageview) and dispatches the
 existing writers only through the workflows that own them, so a retry behaves
@@ -112,14 +112,18 @@ def inventory(day: dt.date) -> dict[str, dict]:
 
 
 def classify(due: dt.datetime, now: dt.datetime, published_at):
-    """Name the state of one slot against the owner's 30-minute tolerance."""
+    """Name the state of one slot against the owner's 30-minute tolerance.
+
+    A slot that missed its range is never abandoned: it becomes ``overdue`` and the
+    guard keeps retrying it until the edition is live, then reports how late it was.
+    """
     if published_at:
         return "on time" if published_at <= due + TOLERANCE else "late"
     if now < due - EARLY_ALLOWANCE:
         return "upcoming"
     if now <= due + TOLERANCE:
         return "pending"
-    return "missed"
+    return "overdue"
 
 
 def dispatch(slot: dict, apply: bool) -> str:
@@ -164,8 +168,11 @@ def main() -> int:
             record["publishedAt"] = published_at.isoformat()
             if record["state"] == "late":
                 record["minutesLate"] = int((published_at - slot["due"]).total_seconds() // 60)
-        elif record["state"] == "pending":
-            record["state"] = "pending"
+        elif record["state"] in ("pending", "overdue"):
+            # Both a slot inside its range and one that missed it are chased until
+            # the edition is live. A miss costs minutes, never the day's article.
+            if record["state"] == "overdue":
+                record["minutesLate"] = int((now - slot["due"]).total_seconds() // 60)
             key = f"{day}:{slot['key']}"
             last = ledger.get(key, "")
             if not last or now - dt.datetime.fromisoformat(last) >= DISPATCH_SPACING:
@@ -173,8 +180,6 @@ def main() -> int:
                 if args.apply:
                     ledger[key] = now.isoformat()
                     dispatched += 1
-        elif record["state"] == "missed":
-            record["minutesLate"] = int((now - slot["due"]).total_seconds() // 60)
         rows.append(record)
     if args.apply:
         save(LEDGER, {k: v for k, v in ledger.items() if v.startswith(day.isoformat())})
@@ -186,14 +191,14 @@ def main() -> int:
               "toleranceMinutes": int(TOLERANCE.total_seconds() // 60),
               "slots": len(rows), "live": len(done), "onTime": counts.get("on time", 0),
               "late": counts.get("late", 0), "pending": counts.get("pending", 0),
-              "missedCount": counts.get("missed", 0), "upcoming": counts.get("upcoming", 0),
+              "overdue": counts.get("overdue", 0), "upcoming": counts.get("upcoming", 0),
               "dispatched": dispatched, "rows": rows,
               "syntheticViews": 0, "publicDailyYieldRequests": 0}
-    report["status"] = ("PASS" if not counts.get("missed") and not counts.get("late")
+    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late")
                         else "ATTENTION")
     save(STATUS, report)
     print(json.dumps({k: report[k] for k in ("status", "slots", "live", "onTime", "late",
-                                             "pending", "missedCount", "upcoming", "dispatched")}))
+                                             "pending", "overdue", "upcoming", "dispatched")}))
     return 0
 
 
