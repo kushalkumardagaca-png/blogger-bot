@@ -89,6 +89,8 @@ def revival_queue() -> dict[str, dict]:
         state = json.loads(REVIVAL_STATE.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
+    if state.get("enabled") is False or state.get("status") == "RETIRED":
+        return {}
     return {str(row.get("draft_id")): row for row in state.get("items", {}).values()
             if row.get("status") != "live"}
 

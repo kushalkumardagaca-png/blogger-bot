@@ -263,5 +263,9 @@
       ],
       "status": "pending"
     }
-  ]
+  ],
+  "enabled": false,
+  "status": "RETIRED",
+  "retired_at": "2026-10-17T23:35:15.990837+05:30",
+  "retired_reason": "Owner removed the separate eight-hour recovery publishing schedule on 17 October 2026; the regular 21-article daily schedule continues unchanged."
 }

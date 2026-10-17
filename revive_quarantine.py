@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Restore quarantined Blogger drafts one at a time, eight hours apart.
+"""Archived eight-hour draft recovery publisher; retired by the owner on 17 October 2026.
+
+The old repair helpers and evidence remain available, but publication is disabled
+by default. A retired or missing plan cannot be bypassed with --force.
+
+Historical purpose: restore quarantined Blogger drafts one at a time, eight hours apart.
 
 The user decision of 15 October 2026 is to bring the 18 quarantined drafts back
 into public view gradually, and only after each one proves that it meets the
@@ -684,6 +689,17 @@ def announce(item: dict, published_at: str, url: str, apply: bool) -> list[str]:
 
 
 def run(apply: bool, force: bool) -> dict:
+    # Owner retired this separate publisher. Check before credentials, inventory,
+    # state mutation or any Blogger/social operation; --force only affects timing
+    # and must never override the owner's removal. Missing plans fail closed.
+    plan = load(PLAN, {})
+    if plan.get("enabled") is not True:
+        return {
+            "status": "RETIRED",
+            "reason": plan.get("retired_reason", "Eight-hour recovery publishing is disabled."),
+            "articlesPublished": 0,
+            "socialPostsDispatched": 0,
+        }
     current = state()
     now = dt.datetime.now(IST)
     if not force and not due_now(current, now):
@@ -753,6 +769,7 @@ def main() -> int:
         document = survey(tok)
         return 0 if document["preflight_pass"] == document["drafts"] else 0
     result = run(args.apply and not args.dry_run, args.force)
+    print(json.dumps(result, ensure_ascii=False))
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as handle:
