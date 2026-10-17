@@ -404,6 +404,22 @@
  ],
  "history": [
   {
+   "at": "2026-10-17T17:22:38.519098+00:00",
+   "count": 0,
+   "endpoints": [
+    {
+     "endpoint": "https://api.indexnow.org/indexnow",
+     "ok": false,
+     "detail": "HTTP 422: {\"errorCode\":\"InvalidRequestParameters\",\"message\":\"One or more URLs are not related to your site verified through the keylocation parameter. Please verify URLs "
+    },
+    {
+     "endpoint": "https://yandex.com/indexnow",
+     "ok": false,
+     "detail": "HTTP 422: {\n  \"success\":false,\n  \"invalidUrlList\":\n    [\n      \"https://dailyyield.blogspot.com/2026/10/cost-of-living-demonstrations-to-grip.html\",\n      \"https://dailyy"
+    }
+   ]
+  },
+  {
    "at": "2026-10-17T17:18:00.110059+00:00",
    "count": 0,
    "endpoints": [
@@ -420,5 +436,5 @@
    ]
   }
  ],
- "lastRun": "2026-10-17T17:18:00.110059+00:00"
+ "lastRun": "2026-10-17T17:22:38.519098+00:00"
 }
