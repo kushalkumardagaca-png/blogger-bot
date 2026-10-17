@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T12:43:01.060594+05:30",
+ "generatedAt": "2026-10-17T12:45:33.657830+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 9,
  "expectedPosts": 18,
- "articlesWithBothPosts": 8,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 9,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-india",
@@ -18,6 +18,30 @@
     "bluesky": 0,
     "tumblr": 1,
     "mastodon": 0
+   }
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 1
+   }
+  },
+  {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 1
    }
   },
   {
@@ -43,34 +67,6 @@
     "tumblr": 2,
     "mastodon": 1
    }
-  },
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-17.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 1
-   }
-  },
-  {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-17.html",
-   "posts": 0,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
   },
   {
    "key": "master-trending-24e9575ea111fc88",
@@ -123,5 +119,5 @@
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
