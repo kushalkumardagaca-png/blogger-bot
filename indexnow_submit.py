@@ -67,6 +67,29 @@ def post(endpoint: str, payload: dict) -> tuple[bool, str]:
         return False, f"{type(exc).__name__}: {str(exc)[:160]}"
 
 
+def sitemap_urls() -> list[str]:
+    """Every URL the blog advertises, straight from its own sitemap."""
+    import urllib.request
+    from xml.etree import ElementTree
+    found: list[str] = []
+    for page in range(1, 6):
+        url = f"{SITE}/sitemap.xml" if page == 1 else f"{SITE}/sitemap.xml?page={page}"
+        try:
+            with urllib.request.urlopen(url, timeout=45) as response:
+                tree = ElementTree.fromstring(response.read())
+        except Exception:  # noqa: BLE001
+            break
+        ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        entries = tree.findall(".//s:url", ns)
+        if not entries:
+            break
+        for entry in entries:
+            loc = entry.findtext("s:loc", default="", namespaces=ns)
+            if loc:
+                found.append(loc)
+    return list(dict.fromkeys(found))
+
+
 def submit(urls: list[str], apply: bool) -> dict:
     state = load(STATE, {"submitted": {}, "pending": [], "history": []})
     key = os.environ.get("INDEXNOW_KEY", "").strip()
@@ -117,6 +140,8 @@ def main() -> int:
     parser.add_argument("--url", action="append", default=[], help="URL to submit (repeatable)")
     parser.add_argument("--urls-file", default="", help="file with one URL per line")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--from-sitemap", action="store_true",
+                        help="also announce every sitemap URL never announced before")
     args = parser.parse_args()
     urls = list(args.url)
     if args.urls_file and Path(args.urls_file).exists():
@@ -124,6 +149,12 @@ def main() -> int:
     # Anything queued by an earlier run (for example before the key existed) is
     # delivered first, so a missing secret costs time and never a URL.
     state = load(STATE, {})
+    if args.from_sitemap:
+        known = state.get("submitted", {})
+        fresh = [u for u in sitemap_urls() if u not in known]
+        # Politeness: a big first catch-up is spread over runs rather than fired
+        # at once, and anything left stays on the list for tomorrow.
+        urls += fresh[:400]
     urls = list(dict.fromkeys(urls + state.get("pending", [])))
     print(json.dumps(submit(urls, args.apply), ensure_ascii=False)[:900])
     return 0

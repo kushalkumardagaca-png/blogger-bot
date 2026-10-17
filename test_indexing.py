@@ -52,6 +52,35 @@ class IndexNowTests(unittest.TestCase):
         self.assertEqual(saved["pending"], [])
 
 
+class SitemapCatchUpTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.state = Path(self.temp.name) / "INDEXNOW_STATE.json"
+        self._state, ix.STATE = ix.STATE, self.state
+        self._urls, ix.sitemap_urls = ix.sitemap_urls, lambda: [
+            "https://dailyyield.blogspot.com/old.html",
+            "https://dailyyield.blogspot.com/new.html"]
+
+    def tearDown(self):
+        ix.STATE, ix.sitemap_urls = self._state, self._urls
+
+    def test_only_urls_never_announced_before_are_sent(self):
+        self.state.write_text(json.dumps({"submitted": {
+            "https://dailyyield.blogspot.com/old.html": "2026-10-17"}, "pending": []}))
+        sent = []
+        def fake_post(endpoint, payload):
+            sent.append(payload["urlList"])
+            return True, "HTTP 200"
+        import sys
+        with patch.dict("os.environ", {"INDEXNOW_KEY": "k"}, clear=True), \
+             patch.object(ix, "post", fake_post):
+            sys.argv = ["indexnow_submit.py", "--apply", "--from-sitemap"]
+            ix.main()
+        self.assertIn("https://dailyyield.blogspot.com/new.html", sent[0])
+        self.assertNotIn("https://dailyyield.blogspot.com/old.html", sent[0])
+
+
 class BingQueueTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()

@@ -38,7 +38,7 @@ jobs:
           python bing_index_queue.py --apply || echo "Bing queue reported an error"
           # Anything the API could not take goes out through IndexNow instead,
           # which has no quota.
-          python indexnow_submit.py --apply || echo "IndexNow reported an error"
+          python indexnow_submit.py --apply --from-sitemap || echo "IndexNow reported an error"
       - name: Persist the indexing evidence
         if: always()
         shell: bash
