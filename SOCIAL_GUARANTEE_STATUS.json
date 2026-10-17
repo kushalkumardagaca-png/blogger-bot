@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T19:45:49.821730+05:30",
+ "generatedAt": "2026-10-17T19:49:32.765039+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 18,
  "expectedPosts": 36,
  "articlesWithBothPosts": 17,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-russia",
@@ -224,8 +224,8 @@
     "mastodon": 0
    },
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   }
  ],
