@@ -19,7 +19,7 @@ SOCIAL_GRACE=dt.timedelta(minutes=10)
 # readers have gone and duplicates the desk for the day.
 NEWS_WINDOW=dt.timedelta(minutes=30)  # the target range, not a cancellation point
 RETRY=dt.timedelta(hours=3)
-ARTICLE_RETRY=dt.timedelta(minutes=30)
+ARTICLE_RETRY=dt.timedelta(minutes=10)  # a failing desk is retried every ten minutes, all day
 MAX_RETRIES=3
 PREWARM=dt.timedelta(hours=3,minutes=15)
 
