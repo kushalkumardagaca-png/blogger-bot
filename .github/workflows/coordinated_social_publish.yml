@@ -93,7 +93,16 @@ jobs:
       - run: python -m pip install --disable-pip-version-check requests pillow
       - name: Wait until five minutes after Blogger publication
         run: sleep '${{ needs.plan.outputs.delay_seconds }}'
+      - name: Skip a repeat of the same article on Facebook
+        id: dupe
+        run: |
+          set +e
+          python social_dedupe.py --platform facebook --url '${{ needs.plan.outputs.target_url }}'
+          code=$?
+          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
+          exit 0
       - name: Publish exact assigned destination to Facebook
+        if: steps.dupe.outputs.already != 'yes'
         env:
           FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
           FACEBOOK_PAGE_ID: '1303333369533572'
@@ -120,7 +129,16 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check requests pillow
       - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
+      - name: Skip a repeat of the same article on Bluesky
+        id: dupe
+        run: |
+          set +e
+          python social_dedupe.py --platform bluesky --url '${{ needs.plan.outputs.target_url }}'
+          code=$?
+          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
+          exit 0
       - name: Publish exact assigned destination to Bluesky
+        if: steps.dupe.outputs.already != 'yes'
         env:
           BLUESKY_HANDLE: 'dailyyield.bsky.social'
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
@@ -146,7 +164,16 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check requests cryptography pillow
       - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
+      - name: Skip a repeat of the same article on Tumblr
+        id: dupe
+        run: |
+          set +e
+          python social_dedupe.py --platform tumblr --url '${{ needs.plan.outputs.target_url }}'
+          code=$?
+          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
+          exit 0
       - name: Publish exact assigned destination to Tumblr
+        if: steps.dupe.outputs.already != 'yes'
         env:
           TUMBLR_BLOG_IDENTIFIER: 'dailyyield-official'
           TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
@@ -174,7 +201,16 @@ jobs:
         with: {python-version: '3.12'}
       - run: python -m pip install --disable-pip-version-check requests cryptography pillow
       - run: sleep '${{ needs.plan.outputs.delay_seconds }}'
+      - name: Skip a repeat of the same article on Mastodon
+        id: dupe
+        run: |
+          set +e
+          python social_dedupe.py --platform mastodon --url '${{ needs.plan.outputs.target_url }}'
+          code=$?
+          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
+          exit 0
       - name: Publish exact assigned destination to Mastodon
+        if: steps.dupe.outputs.already != 'yes'
         env:
           MASTODON_INSTANCE: https://mastodon.social
           MASTODON_TOKEN_KEY: ${{ secrets.MASTODON_TOKEN_KEY }}
