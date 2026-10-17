@@ -1,12 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "2d019933a64e7cb1",
-  "kind": "evergreen",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-17",
-  "category": "Taxes Benefits & Financial Planning",
-  "evergreen_category": "Taxes Benefits & Financial Planning",
+  "kind": "evergreen",
+  "slot": 2,
+  "topic_id": "2d019933a64e7cb1",
+  "replaced_topic_id": null,
   "title": "Sold a property? Eight different ways to reduc",
-  "url": "https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to_0586614503.html",
-  "published_at": "2026-10-17T02:45:07-07:00"
+  "package": "master_packages/dynamic/2026-10-17-evergreen-2d019933a64e7cb1.json",
+  "html": "scheduled_ready/2026-10-17-evergreen-2-sold-a-property-eight-different-ways-to-reduc.html"
 }
