@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T17:45:43.941058+05:30",
+ "generatedAt": "2026-10-17T17:51:56.671194+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 15,
  "expectedPosts": 30,
- "articlesWithBothPosts": 14,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 15,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-markets",
@@ -48,17 +48,13 @@
    "key": "news-companies",
    "title": "companies edition",
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-17.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 2,
+    "bluesky": 1,
     "tumblr": 0,
     "mastodon": 0
-   },
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   }
   },
   {
    "key": "news-china",
@@ -195,5 +191,5 @@
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
