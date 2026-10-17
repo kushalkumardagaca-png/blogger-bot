@@ -1,15 +1,21 @@
 {
-  "generatedAt": "2026-10-17T09:03:14.730382+05:30",
+  "generatedAt": "2026-10-17T09:34:39.439271+05:30",
   "dateIST": "2026-10-17",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 5,
-  "confirmedByLivePost": 5,
+  "confirmedPublications": 6,
+  "confirmedByLivePost": 6,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-1",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
