@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T11:00:12.312297+05:30",
+ "generatedAt": "2026-10-17T11:15:40.705618+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
- "articles": 7,
- "expectedPosts": 14,
+ "articles": 8,
+ "expectedPosts": 16,
  "articlesWithBothPosts": 7,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-india",
@@ -91,9 +91,25 @@
     "tumblr": 0,
     "mastodon": 0
    }
+  },
+  {
+   "key": "master-evergreen-3d060d702c6d4402",
+   "title": "Pension fund managers in India: A guide to per",
+   "url": "https://dailyyield.blogspot.com/2026/10/pension-fund-managers-in-india-guide-to.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
