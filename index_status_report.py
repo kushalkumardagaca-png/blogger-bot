@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "INDEX_STATUS_REPORT.json"
-SITE = "https://dailyyield.blogspot.com/"
+SITE = "sc-domain:dailyyield.blogspot.com"   # the property the Search Console token can read
 BLOG = "https://dailyyield.blogspot.com"
 
 
@@ -53,7 +53,9 @@ def inventory() -> list[str]:
     for kind in ("pages", "posts"):
         start = 1
         while True:
-            data = fetch(f"{BLOG}/feeds/{kind}/default?alt=json&max-results=100&start-index={start}", {})
+            # Blogger caps a feed page at 25 entries whatever max-results asks for,
+            # so the page size is taken from the reply rather than assumed.
+            data = fetch(f"{BLOG}/feeds/{kind}/default?alt=json&max-results=25&start-index={start}", {})
             entries = data.get("feed", {}).get("entry", [])
             if not entries:
                 break
@@ -61,9 +63,7 @@ def inventory() -> list[str]:
                 url = next((x.get("href", "") for x in entry.get("link", []) if x.get("rel") == "alternate"), "")
                 if url and not url.endswith("/p/share-market_0718113516.html"):
                     urls.append(url)
-            start += 100
-            if len(entries) < 100:
-                break
+            start += len(entries)
     return urls
 
 
@@ -88,6 +88,19 @@ def main() -> int:
             rows.append({"url": url, "verdict": "ERROR", "coverageState": str(exc)[:160]})
         time.sleep(0.15)
     indexed = [r for r in rows if r["verdict"] == "PASS"]
+    errors = [r for r in rows if r["verdict"] == "ERROR"]
+    if errors and len(errors) == len(rows):
+        report = {"checkedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "property": SITE,
+                  "urls": len(rows), "indexed": 0, "notIndexed": len(rows),
+                  "status": "TOKEN_CANNOT_INSPECT",
+                  "detail": errors[0]["coverageState"],
+                  "note": "The Search Console token needs the URL-prefix property "
+                          "(https://dailyyield.blogspot.com/) verified, or the inspection "
+                          "scope; the measured traffic numbers are unaffected.",
+                  "syntheticViews": 0, "publicDailyYieldRequests": 0}
+        OUT.write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(json.dumps({"status": report["status"], "detail": report["detail"][:160]}))
+        return 0
     report = {"checkedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "property": SITE,
               "urls": len(rows), "indexed": len(indexed),
               "notIndexed": len(rows) - len(indexed),
