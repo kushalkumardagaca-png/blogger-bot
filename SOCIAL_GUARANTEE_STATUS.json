@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-17T19:49:32.765039+05:30",
+ "generatedAt": "2026-10-17T20:16:37.034768+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 18,
  "expectedPosts": 36,
- "articlesWithBothPosts": 17,
- "postsMissing": 2,
+ "articlesWithBothPosts": 18,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -216,20 +216,16 @@
    "key": "master-evergreen-6d4d27757c7d1aa3",
    "title": "UAB-sponsored benefit options include employee",
    "url": "https://dailyyield.blogspot.com/2026/10/uab-sponsored-benefit-options-include.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "tumblr": 0,
+    "tumblr": 1,
     "mastodon": 0
-   },
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
