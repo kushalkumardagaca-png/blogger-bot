@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T16:16:34.149760+05:30",
+  "generatedAt": "2026-10-17T16:38:29.270723+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
@@ -15,6 +15,11 @@
     {
       "type": "source_recovery",
       "key": "news-economy",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-3",
       "applied": true
     }
   ],
