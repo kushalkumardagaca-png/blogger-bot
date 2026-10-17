@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T15:08:19.942850+05:30",
+ "generatedAt": "2026-10-17T15:15:38.730693+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
- "articles": 11,
- "expectedPosts": 22,
+ "articles": 12,
+ "expectedPosts": 24,
  "articlesWithBothPosts": 11,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -139,9 +139,25 @@
     "tumblr": 0,
     "mastodon": 1
    }
+  },
+  {
+   "key": "master-evergreen-2d019933a64e7cb1",
+   "title": "Sold a property? Eight different ways to reduc",
+   "url": "https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to_0586614503.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
