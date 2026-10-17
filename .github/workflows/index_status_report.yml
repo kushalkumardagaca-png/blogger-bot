@@ -1,0 +1,57 @@
+name: Google Index Status Report
+
+# Answers the question that decides every traffic target: how many of the site's
+# URLs does Google actually hold, and how many are still unknown. Uses the
+# authenticated URL Inspection endpoint only; no public page request is made.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '40 20 * * *'   # 02:10 IST daily
+  push:
+    branches: [main]
+    paths:
+      - 'index_status_report.py'
+      - '.github/workflows/index_status_report.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Inspect every URL
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+        run: python index_status_report.py
+      - name: Persist the report
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-index
+          cp INDEX_STATUS_REPORT.json /tmp/dy-index/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-index/* . 2>/dev/null || true
+            git add INDEX_STATUS_REPORT.json 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record Google index status [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
