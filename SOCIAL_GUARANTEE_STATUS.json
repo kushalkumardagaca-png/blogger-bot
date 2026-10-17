@@ -1,13 +1,89 @@
 {
- "generatedAt": "2026-10-17T17:22:24.718196+05:30",
+ "generatedAt": "2026-10-17T17:45:43.941058+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
- "articles": 14,
- "expectedPosts": 28,
+ "articles": 15,
+ "expectedPosts": 30,
  "articlesWithBothPosts": 14,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 2,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
+   }
+  },
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 1,
+    "mastodon": 0
+   }
+  },
+  {
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 2,
+    "mastodon": 1
+   }
+  },
+  {
+   "key": "news-companies",
+   "title": "companies edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-17.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 1
+   }
+  },
+  {
+   "key": "news-americas",
+   "title": "americas edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-17.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 2,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
+   }
+  },
   {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
@@ -30,66 +106,6 @@
     "bluesky": 1,
     "tumblr": 0,
     "mastodon": 1
-   }
-  },
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-17.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 2,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 0
-   }
-  },
-  {
-   "key": "news-americas",
-   "title": "americas edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-17.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 2,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 0
-   }
-  },
-  {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 2,
-    "mastodon": 1
-   }
-  },
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-17.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 1
-   }
-  },
-  {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-17.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 1,
-    "mastodon": 0
    }
   },
   {
@@ -179,5 +195,5 @@
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
