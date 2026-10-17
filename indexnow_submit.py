@@ -102,6 +102,12 @@ def submit(urls: list[str], apply: bool) -> dict:
         state["lastRun"] = datetime.now(timezone.utc).isoformat()
         save(STATE, state)
         return {**result, "note": "no Daily Yield URLs in the request"}
+    blocked = state.get("blocked") or {}
+    if blocked and not os.environ.get("INDEXNOW_FORCE"):
+        # A known, platform-level refusal: do not pile URLs into a queue that
+        # cannot drain. The reason stays on record for when it can.
+        return {**result, "blocked": blocked,
+                "note": "IndexNow unavailable on this host; see blocked reason"}
     if not key:
         # Without a key nothing can be sent; the URLs wait in the pending queue so
         # the next run (once the secret exists) delivers them. Nothing is lost.
@@ -120,6 +126,18 @@ def submit(urls: list[str], apply: bool) -> dict:
             result["sent"] = len(clean)
         time.sleep(1)
     now = datetime.now(timezone.utc).isoformat()
+    refusal = " ".join(str(e.get("detail", "")) for e in result["results"])
+    key_problem = ("keylocation" in refusal.lower() or "key location" in refusal.lower()
+                   or "invalidurlkey" in refusal.lower() or "http 403" in refusal.lower())
+    if not result["sent"] and key_problem:
+        # Blogger serves every page as HTML and IndexNow needs a plain-text key
+        # file, so this cannot succeed until the site has its own domain. The
+        # channel parks itself with a dated reason instead of retrying forever.
+        state["blocked"] = {"reason": "key location not verifiable on blogspot.com",
+                            "detail": refusal[:300], "since": now,
+                            "unblocksWhen": "a plain-text key file can be hosted (custom domain)"}
+    elif result["sent"]:
+        state.pop("blocked", None)
     if result["sent"]:
         for url in clean:
             state.setdefault("submitted", {})[url] = now

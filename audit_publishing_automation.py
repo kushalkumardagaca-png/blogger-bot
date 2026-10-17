@@ -256,7 +256,8 @@ check('Every new URL is announced to the search engines without human submission
       and 'indexnow_submit.py' in (ROOT/'.github/workflows/daily_news_wires.yml').read_text(encoding='utf-8')
       and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text(encoding='utf-8')
       and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text(encoding='utf-8')
-      and 'BING_WEBMASTER_API_KEY' in (ROOT/'.github/workflows/search_indexing.yml').read_text(encoding='utf-8')
+      and 'submit_feed' in (ROOT/'bing_url_automation.py').read_text(encoding='utf-8')
+      and 'blocked' in (ROOT/'indexnow_submit.py').read_text(encoding='utf-8')
       and 'pending' in (ROOT/'indexnow_submit.py').read_text(encoding='utf-8'))
 
 check('Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow',

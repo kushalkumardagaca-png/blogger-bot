@@ -8,7 +8,6 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import bing_index_queue as bq
 import indexnow_submit as ix
 
 
@@ -81,52 +80,37 @@ class SitemapCatchUpTests(unittest.TestCase):
         self.assertNotIn("https://dailyyield.blogspot.com/old.html", sent[0])
 
 
-class BingQueueTests(unittest.TestCase):
+class BlockedHostTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
-        self.state = Path(self.temp.name) / "BING_INDEX_QUEUE.json"
-        self._state, bq.STATE = bq.STATE, self.state
-        self._urls, bq.sitemap_urls = bq.sitemap_urls, lambda: [
-            "https://dailyyield.blogspot.com/new.html",
-            "https://dailyyield.blogspot.com/old.html"]
+        self.state = Path(self.temp.name) / "INDEXNOW_STATE.json"
+        self._state, ix.STATE = ix.STATE, self.state
 
     def tearDown(self):
-        bq.STATE, bq.sitemap_urls = self._state, self._urls
+        ix.STATE = self._state
 
-    def test_quota_zero_sends_nothing_and_keeps_the_queue(self):
-        with patch.dict("os.environ", {"BING_WEBMASTER_API_KEY": "k"}, clear=True), \
-             patch.object(bq, "quota", lambda key: (0, 1400)):
-            with patch.object(bq, "api_call") as call:
-                bq.main.__wrapped__ if hasattr(bq.main, "__wrapped__") else None
-                import sys
-                sys.argv = ["bing_index_queue.py", "--apply"]
-                bq.main()
+    def test_a_html_key_location_parks_the_channel_instead_of_retrying_forever(self):
+        refused = (False, "HTTP 422: URLs are not related to your site verified "
+                          "through the keylocation parameter")
+        with patch.dict("os.environ", {"INDEXNOW_KEY": "k"}, clear=True), \
+             patch.object(ix, "post", lambda *a, **k: refused):
+            first = ix.submit(["https://dailyyield.blogspot.com/a.html"], apply=True)
+            self.assertEqual(first["sent"], 0)
+            parked = json.loads(self.state.read_text())["blocked"]
+            self.assertIn("blogspot", parked["reason"])
+            # The next run must not touch the network again.
+            with patch.object(ix, "post") as call:
+                second = ix.submit(["https://dailyyield.blogspot.com/b.html"], apply=True)
                 call.assert_not_called()
-        self.assertEqual(len(json.loads(self.state.read_text())["queue"]), 2)
+            self.assertIn("blocked", second)
 
-    def test_a_positive_quota_sends_newest_first_and_records_it(self):
-        sent = []
-        with patch.dict("os.environ", {"BING_WEBMASTER_API_KEY": "k"}, clear=True), \
-             patch.object(bq, "quota", lambda key: (1, 1400)), \
-             patch.object(bq, "api_call", lambda op, key, params, body=None: sent.append(body) or {}):
-            import sys
-            sys.argv = ["bing_index_queue.py", "--apply"]
-            bq.main()
-        self.assertEqual(sent[0]["urlList"], ["https://dailyyield.blogspot.com/new.html"])
-
-    def test_a_url_is_never_paid_for_twice(self):
-        self.state.write_text(json.dumps({"sent": {
-            "https://dailyyield.blogspot.com/new.html": "2026-10-17"}, "queue": []}))
-        with patch.dict("os.environ", {"BING_WEBMASTER_API_KEY": "k"}, clear=True), \
-             patch.object(bq, "quota", lambda key: (5, 1400)), \
-             patch.object(bq, "api_call") as call:
-            import sys
-            sys.argv = ["bing_index_queue.py", "--apply"]
-            bq.main()
-        bodies = [c.kwargs.get("body") for c in call.call_args_list if c.kwargs.get("body")]
-        if bodies:
-            self.assertNotIn("https://dailyyield.blogspot.com/new.html", bodies[0]["urlList"])
+    def test_a_later_success_clears_the_block(self):
+        self.state.write_text(json.dumps({"blocked": {"reason": "x"}, "pending": []}))
+        with patch.dict("os.environ", {"INDEXNOW_KEY": "k", "INDEXNOW_FORCE": "1"}, clear=True), \
+             patch.object(ix, "post", lambda *a, **k: (True, "HTTP 200")):
+            ix.submit(["https://dailyyield.blogspot.com/a.html"], apply=True)
+        self.assertNotIn("blocked", json.loads(self.state.read_text()))
 
 
 if __name__ == "__main__":

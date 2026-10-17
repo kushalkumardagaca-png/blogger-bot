@@ -206,6 +206,15 @@ def submit_batch(key: str, urls: list[str]) -> None:
     )
 
 
+def submit_feed(key: str) -> None:
+    """Ask Bing to re-read the sitemap. Quota-free, so it runs every cycle."""
+    json_request(
+        bing_url("SubmitFeed", key, siteUrl=SITE), service="Bing sitemap feed",
+        method="POST", body={"siteUrl": SITE, "feedUrl": SITE.rstrip("/") + "/sitemap.xml"},
+        retries=2,
+    )
+
+
 def get_page_stats(key: str) -> dict[str, dict]:
     """Return Bing-observed Daily Yield pages from Search Performance.
 
@@ -317,6 +326,7 @@ def main() -> int:
 
     candidates.sort(key=candidate_priority)
     quota = {"dailyAvailable": 0, "monthlyAvailable": 0}
+    feed_warning = ""
     submitted = []
     deferred = []
     try:
@@ -337,6 +347,14 @@ def main() -> int:
             })
         for item in deferred:
             records[item["url"]]["status"] = "QUOTA_DEFERRED"
+
+        # The sitemap feed is a separate channel: it does not consume the URL
+        # submission quota, so it is refreshed on every run. That way a day whose
+        # 100 URL submissions are already spent still tells Bing about the site.
+        try:
+            submit_feed(key)
+        except Exception as exc:  # noqa: BLE001
+            feed_warning = f"sitemap feed not refreshed: {type(exc).__name__}"
     except Exception as exc:
         errors.append(str(exc))
         deferred = candidates
@@ -361,6 +379,8 @@ def main() -> int:
     due.sort(key=lambda row: (row[0], row[1]))
     inspected = 0
     warnings: list[str] = []
+    if feed_warning:
+        warnings.append(feed_warning)
     observed_pages: dict[str, dict] = {}
     stats_available = not due
     if due:
