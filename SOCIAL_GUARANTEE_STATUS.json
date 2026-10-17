@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T16:03:32.549652+05:30",
+ "generatedAt": "2026-10-17T16:15:51.729031+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
- "articles": 12,
- "expectedPosts": 24,
+ "articles": 13,
+ "expectedPosts": 26,
  "articlesWithBothPosts": 12,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -151,9 +151,25 @@
     "tumblr": 2,
     "mastodon": 0
    }
+  },
+  {
+   "key": "master-trending-e628367f510ad86c",
+   "title": "Russian ministers join board of key trade paym",
+   "url": "https://dailyyield.blogspot.com/2026/10/russian-ministers-join-board-of-key.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
