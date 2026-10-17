@@ -1,0 +1,44 @@
+{
+ "checkedAt": "2026-10-17T17:22:33.150206+00:00",
+ "site": "https://dailyyield.blogspot.com/",
+ "quota": {
+  "ok": true,
+  "code": 200,
+  "body": {
+   "d": {
+    "__type": "UrlSubmissionQuota:#Microsoft.Bing.Webmaster.Api",
+    "DailyQuota": 0,
+    "MonthlyQuota": 1400
+   }
+  }
+ },
+ "sites": {
+  "ok": true,
+  "code": 200,
+  "body": {
+   "d": [
+    {
+     "__type": "Site:#Microsoft.Bing.Webmaster.Api",
+     "AuthenticationCode": "6A5AAEC257D10860B4503E2C3623DD8A",
+     "DnsVerificationCode": "eb1acbe39a37ed1128674d09c7c27e1b.dailyyield.blogspot.com",
+     "IsVerified": true,
+     "Url": "https://dailyyield.blogspot.com/"
+    }
+   ]
+  }
+ },
+ "probeUrl": "https://dailyyield.blogspot.com/2026/09/90k-salary-4k-net-worth-audit.html",
+ "urlSubmission": {
+  "ok": false,
+  "code": 400,
+  "error": "{\"ErrorCode\":8,\"Message\":\"ERROR!!! You have exceeded your daily url submission quota : 100\"}"
+ },
+ "feedSubmission": {
+  "ok": true,
+  "code": 200,
+  "body": {
+   "d": null
+  }
+ },
+ "status": "MEASURED"
+}
