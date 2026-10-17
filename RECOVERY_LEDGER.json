@@ -541,12 +541,17 @@
   },
   "source:2026-10-17:news-economy": {
     "revision": "520c112839ad8656",
-    "attempts": 8,
-    "lastAttempt": "2026-10-17T17:12:28.479017+05:30"
+    "attempts": 9,
+    "lastAttempt": "2026-10-17T17:35:03.951453+05:30"
   },
   "prewarm:2026-10-17:master-evergreen-3": {
     "revision": "520c112839ad8656",
-    "attempts": 2,
-    "lastAttempt": "2026-10-17T17:12:28.479017+05:30"
+    "attempts": 3,
+    "lastAttempt": "2026-10-17T17:35:03.951453+05:30"
+  },
+  "prewarm:2026-10-17:master-trending-4": {
+    "revision": "520c112839ad8656",
+    "attempts": 1,
+    "lastAttempt": "2026-10-17T17:35:03.951453+05:30"
   }
 }
