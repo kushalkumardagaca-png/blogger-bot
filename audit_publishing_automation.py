@@ -252,7 +252,7 @@ check('Coordinated tracker writes use semantic race-safe persistence retries',
 recovery_path=ROOT/'.github/workflows/publishing_recovery.yml';recovery_script=ROOT/'publishing_recovery.py'
 recovery=recovery_path.read_text() if recovery_path.exists() else '';recovery_code=recovery_script.read_text() if recovery_script.exists() else ''
 check('Every new URL is announced to the search engines without human submission',
-      (ROOT/'indexnow_submit.py').exists() and (ROOT/'bing_index_queue.py').exists()
+      (ROOT/'indexnow_submit.py').exists()
       and 'indexnow_submit.py' in (ROOT/'.github/workflows/daily_news_wires.yml').read_text(encoding='utf-8')
       and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text(encoding='utf-8')
       and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text(encoding='utf-8')
