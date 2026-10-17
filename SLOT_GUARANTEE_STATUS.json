@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-17T21:02:34.767630+05:30",
+ "generatedAt": "2026-10-17T21:30:17.006596+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "toleranceMinutes": 30,
@@ -18,7 +18,7 @@
    "due": "2026-10-17T04:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 1007,
+   "minutesFromSlot": 1035,
    "publishedAt": "2026-10-17T03:27:12.437161+05:30"
   },
   {
@@ -27,7 +27,7 @@
    "due": "2026-10-17T05:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 947,
+   "minutesFromSlot": 975,
    "publishedAt": "2026-10-17T04:22:00.498272+05:30"
   },
   {
@@ -36,7 +36,7 @@
    "due": "2026-10-17T06:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 887,
+   "minutesFromSlot": 915,
    "publishedAt": "2026-10-16T17:45:08-07:00"
   },
   {
@@ -45,7 +45,7 @@
    "due": "2026-10-17T07:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 827,
+   "minutesFromSlot": 855,
    "publishedAt": "2026-10-17T06:36:29.328758+05:30"
   },
   {
@@ -54,7 +54,7 @@
    "due": "2026-10-17T08:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 767,
+   "minutesFromSlot": 795,
    "publishedAt": "2026-10-16T19:45:07-07:00"
   },
   {
@@ -63,7 +63,7 @@
    "due": "2026-10-17T09:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 707,
+   "minutesFromSlot": 735,
    "publishedAt": "2026-10-16T20:45:10-07:00"
   },
   {
@@ -72,7 +72,7 @@
    "due": "2026-10-17T10:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 647,
+   "minutesFromSlot": 675,
    "publishedAt": "2026-10-17T10:02:32.789788+05:30"
   },
   {
@@ -81,7 +81,7 @@
    "due": "2026-10-17T11:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 587,
+   "minutesFromSlot": 615,
    "publishedAt": "2026-10-16T22:45:07-07:00"
   },
   {
@@ -90,7 +90,7 @@
    "due": "2026-10-17T12:15:00+05:30",
    "live": true,
    "state": "late",
-   "minutesFromSlot": 527,
+   "minutesFromSlot": 555,
    "publishedAt": "2026-10-17T13:48:16.351068+05:30",
    "minutesLate": 93
   },
@@ -100,7 +100,7 @@
    "due": "2026-10-17T12:45:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 497,
+   "minutesFromSlot": 525,
    "publishedAt": "2026-10-17T12:39:41.481540+05:30"
   },
   {
@@ -109,8 +109,8 @@
    "due": "2026-10-17T13:15:00+05:30",
    "live": false,
    "state": "overdue",
-   "minutesFromSlot": 467,
-   "minutesLate": 467,
+   "minutesFromSlot": 495,
+   "minutesLate": 495,
    "action": "dispatched"
   },
   {
@@ -119,7 +119,7 @@
    "due": "2026-10-17T14:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 407,
+   "minutesFromSlot": 435,
    "publishedAt": "2026-10-17T01:45:10-07:00"
   },
   {
@@ -128,7 +128,7 @@
    "due": "2026-10-17T15:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 347,
+   "minutesFromSlot": 375,
    "publishedAt": "2026-10-17T02:45:07-07:00"
   },
   {
@@ -137,7 +137,7 @@
    "due": "2026-10-17T16:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 287,
+   "minutesFromSlot": 315,
    "publishedAt": "2026-10-17T03:45:10-07:00"
   },
   {
@@ -146,7 +146,7 @@
    "due": "2026-10-17T17:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 227,
+   "minutesFromSlot": 255,
    "publishedAt": "2026-10-17T16:18:37.167747+05:30"
   },
   {
@@ -155,7 +155,7 @@
    "due": "2026-10-17T17:45:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 197,
+   "minutesFromSlot": 225,
    "publishedAt": "2026-10-17T16:50:42.670222+05:30"
   },
   {
@@ -164,7 +164,7 @@
    "due": "2026-10-17T18:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 167,
+   "minutesFromSlot": 195,
    "publishedAt": "2026-10-17T17:17:39.193895+05:30"
   },
   {
@@ -173,7 +173,7 @@
    "due": "2026-10-17T18:45:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 137,
+   "minutesFromSlot": 165,
    "publishedAt": "2026-10-17T17:39:15.625047+05:30"
   },
   {
@@ -182,7 +182,7 @@
    "due": "2026-10-17T19:45:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 77,
+   "minutesFromSlot": 105,
    "publishedAt": "2026-10-17T07:15:08-07:00"
   },
   {
@@ -191,7 +191,7 @@
    "due": "2026-10-17T20:45:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 17,
+   "minutesFromSlot": 45,
    "publishedAt": "2026-10-17T08:15:08-07:00"
   },
   {
@@ -200,7 +200,7 @@
    "due": "2026-10-17T22:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -73
+   "minutesFromSlot": -45
   }
  ],
  "syntheticViews": 0,
