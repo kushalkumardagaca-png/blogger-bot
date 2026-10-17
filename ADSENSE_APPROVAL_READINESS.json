@@ -1,6 +1,6 @@
 {
- "checkedAt": "2026-10-16T16:11:32.818194+00:00",
- "status": "FAIL",
+ "checkedAt": "2026-10-17T03:09:04.968229+00:00",
+ "status": "PASS",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
@@ -169,7 +169,7 @@
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 475 URLs listed",
+   "detail": "HTTP 200, 481 URLs listed",
    "blocking": true
   },
   {
@@ -186,7 +186,7 @@
   },
   {
    "check": "no retired byline on the homepage",
-   "pass": false,
+   "pass": true,
    "detail": "the homepage carries the public author name, not the retired initials form",
    "blocking": true
   },
@@ -209,14 +209,7 @@
    "blocking": false
   }
  ],
- "blockingIssues": [
-  {
-   "check": "no retired byline on the homepage",
-   "pass": false,
-   "detail": "the homepage carries the public author name, not the retired initials form",
-   "blocking": true
-  }
- ],
+ "blockingIssues": [],
  "manualStepsRequired": [
   "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
   "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",
