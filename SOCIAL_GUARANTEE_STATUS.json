@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-17T20:45:51.363967+05:30",
+ "generatedAt": "2026-10-17T20:51:43.612384+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 19,
  "expectedPosts": 38,
- "articlesWithBothPosts": 18,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 19,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-russia",
@@ -228,20 +228,16 @@
    "key": "master-trending-7bc7e9c1dfc590d3",
    "title": "Cost-of-living demonstrations to grip pre-elec",
    "url": "https://dailyyield.blogspot.com/2026/10/cost-of-living-demonstrations-to-grip.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 0,
+    "bluesky": 1,
+    "tumblr": 2,
     "mastodon": 0
-   },
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
