@@ -1,5 +1,37 @@
 {
   "desks": {
+    "asia-pacific": {
+      "edition": "2026-10-17",
+      "window_end": "2026-10-17T03:27:12.437161+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-17.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/500px_photo_%28101127635%29.jpeg/1920px-500px_photo_%28101127635%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Slaffka Che / CC BY 3.0",
+      "hero_source": "prepared-pool"
+    },
+    "banking": {
+      "edition": "2026-10-16",
+      "window_end": "2026-10-16T22:23:19.344233+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/P059743-15224.jpg/1920px-P059743-15224.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: European Commission / CC BY 4.0",
+      "hero_source": "prepared-pool"
+    },
+    "china": {
+      "edition": "2026-10-17",
+      "window_end": "2026-10-17T04:22:00.498272+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-17.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Pudong%2C_Shanghai%2C_with_boat.jpg/1920px-Pudong%2C_Shanghai%2C_with_boat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Brian Kell / Public domain",
+      "hero_source": "prepared-pool"
+    },
+    "russia": {
+      "edition": "2026-10-17",
+      "window_end": "2026-10-17T10:02:32.789788+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Saint_Petersburg%2C_Russia_%2847957296208%29.jpg/1920px-Saint_Petersburg%2C_Russia_%2847957296208%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Ninara from Helsinki, Finland / CC BY 2.0",
+      "hero_source": "prepared-pool"
+    },
     "americas": {
       "edition": "2026-10-16",
       "window_end": "2026-10-16T16:26:05.499801+05:30",
@@ -16,21 +48,23 @@
       "hero_credit": "Photo: Pinakpani / CC BY 4.0",
       "hero_source": "prepared-pool"
     },
-    "banking": {
-      "edition": "2026-10-16",
-      "window_end": "2026-10-16T22:23:19.344233+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/P059743-15224.jpg/1920px-P059743-15224.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: European Commission / CC BY 4.0",
+    "europe": {
+      "edition": "2026-10-17",
+      "window_end": "2026-10-17T12:39:41.481540+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-17.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Rue_de_la_Loi%2C_European_Quarter_in_Brussels_during_civil_twilight_%28DSCF6957%29.jpg/1920px-Rue_de_la_Loi%2C_European_Quarter_in_Brussels_during_civil_twilight_%28DSCF6957%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Trougnouf (Benoit Brummer) / CC BY 4.0",
       "hero_source": "prepared-pool"
     },
-    "global": {
-      "edition": "2026-10-16",
-      "window_end": "2026-10-16T17:24:53.746284+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-16.html",
-      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Prime_Minister_Sheikh_Hasina_observes_minute_of_silence_for_peacekeepers_International_United_Nations_Peacekeepers_Day_2022-05-29_%28PID-0022950%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-      "hero_credit": "Photo: Press Information Department / Public domain",
-      "hero_source": "prepared-pool"
+    "markets": {
+      "edition": "2026-10-17",
+      "window_end": "2026-10-17T13:48:16.351068+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-17.html",
+      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Crowds_gathering_outside_New_York_Stock_Exchange_%283%29.jpg/1920px-Crowds_gathering_outside_New_York_Stock_Exchange_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "hero_credit": "Photo: Associated Press / Public domain",
+      "hero_source": "prepared-pool",
+      "lateSlot": "07:45",
+      "late_minutes_at_start": 363
     },
     "economy": {
       "edition": "2026-10-16",
@@ -40,52 +74,20 @@
       "hero_credit": "Photo: George P. Lewis / Public domain",
       "hero_source": "prepared-pool"
     },
-    "markets": {
-      "edition": "2026-10-17",
-      "window_end": "2026-10-17T13:46:04.972880+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-17.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Gold_bullion_bars.jpg/1920px-Gold_bullion_bars.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Stevebidmead / CC0",
-      "hero_source": "prepared-pool"
-    },
-    "china": {
-      "edition": "2026-10-17",
-      "window_end": "2026-10-17T04:22:00.498272+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-17.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Pudong%2C_Shanghai%2C_with_boat.jpg/1920px-Pudong%2C_Shanghai%2C_with_boat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Brian Kell / Public domain",
-      "hero_source": "prepared-pool"
-    },
-    "asia-pacific": {
-      "edition": "2026-10-17",
-      "window_end": "2026-10-17T03:27:12.437161+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-17.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/500px_photo_%28101127635%29.jpeg/1920px-500px_photo_%28101127635%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Slaffka Che / CC BY 3.0",
-      "hero_source": "prepared-pool"
-    },
-    "russia": {
-      "edition": "2026-10-17",
-      "window_end": "2026-10-17T10:02:32.789788+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Saint_Petersburg%2C_Russia_%2847957296208%29.jpg/1920px-Saint_Petersburg%2C_Russia_%2847957296208%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Ninara from Helsinki, Finland / CC BY 2.0",
-      "hero_source": "prepared-pool"
-    },
-    "europe": {
-      "edition": "2026-10-17",
-      "window_end": "2026-10-17T12:39:41.481540+05:30",
-      "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-17.html",
-      "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Rue_de_la_Loi%2C_European_Quarter_in_Brussels_during_civil_twilight_%28DSCF6957%29.jpg/1920px-Rue_de_la_Loi%2C_European_Quarter_in_Brussels_during_civil_twilight_%28DSCF6957%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "hero_credit": "Photo: Trougnouf (Benoit Brummer) / CC BY 4.0",
-      "hero_source": "prepared-pool"
-    },
     "companies": {
       "edition": "2026-10-16",
       "window_end": "2026-10-16T16:56:14.798206+05:30",
       "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-16.html",
       "hero_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/NASA%E2%80%99s_UAP_Independent_Study_Team_Meeting_%28NHQ202305310012%29.jpg/1920px-NASA%E2%80%99s_UAP_Independent_Study_Team_Meeting_%28NHQ202305310012%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "hero_credit": "Photo: NASA Headquarters / NASA/Joel Kowsky / Public domain",
+      "hero_source": "prepared-pool"
+    },
+    "global": {
+      "edition": "2026-10-16",
+      "window_end": "2026-10-16T17:24:53.746284+05:30",
+      "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-16.html",
+      "hero_url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Prime_Minister_Sheikh_Hasina_observes_minute_of_silence_for_peacekeepers_International_United_Nations_Peacekeepers_Day_2022-05-29_%28PID-0022950%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "hero_credit": "Photo: Press Information Department / Public domain",
       "hero_source": "prepared-pool"
     }
   }
