@@ -73,6 +73,11 @@ def submit(urls: list[str], apply: bool) -> dict:
     clean = [u for u in dict.fromkeys(urls) if u.startswith(SITE)]
     result = {"requested": len(clean), "sent": 0, "results": []}
     if not clean:
+        # Keep the queue on disk even on a quiet run, so a later run (or a missing
+        # secret) can still see what is waiting.
+        state.setdefault("pending", state.get("pending", []))
+        state["lastRun"] = datetime.now(timezone.utc).isoformat()
+        save(STATE, state)
         return {**result, "note": "no Daily Yield URLs in the request"}
     if not key:
         # Without a key nothing can be sent; the URLs wait in the pending queue so

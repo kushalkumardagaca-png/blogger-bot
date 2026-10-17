@@ -47,7 +47,11 @@ jobs:
           git config user.name "Daily Yield Arena Controller"
           git config user.email "dailyyield.official@gmail.com"
           mkdir -p /tmp/dy-index
-          cp BING_INDEX_QUEUE.json INDEXNOW_STATE.json /tmp/dy-index/ 2>/dev/null || true
+          # The scripts always write these now; a missing file means something
+          # failed, so it is reported rather than silently skipped.
+          for f in BING_INDEX_QUEUE.json INDEXNOW_STATE.json; do
+            if [ -f "$f" ]; then cp "$f" /tmp/dy-index/; else echo "::warning title=Missing evidence::$f was not written"; fi
+          done
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
