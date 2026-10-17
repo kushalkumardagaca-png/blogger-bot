@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T13:48:27.882898+05:30",
+  "generatedAt": "2026-10-17T14:03:42.091937+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
@@ -11,10 +11,29 @@
   "overdueMissing": [
     "news-economy"
   ],
-  "actions": [],
-  "retryBlocked": [
-    "source:2026-10-17:news-economy"
+  "actions": [
+    {
+      "type": "source_recovery",
+      "key": "news-economy",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-evergreen-2",
+      "applied": true
+    },
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-3",
+      "applied": true
+    }
   ],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
