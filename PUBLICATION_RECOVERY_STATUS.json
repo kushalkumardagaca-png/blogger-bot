@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-17T15:45:10.230730+05:30",
+  "generatedAt": "2026-10-17T16:16:34.149760+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 12,
-  "confirmedByLivePost": 12,
+  "confirmedPublications": 13,
+  "confirmedByLivePost": 13,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,11 +15,6 @@
     {
       "type": "source_recovery",
       "key": "news-economy",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-3",
       "applied": true
     }
   ],
