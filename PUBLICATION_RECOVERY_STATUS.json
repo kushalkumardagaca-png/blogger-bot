@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T18:46:02.955594+05:30",
+  "generatedAt": "2026-10-17T19:16:54.770160+05:30",
   "dateIST": "2026-10-17",
   "status": "DEGRADED",
   "apply": true,
@@ -28,17 +28,8 @@
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "facebook",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "tumblr",
-      "routeIndex": 1,
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
       "applied": true
     }
   ],
