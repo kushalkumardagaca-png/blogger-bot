@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-17T14:18:50.909606+05:30",
+ "generatedAt": "2026-10-17T14:40:16.670870+05:30",
  "dateIST": "2026-10-17",
  "apply": true,
  "articles": 11,
  "expectedPosts": 22,
- "articlesWithBothPosts": 10,
- "postsMissing": 2,
+ "articlesWithBothPosts": 11,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -132,20 +132,16 @@
    "key": "master-trending-5837b48529ade843",
    "title": "Inside India newsletter: Billionaire Ambani’s",
    "url": "https://dailyyield.blogspot.com/2026/10/inside-india-newsletter-billionaire.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
-   },
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+    "mastodon": 1
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
