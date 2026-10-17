@@ -1,14 +1,18 @@
 {
-  "generatedAt": "2026-10-17T12:07:48.134509+05:30",
+  "generatedAt": "2026-10-17T12:50:00.005589+05:30",
   "dateIST": "2026-10-17",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 8,
-  "confirmedByLivePost": 8,
+  "confirmedPublications": 9,
+  "confirmedByLivePost": 9,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
-  "expiredSlots": [],
-  "overdueMissing": [],
+  "expiredSlots": [
+    "news-markets"
+  ],
+  "overdueMissing": [
+    "news-markets"
+  ],
   "actions": [
     {
       "type": "preparation_recovery",
