@@ -1,6 +1,6 @@
 {
- "checkedAt": "2026-10-17T03:09:04.968229+00:00",
- "status": "PASS",
+ "checkedAt": "2026-10-18T03:09:08.299437+00:00",
+ "status": "FAIL",
  "publicPagesRead": 9,
  "syntheticViews": 0,
  "checks": [
@@ -30,8 +30,8 @@
   },
   {
    "check": "policy page /terms",
-   "pass": true,
-   "detail": "/p/terms-and-conditions.html → HTTP 200",
+   "pass": false,
+   "detail": "/p/terms-and-conditions.html → HTTP 0",
    "blocking": true
   },
   {
@@ -169,7 +169,7 @@
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 481 URLs listed",
+   "detail": "HTTP 200, 502 URLs listed",
    "blocking": true
   },
   {
@@ -209,7 +209,14 @@
    "blocking": false
   }
  ],
- "blockingIssues": [],
+ "blockingIssues": [
+  {
+   "check": "policy page /terms",
+   "pass": false,
+   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "blocking": true
+  }
+ ],
  "manualStepsRequired": [
   "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
   "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",

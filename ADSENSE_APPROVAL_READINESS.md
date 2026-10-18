@@ -1,7 +1,7 @@
 # Daily Yield — AdSense approval readiness (live site check)
 
-- **Status:** PASS
-- **Checked:** 2026-10-17T03:09:04.968229+00:00
+- **Status:** FAIL
+- **Checked:** 2026-10-18T03:09:08.299437+00:00
 - **Public pages read:** 9 (ordinary HTTP, no synthetic views)
 
 ## Checks
@@ -9,7 +9,7 @@
 - **PASS** — policy page /contact: /p/contact-us_01883938366.html → HTTP 200
 - **PASS** — policy page /privacy: /p/privacy-policy.html → HTTP 200
 - **PASS** — policy page /disclaimer: /p/disclaimer.html → HTTP 200
-- **PASS** — policy page /terms: /p/terms-and-conditions.html → HTTP 200
+- **FAIL** — policy page /terms: /p/terms-and-conditions.html → HTTP 0
 - **PASS** — about: public author name: Kushal Daga
 - **PASS** — about: publisher's legal name: Kushal Kumar Daga
 - **PASS** — about: name relationship explained: the site says the public author name is the short form of the legal name used on records
@@ -32,7 +32,7 @@
 - **PASS** — robots.txt readable and permits reading: HTTP 200
 - **PASS** — Mediapartners-Google explicitly allowed: the AdSense crawler is named in robots.txt
 - **PASS** — sitemap declared: sitemap line present in robots.txt
-- **PASS** — sitemap.xml serves URLs: HTTP 200, 481 URLs listed
+- **PASS** — sitemap.xml serves URLs: HTTP 200, 502 URLs listed
 - **PASS** — no raw code shown to readers: no CSS text leaks outside style blocks on the homepage
 - **PASS** — no inaccurate name claim on the homepage: the homepage does not present an unrelated surname as an alias of the author
 - **PASS** — no retired byline on the homepage: the homepage carries the public author name, not the retired initials form
