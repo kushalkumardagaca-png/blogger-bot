@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-10-18T09:24:47.334922+00:00",
+  "checkedAt": "2026-10-18T09:47:52.696145+00:00",
   "status": "CHECKED_WITH_LIMITS",
   "siteWrites": 0,
   "analyticsEventsSent": 0,
   "pageScriptsExecuted": false,
   "bloggerApiReads": 14,
-  "livePosts": 510,
+  "livePosts": 511,
   "livePages": 14,
   "drafts": 0,
   "draftInventory": [],
@@ -14,7 +14,9 @@
   "sourceObservation": {
     "status": "OBSERVED",
     "httpStatus": 200,
-    "sourceSha256": "628a31a2e2248d64cafb785cc9c7cb27a5644a40d9e3ee5e98f3ef34a2480642",
+    "checkedAt": "2026-10-18T08:45:31.683293+00:00",
+    "sourceSha256": "e6f1d7d7f1e8ab5555f4c7c89e43e39795e3032532ed51c507f9b2a64f279c08",
+    "evidenceOrigin": "Earlier independent source diagnostic; see its original checkedAt/sourceSha256, not a fresh successful runner request",
     "ga4IdsObserved": [
       "G-WLEEYTKV12"
     ],
@@ -45,21 +47,30 @@
       "/p/disclaimer.html": true,
       "/p/terms-and-conditions.html": true
     },
-    "scriptsExecuted": false,
-    "accountApprovalVisible": false,
-    "limits": "HTML observation is not proof of a collecting GA4 property or certified consent. No live visitor session was manufactured.",
+    "scriptsExecutedOnLiveSite": false,
+    "analyticsEventsSent": 0,
+    "limits": "Existing tag/configuration observed, not Analytics account or readership proof.",
     "adsTxt": {
       "httpStatus": 200,
       "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
-      "readOnly": true,
-      "checkedAt": "2026-10-18T09:24:23.706219+00:00",
+      "checkedAt": "2026-10-18T09:05:26.252937+00:00",
       "matchesRecordedPublisher": true
     },
     "robotsTxt": {
       "httpStatus": 200,
       "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
       "readOnly": true,
-      "checkedAt": "2026-10-18T09:24:23.837461+00:00"
+      "checkedAt": "2026-10-18T09:47:08.282779+00:00"
+    },
+    "runnerSourceRead": {
+      "status": "UNAVAILABLE",
+      "httpStatus": 429
+    },
+    "runnerAdsTxtRead": {
+      "httpStatus": 429,
+      "text": "",
+      "readOnly": true,
+      "checkedAt": "2026-10-18T09:47:08.159397+00:00"
     }
   },
   "freeze": {
@@ -75,7 +86,7 @@
     "routineUpdates": "Existing article/news hub cards and JSON data only; no old-post/theme/label rebuild."
   },
   "corpusSummary": {
-    "postsScanned": 510,
+    "postsScanned": 511,
     "pagesScanned": 14,
     "automatedPolicyFlags": [
       {
@@ -98,22 +109,6 @@
         "id": "4156483657490223145",
         "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-29.html",
         "title": "South Korea Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3308607986117894116",
-        "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-28.html",
-        "title": "Spain Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7064447949502231390",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-28.html",
-        "title": "Germany Finance News — 28 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -143,22 +138,6 @@
         ]
       },
       {
-        "id": "5838514800314490393",
-        "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-27.html",
-        "title": "Brazil Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "193247759891078847",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-27.html",
-        "title": "Germany Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "2983561509636256187",
         "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-27.html",
         "title": "South Korea Finance News — 27 September 2026",
@@ -170,22 +149,6 @@
         "id": "9115764774433521189",
         "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
         "title": "South Korea Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6882231783502356233",
-        "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-25.html",
-        "title": "US Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1374496040576360177",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html",
-        "title": "UK Finance News — 25 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -203,7 +166,7 @@
     "exactEditorialDuplicateGroups": []
   },
   "photoSummary": {
-    "masterCountMismatches": 121,
+    "masterCountMismatches": 122,
     "licenceEvidenceNeedsReviewCount": 44,
     "newsPoolsBelow40": [
       {
@@ -380,11 +343,216 @@
   },
   "redirectSummary": {
     "checked": 13,
-    "currentlyReachable": 13,
-    "needsRecheck": []
+    "currentlyReachable": 1,
+    "needsRecheck": [
+      {
+        "url": "https://dailyyield.blogspot.com/",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:21:19Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-09-25T16:57:09Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-09-25T16:59:14Z",
+        "desktop": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:17:17Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/daily-news.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/daily-news.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:17:17Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:17:17Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-09-27T14:13:01Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-09-25T17:01:15Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/article.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:15:16Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/article.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/article.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:21:19Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+        "oldGoogleCoverage": null,
+        "oldLastCrawl": null,
+        "desktop": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+        "oldGoogleCoverage": null,
+        "oldLastCrawl": null,
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/disclaimer.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/disclaimer.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      }
+    ]
   },
   "analytics": {
-    "checkedAt": "2026-10-18T09:24:47.121321+00:00",
+    "checkedAt": "2026-10-18T09:47:52.550723+00:00",
     "siteTagsChanged": false,
     "newCollectionEnabled": false,
     "dataSubmitted": false,
@@ -406,7 +574,7 @@
   },
   "bing": {
     "lastRun": {
-      "checkedAt": "2026-10-18T09:01:17.770703+00:00",
+      "checkedAt": "2026-10-18T09:45:44.008972+00:00",
       "status": "PASS",
       "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
       "syntheticViews": 0,
@@ -416,13 +584,13 @@
         "monthlyAvailable": 1300
       },
       "summary": {
-        "inventory": 525,
-        "candidates": 461,
+        "inventory": 526,
+        "candidates": 462,
         "submitted": 0,
-        "quotaDeferred": 461,
+        "quotaDeferred": 462,
         "inspected": 10,
         "knownToBing": 0,
-        "pendingMonitoring": 68,
+        "pendingMonitoring": 69,
         "removedAlerts": 19
       },
       "errors": [],

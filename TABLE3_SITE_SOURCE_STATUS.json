@@ -1,7 +1,9 @@
 {
   "status": "OBSERVED",
   "httpStatus": 200,
-  "sourceSha256": "628a31a2e2248d64cafb785cc9c7cb27a5644a40d9e3ee5e98f3ef34a2480642",
+  "checkedAt": "2026-10-18T08:45:31.683293+00:00",
+  "sourceSha256": "e6f1d7d7f1e8ab5555f4c7c89e43e39795e3032532ed51c507f9b2a64f279c08",
+  "evidenceOrigin": "Earlier independent source diagnostic; see its original checkedAt/sourceSha256, not a fresh successful runner request",
   "ga4IdsObserved": [
     "G-WLEEYTKV12"
   ],
@@ -32,20 +34,29 @@
     "/p/disclaimer.html": true,
     "/p/terms-and-conditions.html": true
   },
-  "scriptsExecuted": false,
-  "accountApprovalVisible": false,
-  "limits": "HTML observation is not proof of a collecting GA4 property or certified consent. No live visitor session was manufactured.",
+  "scriptsExecutedOnLiveSite": false,
+  "analyticsEventsSent": 0,
+  "limits": "Existing tag/configuration observed, not Analytics account or readership proof.",
   "adsTxt": {
     "httpStatus": 200,
     "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
-    "readOnly": true,
-    "checkedAt": "2026-10-18T09:24:23.706219+00:00",
+    "checkedAt": "2026-10-18T09:05:26.252937+00:00",
     "matchesRecordedPublisher": true
   },
   "robotsTxt": {
     "httpStatus": 200,
     "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
     "readOnly": true,
-    "checkedAt": "2026-10-18T09:24:23.837461+00:00"
+    "checkedAt": "2026-10-18T09:47:08.282779+00:00"
+  },
+  "runnerSourceRead": {
+    "status": "UNAVAILABLE",
+    "httpStatus": 429
+  },
+  "runnerAdsTxtRead": {
+    "httpStatus": 429,
+    "text": "",
+    "readOnly": true,
+    "checkedAt": "2026-10-18T09:47:08.159397+00:00"
   }
 }
