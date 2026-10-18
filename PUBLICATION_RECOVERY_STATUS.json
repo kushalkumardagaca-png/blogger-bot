@@ -1,31 +1,19 @@
 {
-  "generatedAt": "2026-10-18T22:01:55.301063+05:30",
+  "generatedAt": "2026-10-18T22:30:37.022375+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 20,
-  "confirmedByLivePost": 20,
+  "confirmedPublications": 21,
+  "confirmedByLivePost": 21,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
-  "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-4",
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-global",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    }
-  ],
+  "actions": [],
   "retryBlocked": [
     "social:2026-10-18:news-americas:0",
     "social:2026-10-18:news-companies:1",
+    "social:2026-10-18:news-global:0",
     "social:2026-10-18:master-evergreen-3:0"
   ],
   "masterRecoveryDeferred": [],
