@@ -34,6 +34,7 @@ jobs:
           python audit_publishing_automation.py
           git restore NEWS_COVERAGE_STATUS.json SEARCH_DEMAND_TRENDS.json PUBLISHING_AUTOMATION_AUDIT.json
       - name: Correct only the reviewed existing archives and image slots
+        id: corrections
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
@@ -47,7 +48,7 @@ jobs:
             python -u followup_own_work.py
           fi
       - name: Refresh existing hub card data only (no rebuild)
-        if: success() && (github.event_name == 'push' || inputs.apply)
+        if: success() && steps.corrections.outputs.effective_apply == 'true'
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}

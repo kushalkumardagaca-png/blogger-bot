@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Execute only the approved nine-archive/44-image follow-up, not owner account tasks."""
 from __future__ import annotations
-import argparse,collections,datetime as dt,gzip,hashlib,json,re,time
+import argparse,collections,datetime as dt,gzip,hashlib,json,re,time,os
 from pathlib import Path
 import requests
 from preapproval_audit import BloggerReader,corpus_audit
@@ -37,6 +37,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true');args=parser.parse_args()
     request=load('FOLLOWUP_OWN_WORK_REQUEST.json')
     if request.get('operation')=='VERIFY_ONLY':args.apply=False
+    if os.environ.get('GITHUB_OUTPUT'):
+        with open(os.environ['GITHUB_OUTPUT'],'a') as outputs:outputs.write('effective_apply='+str(args.apply).lower()+'\n')
     today=dt.datetime.now(dt.timezone(dt.timedelta(hours=5,minutes=30))).date().isoformat()
     if args.apply and today>request['validThroughIST']:
         print(json.dumps({'status':'REQUEST_EXPIRED','siteWrites':0}));return 0
