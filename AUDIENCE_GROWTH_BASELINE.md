@@ -1,6 +1,6 @@
 # Daily Yield Audience Growth Baseline
 
-- **Checked:** 2026-10-18T02:03:51.624208+00:00
+- **Checked:** 2026-10-18T03:12:06.888306+00:00
 - **Mode:** AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS
 - **Synthetic views:** 0
 - **Search data available through:** 2026-10-15

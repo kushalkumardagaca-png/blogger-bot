@@ -1,40 +1,40 @@
 {
-  "generatedAt": "2026-10-17T03:12:37.929828+00:00",
+  "generatedAt": "2026-10-18T03:12:07.000684+00:00",
   "deadline": "2027-09-30",
   "targetDistinctDailyEngagedReaders": 10000000,
-  "daysRemaining": 348,
+  "daysRemaining": 347,
   "stretchTrajectory": {
     "planningBaselineUnverified": 300,
-    "requiredDailyGrowth": 0.030378,
-    "requiredWeeklyMultiplier": 1.233,
+    "requiredDailyGrowth": 0.030467,
+    "requiredWeeklyMultiplier": 1.2338,
     "checkpoints": [
       {
         "daysFromNow": 30,
-        "date": "2026-11-16",
-        "planningReaders": 736
+        "date": "2026-11-17",
+        "planningReaders": 738
       },
       {
         "daysFromNow": 60,
-        "date": "2026-12-16",
-        "planningReaders": 1807
+        "date": "2026-12-17",
+        "planningReaders": 1816
       },
       {
         "daysFromNow": 90,
-        "date": "2027-01-15",
-        "planningReaders": 4434
+        "date": "2027-01-16",
+        "planningReaders": 4469
       },
       {
         "daysFromNow": 180,
-        "date": "2027-04-15",
-        "planningReaders": 65545
+        "date": "2027-04-16",
+        "planningReaders": 66571
       },
       {
         "daysFromNow": 270,
-        "date": "2027-07-14",
-        "planningReaders": 968838
+        "date": "2027-07-15",
+        "planningReaders": 991663
       },
       {
-        "daysFromNow": 348,
+        "daysFromNow": 347,
         "date": "2027-09-30",
         "planningReaders": 10000000
       }
@@ -71,10 +71,10 @@
       "averagePosition": 1.0
     },
     "socialOfficialObservations": 260,
-    "socialObservedInteractions": 9
+    "socialObservedInteractions": 7
   },
   "production": {
-    "masterPublishedTotal": 50,
+    "masterPublishedTotal": 59,
     "newsDesksTracked": 11
   },
   "integrity": {
