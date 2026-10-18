@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T19:37:52.007097+05:30",
+ "generatedAt": "2026-10-18T19:45:51.872200+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 19,
- "expectedPosts": 38,
+ "articles": 20,
+ "expectedPosts": 40,
  "articlesWithBothPosts": 16,
- "postsMissing": 3,
- "dispatched": 3,
+ "postsMissing": 5,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-markets",
@@ -64,7 +64,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -109,7 +109,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -168,7 +168,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -282,11 +282,29 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-3",
+   "title": "China's central bank to boost support for glob",
+   "url": "https://dailyyield.blogspot.com/2026/10/chinas-central-bank-to-boost-support.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 1,
- "liveVerificationSourceAt": "2026-10-18T19:37:37.283641+05:30",
+ "liveVerificationSourceAt": "2026-10-18T19:45:43.568336+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 15,
  "syntheticViews": 0,
