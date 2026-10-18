@@ -1,55 +1,13 @@
 {
- "generatedAt": "2026-10-18T17:15:43.924474+05:30",
+ "generatedAt": "2026-10-18T17:36:01.996544+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 16,
  "expectedPosts": 32,
  "articlesWithBothPosts": 15,
- "postsMissing": 2,
- "dispatched": 2,
+ "postsMissing": 1,
+ "dispatched": 1,
  "rows": [
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-18.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-18.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-economy",
    "title": "economy edition",
@@ -82,17 +40,16 @@
    "key": "news-americas",
    "title": "americas edition",
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-18.html",
-   "posts": 0,
+   "posts": 1,
    "byPlatform": {
     "facebook": 0,
     "bluesky": 0,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
+   "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
     "dispatched"
    ]
   },
@@ -106,6 +63,48 @@
     "bluesky": 0,
     "tumblr": 1,
     "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-18.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-18.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -239,7 +238,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-18T17:15:37.098450+05:30",
+ "liveVerificationSourceAt": "2026-10-18T17:35:48.265587+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 15,
  "syntheticViews": 0,
