@@ -1,6 +1,6 @@
 # Daily Yield — Table 3 Work and Results
 
-**Updated: 18 October 2026, 15:17 IST. AdSense remains the first priority.**
+**Updated: 18 October 2026, 15:28 IST. AdSense remains the first priority.**
 
 **The controls and checks were carried out. This is not a claim that every requirement passed:** photo-count/evidence gaps, any owner-only settings, Analytics permissions and human fact-review limits are shown below.
 
@@ -27,7 +27,7 @@
 | B6 — Facts and originality | Automated check done; human-review limit remains | 511 live posts read as actually stored. Policy flags: 9; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected. |
 | B7 — Photographs and rights | Checked; requirements not fully met | Master photo-count mismatches: 122; figures needing fuller licence/alt/caption evidence: 44; News pools below 40: 6. Exact-file licence metadata recovered separately: 455. No copyright-ownership guarantee or old-photo replacement. |
 | B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-18T15:16:29.980581+05:30: 13/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 1. |
-| B9 — Social delivery and duplicates | Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately. |
+| B9 — Social delivery and duplicates | Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'tumblr': 8, 'mastodon': 0}); this run 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately. |
 | B10 — Search Console | Read existing results | Latest index evidence 2026-10-18T09:21:38.113572+00:00: 1 indexed results, 521 not indexed, 0 inspection errors. No ownership reset or manual bulk request. |
 | B11 — Old redirect warnings | Diagnosed, not blindly repaired | 10 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence. |
 | B12 — Existing Analytics installation | Observed without changes | GA4 IDs in source: 1; tag-manager IDs: 0; Analytics loaders: 1. Hooks alone are not counted as working collection. No tag installed. Existing GA4 is not the same as a connected report. |
@@ -49,9 +49,9 @@ Article-status source: 2026-10-18T15:16:29.980581+05:30.
 | Evergreen | 3 | 3 | 0 |
 | Trending | 3 | 3 | 0 |
 
-- **Article-related social posts recorded today:** 28; full-day target 42.
+- **Article-related social posts recorded today:** 30; full-day target 42.
 - **Resource promotions recorded today:** 6; full-day target 12. Per network: {'facebook': 2, 'bluesky': 1, 'tumblr': 2, 'mastodon': 1}.
-- **Article-social tracker status:** ATTENTION; missing routes 2; duplicate copies 0.
+- **Article-social tracker status:** PASS; missing routes 0; duplicate copies 0.
 - These are durable publishing records, not reader counts. Provider checks were used before deleting duplicate copies.
 - The eight-hour schedule is retired and is not counted.
 

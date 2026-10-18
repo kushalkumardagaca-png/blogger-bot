@@ -18,6 +18,14 @@ def load(name):
 def cell(value):return str(value).replace('|','/').replace('\n',' ')
 
 
+def verified_social_removals():
+    counts={}
+    for platform in ('facebook','bluesky','tumblr','mastodon'):
+        rows=load(platform+'_tracker.json').get('deleted',[])
+        counts[platform]=len({identity(r) for r in rows if r.get('reason','').startswith('same live article')})
+    return counts
+
+
 def main():
     audit=load('TABLE3_AUDIT.json');source=load('TABLE3_SITE_SOURCE_STATUS.json');corpus=load('TABLE3_CORPUS_AUDIT.json')
     photos=load('TABLE3_PHOTO_AUDIT.json');ga=load('TABLE3_ANALYTICS_STATUS.json');redirect=load('TABLE3_REDIRECT_CHECKS.json')
@@ -27,6 +35,7 @@ def main():
     local_policy=load('TABLE3_LOCAL_POLICY_DIAGNOSTICS.json')
     corrections=load('ESSENTIAL_PREAPPROVAL_CORRECTIONS.json');replay=load('TABLE3_CONSENT_REPLAY.json')
     now=dt.datetime.now(IST);owner=[]
+    removed_totals=verified_social_removals()
     for issue in audit.get('ownerOnlyFindings',[]):owner.append(('Before approval',issue))
     owner.append(('Before approval, only if shown','Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site.'))
     if ga.get('status') not in ('EXISTING_COLLECTION_REPORT_CONNECTED',):
@@ -49,7 +58,7 @@ def main():
     row('B6','Facts and originality','Automated check done; human-review limit remains',f"{corpus.get('postsScanned','unknown')} live posts read as actually stored. Policy flags: {len(corpus.get('automatedPolicyFlags',[]))}; missing disclosures: {len(corpus.get('missingDisclosure',[]))}; exact-text duplicate groups: {len(corpus.get('exactEditorialDuplicateGroups',[]))}. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: {sum(bool(x.get('applied')) for x in corrections.get('legacyNews',[]))}; all numerical facts, links, scripts and styles were protected.")
     row('B7','Photographs and rights','Checked; requirements not fully met' if photos.get('masterCountMismatches') or photos.get('licenceEvidenceNeedsReviewCount') or photos.get('newsPoolsBelow40') else 'Metadata check done',f"Master photo-count mismatches: {photos.get('masterCountMismatches','unknown')}; figures needing fuller licence/alt/caption evidence: {photos.get('licenceEvidenceNeedsReviewCount','unknown')}; News pools below 40: {len(photos.get('newsPoolsBelow40',[]))}. Exact-file licence metadata recovered separately: {len(load('IMAGE_LICENCE_EVIDENCE_SUPPLEMENT.json').get('items',[]))}. No copyright-ownership guarantee or old-photo replacement.")
     row('B8','21 daily articles','Active; ongoing',f"Live status source {slots.get('generatedAt','unavailable')}: {slots.get('live','unknown')}/21 live, {slots.get('overdue','unknown')} overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: {len(slots.get('extraLiveArticles',[]))}.")
-    row('B9','Social delivery and duplicates','Future check fixed; cleanup '+cleanup.get('status','not yet recorded'),f"Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: {len(cleanup.get('deleted',[]))}; cleanup items not verified/deleted: {len(cleanup.get('blocked',[]))}. Two networks required; resources counted separately.")
+    row('B9','Social delivery and duplicates','Future check fixed; cleanup '+cleanup.get('status','not yet recorded'),f"Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: {sum(removed_totals.values())} ({removed_totals}); this run {len(cleanup.get('deleted',[]))}; cleanup items not verified/deleted: {len(cleanup.get('blocked',[]))}. Two networks required; resources counted separately.")
     row('B10','Search Console','Read existing results',f"Latest index evidence {index.get('checkedAt','unavailable')}: {index.get('indexed','unknown')} indexed results, {index.get('notIndexed','unknown')} not indexed, {index.get('inspectionErrors','unknown')} inspection errors. No ownership reset or manual bulk request.")
     row('B11','Old redirect warnings','Diagnosed, not blindly repaired',f"{len([x for x in redirect.get('rows',[]) if x.get('oldGoogleCoverage')=='Redirect error'])} prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence.")
     row('B12','Existing Analytics installation','Observed without changes',f"GA4 IDs in source: {len(source.get('ga4IdsObserved',[]))}; tag-manager IDs: {len(source.get('tagManagerIdsObserved',[]))}; Analytics loaders: {len(source.get('analyticsLoaderSources',[]))}. Hooks alone are not counted as working collection. No tag installed. Existing GA4 is not the same as a connected report.")

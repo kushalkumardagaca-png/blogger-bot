@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T15:17:54.147404+05:30",
+  "generatedAt": "2026-10-18T15:28:47.685865+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -54,7 +54,7 @@
       "id": "B9",
       "task": "Social delivery and duplicates",
       "result": "Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE",
-      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately."
+      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'tumblr': 8, 'mastodon': 0}); this run 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately."
     },
     {
       "id": "B10",
@@ -140,7 +140,7 @@
   "sourceDates": {
     "siteAudit": "2026-10-18T09:47:52.696145+00:00",
     "slots": "2026-10-18T15:16:29.980581+05:30",
-    "social": "2026-10-18T15:17:54.099546+05:30",
+    "social": "2026-10-18T15:25:29.818257+05:30",
     "google": "2026-10-18T09:21:38.113572+00:00"
   },
   "noGrandUpdateStarted": true,
