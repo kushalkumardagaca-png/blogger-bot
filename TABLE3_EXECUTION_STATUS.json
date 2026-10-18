@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2026-10-18T14:15:12.231630+05:30",
+  "status": "AUDIT_NOT_COMPLETED",
+  "rows": [
+    {
+      "id": "B1",
+      "task": "Freeze automatic edits",
+      "result": "Implemented",
+      "proof": "15 optional workflows and 15 CLI tools held. Three old-page tools are audit-only. Hub updates limited to existing cards/data; publishers remain active."
+    },
+    {
+      "id": "B2",
+      "task": "AdSense connection and ads.txt",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "Public source recorded publisher IDs: not observed. ads.txt matches recorded publisher: not checked. Required verification is preserved; private review approval is not visible."
+    },
+    {
+      "id": "B3",
+      "task": "Misleading reports",
+      "result": "Fixed",
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: see CI result."
+    },
+    {
+      "id": "B4",
+      "task": "Policy pages and navigation",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "0/0 policy routes observed in homepage links; 0 Report Abuse link(s). HEAD diagnostics: 0/0 tested routes reached HTTP 200 for both checks. No redesign."
+    },
+    {
+      "id": "B5",
+      "task": "Names and honest statements",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim."
+    },
+    {
+      "id": "B6",
+      "task": "Facts and originality",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "unknown live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact."
+    },
+    {
+      "id": "B7",
+      "task": "Photographs and rights",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "Master photo-count mismatches: unknown; figures needing fuller licence/alt/caption evidence: unknown; News pools below 40: 0. No copyright guarantee or old-photo replacement."
+    },
+    {
+      "id": "B8",
+      "task": "21 daily articles",
+      "result": "Active; ongoing",
+      "proof": "Live status source 2026-10-18T14:06:41.646014+05:30: 11/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late."
+    },
+    {
+      "id": "B9",
+      "task": "Social delivery and duplicates",
+      "result": "Future check fixed; cleanup not yet recorded",
+      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately."
+    },
+    {
+      "id": "B10",
+      "task": "Search Console",
+      "result": "Read existing results",
+      "proof": "Latest index evidence 2026-10-17T21:59:49.266028+00:00: 1 indexed results, 509 not indexed, unknown inspection errors. No ownership reset or manual bulk request."
+    },
+    {
+      "id": "B11",
+      "task": "Old redirect warnings",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "0 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence."
+    },
+    {
+      "id": "B12",
+      "task": "Existing Analytics installation",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "GA4 IDs in source: 0; tag-manager IDs: 0; Analytics loaders: 0. Hooks alone are not counted as working collection. No tag installed."
+    },
+    {
+      "id": "B13",
+      "task": "Existing Analytics reporting",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "Result: not available. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured."
+    },
+    {
+      "id": "B14",
+      "task": "Privacy and consent",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "Source consent scripts: unknown; default-consent command observed: unknown. Cookie controls are not a certified advertising-CMP guarantee. Offline browser evidence, if available, is labelled separately."
+    },
+    {
+      "id": "B15",
+      "task": "Bing and IndexNow",
+      "result": "Monitored; quota respected",
+      "proof": "Last Bing record unavailable: remaining daily allowance unknown; durable URL records with accepted-submission evidence unknown. IndexNow parked: unknown. No indexing guarantee."
+    },
+    {
+      "id": "B16",
+      "task": "Drafts and retired recovery",
+      "result": "NOT COMPLETED — fresh audit unavailable",
+      "proof": "API draft count at audit: unknown. Deleted-draft restoration now stops before credentials. Eight-hour recovery remains retired. Existing draft hygiene and duplicate guards retained."
+    },
+    {
+      "id": "B17",
+      "task": "Private growth preparation",
+      "result": "Prepared; not built or published",
+      "proof": "50 proposals, topic groups, individual specifications and pre-release tests prepared. Costs are estimates/formulas, not connected invoices. No new live URLs, Blogger drafts or prototypes."
+    },
+    {
+      "id": "B18",
+      "task": "One simple progress report",
+      "result": "Implemented",
+      "proof": "This report separates article delivery, article social posts, resource promotions, Google results, missing Analytics and unknown bills. It can be refreshed by the repository workflow; it does not imply that I monitor the site continuously in chat."
+    }
+  ],
+  "ownerActions": [
+    [
+      "Before approval, only if shown",
+      "Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site."
+    ],
+    [
+      "Optional read-only help before approval; new installation later",
+      "Analytics report access is not established. Only if you already use Analytics, check the existing property/permission. Do not install code to complete this checklist."
+    ],
+    [
+      "Before high-risk advice is published",
+      "A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article."
+    ],
+    [
+      "Later, not now",
+      "Review the 50-item shortlist before any ranking build. Release requires AdSense approval, the agreed earnings period and your explicit permission."
+    ]
+  ],
+  "sourceDates": {
+    "siteAudit": null,
+    "slots": "2026-10-18T14:06:41.646014+05:30",
+    "social": "2026-10-18T14:06:47.544847+05:30",
+    "google": "2026-10-17T21:59:49.266028+00:00"
+  },
+  "noGrandUpdateStarted": true,
+  "analyticsCollectionInstalled": false
+}
