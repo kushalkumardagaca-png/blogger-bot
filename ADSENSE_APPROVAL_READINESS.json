@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-18T08:25:53.638835+00:00",
+ "checkedAt": "2026-10-18T09:19:17.649273+00:00",
  "status": "CHECK_INCOMPLETE",
  "publicPagesRead": 10,
  "diagnosticReadsOnly": true,
@@ -9,9 +9,9 @@
  "checks": [
   {
    "check": "policy page /about",
-   "pass": true,
-   "state": "PASS",
-   "detail": "/p/about-us_02080501126.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/about-us_02080501126.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
@@ -23,16 +23,16 @@
   },
   {
    "check": "policy page /privacy",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/privacy-policy.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "policy page /disclaimer",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/disclaimer.html → HTTP 200",
    "blocking": true
   },
   {
@@ -43,59 +43,10 @@
    "blocking": true
   },
   {
-   "check": "about: public author name",
-   "pass": true,
-   "state": "PASS",
-   "detail": "Kushal Daga",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's legal name",
-   "pass": true,
-   "state": "PASS",
-   "detail": "Kushal Kumar Daga",
-   "blocking": true
-  },
-  {
-   "check": "about: name relationship explained",
-   "pass": true,
-   "state": "PASS",
-   "detail": "the site says the public author name is the short form of the legal name used on records",
-   "blocking": true
-  },
-  {
-   "check": "about: retired initials byline gone",
-   "pass": true,
-   "state": "PASS",
-   "detail": "the retired initials byline is no longer published",
-   "blocking": true
-  },
-  {
-   "check": "about: publication inbox",
-   "pass": true,
-   "state": "PASS",
-   "detail": "dailyyield.official@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "about: publisher's own address",
-   "pass": true,
-   "state": "PASS",
-   "detail": "kushalkumardaga.ca@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "about: no contradictory reply time",
-   "pass": true,
-   "state": "PASS",
-   "detail": "one reply-time promise only",
-   "blocking": true
-  },
-  {
-   "check": "about: no inaccurate name claim",
-   "pass": true,
-   "state": "PASS",
-   "detail": "no unrelated surname is published as an alias",
+   "check": "about: identity content available",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "Identity could not be checked because the page read failed",
    "blocking": true
   },
   {
@@ -114,8 +65,8 @@
   },
   {
    "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": null,
-   "state": "UNKNOWN",
+   "pass": true,
+   "state": "PASS",
    "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   },
@@ -151,7 +102,7 @@
    "check": "sitemap.xml serves URLs",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200, 508 URLs listed",
+   "detail": "HTTP 200, 510 URLs listed",
    "blocking": true
   },
   {
@@ -200,6 +151,13 @@
  "blockingIssues": [],
  "unverifiedChecks": [
   {
+   "check": "policy page /about",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/about-us_02080501126.html → HTTP 0; read unavailable, not proof of a missing page",
+   "blocking": true
+  },
+  {
    "check": "policy page /contact",
    "pass": null,
    "state": "UNKNOWN",
@@ -207,17 +165,10 @@
    "blocking": true
   },
   {
-   "check": "policy page /privacy",
+   "check": "about: identity content available",
    "pass": null,
    "state": "UNKNOWN",
-   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
-   "blocking": true
-  },
-  {
-   "check": "policy page /disclaimer",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "detail": "Identity could not be checked because the page read failed",
    "blocking": true
   },
   {
@@ -225,13 +176,6 @@
    "pass": null,
    "state": "UNKNOWN",
    "detail": "Identity could not be checked because the page read failed",
-   "blocking": true
-  },
-  {
-   "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   }
  ],
