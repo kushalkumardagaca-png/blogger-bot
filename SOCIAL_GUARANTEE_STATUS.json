@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T12:12:08.024048+05:30",
+ "generatedAt": "2026-10-18T12:15:38.653433+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 8,
- "expectedPosts": 16,
+ "articles": 9,
+ "expectedPosts": 18,
  "articlesWithBothPosts": 8,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-russia",
@@ -33,6 +33,18 @@
    }
   },
   {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-18.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 2,
+    "mastodon": 0
+   }
+  },
+  {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
@@ -45,16 +57,20 @@
    }
   },
   {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-18.html",
-   "posts": 2,
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-18.html",
+   "posts": 0,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 1,
-    "tumblr": 2,
+    "bluesky": 0,
+    "tumblr": 0,
     "mastodon": 0
-   }
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   },
   {
    "key": "master-trending-2cd0183cf5f56550",
@@ -107,5 +123,5 @@
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
