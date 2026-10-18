@@ -35,7 +35,9 @@ def patch_existing(reader,item,after):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true');args=parser.parse_args()
-    request=load('FOLLOWUP_OWN_WORK_REQUEST.json');today=dt.datetime.now(dt.timezone(dt.timedelta(hours=5,minutes=30))).date().isoformat()
+    request=load('FOLLOWUP_OWN_WORK_REQUEST.json')
+    if request.get('operation')=='VERIFY_ONLY':args.apply=False
+    today=dt.datetime.now(dt.timezone(dt.timedelta(hours=5,minutes=30))).date().isoformat()
     if args.apply and today>request['validThroughIST']:
         print(json.dumps({'status':'REQUEST_EXPIRED','siteWrites':0}));return 0
     if request['ownerAccountSteps']!='DEFERRED_TOGETHER_WITH_TABLE_1':raise RuntimeError('unexpected account-step scope')

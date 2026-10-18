@@ -72,3 +72,13 @@ class ImageFollowupTests(unittest.TestCase):
         self.assertEqual(len({x['newPhoto']['url'] for x in p['patches'] if x['changeImage']}),24)
 
 if __name__=='__main__':unittest.main()
+
+class AttributionNoticeTests(unittest.TestCase):
+    def test_functional_image_notice_is_not_financial_analysis(self):
+        from content_policy_guard import audit_text
+        notice='<figcaption>Used as an illustration, not as evidence of the particular people, organisation or event discussed.</figcaption>'
+        self.assertNotIn('repeated substantive sentence within the content',audit_text('Article',notice*2))
+        financial='<p>The bank reduced the applicable mortgage interest rate after publishing its latest policy decision.</p>'
+        self.assertIn('repeated substantive sentence within the content',audit_text('Article',financial*2))
+        harmful='<figcaption>We offer guaranteed profits for every investor buying this product.</figcaption>'
+        self.assertIn('deceptive financial or commercial promise',audit_text('Article',harmful))

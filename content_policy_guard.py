@@ -137,7 +137,9 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  seq=[normalize_sentence(x) for x in sentences(repetition_content)];seq=[x for x in seq if len(x.split())>=10]
  # This is an explicit background/date label, not substantive reporting. It
  # remains visible on each older item and is not removed to fake originality.
- date_labels={normalize_sentence(x) for x in ('It is separated from the current-period items so its date and role are clear.','This item is included only to provide context for the current desk.')}
+ # Likewise the exact image-rights disclaimer is repeated per photo on purpose;
+ # it is a functional attribution notice, not duplicated financial analysis.
+ date_labels={normalize_sentence(x) for x in ('It is separated from the current-period items so its date and role are clear.','This item is included only to provide context for the current desk.','Used as an illustration, not as evidence of the particular people, organisation or event discussed.')}
  substantive_seq=[s for s in seq if s not in date_labels]
  counts=Counter(substantive_seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]
  if duplicates:issues.append("repeated substantive sentence within the content")
