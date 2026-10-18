@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-18T08:19:40.898185+05:30",
+ "generatedAt": "2026-10-18T08:42:14.301804+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 5,
  "expectedPosts": 10,
- "articlesWithBothPosts": 4,
- "postsMissing": 1,
+ "articlesWithBothPosts": 5,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -60,19 +60,16 @@
    "key": "master-evergreen-eb9f027e927c2901",
    "title": "Government moves to align education with futur",
    "url": "https://dailyyield.blogspot.com/2026/10/government-moves-to-align-education.html",
-   "posts": 1,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 1,
     "mastodon": 0
-   },
-   "actions": [
-    "waiting for the last attempt"
-   ]
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
