@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T15:04:13.540340+05:30",
+ "generatedAt": "2026-10-18T15:15:48.658330+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 13,
- "expectedPosts": 26,
+ "articles": 14,
+ "expectedPosts": 28,
  "articlesWithBothPosts": 13,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -189,6 +189,24 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-2",
+   "title": "X Money is here: What Elon Musk’s financial su",
+   "url": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
@@ -196,5 +214,5 @@
  "articlesWithExactlyTwoPosts": 13,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
