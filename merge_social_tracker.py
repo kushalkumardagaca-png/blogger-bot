@@ -18,7 +18,14 @@ def merge(current,incoming):
         key=identity(row)
         if key not in combined:order.append(key);combined[key]=dict(row)
         else:combined[key].update(row)
-    rows=[combined[key] for key in order]
+    # Successful provider deletions are durable tombstones. A stale publisher's
+    # checkout must not resurrect a deleted duplicate in the merged tracker.
+    removed = {}
+    for row in list(current.get('deleted', [])) + list(incoming.get('deleted', [])):
+        removed[identity(row)] = dict(row)
+    rows=[combined[key] for key in order if key not in removed]
+    if removed:
+        result['deleted'] = list(removed.values())
     rows.sort(key=lambda row:str(row.get('published_at','')))
     result['published']=rows
     result['last_success_at']=max(str(current.get('last_success_at','')),str(incoming.get('last_success_at','')))

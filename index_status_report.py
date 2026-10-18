@@ -1,118 +1,116 @@
 #!/usr/bin/env python3
-"""How much of the site does Google actually hold?
-
-Search Console showed one impression in twenty-eight days, which is not a ranking
-problem — it is an indexing problem. This report inspects every URL through the
-official URL Inspection endpoint and writes a plain count by coverage state, so
-the traffic plan is built on what Google has actually indexed rather than on how
-many URLs the sitemap lists.
-"""
+"""Read Google's indexed-version results; never submit/reset or count API errors as unindexed."""
 from __future__ import annotations
-
 import datetime as dt
-import json
-import os
-import time
-import urllib.parse
-import urllib.request
+import json, os, time, urllib.error, urllib.parse, urllib.request
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT / "INDEX_STATUS_REPORT.json"
-SITE = "sc-domain:dailyyield.blogspot.com"   # the property the Search Console token can read
-BLOG = "https://dailyyield.blogspot.com"
+OUT = ROOT / 'INDEX_STATUS_REPORT.json'
+SITE = 'sc-domain:dailyyield.blogspot.com'
+BLOG = 'https://dailyyield.blogspot.com'
 
 
-def required(name: str) -> str:
-    value = os.environ.get(name, "").strip()
-    if not value:
-        raise RuntimeError(f"{name} is required")
+def required(name):
+    value=os.environ.get(name,'').strip()
+    if not value: raise RuntimeError('missing required secret: '+name)
     return value
 
 
-def fetch(url: str, headers: dict, method: str = "GET", body: dict | None = None):
-    data = json.dumps(body).encode() if body is not None else None
-    request = urllib.request.Request(url, data=data, method=method, headers=headers)
-    with urllib.request.urlopen(request, timeout=60) as response:
-        raw = response.read()
+def fetch(url, headers, method='GET', body=None):
+    data=json.dumps(body).encode() if body is not None else None
+    request=urllib.request.Request(url,data=data,headers=headers,method=method)
+    with urllib.request.urlopen(request,timeout=60) as response:
+        raw=response.read()
         return json.loads(raw) if raw else {}
 
 
-def search_token() -> str:
-    form = urllib.parse.urlencode({
-        "client_id": required("GSC_CLIENT_ID"), "client_secret": required("GSC_CLIENT_SECRET"),
-        "refresh_token": required("GSC_REFRESH_TOKEN"), "grant_type": "refresh_token"}).encode()
-    request = urllib.request.Request("https://oauth2.googleapis.com/token", data=form, method="POST")
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)["access_token"]
+def oauth(prefix):
+    form=urllib.parse.urlencode({'client_id':required(prefix+'_CLIENT_ID'),
+        'client_secret':required(prefix+'_CLIENT_SECRET'),'refresh_token':required(prefix+'_REFRESH_TOKEN'),
+        'grant_type':'refresh_token'}).encode()
+    with urllib.request.urlopen(urllib.request.Request('https://oauth2.googleapis.com/token',data=form,method='POST'),timeout=30) as response:
+        return json.load(response)['access_token']
 
 
-def inventory() -> list[str]:
-    urls = [SITE]
-    for kind in ("pages", "posts"):
-        start = 1
-        while True:
-            # Blogger caps a feed page at 25 entries whatever max-results asks for,
-            # so the page size is taken from the reply rather than assumed.
-            data = fetch(f"{BLOG}/feeds/{kind}/default?alt=json&max-results=25&start-index={start}", {})
-            entries = data.get("feed", {}).get("entry", [])
-            if not entries:
-                break
-            for entry in entries:
-                url = next((x.get("href", "") for x in entry.get("link", []) if x.get("rel") == "alternate"), "")
-                if url and not url.endswith("/p/share-market_0718113516.html"):
-                    urls.append(url)
-            start += len(entries)
-    return urls
+def search_token(): return oauth('GSC')
 
 
-def inspect(access: str, url: str) -> dict:
-    result = fetch("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",
-                   {"Authorization": "Bearer " + access, "Content-Type": "application/json"},
-                   "POST", {"inspectionUrl": url, "siteUrl": SITE, "languageCode": "en-US"})
-    status = (result.get("inspectionResult", {}).get("indexStatusResult") or {})
-    return {"url": url, "verdict": status.get("verdict", "UNKNOWN"),
-            "coverageState": status.get("coverageState", ""),
-            "lastCrawlTime": status.get("lastCrawlTime", "")}
+def valid_url(value):
+    try:
+        parsed=urllib.parse.urlparse(str(value))
+        return parsed.scheme=='https' and parsed.hostname=='dailyyield.blogspot.com' and not parsed.username and not parsed.password
+    except ValueError:
+        return False
 
 
-def main() -> int:
-    access = search_token()
-    urls = inventory()
-    rows = []
-    for url in urls:
-        try:
-            rows.append(inspect(access, url))
-        except Exception as exc:  # noqa: BLE001
-            rows.append({"url": url, "verdict": "ERROR", "coverageState": str(exc)[:160]})
-        time.sleep(0.15)
-    indexed = [r for r in rows if r["verdict"] == "PASS"]
-    errors = [r for r in rows if r["verdict"] == "ERROR"]
-    if errors and len(errors) == len(rows):
-        report = {"checkedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "property": SITE,
-                  "urls": len(rows), "indexed": 0, "notIndexed": len(rows),
-                  "status": "TOKEN_CANNOT_INSPECT",
-                  "detail": errors[0]["coverageState"],
-                  "note": "The Search Console token needs the URL-prefix property "
-                          "(https://dailyyield.blogspot.com/) verified, or the inspection "
-                          "scope; the measured traffic numbers are unaffected.",
-                  "syntheticViews": 0, "publicDailyYieldRequests": 0}
-        OUT.write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(json.dumps({"status": report["status"], "detail": report["detail"][:160]}))
-        return 0
-    report = {"checkedAt": dt.datetime.now(dt.timezone.utc).isoformat(), "property": SITE,
-              "urls": len(rows), "indexed": len(indexed),
-              "notIndexed": len(rows) - len(indexed),
-              "byCoverageState": Counter(r["coverageState"] or "unknown" for r in rows).most_common(),
-              "notIndexedUrls": [r for r in rows if r["verdict"] != "PASS"][:200],
-              "syntheticViews": 0, "publicDailyYieldRequests": 0}
-    OUT.write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(json.dumps({k: report[k] for k in ("urls", "indexed", "notIndexed")}))
-    for state, count in report["byCoverageState"]:
-        print(f"  {count:4d}  {state}")
+def inventory():
+    # A Search Console property label is not a URL. The homepage is a real URL.
+    urls=[BLOG+'/']
+    if all(os.environ.get('BLOGGER_'+s) for s in ('CLIENT_ID','CLIENT_SECRET','REFRESH_TOKEN','BLOG_ID')):
+        access=oauth('BLOGGER')
+        base='https://www.googleapis.com/blogger/v3/blogs/'+required('BLOGGER_BLOG_ID')
+        for kind in ('pages','posts'):
+            page=''
+            while True:
+                params={'maxResults':'50','fetchBodies':'false','status':'live','fields':'items(url),nextPageToken'}
+                if page: params['pageToken']=page
+                data=fetch(base+'/'+kind+'?'+urllib.parse.urlencode(params),{'Authorization':'Bearer '+access})
+                urls.extend(row.get('url','') for row in data.get('items',[]))
+                page=data.get('nextPageToken','')
+                if not page: break
+    else:
+        # Feed reads, not public page renders. Honour actual pagination size.
+        for kind in ('pages','posts'):
+            start=1
+            while True:
+                data=fetch(f'{BLOG}/feeds/{kind}/default?alt=json&max-results=25&start-index={start}',{})
+                entries=data.get('feed',{}).get('entry',[])
+                if not entries: break
+                urls.extend(next((x.get('href','') for x in e.get('link',[]) if x.get('rel')=='alternate'),'') for e in entries)
+                start+=len(entries)
+    return list(dict.fromkeys(u for u in urls if valid_url(u) and not u.endswith('/p/share-market_0718113516.html')))
+
+
+def inspect(access,url):
+    if not valid_url(url): raise ValueError('inspection target is not a valid Daily Yield HTTPS URL')
+    result=fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',
+        {'Authorization':'Bearer '+access,'Content-Type':'application/json'},'POST',
+        {'inspectionUrl':url,'siteUrl':SITE,'languageCode':'en-US'})
+    status=result.get('inspectionResult',{}).get('indexStatusResult') or {}
+    return {'url':url,'verdict':status.get('verdict','UNKNOWN'),'coverageState':status.get('coverageState',''),
+            'lastCrawlTime':status.get('lastCrawlTime',''),'googleCanonical':status.get('googleCanonical',''),
+            'pageFetchState':status.get('pageFetchState','')}
+
+
+def summarise(rows):
+    indexed=[r for r in rows if r.get('verdict')=='PASS']
+    failed=[r for r in rows if r.get('verdict')=='ERROR']
+    unknown=[r for r in rows if r.get('verdict')=='UNKNOWN']
+    not_indexed=[r for r in rows if r.get('verdict') in ('FAIL','NEUTRAL')]
+    return {'checkedAt':dt.datetime.now(dt.timezone.utc).isoformat(),'property':SITE,
+        'status':'UNAVAILABLE' if rows and len(failed)==len(rows) else ('PARTIAL' if failed or unknown else 'MEASURED'),
+        'urls':len(rows),'indexed':len(indexed),'notIndexed':len(not_indexed),
+        'inspectionErrors':len(failed),'unknown':len(unknown),
+        'byCoverageState':Counter(r.get('coverageState') or 'unknown' for r in rows if r.get('verdict')!='ERROR').most_common(),
+        'notIndexedUrls':not_indexed,'errors':failed,'rows':rows,
+        'resultType':'Google indexed version, not a live-page availability test',
+        'limits':'Not indexed is not an AdSense refusal. An API error is unknown, never evidence of non-indexing. Redirect results may describe an old crawl.',
+        'syntheticViews':0,'publicDailyYieldRequests':0}
+
+
+def main():
+    access=search_token();rows=[]
+    for url in inventory():
+        try: rows.append(inspect(access,url))
+        except Exception as exc:
+            code=exc.code if isinstance(exc,urllib.error.HTTPError) else None
+            rows.append({'url':url,'verdict':'ERROR','coverageState':'','errorType':type(exc).__name__,
+                         'httpStatus':code,'error':'HTTP '+str(code) if code else 'inspection could not be completed'})
+        time.sleep(.15)
+    report=summarise(rows);OUT.write_text(json.dumps(report,indent=1,ensure_ascii=False)+'\n')
+    print(json.dumps({k:report[k] for k in ('status','urls','indexed','notIndexed','inspectionErrors','unknown')}))
     return 0
 
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+if __name__=='__main__': raise SystemExit(main())

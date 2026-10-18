@@ -335,7 +335,12 @@ def repair_news_page(page,posts):
  return marked(c,css)
 
 def main():
- h=auth();posts=list_all('posts',h);pages=list_all('pages',h);article_page,cfg,categories=categories_from_article_page(pages)
+ h=auth();posts=list_all('posts',h);pages=list_all('pages',h)
+ from site_change_control import is_frozen
+ if is_frozen():
+  from frozen_hub_refresh import refresh_existing_hubs
+  return refresh_existing_hubs(h,posts,pages,put,article_card,news_item,MASTER_CATEGORIES)
+ article_page,cfg,categories=categories_from_article_page(pages)
  labels_fixed=0;images_fixed=0;used=set();hero_owner={}
  # Newest instance keeps an existing duplicated photo; older repeats receive a distinct Commons photo.
  for p in sorted(posts,key=lambda x:x.get('published',''),reverse=True):

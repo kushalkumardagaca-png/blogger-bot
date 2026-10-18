@@ -6,6 +6,11 @@ Yield URL and writes a complete pre-change backup before applying updates.
 """
 from __future__ import annotations
 
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('bing_seo_repair')
+
+
 import gzip
 import json
 import os

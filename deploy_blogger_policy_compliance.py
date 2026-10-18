@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Idempotently publish Daily Yield's Blogger-policy disclosures and safeguards."""
 from __future__ import annotations
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('deploy_blogger_policy_compliance')
+
 import datetime,json,os,re
 from pathlib import Path
 from urllib.parse import urlparse

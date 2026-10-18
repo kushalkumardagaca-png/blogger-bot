@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "frozen": true,
+  "setAt": "2026-10-18T08:17:09.499069+00:00",
+  "ownerInstruction": "Execute Table 3 before-approval tasks; AdSense first. Preserve freeze until approval plus agreed earnings period and explicit release.",
+  "releaseRequires": [
+    "AdSense Ready confirmed by owner",
+    "Agreed few months of real earnings",
+    "Explicit owner approval and tested release"
+  ],
+  "heldCliActions": {
+    "reader_measurement_retrofit": "reader_measurement_retrofit.py",
+    "motion_related_retrofit": "motion_related_retrofit.py",
+    "bing_seo_repair": "bing_seo_repair.py",
+    "adsense_readiness": "adsense_readiness.py",
+    "retrofit_live_news": "retrofit_live_news.py",
+    "repair_family_directory": "repair_family_directory.py",
+    "update_page_family": "update_page_family.py",
+    "deploy_blogger_policy_compliance": "deploy_blogger_policy_compliance.py",
+    "deploy_global_snapshot": "deploy_global_snapshot.py",
+    "deploy_markets_today": "deploy_markets_today.py",
+    "solve_remaining": "solve_remaining.py",
+    "identity_migration": "migrate_live_identity.py",
+    "desk_index_redesign": "desk_index_redesign.py",
+    "gsc_rebuild": "gsc_rebuild.py",
+    "repair_known_external_links": "repair_known_external_links.py"
+  },
+  "heldWorkflows": [
+    "reader_measurement_retrofit.yml",
+    "motion_related_retrofit.yml",
+    "bing_seo_repair.yml",
+    "adsense_readiness.yml",
+    "retrofit_live_news.yml",
+    "repair_family_directory.yml",
+    "update_page_family.yml",
+    "deploy_global_snapshot.yml",
+    "deploy_markets_today.yml",
+    "solve_remaining.yml",
+    "identity_migration.yml",
+    "desk_index_redesign.yml",
+    "gsc_rebuild.yml",
+    "repair_known_external_links.yml",
+    "blogger_policy_compliance.yml"
+  ],
+  "auditOnlyActions": [
+    "harden_live_corpus",
+    "contextual_links_retrofit",
+    "site_content_audit_cleanup"
+  ],
+  "dataOnlyActions": [
+    "content_experience_repair"
+  ],
+  "preserved": [
+    "21 daily article slots and their safety gates",
+    "42 article social assignments plus existing 12 resource promotions",
+    "late same-day delivery",
+    "draft hygiene (no restore)",
+    "Bing quota-aware submissions and unchanged sitemap feed",
+    "read-only Google/Analytics/policy monitoring"
+  ],
+  "essentialPublicCorrections": "Confirmed issue, smallest tested edit, retained backup and explicit approval; no batch redesign or force/env bypass."
+}

@@ -6,7 +6,7 @@ from page_family import remove_legacy_explore_blocks
 from retrofit_live_news import retrofit
 from news_pipeline import BLOG, CATEGORY_DESKS, CATEGORY_FILTERS, DESKS, HINT_RE, IST
 
-BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}';APPLY=os.environ.get('APPLY','false').lower()=='true'
+BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}';APPLY=os.environ.get('APPLY','false').lower()=='true' and not __import__('site_change_control').is_frozen()
 
 def token():
  data=urllib.parse.urlencode({'client_id':os.environ['BLOGGER_CLIENT_ID'],'client_secret':os.environ['BLOGGER_CLIENT_SECRET'],'refresh_token':os.environ['BLOGGER_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode()

@@ -6,6 +6,11 @@ pre-change backup, changes only marked policy disclosures and missing image alt
 text, and preserves every URL, title, label and unrelated content byte.
 """
 from __future__ import annotations
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('adsense_readiness')
+
 import gzip, html, json, os, re, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path

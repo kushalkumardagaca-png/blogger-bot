@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """Repair explicitly verified malformed external links through Blogger API only."""
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('repair_known_external_links')
+
 import json, os, urllib.parse, urllib.request
 BLOG_ID=os.environ['BLOGGER_BLOG_ID']
 OLD='https://www.sebi.gov.in/https://www.sebi.gov.in/sebi_data/attachdocs/sep-2026/ORDER_1790584774.pdf'

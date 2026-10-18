@@ -84,6 +84,9 @@ jobs:
   facebook:
     needs: plan
     if: needs.plan.outputs.platform == 'facebook'
+    concurrency:
+      group: social-facebook-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -97,10 +100,16 @@ jobs:
         id: dupe
         run: |
           set +e
-          python social_dedupe.py --platform facebook --url '${{ needs.plan.outputs.target_url }}'
+          python social_dedupe.py --platform facebook --url '${{ needs.plan.outputs.target_url }}' --content-mode '${{ needs.plan.outputs.content_mode }}'
           code=$?
-          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
-          exit 0
+          if [ "$code" = "78" ]; then
+            echo 'already=yes' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "0" ]; then
+            echo 'already=no' >> "$GITHUB_OUTPUT"
+          else
+            echo "Cannot verify dedupe history; defer this route safely."
+            exit "$code"
+          fi
       - name: Publish exact assigned destination to Facebook
         if: steps.dupe.outputs.already != 'yes'
         env:
@@ -121,6 +130,9 @@ jobs:
   bluesky:
     needs: plan
     if: needs.plan.outputs.platform == 'bluesky'
+    concurrency:
+      group: social-bluesky-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -133,10 +145,16 @@ jobs:
         id: dupe
         run: |
           set +e
-          python social_dedupe.py --platform bluesky --url '${{ needs.plan.outputs.target_url }}'
+          python social_dedupe.py --platform bluesky --url '${{ needs.plan.outputs.target_url }}' --content-mode '${{ needs.plan.outputs.content_mode }}'
           code=$?
-          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
-          exit 0
+          if [ "$code" = "78" ]; then
+            echo 'already=yes' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "0" ]; then
+            echo 'already=no' >> "$GITHUB_OUTPUT"
+          else
+            echo "Cannot verify dedupe history; defer this route safely."
+            exit "$code"
+          fi
       - name: Publish exact assigned destination to Bluesky
         if: steps.dupe.outputs.already != 'yes'
         env:
@@ -156,6 +174,9 @@ jobs:
   tumblr:
     needs: plan
     if: needs.plan.outputs.platform == 'tumblr'
+    concurrency:
+      group: social-tumblr-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -168,10 +189,16 @@ jobs:
         id: dupe
         run: |
           set +e
-          python social_dedupe.py --platform tumblr --url '${{ needs.plan.outputs.target_url }}'
+          python social_dedupe.py --platform tumblr --url '${{ needs.plan.outputs.target_url }}' --content-mode '${{ needs.plan.outputs.content_mode }}'
           code=$?
-          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
-          exit 0
+          if [ "$code" = "78" ]; then
+            echo 'already=yes' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "0" ]; then
+            echo 'already=no' >> "$GITHUB_OUTPUT"
+          else
+            echo "Cannot verify dedupe history; defer this route safely."
+            exit "$code"
+          fi
       - name: Publish exact assigned destination to Tumblr
         if: steps.dupe.outputs.already != 'yes'
         env:
@@ -193,6 +220,9 @@ jobs:
   mastodon:
     needs: plan
     if: needs.plan.outputs.platform == 'mastodon'
+    concurrency:
+      group: social-mastodon-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -205,10 +235,16 @@ jobs:
         id: dupe
         run: |
           set +e
-          python social_dedupe.py --platform mastodon --url '${{ needs.plan.outputs.target_url }}'
+          python social_dedupe.py --platform mastodon --url '${{ needs.plan.outputs.target_url }}' --content-mode '${{ needs.plan.outputs.content_mode }}'
           code=$?
-          if [ "$code" = "78" ]; then echo 'already="yes"' >> "$GITHUB_OUTPUT"; else echo 'already="no"' >> "$GITHUB_OUTPUT"; fi
-          exit 0
+          if [ "$code" = "78" ]; then
+            echo 'already=yes' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "0" ]; then
+            echo 'already=no' >> "$GITHUB_OUTPUT"
+          else
+            echo "Cannot verify dedupe history; defer this route safely."
+            exit "$code"
+          fi
       - name: Publish exact assigned destination to Mastodon
         if: steps.dupe.outputs.already != 'yes'
         env:

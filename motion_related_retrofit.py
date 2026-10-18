@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """Sitewide continuous gesture motion plus topic-related article shelves."""
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('motion_related_retrofit')
+
 from pathlib import Path
 import json,os,re,urllib.parse,urllib.request
 from continuous_motion import ensure as ensure_motion

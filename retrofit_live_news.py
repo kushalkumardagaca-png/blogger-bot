@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Retrofit today's already-live news posts to the current title/coverage policy."""
 
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('retrofit_live_news')
+
+
 import brand_seo
 
 from pathlib import Path

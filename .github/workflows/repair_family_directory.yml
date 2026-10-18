@@ -20,6 +20,8 @@ concurrency:
 
 jobs:
   repair:
+    # Owner-approved freeze: no optional live-page/URL/tracking rebuild.
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:

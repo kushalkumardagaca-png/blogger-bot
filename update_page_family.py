@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """Install the shared Daily Yield family directory on every active static page."""
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('update_page_family')
+
 from pathlib import Path
 import html, json, os, re, requests
 from page_family import ACTIVE_PAGES, BLOG, END, START, ensure_family

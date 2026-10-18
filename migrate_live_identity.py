@@ -6,6 +6,11 @@ uploading Daily_Yield_Theme.xml and changing the Blogger title to DAILY YIELD.
 Technical email addresses, social handles, and profile URLs are intentionally not
 rewritten because changing their visible targets would break working links.
 """
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('identity_migration')
+
 from io import BytesIO
 from pathlib import Path
 import base64, json, os, re, sys

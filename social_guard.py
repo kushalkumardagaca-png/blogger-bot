@@ -19,6 +19,8 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+from social_rotation import platform_pair_for
+from merge_social_tracker import identity
 import subprocess
 from pathlib import Path
 
@@ -54,9 +56,15 @@ def todays_articles(day: dt.date) -> list[dict]:
             articles.append({"key": f"news-{desk}", "title": f"{desk} edition",
                              "url": row["url"], "publishedAt": row.get("window_end", "")})
     master = load(ROOT / "MASTER_AUTOMATION_TRACKER.json", {}).get("published", [])
+    plan = load(ROOT / "MASTER_DAILY_PLAN.json", {})
+    slot_keys = {}
+    if plan.get("date") == day.isoformat():
+        for kind in ("trending", "evergreen"):
+            for index, item in enumerate(plan.get(kind, [])[:5]):
+                slot_keys[(kind, str(item.get("id")))] = f"master-{kind}-{index}"
     for row in master:
         if row.get("date") == day.isoformat() and row.get("url"):
-            articles.append({"key": f"master-{row.get('kind')}-{row.get('topic_id')}",
+            articles.append({"key": slot_keys.get((row.get('kind'), str(row.get('topic_id'))), f"master-{row.get('kind')}-{row.get('topic_id')}"),
                              "title": row.get("title", ""), "url": row["url"],
                              "publishedAt": row.get("published_at", "")})
     return articles
@@ -77,7 +85,7 @@ def covered_by(article: dict, trackers: dict[str, list[dict]]) -> dict[str, int]
     """How many of today's posts each platform carries for this article."""
     counts = {}
     for platform, rows in trackers.items():
-        counts[platform] = sum(1 for row in rows if matches(row, article))
+        counts[platform] = len({identity(row) for row in rows if matches(row, article)})
     return counts
 
 
@@ -107,17 +115,28 @@ def main() -> int:
     trackers = tracker_rows()
     ledger = load(LEDGER, {})
     rows, dispatched, missing = [], 0, 0
+    duplicates, extra_networks = 0, 0
     # Articles are chased whatever their lateness: a late edition is still owed its
     # two posts, because the audience is still there when the article lands.
     for article in todays_articles(day):
         counts = covered_by(article, trackers)
         have = sum(1 for value in counts.values() if value)
         needed = max(0, REQUIRED - have)
+        duplicate_count = sum(max(0, value - 1) for value in counts.values())
+        duplicates += duplicate_count
+        extra_networks += max(0, have - REQUIRED)
         record = {"key": article["key"], "title": article["title"][:70],
-                  "url": article["url"], "posts": have, "byPlatform": counts}
+                  "url": article["url"], "posts": have, "byPlatform": counts,
+                  "observedDistinctPosts": sum(counts.values()), "duplicatePosts": duplicate_count}
         if needed:
             missing += needed
-            for route_index in range(needed):
+            try:
+                pair = platform_pair_for(article['key'], day)
+                route_indexes = [index for index, platform in enumerate(pair) if not counts.get(platform)][:needed]
+            except ValueError:
+                route_indexes = []
+                record['routingIssue'] = 'Cannot identify the approved daily slot; no guessed route is posted.'
+            for route_index in route_indexes:
                 key = f"{day}:{article['key']}:{route_index}"
                 last = ledger.get(key, "")
                 if last and now - dt.datetime.fromisoformat(last) < DISPATCH_SPACING:
@@ -135,8 +154,10 @@ def main() -> int:
               "articles": len(rows), "expectedPosts": len(rows) * REQUIRED,
               "articlesWithBothPosts": complete, "postsMissing": missing,
               "dispatched": dispatched, "rows": rows,
+              "duplicatePosts": duplicates, "extraNetworks": extra_networks,
+              "articlesWithExactlyTwoPosts": sum(1 for row in rows if row['posts'] == REQUIRED and row['duplicatePosts'] == 0),
               "syntheticViews": 0, "publicDailyYieldRequests": 0,
-              "status": "PASS" if complete == len(rows) else "ATTENTION"}
+              "status": "PASS" if complete == len(rows) and duplicates == 0 and extra_networks == 0 else "ATTENTION"}
     save(STATUS, report)
     print(json.dumps({k: report[k] for k in ("status", "articles", "expectedPosts",
                                              "articlesWithBothPosts", "postsMissing",

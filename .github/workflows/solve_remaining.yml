@@ -17,6 +17,8 @@ permissions:
 
 jobs:
   solve:
+    # Owner-approved freeze: no optional live-page/URL/tracking rebuild.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

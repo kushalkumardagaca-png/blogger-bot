@@ -35,7 +35,7 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-          APPLY_CORPUS_REMEDIATION: ${{ (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.apply)) && 'true' || 'false' }}
+          APPLY_CORPUS_REMEDIATION: 'false' # audit the stored corpus; no bulk repairs during freeze
         run: python harden_live_corpus.py
       - name: Persist compact policy and image-rights evidence
         run: |

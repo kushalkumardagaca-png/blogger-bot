@@ -18,6 +18,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   instrument:
+    # Owner-approved freeze: no optional live-page/URL/tracking rebuild.
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:

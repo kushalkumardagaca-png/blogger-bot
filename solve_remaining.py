@@ -25,6 +25,11 @@ No page of the site is fetched: this run uses the authenticated API only.
 """
 from __future__ import annotations
 
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('solve_remaining')
+
+
 import html
 import json
 import os

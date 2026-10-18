@@ -153,9 +153,13 @@ def main() -> int:
     parser.add_argument("--restore", action="store_true",
                         help="bring drafts back from DRAFT_SWEEP_BACKUP.json (the sweep is reversible)")
     args = parser.parse_args()
-    access = token()
     if args.restore:
-        return restore(access)
+        # Deleted legacy drafts and the retired eight-hour queue are not an
+        # approved publication source. Do not authenticate or restore by accident.
+        print(json.dumps({"status": "RESTORE_RETIRED", "restored": 0,
+                          "reason": "Owner instruction: do not revive deleted legacy drafts."}))
+        return 0
+    access = token()
     found = drafts(access)
     keep, stale = classify(found, revival_queue())
     deleted, failures = [], []

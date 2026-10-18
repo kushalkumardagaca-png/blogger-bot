@@ -15,6 +15,11 @@ Modes
 """
 from __future__ import annotations
 
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('desk_index_redesign')
+
+
 import argparse, datetime as dt, html, json, os, re, sys, time, urllib.parse, urllib.request
 from pathlib import Path
 

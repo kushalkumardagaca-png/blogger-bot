@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 """Create Global Snapshot at a new Blogger URL and retire the former Market Explorer page."""
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('deploy_global_snapshot')
+
 from pathlib import Path
 import json, os, requests
 from page_family import ensure_family

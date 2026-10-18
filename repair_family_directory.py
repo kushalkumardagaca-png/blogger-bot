@@ -8,6 +8,11 @@ API for exact post-deployment verification.
 """
 from __future__ import annotations
 
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('repair_family_directory')
+
+
 import gzip
 import json
 import os

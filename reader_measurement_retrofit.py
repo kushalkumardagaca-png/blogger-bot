@@ -6,6 +6,11 @@ The idempotent inline guard measures active reading, not page loading, and sends
 one GA4 article_read event after 30 visible seconds plus 50% content depth.
 """
 from __future__ import annotations
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('reader_measurement_retrofit')
+
 import json, os, re, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path

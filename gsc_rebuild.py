@@ -6,6 +6,11 @@ Official API boundaries:
   and inspection of Google's indexed version.
 - Does NOT automate Test Live URL or Request Indexing; Google exposes no API for them.
 """
+
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+if __name__ == "__main__":
+    _dy_stop_if_frozen('gsc_rebuild')
+
 from pathlib import Path
 import datetime as dt, html, json, os, re, time, urllib.error, urllib.parse, urllib.request
 

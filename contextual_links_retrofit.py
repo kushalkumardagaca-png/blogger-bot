@@ -5,7 +5,7 @@ import html, json, os, re, urllib.parse, urllib.request
 from contextual_links import STYLE, card
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID'];BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
-APPLY=os.environ.get('APPLY','false').lower()=='true'
+APPLY=os.environ.get('APPLY','false').lower()=='true' and not __import__('site_change_control').is_frozen()
 MARKET_FALLBACK='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&h=900&q=85'
 PERSONAL_FALLBACK='https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1600&h=900&q=85'
 BROKEN_MAP={

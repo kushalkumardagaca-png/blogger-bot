@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup,Comment
 from content_policy_guard import DISCLOSURE_MARKER,audit_text,automation_disclosure
 from editorial_integrity import language_similarity,normalized_title
 
-BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}";APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true'
+BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}";APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true' and not __import__('site_change_control').is_frozen()
 REPORT=Path('BLOGGER_CORPUS_POLICY_STATUS.json');RIGHTS=Path('BLOGGER_IMAGE_RIGHTS_LEDGER.json')
 UTILITY_SELECTORS=('.dy2-summary','.dy2-faq','.dy2-glossary','.dy2-links','.dy2-low','.dy2-follow','#dyPageFamily','.dy-policy-disclosure','.dy-related','.dy-context','script','style','noscript','template')
 
@@ -119,10 +119,13 @@ def main():
  removed=set(deleted)
  for p in rows:
   if p['id'] in removed:continue
-  content=clean_legacy_promises(p.get('content',''))
-  if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
-  content=ensure_figure_rights(content)
-  if automated(p):content=upgrade_disclosure(content)
+  # Audit the real stored copy, not a cleaned hypothetical copy.
+  content=p.get('content','')
+  if APPLY:
+   content=clean_legacy_promises(content)
+   if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
+   content=ensure_figure_rights(content)
+   if automated(p):content=upgrade_disclosure(content)
   audit_content=editorial_only(p,content);issues=[x for x in audit_text(p.get('title',''),audit_content,'historical',require_disclosure=False) if x!='insufficient sentence-level originality']
   bad_links=[]
   for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content,re.I):
