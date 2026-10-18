@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T07:43:07.138175+05:30",
+ "generatedAt": "2026-10-18T08:15:37.823188+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 4,
- "expectedPosts": 8,
+ "articles": 5,
+ "expectedPosts": 10,
  "articlesWithBothPosts": 4,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-india",
@@ -55,9 +55,25 @@
     "tumblr": 1,
     "mastodon": 0
    }
+  },
+  {
+   "key": "master-evergreen-eb9f027e927c2901",
+   "title": "Government moves to align education with futur",
+   "url": "https://dailyyield.blogspot.com/2026/10/government-moves-to-align-education.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
