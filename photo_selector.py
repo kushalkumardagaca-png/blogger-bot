@@ -7,6 +7,7 @@ from pathlib import Path
 import imagehash,requests
 from PIL import Image,ImageStat
 from io import BytesIO
+from source_photography import photographic_candidate,source_alt
 ROOT=Path(__file__).parent;REGISTRY=ROOT/'PHOTO_USAGE_REGISTRY.json';UA='DailyYieldPhotoEditor/1.0 (dailyyield.official@gmail.com)'
 ALLOW=('cc0','public domain','cc by 2.0','cc by 2.5','cc by 3.0','cc by 4.0')
 MINOR_TERMS=re.compile(r'\b(?:child|children|kid|kids|minor|schoolchild|schoolgirl|schoolboy|teenager|young girl|young boy|student|pupil)\b',re.I)
@@ -47,6 +48,7 @@ def commons_candidates(brief):
   if not license_url and 'public domain' in combined:license_url='https://creativecommons.org/publicdomain/mark/1.0/'
   elif not license_url and 'cc0' in combined:license_url='https://creativecommons.org/publicdomain/zero/1.0/'
   if MINOR_TERMS.search(clean(p.get('title',''))+' '+desc):continue
+  if not photographic_candidate({'title':p.get('title',''),'description':desc,'original_url':info.get('url',''),'source_page':info.get('descriptionurl','')}):continue
   if not any(x in combined for x in ALLOW):continue
   if any(x in combined for x in ('noncommercial','no derivatives','gfdl')):continue
   w=int(info.get('width') or 0);h=int(info.get('height') or 0)
@@ -95,7 +97,7 @@ def choose_photos(briefs,slug,article_key):
     from photo_library import reserve_master_entry
     entry=reserve_master_entry(str(article_key),brief,None,placement,avoid_ids={x for x in used_ids if x})
     funnel[f'placement-{placement}-pool_fallback']=bool(entry)
-    if entry:
+    if entry and photographic_candidate(entry):
      try:
       rr=requests.get(entry['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
       image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
@@ -117,6 +119,6 @@ def choose_photos(briefs,slug,article_key):
   else:nh=int(w/target);image=image.crop((0,(h-nh)//2,w,(h+nh)//2))
   image=image.resize((1600,900),Image.Resampling.LANCZOS);path=folder/f'photo-{placement}.jpg';image.save(path,'JPEG',quality=90,optimize=True)
   url=f'https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/{slug}/photo-{placement}.jpg';credit=f"Photo: {c['creator']} / {c['license']}"
-  selected.append({'url':url,'alt':clean(brief)[:220],'caption':credit,'width':1600,'height':900,'source_page':c['source_page'],'license':c['license'],'license_url':c['license_url'],'creator':c['creator']})
+  selected.append({'url':url,'alt':source_alt(c),'source_title':c.get('title',''),'subjectDescriptionBasis':'Primary source file title, not the requested search brief','caption':credit,'width':1600,'height':900,'source_page':c['source_page'],'license':c['license'],'license_url':c['license_url'],'creator':c['creator']})
   item={**c,'url':url,'sha256':sha,'phash':ph,'article_key':str(article_key),'placement':placement,'brief':brief,'selection_score':round(score,2),'selected_at':datetime.now(timezone.utc).isoformat()};registry['items'].append(item);used_ids.add(c['source_id']);used_urls.add(c['original_url']);used_hashes.add(sha);used_phashes.append(ph)
  save_registry(registry);return selected

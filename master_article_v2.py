@@ -89,10 +89,13 @@ def linked_text(text,sources,internals):
     out.append(esc((text or "")[pos:]));return "".join(out)
 
 def photo(p,index):
+    from source_photography import source_alt
+    # A search brief is not evidence of what the chosen picture actually shows.
+    verified_alt=source_alt(p)
     credit=esc(p['caption'])
     if p.get('source_page'): credit=f'<a href="{esc(p["source_page"])}" rel="noopener" target="_blank">{credit}</a>'
     if p.get('license_url'): credit+=f' · <a href="{esc(p["license_url"])}" rel="license noopener" target="_blank">Licence</a>'
-    return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(p['alt'])}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{credit}</figcaption></figure>'''
+    return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(verified_alt)}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{credit}</figcaption></figure>'''
 
 def visual(v,sources,index):
     title=esc(v.get("title",f"Data view {index}"));caption=esc(v.get("caption",''));raw_source=v.get("source",v.get("source_number",1))

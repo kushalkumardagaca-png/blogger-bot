@@ -1,9 +1,9 @@
 {
  "kind": "master",
  "topic_key": "dc0fd333ea797c23",
- "title": "financial district buildings",
+ "title": "What is the Daily Yield website?",
  "target": 10,
- "built_at": "2026-10-18T00:53:27.942124+00:00",
+ "built_at": "2026-10-18T13:47:36.903321+00:00",
  "entries": [
   {
    "source_id": "commons:8925716",
@@ -68,22 +68,6 @@
    "height": 1327,
    "query": "table office office",
    "checked_at": "2026-10-18T00:53:19.292749+00:00"
-  },
-  {
-   "source_id": "commons:113043563",
-   "provider": "Wikimedia Commons",
-   "title": "\"Billiard Table Manufactory, J. M. Brunswick & Bro., Proprietors, Cincinnati, Ohio\" 1865 ad in Polk's Nashville (Davidson county, Tenn.) City Directory ... 1865 (IA polksnashvilleda00nash) (page 10 crop).jpg",
-   "description": "\"Billiard Table Manufactory, J. M. Brunswick & Bro., Proprietors, Cincinnati, Ohio\" 1865 ad. Title varies: 1865, Singleton's Nashville business directory ... 186- King's Nashville city directory ... 18-- Nashville and Edgefield directory ... 1880, Nashville directory ... 18-- Nashville city directory ... 1902-1903, Directory of Nashville ... and rural routes of Davidson county ... 1922-1928, Marshall-Bruce-Polk co.'s Nashville city directory ... 1929- Polk's Nashville (Davidson county, Tenn.) city dirctory ... [with slight variations] Published vary Subjects:",
-   "creator": "Unknown creator",
-   "licence": "Public domain",
-   "licence_url": "https://creativecommons.org/publicdomain/mark/1.0/",
-   "source_page": "https://commons.wikimedia.org/wiki/File:%22Billiard_Table_Manufactory,_J._M._Brunswick_%26_Bro.,_Proprietors,_Cincinnati,_Ohio%22_1865_ad_in_Polk%27s_Nashville_(Davidson_county,_Tenn.)_City_Directory_..._1865_(IA_polksnashvilleda00nash)_(page_10_crop).jpg",
-   "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/%22Billiard_Table_Manufactory%2C_J._M._Brunswick_%26_Bro.%2C_Proprietors%2C_Cincinnati%2C_Ohio%22_1865_ad_in_Polk%27s_Nashville_%28Davidson_county%2C_Tenn.%29_City_Directory_..._1865_%28IA_polksnashvilleda00nash%29_%28page_10_crop%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-   "original_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/%22Billiard_Table_Manufactory%2C_J._M._Brunswick_%26_Bro.%2C_Proprietors%2C_Cincinnati%2C_Ohio%22_1865_ad_in_Polk%27s_Nashville_%28Davidson_county%2C_Tenn.%29_City_Directory_..._1865_%28IA_polksnashvilleda00nash%29_%28page_10_crop%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-   "width": 1911,
-   "height": 1273,
-   "query": "table office city",
-   "checked_at": "2026-10-18T00:53:19.292759+00:00"
   },
   {
    "source_id": "commons:124575545",
@@ -164,6 +148,23 @@
    "height": 2103,
    "query": "table office city",
    "checked_at": "2026-10-18T00:53:19.292786+00:00"
+  },
+  {
+   "source_id": "commons:151790680",
+   "provider": "Wikimedia Commons",
+   "title": "Financial District Manhattan August 2024.jpg",
+   "description": "Financial District, Manhattan in August 2024",
+   "creator": "Kidfly182",
+   "licence": "CC BY 4.0",
+   "licence_url": "https://creativecommons.org/licenses/by/4.0",
+   "source_page": "https://commons.wikimedia.org/wiki/File:Financial_District_Manhattan_August_2024.jpg",
+   "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Financial_District_Manhattan_August_2024.jpg/1920px-Financial_District_Manhattan_August_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "original_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Financial_District_Manhattan_August_2024.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+   "width": 4608,
+   "height": 2072,
+   "mime": "image/jpeg",
+   "query": "filetype:bitmap financial district buildings",
+   "checked_at": "2026-10-18T13:47:34.292611+00:00"
   }
  ],
  "taken": [
@@ -203,5 +204,6 @@
    "placement": 3,
    "used_at": "2026-10-18T00:53:27.942652+00:00"
   }
- ]
+ ],
+ "rotation": 0
 }

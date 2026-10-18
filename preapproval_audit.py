@@ -13,6 +13,7 @@ import requests
 from bs4 import BeautifulSoup
 from content_policy_guard import audit_text,DISCLOSURE_MARKER
 from site_change_control import policy,is_frozen
+from licence_evidence import rights_record_complete
 
 ROOT=Path(__file__).resolve().parent
 BLOG='https://dailyyield.blogspot.com'
@@ -182,7 +183,7 @@ def corpus_audit(posts,pages):
             license_name=record.get('license') or record.get('licence') or ''
             license_url=record.get('license_url') or record.get('licence_url') or ''
             source=record.get('source_page') or ''
-            evidence=bool(license_name and license_url and source and (record.get('creator') or record.get('artist')))
+            evidence=rights_record_complete(record)
             if not (evidence and caption and img.get('alt','').strip()):
                 rights_review.append({'postId':post['id'],'url':post.get('url'),'image':src,'altPresent':bool(img.get('alt','').strip()),'captionPresent':bool(caption),'metadataMatched':bool(record),'licenceRecordComplete':evidence,'captionLinks':links[:3]})
         if len(fact_queue)<6:
