@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T04:21:41.200503+05:30",
+ "generatedAt": "2026-10-19T04:37:13.851226+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 1,
  "expectedPosts": 2,
  "articlesWithBothPosts": 0,
  "postsMissing": 1,
- "dispatched": 0,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -22,13 +22,13 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T04:21:40.408191+05:30",
+ "liveVerificationSourceAt": "2026-10-19T04:37:13.341911+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 0,
  "syntheticViews": 0,
