@@ -1,31 +1,65 @@
 {
-  "checkedAt": "2026-10-18T08:47:32.709984+00:00",
+  "checkedAt": "2026-10-18T09:24:47.334922+00:00",
   "status": "CHECKED_WITH_LIMITS",
   "siteWrites": 0,
   "analyticsEventsSent": 0,
   "pageScriptsExecuted": false,
   "bloggerApiReads": 14,
-  "livePosts": 509,
+  "livePosts": 510,
   "livePages": 14,
   "drafts": 0,
   "draftInventory": [],
   "storedBlogDescription": "Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.",
   "ownerOnlyFindings": [],
   "sourceObservation": {
-    "status": "UNAVAILABLE",
-    "httpStatus": 429,
+    "status": "OBSERVED",
+    "httpStatus": 200,
+    "sourceSha256": "628a31a2e2248d64cafb785cc9c7cb27a5644a40d9e3ee5e98f3ef34a2480642",
+    "ga4IdsObserved": [
+      "G-WLEEYTKV12"
+    ],
+    "tagManagerIdsObserved": [],
+    "gtagConfigDestinations": [
+      "G-WLEEYTKV12"
+    ],
+    "analyticsLoaderSources": [
+      "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+    ],
+    "adSensePublisherIds": [
+      "ca-pub-1083724733490660"
+    ],
+    "adsenseAccountMeta": "",
+    "consentScriptCount": 1,
+    "hasConsentDefaults": true,
+    "certifiedConsentSignalsObserved": false,
+    "reportAbuseLinks": [
+      {
+        "text": "",
+        "href": "https://www.blogger.com/go/report-abuse"
+      }
+    ],
+    "policyNavigation": {
+      "/p/about-us_02080501126.html": true,
+      "/p/contact-us_01883938366.html": true,
+      "/p/privacy-policy.html": true,
+      "/p/disclaimer.html": true,
+      "/p/terms-and-conditions.html": true
+    },
+    "scriptsExecuted": false,
+    "accountApprovalVisible": false,
+    "limits": "HTML observation is not proof of a collecting GA4 property or certified consent. No live visitor session was manufactured.",
     "adsTxt": {
-      "httpStatus": 429,
-      "text": "",
+      "httpStatus": 200,
+      "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
       "readOnly": true,
-      "checkedAt": "2026-10-18T08:46:58.045107+00:00",
-      "matchesRecordedPublisher": false
+      "checkedAt": "2026-10-18T09:24:23.706219+00:00",
+      "matchesRecordedPublisher": true
     },
     "robotsTxt": {
-      "httpStatus": 404,
-      "text": "",
+      "httpStatus": 200,
+      "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
       "readOnly": true,
-      "checkedAt": "2026-10-18T08:46:58.495263+00:00"
+      "checkedAt": "2026-10-18T09:24:23.837461+00:00"
     }
   },
   "freeze": {
@@ -41,205 +75,13 @@
     "routineUpdates": "Existing article/news hub cards and JSON data only; no old-post/theme/label rebuild."
   },
   "corpusSummary": {
-    "postsScanned": 509,
+    "postsScanned": 510,
     "pagesScanned": 14,
     "automatedPolicyFlags": [
-      {
-        "id": "8424036406237802934",
-        "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-07.html",
-        "title": "South Korea Finance News · 7 October 2026 · Coverage October 6 to 7 — (2nd LD) Seoul shares end lower on tech losses amid rising bond yields; S. Korean won…",
-        "issues": [
-          "undisclosed affiliate or commercial link"
-        ]
-      },
-      {
-        "id": "3442600443400729974",
-        "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-05.html",
-        "title": "Brazil Finance News — 5 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6612585196075280264",
-        "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-05.html",
-        "title": "Spain Finance News — 5 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3000292393265106707",
-        "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-05.html",
-        "title": "Germany Finance News — 5 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5131310480958239502",
-        "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-05.html",
-        "title": "South Korea Finance News — 5 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7961948819417398860",
-        "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-05.html",
-        "title": "Australia Finance News — 5 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6812626816465387916",
-        "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-04.html",
-        "title": "Brazil Finance News — 4 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6002847844933215206",
-        "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-04.html",
-        "title": "Germany Finance News — 4 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1491878054535573888",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-03.html",
-        "title": "Personal Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3354573029890676948",
-        "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-03.html",
-        "title": "Mexico Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1916711467989940356",
-        "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-03.html",
-        "title": "Canada Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5715277917410069452",
-        "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-03.html",
-        "title": "US Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8692987777881824271",
-        "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-03.html",
-        "title": "Brazil Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "9150949963237525136",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html",
-        "title": "Corporate Finance and Industry News",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1850827666127980508",
-        "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-03.html",
-        "title": "Italy Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "915852663858125554",
-        "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-03.html",
-        "title": "Spain Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3468962202153168979",
-        "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-03.html",
-        "title": "China Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "332980622017107325",
-        "url": "https://dailyyield.blogspot.com/2026/10/uk-2026-10-03.html",
-        "title": "UK Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3235780247739134014",
-        "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-03.html",
-        "title": "Japan Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8233701864497037469",
-        "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-03.html",
-        "title": "France Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
       {
         "id": "7509329855154139182",
         "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-03.html",
         "title": "Germany Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1064654714094741604",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0526097754.html",
-        "title": "Economy and Macro Policy News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "769802491907818695",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-03.html",
-        "title": "Market and Trading News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1838531017002841703",
-        "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-03.html",
-        "title": "India Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8521744947047722622",
-        "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-03.html",
-        "title": "Global Finance Wire — 3 October 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -253,721 +95,9 @@
         ]
       },
       {
-        "id": "1732882384791246050",
-        "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-03.html",
-        "title": "Australia Finance News — 3 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8604263644681996802",
-        "url": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-02.html",
-        "title": "Russia Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8681953723978380210",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-02.html",
-        "title": "Personal Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8116771357609802510",
-        "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-02.html",
-        "title": "Mexico Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3374488531251831353",
-        "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-02.html",
-        "title": "Canada Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6110897283203249229",
-        "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-02.html",
-        "title": "US Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1379109366375175777",
-        "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-02.html",
-        "title": "Brazil Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1504093871376035088",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html",
-        "title": "Corporate Finance and Industry News",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "955420358948638066",
-        "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-02.html",
-        "title": "Italy Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2005014805006920526",
-        "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-02.html",
-        "title": "Spain Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3093831134407049207",
-        "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-02.html",
-        "title": "China Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3582600754100729351",
-        "url": "https://dailyyield.blogspot.com/2026/10/uk-2026-10-02.html",
-        "title": "UK Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1875628838135514595",
-        "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-02.html",
-        "title": "Japan Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4732705071384887954",
-        "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-02.html",
-        "title": "France Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1241153471079039627",
-        "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-02.html",
-        "title": "Germany Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7126642917481377533",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026.html",
-        "title": "Macro Policy News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6527694942512355244",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-02.html",
-        "title": "Market News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7592536897293931312",
-        "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-02.html",
-        "title": "India Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "888647573326388172",
-        "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-02.html",
-        "title": "Global Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7836621888717460852",
-        "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-02.html",
-        "title": "South Korea Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5158064681276983892",
-        "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-02.html",
-        "title": "Australia Finance News — 2 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "626954337147022449",
-        "url": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-01.html",
-        "title": "Russia Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "255068634201679306",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-01.html",
-        "title": "Personal Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1697237802506427825",
-        "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-01.html",
-        "title": "Mexico Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "132048976709130267",
-        "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
-        "title": "Canada Finance News — 1 October 2026 (2)",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7963636691459098956",
-        "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-01_01887906195.html",
-        "title": "US Finance News — 1 October 2026 (2)",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3571951616049148857",
-        "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01.html",
-        "title": "Canada Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7632338182974546049",
-        "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-01.html",
-        "title": "US Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "553934405300545275",
-        "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-01.html",
-        "title": "Brazil Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2586213142082697872",
-        "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry.html",
-        "title": "Corporate Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2370753968758385048",
-        "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-01.html",
-        "title": "Italy Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "537381809861598684",
-        "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-01.html",
-        "title": "Spain Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "9028432246850261596",
-        "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-01.html",
-        "title": "China Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "983834499565146723",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-10-01.html",
-        "title": "UK Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5545386663868376235",
-        "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-10-01.html",
-        "title": "Japan Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7819017210363133781",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-10-01.html",
-        "title": "France Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "967337411893740866",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-10-01.html",
-        "title": "Germany Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6190892833991317126",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01962741990.html",
-        "title": "Macro Policy News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3794916987021150590",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html",
-        "title": "Market News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2678078863814343955",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-10-01.html",
-        "title": "India Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "309111306060639526",
-        "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-10-01.html",
-        "title": "Global Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2542420316692426930",
-        "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-10-01.html",
-        "title": "South Korea Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "635769679322746121",
-        "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-10-01.html",
-        "title": "Australia Finance News — 1 October 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1610593295668865715",
-        "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-30.html",
-        "title": "Russia Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3042075322183164827",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-30.html",
-        "title": "Personal Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5921749039774626930",
-        "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-30.html",
-        "title": "Mexico Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3417859541869662007",
-        "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-30.html",
-        "title": "Canada Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4378017040434071616",
-        "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-30.html",
-        "title": "US Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6754930054304268139",
-        "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-30.html",
-        "title": "Brazil Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5019452690942245047",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01348401010.html",
-        "title": "Corporate Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2913845025272989831",
-        "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-30.html",
-        "title": "Italy Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1152148656719761146",
-        "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-30.html",
-        "title": "Spain Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "48092243194050927",
-        "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-30.html",
-        "title": "China Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8686096611857118978",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-30.html",
-        "title": "UK Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3369513303010484098",
-        "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-30.html",
-        "title": "Japan Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2849933272866910243",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-30.html",
-        "title": "France Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "416760661369375574",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-30.html",
-        "title": "Germany Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7732982655147361005",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0527246697.html",
-        "title": "Macro Policy News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8099889816920857108",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-30.html",
-        "title": "Market News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "734722129897789265",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-30.html",
-        "title": "India Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4173730771472877576",
-        "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-30.html",
-        "title": "Global Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3338477738272234964",
-        "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-30.html",
-        "title": "South Korea Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4294031392271634610",
-        "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-30.html",
-        "title": "Australia Finance News — 30 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "9100032476497143186",
-        "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-29.html",
-        "title": "Russia Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1079265428435182809",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-29.html",
-        "title": "Personal Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7115176249025195517",
-        "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-29.html",
-        "title": "Mexico Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7003750694659761692",
-        "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-29.html",
-        "title": "Canada Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1559881385941953973",
-        "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-29.html",
-        "title": "US Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6981062378758319524",
-        "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-29.html",
-        "title": "Brazil Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3890352632686960222",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_0629962340.html",
-        "title": "Corporate Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5797453094847355471",
-        "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-29.html",
-        "title": "Italy Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6059871633623862310",
-        "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-29.html",
-        "title": "Spain Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "9007144551320250681",
-        "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-29.html",
-        "title": "China Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1810052964905988018",
-        "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-29.html",
-        "title": "Japan Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7667045939093536899",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-29.html",
-        "title": "UK Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3888811538986935233",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-29.html",
-        "title": "France Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5530506896553639228",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-29.html",
-        "title": "Germany Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5793837205624436935",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01743986716.html",
-        "title": "Macro Policy News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5663946889586320606",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-29.html",
-        "title": "Market News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1470400056182955354",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-29.html",
-        "title": "India Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1954269198646496705",
-        "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-29.html",
-        "title": "Global Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "4156483657490223145",
         "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-29.html",
         "title": "South Korea Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2829755268130449976",
-        "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-29.html",
-        "title": "Australia Finance News — 29 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5244611819587678418",
-        "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-28.html",
-        "title": "Russia Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1022860638256450673",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-28.html",
-        "title": "Personal Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1692610470499812937",
-        "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-28.html",
-        "title": "Canada Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6398572425484507020",
-        "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-28.html",
-        "title": "US Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2086262243563462858",
-        "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-28.html",
-        "title": "Brazil Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1176196356811634898",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html",
-        "title": "Corporate Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8220571972089630701",
-        "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-28.html",
-        "title": "Italy Finance News — 28 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -981,73 +111,9 @@
         ]
       },
       {
-        "id": "6136867085515829924",
-        "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-28.html",
-        "title": "China Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2456526586094870954",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-28.html",
-        "title": "UK Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7828478888559605544",
-        "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-28.html",
-        "title": "Japan Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7610007741627454383",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-28.html",
-        "title": "France Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "7064447949502231390",
         "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-28.html",
         "title": "Germany Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7120917028774007604",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_017346688.html",
-        "title": "Macro Policy News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4839715618924227739",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-28.html",
-        "title": "Market News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7080232271061962890",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-28.html",
-        "title": "India Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6334994565996995329",
-        "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-28.html",
-        "title": "Global Finance News — 28 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -1061,41 +127,9 @@
         ]
       },
       {
-        "id": "8595229389581582705",
-        "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-28.html",
-        "title": "Australia Finance News — 28 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5984345327493779721",
-        "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-27.html",
-        "title": "Russia Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "4559693310963899298",
         "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-27.html",
         "title": "Personal Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2220914668880365188",
-        "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-27.html",
-        "title": "Mexico Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2949080403088347215",
-        "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-27.html",
-        "title": "Canada Finance News — 27 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -1117,89 +151,9 @@
         ]
       },
       {
-        "id": "7973170617751893872",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01446121781.html",
-        "title": "Corporate Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3692047325956181058",
-        "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-27.html",
-        "title": "Spain Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4208803768759667992",
-        "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-27.html",
-        "title": "China Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6008980440625951868",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-27.html",
-        "title": "UK Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7952741125342031934",
-        "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-27.html",
-        "title": "Japan Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2148070858167788668",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-27.html",
-        "title": "France Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "193247759891078847",
         "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-27.html",
         "title": "Germany Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6486100444408340779",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html",
-        "title": "Macro Policy News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5949797759482040830",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-27.html",
-        "title": "Market News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6563970637452730738",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-27.html",
-        "title": "India Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1525321452486561932",
-        "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-27.html",
-        "title": "Global Finance News — 27 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -1213,185 +167,9 @@
         ]
       },
       {
-        "id": "6643967970978131215",
-        "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-27.html",
-        "title": "Australia Finance News — 27 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8141949697072344971",
-        "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-26.html",
-        "title": "Russia Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "5809539308164270577",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-26.html",
-        "title": "Personal Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "8973398431497020572",
-        "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-26.html",
-        "title": "Mexico Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "133946527053973582",
-        "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-26.html",
-        "title": "Canada Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7833492098676155691",
-        "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-26.html",
-        "title": "US Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4252136656968625158",
-        "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-26.html",
-        "title": "Brazil Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4802097022733879661",
-        "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-26.html",
-        "title": "Italy Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3265098780048862172",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html",
-        "title": "Corporate Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "7978855042342948180",
-        "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-26.html",
-        "title": "Spain Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6017439504908254782",
-        "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-26.html",
-        "title": "China Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4827012825782525705",
-        "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
-        "title": "UK Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1107194767136752071",
-        "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
-        "title": "Japan Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4996598231152424846",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-26.html",
-        "title": "France Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1685234226138286098",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-26.html",
-        "title": "Germany Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6787552373366780877",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01001893817.html",
-        "title": "Macro Policy News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "1244600316209982174",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-26.html",
-        "title": "Market News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "6622106669535090283",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-26.html",
-        "title": "India Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "115783846078738704",
-        "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-26.html",
-        "title": "Global Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "9115764774433521189",
         "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
         "title": "South Korea Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "2557941853294839938",
-        "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-26.html",
-        "title": "Australia Finance News — 26 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3288071481427933520",
-        "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-25.html",
-        "title": "Russia Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "749521336862589933",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-25.html",
-        "title": "Personal Finance News — 25 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -1405,49 +183,9 @@
         ]
       },
       {
-        "id": "1496481957315805113",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
-        "title": "Corporate Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
         "id": "1374496040576360177",
         "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-25.html",
         "title": "UK Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "4562345940833333639",
-        "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-25.html",
-        "title": "France Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "9219122336676981755",
-        "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-25.html",
-        "title": "Germany Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "3580047848347313026",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026.html",
-        "title": "Macro Policy News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
-      },
-      {
-        "id": "778009067188225768",
-        "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-25.html",
-        "title": "Market News — 25 September 2026",
         "issues": [
           "repeated substantive sentence within the content"
         ]
@@ -1459,22 +197,14 @@
         "issues": [
           "repeated substantive sentence within the content"
         ]
-      },
-      {
-        "id": "7434389172805313190",
-        "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-25.html",
-        "title": "India Finance News — 25 September 2026",
-        "issues": [
-          "repeated substantive sentence within the content"
-        ]
       }
     ],
     "missingDisclosure": [],
     "exactEditorialDuplicateGroups": []
   },
   "photoSummary": {
-    "masterCountMismatches": 120,
-    "licenceEvidenceNeedsReviewCount": 491,
+    "masterCountMismatches": 121,
+    "licenceEvidenceNeedsReviewCount": 44,
     "newsPoolsBelow40": [
       {
         "pool": "photo_library/news/companies.json",
@@ -1649,199 +379,34 @@
     ]
   },
   "redirectSummary": {
-    "checked": 12,
-    "currentlyReachable": 2,
-    "needsRecheck": [
-      {
-        "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-09-25T16:57:09Z",
-        "desktop": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/global-snapshot.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/markets-today.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-09-25T16:59:14Z",
-        "desktop": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/daily-news.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-10-02T07:17:17Z",
-        "desktop": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/daily-news.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/daily-news.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-10-02T07:17:17Z",
-        "desktop": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-09-27T14:13:01Z",
-        "desktop": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-09-25T17:01:15Z",
-        "desktop": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/article.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-10-02T07:15:16Z",
-        "desktop": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/article.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/article.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
-        "oldGoogleCoverage": "Redirect error",
-        "oldLastCrawl": "2026-10-02T07:21:19Z",
-        "desktop": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
-        "oldGoogleCoverage": null,
-        "oldLastCrawl": null,
-        "desktop": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/disclaimer.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/disclaimer.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      },
-      {
-        "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-        "oldGoogleCoverage": null,
-        "oldLastCrawl": null,
-        "desktop": {
-          "httpStatus": 204,
-          "finalUrl": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-          "redirects": []
-        },
-        "crawlerUA": {
-          "httpStatus": 200,
-          "finalUrl": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-          "redirects": []
-        },
-        "status": "NEEDS_RECHECK",
-        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
-      }
-    ]
+    "checked": 13,
+    "currentlyReachable": 13,
+    "needsRecheck": []
   },
   "analytics": {
-    "checkedAt": "2026-10-18T08:47:32.493638+00:00",
+    "checkedAt": "2026-10-18T09:24:47.121321+00:00",
     "siteTagsChanged": false,
     "newCollectionEnabled": false,
     "dataSubmitted": false,
-    "observedGa4Ids": [],
+    "observedGa4Ids": [
+      "G-WLEEYTKV12"
+    ],
     "observedTagManagerIds": [],
     "privatePropertyIdConfigured": false,
-    "status": "ANALYTICS_READ_PERMISSION_UNAVAILABLE",
+    "status": "ANALYTICS_SCOPE_MISSING",
     "readers": null,
     "returningReaders": null,
     "ownerStep": "Do not install tags during freeze. Only an existing collection/report permission may be connected.",
     "adminReadHttpStatus": 403,
-    "detail": "Current authorised token cannot list Analytics properties; no permission grant or installation was attempted."
+    "apiReasons": [
+      "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
+    ],
+    "apiErrorStatus": "PERMISSION_DENIED",
+    "detail": "Existing authorised access could not list Analytics properties. No account/permission changes, collection installation or event submission was attempted."
   },
   "bing": {
     "lastRun": {
-      "checkedAt": "2026-10-18T08:45:44.713740+00:00",
+      "checkedAt": "2026-10-18T09:01:17.770703+00:00",
       "status": "PASS",
       "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
       "syntheticViews": 0,
@@ -1851,10 +416,10 @@
         "monthlyAvailable": 1300
       },
       "summary": {
-        "inventory": 524,
-        "candidates": 460,
+        "inventory": 525,
+        "candidates": 461,
         "submitted": 0,
-        "quotaDeferred": 460,
+        "quotaDeferred": 461,
         "inspected": 10,
         "knownToBing": 0,
         "pendingMonitoring": 68,

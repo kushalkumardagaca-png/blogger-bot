@@ -1,17 +1,51 @@
 {
-  "status": "UNAVAILABLE",
-  "httpStatus": 429,
+  "status": "OBSERVED",
+  "httpStatus": 200,
+  "sourceSha256": "628a31a2e2248d64cafb785cc9c7cb27a5644a40d9e3ee5e98f3ef34a2480642",
+  "ga4IdsObserved": [
+    "G-WLEEYTKV12"
+  ],
+  "tagManagerIdsObserved": [],
+  "gtagConfigDestinations": [
+    "G-WLEEYTKV12"
+  ],
+  "analyticsLoaderSources": [
+    "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+  ],
+  "adSensePublisherIds": [
+    "ca-pub-1083724733490660"
+  ],
+  "adsenseAccountMeta": "",
+  "consentScriptCount": 1,
+  "hasConsentDefaults": true,
+  "certifiedConsentSignalsObserved": false,
+  "reportAbuseLinks": [
+    {
+      "text": "",
+      "href": "https://www.blogger.com/go/report-abuse"
+    }
+  ],
+  "policyNavigation": {
+    "/p/about-us_02080501126.html": true,
+    "/p/contact-us_01883938366.html": true,
+    "/p/privacy-policy.html": true,
+    "/p/disclaimer.html": true,
+    "/p/terms-and-conditions.html": true
+  },
+  "scriptsExecuted": false,
+  "accountApprovalVisible": false,
+  "limits": "HTML observation is not proof of a collecting GA4 property or certified consent. No live visitor session was manufactured.",
   "adsTxt": {
-    "httpStatus": 429,
-    "text": "",
+    "httpStatus": 200,
+    "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
     "readOnly": true,
-    "checkedAt": "2026-10-18T08:46:58.045107+00:00",
-    "matchesRecordedPublisher": false
+    "checkedAt": "2026-10-18T09:24:23.706219+00:00",
+    "matchesRecordedPublisher": true
   },
   "robotsTxt": {
-    "httpStatus": 404,
-    "text": "",
+    "httpStatus": 200,
+    "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
     "readOnly": true,
-    "checkedAt": "2026-10-18T08:46:58.495263+00:00"
+    "checkedAt": "2026-10-18T09:24:23.837461+00:00"
   }
 }

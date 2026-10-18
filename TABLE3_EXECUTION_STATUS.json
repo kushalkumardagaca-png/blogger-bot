@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T14:17:34.391883+05:30",
+  "generatedAt": "2026-10-18T14:54:49.580435+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -12,19 +12,19 @@
       "id": "B2",
       "task": "AdSense connection and ads.txt",
       "result": "Checked; private account not accessible",
-      "proof": "Public source recorded publisher IDs: not observed. ads.txt matches recorded publisher: False. Required verification is preserved; private review approval is not visible."
+      "proof": "Public source recorded publisher IDs: ca-pub-1083724733490660. ads.txt matches recorded publisher: True. Required verification is preserved; private review approval is not visible."
     },
     {
       "id": "B3",
       "task": "Misleading reports",
       "result": "Fixed",
-      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 392."
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 400."
     },
     {
       "id": "B4",
       "task": "Policy pages and navigation",
       "result": "Checked",
-      "proof": "0/0 policy routes observed in homepage links; 0 Report Abuse link(s). HEAD diagnostics: 2/12 tested routes reached HTTP 200 for both checks. No redesign."
+      "proof": "5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 13/13 tested routes reached HTTP 200 for both checks. No redesign."
     },
     {
       "id": "B5",
@@ -36,61 +36,61 @@
       "id": "B6",
       "task": "Facts and originality",
       "result": "Automated check done; human-review limit remains",
-      "proof": "509 live posts read as actually stored. Policy flags: 178; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact."
+      "proof": "510 live posts read as actually stored. Policy flags: 15; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
     },
     {
       "id": "B7",
       "task": "Photographs and rights",
       "result": "Checked; requirements not fully met",
-      "proof": "Master photo-count mismatches: 120; figures needing fuller licence/alt/caption evidence: 491; News pools below 40: 6. No copyright guarantee or old-photo replacement."
+      "proof": "Master photo-count mismatches: 121; figures needing fuller licence/alt/caption evidence: 44; News pools below 40: 6. Exact-file licence metadata recovered separately: 455. No copyright-ownership guarantee or old-photo replacement."
     },
     {
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-18T14:15:43.429470+05:30: 12/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late."
+      "proof": "Live status source 2026-10-18T14:32:57.087123+05:30: 12/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late."
     },
     {
       "id": "B9",
       "task": "Social delivery and duplicates",
-      "result": "Future check fixed; cleanup CHECKED_WITH_LIMITS",
-      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 10; cleanup items not verified/deleted: 1. Two networks required; resources counted separately."
+      "result": "Future check fixed; cleanup REMOVED_VERIFIED_DUPLICATES",
+      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 8; cleanup items not verified/deleted: 0. Two networks required; resources counted separately."
     },
     {
       "id": "B10",
       "task": "Search Console",
       "result": "Read existing results",
-      "proof": "Latest index evidence 2026-10-17T21:59:49.266028+00:00: 1 indexed results, 509 not indexed, unknown inspection errors. No ownership reset or manual bulk request."
+      "proof": "Latest index evidence 2026-10-18T09:21:38.113572+00:00: 1 indexed results, 521 not indexed, 0 inspection errors. No ownership reset or manual bulk request."
     },
     {
       "id": "B11",
       "task": "Old redirect warnings",
       "result": "Diagnosed, not blindly repaired",
-      "proof": "9 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence."
+      "proof": "10 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence."
     },
     {
       "id": "B12",
       "task": "Existing Analytics installation",
       "result": "Observed without changes",
-      "proof": "GA4 IDs in source: 0; tag-manager IDs: 0; Analytics loaders: 0. Hooks alone are not counted as working collection. No tag installed."
+      "proof": "GA4 IDs in source: 1; tag-manager IDs: 0; Analytics loaders: 1. Hooks alone are not counted as working collection. No tag installed. Existing GA4 is not the same as a connected report."
     },
     {
       "id": "B13",
       "task": "Existing Analytics reporting",
       "result": "Checked; cannot claim connected",
-      "proof": "Result: ANALYTICS_READ_PERMISSION_UNAVAILABLE. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured."
+      "proof": "Result: ANALYTICS_SCOPE_MISSING. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured."
     },
     {
       "id": "B14",
       "task": "Privacy and consent",
       "result": "Checked with stated limits",
-      "proof": "Source consent scripts: unknown; default-consent command observed: unknown. Cookie controls are not a certified advertising-CMP guarantee. Offline browser evidence, if available, is labelled separately."
+      "proof": "Source consent scripts: 1; default-consent command observed: True. Cookie controls are not a certified advertising-CMP guarantee. Offline browser cases: 4; zero events sent. Privacy pages corrected for false GA4-off wording: 1. Replay does not prove certified-CMP or live Google network behaviour."
     },
     {
       "id": "B15",
       "task": "Bing and IndexNow",
       "result": "Monitored; quota respected",
-      "proof": "Last Bing record 2026-10-18T08:45:44.713740+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 534. IndexNow parked: True. No indexing guarantee."
+      "proof": "Last Bing record 2026-10-18T09:01:17.770703+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 534. IndexNow parked: True. No indexing guarantee."
     },
     {
       "id": "B16",
@@ -138,10 +138,10 @@
     ]
   ],
   "sourceDates": {
-    "siteAudit": "2026-10-18T08:47:32.709984+00:00",
-    "slots": "2026-10-18T14:15:43.429470+05:30",
-    "social": "2026-10-18T14:17:34.353489+05:30",
-    "google": "2026-10-17T21:59:49.266028+00:00"
+    "siteAudit": "2026-10-18T09:24:47.334922+00:00",
+    "slots": "2026-10-18T14:32:57.087123+05:30",
+    "social": "2026-10-18T14:54:49.548057+05:30",
+    "google": "2026-10-18T09:21:38.113572+00:00"
   },
   "noGrandUpdateStarted": true,
   "analyticsCollectionInstalled": false

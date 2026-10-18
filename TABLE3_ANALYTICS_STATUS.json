@@ -1,15 +1,21 @@
 {
-  "checkedAt": "2026-10-18T08:47:32.493638+00:00",
+  "checkedAt": "2026-10-18T09:24:47.121321+00:00",
   "siteTagsChanged": false,
   "newCollectionEnabled": false,
   "dataSubmitted": false,
-  "observedGa4Ids": [],
+  "observedGa4Ids": [
+    "G-WLEEYTKV12"
+  ],
   "observedTagManagerIds": [],
   "privatePropertyIdConfigured": false,
-  "status": "ANALYTICS_READ_PERMISSION_UNAVAILABLE",
+  "status": "ANALYTICS_SCOPE_MISSING",
   "readers": null,
   "returningReaders": null,
   "ownerStep": "Do not install tags during freeze. Only an existing collection/report permission may be connected.",
   "adminReadHttpStatus": 403,
-  "detail": "Current authorised token cannot list Analytics properties; no permission grant or installation was attempted."
+  "apiReasons": [
+    "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
+  ],
+  "apiErrorStatus": "PERMISSION_DENIED",
+  "detail": "Existing authorised access could not list Analytics properties. No account/permission changes, collection installation or event submission was attempted."
 }
