@@ -611,13 +611,13 @@
   },
   "prewarm:2026-10-18:master-evergreen-3": {
     "revision": "0e94bd85dd024170",
-    "attempts": 4,
-    "lastAttempt": "2026-10-18T18:09:36.803960+05:30"
+    "attempts": 5,
+    "lastAttempt": "2026-10-18T18:46:05.050152+05:30"
   },
   "prewarm:2026-10-18:master-trending-4": {
     "revision": "0e94bd85dd024170",
-    "attempts": 2,
-    "lastAttempt": "2026-10-18T18:09:36.803960+05:30"
+    "attempts": 3,
+    "lastAttempt": "2026-10-18T18:46:05.050152+05:30"
   },
   "social:2026-10-18:news-americas:0": {
     "revision": "0e94bd85dd024170",
@@ -628,5 +628,15 @@
     "revision": "0e94bd85dd024170",
     "attempts": 1,
     "lastAttempt": "2026-10-18T18:09:36.803960+05:30"
+  },
+  "social:2026-10-18:news-global:0": {
+    "revision": "0e94bd85dd024170",
+    "attempts": 1,
+    "lastAttempt": "2026-10-18T18:46:05.050152+05:30"
+  },
+  "social:2026-10-18:news-banking:1": {
+    "revision": "0e94bd85dd024170",
+    "attempts": 1,
+    "lastAttempt": "2026-10-18T18:46:05.050152+05:30"
   }
 }

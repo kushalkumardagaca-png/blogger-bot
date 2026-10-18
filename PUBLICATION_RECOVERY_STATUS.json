@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-18T18:09:36.803960+05:30",
+  "generatedAt": "2026-10-18T18:46:05.050152+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 16,
-  "confirmedByLivePost": 16,
+  "confirmedPublications": 18,
+  "confirmedByLivePost": 18,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -22,14 +22,22 @@
     },
     {
       "type": "social_replay",
-      "key": "news-companies",
+      "key": "news-global",
       "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-banking",
+      "platform": "bluesky",
       "routeIndex": 1,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-18:news-americas:0"
+    "social:2026-10-18:news-americas:0",
+    "social:2026-10-18:news-companies:1"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
