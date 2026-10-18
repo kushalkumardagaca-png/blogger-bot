@@ -1,13 +1,25 @@
 {
- "generatedAt": "2026-10-18T12:48:24.770340+05:30",
+ "generatedAt": "2026-10-18T13:15:41.806470+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 10,
- "expectedPosts": 20,
- "articlesWithBothPosts": 9,
+ "articles": 11,
+ "expectedPosts": 22,
+ "articlesWithBothPosts": 10,
  "postsMissing": 2,
- "dispatched": 0,
+ "dispatched": 2,
  "rows": [
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   }
+  },
   {
    "key": "news-markets",
    "title": "markets edition",
@@ -21,9 +33,9 @@
    }
   },
   {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-18.html",
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-18.html",
    "posts": 0,
    "byPlatform": {
     "facebook": 0,
@@ -32,8 +44,8 @@
     "mastodon": 0
    },
    "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
+    "dispatched",
+    "dispatched"
    ]
   },
   {
@@ -46,18 +58,6 @@
     "bluesky": 1,
     "tumblr": 0,
     "mastodon": 0
-   }
-  },
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 1
    }
   },
   {
@@ -82,6 +82,18 @@
     "bluesky": 1,
     "tumblr": 2,
     "mastodon": 0
+   }
+  },
+  {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-18.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 2,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
    }
   },
   {
