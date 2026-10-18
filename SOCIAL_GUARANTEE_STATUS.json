@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T12:45:49.554112+05:30",
+ "generatedAt": "2026-10-18T12:48:24.770340+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 10,
  "expectedPosts": 20,
  "articlesWithBothPosts": 9,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-markets",
@@ -32,8 +32,8 @@
     "mastodon": 0
    },
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   },
   {
