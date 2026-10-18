@@ -6,9 +6,9 @@ Commons and Openverse) so a publication run never has to stop because a
 photograph could not be found in time:
 
 * **Master pool** — ten candidates for every evergreen and trending article, built
-  from the article's own topic words. The writer keeps its rule of exactly three
-  unique, licence-verified photographs; it now picks them from this prepared
-  pool, so the "no photograph passed" dead end cannot happen.
+  from the article's own topic words. The current renderer uses three photos;
+  the owner's live-format target is ten, and expansion remains held during the
+  AdSense freeze. Ten prepared candidates must not be reported as ten published photos.
 * **News pool** — forty to fifty photographs for each News desk (every country
   desk plus the global section), used in strict rotation so consecutive editions
   never repeat a picture.
@@ -31,6 +31,7 @@ import urllib.parse
 from pathlib import Path
 
 import requests
+from source_photography import photographic_candidate
 
 ROOT = Path(__file__).parent
 LIBRARY = ROOT / "photo_library"
@@ -154,6 +155,8 @@ def licence_ok(entry: dict) -> bool:
 
 
 def subject_ok(entry: dict) -> bool:
+    if (entry.get('original_url') or entry.get('source_page')) and not photographic_candidate(entry):
+        return False
     text = f"{entry.get('title', '')} {entry.get('description', '')}"
     if MINOR_TERMS.search(text):
         return False

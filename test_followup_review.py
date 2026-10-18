@@ -82,3 +82,11 @@ class AttributionNoticeTests(unittest.TestCase):
         self.assertIn('repeated substantive sentence within the content',audit_text('Article',financial*2))
         harmful='<figcaption>We offer guaranteed profits for every investor buying this product.</figcaption>'
         self.assertIn('deceptive financial or commercial promise',audit_text('Article',harmful))
+
+class PreparedPoolMediaTests(unittest.TestCase):
+    def test_pool_does_not_reintroduce_document_or_video_thumbnails(self):
+        import photo_library as pool
+        base={'title':'Office financial context','description':'Commercial context','width':1800,'height':1000}
+        self.assertFalse(pool.subject_ok({**base,'original_url':'https://upload.wikimedia.org/source.pdf'}))
+        self.assertFalse(pool.subject_ok({**base,'original_url':'https://upload.wikimedia.org/source.webm'}))
+        self.assertTrue(pool.subject_ok({**base,'original_url':'https://upload.wikimedia.org/source.jpg'}))
