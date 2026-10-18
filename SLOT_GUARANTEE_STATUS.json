@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-18T14:15:16.486634+05:30",
+ "generatedAt": "2026-10-18T14:15:43.429470+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 11,
- "onTime": 11,
+ "live": 12,
+ "onTime": 12,
  "late": 0,
  "early": 0,
- "pending": 1,
+ "pending": 0,
  "overdue": 0,
  "upcoming": 9,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -116,10 +116,10 @@
    "key": "master-trending-2",
    "slot": "14:15",
    "due": "2026-10-18T14:15:00+05:30",
-   "live": false,
-   "state": "pending",
+   "live": true,
+   "state": "on time",
    "minutesFromSlot": 0,
-   "action": "dispatched"
+   "publishedAt": "2026-10-18T01:45:07-07:00"
   },
   {
    "key": "master-evergreen-2",
