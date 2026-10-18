@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-18T07:20:12.741192+05:30",
+ "generatedAt": "2026-10-18T07:43:04.902701+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "toleranceMinutes": 30,
@@ -18,7 +18,7 @@
    "due": "2026-10-18T04:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 185,
+   "minutesFromSlot": 208,
    "publishedAt": "2026-10-18T04:14:48.227166+05:30"
   },
   {
@@ -27,7 +27,7 @@
    "due": "2026-10-18T05:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 125,
+   "minutesFromSlot": 148,
    "publishedAt": "2026-10-18T04:15:31.680673+05:30"
   },
   {
@@ -36,7 +36,7 @@
    "due": "2026-10-18T06:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 65,
+   "minutesFromSlot": 88,
    "publishedAt": "2026-10-17T17:45:10-07:00"
   },
   {
@@ -45,7 +45,7 @@
    "due": "2026-10-18T07:15:00+05:30",
    "live": true,
    "state": "on time",
-   "minutesFromSlot": 5,
+   "minutesFromSlot": 28,
    "publishedAt": "2026-10-18T06:36:35.751008+05:30"
   },
   {
@@ -54,7 +54,7 @@
    "due": "2026-10-18T08:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -55
+   "minutesFromSlot": -32
   },
   {
    "key": "master-trending-1",
@@ -62,7 +62,7 @@
    "due": "2026-10-18T09:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -115
+   "minutesFromSlot": -92
   },
   {
    "key": "news-russia",
@@ -70,7 +70,7 @@
    "due": "2026-10-18T10:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -175
+   "minutesFromSlot": -152
   },
   {
    "key": "master-evergreen-1",
@@ -78,7 +78,7 @@
    "due": "2026-10-18T11:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -235
+   "minutesFromSlot": -212
   },
   {
    "key": "news-markets",
@@ -86,7 +86,7 @@
    "due": "2026-10-18T12:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -295
+   "minutesFromSlot": -272
   },
   {
    "key": "news-europe",
@@ -94,7 +94,7 @@
    "due": "2026-10-18T12:45:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -325
+   "minutesFromSlot": -302
   },
   {
    "key": "news-economy",
@@ -102,7 +102,7 @@
    "due": "2026-10-18T13:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -355
+   "minutesFromSlot": -332
   },
   {
    "key": "master-trending-2",
@@ -110,7 +110,7 @@
    "due": "2026-10-18T14:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -415
+   "minutesFromSlot": -392
   },
   {
    "key": "master-evergreen-2",
@@ -118,7 +118,7 @@
    "due": "2026-10-18T15:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -475
+   "minutesFromSlot": -452
   },
   {
    "key": "master-trending-3",
@@ -126,7 +126,7 @@
    "due": "2026-10-18T16:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -535
+   "minutesFromSlot": -512
   },
   {
    "key": "news-americas",
@@ -134,7 +134,7 @@
    "due": "2026-10-18T17:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -595
+   "minutesFromSlot": -572
   },
   {
    "key": "news-companies",
@@ -142,7 +142,7 @@
    "due": "2026-10-18T17:45:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -625
+   "minutesFromSlot": -602
   },
   {
    "key": "news-global",
@@ -150,7 +150,7 @@
    "due": "2026-10-18T18:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -655
+   "minutesFromSlot": -632
   },
   {
    "key": "news-banking",
@@ -158,7 +158,7 @@
    "due": "2026-10-18T18:45:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -685
+   "minutesFromSlot": -662
   },
   {
    "key": "master-evergreen-3",
@@ -166,7 +166,7 @@
    "due": "2026-10-18T19:45:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -745
+   "minutesFromSlot": -722
   },
   {
    "key": "master-trending-4",
@@ -174,7 +174,7 @@
    "due": "2026-10-18T20:45:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -805
+   "minutesFromSlot": -782
   },
   {
    "key": "master-evergreen-4",
@@ -182,7 +182,7 @@
    "due": "2026-10-18T22:15:00+05:30",
    "live": false,
    "state": "upcoming",
-   "minutesFromSlot": -895
+   "minutesFromSlot": -872
   }
  ],
  "syntheticViews": 0,
