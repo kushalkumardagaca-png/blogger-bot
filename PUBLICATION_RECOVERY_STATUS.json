@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-18T17:34:52.489647+05:30",
+  "generatedAt": "2026-10-18T18:09:36.803960+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 15,
-  "confirmedByLivePost": 15,
+  "confirmedPublications": 16,
+  "confirmedByLivePost": 16,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -22,13 +22,15 @@
     },
     {
       "type": "social_replay",
-      "key": "news-americas",
+      "key": "news-companies",
       "platform": "tumblr",
-      "routeIndex": 0,
+      "routeIndex": 1,
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "social:2026-10-18:news-americas:0"
+  ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
