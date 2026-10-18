@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-18T15:16:37.434395+05:30",
+ "generatedAt": "2026-10-18T15:32:16.453041+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 14,
  "expectedPosts": 28,
- "articlesWithBothPosts": 13,
- "postsMissing": 2,
+ "articlesWithBothPosts": 14,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -194,27 +194,23 @@
    "key": "master-evergreen-2",
    "title": "X Money is here: What Elon Musk’s financial su",
    "url": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 0,
+    "bluesky": 1,
+    "tumblr": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-18T15:16:29.980581+05:30",
+ "liveVerificationSourceAt": "2026-10-18T15:32:10.548807+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 13,
+ "articlesWithExactlyTwoPosts": 14,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
