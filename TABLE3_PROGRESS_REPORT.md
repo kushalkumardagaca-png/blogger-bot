@@ -1,6 +1,6 @@
 # Daily Yield — Table 3 Work and Results
 
-**Updated: 18 October 2026, 14:15 IST. AdSense remains the first priority.**
+**Updated: 18 October 2026, 14:17 IST. AdSense remains the first priority.**
 
 **The controls and checks were carried out. This is not a claim that every requirement passed:** photo-count/evidence gaps, any owner-only settings, Analytics permissions and human fact-review limits are shown below.
 
@@ -10,7 +10,9 @@
 |---|---|
 | Before approval, only if shown | Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site. |
 | Optional read-only help before approval; new installation later | Analytics report access is not established. Only if you already use Analytics, check the existing property/permission. Do not install code to complete this checklist. |
+| Before approval, after reviewing the specific evidence | Approve only the smallest confirmed content correction if a reported issue is genuine. No bulk rewrite has been applied. |
 | Before high-risk advice is published | A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article. |
+| Decision needed; no old-page photo expansion during freeze | The saved Master renderer uses three photographs, not the agreed ten. The gap is recorded honestly; no unsafe mass image replacement has been made. |
 | Later, not now | Review the 50-item shortlist before any ranking build. Release requires AdSense approval, the agreed earnings period and your explicit permission. |
 
 ## 2. What I did — every Table 3 item separately
@@ -18,38 +20,38 @@
 | Item | Result | Proof / remaining limit |
 |---|---|---|
 | B1 — Freeze automatic edits | Implemented | 15 optional workflows and 15 CLI tools held. Three old-page tools are audit-only. Hub updates limited to existing cards/data; publishers remain active. |
-| B2 — AdSense connection and ads.txt | NOT COMPLETED — fresh audit unavailable | Public source recorded publisher IDs: not observed. ads.txt matches recorded publisher: not checked. Required verification is preserved; private review approval is not visible. |
-| B3 — Misleading reports | Fixed | Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: see CI result. |
-| B4 — Policy pages and navigation | NOT COMPLETED — fresh audit unavailable | 0/0 policy routes observed in homepage links; 0 Report Abuse link(s). HEAD diagnostics: 0/0 tested routes reached HTTP 200 for both checks. No redesign. |
-| B5 — Names and honest statements | NOT COMPLETED — fresh audit unavailable | Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim. |
-| B6 — Facts and originality | NOT COMPLETED — fresh audit unavailable | unknown live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. |
-| B7 — Photographs and rights | NOT COMPLETED — fresh audit unavailable | Master photo-count mismatches: unknown; figures needing fuller licence/alt/caption evidence: unknown; News pools below 40: 0. No copyright guarantee or old-photo replacement. |
-| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-18T14:06:41.646014+05:30: 11/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. |
-| B9 — Social delivery and duplicates | Future check fixed; cleanup not yet recorded | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately. |
+| B2 — AdSense connection and ads.txt | Checked; private account not accessible | Public source recorded publisher IDs: not observed. ads.txt matches recorded publisher: False. Required verification is preserved; private review approval is not visible. |
+| B3 — Misleading reports | Fixed | Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 392. |
+| B4 — Policy pages and navigation | Checked | 0/0 policy routes observed in homepage links; 0 Report Abuse link(s). HEAD diagnostics: 2/12 tested routes reached HTTP 200 for both checks. No redesign. |
+| B5 — Names and honest statements | Checked | Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim. |
+| B6 — Facts and originality | Automated check done; human-review limit remains | 509 live posts read as actually stored. Policy flags: 178; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. |
+| B7 — Photographs and rights | Checked; requirements not fully met | Master photo-count mismatches: 120; figures needing fuller licence/alt/caption evidence: 491; News pools below 40: 6. No copyright guarantee or old-photo replacement. |
+| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-18T14:15:43.429470+05:30: 12/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. |
+| B9 — Social delivery and duplicates | Future check fixed; cleanup CHECKED_WITH_LIMITS | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Provider-confirmed extra article copies removed: 10; cleanup items not verified/deleted: 1. Two networks required; resources counted separately. |
 | B10 — Search Console | Read existing results | Latest index evidence 2026-10-17T21:59:49.266028+00:00: 1 indexed results, 509 not indexed, unknown inspection errors. No ownership reset or manual bulk request. |
-| B11 — Old redirect warnings | NOT COMPLETED — fresh audit unavailable | 0 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence. |
-| B12 — Existing Analytics installation | NOT COMPLETED — fresh audit unavailable | GA4 IDs in source: 0; tag-manager IDs: 0; Analytics loaders: 0. Hooks alone are not counted as working collection. No tag installed. |
-| B13 — Existing Analytics reporting | NOT COMPLETED — fresh audit unavailable | Result: not available. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured. |
-| B14 — Privacy and consent | NOT COMPLETED — fresh audit unavailable | Source consent scripts: unknown; default-consent command observed: unknown. Cookie controls are not a certified advertising-CMP guarantee. Offline browser evidence, if available, is labelled separately. |
-| B15 — Bing and IndexNow | Monitored; quota respected | Last Bing record unavailable: remaining daily allowance unknown; durable URL records with accepted-submission evidence unknown. IndexNow parked: unknown. No indexing guarantee. |
-| B16 — Drafts and retired recovery | NOT COMPLETED — fresh audit unavailable | API draft count at audit: unknown. Deleted-draft restoration now stops before credentials. Eight-hour recovery remains retired. Existing draft hygiene and duplicate guards retained. |
+| B11 — Old redirect warnings | Diagnosed, not blindly repaired | 9 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence. |
+| B12 — Existing Analytics installation | Observed without changes | GA4 IDs in source: 0; tag-manager IDs: 0; Analytics loaders: 0. Hooks alone are not counted as working collection. No tag installed. |
+| B13 — Existing Analytics reporting | Checked; cannot claim connected | Result: ANALYTICS_READ_PERMISSION_UNAVAILABLE. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured. |
+| B14 — Privacy and consent | Checked with stated limits | Source consent scripts: unknown; default-consent command observed: unknown. Cookie controls are not a certified advertising-CMP guarantee. Offline browser evidence, if available, is labelled separately. |
+| B15 — Bing and IndexNow | Monitored; quota respected | Last Bing record 2026-10-18T08:45:44.713740+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 534. IndexNow parked: True. No indexing guarantee. |
+| B16 — Drafts and retired recovery | Checked and protected | API draft count at audit: 0. Deleted-draft restoration now stops before credentials. Eight-hour recovery remains retired. Existing draft hygiene and duplicate guards retained. |
 | B17 — Private growth preparation | Prepared; not built or published | 50 proposals, topic groups, individual specifications and pre-release tests prepared. Costs are estimates/formulas, not connected invoices. No new live URLs, Blogger drafts or prototypes. |
 | B18 — One simple progress report | Implemented | This report separates article delivery, article social posts, resource promotions, Google results, missing Analytics and unknown bills. It can be refreshed by the repository workflow; it does not imply that I monitor the site continuously in chat. |
 
 ## 3. Articles and social posts — separate counts
 
 **Missing among articles due at the saved status time: 0.** Later slots are not failures.
-Article-status source: 2026-10-18T14:06:41.646014+05:30.
+Article-status source: 2026-10-18T14:15:43.429470+05:30.
 
 | Type | Due by that time | Published among those due | Missing |
 |---|---:|---:|---:|
 | News | 7 | 7 | 0 |
 | Evergreen | 2 | 2 | 0 |
-| Trending | 2 | 2 | 0 |
+| Trending | 3 | 3 | 0 |
 
-- **Article-related social posts recorded today:** 32; full-day target 42.
-- **Resource promotions recorded today:** 5; full-day target 12. Per network: {'facebook': 2, 'bluesky': 1, 'tumblr': 1, 'mastodon': 1}.
-- **Article-social tracker status:** ATTENTION; missing routes 0; duplicate copies 8.
+- **Article-related social posts recorded today:** 28; full-day target 42.
+- **Resource promotions recorded today:** 6; full-day target 12. Per network: {'facebook': 2, 'bluesky': 1, 'tumblr': 2, 'mastodon': 1}.
+- **Article-social tracker status:** ATTENTION; missing routes 2; duplicate copies 4.
 - These are durable publishing records, not reader counts. Provider checks were used before deleting duplicate copies.
 - The eight-hour schedule is retired and is not counted.
 
@@ -57,8 +59,8 @@ Article-status source: 2026-10-18T14:06:41.646014+05:30.
 
 | Measure | What we can honestly say |
 |---|---|
-| Google search | Search report dated 2026-10-18T03:12:06.888306+00:00. Seven-day clicks: 0; impressions: 0. |
-| Visitor/readership measurement | unknown. Missing reporting is unknown, not zero visitors. |
+| Google search | Search report dated 2026-10-18T08:47:33.736783+00:00. Seven-day clicks: 0; impressions: 1. |
+| Visitor/readership measurement | ANALYTICS_READ_PERMISSION_UNAVAILABLE. Missing reporting is unknown, not zero visitors. |
 | Income and costs | Actual bills and AdSense earnings are not connected here. Profit is unknown, not assumed positive. |
 | Ranking/traffic promises | None. Sending URLs, passing code checks or publishing more articles does not promise indexing, approval or 10 million daily views. |
 
