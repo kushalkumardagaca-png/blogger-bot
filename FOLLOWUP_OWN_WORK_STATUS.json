@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-10-18T14:06:30.140832+00:00",
-  "apply": true,
+  "startedAt": "2026-10-18T14:16:59.537088+00:00",
+  "apply": false,
   "scope": {
     "request": "User asked to do the assistant parts now; owner steps will be done together with Table 1.",
     "createdAt": "2026-10-18T13:49:26.298407+00:00",
@@ -18,7 +18,9 @@
     ],
     "imageRecordCount": 44,
     "liveChangesAllowed": "Only the explicit existing archive and image-slot corrections; no whole-article deletion, new post, theme, route or tracking change.",
-    "ownerAccountSteps": "DEFERRED_TOGETHER_WITH_TABLE_1"
+    "ownerAccountSteps": "DEFERRED_TOGETHER_WITH_TABLE_1",
+    "operation": "VERIFY_ONLY",
+    "verificationRequestedAt": "2026-10-18T14:15:45.433796+00:00"
   },
   "newArticles": 0,
   "deletedArticles": 0,
@@ -29,134 +31,23 @@
     {
       "id": "1126447614310368625",
       "url": "https://dailyyield.blogspot.com/2026/09/house-hack-before-you-landlord.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "1d476d441aee2810c189ab8acdaea0521df6bd36517ca20d7e18c486ed2798f9",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "1f7908fcece198bcea85b3bedc67c76daae656882f42727448cbd620fb476dba",
       "afterSha256": "1f7908fcece198bcea85b3bedc67c76daae656882f42727448cbd620fb476dba",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/A_history_of_real_estate%2C_building_and_architecture_in_New_York_City_during_the_last_quarter_of_a_century_%28IA_historyofrealest00durs%29.pdf/page1-500px-A_history_of_real_estate%2C_building_and_architecture_in_New_York_City_during_the_last_quarter_of_a_century_%28IA_historyofrealest00durs%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-18.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Apartment_houses_in_Aiaste,_Estonia.jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "1134526280711723914",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-03.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "e26617f504746e8a3776124e1425db78a31fdd062bae225c9ae4d1a5a32b19b1",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "957bf9e82c197a4225523619e1ac390241f8a20212574d190f1ad1360816f3ea",
       "afterSha256": "957bf9e82c197a4225523619e1ac390241f8a20212574d190f1ad1360816f3ea",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-10-03",
-        "retained": [
-          {
-            "position": 1,
-            "title": "(2nd LD) Seoul shares end higher on bargain hunting amid uncertainties; S. Korean won up",
-            "source": "https://en.yna.co.kr/view/AEN20261002006252320"
-          },
-          {
-            "position": 4,
-            "title": "Samsung Heavy wins 672.2 bln-won order to build 2 LNG carriers",
-            "source": "https://en.yna.co.kr/view/AEN20261002003800320"
-          },
-          {
-            "position": 5,
-            "title": "White House official stresses shipbuilding cooperation with S. Korea, need to reward investors",
-            "source": "https://en.yna.co.kr/view/AEN20261003000200315"
-          },
-          {
-            "position": 6,
-            "title": "(LEAD) Trump says S. Korea deal 'keeps getting better,' unveils US$8.4 billion oil recovery project",
-            "source": "https://en.yna.co.kr/view/AEN20261002009851315"
-          },
-          {
-            "position": 9,
-            "title": "South Korea finance regulator holds emergency meeting over bank hacks",
-            "source": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPSVJXS3ZIMXhTeUlMR1dvNENnaFd4SENmMlZmMFlPNkFPdFE4ZTdIWlUwUjVRTUs0UXlDN0wzWEg0TFhWS3V1bEJQSWlxZFluQU82eXBVZWxZYWFOY1ltdFZtdW5vMkJaT3hSNGtyUVptQ3JzTDU4ZnpZc0Jxenl2YjM2X01BclVWOWJweFp1MXhkeWFhSjZlTDFvMENBZ3FTZ25QNEozbllqZG4xeHNIZ2FUWVRNUllNajhJd1VCQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 10,
-            "title": "Dunamu CEO Urges South Korea to Move Quickly on Won-Backed Stablecoins",
-            "source": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOeEt6bDVoWnkxOTJKNVZGUlpRZWRHN3Y1QzhLLXI3Vjl3cHFhQzJwZVZyXzZ1WnlnRzQ0M2xqdDZReFBKbmF6d1lza1VHdVRCbThjaGRZUlJCUnQyS2R4WHlTcGYxa2pmaDJ4WkN0eTdaeUZyX0M3eFhjZTlmM3pnMGR0S29HSElmSEVVTUhDUDJwOTZHcWVtcG13YzZYLTl6aWNuWVRxWlJsTGhZVUExbGYxNVhwQ0Jfanc?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 11,
-            "title": "Trump says South Korea trade deal adds $8.4B oil project",
-            "source": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNUVlxVnFNY2FUNU1uZ3RZQjlNbDJGSmNIMDlGekZ4V1YwZGxNUVJQclpJaHFIdmpEZEtDXzZISTU3b0ZSNUR4dVRwU2d3R25aWTRwMHQ1YXdoN1RxVDBfZjFVQU5LSS1KQVlVY0YwbGMyakZJSnRjWTdQTGZPZ2FjSTFidVVVTjBaS1hYMkdFRXhYV1lYQmtZZUZwQmROc1JVeG9WeFNvZjhUZzJIcWRYXw?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 12,
-            "title": "Trump pushes South Korea on $54B Alaska LNG venture, warns of tariff hikes",
-            "source": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOaDBwMmIxTUU5dnF6NFhfSGtMRnc0akN0di1DRTVYdkFZQ3J3bFcwM1c1Z3RRNDhWZmdkcHExeU9lSnE2M0Vub0pFYTVldUpnZ2tYemtaWDRwNUY4dkxqbmRYRW1CNW9pd2NnS2l2SkdVN1ZCOWJ1M2lvQ3lIQ3paVzNzek5FbTFFTHFJZEd5M1JNbUpCTFpVTHVWeHYyMExUVGEzQ1gyS0c1ckwxc1puRXhjbEFDNngxR05RUHlFMXE?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 13,
-            "title": "South Korea regulator meets banks after data breaches",
-            "source": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNU2ZQVFA5MnUyczhwMmNJREFveDk2ZjNsUkNvZ216ZGVaNHBXeFlSaUtxR0JUYkE2dFBuTFNQaDJTcFE3WjB3ajBfa090ZWZ1WGtVMG5iS0xWd2RYZ3FkbHVVWlJ2UWp3WUFFbkQ0czA2TXFzc0x6MDVlT25ycHIwdlUxTXd0ak53WkRweXdUbDRmdzZjZWVkWW1QSnRmZHRKblpWVkNrbnVWV3lRWlFGSDhNME1YQQ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 14,
-            "title": "The Business Cost of Failing to Anticipate Climate Risk",
-            "source": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNZV9fRTd1WF9NaFd4Ymx1aFVCS0R4bGpQcEhPazN3Qko5RVMwY1FoODYzYnlvdEZVMklWbzduVWh2djhjVzcwOXR4RndtaXR3bFk1NnBoTWRxcTdMZloyMVM3cDV4QlItTC1IRVBHTXZRa0duZHpyTDAxSDlqVktDUzNtNGVOMFgtNjN3MXNjUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 15,
-            "title": "Trump says US deal with South Korea includes $8.4 billion for oil recovery By Reuters",
-            "source": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPODV3Q01vbHp2c1dpZFNaUXVtRGhHME84ZXNQeFdsMHRVcjMzTm04RWpZdEkzeFN5TW1SNU1Na24tRlJRQ21uZzU3N2V0eG9wanFIcGZuNDhfdTNtdVdwU05WcHpjQ2JYMTY5Zl9BbVlac1BaTFZDYlI2Uy1XekxXQjN6WHZtRUN1aEV4ZnFvcU1fRXkwSC1xS0cxMG5qUjRqMklMQVZ6a2FQM0xfMS00RmxrZXhnSXdLWWdVTzBpTXJLaGZZdFE?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 16,
-            "title": "EUR/USD 1.1225 · EUR/GBP 0.8503 · EUR/JPY 176.9900 · EUR/CNY 7.5259 · EUR/INR 108.1245 · EUR/BRL 5.8610",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 2,
-            "title": "(LEAD) Seoul shares end higher on bargain hunting amid uncertainties; S. Korean won up",
-            "source": "https://en.yna.co.kr/view/AEN20261002006251320",
-            "reason": "Earlier LEAD version of the retained second-lead Seoul-market dispatch."
-          },
-          {
-            "position": 3,
-            "title": "Seoul shares end higher on bargain hunting amid uncertainties; S. Korean won up",
-            "source": "https://en.yna.co.kr/view/AEN20261002006200320",
-            "reason": "Initial version of the same Seoul-market wire story."
-          },
-          {
-            "position": 7,
-            "title": "Trump says S. Korea deal 'keeps getting better,' unveils US$8.4 billion oil recovery project",
-            "source": "https://en.yna.co.kr/view/AEN20261002009800315",
-            "reason": "Initial version of the retained LEAD oil-recovery-project story."
-          },
-          {
-            "position": 8,
-            "title": "(Asiad) Close calls abound as S. Korea adds 3 gold medals",
-            "source": "https://en.yna.co.kr/view/AEN20261002009600315",
-            "reason": "Ordinary sporting medals, not commodity gold or finance."
-          }
-        ],
-        "retainedCount": 12,
-        "referenceDate": "2026-10-02",
-        "referenceValues": {
-          "USD": "1.1225",
-          "GBP": "0.8503",
-          "JPY": "176.9900",
-          "CNY": "7.5259",
-          "INR": "108.1245",
-          "BRL": "5.8610"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": [
         {
@@ -171,9 +62,9 @@
     {
       "id": "132048976709130267",
       "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "40aada6cb616ac8f41abb9e8343d4033a6888d7bcb4b8754008b1079378ec9bc",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "4ab01313563c6194427bac007f2530a832420c6f0240bcc4378f406d46e5fabb",
       "afterSha256": "4ab01313563c6194427bac007f2530a832420c6f0240bcc4378f406d46e5fabb",
       "archive": null,
       "photoChanges": [
@@ -189,9 +80,9 @@
     {
       "id": "1588416772214254069",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-08.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "c1373665d6e2e6139dec38b562d7b1e2ab3cecce6b745415de375339159fa8f6",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "0d8dfd4f58907765dbd580bc213ef014e613f810b0f65151913414cebcaa0b9e",
       "afterSha256": "0d8dfd4f58907765dbd580bc213ef014e613f810b0f65151913414cebcaa0b9e",
       "archive": null,
       "photoChanges": [
@@ -207,9 +98,9 @@
     {
       "id": "1700784563179985190",
       "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-10.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "c2f751eee9794b2c29513566ee1e5cfb530e2223a247edbdd0ae10c26884a3cf",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "8ecac1526b15380f6c293ca0ff290fe715fab7fc5fe2f867cc82bac143ff47a0",
       "afterSha256": "8ecac1526b15380f6c293ca0ff290fe715fab7fc5fe2f867cc82bac143ff47a0",
       "archive": null,
       "photoChanges": [
@@ -225,27 +116,19 @@
     {
       "id": "1728449732468068976",
       "url": "https://dailyyield.blogspot.com/2026/10/national-budget-realities-fiscal-policy.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "a95075aa8bb4d01bf11dba03b33e172ddc3b86d91daa9f57b6e512ac8497e709",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "3d53ff88abcbc03178d0bde3eab627cde7935ca5cbffd406a910ef644dee34f4",
       "afterSha256": "3d53ff88abcbc03178d0bde3eab627cde7935ca5cbffd406a910ef644dee34f4",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/national-budget-realities-fiscal-policy/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-11.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Eimskip_container_terminal_at_Port_of_Reykjav%C3%ADk.jpg",
-          "licence": "CC BY 4.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "2542420316692426930",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-10-01.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "861addc6357089a522bf43e9bd5c0a2420ac0cd0264023e6d8d135c546dde444",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "796fe830212aa7b3c61ad9070bc4b3ecc8df34891a3b08367886c3e838fafda0",
       "afterSha256": "796fe830212aa7b3c61ad9070bc4b3ecc8df34891a3b08367886c3e838fafda0",
       "archive": null,
       "photoChanges": [
@@ -261,348 +144,68 @@
     {
       "id": "2983561509636256187",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-27.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "703dcfc8097132cfb6544c3580b33ed37a9ac35e85b87a38b0b61e050aae7b9f",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "2865a7e3b3a67c303778f508111c6181aba9ff4993355c42b0328d34d591cacf",
       "afterSha256": "2865a7e3b3a67c303778f508111c6181aba9ff4993355c42b0328d34d591cacf",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-27",
-        "retained": [
-          {
-            "position": 10,
-            "title": "Background context: (5th LD) Xi says U.S., China reach new trade arrangement during summit with Trump: report",
-            "source": "https://en.yna.co.kr/view/AEN20260924006055315"
-          },
-          {
-            "position": 11,
-            "title": "EUR/USD 1.1403 · EUR/GBP 0.8605 · EUR/JPY 179.7000 · EUR/CNY 7.6551 · EUR/INR 109.2605 · EUR/BRL 5.9091",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 1,
-            "title": "(3rd LD) (Asiad) S. Korea wins women's basketball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260926005553315",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 2,
-            "title": "(2nd LD) (Asiad) S. Korea wins women's basketball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260926005552315",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 3,
-            "title": "(LEAD) (Asiad) S. Korea wins women's basketball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260926005551315",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 4,
-            "title": "(Asiad) S. Korea wins women's basketball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260926005500315",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 5,
-            "title": "(URGENT) S. Korea wins Asian Games gold medal in women's basketball",
-            "source": "https://en.yna.co.kr/view/AEN20260926005400315",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 6,
-            "title": "(LEAD) (Asiad) S. Korea wins 4th consecutive gold in men's sabre team fencing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260926003851320",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 7,
-            "title": "(Asiad) S. Korea wins 4th consecutive gold in men's sabre team fencing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260926003800320",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 8,
-            "title": "(URGENT) S. Korea wins 4th consecutive gold in men's sabre team fencing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260926003700320",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          },
-          {
-            "position": 9,
-            "title": "Background context: (Asiad) Nat'l swimming coach encouraged by growth of young medalists",
-            "source": "https://en.yna.co.kr/view/AEN20260925002800315",
-            "reason": "Ordinary sports or medal coverage; not finance. Original duplicate medal wires are not separate financial events."
-          }
-        ],
-        "retainedCount": 2,
-        "referenceDate": "2026-09-25",
-        "referenceValues": {
-          "USD": "1.1403",
-          "GBP": "0.8605",
-          "JPY": "179.7000",
-          "CNY": "7.6551",
-          "INR": "109.2605",
-          "BRL": "5.9091"
-        },
-        "noCurrentFinancialItems": true,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "3354573029890676948",
       "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-03.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "879b85596d3d0f0ef9f46bcefd02874e8815789af7bd67f59c5701684478b184",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "2f599d08bd4d66f8f45fe13f5475dae38806155611ace97b2be72ff7cee406d7",
       "afterSha256": "2f599d08bd4d66f8f45fe13f5475dae38806155611ace97b2be72ff7cee406d7",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/1967_Census_of_Business._Major_Retail_Centers_in_Standard_Metropolitian_Statistical_Areas._New_Mexico_%28IA_1967censusofbusi6732uns%29.pdf/page1-960px-1967_Census_of_Business._Major_Retail_Centers_in_Standard_Metropolitian_Statistical_Areas._New_Mexico_%28IA_1967censusofbusi6732uns%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-20.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:90039_DB_Cargo_on_hire_to_LNER_KX_030519.jpg",
-          "licence": "CC BY 2.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "3566483254293904115",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-28.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "e3599bcb1436e8ab61f7b6a06c0f468bd602c274787c55b12a1cfdc6e793ad81",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "4a1d56ce5ec6674e0a29721fca53605c521a2cedf93bb73cdf44beb0b348114d",
       "afterSha256": "4a1d56ce5ec6674e0a29721fca53605c521a2cedf93bb73cdf44beb0b348114d",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-28",
-        "retained": [
-          {
-            "position": 1,
-            "title": "S. Korea's tourism balance swings to deficit in July after 4 months of surplus",
-            "source": "https://en.yna.co.kr/view/AEN20260927000500320"
-          },
-          {
-            "position": 9,
-            "title": "South Korea tax windfall could top 50 trillion won on chip boom - Yonhap",
-            "source": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPeUtPOWFCUTJsRGtCVnRhU3NBWVhwTDUxaGU0M1Zsd01tMDlKX3dWTHg1WkMwLU1ROVVhdXJaU3ZpRFkwYVFQUjltb0VYRXVQM2RqZVlheUpFbUFfZ1ZWaVdUdTdnWmFyYlRWNGlraUxjNE5KeHdacDdEOXM2NEF6Q19FcFBBb3dYQjVILTdNblNaMTZ0cDFoZzR5cEh1T0xjZ3VvMmxpV0o3TjZNbWRyMFFGNnRJdGR3bjFFeWdNM2U?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 10,
-            "title": "Foreign banks have expressed UBS merger interest, Swiss newspaper reports",
-            "source": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQcms5Vnl5NmxHQkRHbndPcG1mbndMaUFxQ3ZXMklkTGIwYzhEWml4SldjbVF2aXg2U1kxQk50cG1mei1OWEphOVV6TlRWdjlsQWIyU0VxaE8zVDdWd0VhYjI4Uzl4OFJoWXo4bGxoUzJrbzQtTi1wREtKU01JUmR1VnRnajdqSi01bnVsUnZ3RGZXTmVPMFBRUXV5SGNIdFpYQXc?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 11,
-            "title": "Value of old supertankers soars past new builds as market goes ‘bananas’",
-            "source": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPRlVuYldTTzRBbF9FWWZmNWVrU1hyN21COFJfajdQbTlWUXpvOGhfY3NUWGVudGhUZUwtVGpXZE9zdWtlUkVWanJEaE8ydC1QWDdVZkYzUkNVb2d6S3FkTzBTR1J4emNzdHMwYXFGanFTelJrTXZsUmZoeE9Ld3pTMG5TYlo?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 12,
-            "title": "Global Affairs Lab Releases Two Interactive Games on US-South Korea Economic Ties",
-            "source": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOLWpUTVJZbHY1MDgwQWd5LVJuX0dyWlNIOFdoY0UwcTBVVnAwNTJmWUN1LWdMMEtRTWxiU1pINE91YkZSdlFQY2hEakcyck1sdG5icThRUFNKVXhiNUd0MEZGTXNNQk5sNWZOMGM1OWQzWVFCZUgtWG1KZS03OFBuQ0d4NGdnamtfelVlZUZDUVNTN09XZGJ2cDdwZlU?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 13,
-            "title": "EUR/USD 1.1403 · EUR/GBP 0.8605 · EUR/JPY 179.7000 · EUR/CNY 7.6551 · EUR/INR 109.2605 · EUR/BRL 5.9091",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 2,
-            "title": "(2nd LD) (Asiad) S. Korea captures gold in women's sabre fencing team event",
-            "source": "https://en.yna.co.kr/view/AEN20260927002952315",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          },
-          {
-            "position": 3,
-            "title": "(Asiad) S. Korea rakes in 5 gold medals; baseball stars, teen skateboarder come through",
-            "source": "https://en.yna.co.kr/view/AEN20260927003700315",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          },
-          {
-            "position": 4,
-            "title": "(LEAD) (Asiad) S. Korea beats Japan for 5th consecutive baseball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260927003451315",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          },
-          {
-            "position": 5,
-            "title": "(Asiad) S. Korea beats Japan for 5th consecutive baseball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260927003400315",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          },
-          {
-            "position": 6,
-            "title": "(URGENT) S. Korea wins 5th consecutive Asian Games baseball gold medal",
-            "source": "https://en.yna.co.kr/view/AEN20260927003300315",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          },
-          {
-            "position": 7,
-            "title": "(LEAD) (Asiad) S. Korea captures gold in women's sabre fencing team event",
-            "source": "https://en.yna.co.kr/view/AEN20260927002951315",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          },
-          {
-            "position": 8,
-            "title": "(Asiad) S. Korea gets revenge on Japan, wins Asiad handball gold",
-            "source": "https://en.yna.co.kr/view/AEN20260927003200320",
-            "reason": "Ordinary sports/medal coverage, including repeated wire updates; not finance."
-          }
-        ],
-        "retainedCount": 6,
-        "referenceDate": "2026-09-25",
-        "referenceValues": {
-          "USD": "1.1403",
-          "GBP": "0.8605",
-          "JPY": "179.7000",
-          "CNY": "7.6551",
-          "INR": "109.2605",
-          "BRL": "5.9091"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "3732839907904396174",
       "url": "https://dailyyield.blogspot.com/2026/10/ambani-heirs-lead-record-jio-ipo.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "7cdd9139cb21096455f665665f0d3000d3e8e107451b8c2409ac7c047207d3e5",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "3c4818f42cedf1d25c254345192134e0f33df2843c51a75ee3a121d352644e16",
       "afterSha256": "3c4818f42cedf1d25c254345192134e0f33df2843c51a75ee3a121d352644e16",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/ambani-heirs-lead-record-jio-ipo-roadshow/photo-2.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-09.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:SunRackMountServers.jpg",
-          "licence": "Public domain"
-        },
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/ambani-heirs-lead-record-jio-ipo-roadshow/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-02.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Belgrade,_Office_Building_at_Sremska_5-7_by_Zoran_Zoran_2016_(Unsplash).jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "4156483657490223145",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-29.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "dfaecb406af03857d3d0421434bede29929c1350471b1358bfbdf97aafb2b6c3",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "2fa636439300c8af756e96694cff41411f9b379bf8efe8f43f5388bdad22c14c",
       "afterSha256": "2fa636439300c8af756e96694cff41411f9b379bf8efe8f43f5388bdad22c14c",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-29",
-        "retained": [
-          {
-            "position": 1,
-            "title": "Hanwha Ocean wins 680 bln-won order to build 2 LNG carriers",
-            "source": "https://en.yna.co.kr/view/AEN20260928009100320"
-          },
-          {
-            "position": 2,
-            "title": "Watchdog to slap fines totaling 14.8 bln won on Korean barbecue chain operator",
-            "source": "https://en.yna.co.kr/view/AEN20260928005300320"
-          },
-          {
-            "position": 3,
-            "title": "S. Korea's AI adoption rate over 40 pct, ranks 12th place globally: report",
-            "source": "https://en.yna.co.kr/view/AEN20260928002400320"
-          },
-          {
-            "position": 6,
-            "title": "(2nd LD) Seoul stocks sink over 2.5 pct on chip losses",
-            "source": "https://en.yna.co.kr/view/AEN20260928007352320"
-          },
-          {
-            "position": 9,
-            "title": "South Korea Weighs Crypto Market Makers After JPYC Price Surge",
-            "source": "https://news.google.com/rss/articles/CBMingFBVV95cUxOTzY2OWtKWkRyQzkxSWxUbXpaMTExUTl0cUNQZ3RXV3Rnb2xseHN3YVJMbkQwbHVhcHVzeS0yWndvZUVmUVRDYlNlOW9Hd0VyUWdYNGdzbVplcGVXTEp4SDZPOExBVDB1MXVyUUFjdk01WV9PVmd0RjZyOGNhRXI3djhLV1N2MjlnYXFZTTlpRENKMjgyc1U5WlF2YkFfdw?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 10,
-            "title": "Broadridge and Korea Securities Depository Sign MOU to Support Modernization of Proxy Voting for International Investors Holding Korean…",
-            "source": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPT1B0ZWUtakFEX0RfZmJ2OGxxYTl5QTVDN3hfbWVneUJqdXlwcGRiMmdVWnhLTG1LV0MzcVN6d3ZLeldmcnZOM09Ub1BxRnN0d3F4V1RYMDBIYVpYM2xwY0hSM3RKM1J1VWhwV25aVldMNDc1TFZ6QS1KMk5aVWM2cVJaRHl5QVIzRnZRbmNCNUp3dmJxaVRJ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 11,
-            "title": "Mexico, South Korea Target US$100 Million Interbank Credit Line",
-            "source": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQVl9lY0tQZFd2UmF0Q1NKMW9CV1ZGTjlQZzhaOXRZSm9KUDNzVXZUUUc1M19aaUpJZmlaT2VOMWc4OHVCM3lFZlNJNmE5Q2xzWXV4V2w1Wl84OVZpUUlLZm5zSDVwc1VBUEdPU3JwUVFjNUJUVUVKdVdWQ1NlR3E1ZU9kb3FvY2MtUkk0bzdDWWdFMjRoXzZpMWEyOVAycl9SWkIzWg?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 12,
-            "title": "EUR/USD 1.1378 · EUR/GBP 0.8579 · EUR/JPY 178.5000 · EUR/CNY 7.6352 · EUR/INR 109.2095 · EUR/BRL 5.9186",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 4,
-            "title": "(Asiad) S. Korea goes goldless for 1st time; silver medals come from shooting, kurash, diving",
-            "source": "https://en.yna.co.kr/view/AEN20260928012700315",
-            "reason": "Ordinary Asian Games medal results, not financial reporting."
-          },
-          {
-            "position": 5,
-            "title": "(Asiad) S. Korean fencers finish Asian Games with 4 golds, eye 2028 Olympics",
-            "source": "https://en.yna.co.kr/view/AEN20260928009600320",
-            "reason": "Ordinary fencing medal results, not financial reporting."
-          },
-          {
-            "position": 7,
-            "title": "(LEAD) Seoul stocks sink over 2.5 pct on chip losses",
-            "source": "https://en.yna.co.kr/view/AEN20260928007351320",
-            "reason": "Earlier LEAD version of retained second-lead market dispatch."
-          },
-          {
-            "position": 8,
-            "title": "Seoul stocks sink over 2 pct on chip losses",
-            "source": "https://en.yna.co.kr/view/AEN20260928007300320",
-            "reason": "Initial version of retained second-lead market dispatch."
-          }
-        ],
-        "retainedCount": 8,
-        "referenceDate": "2026-09-28",
-        "referenceValues": {
-          "USD": "1.1378",
-          "GBP": "0.8579",
-          "JPY": "178.5000",
-          "CNY": "7.6352",
-          "INR": "109.2095",
-          "BRL": "5.9186"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "4182636857771329459",
       "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "5acf3e5bc9a7fa0f2b97e7db1caee52a27e0010a7c45514999bac058f99e3edd",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "4e058f969940b33eba552d1ab1c71b26e6d737d677b65b5f9d566a7848f5d4f2",
       "afterSha256": "4e058f969940b33eba552d1ab1c71b26e6d737d677b65b5f9d566a7848f5d4f2",
       "archive": null,
       "photoChanges": [
@@ -618,144 +221,32 @@
     {
       "id": "4559693310963899298",
       "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-27.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "bb3ac773dfc11c477995b58d885cccb35906bc61891fbc4a33076c8c98a6786c",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "d2d6bfbbc012822f75c6e9f4380a55e95b0f87e1f167607430bebad122e78314",
       "afterSha256": "d2d6bfbbc012822f75c6e9f4380a55e95b0f87e1f167607430bebad122e78314",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-27",
-        "retained": [
-          {
-            "position": 1,
-            "title": "Ukraine's public debt reaches roughly $223 bln by late September",
-            "source": "https://tass.com/world/2193523"
-          },
-          {
-            "position": 2,
-            "title": "Thousands rally against Spain's housing crisis after 87yo's eviction",
-            "source": "https://www.abc.net.au/news/2026-09-27/spain-housing-protest/107200740"
-          },
-          {
-            "position": 4,
-            "title": "Protesters camp in Madrid in demonstration against Spain' housing crisis",
-            "source": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPZDFyMmdKTnFsSEtYMGg5TmxxdDdGbGNzclUxcVF2SDBFNFFwVVRSMTdsRXZhV0pBOFhDYms1Y0RYR3BGSFlQbWc5SFl6Q21FUlJmMFZneUZJdU5ENHhoczhWaTI1YnZjVzJhZWw2RmJSZFotOGhneHV5Q0FIWjRRVk5qbjBDRnQtXzhCNUNB?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 5,
-            "title": "Thousands of people take to the streets of Madrid to protest against Spain's housing crisis",
-            "source": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQR0dma1VJSHE1YThycDZXOUIyOGxLZHZLanRCQXZMTjNTNWpjZWltZ1BzaDQ0bTBNTDdKLTVFMFVZYjdRZkRwUV8zM2ZhV0w5QjlzNXl6U3V4ZkJ2TzdYRXB0cjY1X1VidjRYY04yTUJVMUxLcFhXd20wVXo3T01EZUpOYjRYYmM?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 6,
-            "title": "Give blood, buy bonds: Countries get creative in hunt for cash",
-            "source": "https://economictimes.indiatimes.com/markets/bonds/give-blood-buy-bonds-countries-get-creative-in-hunt-for-cash/articleshow/134497672.cms"
-          },
-          {
-            "position": 7,
-            "title": "Battered bonds draw support from falling oil prices",
-            "source": "https://economictimes.indiatimes.com/markets/us-stocks/news/battered-bonds-draw-support-from-falling-oil-prices/articleshow/134496754.cms"
-          },
-          {
-            "position": 8,
-            "title": "European shares log weekly gains as oil prices ease, Mideast tensions linger",
-            "source": "https://economictimes.indiatimes.com/markets/us-stocks/news/european-shares-log-weekly-gains-as-oil-prices-ease-mideast-tensions-linger/articleshow/134496669.cms"
-          },
-          {
-            "position": 9,
-            "title": "European cities seek ways of boosting affordable housing",
-            "source": "https://www.dw.com/en/european-cities-seek-ways-of-boosting-affordable-housing/a-79438939?maca=en-rss-en-all-1573-xml-mrss"
-          },
-          {
-            "position": 14,
-            "title": "Many homeowners have a big insurance coverage gap — and don't even know it",
-            "source": "https://www.cnbc.com/2026/09/26/homeowners-insurance-coverage-gap.html"
-          },
-          {
-            "position": 15,
-            "title": "Number of int'l flight passengers up 10 pct this year despite hikes in oil prices",
-            "source": "https://en.yna.co.kr/view/AEN20260926001100315"
-          },
-          {
-            "position": 16,
-            "title": "EUR/USD 1.1403 · EUR/GBP 0.8605 · EUR/JPY 179.7000 · EUR/CNY 7.6551 · EUR/INR 109.2605 · EUR/BRL 5.9091",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 3,
-            "title": "Israeli minister Bezalel Smotrich calls for war in occupied West Bank",
-            "source": "https://www.aljazeera.com/news/2026/9/27/israeli-minister-bezalel-smotrich-calls-for-war-in-occupied-west-bank?traffic_source=rss",
-            "reason": "War/security statement without a supported personal-finance angle."
-          },
-          {
-            "position": 10,
-            "title": "(LEAD) (Asiad) S. Korea wins gold in equestrian dressage individual",
-            "source": "https://en.yna.co.kr/view/AEN20260927001851320",
-            "reason": "Ordinary equestrian medal report, not finance."
-          },
-          {
-            "position": 11,
-            "title": "(Asiad) S. Korea wins gold in equestrian dressage individual",
-            "source": "https://en.yna.co.kr/view/AEN20260927001800320",
-            "reason": "Earlier version of the same non-financial medal result."
-          },
-          {
-            "position": 12,
-            "title": "(URGENT) S. Korea wins gold in equestrian dressage individual at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260927001700320",
-            "reason": "Urgent version of the same non-financial medal result."
-          },
-          {
-            "position": 13,
-            "title": "Giant pandas Ping Ping and Fu Shuang touch down in the US under new loan deal",
-            "source": "https://www.scmp.com/news/china/diplomacy/article/3368964/giant-pandas-ping-ping-and-fu-shuang-touch-down-us-under-new-loan-deal?utm_source=rss_feed",
-            "reason": "Animal-loan/diplomacy story, not a financial loan report in the retained excerpt."
-          }
-        ],
-        "retainedCount": 11,
-        "referenceDate": "2026-09-25",
-        "referenceValues": {
-          "USD": "1.1403",
-          "GBP": "0.8605",
-          "JPY": "179.7000",
-          "CNY": "7.6551",
-          "INR": "109.2605",
-          "BRL": "5.9091"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "4770596769544807782",
       "url": "https://dailyyield.blogspot.com/2026/10/balancing-budgets-and-cost-pressures.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "be32ecf761d39e5f569e5cf94368a84be7a4aa4dd7a62ba9610f643bc5f346a4",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "7ea64ac8d1e3cb07e7f174844870b0adcee0f6b8226d9af8c73275f05fad5cdc",
       "afterSha256": "7ea64ac8d1e3cb07e7f174844870b0adcee0f6b8226d9af8c73275f05fad5cdc",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/balancing-budgets-and-cost-pressures/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-07.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:David_Shoe_Factory,_West_End,_Cincinnati,_OH_(27229795927).jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "5131310480958239502",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-05.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "77fbbf4b5104c77c7410e9f79e42d4ba06b593dc68430693fca6f0a620e1bc2e",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "aa26cc3c094588a8dbf4f012dc26895f7671314af2ae52501ce1a7c8cf64fb86",
       "afterSha256": "aa26cc3c094588a8dbf4f012dc26895f7671314af2ae52501ce1a7c8cf64fb86",
       "archive": null,
       "photoChanges": [
@@ -771,45 +262,29 @@
     {
       "id": "5305676119975498294",
       "url": "https://dailyyield.blogspot.com/2026/10/gold-and-silver-price-outlook-macro.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "5f749a60d9e734a73dd28e3c37c187c33e01c2c5bb1ef74345ca617e78b63155",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "a7d60fd884177991308328b4416ac1123f305acc0413b08f890410432b2f58c1",
       "afterSha256": "a7d60fd884177991308328b4416ac1123f305acc0413b08f890410432b2f58c1",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/gold-and-silver-price-outlook-macro-drivers/photo-2.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-15.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Lascar_Banco_de_Espa%C3%B1a_(Bank_of_Spain)_-_Central_Bank_of_Spain_(4607212122).jpg",
-          "licence": "CC BY 2.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "5404346285805003109",
       "url": "https://dailyyield.blogspot.com/2026/10/building-healthcare-ai-advantage.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "e46f84c290e3405ea9ebe744dfad5341709a9f798b77098caaa9165a1508802a",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "925f08b25c418e46e875d40118855fb8cdb2a5d93616a1a265b8a159046c5eeb",
       "afterSha256": "925f08b25c418e46e875d40118855fb8cdb2a5d93616a1a265b8a159046c5eeb",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/building-a-healthcare-ai-advantage/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-13.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Technician_with_laptop_working_on_server_rack_at_NERSC.jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "5505177037483463182",
       "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-11.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "f3a2355873a7067941328ee907b789b410a911ab134460ecb5e61ca6147e90de",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "3947c1e478161c8acd6d6c8ac45143982e924ab7f6d3264127d462dcf6f3fa83",
       "afterSha256": "3947c1e478161c8acd6d6c8ac45143982e924ab7f6d3264127d462dcf6f3fa83",
       "archive": null,
       "photoChanges": [
@@ -825,27 +300,19 @@
     {
       "id": "5655979092044783562",
       "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-06.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "8f45335b31db8ffd523ba3ecee15bdaad73a86748d58fc32fa356140fb7bfccd",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "705059c3c15b5a723ba259e537bcc9ed4a3144b85114ac1335b27f56fd0d68ea",
       "afterSha256": "705059c3c15b5a723ba259e537bcc9ed4a3144b85114ac1335b27f56fd0d68ea",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://upload.wikimedia.org/wikipedia/commons/0/00/Controul_and_Advice%2C_a_scene_in_Midas%2C_with_a_parody_%28BM_1868%2C0808.5824%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-19.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:New_York_Stock_Exchange_January_2025.jpg",
-          "licence": "CC BY 4.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "5701917770607627658",
       "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-12.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "142477fd0dea72f9a5e36e11a702f1059ec57be83302200bb81edd8488f9f52a",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "3d149e50dc185d87c29c071681422ba2dee5b09b3ce8cef017e92b9d067132b5",
       "afterSha256": "3d149e50dc185d87c29c071681422ba2dee5b09b3ce8cef017e92b9d067132b5",
       "archive": null,
       "photoChanges": [
@@ -861,27 +328,19 @@
     {
       "id": "5979745421799098842",
       "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-14.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "6e82e1eb958f0d350c0bf6e4d7c5cd6948069dcd58664fef50c8034161ecc363",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "4c4b9d763e822c18294f4ef5b8b2c2b9d40ab17ac4d6e36d5e5498d05c415501",
       "afterSha256": "4c4b9d763e822c18294f4ef5b8b2c2b9d40ab17ac4d6e36d5e5498d05c415501",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://images.unsplash.com/photo-1494522855154-9297ac14b55f?auto=format&fit=crop&w=1600&h=900&q=85",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-23.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:NYSE_exterior_(33618886553).jpg",
-          "licence": "CC BY 2.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "6066778244772837378",
       "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-15.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "c58342327c56641682a79930299be6fe931ecac12dbc7bca0de741ebfd1b3643",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "bc8a23d31e71d37fd8ff46f54eeb486463883769f724954e2cb22c9bb9c6c075",
       "afterSha256": "bc8a23d31e71d37fd8ff46f54eeb486463883769f724954e2cb22c9bb9c6c075",
       "archive": null,
       "photoChanges": [
@@ -897,63 +356,39 @@
     {
       "id": "6110897283203249229",
       "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-02.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "cae797f4566602659cc3a500bef03464c8ea44d557dda0188646dfeef65d2a11",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "deb429e7f934549767b7a31e94c7a44dc41a37469737e71258368992deb9b5f3",
       "afterSha256": "deb429e7f934549767b7a31e94c7a44dc41a37469737e71258368992deb9b5f3",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/1963_Census_of_Business%2C_manufactures%2C_and_Mineral%2C_Virgin_Islands_of_the_United_States_and_Guam_%28IA_1963censusofbu1963unse%29.pdf/page1-1280px-1963_Census_of_Business%2C_manufactures%2C_and_Mineral%2C_Virgin_Islands_of_the_United_States_and_Guam_%28IA_1963censusofbu1963unse%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-17.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:American_Airlines_Terminal_3_at_O%27Hare_International_Airport.jpg",
-          "licence": "Public domain"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "6121654008990265419",
       "url": "https://dailyyield.blogspot.com/2026/10/mastering-budgeting-for-beginners.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "f2416f8931a8b8d4fff39436827629a420710f3e8b04d789f303ed46561e8072",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "5e95a0cdeae2ae2f103043e07ba67eb44390a1cc2755835802aa82e6bc4ba655",
       "afterSha256": "5e95a0cdeae2ae2f103043e07ba67eb44390a1cc2755835802aa82e6bc4ba655",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/mastering-budgeting-for-beginners/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-10.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Construction_of_a_new_office-building_near_Beatrixkwartier_in_The_Hague_city;_high_resolution_image_by_FotoDutch,_June_2013.jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "6198179080179508205",
       "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-13.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "20ebc9eb0d6216d359fdc3ec1a693f9c516e2ac84343ce9abcce8b591675e242",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "1c4e45cf36f55ca67b5d39d2b230444e3f9021a5c848ed800064d71945fd9ccb",
       "afterSha256": "1c4e45cf36f55ca67b5d39d2b230444e3f9021a5c848ed800064d71945fd9ccb",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&h=900&q=85",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-24.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Industrial_port_of_Vancouver_(11436848075).jpg",
-          "licence": "CC BY 2.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "6416571193713380748",
       "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "208c70ace5c53c674c1252100b006fe1c84fe3c0a6ce4eed87d4db57fc001205",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "0b7db94b1b2bdeb412d94853b4aecdb7ae40966d757e2944b3c9ce811972db42",
       "afterSha256": "0b7db94b1b2bdeb412d94853b4aecdb7ae40966d757e2944b3c9ce811972db42",
       "archive": null,
       "photoChanges": [
@@ -969,9 +404,9 @@
     {
       "id": "6440924687029284362",
       "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_02014784419.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "1b30f2cba8d1ec1d43b46f1a9a02136590725d7327585f2c9c0a921c54ba3184",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "b223056b758e204cf783a1d07d37aa80003c3b62556f6f2b9faddf8a779b8458",
       "afterSha256": "b223056b758e204cf783a1d07d37aa80003c3b62556f6f2b9faddf8a779b8458",
       "archive": null,
       "photoChanges": [
@@ -987,27 +422,19 @@
     {
       "id": "6486688981578418368",
       "url": "https://dailyyield.blogspot.com/2026/09/nurse-two-kids-18k-debt-fixed.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "a798ac8624fbd0191507da2a66f663e7de0283394be0e1239dad672b944cfb09",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "cebcf2f1e7719857925497286dfe5e938642d3a9b0e276b1ed8ce290024fffa8",
       "afterSha256": "cebcf2f1e7719857925497286dfe5e938642d3a9b0e276b1ed8ce290024fffa8",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/1954_Census_of_Business._Selected_Services._Preliminary_Area_Reports_%28IA_1954censusofbu1954unse%29.pdf/page1-1280px-1954_Census_of_Business._Selected_Services._Preliminary_Area_Reports_%28IA_1954censusofbu1954unse%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-04.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Container_Terminal_-_panoramio_(1).jpg",
-          "licence": "CC BY 3.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "6615935574461620333",
       "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "f66797c6142f76375105f618e6700ea6b558252ec462fa638082668b56584c53",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "58e523cd1ff4fb1d8a5bbe7918c270d87f65a4372b1d84fe1dc83e49d319d37f",
       "afterSha256": "58e523cd1ff4fb1d8a5bbe7918c270d87f65a4372b1d84fe1dc83e49d319d37f",
       "archive": null,
       "photoChanges": [
@@ -1023,9 +450,9 @@
     {
       "id": "6656356680841125757",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-04.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "30133866ad12fb6b4e085e7f32fc409e7caaeac689aba5faf844c33c27655c5c",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "6c139e0fe901c195b293db5fa9f08bc561fc085d5260c0effc51f8f92275af8c",
       "afterSha256": "6c139e0fe901c195b293db5fa9f08bc561fc085d5260c0effc51f8f92275af8c",
       "archive": null,
       "photoChanges": [
@@ -1041,9 +468,9 @@
     {
       "id": "6875432953247800043",
       "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "084d50648588f9f48337a6a9014743233831538a369b746299be3a88a9f1d592",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "f410f66fde288725cec7ad6127fad4d4c87e8df315c30b00b3b4a4c690baf19b",
       "afterSha256": "f410f66fde288725cec7ad6127fad4d4c87e8df315c30b00b3b4a4c690baf19b",
       "archive": null,
       "photoChanges": [
@@ -1059,142 +486,32 @@
     {
       "id": "749521336862589933",
       "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-25.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "a3846d8f7e422d568c054d8eeeb2383f6fcf0bea8cc7dcfb603fd7f14d45f23b",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "dad84067b7a31dbbe644f51f5b86a63c93900ebf919b1b82453bcb9d4b3721c6",
       "afterSha256": "dad84067b7a31dbbe644f51f5b86a63c93900ebf919b1b82453bcb9d4b3721c6",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/How_is_money_obtained_for_marketing%3F_-_finance_and_risk_bearing_-_town_and_country_business_program._-_%28IA_CAT84805403%29.pdf/page1-1280px-How_is_money_obtained_for_marketing%3F_-_finance_and_risk_bearing_-_town_and_country_business_program._-_%28IA_CAT84805403%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-08.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:20160823_DB_Cargo_UK_66097.jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "7509329855154139182",
       "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-03.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "4c130ade3be95b9fec2c233d1438a3a6c800d62bfcaf4bd85bffcb8cfc585888",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "fb243bc936a96fac6532dee12c0588b8de094fecb536dbabf749ad9f0ca08f41",
       "afterSha256": "fb243bc936a96fac6532dee12c0588b8de094fecb536dbabf749ad9f0ca08f41",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-10-03",
-        "retained": [
-          {
-            "position": 1,
-            "title": "Spain's parliament rejects housing bill as protests continue",
-            "source": "https://www.dw.com/en/spain-s-parliament-rejects-housing-bill-as-protests-continue/a-79522683?maca=en-rss-en-all-1573-xml-mrss"
-          },
-          {
-            "position": 2,
-            "title": "Europe to release diesel reserves after Trump request",
-            "source": "https://www.dw.com/en/europe-to-release-diesel-reserves-after-trump-request/a-79522810?maca=en-rss-en-all-1573-xml-mrss"
-          },
-          {
-            "position": 5,
-            "title": "Turkey: Stock market scandal hits half a million investors",
-            "source": "https://www.dw.com/en/turkey-stock-market-scandal-hits-half-a-million-investors/a-79494710?maca=en-rss-en-all-1573-xml-mrss"
-          },
-          {
-            "position": 7,
-            "title": "German retail chain Galeria files for fourth bankruptcy in six years",
-            "source": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOUC1WbVVuakJpajhiQ2lDTHFFT2xWRjBKc2k5QTZnZ3R1LUNqazJXUHZIT3hrekNjTkZUbTdQM2w1VmRNNUZYS3dobklXWFlEbFpFYU9xZWNMTzJMUHY5dXJuZW9acTUtYXpJT1Jjb0hOdzI1MUNSOUZ5dFBiUnU3Vks4aHhNT212anZqVEpDeVd2ek53U0E?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 8,
-            "title": "Europe discussing plan for diesel stock releases after US pressure, source says",
-            "source": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOUDM1cnNPYWpCWVY1Si1jMlQ1S29uempQdUtCUGFaTzNuMkNYQS1NbThZelBlN2d1aXZsSmRfQ1ppNWFOYjdGTG8tVUR5SGZQZEdNRUNyQUN3QmVLaW1xR1V4OTRqMXR3WnhRZko5Yi0tQWNoVGJFZXRVUHpWSkdsSElhNktGOEk1ZXoxSQ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 9,
-            "title": "Germany stocks higher at close of trade; DAX up 1.13%",
-            "source": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOOUYtbmMwbUJ0ZkIxWk5kSmM5OVFfVW1sMnpNOHU1VDY3WmwtUlJEQVJIV3RzSG5iZ0xZTjZPN2EzcHFFNVRMMnAxdGRWZF93Nk1ybGdOZDRzTUU2VWsxejdzMDBMaEhfeEh3UUkzc3lONVZGWWtOcUgwWVJneXhVZmpXUENjT3U2alFIc3I3LWNjTE00bFFBN21GTTdKUXB6Ny1xNk9DUWE3Z1k?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 10,
-            "title": "Why are U.S. 2-year Treasury yields, 10-year note, global bond markets down in France, Germany?",
-            "source": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxOR0dSdzdsTk1MQ0Q0UndnaEk5X2dITEVBaUNKQm13S3lVaVlWcjB3bjNBMEk2bzdQdU5jbUZVbl9xTGVXRzR0MUoyWXJsLU10Z3BYZUZsdEk0VmUxVU02VmFnNDNLTDZoM1JTdTVvangzTW5HUVlmSmtLa2cyd0UwYWVTUzd3azg1YUpmcmZ0STNMSE1yOExnSFJHNHNQeHZIOW95dUctNzc0MXB3aTBCaDhmMUdrdTBfeTFwRXU3NjZGV1BFY0V2MVhTSTNwWmhHVFdKdjYyNVp1MENaQ080Z3Z6R2lrT0FRalI2NFZLY1JXNGI5ZXRHQTR5LTHSAYICQVVfeXFMTk4yQXp2QmF0RmpGLS01Qy1PQTMwOTF5T0dSUDFYR1EtYkplcVhUSlgyWUxHdDlONDNEaFlCOGE0bEdfX1RycTdYSndmcjRVY1pKbndjaTdDV2RWUml2ZVBxekZHekRpbXJoTlY0Q3VvdVhEcFk1ZUszWnV3LVVfSWFhc2ZBRHlMQ3lXYlNpWkFBR0xleGJqY3lWbTNGZW5XWkg0a013b2hoNHZNOTRVTURUaGhKT1QxTUo5cG9nU0VmYzdXMjBNakJ3VVF2UjJNUXQxMFl5Ri15cENhS0RSMVRWV1ZvRFo5S3ExZXoycC1IMnBhQXEzOUpJR0RyS2thOU1B?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 11,
-            "title": "Europe agrees to release stocked diesel oil, Trump says",
-            "source": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQXdNTUdMSWlGc3lsVG1hTU5pc1k4emd0MnVsbzY2NkdxV3VicTFYN29zWmlBcVFLYWVkSDBuN21mOUZWMDB4b1BzS1Rtbkc0cmJqNmwtdi1uWkZZd3lYREFUaUhNMXF1STU0TVV4bzBRWlpTSU1OT1JZMWRMY28xanhHa1B3VUNPMlJxQW1oZmJnUE1fSmw2S3QzajNXczk5bEZ5OVRUNXBnUQ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 12,
-            "title": "Argentina launches cash-for-citizenship scheme",
-            "source": "https://www.dw.com/en/argentina-launches-cash-for-citizenship-scheme/a-79520708?maca=en-rss-en-all-1573-xml-mrss"
-          },
-          {
-            "position": 13,
-            "title": "SEFE Enlists Lazard for Reprivatisation Amid German Energy Shift",
-            "source": "https://news.google.com/rss/articles/CBMimwFBVV95cUxORl9LUl8tV0FIN2dBanB2S09Zejd3dmZoN2paVTVhMmNjRlZIZklkX1pOX0c0M2p2MlJBeFRkWm01Xzh5R00wTVpTc2NvMXBJdXZjUHBsVGZSNGRfQ3ZjU25rMkFqS3BKNXY2TDZnMkJqVndsVVo0N2VsMzNUZHlJb25YTjNmVTZnS1Q3Vm9sUjZTRGt1OWsycW44VQ?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 14,
-            "title": "Germany's Schroeder Joins Board of Russian Retailer Hyperglobus",
-            "source": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNR2pHNzlEQXphbTVrUkJrTlc3U1Jtb0tPNEVUMEtmZkMxQTdjNTlVdTNBc2pOQjVub2NfTlNwaENmQ0VNSEVGc0E5NTNmanhNOGk0d25jd1BFTkJhdkViVk1kME5MT0RkSnJYXzNPRDRzZWhKUmMtWEpyTUpOMVVQMDREbngtRU9QenU2S1lkQVJDQmlTREtFQzU4eUJXWTJi?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 15,
-            "title": "German Government Raises Economic Forecasts After Strong First Half",
-            "source": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQZHhzVE96b0dsd0JMSHJRYzI4d3d1OEZfX0lNQ19pdzRiZGJ1bWV0UFZ3YjlKeXh1cFYxWFRvYnA4QTB6ZHc5VTFOQW8tUjB5cGFQVnM4aTJyVTB3RXpEWTg4aTBwSXgxcEZFUVJOZkZOM3YwUGlHRlVWNUlzNklGeW1DWmU4ZUNNZ3pJTnZwTDZjMWJnOFFfR2ptdw?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 16,
-            "title": "EUR/USD 1.1225 · EUR/GBP 0.8503 · EUR/JPY 176.9900 · EUR/CNY 7.5259 · EUR/INR 108.1245 · EUR/BRL 5.8610",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 3,
-            "title": "North and South Korea trade accusations over landmines that injured three soldiers",
-            "source": "https://www.dw.com/en/north-and-south-korea-trade-accusations-over-landmines-that-injured-three-soldiers/a-79503854?maca=en-rss-en-all-1573-xml-mrss",
-            "reason": "Non-financial military/landmine story misread as trade."
-          },
-          {
-            "position": 4,
-            "title": "Half of Europe witnessed record heat stress this summer — EU",
-            "source": "https://www.dw.com/en/half-of-europe-witnessed-record-heat-stress-this-summer-eu/a-79514799?maca=en-rss-en-all-1573-xml-mrss",
-            "reason": "Weather-only source excerpt has no supported finance angle."
-          },
-          {
-            "position": 6,
-            "title": "Germany's Economic Growth May Double in 2024, Says Bundesbank",
-            "source": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOcmNrR0w0T21OMHVtM1NDaG51bDFkWW1RNHpUR0V0WlJpN21TZUF4LUhMOVR6S1c4TXhNdDZ4RUFpc3pBQ05QQUoweUpXVWhVMXp5YzJTZ3UxUVFFUVQ1ZDlBbDdkZUMtcG1JWGNYX3VsRVo2WmtnYWRkRnVkcDZLS0FHWENGZ2E3RGxrd0h1MHI4UV9Ta1V6a05CMDU?oc=5&hl=en-US&gl=US&ceid=US:en",
-            "reason": "Headline is a 2024 forecast, not current October 2026 reporting."
-          }
-        ],
-        "retainedCount": 13,
-        "referenceDate": "2026-10-02",
-        "referenceValues": {
-          "USD": "1.1225",
-          "GBP": "0.8503",
-          "JPY": "176.9900",
-          "CNY": "7.5259",
-          "INR": "108.1245",
-          "BRL": "5.8610"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "76036352328662163",
       "url": "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "251559919b21fbf9619ec81c402bc72f681dee92083cb4851c79bc88e5b54321",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "51c389b41419165b60deaba439ffb6a910488e78cb26fe43cbf2181848c8e886",
       "afterSha256": "51c389b41419165b60deaba439ffb6a910488e78cb26fe43cbf2181848c8e886",
       "archive": null,
       "photoChanges": [
@@ -1210,52 +527,29 @@
     {
       "id": "7632338182974546049",
       "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-01.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "12f763d3328794f6b86442106422f78969b018c53a04aec8ea8ed49c9e324ec1",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "e8b90b06cceafcb307ee0a9f3e33cc813ca375c32e18ddc674d55b711b8b5970",
       "afterSha256": "e8b90b06cceafcb307ee0a9f3e33cc813ca375c32e18ddc674d55b711b8b5970",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/1967_Census_of_Business._Major_Retail_Centers_in_Standard_Metropolitian_Statistical_Areas._United_States_summary_%28IA_1967censusofbusi671uns%29.pdf/page1-1280px-1967_Census_of_Business._Major_Retail_Centers_in_Standard_Metropolitian_Statistical_Areas._United_States_summary_%28IA_1967censusofbusi671uns%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-16.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Line3174_-_Shipping_Containers_at_the_terminal_at_Port_Elizabeth,_New_Jersey_-_NOAA.jpg",
-          "licence": "Public domain"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "7674640489272907651",
       "url": "https://dailyyield.blogspot.com/2026/10/fintechs-evolution-disruption-and-future.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "064b30f4a882c20abcab2e87c246e95c82f7109dc124e7895c9cf6820b3c08df",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "700b92cc29691aa3a816ae236594cb342347da24b6e4ec77a879214a5fed1524",
       "afterSha256": "700b92cc29691aa3a816ae236594cb342347da24b6e4ec77a879214a5fed1524",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/fintech-s-evolution-disruption-and-future/photo-2.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-03.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:At_the_front_of_Hongkong_%5E_Shanghai_Bank_-_panoramio.jpg",
-          "licence": "CC BY 3.0"
-        },
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/fintech-s-evolution-disruption-and-future/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-14.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Dark_glass_facade_(Unsplash).jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "7836621888717460852",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-02.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "09850961e62af37c848dd8b5e14706983536dc7002250c8803786a62fe6f5479",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "a4e63a2a82db9a7d606349b61124abf69c8bfe406382e424fd775f1496d2aace",
       "afterSha256": "a4e63a2a82db9a7d606349b61124abf69c8bfe406382e424fd775f1496d2aace",
       "archive": null,
       "photoChanges": [
@@ -1271,9 +565,9 @@
     {
       "id": "7856067051374791672",
       "url": "https://dailyyield.blogspot.com/2026/10/sec-unveils-tokenized-stock-exemption.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "156a26e92e3c222d5ad332f7d07191fba69c1ce139e333b1df4049c78bb5bb30",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "e15b1ae10431864836e7dd0188fd25358981e57f4209e67e532cc9cc8ab461ce",
       "afterSha256": "e15b1ae10431864836e7dd0188fd25358981e57f4209e67e532cc9cc8ab461ce",
       "archive": null,
       "photoChanges": [
@@ -1283,58 +577,35 @@
           "imageChanged": false,
           "primarySource": "https://commons.wikimedia.org/wiki/File:NY_stock_exchange_traders_floor_LC-U9-10548-6.jpg",
           "licence": "Public domain"
-        },
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/sec-unveils-tokenized-stock-exemption/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-06.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:New_York_Stock_Exchange,_interior_lit_edition_(51693281831).jpg",
-          "licence": "CC0"
         }
       ]
     },
     {
       "id": "7917175397372471855",
       "url": "https://dailyyield.blogspot.com/2026/10/bangladesh-startup-funding-drops.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "0eb07051df170a5697da56e2bfcc311f97a514cc6755f31371eed191d5acbbbf",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "c1b57477a50b2f70ecad4e91a2deb08dd1d58437d139c86aca5ce1dfe994b494",
       "afterSha256": "c1b57477a50b2f70ecad4e91a2deb08dd1d58437d139c86aca5ce1dfe994b494",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/bangladesh-startup-funding-drops/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-01.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg",
-          "licence": "CC BY 2.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "7949223128636486384",
       "url": "https://dailyyield.blogspot.com/2026/09/why-dual-income-couples-still-feel-one.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "cae0fa49a5ac3f88b16c92c157c7b46b631c5787c8f0f18fd16be2eea498dcd6",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "3a4b47852a37d062f40a6f59cf61f44b3299b2ffcc2f75607624bd52d1e6b709",
       "afterSha256": "3a4b47852a37d062f40a6f59cf61f44b3299b2ffcc2f75607624bd52d1e6b709",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://commons.wikimedia.org/w/resources/assets/file-type-icons/fileicon-ogg.png",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-22.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Paketzentrum_Frauenfeld_Container_Terminal.jpg",
-          "licence": "CC BY 4.0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "8424036406237802934",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-07.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "3ff2896ea60d696788ad9b0604c474171b40ec501596260081852c89f976bfb8",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "c7391dc257bc6ddc6dd698cae6545f188dbf447100fbef50037a0fea098b41e2",
       "afterSha256": "c7391dc257bc6ddc6dd698cae6545f188dbf447100fbef50037a0fea098b41e2",
       "archive": null,
       "photoChanges": [
@@ -1350,344 +621,68 @@
     {
       "id": "8605540625196160085",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-25.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "4de72964f532985e80b993c3dc7f651b1fee876d71c0904336134cc327f9b86e",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "c86e8c53b1e93ec3815a5b96b9c175d77da29ec1c66d38d9e5d81b47821869d1",
       "afterSha256": "c86e8c53b1e93ec3815a5b96b9c175d77da29ec1c66d38d9e5d81b47821869d1",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-25",
-        "retained": [
-          {
-            "position": 1,
-            "title": "Lee says combining S. Korea's technology with Mexico's industrial base can create new growth",
-            "source": "https://en.yna.co.kr/view/AEN20260924001600315"
-          },
-          {
-            "position": 2,
-            "title": "(3rd LD) S. Korea, Mexico adopt joint action plan to expand cooperation in defense, crude oil, AI",
-            "source": "https://en.yna.co.kr/view/AEN20260925000353315"
-          },
-          {
-            "position": 9,
-            "title": "EUR/USD 1.1367 · EUR/GBP 0.8599 · EUR/JPY 180.5700 · EUR/CNY 7.6302 · EUR/INR 109.0775 · EUR/BRL 5.8890",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 3,
-            "title": "(2nd LD) S. Korea, Mexico adopt joint action plan to expand cooperation in defense, crude oil, AI",
-            "source": "https://en.yna.co.kr/view/AEN20260925000352315",
-            "reason": "Earlier second-lead version of retained third-lead cooperation story."
-          },
-          {
-            "position": 4,
-            "title": "(2nd LD) (Asiad) S. Korea wins gold in men's kayak four-person 500m racing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260924001252320",
-            "reason": "Ordinary kayak medal result, not financial reporting."
-          },
-          {
-            "position": 5,
-            "title": "(LEAD) (Asiad) S. Korea wins gold in men's kayak four-person 500m racing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260924001251320",
-            "reason": "Earlier update of the non-financial kayak result."
-          },
-          {
-            "position": 6,
-            "title": "(Asiad) S. Korea wins gold in men's kayak four-person 500m racing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260924001200320",
-            "reason": "Initial update of the non-financial kayak result."
-          },
-          {
-            "position": 7,
-            "title": "(URGENT) S. Korea wins gold in men's kayak four-person 500m racing at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260924001000320",
-            "reason": "Urgent update of the non-financial kayak result."
-          },
-          {
-            "position": 8,
-            "title": "(Asiad) Yeo Seo-jeong leads Korea's gold medal hopes",
-            "source": "https://en.yna.co.kr/view/AEN20260922005000320",
-            "reason": "Ordinary gymnastics medal preview, not finance."
-          }
-        ],
-        "retainedCount": 3,
-        "referenceDate": "2026-09-24",
-        "referenceValues": {
-          "USD": "1.1367",
-          "GBP": "0.8599",
-          "JPY": "180.5700",
-          "CNY": "7.6302",
-          "INR": "109.0775",
-          "BRL": "5.8890"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "8780956659587017395",
       "url": "https://dailyyield.blogspot.com/2026/09/real-net-worth-targets-by-age-for.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "cf4db34c562a6c7722d284e976e236de085afaee20194f3dc970bef3c5ac3628",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "f18d9a3d7c2eb74217a6b6ce539b252a795e7b2fc78eacc9dae5e70579ffc36a",
       "afterSha256": "f18d9a3d7c2eb74217a6b6ce539b252a795e7b2fc78eacc9dae5e70579ffc36a",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/age-is-a-bad-net-worth-target/photo-2.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-05.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Apartment_Complex_Parking_Lot_1.png",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "8934759392828970541",
       "url": "https://dailyyield.blogspot.com/2026/10/defining-wealth-what-is-asset.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "8e33b4819dbb89fa27725bc3e0b367ad56d162f67d3ff579d3451f12ef7e9d58",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "a0ccc8fadadbba22f15af40696965bc298904c695c4e8df8bba4c6cd78eb215a",
       "afterSha256": "a0ccc8fadadbba22f15af40696965bc298904c695c4e8df8bba4c6cd78eb215a",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/defining-wealth-what-is-an-asset/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-21.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Fassade_Wilhelmstrasse_65,_Berlin-Mitte,_160417,_ako.jpg",
-          "licence": "CC BY 3.0 de"
-        }
-      ]
+      "photoChanges": []
     },
     {
       "id": "9051696550888128467",
       "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-27.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "cdecd58cd2964e8447a784ab764c3f0854aa8b86eacd66bf7a96a6c260a1f75f",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "6574aa891a85aac237193bfebd1233cfbb264a16203c05e84f797d8de06e4528",
       "afterSha256": "6574aa891a85aac237193bfebd1233cfbb264a16203c05e84f797d8de06e4528",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-27",
-        "retained": [
-          {
-            "position": 1,
-            "title": "Wall Street money takes back over from small investors as driving force of the stock market",
-            "source": "https://www.cnbc.com/2026/09/27/institutional-investors-stocks-treaurys-retail-traders.html"
-          },
-          {
-            "position": 2,
-            "title": "Nvidia and these other stocks are on sale, Bank of America says",
-            "source": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOUjQxOVFhR3ZKMmxDSG9CSGMtTHctdFFuTmF2Q1lST2c0dTdNNFEtcHVyX0duMTlHcnI1eG12Tk5QdVByRXF4OWR5UDA5TGFpbHo5SG1ZWk9tVHJndy1XZjcxaDhjbE5fNXJENm1xbnBsLWdrNy1KU0U0WUpwbzliSGJvUW9rZk9ERDFUX2U3YUttbkFzNjQ2OUZINXJ0WC1N?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 3,
-            "title": "Top Wall Street analysts like these 3 dividend stocks for steady income",
-            "source": "https://www.cnbc.com/2026/09/27/top-wall-street-analysts-like-these-dividend-stocks-for-steady-income.html"
-          },
-          {
-            "position": 4,
-            "title": "Debt-hungry AI companies face increased risk as bond yields spike",
-            "source": "https://www.cnbc.com/2026/09/27/debt-hungry-data-center-companies-increased-risk-bond-yields-spike.html"
-          },
-          {
-            "position": 5,
-            "title": "This key part of the stock market could be headed for a meaningful breakout",
-            "source": "https://www.cnbc.com/2026/09/27/this-key-part-of-the-stock-market-could-be-headed-for-a-meaningful-breakout.html"
-          },
-          {
-            "position": 6,
-            "title": "Why the upcoming jobs report could send 10-year and 30-year Treasury yields surging",
-            "source": "https://www.marketwatch.com/story/why-the-upcoming-jobs-report-could-send-10-year-and-30-year-treasury-yields-surging-67eab4ba?mod=mw_rss_topstories"
-          },
-          {
-            "position": 7,
-            "title": "'Funflation' is on the rise as hobbies get pricier, but consumers keep spending anyway",
-            "source": "https://www.cnbc.com/2026/09/27/funflation-consumer-spending-pricier-hobbies.html"
-          },
-          {
-            "position": 8,
-            "title": "TSX gains nearly 100 points on Friday, U.S. markets also positive",
-            "source": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOaVZJTHZRVFJZWFNmMFYyeHkxZTlEVWxLakdoWHhSNXNha0ZVUG11dEtTNXlqQmJhMWd6aGphbTJkOUh2TTYwTDRRWExqSWNMMVVqc2JTS19DMDZtdlF1YWhxcVZMQThCNDhZU3lvdTJSRWwxRHk5UG9hM1ZzLUhOTzdtNFZiWW12OUd6QjloVnE?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 9,
-            "title": "Apple faces $5.7 billion patent infringement verdict over iPhone and Apple Watch haptics",
-            "source": "https://www.cnbc.com/2026/09/26/apple-taction-technology-patent-infringement-verdict.html"
-          },
-          {
-            "position": 10,
-            "title": "Supply glut, lab-grown alternatives: What's behind the fall of diamond prices to record lows",
-            "source": "https://www.cnbc.com/2026/09/26/whats-behind-the-fall-of-diamond-prices-to-record-lows.html"
-          },
-          {
-            "position": 11,
-            "title": "Here’s how much worse U.S. debt could get as Treasury yields surge to the highest levels in two decades",
-            "source": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1nNV82cHNPUnhpTlFrU1duUXZRWFdkSFZpeEtlQXNuVkNxaTFLczhXQmJDMF80R3hWOFFyUlRadDNUcnljY3dBRURkM2xSMFZ6RTN5UG8wM0h4RHFkZnowOU9QalNRalRfcmQtZkE2UTQtSFYzUXhJR0ZRQWg?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 12,
-            "title": "U.S. Stock Market personal finance tips: Wall Street investors may think over these key 5 points during we",
-            "source": "https://news.google.com/rss/articles/CBMisAJBVV95cUxNM0xTQkRqTWtZM2JoV0EwQ1JUVWZucGxaZUUxemhQWGdFQmdFVkJYRms5N2Q2ZDUxYXJXUjhKeWkzSnJIVURwWmZqMS1MZWVsT2trX2p5NFJ4b3lrdkx2aUFjVGdsVTBkQ0syLVo5ejBCVzNXWGRLcTB0OW1DMWJTS19DMi1yY1JJUXpxbzB2QW81QWFzMTVDZGVJM19XRnVEV2RFZ2F6c2gyQVZlUGFQWkhkaVZkb0VwLTN6d1hFUnpXZ3VHa3A2MS1VeWlhLTByTWZnUzJqVkNENGFvaG90QzNHOTJfbFNWRDBGUHdJQTV3ME9qNGNUY2dRbUdkVlFCdUg3cFJwZ1hhNmUxdzdyTGJsNXZuSFdJRzViTzVzejVKazdPYUV5SDZwOC1KbC1k0gG2AkFVX3lxTE10TF85NGxvdTVXbHBwT0NLOXY5QmxRVV9pVU01RW9zbkQ2dWt2ZF9XWkFuenctRDZaSGMtajZxQ0tfSXkzeHBPVHFmOWliTGtlSG1RZTJFcEFRM1lzRDgzZHhzWVBSeWNvOXduc251SW5odEtXWEp2emNFUnY5b3FiSUNxejR0andtUjdUYnQzcEk5aGdPMGFpeHRGbDlIdWJjVDVhWGJsUm9VSkMxZWkwZ2RwZ1hFcE1NcUpHUmF1Y0F0SDRWWTdQZ1c3bHc0alBTYm1WaHlNaHR0Wm5OeDdOU0VFd1hrWms2b3RBcldUemtNc1RfYUp2TW50LVpSTXZKdXpnRFNMNjBLcUhMaFRxek80TWVBT3E1eHpHY3lSaXBTTGowRFIwTHc3a3YwM3pxRlJjcnc?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 13,
-            "title": "My friend grosses $300,000 a year with her pet-sitting business. She pays herself $50,000. Should I do the same?",
-            "source": "https://www.marketwatch.com/story/my-friend-grosses-300-000-a-year-with-her-pet-sitting-business-she-pays-herself-50-000-should-i-do-the-same-8ab5cba3?mod=mw_rss_topstories"
-          },
-          {
-            "position": 14,
-            "title": "Social Security checks are projected to be cut by $540 a month in just six years",
-            "source": "https://www.marketwatch.com/story/social-security-checks-are-projected-to-be-cut-by-540-a-month-in-just-six-years-a8842912?mod=mw_rss_topstories"
-          },
-          {
-            "position": 15,
-            "title": "‘She says it’s just money’: My friend pays for everything. I should be grateful, but I can’t stand her anymore",
-            "source": "https://www.marketwatch.com/story/she-says-its-just-money-my-friend-pays-for-everything-i-should-be-grateful-but-i-cant-stand-her-anymore-2e7c5c10?mod=mw_rss_topstories"
-          },
-          {
-            "position": 16,
-            "title": "EUR/USD 1.1403 · EUR/GBP 0.8605 · EUR/JPY 179.7000 · EUR/CNY 7.6551 · EUR/INR 109.2605 · EUR/BRL 5.9091",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [],
-        "retainedCount": 16,
-        "referenceDate": "2026-09-25",
-        "referenceValues": {
-          "USD": "1.1403",
-          "GBP": "0.8605",
-          "JPY": "179.7000",
-          "CNY": "7.6551",
-          "INR": "109.2605",
-          "BRL": "5.9091"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "9115764774433521189",
       "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-26.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "e6988c3767df8e61cbbb1353c1c820a3ea983f5282ba4963e7828697eb862558",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "d52616ba6970d996d381874758526cac2100f19a1d30dc82c0858cec867485d4",
       "afterSha256": "d52616ba6970d996d381874758526cac2100f19a1d30dc82c0858cec867485d4",
       "archive": {
-        "status": "REVIEWED",
-        "edition": "2026-09-26",
-        "retained": [
-          {
-            "position": 9,
-            "title": "World shares mostly advance after global bond sell-off and drop in oil prices",
-            "source": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQRTU3QkZfZUVlX1U2RlBFZXlsX00wLTZ3Wl9aZmUtdjJKMnR3b2VpWV9TWm83eU8tRkZTR2w3bGM2d3dTRDU5M09MaWw4Y09JajhCallCSW8wMkJOY3B3ODFjelpWVFlLYWpvZlpYUDl1MEltaXEwV2kzbkhRZHFTRE4wYXkwZ25QWGdjU3NlY1M2UWlsQXJHUVNQSnAybGJua0R3V2l1dkpPVUc5c243eE5OeTA3RlRuLVNLRGJIX0RrZ1E?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 10,
-            "title": "Stocktwits Passport Portfolio: QQQ Weekly Rally Leaves SPY, DIA And Asia In The Dust",
-            "source": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTm1zSkx5ZlhOY251elJPTmRNMDJMSU5JLTRDbjZ3bjZhMklCVmVCM2U4Sk56WTJjRWpjVy1aVkNfbXVyTld5b1NKemRGMy05V1JwUHFCLXh1Y2RyREUzNVljX2YyMlBBVWJSN3BheDlDNDdLdTdZcHdGbHFJRFB6R3J4WTVNbGJSRUZEbGVjTHBhakNWTFVLelRWYlJlSEJCck1GTFd5MTc?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 11,
-            "title": "Tamchy SFIT: Kyrgyzstan launches financial zone to tap into Central Asia's economic shift - Article",
-            "source": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPOUJsOEFveXJZcDctR293cmVuR3JlM2cwaFdsWjhham56Y1dEeE1Lb0ZhX25ZVGlLQTNTODRJQ2tYTzNtNE1qU0Z0NmJZVkdWX2dlUVBISXpDWnlUV1NMRlZJY01WOXJPTkRpbXNyay1ubVBjcEl5aURYb2Q0MTdQaGh2S1Rxd1NOMDhVZ1U5MFR1MXB5Y1BVdi1wWlhDWTNXejVydXRPaVJXMHdfaDl4WWpLZlpqSk1ZSDViZjZIbzBxUUFyRHc?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 12,
-            "title": "Stocks to watch: PB Fintech, MCX, NSE, Inox Green, Waaree Energies, Dr Lal",
-            "source": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQaDk2OWF3Zi00aVpZWkhKekZzbFBkck9aNFVfNHYwUko4LVVXUkhSWDlONmMzUXIxTG4zYjRtcnZhSkZwaUxWQjJhYzZZTXpkZHc4bmRfX0VmTE1RSEhuQ01URVhQLWJ0YzNHY0ZpUEZkNTIxRG56LTZUbmFoQUdlTU1CTUtQZGRWWHJRVkg3c1hqTnhPbDE1ZHhiN25XRVZuM0FidnpPM1MzejlTQmR0dnBuSG5MenJ0ckZRamowMjJKV1Y3Y3JDU2kwLXEtTkw2b1NKS2ZB0gHWAUFVX3lxTFBoOTY5YXdmLTRpWllaSEp6RnNsUGRyT1o0VV80djBSSjgtVVdSSFJYOU42YzNRcjFMbjNiNG1ydmFKRnBpTFZCMmFjNllNemRkdzhuZF9fRWZMTVFISG5DTVRFWFAtYnRjM0djRmlQRmQ1MjFEbnotNlRuYWhBR2VNTUJNS1BkZFZYclFWSDdzWGpOeE9sMTVkeGI3bldFVm4zQWJ2ek8zUzN6OVNCZHR2cG5Ibkx6cnRyRlFqajAyMkpXVjdjckNTaTAtcS1OTDZvU0pLZkE?oc=5&hl=en-US&gl=US&ceid=US:en"
-          },
-          {
-            "position": 13,
-            "title": "EUR/USD 1.1403 · EUR/GBP 0.8605 · EUR/JPY 179.7000 · EUR/CNY 7.6551 · EUR/INR 109.2605 · EUR/BRL 5.9091",
-            "source": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
-          }
-        ],
-        "removed": [
-          {
-            "position": 1,
-            "title": "(Asiad) S. Korean sabre fencers target 4th straight Asiad team gold",
-            "source": "https://en.yna.co.kr/view/AEN20260922005500320",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 2,
-            "title": "(Asiad) Hwang ends South Korea's 40-yr wait for Asiad balance beam gold",
-            "source": "https://en.yna.co.kr/view/AEN20260925006800320",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 3,
-            "title": "(LEAD) (Asiad) S. Korea captures gold in men's 3x3 basketball",
-            "source": "https://en.yna.co.kr/view/AEN20260925005551315",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 4,
-            "title": "(Asiad) S. Korea captures gold in men's 3x3 basketball",
-            "source": "https://en.yna.co.kr/view/AEN20260925005500315",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 5,
-            "title": "(URGENT) S. Korea wins gold in men's 3x3 basketball at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260925005400315",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 6,
-            "title": "(LEAD) (Asiad) S. Korea's Hwang Seo-hyun wins gold in women's balance beam at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260925004551320",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 7,
-            "title": "(Asiad) S. Korea's Hwang Seo-hyun wins gold in women's balance beam at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260925004500320",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          },
-          {
-            "position": 8,
-            "title": "(URGENT) S. Korea's Hwang Seo-hyun wins gold in women's balance beam at Asian Games",
-            "source": "https://en.yna.co.kr/view/AEN20260925004400320",
-            "reason": "Ordinary sports/medal reporting, including multiple wire versions; not finance."
-          }
-        ],
-        "retainedCount": 5,
-        "referenceDate": "2026-09-25",
-        "referenceValues": {
-          "USD": "1.1403",
-          "GBP": "0.8605",
-          "JPY": "179.7000",
-          "CNY": "7.6551",
-          "INR": "109.2605",
-          "BRL": "5.9091"
-        },
-        "noCurrentFinancialItems": false,
-        "postReviewFlags": [],
-        "imagesAndExecutableCodeUnchanged": true,
-        "existingArticleMetadataMatchedToCorrection": true,
-        "newFinancialClaimsInvented": false
+        "status": "ALREADY_REVIEWED",
+        "removed": []
       },
       "photoChanges": []
     },
     {
       "id": "9185981256107977926",
       "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-06.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "509535197ff07c04f3933bbc787ff53522d6a17ec5cde1ab30dd7dbf8811cb73",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "890a0c614b7280ccaf11b7962a1f6727f4636b0c6840b93ae592c3d9370fde8b",
       "afterSha256": "890a0c614b7280ccaf11b7962a1f6727f4636b0c6840b93ae592c3d9370fde8b",
       "archive": null,
       "photoChanges": [
@@ -1703,27 +698,19 @@
     {
       "id": "943062772594238272",
       "url": "https://dailyyield.blogspot.com/2026/10/fuel-surcharges-hit-lowcost-airlines.html",
-      "changed": true,
-      "applied": true,
-      "beforeSha256": "2c1c6a16ade9821ac61f4f3cab98b097c175599d80d126c863d4d645fec6f132",
+      "changed": false,
+      "applied": false,
+      "beforeSha256": "7fc65646b9253589236c21c19a1a903dd364e6752793f68a555f8b19cb02d46e",
       "afterSha256": "7fc65646b9253589236c21c19a1a903dd364e6752793f68a555f8b19cb02d46e",
       "archive": null,
-      "photoChanges": [
-        {
-          "oldSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/fuel-surcharges-hit-low-cost-airlines/photo-3.jpg",
-          "newSrc": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/review-20261018/verified-12.jpg",
-          "imageChanged": true,
-          "primarySource": "https://commons.wikimedia.org/wiki/File:Airliners_Jakarta_2025_(01).jpg",
-          "licence": "CC0"
-        }
-      ]
+      "photoChanges": []
     }
   ],
   "deferred": [],
   "status": "COMPLETED_VERIFIED",
-  "finishedAt": "2026-10-18T14:09:16.238263+00:00",
+  "finishedAt": "2026-10-18T14:18:19.049762+00:00",
   "verification": {
-    "livePostsRead": 515,
+    "livePostsRead": 516,
     "reviewedArchives": 9,
     "reviewedImageRecords": 44,
     "archiveFlagsRemaining": [],
