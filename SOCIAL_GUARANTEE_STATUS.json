@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T15:15:48.658330+05:30",
+ "generatedAt": "2026-10-18T15:16:37.434395+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 14,
  "expectedPosts": 28,
  "articlesWithBothPosts": 13,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -163,7 +163,7 @@
    "duplicatePosts": 0
   },
   {
-   "key": "master-trending-9b17e3fd5932ac27",
+   "key": "master-trending-2",
    "title": "Tesla unveils long-delayed Roadster developed",
    "url": "https://dailyyield.blogspot.com/2026/10/tesla-unveils-long-delayed-roadster.html",
    "posts": 2,
@@ -177,7 +177,7 @@
    "duplicatePosts": 0
   },
   {
-   "key": "master-trending-2",
+   "key": "extra-master-trending-2-ae369d0aace4c173",
    "title": "Global investors firm India BFSI bets with ove",
    "url": "https://dailyyield.blogspot.com/2026/10/global-investors-firm-india-bfsi-bets.html",
    "posts": 2,
@@ -204,13 +204,15 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
+ "liveVerificationSourceAt": "2026-10-18T15:16:29.980581+05:30",
+ "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 13,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
