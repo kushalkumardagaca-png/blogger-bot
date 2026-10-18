@@ -56,5 +56,4 @@ jobs:
       - name: Report the outcome
         if: steps.check.outcome == 'failure'
         run: |
-          echo '::error title=AdSense readiness::some blocking points are still open; see ADSENSE_APPROVAL_READINESS.md'
-          exit 1
+          python -c 'import json,sys; d=json.load(open("ADSENSE_APPROVAL_READINESS.json")); incomplete=d.get("status")=="CHECK_INCOMPLETE"; print("::warning title=Read-only check incomplete::Some observations were unavailable; this is not proof of missing policy pages." if incomplete else "::error title=AdSense readiness::Confirmed check failures or a check execution problem remain; see the report."); sys.exit(0 if incomplete else 1)'

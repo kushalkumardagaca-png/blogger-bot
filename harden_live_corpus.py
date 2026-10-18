@@ -81,7 +81,7 @@ def editorial_only(post,content):
   for node in soup.select(selector):node.decompose()
  if 'News' in set(post.get('labels') or []) or soup.select_one('.fbk-item'):
   selected=soup.select('p.fbk-description,p.fbk-context')
-  return '<article>'+''.join(str(x) for x in selected)+'</article>'
+  if selected:return '<article>'+''.join(str(x) for x in selected)+'</article>'
  article=soup.select_one('article.dy2')
  if article:
   return str(article)

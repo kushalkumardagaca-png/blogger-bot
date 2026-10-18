@@ -119,6 +119,20 @@ def editorial(post):
     return str(node or soup)
 
 
+def image_key(value):
+    parsed=urlparse(html.unescape(str(value)))
+    path=unquote(unquote(parsed.path))
+    host=(parsed.hostname or '').casefold()
+    if host in ('thumb.wikimedia.org','upload.wikimedia.org') and '/wikipedia/commons/' in path:
+        parts=path.split('/')
+        return 'commons-file:'+((parts[-2] if '/thumb/' in path else parts[-1]).replace(' ','_').casefold())
+    if host=='commons.wikimedia.org' and path.startswith('/wiki/File:'):
+        return 'commons-file:'+path.split('/wiki/File:',1)[1].replace(' ','_').casefold()
+    if host=='raw.githubusercontent.com' and path.startswith('/kushalkumardagaca-png/blogger-bot/'):
+        path=path.replace('/refs/heads/main/','/main/')
+    return host+path
+
+
 def pool_evidence():
     registry=load('PHOTO_USAGE_REGISTRY.json',{}).get('items',[])
     paths=list((ROOT/'photo_library').glob('**/*.json'))
@@ -133,9 +147,13 @@ def pool_evidence():
         pool_rows.append({'pool':str(p.relative_to(ROOT)),'type':'news' if p.parent==NEWS_DIR else 'master',
                           'count':len(items),'target':d.get('target'),'title':d.get('title','')[:100]})
     by_url={}
-    for record in registry+entries:
-        for key in ('url','original_url','download_url'):
-            if record.get(key):by_url[html.unescape(record[key])]=record
+    supplement=load('IMAGE_LICENCE_EVIDENCE_SUPPLEMENT.json',{}).get('items',[])
+    for record in registry+entries+supplement:
+        for key in ('url','original_url','download_url','source_page'):
+            if record.get(key):
+                token=image_key(record[key]);previous=by_url.get(token,{})
+                score=lambda r:sum(bool(r.get(k)) for k in ('creator','source_page'))+bool(r.get('license') or r.get('licence'))+bool(r.get('license_url') or r.get('licence_url'))
+                if score(record)>=score(previous):by_url[token]=record
     return pool_rows,by_url
 
 
@@ -157,8 +175,10 @@ def corpus_audit(posts,pages):
         for figure in soup.find_all('figure'):
             img=figure.find('img',src=True)
             if not img:continue
-            src=html.unescape(img['src']);record=image_records.get(src,{})
+            src=html.unescape(img['src']);record=image_records.get(image_key(src),{})
             caption=figure.find('figcaption');links=[x.get('href','') for x in figure.find_all('a',href=True)]
+            if not record:
+                record=next((image_records[image_key(link)] for link in links if image_key(link) in image_records),{})
             license_name=record.get('license') or record.get('licence') or ''
             license_url=record.get('license_url') or record.get('licence_url') or ''
             source=record.get('source_page') or ''
@@ -207,7 +227,13 @@ def analytics_audit(observed):
     response=requests.get('https://analyticsadmin.googleapis.com/v1beta/accountSummaries',headers=headers,timeout=40)
     result['adminReadHttpStatus']=response.status_code
     if not response.ok:
-        return {**result,'status':'ANALYTICS_READ_PERMISSION_UNAVAILABLE','detail':'Current authorised token cannot list Analytics properties; no permission grant or installation was attempted.'}
+        try:error=response.json().get('error',{})
+        except ValueError:error={}
+        reasons=[x.get('reason','') for x in error.get('details',[]) if isinstance(x,dict)]
+        reasons += [x.get('reason','') for x in error.get('errors',[]) if isinstance(x,dict)]
+        state='ANALYTICS_API_DISABLED' if 'SERVICE_DISABLED' in reasons else ('ANALYTICS_SCOPE_MISSING' if any('SCOPE' in x.upper() or 'insufficient' in x.lower() for x in reasons) else 'ANALYTICS_READ_UNAVAILABLE')
+        return {**result,'status':state,'apiReasons':reasons,'apiErrorStatus':error.get('status'),
+                'detail':'Existing authorised access could not list Analytics properties. No account/permission changes, collection installation or event submission was attempted.'}
     configured=os.environ.get('GA4_PROPERTY_ID','').strip();matching=[]
     summaries=[p for a in response.json().get('accountSummaries',[]) for p in a.get('propertySummaries',[])]
     for row in summaries:
@@ -244,9 +270,19 @@ def main():
     errors=[];reader=BloggerReader();blog=reader.get('',{'fields':'id,name,url,description'})
     posts=reader.collect('posts');pages=reader.collect('pages');drafts=reader.collect('posts','draft',False)
     observed,source=page_source()
-    observed['adsTxt']=plain_diagnostic('/ads.txt')
-    observed['adsTxt']['matchesRecordedPublisher']='google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0' in observed['adsTxt']['text']
-    observed['robotsTxt']=plain_diagnostic('/robots.txt')
+    if observed.get('status')!='OBSERVED':
+        supplemental=load('TABLE3_LOCAL_SOURCE_EVIDENCE.json',{})
+        if supplemental.get('status')=='OBSERVED':
+            observed={**supplemental,'runnerSourceRead':observed,'evidenceOrigin':'Earlier independent source diagnostic; see its original checkedAt/sourceSha256, not a fresh successful runner request'}
+    current_ads=plain_diagnostic('/ads.txt')
+    if current_ads['httpStatus']==200 or observed.get('adsTxt',{}).get('httpStatus')!=200:
+        observed['adsTxt']=current_ads
+    else:observed['runnerAdsTxtRead']=current_ads
+    observed['adsTxt']['matchesRecordedPublisher']=('google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0' in observed['adsTxt']['text']) if observed['adsTxt']['httpStatus']==200 else None
+    current_robots=plain_diagnostic('/robots.txt')
+    if current_robots['httpStatus']==200 or observed.get('robotsTxt',{}).get('httpStatus')!=200:
+        observed['robotsTxt']=current_robots
+    else:observed['runnerRobotsRead']=current_robots
     save('TABLE3_SITE_SOURCE_STATUS.json',observed)
     corpus,photos=corpus_audit(posts,pages)
     save('TABLE3_CORPUS_AUDIT.json',corpus);save('TABLE3_PHOTO_AUDIT.json',photos)

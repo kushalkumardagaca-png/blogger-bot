@@ -1,0 +1,51 @@
+{
+  "status": "OBSERVED",
+  "httpStatus": 200,
+  "checkedAt": "2026-10-18T08:45:31.683293+00:00",
+  "sourceSha256": "e6f1d7d7f1e8ab5555f4c7c89e43e39795e3032532ed51c507f9b2a64f279c08",
+  "evidenceOrigin": "Sandbox source-only diagnostic; page scripts were not executed on the live site",
+  "ga4IdsObserved": [
+    "G-WLEEYTKV12"
+  ],
+  "tagManagerIdsObserved": [],
+  "gtagConfigDestinations": [
+    "G-WLEEYTKV12"
+  ],
+  "analyticsLoaderSources": [
+    "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+  ],
+  "adSensePublisherIds": [
+    "ca-pub-1083724733490660"
+  ],
+  "adsenseAccountMeta": "",
+  "consentScriptCount": 1,
+  "hasConsentDefaults": true,
+  "certifiedConsentSignalsObserved": false,
+  "reportAbuseLinks": [
+    {
+      "text": "",
+      "href": "https://www.blogger.com/go/report-abuse"
+    }
+  ],
+  "policyNavigation": {
+    "/p/about-us_02080501126.html": true,
+    "/p/contact-us_01883938366.html": true,
+    "/p/privacy-policy.html": true,
+    "/p/disclaimer.html": true,
+    "/p/terms-and-conditions.html": true
+  },
+  "scriptsExecutedOnLiveSite": false,
+  "analyticsEventsSent": 0,
+  "limits": "Existing tag/configuration observed, not Analytics account or readership proof.",
+  "adsTxt": {
+    "httpStatus": 200,
+    "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
+    "checkedAt": "2026-10-18T09:05:26.252937+00:00",
+    "matchesRecordedPublisher": true
+  },
+  "robotsTxt": {
+    "httpStatus": 200,
+    "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
+    "checkedAt": "2026-10-18T09:05:26.294759+00:00"
+  }
+}

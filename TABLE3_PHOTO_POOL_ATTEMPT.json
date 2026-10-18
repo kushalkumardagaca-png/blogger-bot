@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-10-18T09:17:26.155966+00:00",
+  "scope": "Prepared News photo pools only; no website edits",
+  "budgetMinutes": 6,
+  "result": "Time budget reached after two deficient desks; no new candidates passed all current filters.",
+  "desksChecked": [
+    {
+      "desk": "asia-pacific",
+      "before": 32,
+      "after": 32
+    },
+    {
+      "desk": "china",
+      "before": 24,
+      "after": 24
+    }
+  ],
+  "requirementsMet": false,
+  "siteWrites": 0,
+  "noForcedUnlicensedOrUnrelatedPhotos": true
+}

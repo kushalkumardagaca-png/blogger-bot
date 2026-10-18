@@ -1,0 +1,370 @@
+{
+  "checkedAt": "2026-10-18T08:49:45.252247+00:00",
+  "method": "Offline Chromium replay of the current fetched HTML; document fulfilled locally and all outbound requests blocked",
+  "sourceSha256": "e6f1d7d7f1e8ab5555f4c7c89e43e39795e3032532ed51c507f9b2a64f279c08",
+  "networkRequestsSentToLiveSite": 0,
+  "analyticsEventsSent": 0,
+  "adClicks": 0,
+  "consentDefaultPrecedesGa4Loader": true,
+  "results": [
+    {
+      "case": "first_visit_essential",
+      "before": {
+        "saved": null,
+        "panelOpen": true,
+        "label": "Privacy choices",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:39.228000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ]
+        ]
+      },
+      "after": {
+        "saved": "essential",
+        "panelOpen": false,
+        "label": "Privacy choices \u00b7 Essential only",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:39.228000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ],
+          {
+            "event": "dy_consent_update",
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          [
+            "consent",
+            "update",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied"
+            }
+          ]
+        ]
+      },
+      "localCookies": [],
+      "externalRequestsBlocked": 7,
+      "googleTagLoadAttempts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+      ],
+      "analyticsCollectAttempts": [],
+      "scriptErrorsWithExternalDependenciesBlocked": [
+        "_WidgetManager is not defined"
+      ]
+    },
+    {
+      "case": "first_visit_allow",
+      "before": {
+        "saved": null,
+        "panelOpen": true,
+        "label": "Privacy choices",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:40.978000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ]
+        ]
+      },
+      "after": {
+        "saved": "all",
+        "panelOpen": false,
+        "label": "Privacy choices \u00b7 All cookies allowed",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:40.978000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ],
+          {
+            "event": "dy_consent_update",
+            "analytics_storage": "granted",
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted"
+          },
+          [
+            "consent",
+            "update",
+            {
+              "analytics_storage": "granted",
+              "ad_storage": "granted",
+              "ad_user_data": "granted",
+              "ad_personalization": "granted"
+            }
+          ]
+        ]
+      },
+      "localCookies": [],
+      "externalRequestsBlocked": 7,
+      "googleTagLoadAttempts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+      ],
+      "analyticsCollectAttempts": [],
+      "scriptErrorsWithExternalDependenciesBlocked": [
+        "_WidgetManager is not defined"
+      ]
+    },
+    {
+      "case": "saved_essential",
+      "before": {
+        "saved": "essential",
+        "panelOpen": true,
+        "label": "Privacy choices \u00b7 Essential only",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:42.580000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ],
+          {
+            "event": "dy_consent_update",
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          [
+            "consent",
+            "update",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied"
+            }
+          ]
+        ]
+      },
+      "after": {
+        "saved": "essential",
+        "panelOpen": true,
+        "label": "Privacy choices \u00b7 Essential only",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:42.580000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ],
+          {
+            "event": "dy_consent_update",
+            "analytics_storage": "denied",
+            "ad_storage": "denied",
+            "ad_user_data": "denied",
+            "ad_personalization": "denied"
+          },
+          [
+            "consent",
+            "update",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied"
+            }
+          ]
+        ]
+      },
+      "localCookies": [],
+      "externalRequestsBlocked": 7,
+      "googleTagLoadAttempts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+      ],
+      "analyticsCollectAttempts": [],
+      "scriptErrorsWithExternalDependenciesBlocked": [
+        "_WidgetManager is not defined"
+      ]
+    },
+    {
+      "case": "saved_allow",
+      "before": {
+        "saved": "all",
+        "panelOpen": false,
+        "label": "Privacy choices \u00b7 All cookies allowed",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:44.009000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ],
+          {
+            "event": "dy_consent_update",
+            "analytics_storage": "granted",
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted"
+          },
+          [
+            "consent",
+            "update",
+            {
+              "analytics_storage": "granted",
+              "ad_storage": "granted",
+              "ad_user_data": "granted",
+              "ad_personalization": "granted"
+            }
+          ]
+        ]
+      },
+      "after": {
+        "saved": "all",
+        "panelOpen": false,
+        "label": "Privacy choices \u00b7 All cookies allowed",
+        "commands": [
+          [
+            "consent",
+            "default",
+            {
+              "analytics_storage": "denied",
+              "ad_storage": "denied",
+              "ad_user_data": "denied",
+              "ad_personalization": "denied",
+              "wait_for_update": 500
+            }
+          ],
+          [
+            "js",
+            "2026-10-18 08:49:44.009000+00:00"
+          ],
+          [
+            "config",
+            "G-WLEEYTKV12"
+          ],
+          {
+            "event": "dy_consent_update",
+            "analytics_storage": "granted",
+            "ad_storage": "granted",
+            "ad_user_data": "granted",
+            "ad_personalization": "granted"
+          },
+          [
+            "consent",
+            "update",
+            {
+              "analytics_storage": "granted",
+              "ad_storage": "granted",
+              "ad_user_data": "granted",
+              "ad_personalization": "granted"
+            }
+          ]
+        ]
+      },
+      "localCookies": [],
+      "externalRequestsBlocked": 7,
+      "googleTagLoadAttempts": [
+        "https://www.googletagmanager.com/gtag/js?id=G-WLEEYTKV12"
+      ],
+      "analyticsCollectAttempts": [],
+      "scriptErrorsWithExternalDependenciesBlocked": [
+        "_WidgetManager is not defined"
+      ]
+    }
+  ],
+  "limits": "This validates UI/storage/queued consent commands, not certified-CMP status or the full live Google-tag network behavior. All external scripts were blocked; zero cookies here must not be claimed as live-cookie proof. No speed scores are inferred."
+}

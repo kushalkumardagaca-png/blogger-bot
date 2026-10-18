@@ -7,6 +7,7 @@ repetitive or commercially manipulative material.
 """
 from __future__ import annotations
 import html,os,re
+from urllib.parse import urlparse,parse_qs
 from collections import Counter
 
 POLICY_VERSION="BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2"
@@ -120,7 +121,12 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  # relationship statement; otherwise it can resemble a fake review.
  if re.search(r"\bbest\b.{0,45}\b(?:compan(?:y|ies)|bank|broker|insurer|insurance|card|loan|app|platform|fund)s?\b",title or '',re.I):
   if not re.search(r"\b(?:selection|comparison|ranking) methodology\b",text,re.I) or not re.search(r"\b(?:no paid placement|not a paid ranking|commercial relationship|affiliate compensation)\b",text,re.I):issues.append("unsupported financial ranking or fake-review risk")
- affiliate_links=re.findall(r'<a\b[^>]*href=["\']([^"\']*(?:affiliate|aff_id|affid|referral|utm_medium=affiliate)[^"\']*)',content or '',flags=re.I)
+ # Encoded Google News IDs can coincidentally contain "affid". Only actual
+ # parsed affiliate query parameters establish this mechanical signal.
+ affiliate_links=[]
+ for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content or '',flags=re.I):
+  query=parse_qs(urlparse(html.unescape(href)).query)
+  if any(k.casefold() in ('aff_id','affid','affiliate','affiliate_id','referral') for k in query) or any(v.casefold()=='affiliate' for k,values in query.items() if k.casefold()=='utm_medium' for v in values):affiliate_links.append(href)
  if affiliate_links and not re.search(r"\b(?:affiliate|commercial relationship|paid placement|commission)\b",text,re.I):issues.append("undisclosed affiliate or commercial link")
  # Seamless carousels may contain an accessibility-hidden clone of visible cards.
  # Scan the full text for harmful material, but do not count that non-reader clone
@@ -129,9 +135,13 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>',r'<a\b[^>]*class=["\'][^"\']*\b(?:fbk-src|dy-context|dy-related)\b[^"\']*["\'][^>]*>.*?</a>'):
   repetition_content=re.sub(pattern,' ',repetition_content,flags=re.I|re.S)
  seq=[normalize_sentence(x) for x in sentences(repetition_content)];seq=[x for x in seq if len(x.split())>=10]
- counts=Counter(seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]
+ # This is an explicit background/date label, not substantive reporting. It
+ # remains visible on each older item and is not removed to fake originality.
+ date_label=normalize_sentence('It is separated from the current-period items so its date and role are clear.')
+ substantive_seq=[s for s in seq if s!=date_label]
+ counts=Counter(substantive_seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]
  if duplicates:issues.append("repeated substantive sentence within the content")
- if len(seq)>=12 and len(counts)/len(seq)<0.94:issues.append("insufficient sentence-level originality")
+ if len(substantive_seq)>=12 and len(counts)/len(substantive_seq)<0.94:issues.append("insufficient sentence-level originality")
  for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content or '',flags=re.I):
   if re.match(r'\s*(?:javascript|vbscript|data):',html.unescape(href),re.I):issues.append('unsafe active link scheme')
  for src in re.findall(r'<script\b[^>]*src=["\']([^"\']+)',content or '',flags=re.I):

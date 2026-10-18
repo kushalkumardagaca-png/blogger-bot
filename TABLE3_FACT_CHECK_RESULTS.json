@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-18T09:05:26.295194+00:00",
+  "scope": "Two source-attributed statements from the 18 October Economy edition, not the full article/corpus; no claim Kushal reviewed them.",
+  "checks": [
+    {
+      "claim": "ICICI Q2 FY27 net profit 14,843 crore, +20.1% year on year",
+      "result": "Corroborated; standalone and consolidated figures must not be confused.",
+      "support": [
+        "[13](https://x.com/ICICIBank/status/2111463095197724919)",
+        "[7](https://m.economictimes.com/markets/stocks/earnings/icici-bank-q2-results-net-profit-jumps-20-to-rs-14843-crore-nii-rises-18-yoy/amp_articleshow/135011810.cms)"
+      ]
+    },
+    {
+      "claim": "Economic Times reports HDFC Q2 FY27 profit 19,509 crore and 4.6% year-on-year growth",
+      "result": "Matches the attributed Economic Times wording, but other reports show 19,509.96 crore rounded to 19,510 and 4.7%. Do not represent the truncated source wording as an independently precise bank filing.",
+      "support": [
+        "[2](https://m.economictimes.com/markets/stocks/earnings/hdfc-bank-q2-results-net-profit-rises-5-yoy-to-rs-19510-crore-nii-grows-10/amp_articleshow/135010605.cms)",
+        "[13](https://www.businesstoday.in/markets/stocks/story/hdfc-bank-q2-results-net-profit-rises-4-7-to-rs-19510-crore-key-highlights-562243-2026-10-17)"
+      ]
+    }
+  ],
+  "expertReviewClaimed": false,
+  "siteEdits": 0
+}

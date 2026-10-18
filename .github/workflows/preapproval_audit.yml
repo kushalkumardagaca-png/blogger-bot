@@ -31,11 +31,19 @@ jobs:
         with: {python-version: '3.12'}
       - name: Check the safety controls
         run: |
-          python -m pip install --disable-pip-version-check requests beautifulsoup4 pillow imagehash json-repair pytest pyyaml
+          python -m pip install --disable-pip-version-check requests beautifulsoup4 pillow imagehash json-repair pytest pyyaml cryptography
           python -m pytest -q --junitxml=/tmp/table3-tests.xml
           python -c 'import json,xml.etree.ElementTree as E; from pathlib import Path; r=E.parse("/tmp/table3-tests.xml").getroot(); ss=[r] if r.tag=="testsuite" else list(r); Path("TABLE3_CONTROL_TESTS.json").write_text(json.dumps({"tests":sum(int(x.get("tests",0)) for x in ss),"failures":sum(int(x.get("failures",0)) for x in ss),"errors":sum(int(x.get("errors",0)) for x in ss)}))'
           git restore NEWS_COVERAGE_STATUS.json SEARCH_DEMAND_TRENDS.json PUBLISHING_AUTOMATION_AUDIT.json
           python audit_publishing_automation.py
+      - name: Apply only the separately documented essential privacy/stock-commentary corrections
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, '[apply-table3-corrections]')
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python -u preapproval_essential_corrections.py --apply
       - name: Remove only verified extra social copies of live articles
         id: cleanup
         continue-on-error: true
@@ -109,12 +117,14 @@ jobs:
             TABLE3_PROGRESS_REPORT.md
             SOCIAL_DUPLICATE_CLEANUP_STATUS.json
             /tmp/table3-social-cleanup-backup.json
+            /tmp/table3-essential-before.json.gz
+            ESSENTIAL_PREAPPROVAL_CORRECTIONS.json
             /tmp/table3-tests.xml
       - name: Persist the compact report evidence without modifying the website
         if: always()
         run: |
           files=()
-          for file in TABLE3_*.json TABLE3_PROGRESS_REPORT.md SOCIAL_DUPLICATE_CLEANUP_STATUS.json EXISTING_ANALYTICS_CONNECTION.json AUDIENCE_GROWTH_BASELINE.json AUDIENCE_GROWTH_BASELINE.md GROWTH_CONTROL_TOWER.json GROWTH_CONTROL_TOWER.md; do
+          for file in TABLE3_*.json TABLE3_PROGRESS_REPORT.md SOCIAL_DUPLICATE_CLEANUP_STATUS.json ESSENTIAL_PREAPPROVAL_CORRECTIONS.json EXISTING_ANALYTICS_CONNECTION.json AUDIENCE_GROWTH_BASELINE.json AUDIENCE_GROWTH_BASELINE.md GROWTH_CONTROL_TOWER.json GROWTH_CONTROL_TOWER.md; do
             if [ -f "$file" ]; then files+=("$file"); fi
           done
           bash persist_social_state.sh "${files[@]}"
