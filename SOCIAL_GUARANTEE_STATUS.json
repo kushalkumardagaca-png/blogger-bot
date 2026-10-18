@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-18T06:17:18.349792+05:30",
+ "generatedAt": "2026-10-18T06:50:14.918551+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 3,
  "expectedPosts": 6,
- "articlesWithBothPosts": 2,
- "postsMissing": 2,
+ "articlesWithBothPosts": 3,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -36,20 +36,16 @@
    "key": "master-trending-2cd0183cf5f56550",
    "title": "U.S. budget deficit swells to almost $2 trilli",
    "url": "https://dailyyield.blogspot.com/2026/10/us-budget-deficit-swells-to-almost-2.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "tumblr": 0,
+    "tumblr": 1,
     "mastodon": 0
-   },
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
