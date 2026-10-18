@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T22:59:33.195947+05:30",
+  "generatedAt": "2026-10-18T23:25:57.709875+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
@@ -9,12 +9,19 @@
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "social_replay",
+      "key": "master-evergreen-3",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    }
+  ],
   "retryBlocked": [
     "social:2026-10-18:news-americas:0",
     "social:2026-10-18:news-companies:1",
-    "social:2026-10-18:news-global:0",
-    "social:2026-10-18:master-evergreen-3:0"
+    "social:2026-10-18:news-global:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
