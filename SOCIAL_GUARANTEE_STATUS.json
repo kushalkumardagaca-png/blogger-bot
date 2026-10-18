@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-18T13:17:39.749206+05:30",
+ "generatedAt": "2026-10-18T13:38:43.889451+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 11,
  "expectedPosts": 22,
- "articlesWithBothPosts": 10,
- "postsMissing": 2,
+ "articlesWithBothPosts": 11,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -36,17 +36,13 @@
    "key": "news-economy",
    "title": "economy edition",
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-18.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 2,
     "bluesky": 0,
-    "tumblr": 0,
+    "tumblr": 2,
     "mastodon": 0
-   },
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   }
   },
   {
    "key": "news-russia",
@@ -147,5 +143,5 @@
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
