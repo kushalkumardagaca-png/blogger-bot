@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T15:28:47.685865+05:30",
+  "generatedAt": "2026-10-18T23:11:55.098464+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -36,19 +36,19 @@
       "id": "B6",
       "task": "Facts and originality",
       "result": "Automated check done; human-review limit remains",
-      "proof": "511 live posts read as actually stored. Policy flags: 9; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
+      "proof": "516 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
     },
     {
       "id": "B7",
       "task": "Photographs and rights",
       "result": "Checked; requirements not fully met",
-      "proof": "Master photo-count mismatches: 122; figures needing fuller licence/alt/caption evidence: 44; News pools below 40: 6. Exact-file licence metadata recovered separately: 455. No copyright-ownership guarantee or old-photo replacement."
+      "proof": "Master photo-count mismatches: 124; figures needing fuller licence/alt/caption evidence: 0; News pools below 40: 0. Exact-file licence metadata recovered separately: 522. No copyright-ownership guarantee or old-photo replacement."
     },
     {
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-18T15:16:29.980581+05:30: 13/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 1."
+      "proof": "Live status source 2026-10-18T23:06:01.128846+05:30: 21/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 1."
     },
     {
       "id": "B9",
@@ -121,10 +121,6 @@
       "Analytics report access is not established. Only if you already use Analytics, check the existing property/permission. Do not install code to complete this checklist."
     ],
     [
-      "Before approval, after reviewing the specific evidence",
-      "Approve only the smallest confirmed content correction if a reported issue is genuine. No bulk rewrite has been applied."
-    ],
-    [
       "Before high-risk advice is published",
       "A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article."
     ],
@@ -139,8 +135,8 @@
   ],
   "sourceDates": {
     "siteAudit": "2026-10-18T09:47:52.696145+00:00",
-    "slots": "2026-10-18T15:16:29.980581+05:30",
-    "social": "2026-10-18T15:25:29.818257+05:30",
+    "slots": "2026-10-18T23:06:01.128846+05:30",
+    "social": "2026-10-18T23:06:12.806810+05:30",
     "google": "2026-10-18T09:21:38.113572+00:00"
   },
   "noGrandUpdateStarted": true,
