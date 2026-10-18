@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T22:16:00.437093+05:30",
+ "generatedAt": "2026-10-18T22:20:17.560256+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 22,
  "expectedPosts": 44,
- "articlesWithBothPosts": 17,
- "postsMissing": 6,
- "dispatched": 6,
+ "articlesWithBothPosts": 18,
+ "postsMissing": 4,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-markets",
@@ -64,7 +64,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -109,7 +109,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -168,7 +168,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -297,7 +297,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -318,26 +318,22 @@
    "key": "master-evergreen-4",
    "title": "Be a gharjamai: Is wife asking her husband to",
    "url": "https://dailyyield.blogspot.com/2026/10/be-gharjamai-is-wife-asking-her-husband.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 1,
- "liveVerificationSourceAt": "2026-10-18T22:15:47.458395+05:30",
+ "liveVerificationSourceAt": "2026-10-18T22:20:08.727062+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 16,
+ "articlesWithExactlyTwoPosts": 17,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
