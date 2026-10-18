@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T21:34:59.369281+00:00",
+  "generated_at": "2026-10-18T21:35:38.810303+00:00",
   "method": "Official social APIs only; no Daily Yield page requests and no synthetic views.",
   "limitations": "Impressions are recorded only where the platform API supplies them. Engagement counts are not treated as impressions.",
   "platforms": {
@@ -21,6 +21,885 @@
     }
   },
   "items": [
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "42cceecfe3ca19a2",
+        "topic": "page",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "A PRACTICAL MONEY RESOURCE",
+        "emoji": "📌",
+        "question": "Which decision will you use this resource for?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my66plgymf2m",
+      "title": "FOR CORPORATE",
+      "destination": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "published_at": "2026-10-18T23:30:11.302977+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "fbb296da5966f7ae",
+        "topic": "general",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "ONE DECISION, CLEAR ASSUMPTIONS",
+        "emoji": "🌐",
+        "question": "Which number would decide this for you?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117462937347516657",
+      "title": "Be a gharjamai: Is wife asking her husband to",
+      "destination": "https://dailyyield.blogspot.com/2026/10/be-gharjamai-is-wife-asking-her-husband.html",
+      "published_at": "2026-10-18T22:19:43.830129+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "14eebaf36a536d74",
+        "topic": "page",
+        "style": "lavender zine",
+        "style_index": 6,
+        "hook": "USE THE TOOL, CHECK THE ASSUMPTIONS",
+        "emoji": "🌐",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "117462795706322443",
+      "title": "DAILY NEWS",
+      "destination": "https://dailyyield.blogspot.com/p/daily-news.html",
+      "published_at": "2026-10-18T21:43:42.572165+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "8f339ff2deee33a6",
+        "topic": "market",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "WHAT THE NUMBERS CAN SUPPORT",
+        "emoji": "🧾",
+        "question": "What downside would make this unsuitable for you?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "117462582741798380",
+      "title": "Call for more food funding due to high living",
+      "destination": "https://dailyyield.blogspot.com/2026/10/call-for-more-food-funding-due-to-high.html",
+      "published_at": "2026-10-18T20:49:33.545594+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "3636616690266156",
+        "topic": "market",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "READ THE RISK BEFORE THE RETURN",
+        "emoji": "📌",
+        "question": "Which assumption would change your view?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my5vq6zsvi2s",
+      "title": "Call for more food funding due to high living",
+      "destination": "https://dailyyield.blogspot.com/2026/10/call-for-more-food-funding-due-to-high.html",
+      "published_at": "2026-10-18T20:49:27.711189+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "b2ddcdcaecab8f5c",
+        "topic": "economy",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "MACRO DATA WITH LIMITS ATTACHED",
+        "emoji": "📊",
+        "question": "Which household decision could this number affect?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my5seyfl2t2y",
+      "title": "China's central bank to boost support for glob",
+      "destination": "https://dailyyield.blogspot.com/2026/10/chinas-central-bank-to-boost-support.html",
+      "published_at": "2026-10-18T19:49:30.469762+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "f250b59349d979f2",
+        "topic": "saving",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "BUILD MARGIN BEFORE CHASING RETURN",
+        "emoji": "🌐",
+        "question": "What amount can you sustain in a difficult month?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my5ozlv6bz2y",
+      "title": "Banking & Personal Money News",
+      "destination": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01450325346.html",
+      "published_at": "2026-10-18T18:49:27.017601+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "d1e5cf3976ef6e31",
+        "topic": "general",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "🧮",
+        "question": "Which number would decide this for you?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117461841545153669",
+      "title": "Companies, IPOs & Deals News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-18.html",
+      "published_at": "2026-10-18T17:41:03.204966+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "0639058fb30c3cfc",
+        "topic": "news",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "🔎",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117461756820559612",
+      "title": "Americas Finance News — 17 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T17:19:30.633708+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "22178a0c7aa23d06",
+        "topic": "page",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "A PRACTICAL MONEY RESOURCE",
+        "emoji": "🧾",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my5jws3vbm2s",
+      "title": "CALCULATOR",
+      "destination": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "published_at": "2026-10-18T17:18:23.924849+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "66afe712d86c2fd0",
+        "topic": "tax",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "CHECK THE COUNTRY AND TAX YEAR",
+        "emoji": "🧾",
+        "question": "What record would you need to support the claim?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117461535399690608",
+      "title": "(LEAD) S. Korea, U.S. hold first 2+2 meeting o",
+      "destination": "https://dailyyield.blogspot.com/2026/10/lead-s-korea-us-hold-first-22-meeting-o.html",
+      "published_at": "2026-10-18T16:23:11.800321+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "465466becdd35fbd",
+        "topic": "page",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "A PRACTICAL MONEY RESOURCE",
+        "emoji": "🧮",
+        "question": "Which decision will you use this resource for?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117461498327631428",
+      "title": "DAILY ARTICLE",
+      "destination": "https://dailyyield.blogspot.com/p/article.html",
+      "published_at": "2026-10-18T16:13:47.419703+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "d8c3069cbf42eebd",
+        "topic": "general",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "ONE DECISION, CLEAR ASSUMPTIONS",
+        "emoji": "📌",
+        "question": "What evidence would make you choose differently?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my5dc6dmkx2y",
+      "title": "X Money is here: What Elon Musk’s financial su",
+      "destination": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
+      "published_at": "2026-10-18T15:19:29.882725+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "64e103933b206a0c",
+        "topic": "general",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "🧾",
+        "question": "What evidence would make you choose differently?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "830804553040560128",
+      "title": "X Money is here: What Elon Musk’s financial su",
+      "destination": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
+      "published_at": "2026-10-18T15:19:24.428538+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "defeee2df3d2a07f",
+        "topic": "market",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "READ THE RISK BEFORE THE RETURN",
+        "emoji": "🔎",
+        "question": "Which assumption would change your view?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "social_id": "117461107009900922",
+      "title": "Global investors firm India BFSI bets with ove",
+      "destination": "https://dailyyield.blogspot.com/2026/10/global-investors-firm-india-bfsi-bets.html",
+      "published_at": "2026-10-18T14:34:15.098342+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "a6de2efb35802680",
+        "topic": "economy",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "THE HOUSEHOLD QUESTION BEHIND THE NUMBER",
+        "emoji": "🔎",
+        "question": "What comparison period would make this clearer?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117461049127526719",
+      "title": "Tesla unveils long-delayed Roadster developed",
+      "destination": "https://dailyyield.blogspot.com/2026/10/tesla-unveils-long-delayed-roadster.html",
+      "published_at": "2026-10-18T14:19:31.907594+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "d89cee609bd8ffaf",
+        "topic": "page",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "USE THE TOOL, CHECK THE ASSUMPTIONS",
+        "emoji": "🔎",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "social_id": "830800572284272640",
+      "title": "Daily Yield Spotlight: Today's Featured Stories",
+      "destination": "https://dailyyield.blogspot.com/#spotlight",
+      "published_at": "2026-10-18T14:16:08.094520+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "9d1520d20a5214fd",
+        "topic": "economy",
+        "style": "teal voltage",
+        "style_index": 5,
+        "hook": "WHAT THE RELEASE ACTUALLY SAYS",
+        "emoji": "🧠",
+        "question": "What comparison period would make this clearer?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "830797005451329536",
+      "title": "Economy, Trade & Jobs News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-18.html",
+      "published_at": "2026-10-18T13:19:26.536410+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "27a7406f0ae9ff00",
+        "topic": "news",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "🔎",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117460694904535325",
+      "title": "Europe Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T12:50:00.324808+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "40b9ab0ab35e6bf1",
+        "topic": "market",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "CONTEXT BEFORE A MARKET DECISION",
+        "emoji": "⚡",
+        "question": "Which assumption would change your view?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117460577020252732",
+      "title": "Markets & Commodities News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-18.html",
+      "published_at": "2026-10-18T12:20:37.434705+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "8ad7d2150a9f9b90",
+        "topic": "market",
+        "style": "violet mint",
+        "style_index": 2,
+        "hook": "CONTEXT BEFORE A MARKET DECISION",
+        "emoji": "📊",
+        "question": "What downside would make this unsuitable for you?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "830793230525267968",
+      "title": "Markets & Commodities News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-18.html",
+      "published_at": "2026-10-18T12:19:26.407523+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "787ad37a02c674fd",
+        "topic": "general",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "CHECK THE DOWNSIDE, NOT JUST THE CLAIM",
+        "emoji": "🧾",
+        "question": "What evidence would make you choose differently?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my4vznpqj42l",
+      "title": "Small business cash flow tips for peak trading",
+      "destination": "https://dailyyield.blogspot.com/2026/10/small-business-cash-flow-tips-for-peak.html",
+      "published_at": "2026-10-18T11:22:05.089453+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "ffca7b4e274bc1c9",
+        "topic": "general",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "🌐",
+        "question": "What evidence would make you choose differently?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "830789612175835136",
+      "title": "Small business cash flow tips for peak trading",
+      "destination": "https://dailyyield.blogspot.com/2026/10/small-business-cash-flow-tips-for-peak.html",
+      "published_at": "2026-10-18T11:21:56.248817+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "7bf281194af4cb7c",
+        "topic": "page",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "A PRACTICAL MONEY RESOURCE",
+        "emoji": "🔎",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my4vd6zgnv2s",
+      "title": "MARKETS TODAY",
+      "destination": "https://dailyyield.blogspot.com/p/markets-today.html",
+      "published_at": "2026-10-18T11:09:31.659060+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "fd1e3cdfe00e1243",
+        "topic": "news",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "🧮",
+        "question": "Which linked source deserves a closer read?",
+        "layout": 0,
+        "adaptive": true
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my4sjog2db2d",
+      "title": "Russia Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T10:20:00.761617+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "513a8524b1773267",
+        "topic": "market",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "WHAT THE NUMBERS CAN SUPPORT",
+        "emoji": "🧮",
+        "question": "What downside would make this unsuitable for you?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117459869112977241",
+      "title": "What is the Daily Yield website?",
+      "destination": "https://dailyyield.blogspot.com/2026/10/what-is-daily-yield-website.html",
+      "published_at": "2026-10-18T09:20:01.578628+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "c4a305a4247fd0d7",
+        "topic": "market",
+        "style": "rose terminal",
+        "style_index": 9,
+        "hook": "WHAT THE NUMBERS CAN SUPPORT",
+        "emoji": "🧮",
+        "question": "What downside would make this unsuitable for you?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "830781909943615488",
+      "title": "What is the Daily Yield website?",
+      "destination": "https://dailyyield.blogspot.com/2026/10/what-is-daily-yield-website.html",
+      "published_at": "2026-10-18T09:19:30.310531+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "df197992ec66ee4d",
+        "topic": "page",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "A USEFUL DAILY YIELD RESOURCE",
+        "emoji": "📊",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 1,
+        "adaptive": false
+      },
+      "social_id": "117459817652640064",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "destination": "https://dailyyield.blogspot.com/",
+      "published_at": "2026-10-18T09:06:21.069098+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "245939c911a3edbb",
+        "topic": "general",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "CHECK THE DOWNSIDE, NOT JUST THE CLAIM",
+        "emoji": "🧠",
+        "question": "Which number would decide this for you?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my4lt2mm662d",
+      "title": "Government moves to align education with futur",
+      "destination": "https://dailyyield.blogspot.com/2026/10/government-moves-to-align-education.html",
+      "published_at": "2026-10-18T08:19:26.585795+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "b53a1a8c8f59fe4f",
+        "topic": "general",
+        "style": "teal voltage",
+        "style_index": 5,
+        "hook": "A PRACTICAL WAY TO TEST THE IDEA",
+        "emoji": "🧮",
+        "question": "What evidence would make you choose differently?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "830778125771292672",
+      "title": "Government moves to align education with futur",
+      "destination": "https://dailyyield.blogspot.com/2026/10/government-moves-to-align-education.html",
+      "published_at": "2026-10-18T08:19:21.379717+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "bluesky",
+      "creative": {
+        "seed": "797f545cebc80716",
+        "topic": "news",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "🧠",
+        "question": "Which linked source deserves a closer read?",
+        "layout": 0,
+        "adaptive": true
+      },
+      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3my4ihrnzzl2m",
+      "title": "India Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T07:20:01.504599+05:30",
+      "metrics": {
+        "likes": 0,
+        "reposts": 0,
+        "replies": 0,
+        "quotes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "aa69d730260c77a3",
+        "topic": "news",
+        "style": "teal voltage",
+        "style_index": 5,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "emoji": "🧾",
+        "question": "Which linked source deserves a closer read?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "830774360088412160",
+      "title": "India Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T07:19:30.186232+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "ac07655b2fd5d3e2",
+        "topic": "page",
+        "style": "mango grid",
+        "style_index": 8,
+        "hook": "SAVE FOR YOUR NEXT DECISION",
+        "emoji": "🔎",
+        "question": "Which decision will you use this resource for?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "830773732585897984",
+      "title": "FOR CORPORATE",
+      "destination": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+      "published_at": "2026-10-18T07:09:31.702166+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "tumblr",
+      "creative": {
+        "seed": "be47b8eb22d0417d",
+        "topic": "saving",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "BUILD MARGIN BEFORE CHASING RETURN",
+        "emoji": "🧮",
+        "question": "What amount can you sustain in a difficult month?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "social_id": "830770591960285184",
+      "title": "U.S. budget deficit swells to almost $2 trilli",
+      "destination": "https://dailyyield.blogspot.com/2026/10/us-budget-deficit-swells-to-almost-2.html",
+      "published_at": "2026-10-18T06:19:36.640166+05:30",
+      "metrics": {
+        "notes": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "8d0d4460f241cc8b",
+        "topic": "news",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "emoji": "⚡",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "social_id": "117458925452709518",
+      "title": "China Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T05:20:01.768454+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "0157d1af83394de7",
+        "topic": "news",
+        "style": "hot coral",
+        "style_index": 3,
+        "hook": "THE SOURCE-LED UPDATE",
+        "emoji": "🌐",
+        "question": "Which linked source deserves a closer read?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117458692050380819",
+      "title": "Asia-Pacific Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
+      "published_at": "2026-10-18T04:20:05.710588+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
+    {
+      "platform": "mastodon",
+      "creative": {
+        "seed": "3ec8e12aa144df62",
+        "topic": "news",
+        "style": "night signal",
+        "style_index": 4,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
+        "emoji": "🧠",
+        "question": "Does this report change a decision—or only the context?",
+        "layout": 4,
+        "adaptive": false
+      },
+      "social_id": "117458689501202976",
+      "title": "Asia-Pacific Finance News — 18 October 2026",
+      "destination": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18.html",
+      "published_at": "2026-10-18T04:19:26.854816+05:30",
+      "metrics": {
+        "favourites": 0,
+        "reblogs": 0,
+        "replies": 0
+      },
+      "impressions_available": false
+    },
     {
       "platform": "tumblr",
       "creative": {
@@ -110,32 +989,10 @@
       "destination": "https://dailyyield.blogspot.com/2026/10/cost-of-living-demonstrations-to-grip.html",
       "published_at": "2026-10-17T20:50:08.447930+05:30",
       "metrics": {
-        "likes": 0,
+        "likes": 1,
         "reposts": 0,
         "replies": 0,
         "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "3a584aab075d271c",
-        "topic": "general",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "CHECK THE DOWNSIDE, NOT JUST THE CLAIM",
-        "emoji": "🧮",
-        "question": "What evidence would make you choose differently?",
-        "layout": 3,
-        "adaptive": false
-      },
-      "social_id": "830734755555344384",
-      "title": "Cost-of-living demonstrations to grip pre-elec",
-      "destination": "https://dailyyield.blogspot.com/2026/10/cost-of-living-demonstrations-to-grip.html",
-      "published_at": "2026-10-17T20:50:00.750905+05:30",
-      "metrics": {
-        "notes": 0
       },
       "impressions_available": false
     },
@@ -178,28 +1035,6 @@
       "title": "UAB-sponsored benefit options include employee",
       "destination": "https://dailyyield.blogspot.com/2026/10/uab-sponsored-benefit-options-include.html",
       "published_at": "2026-10-17T19:49:26.836713+05:30",
-      "metrics": {
-        "notes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "9f7d1ea63586f363",
-        "topic": "saving",
-        "style": "rose terminal",
-        "style_index": 9,
-        "hook": "MAKE THE NEXT STEP MEASURABLE",
-        "emoji": "📌",
-        "question": "Which assumption should you stress-test first?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "830727203762356224",
-      "title": "Banking & Personal Money News",
-      "destination": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01450325346.html",
-      "published_at": "2026-10-17T18:49:58.423144+05:30",
       "metrics": {
         "notes": 0
       },
@@ -394,28 +1229,6 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "4176e9dd591b1946",
-        "topic": "tax",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "ELIGIBILITY BEFORE THE TAX SAVING",
-        "emoji": "🌐",
-        "question": "Which official rule and tax year apply to you?",
-        "layout": 1,
-        "adaptive": false
-      },
-      "social_id": "830713991650230272",
-      "title": "Sold a property? Eight different ways to reduc",
-      "destination": "https://dailyyield.blogspot.com/2026/10/sold-property-eight-different-ways-to_0586614503.html",
-      "published_at": "2026-10-17T15:19:58.483558+05:30",
-      "metrics": {
-        "notes": 0
       },
       "impressions_available": false
     },
@@ -653,28 +1466,6 @@
         "favourites": 0,
         "reblogs": 0,
         "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "5e6df221ae10bc8c",
-        "topic": "news",
-        "style": "lavender zine",
-        "style_index": 6,
-        "hook": "THE SOURCE-LED UPDATE",
-        "emoji": "🧠",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": false
-      },
-      "social_id": "830695076877516800",
-      "title": "Russia Finance News — 17 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
-      "published_at": "2026-10-17T10:19:20.201916+05:30",
-      "metrics": {
-        "notes": 0
       },
       "impressions_available": false
     },
@@ -4792,30 +5583,6 @@
       "impressions_available": false
     },
     {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "0b1738e63b5d6f89",
-        "topic": "saving",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS",
-        "emoji": "⚡",
-        "question": "Which assumption should you stress-test first?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117428030335370624",
-      "title": "Budget Airlines Lose Their Cost Edge",
-      "destination": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
-      "published_at": "2026-10-12T18:22:25.745464+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "fa9b79a5a4a7dc17",
@@ -4885,30 +5652,6 @@
       "impressions_available": false
     },
     {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "81587048748e2809",
-        "topic": "tax",
-        "style": "hot coral",
-        "style_index": 3,
-        "hook": "ELIGIBILITY BEFORE THE TAX SAVING",
-        "emoji": "🧮",
-        "question": "Which official rule and tax year apply to you?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117427546481982929",
-      "title": "Ambani Heirs Lead Record Jio IPO Roadshow",
-      "destination": "https://dailyyield.blogspot.com/2026/10/ambani-heirs-lead-record-jio-ipo.html",
-      "published_at": "2026-10-12T16:19:22.191793+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "06f9586b310b2a64",
@@ -4959,54 +5702,6 @@
       "impressions_available": false
     },
     {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "0b1738e63b5d6f89",
-        "topic": "saving",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS",
-        "emoji": "⚡",
-        "question": "Which assumption should you stress-test first?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117427338275846979",
-      "title": "Budget Airlines Lose Their Cost Edge",
-      "destination": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
-      "published_at": "2026-10-12T15:26:25.077833+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "cbf42a3bf1cbb656",
-        "topic": "page",
-        "style": "acid ledger",
-        "style_index": 0,
-        "hook": "USE THE TOOL, CHECK THE ASSUMPTIONS",
-        "emoji": "🔎",
-        "question": "What useful tool should Daily Yield improve next?",
-        "layout": 2,
-        "adaptive": false
-      },
-      "social_id": "117427084988903147",
-      "title": "CALCULATOR",
-      "destination": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
-      "published_at": "2026-10-12T14:22:00.272353+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "8fd457afb28c4197",
@@ -5028,30 +5723,6 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "3c3bd5d286db81b4",
-        "topic": "news",
-        "style": "night signal",
-        "style_index": 4,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "🧮",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117426883368287856",
-      "title": "Europe Finance News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-12.html",
-      "published_at": "2026-10-12T13:30:43.759668+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
       },
       "impressions_available": false
     },
@@ -5081,30 +5752,6 @@
       "impressions_available": false
     },
     {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "fda6b4cf9852e93b",
-        "topic": "economy",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "WHAT THE RELEASE ACTUALLY SAYS",
-        "emoji": "📌",
-        "question": "What comparison period would make this clearer?",
-        "layout": 3,
-        "adaptive": false
-      },
-      "social_id": "117426838871676060",
-      "title": "Economy, Trade & Jobs News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-12.html",
-      "published_at": "2026-10-12T13:19:24.774040+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "b57030694cf7efd3",
@@ -5130,214 +5777,6 @@
       "impressions_available": false
     },
     {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "0b1738e63b5d6f89",
-        "topic": "saving",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS",
-        "emoji": "⚡",
-        "question": "Which assumption should you stress-test first?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117426537497103001",
-      "title": "Budget Airlines Lose Their Cost Edge",
-      "destination": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
-      "published_at": "2026-10-12T12:02:46.221220+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "ccfb4f1dd5679024",
-        "topic": "news",
-        "style": "night signal",
-        "style_index": 4,
-        "hook": "WHAT CHANGED — AND WHAT DID NOT",
-        "emoji": "🌐",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "830242098195349504",
-      "title": "Russia Finance News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-12.html",
-      "published_at": "2026-10-12T10:19:25.659541+05:30",
-      "metrics": {
-        "notes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "f0a97d7c8fabdada",
-        "topic": "news",
-        "style": "mango grid",
-        "style_index": 8,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
-        "emoji": "🔎",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117426131024530591",
-      "title": "Russia Finance News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-12.html",
-      "published_at": "2026-10-12T10:19:23.906953+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "752ff2134289219a",
-        "topic": "page",
-        "style": "acid ledger",
-        "style_index": 0,
-        "hook": "A PRACTICAL MONEY RESOURCE",
-        "emoji": "🧠",
-        "question": "What useful tool should Daily Yield improve next?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "830239617637826560",
-      "title": "DAILY ARTICLE",
-      "destination": "https://dailyyield.blogspot.com/p/article.html",
-      "published_at": "2026-10-12T09:40:00.120305+05:30",
-      "metrics": {
-        "notes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "f69712dd2e15ca59",
-        "topic": "general",
-        "style": "rose terminal",
-        "style_index": 9,
-        "hook": "PUT THE TRADE-OFFS ON ONE PAGE",
-        "emoji": "📊",
-        "question": "What evidence would make you choose differently?",
-        "layout": 3,
-        "adaptive": false
-      },
-      "social_id": "830238049571061760",
-      "title": "High-Yield Single-Day Gigs",
-      "destination": "https://dailyyield.blogspot.com/2026/10/high-yield-single-day-gigs.html",
-      "published_at": "2026-10-12T09:15:04.581137+05:30",
-      "metrics": {
-        "notes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "0b1738e63b5d6f89",
-        "topic": "saving",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "SMALL CONTRIBUTIONS, VISIBLE ASSUMPTIONS",
-        "emoji": "⚡",
-        "question": "Which assumption should you stress-test first?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117425541133680250",
-      "title": "Budget Airlines Lose Their Cost Edge",
-      "destination": "https://dailyyield.blogspot.com/2026/10/budget-airlines-lose-their-cost-edge.html",
-      "published_at": "2026-10-12T08:23:38.757710+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "198b23a65bc9dcbc",
-        "topic": "news",
-        "style": "acid ledger",
-        "style_index": 0,
-        "hook": "THE SOURCE-LED UPDATE",
-        "emoji": "📊",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "830230770288410624",
-      "title": "India Finance News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-12.html",
-      "published_at": "2026-10-12T07:19:22.609295+05:30",
-      "metrics": {
-        "notes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "caebfc3649323387",
-        "topic": "page",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "A USEFUL DAILY YIELD RESOURCE",
-        "emoji": "🧾",
-        "question": "What useful tool should Daily Yield improve next?",
-        "layout": 1,
-        "adaptive": false
-      },
-      "social_id": "117425215050867539",
-      "title": "MARKETS TODAY",
-      "destination": "https://dailyyield.blogspot.com/p/markets-today.html",
-      "published_at": "2026-10-12T06:26:27.262500+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "34bd58a0d3c908ec",
-        "topic": "news",
-        "style": "acid ledger",
-        "style_index": 0,
-        "hook": "THE NEWS BEHIND THE HEADLINE",
-        "emoji": "🧮",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117425145180142313",
-      "title": "China Finance News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-12.html",
-      "published_at": "2026-10-12T06:08:41.115733+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "615e47a3371ebe11",
@@ -5359,30 +5798,6 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "41ba06b1b77eea69",
-        "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "WHAT CHANGED — AND WHAT DID NOT",
-        "emoji": "🧮",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "117424858651415413",
-      "title": "Asia-Pacific Finance News — 12 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-12.html",
-      "published_at": "2026-10-12T04:55:49.039398+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
       },
       "impressions_available": false
     },
@@ -5437,52 +5852,6 @@
       "impressions_available": false
     },
     {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "9156b6ef9061b3d6",
-        "topic": "page",
-        "style": "lavender zine",
-        "style_index": 6,
-        "hook": "SAVE FOR YOUR NEXT DECISION",
-        "emoji": "⚡",
-        "question": "What useful tool should Daily Yield improve next?",
-        "layout": 2,
-        "adaptive": false
-      },
-      "social_id": "830194421122416640",
-      "title": "Daily Yield: Markets, Money and Better Decisions",
-      "destination": "https://dailyyield.blogspot.com/",
-      "published_at": "2026-10-11T21:41:37.785835+05:30",
-      "metrics": {
-        "notes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "2eab2e8fe8c52255",
-        "topic": "debt",
-        "style": "rose terminal",
-        "style_index": 9,
-        "hook": "START WITH THE EFFECTIVE COST",
-        "emoji": "⚡",
-        "question": "Which balance has the highest effective cost?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "117422945883610795",
-      "title": "Coastal Real Estate Valuation Realities",
-      "destination": "https://dailyyield.blogspot.com/2026/10/coastal-real-estate-valuation-realities.html",
-      "published_at": "2026-10-11T20:49:22.563803+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 1,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "4a66e0b5415dde0f",
@@ -5504,28 +5873,6 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "tumblr",
-      "creative": {
-        "seed": "a86dbb20040ff18d",
-        "topic": "saving",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "MAKE THE NEXT STEP MEASURABLE",
-        "emoji": "🧾",
-        "question": "Which assumption should you stress-test first?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "830189242241236992",
-      "title": "Balancing Budgets And Cost Pressures",
-      "destination": "https://dailyyield.blogspot.com/2026/10/balancing-budgets-and-cost-pressures.html",
-      "published_at": "2026-10-11T20:19:18.287629+05:30",
-      "metrics": {
-        "notes": 0
       },
       "impressions_available": false
     },
@@ -5555,30 +5902,6 @@
       "impressions_available": false
     },
     {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "90cd4b6f8b7a4b2f",
-        "topic": "general",
-        "style": "hot coral",
-        "style_index": 3,
-        "hook": "ONE DECISION, CLEAR ASSUMPTIONS",
-        "emoji": "🌐",
-        "question": "What evidence would make you choose differently?",
-        "layout": 0,
-        "adaptive": false
-      },
-      "social_id": "117422592086333766",
-      "title": "Fintech’s Evolution, Disruption, and Future",
-      "destination": "https://dailyyield.blogspot.com/2026/10/fintechs-evolution-disruption-and-future.html",
-      "published_at": "2026-10-11T19:19:23.979823+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
       "platform": "bluesky",
       "creative": {
         "seed": "318195dc1ac2a51b",
@@ -5600,54 +5923,6 @@
         "reposts": 0,
         "replies": 0,
         "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "260c4770199c51cf",
-        "topic": "news",
-        "style": "sky sticker",
-        "style_index": 7,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "🧠",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 1,
-        "adaptive": false
-      },
-      "social_id": "117422582170579957",
-      "title": "Global Finance News — 11 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-11.html",
-      "published_at": "2026-10-11T19:16:53.005774+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "mastodon",
-      "creative": {
-        "seed": "f849b0d41c8a6f42",
-        "topic": "page",
-        "style": "violet mint",
-        "style_index": 2,
-        "hook": "A USEFUL DAILY YIELD RESOURCE",
-        "emoji": "⚡",
-        "question": "What useful tool should Daily Yield improve next?",
-        "layout": 2,
-        "adaptive": false
-      },
-      "social_id": "117422569233440534",
-      "title": "DAILY NEWS",
-      "destination": "https://dailyyield.blogspot.com/p/daily-news.html",
-      "published_at": "2026-10-11T19:13:35.316899+05:30",
-      "metrics": {
-        "favourites": 0,
-        "reblogs": 0,
-        "replies": 0
       },
       "impressions_available": false
     },
@@ -5806,12 +6081,12 @@
       "creative": {
         "seed": "42bcdd17b9136707",
         "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "🧠",
         "question": "Does this report change a decision—or only the context?",
-        "layout": 4,
+        "layout": 0,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxlfxn6eqj2d",
@@ -5856,12 +6131,12 @@
       "creative": {
         "seed": "04e84a99a49a1e6c",
         "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "WHAT CHANGED — AND WHAT DID NOT",
         "emoji": "⚡",
         "question": "Which linked source deserves a closer read?",
-        "layout": 4,
+        "layout": 0,
         "adaptive": true
       },
       "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxkysodypx2r",
@@ -5920,281 +6195,6 @@
       "published_at": "2026-10-10T22:42:27.784128+05:30",
       "metrics": {
         "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "2584685012838517",
-        "topic": "market",
-        "style": "hot coral",
-        "style_index": 3,
-        "hook": "CONTEXT BEFORE A MARKET DECISION",
-        "emoji": "⚡",
-        "question": "Which assumption would change your view?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxjvota4ct2o",
-      "title": "Cost of Living Crisis: Should You Invest?",
-      "destination": "https://dailyyield.blogspot.com/2026/10/cost-of-living-crisis-should-you-invest.html",
-      "published_at": "2026-10-10T21:55:26.911594+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "564502ecb20378c0",
-        "topic": "general",
-        "style": "lavender zine",
-        "style_index": 6,
-        "hook": "ONE DECISION, CLEAR ASSUMPTIONS",
-        "emoji": "🧮",
-        "question": "Which number would decide this for you?",
-        "layout": 3,
-        "adaptive": false
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxjs2cnz672m",
-      "title": "Defining Wealth: What Is an Asset?",
-      "destination": "https://dailyyield.blogspot.com/2026/10/defining-wealth-what-is-asset.html",
-      "published_at": "2026-10-10T20:50:17.347091+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "6376dff1e98c5c5e",
-        "topic": "news",
-        "style": "acid ledger",
-        "style_index": 0,
-        "hook": "WHAT CHANGED — AND WHAT DID NOT",
-        "emoji": "🧮",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxiwyue5qs2u",
-      "title": "China Finance News — 10 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-10.html",
-      "published_at": "2026-10-10T12:46:17.599988+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "df6d8acc0013f876",
-        "topic": "page",
-        "style": "night signal",
-        "style_index": 4,
-        "hook": "A USEFUL DAILY YIELD RESOURCE",
-        "emoji": "📊",
-        "question": "What useful tool should Daily Yield improve next?",
-        "layout": 4,
-        "adaptive": false
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxepa2z3ri2l",
-      "title": "DAILY ARTICLE",
-      "destination": "https://dailyyield.blogspot.com/p/article.html",
-      "published_at": "2026-10-10T10:18:10.305665+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "9cb5968d8d03954c",
-        "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "📊",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 4,
-        "adaptive": true
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxio66x2o32l",
-      "title": "Markets & Commodities News — 10 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-10.html",
-      "published_at": "2026-10-10T10:08:12.904800+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "4c71ad7f2b0ba672",
-        "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "⚡",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 4,
-        "adaptive": true
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxgphjunar2m",
-      "title": "Italy Finance News — 9 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-09.html",
-      "published_at": "2026-10-09T15:26:00.537884+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "ec14e75c0e173463",
-        "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "📊",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 4,
-        "adaptive": true
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxggpjb5im2y",
-      "title": "China Finance News — 9 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/china-2026-10-09.html",
-      "published_at": "2026-10-09T12:49:24.756487+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "1a8dca8a754ac18a",
-        "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "📊",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 4,
-        "adaptive": true
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxg6f6i25a2o",
-      "title": "France Finance News — 9 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/france-2026-10-09.html",
-      "published_at": "2026-10-09T10:20:28.001977+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "38ab513efade9854",
-        "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "📌",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 4,
-        "adaptive": true
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxfrd24ul22m",
-      "title": "India Finance News — 9 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/india-2026-10-09.html",
-      "published_at": "2026-10-09T06:26:37.706213+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "482276396135765a",
-        "topic": "news",
-        "style": "teal voltage",
-        "style_index": 5,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "🧾",
-        "question": "Which linked source deserves a closer read?",
-        "layout": 4,
-        "adaptive": true
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxfjzc2tsu2y",
-      "title": "Australia Finance News — 9 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-09.html",
-      "published_at": "2026-10-09T04:15:54.432737+05:30",
-      "metrics": {
-        "likes": 0,
-        "reposts": 0,
-        "replies": 0,
-        "quotes": 0
-      },
-      "impressions_available": false
-    },
-    {
-      "platform": "bluesky",
-      "creative": {
-        "seed": "d25462116be811dc",
-        "topic": "news",
-        "style": "acid ledger",
-        "style_index": 0,
-        "hook": "CURRENT REPORTS, CLEARLY DATED",
-        "emoji": "🔎",
-        "question": "Does this report change a decision—or only the context?",
-        "layout": 2,
-        "adaptive": false
-      },
-      "social_id": "at://did:plc:vu3fwn4wuwbnrke2vhey4xkj/app.bsky.feed.post/3mxeqqvche52q",
-      "title": "Personal Finance News — 8 October 2026",
-      "destination": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-08.html",
-      "published_at": "2026-10-08T20:43:48.583744+05:30",
-      "metrics": {
-        "likes": 1,
         "reposts": 0,
         "replies": 0,
         "quotes": 0
