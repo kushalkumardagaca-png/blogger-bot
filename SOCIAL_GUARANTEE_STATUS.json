@@ -1,13 +1,41 @@
 {
- "generatedAt": "2026-10-18T12:15:38.653433+05:30",
+ "generatedAt": "2026-10-18T12:45:49.554112+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 9,
- "expectedPosts": 18,
- "articlesWithBothPosts": 8,
+ "articles": 10,
+ "expectedPosts": 20,
+ "articlesWithBothPosts": 9,
  "postsMissing": 2,
  "dispatched": 2,
  "rows": [
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-18.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 2,
+    "mastodon": 1
+   }
+  },
+  {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-18.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
   {
    "key": "news-russia",
    "title": "russia edition",
@@ -18,6 +46,18 @@
     "bluesky": 1,
     "tumblr": 0,
     "mastodon": 0
+   }
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
    }
   },
   {
@@ -43,34 +83,6 @@
     "tumblr": 2,
     "mastodon": 0
    }
-  },
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 1
-   }
-  },
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-18.html",
-   "posts": 0,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
   },
   {
    "key": "master-trending-2cd0183cf5f56550",
