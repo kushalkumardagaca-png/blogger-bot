@@ -1,11 +1,12 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-18",
-  "kind": "evergreen",
-  "slot": 2,
-  "topic_id": "28a6a5b8e442f3f1",
-  "title": "X Money is here: What Elon Musk’s financial su",
-  "url": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
-  "published_at": "2026-10-18T02:45:08-07:00"
+  "kind": "trending",
+  "slot": 3,
+  "topic_id": "ed31eb2edf988c9d",
+  "replaced_topic_id": null,
+  "title": "(LEAD) S. Korea, U.S. hold first 2+2 meeting o",
+  "package": "master_packages/dynamic/2026-10-18-trending-ed31eb2edf988c9d.json",
+  "html": "scheduled_ready/2026-10-18-trending-3-lead-s-korea-u-s-hold-first-2-2-meeting-o.html"
 }
