@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-18T16:15:37.433876+05:30",
+ "generatedAt": "2026-10-18T16:24:11.335381+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 14,
- "expectedPosts": 28,
- "articlesWithBothPosts": 14,
+ "articles": 15,
+ "expectedPosts": 30,
+ "articlesWithBothPosts": 15,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
@@ -203,13 +203,27 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-3",
+   "title": "(LEAD) S. Korea, U.S. hold first 2+2 meeting o",
+   "url": "https://dailyyield.blogspot.com/2026/10/lead-s-korea-us-hold-first-22-meeting-o.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-18T16:15:28.040575+05:30",
+ "liveVerificationSourceAt": "2026-10-18T16:24:03.080118+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 14,
+ "articlesWithExactlyTwoPosts": 15,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
