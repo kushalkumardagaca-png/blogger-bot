@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T18:46:05.050152+05:30",
+  "generatedAt": "2026-10-18T19:16:49.252882+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
@@ -21,23 +21,15 @@
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-global",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-banking",
-      "platform": "bluesky",
-      "routeIndex": 1,
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
       "applied": true
     }
   ],
   "retryBlocked": [
     "social:2026-10-18:news-americas:0",
-    "social:2026-10-18:news-companies:1"
+    "social:2026-10-18:news-companies:1",
+    "social:2026-10-18:news-global:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
