@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T21:50:54.664624+05:30",
+ "generatedAt": "2026-10-18T22:16:00.437093+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
- "articles": 21,
- "expectedPosts": 42,
+ "articles": 22,
+ "expectedPosts": 44,
  "articlesWithBothPosts": 17,
- "postsMissing": 4,
- "dispatched": 4,
+ "postsMissing": 6,
+ "dispatched": 6,
  "rows": [
   {
    "key": "news-markets",
@@ -313,11 +313,29 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-4",
+   "title": "Be a gharjamai: Is wife asking her husband to",
+   "url": "https://dailyyield.blogspot.com/2026/10/be-gharjamai-is-wife-asking-her-husband.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 1,
- "liveVerificationSourceAt": "2026-10-18T21:50:43.423849+05:30",
+ "liveVerificationSourceAt": "2026-10-18T22:15:47.458395+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 16,
  "syntheticViews": 0,
