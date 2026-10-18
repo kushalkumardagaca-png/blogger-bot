@@ -399,6 +399,9 @@ def fetch_source(source):
         media = True
     else:
         items = parse_rss(text, source) if kind == "rss" else parse_html_listing(text, source)
+    # A sports gold medal is not a gold-market story. Keep genuine finance
+    # about sport (fees, wages, sponsorship), not ordinary match/medal results.
+    items = [i for i in items if not nonfinancial_sport(i)]
     if media:  # newsrooms cover everything; keep only finance/economy stories
         items = [i for i in items if FINANCE_RE.search(i["title"])]
     if trust:  # feed rebuilt continuously; undated items count as current
@@ -579,6 +582,14 @@ FINANCE_RE = re.compile(r"\b(rate|inflation|cpi|gdp|growth|recession|econom|mark
                         r"consumer|spending|retail|industrial|export|import|compan|corporate|"
                         r"business|industr|sanction|fine|penalt|startup|crypt|bitcoin|wealth|"
                         r"money|cash|payment|income|cost|fee|million|billion|trillion)", re.I)
+
+SPORT_RE=re.compile(r"\b(?:gold medal|medals?|olympics?|asian games|fencing|sabre|equestrian|gymnastics|baseball|basketball|football|kayak|balance beam)\b",re.I)
+SPORT_FINANCE_RE=re.compile(r"\b(?:financial|finance|budget|tax|debt|bank|profit|revenue|earnings|valuation|sponsorship|sponsor|broadcast(?:ing)? rights|investment|prize money|salary|wages|contracts?|costs?|prices?|funding|acquisition|transfer fees?)\b",re.I)
+
+def nonfinancial_sport(item):
+    title=str(item.get('title',''))
+    return bool(SPORT_RE.search(title) and not SPORT_FINANCE_RE.search(title))
+
 
 COUNTRY_TO_REGION = {
     "us": "americas", "canada": "americas", "mexico": "americas", "brazil": "americas",

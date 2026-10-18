@@ -3,8 +3,11 @@
 import json,sys
 from pathlib import Path
 
-def merge_plan(current,incoming,status):
- if current.get('date')!=incoming.get('date'):return incoming
+def merge_plan(current,incoming,status,published=None):
+ if current.get('date')!=incoming.get('date'):return current if str(current.get('date',''))>str(incoming.get('date','')) else incoming
+ from master_slot_state import keeper_for_slot,seal_plan
+ kind=status.get('kind');slot=int(status.get('slot',-1))
+ if published and keeper_for_slot(current,published,kind,slot):return seal_plan(current,published)
  out=dict(current);kind=status.get('kind');slot=int(status.get('slot',-1));topic=str(status.get('topic_id',''))
  if kind not in ('trending','evergreen') or slot not in range(5):raise RuntimeError('invalid prepared slot status')
  rows=list(out.get(kind,[]));incoming_rows=incoming.get(kind,[])
@@ -58,6 +61,7 @@ def merge_registry(current,incoming):
 def main():
  if len(sys.argv)!=7:raise SystemExit('usage: merge_master_preparation.py CURRENT_PLAN INCOMING_PLAN STATUS CURRENT_REGISTRY INCOMING_REGISTRY OUTPUT_PREFIX')
  cp,ip,st,cr,ir=[json.loads(Path(x).read_text()) for x in sys.argv[1:6]];prefix=Path(sys.argv[6])
- Path(str(prefix)+'.plan.json').write_text(json.dumps(merge_plan(cp,ip,st),indent=2,ensure_ascii=False)+'\n')
+ published=json.loads(Path('MASTER_AUTOMATION_TRACKER.json').read_text()).get('published',[]) if Path('MASTER_AUTOMATION_TRACKER.json').exists() else []
+ Path(str(prefix)+'.plan.json').write_text(json.dumps(merge_plan(cp,ip,st,published),indent=2,ensure_ascii=False)+'\n')
  Path(str(prefix)+'.registry.json').write_text(json.dumps(merge_registry(cr,ir),indent=2,ensure_ascii=False)+'\n')
 if __name__=='__main__':main()

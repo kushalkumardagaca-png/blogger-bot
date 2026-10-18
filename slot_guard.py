@@ -98,15 +98,13 @@ def inventory(day: dt.date) -> dict[str, dict]:
             found[f"news-{desk}"] = {"url": row.get("url", ""), "desk": desk, "kind": "news",
                                      "publishedAt": row.get("window_end", "")}
     master = load(ROOT / "MASTER_AUTOMATION_TRACKER.json", {}).get("published", [])
+    from master_slot_state import keeper_for_slot
     plan = load(ROOT / "MASTER_DAILY_PLAN.json", {})
     if plan.get("date") == day.isoformat():
         for kind in ("trending", "evergreen"):
             ids = [str(item.get("id")) for item in plan.get(kind, [])[:5]]
             for index, topic_id in enumerate(ids):
-                row = next((x for x in master
-                            if str(x.get("topic_id")) == topic_id
-                            and x.get("kind") == kind
-                            and x.get("date") == day.isoformat()), None)
+                row = keeper_for_slot(plan,master,kind,index)
                 if row:
                     found[f"master-{kind}-{index}"] = {"url": row.get("url", ""), "kind": kind,
                                                        "publishedAt": row.get("published_at", "")}
@@ -165,7 +163,7 @@ def main() -> int:
         row = records.get(slot["key"], {})
         published_at = confirmed_publish_time(row, token, day) if row else None
         record = {"key": slot["key"], "slot": slot["slot"], "due": slot["due"].isoformat(),
-                  "live": bool(published_at)}
+                  "live": bool(published_at), "url": row.get("url", "")}
         record["state"] = classify(slot["due"], now, published_at)
         record["minutesFromSlot"] = int((now - slot["due"]).total_seconds() // 60)
         if published_at:
@@ -200,7 +198,20 @@ def main() -> int:
               "overdue": counts.get("overdue", 0), "upcoming": counts.get("upcoming", 0),
               "dispatched": dispatched, "rows": rows,
               "syntheticViews": 0, "publicDailyYieldRequests": 0}
-    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late") and not counts.get("early")
+    # Extra already-live publications are visible, not hidden to make the 21-slot
+    # board green. Never delete a valid URL or cancel a promised future slot here.
+    from master_slot_state import extra_records
+    plan = load(ROOT / "MASTER_DAILY_PLAN.json", {})
+    master = load(ROOT / "MASTER_AUTOMATION_TRACKER.json", {}).get("published", [])
+    extras = []
+    for extra in extra_records(plan, master):
+        if plan.get("date") != day.isoformat():continue
+        ok, reason = news_pipeline.master_edition_check(extra['url'],token,day) if token else (False,'no credentials')
+        if ok:extras.append({"url":extra['url'],"key":"extra-"+extra['routingKey']+"-"+str(extra.get('topic_id')),
+                             "routingKey":extra['routingKey'],"title":extra.get('title',''),"publishedAt":extra.get('published_at','')})
+    report['extraLiveArticles'] = extras
+    report['actualArticlesLiveIncludingExtras'] = len(done) + len(extras)
+    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late") and not counts.get("early") and not extras
                         else "ATTENTION")
     save(STATUS, report)
     print(json.dumps({k: report[k] for k in ("status", "slots", "live", "onTime", "late",

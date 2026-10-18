@@ -137,8 +137,8 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  seq=[normalize_sentence(x) for x in sentences(repetition_content)];seq=[x for x in seq if len(x.split())>=10]
  # This is an explicit background/date label, not substantive reporting. It
  # remains visible on each older item and is not removed to fake originality.
- date_label=normalize_sentence('It is separated from the current-period items so its date and role are clear.')
- substantive_seq=[s for s in seq if s!=date_label]
+ date_labels={normalize_sentence(x) for x in ('It is separated from the current-period items so its date and role are clear.','This item is included only to provide context for the current desk.')}
+ substantive_seq=[s for s in seq if s not in date_labels]
  counts=Counter(substantive_seq);duplicates=[s for s,n in counts.items() if n>1 and len(s.split())>=12]
  if duplicates:issues.append("repeated substantive sentence within the content")
  if len(substantive_seq)>=12 and len(counts)/len(substantive_seq)<0.94:issues.append("insufficient sentence-level originality")

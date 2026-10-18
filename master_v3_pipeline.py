@@ -84,9 +84,28 @@ def trending_candidates(plan,item):
  primary=[] if item.get('id') in published_ids else [item]
  return primary+sorted(rows,key=evidence_rank,reverse=True)[:12]
 
+def reuse_completed_slot(plan,kind,slot,emit_social=False):
+ from master_slot_state import keeper_for_slot,seal_plan
+ records=read(TRACKER,{}).get('published',[]);keeper=keeper_for_slot(plan,records,kind,slot)
+ if not keeper:return False
+ import news_pipeline
+ token=news_pipeline.blogger_token()
+ ok,reason=news_pipeline.master_edition_check(keeper['url'],token,dt.date.fromisoformat(plan['date']))
+ if not ok:raise RuntimeError('Recorded published slot could not be confirmed; defer instead of creating a second article: '+reason)
+ pool=read(POOL,{});candidates=pool.get('topics',[])
+ canonical=seal_plan(plan,records,candidates);write(PLAN,canonical)
+ write(STATUS,{'status':'ALREADY_PUBLISHED','publication_enabled':bool(emit_social),'date':plan['date'],'kind':kind,'slot':slot,
+               'topic_id':keeper.get('topic_id'),'title':keeper.get('title'),'url':keeper['url'],'published_at':keeper.get('published_at')})
+ if emit_social:write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':keeper['url'],'content_mode':'post','published_at':keeper.get('published_at','')}])
+ print('Daily slot already has a confirmed live article; no replacement article is prepared or published.',flush=True)
+ return True
+
+
 def prepare(kind,slot):
+ plan,item=selected(kind,slot)
+ if reuse_completed_slot(plan,kind,slot):return
  import master_v3_generator as generator
- plan,item=selected(kind,slot);original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
+ original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
  for candidate in attempts:
   try:
    candidate=dict(candidate);candidate['_structure_slot']=slot+(0 if kind=='trending' else 5)
@@ -116,11 +135,13 @@ def publish(kind,slot,timed_release=False):
  # Prewarm retries and manual recovery may finish early, but every publishing
  # path waits for the exact audience-facing slot before calling Blogger.
  wait_for_release(MASTER_LIVE[(kind,slot)])
- plan,item=selected(kind,slot);target=package_path(kind,item)
+ plan,item=selected(kind,slot)
+ if reuse_completed_slot(plan,kind,slot,emit_social=True):return
+ target=package_path(kind,item)
  if not target.exists():raise RuntimeError('validated prepared package is absent')
  package=read(target,{});validate(package);title,slug,meta,labels,body=build_html(kind,item,package);res=publish_to_blogger(title,body,labels)
  if not res or not res.get('url'):raise RuntimeError('Blogger did not confirm a live Master Article URL')
- tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['publication_enabled']=True
+ tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'slot':slot,'slot_key':f"{plan['date']}:{kind}:{slot}",'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['publication_enabled']=True
  if not any((x.get('topic_id')==item['id'] and x.get('date')==plan['date']) or x.get('url')==res['url'] for x in tracker['published']):tracker['published'].append(record)
  write(TRACKER,tracker)
  history=read(ROOT/'MASTER_TOPIC_HISTORY.json',{'version':1,'items':[]})

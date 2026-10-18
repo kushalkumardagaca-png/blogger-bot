@@ -16,6 +16,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: daily-yield-google-index-report
+  cancel-in-progress: false
+
 jobs:
   report:
     runs-on: ubuntu-24.04
@@ -34,6 +38,7 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
           GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_INSPECTION_BUDGET_SECONDS: ${{ github.event_name == 'push' && '240' || '900' }}
         run: python index_status_report.py
       - name: Persist the report
         if: always()

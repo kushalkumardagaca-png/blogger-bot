@@ -57,16 +57,15 @@ def todays_articles(day: dt.date) -> list[dict]:
                              "url": row["url"], "publishedAt": row.get("window_end", "")})
     master = load(ROOT / "MASTER_AUTOMATION_TRACKER.json", {}).get("published", [])
     plan = load(ROOT / "MASTER_DAILY_PLAN.json", {})
-    slot_keys = {}
-    if plan.get("date") == day.isoformat():
-        for kind in ("trending", "evergreen"):
-            for index, item in enumerate(plan.get(kind, [])[:5]):
-                slot_keys[(kind, str(item.get("id")))] = f"master-{kind}-{index}"
+    from master_slot_state import record_slot, keeper_for_slot
     for row in master:
         if row.get("date") == day.isoformat() and row.get("url"):
-            articles.append({"key": slot_keys.get((row.get('kind'), str(row.get('topic_id'))), f"master-{row.get('kind')}-{row.get('topic_id')}"),
-                             "title": row.get("title", ""), "url": row["url"],
-                             "publishedAt": row.get("published_at", "")})
+            slot=record_slot(row,plan)
+            routing=f"master-{row.get('kind')}-{slot}" if slot is not None else f"master-{row.get('kind')}-{row.get('topic_id')}"
+            keeper=keeper_for_slot(plan,master,row.get('kind'),slot) if slot is not None else None
+            key=routing if keeper and keeper.get('url')==row['url'] else 'extra-'+routing+'-'+str(row.get('topic_id'))
+            articles.append({"key":key,"routingKey":routing,
+                             "title":row.get('title',''),"url":row['url'],"publishedAt":row.get('published_at','')})
     return articles
 
 
@@ -94,7 +93,7 @@ def dispatch(article: dict, route_index: int, apply: bool) -> str:
         return "would dispatch"
     try:
         subprocess.run(["gh", "workflow", "run", WORKFLOW, "--ref", "main",
-                        "-f", f"item_key={article['key']}",
+                        "-f", f"item_key={article.get('routingKey',article['key'])}",
                         "-f", f"target_url={article['url']}",
                         "-f", "content_mode=post",
                         "-f", f"published_at={article.get('publishedAt', '')}",
@@ -118,7 +117,13 @@ def main() -> int:
     duplicates, extra_networks = 0, 0
     # Articles are chased whatever their lateness: a late edition is still owed its
     # two posts, because the audience is still there when the article lands.
-    for article in todays_articles(day):
+    recorded=todays_articles(day)
+    slots=load(ROOT / "SLOT_GUARANTEE_STATUS.json", {})
+    confirmed_urls={r.get('url') for r in slots.get('rows',[]) if r.get('live') and r.get('url')} if slots.get('dateIST')==day.isoformat() else set()
+    if slots.get('dateIST')==day.isoformat():
+        confirmed_urls.update(r.get('url') for r in slots.get('extraLiveArticles',[]) if r.get('url'))
+    awaiting=[a for a in recorded if a['url'] not in confirmed_urls]
+    for article in [a for a in recorded if a['url'] in confirmed_urls]:
         counts = covered_by(article, trackers)
         have = sum(1 for value in counts.values() if value)
         needed = max(0, REQUIRED - have)
@@ -131,7 +136,7 @@ def main() -> int:
         if needed:
             missing += needed
             try:
-                pair = platform_pair_for(article['key'], day)
+                pair = platform_pair_for(article.get('routingKey',article['key']), day)
                 route_indexes = [index for index, platform in enumerate(pair) if not counts.get(platform)][:needed]
             except ValueError:
                 route_indexes = []
@@ -155,9 +160,11 @@ def main() -> int:
               "articlesWithBothPosts": complete, "postsMissing": missing,
               "dispatched": dispatched, "rows": rows,
               "duplicatePosts": duplicates, "extraNetworks": extra_networks,
+              "liveVerificationSourceAt": slots.get('generatedAt'),
+              "awaitingLiveVerification": [{"key":a['key'],"url":a['url']} for a in awaiting],
               "articlesWithExactlyTwoPosts": sum(1 for row in rows if row['posts'] == REQUIRED and row['duplicatePosts'] == 0),
               "syntheticViews": 0, "publicDailyYieldRequests": 0,
-              "status": "PASS" if complete == len(rows) and duplicates == 0 and extra_networks == 0 else "ATTENTION"}
+              "status": "PASS" if complete == len(rows) and duplicates == 0 and extra_networks == 0 and not awaiting else "ATTENTION"}
     save(STATUS, report)
     print(json.dumps({k: report[k] for k in ("status", "articles", "expectedPosts",
                                              "articlesWithBothPosts", "postsMissing",

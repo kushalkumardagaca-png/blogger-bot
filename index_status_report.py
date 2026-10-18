@@ -3,6 +3,8 @@
 from __future__ import annotations
 import datetime as dt
 import json, os, time, urllib.error, urllib.parse, urllib.request
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FuturesTimeout
 from collections import Counter
 from pathlib import Path
 
@@ -18,10 +20,10 @@ def required(name):
     return value
 
 
-def fetch(url, headers, method='GET', body=None):
+def fetch(url, headers, method='GET', body=None, timeout=60):
     data=json.dumps(body).encode() if body is not None else None
     request=urllib.request.Request(url,data=data,headers=headers,method=method)
-    with urllib.request.urlopen(request,timeout=60) as response:
+    with urllib.request.urlopen(request,timeout=timeout) as response:
         raw=response.read()
         return json.loads(raw) if raw else {}
 
@@ -77,7 +79,7 @@ def inspect(access,url):
     if not valid_url(url): raise ValueError('inspection target is not a valid Daily Yield HTTPS URL')
     result=fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',
         {'Authorization':'Bearer '+access,'Content-Type':'application/json'},'POST',
-        {'inspectionUrl':url,'siteUrl':SITE,'languageCode':'en-US'})
+        {'inspectionUrl':url,'siteUrl':SITE,'languageCode':'en-US'}, timeout=20)
     status=result.get('inspectionResult',{}).get('indexStatusResult') or {}
     return {'url':url,'verdict':status.get('verdict','UNKNOWN'),'coverageState':status.get('coverageState',''),
             'lastCrawlTime':status.get('lastCrawlTime',''),'googleCanonical':status.get('googleCanonical',''),
@@ -100,17 +102,71 @@ def summarise(rows):
         'syntheticViews':0,'publicDailyYieldRequests':0}
 
 
-def main():
-    access=search_token();rows=[]
-    for url in inventory():
-        try: rows.append(inspect(access,url))
+class InspectionPacer:
+    def __init__(self):
+        self.lock=threading.Lock();self.next_at=0.0
+    def wait(self):
+        with self.lock:
+            now=time.monotonic();pause=max(0,self.next_at-now)
+            if pause:time.sleep(pause)
+            self.next_at=time.monotonic()+.25  # at most 240 starts/minute
+
+
+def inspect_inventory(access, urls, budget_seconds=900):
+    targets=list(dict.fromkeys(u for u in urls if valid_url(u)))
+    results={};pacer=InspectionPacer()
+    def snapshot(complete=False):
+        rows=[results.get(u,{'url':u,'verdict':'UNKNOWN','coverageState':'',
+                            'inspectionDeferred':True,'reason':'Not inspected within this bounded run yet'}) for u in targets]
+        report=summarise(rows)
+        report['completedInspections']=len(results)
+        report['deferredInspections']=len(targets)-len(results)
+        report['runComplete']=complete and len(results)==len(targets)
+        if not complete:report['status']='IN_PROGRESS'
+        elif report['deferredInspections']:report['status']='PARTIAL'
+        OUT.write_text(json.dumps(report,indent=1,ensure_ascii=False)+'\n')
+        return report
+    def work(url):
+        pacer.wait()
+        try:return inspect(access,url)
         except Exception as exc:
             code=exc.code if isinstance(exc,urllib.error.HTTPError) else None
-            rows.append({'url':url,'verdict':'ERROR','coverageState':'','errorType':type(exc).__name__,
-                         'httpStatus':code,'error':'HTTP '+str(code) if code else 'inspection could not be completed'})
-        time.sleep(.15)
-    report=summarise(rows);OUT.write_text(json.dumps(report,indent=1,ensure_ascii=False)+'\n')
-    print(json.dumps({k:report[k] for k in ('status','urls','indexed','notIndexed','inspectionErrors','unknown')}))
+            return {'url':url,'verdict':'ERROR','coverageState':'','errorType':type(exc).__name__,
+                    'httpStatus':code,'error':'HTTP '+str(code) if code else 'inspection could not be completed'}
+    snapshot()
+    if budget_seconds<=0:return snapshot(True)
+    executor=ThreadPoolExecutor(max_workers=4)
+    futures={executor.submit(work,u):u for u in targets}
+    try:
+        for future in as_completed(futures,timeout=budget_seconds):
+            url=futures[future];results[url]=future.result()
+            if len(results)%25==0:
+                snapshot();print(json.dumps({'inspectionProgress':len(results),'targets':len(targets)}),flush=True)
+    except FuturesTimeout:
+        pass
+    finally:
+        for future in futures:future.cancel()
+        executor.shutdown(wait=False,cancel_futures=True)
+    # Running HTTP requests have a 20-second timeout; queued requests are cancelled.
+    # A durable local checkpoint survives any later runner timeout.
+    return snapshot(True)
+
+
+def main():
+    # A code push needs tests, not another full crawl immediately after a complete
+    # measurement. Preserve its original timestamp rather than spending quota.
+    if os.environ.get('GITHUB_EVENT_NAME')=='push':
+        try:
+            recent=json.loads(OUT.read_text())
+            stamp=dt.datetime.fromisoformat(recent.get('checkedAt','').replace('Z','+00:00'))
+            fresh=dt.datetime.now(dt.timezone.utc)-stamp < dt.timedelta(hours=2)
+            if fresh and recent.get('property')==SITE and recent.get('status')=='MEASURED' and recent.get('inspectionErrors',0)==0 and recent.get('unknown',0)==0:
+                print('Preserving a recent complete index measurement; no duplicate push-time inspection. Original checkedAt='+recent['checkedAt'])
+                return 0
+        except (OSError,ValueError,TypeError):pass
+    access=search_token();targets=inventory()
+    report=inspect_inventory(access,targets,budget_seconds=min(900,max(30,int(os.environ.get('GSC_INSPECTION_BUDGET_SECONDS','900')))))
+    print(json.dumps({k:report[k] for k in ('status','urls','indexed','notIndexed','inspectionErrors','unknown','completedInspections','deferredInspections')}))
     return 0
 
 if __name__=='__main__': raise SystemExit(main())
