@@ -1,0 +1,120 @@
+name: AdSense-first Table 3 Checks
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 3 * * 1' # weekly full read-only site and account evidence
+  push:
+    branches: [main]
+    paths:
+      - 'preapproval_audit.py'
+      - 'preapproval_progress_report.py'
+      - 'social_duplicate_cleanup.py'
+      - 'test_preapproval_evidence.py'
+      - '.github/workflows/preapproval_audit.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: daily-yield-table3-evidence
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with: {python-version: '3.12'}
+      - name: Check the safety controls
+        run: |
+          python -m pip install --disable-pip-version-check requests beautifulsoup4 pillow imagehash json-repair pytest pyyaml
+          python -m pytest -q --junitxml=/tmp/table3-tests.xml
+          python -c 'import json,xml.etree.ElementTree as E; from pathlib import Path; r=E.parse("/tmp/table3-tests.xml").getroot(); ss=[r] if r.tag=="testsuite" else list(r); Path("TABLE3_CONTROL_TESTS.json").write_text(json.dumps({"tests":sum(int(x.get("tests",0)) for x in ss),"failures":sum(int(x.get("failures",0)) for x in ss),"errors":sum(int(x.get("errors",0)) for x in ss)}))'
+          git restore NEWS_COVERAGE_STATUS.json SEARCH_DEMAND_TRENDS.json PUBLISHING_AUTOMATION_AUDIT.json
+          python audit_publishing_automation.py
+      - name: Remove only verified extra social copies of live articles
+        id: cleanup
+        continue-on-error: true
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
+          FACEBOOK_PAGE_ID: '1303333369533572'
+          FACEBOOK_GRAPH_VERSION: 'v26.0'
+          TUMBLR_BLOG_IDENTIFIER: dailyyield-official
+          TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
+          TUMBLR_CONSUMER_SECRET: ${{ secrets.TUMBLR_CONSUMER_SECRET }}
+          TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}
+        run: python social_duplicate_cleanup.py --apply --since 2026-10-17
+      - name: Keep verified social removals race-safely
+        if: always()
+        run: |
+          git config user.name 'Daily Yield AdSense-first Controller'
+          git config user.email 'dailyyield.official@gmail.com'
+          files=(facebook_tracker.json bluesky_tracker.json tumblr_tracker.json mastodon_tracker.json)
+          if [ -f TABLE3_CONTROL_TESTS.json ]; then files+=(TABLE3_CONTROL_TESTS.json); fi
+          if [ -f SOCIAL_DUPLICATE_CLEANUP_STATUS.json ]; then files+=(SOCIAL_DUPLICATE_CLEANUP_STATUS.json); fi
+          bash persist_social_state.sh "${files[@]}"
+      - name: Read the actual stored website and existing Analytics access
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GA4_CLIENT_ID: ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET: ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN: ${{ secrets.GA4_REFRESH_TOKEN }}
+        run: python -u preapproval_audit.py
+      - name: Refresh existing Google search and readership reports
+        continue-on-error: true
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GA4_CLIENT_ID: ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET: ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN: ${{ secrets.GA4_REFRESH_TOKEN }}
+        run: |
+          python audience_growth_baseline.py
+          python growth_control_tower.py
+      - name: Use fresh publication evidence and write one plain progress report
+        if: always()
+        run: |
+          git fetch --quiet origin main
+          for file in SLOT_GUARANTEE_STATUS.json SOCIAL_GUARANTEE_STATUS.json news_tracker.json MASTER_AUTOMATION_TRACKER.json MASTER_DAILY_PLAN.json facebook_tracker.json bluesky_tracker.json tumblr_tracker.json mastodon_tracker.json; do
+            git show "origin/main:$file" > "/tmp/table3-$file" && cp "/tmp/table3-$file" "$file"
+          done
+          python social_guard.py
+          python preapproval_progress_report.py
+      - name: Retain the audit and pre-deletion social backup
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: table3-evidence-${{ github.run_id }}
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            TABLE3_*.json
+            TABLE3_PROGRESS_REPORT.md
+            SOCIAL_DUPLICATE_CLEANUP_STATUS.json
+            /tmp/table3-social-cleanup-backup.json
+            /tmp/table3-tests.xml
+      - name: Persist the compact report evidence without modifying the website
+        if: always()
+        run: |
+          files=()
+          for file in TABLE3_*.json TABLE3_PROGRESS_REPORT.md SOCIAL_DUPLICATE_CLEANUP_STATUS.json EXISTING_ANALYTICS_CONNECTION.json AUDIENCE_GROWTH_BASELINE.json AUDIENCE_GROWTH_BASELINE.md GROWTH_CONTROL_TOWER.json GROWTH_CONTROL_TOWER.md; do
+            if [ -f "$file" ]; then files+=("$file"); fi
+          done
+          bash persist_social_state.sh "${files[@]}"

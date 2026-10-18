@@ -20,9 +20,8 @@ def load(name,default):
  except (OSError,json.JSONDecodeError):return default
 
 def oauth_token():
- cid=os.getenv('GA4_CLIENT_ID') or os.getenv('GSC_CLIENT_ID','')
- secret=os.getenv('GA4_CLIENT_SECRET') or os.getenv('GSC_CLIENT_SECRET','')
- refresh=os.getenv('GA4_REFRESH_TOKEN') or os.getenv('GSC_REFRESH_TOKEN','')
+ prefix='GA4' if all(os.getenv('GA4_'+suffix) for suffix in ('CLIENT_ID','CLIENT_SECRET','REFRESH_TOKEN')) else 'GSC'
+ cid=os.getenv(prefix+'_CLIENT_ID','');secret=os.getenv(prefix+'_CLIENT_SECRET','');refresh=os.getenv(prefix+'_REFRESH_TOKEN','')
  if not all((cid,secret,refresh)):raise RuntimeError('OAuth reporting credentials are not configured')
  data=urllib.parse.urlencode({'client_id':cid,'client_secret':secret,'refresh_token':refresh,'grant_type':'refresh_token'}).encode()
  req=urllib.request.Request('https://oauth2.googleapis.com/token',data=data,method='POST')
@@ -43,13 +42,22 @@ def rows(report):
 
 def engaged_analytics(today):
  pid=os.getenv('GA4_PROPERTY_ID','').strip()
+ if not pid:
+  existing=load('EXISTING_ANALYTICS_CONNECTION.json',{})
+  if existing.get('verifiedExisting') is True and urllib.parse.urlparse(str(existing.get('defaultUri',''))).hostname=='dailyyield.blogspot.com':
+   pid=str(existing.get('propertyId','')).strip()
  base={'status':'NOT_CONFIGURED','metricDefinition':'Distinct consented users triggering article_read after at least 30 active seconds and 50% article depth.','dau':None,'average7Day':None,'average28Day':None,'newUsers28Day':None,'returningUsers28Day':None,'daily':[]}
  if not pid:return base
  try:
   token=oauth_token(); end=(today-timedelta(days=1)).isoformat(); start=(today-timedelta(days=28)).isoformat()
   daily=rows(ga4_report(token,pid,start,end,['date'],['activeUsers'],'article_read'))
   series=[{'date':datetime.strptime(r[0],'%Y%m%d').date().isoformat(),'engagedReaders':int(float(r[1]))} for r in daily]
-  series.sort(key=lambda x:x['date']); vals=[x['engagedReaders'] for x in series]
+  # API omits dates with no recorded events; don't inflate averages by dividing
+  # only by active dates. This is still consented observed activity, not all users.
+  observed={x['date']:x['engagedReaders'] for x in series}
+  begin=today-timedelta(days=28)
+  series=[{'date':(begin+timedelta(days=i)).isoformat(),'engagedReaders':observed.get((begin+timedelta(days=i)).isoformat(),0)} for i in range(28)]
+  vals=[x['engagedReaders'] for x in series]
   base.update(status='ACTIVE',daily=series,dau=(vals[-1] if vals else 0),average7Day=round(sum(vals[-7:])/max(1,len(vals[-7:])),1),average28Day=round(sum(vals)/max(1,len(vals)),1))
   # New/returning users are reported only among article_read events.
   nr=rows(ga4_report(token,pid,start,end,['newVsReturning'],['activeUsers'],'article_read'))
@@ -67,12 +75,13 @@ def build(today=None):
  items=social.get('items',[]); interactions=sum(sum(float(v) for v in x.get('metrics',{}).values() if isinstance(v,(int,float))) for x in items)
  days=max(0,(DEADLINE-today).days); current=analytics.get('dau'); required=None
  if isinstance(current,(int,float)) and current>0 and days>0:required=round((TARGET/current)**(1/days)-1,6)
- planning_baseline=300;planning_rate=(TARGET/planning_baseline)**(1/days)-1 if days else 0
+ # Do not fabricate a 300-reader baseline or a forecast from missing data.
  checkpoints=[]
- for offset in (30,60,90,180,270,days):
-  if 0<offset<=days:checkpoints.append({'daysFromNow':offset,'date':(today+timedelta(days=offset)).isoformat(),'planningReaders':round(planning_baseline*((1+planning_rate)**offset))})
+ if isinstance(current,(int,float)) and current>0 and days>0:
+  for offset in (30,60,90,180,270,days):
+   if 0<offset<=days:checkpoints.append({'daysFromNow':offset,'date':(today+timedelta(days=offset)).isoformat(),'arithmeticTargetReaders':round(current*((1+required)**offset))})
  return {'generatedAt':datetime.now(timezone.utc).isoformat(),'deadline':DEADLINE.isoformat(),'targetDistinctDailyEngagedReaders':TARGET,'daysRemaining':days,
-  'stretchTrajectory':{'planningBaselineUnverified':planning_baseline,'requiredDailyGrowth':round(planning_rate,6),'requiredWeeklyMultiplier':round((1+planning_rate)**7,4),'checkpoints':checkpoints,'warning':'Planning trajectory only; the baseline is not a verified distinct-reader metric.'},
+  'stretchTrajectory':{'verifiedBaseline':current,'requiredDailyGrowth':required,'checkpoints':checkpoints,'warning':'Arithmetic to an ambition, not a forecast. No trajectory is generated without a verified positive baseline.'},
   'primaryMetric':analytics,
   'pace':{'currentVerifiedDAU':current,'targetGap':TARGET-current if isinstance(current,(int,float)) else None,'requiredDailyCompoundGrowth':required,'onTarget':bool(current and current>=TARGET)},
   'acquisition':{'search7Day':search.get('last7Days'),'search28Day':search.get('last28Days'),'socialOfficialObservations':len(items),'socialObservedInteractions':round(interactions)},

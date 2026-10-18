@@ -70,15 +70,17 @@ def confirmed_publish_time(row: dict, token: str, day: dt.date):
     url = row.get("url", "")
     if not url or not token:
         return None
+    observed = {}
     if row.get("kind", "news") == "news":
         ok = news_pipeline.live_current_edition(
             url, token, day,
-            alt_dates=(day - dt.timedelta(days=1),) if row.get("desk") == "americas" else ())
+            alt_dates=(day - dt.timedelta(days=1),) if row.get("desk") == "americas" else (), observed=observed)
     else:
-        ok, _reason = news_pipeline.master_edition_check(url, token, day)
+        ok, _reason = news_pipeline.master_edition_check(url, token, day, observed=observed)
     if not ok:
         return None
-    stamp = row.get("publishedAt", "")
+    # News window_end is the source-gathering time, not publication time.
+    stamp = observed.get("published", "") or (row.get("publishedAt", "") if row.get("kind") != "news" else "")
     if stamp:
         try:
             return dt.datetime.fromisoformat(stamp)
@@ -118,6 +120,8 @@ def classify(due: dt.datetime, now: dt.datetime, published_at):
     guard keeps retrying it until the edition is live, then reports how late it was.
     """
     if published_at:
+        if published_at < due - TOLERANCE:
+            return "early"
         return "on time" if published_at <= due + TOLERANCE else "late"
     if now < due - EARLY_ALLOWANCE:
         return "upcoming"
@@ -166,6 +170,8 @@ def main() -> int:
         record["minutesFromSlot"] = int((now - slot["due"]).total_seconds() // 60)
         if published_at:
             record["publishedAt"] = published_at.isoformat()
+            if record["state"] == "early":
+                record["minutesEarly"] = int((slot["due"] - published_at).total_seconds() // 60)
             if record["state"] == "late":
                 record["minutesLate"] = int((published_at - slot["due"]).total_seconds() // 60)
         elif record["state"] in ("pending", "overdue"):
@@ -190,11 +196,11 @@ def main() -> int:
     report = {"generatedAt": now.isoformat(), "dateIST": day.isoformat(), "apply": args.apply,
               "toleranceMinutes": int(TOLERANCE.total_seconds() // 60),
               "slots": len(rows), "live": len(done), "onTime": counts.get("on time", 0),
-              "late": counts.get("late", 0), "pending": counts.get("pending", 0),
+              "late": counts.get("late", 0), "early": counts.get("early", 0), "pending": counts.get("pending", 0),
               "overdue": counts.get("overdue", 0), "upcoming": counts.get("upcoming", 0),
               "dispatched": dispatched, "rows": rows,
               "syntheticViews": 0, "publicDailyYieldRequests": 0}
-    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late")
+    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late") and not counts.get("early")
                         else "ATTENTION")
     save(STATUS, report)
     print(json.dumps({k: report[k] for k in ("status", "slots", "live", "onTime", "late",

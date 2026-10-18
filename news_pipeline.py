@@ -1674,7 +1674,7 @@ def live_post_exists(url, token):
         return False
 
 
-def live_current_edition(url, token, edition_date, alt_dates=()):
+def live_current_edition(url, token, edition_date, alt_dates=(), observed=None):
     """Is the live post at this address actually the edition that is due?
 
     An address can be occupied by an older edition, so the address alone is
@@ -1688,7 +1688,7 @@ def live_current_edition(url, token, edition_date, alt_dates=()):
     try:
         path = urllib.parse.urlparse(url).path
         query = urllib.parse.urlencode({"path": path, "fetchBody": "true",
-                                        "fields": "id,url,status,title,content"})
+                                        "fields": "id,url,status,title,content,published"})
         post = blogger_call("/posts/bypath?" + query, token)
         # The by-path read is quiet about `status`, and a draft is not addressable
         # by path at all, so absence of the field is not evidence of a draft; only
@@ -1710,12 +1710,14 @@ def live_current_edition(url, token, edition_date, alt_dates=()):
         if not any(marker.casefold() in declared_text for marker in markers):
             return False
         assert_saved_green(post)
+        if observed is not None:
+            observed.update(published=post.get("published", ""), confirmed=True)
         return True
     except Exception:
         return False
 
 
-def master_edition_check(url, token, day):
+def master_edition_check(url, token, day, observed=None):
     """Verify a Master article against its own published date, with the reason.
 
     Master titles carry no edition date ("Best Financial Habits For Gen Z"), so the
@@ -1729,7 +1731,7 @@ def master_edition_check(url, token, day):
     try:
         path = urllib.parse.urlparse(url).path
         query = urllib.parse.urlencode({"path": path, "fetchBody": "true",
-                                        "fields": "id,url,status,title,content"})
+                                        "fields": "id,url,status,title,content,published"})
         post = blogger_call("/posts/bypath?" + query, token)
     except Exception as exc:  # noqa: BLE001
         return False, f"by-path read failed: {type(exc).__name__}: {str(exc)[:160]}"
@@ -1745,6 +1747,8 @@ def master_edition_check(url, token, day):
         assert_saved_green(post)
     except Exception as exc:  # noqa: BLE001
         return False, f"green verification: {str(exc)[:200]}"
+    if observed is not None:
+        observed.update(published=post.get("published", ""), confirmed=True)
     return True, "stored page carries today's published date and passes the green checks"
 
 

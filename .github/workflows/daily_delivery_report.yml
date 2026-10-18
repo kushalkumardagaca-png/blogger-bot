@@ -36,7 +36,8 @@ jobs:
             git reset --hard origin/main
             git checkout origin/main -- SLOT_DAY_REPORT.md 2>/dev/null || true
             python slot_day_report.py
-            git add SLOT_DAY_REPORT.md
+            python preapproval_progress_report.py
+            git add SLOT_DAY_REPORT.md TABLE3_PROGRESS_REPORT.md TABLE3_EXECUTION_STATUS.json
             if git diff --staged --quiet; then exit 0; fi
             git commit -m "Record the daily delivery report [skip ci]" || true
             if git push origin HEAD:main; then exit 0; fi
