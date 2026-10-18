@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-18T13:38:43.889451+05:30",
+ "generatedAt": "2026-10-18T13:55:03.539733+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 11,
@@ -18,7 +18,9 @@
     "bluesky": 0,
     "tumblr": 0,
     "mastodon": 1
-   }
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-markets",
@@ -30,7 +32,9 @@
     "bluesky": 0,
     "tumblr": 2,
     "mastodon": 1
-   }
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 1
   },
   {
    "key": "news-economy",
@@ -42,7 +46,9 @@
     "bluesky": 0,
     "tumblr": 2,
     "mastodon": 0
-   }
+   },
+   "observedDistinctPosts": 4,
+   "duplicatePosts": 2
   },
   {
    "key": "news-russia",
@@ -54,7 +60,9 @@
     "bluesky": 1,
     "tumblr": 0,
     "mastodon": 0
-   }
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 1
   },
   {
    "key": "news-china",
@@ -66,7 +74,9 @@
     "bluesky": 0,
     "tumblr": 0,
     "mastodon": 1
-   }
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 1
   },
   {
    "key": "news-india",
@@ -78,7 +88,9 @@
     "bluesky": 1,
     "tumblr": 2,
     "mastodon": 0
-   }
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 1
   },
   {
    "key": "news-europe",
@@ -90,10 +102,12 @@
     "bluesky": 0,
     "tumblr": 0,
     "mastodon": 1
-   }
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 1
   },
   {
-   "key": "master-trending-2cd0183cf5f56550",
+   "key": "master-trending-0",
    "title": "U.S. budget deficit swells to almost $2 trilli",
    "url": "https://dailyyield.blogspot.com/2026/10/us-budget-deficit-swells-to-almost-2.html",
    "posts": 2,
@@ -102,10 +116,12 @@
     "bluesky": 0,
     "tumblr": 1,
     "mastodon": 0
-   }
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
-   "key": "master-evergreen-eb9f027e927c2901",
+   "key": "master-evergreen-0",
    "title": "Government moves to align education with futur",
    "url": "https://dailyyield.blogspot.com/2026/10/government-moves-to-align-education.html",
    "posts": 2,
@@ -114,10 +130,12 @@
     "bluesky": 1,
     "tumblr": 1,
     "mastodon": 0
-   }
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
-   "key": "master-trending-dc0fd333ea797c23",
+   "key": "master-trending-1",
    "title": "What is the Daily Yield website?",
    "url": "https://dailyyield.blogspot.com/2026/10/what-is-daily-yield-website.html",
    "posts": 2,
@@ -126,10 +144,12 @@
     "bluesky": 0,
     "tumblr": 2,
     "mastodon": 1
-   }
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 1
   },
   {
-   "key": "master-evergreen-74f089505248d07c",
+   "key": "master-evergreen-1",
    "title": "Small business cash flow tips for peak trading",
    "url": "https://dailyyield.blogspot.com/2026/10/small-business-cash-flow-tips-for-peak.html",
    "posts": 2,
@@ -138,10 +158,15 @@
     "bluesky": 1,
     "tumblr": 1,
     "mastodon": 0
-   }
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
+ "duplicatePosts": 8,
+ "extraNetworks": 0,
+ "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
