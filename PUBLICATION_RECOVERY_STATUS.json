@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T21:05:22.053932+05:30",
+  "generatedAt": "2026-10-18T21:30:56.820663+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
@@ -14,11 +14,17 @@
       "type": "preparation_recovery",
       "key": "master-evergreen-4",
       "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-companies",
+      "platform": "tumblr",
+      "routeIndex": 1,
+      "applied": true
     }
   ],
   "retryBlocked": [
     "social:2026-10-18:news-americas:0",
-    "social:2026-10-18:news-companies:1",
     "social:2026-10-18:news-global:0",
     "social:2026-10-18:master-evergreen-3:0"
   ],
