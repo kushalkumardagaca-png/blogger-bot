@@ -1,225 +1,243 @@
 {
- "checkedAt": "2026-10-18T03:09:08.299437+00:00",
- "status": "FAIL",
- "publicPagesRead": 9,
+ "checkedAt": "2026-10-18T08:25:53.638835+00:00",
+ "status": "CHECK_INCOMPLETE",
+ "publicPagesRead": 10,
+ "diagnosticReadsOnly": true,
+ "pageScriptsExecuted": false,
  "syntheticViews": 0,
+ "accountApprovalStatus": "NOT_VISIBLE",
  "checks": [
   {
    "check": "policy page /about",
    "pass": true,
+   "state": "PASS",
    "detail": "/p/about-us_02080501126.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "policy page /contact",
-   "pass": true,
-   "detail": "/p/contact-us_01883938366.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
    "check": "policy page /privacy",
-   "pass": true,
-   "detail": "/p/privacy-policy.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
    "check": "policy page /disclaimer",
-   "pass": true,
-   "detail": "/p/disclaimer.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
    "check": "policy page /terms",
-   "pass": false,
-   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/terms-and-conditions.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "about: public author name",
    "pass": true,
+   "state": "PASS",
    "detail": "Kushal Daga",
    "blocking": true
   },
   {
    "check": "about: publisher's legal name",
    "pass": true,
+   "state": "PASS",
    "detail": "Kushal Kumar Daga",
    "blocking": true
   },
   {
    "check": "about: name relationship explained",
    "pass": true,
+   "state": "PASS",
    "detail": "the site says the public author name is the short form of the legal name used on records",
    "blocking": true
   },
   {
    "check": "about: retired initials byline gone",
    "pass": true,
+   "state": "PASS",
    "detail": "the retired initials byline is no longer published",
    "blocking": true
   },
   {
    "check": "about: publication inbox",
    "pass": true,
+   "state": "PASS",
    "detail": "dailyyield.official@gmail.com",
    "blocking": true
   },
   {
    "check": "about: publisher's own address",
    "pass": true,
+   "state": "PASS",
    "detail": "kushalkumardaga.ca@gmail.com",
    "blocking": true
   },
   {
    "check": "about: no contradictory reply time",
    "pass": true,
+   "state": "PASS",
    "detail": "one reply-time promise only",
    "blocking": true
   },
   {
    "check": "about: no inaccurate name claim",
    "pass": true,
+   "state": "PASS",
    "detail": "no unrelated surname is published as an alias",
    "blocking": true
   },
   {
-   "check": "contact: public author name",
-   "pass": true,
-   "detail": "Kushal Daga",
-   "blocking": true
-  },
-  {
-   "check": "contact: publisher's legal name",
-   "pass": true,
-   "detail": "Kushal Kumar Daga",
-   "blocking": true
-  },
-  {
-   "check": "contact: name relationship explained",
-   "pass": true,
-   "detail": "the site says the public author name is the short form of the legal name used on records",
-   "blocking": true
-  },
-  {
-   "check": "contact: retired initials byline gone",
-   "pass": true,
-   "detail": "the retired initials byline is no longer published",
-   "blocking": true
-  },
-  {
-   "check": "contact: publication inbox",
-   "pass": true,
-   "detail": "dailyyield.official@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "contact: publisher's own address",
-   "pass": true,
-   "detail": "kushalkumardaga.ca@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "contact: no contradictory reply time",
-   "pass": true,
-   "detail": "one reply-time promise only",
-   "blocking": true
-  },
-  {
-   "check": "contact: no inaccurate name claim",
-   "pass": true,
-   "detail": "no unrelated surname is published as an alias",
+   "check": "contact: identity content available",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "Identity could not be checked because the page read failed",
    "blocking": true
   },
   {
    "check": "advertising declared in the policy pages",
    "pass": true,
+   "state": "PASS",
    "detail": "advertising and Google AdSense are described in the policy pages",
    "blocking": true
   },
   {
    "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": true,
+   "pass": null,
+   "state": "UNKNOWN",
    "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   },
   {
-   "check": "ads.txt published",
+   "check": "ads.txt matches the recorded publisher",
    "pass": true,
+   "state": "PASS",
    "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
    "blocking": true
   },
   {
-   "check": "robots.txt readable and permits reading",
+   "check": "robots.txt readable",
    "pass": true,
+   "state": "PASS",
    "detail": "HTTP 200",
    "blocking": true
   },
   {
-   "check": "Mediapartners-Google explicitly allowed",
+   "check": "AdSense crawler access allowed",
    "pass": true,
-   "detail": "the AdSense crawler is named in robots.txt",
+   "state": "PASS",
+   "detail": "Evaluated effective robots rules; an explicit agent name is not mandatory",
    "blocking": true
   },
   {
    "check": "sitemap declared",
    "pass": true,
-   "detail": "sitemap line present in robots.txt",
+   "state": "PASS",
+   "detail": "sitemap line checked in existing robots.txt",
    "blocking": true
   },
   {
    "check": "sitemap.xml serves URLs",
    "pass": true,
-   "detail": "HTTP 200, 502 URLs listed",
+   "state": "PASS",
+   "detail": "HTTP 200, 508 URLs listed",
    "blocking": true
   },
   {
    "check": "no raw code shown to readers",
    "pass": true,
+   "state": "PASS",
    "detail": "no CSS text leaks outside style blocks on the homepage",
    "blocking": true
   },
   {
    "check": "no inaccurate name claim on the homepage",
    "pass": true,
+   "state": "PASS",
    "detail": "the homepage does not present an unrelated surname as an alias of the author",
    "blocking": true
   },
   {
    "check": "no retired byline on the homepage",
    "pass": true,
+   "state": "PASS",
    "detail": "the homepage carries the public author name, not the retired initials form",
    "blocking": true
   },
   {
-   "check": "robots meta allows indexing",
+   "check": "robots meta does not forbid indexing",
    "pass": true,
-   "detail": "the homepage is indexable",
+   "state": "PASS",
+   "detail": "No noindex directive found; an explicit index,follow tag is not required",
    "blocking": true
   },
   {
    "check": "newest articles show no drafting artefacts",
    "pass": true,
+   "state": "PASS",
    "detail": "the 12 most recent posts carry no unnamed source links, repeated links or leftover markdown",
    "blocking": true
   },
   {
-   "check": "no ad code before approval",
+   "check": "AdSense connection markers observed (informational)",
    "pass": true,
-   "detail": "only Blogger's own AdSense tag may be present before approval",
+   "state": "PASS",
+   "detail": "Verification/ad code is not prohibited before approval. Keep the Blogger/AdSense method required by the current application; private account status is not visible here.",
    "blocking": false
   }
  ],
- "blockingIssues": [
+ "blockingIssues": [],
+ "unverifiedChecks": [
   {
-   "check": "policy page /terms",
-   "pass": false,
-   "detail": "/p/terms-and-conditions.html → HTTP 0",
+   "check": "policy page /contact",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
+   "blocking": true
+  },
+  {
+   "check": "policy page /privacy",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
+   "blocking": true
+  },
+  {
+   "check": "policy page /disclaimer",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "blocking": true
+  },
+  {
+   "check": "contact: identity content available",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "Identity could not be checked because the page read failed",
+   "blocking": true
+  },
+  {
+   "check": "privacy page names third-party cookie vendors and the ad opt-out",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   }
  ],
  "manualStepsRequired": [
-  "In the AdSense account, set the payee name, address and contact details exactly as they appear on About Us and Contact Us.",
-  "Confirm the AdSense account's contact email is one of the two addresses shown on the site.",
-  "Use the 'Review your application' button and tick the confirmation box only after the site updates above are live."
+  "Check the existing AdSense site status. If Getting ready, do not remove and resubmit it.",
+  "Complete only the required account tasks actually shown. Legal/payment records must match official records, not necessarily the public author byline.",
+  "Keep correct contact details unchanged. Submit identity, bank or tax details directly to Google only when requested; never in chat."
  ]
 }
