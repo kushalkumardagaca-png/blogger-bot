@@ -616,8 +616,8 @@
   },
   "prewarm:2026-10-18:master-trending-4": {
     "revision": "0e94bd85dd024170",
-    "attempts": 5,
-    "lastAttempt": "2026-10-18T19:38:46.941311+05:30"
+    "attempts": 6,
+    "lastAttempt": "2026-10-18T20:14:06.362656+05:30"
   },
   "social:2026-10-18:news-americas:0": {
     "revision": "0e94bd85dd024170",
@@ -641,7 +641,12 @@
   },
   "prewarm:2026-10-18:master-evergreen-4": {
     "revision": "0e94bd85dd024170",
-    "attempts": 2,
-    "lastAttempt": "2026-10-18T19:38:46.941311+05:30"
+    "attempts": 3,
+    "lastAttempt": "2026-10-18T20:14:06.362656+05:30"
+  },
+  "social:2026-10-18:master-evergreen-3:0": {
+    "revision": "0e94bd85dd024170",
+    "attempts": 1,
+    "lastAttempt": "2026-10-18T20:14:06.362656+05:30"
   }
 }

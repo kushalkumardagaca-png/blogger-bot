@@ -1,20 +1,15 @@
 {
-  "generatedAt": "2026-10-18T19:38:46.941311+05:30",
+  "generatedAt": "2026-10-18T20:14:06.362656+05:30",
   "dateIST": "2026-10-18",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 18,
-  "confirmedByLivePost": 18,
+  "confirmedPublications": 19,
+  "confirmedByLivePost": 19,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
   "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-3",
-      "applied": true
-    },
     {
       "type": "preparation_recovery",
       "key": "master-trending-4",
@@ -23,6 +18,13 @@
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-4",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-evergreen-3",
+      "platform": "tumblr",
+      "routeIndex": 0,
       "applied": true
     }
   ],
