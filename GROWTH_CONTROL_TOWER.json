@@ -1,45 +1,13 @@
 {
-  "generatedAt": "2026-10-18T03:12:07.000684+00:00",
+  "generatedAt": "2026-10-18T08:45:14.610331+00:00",
   "deadline": "2027-09-30",
   "targetDistinctDailyEngagedReaders": 10000000,
   "daysRemaining": 347,
   "stretchTrajectory": {
-    "planningBaselineUnverified": 300,
-    "requiredDailyGrowth": 0.030467,
-    "requiredWeeklyMultiplier": 1.2338,
-    "checkpoints": [
-      {
-        "daysFromNow": 30,
-        "date": "2026-11-17",
-        "planningReaders": 738
-      },
-      {
-        "daysFromNow": 60,
-        "date": "2026-12-17",
-        "planningReaders": 1816
-      },
-      {
-        "daysFromNow": 90,
-        "date": "2027-01-16",
-        "planningReaders": 4469
-      },
-      {
-        "daysFromNow": 180,
-        "date": "2027-04-16",
-        "planningReaders": 66571
-      },
-      {
-        "daysFromNow": 270,
-        "date": "2027-07-15",
-        "planningReaders": 991663
-      },
-      {
-        "daysFromNow": 347,
-        "date": "2027-09-30",
-        "planningReaders": 10000000
-      }
-    ],
-    "warning": "Planning trajectory only; the baseline is not a verified distinct-reader metric."
+    "verifiedBaseline": null,
+    "requiredDailyGrowth": null,
+    "checkpoints": [],
+    "warning": "Arithmetic to an ambition, not a forecast. No trajectory is generated without a verified positive baseline."
   },
   "primaryMetric": {
     "status": "NOT_CONFIGURED",
@@ -60,21 +28,21 @@
   "acquisition": {
     "search7Day": {
       "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "impressions": 1,
+      "ctr": 0.0,
+      "averagePosition": 4.0
     },
     "search28Day": {
       "clicks": 1,
-      "impressions": 1,
-      "ctr": 1.0,
-      "averagePosition": 1.0
+      "impressions": 2,
+      "ctr": 0.5,
+      "averagePosition": 2.5
     },
     "socialOfficialObservations": 260,
     "socialObservedInteractions": 7
   },
   "production": {
-    "masterPublishedTotal": 59,
+    "masterPublishedTotal": 61,
     "newsDesksTracked": 11
   },
   "integrity": {

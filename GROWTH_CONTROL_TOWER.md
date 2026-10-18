@@ -14,7 +14,7 @@ Search clicks, impressions, social reach and Blogger pageviews are deliberately 
 
 ## Acquisition evidence
 
-- Search, last 7 days: `{"clicks": 0, "impressions": 0, "ctr": 0, "averagePosition": null}`
-- Search, last 28 days: `{"clicks": 1, "impressions": 1, "ctr": 1.0, "averagePosition": 1.0}`
+- Search, last 7 days: `{"clicks": 0, "impressions": 1, "ctr": 0.0, "averagePosition": 4.0}`
+- Search, last 28 days: `{"clicks": 1, "impressions": 2, "ctr": 0.5, "averagePosition": 2.5}`
 - Official social observations: 260
 - Observed social interactions: 7

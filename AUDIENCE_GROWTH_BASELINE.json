@@ -1,28 +1,28 @@
 {
-  "checkedAt": "2026-10-18T03:12:06.888306+00:00",
+  "checkedAt": "2026-10-18T08:45:14.479644+00:00",
   "mode": "AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "property": "sc-domain:dailyyield.blogspot.com",
   "requestedThrough": "2026-10-17",
-  "availableThrough": "2026-10-15",
+  "availableThrough": "2026-10-16",
   "searchAcquisition": {
     "last7Days": {
       "clicks": 0,
-      "impressions": 0,
-      "ctr": 0,
-      "averagePosition": null
+      "impressions": 1,
+      "ctr": 0.0,
+      "averagePosition": 4.0
     },
     "last28Days": {
       "clicks": 1,
-      "impressions": 1,
-      "ctr": 1.0,
-      "averagePosition": 1.0
+      "impressions": 2,
+      "ctr": 0.5,
+      "averagePosition": 2.5
     },
     "last90Days": {
       "clicks": 1,
-      "impressions": 1,
-      "ctr": 1.0,
-      "averagePosition": 1.0
+      "impressions": 2,
+      "ctr": 0.5,
+      "averagePosition": 2.5
     },
     "topPages28Days": [
       {
@@ -31,6 +31,13 @@
         "impressions": 1,
         "ctr": 1.0,
         "averagePosition": 1.0
+      },
+      {
+        "page": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-15.html",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "averagePosition": 4.0
       }
     ],
     "topQueries28Days": [],
@@ -42,6 +49,13 @@
         "impressions": 1,
         "ctr": 1.0,
         "averagePosition": 1.0
+      },
+      {
+        "country": "bel",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "averagePosition": 4.0
       }
     ],
     "devices28Days": [
@@ -51,6 +65,13 @@
         "impressions": 1,
         "ctr": 1.0,
         "averagePosition": 1.0
+      },
+      {
+        "device": "DESKTOP",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0.0,
+        "averagePosition": 4.0
       }
     ]
   },
