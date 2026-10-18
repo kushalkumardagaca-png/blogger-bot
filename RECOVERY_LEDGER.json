@@ -591,7 +591,12 @@
   },
   "prewarm:2026-10-18:master-evergreen-1": {
     "revision": "86c3d572ca5aff77",
-    "attempts": 5,
-    "lastAttempt": "2026-10-18T10:33:28.231519+05:30"
+    "attempts": 6,
+    "lastAttempt": "2026-10-18T11:03:10.595927+05:30"
+  },
+  "prewarm:2026-10-18:master-trending-2": {
+    "revision": "86c3d572ca5aff77",
+    "attempts": 1,
+    "lastAttempt": "2026-10-18T11:03:10.595927+05:30"
   }
 }
