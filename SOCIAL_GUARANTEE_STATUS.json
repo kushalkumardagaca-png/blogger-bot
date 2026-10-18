@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-18T09:15:42.208118+05:30",
+ "generatedAt": "2026-10-18T09:42:33.978028+05:30",
  "dateIST": "2026-10-18",
  "apply": true,
  "articles": 6,
  "expectedPosts": 12,
- "articlesWithBothPosts": 5,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 6,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-india",
@@ -72,20 +72,16 @@
    "key": "master-trending-dc0fd333ea797c23",
    "title": "What is the Daily Yield website?",
    "url": "https://dailyyield.blogspot.com/2026/10/what-is-daily-yield-website.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
     "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+    "tumblr": 2,
+    "mastodon": 1
+   }
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
