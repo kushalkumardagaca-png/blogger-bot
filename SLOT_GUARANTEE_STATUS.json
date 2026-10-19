@@ -1,235 +1,212 @@
 {
- "generatedAt": "2026-10-19T23:42:22.997367+05:30",
- "dateIST": "2026-10-19",
+ "generatedAt": "2026-10-20T00:23:40.729979+05:30",
+ "dateIST": "2026-10-20",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 19,
- "onTime": 19,
+ "live": 0,
+ "onTime": 0,
  "late": 0,
  "early": 0,
  "pending": 0,
- "overdue": 2,
- "upcoming": 0,
- "dispatched": 2,
+ "overdue": 0,
+ "upcoming": 21,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
    "slot": "04:15",
-   "due": "2026-10-19T04:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 1167,
-   "publishedAt": "2026-10-18T15:45:05-07:00"
+   "due": "2026-10-20T04:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -232
   },
   {
    "key": "news-china",
    "slot": "05:15",
-   "due": "2026-10-19T05:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 1107,
-   "publishedAt": "2026-10-18T16:31:07-07:00"
+   "due": "2026-10-20T05:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -292
   },
   {
    "key": "master-trending-0",
    "slot": "06:15",
-   "due": "2026-10-19T06:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
-   "state": "on time",
-   "minutesFromSlot": 1047,
-   "publishedAt": "2026-10-18T17:45:09-07:00"
+   "due": "2026-10-20T06:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -352
   },
   {
    "key": "news-india",
    "slot": "07:15",
-   "due": "2026-10-19T07:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 987,
-   "publishedAt": "2026-10-18T18:43:59-07:00"
+   "due": "2026-10-20T07:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -412
   },
   {
    "key": "master-evergreen-0",
    "slot": "08:15",
-   "due": "2026-10-19T08:15:00+05:30",
+   "due": "2026-10-20T08:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "overdue",
-   "minutesFromSlot": 927,
-   "minutesLate": 927,
-   "action": "dispatched"
+   "state": "upcoming",
+   "minutesFromSlot": -472
   },
   {
    "key": "master-trending-1",
    "slot": "09:15",
-   "due": "2026-10-19T09:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/eurusd-11253-eurgbp-08438-eurjpy-177.html",
-   "state": "on time",
-   "minutesFromSlot": 867,
-   "publishedAt": "2026-10-18T20:45:08-07:00"
+   "due": "2026-10-20T09:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -532
   },
   {
    "key": "news-russia",
    "slot": "10:15",
-   "due": "2026-10-19T10:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 807,
-   "publishedAt": "2026-10-18T21:45:04-07:00"
+   "due": "2026-10-20T10:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -592
   },
   {
    "key": "master-evergreen-1",
    "slot": "11:15",
-   "due": "2026-10-19T11:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
-   "state": "on time",
-   "minutesFromSlot": 747,
-   "publishedAt": "2026-10-18T22:45:08-07:00"
+   "due": "2026-10-20T11:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -652
   },
   {
    "key": "news-markets",
    "slot": "12:15",
-   "due": "2026-10-19T12:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 687,
-   "publishedAt": "2026-10-18T23:45:04-07:00"
+   "due": "2026-10-20T12:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -712
   },
   {
    "key": "news-europe",
    "slot": "12:45",
-   "due": "2026-10-19T12:45:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 657,
-   "publishedAt": "2026-10-19T00:15:06-07:00"
+   "due": "2026-10-20T12:45:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -742
   },
   {
    "key": "news-economy",
    "slot": "13:15",
-   "due": "2026-10-19T13:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 627,
-   "publishedAt": "2026-10-19T00:45:03-07:00"
+   "due": "2026-10-20T13:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -772
   },
   {
    "key": "master-trending-2",
    "slot": "14:15",
-   "due": "2026-10-19T14:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/trumps-student-loan-overhaul-could-lead.html",
-   "state": "on time",
-   "minutesFromSlot": 567,
-   "publishedAt": "2026-10-19T01:45:08-07:00"
+   "due": "2026-10-20T14:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -832
   },
   {
    "key": "master-evergreen-2",
    "slot": "15:15",
-   "due": "2026-10-19T15:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/10-ways-to-pay-off-credit-card-debt.html",
-   "state": "on time",
-   "minutesFromSlot": 507,
-   "publishedAt": "2026-10-19T02:45:07-07:00"
+   "due": "2026-10-20T15:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -892
   },
   {
    "key": "master-trending-3",
    "slot": "16:15",
-   "due": "2026-10-19T16:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/fra-approves-six-companies-to-conduct.html",
-   "state": "on time",
-   "minutesFromSlot": 447,
-   "publishedAt": "2026-10-19T04:14:00-07:00"
+   "due": "2026-10-20T16:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -952
   },
   {
    "key": "news-americas",
    "slot": "17:15",
-   "due": "2026-10-19T17:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 387,
-   "publishedAt": "2026-10-19T04:45:07-07:00"
+   "due": "2026-10-20T17:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -1012
   },
   {
    "key": "news-companies",
    "slot": "17:45",
-   "due": "2026-10-19T17:45:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 357,
-   "publishedAt": "2026-10-19T05:05:32-07:00"
+   "due": "2026-10-20T17:45:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -1042
   },
   {
    "key": "news-global",
    "slot": "18:15",
-   "due": "2026-10-19T18:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-19.html",
-   "state": "on time",
-   "minutesFromSlot": 327,
-   "publishedAt": "2026-10-19T05:45:06-07:00"
+   "due": "2026-10-20T18:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -1072
   },
   {
    "key": "news-banking",
    "slot": "18:45",
-   "due": "2026-10-19T18:45:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html",
-   "state": "on time",
-   "minutesFromSlot": 297,
-   "publishedAt": "2026-10-19T06:15:03-07:00"
+   "due": "2026-10-20T18:45:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -1102
   },
   {
    "key": "master-evergreen-3",
    "slot": "19:45",
-   "due": "2026-10-19T19:45:00+05:30",
+   "due": "2026-10-20T19:45:00+05:30",
    "live": false,
    "url": "",
-   "state": "overdue",
-   "minutesFromSlot": 237,
-   "minutesLate": 237,
-   "action": "dispatched"
+   "state": "upcoming",
+   "minutesFromSlot": -1162
   },
   {
    "key": "master-trending-4",
    "slot": "20:45",
-   "due": "2026-10-19T20:45:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/tear-gas-fired-as-thousands-protest.html",
-   "state": "on time",
-   "minutesFromSlot": 177,
-   "publishedAt": "2026-10-19T08:15:08-07:00"
+   "due": "2026-10-20T20:45:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -1222
   },
   {
    "key": "master-evergreen-4",
    "slot": "22:15",
-   "due": "2026-10-19T22:15:00+05:30",
-   "live": true,
-   "url": "https://dailyyield.blogspot.com/2026/10/asset-allocation-gold-leads-as-equity.html",
-   "state": "on time",
-   "minutesFromSlot": 87,
-   "publishedAt": "2026-10-19T09:45:12-07:00"
+   "due": "2026-10-20T22:15:00+05:30",
+   "live": false,
+   "url": "",
+   "state": "upcoming",
+   "minutesFromSlot": -1312
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 19,
+ "actualArticlesLiveIncludingExtras": 0,
  "wrongDay": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
