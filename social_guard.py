@@ -31,6 +31,18 @@ IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 TRACKERS = {"facebook": "facebook_tracker.json", "bluesky": "bluesky_tracker.json",
             "tumblr": "tumblr_tracker.json", "mastodon": "mastodon_tracker.json"}
 WORKFLOW = "coordinated_social_publish.yml"
+CREDENTIAL_HEALTH = ROOT / "SOCIAL_CREDENTIAL_HEALTH.json"
+
+
+def blocked_platforms(root: Path = ROOT) -> dict[str, str]:
+    """Networks whose stored credentials are known to be unusable, with the reason."""
+    path = root / "SOCIAL_CREDENTIAL_HEALTH.json"
+    health = load(path, {})
+    if not isinstance(health, dict):
+        return {}
+    return {str(name): str(row.get("reason", "credentials unavailable"))
+            for name, row in health.items()
+            if isinstance(row, dict) and row.get("ok") is False}
 REQUIRED = 2
 TOLERANCE = dt.timedelta(minutes=30)
 DISPATCH_SPACING = dt.timedelta(minutes=10)
@@ -165,6 +177,20 @@ def main() -> int:
             except ValueError:
                 route_indexes = []
                 record['routingIssue'] = 'Cannot identify the approved daily slot; no guessed route is posted.'
+            blocked = blocked_platforms()
+            if blocked:
+                try:
+                    pair = platform_pair_for(article.get('routingKey', article['key']), day)
+                except ValueError:
+                    pair = ()
+                down = sorted({pair[index] for index in route_indexes if index < len(pair) and pair[index] in blocked})
+                if down:
+                    record["credentialBlocked"] = {name: blocked[name] for name in down}
+                    record.setdefault("actions", []).append(
+                        "no post is attempted because " + ", ".join(down) +
+                        " credentials are known to be unusable; the owner must re-authorise the connection")
+                    rows.append(record)
+                    continue
             for route_index in route_indexes:
                 key = f"{day}:{article['key']}:{route_index}"
                 waiting, paused, attempts = route_state(ledger.get(key), now)

@@ -8,6 +8,7 @@ check only knew the canonical address and not the collision-suffixed one.
 """
 import datetime as dt
 import sys
+import json
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -232,6 +233,47 @@ class RouteAttemptCap(unittest.TestCase):
         import social_guard as g
         now = dt.datetime(2026, 10, 19, 13, 0, tzinfo=IST)
         self.assertEqual(g.route_state(None, now), (False, False, 0))
+
+
+class CredentialHealthIsVisible(unittest.TestCase):
+    def test_a_dead_network_is_reported_and_a_healthy_one_is_ignored(self):
+        import tempfile
+        import social_guard as g
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.assertEqual(g.blocked_platforms(root), {})
+            (root / "SOCIAL_CREDENTIAL_HEALTH.json").write_text(json.dumps(
+                {"tumblr": {"ok": False, "reason": "RuntimeError: invalid_grant"},
+                 "mastodon": {"ok": True, "reason": ""}}), encoding="utf-8")
+            blocked = g.blocked_platforms(root)
+        self.assertEqual(list(blocked), ["tumblr"])
+        self.assertIn("invalid_grant", blocked["tumblr"])
+
+    def test_broken_json_cannot_make_the_guard_think_a_network_is_down(self):
+        import tempfile
+        import social_guard as g
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "SOCIAL_CREDENTIAL_HEALTH.json").write_text("{not json", encoding="utf-8")
+            self.assertEqual(g.blocked_platforms(root), {})
+
+    def test_the_publisher_writes_health_without_leaving_a_token_behind(self):
+        import tempfile
+        import tumblr_publisher as t
+        with tempfile.TemporaryDirectory() as tmp:
+            health = Path(tmp) / "SOCIAL_CREDENTIAL_HEALTH.json"
+            original = t.HEALTH_FILE
+            t.HEALTH_FILE = health
+            try:
+                t.record_health(False, "401 Client Error: unauthorized url=" + "A" * 60)
+                row = json.loads(health.read_text())["tumblr"]
+                self.assertFalse(row["ok"])
+                self.assertNotIn("A" * 60, health.read_text())
+                self.assertIn("re-authorise", row["action"])
+                t.record_health(True)
+                self.assertTrue(json.loads(health.read_text())["tumblr"]["ok"])
+            finally:
+                t.HEALTH_FILE = original
 
 
 if __name__ == "__main__":

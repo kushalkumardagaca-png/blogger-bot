@@ -63,6 +63,28 @@ def refresh_access():
  if not new.get("refresh_token"): new["refresh_token"]=old["refresh_token"]
  if not new.get("scope"): new["scope"]=old.get("scope","")
  encrypt_bundle(new);return new["access_token"]
+HEALTH_FILE=Path(__file__).resolve().parent/"SOCIAL_CREDENTIAL_HEALTH.json"
+PLATFORM="tumblr"
+_SECRET_RE=re.compile(r"(?i)(bearer\s+|[a-z0-9_-]{28,})")
+
+
+def _safe_reason(text:str)->str:
+    """Tumblr's own error words, with anything token-shaped removed."""
+    return _SECRET_RE.sub("[redacted]",str(text))[:300]
+
+
+def record_health(ok:bool,reason:str="")->None:
+    """Write the platform's credential state so a breakage is visible without log access."""
+    rows={}
+    try:rows=json.loads(HEALTH_FILE.read_text())
+    except Exception:rows={}
+    if not isinstance(rows,dict):rows={}
+    rows[PLATFORM]={"ok":bool(ok),"checkedAtIST":datetime.now(IST).isoformat(),"reason":_safe_reason(reason)}
+    if ok:rows[PLATFORM]["action"]="none; the network is publishing"
+    else:rows[PLATFORM]["action"]="the owner must re-authorise the Tumblr connection (official OAuth approval); no post can be published until then"
+    HEALTH_FILE.write_text(json.dumps(rows,indent=2,ensure_ascii=False)+"\n")
+
+
 def auth(token): return {"Authorization":"Bearer "+token}
 def verify_account(token):
  data=request("GET",API+"/user/info",headers=auth(token)).json().get("response",{}).get("user",{})
@@ -171,7 +193,14 @@ def publish(token,x):
 
 def main():
  p=argparse.ArgumentParser();p.add_argument("--verify-only",action="store_true");p.add_argument("--dry-run",action="store_true");p.add_argument("--content-mode",choices=("auto","post","page"),default="auto");p.add_argument("--target-url",default="",help="Publish this exact API-inventoried Daily Yield destination");a=p.parse_args()
- token=refresh_access();user=verify_account(token);print(f"Tumblr account verified for {TUMBLR_BLOG} ({user.get('name','account')}).")
+ try:
+  token=refresh_access();user=verify_account(token)
+ except Exception as exc:
+  # Every route that needs Tumblr is blocked until the connection is re-authorised,
+  # and the reason must survive somewhere readable: Actions logs are not available to
+  # the automation, and on 19 October six routes failed with nobody able to say why.
+  record_health(False,f"{type(exc).__name__}: {exc}");raise
+ record_health(True);print(f"Tumblr account verified for {TUMBLR_BLOG} ({user.get('name','account')}).")
  if a.verify_only:return 0
  posts,pages=inventory(blogger_token());tracker=load_tracker();recent=recent_posts(token)
  if a.target_url:
