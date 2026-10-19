@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T15:15:50.765137+05:30",
+ "generatedAt": "2026-10-19T15:49:46.570880+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 12,
  "expectedPosts": 24,
- "articlesWithBothPosts": 4,
- "postsMissing": 9,
- "dispatched": 3,
+ "articlesWithBothPosts": 5,
+ "postsMissing": 7,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-economy",
@@ -199,26 +199,22 @@
    "key": "master-evergreen-2",
    "title": "10 Ways to Pay Off Credit Card Debt",
    "url": "https://dailyyield.blogspot.com/2026/10/10-ways-to-pay-off-credit-card-debt.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T15:15:44.536828+05:30",
+ "liveVerificationSourceAt": "2026-10-19T15:49:38.820366+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 4,
+ "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
