@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T14:13:40.957113+05:30",
+  "generatedAt": "2026-10-19T14:50:26.115499+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 10,
-  "confirmedByLivePost": 10,
+  "confirmedPublications": 11,
+  "confirmedByLivePost": 11,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,7 +15,14 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 2,
+      "attempt": 3,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-2",
+      "platform": "tumblr",
+      "routeIndex": 1,
       "applied": true
     }
   ],
