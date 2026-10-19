@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T08:47:09.697014+05:30",
+ "generatedAt": "2026-10-19T09:15:44.725407+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 4,
- "expectedPosts": 8,
+ "articles": 5,
+ "expectedPosts": 10,
  "articlesWithBothPosts": 1,
- "postsMissing": 3,
- "dispatched": 3,
+ "postsMissing": 5,
+ "dispatched": 5,
  "rows": [
   {
    "key": "news-india",
@@ -72,11 +72,29 @@
    "actions": [
     "dispatched"
    ]
+  },
+  {
+   "key": "master-trending-1",
+   "title": "EUR/USD 1.1253 · EUR/GBP 0.8438 · EUR/JPY 177.",
+   "url": "https://dailyyield.blogspot.com/2026/10/eurusd-11253-eurgbp-08438-eurjpy-177.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T08:47:05.631900+05:30",
+ "liveVerificationSourceAt": "2026-10-19T09:15:37.839757+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 1,
  "syntheticViews": 0,
