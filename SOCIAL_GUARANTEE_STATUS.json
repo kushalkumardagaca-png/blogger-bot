@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T20:27:44.445170+05:30",
+ "generatedAt": "2026-10-19T20:46:27.338560+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 17,
- "expectedPosts": 34,
+ "articles": 18,
+ "expectedPosts": 36,
  "articlesWithBothPosts": 8,
- "postsMissing": 9,
- "dispatched": 0,
+ "postsMissing": 11,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-markets",
@@ -290,11 +290,29 @@
    "actions": [
     "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
+  },
+  {
+   "key": "master-trending-4",
+   "title": "Tear gas fired as thousands protest rising cos",
+   "url": "https://dailyyield.blogspot.com/2026/10/tear-gas-fired-as-thousands-protest.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T20:27:25.846831+05:30",
+ "liveVerificationSourceAt": "2026-10-19T20:46:04.864565+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 8,
  "syntheticViews": 0,
