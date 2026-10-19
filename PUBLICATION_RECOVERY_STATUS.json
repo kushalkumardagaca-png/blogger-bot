@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T09:06:04.361784+05:30",
+  "generatedAt": "2026-10-19T09:44:41.013225+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 4,
-  "confirmedByLivePost": 4,
+  "confirmedPublications": 5,
+  "confirmedByLivePost": 5,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,7 +15,7 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 1,
+      "attempt": 2,
       "applied": true
     }
   ],
