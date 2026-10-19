@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T15:49:46.570880+05:30",
+ "generatedAt": "2026-10-19T16:24:12.422590+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 12,
  "expectedPosts": 24,
  "articlesWithBothPosts": 5,
  "postsMissing": 7,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-economy",
@@ -191,8 +191,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -212,7 +214,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T15:49:38.820366+05:30",
+ "liveVerificationSourceAt": "2026-10-19T16:24:02.565722+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
