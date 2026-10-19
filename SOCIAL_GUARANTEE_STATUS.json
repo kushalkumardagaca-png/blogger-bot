@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T18:15:46.807348+05:30",
+ "generatedAt": "2026-10-19T18:17:09.966487+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 16,
  "expectedPosts": 32,
  "articlesWithBothPosts": 7,
  "postsMissing": 10,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-markets",
@@ -69,8 +69,8 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   },
   {
@@ -279,7 +279,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T18:15:36.166904+05:30",
+ "liveVerificationSourceAt": "2026-10-19T18:17:03.113511+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 7,
  "syntheticViews": 0,
