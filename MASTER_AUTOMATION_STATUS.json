@@ -1,12 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "ecdac34f3a084a15",
+  "kind": "evergreen",
+  "slot": 0,
+  "slot_key": "2026-10-19:evergreen:0",
   "date": "2026-10-19",
-  "kind": "trending",
-  "slot": 1,
-  "topic_id": "762d6127d7c84241",
-  "replaced_topic_id": "7b8222d84a84df45",
-  "title": "EUR/USD 1.1253 · EUR/GBP 0.8438 · EUR/JPY 177.",
-  "package": "master_packages/dynamic/2026-10-19-trending-762d6127d7c84241.json",
-  "html": "scheduled_ready/2026-10-19-trending-1-eur-usd-1-1253-eur-gbp-0-8438-eur-jpy-177.html"
+  "category": "Money Hacks & Financial Habits",
+  "evergreen_category": "Money Hacks & Financial Habits",
+  "title": "Best Financial Habits For Gen Z: Budgeting, Sm",
+  "url": "https://dailyyield.blogspot.com/2026/10/best-financial-habits-for-gen-z.html",
+  "published_at": "2026-10-15T19:45:08-07:00"
 }
