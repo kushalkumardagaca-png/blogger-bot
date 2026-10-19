@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-19T15:15:19.318270+05:30",
+ "generatedAt": "2026-10-19T15:15:44.536828+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 11,
- "onTime": 11,
+ "live": 12,
+ "onTime": 12,
  "late": 0,
  "early": 0,
- "pending": 1,
+ "pending": 0,
  "overdue": 1,
  "upcoming": 8,
- "dispatched": 2,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -138,11 +138,11 @@
    "key": "master-evergreen-2",
    "slot": "15:15",
    "due": "2026-10-19T15:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "pending",
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/10-ways-to-pay-off-credit-card-debt.html",
+   "state": "on time",
    "minutesFromSlot": 0,
-   "action": "dispatched"
+   "publishedAt": "2026-10-19T02:45:07-07:00"
   },
   {
    "key": "master-trending-3",
@@ -220,7 +220,7 @@
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 11,
+ "actualArticlesLiveIncludingExtras": 12,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
