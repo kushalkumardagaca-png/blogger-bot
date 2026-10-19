@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T20:46:27.338560+05:30",
+ "generatedAt": "2026-10-19T20:59:53.809711+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 18,
  "expectedPosts": 36,
- "articlesWithBothPosts": 8,
- "postsMissing": 11,
- "dispatched": 2,
+ "articlesWithBothPosts": 9,
+ "postsMissing": 9,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-markets",
@@ -295,26 +295,22 @@
    "key": "master-trending-4",
    "title": "Tear gas fired as thousands protest rising cos",
    "url": "https://dailyyield.blogspot.com/2026/10/tear-gas-fired-as-thousands-protest.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T20:46:04.864565+05:30",
+ "liveVerificationSourceAt": "2026-10-19T20:59:40.536424+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 8,
+ "articlesWithExactlyTwoPosts": 9,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
