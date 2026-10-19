@@ -1,14 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "26b4796ee118af45",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-19",
   "kind": "evergreen",
   "slot": 1,
-  "slot_key": "2026-10-19:evergreen:1",
-  "date": "2026-10-19",
-  "category": "Saving & Emergency Planning",
-  "evergreen_category": "Saving & Emergency Planning",
+  "topic_id": "26b4796ee118af45",
+  "replaced_topic_id": null,
   "title": "Proposals to close Minneapolis schools aimed a",
-  "url": "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
-  "published_at": "2026-10-18T22:45:08-07:00"
+  "package": "master_packages/dynamic/2026-10-19-evergreen-26b4796ee118af45.json",
+  "html": "scheduled_ready/2026-10-19-evergreen-1-proposals-to-close-minneapolis-schools-aimed-a.html"
 }
