@@ -1,0 +1,764 @@
+{
+  "preparedAtIST": "2026-10-19T12:54:40.907909+05:30",
+  "status": "PRIVATE_SPEC_ONLY",
+  "shortlistStatus": "PRIVATE_SHORTLIST_ONLY",
+  "releaseRule": "No new live URLs, Blogger drafts or ranking build until explicit owner approval and the freeze release conditions.",
+  "whyPrivate": "Publishing new URLs, changing the sitemap or restructuring pages is held until the AdSense review is finished and the owner lifts the freeze. The arithmetic and the page shape are proved now so the release is one careful pass later.",
+  "tools": [
+    {
+      "id": "P01",
+      "type": "Calculator",
+      "name": "Loan EMI",
+      "cluster": "Loans and debt",
+      "readerQuestion": "What is my monthly loan payment?",
+      "publishedSpecification": "Fixed-rate amortisation, plus a separate zero-interest branch.",
+      "inputs": [
+        {
+          "name": "principal",
+          "min": 1000,
+          "max": 50000000,
+          "unit": "rupees",
+          "workedDefault": 2500000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 30,
+          "unit": "percent per year",
+          "workedDefault": 8.6
+        },
+        {
+          "name": "months",
+          "min": 6,
+          "max": 360,
+          "unit": "months",
+          "workedDefault": 240
+        }
+      ],
+      "formula": "EMI = P x r x (1+r)^n / ((1+r)^n - 1), r = annual rate / 1200",
+      "outputs": [
+        "Monthly instalment",
+        "Total interest",
+        "Total payment"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "principal": 2500000,
+          "annualRatePct": 8.6,
+          "months": 240
+        },
+        "outputs": {
+          "emi": 21854.07,
+          "totalInterest": 2744976.53,
+          "totalPayment": 5244976.53
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.01 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P02",
+      "type": "Calculator",
+      "name": "Loan prepayment",
+      "cluster": "Loans and debt",
+      "readerQuestion": "How much interest could a loan prepayment save?",
+      "publishedSpecification": "Compare two complete amortisation schedules; show fees and rate assumptions.",
+      "inputs": [
+        {
+          "name": "principal",
+          "min": 1000,
+          "max": 50000000,
+          "unit": "rupees",
+          "workedDefault": 2000000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 30,
+          "unit": "percent per year",
+          "workedDefault": 9.0
+        },
+        {
+          "name": "months",
+          "min": 6,
+          "max": 360,
+          "unit": "months",
+          "workedDefault": 240
+        },
+        {
+          "name": "lump",
+          "min": 1000,
+          "max": 10000000,
+          "unit": "rupees",
+          "workedDefault": 300000
+        },
+        {
+          "name": "atMonth",
+          "min": 1,
+          "max": 300,
+          "unit": "month number",
+          "workedDefault": 12
+        }
+      ],
+      "formula": "re-run the amortisation with the extra capital payment added at month k, then compare",
+      "outputs": [
+        "Months saved",
+        "Interest saved",
+        "New final month"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "principal": 2000000,
+          "annualRatePct": 9.0,
+          "months": 240,
+          "lump": 300000,
+          "atMonth": 12
+        },
+        "outputs": {
+          "monthsSaved": 69,
+          "interestSaved": 959305.48,
+          "monthsAfter": 171,
+          "monthsBefore": 240
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.02 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P03",
+      "type": "Calculator",
+      "name": "Loan affordability",
+      "cluster": "Loans and debt",
+      "readerQuestion": "What loan payment fits my budget?",
+      "publishedSpecification": "User budget and existing debts; not a lender approval or eligibility promise.",
+      "inputs": [
+        {
+          "name": "monthlyBudget",
+          "min": 1000,
+          "max": 500000,
+          "unit": "rupees",
+          "workedDefault": 45000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 30,
+          "unit": "percent per year",
+          "workedDefault": 8.75
+        },
+        {
+          "name": "months",
+          "min": 6,
+          "max": 360,
+          "unit": "months",
+          "workedDefault": 240
+        }
+      ],
+      "formula": "Principal = budget x (1 - (1+r)^-n) / r",
+      "outputs": [
+        "Largest affordable loan",
+        "Implied EMI at that size"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "monthlyBudget": 45000,
+          "annualRatePct": 8.75,
+          "months": 240
+        },
+        "outputs": {
+          "affordablePrincipal": 5092164.16,
+          "emiAtThatSize": 45000.0
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.03 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P04",
+      "type": "Calculator",
+      "name": "Credit-card payoff",
+      "cluster": "Loans and debt",
+      "readerQuestion": "How long will it take to pay off my card?",
+      "publishedSpecification": "Balance/periodic rate/payment simulation; detect payments that do not cover interest.",
+      "inputs": [
+        {
+          "name": "balance",
+          "min": 1000,
+          "max": 5000000,
+          "unit": "rupees",
+          "workedDefault": 400000
+        },
+        {
+          "name": "monthlyPayment",
+          "min": 100,
+          "max": 500000,
+          "unit": "rupees",
+          "workedDefault": 20000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 60,
+          "unit": "percent per year",
+          "workedDefault": 42
+        }
+      ],
+      "formula": "iterate: interest = balance x r; capital = payment - interest; stop when capital <= 0",
+      "outputs": [
+        "Months to clear",
+        "Total interest",
+        "A plain warning when the payment cannot clear the card"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "balance": 400000,
+          "monthlyPayment": 20000,
+          "annualRatePct": 42
+        },
+        "outputs": {
+          "months": 35,
+          "interestApprox": 300000
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.04 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P05",
+      "type": "Calculator",
+      "name": "Compound interest",
+      "cluster": "Saving and investing basics",
+      "readerQuestion": "How does money grow with compound interest?",
+      "publishedSpecification": "Principal and deposits with an explicit rate/compounding convention.",
+      "inputs": [
+        {
+          "name": "principal",
+          "min": 100,
+          "max": 10000000,
+          "unit": "rupees",
+          "workedDefault": 100000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 20,
+          "unit": "percent per year",
+          "workedDefault": 7.5
+        },
+        {
+          "name": "years",
+          "min": 0.25,
+          "max": 40,
+          "unit": "years",
+          "workedDefault": 10
+        },
+        {
+          "name": "compoundsPerYear",
+          "min": 1,
+          "max": 12,
+          "unit": "times a year",
+          "workedDefault": 12
+        }
+      ],
+      "formula": "Amount x (1 + rate/periods)^(periods x years)",
+      "outputs": [
+        "Value at the end",
+        "Interest earned",
+        "Growth as a percentage"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "principal": 100000,
+          "annualRatePct": 7.5,
+          "years": 10,
+          "compoundsPerYear": 12
+        },
+        "outputs": {
+          "futureValue": 211206.46,
+          "interestEarned": 111206.46
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.05 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P06",
+      "type": "Calculator",
+      "name": "Savings goal",
+      "cluster": "Saving and investing basics",
+      "readerQuestion": "How much should I save monthly for a goal?",
+      "publishedSpecification": "Solve monthly contributions under disclosed hypothetical rates, not promised returns.",
+      "inputs": [
+        {
+          "name": "target",
+          "min": 1000,
+          "max": 100000000,
+          "unit": "rupees",
+          "workedDefault": 3000000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 20,
+          "unit": "percent per year",
+          "workedDefault": 9
+        },
+        {
+          "name": "years",
+          "min": 0.25,
+          "max": 40,
+          "unit": "years",
+          "workedDefault": 12
+        }
+      ],
+      "formula": "Monthly deposit = target x r / ((1+r)^n - 1)",
+      "outputs": [
+        "Monthly deposit needed",
+        "Total contributed",
+        "Interest earned"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "target": 3000000,
+          "annualRatePct": 9,
+          "years": 12
+        },
+        "outputs": {
+          "monthlyDeposit": 11640.92,
+          "totalContributed": 1676292.61
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.06 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P07",
+      "type": "Calculator",
+      "name": "Inflation and buying power",
+      "cluster": "Saving and investing basics",
+      "readerQuestion": "What could today’s spending cost in the future?",
+      "publishedSpecification": "Present value and future value under a user-chosen inflation assumption.",
+      "inputs": [
+        {
+          "name": "amount",
+          "min": 100,
+          "max": 100000000,
+          "unit": "rupees",
+          "workedDefault": 1000000
+        },
+        {
+          "name": "inflationPct",
+          "min": 0,
+          "max": 20,
+          "unit": "percent per year",
+          "workedDefault": 6.2
+        },
+        {
+          "name": "years",
+          "min": 0.25,
+          "max": 60,
+          "unit": "years",
+          "workedDefault": 10
+        }
+      ],
+      "formula": "Future price = amount x (1 + inflation)^years; buying power is its inverse",
+      "outputs": [
+        "Future price of today's spending",
+        "Today's value of that future money",
+        "Price rise %"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "amount": 1000000,
+          "inflationPct": 6.2,
+          "years": 10
+        },
+        "outputs": {
+          "futureCost": 1824925.62,
+          "buyingPowerOfToday": 547967.54,
+          "priceIncreasePct": 82.49
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.07 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P08",
+      "type": "Calculator",
+      "name": "Retirement scenarios",
+      "cluster": "Saving and investing basics",
+      "readerQuestion": "How do expenses and savings affect a retirement plan?",
+      "publishedSpecification": "Expenses, inflation, years and withdrawal assumptions; no safe-return guarantee.",
+      "inputs": [
+        {
+          "name": "fundAtRetirement",
+          "min": 100000,
+          "max": 100000000,
+          "unit": "rupees",
+          "workedDefault": 25000000
+        },
+        {
+          "name": "annualExpense",
+          "min": 10000,
+          "max": 10000000,
+          "unit": "rupees a year",
+          "workedDefault": 1000000
+        },
+        {
+          "name": "returnPct",
+          "min": 0,
+          "max": 15,
+          "unit": "percent per year",
+          "workedDefault": 7
+        }
+      ],
+      "formula": "year by year: fund = fund x (1 + return) - withdrawal",
+      "outputs": [
+        "Years the fund lasts",
+        "When it runs out",
+        "What a 20% larger withdrawal changes"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "fundAtRetirement": 25000000,
+          "annualExpense": 1000000,
+          "returnPct": 7
+        },
+        "outputs": {
+          "yearsLasts": 100.0
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.08 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P09",
+      "type": "Calculator",
+      "name": "SIP scenarios",
+      "cluster": "Saving and investing basics",
+      "readerQuestion": "How could regular monthly investments grow?",
+      "publishedSpecification": "Explicit contribution timing and rate convention; hypothetical investment values.",
+      "inputs": [
+        {
+          "name": "monthlyAmount",
+          "min": 100,
+          "max": 1000000,
+          "unit": "rupees a month",
+          "workedDefault": 10000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 25,
+          "unit": "percent per year",
+          "workedDefault": 12
+        },
+        {
+          "name": "years",
+          "min": 0.25,
+          "max": 45,
+          "unit": "years",
+          "workedDefault": 20
+        }
+      ],
+      "formula": "FV = deposit x ((1+r)^n - 1) / r, payments at month end",
+      "outputs": [
+        "Corpus",
+        "Total invested",
+        "Gain",
+        "Gain as a share of the corpus"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "monthlyAmount": 10000,
+          "annualRatePct": 12,
+          "years": 20
+        },
+        "outputs": {
+          "corpus": 9892553.65,
+          "invested": 2400000
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.09 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    },
+    {
+      "id": "P10",
+      "type": "Calculator",
+      "name": "Step-up SIP",
+      "cluster": "Saving and investing basics",
+      "readerQuestion": "What changes if I increase contributions each year?",
+      "publishedSpecification": "Yearly contribution increases with monthly cash-flow timing.",
+      "inputs": [
+        {
+          "name": "startMonthly",
+          "min": 100,
+          "max": 1000000,
+          "unit": "rupees a month",
+          "workedDefault": 10000
+        },
+        {
+          "name": "annualRatePct",
+          "min": 0,
+          "max": 25,
+          "unit": "percent per year",
+          "workedDefault": 11
+        },
+        {
+          "name": "years",
+          "min": 1,
+          "max": 45,
+          "unit": "years",
+          "workedDefault": 15
+        },
+        {
+          "name": "annualStepUpPct",
+          "min": 0,
+          "max": 50,
+          "unit": "percent a year",
+          "workedDefault": 10
+        }
+      ],
+      "formula": "raise the monthly amount each 12th month, then compound month by month",
+      "outputs": [
+        "Corpus",
+        "Extra versus a flat contribution",
+        "Total invested"
+      ],
+      "roundingRule": "full precision inside the calculation; round once at display; two decimals for rupees, one for percentages",
+      "invalidInputRule": "negative or absurd values return a plain explanation, never a number",
+      "workedExample": {
+        "inputs": {
+          "startMonthly": 10000,
+          "annualRatePct": 11,
+          "years": 15,
+          "annualStepUpPct": 10
+        },
+        "outputs": {
+          "corpus": 7956677.43,
+          "flatCorpus": 4546895.75
+        }
+      },
+      "verification": "test_growth_tool_math.py (growth_tool_math.10 arithmetic cross-checked by loop and inverse calls)",
+      "pageIntent": {
+        "onePagePerIntent": true,
+        "sections": [
+          "what the number means",
+          "the worked example above",
+          "the formula in words",
+          "the limits of the estimate",
+          "related Daily Yield articles"
+        ],
+        "wordTarget": [
+          900,
+          1400
+        ]
+      },
+      "requiredDisclosure": "An illustration from stated inputs, not advice. Rates, taxes and charges must be confirmed with the lender, fund or tax rules in force.",
+      "buildState": "SPECIFIED_AND_MATHS_TESTED_NOT_BUILT"
+    }
+  ],
+  "notInThisPass": {
+    "pagesCreated": 0,
+    "urlsRegistered": 0,
+    "themeChanged": false,
+    "sitemapChanged": false,
+    "ownerAccountChanged": false,
+    "missingFromShortlist": []
+  },
+  "remainingOfFifty": [
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20",
+    "P21",
+    "P22",
+    "P23",
+    "P24",
+    "P25",
+    "P26",
+    "P27",
+    "P28",
+    "P29",
+    "P30",
+    "P31",
+    "P32",
+    "P33",
+    "P34",
+    "P35",
+    "P36",
+    "P37",
+    "P38",
+    "P39",
+    "P40",
+    "P41",
+    "P42",
+    "P43",
+    "P44",
+    "P45",
+    "P46",
+    "P47",
+    "P48",
+    "P49",
+    "P50"
+  ]
+}
