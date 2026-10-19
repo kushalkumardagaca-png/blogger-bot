@@ -1,14 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "73a4ff24d60c2ca0",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-19",
   "kind": "trending",
   "slot": 0,
-  "slot_key": "2026-10-19:trending:0",
-  "date": "2026-10-19",
-  "category": "Trend · Money & Policy Now",
-  "evergreen_category": "Banking Payments & Fintech",
+  "topic_id": "73a4ff24d60c2ca0",
+  "replaced_topic_id": null,
   "title": "World Bank says ‘small AI’ could transform dev",
-  "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
-  "published_at": "2026-10-18T17:45:09-07:00"
+  "package": "master_packages/dynamic/2026-10-19-trending-73a4ff24d60c2ca0.json",
+  "html": "scheduled_ready/2026-10-19-trending-0-world-bank-says-small-ai-could-transform-dev.html"
 }
