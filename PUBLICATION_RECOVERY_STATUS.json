@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T23:25:04.773993+05:30",
+  "generatedAt": "2026-10-19T23:57:07.255673+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
@@ -16,7 +16,7 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 2,
+      "attempt": 3,
       "applied": true
     }
   ],
