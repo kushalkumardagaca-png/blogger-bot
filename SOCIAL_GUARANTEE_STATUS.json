@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T13:54:50.915565+05:30",
+ "generatedAt": "2026-10-19T14:15:54.680284+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 10,
- "expectedPosts": 20,
+ "articles": 11,
+ "expectedPosts": 22,
  "articlesWithBothPosts": 4,
- "postsMissing": 6,
- "dispatched": 6,
+ "postsMissing": 8,
+ "dispatched": 3,
  "rows": [
   {
    "key": "news-economy",
@@ -52,8 +52,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -69,8 +71,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -100,8 +104,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -117,8 +123,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -134,8 +142,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -165,11 +175,29 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-2",
+   "title": "Trump's student loan overhaul could lead to mo",
+   "url": "https://dailyyield.blogspot.com/2026/10/trumps-student-loan-overhaul-could-lead.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T13:54:43.420507+05:30",
+ "liveVerificationSourceAt": "2026-10-19T14:15:47.589248+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
