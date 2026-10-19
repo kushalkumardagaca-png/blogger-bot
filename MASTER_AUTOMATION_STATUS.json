@@ -1,12 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "6b37ec5ecf59dde4",
+  "kind": "trending",
+  "slot": 4,
+  "slot_key": "2026-10-19:trending:4",
   "date": "2026-10-19",
-  "kind": "evergreen",
-  "slot": 0,
-  "topic_id": "ecdac34f3a084a15",
-  "replaced_topic_id": null,
-  "title": "Best Financial Habits For Gen Z: Budgeting, Sm",
-  "package": "master_packages/dynamic/2026-10-19-evergreen-ecdac34f3a084a15.json",
-  "html": "scheduled_ready/2026-10-19-evergreen-0-best-financial-habits-for-gen-z-budgeting-sm.html"
+  "category": "Trend · Viral Money Questions",
+  "evergreen_category": "Money Hacks & Financial Habits",
+  "title": "Tear gas fired as thousands protest rising cos",
+  "url": "https://dailyyield.blogspot.com/2026/10/tear-gas-fired-as-thousands-protest.html",
+  "published_at": "2026-10-19T08:15:08-07:00"
 }
