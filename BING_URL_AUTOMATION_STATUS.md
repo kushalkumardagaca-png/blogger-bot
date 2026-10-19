@@ -1,7 +1,7 @@
 # Bing URL Submission and Index-Status Automation
 
 - **Status:** PASS
-- **Checked:** 2026-10-19T12:06:14.885414+00:00
+- **Checked:** 2026-10-19T12:15:33.793005+00:00
 - **Mode:** authenticated control-plane, zero public Daily Yield requests
 - **Synthetic Daily Yield views:** 0
 
