@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-20T04:41:20.205920+05:30",
+  "generatedAt": "2026-10-20T05:15:57.172668+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 1,
-  "confirmedByLivePost": 1,
+  "confirmedPublications": 2,
+  "confirmedByLivePost": 2,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -16,14 +16,14 @@
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-asia-pacific",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "type": "preparation_recovery",
+      "key": "master-evergreen-0",
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "social:2026-10-20:news-asia-pacific:0"
+  ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
