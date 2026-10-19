@@ -1,6 +1,6 @@
 # Daily Yield — Table 3 Work and Results
 
-**Updated: 19 October 2026, 20:08 IST. AdSense remains the first priority.**
+**Updated: 19 October 2026, 23:15 IST. AdSense remains the first priority.**
 
 **The controls and checks were carried out. This is not a claim that every requirement passed:** photo-count/evidence gaps, any owner-only settings, Analytics permissions and human fact-review limits are shown below.
 
@@ -24,7 +24,7 @@
 | B5 — Names and honest statements | Checked | Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim. |
 | B6 — Facts and originality | Automated check done; human-review limit remains | 535 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected. |
 | B7 — Photographs and rights | Metadata check done | Master photo-count mismatches: 0; figures needing fuller licence/alt/caption evidence: 0; News pools below 40: 0. Exact-file licence metadata recovered separately: 522. No copyright-ownership guarantee or old-photo replacement. |
-| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-19T19:45:37.242884+05:30: 17/21 live, 1 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0. |
+| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-19T23:12:35.149670+05:30: 19/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0. |
 | B9 — Social delivery and duplicates | Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'tumblr': 8, 'mastodon': 0}); this run 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately. |
 | B10 — Search Console | Read existing results | Latest index evidence 2026-10-18T21:16:35.179936+00:00: 1 indexed results, 531 not indexed, 0 inspection errors. No ownership reset or manual bulk request. |
 | B11 — Old redirect warnings | Diagnosed, not blindly repaired | 10 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence. |
@@ -39,17 +39,17 @@
 ## 3. Articles and social posts — separate counts
 
 **Missing among articles due at the saved status time: 2.** Later slots are not failures.
-Article-status source: 2026-10-19T19:45:37.242884+05:30.
+Article-status source: 2026-10-19T23:12:35.149670+05:30.
 
 | Type | Due by that time | Published among those due | Missing |
 |---|---:|---:|---:|
 | News | 11 | 11 | 0 |
-| Evergreen | 4 | 2 | 2 |
-| Trending | 4 | 4 | 0 |
+| Evergreen | 5 | 3 | 2 |
+| Trending | 5 | 5 | 0 |
 
-- **Article-related social posts recorded today:** 25; full-day target 42.
-- **Resource promotions recorded today:** 5; full-day target 12. Per network: {'facebook': 2, 'bluesky': 1, 'mastodon': 2}.
-- **Article-social tracker status:** ATTENTION; missing routes 9; duplicate copies 0.
+- **Article-related social posts recorded today:** 28; full-day target 42.
+- **Resource promotions recorded today:** 6; full-day target 12. Per network: {'facebook': 2, 'bluesky': 2, 'mastodon': 2}.
+- **Article-social tracker status:** ATTENTION; missing routes 10; duplicate copies 0.
 - These are durable publishing records, not reader counts. Provider checks were used before deleting duplicate copies.
 - The eight-hour schedule is retired and is not counted.
 
