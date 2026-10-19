@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-19T18:17:03.113511+05:30",
+ "generatedAt": "2026-10-19T18:45:42.028778+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 16,
- "onTime": 16,
+ "live": 17,
+ "onTime": 17,
  "late": 0,
  "early": 0,
  "pending": 0,
  "overdue": 1,
- "upcoming": 4,
- "dispatched": 0,
+ "upcoming": 3,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 842,
+   "minutesFromSlot": 870,
    "publishedAt": "2026-10-18T15:45:05-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 782,
+   "minutesFromSlot": 810,
    "publishedAt": "2026-10-18T16:31:07-07:00"
   },
   {
@@ -40,7 +40,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
    "state": "on time",
-   "minutesFromSlot": 722,
+   "minutesFromSlot": 750,
    "publishedAt": "2026-10-18T17:45:09-07:00"
   },
   {
@@ -50,7 +50,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 662,
+   "minutesFromSlot": 690,
    "publishedAt": "2026-10-18T18:43:59-07:00"
   },
   {
@@ -60,8 +60,9 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 602,
-   "minutesLate": 602
+   "minutesFromSlot": 630,
+   "minutesLate": 630,
+   "action": "dispatched"
   },
   {
    "key": "master-trending-1",
@@ -70,7 +71,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/eurusd-11253-eurgbp-08438-eurjpy-177.html",
    "state": "on time",
-   "minutesFromSlot": 542,
+   "minutesFromSlot": 570,
    "publishedAt": "2026-10-18T20:45:08-07:00"
   },
   {
@@ -80,7 +81,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 482,
+   "minutesFromSlot": 510,
    "publishedAt": "2026-10-18T21:45:04-07:00"
   },
   {
@@ -90,7 +91,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
    "state": "on time",
-   "minutesFromSlot": 422,
+   "minutesFromSlot": 450,
    "publishedAt": "2026-10-18T22:45:08-07:00"
   },
   {
@@ -100,7 +101,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 362,
+   "minutesFromSlot": 390,
    "publishedAt": "2026-10-18T23:45:04-07:00"
   },
   {
@@ -110,7 +111,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 332,
+   "minutesFromSlot": 360,
    "publishedAt": "2026-10-19T00:15:06-07:00"
   },
   {
@@ -120,7 +121,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 302,
+   "minutesFromSlot": 330,
    "publishedAt": "2026-10-19T00:45:03-07:00"
   },
   {
@@ -130,7 +131,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/trumps-student-loan-overhaul-could-lead.html",
    "state": "on time",
-   "minutesFromSlot": 242,
+   "minutesFromSlot": 270,
    "publishedAt": "2026-10-19T01:45:08-07:00"
   },
   {
@@ -140,7 +141,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/10-ways-to-pay-off-credit-card-debt.html",
    "state": "on time",
-   "minutesFromSlot": 182,
+   "minutesFromSlot": 210,
    "publishedAt": "2026-10-19T02:45:07-07:00"
   },
   {
@@ -150,7 +151,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/fra-approves-six-companies-to-conduct.html",
    "state": "on time",
-   "minutesFromSlot": 122,
+   "minutesFromSlot": 150,
    "publishedAt": "2026-10-19T04:14:00-07:00"
   },
   {
@@ -160,7 +161,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 62,
+   "minutesFromSlot": 90,
    "publishedAt": "2026-10-19T04:45:07-07:00"
   },
   {
@@ -170,7 +171,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 32,
+   "minutesFromSlot": 60,
    "publishedAt": "2026-10-19T05:05:32-07:00"
   },
   {
@@ -180,17 +181,18 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 2,
+   "minutesFromSlot": 30,
    "publishedAt": "2026-10-19T05:45:06-07:00"
   },
   {
    "key": "news-banking",
    "slot": "18:45",
    "due": "2026-10-19T18:45:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -28
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html",
+   "state": "on time",
+   "minutesFromSlot": 0,
+   "publishedAt": "2026-10-19T06:15:03-07:00"
   },
   {
    "key": "master-evergreen-3",
@@ -199,7 +201,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -88
+   "minutesFromSlot": -60
   },
   {
    "key": "master-trending-4",
@@ -208,7 +210,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -148
+   "minutesFromSlot": -120
   },
   {
    "key": "master-evergreen-4",
@@ -217,13 +219,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -238
+   "minutesFromSlot": -210
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 16,
+ "actualArticlesLiveIncludingExtras": 17,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
