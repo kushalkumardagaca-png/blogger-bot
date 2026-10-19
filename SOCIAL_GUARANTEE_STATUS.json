@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T14:15:54.680284+05:30",
+ "generatedAt": "2026-10-19T14:23:22.504765+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 11,
  "expectedPosts": 22,
  "articlesWithBothPosts": 4,
- "postsMissing": 8,
- "dispatched": 3,
+ "postsMissing": 7,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-economy",
@@ -22,7 +22,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -180,24 +180,23 @@
    "key": "master-trending-2",
    "title": "Trump's student loan overhaul could lead to mo",
    "url": "https://dailyyield.blogspot.com/2026/10/trumps-student-loan-overhaul-could-lead.html",
-   "posts": 0,
+   "posts": 1,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
     "tumblr": 0,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
+   "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T14:15:47.589248+05:30",
+ "liveVerificationSourceAt": "2026-10-19T14:23:16.323429+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
