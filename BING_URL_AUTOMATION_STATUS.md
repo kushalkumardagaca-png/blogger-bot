@@ -1,7 +1,7 @@
 # Bing URL Submission and Index-Status Automation
 
 - **Status:** PASS
-- **Checked:** 2026-10-19T16:45:53.300955+00:00
+- **Checked:** 2026-10-19T16:47:48.247349+00:00
 - **Mode:** authenticated control-plane, zero public Daily Yield requests
 - **Synthetic Daily Yield views:** 0
 
@@ -22,3 +22,7 @@
 - No public Daily Yield URL, Bing Live URL fetch or synthetic pageview is created.
 - Unchanged URLs are not resubmitted.
 - Submission does not guarantee crawling, indexing, ranking or traffic.
+
+## Provider warnings
+
+- sitemap feed not refreshed: SafeApiError
