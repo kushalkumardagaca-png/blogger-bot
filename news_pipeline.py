@@ -1801,6 +1801,72 @@ def edition_identity(art):
     return editorial_integrity.content_fingerprint(art["html"])
 
 
+EDITION_SLUG_DATE_RE = re.compile(r"-(\d{4}-\d{2}-\d{2})(?:$|[._])")
+
+
+def edition_day_of(art):
+    """The calendar day this run's edition belongs to, read from its permalink slug."""
+    found = EDITION_SLUG_DATE_RE.search(art.get("slug", "") or "")
+    if found:
+        try:
+            return dt.date.fromisoformat(found.group(1))
+        except ValueError:
+            return None
+    return None
+
+
+def stored_published_day(stored):
+    """The day Blogger says a stored post went live, in IST, or None if unreadable."""
+    raw = str((stored or {}).get("published") or "")
+    if not raw:
+        return None
+    try:
+        moment = dt.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=dt.timezone.utc)
+    return moment.astimezone(IST).date()
+
+
+def is_previous_edition(stored, art):
+    """True only when the matched post is provably an *earlier day's* edition.
+
+    Either proof is enough: the two document titles name different explicit edition
+    dates, or Blogger's own publish day for the stored post is earlier than the day
+    this edition belongs to. Anything unreadable answers False, so a half-finished
+    post this very run left behind is still repaired instead of duplicated.
+    """
+    mine = {day.casefold() for day in EDITION_DATE_RE.findall(art.get("title", "") or "")}
+    theirs = {day.casefold() for day in EDITION_DATE_RE.findall(stored.get("title", "") or "")}
+    if mine and theirs and not (mine & theirs):
+        return True
+    day, stored_day = edition_day_of(art), stored_published_day(stored)
+    return bool(day and stored_day and stored_day < day)
+
+
+def find_same_day_desk_post(slug, edition_date, token):
+    """A live post already published for this desk today, whatever address it took.
+
+    The canonical-address check alone misses a post whose permalink got Blogger's
+    collision suffix, and two dispatches for one desk then produced two editions on
+    18 October. Matching on the desk's dated address prefix finds either form.
+    """
+    query = urllib.parse.urlencode({"status": "live", "fetchBodies": "false",
+                                    "maxResults": "50",
+                                    "fields": "items(id,title,url,published)"})
+    try:
+        recent = blogger_call("/posts?" + query, token).get("items", [])
+    except Exception:
+        return None
+    needle = f"/{edition_date:%Y/%m}/{slug}-{edition_date.isoformat()}"
+    rows = [post for post in recent if needle in str(post.get("url", ""))]
+    if not rows:
+        return None
+    rows.sort(key=lambda post: str(post.get("published") or ""))
+    return str(rows[0].get("url", "") or "")
+
+
 def stored_is_this_edition(stored, art):
     """Is the stored post carrying *this* edition, not one of its older ones?
 
@@ -1875,7 +1941,7 @@ def publish_post(art, token, dry=False):
     assert_green_operating_state()
     # Stop same-title, same-canonical and near-duplicate editions before draft
     # creation. The authenticated read creates no public pageview.
-    query = urllib.parse.urlencode({"status":"live","fetchBodies":"true","maxResults":"50","fields":"items(id,title,url,content,labels)"})
+    query = urllib.parse.urlencode({"status":"live","fetchBodies":"true","maxResults":"50","fields":"items(id,title,url,content,labels,published)"})
     recent = blogger_call("/posts?"+query, token).get("items",[])
     existing,reason=find_duplicate(art["title"],art["html"],recent,art.get("canonical",''))
     if existing:
@@ -1896,6 +1962,9 @@ def publish_post(art, token, dry=False):
                 "content":repaired,"labels":art["labels"]})
             stored=blogger_call(f"/posts/{target['id']}?fetchBody=true",token)
             assert_saved_green(stored)
+            # A repair that wrote the wrong prose would look like a success, so the
+            # fingerprint of this edition is re-checked on the stored response.
+            assert_edition_identity(stored, art)
             print(f"    {note}: {stored.get('url')}")
             return stored.get('url') or target.get('url','')
 
@@ -1907,18 +1976,30 @@ def publish_post(art, token, dry=False):
         # Same headline is NOT the same edition. This desk's older editions share
         # its title, and accepting them silently retired the desk for a whole day.
         carrying_today=stored_is_this_edition(stored, art)
-        if not carrying_today:
+        # A same-desk title from another day is not this edition, and it is not
+        # something to overwrite. Rewriting it made today's article inherit
+        # yesterday's address and publish time (the 18 October banking edition) and
+        # destroyed the earlier edition. Only a post of this day may be repaired.
+        # ``same canonical path`` is excluded on purpose: a post occupying this
+        # edition's own address belongs to this edition, however it got there, and
+        # repairing it is right. A match by title or topic is a different matter.
+        if not carrying_today and reason != "same canonical path" and is_previous_edition(stored, art):
+            print(f"    duplicate-safe scan ({reason}) matched an earlier edition "
+                  f"({present[:60] or 'undated'}); publishing today's edition as its own post "
+                  f"and leaving the earlier one intact")
+        elif not carrying_today:
             print(f"    duplicate-safe recovery ({reason}) holds a different edition "
                   f"({present[:60] or 'undated'}); refreshing it with today's edition")
             return reissue(stored, "older-edition post refreshed with today's edition")
-        try:
-            assert_saved_green(stored)
-            assert_edition_identity(stored, art)
-            print(f"    duplicate-safe recovery ({reason}): {stored.get('url')}")
-            return stored.get('url','')
-        except RuntimeError as exc:
-            print(f"    repairing the post left by an interrupted run ({stored.get('id')}): {str(exc)[:200]}")
-            return reissue(stored, "interrupted-run post repaired and verified")
+        else:
+            try:
+                assert_saved_green(stored)
+                assert_edition_identity(stored, art)
+                print(f"    duplicate-safe recovery ({reason}): {stored.get('url')}")
+                return stored.get('url','')
+            except RuntimeError as exc:
+                print(f"    repairing the post left by an interrupted run ({stored.get('id')}): {str(exc)[:200]}")
+                return reissue(stored, "interrupted-run post repaired and verified")
     art["html"]=stamp(art["html"],art["title"],"news-desk")
     # Resume an incomplete slug-title post before creating anything new. This
     # makes the three-pass publication transaction retry-safe.
@@ -2020,6 +2101,15 @@ def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
               f"today's edition — republishing")
     # Recover safely if Blogger published successfully but a previous tracker push failed.
     expected_url = f"{BLOG}/{now:%Y/%m}/{slug}-{now.date().isoformat()}.html"
+    if not dry:
+        sibling = find_same_day_desk_post(slug, now.date(), token)
+        if sibling and sibling != expected_url and live_current_edition(sibling, token, now.date(), alt_dates):
+            tracker["desks"][desk] = {**prev, "edition": now.date().isoformat(),
+                                      "window_end": now.isoformat(), "url": sibling}
+            save_tracker(tracker)
+            append_social_event(desk, sibling)
+            print(f"  [{desk}] today's edition is already live at {sibling} — no second post")
+            return True
     if not dry and live_current_edition(expected_url, token, now.date(), alt_dates):
         tracker["desks"][desk] = {**prev, "edition": now.date().isoformat(),
                                   "window_end": now.isoformat(), "url": expected_url}

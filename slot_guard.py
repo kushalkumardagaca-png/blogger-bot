@@ -128,6 +128,14 @@ def classify(due: dt.datetime, now: dt.datetime, published_at):
     return "overdue"
 
 
+def is_wrong_day(published_at, day: dt.date) -> bool:
+    """True when the post answering for a slot carries another calendar day."""
+    if not published_at:
+        return False
+    moment = published_at if published_at.tzinfo else published_at.replace(tzinfo=IST)
+    return moment.astimezone(IST).date() != day
+
+
 def dispatch(slot: dict, apply: bool) -> str:
     if not apply:
         return "would dispatch"
@@ -168,7 +176,18 @@ def main() -> int:
         record["minutesFromSlot"] = int((now - slot["due"]).total_seconds() // 60)
         if published_at:
             record["publishedAt"] = published_at.isoformat()
-            if record["state"] == "early":
+            # A post carrying today's edition text but Blogger's timestamp of an
+            # earlier day is not an early edition: it is the wrong post answering
+            # for this slot. Calling that "early" hid a real defect on 18 October.
+            moment = published_at if published_at.tzinfo else published_at.replace(tzinfo=IST)
+            wrong_day = is_wrong_day(published_at, day)
+            if wrong_day:
+                record["state"] = "wrong day"
+                record["publishedDay"] = moment.astimezone(IST).date().isoformat()
+                record["note"] = ("the live post answering for this slot was published on "
+                                  f"{record['publishedDay']}, not {day.isoformat()}; the edition "
+                                  "needs its own address and publish time")
+            elif record["state"] == "early":
                 record["minutesEarly"] = int((slot["due"] - published_at).total_seconds() // 60)
             if record["state"] == "late":
                 record["minutesLate"] = int((published_at - slot["due"]).total_seconds() // 60)
@@ -190,7 +209,8 @@ def main() -> int:
     counts: dict[str, int] = {}
     for row in rows:
         counts[row["state"]] = counts.get(row["state"], 0) + 1
-    done = [r for r in rows if r["live"]]
+    misfiled = [r for r in rows if r["state"] == "wrong day"]
+    done = [r for r in rows if r["live"] and r["state"] != "wrong day"]
     report = {"generatedAt": now.isoformat(), "dateIST": day.isoformat(), "apply": args.apply,
               "toleranceMinutes": int(TOLERANCE.total_seconds() // 60),
               "slots": len(rows), "live": len(done), "onTime": counts.get("on time", 0),
@@ -211,11 +231,14 @@ def main() -> int:
                              "routingKey":extra['routingKey'],"title":extra.get('title',''),"publishedAt":extra.get('published_at','')})
     report['extraLiveArticles'] = extras
     report['actualArticlesLiveIncludingExtras'] = len(done) + len(extras)
-    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late") and not counts.get("early") and not extras
+    report["wrongDay"] = len(misfiled)
+    report["status"] = ("PASS" if not counts.get("overdue") and not counts.get("late") and not counts.get("early")
+                        and not misfiled and not extras
                         else "ATTENTION")
     save(STATUS, report)
     print(json.dumps({k: report[k] for k in ("status", "slots", "live", "onTime", "late",
-                                             "pending", "overdue", "upcoming", "dispatched")}))
+                                             "pending", "overdue", "upcoming", "dispatched",
+                                             "wrongDay")}))
     return 0
 
 

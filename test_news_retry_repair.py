@@ -64,19 +64,39 @@ class RepairPathTests(unittest.TestCase):
         self.assertTrue(url)
         self.assertNotIn(("PUT", "/posts/42"), self.calls)
 
-    def test_older_edition_post_is_refreshed_with_todays_content(self):
-        # the Americas desk case: a green post still carrying yesterday's edition
+    def test_older_edition_post_is_left_intact_and_today_gets_its_own_post(self):
+        # the Americas desk case: a green post carrying the previous day's edition.
+        # Overwriting it (which is what happened to Banking on 18 October) destroyed
+        # an earlier published edition and made today's article inherit yesterday's
+        # publish time and address, so the day's slot could not be verified.
         self.stored = {"id": "77", "url": "https://dailyyield.blogspot.com/2026/10/americas.html",
                        "title": "Americas Finance News \u2014 14 October 2026", "status": "LIVE",
+                       "published": "2026-10-13T22:45:00Z",
                        "content": np.stamp("<h1>Americas Finance News \u2014 14 October 2026</h1><p>old</p>",
                                             "Americas Finance News \u2014 14 October 2026", "news-desk")
                        + np.automation_disclosure("news edition")}
-        np.find_duplicate = lambda *a, **k: (dict(self.stored), "same slug path")
+        np.find_duplicate = lambda *a, **k: (dict(self.stored), "near-duplicate topic title")
         art = article("Americas Finance News \u2014 15 October 2026")
+        finished = (np.stamp(art["html"], art["title"], "news-desk")
+                    + np.automation_disclosure("news edition"))
+        fresh = {"id": "78", "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-15.html",
+                 "status": "LIVE", "title": art["title"], "content": finished}
+        def create_aware(path, token, method="GET", payload=None, **kwargs):
+            self.calls.append((method, path))
+            if method == "POST" and path.startswith("/posts?"):
+                return {"id": "78"}
+            if path.startswith("/posts/78/publish"):
+                return {"id": "78", "url": fresh["url"], "status": "LIVE"}
+            if path.startswith("/posts/78"):
+                return dict(fresh)
+            return {"items": []}
+
+        np.blogger_call = create_aware
         url = np.publish_post(art, "token")
-        self.assertEqual(url, self.stored["url"])
-        self.assertIn(("PUT", "/posts/77"), self.calls)
-        self.assertIn("15 October 2026", self.put_payload.get("title", ""))
+        self.assertNotIn(("PUT", "/posts/77"), self.calls,
+                         "an earlier edition must not be rewritten")
+        self.assertIn(("POST", "/posts?isDraft=true"), self.calls)
+        self.assertEqual(url, fresh["url"])
 
     def test_same_edition_post_is_not_rewritten(self):
         html = np.stamp(article()["html"], "Banking & Personal Money News", "news-desk")

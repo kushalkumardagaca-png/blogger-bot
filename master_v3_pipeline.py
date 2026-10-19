@@ -19,6 +19,7 @@ from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
 from content_policy_guard import POLICY_VERSION
 from editorial_integrity import assert_unique_plan,stamp
+from master_topic_discovery import used_topic_ids
 
 ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata');PRODUCTION_START=dt.date(2026,10,14)
 
@@ -26,6 +27,56 @@ def read(path,default):
  try:return json.loads(path.read_text())
  except (OSError,json.JSONDecodeError):return default
 def write(path,value):path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n')
+def ist_day(value):
+    """The IST calendar day a Blogger timestamp falls on, or None if unreadable."""
+    if not value:
+        return None
+    try:
+        moment = dt.datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=dt.timezone.utc)
+    return moment.astimezone(IST).date()
+
+
+def blocked_topics(plan):
+    """Topics this day already proved it cannot publish, so a retry substitutes."""
+    return {str(key) for key in (plan.get("blockedTopics") or {})}
+
+
+def replace_blocked_topic(plan, kind, slot, item):
+    """Swap a blocked topic for another same-category topic and persist the plan."""
+    excluded = used_topic_ids(read(ROOT / "MASTER_TOPIC_HISTORY.json", {"items": []}),
+                              read(TRACKER, {})) | blocked_topics(plan)
+    excluded |= {str(row.get("id")) for row in plan.get(kind, []) if row.get("id")}
+    replacement = None
+    pool = read(POOL, {}).get("topics", [])
+    same_category = [row for row in pool
+                     if row.get("category") == item.get("category") and str(row.get("id")) not in excluded]
+    if kind == "trending":
+        same_category = [row for row in same_category if row.get("discovered_from_live_internet")]
+        if same_category:
+            replacement = max(same_category, key=lambda row: float(row.get("overall_score") or 0))
+    else:
+        try:
+            from master_topic_discovery import evergreen_candidates
+            label = str(item.get("category") or "")
+            found = evergreen_candidates([{"label": label,
+                                          "queries": [(label.split(" ")[0] if label else "money").lower()]}], excluded)
+            if found:
+                replacement = dict(found[0]); replacement["evergreen_category"] = label
+        except Exception:
+            replacement = None
+    if replacement is None:
+        raise RuntimeError(f"no unused {kind} topic remains for slot {slot}; the blocked topic is not republished")
+    plan[kind][slot] = replacement
+    write(PLAN, plan)
+    print(f"Master {kind} slot {slot}: {str(item.get('title',''))[:50]!r} is blocked for today; "
+          f"substituting {str(replacement.get('title',''))[:60]!r}")
+    return replacement
+
+
 def selected(kind,slot):
  plan=read(PLAN,{})
  if plan.get('status')!='READY':raise RuntimeError('daily dynamic Master plan is not READY')
@@ -72,7 +123,7 @@ def build_html(kind,item,package,check_remote_images=True):
 
 def trending_candidates(plan,item):
  """Use only live-internet reserves from the same approved category."""
- published_ids={x.get('topic_id') for x in read(TRACKER,{}).get('published',[])}
+ published_ids=used_topic_ids(read(ROOT/'MASTER_TOPIC_HISTORY.json',{'items':[]}),read(TRACKER,{}))
  used={x.get('id') for x in plan.get('trending',[])} | published_ids
  rows=[x for x in read(POOL,{}).get('topics',[]) if x.get('category')==item.get('category') and x.get('id') not in used and x.get('discovered_from_live_internet')]
  def evidence_rank(row):
@@ -103,6 +154,7 @@ def reuse_completed_slot(plan,kind,slot,emit_social=False):
 
 def prepare(kind,slot):
  plan,item=selected(kind,slot)
+ if str(item.get('id')) in blocked_topics(plan):item=replace_blocked_topic(plan,kind,slot,item);plan=read(PLAN,{})
  if reuse_completed_slot(plan,kind,slot):return
  import master_v3_generator as generator
  original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
@@ -127,6 +179,16 @@ def prepare(kind,slot):
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
  write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'replaced_topic_id':original.get('id') if item.get('id')!=original.get('id') else None,'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
 
+def _package_or_build(kind,slot,item):
+    """A substituted topic has no package yet, so build it before publishing."""
+    target=package_path(kind,item)
+    if target.exists():return target
+    prepare(kind,slot)
+    target=package_path(kind,item)
+    if not target.exists():raise RuntimeError('substituted topic package could not be prepared')
+    return target
+
+
 def publish(kind,slot,timed_release=False):
  # Never allow an ignored event from a prior local attempt to be redispatched.
  write(SOCIAL,[])
@@ -136,16 +198,30 @@ def publish(kind,slot,timed_release=False):
  # path waits for the exact audience-facing slot before calling Blogger.
  wait_for_release(MASTER_LIVE[(kind,slot)])
  plan,item=selected(kind,slot)
+ if str(item.get('id')) in blocked_topics(plan):
+  item=replace_blocked_topic(plan,kind,slot,item);plan=read(PLAN,{})
  if reuse_completed_slot(plan,kind,slot,emit_social=True):return
- target=package_path(kind,item)
- if not target.exists():raise RuntimeError('validated prepared package is absent')
+ target=_package_or_build(kind,slot,item)  # proves the package exists or builds it
  package=read(target,{});validate(package);title,slug,meta,labels,body=build_html(kind,item,package);res=publish_to_blogger(title,body,labels)
  if not res or not res.get('url'):raise RuntimeError('Blogger did not confirm a live Master Article URL')
+ # Blogger answers with an older article when a topic has been published before.
+ # Recording that as today's slot left an Evergreen slot unpaid for hours on
+ # 19 October and rewrote an earlier published article, so the day's own
+ # publication is proved here and the topic is blocked so a retry substitutes.
+ live_day=ist_day(res.get('published') or '')
+ if live_day and live_day!=dt.date.fromisoformat(str(plan['date'])):
+  blocked=plan.setdefault('blockedTopics',{});blocked[str(item['id'])]=(
+   f"the live post at {res.get('url')} was published {live_day.isoformat()}, not {plan['date']}")
+  write(PLAN,plan)
+  raise RuntimeError(f"MASTER EDITION IDENTITY FAILED - the article at {res.get('url')} belongs to "
+                     f"{live_day.isoformat()}, not {plan['date']}; the topic is blocked for today so a "
+                     f"retry publishes another article instead of rewriting the older one")
  tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'slot':slot,'slot_key':f"{plan['date']}:{kind}:{slot}",'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['publication_enabled']=True
- if not any((x.get('topic_id')==item['id'] and x.get('date')==plan['date']) or x.get('url')==res['url'] for x in tracker['published']):tracker['published'].append(record)
+ already=lambda rows: any(x.get('date')==plan['date'] and x.get('kind')==kind and x.get('slot')==slot for x in rows)
+ if not already(tracker['published']):tracker['published'].append(record)
  write(TRACKER,tracker)
  history=read(ROOT/'MASTER_TOPIC_HISTORY.json',{'version':1,'items':[]})
- if not any((x.get('topic_id')==item['id'] and x.get('date')==plan['date']) or x.get('url')==res['url'] for x in history['items']):history['items'].append(record)
+ if not already(history['items']):history['items'].append(record)
  write(ROOT/'MASTER_TOPIC_HISTORY.json',history);write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':res['url'],'content_mode':'post','published_at':record['published_at']}]);write(STATUS,{'status':'PASS','publication_enabled':True,**record});print(res['url'])
 
 def main():

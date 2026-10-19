@@ -15,7 +15,7 @@ import requests
 from master_taxonomy import TRENDING_CATEGORIES, EVERGREEN_CATEGORIES, evergreen_rotation
 
 ROOT=Path(__file__).parent;IST=ZoneInfo('Asia/Kolkata')
-POOL=ROOT/'MASTER_TREND_POOL.json';PLAN=ROOT/'MASTER_DAILY_PLAN.json';HISTORY=ROOT/'MASTER_TOPIC_HISTORY.json';STATUS=ROOT/'MASTER_DISCOVERY_STATUS.json';EVERGREEN_REFERENCE=ROOT/'MASTER_EVERGREEN_REFERENCE.csv'
+POOL=ROOT/'MASTER_TREND_POOL.json';PLAN=ROOT/'MASTER_DAILY_PLAN.json';HISTORY=ROOT/'MASTER_TOPIC_HISTORY.json';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_DISCOVERY_STATUS.json';EVERGREEN_REFERENCE=ROOT/'MASTER_EVERGREEN_REFERENCE.csv'
 UA='DailyYieldTopicDiscovery/1.0 (dailyyield.official@gmail.com)'
 STOP={'the','and','for','with','from','into','after','before','about','amid','over','under','what','why','how','your','this','that','says','could','will','new','latest','today'}
 
@@ -219,6 +219,26 @@ def gsc_queries():
  r=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access},json=body,timeout=60);r.raise_for_status()
  return [{'query':clean(x['keys'][0]),'clicks':x.get('clicks',0),'impressions':x.get('impressions',0),'position':x.get('position',100)} for x in r.json().get('rows',[])]
 
+def used_topic_ids(history, tracker=None):
+    """Every topic id already published, whatever key the record was written under.
+
+    Publication records store the topic as ``topic_id``, while the plan and pool
+    call the same value ``id``. Reading only ``id`` returned {None} for every
+    published article, so a topic was free to be planned again: on 19 October an
+    evergreen topic was re-planned five days after it published, and the publisher
+    answered by rewriting the older article instead of publishing today's slot.
+    """
+    ids=set()
+    for source in (history,tracker):
+        for row in (source or {}).get('items',[]) or []:
+            ident=row.get('topic_id') or row.get('id')
+            if ident:ids.add(str(ident))
+        for row in (source or {}).get('published',[]) or []:
+            ident=row.get('topic_id') or row.get('id')
+            if ident:ids.add(str(ident))
+    return ids
+
+
 def revalidated_reference_evergreen(cat,excluded):
  """Use the retired CSV only as a seed; live demand must independently validate it."""
  if not EVERGREEN_REFERENCE.exists():return None
@@ -277,7 +297,7 @@ def daily(date=None):
  # depth and reserves, but it is never consumed blindly.
  live=trend_candidates(recent_news_headlines()+google_trends()+category_news()+gdelt())
  live_by_id={x['id']:x for x in live}
- used={x.get('id') for x in read(HISTORY,{'items':[]}).get('items',[])};trending=[]
+ used=used_topic_ids(read(HISTORY,{'items':[]}),read(TRACKER,{}));trending=[]
  for cat in TRENDING_CATEGORIES:
   revalidated=[]
   for queued in pool['topics']:

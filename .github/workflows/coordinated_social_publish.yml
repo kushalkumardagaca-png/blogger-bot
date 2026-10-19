@@ -85,7 +85,7 @@ jobs:
     needs: plan
     if: needs.plan.outputs.platform == 'facebook'
     concurrency:
-      group: social-facebook-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      group: social-facebook
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
@@ -131,7 +131,7 @@ jobs:
     needs: plan
     if: needs.plan.outputs.platform == 'bluesky'
     concurrency:
-      group: social-bluesky-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      group: social-bluesky
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
@@ -171,11 +171,15 @@ jobs:
           git config user.email 'bot@dailyyield.blogspot.com'
           bash persist_social_state.sh bluesky_tracker.json
 
+  # One destination per network at a time. Tumblr's OAuth refresh token is rotated
+  # by the job that publishes, so two simultaneous Tumblr jobs for two articles
+  # both started from the same stored token: the first rotation invalidated the
+  # second one's, and six routes failed on 19 October.
   tumblr:
     needs: plan
     if: needs.plan.outputs.platform == 'tumblr'
     concurrency:
-      group: social-tumblr-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      group: social-tumblr
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
@@ -221,7 +225,7 @@ jobs:
     needs: plan
     if: needs.plan.outputs.platform == 'mastodon'
     concurrency:
-      group: social-mastodon-${{ needs.plan.outputs.content_mode }}-${{ needs.plan.outputs.target_url }}
+      group: social-mastodon
       cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25

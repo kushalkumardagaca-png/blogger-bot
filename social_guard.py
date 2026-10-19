@@ -34,6 +34,10 @@ WORKFLOW = "coordinated_social_publish.yml"
 REQUIRED = 2
 TOLERANCE = dt.timedelta(minutes=30)
 DISPATCH_SPACING = dt.timedelta(minutes=10)
+# A route that has been re-dispatched this many times in one day is not helped by a
+# seventh attempt, and the retries burn runner minutes. The row stays reported as
+# missing so the day is never marked green because of the pause.
+MAX_ROUTE_ATTEMPTS = 4
 
 
 def load(path: Path, default):
@@ -86,6 +90,26 @@ def covered_by(article: dict, trackers: dict[str, list[dict]]) -> dict[str, int]
     for platform, rows in trackers.items():
         counts[platform] = len({identity(row) for row in rows if matches(row, article)})
     return counts
+
+
+def route_state(entry, now: dt.datetime):
+    """(waiting, paused, attempts) for one route's ledger entry.
+
+    A plain timestamp is an older entry written before attempts were counted, so it
+    is read as one attempt; that keeps an existing day's ledger usable.
+    """
+    entry = entry or ""
+    if isinstance(entry, dict):
+        stamp, attempts = str(entry.get("at", "")), int(entry.get("n", 1) or 1)
+    else:
+        stamp, attempts = str(entry), (1 if entry else 0)
+    if not stamp:
+        return False, False, attempts
+    try:
+        waiting = now - dt.datetime.fromisoformat(stamp) < DISPATCH_SPACING
+    except ValueError:
+        waiting = False
+    return waiting, (not waiting and attempts >= MAX_ROUTE_ATTEMPTS), attempts
 
 
 def dispatch(article: dict, route_index: int, apply: bool) -> str:
@@ -143,17 +167,24 @@ def main() -> int:
                 record['routingIssue'] = 'Cannot identify the approved daily slot; no guessed route is posted.'
             for route_index in route_indexes:
                 key = f"{day}:{article['key']}:{route_index}"
-                last = ledger.get(key, "")
-                if last and now - dt.datetime.fromisoformat(last) < DISPATCH_SPACING:
+                waiting, paused, attempts = route_state(ledger.get(key), now)
+                if waiting:
                     record.setdefault("actions", []).append("waiting for the last attempt")
+                    continue
+                if paused:
+                    record["paused"] = True
+                    record["attemptsToday"] = attempts
+                    record.setdefault("actions", []).append(
+                        f"route paused after {attempts} attempts today: the network or its "
+                        "credentials need attention; the post is still counted as missing")
                     continue
                 record.setdefault("actions", []).append(dispatch(article, route_index, args.apply))
                 if args.apply:
-                    ledger[key] = now.isoformat()
+                    ledger[key] = {"at": now.isoformat(), "n": attempts + 1}
                     dispatched += 1
         rows.append(record)
     if args.apply:
-        save(LEDGER, {k: v for k, v in ledger.items() if v.startswith(day.isoformat())})
+        save(LEDGER, {k: v for k, v in ledger.items() if k.startswith(day.isoformat())})
     complete = sum(1 for row in rows if row["posts"] >= REQUIRED)
     report = {"generatedAt": now.isoformat(), "dateIST": day.isoformat(), "apply": args.apply,
               "articles": len(rows), "expectedPosts": len(rows) * REQUIRED,

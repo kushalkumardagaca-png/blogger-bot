@@ -26,6 +26,10 @@ def clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(value)).strip()
 
 
+MONTHS = ("January","February","March","April","May","June","July","August","September","October","November","December")
+DATE_PIECE = r"\d{1,2} (?:%s) \d{4}" % "|".join(MONTHS)
+
+
 def _word_clip(value: str, limit: int) -> str:
     value = re.sub(r"\s+", " ", value).strip()
     if len(value) <= limit:
@@ -44,6 +48,18 @@ def compact_title(title: str, limit: int = MAX_TITLE_CHARS) -> str:
     if len(parts) >= 2 and re.search(r"\b20\d{2}\b", parts[1]):
         prefix = NEWS_PREFIXES.get(parts[0], parts[0])
         candidate = f"{prefix} — {parts[1]}"
+    # An edition's date is not decoration: "Banking & Personal Money News — 18
+    # October 2026" is 47 characters, so the 46-character ceiling used to clip the
+    # date away and leave every banking edition sharing one title. A desk whose
+    # editions are all titled alike cannot tell today's post from yesterday's.
+    # When the date does not fit, the desk name is shortened and the date stays.
+    dated = re.match(rf"^(?P<lead>.+?)[\s—:]+(?P<date>{DATE_PIECE})\s*$", candidate)
+    if dated and len(candidate) > limit:
+        room = limit - len(dated.group("date")) - 3
+        lead = re.sub(r"[,;:—–-]+$", "", dated.group("lead")).strip()
+        if room >= 12:
+            clipped = lead[:room].rsplit(" ", 1)[0].rstrip(" ,;:—–-") or lead[:room].rstrip(" ,;:—–-")
+            candidate = f"{clipped} — {dated.group('date')}"
     # Prefer the main clause over mechanically clipping a subtitle.
     if len(candidate) > limit:
         clauses = re.split(r"\s*[—:]\s+", candidate, maxsplit=1)

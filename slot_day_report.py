@@ -38,13 +38,21 @@ def main() -> int:
         post = posts.get(key, {})
         count = post.get("posts", "-")
         lines.append(f"| {row['slot']} | {key} | {when} | {minutes} | {count}/2 |")
-    articles = sum(1 for r in rows if r.get("live"))
+    misfiled = [r for r in rows if r.get("state") == "wrong day"]
+    articles = sum(1 for r in rows if r.get("live") and r.get("state") != "wrong day")
     on_time = sum(1 for r in rows if r.get("state") == "on time")
     both = sum(1 for p in posts.values() if p.get("posts", 0) >= 2)
     lines += ["", f"**Articles live: {articles} of {len(rows)}** · "
                   f"**on time: {on_time}** · late: {sum(1 for r in rows if r.get('state') == 'late')} · "
                   f"overdue: {sum(1 for r in rows if r.get('state') == 'overdue')}",
               f"**Articles with both social posts: {both} of {len(posts)}**"]
+    if misfiled:
+        # An edition answering for today from an older post is reported, never
+        # smoothed into a green line.
+        lines += ["", "**Live post carrying the wrong publication day:**"]
+        lines += [f"- `{row['key']}` at {row.get('url','') or 'no address'} — published "
+                  f"{row.get('publishedDay','?')}, slot due {row['slot']} on {row['due'][:10]}"
+                  for row in misfiled]
     OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines[:6]))
     return 0

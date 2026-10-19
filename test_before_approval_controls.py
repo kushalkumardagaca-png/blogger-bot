@@ -159,10 +159,15 @@ class SocialSafetyTests(unittest.TestCase):
         text=(ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
         self.assertNotIn('already="yes"',text);self.assertEqual(text.count("echo 'already=yes'"),4)
         self.assertEqual(text.count('exit "$code"'),4)
-    def test_same_url_platform_jobs_are_serialised(self):
+    def test_each_network_publishes_one_destination_at_a_time(self):
+        # The group is scoped to the network, not to network+destination: Tumblr and
+        # Facebook both rotate a single OAuth refresh token per job, so two parallel
+        # jobs for two articles invalidated each other's token on 19 October.
         data=yaml.safe_load((ROOT/'.github/workflows/coordinated_social_publish.yml').read_text())
         for platform in ('facebook','tumblr','bluesky','mastodon'):
-            self.assertIn('needs.plan.outputs.target_url',data['jobs'][platform]['concurrency']['group'])
+            group=data['jobs'][platform]['concurrency']['group']
+            self.assertEqual(group,f'social-{platform}')
+            self.assertNotIn('target_url',group)
             self.assertIs(data['jobs'][platform]['concurrency']['cancel-in-progress'],False)
 
 if __name__=='__main__':unittest.main()
