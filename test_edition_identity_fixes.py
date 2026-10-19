@@ -210,6 +210,65 @@ class MasterDayIdentity(unittest.TestCase):
         self.assertEqual(calls, [("prepare", "evergreen", 0)])
 
 
+    def test_a_blocked_topic_is_replaced_and_published_in_the_same_run(self):
+        import master_v3_pipeline as m
+        item_old = {"id": "old1", "title": "Best Financial Habits For Gen Z",
+                    "category": "Money Hacks & Financial Habits"}
+        item_new = {"id": "new2", "title": "Emergency Fund Basics",
+                    "category": "Money Hacks & Financial Habits"}
+        plan_before = {"date": "2026-10-19", "status": "READY", "trending": [], "evergreen": [item_old]}
+        plan_after = {"date": "2026-10-19", "status": "READY", "trending": [], "evergreen": [item_new],
+                      "blockedTopics": {"old1": "the live post belongs to 2026-10-16"}}
+        states = [(plan_before, item_old), (plan_after, item_old)]
+        package = {"id": "x", "policy_version": m.POLICY_VERSION}
+        answers = [{"url": "https://dailyyield.blogspot.com/2026/10/old.html",
+                    "published": "2026-10-15T19:45:08-07:00"},
+                   {"url": "https://dailyyield.blogspot.com/2026/10/emergency-fund-basics.html",
+                    "published": "2026-10-19T07:20:00+00:00"}]
+        calls, written = {"substitute": 0, "publish": 0}, []
+
+        def fake_read(path, default):
+            name = Path(path).name
+            if name == "MASTER_DAILY_PLAN.json":
+                return plan_after
+            if name == "MASTER_AUTOMATION_TRACKER.json":
+                return {"version": 1, "published": []}
+            if name == "MASTER_TOPIC_HISTORY.json":
+                return {"version": 1, "items": []}
+            if "package" in str(path):
+                return package
+            return default
+
+        def substitute(plan, kind, slot, item):
+            calls["substitute"] += 1
+            return item_new
+
+        def publish_once(title, body, labels):
+            calls["publish"] += 1
+            return answers[calls["publish"] - 1]
+
+        with patch.dict("os.environ", {"MASTER_PUBLICATION_ENABLED": "true"}), \
+             patch.object(m, "selected", side_effect=lambda kind, slot: states.pop(0)), \
+             patch.object(m, "replace_blocked_topic", substitute), \
+             patch.object(m, "reuse_completed_slot", lambda *a, **k: False), \
+             patch.object(m, "_package_or_build", lambda kind, slot, item: Path("package.json")), \
+             patch.object(m, "read", fake_read), \
+             patch.object(m, "validate", lambda p: True), \
+             patch.object(m, "build_html", lambda kind, item, package: (item["title"], "s", "m", ["Master Article"], "<p>b</p>")), \
+             patch.object(m, "wait_for_release", lambda *a, **k: None), \
+             patch.object(m, "publish_to_blogger", publish_once), \
+             patch.object(m, "write", lambda path, value: written.append((Path(path).name, value))):
+            m.publish("evergreen", 0)
+
+        self.assertEqual(calls["substitute"], 1, "the unusable topic must be replaced once")
+        self.assertEqual(calls["publish"], 2, "today's substitute must really be published")
+        tracker = [value for name, value in written if name == "MASTER_AUTOMATION_TRACKER.json"]
+        self.assertTrue(tracker, "the day's slot must be recorded")
+        self.assertEqual(tracker[-1]["published"][0]["slot"], 0)
+        self.assertEqual(tracker[-1]["published"][0]["topic_id"], "new2")
+        self.assertEqual(tracker[-1]["published"][0]["date"], "2026-10-19")
+
+
 class RouteAttemptCap(unittest.TestCase):
     def test_a_repeatedly_failing_route_is_paused_not_spammed(self):
         import social_guard as g

@@ -27,6 +27,10 @@ def read(path,default):
  try:return json.loads(path.read_text())
  except (OSError,json.JSONDecodeError):return default
 def write(path,value):path.parent.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n')
+class EditionIdentityError(RuntimeError):
+    """Blogger answered with a post that belongs to another day, not today's."""
+
+
 def ist_day(value):
     """The IST calendar day a Blogger timestamp falls on, or None if unreadable."""
     if not value:
@@ -189,7 +193,7 @@ def _package_or_build(kind,slot,item):
     return target
 
 
-def publish(kind,slot,timed_release=False):
+def _publish_once(kind,slot,timed_release=False):
  # Never allow an ignored event from a prior local attempt to be redispatched.
  write(SOCIAL,[])
  if os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()!='true':raise RuntimeError('Master publication remains intentionally paused; set MASTER_PUBLICATION_ENABLED=true only after owner activation')
@@ -213,7 +217,7 @@ def publish(kind,slot,timed_release=False):
   blocked=plan.setdefault('blockedTopics',{});blocked[str(item['id'])]=(
    f"the live post at {res.get('url')} was published {live_day.isoformat()}, not {plan['date']}")
   write(PLAN,plan)
-  raise RuntimeError(f"MASTER EDITION IDENTITY FAILED - the article at {res.get('url')} belongs to "
+  raise EditionIdentityError(f"MASTER EDITION IDENTITY FAILED - the article at {res.get('url')} belongs to "
                      f"{live_day.isoformat()}, not {plan['date']}; the topic is blocked for today so a "
                      f"retry publishes another article instead of rewriting the older one")
  tracker=read(TRACKER,{'version':1,'published':[]});record={'topic_id':item['id'],'kind':kind,'slot':slot,'slot_key':f"{plan['date']}:{kind}:{slot}",'date':plan['date'],'category':item['category'],'evergreen_category':item.get('evergreen_category') or item['category'],'title':title,'url':res['url'],'published_at':res.get('published') or dt.datetime.now(dt.timezone.utc).isoformat()};tracker['publication_enabled']=True
@@ -223,6 +227,32 @@ def publish(kind,slot,timed_release=False):
  history=read(ROOT/'MASTER_TOPIC_HISTORY.json',{'version':1,'items':[]})
  if not already(history['items']):history['items'].append(record)
  write(ROOT/'MASTER_TOPIC_HISTORY.json',history);write(SOCIAL,[{'item_key':f'master-{kind}-{slot}','target_url':res['url'],'content_mode':'post','published_at':record['published_at']}]);write(STATUS,{'status':'PASS','publication_enabled':True,**record});print(res['url'])
+
+def publish(kind,slot,timed_release=False):
+    """Publish today's article, substituting a topic that another day already owns.
+
+    A repeated topic used to end three ways, all wrong: the older article was
+    rewritten, the slot went unrecorded, and the recovery guard dispatched the same
+    failing job over and over while every run reported success. Now the day is proved,
+    the unusable topic is blocked for today, and another approved topic in the same
+    category is prepared and published inside the same run.
+    """
+    first = None
+    for attempt in range(3):
+        try:
+            return _publish_once(kind, slot, timed_release)
+        except EditionIdentityError as exc:
+            first = exc
+            if attempt >= 2:
+                raise
+            print(f"Master {kind} slot {slot}: {exc}", flush=True)
+            print("Master block recorded; preparing another approved topic for this slot now", flush=True)
+        except RuntimeError as exc:
+            if first is not None:
+                raise RuntimeError(f"{first}; and the substitution also failed - {exc}") from exc
+            raise
+    raise first if first else RuntimeError('unreachable')
+
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--kind',choices=('trending','evergreen'),required=True);p.add_argument('--slot',type=int,choices=range(5),required=True);p.add_argument('--prepare',action='store_true');p.add_argument('--publish',action='store_true');p.add_argument('--timed-release',action='store_true');a=p.parse_args()
