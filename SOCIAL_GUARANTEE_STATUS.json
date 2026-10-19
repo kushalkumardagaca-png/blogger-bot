@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T22:11:23.318752+05:30",
+ "generatedAt": "2026-10-19T22:16:04.856214+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 18,
- "expectedPosts": 36,
+ "articles": 19,
+ "expectedPosts": 38,
  "articlesWithBothPosts": 9,
- "postsMissing": 9,
- "dispatched": 0,
+ "postsMissing": 11,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-markets",
@@ -304,11 +304,29 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-4",
+   "title": "Asset allocation: Gold leads as equity returns",
+   "url": "https://dailyyield.blogspot.com/2026/10/asset-allocation-gold-leads-as-equity.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T22:11:07.449826+05:30",
+ "liveVerificationSourceAt": "2026-10-19T22:15:53.768814+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 9,
  "syntheticViews": 0,
