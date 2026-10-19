@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T12:53:03.905367+05:30",
+  "generatedAt": "2026-10-19T20:08:40.001592+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -12,19 +12,19 @@
       "id": "B2",
       "task": "AdSense connection and ads.txt",
       "result": "Checked; private account not accessible",
-      "proof": "Public source recorded publisher IDs: ca-pub-1083724733490660. ads.txt matches recorded publisher: None. Required verification is preserved; private review approval is not visible."
+      "proof": "Public source recorded publisher IDs: ca-pub-1083724733490660. ads.txt matches recorded publisher: True. Required verification is preserved; private review approval is not visible."
     },
     {
       "id": "B3",
       "task": "Misleading reports",
       "result": "Fixed",
-      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 429."
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 500."
     },
     {
       "id": "B4",
       "task": "Policy pages and navigation",
       "result": "Checked",
-      "proof": "5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 0/13 tested routes reached HTTP 200 for both checks. No redesign. Independent source-only policy GET checks returned 200 for 5/5 pages, with no retired description wording observed."
+      "proof": "5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 13/13 tested routes reached HTTP 200 for both checks. No redesign. Independent source-only policy GET checks returned 200 for 5/5 pages, with no retired description wording observed."
     },
     {
       "id": "B5",
@@ -36,19 +36,19 @@
       "id": "B6",
       "task": "Facts and originality",
       "result": "Automated check done; human-review limit remains",
-      "proof": "522 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
+      "proof": "535 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
     },
     {
       "id": "B7",
       "task": "Photographs and rights",
-      "result": "Checked; requirements not fully met",
-      "proof": "Master photo-count mismatches: 127; figures needing fuller licence/alt/caption evidence: 0; News pools below 40: 0. Exact-file licence metadata recovered separately: 522. No copyright-ownership guarantee or old-photo replacement."
+      "result": "Metadata check done",
+      "proof": "Master photo-count mismatches: 0; figures needing fuller licence/alt/caption evidence: 0; News pools below 40: 0. Exact-file licence metadata recovered separately: 522. No copyright-ownership guarantee or old-photo replacement."
     },
     {
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-19T12:45:38.220752+05:30: 9/21 live, 1 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
+      "proof": "Live status source 2026-10-19T19:45:37.242884+05:30: 17/21 live, 1 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
     },
     {
       "id": "B9",
@@ -90,7 +90,7 @@
       "id": "B15",
       "task": "Bing and IndexNow",
       "result": "Monitored; quota respected",
-      "proof": "Last Bing record 2026-10-19T03:38:27.599045+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 555. IndexNow parked: True. No indexing guarantee."
+      "proof": "Last Bing record 2026-10-19T13:22:12.994258+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 555. IndexNow parked: True. No indexing guarantee."
     },
     {
       "id": "B16",
@@ -125,18 +125,14 @@
       "A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article."
     ],
     [
-      "Decision needed; no old-page photo expansion during freeze",
-      "The saved Master renderer uses three photographs, not the agreed ten. The gap is recorded honestly; no unsafe mass image replacement has been made."
-    ],
-    [
       "Later, not now",
       "Review the 50-item shortlist before any ranking build. Release requires AdSense approval, the agreed earnings period and your explicit permission."
     ]
   ],
   "sourceDates": {
-    "siteAudit": "2026-10-19T03:41:48.785697+00:00",
-    "slots": "2026-10-19T12:45:38.220752+05:30",
-    "social": "2026-10-19T12:45:42.997362+05:30",
+    "siteAudit": "2026-10-19T14:38:37.504933+00:00",
+    "slots": "2026-10-19T19:45:37.242884+05:30",
+    "social": "2026-10-19T20:08:39.949958+05:30",
     "google": "2026-10-18T21:16:35.179936+00:00"
   },
   "noGrandUpdateStarted": true,

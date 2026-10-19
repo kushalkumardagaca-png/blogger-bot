@@ -1,7 +1,7 @@
 {
   "status": "OBSERVED",
   "httpStatus": 200,
-  "sourceSha256": "3ee46d669b2940db6ec84c7510a750e7a706a70a79977ee918a9be5cde4e1687",
+  "sourceSha256": "173a4c753f7449b67358cc7bd963a0e4b60204e936efad9e8119f651ce52cc57",
   "ga4IdsObserved": [
     "G-WLEEYTKV12"
   ],
@@ -36,16 +36,16 @@
   "accountApprovalVisible": false,
   "limits": "HTML observation is not proof of a collecting GA4 property or certified consent. No live visitor session was manufactured.",
   "adsTxt": {
-    "httpStatus": 429,
-    "text": "",
+    "httpStatus": 200,
+    "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
     "readOnly": true,
-    "checkedAt": "2026-10-19T03:41:11.983396+00:00",
-    "matchesRecordedPublisher": null
+    "checkedAt": "2026-10-19T14:38:12.704019+00:00",
+    "matchesRecordedPublisher": true
   },
   "robotsTxt": {
-    "httpStatus": 404,
-    "text": "",
+    "httpStatus": 200,
+    "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
     "readOnly": true,
-    "checkedAt": "2026-10-19T03:41:12.362735+00:00"
+    "checkedAt": "2026-10-19T14:38:12.820923+00:00"
   }
 }
