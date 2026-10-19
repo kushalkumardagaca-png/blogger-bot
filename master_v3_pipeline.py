@@ -20,6 +20,7 @@ from social_identity import ensure_social_identity
 from content_policy_guard import POLICY_VERSION
 from editorial_integrity import assert_unique_plan,stamp
 from master_topic_discovery import used_topic_ids
+from master_taxonomy import EVERGREEN_CATEGORIES
 
 ROOT=Path(__file__).parent;PLAN=ROOT/'MASTER_DAILY_PLAN.json';POOL=ROOT/'MASTER_TREND_POOL.json';PACKAGES=ROOT/'master_packages'/'dynamic';TRACKER=ROOT/'MASTER_AUTOMATION_TRACKER.json';STATUS=ROOT/'MASTER_AUTOMATION_STATUS.json';SOCIAL=ROOT/'social_events.json';IST=ZoneInfo('Asia/Kolkata');PRODUCTION_START=dt.date(2026,10,14)
 
@@ -63,17 +64,43 @@ def replace_blocked_topic(plan, kind, slot, item):
         if same_category:
             replacement = max(same_category, key=lambda row: float(row.get("overall_score") or 0))
     else:
+        label = str(item.get("category") or "")
+        # A category must be the real taxonomy object. Handing discovery a made-up
+        # dict missing "signals" raised KeyError, and because that failure was
+        # swallowed it was reported as "no topic remains" — twice on 19 October,
+        # which cost two Evergreen slots whose real problem was only that the
+        # fallback was never allowed to run.
+        cat = next((row for row in EVERGREEN_CATEGORIES if str(row.get("label", "")).casefold() == label.casefold()), None)
+        if cat is None:
+            cat = next((row for row in EVERGREEN_CATEGORIES
+                        if any(signal in label.casefold() or label.casefold() in signal
+                               for signal in row.get("signals", []))), EVERGREEN_CATEGORIES[0])
+        discovery_error = None
         try:
             from master_topic_discovery import evergreen_candidates
-            label = str(item.get("category") or "")
-            found = evergreen_candidates([{"label": label,
-                                          "queries": [(label.split(" ")[0] if label else "money").lower()]}], excluded)
+            found = evergreen_candidates([cat], excluded)
             if found:
                 replacement = dict(found[0]); replacement["evergreen_category"] = label
-        except Exception:
-            replacement = None
+        except Exception as exc:  # recorded below, never hidden
+            discovery_error = exc
+        if replacement is None:
+            # The 500-topic Evergreen reserve, validated by live demand before use.
+            try:
+                from master_topic_discovery import revalidated_reference_evergreen, uid
+                ref = revalidated_reference_evergreen(cat, excluded)
+                if ref:
+                    replacement = {"id": uid(ref["title"]), "title": ref["title"], "category": cat["label"],
+                                   "evergreen_category": label, "demand_score": round(ref["demand"], 1),
+                                   "content_gap_score": round(ref["gap"], 1),
+                                   "overall_score": round(.25 * ref["demand"] + .20 * 90 + .15 * ref["gap"]
+                                                          + .15 * 85 + .10 * 80 + .05 * 60 + .05 * 70 + .05 * 85, 1),
+                                   "discovered_from_live_internet": True, "from_evergreen_reserve": True}
+            except Exception as exc:
+                discovery_error = discovery_error or exc
     if replacement is None:
-        raise RuntimeError(f"no unused {kind} topic remains for slot {slot}; the blocked topic is not republished")
+        raise RuntimeError(f"no unused {kind} topic remains for slot {slot}"
+                           + (f"; the topic search itself failed ({discovery_error})" if discovery_error else "")
+                           + "; the blocked topic is not republished")
     plan[kind][slot] = replacement
     write(PLAN, plan)
     print(f"Master {kind} slot {slot}: {str(item.get('title',''))[:50]!r} is blocked for today; "

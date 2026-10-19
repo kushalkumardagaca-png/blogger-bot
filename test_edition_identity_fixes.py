@@ -269,6 +269,69 @@ class MasterDayIdentity(unittest.TestCase):
         self.assertEqual(tracker[-1]["published"][0]["date"], "2026-10-19")
 
 
+class SubstitutionUsesTheRealCategoryAndReserve(unittest.TestCase):
+    """19 Oct: two Evergreen slots were lost to a fabricated "pool exhausted" claim."""
+
+    def _plan(self):
+        return {"date": "2026-10-19", "trending": [], "evergreen": [
+            {"id": "blocked-topic", "title": "Best Financial Habits For Gen Z: Budgeting, Smart Investing",
+             "category": "Money Hacks & Financial Habits"}], "blocked_topics": ["blocked-topic"]}
+
+    def _run(self, discovery, reserve=None):
+        import master_v3_pipeline as pipeline, master_topic_discovery as discovery_module
+        plan = self._plan()
+        written = []
+        original_read, original_write = pipeline.read, pipeline.write
+        originals = (discovery_module.evergreen_candidates,
+                     getattr(discovery_module, "revalidated_reference_evergreen", None))
+        pipeline.read = lambda path, default=None: default if isinstance(default, dict) else {}
+        pipeline.write = lambda path, payload: written.append(dict(payload))
+        discovery_module.evergreen_candidates = discovery
+        discovery_module.revalidated_reference_evergreen = reserve or (lambda cat, excluded: None)
+        try:
+            replacement = pipeline.replace_blocked_topic(
+                plan, "evergreen", 0, plan["evergreen"][0])
+        finally:
+            pipeline.read, pipeline.write = original_read, original_write
+            discovery_module.evergreen_candidates, discovery_module.revalidated_reference_evergreen = originals
+        return replacement, written
+
+    def test_discovery_receives_a_complete_category_object(self):
+        seen = {}
+
+        def discovery(categories, excluded=None):
+            seen.update(categories[0])
+            return [{"id": "fresh", "title": "Emergency fund sizing for a two-income household",
+                     "category": categories[0]["label"]}]
+
+        replacement, _ = self._run(discovery)
+        for key in ("label", "signals", "description"):
+            self.assertIn(key, seen, "the taxonomy object must be passed whole")
+        self.assertEqual(replacement["evergreen_category"], "Money Hacks & Financial Habits")
+
+    def test_an_800_topic_reserve_is_used_when_demand_search_finds_nothing(self):
+        def discovery(categories, excluded=None):
+            return []
+
+        reserve = lambda cat, excluded: {"title": "Salary, savings and the six-month buffer",
+                                         "demand": 64.0, "gap": 58}
+        replacement, written = self._run(discovery, reserve)
+        self.assertEqual(replacement["title"], "Salary, savings and the six-month buffer")
+        self.assertTrue(replacement["from_evergreen_reserve"])
+        self.assertTrue(written, "the substituted plan must be persisted, not just returned")
+
+    def test_a_broken_search_is_reported_as_a_broken_search(self):
+        def discovery(categories, excluded=None):
+            raise KeyError("signals")
+
+        with self.assertRaises(RuntimeError) as caught:
+            self._run(discovery)
+        message = str(caught.exception)
+        self.assertIn("the topic search itself failed", message)
+        self.assertIn("signals", message)
+        self.assertNotEqual(message.count("no unused evergreen topic remains for slot 0"), 0)
+
+
 class RouteAttemptCap(unittest.TestCase):
     def test_a_repeatedly_failing_route_is_paused_not_spammed(self):
         import social_guard as g
