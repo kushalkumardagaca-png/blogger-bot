@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T20:23:25.882756+05:30",
+  "generatedAt": "2026-10-19T20:57:38.326048+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 17,
-  "confirmedByLivePost": 17,
+  "confirmedPublications": 18,
+  "confirmedByLivePost": 18,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -16,56 +16,26 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 11,
+      "attempt": 12,
       "applied": true
     },
     {
       "type": "social_replay",
-      "key": "news-asia-pacific",
+      "key": "master-trending-3",
       "platform": "tumblr",
       "routeIndex": 1,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-china",
-      "platform": "tumblr",
-      "routeIndex": 1,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-russia",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "tumblr",
-      "routeIndex": 1,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-economy",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-0",
-      "platform": "tumblr",
-      "routeIndex": 0,
       "applied": true
     }
   ],
   "retryBlocked": [
+    "social:2026-10-19:news-asia-pacific:1",
+    "social:2026-10-19:news-china:1",
+    "social:2026-10-19:news-russia:0",
+    "social:2026-10-19:news-europe:1",
+    "social:2026-10-19:news-economy:0",
     "social:2026-10-19:news-global:1",
-    "social:2026-10-19:master-trending-2:1",
-    "social:2026-10-19:master-trending-3:1"
+    "social:2026-10-19:master-trending-0:0",
+    "social:2026-10-19:master-trending-2:1"
   ],
   "masterRecoveryDeferred": [
     "master-evergreen-3"
