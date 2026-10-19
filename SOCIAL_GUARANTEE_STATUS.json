@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-19T19:45:46.428586+05:30",
+ "generatedAt": "2026-10-19T20:27:44.445170+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 17,
@@ -120,8 +120,10 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "waiting for the last attempt"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   },
   {
@@ -292,7 +294,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T19:45:37.242884+05:30",
+ "liveVerificationSourceAt": "2026-10-19T20:27:25.846831+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 8,
  "syntheticViews": 0,
