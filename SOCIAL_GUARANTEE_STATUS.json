@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T06:15:37.724990+05:30",
+ "generatedAt": "2026-10-19T06:41:42.457334+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 3,
  "expectedPosts": 6,
  "articlesWithBothPosts": 0,
- "postsMissing": 4,
- "dispatched": 4,
+ "postsMissing": 3,
+ "dispatched": 3,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -46,24 +46,23 @@
    "key": "master-trending-0",
    "title": "World Bank says ‘small AI’ could transform dev",
    "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
-   "posts": 0,
+   "posts": 1,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
+   "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
     "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T06:15:35.927999+05:30",
+ "liveVerificationSourceAt": "2026-10-19T06:41:40.481771+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 0,
  "syntheticViews": 0,
