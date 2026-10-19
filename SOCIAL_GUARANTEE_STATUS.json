@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T16:24:12.422590+05:30",
+ "generatedAt": "2026-10-19T16:56:19.845172+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 12,
- "expectedPosts": 24,
+ "articles": 13,
+ "expectedPosts": 26,
  "articlesWithBothPosts": 5,
- "postsMissing": 7,
- "dispatched": 0,
+ "postsMissing": 8,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-economy",
@@ -210,11 +210,28 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-3",
+   "title": "FRA approves six companies to conduct non-bank",
+   "url": "https://dailyyield.blogspot.com/2026/10/fra-approves-six-companies-to-conduct.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T16:24:02.565722+05:30",
+ "liveVerificationSourceAt": "2026-10-19T16:56:12.878600+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
