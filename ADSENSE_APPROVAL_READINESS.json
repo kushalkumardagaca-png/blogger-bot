@@ -1,6 +1,6 @@
 {
- "checkedAt": "2026-10-19T07:36:14.810076+00:00",
- "status": "PASS",
+ "checkedAt": "2026-10-19T07:37:54.354078+00:00",
+ "status": "CHECK_INCOMPLETE",
  "publicPagesRead": 10,
  "diagnosticReadsOnly": true,
  "pageScriptsExecuted": false,
@@ -30,9 +30,9 @@
   },
   {
    "check": "policy page /disclaimer",
-   "pass": true,
-   "state": "PASS",
-   "detail": "/p/disclaimer.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
@@ -170,16 +170,16 @@
   },
   {
    "check": "ads.txt matches the recorded publisher",
-   "pass": true,
-   "state": "PASS",
-   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "HTTP 0: not verified",
    "blocking": true
   },
   {
    "check": "robots.txt readable",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200",
+   "detail": "HTTP 200 after 3 reads; the first answer was a 404 that the re-probe disproved",
    "blocking": true
   },
   {
@@ -247,7 +247,22 @@
   }
  ],
  "blockingIssues": [],
- "unverifiedChecks": [],
+ "unverifiedChecks": [
+  {
+   "check": "policy page /disclaimer",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "blocking": true
+  },
+  {
+   "check": "ads.txt matches the recorded publisher",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "HTTP 0: not verified",
+   "blocking": true
+  }
+ ],
  "manualStepsRequired": [
   "Check the existing AdSense site status. If Getting ready, do not remove and resubmit it.",
   "Complete only the required account tasks actually shown. Legal/payment records must match official records, not necessarily the public author byline.",

@@ -1,14 +1,14 @@
 # Daily Yield — AdSense approval readiness (live site check)
 
-- **Status:** PASS
-- **Checked:** 2026-10-19T07:36:14.810076+00:00
+- **Status:** CHECK_INCOMPLETE
+- **Checked:** 2026-10-19T07:37:54.354078+00:00
 - **Public pages read:** 10 (ordinary HTTP, no synthetic views)
 
 ## Checks
 - **PASS** — policy page /about: /p/about-us_02080501126.html → HTTP 200
 - **PASS** — policy page /contact: /p/contact-us_01883938366.html → HTTP 200
 - **PASS** — policy page /privacy: /p/privacy-policy.html → HTTP 200
-- **PASS** — policy page /disclaimer: /p/disclaimer.html → HTTP 200
+- **UNKNOWN** — policy page /disclaimer: /p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page
 - **PASS** — policy page /terms: /p/terms-and-conditions.html → HTTP 200
 - **PASS** — about: public author name: Kushal Daga
 - **PASS** — about: publisher's legal name: Kushal Kumar Daga
@@ -28,8 +28,8 @@
 - **PASS** — contact: no inaccurate name claim: no unrelated surname is published as an alias
 - **PASS** — advertising declared in the policy pages: advertising and Google AdSense are described in the policy pages
 - **PASS** — privacy page names third-party cookie vendors and the ad opt-out: third-party vendor cookie use and an opt-out route are named on the privacy page
-- **PASS** — ads.txt matches the recorded publisher: HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0
-- **PASS** — robots.txt readable: HTTP 200
+- **UNKNOWN** — ads.txt matches the recorded publisher: HTTP 0: not verified
+- **PASS** — robots.txt readable: HTTP 200 after 3 reads; the first answer was a 404 that the re-probe disproved
 - **PASS** — AdSense crawler access allowed: Evaluated effective robots rules; an explicit agent name is not mandatory
 - **PASS** — sitemap declared: sitemap line checked in existing robots.txt
 - **PASS** — sitemap.xml serves URLs: HTTP 200, 527 URLs listed
