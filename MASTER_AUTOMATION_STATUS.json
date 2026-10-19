@@ -1,12 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-19",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "ead93a367603d402",
   "kind": "evergreen",
-  "slot": 0,
-  "topic_id": "ecdac34f3a084a15",
-  "replaced_topic_id": null,
-  "title": "Best Financial Habits For Gen Z: Budgeting, Sm",
-  "package": "master_packages/dynamic/2026-10-19-evergreen-ecdac34f3a084a15.json",
-  "html": "scheduled_ready/2026-10-19-evergreen-0-best-financial-habits-for-gen-z-budgeting-sm.html"
+  "slot": 2,
+  "slot_key": "2026-10-19:evergreen:2",
+  "date": "2026-10-19",
+  "category": "Credit Debt & Loans",
+  "evergreen_category": "Credit Debt & Loans",
+  "title": "10 Ways to Pay Off Credit Card Debt",
+  "url": "https://dailyyield.blogspot.com/2026/10/10-ways-to-pay-off-credit-card-debt.html",
+  "published_at": "2026-10-19T02:45:07-07:00"
 }
