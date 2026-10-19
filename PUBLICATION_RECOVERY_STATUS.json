@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T10:25:19.548013+05:30",
+  "generatedAt": "2026-10-19T10:57:35.126499+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
@@ -15,27 +15,21 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 3,
+      "attempt": 4,
       "applied": true
     },
     {
       "type": "social_replay",
-      "key": "news-russia",
+      "key": "news-asia-pacific",
       "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-0",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "routeIndex": 1,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-19:news-asia-pacific:1",
-    "social:2026-10-19:news-china:1"
+    "social:2026-10-19:news-china:1",
+    "social:2026-10-19:news-russia:0",
+    "social:2026-10-19:master-trending-0:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
