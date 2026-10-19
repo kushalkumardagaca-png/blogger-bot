@@ -1,13 +1,47 @@
 {
- "generatedAt": "2026-10-19T13:14:22.799684+05:30",
+ "generatedAt": "2026-10-19T13:15:45.523533+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 9,
- "expectedPosts": 18,
+ "articles": 10,
+ "expectedPosts": 20,
  "articlesWithBothPosts": 4,
- "postsMissing": 5,
- "dispatched": 5,
+ "postsMissing": 7,
+ "dispatched": 2,
  "rows": [
+  {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "waiting for the last attempt"
+   ]
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "waiting for the last attempt"
+   ]
+  },
   {
    "key": "news-russia",
    "title": "russia edition",
@@ -22,22 +56,8 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
-  },
-  {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-19.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
   },
   {
    "key": "news-markets",
@@ -54,19 +74,20 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
-   "posts": 1,
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-19.html",
+   "posts": 0,
    "byPlatform": {
-    "facebook": 1,
+    "facebook": 0,
     "bluesky": 0,
     "tumblr": 0,
     "mastodon": 0
    },
-   "observedDistinctPosts": 1,
+   "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
+    "dispatched",
     "dispatched"
    ]
   },
@@ -84,25 +105,22 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
-   "posts": 1,
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-19.html",
+   "posts": 2,
    "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
+    "facebook": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 1,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "master-trending-0",
@@ -118,7 +136,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -152,7 +170,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T13:14:14.535590+05:30",
+ "liveVerificationSourceAt": "2026-10-19T13:15:40.415856+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
