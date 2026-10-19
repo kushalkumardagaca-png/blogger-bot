@@ -1,14 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "d7eb056559c44e94",
-  "kind": "evergreen",
-  "slot": 4,
-  "slot_key": "2026-10-19:evergreen:4",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-19",
-  "category": "Investing & Portfolio Building",
-  "evergreen_category": "Investing & Portfolio Building",
-  "title": "Asset allocation: Gold leads as equity returns",
-  "url": "https://dailyyield.blogspot.com/2026/10/asset-allocation-gold-leads-as-equity.html",
-  "published_at": "2026-10-19T09:45:12-07:00"
+  "kind": "evergreen",
+  "slot": 3,
+  "topic_id": "cc027b678dd1cba0",
+  "replaced_topic_id": null,
+  "title": "Bangladesh needs digital banking, but not more",
+  "package": "master_packages/dynamic/2026-10-19-evergreen-cc027b678dd1cba0.json",
+  "html": "scheduled_ready/2026-10-19-evergreen-3-bangladesh-needs-digital-banking-but-not-more.html"
 }
