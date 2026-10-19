@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T09:58:29.796315+05:30",
+ "generatedAt": "2026-10-19T10:15:38.733075+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
- "articles": 5,
- "expectedPosts": 10,
+ "articles": 6,
+ "expectedPosts": 12,
  "articlesWithBothPosts": 2,
- "postsMissing": 3,
- "dispatched": 3,
+ "postsMissing": 5,
+ "dispatched": 5,
  "rows": [
   {
    "key": "news-india",
@@ -21,6 +21,24 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   },
   {
    "key": "news-asia-pacific",
@@ -90,7 +108,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T09:58:26.121791+05:30",
+ "liveVerificationSourceAt": "2026-10-19T10:15:34.858394+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 2,
  "syntheticViews": 0,
