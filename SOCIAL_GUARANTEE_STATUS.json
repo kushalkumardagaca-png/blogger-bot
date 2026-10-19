@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T14:23:22.504765+05:30",
+ "generatedAt": "2026-10-19T14:40:00.757959+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 11,
  "expectedPosts": 22,
  "articlesWithBothPosts": 4,
  "postsMissing": 7,
- "dispatched": 0,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-economy",
@@ -22,7 +22,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -190,13 +190,13 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T14:23:16.323429+05:30",
+ "liveVerificationSourceAt": "2026-10-19T14:39:52.382027+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
