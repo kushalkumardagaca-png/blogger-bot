@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T11:15:50.930494+05:30",
+ "generatedAt": "2026-10-19T11:39:54.953538+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 7,
  "expectedPosts": 14,
- "articlesWithBothPosts": 2,
- "postsMissing": 6,
- "dispatched": 2,
+ "articlesWithBothPosts": 3,
+ "postsMissing": 4,
+ "dispatched": 4,
  "rows": [
   {
    "key": "news-india",
@@ -36,7 +36,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -53,7 +53,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -70,7 +70,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -87,7 +87,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -108,26 +108,22 @@
    "key": "master-evergreen-1",
    "title": "Proposals to close Minneapolis schools aimed a",
    "url": "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T11:15:45.452296+05:30",
+ "liveVerificationSourceAt": "2026-10-19T11:39:47.856891+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 2,
+ "articlesWithExactlyTwoPosts": 3,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
