@@ -48,13 +48,20 @@ def assert_publishable(title,content,labels,check_remote_images=True):
   if phrase.casefold() in text.casefold():issues.append('mass-template phrase prohibited: '+phrase)
  for phrase in UNSUPPORTED_ABSOLUTES:
   if phrase.casefold() in text.casefold():issues.append('unsupported absolute claim prohibited: '+phrase)
+ # The owner has no human financial reviewer (decision of 19 October 2026), so risky
+ # material is stopped by rule instead of approved by a person. Uncertainty notes are
+ # recorded by the gate for the weekly report but never block a sound article here.
+ from advice_risk_gate import audit as _advice_audit
+ for _row in _advice_audit(title,text)['blocking']:
+  issues.append('advice risk gate: '+_row['rule'])
  if not is_news and not master_v2:
   if 'Worked example with disclosed assumptions' not in content:issues.append('transparent worked example missing')
   if 'Editorial method' not in content:issues.append('editorial method disclosure missing')
  if master_v2:
   for marker,name in (("class=\"dy2-toc\"","table of contents"),("class=\"dy2-summary\"","600–800 word summary"),("class=\"dy2-faq\"","topic FAQ"),("class=\"dy2-glossary\"","glossary"),("class=\"dy2-low\"","10–15 item discovery shelf"),("class=\"dy2-follow\"","separate follow section")):
    if marker not in content:issues.append(name+' missing')
-  if content.count('class="dy2-photo"')!=3:issues.append('exactly three editorial landscape photos required')
+  from master_article_v2 import PHOTOS_PER_MASTER_ARTICLE
+  if content.count('class="dy2-photo"')!=PHOTOS_PER_MASTER_ARTICLE:issues.append(f'exactly {PHOTOS_PER_MASTER_ARTICLE} editorial landscape photos required')
   if content.count('class="dy2-data ')<3:issues.append('at least three evidence-based data representations required')
   order=[content.find(x) for x in ('class="dy2-summary"','class="dy2-faq"','class="dy2-glossary"','class="dy2-low"','class="dy2-follow"','DY_PAGE_FAMILY_START')]
   if any(x<0 for x in order) or order!=sorted(order):issues.append('Master V2 closing-section order is invalid')

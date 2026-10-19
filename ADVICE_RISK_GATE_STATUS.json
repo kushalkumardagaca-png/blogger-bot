@@ -1,0 +1,31 @@
+{
+  "checkedAtIST": "2026-10-19T20:04:51.819905+05:30",
+  "scope": "Prepared article HTML in scheduled_ready; no live page was opened or changed",
+  "filesChecked": 79,
+  "blockedLocally": 6,
+  "withWarnings": 41,
+  "examples": [
+    {
+      "file": "2026-10-11-evergreen-1-decoding-ira-withdrawals-and-rmd-rules.html",
+      "rule": "tax rule stated as permanent fact with no date and no change notice"
+    },
+    {
+      "file": "2026-10-11-evergreen-2-0-capital-gains-tax-guide.html",
+      "rule": "tax rule stated as permanent fact with no date and no change notice"
+    },
+    {
+      "file": "2026-10-14-evergreen-2-sold-a-property-eight-different-ways-to-reduc.html",
+      "rule": "tax rule stated as permanent fact with no date and no change notice"
+    },
+    {
+      "file": "2026-10-15-evergreen-4-how-to-plan-multigenerational-housing-without.html",
+      "rule": "tax rule stated as permanent fact with no date and no change notice"
+    },
+    {
+      "file": "2026-10-16-evergreen-1-best-tax-free-savings-account-rates-in-canada.html",
+      "rule": "tax rule stated as permanent fact with no date and no change notice"
+    }
+  ],
+  "humanReviewer": false,
+  "note": "Offline check of prepared files. It is an automated rule pass, not a professional review, and it creates or changes no page."
+}

@@ -395,7 +395,17 @@ check('Master links both market desks','/p/markets-today.html' in prep and '/p/g
 _master_label_line = mv2.split('labels=list(dict.fromkeys(')[1].split(')')[0] if 'labels=list(dict.fromkeys(' in mv2 else ''
 check('Master posts cannot enter News hub', bool(_master_label_line) and 'News' not in _master_label_line)
 check('Master articles include continuous gesture motion','ensure_continuous_motion' in ap)
-check('Master uses three unique licensed 16:9 placement-specific photographs','choose_photos' in prep and "image.resize((1600,900)" in (ROOT/'photo_selector.py').read_text() and "len(photos)!=3" in mv2 and 'PHOTO_USAGE_REGISTRY.json' in (ROOT/'photo_selector.py').read_text())
+# Three photographs per Master article is the owner's decision of 19 October 2026 and
+# it lives in one constant, so the audit checks the constant and both call sites
+# instead of a duplicated literal that a refactor can silently orphan.
+_pf=(ROOT/'publication_preflight.py').read_text(encoding='utf-8')
+check('Master uses three unique licensed 16:9 placement-specific photographs','choose_photos' in prep and "image.resize((1600,900)" in (ROOT/'photo_selector.py').read_text() and 'PHOTOS_PER_MASTER_ARTICLE = 3' in mv2 and 'len(photos)!=PHOTOS_PER_MASTER_ARTICLE' in mv2 and '{PHOTOS_PER_MASTER_ARTICLE} distinct' in mv2 and "content.count('class=\"dy2-photo\"')!=PHOTOS_PER_MASTER_ARTICLE" in _pf and 'PHOTO_USAGE_REGISTRY.json' in (ROOT/'photo_selector.py').read_text())
+# The owner is a CA articleship student, not a Chartered Accountant (answer of 19
+# October 2026). The qualification guard can only be switched off by an environment
+# variable, so no scheduled job may ever set it.
+_workflows='\n'.join(f.read_text(encoding='utf-8',errors='replace') for f in (ROOT/'.github/workflows').glob('*.yml'))
+check('No automation may claim a professional qualification','DY_VERIFIED_PROFESSIONAL_QUALIFICATION' not in _workflows)
+check('Advice risk gate blocks publication','advice_risk_gate' in (ROOT/'publication_preflight.py').read_text() and 'ADVICE RISK GATE BLOCKED' in (ROOT/'advice_risk_gate.py').read_text() and 'HUMAN_REVIEWER = False' in (ROOT/'advice_risk_gate.py').read_text())
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News adaptive polish can deepen sparse but sourced editions before failing',
       'base_context + 380' in np and 'summary_target + 54' in np

@@ -1,0 +1,81 @@
+{
+  "preparedAtIST": "2026-10-19T20:04:37.693836+05:30",
+  "decision": "No live post is edited while the site is frozen for the AdSense review. This is the queue for the Grand Update window.",
+  "whyTheseFiles": "Prepared copies of articles published before the gate existed (10-17 October). Their wording still reads as advice on the live site.",
+  "actionAtRelease": "For each: attribute the claim to its named source, add the date the figure was true, or remove the promise. Never soften by deleting the disclosure.",
+  "items": [
+    {
+      "file": "2026-10-11-evergreen-1-decoding-ira-withdrawals-and-rmd-rules.html",
+      "preparedDate": "2026-10-11",
+      "rules": [
+        "tax rule stated as permanent fact with no date and no change notice"
+      ],
+      "sentences": [
+        "Because traditional retirement accounts grow free of immediate income tax, the Internal Revenue Service enforces mandatory withdrawal guidelines to prevent these accounts from functioning as perpetual, tax-free estate pl"
+      ],
+      "warnings": [
+        "money or percentage figure with no date in the sentence"
+      ]
+    },
+    {
+      "file": "2026-10-11-evergreen-2-0-capital-gains-tax-guide.html",
+      "preparedDate": "2026-10-11",
+      "rules": [
+        "tax rule stated as permanent fact with no date and no change notice"
+      ],
+      "sentences": [
+        "Nevertheless, managing capital distributions requires precision, because a single large asset sale can easily push a head of household across the boundary, converting what would have been tax-free gains into a taxable ca"
+      ],
+      "warnings": [
+        "money or percentage figure with no date in the sentence"
+      ]
+    },
+    {
+      "file": "2026-10-14-evergreen-2-sold-a-property-eight-different-ways-to-reduc.html",
+      "preparedDate": "2026-10-14",
+      "rules": [
+        "tax rule stated as permanent fact with no date and no change notice"
+      ],
+      "sentences": [
+        "Tax-Free Capital Gains : If you&#x27;re selling a property that you&#x27;ve held for more than two years, you can defer paying capital gains tax until you sell it."
+      ],
+      "warnings": [
+        "money or percentage figure with no date in the sentence"
+      ]
+    },
+    {
+      "file": "2026-10-15-evergreen-4-how-to-plan-multigenerational-housing-without.html",
+      "preparedDate": "2026-10-15",
+      "rules": [
+        "tax rule stated as permanent fact with no date and no change notice"
+      ],
+      "sentences": [
+        "How to Plan Multigenerational Housing Without Section 10: Perceptions of Reproductive Health Services of Young African American Mothers In the realm of multigenerational housing, understanding the unique challenges faced"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "2026-10-16-evergreen-1-best-tax-free-savings-account-rates-in-canada.html",
+      "preparedDate": "2026-10-16",
+      "rules": [
+        "tax rule stated as permanent fact with no date and no change notice"
+      ],
+      "sentences": [
+        "Financial expert explains how tax-free Tax-Free Savings Account Should you open a tax-free savings account for a minor?"
+      ],
+      "warnings": []
+    },
+    {
+      "file": "2026-10-17-evergreen-1-pension-fund-managers-in-india-a-guide-to-per.html",
+      "preparedDate": "2026-10-17",
+      "rules": [
+        "guaranteed or risk-free return claim"
+      ],
+      "sentences": [
+        "These annuities are designed to provide a guaranteed minimum return, ensuring that participants can rely on a certain amount of income from their pension savings."
+      ],
+      "warnings": []
+    }
+  ],
+  "total": 6
+}

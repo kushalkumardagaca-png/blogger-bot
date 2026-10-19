@@ -10,6 +10,7 @@ from collections import Counter,defaultdict
 from pathlib import Path
 from urllib.parse import urlparse,unquote,urlencode
 import requests
+from master_article_v2 import PHOTOS_PER_MASTER_ARTICLE
 from bs4 import BeautifulSoup
 from content_policy_guard import audit_text,DISCLOSURE_MARKER
 from site_change_control import policy,is_frozen
@@ -172,7 +173,8 @@ def corpus_audit(posts,pages):
         soup=BeautifulSoup(content,'html.parser');master=soup.select_one('article.dy2')
         if master:
             pictures=master.select('figure img[src]')
-            photos.append({'id':post['id'],'url':post.get('url'),'published':post.get('published'),'editorialPhotographs':len(pictures),'required':10,'matchesRequiredCount':len(pictures)==10})
+            photos.append({'id':post['id'],'url':post.get('url'),'published':post.get('published'),'editorialPhotographs':len(pictures),'required':PHOTOS_PER_MASTER_ARTICLE,
+                      'matchesRequiredCount':len(pictures)==PHOTOS_PER_MASTER_ARTICLE})
         for figure in soup.find_all('figure'):
             img=figure.find('img',src=True)
             if not img:continue

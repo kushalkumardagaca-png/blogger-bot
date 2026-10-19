@@ -38,8 +38,8 @@ def validate(package):
     summary_count=words(" ".join(summary))
     if not SUMMARY_MIN<=summary_count<=SUMMARY_MAX: errors.append(f"summary is {summary_count} words; required {SUMMARY_MIN}–{SUMMARY_MAX}")
     photos=package.get("photos") or []
-    if len(photos)!=3: errors.append("exactly three distinct editorial photos are required")
-    if len({x.get("url") for x in photos})!=3: errors.append("editorial photos are not distinct")
+    if len(photos)!=PHOTOS_PER_MASTER_ARTICLE: errors.append(f"exactly {PHOTOS_PER_MASTER_ARTICLE} distinct editorial photos are required")
+    if len({x.get("url") for x in photos})!=PHOTOS_PER_MASTER_ARTICLE: errors.append("editorial photos are not distinct")
     for index,p in enumerate(photos,1):
         if not p.get("url") or not p.get("alt") or not p.get("caption"): errors.append(f"photo {index} metadata incomplete")
         if package.get('policy_version','').endswith('GREEN_V2') and not all(p.get(x) for x in ('source_page','license','license_url','creator')):errors.append(f"photo {index} rights ledger incomplete")
@@ -87,6 +87,13 @@ def linked_text(text,sources,internals):
         else: out.append(esc(anchor))
         pos=m.end()
     out.append(esc((text or "")[pos:]));return "".join(out)
+
+# Owner decision, 19 October 2026: three photographs per Master article, because the
+# page is planned to carry five articles' worth of reading with advertisements, and
+# more pictures would make the page messy. Every check now reads this one value, so a
+# published article can never be reported against an older standard.
+PHOTOS_PER_MASTER_ARTICLE = 3
+
 
 def photo(p,index):
     from source_photography import source_alt
