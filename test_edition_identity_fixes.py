@@ -313,8 +313,9 @@ class SubstitutionUsesTheRealCategoryAndReserve(unittest.TestCase):
         def discovery(categories, excluded=None):
             return []
 
-        reserve = lambda cat, excluded: {"title": "Salary, savings and the six-month buffer",
-                                         "demand": 64.0, "gap": 58}
+        def reserve(cat, excluded, **kwargs):
+            self.assertTrue(kwargs.get("rescue"), "a slot about to be abandoned must be allowed rescue mode")
+            return {"title": "Salary, savings and the six-month buffer", "demand": 64.0, "gap": 58}
         replacement, written = self._run(discovery, reserve)
         self.assertEqual(replacement["title"], "Salary, savings and the six-month buffer")
         self.assertTrue(replacement["from_evergreen_reserve"])

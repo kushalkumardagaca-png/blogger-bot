@@ -87,14 +87,16 @@ def replace_blocked_topic(plan, kind, slot, item):
             # The 500-topic Evergreen reserve, validated by live demand before use.
             try:
                 from master_topic_discovery import revalidated_reference_evergreen, uid
-                ref = revalidated_reference_evergreen(cat, excluded)
+                ref = revalidated_reference_evergreen(cat, excluded, rescue=True)
                 if ref:
                     replacement = {"id": uid(ref["title"]), "title": ref["title"], "category": cat["label"],
                                    "evergreen_category": label, "demand_score": round(ref["demand"], 1),
                                    "content_gap_score": round(ref["gap"], 1),
                                    "overall_score": round(.25 * ref["demand"] + .20 * 90 + .15 * ref["gap"]
                                                           + .15 * 85 + .10 * 80 + .05 * 60 + .05 * 70 + .05 * 85, 1),
-                                   "discovered_from_live_internet": True, "from_evergreen_reserve": True}
+                                   "discovered_from_live_internet": bool(ref.get("reference_validated", True)),
+                                   "from_evergreen_reserve": True,
+                                   "reference_validated": bool(ref.get("reference_validated", True))}
             except Exception as exc:
                 discovery_error = discovery_error or exc
     if replacement is None:

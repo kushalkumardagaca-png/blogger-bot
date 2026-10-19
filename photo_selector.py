@@ -113,6 +113,32 @@ def choose_photos(briefs,slug,article_key):
      except Exception:winner=None
    except Exception:
     winner=None
+  if not winner:
+   # A substituted topic has no prepared pool of its own, so the safety net above is
+   # empty and the article would be abandoned over a picture even though verified,
+   # never-published photographs already exist in other pools. Borrowing one of those
+   # keeps every rule: the live-registry exclusion, the size and contrast floor, the
+   # perceptual-hash uniqueness test and the licence fields all still run here.
+   try:
+    from photo_library import reserve_unused_pool_entry
+    entry=reserve_unused_pool_entry(brief,{x for x in used_ids if x})
+    funnel[f'placement-{placement}-cross_pool']=bool(entry)
+    if entry and photographic_candidate(entry):
+     try:
+      rr=requests.get(entry['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
+      image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
+      if w>=1200 and h>=650:
+       gray=image.resize((256,144)).convert('L');contrast=ImageStat.Stat(gray).stddev[0]
+       sha=hashlib.sha256(raw).hexdigest();ph=str(imagehash.phash(image))
+       if contrast>=22 and sha not in used_hashes and not any(distance(ph,x)<=6 for x in used_phashes):
+        c={'source_id':entry.get('source_id'),'title':entry.get('title'),'description':entry.get('description'),
+           'creator':entry.get('creator'),'license':entry.get('licence'),'license_url':entry.get('licence_url'),
+           'source_page':entry.get('source_page'),'download_url':entry.get('download_url'),
+           'original_url':entry.get('original_url'),'width':w,'height':h,'pool_rescue':True}
+        winner=(c,image,sha,ph,0.0)
+     except Exception:winner=None
+   except Exception:
+    winner=None
   if not winner:raise RuntimeError(f'no unique licensed professional photograph passed for placement {placement} '+json.dumps(funnel,sort_keys=True))
   c,image,sha,ph,score=winner;w,h=image.size;target=16/9
   if w/h>target:nw=int(h*target);image=image.crop(((w-nw)//2,0,(w+nw)//2,h))

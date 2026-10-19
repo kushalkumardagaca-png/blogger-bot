@@ -153,6 +153,15 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          # A blocked topic is substituted at publication time, and the substitute is
+          # written here, not in the prepare step. Search Console demand inputs were
+          # only given to the prepare step, so the rescue died with "GSC_CLIENT_ID is
+          # required" while the topic it needed was sitting unused in the pool. Any
+          # step that can build an article carries the same inputs as the prepare step.
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
         run: python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name != 'workflow_dispatch' && '--timed-release' || '' }}
       - name: Tell the search engines the new article is live
         if: success()

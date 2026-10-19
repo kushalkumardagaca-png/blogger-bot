@@ -239,7 +239,7 @@ def used_topic_ids(history, tracker=None):
     return ids
 
 
-def revalidated_reference_evergreen(cat,excluded):
+def revalidated_reference_evergreen(cat,excluded,limit=24,rescue=False):
  """Use the retired CSV only as a seed; live demand must independently validate it."""
  if not EVERGREEN_REFERENCE.exists():return None
  ranked=[]
@@ -251,13 +251,20 @@ def revalidated_reference_evergreen(cat,excluded):
     score=evergreen_topic_quality(candidate,cat)
     if score>0:ranked.append((score,title,idea))
  except (OSError,csv.Error):return None
- for score,title,idea in sorted(ranked,reverse=True)[:8]:
+ for score,title,idea in sorted(ranked,reverse=True)[:limit]:
   query='"'+clean(title)+'" finance'
   observations=rss('https://www.bing.com/news/search?format=rss&q='+urllib.parse.quote(query),'Bing live evergreen validation',cat['label'])
   observations+=rss('https://news.google.com/rss/search?q='+urllib.parse.quote(query+' when:365d')+'&hl=en-US&gl=US&ceid=US:en','Google live evergreen validation',cat['label'])
   urls={x.get('url') for x in observations if x.get('url')}
   if len(urls)>=2:
    return {'title':title,'demand':min(72,50+len(urls)*3),'gap':58,'reference_observations':len(urls)}
+ if rescue and ranked:
+  # Rescue mode runs only when a slot would otherwise be abandoned. Evergreen
+  # subjects are timeless by design, so today's missing trend coverage is a weaker
+  # objection than publishing nothing: take the best category-fitting unused seed
+  # and record honestly that live demand did not validate it today.
+  _score,title,idea=sorted(ranked,reverse=True)[0]
+  return {'title':title,'demand':44.0,'gap':52,'reference_observations':0,'reference_validated':False}
  return None
 
 def evergreen_candidates(categories,excluded=None):

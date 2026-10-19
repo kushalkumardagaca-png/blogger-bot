@@ -225,6 +225,53 @@ def used_source_ids() -> set[str]:
     return {x for x in used if x}
 
 
+def reserve_unused_pool_entry(brief: str, avoid_ids: set[str] | None = None) -> dict | None:
+    """Re-use a verified photograph that no article has ever run.
+
+    A substituted topic has no prepared pool of its own, so the per-article safety
+    net is empty and a live search that finds nothing stops publication. Every
+    pool holds licence-checked candidates that were never published: those are a
+    legitimate reserve. The registry of photographs that actually ran is still
+    excluded here, and the caller re-checks size, contrast and perceptual
+    uniqueness before anything is written, so this widens the search, not the rules.
+    """
+    avoid = {str(x) for x in (avoid_ids or set())}
+    registry_used: set[str] = set()
+    try:
+        for item in json.loads((ROOT / "PHOTO_USAGE_REGISTRY.json").read_text()).get("items", []):
+            registry_used.add(str(item.get("source_id", "")))
+    except (OSError, json.JSONDecodeError):
+        pass
+    wanted = terms(brief)
+    best = None
+    for path in list(MASTER_DIR.glob("*.json")) + list(NEWS_DIR.glob("*.json")):
+        pool = load_pool(path)
+        taken = {str(x.get("source_id")) for x in (pool.get("taken") or [])}
+        for entry in (pool.get("entries") or []):
+            source_id = str(entry.get("source_id", ""))
+            if not source_id or source_id in taken or source_id in avoid or source_id in registry_used:
+                continue
+            width, height = int(entry.get("width") or 0), int(entry.get("height") or 0)
+            if width < 1400 or height < 700 or width / max(height, 1) < 1.3:
+                continue
+            text = (f"{entry.get('title', '')} {entry.get('description', '')} {entry.get('query', '')}")
+            overlap = len(wanted & terms(text))
+            if overlap < 1:
+                continue
+            score = overlap * 10 + min(width, 5000) / 1000
+            if best is None or score > best[0]:
+                best = (score, dict(entry), path, pool, source_id)
+    if best is None:
+        return None
+    _score, entry, path, pool, source_id = best
+    entry["pool_source"] = path.parent.name + "/" + path.name
+    entry["pool_rescue"] = True
+    pool["taken"] = (pool.get("taken") or []) + [
+        dict(entry, taken_at=dt.datetime.now(dt.timezone.utc).isoformat())]
+    save_pool(path, pool)
+    return entry
+
+
 def gather(queries: list[str], wanted: set[str], want: int, exclude: set[str]) -> list[dict]:
     """Search both sources, keep only licensed and usable photographs, best first."""
     if want <= 0:
