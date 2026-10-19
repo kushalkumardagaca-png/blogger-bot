@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-19T18:45:53.286492+05:30",
+ "generatedAt": "2026-10-19T18:59:48.119008+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 17,
  "expectedPosts": 34,
- "articlesWithBothPosts": 7,
- "postsMissing": 11,
- "dispatched": 3,
+ "articlesWithBothPosts": 8,
+ "postsMissing": 9,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-markets",
@@ -26,19 +26,15 @@
    "key": "news-banking",
    "title": "banking edition",
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-asia-pacific",
@@ -296,9 +292,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T18:45:42.028778+05:30",
+ "liveVerificationSourceAt": "2026-10-19T18:59:36.123317+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 7,
+ "articlesWithExactlyTwoPosts": 8,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
