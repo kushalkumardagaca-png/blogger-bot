@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-19T11:39:47.856891+05:30",
+ "generatedAt": "2026-10-19T12:15:37.204959+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 7,
- "onTime": 7,
+ "live": 8,
+ "onTime": 8,
  "late": 0,
  "early": 0,
  "pending": 0,
  "overdue": 1,
- "upcoming": 13,
+ "upcoming": 12,
  "dispatched": 1,
  "rows": [
   {
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 444,
+   "minutesFromSlot": 480,
    "publishedAt": "2026-10-18T15:45:05-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 384,
+   "minutesFromSlot": 420,
    "publishedAt": "2026-10-18T16:31:07-07:00"
   },
   {
@@ -40,7 +40,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
    "state": "on time",
-   "minutesFromSlot": 324,
+   "minutesFromSlot": 360,
    "publishedAt": "2026-10-18T17:45:09-07:00"
   },
   {
@@ -50,7 +50,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 264,
+   "minutesFromSlot": 300,
    "publishedAt": "2026-10-18T18:43:59-07:00"
   },
   {
@@ -60,8 +60,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 204,
-   "minutesLate": 204,
+   "minutesFromSlot": 240,
+   "minutesLate": 240,
    "action": "dispatched"
   },
   {
@@ -71,7 +71,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/eurusd-11253-eurgbp-08438-eurjpy-177.html",
    "state": "on time",
-   "minutesFromSlot": 144,
+   "minutesFromSlot": 180,
    "publishedAt": "2026-10-18T20:45:08-07:00"
   },
   {
@@ -81,7 +81,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
    "state": "on time",
-   "minutesFromSlot": 84,
+   "minutesFromSlot": 120,
    "publishedAt": "2026-10-18T21:45:04-07:00"
   },
   {
@@ -91,17 +91,18 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
    "state": "on time",
-   "minutesFromSlot": 24,
+   "minutesFromSlot": 60,
    "publishedAt": "2026-10-18T22:45:08-07:00"
   },
   {
    "key": "news-markets",
    "slot": "12:15",
    "due": "2026-10-19T12:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -36
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-19.html",
+   "state": "on time",
+   "minutesFromSlot": 0,
+   "publishedAt": "2026-10-18T23:45:04-07:00"
   },
   {
    "key": "news-europe",
@@ -110,7 +111,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -66
+   "minutesFromSlot": -30
   },
   {
    "key": "news-economy",
@@ -119,7 +120,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -96
+   "minutesFromSlot": -60
   },
   {
    "key": "master-trending-2",
@@ -128,7 +129,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -156
+   "minutesFromSlot": -120
   },
   {
    "key": "master-evergreen-2",
@@ -137,7 +138,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -216
+   "minutesFromSlot": -180
   },
   {
    "key": "master-trending-3",
@@ -146,7 +147,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -276
+   "minutesFromSlot": -240
   },
   {
    "key": "news-americas",
@@ -155,7 +156,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -336
+   "minutesFromSlot": -300
   },
   {
    "key": "news-companies",
@@ -164,7 +165,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -366
+   "minutesFromSlot": -330
   },
   {
    "key": "news-global",
@@ -173,7 +174,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -396
+   "minutesFromSlot": -360
   },
   {
    "key": "news-banking",
@@ -182,7 +183,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -426
+   "minutesFromSlot": -390
   },
   {
    "key": "master-evergreen-3",
@@ -191,7 +192,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -486
+   "minutesFromSlot": -450
   },
   {
    "key": "master-trending-4",
@@ -200,7 +201,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -546
+   "minutesFromSlot": -510
   },
   {
    "key": "master-evergreen-4",
@@ -209,12 +210,12 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -636
+   "minutesFromSlot": -600
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 7,
+ "actualArticlesLiveIncludingExtras": 8,
  "status": "ATTENTION"
 }
