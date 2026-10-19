@@ -1,12 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-19",
-  "kind": "evergreen",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "73a4ff24d60c2ca0",
+  "kind": "trending",
   "slot": 0,
-  "topic_id": "ecdac34f3a084a15",
-  "replaced_topic_id": null,
-  "title": "Best Financial Habits For Gen Z: Budgeting, Sm",
-  "package": "master_packages/dynamic/2026-10-19-evergreen-ecdac34f3a084a15.json",
-  "html": "scheduled_ready/2026-10-19-evergreen-0-best-financial-habits-for-gen-z-budgeting-sm.html"
+  "slot_key": "2026-10-19:trending:0",
+  "date": "2026-10-19",
+  "category": "Trend · Money & Policy Now",
+  "evergreen_category": "Banking Payments & Fintech",
+  "title": "World Bank says ‘small AI’ could transform dev",
+  "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
+  "published_at": "2026-10-18T17:45:09-07:00"
 }
