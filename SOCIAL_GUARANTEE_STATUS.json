@@ -1,111 +1,28 @@
 {
- "generatedAt": "2026-10-19T13:15:45.523533+05:30",
+ "generatedAt": "2026-10-19T13:54:50.915565+05:30",
  "dateIST": "2026-10-19",
  "apply": true,
  "articles": 10,
  "expectedPosts": 20,
  "articlesWithBothPosts": 4,
- "postsMissing": 7,
- "dispatched": 2,
+ "postsMissing": 6,
+ "dispatched": 6,
  "rows": [
-  {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
-   "posts": 1,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 1,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt"
-   ]
-  },
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
-   "posts": 1,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 1,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt"
-   ]
-  },
-  {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
-   "posts": 1,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 1,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt"
-   ]
-  },
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-19.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-economy",
    "title": "economy edition",
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-19.html",
-   "posts": 0,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
-  },
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-19.html",
    "posts": 1,
    "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
+    "facebook": 0,
+    "bluesky": 1,
     "tumblr": 0,
     "mastodon": 0
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -123,6 +40,88 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-19.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-19.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-19.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
+  },
+  {
    "key": "master-trending-0",
    "title": "World Bank says ‘small AI’ could transform dev",
    "url": "https://dailyyield.blogspot.com/2026/10/world-bank-says-small-ai-could.html",
@@ -136,7 +135,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -170,7 +169,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-19T13:15:40.415856+05:30",
+ "liveVerificationSourceAt": "2026-10-19T13:54:43.420507+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
