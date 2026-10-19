@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-20T03:36:53.711645+05:30",
+ "generatedAt": "2026-10-20T04:06:14.372938+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "toleranceMinutes": 30,
@@ -8,10 +8,10 @@
  "onTime": 0,
  "late": 0,
  "early": 0,
- "pending": 0,
+ "pending": 1,
  "overdue": 0,
- "upcoming": 21,
- "dispatched": 0,
+ "upcoming": 20,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -19,8 +19,9 @@
    "due": "2026-10-20T04:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -39
+   "state": "pending",
+   "minutesFromSlot": -9,
+   "action": "dispatched"
   },
   {
    "key": "news-china",
@@ -29,7 +30,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -99
+   "minutesFromSlot": -69
   },
   {
    "key": "master-trending-0",
@@ -38,7 +39,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -159
+   "minutesFromSlot": -129
   },
   {
    "key": "news-india",
@@ -47,7 +48,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -219
+   "minutesFromSlot": -189
   },
   {
    "key": "master-evergreen-0",
@@ -56,7 +57,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -279
+   "minutesFromSlot": -249
   },
   {
    "key": "master-trending-1",
@@ -65,7 +66,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -339
+   "minutesFromSlot": -309
   },
   {
    "key": "news-russia",
@@ -74,7 +75,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -399
+   "minutesFromSlot": -369
   },
   {
    "key": "master-evergreen-1",
@@ -83,7 +84,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -459
+   "minutesFromSlot": -429
   },
   {
    "key": "news-markets",
@@ -92,7 +93,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -519
+   "minutesFromSlot": -489
   },
   {
    "key": "news-europe",
@@ -101,7 +102,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -549
+   "minutesFromSlot": -519
   },
   {
    "key": "news-economy",
@@ -110,7 +111,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -579
+   "minutesFromSlot": -549
   },
   {
    "key": "master-trending-2",
@@ -119,7 +120,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -639
+   "minutesFromSlot": -609
   },
   {
    "key": "master-evergreen-2",
@@ -128,7 +129,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -699
+   "minutesFromSlot": -669
   },
   {
    "key": "master-trending-3",
@@ -137,7 +138,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -759
+   "minutesFromSlot": -729
   },
   {
    "key": "news-americas",
@@ -146,7 +147,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -819
+   "minutesFromSlot": -789
   },
   {
    "key": "news-companies",
@@ -155,7 +156,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -849
+   "minutesFromSlot": -819
   },
   {
    "key": "news-global",
@@ -164,7 +165,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -879
+   "minutesFromSlot": -849
   },
   {
    "key": "news-banking",
@@ -173,7 +174,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -909
+   "minutesFromSlot": -879
   },
   {
    "key": "master-evergreen-3",
@@ -182,7 +183,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -969
+   "minutesFromSlot": -939
   },
   {
    "key": "master-trending-4",
@@ -191,7 +192,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -1029
+   "minutesFromSlot": -999
   },
   {
    "key": "master-evergreen-4",
@@ -200,7 +201,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -1119
+   "minutesFromSlot": -1089
   }
  ],
  "syntheticViews": 0,
