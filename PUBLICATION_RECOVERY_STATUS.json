@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T02:27:47.708616+05:30",
+  "generatedAt": "2026-10-20T03:04:46.816328+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
@@ -9,7 +9,13 @@
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
-  "actions": [],
+  "actions": [
+    {
+      "type": "preparation_recovery",
+      "key": "master-trending-0",
+      "applied": true
+    }
+  ],
   "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
