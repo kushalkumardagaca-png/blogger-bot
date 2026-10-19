@@ -686,8 +686,8 @@
   },
   "source:2026-10-19:master-evergreen-0": {
     "revision": "1c931f8d757f5f2f",
-    "attempts": 8,
-    "lastAttempt": "2026-10-19T18:01:50.314089+05:30"
+    "attempts": 9,
+    "lastAttempt": "2026-10-19T18:52:06.288880+05:30"
   },
   "social:2026-10-19:news-russia:0": {
     "revision": "1c931f8d757f5f2f",
@@ -713,5 +713,10 @@
     "revision": "1c931f8d757f5f2f",
     "attempts": 1,
     "lastAttempt": "2026-10-19T17:24:34.323614+05:30"
+  },
+  "social:2026-10-19:news-global:1": {
+    "revision": "1c931f8d757f5f2f",
+    "attempts": 1,
+    "lastAttempt": "2026-10-19T18:52:06.288880+05:30"
   }
 }

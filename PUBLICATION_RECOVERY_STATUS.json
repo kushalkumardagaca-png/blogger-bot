@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T18:01:50.314089+05:30",
+  "generatedAt": "2026-10-19T18:52:06.288880+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 15,
-  "confirmedByLivePost": 15,
+  "confirmedPublications": 17,
+  "confirmedByLivePost": 17,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,12 +15,12 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 8,
+      "attempt": 9,
       "applied": true
     },
     {
       "type": "social_replay",
-      "key": "master-trending-2",
+      "key": "news-global",
       "platform": "tumblr",
       "routeIndex": 1,
       "applied": true
@@ -33,6 +33,7 @@
     "social:2026-10-19:news-europe:1",
     "social:2026-10-19:news-economy:0",
     "social:2026-10-19:master-trending-0:0",
+    "social:2026-10-19:master-trending-2:1",
     "social:2026-10-19:master-trending-3:1"
   ],
   "masterRecoveryDeferred": [],
