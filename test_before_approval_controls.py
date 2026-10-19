@@ -125,6 +125,58 @@ class ApprovalTruthTests(unittest.TestCase):
         r=self.report('/')
         self.assertEqual(r['status'],'CHECK_INCOMPLETE')
         self.assertTrue(any(x['check']=='homepage identity and markup' and x['pass'] is None for x in r['checks']))
+    def test_one_transient_404_cannot_be_reported_as_a_blocking_defect(self):
+        base = ('Kushal Daga Kushal Kumar Daga short form legal name '
+                'dailyyield.official@gmail.com kushalkumardaga.ca@gmail.com '
+                'advertising AdSense third-party vendor aboutads.info')
+        feed = json.dumps({'feed': {'entry': [{'title': {'$t': 'Article'},
+                                               'content': {'$t': '<p>Original reporting.</p>'}}]}})
+        robots_reads = []
+
+        def get(path, *a, **kw):
+            if path == '/robots.txt':
+                robots_reads.append(path)
+                if len(robots_reads) == 1:
+                    return 404, 'Not Found'
+                return 200, 'User-agent: *\nDisallow: /search\nAllow: /\nSitemap: https://dailyyield.blogspot.com/sitemap.xml'
+            if path == '/ads.txt':
+                return 200, 'google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0'
+            if path == '/sitemap.xml':
+                return 200, '<url><loc>https://dailyyield.blogspot.com/</loc></url>'
+            if path.startswith('/feeds/'):
+                return 200, feed
+            return 200, '<html><body>' + base + '</body></html>'
+
+        with patch.object(approval, 'get', side_effect=get), patch.object(approval.time, 'sleep'), \
+             patch.object(approval.reader_prose, 'problems', return_value=[]):
+            report = approval.check_site()
+        row = next(x for x in report['checks'] if x['check'] == 'robots.txt readable')
+        self.assertIs(row['pass'], True)
+        self.assertIn('the first answer was a 404 that the re-probe disproved', row['detail'])
+        self.assertEqual(len(robots_reads), 2)
+        self.assertEqual(report['status'], 'PASS')
+        self.assertFalse(report['blockingIssues'])
+
+    def test_a_file_that_stays_missing_still_fails(self):
+        def get(path, *a, **kw):
+            if path == "/ads.txt":
+                return 404, "Not Found"
+            if path == "/robots.txt":
+                return 200, "User-agent: *\nAllow: /\nSitemap: https://dailyyield.blogspot.com/sitemap.xml"
+            if path == "/sitemap.xml":
+                return 200, "<url><loc>https://dailyyield.blogspot.com/</loc></url>"
+            if path.startswith("/feeds/"):
+                return 200, json.dumps({"feed": {"entry": []}})
+            return 200, "<html><body>ok</body></html>"
+
+        with patch.object(approval, "get", side_effect=get), patch.object(approval.time, "sleep"), \
+             patch.object(approval.reader_prose, "problems", return_value=[]):
+            report = approval.check_site()
+        ads = next(row for row in report["checks"] if row["check"] == "ads.txt matches the recorded publisher")
+        self.assertIs(ads["pass"], False)
+        self.assertIn("3 reads", ads["detail"])
+        self.assertEqual(report["status"], "FAIL")
+
     def test_robots_default_indexing_is_not_a_failure(self):
         r=self.report();self.assertEqual(r['status'],'PASS')
     def test_old_forced_resubmit_and_name_match_instructions_are_gone(self):

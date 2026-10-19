@@ -1,6 +1,6 @@
 {
- "checkedAt": "2026-10-19T03:13:50.459608+00:00",
- "status": "FAIL",
+ "checkedAt": "2026-10-19T07:36:14.810076+00:00",
+ "status": "PASS",
  "publicPagesRead": 10,
  "diagnosticReadsOnly": true,
  "pageScriptsExecuted": false,
@@ -16,9 +16,9 @@
   },
   {
    "check": "policy page /contact",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/contact-us_01883938366.html → HTTP 200",
    "blocking": true
   },
   {
@@ -30,9 +30,9 @@
   },
   {
    "check": "policy page /disclaimer",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/disclaimer.html → HTTP 200",
    "blocking": true
   },
   {
@@ -99,10 +99,59 @@
    "blocking": true
   },
   {
-   "check": "contact: identity content available",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Identity could not be checked because the page read failed",
+   "check": "contact: public author name",
+   "pass": true,
+   "state": "PASS",
+   "detail": "Kushal Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's legal name",
+   "pass": true,
+   "state": "PASS",
+   "detail": "Kushal Kumar Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: name relationship explained",
+   "pass": true,
+   "state": "PASS",
+   "detail": "the site says the public author name is the short form of the legal name used on records",
+   "blocking": true
+  },
+  {
+   "check": "contact: retired initials byline gone",
+   "pass": true,
+   "state": "PASS",
+   "detail": "the retired initials byline is no longer published",
+   "blocking": true
+  },
+  {
+   "check": "contact: publication inbox",
+   "pass": true,
+   "state": "PASS",
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's own address",
+   "pass": true,
+   "state": "PASS",
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: no contradictory reply time",
+   "pass": true,
+   "state": "PASS",
+   "detail": "one reply-time promise only",
+   "blocking": true
+  },
+  {
+   "check": "contact: no inaccurate name claim",
+   "pass": true,
+   "state": "PASS",
+   "detail": "no unrelated surname is published as an alias",
    "blocking": true
   },
   {
@@ -128,22 +177,22 @@
   },
   {
    "check": "robots.txt readable",
-   "pass": false,
-   "state": "FAIL",
-   "detail": "HTTP 404",
+   "pass": true,
+   "state": "PASS",
+   "detail": "HTTP 200",
    "blocking": true
   },
   {
    "check": "AdSense crawler access allowed",
-   "pass": null,
-   "state": "UNKNOWN",
+   "pass": true,
+   "state": "PASS",
    "detail": "Evaluated effective robots rules; an explicit agent name is not mandatory",
    "blocking": true
   },
   {
    "check": "sitemap declared",
-   "pass": null,
-   "state": "UNKNOWN",
+   "pass": true,
+   "state": "PASS",
    "detail": "sitemap line checked in existing robots.txt",
    "blocking": true
   },
@@ -151,21 +200,35 @@
    "check": "sitemap.xml serves URLs",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200, 522 URLs listed",
+   "detail": "HTTP 200, 527 URLs listed",
    "blocking": true
   },
   {
-   "check": "homepage could be read",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "the homepage did not answer (0); content checks are unknown, not passed",
+   "check": "no raw code shown to readers",
+   "pass": true,
+   "state": "PASS",
+   "detail": "no CSS text leaks outside style blocks on the homepage",
    "blocking": true
   },
   {
-   "check": "homepage identity and markup",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Not checked because homepage fetch was unavailable",
+   "check": "no inaccurate name claim on the homepage",
+   "pass": true,
+   "state": "PASS",
+   "detail": "the homepage does not present an unrelated surname as an alias of the author",
+   "blocking": true
+  },
+  {
+   "check": "no retired byline on the homepage",
+   "pass": true,
+   "state": "PASS",
+   "detail": "the homepage carries the public author name, not the retired initials form",
+   "blocking": true
+  },
+  {
+   "check": "robots meta does not forbid indexing",
+   "pass": true,
+   "state": "PASS",
+   "detail": "No noindex directive found; an explicit index,follow tag is not required",
    "blocking": true
   },
   {
@@ -183,66 +246,8 @@
    "blocking": false
   }
  ],
- "blockingIssues": [
-  {
-   "check": "robots.txt readable",
-   "pass": false,
-   "state": "FAIL",
-   "detail": "HTTP 404",
-   "blocking": true
-  }
- ],
- "unverifiedChecks": [
-  {
-   "check": "policy page /contact",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
-   "blocking": true
-  },
-  {
-   "check": "policy page /disclaimer",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
-   "blocking": true
-  },
-  {
-   "check": "contact: identity content available",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Identity could not be checked because the page read failed",
-   "blocking": true
-  },
-  {
-   "check": "AdSense crawler access allowed",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Evaluated effective robots rules; an explicit agent name is not mandatory",
-   "blocking": true
-  },
-  {
-   "check": "sitemap declared",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "sitemap line checked in existing robots.txt",
-   "blocking": true
-  },
-  {
-   "check": "homepage could be read",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "the homepage did not answer (0); content checks are unknown, not passed",
-   "blocking": true
-  },
-  {
-   "check": "homepage identity and markup",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Not checked because homepage fetch was unavailable",
-   "blocking": true
-  }
- ],
+ "blockingIssues": [],
+ "unverifiedChecks": [],
  "manualStepsRequired": [
   "Check the existing AdSense site status. If Getting ready, do not remove and resubmit it.",
   "Complete only the required account tasks actually shown. Legal/payment records must match official records, not necessarily the public author byline.",

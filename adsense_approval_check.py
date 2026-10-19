@@ -70,6 +70,25 @@ def get(path: str, attempts: int = 3) -> tuple[int, str]:
     return 0, last
 
 
+def get_file(path: str, probes: int = 3, pause: float = 6.0) -> tuple[int, str, int]:
+    """Read a hosted site file, re-probing a 404 before it is believed.
+
+    Blogger can answer 404 for /robots.txt or /ads.txt for a few seconds while an
+    edge cache is cold or a page address is re-indexed. On 19 October one such blip
+    was written into the readiness evidence as a blocking AdSense failure, which
+    would have sent the owner looking for a defect that did not exist: three reads a
+    few seconds apart answered 200 with the expected 197 bytes. A genuinely missing
+    file still fails, because every probe answers 404.
+    """
+    status, body = get(path)
+    used = 1
+    while status == 404 and used < probes:
+        used += 1
+        time.sleep(pause)
+        status, body = get(path)
+    return status, body, used
+
+
 def visible(html_text: str) -> str:
     text = re.sub(r"<script.*?</script>", " ", html_text, flags=re.S | re.I)
     text = re.sub(r"<style.*?</style>", " ", text, flags=re.S | re.I)
@@ -89,10 +108,12 @@ def check_site() -> dict:
 
     pages: dict[str, str] = {}
     for name, path in PAGES.items():
-        status, body = get(path)
+        status, body, page_probes = get_file(path, probes=2, pause=4.0)
         time.sleep(1.2)   # polite spacing between page reads
         pages[name] = visible(body) if status == 200 else ""
-        add(f"policy page /{name}", observed(status), f"{path} → HTTP {status}" + ("; read unavailable, not proof of a missing page" if observed(status) is None else ""))
+        probe_note = f"; {page_probes} reads" if page_probes > 1 else ""
+        add(f"policy page /{name}", observed(status), f"{path} → HTTP {status}" + probe_note
+            + ("; read unavailable, not proof of a missing page" if observed(status) is None else ""))
 
     for name in ("about", "contact"):
         text = pages.get(name, "")
@@ -123,12 +144,13 @@ def check_site() -> dict:
         ("third-party vendor" in privacy.casefold() and "aboutads.info" in privacy.casefold()) if privacy else None,
         "third-party vendor cookie use and an opt-out route are named on the privacy page")
 
-    status, ads = get("/ads.txt")
+    status, ads, ads_probes = get_file("/ads.txt")
     add("ads.txt matches the recorded publisher", ("google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0" in ads) if status == 200 else observed(status),
-        f"HTTP {status}: {ads.strip()[:80] if status == 200 else 'not verified'}")
+        f"HTTP {status}{' after ' + str(ads_probes) + ' reads' if ads_probes > 1 else ''}: {ads.strip()[:80] if status == 200 else 'not verified'}")
 
-    status, robots = get("/robots.txt")
-    add("robots.txt readable", observed(status), f"HTTP {status}")
+    status, robots, robots_probes = get_file("/robots.txt")
+    add("robots.txt readable", observed(status),
+        f"HTTP {status}" + (f" after {robots_probes} reads; the first answer was a 404 that the re-probe disproved" if robots_probes > 1 else ""))
     parser = urllib.robotparser.RobotFileParser()
     if status == 200:
         parser.parse(robots.splitlines())
@@ -137,7 +159,7 @@ def check_site() -> dict:
         "Evaluated effective robots rules; an explicit agent name is not mandatory")
     add("sitemap declared", "sitemap:" in robots.casefold() if status == 200 else None, "sitemap line checked in existing robots.txt")
 
-    status, sitemap = get("/sitemap.xml")
+    status, sitemap, _sitemap_probes = get_file("/sitemap.xml")
     add("sitemap.xml serves URLs", ("<loc>" in sitemap) if status == 200 else observed(status),
         f"HTTP {status}, {sitemap.count('<loc>') if status == 200 else 0} URLs listed")
 
