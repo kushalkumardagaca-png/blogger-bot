@@ -1,12 +1,11 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
+  "status": "ALREADY_PUBLISHED",
+  "publication_enabled": true,
   "date": "2026-10-19",
   "kind": "evergreen",
   "slot": 4,
   "topic_id": "d7eb056559c44e94",
-  "replaced_topic_id": null,
   "title": "Asset allocation: Gold leads as equity returns",
-  "package": "master_packages/dynamic/2026-10-19-evergreen-d7eb056559c44e94.json",
-  "html": "scheduled_ready/2026-10-19-evergreen-4-asset-allocation-gold-leads-as-equity-returns.html"
+  "url": "https://dailyyield.blogspot.com/2026/10/asset-allocation-gold-leads-as-equity.html",
+  "published_at": "2026-10-19T09:45:12-07:00"
 }
