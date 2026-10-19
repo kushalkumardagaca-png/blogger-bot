@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-19T10:57:35.126499+05:30",
+  "generatedAt": "2026-10-19T11:37:24.654298+05:30",
   "dateIST": "2026-10-19",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 6,
-  "confirmedByLivePost": 6,
+  "confirmedPublications": 7,
+  "confirmedByLivePost": 7,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,19 +15,19 @@
     {
       "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 4,
+      "attempt": 5,
       "applied": true
     },
     {
       "type": "social_replay",
-      "key": "news-asia-pacific",
+      "key": "news-china",
       "platform": "tumblr",
       "routeIndex": 1,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-19:news-china:1",
+    "social:2026-10-19:news-asia-pacific:1",
     "social:2026-10-19:news-russia:0",
     "social:2026-10-19:master-trending-0:0"
   ],
