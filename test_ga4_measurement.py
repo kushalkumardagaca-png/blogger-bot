@@ -61,6 +61,16 @@ class Reading(Harness):
         self.assertIn("tag", report["remedy"])
 
 
+    def test_an_unreachable_homepage_does_not_claim_the_tag_is_missing(self):
+        # a data-centre request can be refused while the owner's browser loads the page fine,
+        # and "we could not look" must never be reported as "the tag is not there"
+        report = self.run_with({"rows": [], "siteTag": {"checked": True, "reachable": False,
+                                                        "measurementIds": [], "installedHere": None,
+                                                        "error": "HTTP Error 403: Forbidden"}})
+        self.assertEqual(report["status"], "TAG_UNKNOWN")
+        self.assertIsNone(report["totals"]["viewsPerDay"])
+        self.assertIn("not checked", ga4.MD.read_text(encoding="utf-8"))
+
 class Restraint(unittest.TestCase):
     """Nothing in this file may write to the blog, and no status may fake a number."""
 

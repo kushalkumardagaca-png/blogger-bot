@@ -45,6 +45,9 @@ REMEDIES = {
                           "Analytics -> Admin -> Property settings",
     "TAG_NOT_OBSERVED": "the analytics tag is not on the live pages; it has to be added before any "
                         "count can exist",
+    "TAG_UNKNOWN": "the public homepage could not be fetched from this network (a data-centre "
+                   "request can be refused while your own browser loads the page), so the tag is "
+                   "neither confirmed nor denied - the nightly job asks again",
     "NO_DATA_YET": "the property is reachable but holds no rows: check that the tag's measurement id "
                    "matches the property and that data retention includes today",
 }
@@ -66,9 +69,10 @@ def http(url: str, token: str = "", body: dict | None = None, method: str = "") 
 
 def site_tag() -> dict:
     """Confirm from the public homepage that the tag is installed. Needs no credential."""
-    row = {"checked": True, "reachable": False, "measurementIds": [], "installedHere": False}
+    # Three answers, not two: an unfetchable page has not shown that the tag is missing.
+    row = {"checked": True, "reachable": False, "measurementIds": [], "installedHere": None}
     try:
-        request = urllib.request.Request(HOME, headers={"User-Agent": "Daily Yield self-check"})
+        request = urllib.request.Request(HOME, headers={"User-Agent": "Mozilla/5.0 (Daily Yield self-check)"})
         with urllib.request.urlopen(request, timeout=30) as response:
             html = response.read().decode("utf-8", "ignore")
         row["reachable"] = True
@@ -141,7 +145,14 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
     views = sum(row.get("views") or 0 for row in rows)
     users = sum(row.get("activeUsers") or 0 for row in rows)
     sessions = sum(row.get("sessions") or 0 for row in rows)
-    status = "MEASURED" if rows and views else ("NO_DATA_YET" if rows or tag.get("installedHere") else "TAG_NOT_OBSERVED")
+    if rows and views:
+        status = "MEASURED"
+    elif rows or tag.get("installedHere") is True:
+        status = "NO_DATA_YET"
+    elif tag.get("installedHere") is None:
+        status = "TAG_UNKNOWN"
+    else:
+        status = "TAG_NOT_OBSERVED"
     # a window with no rows is "nothing read yet", never a measured audience of zero: only a real
     # report from Google is allowed to put a number in this file
     measured = status == "MEASURED"
@@ -204,9 +215,12 @@ def main() -> int:
     totals = report.get("totals") or {}
     lines = [f"# GA4 measurement · {report['measuredAt']}", "",
              f"Status: **{report['status']}**", "",
-             f"- analytics tag observed on the live site: "
-             f"**{'yes' if (report.get('siteTag') or {}).get('installedHere') else 'no'}** "
-             f"({', '.join((report.get('siteTag') or {}).get('measurementIds') or []) or 'no G- id found'})",
+             "- analytics tag observed on the live site: "
+             + {True: "**yes**", False: "**no**", None: "**not checked**"}
+               .get((report.get("siteTag") or {}).get("installedHere"), "**not checked**")
+             + " (" + (", ".join((report.get("siteTag") or {}).get("measurementIds") or [])
+                      or (report.get("siteTag") or {}).get("error")
+                      or "no G- id on the page that came back") + ")",
              f"- property: **{report.get('propertyId') or 'not resolved'}** "
              f"({report.get('propertyIdSource') or 'unknown'})"]
     if report["ok"]:
