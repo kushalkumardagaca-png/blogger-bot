@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T09:15:44.527808+05:30",
+ "generatedAt": "2026-10-20T09:41:33.797077+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 6,
  "expectedPosts": 12,
  "articlesWithBothPosts": 3,
- "postsMissing": 4,
- "dispatched": 2,
+ "postsMissing": 3,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -92,24 +92,23 @@
    "key": "master-trending-1",
    "title": "How often is Daily Yield published?",
    "url": "https://dailyyield.blogspot.com/2026/10/how-often-is-daily-yield-published.html",
-   "posts": 0,
+   "posts": 1,
    "byPlatform": {
     "facebook": 0,
     "bluesky": 0,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
+   "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
     "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T09:15:41.763611+05:30",
+ "liveVerificationSourceAt": "2026-10-20T09:41:30.515567+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 3,
  "syntheticViews": 0,
