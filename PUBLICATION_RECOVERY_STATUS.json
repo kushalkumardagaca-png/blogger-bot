@@ -1,36 +1,16 @@
 {
-  "generatedAt": "2026-10-20T23:36:53.164840+05:30",
-  "dateIST": "2026-10-20",
-  "status": "DEGRADED",
+  "generatedAt": "2026-10-21T00:14:32.018260+05:30",
+  "dateIST": "2026-10-21",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 20,
-  "confirmedByLivePost": 20,
+  "confirmedPublications": 0,
+  "confirmedByLivePost": 0,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
-  "overdueMissing": [
-    "master-evergreen-4"
-  ],
-  "actions": [
-    {
-      "type": "source_recovery",
-      "key": "master-evergreen-4",
-      "attempt": 2,
-      "applied": true
-    }
-  ],
-  "retryBlocked": [
-    "social:2026-10-20:news-asia-pacific:0",
-    "social:2026-10-20:news-china:0",
-    "social:2026-10-20:news-markets:0",
-    "social:2026-10-20:news-europe:0",
-    "social:2026-10-20:news-americas:1",
-    "social:2026-10-20:news-companies:0",
-    "social:2026-10-20:master-trending-1:0",
-    "social:2026-10-20:master-trending-2:0",
-    "social:2026-10-20:master-trending-3:0",
-    "social:2026-10-20:master-trending-4:0"
-  ],
+  "overdueMissing": [],
+  "actions": [],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
