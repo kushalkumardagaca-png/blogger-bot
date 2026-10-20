@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-20T21:57:50.073522+05:30",
+ "generatedAt": "2026-10-20T22:34:15.631917+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 19,
- "expectedPosts": 38,
- "articlesWithBothPosts": 9,
+ "articles": 20,
+ "expectedPosts": 40,
+ "articlesWithBothPosts": 10,
  "postsMissing": 10,
  "dispatched": 1,
  "rows": [
@@ -321,13 +321,27 @@
    "actions": [
     "dispatched"
    ]
+  },
+  {
+   "key": "master-evergreen-3",
+   "title": "4 Different Types of Life Insurance & How",
+   "url": "https://dailyyield.blogspot.com/2026/10/4-different-types-of-life-insurance-how.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T21:57:35.286635+05:30",
+ "liveVerificationSourceAt": "2026-10-20T22:33:59.824296+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 9,
+ "articlesWithExactlyTwoPosts": 10,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
