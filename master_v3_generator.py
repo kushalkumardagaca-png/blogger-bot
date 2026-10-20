@@ -225,12 +225,24 @@ def deterministic_section(section_heading,sources):
  paragraphs=cleaned
  if len(paragraphs)>6:
   paragraphs=[' '.join(paragraphs[i:i+2]) for i in range(0,len(paragraphs),2)]
- while words(' '.join(paragraphs))>480:
-  index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]));parts=paragraphs[index].split()
-  if len(parts)<=35:break
-  paragraphs[index]=' '.join(parts[:-1]).rstrip(' ,;:')+'.'
+ # The section has to land in the 400-490 word window the validator enforces. The loop below used
+ # to give up as soon as the longest paragraph held 35 words or fewer, so a 504-word section was
+ # handed on and rejected - that is what cost the evergreen slot on 20 October 2026 after the title
+ # rule had already been repaired. Reaching the window is the requirement, so sentences are removed
+ # from the end of the longest paragraph until the count fits; a paragraph is never half-cut, and a
+ # whole paragraph is only dropped while at least four remain, because the contract wants four.
+ # Every paragraph must carry a citation, and the citation is part of the text the validator counts,
+ # so it is attached first and only then is the length trimmed. Adding it afterwards is how a
+ # section that looked 480 words long arrived at 504 and was rejected outright.
  primary=sources[0][0];primary_name=citation_label(sources[0][1])
  paragraphs=[p if any(f'[[S{i}|' in p for i,_ in sources) else p+f' [[S{primary}|{primary_name}]]' for p in paragraphs]
+ while words(' '.join(paragraphs))>470:
+  index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]))
+  sentences=[x for x in re.split(r'(?<=[.!?])\s+',paragraphs[index]) if x.strip()]
+  if len(sentences)>1:paragraphs[index]=' '.join(sentences[:-1]).replace('  ',' ').strip()
+  elif len(paragraphs)>4:paragraphs.pop(index)
+  else:break
+  paragraphs=[x for x in paragraphs if x and x.strip()]
  ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)
  return paragraphs

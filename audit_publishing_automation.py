@@ -440,6 +440,11 @@ check('A social network that cannot publish says so in the repository, not only 
 check('A quoted source passage cannot smuggle a rejected claim into a Master article',
       'def quoted_window' in v3_generator
       and "' '.join(tokens[start:start+" not in v3_generator)
+check('A deterministic section is measured with its citations attached, not before',
+      # the 400-490 word contract is enforced on the final text; measuring first and appending
+      # '[[S1|provider]]' afterwards produced a 504-word section and a lost slot on 20 Oct 2026
+      v3_generator.index("primary=sources[0][0];primary_name=citation_label(sources[0][1])")
+      < v3_generator.index("while words(' '.join(paragraphs))>470:"))
 check('Master headlines are clipped on a word boundary, never inside a word',
       'def head_clip' in v3_generator and '[:46]' not in v3_generator
       and 'for token in value.split():' in v3_generator

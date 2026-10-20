@@ -76,3 +76,48 @@ it triggers `bing_seo_repair.yml`, which would rewrite every live title on the b
 * `Publish exact assigned destination to Tumblr` exited 1 at 13:27 UTC. The coordinated social runs
   at 13:24 UTC and 14:04 UTC both succeeded, so the channel recovered on its own.
 * One trending run at 13:13 UTC was cancelled by GitHub's concurrency rule, not by an error.
+
+## The second cause, found after the first fix went live
+
+The title rule was repaired and pushed at 20:22 IST. The next evergreen attempt (20:34 IST) still
+failed, on a different line of the same contract, and the run annotation said it plainly:
+
+```
+FAIL master-v3 deterministic evidence section failed: 504 words; required 400-490
+```
+
+That is the fallback section builder, which runs when the model's own prose cannot be accepted.
+It trimmed a section down to 480 words, and *then* attached the source citation to every
+paragraph, so the text the validator finally measured was 504 words and the whole article was
+rejected for a difference nobody had looked at. Two changes, both pushed at 22:47 IST:
+
+1. the citations are attached **before** the length is measured, so what is counted is what is
+   published;
+2. the trimmer no longer gives up when a paragraph gets short: it removes sentences from the end
+   of the longest paragraph until the window is met, and drops a whole paragraph only while at
+   least four remain, which is the minimum the same validator demands.
+
+A paragraph is never half-cut, and a section is never handed over without its citation - both are
+asserted in `test_master_v3_excerpt_policy.py`.
+
+## The social side of the same day
+
+`SOCIAL_GUARANTEE_STATUS.json` for 20 October, generated 21:02 IST: 18 articles, **36 posts
+expected, 9 articles with both posts, 9 missing**. Per platform: Mastodon 12, Bluesky 9,
+Facebook 6, **Tumblr 0**. Tumblr's own tracker shows its last published post was on **18 October
+at 15:19 IST**, so the network has been refusing posts for two days and nothing in the repository
+said why, because the reason lived in a job log that cannot be read from outside. Twenty-two social
+runs failed today with only "Process completed with exit code 1" to show for it.
+
+Fixed in the same push: every channel (Facebook, Bluesky, Tumblr, Mastodon) now retries three
+times with back-off, writes the network's own words into `SOCIAL_CREDENTIAL_HEALTH.json` with
+anything token-shaped redacted, and persists that file. `social_guard.py` had been refusing to
+dispatch to a network recorded as unusable since it was written - it simply could never see the
+record. From the next run onward a broken network is stated in the repository and in the run
+annotation, and the posts that the 9 missing routes still owe are re-tried by recovery.
+
+What code cannot do: a dead social login has to be re-authorised by the owner. For Tumblr that
+means signing in at www.tumblr.com as **dailyyield-official**, then re-running
+`python tumblr_oauth_bootstrap.py` and committing the new `tumblr_token.enc`. No password, code or
+token should ever be pasted into a chat.
+

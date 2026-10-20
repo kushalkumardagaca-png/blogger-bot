@@ -8,7 +8,8 @@ publishing the unusable one, and it never rewrites or pads the source.
 """
 import unittest
 
-from master_v3_generator import POLICY_TRIP, head_clip, quoted_window
+from master_v3_generator import (POLICY_TRIP, deterministic_section, head_clip, quoted_window,
+                     validate_section)
 
 CLEAN = ("The filing lists fee schedules and the trust reported thirty one million dollars in "
          "assets under management this quarter").split()
@@ -55,6 +56,42 @@ class TitleCeiling(unittest.TestCase):
             with self.subTest(source=source[:24]):
                 self.assertTrue(12 <= len(one) <= 46, one)
                 self.assertTrue(source.startswith(one) or source.replace("’", "'").startswith(one))
+
+
+class DeterministicSectionContract(unittest.TestCase):
+    """The fallback section builder must hand over text the validator accepts.
+
+    On 20 October 2026 an evergreen slot died on "504 words; required 400-490" because the
+    trimmer stopped early and because every citation was attached after the length had already
+    been measured, so a section that looked acceptable became a rejected package on its last step.
+    """
+
+    @staticmethod
+    def sources():
+        def record(count, lead):
+            body = " ".join(
+                f"{lead} sentence {i} keeps the record long enough to matter for a reader "
+                "comparing banks over the quarter" for i in range(count))
+            return {"text": body, "title": "Record on banking oversight", "name": "Federal Register"}
+        return [(1, record(12, "The OCC")), (2, record(12, "The SEC"))]
+
+    def test_a_long_source_still_yields_a_valid_section(self):
+        sources = self.sources()
+        evidence = {i: f"{r['text']} {r['title']}" for i, r in sources}
+        for trial in range(6):
+            paragraphs = deterministic_section(f"Evidence section {trial}", sources)
+            ok, error = validate_section(paragraphs, evidence)
+            with self.subTest(trial=trial):
+                self.assertTrue(ok, f"the validator would reject the section: {error}")
+
+    def test_trimming_never_strands_a_paragraph_without_its_citation(self):
+        sources = self.sources()
+        for trial in range(3):
+            paragraphs = deterministic_section(f"Evidence section {trial}", sources)
+            with self.subTest(trial=trial):
+                self.assertTrue(paragraphs)
+                self.assertTrue(all("[[S" in paragraph for paragraph in paragraphs),
+                                "every paragraph must still cite a supplied source")
 
 
 if __name__ == "__main__":
