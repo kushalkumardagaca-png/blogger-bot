@@ -145,6 +145,23 @@ def choose_photos(briefs,slug,article_key):
   else:nh=int(w/target);image=image.crop((0,(h-nh)//2,w,(h+nh)//2))
   image=image.resize((1600,900),Image.Resampling.LANCZOS);path=folder/f'photo-{placement}.jpg';image.save(path,'JPEG',quality=90,optimize=True)
   url=f'https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/{slug}/photo-{placement}.jpg';credit=f"Photo: {c['creator']} / {c['license']}"
-  selected.append({'url':url,'alt':source_alt(c),'source_title':c.get('title',''),'subjectDescriptionBasis':'Primary source file title, not the requested search brief','caption':credit,'width':1600,'height':900,'source_page':c['source_page'],'license':c['license'],'license_url':c['license_url'],'creator':c['creator']})
+  # The validator rejects a photo whose rights ledger is incomplete, and a borrowed
+  # pool entry spells its fields the way the pool stores them. Normalise here, in the
+  # one place every path passes, so a picture either carries complete evidence or the
+  # placement is retried: an empty licence URL is derived from the licence name (a
+  # factual mapping), never invented, and a missing creator or source page is refused.
+  lic=clean(c.get('license') or c.get('licence'));licurl=clean(c.get('license_url') or c.get('licence_url'))
+  if lic and not licurl:
+   licurl={'public domain':'https://creativecommons.org/publicdomain/mark/1.0/','cc0':'https://creativecommons.org/publicdomain/zero/1.0/',
+           'pdm':'https://creativecommons.org/publicdomain/mark/1.0/','cc by 4.0':'https://creativecommons.org/licenses/by/4.0/',
+           'cc by 3.0':'https://creativecommons.org/licenses/by/3.0/','cc by 2.5':'https://creativecommons.org/licenses/by/2.5/',
+           'cc by 2.0':'https://creativecommons.org/licenses/by/2.0/','by 4.0':'https://creativecommons.org/licenses/by/4.0/',
+           'by 3.0':'https://creativecommons.org/licenses/by/3.0/','by 2.5':'https://creativecommons.org/licenses/by/2.5/',
+           'by 2.0':'https://creativecommons.org/licenses/by/2.0/'}.get(lic.casefold().strip('.'),'')
+  page=clean(c.get('source_page') or c.get('descriptionurl'));creator=clean(c.get('creator') or c.get('artist'))
+  if not lic or not licurl or not page or not creator:
+   raise RuntimeError(f'photo {placement} has no complete rights ledger (licence={lic or "none"}, page={bool(page)}, creator={bool(creator)}); it is not published with a partial credit')
+  c.update({'license':lic,'license_url':licurl,'source_page':page,'creator':creator})
+  selected.append({'url':url,'alt':source_alt(c),'source_title':c.get('title',''),'subjectDescriptionBasis':'Primary source file title, not the requested search brief','caption':f"Photo: {creator} / {lic}",'width':1600,'height':900,'source_page':page,'license':lic,'license_url':licurl,'creator':creator})
   item={**c,'url':url,'sha256':sha,'phash':ph,'article_key':str(article_key),'placement':placement,'brief':brief,'selection_score':round(score,2),'selected_at':datetime.now(timezone.utc).isoformat()};registry['items'].append(item);used_ids.add(c['source_id']);used_urls.add(c['original_url']);used_hashes.add(sha);used_phashes.append(ph)
  save_registry(registry);return selected

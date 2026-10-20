@@ -138,5 +138,60 @@ class PublishStepCarriesTheSameInputs(unittest.TestCase):
                 self.assertIn(name, block, f"{workflow}: the publish step is missing {name}")
 
 
+class RightsLedgerIsNeverPartial(unittest.TestCase):
+    """A borrowed photograph must arrive with complete, non-invented credit."""
+
+    def _select(self, entry):
+        import photo_selector
+        images = []
+        import io as _io, random
+        from PIL import Image as _Image
+        for index in range(3):
+            generator = random.Random(7000 + index)
+            image = _Image.new("RGB", (2400, 1350)); pixels = image.load()
+            for by in range(45):
+                for bx in range(80):
+                    colour = (generator.randrange(2) * 255,) * 3
+                    for dy in range(30):
+                        for dx in range(30):
+                            pixels[bx * 30 + dx, by * 30 + dy] = colour
+            buffer = _io.BytesIO(); image.save(buffer, "JPEG", quality=90); images.append(buffer.getvalue())
+        taken = []
+
+        def fake_get(url, headers=None, timeout=None):
+            response = mock.Mock(); response.raise_for_status = lambda: None
+            response.content = images[min(len(taken), 2)]; taken.append(url); return response
+
+        slug = "test-rights-ledger"
+        folder = photo_selector.ROOT / "assets" / "master" / slug
+        with mock.patch.object(photo_selector, "load_registry",
+                               return_value={"version": 1, "baseline_complete": True, "items": []}), \
+             mock.patch.object(photo_selector, "save_registry", lambda registry: None), \
+             mock.patch.object(photo_selector, "commons_candidates", lambda brief: []), \
+             mock.patch.object(photo_selector, "requests") as requests, \
+             mock.patch.object(photo_library, "reserve_master_entry", return_value=None), \
+             mock.patch.object(photo_library, "reserve_unused_pool_entry",
+                               side_effect=lambda brief, avoid=None: dict(entry)):
+            requests.get = fake_get
+            try:
+                return photo_selector.choose_photos(["Vendor counting cash at a market stall"] * 3, slug, "k")
+            finally:
+                shutil.rmtree(folder, ignore_errors=True)
+
+    def test_a_missing_licence_url_is_derived_from_the_licence_name(self):
+        entry = _entry("commons:derivable", "Vendor counting cash at a market stall")
+        entry["licence_url"] = ""
+        selected = self._select(entry)
+        self.assertTrue(all(row["license_url"].startswith("https://creativecommons.org") for row in selected))
+        self.assertTrue(all(row["creator"] and row["source_page"] for row in selected))
+
+    def test_an_unlicensed_picture_is_refused_rather_than_credited_vaguely(self):
+        entry = _entry("commons:unlicensed", "Vendor counting cash at a market stall")
+        entry["licence"] = ""; entry["licence_url"] = ""
+        with self.assertRaises(RuntimeError) as caught:
+            self._select(entry)
+        self.assertIn("rights ledger", str(caught.exception))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
