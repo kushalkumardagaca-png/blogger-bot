@@ -1,16 +1,15 @@
 {
-  "generatedAt": "2026-10-20T21:07:18.566801+05:30",
+  "generatedAt": "2026-10-20T21:48:18.563323+05:30",
   "dateIST": "2026-10-20",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 18,
-  "confirmedByLivePost": 18,
+  "confirmedPublications": 19,
+  "confirmedByLivePost": 19,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "master-evergreen-3",
-    "master-trending-4"
+    "master-evergreen-3"
   ],
   "actions": [
     {
@@ -81,12 +80,17 @@
       "platform": "tumblr",
       "routeIndex": 0,
       "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-4",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
     }
   ],
   "retryBlocked": [],
-  "masterRecoveryDeferred": [
-    "master-trending-4"
-  ],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
