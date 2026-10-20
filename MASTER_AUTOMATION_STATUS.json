@@ -1,14 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "1e43c6741d23060b",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-20",
   "kind": "trending",
   "slot": 4,
-  "slot_key": "2026-10-20:trending:4",
-  "date": "2026-10-20",
-  "category": "Trend · Viral Money Questions",
-  "evergreen_category": "Money Hacks & Financial Habits",
+  "topic_id": "1e43c6741d23060b",
+  "replaced_topic_id": null,
   "title": "Cost of living protests hit Belgium, Italy,",
-  "url": "https://dailyyield.blogspot.com/2026/10/cost-of-living-protests-hit-belgium.html",
-  "published_at": "2026-10-20T08:47:49-07:00"
+  "package": "master_packages/dynamic/2026-10-20-trending-1e43c6741d23060b.json",
+  "html": "scheduled_ready/2026-10-20-trending-4-cost-of-living-protests-hit-belgium-italy.html"
 }
