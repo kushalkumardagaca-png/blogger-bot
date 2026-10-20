@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T14:40:57.373222+05:30",
+  "generatedAt": "2026-10-20T15:18:37.325087+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
@@ -19,13 +19,6 @@
       "type": "preparation_recovery",
       "key": "master-trending-3",
       "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-2",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
     }
   ],
   "retryBlocked": [
@@ -33,7 +26,8 @@
     "social:2026-10-20:news-china:0",
     "social:2026-10-20:news-markets:0",
     "social:2026-10-20:news-europe:0",
-    "social:2026-10-20:master-trending-1:0"
+    "social:2026-10-20:master-trending-1:0",
+    "social:2026-10-20:master-trending-2:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
