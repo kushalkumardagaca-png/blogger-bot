@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T21:02:02.808502+05:30",
+ "generatedAt": "2026-10-20T21:23:40.868201+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 18,
- "expectedPosts": 36,
+ "articles": 19,
+ "expectedPosts": 38,
  "articlesWithBothPosts": 9,
- "postsMissing": 9,
- "dispatched": 0,
+ "postsMissing": 10,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-companies",
@@ -304,11 +304,28 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-4",
+   "title": "Cost of living protests hit Belgium, Italy,",
+   "url": "https://dailyyield.blogspot.com/2026/10/cost-of-living-protests-hit-belgium.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T21:01:49.572669+05:30",
+ "liveVerificationSourceAt": "2026-10-20T21:23:15.629438+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 9,
  "syntheticViews": 0,
