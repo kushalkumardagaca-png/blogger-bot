@@ -425,6 +425,14 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
+check('Master headlines are clipped on a word boundary, never inside a word',
+      'def head_clip' in v3_generator and '[:46]' not in v3_generator)
+check('Headline repair reads only the article\'s own words and writes only on an explicit apply',
+      'def heading_candidates' in (ROOT/'headline_repair.py').read_text()
+      and 'AUDIT_ONLY' in (ROOT/'headline_repair.py').read_text()
+      and '--apply' in (ROOT/'headline_repair.py').read_text()
+      and 'heldBackCollisions' in (ROOT/'headline_repair.py').read_text()
+      and "default: 'audit'" in (ROOT/'.github/workflows/headline_repair.yml').read_text())
 check('The duplicate pile is audited daily and only deleted on an explicit apply',
       '--apply' in (ROOT/'blogger_duplicate_purge.py').read_text()
       and 'AUDIT_ONLY' in (ROOT/'blogger_duplicate_purge.py').read_text()

@@ -405,10 +405,21 @@ def photo_set(title,category,slug,key):
   try:return choose_photos(briefs,slug,key)
   except Exception as exc:errors.append(str(exc))
  raise RuntimeError('V3 photo search exhausted every independently broadened search: '+' | '.join(errors))
+def head_clip(value,limit=72):
+  # A headline must never end mid-word. The 46-character slice this replaces is what turned
+  # "Payoneer: How Stablecoin is Scaling in Cross-Border Payments" into "…in Cross-B" on the
+  # live site, in the RSS feed and in the <h1>; 72 characters still fits a Google title.
+  value=re.sub(r'\s+',' ',str(value or '')).strip()
+  if len(value)<=limit:return value
+  cut=value[:limit]
+  if ' ' in cut:cut=cut.rsplit(' ',1)[0]
+  else:cut=value[:limit-1]+'\u2026'
+  return cut.rstrip(' ,;:—–-.\u00b7|') or value[:limit]
+
 def build(item,kind,target):
- sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=clean(title)[:46].strip(' -:')
+ sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=head_clip(clean(title).strip(' -:'))
  profile=structure_profile(item.get('_structure_slot',item.get('id','')),title)
- if len(title)<12:title=clean(re.sub(r'^Trend\s*[·:-]?\s*','',item['category'],flags=re.I)+' Evidence Guide')[:46]
+ if len(title)<12:title=head_clip(clean(re.sub(r'^Trend\s*[·:-]?\s*','',item['category'],flags=re.I)+' Evidence Guide'))
  plans=[];used_headings=set()
  for index in range(10):
   primary=(index%len(sources))+1;secondary=((index+3)%len(sources))+1;h=heading(sources[index%len(sources)],index+1)

@@ -1,0 +1,98 @@
+name: Blogger Headline Repair
+
+# Why this exists, in the site's own words: on 20 October the newest master article was
+# published as "Payoneer: How Stablecoin is Scaling in Cross-B", while the article's body
+# said "…Cross-Border Payments". A 46-character slice in the generator cut the headline in
+# half, and a cut headline is what a search result, an RSS reader and Discover would show.
+# The generator is fixed for new posts; this job reads the full headline back out of each
+# article for the ones already live. It only reports on a schedule - rewriting titles is a
+# deliberate, archived, capped action.
+
+on:
+  schedule:
+    - cron: '20 20 * * *'   # 01:50 IST, read-only
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "audit only reports; apply writes the recovered headline back to Blogger"
+        required: true
+        type: choice
+        options: ['audit', 'apply']
+        default: 'audit'
+      max:
+        description: "how many headlines this run may rewrite"
+        required: false
+        default: '40'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-headline-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Read the real headline back out of each article (only when told to, write it)
+        run: |
+          action="${{ github.event.inputs.action }}"
+          [[ -n "$action" ]] || action="audit"
+          cap="${{ github.event.inputs.max }}"
+          [[ -n "$cap" ]] || cap="40"
+          if [ "$action" = "apply" ]; then
+            python headline_repair.py --apply --max "$cap"
+          else
+            python headline_repair.py
+          fi
+      - name: Say what is still broken
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          report = json.loads(pathlib.Path("HEADLINE_REPAIR.json").read_text())
+          print(f"{report['mode']}: {report['postsScanned']} live posts scanned, "
+                f"{report['clippedTitles']} titles cut by the old 46-character cap, "
+                f"{report['repairable']} recoverable, {report['heldBackCollisions']} held back as collisions, "
+                f"{report['selectedThisRun']} selected (cap {report['batchCap']}), "
+                f"{len(report['repaired'])} headlines written")
+          if report["mode"] == "AUDIT_ONLY" and report["repairable"]:
+              print("::notice title=Headlines still cut off::Actions -> Blogger Headline Repair -> "
+                    "Run workflow -> action=apply fixes them; every post is backed up first")
+          if report["failed"]:
+              print(f"::warning title={len(report['failed'])} headline writes failed::see HEADLINE_REPAIR.json")
+          PY
+      - name: Persist the evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-head
+          for f in HEADLINE_REPAIR.json HEADLINE_REPAIR.md HEADLINE_REPAIR_BACKUP.json.gz; do
+            [ -f "$f" ] && cp "$f" /tmp/dy-head/ || true
+          done
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp -r /tmp/dy-head/* . 2>/dev/null || true
+            git add -A -- HEADLINE_REPAIR.json HEADLINE_REPAIR.md HEADLINE_REPAIR_BACKUP.json.gz 2>/dev/null || true
+            if git diff --staged --quiet; then echo "nothing new to record"; exit 0; fi
+            git commit -q -m "Record headline repair evidence [skip ci]" || true
+            if git push -q origin HEAD:main; then echo "evidence recorded"; exit 0; fi
+            sleep $((attempt * 4))
+          done
+          echo "::warning title=Evidence not pushed::main stayed busy; the numbers are in this log"
