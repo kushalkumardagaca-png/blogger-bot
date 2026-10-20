@@ -132,15 +132,30 @@ def _decrypt(blob: bytes) -> str:
 
 
 def access_token() -> str:
+    """Read the token, then sanity-check it before anything is sent.
+
+    A paste that was cut short on a phone, or the App Secret in the wrong box, reaches the
+    graph host as a string it cannot parse. Instagram then answers "Invalid OAuth access
+    token - Cannot parse access token", which reads like a dead login and sends an owner to
+    re-authorise from scratch. Naming the shape here is the difference between re-pasting one
+    field and rebuilding the whole connection.
+    """
     token = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "").strip()
-    if token:
-        return token
-    if TOKEN_FILE.exists():
-        return _decrypt(TOKEN_FILE.read_bytes())
-    raise RuntimeError(
-        "not connected: no INSTAGRAM_ACCESS_TOKEN secret and no instagram_token.enc. In GitHub, "
-        "Settings -> Secrets and variables -> Actions, the token must be a SECRET named exactly "
-        "INSTAGRAM_ACCESS_TOKEN - a Variable of that name is not read here")
+    if not token and TOKEN_FILE.exists():
+        token = _decrypt(TOKEN_FILE.read_bytes())
+    token = "".join(token.split()).strip("'\"")
+    if not token:
+        raise RuntimeError(
+            "not connected: no INSTAGRAM_ACCESS_TOKEN secret and no instagram_token.enc. In GitHub, "
+            "Settings -> Secrets and variables -> Actions, the token must be a SECRET named exactly "
+            "INSTAGRAM_ACCESS_TOKEN - a Variable of that name is not read here")
+    if len(token) < 40 or "|" in token or not token.isascii():
+        raise RuntimeError(
+            "the stored INSTAGRAM_ACCESS_TOKEN is not shaped like an Instagram access token: it is too "
+            "short, or it holds a pipe or non-ASCII text. That usually means the App Secret was pasted "
+            "instead, or the copy was cut off on the way. Re-copy it with the copy button on the "
+            "@daily_yield row of the Instagram setup page and overwrite that one secret")
+    return token
 
 
 def ig_user_id() -> str:

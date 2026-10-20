@@ -166,7 +166,8 @@ class FakeGraph:
 
 
 class RunModes(TempHome):
-    def _run(self, argv, graph, *, token="tok"):
+    def _run(self, argv, graph, *, token="AGQtok"):
+        token = token if len(token) > 40 else token + "x" * 400
         env = {"INSTAGRAM_ACCESS_TOKEN": token, "INSTAGRAM_IG_USER_ID": "1784"}
         with mock.patch.dict(ig.os.environ, env, clear=False), mock.patch.object(ig, "requests", graph), \
              mock.patch("sys.argv", ["instagram_publisher.py"] + argv):
@@ -188,7 +189,7 @@ class RunModes(TempHome):
             type("R", (), {"ok": False, "status_code": 400,
                            "json": staticmethod(lambda: {"error": {"message": "not professional"}}),
                            "headers": {"content-type": "application/json"}})())
-        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "t", "INSTAGRAM_IG_USER_ID": "1"},
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "AGQ" + "t" * 300, "INSTAGRAM_IG_USER_ID": "1"},
                              clear=False), mock.patch.object(ig, "requests", graph), \
              mock.patch("sys.argv", ["x", "--mode", "health"]):
             ig.main()
@@ -270,7 +271,7 @@ class IdentityFromTokenOnly(TempHome):
 
     def test_the_token_supplies_its_own_account_id(self):
         graph = FakeGraph()
-        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "tok"}, clear=True), \
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "AGQ" + "t" * 300}, clear=True), \
              mock.patch.object(ig, "requests", graph):
             self.assertEqual(ig.ig_user_id(), "1784")
         self.assertTrue(any(call[0] == "GET" and call[1] == "me" and call[2].get("fields") == "id"
@@ -278,7 +279,7 @@ class IdentityFromTokenOnly(TempHome):
 
     def test_facebook_login_still_demands_the_id_because_me_is_a_person_there(self):
         graph = FakeGraph()
-        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "tok"}, clear=True), \
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "AGQ" + "t" * 300}, clear=True), \
              mock.patch.object(ig, "requests", graph), mock.patch.object(ig, "MODE", "facebook_login"):
             with self.assertRaises(RuntimeError) as caught:
                 ig.ig_user_id()
@@ -291,7 +292,7 @@ class IdentityFromTokenOnly(TempHome):
         graph.request = lambda method, url, params=None, timeout=None, **k: (
             type("R", (), {"ok": False, "status_code": 400, "headers": {"content-type": "application/json"},
                            "json": staticmethod(lambda: {"error": {"message": "invalid token"}})})())
-        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "bad"}, clear=True), \
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "AGQ" + "b" * 300}, clear=True), \
              mock.patch.object(ig, "requests", graph):
             with self.assertRaises(RuntimeError) as caught:
                 ig.ig_user_id()
@@ -386,6 +387,32 @@ class OwnerMixRule(RunModes):
             {"postsPerDay": 4, "mix": {"evergreen": 9, "trending": -3}}))
         configuration = ig.plan()
         self.assertEqual(configuration["mix"], {"evergreen": 4, "trending": 0})
+
+
+class TokenShape(TempHome):
+    """The difference between re-pasting a field and rebuilding a connection."""
+
+    def test_a_paste_with_line_breaks_and_quotes_is_repaired(self):
+        padded = "AGQ" + "a" * 300
+        env = {"INSTAGRAM_ACCESS_TOKEN": f'  \"{padded}\n  \"  '}
+        with mock.patch.dict(ig.os.environ, env, clear=True):
+            self.assertEqual(ig.access_token(), padded)
+
+    def test_an_app_secret_in_the_token_field_is_named_as_such(self):
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "0123456789abcdef" * 2}, clear=True):
+            with self.assertRaises(RuntimeError) as caught:
+                ig.access_token()
+        message = str(caught.exception)
+        self.assertIn("App Secret", message)
+        self.assertIn("cut off", message)
+
+    def test_the_shape_is_checked_before_any_request_leaves(self):
+        graph = FakeGraph()
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "short-token"}, clear=True), \
+             mock.patch.object(ig, "requests", graph):
+            with self.assertRaises(RuntimeError):
+                ig.access_token()
+        self.assertEqual(graph.calls, [], "a bad credential must not be sent to Meta at all")
 
 
 if __name__ == "__main__":
