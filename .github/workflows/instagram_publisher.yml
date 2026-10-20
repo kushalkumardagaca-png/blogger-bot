@@ -66,13 +66,17 @@ jobs:
         # files, and the only way to see what happened is to read Actions logs by hand.
         if: ${{ !cancelled() }}
         run: |
+          # Print the evidence first. main is shared with a dozen other Daily Yield
+          # workflows that push every few minutes, so a commit can be rejected no matter
+          # how careful this step is; the run log must still carry what the route decided.
+          for file in INSTAGRAM_ROUTE_STATUS.json SOCIAL_CREDENTIAL_HEALTH.json; do
+            if [[ -f "$file" ]]; then
+              echo "--- $file"
+              sed -n '1,40p' "$file"
+            fi
+          done
           git config user.name "Daily Yield Instagram Bot"
           git config user.email "bot@dailyyield.blogspot.com"
-          git pull --rebase --autostash origin main
-          # Stage first, then judge. "git diff --quiet" ignores untracked files, and these three
-          # evidence files are untracked on the very first run, so an old guard here meant a brand
-          # new file could never be committed - the route looked permanently silent even when it
-          # had plenty to say.
           for file in instagram_tracker.json INSTAGRAM_ROUTE_STATUS.json SOCIAL_CREDENTIAL_HEALTH.json; do
             if [[ -f "$file" ]]; then
               git add -- "$file"
@@ -80,6 +84,25 @@ jobs:
           done
           if git diff --cached --quiet; then
             echo "no route evidence changed"
-          else
-            git commit -q -m "Record Instagram route evidence [skip ci]" && git push -q origin main
+            exit 0
+          fi
+          git commit -q -m "Record Instagram route evidence [skip ci]"
+          pushed=0
+          for attempt in 1 2 3 4 5 6; do
+            if git push -q origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            echo "main moved during the push; realigning (attempt $attempt)"
+            git fetch -q origin main
+            if ! git -c rebase.autoStash=true rebase -q origin/main; then
+              git rebase --abort 2>/dev/null || true
+              break
+            fi
+            sleep $((attempt * 4))
+          done
+          if [[ "$pushed" != "1" ]]; then
+            # Losing the commit must not look like a publishing failure: the route did its
+            # job and the run log above carries the evidence.
+            echo "warning: route evidence committed locally but could not be pushed to main" >&2
           fi
