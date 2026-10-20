@@ -1,27 +1,25 @@
 {
-  "checkedAt": "2026-10-19T23:45:36.777123+00:00",
+  "checkedAt": "2026-10-20T00:45:48.288331+00:00",
   "status": "PASS",
   "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "site": "https://dailyyield.blogspot.com/",
   "quota": {
-    "dailyAvailable": 0,
+    "dailyAvailable": 100,
     "monthlyAvailable": 1200
   },
   "summary": {
-    "inventory": 554,
-    "candidates": 399,
-    "submitted": 0,
-    "quotaDeferred": 399,
+    "inventory": 555,
+    "candidates": 400,
+    "submitted": 100,
+    "quotaDeferred": 300,
     "inspected": 0,
     "knownToBing": 0,
-    "pendingMonitoring": 155,
+    "pendingMonitoring": 255,
     "removedAlerts": 19
   },
   "errors": [],
-  "warnings": [
-    "sitemap feed not refreshed: SafeApiError"
-  ],
+  "warnings": [],
   "notes": [
     "Bing GetPageStats supplies a performance-observed signal; absence is not represented as proof that a URL is unindexed.",
     "The provider-failing GetUrlInfo family is not called.",

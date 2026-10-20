@@ -1,19 +1,19 @@
 # Bing URL Submission and Index-Status Automation
 
 - **Status:** PASS
-- **Checked:** 2026-10-19T23:45:36.777123+00:00
+- **Checked:** 2026-10-20T00:45:48.288331+00:00
 - **Mode:** authenticated control-plane, zero public Daily Yield requests
 - **Synthetic Daily Yield views:** 0
 
 ## Current run
 
-- Blogger inventory: **554**
-- Submission candidates: **399**
-- URLs submitted: **0**
-- Quota deferred: **399**
+- Blogger inventory: **555**
+- Submission candidates: **400**
+- URLs submitted: **100**
+- Quota deferred: **300**
 - Performance-monitor records checked: **0**
 - Known/crawled by Bing: **0**
-- Pending monitoring: **155**
+- Pending monitoring: **255**
 - Removed inventory alerts: **19**
 
 ## Guardrails
@@ -22,7 +22,3 @@
 - No public Daily Yield URL, Bing Live URL fetch or synthetic pageview is created.
 - Unchanged URLs are not resubmitted.
 - Submission does not guarantee crawling, indexing, ranking or traffic.
-
-## Provider warnings
-
-- sitemap feed not refreshed: SafeApiError
