@@ -1,14 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "979d61a98df38932",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-20",
   "kind": "trending",
   "slot": 0,
-  "slot_key": "2026-10-20:trending:0",
-  "date": "2026-10-20",
-  "category": "Trend · Money & Policy Now",
-  "evergreen_category": "Banking Payments & Fintech",
+  "topic_id": "979d61a98df38932",
+  "replaced_topic_id": null,
   "title": "Bereaved families could face 'unjust' tax bill",
-  "url": "https://dailyyield.blogspot.com/2026/10/bereaved-families-could-face-unjust-tax.html",
-  "published_at": "2026-10-19T17:45:08-07:00"
+  "package": "master_packages/dynamic/2026-10-20-trending-979d61a98df38932.json",
+  "html": "scheduled_ready/2026-10-20-trending-0-bereaved-families-could-face-unjust-tax-bill.html"
 }
