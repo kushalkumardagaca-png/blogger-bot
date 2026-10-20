@@ -264,5 +264,38 @@ class RunModes(TempHome):
 IG_IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 
 
+class IdentityFromTokenOnly(TempHome):
+    """The owner pastes one token into GitHub. Nothing else should be required."""
+
+    def test_the_token_supplies_its_own_account_id(self):
+        graph = FakeGraph()
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "tok"}, clear=True), \
+             mock.patch.object(ig, "requests", graph):
+            self.assertEqual(ig.ig_user_id(), "1784")
+        self.assertTrue(any(call[0] == "GET" and call[1] == "me" and call[2].get("fields") == "id"
+                            for call in graph.calls), graph.calls)
+
+    def test_facebook_login_still_demands_the_id_because_me_is_a_person_there(self):
+        graph = FakeGraph()
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "tok"}, clear=True), \
+             mock.patch.object(ig, "requests", graph), mock.patch.object(ig, "MODE", "facebook_login"):
+            with self.assertRaises(RuntimeError) as caught:
+                ig.ig_user_id()
+        self.assertIn("facebook", str(caught.exception).lower())
+        self.assertEqual([call for call in graph.calls if call[0] == "GET"], [],
+                         "a Facebook-mode /me would be the wrong id, so it must not even be asked")
+
+    def test_a_token_that_cannot_identify_its_account_says_so(self):
+        graph = FakeGraph()
+        graph.request = lambda method, url, params=None, timeout=None, **k: (
+            type("R", (), {"ok": False, "status_code": 400, "headers": {"content-type": "application/json"},
+                           "json": staticmethod(lambda: {"error": {"message": "invalid token"}})})())
+        with mock.patch.dict(ig.os.environ, {"INSTAGRAM_ACCESS_TOKEN": "bad"}, clear=True), \
+             mock.patch.object(ig, "requests", graph):
+            with self.assertRaises(RuntimeError) as caught:
+                ig.ig_user_id()
+        self.assertIn("invalid token", str(caught.exception))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

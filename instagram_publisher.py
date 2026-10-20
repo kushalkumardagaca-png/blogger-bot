@@ -134,13 +134,31 @@ def access_token() -> str:
 
 
 def ig_user_id() -> str:
+    """The professional account's own id.
+
+    With Instagram Login the token can answer this itself, because /me on
+    graph.instagram.com returns the Instagram-scoped id of the account that granted it.
+    That matters for the owner: pasting one token into GitHub is then the entire
+    connection, with no numeric id to hunt for in a dashboard. Under Facebook Login the
+    same call would return a person's Facebook id, so that mode still needs the id.
+    """
     value = os.environ.get("INSTAGRAM_IG_USER_ID", "").strip()
     if value:
         return value
     state = load(STATE, {})
     if state.get("ig_user_id"):
         return str(state["ig_user_id"])
-    raise RuntimeError("INSTAGRAM_IG_USER_ID is required (the professional account's own id)")
+    if MODE == "facebook_login":
+        raise RuntimeError("INSTAGRAM_IG_USER_ID is required when INSTAGRAM_API_MODE=facebook_login "
+                           "(the token's /me is a Facebook person, not the professional account)")
+    response = request("GET", "/me", params={"fields": "id"})
+    body = response.json() if response.headers.get("content-type", "").startswith("application/json") else {}
+    identifier = str(body.get("id") or "").strip()
+    if not response.ok or not identifier:
+        error = (body or {}).get("error") or {}
+        raise RuntimeError("the token could not identify its own account via /me: "
+                           + str(error.get("message") or body or "no id returned")[:300])
+    return identifier
 
 
 def record_health(ok: bool, reason: str) -> None:
