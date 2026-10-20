@@ -3158,9 +3158,31 @@
       },
       "published_at": "2026-10-20T13:19:35.083493+05:30",
       "reconciled": false
+    },
+    {
+      "kind": "page",
+      "blogger_id": "homepage",
+      "title": "Daily Yield: Markets, Money and Better Decisions",
+      "url": "https://dailyyield.blogspot.com/",
+      "mastodon_status_id": "117472383145593016",
+      "mastodon_url": "https://mastodon.social/@dailyyield/117472383145593016",
+      "score": 59,
+      "creative": {
+        "seed": "470ba30eb923ea85",
+        "topic": "page",
+        "style": "cobalt pop",
+        "style_index": 1,
+        "hook": "USE THE TOOL, CHECK THE ASSUMPTIONS",
+        "emoji": "🧾",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 3,
+        "adaptive": false
+      },
+      "published_at": "2026-10-20T14:21:55.266575+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-20T13:19:35.083507+05:30",
-  "last_mastodon_status_id": "117468907648832017"
+  "last_success_at": "2026-10-20T14:21:55.266590+05:30",
+  "last_mastodon_status_id": "117472383145593016"
 }
