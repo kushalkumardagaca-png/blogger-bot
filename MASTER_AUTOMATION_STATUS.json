@@ -1,12 +1,11 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
+  "status": "ALREADY_PUBLISHED",
+  "publication_enabled": true,
   "date": "2026-10-20",
   "kind": "trending",
   "slot": 1,
   "topic_id": "026f01684d108a67",
-  "replaced_topic_id": null,
   "title": "How often is Daily Yield published?",
-  "package": "master_packages/dynamic/2026-10-20-trending-026f01684d108a67.json",
-  "html": "scheduled_ready/2026-10-20-trending-1-how-often-is-daily-yield-published.html"
+  "url": "https://dailyyield.blogspot.com/2026/10/how-often-is-daily-yield-published.html",
+  "published_at": "2026-10-19T20:45:10-07:00"
 }
