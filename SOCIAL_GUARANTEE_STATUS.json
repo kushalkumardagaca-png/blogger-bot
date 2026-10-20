@@ -1,18 +1,33 @@
 {
- "generatedAt": "2026-10-21T04:06:44.236184+05:30",
+ "generatedAt": "2026-10-21T04:15:28.184490+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 0,
- "expectedPosts": 0,
- "articlesWithBothPosts": 0,
+ "articles": 1,
+ "expectedPosts": 2,
+ "articlesWithBothPosts": 1,
  "postsMissing": 0,
  "dispatched": 0,
- "rows": [],
+ "rows": [
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  }
+ ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T04:06:40.881288+05:30",
+ "liveVerificationSourceAt": "2026-10-21T04:15:26.586407+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 0,
+ "articlesWithExactlyTwoPosts": 1,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
