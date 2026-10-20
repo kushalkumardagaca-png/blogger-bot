@@ -1,5 +1,5 @@
 {
- "checkedAtIST": "2026-10-20T15:29:31.420895+05:30",
+ "checkedAtIST": "2026-10-20T15:58:56.805943+05:30",
  "apiMode": "instagram_login",
  "host": "graph.instagram.com",
  "postsPerDay": 5,
@@ -7,7 +7,7 @@
  "published": [],
  "skipped": [],
  "notes": [
-  "the stored INSTAGRAM_ACCESS_TOKEN is not shaped like an Instagram access token: it is too short, or it holds a pipe or non-ASCII text. That usually means the App Secret was pasted instead, or the copy was cut off on the way. Re-copy it with the copy button on the @daily_yield row of the Instagram setup page and overwrite that one secret"
+  "the token could not identify its own account via /me: Error validating access token: The user has not authorized application 1086897220785233."
  ],
- "status": "NOT_CONNECTED"
+ "status": "CHECK_FAILED"
 }
