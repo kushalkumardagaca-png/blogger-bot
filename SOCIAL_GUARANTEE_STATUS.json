@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T13:16:18.778877+05:30",
+ "generatedAt": "2026-10-20T13:47:48.362820+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 11,
  "expectedPosts": 22,
- "articlesWithBothPosts": 5,
- "postsMissing": 7,
- "dispatched": 4,
+ "articlesWithBothPosts": 6,
+ "postsMissing": 5,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-india",
@@ -57,19 +57,15 @@
    "key": "news-economy",
    "title": "economy edition",
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-20.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-china",
@@ -190,9 +186,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T13:16:14.345280+05:30",
+ "liveVerificationSourceAt": "2026-10-20T13:47:42.024431+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 5,
+ "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
