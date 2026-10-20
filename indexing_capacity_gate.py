@@ -76,6 +76,18 @@ def lexicon() -> list[str]:
     return [str(term).strip().lower() for term in terms if str(term).strip()]
 
 
+def template_of(url: str) -> str:
+    """The slug family a URL belongs to, with any date removed.
+
+    "companies-ipos-deals-2026-10-10" and "...-2026-10-11" are one template. Announcing a
+    dozen of them spends the crawl budget on pages that compete with each other, so the
+    ranking keeps two per family, the freshest first, and lets the rest wait their turn.
+    """
+    slug = re.sub(r"\d{4}-\d{2}-\d{2}", "", slug_of(url))
+    slug = re.sub(r"[-_]?\d*$", "", slug)
+    return slug.split(".html")[0].strip("-_")
+
+
 def score(url: str, words: list[str], today: date) -> tuple[int, list[str]]:
     """How much this URL deserves the crawl budget it would spend."""
     slug = slug_of(url)
@@ -179,7 +191,18 @@ def main() -> int:
         else:
             ranked.append((points, url, why))
     ranked.sort(key=lambda row: (-row[0], row[1]))
-    announce = [{"url": url, "score": points, "why": why} for points, url, why in ranked[:40]]
+    per_template: dict[str, int] = {}
+    announce = []
+    for points, url, why in ranked:
+        family = template_of(url)
+        if per_template.get(family, 0) >= 2:
+            suppressed.append({"url": url, "reason": "third or later URL of the template "
+                               + family + ": one family cannot need the crawl budget twice over"})
+            continue
+        per_template[family] = per_template.get(family, 0) + 1
+        announce.append({"url": url, "score": points, "why": why})
+        if len(announce) >= 40:
+            break
 
     # IndexNow that never actually submits is the failure mode this replaced: the queue grew
     # while nothing left it, and the workflow printed a line and stayed green.

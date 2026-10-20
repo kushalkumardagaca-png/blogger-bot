@@ -111,6 +111,16 @@ class AnnouncementPriority(Harness):
         self.assertIn("submittedEver", report2["announcementQueue"])
 
 
+    def test_a_daily_template_is_not_announced_more_than_twice(self):
+        pending = [f"https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-{day:02d}.html"
+                   for day in range(1, 13)]
+        self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": pending})
+        self.run_gate()
+        priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text())
+        self.assertEqual(len(priority["announce"]), 2, "twelve copies of one template must not take twelve slots")
+        self.assertEqual(priority["suppressCount"], 10)
+
+
 class Evidence(Harness):
     def test_missing_evidence_files_are_listed_as_missing(self):
         report = self.run_gate()

@@ -422,7 +422,8 @@ check('No Instagram route is registered, scheduled or left behind in the reposit
       if (ROOT/'INSTAGRAM_ROUTE_STATUS.json').exists() else True)
 check('Publishing volume is bounded by the measured index, not by ambition',
       (ROOT/'indexing_capacity_gate.py').exists()
-      and 'discovered - currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News adaptive polish can deepen sparse but sourced editions before failing',
