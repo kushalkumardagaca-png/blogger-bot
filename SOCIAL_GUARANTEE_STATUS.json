@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-21T05:15:50.001747+05:30",
+ "generatedAt": "2026-10-21T05:17:52.456242+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 2,
  "expectedPosts": 4,
  "articlesWithBothPosts": 1,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-china",
@@ -22,8 +22,8 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   },
   {
@@ -43,7 +43,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T05:15:48.837566+05:30",
+ "liveVerificationSourceAt": "2026-10-21T05:17:51.231146+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 1,
  "syntheticViews": 0,
