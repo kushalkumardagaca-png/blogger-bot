@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T08:19:47.801957+05:30",
+  "generatedAt": "2026-10-20T08:50:56.283150+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
@@ -22,14 +22,14 @@
     },
     {
       "type": "social_replay",
-      "key": "news-asia-pacific",
+      "key": "news-china",
       "platform": "tumblr",
       "routeIndex": 0,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-20:news-china:0"
+    "social:2026-10-20:news-asia-pacific:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
