@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-20T17:15:41.013338+05:30",
+ "generatedAt": "2026-10-20T17:38:08.608332+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 15,
  "expectedPosts": 30,
  "articlesWithBothPosts": 7,
- "postsMissing": 9,
+ "postsMissing": 8,
  "dispatched": 2,
  "rows": [
   {
@@ -97,17 +97,16 @@
    "key": "news-americas",
    "title": "americas edition",
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-20.html",
-   "posts": 0,
+   "posts": 1,
    "byPlatform": {
     "facebook": 0,
     "bluesky": 0,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
+   "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
     "dispatched"
    ]
   },
@@ -238,7 +237,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -258,7 +257,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T17:15:34.522349+05:30",
+ "liveVerificationSourceAt": "2026-10-20T17:37:58.667165+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 7,
  "syntheticViews": 0,
