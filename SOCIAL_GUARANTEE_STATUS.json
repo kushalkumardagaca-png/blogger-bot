@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-20T12:36:54.891237+05:30",
+ "generatedAt": "2026-10-20T12:45:39.131429+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 9,
- "expectedPosts": 18,
+ "articles": 10,
+ "expectedPosts": 20,
  "articlesWithBothPosts": 5,
- "postsMissing": 4,
+ "postsMissing": 5,
  "dispatched": 1,
  "rows": [
   {
@@ -37,6 +37,23 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-20.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
+  },
+  {
    "key": "news-markets",
    "title": "markets edition",
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-20.html",
@@ -50,7 +67,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -155,7 +172,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T12:36:47.809742+05:30",
+ "liveVerificationSourceAt": "2026-10-20T12:45:33.369049+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
