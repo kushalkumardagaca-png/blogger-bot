@@ -730,9 +730,9 @@
     "lastAttempt": "2026-10-20T05:40:01.281867+05:30"
   },
   "social:2026-10-20:news-asia-pacific:0": {
-    "revision": "a815a83deca46684",
-    "attempts": 3,
-    "lastAttempt": "2026-10-20T11:52:48.488100+05:30"
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   },
   "prewarm:2026-10-20:master-evergreen-0": {
     "revision": "a815a83deca46684",
@@ -740,9 +740,9 @@
     "lastAttempt": "2026-10-20T07:40:57.076935+05:30"
   },
   "social:2026-10-20:news-china:0": {
-    "revision": "a815a83deca46684",
-    "attempts": 3,
-    "lastAttempt": "2026-10-20T11:52:48.488100+05:30"
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   },
   "prewarm:2026-10-20:master-trending-1": {
     "revision": "a815a83deca46684",
@@ -755,9 +755,9 @@
     "lastAttempt": "2026-10-20T10:38:55.473516+05:30"
   },
   "social:2026-10-20:master-trending-1:0": {
-    "revision": "a815a83deca46684",
-    "attempts": 3,
-    "lastAttempt": "2026-10-20T15:49:07.334454+05:30"
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   },
   "prewarm:2026-10-20:master-trending-2": {
     "revision": "a815a83deca46684",
@@ -770,9 +770,9 @@
     "lastAttempt": "2026-10-20T15:18:37.325087+05:30"
   },
   "social:2026-10-20:news-markets:0": {
-    "revision": "a815a83deca46684",
-    "attempts": 2,
-    "lastAttempt": "2026-10-20T15:49:07.334454+05:30"
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   },
   "prewarm:2026-10-20:master-trending-3": {
     "revision": "a815a83deca46684",
@@ -780,14 +780,14 @@
     "lastAttempt": "2026-10-20T15:18:37.325087+05:30"
   },
   "social:2026-10-20:news-europe:0": {
-    "revision": "a815a83deca46684",
-    "attempts": 2,
-    "lastAttempt": "2026-10-20T16:27:36.962730+05:30"
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   },
   "social:2026-10-20:master-trending-2:0": {
-    "revision": "a815a83deca46684",
+    "revision": "d63df769f797deaf",
     "attempts": 1,
-    "lastAttempt": "2026-10-20T14:40:57.373222+05:30"
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   },
   "source:2026-10-20:master-evergreen-2": {
     "revision": "a815a83deca46684",
@@ -795,8 +795,13 @@
     "lastAttempt": "2026-10-20T16:27:36.962730+05:30"
   },
   "social:2026-10-20:master-trending-3:0": {
-    "revision": "a815a83deca46684",
+    "revision": "d63df769f797deaf",
     "attempts": 1,
-    "lastAttempt": "2026-10-20T16:27:36.962730+05:30"
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
+  },
+  "prewarm:2026-10-20:master-evergreen-3": {
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
   }
 }
