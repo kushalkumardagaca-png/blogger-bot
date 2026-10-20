@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T05:15:57.172668+05:30",
+  "generatedAt": "2026-10-20T05:40:01.281867+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
@@ -18,6 +18,13 @@
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-0",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-china",
+      "platform": "tumblr",
+      "routeIndex": 0,
       "applied": true
     }
   ],
