@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-19T07:37:54.354078+00:00",
+ "checkedAt": "2026-10-20T03:13:57.729005+00:00",
  "status": "CHECK_INCOMPLETE",
  "publicPagesRead": 10,
  "diagnosticReadsOnly": true,
@@ -16,23 +16,23 @@
   },
   {
    "check": "policy page /contact",
-   "pass": true,
-   "state": "PASS",
-   "detail": "/p/contact-us_01883938366.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
    "check": "policy page /privacy",
-   "pass": true,
-   "state": "PASS",
-   "detail": "/p/privacy-policy.html → HTTP 200",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
    "check": "policy page /disclaimer",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/disclaimer.html → HTTP 200",
    "blocking": true
   },
   {
@@ -99,59 +99,10 @@
    "blocking": true
   },
   {
-   "check": "contact: public author name",
-   "pass": true,
-   "state": "PASS",
-   "detail": "Kushal Daga",
-   "blocking": true
-  },
-  {
-   "check": "contact: publisher's legal name",
-   "pass": true,
-   "state": "PASS",
-   "detail": "Kushal Kumar Daga",
-   "blocking": true
-  },
-  {
-   "check": "contact: name relationship explained",
-   "pass": true,
-   "state": "PASS",
-   "detail": "the site says the public author name is the short form of the legal name used on records",
-   "blocking": true
-  },
-  {
-   "check": "contact: retired initials byline gone",
-   "pass": true,
-   "state": "PASS",
-   "detail": "the retired initials byline is no longer published",
-   "blocking": true
-  },
-  {
-   "check": "contact: publication inbox",
-   "pass": true,
-   "state": "PASS",
-   "detail": "dailyyield.official@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "contact: publisher's own address",
-   "pass": true,
-   "state": "PASS",
-   "detail": "kushalkumardaga.ca@gmail.com",
-   "blocking": true
-  },
-  {
-   "check": "contact: no contradictory reply time",
-   "pass": true,
-   "state": "PASS",
-   "detail": "one reply-time promise only",
-   "blocking": true
-  },
-  {
-   "check": "contact: no inaccurate name claim",
-   "pass": true,
-   "state": "PASS",
-   "detail": "no unrelated surname is published as an alias",
+   "check": "contact: identity content available",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "Identity could not be checked because the page read failed",
    "blocking": true
   },
   {
@@ -163,23 +114,23 @@
   },
   {
    "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": true,
-   "state": "PASS",
+   "pass": null,
+   "state": "UNKNOWN",
    "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   },
   {
    "check": "ads.txt matches the recorded publisher",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "HTTP 0: not verified",
+   "pass": true,
+   "state": "PASS",
+   "detail": "HTTP 200: google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0",
    "blocking": true
   },
   {
    "check": "robots.txt readable",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200 after 3 reads; the first answer was a 404 that the re-probe disproved",
+   "detail": "HTTP 200",
    "blocking": true
   },
   {
@@ -200,7 +151,7 @@
    "check": "sitemap.xml serves URLs",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200, 527 URLs listed",
+   "detail": "HTTP 200, 542 URLs listed",
    "blocking": true
   },
   {
@@ -249,17 +200,31 @@
  "blockingIssues": [],
  "unverifiedChecks": [
   {
-   "check": "policy page /disclaimer",
+   "check": "policy page /contact",
    "pass": null,
    "state": "UNKNOWN",
-   "detail": "/p/disclaimer.html → HTTP 0; read unavailable, not proof of a missing page",
+   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
    "blocking": true
   },
   {
-   "check": "ads.txt matches the recorded publisher",
+   "check": "policy page /privacy",
    "pass": null,
    "state": "UNKNOWN",
-   "detail": "HTTP 0: not verified",
+   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
+   "blocking": true
+  },
+  {
+   "check": "contact: identity content available",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "Identity could not be checked because the page read failed",
+   "blocking": true
+  },
+  {
+   "check": "privacy page names third-party cookie vendors and the ad opt-out",
+   "pass": null,
+   "state": "UNKNOWN",
+   "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   }
  ],
