@@ -1,14 +1,12 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "083c2df37e074a6d",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-20",
   "kind": "trending",
   "slot": 3,
-  "slot_key": "2026-10-20:trending:3",
-  "date": "2026-10-20",
-  "category": "Trend · Technology & Future Money",
-  "evergreen_category": "Banking Payments & Fintech",
+  "topic_id": "083c2df37e074a6d",
+  "replaced_topic_id": null,
   "title": "Payoneer: How Stablecoin is Scaling in Cross-B",
-  "url": "https://dailyyield.blogspot.com/2026/10/payoneer-how-stablecoin-is-scaling-in.html",
-  "published_at": "2026-10-20T03:45:09-07:00"
+  "package": "master_packages/dynamic/2026-10-20-trending-083c2df37e074a6d.json",
+  "html": "scheduled_ready/2026-10-20-trending-3-payoneer-how-stablecoin-is-scaling-in-cross-b.html"
 }
