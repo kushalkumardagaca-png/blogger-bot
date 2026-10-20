@@ -731,8 +731,8 @@
   },
   "social:2026-10-20:news-asia-pacific:0": {
     "revision": "a815a83deca46684",
-    "attempts": 1,
-    "lastAttempt": "2026-10-20T04:41:20.205920+05:30"
+    "attempts": 2,
+    "lastAttempt": "2026-10-20T08:19:47.801957+05:30"
   },
   "prewarm:2026-10-20:master-evergreen-0": {
     "revision": "a815a83deca46684",
@@ -746,7 +746,12 @@
   },
   "prewarm:2026-10-20:master-trending-1": {
     "revision": "a815a83deca46684",
-    "attempts": 3,
-    "lastAttempt": "2026-10-20T07:40:57.076935+05:30"
+    "attempts": 4,
+    "lastAttempt": "2026-10-20T08:19:47.801957+05:30"
+  },
+  "prewarm:2026-10-20:master-evergreen-1": {
+    "revision": "a815a83deca46684",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T08:19:47.801957+05:30"
   }
 }
