@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T18:17:17.821216+05:30",
+ "generatedAt": "2026-10-20T18:44:33.152815+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 17,
  "expectedPosts": 34,
- "articlesWithBothPosts": 7,
- "postsMissing": 11,
- "dispatched": 0,
+ "articlesWithBothPosts": 8,
+ "postsMissing": 9,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-americas",
@@ -22,7 +22,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -90,19 +90,15 @@
    "key": "news-global",
    "title": "global edition",
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-20.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-companies",
@@ -118,7 +114,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -294,9 +290,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T18:17:11.002919+05:30",
+ "liveVerificationSourceAt": "2026-10-20T18:44:11.106859+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 7,
+ "articlesWithExactlyTwoPosts": 8,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
