@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T10:42:22.817546+05:30",
+ "generatedAt": "2026-10-20T11:13:27.627869+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 7,
  "expectedPosts": 14,
  "articlesWithBothPosts": 4,
  "postsMissing": 3,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-russia",
@@ -115,14 +115,16 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
    "actions": [
-    "dispatched"
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T10:42:18.593924+05:30",
+ "liveVerificationSourceAt": "2026-10-20T11:13:21.234632+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
