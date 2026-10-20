@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Static and template audit for active News, social, search and site automations."""
 from pathlib import Path
+import re
 import ast, datetime as dt, json, re, sys
 
 ROOT=Path(__file__).parent
@@ -406,6 +407,22 @@ check('Master uses three unique licensed 16:9 placement-specific photographs','c
 _workflows='\n'.join(f.read_text(encoding='utf-8',errors='replace') for f in (ROOT/'.github/workflows').glob('*.yml'))
 check('No automation may claim a professional qualification','DY_VERIFIED_PROFESSIONAL_QUALIFICATION' not in _workflows)
 check('Advice risk gate blocks publication','advice_risk_gate' in (ROOT/'publication_preflight.py').read_text() and 'ADVICE RISK GATE BLOCKED' in (ROOT/'advice_risk_gate.py').read_text() and 'HUMAN_REVIEWER = False' in (ROOT/'advice_risk_gate.py').read_text())
+# Instagram is a separate route by owner decision (19-20 October): the fixed rule of
+# two posts per article across four networks stays exactly as set, and the new network
+# is only allowed to publish through Meta's official content-publishing API.
+_guard=(ROOT/'social_guard.py').read_text()
+_block=re.search(r'TRACKERS\s*=\s*\{(.*?)\}', _guard, re.S).group(1)
+_ig=(ROOT/'instagram_publisher.py').read_text()
+_igboot=(ROOT/'instagram_oauth_bootstrap.py').read_text()
+check('Instagram is official API only and never joins the fixed four-network rotation',
+      'graph.instagram.com' in _ig and 'media_publish' in _ig and 'content_publishing_limit' in _ig
+      and 'INSTAGRAM_PLAN.json' in _ig and 'blocked_url' in _ig and 'dailyyield.blogspot.com' in _ig
+      and 'instagram.private.i' not in _ig and 'requests.Session' not in _ig
+      and 'instagram' not in _block and '"instagram":' not in _block
+      and 'instagram_business_content_publish' in _igboot)
+check('Instagram publishes only proven-live articles with their own licensed JPEG',
+      'SLOT_GUARANTEE_STATUS.json' in _ig and 'public_jpeg' in _ig and '"fm": "jpg"' in _ig
+      and 'already_posted' in _ig and 'no licensed JPEG' in _ig and 'status_code' in _ig)
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News adaptive polish can deepen sparse but sourced editions before failing',
       'base_context + 380' in np and 'summary_target + 54' in np

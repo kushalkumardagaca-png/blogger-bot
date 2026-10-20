@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "note": "Cadence and targeting for the Instagram route. Edit this file, not the code. The owner will set the final cadence after the connection is proven; 6 per day is the conservative default because the account's own quota endpoint currently returns 50 posts per rolling 24 hours for many accounts, and two slots are always left free for retries.",
+  "postsPerDay": 6,
+  "targets": "masters_plus_digest",
+  "minSpacingMinutes": 20,
+  "captionHashtags": ["#DailyYield", "#PersonalFinanceIndia", "#FinancialLiteracy"],
+  "rules": {
+    "images": "the article's own licensed photograph at a public JPEG URL; no upload, no substitution, no Gemini or generated picture",
+    "eligibility": "only an article this repository can prove is live",
+    "quota": "read content_publishing_limit before every write and stop two short of it",
+    "dedupe": "one post per article URL, forever, recorded in instagram_tracker.json",
+    "identity": "byline Kushal Daga · publication Daily Yield · legal name Kushal Kumar Daga"
+  }
+}
