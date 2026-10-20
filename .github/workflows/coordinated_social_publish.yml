@@ -120,12 +120,35 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python facebook_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
+        run: |
+          set +e
+          code=0
+          # A 429 or a short API outage must not cost the day its post, and a failure that prints
+          # nothing is a failure nobody can fix: three bounded attempts, then the network's own
+          # words go into SOCIAL_CREDENTIAL_HEALTH.json, where social_guard.py stops sending work to
+          # a broken network and the owner can read why a post is missing. The step still fails when
+          # the post did not go out, so recovery keeps trying until it is actually delivered.
+          for attempt in 1 2 3; do
+            python facebook_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}' > /tmp/social_facebook.txt 2>&1
+            code=$?
+            cat /tmp/social_facebook.txt
+            [ "$code" = "0" ] && break
+            [ "$attempt" = "3" ] || sleep $((attempt * 45))
+          done
+          python social_credential_health.py --platform facebook --code "$code" --output /tmp/social_facebook.txt || true
+          if [ "$code" != "0" ]; then
+            reason="$(python social_credential_health.py --platform facebook --extract --output /tmp/social_facebook.txt)"
+            echo "::error title=Facebook post not delivered::${reason:-the publisher printed no reason; its output is above}"
+          fi
+          exit "$code"
       - name: Persist Facebook tracker with race-safe retries
         run: |
           git config user.name 'Daily Yield Facebook Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
-          bash persist_social_state.sh facebook_tracker.json
+          files=(facebook_tracker.json)
+          # the health file is what turns a silent exit code into a readable reason
+          [ -f SOCIAL_CREDENTIAL_HEALTH.json ] && files+=(SOCIAL_CREDENTIAL_HEALTH.json)
+          bash persist_social_state.sh "${files[@]}"
 
   bluesky:
     needs: plan
@@ -164,12 +187,35 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python bluesky_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
+        run: |
+          set +e
+          code=0
+          # A 429 or a short API outage must not cost the day its post, and a failure that prints
+          # nothing is a failure nobody can fix: three bounded attempts, then the network's own
+          # words go into SOCIAL_CREDENTIAL_HEALTH.json, where social_guard.py stops sending work to
+          # a broken network and the owner can read why a post is missing. The step still fails when
+          # the post did not go out, so recovery keeps trying until it is actually delivered.
+          for attempt in 1 2 3; do
+            python bluesky_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}' > /tmp/social_bluesky.txt 2>&1
+            code=$?
+            cat /tmp/social_bluesky.txt
+            [ "$code" = "0" ] && break
+            [ "$attempt" = "3" ] || sleep $((attempt * 45))
+          done
+          python social_credential_health.py --platform bluesky --code "$code" --output /tmp/social_bluesky.txt || true
+          if [ "$code" != "0" ]; then
+            reason="$(python social_credential_health.py --platform bluesky --extract --output /tmp/social_bluesky.txt)"
+            echo "::error title=Bluesky post not delivered::${reason:-the publisher printed no reason; its output is above}"
+          fi
+          exit "$code"
       - name: Persist Bluesky tracker with race-safe retries
         run: |
           git config user.name 'Daily Yield Bluesky Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
-          bash persist_social_state.sh bluesky_tracker.json
+          files=(bluesky_tracker.json)
+          # the health file is what turns a silent exit code into a readable reason
+          [ -f SOCIAL_CREDENTIAL_HEALTH.json ] && files+=(SOCIAL_CREDENTIAL_HEALTH.json)
+          bash persist_social_state.sh "${files[@]}"
 
   # One destination per network at a time. Tumblr's OAuth refresh token is rotated
   # by the job that publishes, so two simultaneous Tumblr jobs for two articles
@@ -214,12 +260,35 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python tumblr_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
+        run: |
+          set +e
+          code=0
+          # A 429 or a short API outage must not cost the day its post, and a failure that prints
+          # nothing is a failure nobody can fix: three bounded attempts, then the network's own
+          # words go into SOCIAL_CREDENTIAL_HEALTH.json, where social_guard.py stops sending work to
+          # a broken network and the owner can read why a post is missing. The step still fails when
+          # the post did not go out, so recovery keeps trying until it is actually delivered.
+          for attempt in 1 2 3; do
+            python tumblr_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}' > /tmp/social_tumblr.txt 2>&1
+            code=$?
+            cat /tmp/social_tumblr.txt
+            [ "$code" = "0" ] && break
+            [ "$attempt" = "3" ] || sleep $((attempt * 45))
+          done
+          python social_credential_health.py --platform tumblr --code "$code" --output /tmp/social_tumblr.txt || true
+          if [ "$code" != "0" ]; then
+            reason="$(python social_credential_health.py --platform tumblr --extract --output /tmp/social_tumblr.txt)"
+            echo "::error title=Tumblr post not delivered::${reason:-the publisher printed no reason; its output is above}"
+          fi
+          exit "$code"
       - name: Persist Tumblr token and tracker with race-safe retries
         run: |
           git config user.name 'Daily Yield Tumblr Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
-          bash persist_social_state.sh tumblr_token.enc tumblr_tracker.json
+          files=(tumblr_token.enc tumblr_tracker.json)
+          # the health file is what turns a silent exit code into a readable reason
+          [ -f SOCIAL_CREDENTIAL_HEALTH.json ] && files+=(SOCIAL_CREDENTIAL_HEALTH.json)
+          bash persist_social_state.sh "${files[@]}"
 
   mastodon:
     needs: plan
@@ -258,9 +327,32 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python mastodon_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}'
+        run: |
+          set +e
+          code=0
+          # A 429 or a short API outage must not cost the day its post, and a failure that prints
+          # nothing is a failure nobody can fix: three bounded attempts, then the network's own
+          # words go into SOCIAL_CREDENTIAL_HEALTH.json, where social_guard.py stops sending work to
+          # a broken network and the owner can read why a post is missing. The step still fails when
+          # the post did not go out, so recovery keeps trying until it is actually delivered.
+          for attempt in 1 2 3; do
+            python mastodon_publisher.py --content-mode '${{ needs.plan.outputs.content_mode }}' --target-url '${{ needs.plan.outputs.target_url }}' > /tmp/social_mastodon.txt 2>&1
+            code=$?
+            cat /tmp/social_mastodon.txt
+            [ "$code" = "0" ] && break
+            [ "$attempt" = "3" ] || sleep $((attempt * 45))
+          done
+          python social_credential_health.py --platform mastodon --code "$code" --output /tmp/social_mastodon.txt || true
+          if [ "$code" != "0" ]; then
+            reason="$(python social_credential_health.py --platform mastodon --extract --output /tmp/social_mastodon.txt)"
+            echo "::error title=Mastodon post not delivered::${reason:-the publisher printed no reason; its output is above}"
+          fi
+          exit "$code"
       - name: Persist Mastodon tracker with race-safe retries
         run: |
           git config user.name 'Daily Yield Mastodon Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
-          bash persist_social_state.sh mastodon_tracker.json
+          files=(mastodon_tracker.json)
+          # the health file is what turns a silent exit code into a readable reason
+          [ -f SOCIAL_CREDENTIAL_HEALTH.json ] && files+=(SOCIAL_CREDENTIAL_HEALTH.json)
+          bash persist_social_state.sh "${files[@]}"

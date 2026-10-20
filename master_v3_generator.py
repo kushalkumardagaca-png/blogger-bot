@@ -12,7 +12,8 @@ from pathlib import Path
 import requests
 from master_article_v2 import words
 from photo_selector import choose_photos
-from content_policy_guard import POLICY_VERSION,audit_text
+from content_policy_guard import (DANGEROUS_PATTERNS, DECEPTIVE_PATTERNS, FAKE_EXPERIENCE_PATTERNS,
+                     POLICY_VERSION, REGULATED_PROMOTION_PATTERNS, audit_text)
 from content_originality import assert_cross_corpus_original,contextualize_cross_corpus_repeats
 
 UA='DailyYieldMasterV3/1.0 (dailyyield.official@gmail.com)';BLOG='https://dailyyield.blogspot.com'
@@ -167,6 +168,30 @@ def validate_section(paragraphs,source_ids):
  for number in re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',text):
   if not any(number in s for s in source_ids.values()):return False,f'unsupported number {number}'
  return True,''
+POLICY_TRIP=re.compile('|'.join(FAKE_EXPERIENCE_PATTERNS+DECEPTIVE_PATTERNS+REGULATED_PROMOTION_PATTERNS
+                                +DANGEROUS_PATTERNS),re.I)
+
+def quoted_window(tokens,start,length):
+  """A stretch of the source that the site's own content policy can actually carry as a quotation.
+
+  The policy refuses an unsupported first-person product or investment claim, a guaranteed-return
+  promise and a few related shapes wherever they appear - including inside a quoted excerpt - and
+  one such sentence in a 4,000-word draft used to destroy the whole article: it is what cost an
+  evergreen slot on 20 October 2026 after the validator rejected the package. Nothing here edits
+  the source's meaning. The window simply steps forward through the same record and quotes a
+  different stretch of it, which is what a human researcher does when a passage is unusable.
+  """
+  total=len(tokens)
+  if total<8:return ''
+  size=min(max(8,length),total)
+  for skip in range(8):
+    at=(start+skip*size)%max(1,total)
+    if at+size>total:at=max(0,total-size)
+    text=' '.join(tokens[at:at+size]).strip(' ,;:')
+    if not text or POLICY_TRIP.search(text):continue
+    return text
+  return ''
+
 def deterministic_section(section_heading,sources):
  """Quota-independent evidence prose with topic-specific, non-repeating syntax."""
  import hashlib
@@ -180,7 +205,7 @@ def deterministic_section(section_heading,sources):
  )
  paragraphs=[]
  for cursor in range(10):
-  source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));start=(cursor*37)%max(1,len(tokens)-42);excerpt=' '.join(tokens[start:start+38]).strip(' ,;:')
+  source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));excerpt=quoted_window(tokens,(cursor*37)%max(1,len(tokens)-42),38)
   if not excerpt:continue
   title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16]);provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider}]]"
   seed=int(hashlib.sha256(f"{heading_text}|{title}|{cursor}".encode()).hexdigest()[:8],16)
@@ -323,7 +348,7 @@ def extracted_summary(sections):
  for index,section in enumerate(sections,1):
   heading_text=clean(section.get('heading','Evidence section'))
   body=clean(' '.join(section.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|the cited record]]'
-  body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body);start=(index*19)%max(1,len(tokens)-34);excerpt=' '.join(tokens[start:start+32])
+  body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body);excerpt=quoted_window(tokens,(index*19)%max(1,len(tokens)-34),32) or ' '.join(tokenized(heading_text)[:6])
   out.append(f'For {heading_text}, the evidence recap begins with this bounded point: {excerpt}. {cite} The practical reading of {heading_text} is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This {heading_text} recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast.')
  total=words(' '.join(out))
  while total<600:
@@ -340,7 +365,7 @@ def support(sections):
   heading=clean(s.get('heading','the evidence'))
   body=clean(' '.join(s.get('paragraphs') or []));cite_match=re.search(r'\[\[S\d+\|[^]]+\]\]',body);cite=cite_match.group(0) if cite_match else '[[S1|the cited record]]'
   body=re.sub(r'\[\[[SI]\d+\|[^]]+\]\]',' ',body);tokens=re.findall(r"[A-Za-z0-9][A-Za-z0-9’'\-]*",body)
-  start=(index*23+11)%max(1,len(tokens)-38);excerpt=' '.join(tokens[start:start+36])
+  excerpt=quoted_window(tokens,(index*23+11)%max(1,len(tokens)-38),36) or ' '.join(tokenized(heading)[:6])
   if index<5:
    answer=(f'The bounded answer for {heading} starts with the source-specific observation that {excerpt}. {cite} '
            f'For {heading}, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. '

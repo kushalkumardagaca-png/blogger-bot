@@ -425,6 +425,21 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
+check('A social network that cannot publish says so in the repository, not only in a job log',
+      # 22 social runs failed on 20 October 2026 with nothing but "exit code 1" to show for it, and
+      # nine of the day's 36 posts were never delivered. The guard already refuses to dispatch to a
+      # network recorded as unusable; this makes sure the record is written and persisted by every
+      # channel, so the reason is readable from the repository without log access.
+      (ROOT/'social_credential_health.py').exists()
+      and all(f'--platform {name} ' in (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
+              for name in ('facebook', 'bluesky', 'tumblr', 'mastodon'))
+      and 'files+=(SOCIAL_CREDENTIAL_HEALTH.json)' in (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
+      and 'blocked_platforms' in (ROOT/'social_guard.py').read_text()
+      and 'def reason_from' in (ROOT/'social_credential_health.py').read_text()
+      and '[redacted]' in (ROOT/'social_credential_health.py').read_text())
+check('A quoted source passage cannot smuggle a rejected claim into a Master article',
+      'def quoted_window' in v3_generator
+      and "' '.join(tokens[start:start+" not in v3_generator)
 check('Master headlines are clipped on a word boundary, never inside a word',
       'def head_clip' in v3_generator and '[:46]' not in v3_generator
       and 'for token in value.split():' in v3_generator

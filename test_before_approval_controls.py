@@ -210,7 +210,9 @@ class SocialSafetyTests(unittest.TestCase):
     def test_workflow_outputs_are_not_accidentally_quoted(self):
         text=(ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
         self.assertNotIn('already="yes"',text);self.assertEqual(text.count("echo 'already=yes'"),4)
-        self.assertEqual(text.count('exit "$code"'),4)
+        # two per channel now: the dedupe guard's exit and the publish block's own exit, so a
+        # network that fails is still a failed step and recovery keeps trying
+        self.assertEqual(text.count('exit "$code"'),8)
     def test_each_network_publishes_one_destination_at_a_time(self):
         # The group is scoped to the network, not to network+destination: Tumblr and
         # Facebook both rotate a single OAuth refresh token per job, so two parallel
