@@ -7,6 +7,10 @@ on:
       - '.github/master-trending-live-trigger'
   schedule:
     # Trending generation budget: 150 minutes plus 15 minutes spare.
+    # Inside that lead, preparation now runs to its own 30-minute clock (see
+    # time_budget.py): a stalled download or a hung model call fails the slot fast and
+    # the ten-minute recovery cycle starts a fresh attempt, so no single run can sit on
+    # a slot for hours. Nothing here cancels a healthy run by age - the run stops itself.
     - cron: '0 22 * * *'   # Prepare 03:30 IST → live 06:15
     - cron: '0 1 * * *'    # Prepare 06:30 IST → live 09:15
     - cron: '0 6 * * *'    # Prepare 11:30 IST → live 14:15
@@ -78,6 +82,7 @@ jobs:
       - name: Research, write, validate and select three photos
         id: prepare
         env:
+          MASTER_PREPARATION_BUDGET_MINUTES: '30'
           OLLAMA_API_URL: http://127.0.0.1:11434
           OLLAMA_MODEL: qwen2.5:1.5b
           GITHUB_TOKEN: ${{ github.token }}
@@ -91,16 +96,25 @@ jobs:
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
           MASTER_BACKFILL: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
         run: |
+          started=$SECONDS
           for attempt in 1 2; do
             if python master_v3_pipeline.py --kind trending --slot "${{ steps.slot.outputs.value }}" --prepare; then
-              exit 0
+              echo "Preparation took $((SECONDS-started)) seconds of the 1800-second budget."; exit 0
             fi
-            echo "Preparation attempt $attempt failed."
-            if [ "$attempt" -eq 2 ]; then exit 1; fi
+            spent=$((SECONDS-started))
+            echo "Preparation attempt $attempt failed after $spent seconds."
+            # A second attempt is worth its while only when the first one fell over quickly - a
+            # model that refused to start, a git race. Grinding for twenty minutes and then
+            # repeating it would double the run and still finish nothing, so the day's ten-minute
+            # recovery cycle is asked to start a fresh attempt instead.
+            if [ "$attempt" = "2" ] || [ "$spent" -gt 600 ]; then
+              if [ "$spent" -gt 600 ]; then echo "Not retrying in this run: $spent of the 1800-second budget is already used; recovery will dispatch a fresh attempt."; fi
+              exit 1
+            fi
             echo "Rolling back partial package state before the final retry."
             git reset --hard HEAD
             git clean -fd master_packages/dynamic assets/master scheduled_ready
-            sleep $((attempt * 20))
+            sleep 20
           done
           exit 1
       # Failure detail stays in the run summary, the run annotation and retained

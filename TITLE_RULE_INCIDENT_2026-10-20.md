@@ -121,3 +121,33 @@ means signing in at www.tumblr.com as **dailyyield-official**, then re-running
 `python tumblr_oauth_bootstrap.py` and committing the new `tumblr_token.enc`. No password, code or
 token should ever be pasted into a chat.
 
+## The 40-minute clock (owner's rule, 20 October 2026 evening)
+
+Preparation was planned at 10-50 minutes and must never run past 40. It had no internal limit at
+all: the evergreen job allowed 120 minutes and the trending job 150, so one stalled Commons
+download or one hung model call could sit on a slot for most of the day while the slot stayed empty.
+
+Now:
+
+* `time_budget.py` sets one deadline for the whole attempt - research, writing, validation and
+  photo selection share it: **30 minutes** (`MASTER_PREPARATION_BUDGET_MINUTES`).
+* Every network read in that path asks the clock how long it may wait, so a request can no longer
+  block for a minute when the run has ten seconds left. `requests` calls in the writing path that
+  carried a fixed 30-90 second wait are now bounded; only the two Google authorisation exchanges
+  keep a fixed 30 seconds, because those must succeed for anything else to be possible.
+* Section writing runs on 5 workers instead of 3, which is the speed the shorter clock needs:
+  ten sections in two waves rather than four.
+* The prepare step is capped at **34 minutes** and the job at **40 minutes**.
+* An attempt that fails after more than 10 minutes is **not** repeated inside the same run - that
+  would only double the wait. The run exits, says why, and the ten-minute recovery cycle starts a
+  fresh attempt with a full clock. Attempts that fail quickly (a model that would not start, a git
+  race) still get their in-run retry.
+* Every outcome records `budgetMinutes`, `elapsedMinutes` and `remainingMinutes` in
+  `MASTER_AUTOMATION_STATUS.json`, so "how long did the last attempt take" is answerable from the
+  repository without job-log access, and the run prints "Preparation used X of 30 budgeted
+  minutes".
+
+The clock never lowers a quality gate: if the article cannot be written, sourced, validated and
+illustrated with three licensed photographs inside 30 minutes, the slot is reported as missing and
+tried again - it is not filled with something thinner.
+

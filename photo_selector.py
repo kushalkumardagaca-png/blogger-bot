@@ -5,6 +5,7 @@ import hashlib,html,json,re,urllib.parse
 from datetime import datetime,timezone
 from pathlib import Path
 import imagehash,requests
+from time_budget import BUDGET
 from PIL import Image,ImageStat
 from io import BytesIO
 from source_photography import photographic_candidate,source_alt
@@ -37,8 +38,11 @@ def commons_candidates(brief):
  pages={}
  for q in dict.fromkeys(x for x in queries if x.strip()):
   params={'action':'query','format':'json','generator':'search','gsrnamespace':6,'gsrlimit':50,'gsrsearch':q,'prop':'imageinfo','iiprop':'url|size|extmetadata','iiurlwidth':1600}
+  # Checked before the try, because this loop swallows every exception as "try the next query";
+  # a search that starts with no time left is only a slower way of failing the same slot.
+  if BUDGET.out():raise BUDGET.stop('searching Commons for an editorial photograph')
   try:
-   r=requests.get('https://commons.wikimedia.org/w/api.php',params=params,headers={'User-Agent':UA},timeout=60);r.raise_for_status();pages.update(r.json().get('query',{}).get('pages',{}))
+   r=requests.get('https://commons.wikimedia.org/w/api.php',params=params,headers={'User-Agent':UA},timeout=BUDGET.seconds(60));r.raise_for_status();pages.update(r.json().get('query',{}).get('pages',{}))
   except Exception:continue
  out=[]
  for p in pages.values():
@@ -80,7 +84,8 @@ def choose_photos(briefs,slug,article_key):
   funnel[f'placement-{placement}-candidates']=len(candidates);funnel[f'placement-{placement}-matched']=len(ranked)
   for semantic,c in ranked:
    try:
-    rr=requests.get(c['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
+    if BUDGET.out():raise BUDGET.stop('downloading a candidate photograph')
+    rr=requests.get(c['download_url'],headers={'User-Agent':UA},timeout=BUDGET.seconds(35));rr.raise_for_status();raw=rr.content
     image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
     if w<1200 or h<650:continue
     gray=image.resize((256,144)).convert('L');contrast=ImageStat.Stat(gray).stddev[0]
@@ -99,7 +104,7 @@ def choose_photos(briefs,slug,article_key):
     funnel[f'placement-{placement}-pool_fallback']=bool(entry)
     if entry and photographic_candidate(entry):
      try:
-      rr=requests.get(entry['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
+      rr=requests.get(entry['download_url'],headers={'User-Agent':UA},timeout=BUDGET.seconds(35));rr.raise_for_status();raw=rr.content
       image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
       if w>=1200 and h>=650:
        gray=image.resize((256,144)).convert('L');contrast=ImageStat.Stat(gray).stddev[0]
@@ -125,7 +130,7 @@ def choose_photos(briefs,slug,article_key):
     funnel[f'placement-{placement}-cross_pool']=bool(entry)
     if entry and photographic_candidate(entry):
      try:
-      rr=requests.get(entry['download_url'],headers={'User-Agent':UA},timeout=35);rr.raise_for_status();raw=rr.content
+      rr=requests.get(entry['download_url'],headers={'User-Agent':UA},timeout=BUDGET.seconds(35));rr.raise_for_status();raw=rr.content
       image=Image.open(BytesIO(raw)).convert('RGB');w,h=image.size
       if w>=1200 and h>=650:
        gray=image.resize((256,144)).convert('L');contrast=ImageStat.Stat(gray).stddev[0]
@@ -139,7 +144,7 @@ def choose_photos(briefs,slug,article_key):
      except Exception:winner=None
    except Exception:
     winner=None
-  if not winner:raise RuntimeError(f'no unique licensed professional photograph passed for placement {placement} '+json.dumps(funnel,sort_keys=True))
+  if not winner:raise RuntimeError(f'no unique licensed professional photograph passed for placement {placement} '+json.dumps(funnel,sort_keys=True)+f' [{BUDGET.note()}]')
   c,image,sha,ph,score=winner;w,h=image.size;target=16/9
   if w/h>target:nw=int(h*target);image=image.crop(((w-nw)//2,0,(w+nw)//2,h))
   else:nh=int(w/target);image=image.crop((0,(h-nh)//2,w,(h+nh)//2))

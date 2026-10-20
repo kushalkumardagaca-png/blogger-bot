@@ -299,10 +299,12 @@ check('Fast model acceleration has a quota-independent completion path',
       and master_workflows.count('models: read')>=2
       and master_workflows.count('GITHUB_TOKEN: ${{ github.token }}')>=2)
 check('Bounded provider waits preserve the under-thirty-minute generation target',
-      'timeout=60' in v3_generator and 'timeout=90' in v3_generator
+      # the waits are no longer fixed numbers but what the run's own clock allows, so a slow
+      # network cannot spend minutes the preparation no longer has
+      'timeout=BUDGET.seconds(60)' in v3_generator and 'timeout=BUDGET.seconds(90)' in v3_generator
       and 'for attempt in range(2)' in v3_generator)
-check('Ten bounded sections use controlled three-worker parallel generation',
-      'ThreadPoolExecutor(max_workers=3' in v3_generator and 'as_completed(futures)' in v3_generator)
+check('Ten bounded sections use controlled five-worker parallel generation',
+      'ThreadPoolExecutor(max_workers=5' in v3_generator and 'as_completed(futures)' in v3_generator)
 check('Overnight pair dispatch retries each category independently',
       'for attempt in 1 2 3 4 5' in prewarm_text
       and 'dispatch master_trending_writer.yml' in prewarm_text
@@ -440,6 +442,19 @@ check('A social network that cannot publish says so in the repository, not only 
 check('A quoted source passage cannot smuggle a rejected claim into a Master article',
       'def quoted_window' in v3_generator
       and "' '.join(tokens[start:start+" not in v3_generator)
+check('A Master preparation run works to a stated clock, not an open-ended timeout',
+      # the owner's rule of 20 October 2026: preparation is planned in 10-50 minutes and must
+      # never pass 40, so a stalled download or a hung model call fails the slot fast and the
+      # ten-minute recovery cycle gets a fresh attempt instead of the rest of the day
+      (ROOT/'time_budget.py').exists()
+      and 'from time_budget import BUDGET' in v3_generator
+      and 'from time_budget import BUDGET' in (ROOT/'photo_selector.py').read_text()
+      and 'from time_budget import BUDGET' in (ROOT/'master_v3_pipeline.py').read_text()
+      and all("MASTER_PREPARATION_BUDGET_MINUTES: '30'" in (ROOT/'.github/workflows'/w).read_text()
+              for w in ('master_evergreen_writer.yml','master_trending_writer.yml'))
+      and 'timeout-minutes:' not in master_workflows  # the run stops itself; nothing is killed by age
+      and '1800-second budget' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text()
+      and 'timeout=90' not in v3_generator and 'timeout=35' not in (ROOT/'photo_selector.py').read_text())
 check('A deterministic section is measured with its citations attached, not before',
       # the 400-490 word contract is enforced on the final text; measuring first and appending
       # '[[S1|provider]]' afterwards produced a 504-word section and a lost slot on 20 Oct 2026

@@ -13,6 +13,7 @@ from auto_blogger_publisher import publish_to_blogger
 from brand_identity import ensure_brand_identity
 from continuous_motion import ensure as ensure_continuous_motion
 from master_article_v2 import render, validate
+from time_budget import BUDGET
 from publication_preflight import assert_publishable
 from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
@@ -210,7 +211,7 @@ def prepare(kind,slot):
  if item.get('id')!=original.get('id'):
   plan['trending'][slot]=item;write(PLAN,plan)
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
- write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'replaced_topic_id':original.get('id') if item.get('id')!=original.get('id') else None,'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT))});print(target)
+ write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'replaced_topic_id':original.get('id') if item.get('id')!=original.get('id') else None,'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT)),**BUDGET.note()});print(f"Preparation used {BUDGET.elapsed_minutes()} of {BUDGET.minutes:.0f} budgeted minutes");print(target)
 
 def _package_or_build(kind,slot,item):
     """A substituted topic has no package yet, so build it before publishing."""
@@ -293,5 +294,5 @@ def main():
   try:
    stage='master-v3'
   except Exception:stage='master-v3'
-  write(STATUS,{'status':'FAIL','publication_enabled':os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true','kind':a.kind,'slot':a.slot,'stage':stage,'error_type':type(exc).__name__,'error':str(exc)[:1000]});raise
+  write(STATUS,{'status':'FAIL','publication_enabled':os.environ.get('MASTER_PUBLICATION_ENABLED','').casefold()=='true','kind':a.kind,'slot':a.slot,'stage':stage,'error_type':type(exc).__name__,'error':str(exc)[:1000],**BUDGET.note()});raise
 if __name__=='__main__':main()

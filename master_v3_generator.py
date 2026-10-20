@@ -12,6 +12,7 @@ from pathlib import Path
 import requests
 from master_article_v2 import words
 from photo_selector import choose_photos
+from time_budget import BUDGET
 from content_policy_guard import (DANGEROUS_PATTERNS, DECEPTIVE_PATTERNS, FAKE_EXPERIENCE_PATTERNS,
                      POLICY_VERSION, REGULATED_PROMOTION_PATTERNS, audit_text)
 from content_originality import assert_cross_corpus_original,contextualize_cross_corpus_repeats
@@ -30,12 +31,12 @@ def low_exposure_posts():
  while len(posts)<300:
   params={'status':'live','fetchBodies':'true','maxResults':50,'fields':'items(id,title,url,content,labels,published),nextPageToken'}
   if page:params['pageToken']=page
-  data=requests.get(base+'/posts',headers={'Authorization':'Bearer '+token},params=params,timeout=60).json();posts+=data.get('items',[]);page=data.get('nextPageToken')
+  data=requests.get(base+'/posts',headers={'Authorization':'Bearer '+token},params=params,timeout=BUDGET.seconds(60)).json();posts+=data.get('items',[]);page=data.get('nextPageToken')
   if not page:break
  access=requests.post('https://oauth2.googleapis.com/token',data={'client_id':cid,'client_secret':secret,'refresh_token':refresh,'grant_type':'refresh_token'},timeout=30);access.raise_for_status()
  from datetime import date,timedelta
  body={'startDate':str(date.today()-timedelta(days=90)),'endDate':str(date.today()-timedelta(days=1)),'dimensions':['page'],'rowLimit':25000};site=urllib.parse.quote(os.environ.get('GSC_SITE_PROPERTY','').strip() or 'sc-domain:dailyyield.blogspot.com',safe='')
- rr=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access.json()['access_token']},json=body,timeout=60);rr.raise_for_status();scores={row['keys'][0].rstrip('/'):(float(row.get('clicks',0)),float(row.get('impressions',0))) for row in rr.json().get('rows',[])}
+ rr=requests.post(f'https://www.googleapis.com/webmasters/v3/sites/{site}/searchAnalytics/query',headers={'Authorization':'Bearer '+access.json()['access_token']},json=body,timeout=BUDGET.seconds(60));rr.raise_for_status();scores={row['keys'][0].rstrip('/'):(float(row.get('clicks',0)),float(row.get('impressions',0))) for row in rr.json().get('rows',[])}
  chosen=sorted(posts,key=lambda p:(*scores.get(p.get('url','').rstrip('/'),(0,0)),p.get('published','')))[:15];out=[]
  for p in chosen:
   match=re.search(r'<img[^>]+src=["\']([^"\']+)',p.get('content',''),re.I);out.append({'title':p.get('title','Daily Yield article'),'url':p.get('url',''),'image':html.unescape(match.group(1)) if match else '','label':next((x for x in p.get('labels',[]) if x not in ('Kushal K. Daga','Kushal Daga')),'Daily Yield')})
@@ -67,15 +68,18 @@ def parse_paragraphs(text):
 
 def ollama_text(prompt,max_tokens=1400):
  endpoint=os.environ.get('OLLAMA_API_URL','http://127.0.0.1:11434').rstrip('/')+'/api/chat';model=os.environ.get('OLLAMA_MODEL','qwen2.5:1.5b')
- r=requests.post(endpoint,json={'model':model,'messages':[{'role':'system','content':'Write accurate source-bounded financial journalism in plain paragraphs. Never output JSON or markdown.'},{'role':'user','content':prompt}],'stream':False,'options':{'temperature':0.2,'num_predict':max_tokens,'num_ctx':8192}},timeout=90);r.raise_for_status();return str(r.json()['message']['content'])
+ r=requests.post(endpoint,json={'model':model,'messages':[{'role':'system','content':'Write accurate source-bounded financial journalism in plain paragraphs. Never output JSON or markdown.'},{'role':'user','content':prompt}],'stream':False,'options':{'temperature':0.2,'num_predict':max_tokens,'num_ctx':8192}},timeout=BUDGET.seconds(90));r.raise_for_status();return str(r.json()['message']['content'])
 def github_text(prompt,max_tokens=1400):
  token=os.environ.get('GITHUB_TOKEN','').strip()
  if not token:raise RuntimeError('repository model token unavailable')
- r=requests.post('https://models.github.ai/inference/chat/completions',headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':os.environ.get('GITHUB_MODELS_MODEL','openai/gpt-4.1-mini'),'messages':[{'role':'system','content':'Write accurate source-bounded financial journalism in plain paragraphs. Never output JSON or markdown.'},{'role':'user','content':prompt}],'temperature':0.15,'max_tokens':max_tokens},timeout=60)
+ r=requests.post('https://models.github.ai/inference/chat/completions',headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':os.environ.get('GITHUB_MODELS_MODEL','openai/gpt-4.1-mini'),'messages':[{'role':'system','content':'Write accurate source-bounded financial journalism in plain paragraphs. Never output JSON or markdown.'},{'role':'user','content':prompt}],'temperature':0.15,'max_tokens':max_tokens},timeout=BUDGET.seconds(60))
  if not r.ok:raise RuntimeError(f'repository model HTTP {r.status_code}: {r.text[:300]}')
  return str(r.json()['choices'][0]['message'].get('content') or '')
 def text_call(prompt,max_tokens=1400):
  errors=[]
+ # Starting a call the run has no time to finish would only delay the honest failure that lets
+ # recovery begin a fresh attempt, so the clock is checked before the writer is asked for prose.
+ if BUDGET.out():raise BUDGET.stop('writing a section')
  # Owner-authorized repository-native GitHub Models is the fast primary writer.
  # The quota-independent local model remains an emergency fallback only.
  for fn in (github_text,ollama_text):
@@ -102,7 +106,7 @@ def discover_sources(item,kind):
   seen.add(key);out.append({'name':clean(name) or 'Retrieved source','title':clean(source_title),'url':url,'text':clean(text)[:6000],'overlap':overlap,'retrieved_at':time.strftime('%Y-%m-%d',time.gmtime())})
  for source in item.get('sources',[]):
   try:
-   r=requests.get(source['url'],headers={'User-Agent':UA},timeout=30);body=clean(r.text)
+   r=requests.get(source['url'],headers={'User-Agent':UA},timeout=BUDGET.seconds(30));body=clean(r.text)
    add(source.get('name'),title,source['url'],body)
   except Exception:pass
  # Topic-triggered primary-source discovery keeps high-stakes evergreen articles
@@ -114,7 +118,7 @@ def discover_sources(item,kind):
   official=[('Internal Revenue Service','Gig economy tax center','https://www.irs.gov/businesses/gig-economy-tax-center'),('Internal Revenue Service','Manage taxes for a gig economy business','https://www.irs.gov/businesses/small-businesses-self-employed/manage-taxes-for-your-gig-work'),('U.S. Small Business Administration','Calculate your startup costs','https://www.sba.gov/business-guide/plan-your-business/calculate-your-startup-costs')]
  for name,source_title,url in official:
   try:
-   r=requests.get(url,headers={'User-Agent':UA},timeout=30);r.raise_for_status();add(name,source_title,url,clean(r.text))
+   r=requests.get(url,headers={'User-Agent':UA},timeout=BUDGET.seconds(30));r.raise_for_status();add(name,source_title,url,clean(r.text))
   except Exception:pass
  horizon='30d' if kind=='trending' else '365d'
  for query in query_variants:
@@ -122,7 +126,7 @@ def discover_sources(item,kind):
    if len(out)>=12:break
    try:
     url='https://news.google.com/rss/search?q='+urllib.parse.quote(query+suffix+f' when:{horizon}')+'&hl=en-US&gl=US&ceid=US:en'
-    root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=30).content)
+    root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=BUDGET.seconds(30)).content)
     for node in root.findall('.//item'):
      add(clean(node.findtext('source') or 'Google News'),node.findtext('title'),node.findtext('link'),node.findtext('description'))
    except Exception:pass
@@ -136,7 +140,7 @@ def discover_sources(item,kind):
   for query in (f'{evidence_terms} site:.gov guide data',f'{evidence_terms} site:.edu research',f'{evidence_terms} report methodology statistics finance'):
    try:
     url='https://www.bing.com/search?format=rss&q='+urllib.parse.quote(query)
-    root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=30).content)
+    root=ET.fromstring(requests.get(url,headers={'User-Agent':UA},timeout=BUDGET.seconds(30)).content)
     for node in root.findall('.//item'):
      add('Bing web evidence',node.findtext('title'),node.findtext('link'),node.findtext('description'))
    except Exception:pass
@@ -145,7 +149,7 @@ def discover_sources(item,kind):
   if len(out)>=12:break
   try:
    params={'search':query,'per-page':25,'select':'id,display_name,publication_year,authorships,abstract_inverted_index,primary_location'}
-   for work in requests.get('https://api.openalex.org/works',params=params,headers={'User-Agent':UA},timeout=45).json().get('results',[]):
+   for work in requests.get('https://api.openalex.org/works',params=params,headers={'User-Agent':UA},timeout=BUDGET.seconds(45)).json().get('results',[]):
     inv=work.get('abstract_inverted_index') or {};size=max((max(v) for v in inv.values() if v),default=-1)+1;tokens=['']*size
     for word,positions in inv.items():
      for pos in positions:
@@ -487,7 +491,7 @@ def build(item,kind,target):
  def create(plan):
   index,h,primary,secondary=plan
   return index,{'heading':h,'paragraphs':write_section(title,h,index+1,[(primary,sources[primary-1]),(secondary,sources[secondary-1])])}
- with ThreadPoolExecutor(max_workers=3,thread_name_prefix='master-v3-section') as executor:
+ with ThreadPoolExecutor(max_workers=5,thread_name_prefix='master-v3-section') as executor:
   futures=[executor.submit(create,plan) for plan in plans]
   for future in as_completed(futures):
    index,section=future.result();sections[index]=section
