@@ -1,12 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-20",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "18a6240d22247ff2",
   "kind": "evergreen",
   "slot": 3,
-  "topic_id": "18a6240d22247ff2",
-  "replaced_topic_id": null,
+  "slot_key": "2026-10-20:evergreen:3",
+  "date": "2026-10-20",
+  "category": "Insurance & Risk Protection",
+  "evergreen_category": "Insurance & Risk Protection",
   "title": "4 Different Types of Life Insurance & How",
-  "package": "master_packages/dynamic/2026-10-20-evergreen-18a6240d22247ff2.json",
-  "html": "scheduled_ready/2026-10-20-evergreen-3-4-different-types-of-life-insurance-how.html"
+  "url": "https://dailyyield.blogspot.com/2026/10/4-different-types-of-life-insurance-how.html",
+  "published_at": "2026-10-20T09:52:05-07:00"
 }
