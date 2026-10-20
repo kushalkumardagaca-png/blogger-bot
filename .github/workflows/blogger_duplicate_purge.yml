@@ -47,7 +47,10 @@ jobs:
           python-version: '3.12'
       - name: Count exact-title duplicates (and remove them only when told to)
         run: |
+          # On 20 October 2026 the owner chose to let the daily scheduled run fix things by
+          # itself. A manual run still defaults to a report, so a person can look first.
           action="${{ github.event.inputs.action }}"
+          if [[ -z "$action" && "${{ github.event_name }}" == "schedule" ]]; then action="apply"; fi
           [[ -n "$action" ]] || action="audit"
           cap="${{ github.event.inputs.max }}"
           [[ -n "$cap" ]] || cap="25"
@@ -66,8 +69,9 @@ jobs:
                 f"{report['removable']} removable, {report['protectedByEvidence']} protected by evidence, "
                 f"{report['selectedThisRun']} selected (cap {report['batchCap']})")
           if report["mode"] == "AUDIT_ONLY" and report["removable"]:
-              print("::notice title=Duplicates still live::run this workflow with action=apply to remove "
-                    "them; each one is archived into deleted_posts/ before anything is deleted")
+              print("::notice title=Duplicates still live::tonight\u2019s 01:40 IST scheduled run removes "
+                    "them by itself (25 a day, archived into deleted_posts/ first); a manual "
+                    "run with action=audit reports without touching anything")
           if report["failed"]:
               print(f"::warning title={len(report['failed'])} removals failed::see BLOGGER_DUPLICATE_AUDIT.json")
           PY

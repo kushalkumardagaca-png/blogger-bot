@@ -54,11 +54,36 @@ The repository's own control tower already agrees: it sets `TARGET = 10_000_000`
    needs clicks in your Google accounts, not code.
 5. **An owned audience.** The newsletter, then the four social networks already wired.
 
-## What "CONTRACT" means for your daily numbers
+## What the owner decided on 20 October, and what changed because of it
 
-Nothing is blocked or deleted. The automation still writes. The gate says: while Google indexes
-one page at a time, publish **2 master articles and 1 news wire per day** instead of the current
-volume, and let those be the pages Google is told about first. Publishing five articles a day
-into a blog with one indexed page does not add five pages of traffic; it adds five more pages
-that tell Google this site produces bulk, near-identical content. When the indexed count rises,
-the gate raises the cap on its own - it is arithmetic on Google's numbers, not a mood.
+Two decisions, both recorded here because they override what a measurement alone would do.
+
+**1. The publishing robots keep running at full volume: 10 master articles and 11 news wires a
+day.** They are not being cut to the 3 a day the gate suggests. Instead the plan is the hub
+strategy: get Google to index the main daily page, and let that page hand out the articles.
+
+That decision exposed a real defect, which is now fixed. Every one of the ~550 stories links to
+`/p/daily-news.html` and `/p/article.html`, so a crawler standing on any article should be able
+to walk to the hub and then onto today's work. Measured on the live hub: the hub's news data is
+refreshed every day and is current, but the hub's HTML has **53 links and not one of them points
+at a blog post** - every article link on it is built by JavaScript after the page loads. A robot
+that does not run that script sees a dead end, which fits Search Console's 360
+"discovered - currently not indexed" URLs exactly. `frozen_hub_refresh.py` now maintains a plain
+HTML link index inside the hub (12 newest, real `<a href>`, no styles, no scripts, no new
+headings, so the AdSense freeze rules still hold), refreshed by the Content Experience Repair job
+at 07:55 IST daily.
+
+**2. The two clean-ups apply themselves daily instead of waiting for a button.** The duplicate
+pile removal (25 a day) and the headline repair (40 a day) now run `--apply` on their nightly
+schedule; a manual run still defaults to a report. Both archive or back up everything they touch
+into this repository before changing anything, and both hold back any URL the operation depends
+on.
+
+## What "CONTRACT" still means
+
+The gate's verdict is a measurement, not an order: while Google indexes one page at a time, 21
+submissions a day mostly add pages that tell Google this site produces bulk, similar content.
+Publishing continues as the owner chose; what the gate controls is *what gets announced to Google
+first* - 40 URLs a day in a ranked list, hubs and their stories ahead of the long tail - and it
+raises the cap on its own when the indexed count rises.
+

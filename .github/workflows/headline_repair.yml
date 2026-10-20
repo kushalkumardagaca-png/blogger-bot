@@ -49,7 +49,10 @@ jobs:
           python-version: '3.12'
       - name: Read the real headline back out of each article (only when told to, write it)
         run: |
+          # On 20 October 2026 the owner chose to let the daily scheduled run fix things by
+          # itself. A manual run still defaults to a report, so a person can look first.
           action="${{ github.event.inputs.action }}"
+          if [[ -z "$action" && "${{ github.event_name }}" == "schedule" ]]; then action="apply"; fi
           [[ -n "$action" ]] || action="audit"
           cap="${{ github.event.inputs.max }}"
           [[ -n "$cap" ]] || cap="40"
@@ -69,8 +72,8 @@ jobs:
                 f"{report['selectedThisRun']} selected (cap {report['batchCap']}), "
                 f"{len(report['repaired'])} headlines written")
           if report["mode"] == "AUDIT_ONLY" and report["repairable"]:
-              print("::notice title=Headlines still cut off::Actions -> Blogger Headline Repair -> "
-                    "Run workflow -> action=apply fixes them; every post is backed up first")
+              print("::notice title=Headlines still cut off::tonight\u2019s 01:50 IST scheduled run repairs "
+                    "them by itself (40 a day, backed up to HEADLINE_REPAIR_BACKUP.json.gz first)")
           if report["failed"]:
               print(f"::warning title={len(report['failed'])} headline writes failed::see HEADLINE_REPAIR.json")
           PY

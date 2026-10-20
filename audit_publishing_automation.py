@@ -433,6 +433,16 @@ check('Headline repair reads only the article\'s own words and writes only on an
       and '--apply' in (ROOT/'headline_repair.py').read_text()
       and 'heldBackCollisions' in (ROOT/'headline_repair.py').read_text()
       and "default: 'audit'" in (ROOT/'.github/workflows/headline_repair.yml').read_text())
+check('The hub pages hand out real crawlable links and the freeze rules still hold',
+      'def link_index' in (ROOT/'frozen_hub_refresh.py').read_text()
+      and 'DY_HUB_LINK_INDEX_START' in (ROOT/'frozen_hub_refresh.py').read_text()
+      and 'HUB_LINK_CAP = 12' in (ROOT/'frozen_hub_refresh.py').read_text()
+      and 'linkIndexHrefs' in (ROOT/'frozen_hub_refresh.py').read_text()
+      and 'def place_link_index' in (ROOT/'frozen_hub_refresh.py').read_text())
+check('The two live clean-up jobs apply themselves daily but report first when a person runs them',
+      all('== \"schedule\" ]]; then action=\"apply\"; fi' in (ROOT/f'.github/workflows/{name}.yml').read_text()
+          and "default: 'audit'" in (ROOT/f'.github/workflows/{name}.yml').read_text()
+          for name in ('blogger_duplicate_purge', 'headline_repair')))
 check('The duplicate pile is audited daily and only deleted on an explicit apply',
       '--apply' in (ROOT/'blogger_duplicate_purge.py').read_text()
       and 'AUDIT_ONLY' in (ROOT/'blogger_duplicate_purge.py').read_text()

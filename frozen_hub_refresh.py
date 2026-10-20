@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Routine card/data refresh only; preserve all existing hub structure and code."""
 from __future__ import annotations
-import hashlib, json, re
+import hashlib, html, json, re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -61,6 +61,50 @@ def refresh_article_cards(document, posts, categories, card, now=None):
     return document, changed
 
 
+# The hub pages are the crawl path. Every one of the blog's ~550 stories links to
+# /p/daily-news.html and /p/article.html, so a search robot standing on a story should be able
+# to walk from there onto today's articles - which is exactly the shape the operation wants:
+# get the hub indexed, and let the hub hand out the articles. Measured on the live hub on
+# 20 October 2026, however: the news snapshot data is refreshed daily and current, but the
+# page HTML contains 53 anchor tags and 0 of them point at a blog post. Every article link is
+# built by JavaScript after load, so a crawler that does not run that script sees a dead end,
+# which matches Search Console's 360 "discovered - currently not indexed" URLs. This block is
+# the fix inside the freeze rules: a plain HTML link index, in markers this job owns, with no
+# stylesheet, script or heading changes.
+HUB_LINK_CAP = 12
+LINK_START = '<!-- DY_HUB_LINK_INDEX_START -->'
+LINK_END = '<!-- DY_HUB_LINK_INDEX_END -->'
+
+
+def link_index(posts, want_news, cap=HUB_LINK_CAP):
+    """Plain hrefs to the newest articles of one kind, newest first."""
+    rows = [post for post in posts
+            if (("News" in (post.get("labels") or [])) == bool(want_news)) and post.get("url")]
+    rows.sort(key=lambda post: str(post.get("published", "")), reverse=True)
+    rows = rows[:cap]
+    if not rows:
+        return "", 0
+    lead = "Latest news editions on Daily Yield" if want_news else "Latest articles on Daily Yield"
+    items = "".join(
+        '<li><a href="' + html.escape(str(row["url"]), quote=True) + '">'
+        + html.escape(re.sub(r"\s+", " ", str(row.get("title") or "Untitled")).strip()) + "</a></li>"
+        for row in rows)
+    body = (LINK_START + '<div class="dy-hub-links"><p class="dy-hub-links-lead">' + lead +
+            '</p><ul class="dy-hub-links-list">' + items + '</ul></div>' + LINK_END)
+    return body, len(rows)
+
+
+def place_link_index(document, index_html):
+    """Replace the hub link index in place, or add it once if the hub has never had one."""
+    if not index_html:
+        return document, False
+    if LINK_START in document and LINK_END in document:
+        replaced = re.sub(re.escape(LINK_START) + r".*?" + re.escape(LINK_END),
+                          lambda _match: index_html, document, count=1, flags=re.S)
+        return replaced, replaced != document
+    return document + index_html, True
+
+
 def refresh_existing_hubs(headers, posts, pages, put, article_card, news_item, categories):
     rows = []
     for page in pages:
@@ -77,6 +121,8 @@ def refresh_existing_hubs(headers, posts, pages, put, article_card, news_item, c
             for marker in ('window.ENH_NEWS_SNAPSHOT=', '(function(w,d){var items='):
                 new, ok = replace_json_value(new, marker, data)
                 refreshed += int(ok)
+        index_html, index_hrefs = link_index(posts, path != '/p/article.html')
+        new, index_placed = place_link_index(new, index_html)
         # No style addition/change, no new scripts, tracking, headings or sections.
         styles = lambda s: re.findall(r'<style\b.*?</style>', s, re.I|re.S)
         assert styles(old) == styles(new), 'freeze forbids stylesheet changes'
@@ -84,7 +130,8 @@ def refresh_existing_hubs(headers, posts, pages, put, article_card, news_item, c
         assert re.findall(r'<h[1-6]\b.*?</h[1-6]>', old, re.I|re.S) == re.findall(r'<h[1-6]\b.*?</h[1-6]>', new, re.I|re.S), 'freeze forbids changing hub headings'
         if new != old:
             put('pages', page, headers, new)
-        rows.append({'path': path, 'dataBlocks': refreshed, 'changed': new != old,
+        rows.append({'path': path, 'dataBlocks': refreshed, 'linkIndexHrefs': index_hrefs,
+                     'linkIndexWritten': index_placed, 'changed': new != old,
                      'beforeSha256': hashlib.sha256(old.encode()).hexdigest(),
                      'afterSha256': hashlib.sha256(new.encode()).hexdigest()})
     # Existing theme card lookup: data file only, no Blogger theme upload.
