@@ -1,20 +1,15 @@
 {
-  "generatedAt": "2026-10-20T14:00:35.994615+05:30",
+  "generatedAt": "2026-10-20T14:40:57.373222+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 11,
-  "confirmedByLivePost": 11,
+  "confirmedPublications": 12,
+  "confirmedByLivePost": 12,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [],
   "actions": [
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-2",
-      "applied": true
-    },
     {
       "type": "preparation_recovery",
       "key": "master-evergreen-2",
@@ -23,6 +18,13 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-3",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-2",
+      "platform": "tumblr",
+      "routeIndex": 0,
       "applied": true
     }
   ],
