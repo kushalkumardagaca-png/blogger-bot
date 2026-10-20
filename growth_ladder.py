@@ -59,7 +59,9 @@ def measure() -> dict:
     clicks = search.get("clicks")
     followers = (channels.get("totals") or {}).get("followers")
     ga4 = load("GA4_MEASUREMENT.json")
-    ga4_views = (ga4.get("totals") or {}).get("viewsPerDay") if ga4.get("ok") else None
+    ga4_totals = (ga4.get("totals") or {}) if ga4.get("ok") else {}
+    ga4_views = ga4_totals.get("viewsPerDay")
+    ga4_readers = ga4_totals.get("dailyReaders")
     search_rate = round(clicks / 28, 3) if isinstance(clicks, int) else None
     return {
         "asOf": (index.get("checkedAt") or baseline.get("checkedAt") or "")[:10] or None,
@@ -74,6 +76,12 @@ def measure() -> dict:
         "viewsBasis": ("GA4_PAGEVIEWS_7_DAY_AVERAGE" if isinstance(ga4_views, (int, float))
                        else "SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28" if search_rate is not None else None),
         "ga4Status": ga4.get("status"),
+        # the milestone is counted in people, per the owner's clarification on 20 October 2026:
+        # 50,000 readers a day, each opening one or two articles. Until GA4 can be read this stays
+        # None rather than standing in for itself with search clicks.
+        "dailyReaders": ga4_readers if isinstance(ga4_readers, int) else None,
+        "dailyReadersBasis": "GA4_ENGAGED_SESSIONS_LATEST_DAY" if isinstance(ga4_readers, int)
+                              else "UNMEASURABLE_UNTIL_GA4_IS_READABLE",
         "measurableFollowers": followers if isinstance(followers, int) else None,
         "gateVerdict": capacity.get("decision") or capacity.get("verdict"),
         "declaredTarget": tower.get("target") if isinstance(tower.get("target"), (int, float)) else None,
@@ -224,6 +232,10 @@ def main() -> int:
              f"countable social followers. Indexing gate: **{today.get('gateVerdict') or 'UNKNOWN'}**.", "",
              f"Views are counted as **{today.get('viewsBasis') or 'not measured'}**; GA4 status: "
              f"**{today.get('ga4Status') or 'no report'}**.", "",
+             f"Readers (the milestone's own unit: people who open one or two articles a day) today: "
+             f"**{today.get('dailyReaders') if today.get('dailyReaders') is not None else 'not measurable yet'}** "
+             f"- basis **{today.get('dailyReadersBasis')}**. 50,000 is counted in this unit, not in "
+             f"pageviews.", "",
              f"Committed by {DEADLINE:%d %b %Y}: indexed pages {SUB_TARGET_INDEXED[0]}-{SUB_TARGET_INDEXED[1]}, "
              f"{SUB_TARGET_VIEWS[0]}-{SUB_TARGET_VIEWS[1]} views a day.", ""]
     if last_done:

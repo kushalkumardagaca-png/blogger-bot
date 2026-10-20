@@ -40,6 +40,18 @@ PRIORITY = ROOT / "INDEX_PRIORITY.json"
 # Blogger's duplicate suffix: the same title published twice gets "_01450325346" appended.
 DUPLICATE_SLUG = re.compile(r"_\d{8,}\.html?/?$")
 UTILITY_PATH = re.compile(r"/p/|/search|indexnow-key|\?m=1|/robots|\.xml$")
+
+# Owner decision, 20 October 2026: stop trying to get 551 article URLs indexed and get the main
+# pages in first - the hubs, the calculators, the markets and snapshot pages, and the standing
+# information pages (about us, contact us, disclaimer, privacy). They are thirteen URLs, they are
+# what the whole site links to, and a search engine that trusts them has a place to send readers
+# to. Article pages are held, not deleted: they stay published and linked from the hubs, so the
+# daily 21 keeps running, and Google reaches them through the hub instead of through a queue that
+# has indexed one page in ninety days.
+MAIN_PAGE_URL = re.compile(r"https://dailyyield\.blogspot\.com/p/(?!indexnow-key|robots)[a-z0-9\-_]+\.html?$")
+MAIN_PAGE_PRIORITY = ("daily-news", "article", "markets-today", "global-snapshot", "calculator",
+                      "money-atlas", "for-corporate")
+MAIN_PAGE_CAP = 16
 NEWS_SLUG = re.compile(r"(finance-news|markets|crypto|commodities|ipos|global-finance|news-\d{4}-)")
 
 
@@ -162,6 +174,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--today", default="", help="ISO day to judge against (default: now UTC)")
     parser.add_argument("--quiet", action="store_true")
+    parser.add_argument("--include-articles", action="store_true",
+                        help="announce ranked article URLs too, instead of the main pages only")
     arguments = parser.parse_args()
 
     today = datetime.strptime(arguments.today, "%Y-%m-%d").date() if arguments.today else datetime.now(
@@ -204,6 +218,21 @@ def main() -> int:
         if len(announce) >= 40:
             break
 
+    main_pages = sorted(
+        {url for url in (list(pool) + [str(row.get("url") or "") for row in (status.get("rows") or [])])
+         if MAIN_PAGE_URL.search(str(url))},
+        key=lambda url: (MAIN_PAGE_PRIORITY.index(next((key for key in MAIN_PAGE_PRIORITY
+                                                        if key in url), "")) if any(
+            key in url for key in MAIN_PAGE_PRIORITY) else len(MAIN_PAGE_PRIORITY), url))
+    if main_pages and not arguments.include_articles:
+        announce = [{"url": url, "score": 1000 - index,
+                     "why": ["main page: the site's own front doors, indexed before any article"]}
+                    for index, url in enumerate(main_pages[:MAIN_PAGE_CAP])]
+        suppressed += [{"url": url, "reason": "article URL held while the main pages get indexed "
+                                             "(owner decision, 20 October 2026)"}
+                       for _points, url, _why in ranked]
+        ranked = [(row["score"], row["url"], row["why"]) for row in announce]
+
     # IndexNow that never actually submits is the failure mode this replaced: the queue grew
     # while nothing left it, and the workflow printed a line and stayed green.
     submitted_total = len(indexnow.get("submitted") or {})
@@ -215,6 +244,11 @@ def main() -> int:
         "announcementQueue": {"pending": len(indexnow.get("pending") or []), "submittedEver": submitted_total,
                              "indexnowLooksBlocked": submitted_total == 0 and bool(indexnow.get("pending")),
                              "announceTop": len(announce), "suppressedDuplicatesAndUtility": len(suppressed)},
+        "mainPagePolicy": {"on": bool(main_pages) and not arguments.include_articles,
+                           "mainPagesFound": len(main_pages), "announced": min(len(main_pages), MAIN_PAGE_CAP),
+                           "articleUrlsHeld": len(suppressed) if main_pages and not arguments.include_articles else 0,
+                           "pages": main_pages[:MAIN_PAGE_CAP],
+                           "decidedBy": "owner, 20 October 2026: index the main pages first"},
         "evidenceFiles": {name: bool(path.exists()) for name, path in (
             ("INDEX_STATUS_REPORT.json", STATUS), ("AUDIENCE_GROWTH_BASELINE.json", BASELINE),
             ("INDEXNOW_STATE.json", INDEXNOW), ("SEARCH_DEMAND_TRENDS.json", DEMAND))},
@@ -223,8 +257,11 @@ def main() -> int:
     save(PRIORITY, {"day": today.isoformat(), "decision": verdict["decision"],
                     "announce": [row["url"] for row in announce],
                     "suppressCount": len(suppressed),
-                    "note": "Announce only these. The suppressed list is duplicate-title and utility URLs; "
-                            "submitting them spends the crawl budget the articles need."})
+                    "note": ("Announce only the main pages: thirteen hub, calculator, markets and standing "
+                             "information URLs, published 20 October 2026 by owner decision. Article URLs stay "
+                             "published and linked from these pages; they are held back from announcement, not "
+                             "removed. The suppressed list is article, duplicate-title and utility URLs whose "
+                             "announcement would spend the crawl budget the front doors need.")})
     lines = [f"# Indexing capacity gate · {today.isoformat()}", "",
              f"Decision: **{verdict['decision']}**", ""]
     if verdict.get("measured"):
@@ -243,7 +280,13 @@ def main() -> int:
               f"{report['announcementQueue']['submittedEver']} ever accepted"
               + (" — **nothing is actually being submitted**, so the queue is only a list"
                  if report['announcementQueue']['indexnowLooksBlocked'] else ""),
-              f"Priority list for today's announcement: {report['announcementQueue']['announceTop']} URLs; "
+              ("Main pages announced: **%d** of %d found; **%d** article and utility URLs held back "
+              "(owner decision: index the front doors first)."
+              % (report["mainPagePolicy"]["announced"], report["mainPagePolicy"]["mainPagesFound"],
+                 report["mainPagePolicy"]["articleUrlsHeld"])
+              if report["mainPagePolicy"]["on"] else
+              "Main-page-first policy is off for this run: ranked article URLs are being announced."), "",
+             f"Priority list for today's announcement: {report['announcementQueue']['announceTop']} URLs; "
               f"{report['announcementQueue']['suppressedDuplicatesAndUtility']} duplicate/utility URLs held back.",
               ""]
     MD.write_text("\n".join(lines), encoding="utf-8")

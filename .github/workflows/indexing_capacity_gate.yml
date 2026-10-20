@@ -40,6 +40,8 @@ jobs:
         run: python audience_channels.py
       - name: Read the pageviews the site already collects
         run: python ga4_measurement.py
+      - name: Ask what Google News and Discover would see
+        run: python google_news_readiness.py
       - name: Put today's measurement on the ladder
         run: python growth_ladder.py
       - name: Report the decision loudly enough to matter
@@ -75,6 +77,21 @@ jobs:
                                                if ga4.get("ok") else f" - {ga4.get('remedy')}"))
           if not ga4.get("ok") and ga4.get("status") != "CREDENTIALS_MISSING":
               print("::warning title=Views are not measurable yet::" + str(ga4.get("remedy") or ""))
+          news = json.loads(pathlib.Path("GOOGLE_NEWS_READINESS.json").read_text())
+          if news.get("status") == "MEASURED":
+              counts = news["feed"].get("issueCounts", {})
+              print(f"Google News readiness: {news['feed']['feedItems']} feed entries, "
+                    f"{news['feed']['itemsWithIssues']} with a listing defect; pages inspected "
+                    f"{len(news.get('pages') or [])}")
+              for row in news.get("blockersForPublisherCenter") or []:
+                  print(f" - {row['gap']} on {row['urls']} URL(s): {row['meaning']}")
+              if counts.get("truncatedHeadline"):
+                  print(f"::warning title=Cut headlines still in the feed::{counts['truncatedHeadline']} "
+                        "of the newest entries end on a fragment; headline_repair.py works through the "
+                        "backlog at 40 a day")
+          else:
+              print("::notice title=News feed unreadable::the readiness check could not read the public "
+                    "feed from this network; nothing is assumed")
           ladder = json.loads(pathlib.Path("GROWTH_LADDER.json").read_text())
           current = next((r for r in ladder["ladder"] if r["verdict"] in ("ON TRACK", "BEHIND")), None)
           print("ladder:", ladder["commitment"]["weeksRemaining"], "weekly rungs to",
@@ -95,14 +112,14 @@ jobs:
           git config user.name "Daily Yield Arena Controller"
           git config user.email "dailyyield.official@gmail.com"
           mkdir -p /tmp/dy-cap
-          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json GA4_MEASUREMENT.json GA4_MEASUREMENT.md; do
+          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json GA4_MEASUREMENT.json GA4_MEASUREMENT.md GOOGLE_NEWS_READINESS.json GOOGLE_NEWS_READINESS.md; do
             if [ -f "$f" ]; then cp "$f" /tmp/dy-cap/; fi
           done
           for attempt in 1 2 3 4 5; do
             git fetch -q origin main
             git reset -q --hard origin/main
             cp /tmp/dy-cap/* . 2>/dev/null || true
-            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json GA4_MEASUREMENT.json GA4_MEASUREMENT.md 2>/dev/null || true
+            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json GA4_MEASUREMENT.json GA4_MEASUREMENT.md GOOGLE_NEWS_READINESS.json GOOGLE_NEWS_READINESS.md 2>/dev/null || true
             if git diff --staged --quiet; then echo "no growth evidence to record"; exit 0; fi
             git commit -q -m "Record indexing capacity gate and growth ladder [skip ci]" || true
             if git push -q origin HEAD:main; then echo "capacity gate and ladder recorded"; exit 0; fi

@@ -33,8 +33,9 @@ class Harness(unittest.TestCase):
 
 class Reading(Harness):
     def test_seven_days_of_real_rows_become_a_daily_average(self):
-        rows = [{"date": f"2026-10-{13 + index:02d}", "views": 100 + index, "activeUsers": 60 + index,
-                 "sessions": 70 + index} for index in range(7)]
+        # the Data API returns the newest day first, and the reader metric reads that first row
+        rows = [{"date": f"2026-10-{19 - index:02d}", "views": 100 + index, "activeUsers": 60 + index,
+                 "sessions": 70 + index, "engagedSessions": 46 - index} for index in range(7)]
         report = self.run_with({"rows": rows, "propertyId": "412345678",
                                 "siteTag": {"checked": True, "reachable": True,
                                             "measurementIds": [ga4.MEASUREMENT_ID], "installedHere": True}})
@@ -43,6 +44,10 @@ class Reading(Harness):
         self.assertEqual(report["totals"]["views"], 721)
         self.assertEqual(report["totals"]["viewsPerDay"], 103.0)
         self.assertEqual(report["peak"]["views"], 106)
+        self.assertEqual(report["daily"][0]["date"], "2026-10-19")
+        self.assertEqual(report["totals"]["engagedSessions"], 301)
+        self.assertEqual(report["totals"]["dailyReaders"], 46,
+                         "the newest whole day, because the milestone counts people per day")
         self.assertIn("views per day", ga4.MD.read_text(encoding="utf-8"))
 
     def test_a_live_tag_over_an_empty_property_is_not_reported_as_zero_readers(self):

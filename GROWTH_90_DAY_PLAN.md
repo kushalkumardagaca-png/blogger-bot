@@ -119,3 +119,29 @@ which is exactly why the number is worth computing daily.
 What I am sure of, and what you can hold me to each Monday in `GROWTH_LADDER.md`: indexed pages
 1 → 150-400, and 150-1,500 measurable views a day by 31 December. Those rungs are checked
 against Google's own numbers by the job, and a rung that has not arrived may not claim a verdict.
+
+## Three decisions added on 20 October, later in the same day
+
+**1. The 21 articles a day are maintained, and a duplicate is answered with fresh material, not
+with deletions.** The nightly duplicate job now runs `duplicate_refresh.py`: it gives each twin its
+own headline (`Sold property eight different ways to — 15 October 2026 edition`) and a note built
+from the sentences only that edition carries - or, when the copy says nothing new, a line that sends
+the reader to the live version. The URL, the images and the text stay. Bulk deletion survives only
+as a manual choice in "Run workflow" (`action=delete`), with every post archived first. The refresh
+job cannot delete: a test asserts the word `DELETE` never appears in it, and the report's own
+`deletions` field is fixed at 0.
+
+**2. Indexing goes to the front doors only.** `indexing_capacity_gate.py` now announces the 13
+main pages - `daily-news`, `article`, `markets-today`, `global-snapshot`, the calculator,
+money-atlas, for-corporate, about-us, contact-us, disclaimer, privacy, terms - and holds every
+article URL back with the reason printed beside it. Article pages are not removed or unpublished:
+they stay live and linked from those 13 pages, so the crawl path the plan depends on exists, while
+Google's attention is asked for 13 URLs instead of 551. The old behaviour is still available with
+`--include-articles`.
+
+**3. The milestone is counted in readers, not pageviews.** 50,000 a day means 50,000 people each
+opening one or two articles. `ga4_measurement.py` now asks GA4 for `engagedSessions` and the growth
+ladder carries a `dailyReaders` line, with its basis named -
+`GA4_ENGAGED_SESSIONS_LATEST_DAY`, or `UNMEASURABLE_UNTIL_GA4_IS_READABLE` until the read-only token
+exists. Search clicks remain the fallback for views, clearly labelled as such.
+

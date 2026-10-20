@@ -439,10 +439,35 @@ check('The hub pages hand out real crawlable links and the freeze rules still ho
       and 'HUB_LINK_CAP = 12' in (ROOT/'frozen_hub_refresh.py').read_text()
       and 'linkIndexHrefs' in (ROOT/'frozen_hub_refresh.py').read_text()
       and 'def place_link_index' in (ROOT/'frozen_hub_refresh.py').read_text())
-check('The two live clean-up jobs apply themselves daily but report first when a person runs them',
-      all('== \"schedule\" ]]; then action=\"apply\"; fi' in (ROOT/f'.github/workflows/{name}.yml').read_text()
-          and "default: 'audit'" in (ROOT/f'.github/workflows/{name}.yml').read_text()
-          for name in ('blogger_duplicate_purge', 'headline_repair')))
+check('The nightly clean-ups act by themselves but never delete, and a person must choose to delete',
+      '== \"schedule\" ]]; then action=\"apply\"; fi' in (ROOT/'.github/workflows/headline_repair.yml').read_text()
+      and "default: 'audit'" in (ROOT/'.github/workflows/headline_repair.yml').read_text()
+      and 'echo refresh || echo audit' in (ROOT/'.github/workflows/blogger_duplicate_purge.yml').read_text()
+      and 'duplicate_refresh.py --apply' in (ROOT/'.github/workflows/blogger_duplicate_purge.yml').read_text()
+      and 'delete)  python blogger_duplicate_purge.py --apply' in (ROOT/'.github/workflows/blogger_duplicate_purge.yml').read_text()
+      and "default: 'audit'" in (ROOT/'.github/workflows/blogger_duplicate_purge.yml').read_text())
+check('A duplicate is answered with fresh material, and the refresh job cannot delete anything',
+      'def unique_sentences' in (ROOT/'duplicate_refresh.py').read_text()
+      and 'def new_title' in (ROOT/'duplicate_refresh.py').read_text()
+      and 'ARCHIVE' in (ROOT/'duplicate_refresh.py').read_text()
+      and 'DELETE' not in (ROOT/'duplicate_refresh.py').read_text()
+      and '"deletions": 0' in (ROOT/'duplicate_refresh.py').read_text())
+check('Google News readiness is measured from the public feed, and an unreadable feed stays unreadable',
+      'FEED_UNREADABLE' in (ROOT/'google_news_readiness.py').read_text()
+      and 'nothing is assumed' in (ROOT/'google_news_readiness.py').read_text()
+      and 'os.environ' not in (ROOT/'google_news_readiness.py').read_text()
+      and 'googleapis.com/blogger' not in (ROOT/'google_news_readiness.py').read_text()
+      and 'GOOGLE_NEWS_READINESS.json' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text())
+check('Indexing starts at the front doors: the main pages, not all 551 URLs',
+      'MAIN_PAGE_URL' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and 'mainPagePolicy' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and '--include-articles' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and 'owner decision, 20 October 2026' in (ROOT/'indexing_capacity_gate.py').read_text())
+check('The milestone is counted in readers, not in pageviews',
+      'engagedSessions' in (ROOT/'ga4_measurement.py').read_text()
+      and 'dailyReaders' in (ROOT/'ga4_measurement.py').read_text()
+      and 'dailyReadersBasis' in (ROOT/'growth_ladder.py').read_text()
+      and 'UNMEASURABLE_UNTIL_GA4_IS_READABLE' in (ROOT/'growth_ladder.py').read_text())
 check('The growth ladder is judged on measured evidence and cannot invent a verdict',
       'NOT_ENOUGH_MEASUREMENT' in (ROOT/'growth_ladder.py').read_text()
       and 'MIN_POINTS_FOR_RATE = 3' in (ROOT/'growth_ladder.py').read_text()

@@ -1,24 +1,27 @@
-name: Blogger Duplicate Pile Audit
+name: Blogger Duplicate Pile
 
-# The free lever that the index measurement actually points at: Blogger published the same
-# title twice often enough to leave "sold-property-eight-different-ways-to_0586614503.html"
-# beside the original, and 360 such URLs are why Search Console says "discovered - currently
-# not indexed" instead of indexing the blog. This job counts them daily and changes nothing;
-# removal is a separate, explicit action that archives every post it touches first.
+# Blogger published the same title twice often enough to leave "sold-property-eight-different-
+# ways-to_0586614503.html" beside the original, and 360 such URLs are part of why Search Console
+# says "discovered - currently not indexed".
+#
+# Owner rule, 20 October 2026: the daily 21 are maintained, so the answer to a duplicate is NOT
+# to remove pages. The nightly run therefore *refreshes* each twin - its own headline plus a note
+# built from the sentences only that edition carries - and keeps its URL, its images and its text.
+# Bulk deletion is still available, but only as an explicit human choice in "Run workflow".
 
 on:
   schedule:
-    - cron: '10 20 * * *'   # 01:40 IST, read-only
+    - cron: '10 20 * * *'   # 01:40 IST: differentiate the twins, delete nothing
   workflow_dispatch:
     inputs:
       action:
-        description: "audit only counts and reports; apply removes the selected duplicates"
+        description: "audit reports, refresh differentiates the twins, delete removes them (manual only)"
         required: true
         type: choice
-        options: ['audit', 'apply']
+        options: ['audit', 'refresh', 'delete']
         default: 'audit'
       max:
-        description: "how many duplicates this run may remove (audit ignores it)"
+        description: "how many duplicate pairs this run may touch"
         required: false
         default: '25'
 
@@ -30,9 +33,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  audit:
+  pile:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     env:
       BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
@@ -45,56 +48,68 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Count exact-title duplicates (and remove them only when told to)
+      - name: Count the pile, refresh the twins, and delete only when a person chooses to
         run: |
-          # On 20 October 2026 the owner chose to let the daily scheduled run fix things by
-          # itself. A manual run still defaults to a report, so a person can look first.
           action="${{ github.event.inputs.action }}"
-          if [[ -z "$action" && "${{ github.event_name }}" == "schedule" ]]; then action="apply"; fi
-          [[ -n "$action" ]] || action="audit"
+          if [[ -z "$action" ]]; then
+            # the nightly default the owner chose on 20 October 2026: refresh, never delete
+            action="$([ "${{ github.event_name }}" == "schedule" ] && echo refresh || echo audit)"
+          fi
           cap="${{ github.event.inputs.max }}"
           [[ -n "$cap" ]] || cap="25"
-          if [ "$action" = "apply" ]; then
-            python blogger_duplicate_purge.py --apply --max "$cap"
-          else
-            python blogger_duplicate_purge.py
-          fi
+          echo "mode: $action (up to $cap pairs)"
+          case "$action" in
+            delete)  python blogger_duplicate_purge.py --apply --max "$cap" ;;
+            refresh) python duplicate_refresh.py --apply --max "$cap" ;;
+            *)       python duplicate_refresh.py ;;
+          esac
       - name: Report what the pile looks like
+        if: always()
         run: |
           python3 - <<'PY'
           import json, pathlib
-          report = json.loads(pathlib.Path("BLOGGER_DUPLICATE_AUDIT.json").read_text())
-          print(f"{report['mode']}: {report['postsScanned']} posts scanned, "
-                f"{report['titleGroups']} duplicate title groups, {report['duplicateUrls']} duplicate URLs, "
-                f"{report['removable']} removable, {report['protectedByEvidence']} protected by evidence, "
-                f"{report['selectedThisRun']} selected (cap {report['batchCap']})")
-          if report["mode"] == "AUDIT_ONLY" and report["removable"]:
-              print("::notice title=Duplicates still live::tonight\u2019s 01:40 IST scheduled run removes "
-                    "them by itself (25 a day, archived into deleted_posts/ first); a manual "
-                    "run with action=audit reports without touching anything")
-          if report["failed"]:
-              print(f"::warning title={len(report['failed'])} removals failed::see BLOGGER_DUPLICATE_AUDIT.json")
+          refresh_path = pathlib.Path("DUPLICATE_REFRESH.json")
+          purge_path = pathlib.Path("BLOGGER_DUPLICATE_AUDIT.json")
+          if refresh_path.exists():
+              report = json.loads(refresh_path.read_text())
+              print(f"refresh {report['mode']}: {report['titleGroups']} duplicate title groups, "
+                    f"{report['twinsFound']} twins, {report['selectedThisRun']} selected "
+                    f"(cap {report['batchCap']}), {len(report['refreshed'])} differentiated, "
+                    f"{len(report['failed'])} failed, {report['deletions']} deleted")
+              if report.get("stopped"):
+                  print(f"::warning title=Refresh stopped before writing::{report['stopped']}")
+          if purge_path.exists():
+              audit = json.loads(purge_path.read_text())
+              print(f"deletion audit {audit['mode']}: {audit['removable']} removable, "
+                    f"{audit['protectedByEvidence']} protected, {len(audit['removed'])} removed")
+              if audit["mode"] == "APPLIED" and audit["removable"]:
+                  print("::notice title=Duplicates were deleted::they are archived in deleted_posts/ "
+                        "and can be republished from there")
+          if not refresh_path.exists() and not purge_path.exists():
+              print("::warning title=No duplicate evidence::neither job produced a report")
           PY
-      - name: Persist the audit and the archive
+      - name: Persist the evidence and the archives
         if: always()
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "Daily Yield Arena Controller"
           git config user.email "dailyyield.official@gmail.com"
-          mkdir -p /tmp/dy-dup
-          for f in BLOGGER_DUPLICATE_AUDIT.json BLOGGER_DUPLICATE_AUDIT.md; do
-            [ -f "$f" ] && cp "$f" /tmp/dy-dup/ || true
+          mkdir -p /tmp/dy-pile
+          for f in DUPLICATE_REFRESH.json DUPLICATE_REFRESH.md BLOGGER_DUPLICATE_AUDIT.json BLOGGER_DUPLICATE_AUDIT.md; do
+            [ -f "$f" ] && cp "$f" /tmp/dy-pile/ || true
           done
-          if [ -d deleted_posts ]; then cp -r deleted_posts /tmp/dy-dup/ || true; fi
+          for d in duplicate_refresh_archive deleted_posts; do
+            [ -d "$d" ] && cp -r "$d" /tmp/dy-pile/ || true
+          done
           for attempt in 1 2 3 4 5; do
             git fetch -q origin main
             git reset -q --hard origin/main
-            cp -r /tmp/dy-dup/* . 2>/dev/null || true
-            git add -A -- BLOGGER_DUPLICATE_AUDIT.json BLOGGER_DUPLICATE_AUDIT.md deleted_posts 2>/dev/null || true
+            cp -r /tmp/dy-pile/* . 2>/dev/null || true
+            git add -A -- DUPLICATE_REFRESH.json DUPLICATE_REFRESH.md BLOGGER_DUPLICATE_AUDIT.json BLOGGER_DUPLICATE_AUDIT.md duplicate_refresh_archive deleted_posts 2>/dev/null || true
             if git diff --staged --quiet; then echo "nothing new to record"; exit 0; fi
-            git commit -q -m "Record duplicate pile audit [skip ci]" || true
-            if git push -q origin HEAD:main; then echo "audit recorded"; exit 0; fi
+            git commit -q -m "Record duplicate pile refresh [skip ci]" || true
+            if git push -q origin HEAD:main; then echo "evidence recorded"; exit 0; fi
             sleep $((attempt * 4))
           done
           echo "::warning title=Evidence not pushed::main stayed busy; the numbers are in this log"

@@ -33,8 +33,8 @@ class Harness(unittest.TestCase):
     def write(self, name, payload):
         (self.tmp / name).write_text(json.dumps(payload))
 
-    def run_gate(self, today="2026-10-20"):
-        with mock.patch("sys.argv", ["indexing_capacity_gate.py", "--today", today, "--quiet"]):
+    def run_gate(self, today="2026-10-20", *extra):
+        with mock.patch("sys.argv", ["indexing_capacity_gate.py", "--today", today, "--quiet", *extra]):
             self.assertEqual(gate.main(), 0)
         return json.loads((self.tmp / "INDEXING_CAPACITY.json").read_text())
 
@@ -88,7 +88,7 @@ class AnnouncementPriority(Harness):
         self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": pending})
 
     def test_duplicate_and_utility_urls_are_held_back_not_announced(self):
-        self.run_gate()
+        self.run_gate("2026-10-20", "--include-articles")
         priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text())
         announced = " ".join(priority["announce"])
         self.assertNotIn("terms-and-conditions", announced)
@@ -97,7 +97,7 @@ class AnnouncementPriority(Harness):
         self.assertEqual(priority["suppressCount"], 3)
 
     def test_fresh_news_and_a_demand_matching_guide_lead_the_list(self):
-        self.run_gate()
+        self.run_gate("2026-10-20", "--include-articles")
         priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text())
         self.assertEqual(len(priority["announce"]), 2, "only the two URLs worth the budget")
         self.assertIn("india-finance-news", priority["announce"][0])
@@ -115,10 +115,53 @@ class AnnouncementPriority(Harness):
         pending = [f"https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-{day:02d}.html"
                    for day in range(1, 13)]
         self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": pending})
-        self.run_gate()
+        self.run_gate("2026-10-20", "--include-articles")
         priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text())
         self.assertEqual(len(priority["announce"]), 2, "twelve copies of one template must not take twelve slots")
         self.assertEqual(priority["suppressCount"], 10)
+
+
+class MainPagesFirst(Harness):
+    """The owner's decision of 20 October 2026: get the front doors indexed, hold the articles."""
+
+    def setUp(self):
+        super().setUp()
+        self.write("INDEX_STATUS_REPORT.json", {"indexed": 1, "urls": 5, "rows": [
+            {"url": "https://dailyyield.blogspot.com/p/article.html"},
+            {"url": "https://dailyyield.blogspot.com/p/daily-news.html"},
+            {"url": "https://dailyyield.blogspot.com/p/markets-today.html"},
+            {"url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html"},
+            {"url": "https://dailyyield.blogspot.com/p/indexnow-key.html"}]})
+        self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": [
+            "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html"]})
+
+    def test_the_main_pages_are_announced_even_though_the_queue_never_asked_for_them(self):
+        priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text()) if self._run() else None
+        self.assertEqual(priority["announce"], [
+            "https://dailyyield.blogspot.com/p/daily-news.html",
+            "https://dailyyield.blogspot.com/p/article.html",
+            "https://dailyyield.blogspot.com/p/markets-today.html"])
+
+    def test_article_urls_are_held_and_say_who_decided(self):
+        report = self._run()
+        self.assertTrue(report["mainPagePolicy"]["on"])
+        self.assertEqual(report["mainPagePolicy"]["articleUrlsHeld"], 1)
+        self.assertIn("owner, 20 October 2026", report["mainPagePolicy"]["decidedBy"])
+
+    def test_the_key_file_page_is_never_treated_as_a_front_door(self):
+        self._run()
+        priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text())
+        self.assertNotIn("indexnow-key", " ".join(priority["announce"]))
+
+    def test_the_old_ranking_still_runs_when_someone_switches_it_on(self):
+        priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text()) if self._run(
+            "--include-articles") else None
+        self.assertIn("india-finance-news-2026-10-20", " ".join(priority["announce"]))
+        self.assertNotIn("markets-today", " ".join(priority["announce"]))
+
+    def _run(self, *extra):
+        self.run_gate("2026-10-20", *extra)
+        return json.loads((self.tmp / "INDEXING_CAPACITY.json").read_text())
 
 
 class Evidence(Harness):

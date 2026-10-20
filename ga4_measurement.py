@@ -123,7 +123,8 @@ def resolve_property(token: str, measurement_id: str) -> tuple[str, str]:
 def daily_rows(token: str, property_id: str) -> list[dict]:
     start = (datetime.now(timezone.utc).date() - timedelta(days=DAYS)).isoformat()
     payload = {"dimensions": ["date"],
-               "metrics": [{"name": "screenPageViews"}, {"name": "activeUsers"}, {"name": "sessions"}],
+               "metrics": [{"name": "screenPageViews"}, {"name": "activeUsers"}, {"name": "sessions"},
+                           {"name": "engagedSessions"}],
                "dateRanges": [{"startDate": start, "endDate": (datetime.now(timezone.utc).date()
                                                                 - timedelta(days=1)).isoformat()}],
                "orderBys": [{"dimension": {"dimensionName": "date"}, "desc": True}], "limit": str(DAYS)}
@@ -137,7 +138,8 @@ def daily_rows(token: str, property_id: str) -> list[dict]:
             day = f"{day[0:4]}-{day[4:6]}-{day[6:8]}"
         rows.append({"date": day, "views": int(float(metrics[0])) if len(metrics) else 0,
                      "activeUsers": int(float(metrics[1])) if len(metrics) > 1 else 0,
-                     "sessions": int(float(metrics[2])) if len(metrics) > 2 else 0})
+                     "sessions": int(float(metrics[2])) if len(metrics) > 2 else 0,
+                     "engagedSessions": int(float(metrics[3])) if len(metrics) > 3 else 0})
     return rows
 
 
@@ -145,6 +147,11 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
     views = sum(row.get("views") or 0 for row in rows)
     users = sum(row.get("activeUsers") or 0 for row in rows)
     sessions = sum(row.get("sessions") or 0 for row in rows)
+    engaged = sum(row.get("engagedSessions") or 0 for row in rows)
+    # the owner's definition of the milestone, written 20 October 2026: not pageviews but people -
+    # at least 50,000 readers a day, each opening one or two articles. GA4's engagedSessions is the
+    # closest honest count of that, because it drops the visit that bounced without reading
+    latest = rows[0] if rows else None
     if rows and views:
         status = "MEASURED"
     elif rows or tag.get("installedHere") is True:
@@ -165,7 +172,11 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
             "measurementId": MEASUREMENT_ID, "siteTag": tag,
             "totals": {"views": views,
                        "viewsPerDay": round(views / DAYS, 1) if measured else None,
-                       "activeUsers": users, "sessions": sessions, "daysWithRows": len(rows)},
+                       "activeUsers": users, "sessions": sessions, "engagedSessions": engaged,
+                       "dailyReaders": (latest or {}).get("engagedSessions") if measured else None,
+                       "readersDefinition": "engaged sessions on the most recent whole day: people "
+                                            "who opened at least one article and did not bounce",
+                       "daysWithRows": len(rows)},
             "daily": rows[:DAYS],
             "peak": max((row for row in rows), key=lambda row: row.get("views") or 0, default=None),
             "remedy": REMEDIES.get(status, "") or None,
@@ -226,10 +237,16 @@ def main() -> int:
     if report["ok"]:
         lines += [f"- views in the last {report['windowDays']} days: **{totals['views']:,}**",
                   f"- **views per day: {totals['viewsPerDay']}**",
-                  f"- active users: **{totals['activeUsers']:,}**, sessions: **{totals['sessions']:,}**", "",
-                  "| day | views | active users | sessions |", "| --- | --- | --- | --- |"]
-        lines += [f"| {row['date']} | {row['views']:,} | {row['activeUsers']:,} | {row['sessions']:,} |"
-                  for row in report.get("daily") or []]
+                  f"- active users: **{totals['activeUsers']:,}**, sessions: **{totals['sessions']:,}**",
+                  (f"- **readers on the latest whole day: {totals['dailyReaders']:,}** "
+                   f"({totals['readersDefinition']})"
+                   if isinstance(totals.get("dailyReaders"), int) else
+                   "- readers on the latest whole day: that property reported no engaged-session "
+                   "count, so it is left unmeasured rather than guessed"), "",
+                  "| day | views | active users | sessions | engaged sessions |",
+                  "| --- | --- | --- | --- | --- |"]
+        lines += [f"| {row['date']} | {row['views']:,} | {row['activeUsers']:,} | {row['sessions']:,} | "
+                  f"{row.get('engagedSessions', 0):,} |" for row in report.get("daily") or []]
     else:
         lines += ["", f"What to do: {report.get('remedy') or 'not specified'}"]
     lines += ["", "This job reads Google's numbers and the public homepage only. It changes nothing "
