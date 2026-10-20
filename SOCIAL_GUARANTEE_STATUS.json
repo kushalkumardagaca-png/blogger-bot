@@ -1,30 +1,13 @@
 {
- "generatedAt": "2026-10-20T06:52:59.060828+05:30",
+ "generatedAt": "2026-10-20T07:15:42.010484+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 3,
- "expectedPosts": 6,
+ "articles": 4,
+ "expectedPosts": 8,
  "articlesWithBothPosts": 1,
- "postsMissing": 2,
- "dispatched": 1,
+ "postsMissing": 4,
+ "dispatched": 2,
  "rows": [
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-20.html",
-   "posts": 1,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 1,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched"
-   ]
-  },
   {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
@@ -45,6 +28,43 @@
    ]
   },
   {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-20.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "paused": true,
+   "attemptsToday": 4,
+   "actions": [
+    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+   ]
+  },
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
    "key": "master-trending-0",
    "title": "Bereaved families could face 'unjust' tax bill",
    "url": "https://dailyyield.blogspot.com/2026/10/bereaved-families-could-face-unjust-tax.html",
@@ -61,7 +81,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T06:52:57.913696+05:30",
+ "liveVerificationSourceAt": "2026-10-20T07:15:39.403852+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 1,
  "syntheticViews": 0,
