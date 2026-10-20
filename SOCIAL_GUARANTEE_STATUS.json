@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T16:01:34.330184+05:30",
+ "generatedAt": "2026-10-20T16:15:49.473120+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 12,
- "expectedPosts": 24,
+ "articles": 13,
+ "expectedPosts": 26,
  "articlesWithBothPosts": 6,
- "postsMissing": 6,
- "dispatched": 0,
+ "postsMissing": 8,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-india",
@@ -205,11 +205,29 @@
    "actions": [
     "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
    ]
+  },
+  {
+   "key": "master-trending-3",
+   "title": "Payoneer: How Stablecoin is Scaling in Cross-B",
+   "url": "https://dailyyield.blogspot.com/2026/10/payoneer-how-stablecoin-is-scaling-in.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T16:01:22.284522+05:30",
+ "liveVerificationSourceAt": "2026-10-20T16:15:42.710634+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
