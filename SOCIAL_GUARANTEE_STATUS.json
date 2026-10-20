@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T22:34:15.631917+05:30",
+ "generatedAt": "2026-10-20T23:10:31.354349+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 20,
  "expectedPosts": 40,
  "articlesWithBothPosts": 10,
  "postsMissing": 10,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-companies",
@@ -21,10 +21,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -40,10 +41,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -59,10 +61,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -134,10 +137,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -153,10 +157,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -172,10 +177,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -233,10 +239,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -266,10 +273,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -285,10 +293,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "paused": true,
-   "attemptsToday": 4,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "route paused after 4 attempts today: the network or its credentials need attention; the post is still counted as missing"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -318,8 +327,11 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
    "actions": [
-    "dispatched"
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
    ]
   },
   {
@@ -339,7 +351,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T22:33:59.824296+05:30",
+ "liveVerificationSourceAt": "2026-10-20T23:10:21.526368+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 10,
  "syntheticViews": 0,
