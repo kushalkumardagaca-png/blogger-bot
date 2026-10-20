@@ -1,6 +1,6 @@
 # Daily Yield — Table 3 Work and Results
 
-**Updated: 19 October 2026, 23:15 IST. AdSense remains the first priority.**
+**Updated: 20 October 2026, 23:14 IST. AdSense remains the first priority.**
 
 **The controls and checks were carried out. This is not a claim that every requirement passed:** photo-count/evidence gaps, any owner-only settings, Analytics permissions and human fact-review limits are shown below.
 
@@ -24,9 +24,9 @@
 | B5 — Names and honest statements | Checked | Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim. |
 | B6 — Facts and originality | Automated check done; human-review limit remains | 535 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected. |
 | B7 — Photographs and rights | Metadata check done | Master photo-count mismatches: 0; figures needing fuller licence/alt/caption evidence: 0; News pools below 40: 0. Exact-file licence metadata recovered separately: 522. No copyright-ownership guarantee or old-photo replacement. |
-| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-19T23:12:35.149670+05:30: 19/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0. |
+| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-20T23:10:21.526368+05:30: 20/21 live, 1 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0. |
 | B9 — Social delivery and duplicates | Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'tumblr': 8, 'mastodon': 0}); this run 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately. |
-| B10 — Search Console | Read existing results | Latest index evidence 2026-10-18T21:16:35.179936+00:00: 1 indexed results, 531 not indexed, 0 inspection errors. No ownership reset or manual bulk request. |
+| B10 — Search Console | Read existing results | Latest index evidence 2026-10-19T21:22:17.510412+00:00: 1 indexed results, 550 not indexed, 0 inspection errors. No ownership reset or manual bulk request. |
 | B11 — Old redirect warnings | Diagnosed, not blindly repaired | 10 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence. |
 | B12 — Existing Analytics installation | Observed without changes | GA4 IDs in source: 1; tag-manager IDs: 0; Analytics loaders: 1. Hooks alone are not counted as working collection. No tag installed. Existing GA4 is not the same as a connected report. |
 | B13 — Existing Analytics reporting | Checked; cannot claim connected | Result: ANALYTICS_SCOPE_MISSING. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured. |
@@ -38,17 +38,17 @@
 
 ## 3. Articles and social posts — separate counts
 
-**Missing among articles due at the saved status time: 2.** Later slots are not failures.
-Article-status source: 2026-10-19T23:12:35.149670+05:30.
+**Missing among articles due at the saved status time: 1.** Later slots are not failures.
+Article-status source: 2026-10-20T23:10:21.526368+05:30.
 
 | Type | Due by that time | Published among those due | Missing |
 |---|---:|---:|---:|
 | News | 11 | 11 | 0 |
-| Evergreen | 5 | 3 | 2 |
+| Evergreen | 5 | 4 | 1 |
 | Trending | 5 | 5 | 0 |
 
-- **Article-related social posts recorded today:** 28; full-day target 42.
-- **Resource promotions recorded today:** 6; full-day target 12. Per network: {'facebook': 2, 'bluesky': 2, 'mastodon': 2}.
+- **Article-related social posts recorded today:** 30; full-day target 42.
+- **Resource promotions recorded today:** 7; full-day target 12. Per network: {'facebook': 2, 'bluesky': 3, 'mastodon': 2}.
 - **Article-social tracker status:** ATTENTION; missing routes 10; duplicate copies 0.
 - These are durable publishing records, not reader counts. Provider checks were used before deleting duplicate copies.
 - The eight-hour schedule is retired and is not counted.
@@ -57,7 +57,7 @@ Article-status source: 2026-10-19T23:12:35.149670+05:30.
 
 | Measure | What we can honestly say |
 |---|---|
-| Google search | Search report dated 2026-10-19T14:38:39.303786+00:00. Seven-day clicks: 0; impressions: 1. |
+| Google search | Search report dated 2026-10-20T03:16:16.452378+00:00. Seven-day clicks: 0; impressions: 1. |
 | Visitor/readership measurement | ANALYTICS_SCOPE_MISSING. Missing reporting is unknown, not zero visitors. |
 | Income and costs | Actual bills and AdSense earnings are not connected here. Profit is unknown, not assumed positive. |
 | Ranking/traffic promises | None. Sending URLs, passing code checks or publishing more articles does not promise indexing, approval or 10 million daily views. |
