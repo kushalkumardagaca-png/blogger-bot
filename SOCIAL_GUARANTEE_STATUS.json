@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T06:18:45.151407+05:30",
+ "generatedAt": "2026-10-20T06:52:59.060828+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 3,
  "expectedPosts": 6,
- "articlesWithBothPosts": 0,
- "postsMissing": 4,
- "dispatched": 0,
+ "articlesWithBothPosts": 1,
+ "postsMissing": 2,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-china",
@@ -22,7 +22,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt"
+    "dispatched"
    ]
   },
   {
@@ -48,26 +48,22 @@
    "key": "master-trending-0",
    "title": "Bereaved families could face 'unjust' tax bill",
    "url": "https://dailyyield.blogspot.com/2026/10/bereaved-families-could-face-unjust-tax.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T06:18:43.393820+05:30",
+ "liveVerificationSourceAt": "2026-10-20T06:52:57.913696+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 0,
+ "articlesWithExactlyTwoPosts": 1,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
