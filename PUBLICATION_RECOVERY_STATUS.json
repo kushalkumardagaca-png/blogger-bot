@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-20T18:31:30.657747+05:30",
+  "generatedAt": "2026-10-20T19:14:49.953136+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 17,
-  "confirmedByLivePost": 17,
+  "confirmedPublications": 18,
+  "confirmedByLivePost": 18,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -21,10 +21,8 @@
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-companies",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
       "applied": true
     }
   ],
@@ -34,6 +32,7 @@
     "social:2026-10-20:news-markets:0",
     "social:2026-10-20:news-europe:0",
     "social:2026-10-20:news-americas:1",
+    "social:2026-10-20:news-companies:0",
     "social:2026-10-20:master-trending-1:0",
     "social:2026-10-20:master-trending-2:0",
     "social:2026-10-20:master-trending-3:0"
