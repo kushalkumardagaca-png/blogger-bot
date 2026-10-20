@@ -1,27 +1,13 @@
 {
- "generatedAt": "2026-10-20T11:44:19.235695+05:30",
+ "generatedAt": "2026-10-20T12:15:49.735182+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 8,
- "expectedPosts": 16,
+ "articles": 9,
+ "expectedPosts": 18,
  "articlesWithBothPosts": 5,
- "postsMissing": 3,
- "dispatched": 0,
+ "postsMissing": 5,
+ "dispatched": 2,
  "rows": [
-  {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-20.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-india",
    "title": "india edition",
@@ -37,9 +23,41 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-20.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-20.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-20.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-20.html",
    "posts": 1,
    "byPlatform": {
     "facebook": 0,
@@ -56,9 +74,9 @@
    ]
   },
   {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-20.html",
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-20.html",
    "posts": 1,
    "byPlatform": {
     "facebook": 0,
@@ -138,7 +156,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T11:44:15.985963+05:30",
+ "liveVerificationSourceAt": "2026-10-20T12:15:46.237744+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
