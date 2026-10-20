@@ -2,7 +2,7 @@
   "status": "PASS",
   "mode": "FREEZE_DATA_ONLY",
   "zero_view": true,
-  "posts_checked": 553,
+  "posts_checked": 554,
   "posts_rewritten": 0,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
@@ -12,10 +12,10 @@
       "path": "/p/daily-news.html",
       "dataBlocks": 2,
       "linkIndexHrefs": 12,
-      "linkIndexWritten": false,
-      "changed": false,
+      "linkIndexWritten": true,
+      "changed": true,
       "beforeSha256": "f87283153f0882e8b7a3c2e15b183d62ce5baec845cbc5ef2552132a1b52007b",
-      "afterSha256": "f87283153f0882e8b7a3c2e15b183d62ce5baec845cbc5ef2552132a1b52007b"
+      "afterSha256": "907449e7b8e160807212528ef3f4328f5b8af6c5fd02124ea27b7b82b60711e7"
     },
     {
       "path": "/p/article.html",
