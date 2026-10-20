@@ -443,6 +443,16 @@ check('The two live clean-up jobs apply themselves daily but report first when a
       all('== \"schedule\" ]]; then action=\"apply\"; fi' in (ROOT/f'.github/workflows/{name}.yml').read_text()
           and "default: 'audit'" in (ROOT/f'.github/workflows/{name}.yml').read_text()
           for name in ('blogger_duplicate_purge', 'headline_repair')))
+check('The growth ladder is judged on measured evidence and cannot invent a verdict',
+      'NOT_ENOUGH_MEASUREMENT' in (ROOT/'growth_ladder.py').read_text()
+      and 'MIN_POINTS_FOR_RATE = 3' in (ROOT/'growth_ladder.py').read_text()
+      and 'FUTURE' in (ROOT/'growth_ladder.py').read_text()
+      and 'GROWTH_LADDER.json' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text()
+      and 'GROWTH_LADDER_HISTORY.json' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text())
+check('The audience counter is public-endpoint only and never calls an unanswered endpoint zero',
+      'os.environ' not in (ROOT/'audience_channels.py').read_text()
+      and 'PUBLIC_OPEN_ENDPOINTS_ONLY' in (ROOT/'audience_channels.py').read_text()
+      and 'AUDIENCE_CHANNELS.json' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text())
 check('The duplicate pile is audited daily and only deleted on an explicit apply',
       '--apply' in (ROOT/'blogger_duplicate_purge.py').read_text()
       and 'AUDIT_ONLY' in (ROOT/'blogger_duplicate_purge.py').read_text()

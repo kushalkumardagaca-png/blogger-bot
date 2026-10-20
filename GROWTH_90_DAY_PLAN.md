@@ -87,3 +87,35 @@ Publishing continues as the owner chose; what the gate controls is *what gets an
 first* - 40 URLs a day in a ranked list, hubs and their stories ahead of the long tail - and it
 raises the cap on its own when the indexed count rises.
 
+## "Be sure about 50,000 a day by 31 December" - the division, since it decides everything
+
+I am not able to promise that, and now you can check me instead of trusting me. Two new jobs
+run at 02:05 IST every day and write the answer into this repository:
+
+`audience_channels.py` counts what can be counted without a single secret:
+**12 followers** total - Bluesky 10 (from 193 posts), Mastodon 2 (from 176 posts), both accounts
+24 days old. Facebook and Tumblr are listed as not measured, because counting them would need a
+token this operation is not allowed to use. Blog pageviews cannot be counted at all yet: no
+analytics property may be installed during the publisher review, and Blogger has no pageview
+API. So today, of the whole "50,000 views a day" question, only the search channel is even
+measurable - and search has produced **1 click in 90 days**, on the homepage echo
+`dailyyield.blogspot.com/?m=1`, not on an article.
+
+`growth_ladder.py` then does the arithmetic and prints the ladder:
+
+- 50,000 visits a day at a normal 2-3% click rate needs **1.67-2.5 million impressions a day**.
+- one indexed page here currently earns **0.07 impressions a day**; reaching that impression
+  count at today's per-page yield would need roughly **23 million indexed pages**. The blog has 551.
+- with indexing at the top of the committed range (400 pages), every page would have to earn
+  about **58,000×** what a page earns today.
+- the operation's own declared target - 10,000,000 by 30 Sep 2027 - averages **14,700 a day**.
+  50,000 a day is 3.4× the average of the entire remaining plan, asked for in 10 weeks.
+
+Until three measured points exist the projection says `NOT_ENOUGH_MEASUREMENT`, and after that it
+projects from the blog's own growth rate, not from a target. In the first test run of that
+projection, a healthy measured gain of 6.7 extra views a day put the 50,000th visit in **2047** -
+which is exactly why the number is worth computing daily.
+
+What I am sure of, and what you can hold me to each Monday in `GROWTH_LADDER.md`: indexed pages
+1 → 150-400, and 150-1,500 measurable views a day by 31 December. Those rungs are checked
+against Google's own numbers by the job, and a rung that has not arrived may not claim a verdict.

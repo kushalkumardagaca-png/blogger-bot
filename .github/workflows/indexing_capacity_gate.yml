@@ -36,6 +36,10 @@ jobs:
           python-version: '3.12'
       - name: Measure the index and decide the cap
         run: python indexing_capacity_gate.py
+      - name: Count the audience that can be counted without a secret
+        run: python audience_channels.py
+      - name: Put today's measurement on the ladder
+        run: python growth_ladder.py
       - name: Report the decision loudly enough to matter
         run: |
           python3 - <<'PY'
@@ -50,6 +54,32 @@ jobs:
               print("::warning title=IndexNow is only queueing::URLs are pending but nothing has ever "
                     "been accepted; check the INDEXNOW_KEY repository secret")
           PY
+      - name: Report where the ladder stands
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          channels = json.loads(pathlib.Path("AUDIENCE_CHANNELS.json").read_text())
+          total = channels.get("totals", {}).get("followers")
+          print(f"countable audience: {total if total is not None else 'unknown'} followers across "
+                f"{channels.get('totals', {}).get('channelsMeasured', 0)} public channels "
+                f"({channels.get('totals', {}).get('channelsNotMeasured')})")
+          per_post = [round(c["followers"] / c["posts"], 4) for c in channels["channels"].values()
+                      if c.get("ok") and c.get("posts")]
+          if per_post:
+              print(f"audience earned per published post: {min(per_post)} to {max(per_post)} - "
+                    "this is the reach test for the social half of the plan")
+          ladder = json.loads(pathlib.Path("GROWTH_LADDER.json").read_text())
+          current = next((r for r in ladder["ladder"] if r["verdict"] in ("ON TRACK", "BEHIND")), None)
+          print("ladder:", ladder["commitment"]["weeksRemaining"], "weekly rungs to",
+                ladder["commitment"]["deadline"], "| projection:", ladder["projection"]["status"])
+          if current and current["verdict"] == "BEHIND":
+              print(f"::warning title=Behind the growth ladder::rung {current['week']} (by {current['by']}) "
+                    f"measured {current.get('measuredIndexedPages')} indexed pages against "
+                    f"{current['indexedPages'][0]}-{current['indexedPages'][1]}")
+          if total == 0:
+              print("::warning title=Owned audience is empty::every view is being borrowed from "
+                    "search engines; the newsletter is the next free thing to build")
+          PY
       - name: Persist the gate and the priority list
         if: always()
         shell: bash
@@ -58,17 +88,17 @@ jobs:
           git config user.name "Daily Yield Arena Controller"
           git config user.email "dailyyield.official@gmail.com"
           mkdir -p /tmp/dy-cap
-          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json; do
+          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json; do
             if [ -f "$f" ]; then cp "$f" /tmp/dy-cap/; fi
           done
           for attempt in 1 2 3 4 5; do
             git fetch -q origin main
             git reset -q --hard origin/main
             cp /tmp/dy-cap/* . 2>/dev/null || true
-            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json 2>/dev/null || true
-            if git diff --staged --quiet; then echo "no capacity change to record"; exit 0; fi
-            git commit -q -m "Record indexing capacity gate [skip ci]" || true
-            if git push -q origin HEAD:main; then echo "capacity gate recorded"; exit 0; fi
+            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json 2>/dev/null || true
+            if git diff --staged --quiet; then echo "no growth evidence to record"; exit 0; fi
+            git commit -q -m "Record indexing capacity gate and growth ladder [skip ci]" || true
+            if git push -q origin HEAD:main; then echo "capacity gate and ladder recorded"; exit 0; fi
             sleep $((attempt * 4))
           done
           echo "::warning title=Evidence not pushed::main stayed busy; the decision is in this run log"
