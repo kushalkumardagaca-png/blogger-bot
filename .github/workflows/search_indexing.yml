@@ -30,7 +30,37 @@ jobs:
         env:
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
           INDEXNOW_KEY_LOCATION: ${{ secrets.INDEXNOW_KEY_LOCATION }}
-        run: python indexnow_submit.py --apply --from-sitemap || echo "IndexNow reported an error"
+        run: |
+          # Announce the ranked list, not the whole sitemap. The index was 1 of 551 URLs when
+          # this changed, and the queue held duplicate-title and utility pages alongside the
+          # articles; announcing everything spends the crawl budget nothing is indexed with.
+          if [ -f INDEX_PRIORITY.json ]; then
+            python3 -c "import json;print('\n'.join(json.load(open('INDEX_PRIORITY.json'))['announce']))" > /tmp/dy-announce.txt
+            if [ -s /tmp/dy-announce.txt ]; then
+              echo "announcing the priority list ($(wc -l < /tmp/dy-announce.txt) URLs) instead of the whole sitemap"
+              python indexnow_submit.py --apply --urls-file /tmp/dy-announce.txt \
+                || echo "::warning title=IndexNow refused the batch::the Bing URL API stays as the safety net"
+            else
+              echo "priority list is empty; falling back to the sitemap"
+              python indexnow_submit.py --apply --from-sitemap || echo "IndexNow reported an error"
+            fi
+          else
+            python indexnow_submit.py --apply --from-sitemap || echo "IndexNow reported an error"
+          fi
+      - name: Say what the announcement queue actually did
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("INDEXNOW_STATE.json")
+          state = json.loads(path.read_text()) if path.exists() else {}
+          accepted = len(state.get("submitted") or {})
+          pending = len(state.get("pending") or [])
+          print(f"indexnow: {accepted} URLs accepted so far, {pending} still queued")
+          if accepted == 0 and pending:
+              print("::warning title=IndexNow never submits::URLs are queued but nothing has ever been "
+                    "accepted; set or repair the INDEXNOW_KEY repository secret")
+          PY
       - name: Persist the indexing record
         if: always()
         shell: bash

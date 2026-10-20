@@ -1,0 +1,74 @@
+name: Indexing Capacity Gate
+
+# The step that turns Search Console's verdict into today's publishing cap. Measured on
+# 20 Oct 2026: 1 indexed URL out of 551 submitted, 360 "discovered - currently not
+# indexed". Until the index grows, every additional URL announced spends the crawl budget
+# the existing articles need, so volume is held by evidence rather than by optimism.
+# Runs before "Search Engine Indexing" so that job announces the list this one ranks.
+
+on:
+  schedule:
+    - cron: '35 20 * * *'   # 02:05 IST, ten minutes ahead of the announcement job
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'indexing_capacity_gate.py'
+      - '.github/workflows/indexing_capacity_gate.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-indexing-capacity
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Measure the index and decide the cap
+        run: python indexing_capacity_gate.py
+      - name: Report the decision loudly enough to matter
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          report = json.loads(pathlib.Path("INDEXING_CAPACITY.json").read_text())
+          print("decision:", report.get("decision"), "| master articles/day:",
+                report.get("masterArticlesPerDay"), "| news wires/day:", report.get("newsWiresPerDay"))
+          for line in report.get("why", []):
+              print(" -", line)
+          queue = report.get("announcementQueue", {})
+          if queue.get("indexnowLooksBlocked"):
+              print("::warning title=IndexNow is only queueing::URLs are pending but nothing has ever "
+                    "been accepted; check the INDEXNOW_KEY repository secret")
+          PY
+      - name: Persist the gate and the priority list
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-cap
+          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json; do
+            if [ -f "$f" ]; then cp "$f" /tmp/dy-cap/; fi
+          done
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp /tmp/dy-cap/* . 2>/dev/null || true
+            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json 2>/dev/null || true
+            if git diff --staged --quiet; then echo "no capacity change to record"; exit 0; fi
+            git commit -q -m "Record indexing capacity gate [skip ci]" || true
+            if git push -q origin HEAD:main; then echo "capacity gate recorded"; exit 0; fi
+            sleep $((attempt * 4))
+          done
+          echo "::warning title=Evidence not pushed::main stayed busy; the decision is in this run log"
