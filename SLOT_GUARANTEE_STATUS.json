@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-20T16:34:04.282303+05:30",
+ "generatedAt": "2026-10-20T17:07:47.301025+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 13,
+ "live": 14,
  "onTime": 13,
- "late": 0,
+ "late": 1,
  "early": 0,
- "pending": 0,
- "overdue": 1,
- "upcoming": 7,
+ "pending": 1,
+ "overdue": 0,
+ "upcoming": 6,
  "dispatched": 1,
  "rows": [
   {
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 739,
+   "minutesFromSlot": 772,
    "publishedAt": "2026-10-19T15:45:05-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 679,
+   "minutesFromSlot": 712,
    "publishedAt": "2026-10-19T16:37:45-07:00"
   },
   {
@@ -40,7 +40,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/bereaved-families-could-face-unjust-tax.html",
    "state": "on time",
-   "minutesFromSlot": 619,
+   "minutesFromSlot": 652,
    "publishedAt": "2026-10-19T17:45:08-07:00"
   },
   {
@@ -50,7 +50,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 559,
+   "minutesFromSlot": 592,
    "publishedAt": "2026-10-19T18:45:04-07:00"
   },
   {
@@ -60,7 +60,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/could-indias-stock-market-tax-cuts.html",
    "state": "on time",
-   "minutesFromSlot": 499,
+   "minutesFromSlot": 532,
    "publishedAt": "2026-10-19T19:45:08-07:00"
   },
   {
@@ -70,7 +70,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/how-often-is-daily-yield-published.html",
    "state": "on time",
-   "minutesFromSlot": 439,
+   "minutesFromSlot": 472,
    "publishedAt": "2026-10-19T20:45:10-07:00"
   },
   {
@@ -80,7 +80,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 379,
+   "minutesFromSlot": 412,
    "publishedAt": "2026-10-19T21:42:47-07:00"
   },
   {
@@ -90,7 +90,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/how-can-i-declare-my-interest-income-on.html",
    "state": "on time",
-   "minutesFromSlot": 319,
+   "minutesFromSlot": 352,
    "publishedAt": "2026-10-19T22:45:09-07:00"
   },
   {
@@ -100,7 +100,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 259,
+   "minutesFromSlot": 292,
    "publishedAt": "2026-10-19T23:45:03-07:00"
   },
   {
@@ -110,7 +110,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 229,
+   "minutesFromSlot": 262,
    "publishedAt": "2026-10-20T00:07:56-07:00"
   },
   {
@@ -120,7 +120,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-20.html",
    "state": "on time",
-   "minutesFromSlot": 199,
+   "minutesFromSlot": 232,
    "publishedAt": "2026-10-20T00:45:04-07:00"
   },
   {
@@ -130,19 +130,19 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/spacex-tesla-earnings-to-test-musks-ai.html",
    "state": "on time",
-   "minutesFromSlot": 139,
+   "minutesFromSlot": 172,
    "publishedAt": "2026-10-20T01:45:08-07:00"
   },
   {
    "key": "master-evergreen-2",
    "slot": "15:15",
    "due": "2026-10-20T15:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "overdue",
-   "minutesFromSlot": 79,
-   "minutesLate": 79,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/burnham-capital-gains-tax-threat-could.html",
+   "state": "late",
+   "minutesFromSlot": 112,
+   "publishedAt": "2026-10-20T04:18:25-07:00",
+   "minutesLate": 93
   },
   {
    "key": "master-trending-3",
@@ -151,7 +151,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/payoneer-how-stablecoin-is-scaling-in.html",
    "state": "on time",
-   "minutesFromSlot": 19,
+   "minutesFromSlot": 52,
    "publishedAt": "2026-10-20T03:45:09-07:00"
   },
   {
@@ -160,8 +160,9 @@
    "due": "2026-10-20T17:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -41
+   "state": "pending",
+   "minutesFromSlot": -8,
+   "action": "dispatched"
   },
   {
    "key": "news-companies",
@@ -170,7 +171,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -71
+   "minutesFromSlot": -38
   },
   {
    "key": "news-global",
@@ -179,7 +180,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -101
+   "minutesFromSlot": -68
   },
   {
    "key": "news-banking",
@@ -188,7 +189,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -131
+   "minutesFromSlot": -98
   },
   {
    "key": "master-evergreen-3",
@@ -197,7 +198,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -191
+   "minutesFromSlot": -158
   },
   {
    "key": "master-trending-4",
@@ -206,7 +207,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -251
+   "minutesFromSlot": -218
   },
   {
    "key": "master-evergreen-4",
@@ -215,13 +216,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -341
+   "minutesFromSlot": -308
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 13,
+ "actualArticlesLiveIncludingExtras": 14,
  "wrongDay": 0,
  "status": "ATTENTION"
 }

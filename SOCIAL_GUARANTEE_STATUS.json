@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-20T16:34:12.963401+05:30",
+ "generatedAt": "2026-10-20T17:07:54.467458+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
- "articles": 13,
- "expectedPosts": 26,
- "articlesWithBothPosts": 6,
+ "articles": 14,
+ "expectedPosts": 28,
+ "articlesWithBothPosts": 7,
  "postsMissing": 7,
  "dispatched": 1,
  "rows": [
@@ -222,13 +222,27 @@
    "actions": [
     "dispatched"
    ]
+  },
+  {
+   "key": "master-evergreen-2",
+   "title": "Burnham Capital Gains Tax threat could disrupt",
+   "url": "https://dailyyield.blogspot.com/2026/10/burnham-capital-gains-tax-threat-could.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T16:34:04.282303+05:30",
+ "liveVerificationSourceAt": "2026-10-20T17:07:47.301025+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 6,
+ "articlesWithExactlyTwoPosts": 7,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
