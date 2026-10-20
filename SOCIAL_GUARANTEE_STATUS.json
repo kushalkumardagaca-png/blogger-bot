@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T18:16:01.982539+05:30",
+ "generatedAt": "2026-10-20T18:17:17.821216+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 17,
  "expectedPosts": 34,
  "articlesWithBothPosts": 7,
  "postsMissing": 11,
- "dispatched": 4,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-americas",
@@ -22,7 +22,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -100,8 +100,8 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   },
   {
@@ -118,7 +118,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   },
   {
@@ -294,7 +294,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T18:15:52.358249+05:30",
+ "liveVerificationSourceAt": "2026-10-20T18:17:11.002919+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 7,
  "syntheticViews": 0,
