@@ -76,11 +76,13 @@ BRAND_LINES = (
 )
 
 DEFAULT_PLAN = {
-    # Cadence is one editable value, not a code change. Six posts a day keeps the
-    # account inside the lowest quota Meta has been returning (50 per 24 hours) with
-    # room for retries, and keeps the profile reading like a publication.
-    "postsPerDay": 6,
-    "targets": "masters_plus_digest",
+    # Cadence is one editable value, not a code change. The owner set this on 20 Oct 2026:
+    # Master articles only, five a day, in a 2 evergreen : 3 trending mix, until said
+    # otherwise. Five a day also keeps the account far inside the lowest quota Meta has
+    # been returning (50 per 24 hours), which leaves room for retries.
+    "postsPerDay": 5,
+    "targets": "masters_only",
+    "mix": {"evergreen": 2, "trending": 3},
     "minSpacingMinutes": 20,
     "captionHashtags": ["#DailyYield", "#PersonalFinanceIndia", "#FinancialLiteracy"],
 }
@@ -105,8 +107,13 @@ def save(path: Path, payload) -> None:
 def plan() -> dict:
     stored = load(PLAN, {})
     merged = {**DEFAULT_PLAN, **{k: v for k, v in (stored or {}).items() if k in DEFAULT_PLAN}}
-    merged["postsPerDay"] = max(1, min(24, int(merged.get("postsPerDay") or 6)))
+    merged["postsPerDay"] = max(1, min(24, int(merged.get("postsPerDay") or 5)))
     merged["minSpacingMinutes"] = max(5, min(180, int(merged.get("minSpacingMinutes") or 20)))
+    # A mix can never ask for more than the day holds, and a negative budget would mean
+    # "post nothing of this kind", so both ends are clamped rather than trusted.
+    mix = merged.get("mix") or {}
+    merged["mix"] = {kind: max(0, min(merged["postsPerDay"], int(mix.get(kind) or 0)))
+                     for kind in ("evergreen", "trending")}
     return merged
 
 
@@ -130,7 +137,10 @@ def access_token() -> str:
         return token
     if TOKEN_FILE.exists():
         return _decrypt(TOKEN_FILE.read_bytes())
-    raise RuntimeError("not connected: no INSTAGRAM_ACCESS_TOKEN secret and no instagram_token.enc")
+    raise RuntimeError(
+        "not connected: no INSTAGRAM_ACCESS_TOKEN secret and no instagram_token.enc. In GitHub, "
+        "Settings -> Secrets and variables -> Actions, the token must be a SECRET named exactly "
+        "INSTAGRAM_ACCESS_TOKEN - a Variable of that name is not read here")
 
 
 def ig_user_id() -> str:
@@ -424,6 +434,80 @@ def posts_today(tracker: dict, day: str) -> int:
                or str(row.get("publishedAtIST", ""))[:10] == day)
 
 
+def _kind_of(row: dict) -> str:
+    """Evergreen or trending, read from what the slot system already recorded."""
+    text = f"{row.get('kind') or ''} {row.get('key') or ''} {row.get('url') or ''}".lower()
+    if "evergreen" in text:
+        return "evergreen"
+    if "trending" in text:
+        return "trending"
+    return "other"
+
+
+def posts_by_kind(tracker: dict, day: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in tracker.get("published", []):
+        stamp = str(row.get("publishedAtIST", ""))[:10] or str(row.get("published_at", ""))[:10]
+        if stamp == day:
+            kind = str(row.get("kind") or "other")
+            counts[kind] = counts.get(kind, 0) + 1
+    return counts
+
+
+def day_budgets(configuration: dict, tracker: dict, day: str) -> tuple[dict, int, dict]:
+    """What is still owed per kind, how many posts are left today, and what went out."""
+    posted = posts_by_kind(tracker, day)
+    mix = configuration.get("mix") or {}
+    owed = {kind: max(0, int(mix.get(kind) or 0) - posted.get(kind, 0)) for kind in ("evergreen", "trending")}
+    remaining = max(0, int(configuration["postsPerDay"]) - posts_today(tracker, day))
+    return owed, remaining, posted
+
+
+def ordered_queue(chosen: list[dict], owed: dict, cap: int, budgets: dict | None = None) -> tuple[list[dict], bool]:
+    """Build today's queue in the owner's 2:3 evergreen:trending shape.
+
+    The kind that is furthest below its own share of the day goes first, and a tie goes to
+    trending, because a trending article is the one that stops being true by tomorrow. Five
+    posts at a 2:3 mix therefore reads trending, evergreen, trending, evergreen, trending
+    rather than two same-kind blocks back to back.
+
+    If a pool runs short, the rest of the allowance is filled from what is live and still
+    unposted instead of being left empty, and the caller is told the mix was relaxed.
+    """
+    pools = {kind: sorted([row for row in chosen if _kind_of(row) == kind],
+                           key=lambda row: str(row.get("key") or ""))
+             for kind in ("evergreen", "trending", "other")}
+    balance = {kind: int(owed.get(kind) or 0) for kind in ("evergreen", "trending")}
+    wanted = {kind: max(int((budgets or {}).get(kind) or 0), balance[kind]) for kind in balance}
+
+    def behind(kind: str) -> float:
+        if wanted[kind] <= 0:
+            return 99.0
+        return (wanted[kind] - balance[kind]) / wanted[kind]
+
+    queue: list[dict] = []
+    relaxed = False
+    while len(queue) < cap:
+        order = sorted(("trending", "evergreen"), key=lambda kind: (behind(kind), kind != "trending"))
+        picked = next((kind for kind in order if balance[kind] > 0 and pools[kind]), None)
+        if picked:
+            queue.append(pools[picked].pop(0))
+            balance[picked] -= 1
+            continue
+        rest = sorted(pools["evergreen"] + pools["trending"] + pools["other"],
+                      key=lambda row: str(row.get("key") or ""))
+        if not rest:
+            break
+        row = rest[0]
+        for kind in ("evergreen", "trending", "other"):
+            if row in pools[kind]:
+                pools[kind].remove(row)
+                break
+        relaxed = relaxed or balance["evergreen"] > 0 or balance["trending"] > 0
+        queue.append(row)
+    return queue, relaxed
+
+
 def masters_only(items: list[dict], include_digest: bool) -> tuple[list[dict], dict | None]:
     chosen = [row for row in items if str(row.get("key", "")).startswith("master-")]
     digest = None
@@ -496,8 +580,8 @@ def main() -> int:
                          ensure_ascii=False))
         return 0
 
+    owed, remaining_plan, posted_by_kind = day_budgets(configuration, tracker, str(day_ist.date()))
     used_today = posts_today(tracker, str(day_ist.date()))
-    remaining_plan = configuration["postsPerDay"] - used_today
     if remaining_plan <= 0:
         report["status"] = "DAY_COMPLETE"
         save(STATUS, report)
@@ -519,34 +603,51 @@ def main() -> int:
         return 0
 
     items = eligible()
-    chosen, digest = masters_only(items, str(configuration.get("targets", "")) in
-                                  ("masters_plus_digest", "digest_only"))
-    queue = chosen if configuration.get("targets") != "digest_only" else []
+    targets = str(configuration.get("targets", ""))
+    chosen, digest = masters_only(items, targets in ("masters_plus_digest", "digest_only"))
+    # Refuse before queueing, never inside the post loop. A candidate that was already posted
+    # or has no accepted photograph used to sit in the queue and consume one of the day's five
+    # slots, so a run could report success while publishing nothing at all.
+    queueable: list[dict] = []
+    for row in chosen:
+        if already_posted(tracker, row["url"]):
+            report["skipped"].append({"key": row.get("key"), "reason": "already posted today or on an earlier day"})
+            continue
+        image = image_for(row)
+        if not image["url"]:
+            reason = "no licensed JPEG photograph available for this article"
+            report["skipped"].append({"key": row.get("key"), "reason": reason})
+            tracker.setdefault("skipped", []).append({"url": row["url"], "key": row.get("key"),
+                                                      "reason": reason, "atIST": day_ist.isoformat()})
+            continue
+        enriched = dict(row)
+        enriched["image"] = image
+        queueable.append(enriched)
+    queue, relaxed = ([], False) if targets == "digest_only" else ordered_queue(
+        queueable, owed, remaining_plan, configuration.get("mix"))
     if digest:
         queue = queue + [digest]
     report["liveEligible"] = len(items)
+    report["poolAfterRefusals"] = len(queueable)
+    report["mix"] = {"wanted": configuration.get("mix"), "stillOwed": owed,
+                     "postedTodayByKind": posted_by_kind, "relaxed": relaxed}
     report["queueLength"] = len(queue)
 
-    for item in queue[:remaining_plan]:
+    for item in queue:
         url = item["url"]
-        if already_posted(tracker, url):
-            item["skip"] = "already posted today or on an earlier day"
-            report["skipped"].append({"key": item.get("key"), "reason": item["skip"]})
-            continue
-        image = image_for(item)
+        image = item.get("image") or image_for(item)
         if not image["url"]:
-            item["skip"] = "no licensed JPEG photograph available for this article"
-            report["skipped"].append({"key": item.get("key"), "reason": item["skip"]})
+            reason = "no licensed JPEG photograph available for this article"
+            report["skipped"].append({"key": item.get("key"), "reason": reason})
             tracker.setdefault("skipped", []).append({"url": url, "key": item.get("key"),
-                                                       "reason": item["skip"],
-                                                       "atIST": day_ist.isoformat()})
+                                                      "reason": reason, "atIST": day_ist.isoformat()})
             continue
         try:
             result = publish(item, image, dry_run=arguments.dry_run or arguments.mode == "preflight")
         except Exception as exc:
             report["skipped"].append({"key": item.get("key"), "reason": clean(str(exc))[:200]})
             continue
-        row = {"url": url, "key": item.get("key"), "caption_hash": hashlib.sha256(
+        row = {"url": url, "key": item.get("key"), "kind": _kind_of(item), "caption_hash": hashlib.sha256(
             caption(item).encode()).hexdigest()[:16], "imageBasis": image["basis"],
             "publishedAtIST": dt.datetime.now(IST).isoformat()}
         if result.get("dryRun"):
@@ -566,7 +667,8 @@ def main() -> int:
     save(STATUS, report)
     save(TRACKER, tracker)
     print(json.dumps({"status": report["status"], "published": report["publishedToday"],
-                      "skipped": len(report["skipped"]), "quota": limit,
+                      "skipped": len(report["skipped"]), "quota": limit, "mix": report["mix"],
+                      "queued": [row.get("key") for row in report["published"]],
                       "account": report["account"]["username"]}, ensure_ascii=False))
     return 0
 

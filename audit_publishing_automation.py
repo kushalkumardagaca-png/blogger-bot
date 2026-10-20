@@ -423,6 +423,13 @@ check('Instagram is official API only and never joins the fixed four-network rot
 check('Instagram publishes only proven-live articles with their own licensed JPEG',
       'SLOT_GUARANTEE_STATUS.json' in _ig and 'public_jpeg' in _ig and '"fm": "jpg"' in _ig
       and 'already_posted' in _ig and 'no licensed JPEG' in _ig and 'status_code' in _ig)
+check("Instagram cadence is the owner's five Master posts a day in a 2:3 mix",
+      json.loads((ROOT/'INSTAGRAM_PLAN.json').read_text()).get('postsPerDay') == 5
+      and json.loads((ROOT/'INSTAGRAM_PLAN.json').read_text()).get('targets') == 'masters_only'
+      and json.loads((ROOT/'INSTAGRAM_PLAN.json').read_text()).get('mix') == {'evergreen': 2, 'trending': 3})
+check('Instagram keeps its day mixed and never wastes an unfilled slot',
+      'def ordered_queue' in _ig and 'relaxed' in _ig and '"kind": _kind_of(item)' in _ig
+      and 'masters_only' in _ig and 'masters_plus_digest' in _ig)
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News adaptive polish can deepen sparse but sourced editions before failing',
       'base_context + 380' in np and 'summary_target + 54' in np

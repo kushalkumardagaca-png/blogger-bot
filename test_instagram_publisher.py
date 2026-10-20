@@ -9,6 +9,7 @@ write when the account's own quota says stop.
 import datetime as dt
 import io
 import json
+import pathlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -295,6 +296,96 @@ class IdentityFromTokenOnly(TempHome):
             with self.assertRaises(RuntimeError) as caught:
                 ig.ig_user_id()
         self.assertIn("invalid token", str(caught.exception))
+
+
+def mixed_evidence(evergreen: int = 4, trending: int = 4, day: str = "2026-10-20"):
+    """A day with more live Master articles than the plan can post, both kinds."""
+    rows = []
+    for index in range(evergreen):
+        rows.append({"key": f"master-evergreen-{index}", "live": True, "state": "on time",
+                     "url": f"https://dailyyield.blogspot.com/2026/10/evergreen-note-{index}-{day}.html",
+                     "title": f"Evergreen note {index}: sizing a safety buffer"})
+    for index in range(trending):
+        rows.append({"key": f"master-trending-{index}", "live": True, "state": "on time",
+                     "url": f"https://dailyyield.blogspot.com/2026/10/trending-read-{index}-{day}.html",
+                     "title": f"Trending read {index}: what the repo rate move means"})
+    (ig.ROOT / "SLOT_GUARANTEE_STATUS.json").write_text(json.dumps({"rows": rows}))
+    for row in rows:
+        slug = row["url"].rsplit("/", 1)[-1][:-len(".html")]
+        real_photo(ig.ROOT / "assets" / "master" / slug, slug)
+    return rows
+
+
+class OwnerMixRule(RunModes):
+    """The owner's instruction of 20 Oct 2026: five Master posts a day, 2 evergreen : 3 trending."""
+
+    def test_the_default_day_is_five_master_posts_in_the_set_mix(self):
+        with mock.patch.dict(ig.os.environ, {}, clear=True):
+            configuration = ig.plan()
+        self.assertEqual(configuration["postsPerDay"], 5)
+        self.assertEqual(configuration["targets"], "masters_only")
+        self.assertEqual(configuration["mix"], {"evergreen": 2, "trending": 3})
+
+    def test_the_shipped_plan_file_agrees_with_the_code(self):
+        shipped = json.loads((pathlib.Path(__file__).resolve().parent / "INSTAGRAM_PLAN.json").read_text())
+        self.assertEqual(shipped["postsPerDay"], 5)
+        self.assertEqual(shipped["targets"], "masters_only")
+        self.assertEqual(shipped["mix"], {"evergreen": 2, "trending": 3})
+
+    def test_the_day_alternates_and_stops_at_two_evergreen_and_three_trending(self):
+        mixed_evidence()
+        graph = FakeGraph()
+        _code, report = self._run(["--mode", "preflight"], graph)
+        kinds = [str(row["key"]).split("-")[1] for row in report["published"]]
+        self.assertEqual(kinds, ["trending", "evergreen", "trending", "evergreen", "trending"],
+                         f"the owner asked for a mixed 2:3 day, got {kinds}")
+        self.assertFalse(report["mix"]["relaxed"])
+        self.assertEqual(report["mix"]["wanted"], {"evergreen": 2, "trending": 3})
+
+    def test_a_short_pool_does_not_waste_the_rest_of_the_day(self):
+        mixed_evidence(evergreen=4, trending=1)
+        graph = FakeGraph()
+        _code, report = self._run(["--mode", "preflight"], graph)
+        self.assertEqual(len(report["published"]), 5, "the allowance is filled from what is live")
+        self.assertTrue(report["mix"]["relaxed"], "filling beyond the mix must be recorded, not silent")
+
+    def test_posts_already_out_today_are_counted_before_more_are_queued(self):
+        day = dt.datetime.now(IG_IST).strftime("%Y-%m-%d")
+        mixed_evidence()
+        (ig.ROOT / "instagram_tracker.json").write_text(json.dumps({"version": 1, "published": [
+            {"url": f"https://dailyyield.blogspot.com/2026/10/trending-read-{index}-2026-10-20.html",
+             "key": f"master-trending-{index}", "kind": "trending",
+             "published_at": (dt.datetime.now(dt.timezone.utc) - dt.timedelta(hours=3)).isoformat(),
+             "publishedAtIST": dt.datetime.now(IG_IST).isoformat()} for index in range(2)]}))
+        graph = FakeGraph()
+        _code, report = self._run(["--mode", "preflight"], graph)
+        kinds = [str(row["key"]).split("-")[1] for row in report["published"]]
+        self.assertEqual(len(report["published"]), 3, "two of five slots are already used")
+        self.assertEqual(kinds.count("trending"), 1, "only one trending post is still owed")
+        self.assertEqual(kinds.count("evergreen"), 2)
+
+    def test_no_digest_is_queued_while_the_owner_wants_masters_only(self):
+        mixed_evidence(evergreen=2, trending=2)
+        slot = ig.ROOT / "SLOT_GUARANTEE_STATUS.json"
+        payload = json.loads(slot.read_text())
+        payload["rows"].append({"key": "news-india", "live": True, "state": "on time",
+                               "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html",
+                               "title": "India Finance News"})
+        slot.write_text(json.dumps(payload))
+        graph = FakeGraph()
+        _code, report = self._run(["--mode", "preflight"], graph)
+        keys = [str(row["key"]) for row in report["published"]]
+        self.assertEqual(len(keys), 4, "both pools are short, so all four go out")
+        self.assertNotIn("instagram-digest", keys)
+        # ...and the digest would exist under the old targeting, so the check above means something
+        _chosen, digest = ig.masters_only(ig.eligible(), True)
+        self.assertIsNotNone(digest, "the digest builder must stay available, just unselected")
+
+    def test_a_typed_mix_can_never_ask_for_more_than_the_day_holds(self):
+        (ig.ROOT / "INSTAGRAM_PLAN.json").write_text(json.dumps(
+            {"postsPerDay": 4, "mix": {"evergreen": 9, "trending": -3}}))
+        configuration = ig.plan()
+        self.assertEqual(configuration["mix"], {"evergreen": 4, "trending": 0})
 
 
 if __name__ == "__main__":
