@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-20T12:02:23+00:00",
+ "checkedAt": "2026-10-20T12:55:49+00:00",
  "site": "https://dailyyield.blogspot.com",
  "decision": "CONTRACT",
  "masterArticlesPerDay": 2,
@@ -25,8 +25,29 @@
   "pending": 400,
   "submittedEver": 0,
   "indexnowLooksBlocked": true,
-  "announceTop": 40,
-  "suppressedDuplicatesAndUtility": 89
+  "announceTop": 12,
+  "suppressedDuplicatesAndUtility": 458
+ },
+ "mainPagePolicy": {
+  "on": true,
+  "mainPagesFound": 12,
+  "announced": 12,
+  "articleUrlsHeld": 458,
+  "pages": [
+   "https://dailyyield.blogspot.com/p/daily-news.html",
+   "https://dailyyield.blogspot.com/p/article.html",
+   "https://dailyyield.blogspot.com/p/markets-today.html",
+   "https://dailyyield.blogspot.com/p/global-snapshot.html",
+   "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+   "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+   "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+   "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+   "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+   "https://dailyyield.blogspot.com/p/disclaimer.html",
+   "https://dailyyield.blogspot.com/p/privacy-policy.html",
+   "https://dailyyield.blogspot.com/p/terms-and-conditions.html"
+  ],
+  "decidedBy": "owner, 20 October 2026: index the main pages first"
  },
  "evidenceFiles": {
   "INDEX_STATUS_REPORT.json": true,

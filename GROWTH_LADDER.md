@@ -1,8 +1,10 @@
-# Growth ladder · 2026-10-20T12:02:24+00:00
+# Growth ladder · 2026-10-20T12:55:54+00:00
 
 Measured today: **1** indexed pages of **551** submitted, **2** impressions and **1** clicks in 28 days, **12** countable social followers. Indexing gate: **CONTRACT**.
 
 Views are counted as **SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28**; GA4 status: **CREDENTIALS_MISSING**.
+
+Readers (the milestone's own unit: people who open one or two articles a day) today: **not measurable yet** - basis **UNMEASURABLE_UNTIL_GA4_IS_READABLE**. 50,000 is counted in this unit, not in pageviews.
 
 Committed by 31 Dec 2026: indexed pages 150-400, 150-1500 views a day.
 
