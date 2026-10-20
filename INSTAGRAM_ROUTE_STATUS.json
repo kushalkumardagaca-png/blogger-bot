@@ -1,0 +1,13 @@
+{
+ "checkedAtIST": "2026-10-20T15:25:18.561889+05:30",
+ "apiMode": "instagram_login",
+ "host": "graph.instagram.com",
+ "postsPerDay": 5,
+ "dryRun": false,
+ "published": [],
+ "skipped": [],
+ "notes": [
+  "the token could not identify its own account via /me: Invalid OAuth access token - Cannot parse access token"
+ ],
+ "status": "CHECK_FAILED"
+}
