@@ -801,17 +801,22 @@
   },
   "prewarm:2026-10-20:master-evergreen-3": {
     "revision": "d63df769f797deaf",
-    "attempts": 2,
-    "lastAttempt": "2026-10-20T17:38:27.014412+05:30"
+    "attempts": 3,
+    "lastAttempt": "2026-10-20T18:31:30.657747+05:30"
   },
   "prewarm:2026-10-20:master-trending-4": {
     "revision": "d63df769f797deaf",
-    "attempts": 1,
-    "lastAttempt": "2026-10-20T17:38:27.014412+05:30"
+    "attempts": 2,
+    "lastAttempt": "2026-10-20T18:31:30.657747+05:30"
   },
   "social:2026-10-20:news-americas:1": {
     "revision": "d63df769f797deaf",
     "attempts": 1,
     "lastAttempt": "2026-10-20T17:38:27.014412+05:30"
+  },
+  "social:2026-10-20:news-companies:0": {
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T18:31:30.657747+05:30"
   }
 }

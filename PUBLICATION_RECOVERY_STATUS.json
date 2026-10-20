@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-20T17:38:27.014412+05:30",
+  "generatedAt": "2026-10-20T18:31:30.657747+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 15,
-  "confirmedByLivePost": 15,
+  "confirmedPublications": 17,
+  "confirmedByLivePost": 17,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -22,9 +22,9 @@
     },
     {
       "type": "social_replay",
-      "key": "news-americas",
+      "key": "news-companies",
       "platform": "tumblr",
-      "routeIndex": 1,
+      "routeIndex": 0,
       "applied": true
     }
   ],
@@ -33,6 +33,7 @@
     "social:2026-10-20:news-china:0",
     "social:2026-10-20:news-markets:0",
     "social:2026-10-20:news-europe:0",
+    "social:2026-10-20:news-americas:1",
     "social:2026-10-20:master-trending-1:0",
     "social:2026-10-20:master-trending-2:0",
     "social:2026-10-20:master-trending-3:0"
