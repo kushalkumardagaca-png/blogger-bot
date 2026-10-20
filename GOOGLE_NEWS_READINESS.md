@@ -1,11 +1,11 @@
-# Google News and Discover readiness · 2026-10-20T12:55:54+00:00
+# Google News and Discover readiness · 2026-10-20T20:59:41+00:00
 
-- feed entries read: **19**, of which **12** have at least one listing defect
+- feed entries read: **19**, of which **9** have at least one listing defect
 - pages inspected: **6**
 
 | what is wrong | how many | why it matters |
 | --- | --- | --- |
-| truncatedHeadline | 12 | headline ends on a fragment - a headline is what a News reader decides on |
+| truncatedHeadline | 9 | headline ends on a fragment - a headline is what a News reader decides on |
 | noOpenGraphImage | 6 | the page has no og:image, so News and Discover have no picture to show |
 | noHeadDescription | 6 | the page has no meta description in the head, so Google writes its own snippet |
 
