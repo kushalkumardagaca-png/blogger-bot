@@ -61,6 +61,10 @@ jobs:
             python instagram_publisher.py --mode sweep
           fi
       - name: Persist route evidence
+        # !cancelled(): the run must still leave its evidence in the repository when the
+        # publishing step itself falls over. Without it a failure leaves no trace in the
+        # files, and the only way to see what happened is to read Actions logs by hand.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "Daily Yield Instagram Bot"
           git config user.email "bot@dailyyield.blogspot.com"
