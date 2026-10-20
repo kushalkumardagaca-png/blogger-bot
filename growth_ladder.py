@@ -58,14 +58,22 @@ def measure() -> dict:
     impressions = search.get("impressions")
     clicks = search.get("clicks")
     followers = (channels.get("totals") or {}).get("followers")
+    ga4 = load("GA4_MEASUREMENT.json")
+    ga4_views = (ga4.get("totals") or {}).get("viewsPerDay") if ga4.get("ok") else None
+    search_rate = round(clicks / 28, 3) if isinstance(clicks, int) else None
     return {
         "asOf": (index.get("checkedAt") or baseline.get("checkedAt") or "")[:10] or None,
         "indexedPages": indexed if isinstance(indexed, int) else None,
         "submittedPages": submitted if isinstance(submitted, int) else None,
         "impressions28d": impressions if isinstance(impressions, int) else None,
         "clicks28d": clicks if isinstance(clicks, int) else None,
-        # a daily rate, because the target it is compared with is a daily rate
-        "viewsPerDay": round(clicks / 28, 3) if isinstance(clicks, int) else None,
+        # a daily rate, because the target it is compared with is a daily rate. Real pageviews win
+        # over search clicks, and whichever is used is named in the report - the two are not the
+        # same quantity and pretending otherwise is how a number stops meaning anything.
+        "viewsPerDay": ga4_views if isinstance(ga4_views, (int, float)) else search_rate,
+        "viewsBasis": ("GA4_PAGEVIEWS_7_DAY_AVERAGE" if isinstance(ga4_views, (int, float))
+                       else "SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28" if search_rate is not None else None),
+        "ga4Status": ga4.get("status"),
         "measurableFollowers": followers if isinstance(followers, int) else None,
         "gateVerdict": capacity.get("decision") or capacity.get("verdict"),
         "declaredTarget": tower.get("target") if isinstance(tower.get("target"), (int, float)) else None,
@@ -214,6 +222,8 @@ def main() -> int:
              f"**{today.get('clicks28d') if today.get('clicks28d') is not None else 'not measured'}** clicks in 28 days, "
              f"**{today.get('measurableFollowers') if today.get('measurableFollowers') is not None else 'not measured'}** "
              f"countable social followers. Indexing gate: **{today.get('gateVerdict') or 'UNKNOWN'}**.", "",
+             f"Views are counted as **{today.get('viewsBasis') or 'not measured'}**; GA4 status: "
+             f"**{today.get('ga4Status') or 'no report'}**.", "",
              f"Committed by {DEADLINE:%d %b %Y}: indexed pages {SUB_TARGET_INDEXED[0]}-{SUB_TARGET_INDEXED[1]}, "
              f"{SUB_TARGET_VIEWS[0]}-{SUB_TARGET_VIEWS[1]} views a day.", ""]
     if last_done:

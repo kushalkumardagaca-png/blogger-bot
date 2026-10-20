@@ -38,6 +38,8 @@ jobs:
         run: python indexing_capacity_gate.py
       - name: Count the audience that can be counted without a secret
         run: python audience_channels.py
+      - name: Read the pageviews the site already collects
+        run: python ga4_measurement.py
       - name: Put today's measurement on the ladder
         run: python growth_ladder.py
       - name: Report the decision loudly enough to matter
@@ -68,6 +70,11 @@ jobs:
           if per_post:
               print(f"audience earned per published post: {min(per_post)} to {max(per_post)} - "
                     "this is the reach test for the social half of the plan")
+          ga4 = json.loads(pathlib.Path("GA4_MEASUREMENT.json").read_text())
+          print(f"GA4: {ga4.get('status')}" + (f" - {ga4['totals']['viewsPerDay']} views a day"
+                                               if ga4.get("ok") else f" - {ga4.get('remedy')}"))
+          if not ga4.get("ok") and ga4.get("status") != "CREDENTIALS_MISSING":
+              print("::warning title=Views are not measurable yet::" + str(ga4.get("remedy") or ""))
           ladder = json.loads(pathlib.Path("GROWTH_LADDER.json").read_text())
           current = next((r for r in ladder["ladder"] if r["verdict"] in ("ON TRACK", "BEHIND")), None)
           print("ladder:", ladder["commitment"]["weeksRemaining"], "weekly rungs to",
@@ -88,14 +95,14 @@ jobs:
           git config user.name "Daily Yield Arena Controller"
           git config user.email "dailyyield.official@gmail.com"
           mkdir -p /tmp/dy-cap
-          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json; do
+          for f in INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json GA4_MEASUREMENT.json GA4_MEASUREMENT.md; do
             if [ -f "$f" ]; then cp "$f" /tmp/dy-cap/; fi
           done
           for attempt in 1 2 3 4 5; do
             git fetch -q origin main
             git reset -q --hard origin/main
             cp /tmp/dy-cap/* . 2>/dev/null || true
-            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json 2>/dev/null || true
+            git add -A -- INDEXING_CAPACITY.json INDEXING_CAPACITY.md INDEX_PRIORITY.json AUDIENCE_CHANNELS.json AUDIENCE_CHANNELS.md GROWTH_LADDER.json GROWTH_LADDER.md GROWTH_LADDER_HISTORY.json GA4_MEASUREMENT.json GA4_MEASUREMENT.md 2>/dev/null || true
             if git diff --staged --quiet; then echo "no growth evidence to record"; exit 0; fi
             git commit -q -m "Record indexing capacity gate and growth ladder [skip ci]" || true
             if git push -q origin HEAD:main; then echo "capacity gate and ladder recorded"; exit 0; fi

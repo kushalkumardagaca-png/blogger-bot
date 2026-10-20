@@ -453,6 +453,17 @@ check('The audience counter is public-endpoint only and never calls an unanswere
       'os.environ' not in (ROOT/'audience_channels.py').read_text()
       and 'PUBLIC_OPEN_ENDPOINTS_ONLY' in (ROOT/'audience_channels.py').read_text()
       and 'AUDIENCE_CHANNELS.json' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text())
+check('The view counter reads Google numbers without touching the blog',
+      'googleapis.com/blogger' not in (ROOT/'ga4_measurement.py').read_text()
+      and 'DELETE' not in (ROOT/'ga4_measurement.py').read_text()
+      and 'BLOGGER_' not in (ROOT/'ga4_measurement.py').read_text()
+      and 'CREDENTIALS_MISSING' in (ROOT/'ga4_measurement.py').read_text()
+      and 'no number is invented' in (ROOT/'ga4_measurement.py').read_text()
+      and 'analytics.readonly' in (ROOT/'get_analytics_token.py').read_text())
+check('The growth ladder names the basis of every view number it reports',
+      'viewsBasis' in (ROOT/'growth_ladder.py').read_text()
+      and 'GA4_PAGEVIEWS_7_DAY_AVERAGE' in (ROOT/'growth_ladder.py').read_text()
+      and 'ga4_measurement.py' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text())
 check('The duplicate pile is audited daily and only deleted on an explicit apply',
       '--apply' in (ROOT/'blogger_duplicate_purge.py').read_text()
       and 'AUDIT_ONLY' in (ROOT/'blogger_duplicate_purge.py').read_text()
