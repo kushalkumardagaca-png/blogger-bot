@@ -65,14 +65,17 @@ jobs:
           git config user.name "Daily Yield Instagram Bot"
           git config user.email "bot@dailyyield.blogspot.com"
           git pull --rebase --autostash origin main
-          changed=0
+          # Stage first, then judge. "git diff --quiet" ignores untracked files, and these three
+          # evidence files are untracked on the very first run, so an old guard here meant a brand
+          # new file could never be committed - the route looked permanently silent even when it
+          # had plenty to say.
           for file in instagram_tracker.json INSTAGRAM_ROUTE_STATUS.json SOCIAL_CREDENTIAL_HEALTH.json; do
-            if [[ -f "$file" ]] && ! git diff --quiet -- "$file" 2>/dev/null; then
-              git add "$file"; changed=1
+            if [[ -f "$file" ]]; then
+              git add -- "$file"
             fi
           done
-          if [[ "$changed" == "1" ]]; then
-            git commit -q -m "Record Instagram route evidence [skip ci]" && git push -q origin main
-          else
+          if git diff --cached --quiet; then
             echo "no route evidence changed"
+          else
+            git commit -q -m "Record Instagram route evidence [skip ci]" && git push -q origin main
           fi
