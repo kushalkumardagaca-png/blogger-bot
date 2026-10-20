@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-20T10:38:55.473516+05:30",
+  "generatedAt": "2026-10-20T11:17:26.633964+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 7,
-  "confirmedByLivePost": 7,
+  "confirmedPublications": 8,
+  "confirmedByLivePost": 8,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -12,7 +12,7 @@
   "actions": [
     {
       "type": "preparation_recovery",
-      "key": "master-evergreen-1",
+      "key": "master-trending-2",
       "applied": true
     }
   ],
