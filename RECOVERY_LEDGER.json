@@ -761,17 +761,27 @@
   },
   "prewarm:2026-10-20:master-trending-2": {
     "revision": "a815a83deca46684",
-    "attempts": 3,
-    "lastAttempt": "2026-10-20T12:43:44.873418+05:30"
+    "attempts": 4,
+    "lastAttempt": "2026-10-20T13:26:12.211222+05:30"
   },
   "prewarm:2026-10-20:master-evergreen-2": {
     "revision": "a815a83deca46684",
-    "attempts": 1,
-    "lastAttempt": "2026-10-20T12:43:44.873418+05:30"
+    "attempts": 2,
+    "lastAttempt": "2026-10-20T13:26:12.211222+05:30"
   },
   "social:2026-10-20:news-markets:0": {
     "revision": "a815a83deca46684",
     "attempts": 1,
     "lastAttempt": "2026-10-20T12:43:44.873418+05:30"
+  },
+  "prewarm:2026-10-20:master-trending-3": {
+    "revision": "a815a83deca46684",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T13:26:12.211222+05:30"
+  },
+  "social:2026-10-20:news-europe:0": {
+    "revision": "a815a83deca46684",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T13:26:12.211222+05:30"
   }
 }
