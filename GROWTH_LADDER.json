@@ -1,0 +1,212 @@
+{
+ "generatedAt": "2026-10-20T11:41:01+00:00",
+ "measured": {
+  "asOf": "2026-10-19",
+  "indexedPages": 1,
+  "submittedPages": 551,
+  "impressions28d": 2,
+  "clicks28d": 1,
+  "viewsPerDay": 0.036,
+  "measurableFollowers": 12,
+  "gateVerdict": "CONTRACT",
+  "declaredTarget": null,
+  "declaredDeadline": "2027-09-30",
+  "evidenceComplete": true
+ },
+ "commitment": {
+  "deadline": "2026-12-31",
+  "indexedPages": [
+   150,
+   400
+  ],
+  "viewsPerDay": [
+   150,
+   1500
+  ],
+  "weeksRemaining": 11
+ },
+ "ownerAsk": {
+  "viewsPerDay": 50000,
+  "deadline": "2026-12-31",
+  "arithmetic": {
+   "impressionsNeededPerDayForAsk": {
+    "atCtre3pct": 1666667,
+    "atCtre2pct": 2500000,
+    "range": [
+     1666667,
+     2500000
+    ]
+   },
+   "yieldPerIndexedPagePerDay": 0.071429,
+   "indexedPagesNeededForAskAtTodayYield": 23333338,
+   "yieldMultipleNeededAtTopOfSubTarget": 58333.0
+  },
+  "reachable": false
+ },
+ "ladder": [
+  {
+   "week": 1,
+   "by": "2026-10-26",
+   "indexedPages": [
+    15,
+    37
+   ],
+   "viewsPerDay": [
+    15,
+    137
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 2,
+   "by": "2026-11-02",
+   "indexedPages": [
+    28,
+    74
+   ],
+   "viewsPerDay": [
+    28,
+    274
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 3,
+   "by": "2026-11-09",
+   "indexedPages": [
+    42,
+    110
+   ],
+   "viewsPerDay": [
+    42,
+    410
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 4,
+   "by": "2026-11-16",
+   "indexedPages": [
+    55,
+    146
+   ],
+   "viewsPerDay": [
+    55,
+    546
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 5,
+   "by": "2026-11-23",
+   "indexedPages": [
+    69,
+    182
+   ],
+   "viewsPerDay": [
+    69,
+    682
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 6,
+   "by": "2026-11-30",
+   "indexedPages": [
+    82,
+    219
+   ],
+   "viewsPerDay": [
+    82,
+    819
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 7,
+   "by": "2026-12-07",
+   "indexedPages": [
+    96,
+    255
+   ],
+   "viewsPerDay": [
+    96,
+    955
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 8,
+   "by": "2026-12-14",
+   "indexedPages": [
+    109,
+    291
+   ],
+   "viewsPerDay": [
+    109,
+    1091
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 9,
+   "by": "2026-12-21",
+   "indexedPages": [
+    123,
+    327
+   ],
+   "viewsPerDay": [
+    123,
+    1227
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 10,
+   "by": "2026-12-28",
+   "indexedPages": [
+    136,
+    364
+   ],
+   "viewsPerDay": [
+    136,
+    1364
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  },
+  {
+   "week": 11,
+   "by": "2026-12-31",
+   "indexedPages": [
+    150,
+    400
+   ],
+   "viewsPerDay": [
+    150,
+    1500
+   ],
+   "measuredIndexedPages": null,
+   "verdict": "FUTURE"
+  }
+ ],
+ "projection": {
+  "method": "linear on the blog's own measured daily gain",
+  "points": 1,
+  "impressionsPerDayGain": null,
+  "date50k": null,
+  "status": "NOT_ENOUGH_MEASUREMENT",
+  "needsMoreDays": 2,
+  "subTargetOnTrack": "FUTURE"
+ },
+ "policy": "no number in this file is invented: a missing measurement reads as None and the verdict reads UNKNOWN"
+}

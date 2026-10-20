@@ -1,0 +1,51 @@
+{
+ "measuredAt": "2026-10-20T11:41:01+00:00",
+ "mode": "PUBLIC_OPEN_ENDPOINTS_ONLY",
+ "credentialsUsed": false,
+ "channels": {
+  "Bluesky": {
+   "ok": true,
+   "handle": "@dailyyield.bsky.social",
+   "followers": 10,
+   "following": 0,
+   "posts": 193,
+   "created": "2026-09-26",
+   "accountAgeDays": 24,
+   "followersPerPost": 0.0518,
+   "source": "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=dailyyield.bsky.social"
+  },
+  "Mastodon": {
+   "ok": true,
+   "handle": "@dailyyield",
+   "followers": 2,
+   "following": 0,
+   "posts": 176,
+   "created": "2026-09-26",
+   "accountAgeDays": 24,
+   "followersPerPost": 0.0114,
+   "source": "https://mastodon.social/api/v1/accounts/lookup?acct=dailyyield"
+  },
+  "Facebook": {
+   "ok": false,
+   "reason": "needs the page token this operation is not allowed to touch; coordinated_social_publish posts through it"
+  },
+  "Tumblr": {
+   "ok": false,
+   "reason": "needs OAuth for the stats endpoint; the publisher posts through it and the count stays unknown"
+  }
+ },
+ "totals": {
+  "followers": 12,
+  "posts": 369,
+  "channelsMeasured": 2,
+  "channelsNotMeasured": [
+   "Facebook",
+   "Tumblr"
+  ]
+ },
+ "blogPageviews": {
+  "measurable": false,
+  "why": "Google Analytics is not installed and may not be installed during the publisher review, and Blogger exposes no pageview API - so only search traffic can be counted, from Search Console"
+ },
+ "note": "followers per post is the honest reach test: it is what a published post has historically converted into on that network"
+}
