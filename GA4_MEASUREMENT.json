@@ -1,0 +1,22 @@
+{
+ "status": "CREDENTIALS_MISSING",
+ "ok": false,
+ "measuredAt": "2026-10-20T12:02:24+00:00",
+ "windowDays": 7,
+ "measurementId": "G-WLEEYTKV12",
+ "siteTag": {
+  "checked": true,
+  "reachable": false,
+  "measurementIds": [],
+  "installedHere": false,
+  "error": "HTTP Error 429: Too Many Requests"
+ },
+ "totals": {
+  "views": null,
+  "viewsPerDay": null,
+  "daysWithRows": 0
+ },
+ "daily": [],
+ "remedy": "run get_analytics_token.py once, then put the code it prints into the GA4_REFRESH_TOKEN repository secret (never into a chat)",
+ "note": "the blog is not modified by this job"
+}

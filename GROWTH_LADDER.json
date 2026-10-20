@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-20T11:41:01+00:00",
+ "generatedAt": "2026-10-20T12:02:24+00:00",
  "measured": {
   "asOf": "2026-10-19",
   "indexedPages": 1,
@@ -7,6 +7,8 @@
   "impressions28d": 2,
   "clicks28d": 1,
   "viewsPerDay": 0.036,
+  "viewsBasis": "SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28",
+  "ga4Status": "CREDENTIALS_MISSING",
   "measurableFollowers": 12,
   "gateVerdict": "CONTRACT",
   "declaredTarget": null,
