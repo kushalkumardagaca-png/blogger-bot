@@ -17,4 +17,4 @@ Decision: **CONTRACT**
 - publishing is held to the depth the site can get indexed, and the freed time goes into rewriting what already exists rather than adding to the pile
 
 IndexNow: 400 URLs queued, 0 ever accepted — **nothing is actually being submitted**, so the queue is only a list
-Priority list for today's announcement: 40 URLs; 31 duplicate/utility URLs held back.
+Priority list for today's announcement: 40 URLs; 89 duplicate/utility URLs held back.
