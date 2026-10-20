@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-20T05:40:01.281867+05:30",
+  "generatedAt": "2026-10-20T06:31:41.563472+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 2,
-  "confirmedByLivePost": 2,
+  "confirmedPublications": 3,
+  "confirmedByLivePost": 3,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -12,24 +12,18 @@
   "actions": [
     {
       "type": "preparation_recovery",
-      "key": "master-trending-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
       "key": "master-evergreen-0",
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-china",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "type": "preparation_recovery",
+      "key": "master-trending-1",
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-20:news-asia-pacific:0"
+    "social:2026-10-20:news-asia-pacific:0",
+    "social:2026-10-20:news-china:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
