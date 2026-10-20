@@ -74,33 +74,64 @@ def main() -> int:
     token = payload.get("access_token") or ""
     expires_in = int(payload.get("expires_in") or 5184000)
 
+    # Two independent checks, because a token is only worth storing if the account can
+    # actually publish with it. The debugger reports the granted scopes; the capability
+    # probe asks for the very quota endpoint the publisher reads before every post. If
+    # the debugger is unreachable but the probe works, the connection is still proven -
+    # and if both say no, the owner is told which permission to tick, here, instead of
+    # discovering it at 08:00 with a silent skip.
     debug = requests.get("https://graph.instagram.com/v26.0/debug_token",
-                         params={"input_token": token},
-                         headers={"Authorization": f"Bearer {client_id}|{client_secret}"}, timeout=TIMEOUT)
-    scopes = []
+                         params={"input_token": token, "access_token": f"{client_id}|{client_secret}"},
+                         timeout=TIMEOUT)
+    scopes, validated_by = [], "debugger"
     if debug.ok:
         data = debug.json().get("data") or {}
         scopes = sorted(data.get("scopes") or [])
         if not data.get("is_valid"):
-            raise RuntimeError("Instagram returned a token that its own debugger calls invalid")
-    if "instagram_business_content_publish" not in " ".join(scopes):
-        raise RuntimeError("the approved token does not carry instagram_business_content_publish, so it "
-                           "cannot publish; re-authorise with that permission and run this again")
+            raise RuntimeError("Instagram returned a token that its own debugger calls invalid; the code was "
+                               "probably already used or expired, so request a fresh one and run this again")
+    probe = requests.get(f"https://graph.instagram.com/v26.0/{user_id}/content_publishing_limit",
+                         params={"fields": "quota_usage_total", "access_token": token}, timeout=TIMEOUT)
+    probe_ok = probe.ok and bool(probe.json().get("data"))
+    if not probe_ok and not any("content_publish" in scope for scope in scopes):
+        detail = ""
+        try:
+            detail = str((probe.json() or {}).get("error", {}).get("message", ""))[:180]
+        except Exception:
+            pass
+        raise RuntimeError("the stored token cannot publish. In the Meta app, add the Instagram product and "
+                           "grant instagram_business_basic + instagram_business_content_publish, then re-authorise "
+                           "with both scopes in the URL" + (f" (Instagram said: {detail})" if detail else ""))
+    if not any("content_publish" in scope for scope in scopes):
+        scopes = ["instagram_business_basic", "instagram_business_content_publish"]
+        validated_by = "capability probe"
 
     TOKEN_FILE.write_bytes(Fernet(key.encode()).encrypt(token.encode()))
     STATE.write_text(json.dumps({"version": 1, "ig_user_id": user_id, "apiMode": "instagram_login",
-                                 "scopes": scopes,
+                                 "scopes": scopes, "scopesVerifiedBy": validated_by,
                                  "expires_at": (dt.datetime.now(dt.timezone.utc)
                                                 + dt.timedelta(seconds=expires_in)).isoformat(),
                                  "token_fingerprint": "sha256:"
                                  + __import__("hashlib").sha256(token.encode()).hexdigest()[:12],
                                  "bootstrap_at": dt.datetime.now(dt.timezone.utc).isoformat()},
                                 indent=1) + "\n", encoding="utf-8")
-    print(json.dumps({"ok": True, "ig_user_id": user_id, "scopes": scopes,
+    print(json.dumps({"ok": True, "ig_user_id": user_id, "scopes": scopes, "scopesVerifiedBy": validated_by,
                       "expires_at": json.loads(STATE.read_text())["expires_at"],
                       "tokenStoredEncrypted": str(TOKEN_FILE.name)}))
     return 0
 
 
+def cli() -> int:
+    """A clean line in the run log instead of a traceback the owner has to decode."""
+    try:
+        return main()
+    except RuntimeError as exc:
+        print(json.dumps({"ok": False, "error": str(exc)}, ensure_ascii=False))
+        return 1
+    except requests.RequestException as exc:
+        print(json.dumps({"ok": False, "error": f"Instagram could not be reached: {exc}"[:240]}))
+        return 1
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(cli())
