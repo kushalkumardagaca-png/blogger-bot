@@ -1,95 +1,33 @@
 {
-  "generatedAt": "2026-10-20T21:48:18.563323+05:30",
+  "generatedAt": "2026-10-20T22:30:19.769024+05:30",
   "dateIST": "2026-10-20",
-  "status": "DEGRADED",
+  "status": "PASS",
   "apply": true,
-  "confirmedPublications": 19,
-  "confirmedByLivePost": 19,
+  "confirmedPublications": 20,
+  "confirmedByLivePost": 20,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
-  "overdueMissing": [
-    "master-evergreen-3"
-  ],
+  "overdueMissing": [],
   "actions": [
     {
-      "type": "source_recovery",
-      "key": "master-evergreen-3",
-      "attempt": 2,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-asia-pacific",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-china",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-markets",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-americas",
-      "platform": "tumblr",
-      "routeIndex": 1,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-companies",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-1",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-2",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-3",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-4",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "type": "preparation_recovery",
+      "key": "master-evergreen-4",
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "social:2026-10-20:news-asia-pacific:0",
+    "social:2026-10-20:news-china:0",
+    "social:2026-10-20:news-markets:0",
+    "social:2026-10-20:news-europe:0",
+    "social:2026-10-20:news-americas:1",
+    "social:2026-10-20:news-companies:0",
+    "social:2026-10-20:master-trending-1:0",
+    "social:2026-10-20:master-trending-2:0",
+    "social:2026-10-20:master-trending-3:0",
+    "social:2026-10-20:master-trending-4:0"
+  ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
