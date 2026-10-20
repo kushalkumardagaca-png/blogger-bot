@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-20T17:05:35.440285+05:30",
+  "generatedAt": "2026-10-20T17:38:27.014412+05:30",
   "dateIST": "2026-10-20",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 14,
-  "confirmedByLivePost": 14,
+  "confirmedPublications": 15,
+  "confirmedByLivePost": 15,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -16,56 +16,27 @@
       "applied": true
     },
     {
-      "type": "social_replay",
-      "key": "news-asia-pacific",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "type": "preparation_recovery",
+      "key": "master-trending-4",
       "applied": true
     },
     {
       "type": "social_replay",
-      "key": "news-china",
+      "key": "news-americas",
       "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-markets",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-1",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-2",
-      "platform": "tumblr",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-trending-3",
-      "platform": "tumblr",
-      "routeIndex": 0,
+      "routeIndex": 1,
       "applied": true
     }
   ],
-  "retryBlocked": [],
+  "retryBlocked": [
+    "social:2026-10-20:news-asia-pacific:0",
+    "social:2026-10-20:news-china:0",
+    "social:2026-10-20:news-markets:0",
+    "social:2026-10-20:news-europe:0",
+    "social:2026-10-20:master-trending-1:0",
+    "social:2026-10-20:master-trending-2:0",
+    "social:2026-10-20:master-trending-3:0"
+  ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0

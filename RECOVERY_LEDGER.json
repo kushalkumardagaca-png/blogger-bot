@@ -801,7 +801,17 @@
   },
   "prewarm:2026-10-20:master-evergreen-3": {
     "revision": "d63df769f797deaf",
+    "attempts": 2,
+    "lastAttempt": "2026-10-20T17:38:27.014412+05:30"
+  },
+  "prewarm:2026-10-20:master-trending-4": {
+    "revision": "d63df769f797deaf",
     "attempts": 1,
-    "lastAttempt": "2026-10-20T17:05:35.440285+05:30"
+    "lastAttempt": "2026-10-20T17:38:27.014412+05:30"
+  },
+  "social:2026-10-20:news-americas:1": {
+    "revision": "d63df769f797deaf",
+    "attempts": 1,
+    "lastAttempt": "2026-10-20T17:38:27.014412+05:30"
   }
 }
