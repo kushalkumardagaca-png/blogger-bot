@@ -425,6 +425,12 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
+check('The duplicate pile is audited daily and only deleted on an explicit apply',
+      '--apply' in (ROOT/'blogger_duplicate_purge.py').read_text()
+      and 'AUDIT_ONLY' in (ROOT/'blogger_duplicate_purge.py').read_text()
+      and 'def protected_urls' in (ROOT/'blogger_duplicate_purge.py').read_text()
+      and 'batchCap' in (ROOT/'blogger_duplicate_purge.py').read_text()
+      and "default: 'audit'" in (ROOT/'.github/workflows/blogger_duplicate_purge.yml').read_text())
 check('News hero image is preflight-validated','safe_image' in np and 'FALLBACK_PERSONAL' in np)
 check('News adaptive polish can deepen sparse but sourced editions before failing',
       'base_context + 380' in np and 'summary_target + 54' in np

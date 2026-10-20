@@ -1,0 +1,96 @@
+name: Blogger Duplicate Pile Audit
+
+# The free lever that the index measurement actually points at: Blogger published the same
+# title twice often enough to leave "sold-property-eight-different-ways-to_0586614503.html"
+# beside the original, and 360 such URLs are why Search Console says "discovered - currently
+# not indexed" instead of indexing the blog. This job counts them daily and changes nothing;
+# removal is a separate, explicit action that archives every post it touches first.
+
+on:
+  schedule:
+    - cron: '10 20 * * *'   # 01:40 IST, read-only
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "audit only counts and reports; apply removes the selected duplicates"
+        required: true
+        type: choice
+        options: ['audit', 'apply']
+        default: 'audit'
+      max:
+        description: "how many duplicates this run may remove (audit ignores it)"
+        required: false
+        default: '25'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-duplicate-pile
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Count exact-title duplicates (and remove them only when told to)
+        run: |
+          action="${{ github.event.inputs.action }}"
+          [[ -n "$action" ]] || action="audit"
+          cap="${{ github.event.inputs.max }}"
+          [[ -n "$cap" ]] || cap="25"
+          if [ "$action" = "apply" ]; then
+            python blogger_duplicate_purge.py --apply --max "$cap"
+          else
+            python blogger_duplicate_purge.py
+          fi
+      - name: Report what the pile looks like
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          report = json.loads(pathlib.Path("BLOGGER_DUPLICATE_AUDIT.json").read_text())
+          print(f"{report['mode']}: {report['postsScanned']} posts scanned, "
+                f"{report['titleGroups']} duplicate title groups, {report['duplicateUrls']} duplicate URLs, "
+                f"{report['removable']} removable, {report['protectedByEvidence']} protected by evidence, "
+                f"{report['selectedThisRun']} selected (cap {report['batchCap']})")
+          if report["mode"] == "AUDIT_ONLY" and report["removable"]:
+              print("::notice title=Duplicates still live::run this workflow with action=apply to remove "
+                    "them; each one is archived into deleted_posts/ before anything is deleted")
+          if report["failed"]:
+              print(f"::warning title={len(report['failed'])} removals failed::see BLOGGER_DUPLICATE_AUDIT.json")
+          PY
+      - name: Persist the audit and the archive
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-dup
+          for f in BLOGGER_DUPLICATE_AUDIT.json BLOGGER_DUPLICATE_AUDIT.md; do
+            [ -f "$f" ] && cp "$f" /tmp/dy-dup/ || true
+          done
+          if [ -d deleted_posts ]; then cp -r deleted_posts /tmp/dy-dup/ || true; fi
+          for attempt in 1 2 3 4 5; do
+            git fetch -q origin main
+            git reset -q --hard origin/main
+            cp -r /tmp/dy-dup/* . 2>/dev/null || true
+            git add -A -- BLOGGER_DUPLICATE_AUDIT.json BLOGGER_DUPLICATE_AUDIT.md deleted_posts 2>/dev/null || true
+            if git diff --staged --quiet; then echo "nothing new to record"; exit 0; fi
+            git commit -q -m "Record duplicate pile audit [skip ci]" || true
+            if git push -q origin HEAD:main; then echo "audit recorded"; exit 0; fi
+            sleep $((attempt * 4))
+          done
+          echo "::warning title=Evidence not pushed::main stayed busy; the numbers are in this log"
