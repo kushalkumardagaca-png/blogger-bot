@@ -6,6 +6,7 @@ refresh-token bundle is encrypted with a Fernet key held only in GitHub Actions.
 """
 from __future__ import annotations
 import json, os, sys
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 import requests
@@ -73,6 +74,11 @@ def main() -> int:
         "access_token": token["access_token"], "refresh_token": token["refresh_token"],
         "expires_in": token.get("expires_in"), "scope": token.get("scope"),
         "token_type": token.get("token_type", "bearer"),
+        # When the bundle was created, so the publisher can reuse the access token instead of
+        # exchanging the refresh token on every run. Tumblr rotates the refresh token at each
+        # exchange, and a rotation that is never committed back is a dead connection: that is
+        # exactly how the blog lost Tumblr for two days in October 2026.
+        "obtained_at": datetime.now(timezone.utc).isoformat(),
     }
     encrypted = Fernet(required("TUMBLR_TOKEN_ENCRYPTION_KEY").encode()).encrypt(json.dumps(safe_bundle).encode())
     TOKEN_FILE.write_bytes(encrypted + b"\n")

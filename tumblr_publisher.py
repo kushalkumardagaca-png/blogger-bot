@@ -56,13 +56,62 @@ def decrypt_bundle():
 def encrypt_bundle(bundle):
  TOKEN_FILE.write_bytes(Fernet(required("TUMBLR_TOKEN_ENCRYPTION_KEY").encode()).encrypt(json.dumps(bundle).encode())+b"\n")
 def refresh_access():
+ """Exchange the stored refresh token once, and stamp when it was obtained.
+
+ Tumblr rotates the refresh token at every exchange: the replacement is only useful after it has
+ been committed back to this repository. Retrying a refused exchange is therefore harmful rather
+ than merely useless, because a second attempt presents a token Tumblr has already consumed.
+ A rejected grant is named plainly, with the one action that can repair it.
+ """
  old=decrypt_bundle()
- r=request("POST",API+"/oauth2/token",retries=2,data={"grant_type":"refresh_token","refresh_token":old["refresh_token"],"client_id":required("TUMBLR_CONSUMER_KEY"),"client_secret":required("TUMBLR_CONSUMER_SECRET")})
+ try:
+  r=request("POST",API+"/oauth2/token",retries=1,data={"grant_type":"refresh_token","refresh_token":old["refresh_token"],"client_id":required("TUMBLR_CONSUMER_KEY"),"client_secret":required("TUMBLR_CONSUMER_SECRET")})
+ except RuntimeError as exc:
+  text=str(exc)
+  if "invalid_grant" in text or "invalid_client" in text:
+   raise RuntimeError("the stored Tumblr refresh token was refused (invalid_grant): it has been "
+                      "consumed by an earlier exchange or revoked. No Tumblr post can be published "
+                      "until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh "
+                      "TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token.enc. The token is never "
+                      "retried against Tumblr, because a second attempt cannot succeed and a stale "
+                      "grant kept in the repository would only fail every later run") from exc
+  raise
  new=r.json()
  if not new.get("access_token"): raise RuntimeError("Tumblr refresh returned no access token")
  if not new.get("refresh_token"): new["refresh_token"]=old["refresh_token"]
  if not new.get("scope"): new["scope"]=old.get("scope","")
+ if not new.get("expires_in") and old.get("expires_in"): new["expires_in"]=old["expires_in"]
+ new["obtained_at"]=datetime.now(IST).isoformat()
  encrypt_bundle(new);return new["access_token"]
+
+ACCESS_SAFETY_SECONDS=3600
+
+def token_age_seconds(bundle):
+ """How old the stored access token is, or None when the bundle predates this record."""
+ raw=str(bundle.get("obtained_at") or "")
+ if not raw: return None
+ try: obtained=datetime.fromisoformat(raw)
+ except ValueError: return None
+ if obtained.tzinfo is None: obtained=obtained.replace(tzinfo=IST)
+ return (datetime.now(IST)-obtained).total_seconds()
+
+def access_token_or_refresh():
+ """Reuse the stored access token while Tumblr still honours it, and refresh only when it must.
+
+ Refreshing on every single run is what killed this connection: one run whose rotating bundle was
+ never committed back left the repository holding an already-consumed refresh token, and Tumblr
+ then refused every exchange from 18 October onward with "invalid_grant" - twenty-eight posts'
+ worth of Tumblr routes lost while the failure looked like a publishing error. A token that is
+ reused cannot be lost that way, and the number of exchanges drops from about twenty a month to
+ about one every eighteen days.
+ """
+ bundle=decrypt_bundle()
+ age=token_age_seconds(bundle)
+ limit=bundle.get("expires_in")
+ token=str(bundle.get("access_token") or "")
+ if token and age is not None and isinstance(limit,(int,float)) and float(limit)>0:
+  if age < max(0.0,float(limit)-ACCESS_SAFETY_SECONDS): return token
+ return refresh_access()
 HEALTH_FILE=Path(__file__).resolve().parent/"SOCIAL_CREDENTIAL_HEALTH.json"
 PLATFORM="tumblr"
 _SECRET_RE=re.compile(r"(?i)(bearer\s+|[a-z0-9_-]{28,})")
@@ -194,7 +243,7 @@ def publish(token,x):
 def main():
  p=argparse.ArgumentParser();p.add_argument("--verify-only",action="store_true");p.add_argument("--dry-run",action="store_true");p.add_argument("--content-mode",choices=("auto","post","page"),default="auto");p.add_argument("--target-url",default="",help="Publish this exact API-inventoried Daily Yield destination");a=p.parse_args()
  try:
-  token=refresh_access();user=verify_account(token)
+  token=access_token_or_refresh();user=verify_account(token)
  except Exception as exc:
   # Every route that needs Tumblr is blocked until the connection is re-authorised,
   # and the reason must survive somewhere readable: Actions logs are not available to

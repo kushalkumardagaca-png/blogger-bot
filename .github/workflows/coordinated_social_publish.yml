@@ -142,6 +142,11 @@ jobs:
           fi
           exit "$code"
       - name: Persist Facebook tracker with race-safe retries
+        # The state this step commits matters most when the step before it failed:
+        # a refused token or a rejected post is the record the owner needs, and skipping
+        # the persist step after a failure is how a broken connection stayed invisible
+        # for two days. So persist unless the whole run was cancelled.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name 'Daily Yield Facebook Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
@@ -209,6 +214,11 @@ jobs:
           fi
           exit "$code"
       - name: Persist Bluesky tracker with race-safe retries
+        # The state this step commits matters most when the step before it failed:
+        # a refused token or a rejected post is the record the owner needs, and skipping
+        # the persist step after a failure is how a broken connection stayed invisible
+        # for two days. So persist unless the whole run was cancelled.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name 'Daily Yield Bluesky Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
@@ -282,6 +292,11 @@ jobs:
           fi
           exit "$code"
       - name: Persist Tumblr token and tracker with race-safe retries
+        # The state this step commits matters most when the step before it failed:
+        # a refused token or a rejected post is the record the owner needs, and skipping
+        # the persist step after a failure is how a broken connection stayed invisible
+        # for two days. So persist unless the whole run was cancelled.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name 'Daily Yield Tumblr Bot'
           git config user.email 'bot@dailyyield.blogspot.com'
@@ -349,6 +364,11 @@ jobs:
           fi
           exit "$code"
       - name: Persist Mastodon tracker with race-safe retries
+        # The state this step commits matters most when the step before it failed:
+        # a refused token or a rejected post is the record the owner needs, and skipping
+        # the persist step after a failure is how a broken connection stayed invisible
+        # for two days. So persist unless the whole run was cancelled.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name 'Daily Yield Mastodon Bot'
           git config user.email 'bot@dailyyield.blogspot.com'

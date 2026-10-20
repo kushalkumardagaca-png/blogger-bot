@@ -26,12 +26,31 @@ jobs:
           TUMBLR_CONSUMER_SECRET: ${{ secrets.TUMBLR_CONSUMER_SECRET }}
           TUMBLR_AUTHORIZATION_CODE: ${{ secrets.TUMBLR_AUTHORIZATION_CODE }}
           TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}
-        run: python tumblr_oauth_bootstrap.py
+        run: |
+          set +e
+          # The one-time code is never echoed, and neither is any token: only Tumblr's own error
+          # wording is shown, so a refused exchange can be read without log access.
+          python tumblr_oauth_bootstrap.py 2>/tmp/tumblr-bootstrap.err
+          code=$?
+          cat /tmp/tumblr-bootstrap.err
+          python social_credential_health.py --platform tumblr --code "$code" --output /tmp/tumblr-bootstrap.err || true
+          if [ "$code" != "0" ]; then
+            reason="$(python social_credential_health.py --platform tumblr --extract --output /tmp/tumblr-bootstrap.err)"
+            echo "::error title=Tumblr authorisation could not be completed::${reason:-see Tumblr's message above}"
+          else
+            echo "Tumblr is authorised again: the social guard will resume the Tumblr routes on its next sweep."
+          fi
+          exit "$code"
       - name: Commit encrypted token bundle
         run: |
           git config user.name "Daily Yield Tumblr OAuth"
           git config user.email "bot@dailyyield.blogspot.com"
           git add tumblr_token.enc
+          [ -f SOCIAL_CREDENTIAL_HEALTH.json ] && git add SOCIAL_CREDENTIAL_HEALTH.json
+          if git diff --staged --quiet; then
+            echo "Nothing changed: this bundle is already the one in the repository."
+            exit 0
+          fi
           git commit -m "Initialize encrypted Tumblr authorization [skip ci]"
           git pull --rebase origin main
           git push origin main

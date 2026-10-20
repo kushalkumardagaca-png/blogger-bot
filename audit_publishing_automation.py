@@ -427,6 +427,17 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
+check('Tumblr keeps its access token instead of burning a refresh grant on every run',
+      # the two-day outage of 18-20 October 2026: every run exchanged the refresh token, Tumblr
+      # rotates it at each exchange, and one run that failed before its state was committed left
+      # the repository holding a consumed token - after which every attempt answered invalid_grant
+      'def access_token_or_refresh' in (ROOT/'tumblr_publisher.py').read_text()
+      and 'token=access_token_or_refresh()' in (ROOT/'tumblr_publisher.py').read_text()
+      and 'retries=1' in (ROOT/'tumblr_publisher.py').read_text().split('def refresh_access')[1].split('\ndef ')[0]
+      and 'invalid_grant' in (ROOT/'tumblr_publisher.py').read_text()
+      and 'tumblr_oauth_bootstrap.py' in (ROOT/'tumblr_publisher.py').read_text()
+      and 'obtained_at' in (ROOT/'tumblr_oauth_bootstrap.py').read_text()
+      and (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text().count('if: ${{ !cancelled() }}') == 4)
 check('A social network that cannot publish says so in the repository, not only in a job log',
       # 22 social runs failed on 20 October 2026 with nothing but "exit code 1" to show for it, and
       # nine of the day's 36 posts were never delivered. The guard already refuses to dispatch to a

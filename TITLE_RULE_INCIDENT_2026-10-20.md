@@ -151,3 +151,71 @@ The clock never lowers a quality gate: if the article cannot be written, sourced
 illustrated with three licensed photographs inside 30 minutes, the slot is reported as missing and
 tried again - it is not filled with something thinner.
 
+## Tumblr: the two-day outage, and the cause found the same evening
+
+Delivered per network on 20 October (each article is expected on two of the four networks, and the
+count below is the same one the guarantee report uses):
+
+| network | expected | delivered | state |
+| --- | --- | --- | --- |
+| Mastodon | 12 | 12 | working |
+| Bluesky | 9 | 9 | working |
+| Facebook | 7 | 7 | working |
+| **Tumblr** | **10** | **0** | **broken since 18 October, 15:19 IST** |
+
+So the 10 posts the day owes are *all* Tumblr, and the other three networks are at 100 per cent.
+The reason is now written in the run annotation of the failing job:
+
+```
+RuntimeError: request failed: https://api.tumblr.com/v2/oauth2/token: 400 Bad Request
+{"error":"invalid_grant","error_description":"Invalid refresh token"}
+```
+
+**Why a working connection died.** Tumblr rotates the refresh token at every exchange: each time
+the publisher swapped it for an access token, Tumblr handed back a *new* refresh token, and the old
+one stopped working. The publisher wrote the new bundle to the runner's disk and the commit of that
+file was a *later* step - so the first run that refreshed and then failed, or was interrupted before
+its persist step ran, left the repository holding a token Tumblr had already consumed. Every attempt
+since then presented that dead token, and each attempt failed with `invalid_grant`. The automation
+could not heal this by trying harder: retrying a consumed token is exactly what cannot work.
+
+**What was changed (all pushed).**
+
+1. `tumblr_publisher.py` no longer exchanges the refresh token on every run. It reuses the stored
+   access token while Tumblr still honours it and exchanges only when that token is close to
+   expiry - from roughly twenty exchanges a month to about one every eighteen days, so there is
+   almost nothing left to lose.
+2. A refused grant is named for what it is and is **never retried**; the message states the only
+   repair, and the failure is recorded in `SOCIAL_CREDENTIAL_HEALTH.json`.
+3. Every channel now persists its state with `if: !cancelled()`, so a refusal is committed instead
+   of evaporating with the job log. This is the same defect that made 22 social failures today
+   unreadable, in a second place.
+4. `Tumblr OAuth Bootstrap` (the workflow) now records the outcome, prints Tumblr's own words on
+   failure, and tolerates being run when nothing changed. The one-time code is read from a
+   repository secret - never from a dispatch input, because a public repository shows dispatched
+   inputs on the run page.
+5. `social_guard.py` had been written to stop sending work to a network recorded as unusable, but
+   it could never see the record because of (3); that now functions, so a dead Tumblr stops costing
+   runner minutes and each missing post stays counted as missing.
+6. Tests: `test_tumblr_token_reuse.py` (reuse, expiry, no-retry-on-invalid-grant, legacy bundle,
+   and the shape of the authorisation workflow) and one new publishing-audit check, so the reuse
+   rule cannot be quietly undone. `569 passed, 76 subtests`; audits 201/0 and 12/0.
+
+**What only the owner can do to bring Tumblr back (about 3 minutes, no code to write):**
+
+1. In a browser, sign in to Tumblr as **dailyyield-official** and open the app's authorise address
+   for the app whose client id is in the repository variable `TUMBLR_CONSUMER_KEY`.
+2. After approving, the browser is sent to `https://github.com/kushalkumardagaca-png/blogger-bot?code=...`
+   - that page is a GitHub 404 on purpose; copy the whole address from the address bar.
+3. Repository → Settings → Secrets and variables → Actions → **New repository secret**, name
+   `TUMBLR_AUTHORIZATION_CODE`, paste the copied address as the value, save.
+4. Actions → **Tumblr OAuth Bootstrap** → Run workflow. It exchanges the code, checks the account
+   really controls `dailyyield-official`, encrypts the new bundle with the key that exists only
+   inside Actions, commits `tumblr_token.enc`, and marks the network healthy.
+5. Delete that secret's value afterwards (Settings → Secrets → `TUMBLR_AUTHORIZATION_CODE` → update
+   to empty or remove), since it is single-use.
+
+Nothing should ever be pasted into chat: not a password, not a code, not a token. Once step 4 has
+run, the 10 withheld Tumblr posts are re-tried by the same recovery that runs every ten minutes,
+and the guard resumes the route as soon as the health record says the network works.
+
