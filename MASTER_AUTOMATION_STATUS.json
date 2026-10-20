@@ -1,11 +1,12 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-20",
-  "kind": "trending",
-  "slot": 3,
-  "topic_id": "083c2df37e074a6d",
-  "title": "Payoneer: How Stablecoin is Scaling in Cross-B",
-  "url": "https://dailyyield.blogspot.com/2026/10/payoneer-how-stablecoin-is-scaling-in.html",
-  "published_at": "2026-10-20T03:45:09-07:00"
+  "kind": "evergreen",
+  "slot": 2,
+  "topic_id": "bbe277ac016bdb68",
+  "replaced_topic_id": null,
+  "title": "Burnham Capital Gains Tax threat could disrupt",
+  "package": "master_packages/dynamic/2026-10-20-evergreen-bbe277ac016bdb68.json",
+  "html": "scheduled_ready/2026-10-20-evergreen-2-burnham-capital-gains-tax-threat-could-disrupt.html"
 }
