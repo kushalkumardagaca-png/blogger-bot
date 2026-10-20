@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-20T08:15:48.210422+05:30",
+ "generatedAt": "2026-10-20T08:33:53.006911+05:30",
  "dateIST": "2026-10-20",
  "apply": true,
  "articles": 5,
  "expectedPosts": 10,
- "articlesWithBothPosts": 2,
- "postsMissing": 4,
- "dispatched": 2,
+ "articlesWithBothPosts": 3,
+ "postsMissing": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -78,26 +78,22 @@
    "key": "master-evergreen-0",
    "title": "Could India’s Stock-Market Tax Cuts Unlock Liq",
    "url": "https://dailyyield.blogspot.com/2026/10/could-indias-stock-market-tax-cuts.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-20T08:15:46.388097+05:30",
+ "liveVerificationSourceAt": "2026-10-20T08:33:50.224220+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 2,
+ "articlesWithExactlyTwoPosts": 3,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
