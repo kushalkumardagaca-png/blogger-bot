@@ -1,41 +1,76 @@
 {
-  "generatedAt": "2026-10-20T19:49:41.229308+05:30",
+  "generatedAt": "2026-10-20T20:32:50.815588+05:30",
   "dateIST": "2026-10-20",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 18,
   "confirmedByLivePost": 18,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
-  "overdueMissing": [],
+  "overdueMissing": [
+    "master-evergreen-3"
+  ],
   "actions": [
     {
-      "type": "preparation_recovery",
+      "type": "source_recovery",
       "key": "master-evergreen-3",
+      "attempt": 1,
       "applied": true
     },
     {
-      "type": "preparation_recovery",
-      "key": "master-trending-4",
+      "type": "social_replay",
+      "key": "news-asia-pacific",
+      "platform": "tumblr",
+      "routeIndex": 0,
       "applied": true
     },
     {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-4",
+      "type": "social_replay",
+      "key": "news-china",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-markets",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-europe",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-1",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-2",
+      "platform": "tumblr",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-3",
+      "platform": "tumblr",
+      "routeIndex": 0,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-20:news-asia-pacific:0",
-    "social:2026-10-20:news-china:0",
-    "social:2026-10-20:news-markets:0",
-    "social:2026-10-20:news-europe:0",
     "social:2026-10-20:news-americas:1",
-    "social:2026-10-20:news-companies:0",
-    "social:2026-10-20:master-trending-1:0",
-    "social:2026-10-20:master-trending-2:0",
-    "social:2026-10-20:master-trending-3:0"
+    "social:2026-10-20:news-companies:0"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
