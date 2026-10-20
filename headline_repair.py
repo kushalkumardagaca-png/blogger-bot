@@ -9,11 +9,20 @@ characters - so a whole generation of master articles lost their tail in the tit
 RSS feed, the ``<title>`` tag and the ``<h1>``. Two articles that both lose their tails can
 end up sharing one title, which is part of how the duplicate pile was built.
 
-Nothing here invents a headline. A repair only happens when the article already displays a
-longer form of its own truncated title as its first heading, the recovered line stays inside
-a search-result-safe length, and no other post on the blog would collide with it. Like every
-other live-editing job in this repository, it reports unless ``--apply`` is given, backs the
-post up first, and caps how many posts one run may touch.
+The 46-character ceiling is not this file's to raise: ``master_article_v2.validate()`` refuses any
+master title outside 12-46 characters, and publishing stops dead on that rejection - which is what
+a 72-character version of this job did on 20 October 2026, leaving master slots unfilled for hours.
+So a repaired line is read out of the article's own heading and then trimmed, word by word, until
+it both fits inside 46 characters and ends on a complete word: for the Payoneer post the
+60-character heading yields "Payoneer: How Stablecoin is Scaling" - grammatical, inside the rule,
+and made of no words but the article's. Nothing is padded, and an ellipsis is never used to hide a
+truncation.
+
+A heading is required as the witness. A title whose own article shows no corroborating heading is
+left alone even if it ends mid-word, because editing a live headline on a guess is how new
+duplicates were built in the first place. Like every other live-editing job in this repository, it
+reports unless ``--apply`` is given, backs the post up first, and caps how many posts one run
+may touch.
 """
 from __future__ import annotations
 
@@ -36,11 +45,12 @@ OUT = ROOT / "HEADLINE_REPAIR.json"
 MD = ROOT / "HEADLINE_REPAIR.md"
 BACKUP = ROOT / "HEADLINE_REPAIR_BACKUP.json.gz"
 
-# 46 is the cap that caused the damage; 72 is what a headline may grow to. Google writes
-# roughly 600px of title before it clips with an ellipsis of its own, which lands near 70
-# characters, and Bing starts penalising "too long" titles somewhere past 80.
+# 46 is both the cap that caused the damage and the longest repaired title allowed: it is the
+# upper bound master_article_v2.validate() accepts (12-46) and the one seo_hygiene keeps for
+# Blogger's site-name suffix. A title above it is not "optimised", it is unpublished.
 BROKEN_CAP = 46
-MAX_REPAIRED = 72
+MIN_TITLE_CHARS, MAX_TITLE_CHARS = 12, 46
+MAX_REPAIRED = MAX_TITLE_CHARS
 MIN_WORDS = 4
 # A wire headline can be truncated in the source too, and "…AI spending ambitions as" ending
 # on a small connecting word is the tell. A recovered headline must land on a real word.
@@ -69,8 +79,8 @@ def clipped(title: str) -> bool:
 
     The warrant is arithmetic: the old code took the first 46 characters and stripped
     separators, so a victim lands between 43 and 47 characters and ends without punctuation.
-    A headline written short on purpose sits elsewhere, and this job never touches it - the
-    article's own longer heading is still required before anything is proposed.
+    A headline written short on purpose sits elsewhere, and this job never touches it - and even
+    a title that looks cut requires the article's own heading to show the same words first.
     """
     text = plain(title)
     if not text:
@@ -80,14 +90,44 @@ def clipped(title: str) -> bool:
     return BROKEN_CAP - 3 <= len(text) <= BROKEN_CAP + 1 and not re.search(r"[.?!:]$", text)
 
 
+DANGLING_DATE = re.compile(
+    r"\b(?:19|20)\d{2}\b|\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)"
+    r"?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b", re.I)
+
+
 def heading_candidates(content: str) -> list[str]:
-    """Headings the article itself renders, longest-first scan order preserved."""
+    """Headings the article itself renders that the site would accept as a title."""
     found = []
     for match in re.finditer(r"<h([23])[^>]*>(.*?)</h\1>", str(content or ""), flags=re.S | re.I):
         text = plain(match.group(2))
-        if 12 <= len(text) <= MAX_REPAIRED and len(words(text)) >= MIN_WORDS:
+        # A heading carrying a date could never be published as a master title (master titles
+        # are undated by policy), so a repair may not offer one as a title either.
+        if (MIN_TITLE_CHARS <= len(text) <= MAX_REPAIRED and len(words(text)) >= MIN_WORDS
+                and not DANGLING_DATE.search(text)):
             found.append(text)
     return found
+
+
+def fitted(text: str, limit: int = MAX_TITLE_CHARS) -> str:
+    """The article's own words, kept whole, shortened until they fit what the site accepts.
+
+    Words are peeled off the end - never out of the middle - so the result is the longest opening
+    clause of the heading that satisfies ``master_article_v2`` (12-46 characters) and does not stop
+    on a dangling word such as "in" or "the".
+    """
+    parts = str(text or "").split()
+    while parts:
+        candidate = " ".join(parts).strip().strip(" ,;:.!?—–-")
+        if len(candidate) > limit:
+            parts.pop()
+            continue
+        if len(candidate) < MIN_TITLE_CHARS:
+            return ""
+        if candidate.split()[-1].lower().strip(" ,;:.!?-") in DANGLING:
+            parts.pop()  # a headline may not end on a preposition either
+            continue
+        return candidate
+    return ""
 
 
 def recover(post: dict) -> dict:
@@ -98,21 +138,41 @@ def recover(post: dict) -> dict:
     wanted = words(title)
     if not wanted:
         return {}
-    for heading in heading_candidates(post.get("content") or post.get("body") or ""):
+    stem = wanted[:-1]
+    if not stem:
+        return {}  # a one-word headline is not a cut sentence
+    options = []
+    # Any heading the article renders may witness the repair, whatever its length; ``fitted``
+    # then decides how much of it the site would actually accept as a title.
+    for match in re.finditer(r"<h([23])[^>]*>(.*?)</h\1>",
+                             str(post.get("content") or post.get("body") or ""), flags=re.S | re.I):
+        heading = plain(match.group(2))
+        if len(words(heading)) < MIN_WORDS:
+            continue
         have = words(heading)
-        if len(have) <= len(wanted):
+        if len(have) <= len(stem):
             continue
         # The cut title's last token is a fragment of a word ("Cross-B" from "Cross-Border"),
         # so every word before it must match exactly and the fragment may only be completed by
         # the heading's own word. That is reading the article, not writing a better headline.
-        if have[: len(wanted) - 1] != wanted[: len(wanted) - 1]:
+        if have[: len(stem)] != stem:
             continue  # not the same sentence, just a similar topic - never guess
-        if wanted and not have[len(wanted) - 1].startswith(wanted[-1]):
+        if not have[len(stem)].lower().startswith(wanted[-1].lower()):
             continue
         if have[-1].lower() in DANGLING:
             continue  # this heading is itself cut short; it cannot repair anything
-        return {"id": post.get("id"), "url": str(post.get("url") or ""), "before": title,
-                "after": heading, "gained": len(heading) - len(title)}
+        if DANGLING_DATE.search(heading):
+            continue  # master titles are undated by policy; a dated heading may not become one
+        after = fitted(heading)
+        if after == title or not (MIN_TITLE_CHARS <= len(after) <= MAX_TITLE_CHARS):
+            continue  # would change nothing or leave the title outside what the site accepts
+        # The longest clean title the article can vouch for wins, so a heading that already fits
+        # verbatim is preferred to one that has to lose words.
+        options.append({"id": post.get("id"), "url": str(post.get("url") or ""), "before": title,
+                        "after": after, "gained": len(after) - len(title),
+                        "shortenedToFit": len(after) < len(heading)})
+    if options:
+        return max(options, key=lambda row: len(row["after"]))
     return {}
 
 
@@ -210,9 +270,13 @@ def main() -> int:
             except Exception as exc:  # noqa: BLE001
                 failed.append({**row, "error": str(exc)[:160]})
 
+    # how many scanned posts already show a heading the site could carry as a title untouched:
+    # that is the supply of clean headlines available without inventing anything
+    usable = sum(1 for one in posts if heading_candidates(one.get("content") or one.get("body") or ""))
     payload = {"checkedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                "mode": "APPLIED" if arguments.apply else "AUDIT_ONLY",
                "postsScanned": len(posts), "clippedTitles": len(repairs) + blocked,
+               "headingsUsableAsTitle": usable,
                "repairable": len(repairs), "heldBackCollisions": blocked,
                "selectedThisRun": len(batch), "batchCap": arguments.max, "repaired": applied,
                "failed": failed, "backup": BACKUP.name if applied else "",
@@ -224,6 +288,9 @@ def main() -> int:
              f"- titles cut off by the old 46-character cap: **{payload['clippedTitles']}**",
              f"- recoverable from the article's own heading: **{payload['repairable']}**",
              f"- held back because the recovered title already exists: **{payload['heldBackCollisions']}**",
+             f"- posts showing a heading the site could carry as a title untouched: "
+             f"**{payload['headingsUsableAsTitle']}** (a longer heading is trimmed to its longest "
+             f"whole-word opening inside 12-{MAX_TITLE_CHARS} characters rather than published as-is)",
              f"- selected for this run: **{payload['selectedThisRun']}** (cap {arguments.max})",
              f"- headlines written back: **{len(applied)}**", ""]
     if repairs:

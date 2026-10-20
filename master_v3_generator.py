@@ -405,16 +405,33 @@ def photo_set(title,category,slug,key):
   try:return choose_photos(briefs,slug,key)
   except Exception as exc:errors.append(str(exc))
  raise RuntimeError('V3 photo search exhausted every independently broadened search: '+' | '.join(errors))
-def head_clip(value,limit=72):
-  # A headline must never end mid-word. The 46-character slice this replaces is what turned
-  # "Payoneer: How Stablecoin is Scaling in Cross-Border Payments" into "…in Cross-B" on the
-  # live site, in the RSS feed and in the <h1>; 72 characters still fits a Google title.
+def head_clip(value,limit=46):
+  # 46 is not a style preference and must not be raised: master_article_v2.validate() rejects any
+  # master title outside 12-46 characters, so a longer clip stops the article being published at
+  # all - which is exactly what happened on 20 October 2026 when this ceiling was set to 72 and no
+  # master slot filled for hours. The defect this helper exists to fix is the cut *mid-word*, the
+  # slice that turned "Payoneer: How Stablecoin is Scaling in Cross-Border Payments" into
+  # "...in Cross-B" in the title, the feed and the <h1>. So the title is rebuilt from whole words
+  # only: tokens are added while they fit, never a character slice, no word is ever padded or
+  # shortened, an ellipsis is never used to hide a truncation, and a headline is not left standing
+  # on a preposition or an article. A candidate that cannot be clipped inside the rule returns ""
+  # and is rejected by the caller - which is correct, because the validator would reject it anyway.
   value=re.sub(r'\s+',' ',str(value or '')).strip()
   if len(value)<=limit:return value
-  cut=value[:limit]
-  if ' ' in cut:cut=cut.rsplit(' ',1)[0]
-  else:cut=value[:limit-1]+'\u2026'
-  return cut.rstrip(' ,;:—–-.\u00b7|') or value[:limit]
+  kept=''
+  for token in value.split():
+    trial=(kept+' '+token).strip()
+    if len(trial)>limit:break
+    kept=trial
+  while kept:
+    tail=kept.rsplit(' ',1)[-1].lower().strip(' ,;:.\u2014\u2013-')
+    # a cut title must not end on a word that only makes sense joined to what came after it
+    if tail not in {'a','an','and','as','at','but','by','for','from','if','in','into','its','of',
+                    'on','or','our','per','the','to','vs','with','that','this','these','those','it',
+                    'is','are','was','were','be','been','after','before','over','under','between','&'}:
+      break
+    kept=kept.rsplit(' ',1)[0] if ' ' in kept else ''
+  return kept if 12<=len(kept)<=limit else ''
 
 def build(item,kind,target):
  sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=head_clip(clean(title).strip(' -:'))

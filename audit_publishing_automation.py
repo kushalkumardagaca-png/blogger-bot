@@ -426,9 +426,22 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
 check('Master headlines are clipped on a word boundary, never inside a word',
-      'def head_clip' in v3_generator and '[:46]' not in v3_generator)
+      'def head_clip' in v3_generator and '[:46]' not in v3_generator
+      and 'for token in value.split():' in v3_generator
+      and '\u2026' not in v3_generator.split('def head_clip')[1].split('def build')[0])
+check('No generator or repair job may write a master title outside the validator\'s own 12-46 rule',
+      # this is the guard for the 20 October 2026 outage: a title ceiling of 72 characters in the
+      # generator passed its own tests while master_article_v2.validate() refused every candidate,
+      # so no master article was published for the rest of the day. The validator's number, not a
+      # search-result estimate, is the only number allowed in these two files.
+      'def head_clip(value,limit=46)' in v3_generator
+      and 'MIN_TITLE_CHARS, MAX_TITLE_CHARS = 12, 46' in (ROOT/'headline_repair.py').read_text()
+      and 'MAX_REPAIRED = MAX_TITLE_CHARS' in (ROOT/'headline_repair.py').read_text()
+      and 'if not 12<=len(title)<=46' in (ROOT/'master_article_v2.py').read_text()
+      and 'limit=72' not in v3_generator and 'MAX_REPAIRED = 72' not in (ROOT/'headline_repair.py').read_text())
 check('Headline repair reads only the article\'s own words and writes only on an explicit apply',
       'def heading_candidates' in (ROOT/'headline_repair.py').read_text()
+      and 'def fitted' in (ROOT/'headline_repair.py').read_text()
       and 'AUDIT_ONLY' in (ROOT/'headline_repair.py').read_text()
       and '--apply' in (ROOT/'headline_repair.py').read_text()
       and 'heldBackCollisions' in (ROOT/'headline_repair.py').read_text()
