@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-21",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "0292dca982d6b870",
   "kind": "evergreen",
   "slot": 3,
-  "topic_id": "0292dca982d6b870",
-  "replaced_topic_id": null,
+  "slot_key": "2026-10-21:evergreen:3",
+  "date": "2026-10-21",
+  "category": "Economy Policy & Global Finance",
+  "evergreen_category": "Economy Policy & Global Finance",
   "title": "Student Loan Interest Rates: Federal, Private,",
-  "package": "master_packages/dynamic/2026-10-21-evergreen-0292dca982d6b870.json",
-  "html": "scheduled_ready/2026-10-21-evergreen-3-student-loan-interest-rates-federal-private.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 12.2,
-  "remainingMinutes": 17.8
+  "url": "https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html",
+  "published_at": "2026-10-21T08:41:54-07:00"
 }
