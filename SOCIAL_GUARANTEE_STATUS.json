@@ -1,30 +1,26 @@
 {
- "generatedAt": "2026-10-21T05:17:52.456242+05:30",
+ "generatedAt": "2026-10-21T05:38:11.878751+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 2,
  "expectedPosts": 4,
- "articlesWithBothPosts": 1,
- "postsMissing": 2,
+ "articlesWithBothPosts": 2,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
    "key": "news-china",
    "title": "china edition",
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-21.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
+    "bluesky": 1,
     "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-asia-pacific",
@@ -43,10 +39,10 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T05:17:51.231146+05:30",
+ "liveVerificationSourceAt": "2026-10-21T05:38:10.670258+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 1,
+ "articlesWithExactlyTwoPosts": 2,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
