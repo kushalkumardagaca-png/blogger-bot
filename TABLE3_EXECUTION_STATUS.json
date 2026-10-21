@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:19:00.694203+05:30",
+  "generatedAt": "2026-10-21T11:22:28.203775+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -18,7 +18,7 @@
       "id": "B3",
       "task": "Misleading reports",
       "result": "Fixed",
-      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 500."
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 637."
     },
     {
       "id": "B4",
@@ -36,7 +36,7 @@
       "id": "B6",
       "task": "Facts and originality",
       "result": "Automated check done; human-review limit remains",
-      "proof": "535 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
+      "proof": "562 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
     },
     {
       "id": "B7",
@@ -48,7 +48,7 @@
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-21T10:55:16.319004+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
+      "proof": "Live status source 2026-10-21T11:20:39.689611+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
     },
     {
       "id": "B9",
@@ -90,7 +90,7 @@
       "id": "B15",
       "task": "Bing and IndexNow",
       "result": "Monitored; quota respected",
-      "proof": "Last Bing record 2026-10-19T13:22:12.994258+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 555. IndexNow parked: True. No indexing guarantee."
+      "proof": "Last Bing record 2026-10-21T05:22:37.837665+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 593. IndexNow parked: True. No indexing guarantee."
     },
     {
       "id": "B16",
@@ -130,9 +130,9 @@
     ]
   ],
   "sourceDates": {
-    "siteAudit": "2026-10-19T14:38:37.504933+00:00",
-    "slots": "2026-10-21T10:55:16.319004+05:30",
-    "social": "2026-10-21T10:55:23.944161+05:30",
+    "siteAudit": "2026-10-21T05:52:26.508941+00:00",
+    "slots": "2026-10-21T11:20:39.689611+05:30",
+    "social": "2026-10-21T11:22:28.157466+05:30",
     "google": "2026-10-20T21:24:55.506685+00:00"
   },
   "noGrandUpdateStarted": true,

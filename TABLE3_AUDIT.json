@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-10-19T14:38:37.504933+00:00",
+  "checkedAt": "2026-10-21T05:52:26.508941+00:00",
   "status": "CHECKED_WITH_LIMITS",
   "siteWrites": 0,
   "analyticsEventsSent": 0,
   "pageScriptsExecuted": false,
-  "bloggerApiReads": 14,
-  "livePosts": 535,
+  "bloggerApiReads": 15,
+  "livePosts": 562,
   "livePages": 14,
   "drafts": 0,
   "draftInventory": [],
@@ -14,7 +14,7 @@
   "sourceObservation": {
     "status": "OBSERVED",
     "httpStatus": 200,
-    "sourceSha256": "173a4c753f7449b67358cc7bd963a0e4b60204e936efad9e8119f651ce52cc57",
+    "sourceSha256": "7ca6d2f83339ae80faa99bb2e8406d27e5c233adc47fe8fe1ab14c22c2eefdde",
     "ga4IdsObserved": [
       "G-WLEEYTKV12"
     ],
@@ -52,14 +52,14 @@
       "httpStatus": 200,
       "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
       "readOnly": true,
-      "checkedAt": "2026-10-19T14:38:12.704019+00:00",
+      "checkedAt": "2026-10-21T05:51:40.320878+00:00",
       "matchesRecordedPublisher": true
     },
     "robotsTxt": {
       "httpStatus": 200,
       "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
       "readOnly": true,
-      "checkedAt": "2026-10-19T14:38:12.820923+00:00"
+      "checkedAt": "2026-10-21T05:51:40.594702+00:00"
     }
   },
   "freeze": {
@@ -75,7 +75,7 @@
     "routineUpdates": "Existing article/news hub cards and JSON data only; no old-post/theme/label rebuild."
   },
   "corpusSummary": {
-    "postsScanned": 535,
+    "postsScanned": 562,
     "pagesScanned": 14,
     "automatedPolicyFlags": [],
     "missingDisclosure": [],
@@ -115,6 +115,13 @@
         "title": "Brazil's first-round election results trigger currency and stock rally on expectations of tighter fi"
       },
       {
+        "pool": "photo_library/master/083c2df37e074a6d.json",
+        "type": "master",
+        "count": 0,
+        "target": 10,
+        "title": "Payoneer: How Stablecoin is Scaling in Cross-Border Payments - FinTech Magazine"
+      },
+      {
         "pool": "photo_library/master/059ada08d696d8a3.json",
         "type": "master",
         "count": 8,
@@ -133,7 +140,7 @@
         "type": "master",
         "count": 5,
         "target": 10,
-        "title": "Saving & Emergency Planning public institution exterior"
+        "title": "Proposals to close Minneapolis schools aimed at reallocating funds, not saving money, leaders say - "
       },
       {
         "pool": "photo_library/master/94c9cb25362ce09d.json",
@@ -141,6 +148,20 @@
         "count": 0,
         "target": 10,
         "title": "AT&T to Sell AT&T Mexico to Grupo Televisa and Fintech Holdings - PR Newswire"
+      },
+      {
+        "pool": "photo_library/master/18a6240d22247ff2.json",
+        "type": "master",
+        "count": 3,
+        "target": 10,
+        "title": "4 Different Types of Life Insurance & How to Choose in 2026 - NerdWallet"
+      },
+      {
+        "pool": "photo_library/master/bbe277ac016bdb68.json",
+        "type": "master",
+        "count": 1,
+        "target": 10,
+        "title": "Burnham Capital Gains Tax threat could disrupt market - Estate Agent Today"
       },
       {
         "pool": "photo_library/master/e628367f510ad86c.json",
@@ -159,9 +180,9 @@
       {
         "pool": "photo_library/master/ead93a367603d402.json",
         "type": "master",
-        "count": 3,
+        "count": 7,
         "target": 10,
-        "title": "household budgeting papers desk"
+        "title": "10 Ways to Pay Off Credit Card Debt - NerdWallet"
       },
       {
         "pool": "photo_library/master/a95c0e33a1c7e31c.json",
@@ -206,6 +227,27 @@
         "title": "Social Security Administration announces 3.6% cost-of-living adjustment for 2027"
       },
       {
+        "pool": "photo_library/master/026f01684d108a67.json",
+        "type": "master",
+        "count": 1,
+        "target": 10,
+        "title": "How often is Daily Yield published?"
+      },
+      {
+        "pool": "photo_library/master/5e521814024bcfa1.json",
+        "type": "master",
+        "count": 0,
+        "target": 10,
+        "title": "How can I declare my interest income on provident fund account for financial year 2024-2025 now? - U"
+      },
+      {
+        "pool": "photo_library/master/975a7e318b15b228.json",
+        "type": "master",
+        "count": 0,
+        "target": 10,
+        "title": "Mortgage rates: Why has long term US home loan rate hit highest level in 3 years. Check impact on ho"
+      },
+      {
         "pool": "photo_library/master/2d019933a64e7cb1.json",
         "type": "master",
         "count": 6,
@@ -220,7 +262,7 @@
     "needsRecheck": []
   },
   "analytics": {
-    "checkedAt": "2026-10-19T14:38:37.239450+00:00",
+    "checkedAt": "2026-10-21T05:52:26.266356+00:00",
     "siteTagsChanged": false,
     "newCollectionEnabled": false,
     "dataSubmitted": false,
@@ -242,23 +284,23 @@
   },
   "bing": {
     "lastRun": {
-      "checkedAt": "2026-10-19T13:22:12.994258+00:00",
+      "checkedAt": "2026-10-21T05:22:37.837665+00:00",
       "status": "PASS",
       "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
       "syntheticViews": 0,
       "site": "https://dailyyield.blogspot.com/",
       "quota": {
         "dailyAvailable": 0,
-        "monthlyAvailable": 1200
+        "monthlyAvailable": 1000
       },
       "summary": {
-        "inventory": 550,
-        "candidates": 395,
+        "inventory": 577,
+        "candidates": 238,
         "submitted": 0,
-        "quotaDeferred": 395,
-        "inspected": 0,
+        "quotaDeferred": 238,
+        "inspected": 10,
         "knownToBing": 0,
-        "pendingMonitoring": 155,
+        "pendingMonitoring": 339,
         "removedAlerts": 19
       },
       "errors": [],
@@ -270,13 +312,13 @@
         "Submission does not guarantee crawling, indexing, ranking or traffic."
       ]
     },
-    "durableAcceptedRecords": 555,
+    "durableAcceptedRecords": 593,
     "acceptedSample": [
       {
         "url": "https://dailyyield.blogspot.com/",
         "status": "QUOTA_DEFERRED",
-        "submittedFingerprint": "7a2bf6525406516bd85b7f742cf1d0d44b807b47819522e5fe3c50d90d432041",
-        "lastSubmittedAt": "2026-10-19T00:45:49.204028+00:00"
+        "submittedFingerprint": "299221af02508455d3ca865c70f4ba8e68661222a3519a948053a31dd200bb0d",
+        "lastSubmittedAt": "2026-10-21T01:16:54.359500+00:00"
       },
       {
         "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
