@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-21T12:45:47.900388+05:30",
+ "generatedAt": "2026-10-21T12:54:57.592303+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 8,
  "expectedPosts": 16,
- "articlesWithBothPosts": 7,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 8,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-markets",
@@ -64,18 +64,14 @@
    "key": "news-europe",
    "title": "europe edition",
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-21.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 1,
+    "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "master-evergreen-0",
@@ -119,9 +115,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T12:45:41.916279+05:30",
+ "liveVerificationSourceAt": "2026-10-21T12:54:51.668637+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 5,
+ "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
