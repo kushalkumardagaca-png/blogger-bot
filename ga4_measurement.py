@@ -34,6 +34,7 @@ HOME = "https://dailyyield.blogspot.com/"
 DAYS = 7
 TOKEN_URL = "https://oauth2.googleapis.com/token"
 DATA_API = "https://analyticsdata.googleapis.com/v1beta"
+TOKEN_INFO = "https://oauth2.googleapis.com/tokeninfo"
 ADMIN_API = "https://analyticsadmin.googleapis.com/v1alpha"
 
 REMEDIES = {
@@ -74,6 +75,30 @@ def credential_label() -> str:
         return credential_source()
     except Exception:  # noqa: BLE001 - the label is a courtesy; the measurement is the job
         return "not recorded"
+
+
+def token_scopes(token: str) -> list[str]:
+    """Ask Google, before any data call, what the token just obtained is allowed to do.
+
+    A 403 has several causes and a report that must pick one ends up guessing; the scope list settles
+    it. The question is asked about the short-lived access token, and that token is never written into
+    the report or the log.
+    """
+    try:
+        payload = http(TOKEN_INFO + "?access_token=" + urllib.parse.quote(token, safe=""))
+    except Exception:  # noqa: BLE001 - knowing the scopes is a courtesy, not a requirement
+        return []
+    scope_text = payload.get("scope") if isinstance(payload, dict) else ""
+    # every name Google lists is kept, not just the https:// form: a tokeninfo reply may answer
+    # "analytics.readonly" or the full url depending on how the consent was requested, and dropping
+    # either one would make the report claim a permission the token does have
+    return sorted({str(part) for part in str(scope_text or "").split() if part})
+
+
+def grants_analytics(scopes: list[str]) -> bool:
+    """Whether any listed scope is the Analytics read permission, in either spelling."""
+    return any(str(scope).endswith("auth/analytics.readonly") or str(scope) == "analytics.readonly"
+               for scope in scopes)
 
 
 def classify_forbidden(payload: dict) -> tuple[str, str, list[str]]:
@@ -255,8 +280,14 @@ def main() -> int:
     else:
         tag = site_tag()
         rows, property_id, source, status, report_error = [], "", "not read", None, ""
+        scopes: list[str] = []
         try:
             token = refresh_token()
+            scopes = token_scopes(token)
+            if scopes and not grants_analytics(scopes):
+                # Google has answered for itself: this token was never given Analytics, so no call
+                # could succeed and none is attempted. Naming the scopes beats describing a 403.
+                raise PermissionError("the stored token carries only: " + ", ".join(scopes))
             property_id, source = resolve_property(token, MEASUREMENT_ID)
             rows = daily_rows(token, property_id)
         except MissingCredentials:
@@ -281,6 +312,8 @@ def main() -> int:
                     "TOKEN_REFUSED" if exc.code in (400, 401) else "READ_FAILED")
                 detail = str((payload.get("error") or {}).get("message") or "") if isinstance(payload, dict) else ""
                 report_error = f"HTTP {exc.code}" + (f" {detail}" if detail else "")
+        except PermissionError as exc:
+            status, report_error, rows = "SCOPE_INSUFFICIENT", str(exc)[:300], []
         except Exception as exc:  # noqa: BLE001
             status, report_error = "READ_FAILED", str(exc)[:160]
         if status:
@@ -291,7 +324,7 @@ def main() -> int:
                       "daily": [], "remedy": REMEDIES.get(status, "the Analytics Data API could not "
                                                                   "be reached; the failure is recorded, "
                                                                   "no number is invented"),
-                      "credentialSource": credential_label(),
+                      "credentialSource": credential_label(), "tokenScopes": scopes,
                       "note": "the blog is not modified by this job"}
             if report_error:
                 report["error"] = report_error
@@ -317,6 +350,9 @@ def main() -> int:
                       or "no G- id on the page that came back") + ")",
              f"- property: **{report.get('propertyId') or 'not resolved'}** "
              f"({report.get('propertyIdSource') or 'unknown'})"]
+    if report.get("tokenScopes"):
+        lines.append("- what the stored token is permitted to do: "
+                     + ", ".join("`" + str(x).rsplit("/", 1)[-1] + "`" for x in report["tokenScopes"]))
     if report.get("error"):
         lines.append("- google said: `" + str(report["error"])[:300] + "`")
     if report["ok"]:

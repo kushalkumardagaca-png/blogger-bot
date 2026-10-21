@@ -127,19 +127,18 @@ own posting refresh through those clients.
 1. **Gear icon** → tick **Use your own OAuth credentials** → paste the new **Client ID** and new
    **Client secret** → set **Access type: Offline** (without this there is no refresh token to copy) →
    close the gear.
-2. Under **Step 1: Select & authorize APIs**, click into the **"input your own OAuth scopes"** box and
-   type the first line, then press **Enter** so it becomes its own entry, then the second line, then
-   **Enter** again:
-   ```
-   https://www.googleapis.com/auth/analytics.readonly
-   https://www.googleapis.com/auth/webmasters.readonly
-   ```
-   **This is the step that went wrong last time.** The box needs a keypress between the lines; pasting
-   both at once can leave them as one entry, and then Google grants only the first. Before pressing
-   anything else, count: **two separate entries must be listed.** If you can, do this on a keyboard
-   rather than a phone.
+2. Ask for **one permission: Analytics, read-only.** Do not paste anything: under
+   **Step 1: Select & authorize APIs** type `analytics` in the search box above the API list, and tap
+   the line **"View and download your Google Analytics data"** under **Google Analytics Admin API
+   v1beta** (or under **Google Analytics Data API v1beta** — same permission, either one).
+   Full detail, including where the entries sit if the search box is hidden on a phone, is in
+   **"Which permission to tick, and where it is in the list"** above.
+   The Search Console line is deliberately left out this time: it was never required, because the
+   repository keeps its own Search Console token, and asking for two permissions in one box is what
+   the phone could not do.
 3. **Authorize APIs** → sign in as `kushalkumardagaca.ca@gmail.com` → **Advanced → Go to … (unsafe)**.
-   On the permission screen, tick **both** lines (or *Select all*) → **Allow / Continue**.
+   The consent screen shows **one** line to tick — *"See and download your Google Analytics data"* — so
+   tick it → **Allow / Continue**.
 4. **Exchange authorization code for tokens** → the result box fills with JSON. Before copying, check
    the JSON contains the key `"refresh_token"` — if it has only `"access_token"`, the Offline setting
    did not stick; set it again and repeat from step 1. Copy the `refresh_token` value (starts `1//`).
@@ -180,6 +179,60 @@ this one is written out in full.
 
 ---
 
+## Which permission to tick, and where it is in the list
+
+You need **one** permission: **Analytics, read-only**
+(`https://www.googleapis.com/auth/analytics.readonly`).
+
+The Search Console line I asked for too is not needed: the blog's Search Console reading already has its
+own working token in this repository (`GSC_REFRESH_TOKEN`), and nothing on the Analytics side uses the
+other. Asking for both was tidiness, not a requirement — and it is exactly what the phone could not do,
+because the paste box swallows two lines into one. One permission means one tap and one tick.
+
+**Route A — pick it from the list. Nothing to paste.**
+On <https://developers.google.com/oauthplayground/> , under **Step 1: Select & authorize APIs**, there is
+a search box above the list (labelled *Select the scope*). Type **`analytics`**. Two entries appear:
+
+| Listed as | The line to tap |
+| --- | --- |
+| **Google Analytics Admin API v1beta** | *View and download your Google Analytics data* — `https://www.googleapis.com/auth/analytics.readonly` |
+| **Google Analytics Data API v1beta** | the same line and the same URL |
+
+Tap that line once; a check or highlight appears on the row. Ticking it under both entries is harmless —
+it is one permission, not two. If the search box is not showing on your phone, the list is alphabetical:
+scroll to the **G** block, just below *Google Ads API*, and the two Analytics rows are there; Search
+Console sits far below under **S**, which is why typing in the box is quicker.
+
+**Route B — the paste box, with ONE line only.** The box at the bottom of Step 1, under the long list,
+takes what you type as a scope. Paste this single line and nothing else — no second line, no Enter key:
+
+```
+https://www.googleapis.com/auth/analytics.readonly
+```
+
+Then in both routes: **Authorize APIs** → sign in as `kushalkumardagaca.ca@gmail.com` → **Advanced → Go to
+… (unsafe)** → the consent screen now shows **one** line to tick ("See and download your Google Analytics
+data") → **Allow / Continue** → **Exchange authorization code for tokens** → the JSON must contain
+`"refresh_token"` → copy that value.
+
+## What the report proves now, instead of guessing
+
+From 21 October 2026 the reader asks Google what the token it just obtained is permitted to do, and puts
+that answer in the evidence:
+
+```
+what the stored token is permitted to do: `analytics.readonly`
+token permits: analytics.readonly
+```
+
+If Analytics is absent from that line, the run **stops before touching the Analytics API** and says
+`the stored token carries only: …` with the list. So the next time anything is refused you read a
+permission list, not a 403 code, and no one has to work out which of three repairs a status implied.
+Nothing is printed about the tokens themselves: the short-lived access token is never written to the
+report or the log, and this repository is public.
+
+---
+
 ## Step 3A — get the token in your browser, no terminal (2 minutes)
 
 <https://developers.google.com/oauthplayground/> is Google's own page for exactly this.
@@ -196,14 +249,14 @@ this one is written out in full.
    One disclosure, because it is your secret: the Playground proxies the exchange, so Google's own
    playground server sees the client ID and secret (it states they are not logged). If you would
    rather not, use Step 3B, which keeps everything between your machine and Google.
-2. In **Step 1: Select & authorize APIs**, ignore the long list and use the box under it — *"input
-   your own OAuth scopes"* — and paste these two lines, one per line:
+2. In **Step 1: Select & authorize APIs**, type `analytics` in the search box above the list and tick
+   **"View and download your Google Analytics data"** — that single line is all this needs:
    ```
    https://www.googleapis.com/auth/analytics.readonly
-   https://www.googleapis.com/auth/webmasters.readonly
    ```
-   Search Console's read scope is included on purpose: the robots then keep using one authorisation
-   for both jobs instead of two.
+   *(On a keyboard you may also add `https://www.googleapis.com/auth/webmasters.readonly` so one
+   authorisation covers both jobs; it is a convenience, not a requirement, and the repository's
+   Search Console token already works on its own.)*
    Press **Authorize APIs** → sign in as `kushalkumardagaca.ca@gmail.com` → when Google says
    *"Google has not verified this app"*, that is your own app: **Advanced → Go to ... (unsafe) →
    Allow both permissions**.

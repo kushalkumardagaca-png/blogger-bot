@@ -70,6 +70,8 @@ def main() -> int:
     print(f"property: {report.get('propertyId') or 'not resolved'} "
           f"({report.get('propertyIdSource') or 'unknown'})")
     print(f"measurement id: {report.get('measurementId')}")
+    if report.get("tokenScopes"):
+        print("token permits: " + ", ".join(str(x).rsplit("/", 1)[-1] for x in report["tokenScopes"]))
     if report.get("credentialSource"):
         print(f"credential in force: {report['credentialSource']} (names only, never values)")
     if report.get("error"):

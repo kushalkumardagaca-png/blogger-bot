@@ -195,6 +195,83 @@ class ForbiddenIsSplitThreeWays(unittest.TestCase):
         self.assertIn("Enable", report["remedy"])
 
 
+class TokenScopesAreProvedNotGuessed(unittest.TestCase):
+    """The report may only state a permission problem when Google has confirmed one.
+
+    Before this, a 403 was read as "missing scope" on trust. Now the reader asks Google what the
+    token it just obtained is allowed to do, puts that list in the evidence file, and refuses to make
+    a data call at all when Analytics is absent - so the owner sees the permission list instead of a
+    guess, and nobody has to decide which of three repairs a 403 implied.
+    """
+
+    def measure(self, scope_value, follow_up=None):
+        import io
+        import json as _json
+        import tempfile
+        from contextlib import redirect_stdout
+        from unittest.mock import patch
+
+        calls: list[str] = []
+
+        def fake_http(url, *args, **kwargs):
+            calls.append(url.split("//")[-1].split("?")[0])
+            if "tokeninfo" in url:
+                return {"scope": scope_value}
+            if follow_up:
+                return follow_up(url)
+            raise RuntimeError("unexpected call")
+
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(sys, "argv", ["ga4_measurement.py"]), \
+                 patch.dict(os.environ, {"GA4_CLIENT_ID": "cid", "GA4_CLIENT_SECRET": "sec",
+                                         "GA4_REFRESH_TOKEN": "1//SECRET-VALUE-never-printed"}, clear=True), \
+                 patch.object(gm, "OUT", Path(folder) / "GA4_MEASUREMENT.json"), \
+                 patch.object(gm, "MD", Path(folder) / "GA4_MEASUREMENT.md"), \
+                 patch.object(gm, "site_tag", return_value={"checked": True, "reachable": True,
+                                                             "measurementIds": ["G-WLEEYTKV12"],
+                                                             "installedHere": True}), \
+                 patch.object(gm, "refresh_token", return_value="short-lived-access-token"), \
+                 patch.object(gm, "http", side_effect=fake_http), \
+                 redirect_stdout(io.StringIO()):
+                gm.main()
+            folder = Path(folder)
+            report = _json.loads((folder / "GA4_MEASUREMENT.json").read_text(encoding="utf-8"))
+            markdown = (folder / "GA4_MEASUREMENT.md").read_text(encoding="utf-8")
+        return report, markdown, calls
+
+    def test_a_token_without_analytics_is_stopped_before_any_data_call(self):
+        report, markdown, calls = self.measure("https://www.googleapis.com/auth/webmasters")
+        self.assertEqual(report["status"], "SCOPE_INSUFFICIENT")
+        self.assertIn("carries only: https://www.googleapis.com/auth/webmasters", report["error"])
+        self.assertEqual(calls, ["oauth2.googleapis.com/tokeninfo"],
+                         "no Analytics call may be attempted with a token that cannot make it")
+        self.assertIn("permitted to do", markdown)
+
+    def test_a_token_with_analytics_is_allowed_to_go_on_asking(self):
+        def follow_up(url):
+            raise gm.MissingCredentials()
+
+        report, markdown, calls = self.measure(
+            "openid https://www.googleapis.com/auth/analytics.readonly", follow_up=follow_up)
+        self.assertEqual(len(calls), 2, "the property lookup should have been attempted")
+        self.assertIn("analyticsadmin", calls[1])
+        self.assertTrue(any(str(entry).endswith("auth/analytics.readonly")
+                            for entry in report["tokenScopes"]),
+                        f"the granted scope must be listed as it came from Google: {report['tokenScopes']}")
+        self.assertIn("openid", report["tokenScopes"], "every listed scope is shown, not just ours")
+
+    def test_both_spellings_of_the_read_permission_are_understood(self):
+        self.assertTrue(gm.grants_analytics(["analytics.readonly"]))
+        self.assertTrue(gm.grants_analytics(["https://www.googleapis.com/auth/analytics.readonly"]))
+        self.assertFalse(gm.grants_analytics(["https://www.googleapis.com/auth/webmasters"]))
+        self.assertFalse(gm.grants_analytics(["openid", "email", "profile"]))
+
+    def test_the_access_token_itself_never_reaches_the_evidence(self):
+        report, markdown, _ = self.measure("https://www.googleapis.com/auth/webmasters")
+        self.assertNotIn("short-lived-access-token", json.dumps(report) + markdown)
+        self.assertNotIn("never-printed", json.dumps(report) + markdown)
+
+
 class ScopeFailureSaysWhatIsInnocent(unittest.TestCase):
     """A 403 about scopes must not send someone off to rebuild the client pair that is fine.
 
