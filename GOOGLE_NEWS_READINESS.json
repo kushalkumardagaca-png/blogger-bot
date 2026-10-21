@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-21T17:26:44+00:00",
+ "checkedAt": "2026-10-21T21:00:14+00:00",
  "status": "MEASURED",
  "feedUrl": "https://dailyyield.blogspot.com/feeds/posts/default?alt=rss&max-results=25",
  "feed": {
@@ -14,14 +14,18 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/is-3-lakh-enough-for-your-emergency-fund.html",
    "issues": [
-    "pageUnreadable"
-   ]
+    "noOpenGraphImage",
+    "noHeadDescription"
+   ],
+   "pageTitle": "Is ₹3 lakh enough for your emergency fund"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html",
    "issues": [
-    "pageUnreadable"
-   ]
+    "noOpenGraphImage",
+    "noHeadDescription"
+   ],
+   "pageTitle": "Student Loan Interest Rates: Federal, Private,"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/profit-warnings-from-uk-listed-firms.html",
@@ -40,21 +44,21 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-21.html",
    "issues": [
-    "pageUnreadable"
-   ]
+    "noOpenGraphImage",
+    "noHeadDescription"
+   ],
+   "pageTitle": "Global Finance News — 21 October 2026"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-21.html",
    "issues": [
-    "noOpenGraphImage",
-    "noHeadDescription"
-   ],
-   "pageTitle": "Companies, IPOs & Deals News — 21 October 2026"
+    "pageUnreadable"
+   ]
   }
  ],
  "pageIssueCounts": {
-  "noOpenGraphImage": 2,
-  "noHeadDescription": 2
+  "noOpenGraphImage": 4,
+  "noHeadDescription": 4
  },
  "items": [
   {
@@ -165,12 +169,12 @@
   {
    "gap": "noOpenGraphImage",
    "meaning": "the page has no og:image, so News and Discover have no picture to show",
-   "urls": 2
+   "urls": 4
   },
   {
    "gap": "noHeadDescription",
    "meaning": "the page has no meta description in the head, so Google writes its own snippet",
-   "urls": 2
+   "urls": 4
   }
  ],
  "policy": "read-only: this job asks the public feed and the public pages, and writes nothing to Google, Blogger or the theme"
