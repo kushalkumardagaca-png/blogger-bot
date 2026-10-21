@@ -80,8 +80,12 @@ def measure() -> dict:
         # 50,000 readers a day, each opening one or two articles. Until GA4 can be read this stays
         # None rather than standing in for itself with search clicks.
         "dailyReaders": ga4_readers if isinstance(ga4_readers, int) else None,
-        "dailyReadersBasis": "GA4_ENGAGED_SESSIONS_LATEST_DAY" if isinstance(ga4_readers, int)
-                              else "UNMEASURABLE_UNTIL_GA4_IS_READABLE",
+        # which field the reader count came from is said by the measurement itself, because Google
+        # can refuse one metric and leave the other: a hard-coded label here would sometimes name a
+        # field the number was not built from
+        "dailyReadersBasis": (ga4_totals.get("readersBasis") or "GA4_ENGAGED_SESSIONS_LATEST_DAY"
+                              if isinstance(ga4_readers, int)
+                              else "UNMEASURABLE_UNTIL_GA4_IS_READABLE"),
         "measurableFollowers": followers if isinstance(followers, int) else None,
         "gateVerdict": capacity.get("decision") or capacity.get("verdict"),
         "declaredTarget": tower.get("target") if isinstance(tower.get("target"), (int, float)) else None,

@@ -18,7 +18,7 @@ REPORT = ROOT / "GA4_MEASUREMENT.json"
 # annotation levels are chosen by who can fix it: NOTICE for a success, ERROR when the robots are
 # blocked by something only a person can authorise, WARNING when the connection works but is quiet.
 ADVICE = {
-    "MEASURED": ("notice", "Analytics is readable: {views} pageviews and {readers} engaged readers "
+    "MEASURED": ("notice", "Analytics is readable: {views} pageviews and {readers} {noun} "
                             "on the most recent whole day, over {days} days of data."),
     "NO_DATA_YET": ("warning", "The connection works and Google answered, but the property returned no "
                                "rows for the last 7 days. That is normal on a brand-new property or "
@@ -68,12 +68,17 @@ def main() -> int:
     totals = report.get("totals") or {}
     level, sentence = ADVICE.get(status, ADVICE["READ_FAILED"])
     if status == "MEASURED":
+        # the sentence follows the field the number actually came from: calling an active-user count
+        # "engaged readers" would overstate what Google agreed to report
+        noun = ("engaged readers"
+                if str(totals.get("readersBasis") or "").endswith("ENGAGED_SESSIONS_LATEST_DAY")
+                else "readers, counted as people")
         sentence = sentence.format(views=totals.get("views"), readers=totals.get("dailyReaders"),
-                                   days=report.get("windowDays"))
+                                   days=report.get("windowDays"), noun=noun)
     print(f"status: {status}")
     print(f"property: {report.get('propertyId') or 'not resolved'} "
           f"({report.get('propertyIdSource') or 'unknown'})")
-    print(f"measurement id: {report.get('measurementId')}")
+    print(f"measurement id: {report.get('measurementId') or 'not recorded'}")
     if report.get("tokenScopes"):
         print("token permits: " + ", ".join(str(x).rsplit("/", 1)[-1] for x in report["tokenScopes"]))
     if report.get("credentialSource"):

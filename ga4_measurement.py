@@ -266,38 +266,100 @@ def number(cell) -> int:
         return 0
 
 
-def daily_rows(token: str, property_id: str) -> list[dict]:
-    start = (datetime.now(timezone.utc).date() - timedelta(days=DAYS)).isoformat()
-    payload = {"dimensions": ["date"],
-               "metrics": [{"name": "screenPageViews"}, {"name": "activeUsers"}, {"name": "sessions"},
-                           {"name": "engagedSessions"}],
-               "dateRanges": [{"startDate": start, "endDate": (datetime.now(timezone.utc).date()
-                                                                - timedelta(days=1)).isoformat()}],
-               "orderBys": [{"dimension": {"dimensionName": "date"}, "desc": True}], "limit": str(DAYS)}
-    data = http(f"{DATA_API}/properties/{property_id}:runReport", token=token, body=payload, method="POST")
-    rows = []
+# GA4 asks for every field of a report by name, so the names live here once instead of inside a
+# dict literal that a reader has to trust.
+FULL_METRICS = ["screenPageViews", "activeUsers", "sessions", "engagedSessions"]
+CORE_METRICS = ["screenPageViews", "activeUsers"]
+ROW_KEYS = {"screenPageViews": "views", "activeUsers": "activeUsers", "sessions": "sessions",
+            "engagedSessions": "engagedSessions"}
+
+
+def named(field) -> dict:
+    """One GA4 field, spelled the way `runReport` requires: an object carrying a name, not a bare word."""
+    return field if isinstance(field, dict) else {"name": str(field)}
+
+
+def report_request(metrics: list[str]) -> dict:
+    """The body of the seven-day `runReport` call.
+
+    `dimensions` is a list of objects, exactly like `metrics`. The fourth check run on 21 October 2026
+    died on Google's `Invalid value at 'dimensions[0]'
+    (type.googleapis.com/google.analytics.data.v1beta.Dimension), "date"` because the request held the
+    bare word `"date"`, while the owner's authorisation had been correct since the first round.
+    `named()` accepts either spelling, so a later edit cannot reintroduce the crash.
+    """
+    today = datetime.now(timezone.utc).date()
+    return {"dimensions": [named("date")], "metrics": [named(field) for field in metrics],
+            "dateRanges": [{"startDate": (today - timedelta(days=DAYS)).isoformat(),
+                            "endDate": (today - timedelta(days=1)).isoformat()}],
+            "orderBys": [{"dimension": {"dimensionName": "date"}, "desc": True}],
+            "limit": str(DAYS)}
+
+
+def parse_rows(data: dict, metrics: list[str]) -> list[dict]:
+    """One `runReport` answer, turned into one record per day.
+
+    A metric Google had nothing to say about that day is 0. A metric that was never asked for is
+    missing rather than zero, which is how `summarise` knows not to claim a reader count with no basis.
+    """
+    days: list[dict] = []
     for row in data.get("rows") or []:
-        values = [cell.get("value") for cell in row.get("dimensionValues") or []]
-        metrics = [number(cell) for cell in row.get("metricValues") or []]
-        day = (values[0] if values else "").replace("-", "")
+        cells = [cell.get("value") if isinstance(cell, dict) else cell
+                 for cell in row.get("dimensionValues") or []]
+        values = [number(cell) for cell in row.get("metricValues") or []]
+        day = str(cells[0] if cells else "").replace("-", "")
         if len(day) == 8:
             day = f"{day[0:4]}-{day[4:6]}-{day[6:8]}"
-        rows.append({"date": day, "views": metrics[0] if len(metrics) else 0,
-                     "activeUsers": metrics[1] if len(metrics) > 1 else 0,
-                     "sessions": metrics[2] if len(metrics) > 2 else 0,
-                     "engagedSessions": metrics[3] if len(metrics) > 3 else 0})
-    return rows
+        if len(day) != 10:
+            continue
+        record = {"date": day}
+        for position, field in enumerate(metrics):
+            record[ROW_KEYS.get(field, field)] = values[position] if position < len(values) else 0
+        days.append(record)
+    return days
 
 
-def summarise(rows: list[dict], tag: dict, property_id: str, property_source: str) -> dict:
+def daily_rows(token: str, property_id: str) -> tuple[list[dict], list[str]]:
+    """The seven-day report, as (rows, fields Google would not answer for).
+
+    A `400` naming a field means a metric has stopped existing under that name, which is Google's
+    change to make, not the owner's. The two figures the milestone is counted on - views and people -
+    have been stable since GA4 launched, so the request is rebuilt with those alone rather than leave
+    someone pressing a button again for nothing. Any other code is re-raised untouched: a `403` in
+    particular has to reach the classifier that decides whose permission is missing.
+    """
+    def ask(metrics: list[str]) -> list[dict]:
+        data = http(f"{DATA_API}/properties/{property_id}:runReport", token=token,
+                    body=report_request(metrics), method="POST")
+        return parse_rows(data, metrics)
+
+    try:
+        return ask(FULL_METRICS), []
+    except urllib.error.HTTPError as exc:
+        if exc.code != 400:
+            raise
+        return ask(CORE_METRICS), [field for field in FULL_METRICS if field not in CORE_METRICS]
+
+
+def summarise(rows: list[dict], tag: dict, property_id: str, property_source: str,
+              dropped: list[str] | None = None) -> dict:
     views = sum(row.get("views") or 0 for row in rows)
     users = sum(row.get("activeUsers") or 0 for row in rows)
-    sessions = sum(row.get("sessions") or 0 for row in rows)
-    engaged = sum(row.get("engagedSessions") or 0 for row in rows)
+    # a field nobody asked for is not a zero: it is unknown, and printing 0 there would invent a
+    # measurement Google refused to give
+    have = lambda key: any(key in row for row in rows)
+    sessions = sum(row.get("sessions") or 0 for row in rows) if have("sessions") else None
+    engaged = sum(row.get("engagedSessions") or 0 for row in rows) if have("engagedSessions") else None
     # the owner's definition of the milestone, written 20 October 2026: not pageviews but people -
     # at least 50,000 readers a day, each opening one or two articles. GA4's engagedSessions is the
     # closest honest count of that, because it drops the visit that bounced without reading
     latest = rows[0] if rows else None
+    # "readers" is the owner's own word for the milestone and GA4 has no field for it; engagedSessions
+    # is the closest honest count. Where Google would not answer for that field the count falls back to
+    # activeUsers on the same day, and the basis is named, so a ladder can never print a label that
+    # does not match the number beside it.
+    readers_field = ("engagedSessions" if latest and latest.get("engagedSessions") is not None
+                     else "activeUsers")
     if rows and views:
         status = "MEASURED"
     elif rows or tag.get("installedHere") is True:
@@ -313,15 +375,23 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
     users = users if measured else None
     sessions = sessions if measured else None
     return {"status": status, "ok": measured, "credentialSource": credential_label(),
+            "measurementId": MEASUREMENT_ID,
             "measuredAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "windowDays": DAYS, "propertyId": property_id or None, "propertyIdSource": property_source,
             "measurementId": MEASUREMENT_ID, "siteTag": tag,
             "totals": {"views": views,
                        "viewsPerDay": round(views / DAYS, 1) if measured else None,
                        "activeUsers": users, "sessions": sessions, "engagedSessions": engaged,
-                       "dailyReaders": (latest or {}).get("engagedSessions") if measured else None,
-                       "readersDefinition": "engaged sessions on the most recent whole day: people "
-                                            "who opened at least one article and did not bounce",
+                       "dailyReaders": (latest or {}).get(readers_field) if measured else None,
+                       "readersBasis": ("GA4_ENGAGED_SESSIONS_LATEST_DAY"
+                                        if readers_field == "engagedSessions"
+                                        else "GA4_ACTIVE_USERS_LATEST_DAY"),
+                       "readersDefinition": (
+                           "engaged sessions on the most recent whole day: people who opened at "
+                           "least one article and did not bounce" if readers_field == "engagedSessions"
+                           else "active users on the most recent whole day: Google would not answer "
+                                "for engagedSessions, so this counts people rather than reads"),
+                       "droppedFields": list(dropped or []),
                        "daysWithRows": len(rows)},
             "daily": rows[:DAYS],
             "peak": max((row for row in rows), key=lambda row: row.get("views") or 0, default=None),
@@ -351,7 +421,7 @@ def main() -> int:
                 # could succeed and none is attempted. Naming the scopes beats describing a 403.
                 raise PermissionError("the stored token carries only: " + ", ".join(scopes))
             property_id, source = resolve_property(token, MEASUREMENT_ID)
-            rows = daily_rows(token, property_id)
+            rows, dropped = daily_rows(token, property_id)
         except MissingCredentials:
             status = "CREDENTIALS_MISSING"
         except TokenRefused as exc:
@@ -403,7 +473,7 @@ def main() -> int:
                                   "says the token itself carries too few permissions. Re-authorise with "
                                   "BOTH scope lines listed separately, and replace only GA4_REFRESH_TOKEN")
         else:
-            report = summarise(rows, tag, property_id, source)
+            report = summarise(rows, tag, property_id, source, dropped)
 
     OUT.write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n")
     totals = report.get("totals") or {}
@@ -420,6 +490,13 @@ def main() -> int:
     if report.get("tokenScopes"):
         lines.append("- what the stored token is permitted to do: "
                      + ", ".join("`" + str(x).rsplit("/", 1)[-1] + "`" for x in report["tokenScopes"]))
+    if (report.get("totals") or {}).get("droppedFields"):
+        # a field Google no longer offers is said out loud, because a smaller number with no
+        # explanation reads as a fall in the audience
+        lines.append("- counted without: " + ", ".join("`" + str(x) + "`"
+                                                     for x in report["totals"]["droppedFields"])
+                     + " - Google did not answer for those, so the figures below come from the fields"
+                       " it did")
     if report.get("error"):
         lines.append("- google said: `" + str(report["error"])[:300] + "`")
     if report["ok"]:

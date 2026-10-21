@@ -498,7 +498,8 @@ class MetricCellsAreUnwrapped(unittest.TestCase):
                               "metricValues": [{"value": "380"}, {}, {"value": "101"},
                                                {"value": "95"}]}]}
         with mock.patch.object(gm, "http", side_effect=fake):
-            rows = gm.daily_rows("token", "123456789")
+            rows, dropped = gm.daily_rows("token", "123456789")
+        self.assertEqual(dropped, [])
         self.assertEqual([r["views"] for r in rows], [412, 380])
         self.assertEqual([r["date"] for r in rows], ["2026-10-20", "2026-10-19"])
         self.assertEqual(rows[0]["activeUsers"], 96)
@@ -511,6 +512,135 @@ class MetricCellsAreUnwrapped(unittest.TestCase):
         self.assertEqual(totals["activeUsers"], 96)
         self.assertEqual(totals["dailyReaders"], 88,
                          "the newest whole day, not an average across the window")
+
+
+class RequestIsBuiltTheWayGoogleDocumentsIt(unittest.TestCase):
+    """The request shape, checked against the sentence Google used to refuse it.
+
+    The fourth check run on 21 October 2026 read `HTTP 400 Invalid value at 'dimensions[0]'
+    (type.googleapis.com/google.analytics.data.v1beta.Dimension), "date"`: `runReport` takes lists of
+    objects for dimensions as well as metrics, and this file had sent the bare word. Everything else
+    on both sides was already correct, which is why these tests pin the body as it leaves the
+    program, not just the fields it mentions.
+    """
+
+    @staticmethod
+    def sent(metrics=("screenPageViews", "activeUsers", "sessions", "engagedSessions")):
+        rows = {"rows": [{"dimensionValues": [{"value": "20261020"}],
+                          "metricValues": [{"value": "10"}, {"value": "4"}, {"value": "5"},
+                                           {"value": "3"}]}]}
+        bodies = []
+
+        def fake(url, *args, **kwargs):
+            bodies.append(kwargs.get("body"))
+            return rows
+        with mock.patch.object(gm, "http", side_effect=fake):
+            gm.daily_rows("token", "123456789")
+        return bodies[0]
+
+    def test_no_field_is_ever_sent_as_a_bare_word(self):
+        body = self.sent()
+        for key in ("dimensions", "metrics"):
+            for field in body[key]:
+                self.assertIsInstance(field, dict, f"{key} must be objects, not words")
+                self.assertEqual(set(field), {"name"}, f"{key} entries hold only a name")
+        self.assertEqual(body["dimensions"], [{"name": "date"}])
+
+    def test_the_window_is_the_last_seven_whole_days(self):
+        from datetime import date, timedelta
+        body = self.sent()
+        window = body["dateRanges"][0]
+        today = date.today()
+        self.assertEqual(window["endDate"], (today - timedelta(days=1)).isoformat())
+        self.assertEqual(window["startDate"], (today - timedelta(days=gm.DAYS)).isoformat())
+        self.assertEqual(body["limit"], str(gm.DAYS), "a JSON int64 is sent as a string")
+        self.assertEqual(body["orderBys"][0]["dimension"]["dimensionName"], "date")
+
+    def test_either_spelling_of_a_field_is_accepted(self):
+        self.assertEqual(gm.named("date"), {"name": "date"})
+        self.assertEqual(gm.named({"name": "date"}), {"name": "date"})
+
+    def test_a_metric_google_no_longer_offers_costs_the_run_nothing_it_can_answer(self):
+        # views and people are what the milestone is built from; losing an optional field must not
+        # take them with it, and the shortfall has to be written down instead of quietly zeroed
+        seen = []
+
+        def fake(url, *args, **kwargs):
+            body = kwargs.get("body") or {}
+            names = [field["name"] for field in body.get("metrics") or []]
+            seen.append(names)
+            if "engagedSessions" in names:
+                raise urllib.error.HTTPError(url, 400, "Bad Request", {},
+                                             io.BytesIO(b'{"error": {"message": "Unknown name: engaged"}}'))
+            return {"rows": [{"dimensionValues": [{"value": "20261020"}],
+                              "metricValues": [{"value": "713"}, {"value": "180"}]}]}
+
+        with mock.patch.object(gm, "http", side_effect=fake):
+            rows, dropped = gm.daily_rows("token", "123456789")
+        self.assertEqual(len(seen), 2, "one retry, then the answer")
+        self.assertEqual(seen[1], ["screenPageViews", "activeUsers"])
+        self.assertEqual(rows[0]["views"], 713)
+        self.assertNotIn("sessions", rows[0], "not asked for, so not reported as zero")
+        self.assertEqual(dropped, ["sessions", "engagedSessions"])
+        totals = gm.summarise(rows, {"installedHere": True}, "1", "test", dropped)["totals"]
+        self.assertEqual(totals["sessions"], None)
+        self.assertEqual(totals["dailyReaders"], 180)
+        self.assertEqual(totals["readersBasis"], "GA4_ACTIVE_USERS_LATEST_DAY")
+        self.assertEqual(totals["droppedFields"], ["sessions", "engagedSessions"])
+
+    def test_a_refusal_of_permission_is_never_masked_by_a_retry(self):
+        calls = []
+        refused = urllib.error.HTTPError("https://x", 403, "Forbidden", {}, io.BytesIO(b"{}"))
+
+        def fake(url, *args, **kwargs):
+            calls.append(url)
+            raise refused
+
+        with mock.patch.object(gm, "http", side_effect=fake):
+            with self.assertRaises(urllib.error.HTTPError):
+                gm.daily_rows("token", "123456789")
+        self.assertEqual(len(calls), 1, "a 403 must reach the classifier that reads its body")
+
+
+class AnnotationFollowsTheEvidence(unittest.TestCase):
+    """The log line a phone-reading owner gets, checked against the field the number came from.
+
+    `ga4_connection_advice.py` used to say "engaged readers" whatever had been measured, and to print
+    `measurement id: None` on a successful run because only the failure report carried that key. Both
+    are small lies of the kind that cost an owner a round of worry, so they are pinned here.
+    """
+
+    def annotation(self, report: dict) -> str:
+        import ga4_connection_advice as advice
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "GA4_MEASUREMENT.json"
+            path.write_text(json.dumps(report), encoding="utf-8")
+            with mock.patch.object(advice, "REPORT", path), redirect_stdout(io.StringIO()) as out:
+                code = advice.main()
+        return f"exit {code}\n" + out.getvalue()
+
+    def test_engaged_sessions_are_named_when_that_is_what_was_counted(self):
+        text = self.annotation({"status": "MEASURED", "ok": True, "windowDays": 7,
+                                "measurementId": "G-WLEEYTKV12",
+                                "totals": {"views": 137, "dailyReaders": 28,
+                                           "readersBasis": "GA4_ENGAGED_SESSIONS_LATEST_DAY"}})
+        self.assertIn("exit 0", text)
+        self.assertIn("28 engaged readers", text)
+        self.assertIn("measurement id: G-WLEEYTKV12", text)
+
+    def test_a_fallback_count_is_not_called_engaged(self):
+        text = self.annotation({"status": "MEASURED", "ok": True, "windowDays": 7,
+                                "totals": {"views": 137, "dailyReaders": 31,
+                                           "readersBasis": "GA4_ACTIVE_USERS_LATEST_DAY",
+                                           "droppedFields": ["sessions", "engagedSessions"]}})
+        self.assertIn("readers, counted as people", text)
+        self.assertNotIn("engaged readers", text)
+
+    def test_a_missing_measurement_id_says_not_recorded_instead_of_none(self):
+        text = self.annotation({"status": "PROPERTY_NOT_FOUND", "ok": False,
+                                "totals": {}, "remedy": "add the variable"})
+        self.assertIn("not resolved", text)
+        self.assertNotIn(": None", text)
 
 
 class NoSecretsInLogs(unittest.TestCase):
