@@ -1,7 +1,7 @@
 {
- "status": "SCOPE_INSUFFICIENT",
+ "status": "TOKEN_REFUSED",
  "ok": false,
- "measuredAt": "2026-10-21T07:55:32+00:00",
+ "measuredAt": "2026-10-21T09:06:43+00:00",
  "windowDays": 7,
  "measurementId": "G-WLEEYTKV12",
  "siteTag": {
@@ -18,7 +18,11 @@
   "daysWithRows": 0
  },
  "daily": [],
- "remedy": "the stored token predates Analytics access: repeat step 3 of GA4_CONNECT.md (or re-run get_analytics_token.py) and replace GA4_REFRESH_TOKEN with the new code",
+ "remedy": "Google refused the stored refresh token: it was made while the OAuth app was in Testing (Google expires those after 7 days), or it was revoked. Repeat the browser steps in GA4_CONNECT.md and replace only the GA4_REFRESH_TOKEN secret",
+ "credentialSource": "GA4_REFRESH_TOKEN",
+ "tokenScopes": [
+  "https://www.googleapis.com/auth/analytics.readonly"
+ ],
  "note": "the blog is not modified by this job",
- "error": "HTTP 403 Request had insufficient authentication scopes. reasons: ACCESS_TOKEN_SCOPE_INSUFFICIENT, googleapis.com"
+ "error": "HTTP 400 The value for the 'filter' field was empty, but must be provided."
 }
