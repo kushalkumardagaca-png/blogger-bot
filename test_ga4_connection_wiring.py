@@ -399,9 +399,10 @@ class PropertyIsFoundWithoutAFilter(unittest.TestCase):
             calls.append(url.split("//")[-1].split("?")[0])
             return self.fake(url)
         with mock.patch.object(gm, "http", side_effect=spy):
-            numeric, source = gm.resolve_property("token", "G-WLEEYTKV12")
+            numeric, source, verification = gm.resolve_property("token", "G-WLEEYTKV12")
         self.assertEqual(numeric, "123456789")
         self.assertIn("G-WLEEYTKV12", source)
+        self.assertEqual(verification, "stream-matched")
         self.assertNotIn("analyticsadmin.googleapis.com/v1beta/properties", calls,
                          "a property list without a filter is what Google refused")
         self.assertIn("accountSummaries", calls[0])
@@ -512,6 +513,64 @@ class MetricCellsAreUnwrapped(unittest.TestCase):
         self.assertEqual(totals["activeUsers"], 96)
         self.assertEqual(totals["dailyReaders"], 88,
                          "the newest whole day, not an average across the window")
+
+
+class PropertyIsTiedToTheBlog(unittest.TestCase):
+    """How firmly the property behind these numbers is proven to be this site's.
+
+    The first successful read on 21 October 2026 resolved the account's only property by fallback,
+    because the stream check looked for `measurementId` at the top of a data stream while GA4 also
+    files it inside `webStreamData` - which is where `preapproval_audit.py` has always read it. Both
+    spellings are compared now, and the report says which kind of evidence was used, because "the only
+    property in the account" and "the property carrying the tag on the homepage" are not the same claim.
+    """
+
+    def resolve_with(self, streams_response, candidates=("123456789", "Daily Yield"), error=None):
+        def fake(url, *args, **kwargs):
+            if "accountSummaries" in url:
+                return {"accountSummaries": [{"propertySummaries": [
+                    {"property": "properties/" + candidates[0], "displayName": candidates[1]}]}]}
+            if url.endswith("/dataStreams"):
+                if error:
+                    raise urllib.error.HTTPError(url, error, "Refused", {}, io.BytesIO(b"{}"))
+                return streams_response
+            raise AssertionError("unexpected call: " + url)
+        with mock.patch.object(gm, "http", side_effect=fake):
+            return gm.resolve_property("token", "G-WLEEYTKV12")
+
+    def test_the_id_nested_in_web_stream_data_is_found(self):
+        numeric, source, verification = self.resolve_with(
+            {"dataStreams": [{"displayName": "Blog",
+                              "webStreamData": {"measurementId": "G-WLEEYTKV12",
+                                                "defaultUri": "https://dailyyield.blogspot.com"}}]})
+        self.assertEqual((numeric, verification), ("123456789", "stream-matched"))
+        self.assertIn("data stream G-WLEEYTKV12", source)
+
+    def test_the_top_level_id_still_works(self):
+        numeric, source, verification = self.resolve_with(
+            {"dataStreams": [{"measurementId": "G-WLEEYTKV12"}]})
+        self.assertEqual(verification, "stream-matched")
+
+    def test_a_sole_property_with_other_streams_is_taken_but_said_out_loud(self):
+        numeric, source, verification = self.resolve_with(
+            {"dataStreams": [{"webStreamData": {"measurementId": "G-SOMETHINGELSE"}}]})
+        self.assertEqual(verification, "sole-property")
+        self.assertIn("G-SOMETHINGELSE", source, "the id that was seen is named, not just the miss")
+        self.assertIn("only property", source)
+
+    def test_a_refused_stream_list_is_not_reported_as_a_mismatch(self):
+        numeric, source, verification = self.resolve_with({}, error=403)
+        self.assertEqual(verification, "streams-unreadable")
+        self.assertIn("HTTP 403", source)
+
+    def test_the_note_appears_only_when_the_tie_is_unproven(self):
+        rows = [{"date": "2026-10-20", "views": 8, "activeUsers": 8, "sessions": 8,
+                  "engagedSessions": 8}]
+        report = gm.summarise(rows, {"installedHere": True}, "123456789", "sole-property note",
+                              [], "sole-property")
+        self.assertEqual(report["propertyVerification"], "sole-property")
+        self.assertEqual(gm.summarise(rows, {"installedHere": True}, "1", "x", [],
+                                      "stream-matched")["propertyVerification"], "stream-matched")
 
 
 class RequestIsBuiltTheWayGoogleDocumentsIt(unittest.TestCase):

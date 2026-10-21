@@ -213,15 +213,42 @@ class MissingCredentials(RuntimeError):
     pass
 
 
-def resolve_property(token: str, measurement_id: str) -> tuple[str, str]:
-    """The Data API needs the numeric property id; find it from the measurement id if not set."""
+def stream_ids(stream: dict) -> list[str]:
+    """Every measurement id one GA4 data stream publishes.
+
+    The Admin API answers the id twice: once on the stream itself and once inside `webStreamData`.
+    `preapproval_audit.py` reads the nested copy, and so does this file from now on - on the first
+    successful read on 21 October 2026 the top-level field alone was consulted, so the property that
+    did carry `G-WLEEYTKV12` looked like a non-match and the run fell back to "the only property in
+    this account". An id that is merely filed one level deeper must not read as a different site.
+    """
+    found: list[str] = []
+    for source in (stream, stream.get("webStreamData") or {}, stream.get("androidAppStreamData") or {},
+                   stream.get("iosAppStreamData") or {}):
+        if isinstance(source, dict):
+            value = str(source.get("measurementId") or "").strip()
+            if value and value not in found:
+                found.append(value)
+    return found
+
+
+def resolve_property(token: str, measurement_id: str) -> tuple[str, str, str]:
+    """The numeric property id, how it was reached, and how firmly it is tied to this blog.
+
+    The Data API needs the numeric id; it is found from the measurement id on the live pages. The
+    account tree is walked rather than the property list, because a bare `properties` list is refused
+    with "The value for the 'filter' field was empty, but must be provided" - the sentence that broke
+    the owner's first working connection on 21 October, after the token and its scope were both right.
+    `accountSummaries` needs no filter and names every property the account holds.
+
+    The third value is said out loud because the strength of the evidence differs: `stream-matched`
+    means a data stream of that property carries the tag found on the homepage, `sole-property` means
+    the account holds one property and its streams name something else, and `streams-unreadable` means
+    Google would not let this job list them. Only the first ties these numbers to this blog.
+    """
     configured = (os.environ.get("GA4_PROPERTY_ID") or "").strip()
     if configured and not configured.startswith("G-"):
-        return configured, "GA4_PROPERTY_ID repository variable"
-    # The account tree is walked, not the property list. A bare `properties` list is refused by the
-    # Admin API with "The value for the 'filter' field was empty, but must be provided" - which is what
-    # broke the owner's first working connection on 21 October, after the token and its scope were both
-    # already right. accountSummaries needs no filter and names every property the account holds.
+        return configured, "GA4_PROPERTY_ID repository variable", "configured"
     listing = http(f"{ADMIN_API_BETA}/accountSummaries", token=token)
     candidates: list[tuple[str, str]] = []
     for account in listing.get("accountSummaries") or []:
@@ -229,21 +256,26 @@ def resolve_property(token: str, measurement_id: str) -> tuple[str, str]:
             numeric = str(row.get("property") or "").rsplit("/", 1)[-1]
             if numeric.isdigit():
                 candidates.append((numeric, str(row.get("displayName") or "")))
+    stream_problem = ""
     for numeric, display in candidates:
         try:
             streams = http(f"{ADMIN_API_BETA}/properties/{numeric}/dataStreams", token=token)
-        except urllib.error.HTTPError:
+        except urllib.error.HTTPError as exc:
+            stream_problem = stream_problem or f"streams could not be listed (HTTP {exc.code})"
             continue                      # a property we may list but not open is not the one to bet on
-        ids = [str(row.get("measurementId") or "") for row in streams.get("dataStreams") or []]
+        ids = [found for row in streams.get("dataStreams") or [] for found in stream_ids(row)]
         if measurement_id in ids:
-            return numeric, f"data stream {measurement_id} in this account" + (
-                f", property \"{display}\"" if display else "")
+            return numeric, (f"data stream {measurement_id} in this account"
+                             + (f", property \"{display}\"" if display else "")), "stream-matched"
     if len(candidates) == 1:
-        # exactly one property and no matching stream is still an answer worth taking, but it is said
-        # out loud how it was reached, because a wrong property would report the wrong numbers
-        return candidates[0][0], ("the only property in this account, "
-                                 f"\"{candidates[0][1] or 'unnamed'}\" - its data streams do not name "
-                                 f"{measurement_id}")
+        # exactly one property and no matching stream is still an answer worth taking, but how it was
+        # reached is written down, because a wrong property would report the wrong numbers
+        note = (" - " + stream_problem) if stream_problem else (
+            f" - its data stream names {[found for found in ids] or 'nothing'}, not {measurement_id}")
+        only_source = (f"the only property in this account, "
+                       f"\"{candidates[0][1] or 'unnamed'}\"" + note)
+        only_kind = "sole-property" if not stream_problem else "streams-unreadable"
+        return candidates[0][0], only_source, only_kind
     raise LookupError("no GA4 property in this account carries that measurement id; "
                       f"{len(candidates)} propert" + ("y" if len(candidates) == 1 else "ies") +
                       " were listed")
@@ -342,7 +374,7 @@ def daily_rows(token: str, property_id: str) -> tuple[list[dict], list[str]]:
 
 
 def summarise(rows: list[dict], tag: dict, property_id: str, property_source: str,
-              dropped: list[str] | None = None) -> dict:
+              dropped: list[str] | None = None, verification: str = "not read") -> dict:
     views = sum(row.get("views") or 0 for row in rows)
     users = sum(row.get("activeUsers") or 0 for row in rows)
     # a field nobody asked for is not a zero: it is unknown, and printing 0 there would invent a
@@ -378,6 +410,7 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
             "measurementId": MEASUREMENT_ID,
             "measuredAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "windowDays": DAYS, "propertyId": property_id or None, "propertyIdSource": property_source,
+            "propertyVerification": verification,
             "measurementId": MEASUREMENT_ID, "siteTag": tag,
             "totals": {"views": views,
                        "viewsPerDay": round(views / DAYS, 1) if measured else None,
@@ -408,10 +441,11 @@ def main() -> int:
     if arguments.fixture:
         payload = json.loads(Path(arguments.fixture).read_text(encoding="utf-8"))
         report = summarise(payload.get("rows") or [], payload.get("siteTag") or {"checked": False},
-                           str(payload.get("propertyId") or ""), "fixture")
+                           str(payload.get("propertyId") or ""), "fixture",
+                           verification="fixture")
     else:
         tag = site_tag()
-        rows, property_id, source, status, report_error = [], "", "not read", None, ""
+        rows, property_id, source, verification, status, report_error = [], "", "not read", "not read", None, ""
         scopes: list[str] = []
         try:
             token = refresh_token()
@@ -420,7 +454,7 @@ def main() -> int:
                 # Google has answered for itself: this token was never given Analytics, so no call
                 # could succeed and none is attempted. Naming the scopes beats describing a 403.
                 raise PermissionError("the stored token carries only: " + ", ".join(scopes))
-            property_id, source = resolve_property(token, MEASUREMENT_ID)
+            property_id, source, verification = resolve_property(token, MEASUREMENT_ID)
             rows, dropped = daily_rows(token, property_id)
         except MissingCredentials:
             status = "CREDENTIALS_MISSING"
@@ -473,7 +507,7 @@ def main() -> int:
                                   "says the token itself carries too few permissions. Re-authorise with "
                                   "BOTH scope lines listed separately, and replace only GA4_REFRESH_TOKEN")
         else:
-            report = summarise(rows, tag, property_id, source, dropped)
+            report = summarise(rows, tag, property_id, source, dropped, verification)
 
     OUT.write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n")
     totals = report.get("totals") or {}
@@ -487,6 +521,10 @@ def main() -> int:
                       or "no G- id on the page that came back") + ")",
              f"- property: **{report.get('propertyId') or 'not resolved'}** "
              f"({report.get('propertyIdSource') or 'unknown'})"]
+    if report.get("propertyVerification") not in (None, "stream-matched", "configured", "fixture"):
+        lines.append("- note: this property was not tied to the blog's own tag - "
+                     + str(report.get("propertyIdSource") or "")[:200]
+                     + " - so the figures are the account's, pending a stream match")
     if report.get("tokenScopes"):
         lines.append("- what the stored token is permitted to do: "
                      + ", ".join("`" + str(x).rsplit("/", 1)[-1] + "`" for x in report["tokenScopes"]))

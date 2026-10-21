@@ -240,6 +240,11 @@ def analytics_audit(observed):
         state='ANALYTICS_API_DISABLED' if 'SERVICE_DISABLED' in reasons else ('ANALYTICS_SCOPE_MISSING' if any('SCOPE' in x.upper() or 'insufficient' in x.lower() for x in reasons) else 'ANALYTICS_READ_UNAVAILABLE')
         return {**result,'status':state,'apiReasons':reasons,'apiErrorStatus':error.get('status'),
                 'detail':'Existing authorised access could not list Analytics properties. No account/permission changes, collection installation or event submission was attempted.'}
+    # the measurement id is read from webStreamData here, and ga4_measurement.py now consults the same
+    # nested field (plus the top-level copy GA4 also returns) rather than only the top-level one: on
+    # 21 October 2026 the reader's narrower look made the blog's own property read as a non-match and
+    # it was taken by fallback instead. Both files agree on where the id lives, so the report in
+    # GA4_MEASUREMENT.json and this row describe the same property.
     configured=os.environ.get('GA4_PROPERTY_ID','').strip();matching=[]
     summaries=[p for a in response.json().get('accountSummaries',[]) for p in a.get('propertySummaries',[])]
     for row in summaries:

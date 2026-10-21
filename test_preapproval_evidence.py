@@ -61,3 +61,25 @@ class PublicationTimeTruthTests(unittest.TestCase):
         self.assertEqual(stamp,due)
 
 if __name__=='__main__':unittest.main()
+
+class AnalyticsStreamFieldIsReadTheSameWayEverywhere(unittest.TestCase):
+    """Both GA4 readers must look for the measurement id in the same place.
+
+    GA4 files a stream's `measurementId` on the stream and again inside `webStreamData`. The nightly
+    reader used to consult only the first, so a property that did carry the site's tag read as a
+    mismatch and was chosen by fallback instead - while this audit had it right from the start. Two
+    files describing one property should not disagree about where its name is written.
+    """
+
+    def test_both_files_consult_web_stream_data(self):
+        for name in ('preapproval_audit.py', 'ga4_measurement.py'):
+            text = Path(name).read_text(encoding='utf-8')
+            self.assertIn('webStreamData', text, f"{name} must read the nested measurement id")
+
+    def test_the_reader_tolerates_either_spelling(self):
+        import ga4_measurement as reader
+        self.assertEqual(reader.stream_ids({'webStreamData': {'measurementId': 'G-1'}}), ['G-1'])
+        self.assertEqual(reader.stream_ids({'measurementId': 'G-1',
+                                           'webStreamData': {'measurementId': 'G-1'}}), ['G-1'])
+        self.assertEqual(reader.stream_ids({'displayName': 'no id anywhere'}), [])
+
