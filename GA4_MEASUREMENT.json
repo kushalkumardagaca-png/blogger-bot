@@ -1,9 +1,12 @@
 {
- "status": "REQUEST_REJECTED",
- "ok": false,
- "measuredAt": "2026-10-21T09:16:08+00:00",
- "windowDays": 7,
+ "status": "MEASURED",
+ "ok": true,
+ "credentialSource": "GA4_REFRESH_TOKEN",
  "measurementId": "G-WLEEYTKV12",
+ "measuredAt": "2026-10-21T09:24:38+00:00",
+ "windowDays": 7,
+ "propertyId": "556948096",
+ "propertyIdSource": "the only property in this account, \"Daily Yield\" - its data streams do not name G-WLEEYTKV12",
  "siteTag": {
   "checked": true,
   "reachable": true,
@@ -13,16 +16,75 @@
   "installedHere": true
  },
  "totals": {
-  "views": null,
-  "viewsPerDay": null,
-  "daysWithRows": 0
+  "views": 103,
+  "viewsPerDay": 14.7,
+  "activeUsers": 72,
+  "sessions": 80,
+  "engagedSessions": 74,
+  "dailyReaders": 8,
+  "readersBasis": "GA4_ENGAGED_SESSIONS_LATEST_DAY",
+  "readersDefinition": "engaged sessions on the most recent whole day: people who opened at least one article and did not bounce",
+  "droppedFields": [],
+  "daysWithRows": 7
  },
- "daily": [],
- "remedy": "Google turned down the request this job built, not your authorisation: its own sentence is recorded above, and the repair belongs in this repository. Nothing on the blog is involved and no number is invented in the meantime",
- "credentialSource": "GA4_REFRESH_TOKEN",
- "tokenScopes": [
-  "https://www.googleapis.com/auth/analytics.readonly"
+ "daily": [
+  {
+   "date": "2026-10-20",
+   "views": 8,
+   "activeUsers": 8,
+   "sessions": 8,
+   "engagedSessions": 8
+  },
+  {
+   "date": "2026-10-19",
+   "views": 8,
+   "activeUsers": 8,
+   "sessions": 8,
+   "engagedSessions": 8
+  },
+  {
+   "date": "2026-10-18",
+   "views": 9,
+   "activeUsers": 6,
+   "sessions": 6,
+   "engagedSessions": 6
+  },
+  {
+   "date": "2026-10-17",
+   "views": 23,
+   "activeUsers": 13,
+   "sessions": 17,
+   "engagedSessions": 15
+  },
+  {
+   "date": "2026-10-16",
+   "views": 9,
+   "activeUsers": 8,
+   "sessions": 10,
+   "engagedSessions": 8
+  },
+  {
+   "date": "2026-10-15",
+   "views": 31,
+   "activeUsers": 19,
+   "sessions": 20,
+   "engagedSessions": 19
+  },
+  {
+   "date": "2026-10-14",
+   "views": 15,
+   "activeUsers": 10,
+   "sessions": 11,
+   "engagedSessions": 10
+  }
  ],
- "note": "the blog is not modified by this job",
- "error": "HTTP 400 Invalid value at 'dimensions[0]' (type.googleapis.com/google.analytics.data.v1beta.Dimension), \"date\""
+ "peak": {
+  "date": "2026-10-15",
+  "views": 31,
+  "activeUsers": 19,
+  "sessions": 20,
+  "engagedSessions": 19
+ },
+ "remedy": null,
+ "note": "views are GA4 screenPageViews for the last 7 whole days; the blog is not modified by this job and no tag is installed by it"
 }
