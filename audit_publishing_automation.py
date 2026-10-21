@@ -566,6 +566,10 @@ check('The front-door list includes the homepage, which no /p/ pattern can match
       and 'https://dailyyield.blogspot.com/",' in (ROOT/'test_indexing_capacity_gate.py').read_text())
 watch_py=(ROOT/'main_pages_index_watch.py').read_text()
 watch_yml=(ROOT/'.github/workflows/main_pages_index_watch.yml').read_text()
+check('Bing is offered both Blogger sitemaps, not only the archive',
+      'SITEMAP_FEEDS = ("/sitemap.xml", "/sitemap-pages.xml")' in (ROOT/'bing_url_automation.py').read_text()
+      and 'for feed_path in SITEMAP_FEEDS:' in (ROOT/'bing_url_automation.py').read_text()
+      and 'sitemap feed not refreshed' in (ROOT/'bing_url_automation.py').read_text())
 check('The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict',
       'MAIN_PAGE_HOME' in watch_py and 'sitemap-pages.xml' in watch_py
       and 'urlInspection/index:inspect' in watch_py

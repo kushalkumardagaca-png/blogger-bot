@@ -223,11 +223,19 @@ def submit_batch(key: str, urls: list[str]) -> None:
     )
 
 
-def submit_feed(key: str) -> None:
-    """Ask Bing to re-read the sitemap. Quota-free, so it runs every cycle."""
+SITEMAP_FEEDS = ("/sitemap.xml", "/sitemap-pages.xml")
+
+
+def submit_feed(key: str, feed_path: str = "/sitemap.xml") -> None:
+    """Ask Bing to re-read one of Blogger's two sitemaps. Quota-free, so it runs every cycle.
+
+    Both of them matter. sitemap.xml is the archive; sitemap-pages.xml is the file that carries the
+    thirteen front doors, and for weeks only the archive was being offered - Bing was told about the
+    articles it is not indexing and never about the hubs the owner wants indexed first.
+    """
     json_request(
         bing_url("SubmitFeed", key, siteUrl=SITE), service="Bing sitemap feed",
-        method="POST", body={"siteUrl": SITE, "feedUrl": SITE.rstrip("/") + "/sitemap.xml"},
+        method="POST", body={"siteUrl": SITE, "feedUrl": SITE.rstrip("/") + feed_path},
         retries=2,
     )
 
@@ -374,10 +382,14 @@ def main() -> int:
         # The sitemap feed is a separate channel: it does not consume the URL
         # submission quota, so it is refreshed on every run. That way a day whose
         # 100 URL submissions are already spent still tells Bing about the site.
-        try:
-            submit_feed(key)
-        except Exception as exc:  # noqa: BLE001
-            feed_warning = f"sitemap feed not refreshed: {type(exc).__name__}"
+        missed = []
+        for feed_path in SITEMAP_FEEDS:
+            try:
+                submit_feed(key, feed_path)
+            except Exception as exc:  # noqa: BLE001 - one refused feed must not hide the other
+                missed.append(f"{feed_path}: {type(exc).__name__}")
+        if missed:
+            feed_warning = "sitemap feed not refreshed: " + "; ".join(missed)
     except Exception as exc:
         errors.append(str(exc))
         deferred = candidates

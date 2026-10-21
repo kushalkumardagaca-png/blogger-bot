@@ -8,6 +8,29 @@ from unittest.mock import patch
 import bing_url_automation as bing
 
 
+class SitemapFeeds(unittest.TestCase):
+    """Bing is quota-starved on this property, so the feed channel is the only door that stays open.
+
+    It was being used for one of Blogger's two sitemaps: the archive was refreshed and the file that
+    carries the main pages was never mentioned. These tests pin that both are offered, and that one
+    refusal is reported without swallowing the other.
+    """
+
+    def test_both_blogger_sitemaps_are_offered_to_bing(self):
+        self.assertEqual(bing.SITEMAP_FEEDS, ("/sitemap.xml", "/sitemap-pages.xml"))
+        seen = []
+
+        def fake(url, **kwargs):
+            seen.append(kwargs.get("body", {}).get("feedUrl"))
+            return "{}"
+
+        with patch.object(bing, "json_request", fake):
+            for feed_path in bing.SITEMAP_FEEDS:
+                bing.submit_feed("k", feed_path)
+        self.assertEqual(seen, ["https://dailyyield.blogspot.com/sitemap.xml",
+                                "https://dailyyield.blogspot.com/sitemap-pages.xml"])
+
+
 class BingUrlAutomationTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
