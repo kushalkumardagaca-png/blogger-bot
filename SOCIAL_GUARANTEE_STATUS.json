@@ -1,13 +1,26 @@
 {
- "generatedAt": "2026-10-21T12:14:50.474636+05:30",
+ "generatedAt": "2026-10-21T12:15:29.896246+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 7,
  "expectedPosts": 14,
  "articlesWithBothPosts": 6,
  "postsMissing": 1,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
   {
    "key": "news-india",
    "title": "india edition",
@@ -32,19 +45,6 @@
     "mastodon": 1
    },
    "observedDistinctPosts": 3,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
    "duplicatePosts": 0
   },
   {
@@ -99,13 +99,13 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched"
+    "waiting for the last attempt"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T12:14:44.270374+05:30",
+ "liveVerificationSourceAt": "2026-10-21T12:15:26.969248+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
