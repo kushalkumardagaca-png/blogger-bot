@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-21T13:15:48.184800+05:30",
+ "generatedAt": "2026-10-21T13:38:24.469246+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 9,
- "expectedPosts": 18,
- "articlesWithBothPosts": 8,
+ "articles": 10,
+ "expectedPosts": 20,
+ "articlesWithBothPosts": 9,
  "postsMissing": 2,
  "dispatched": 2,
  "rows": [
@@ -22,6 +22,19 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
    "key": "news-china",
    "title": "china edition",
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-21.html",
@@ -29,6 +42,19 @@
    "byPlatform": {
     "facebook": 0,
     "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -61,22 +87,9 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-21.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-economy",
-   "title": "economy edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-21.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-21.html",
    "posts": 0,
    "byPlatform": {
     "facebook": 0,
@@ -132,9 +145,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T13:15:40.004424+05:30",
+ "liveVerificationSourceAt": "2026-10-21T13:38:17.508427+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 6,
+ "articlesWithExactlyTwoPosts": 7,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
