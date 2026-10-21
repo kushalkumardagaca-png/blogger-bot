@@ -1,29 +1,26 @@
 {
-  "generatedAt": "2026-10-21T16:07:17.516003+05:30",
+  "generatedAt": "2026-10-21T16:45:42.665663+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 11,
-  "confirmedByLivePost": 11,
+  "confirmedPublications": 13,
+  "confirmedByLivePost": 13,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "master-trending-1",
-    "master-evergreen-2"
+    "master-trending-1"
   ],
   "actions": [
     {
       "type": "source_recovery",
       "key": "master-trending-1",
-      "attempt": 8,
+      "attempt": 9,
       "applied": true
     }
   ],
   "retryBlocked": [],
-  "masterRecoveryDeferred": [
-    "master-evergreen-2"
-  ],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
