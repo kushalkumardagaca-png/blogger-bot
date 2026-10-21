@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-21T06:58:43.628945+05:30",
+  "generatedAt": "2026-10-21T07:39:11.190800+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 2,
-  "confirmedByLivePost": 2,
+  "confirmedPublications": 3,
+  "confirmedByLivePost": 3,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -15,7 +15,14 @@
     {
       "type": "source_recovery",
       "key": "master-trending-0",
-      "attempt": 1,
+      "attempt": 2,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-india",
+      "platform": "tumblr",
+      "routeIndex": 1,
       "applied": true
     }
   ],
