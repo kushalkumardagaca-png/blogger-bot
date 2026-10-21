@@ -9,6 +9,8 @@ explain every status the reader can produce, and no token value can be echoed in
 import ast
 import io
 import json
+import os
+import json
 import re
 import subprocess
 import sys
@@ -191,6 +193,93 @@ class ForbiddenIsSplitThreeWays(unittest.TestCase):
         self.assertIn("has not been used", report["error"])
         self.assertIn("google said", markdown)
         self.assertIn("Enable", report["remedy"])
+
+
+class ScopeFailureSaysWhatIsInnocent(unittest.TestCase):
+    """A 403 about scopes must not send someone off to rebuild the client pair that is fine.
+
+    The owner's 13:25 IST run on 21 October 2026 proved the diagnosis mattered more than the
+    failure: both APIs were enabled, the project was right, and the stored token simply carried one
+    scope instead of two. The report now names that, states which credential set was in force, and
+    says plainly which single secret needs replacing.
+    """
+
+    def run_reader(self, payload, environ):
+        import io
+        import json as _json
+        import tempfile
+        import urllib.error
+        from contextlib import redirect_stdout
+        from unittest.mock import patch
+
+        import ga4_measurement as reader
+        error = urllib.error.HTTPError("https://example.invalid", 403, "Forbidden", {},
+                                       io.BytesIO(_json.dumps(payload).encode()))
+
+        def forbidden(*args, **kwargs):
+            raise error
+
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.dict(os.environ, environ, clear=True), \
+                 patch.object(sys, "argv", ["ga4_measurement.py"]), \
+                 patch.object(reader, "OUT", Path(folder) / "GA4_MEASUREMENT.json"), \
+                 patch.object(reader, "MD", Path(folder) / "GA4_MEASUREMENT.md"), \
+                 patch.object(reader, "site_tag", return_value={"checked": True, "reachable": True,
+                                                                 "measurementIds": ["G-WLEEYTKV12"],
+                                                                 "installedHere": True}), \
+                 patch.object(reader, "refresh_token", return_value="access-token"), \
+                 patch.object(reader, "http", side_effect=forbidden), \
+                 redirect_stdout(io.StringIO()):
+                reader.main()
+            return _json.loads((Path(folder) / "GA4_MEASUREMENT.json").read_text(encoding="utf-8"))
+
+    SCOPE_BODY = {"error": {"message": "Request had insufficient authentication scopes.",
+                           "status": "PERMISSION_DENIED",
+                           "details": [{"reason": "ACCESS_TOKEN_SCOPE_INSUFFICIENT",
+                                        "domain": "googleapis.com"}]}}
+
+    def test_the_scope_case_names_the_one_secret_to_replace_and_no_other(self):
+        report = self.run_reader(self.SCOPE_BODY, {"GA4_REFRESH_TOKEN": "1//new",
+                                                    "GSC_CLIENT_ID": "cid", "GSC_CLIENT_SECRET": "sec"})
+        self.assertEqual(report["status"], "SCOPE_INSUFFICIENT")
+        said = report["whatThisMeans"]
+        self.assertIn("GA4_REFRESH_TOKEN", said)
+        self.assertIn("client id and secret are fine", said)
+        self.assertIn("not modified", report["note"], "the reassurance must survive the new field")
+        self.assertIn("ACCESS_TOKEN_SCOPE_INSUFFICIENT", report["error"])
+
+    def test_the_report_says_which_credential_names_were_in_force(self):
+        report = self.run_reader(self.SCOPE_BODY, {"GA4_REFRESH_TOKEN": "1//new",
+                                                   "GSC_CLIENT_ID": "cid", "GSC_CLIENT_SECRET": "sec"})
+        self.assertEqual(report["credentialSource"], "GA4_REFRESH_TOKEN + GSC_CLIENT_ID + GSC_CLIENT_SECRET")
+        full = self.run_reader(self.SCOPE_BODY, {"GA4_CLIENT_ID": "new-cid", "GA4_CLIENT_SECRET": "new-sec",
+                                                 "GA4_REFRESH_TOKEN": "1//new"})
+        self.assertEqual(full["credentialSource"], "GA4_REFRESH_TOKEN")
+
+    def test_the_advice_script_prints_the_note_and_the_source(self):
+        import subprocess
+        with tempfile.TemporaryDirectory() as folder:
+            report = {"status": "SCOPE_INSUFFICIENT", "ok": False, "measuredAt": "now",
+                      "windowDays": 7, "measurementId": "G-WLEEYTKV12",
+                      "siteTag": {"installedHere": True, "measurementIds": ["G-WLEEYTKV12"]},
+                      "totals": {}, "daily": [], "credentialSource": "GA4_REFRESH_TOKEN",
+                      "error": "HTTP 403 insufficient authentication scopes",
+                      "note": "the blog is not modified by this job",
+                      "whatThisMeans": "replace only GA4_REFRESH_TOKEN",
+                      "remedy": "re-authorise with both scopes"}
+            # the script resolves its own folder, so a copy beside the report is the honest way to
+            # exercise it: nothing about the production paths is re-implemented here
+            target = Path(folder) / "GA4_MEASUREMENT.json"
+            target.write_text(json.dumps(report), encoding="utf-8")
+            twin = Path(folder) / "ga4_connection_advice.py"
+            twin.write_text((ROOT / "ga4_connection_advice.py").read_text(encoding="utf-8"),
+                            encoding="utf-8")
+            run = subprocess.run([sys.executable, str(twin)], capture_output=True, text=True,
+                                 cwd=str(folder))
+        self.assertEqual(run.returncode, 1, "a refusal must still leave a red run")
+        self.assertIn("credential in force: GA4_REFRESH_TOKEN", run.stdout)
+        self.assertIn("read this first: replace only GA4_REFRESH_TOKEN", run.stdout)
+        self.assertNotIn("1//", run.stdout, "no credential value may reach a public log")
 
 
 class NoSecretsInLogs(unittest.TestCase):

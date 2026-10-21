@@ -67,6 +67,15 @@ REMEDIES = {
 }
 
 
+def credential_label() -> str:
+    """Which repository variable each credential came from, with no values in it."""
+    try:
+        from google_credentials import credential_source
+        return credential_source()
+    except Exception:  # noqa: BLE001 - the label is a courtesy; the measurement is the job
+        return "not recorded"
+
+
 def classify_forbidden(payload: dict) -> tuple[str, str, list[str]]:
     """Split Google's 403 into the three things an owner can actually fix.
 
@@ -216,7 +225,7 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
     views = views if measured else None
     users = users if measured else None
     sessions = sessions if measured else None
-    return {"status": status, "ok": measured,
+    return {"status": status, "ok": measured, "credentialSource": credential_label(),
             "measuredAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "windowDays": DAYS, "propertyId": property_id or None, "propertyIdSource": property_source,
             "measurementId": MEASUREMENT_ID, "siteTag": tag,
@@ -282,9 +291,17 @@ def main() -> int:
                       "daily": [], "remedy": REMEDIES.get(status, "the Analytics Data API could not "
                                                                   "be reached; the failure is recorded, "
                                                                   "no number is invented"),
+                      "credentialSource": credential_label(),
                       "note": "the blog is not modified by this job"}
             if report_error:
                 report["error"] = report_error
+            if "ACCESS_TOKEN_SCOPE_INSUFFICIENT" in report_error:
+                # the one answer that saves someone an hour: this failure is about the scopes the
+                # token was given, not about which client it belongs to, so the stored client id and
+                # secret are innocent and must not be replaced as though they were the fault
+                report["whatThisMeans"] = ("the stored client id and secret are fine for this failure: Google "
+                                  "says the token itself carries too few permissions. Re-authorise with "
+                                  "BOTH scope lines listed separately, and replace only GA4_REFRESH_TOKEN")
         else:
             report = summarise(rows, tag, property_id, source)
 

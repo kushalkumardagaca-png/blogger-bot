@@ -70,8 +70,13 @@ def main() -> int:
     print(f"property: {report.get('propertyId') or 'not resolved'} "
           f"({report.get('propertyIdSource') or 'unknown'})")
     print(f"measurement id: {report.get('measurementId')}")
+    if report.get("credentialSource"):
+        print(f"credential in force: {report['credentialSource']} (names only, never values)")
     if report.get("error"):
         print(f"google said: {report['error']}")
+    if report.get("whatThisMeans"):
+        # this is the line that stops someone rebuilding a client they did not need to rebuild
+        print(f"read this first: {report['whatThisMeans']}")
     if report.get("remedy"):
         print(f"what to do: {report['remedy']}")
     print(f"::{level} title=Analytics read access::{sentence}")
