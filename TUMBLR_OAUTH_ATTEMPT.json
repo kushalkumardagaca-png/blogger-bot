@@ -1,0 +1,6 @@
+{
+  "fingerprint": "8c2ee59bee76",
+  "attemptedAtIST": "2026-10-21T10:00:05+05:30",
+  "outcome": "refused by Tumblr",
+  "reason": "RuntimeError: Tumblr authorization exchange failed: HTTP 400; safe error details: {'error': 'invalid_grant', 'error_description': 'The authorization code has expired'}"
+}
