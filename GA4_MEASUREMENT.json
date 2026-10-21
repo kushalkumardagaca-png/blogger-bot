@@ -3,17 +3,17 @@
  "ok": true,
  "credentialSource": "GA4_REFRESH_TOKEN",
  "measurementId": "G-WLEEYTKV12",
- "measuredAt": "2026-10-21T09:24:38+00:00",
+ "measuredAt": "2026-10-21T11:47:41+00:00",
  "windowDays": 7,
  "propertyId": "556948096",
- "propertyIdSource": "the only property in this account, \"Daily Yield\" - its data streams do not name G-WLEEYTKV12",
+ "propertyIdSource": "data stream G-WLEEYTKV12 in this account, property \"Daily Yield\"",
+ "propertyVerification": "stream-matched",
  "siteTag": {
   "checked": true,
-  "reachable": true,
-  "measurementIds": [
-   "G-WLEEYTKV12"
-  ],
-  "installedHere": true
+  "reachable": false,
+  "measurementIds": [],
+  "installedHere": null,
+  "error": "HTTP Error 429: Too Many Requests"
  },
  "totals": {
   "views": 103,

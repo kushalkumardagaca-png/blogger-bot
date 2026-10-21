@@ -1,9 +1,9 @@
-# GA4 measurement · 2026-10-21T09:24:38+00:00
+# GA4 measurement · 2026-10-21T11:47:41+00:00
 
 Status: **MEASURED**
 
-- analytics tag observed on the live site: **yes** (G-WLEEYTKV12)
-- property: **556948096** (the only property in this account, "Daily Yield" - its data streams do not name G-WLEEYTKV12)
+- analytics tag observed on the live site: **not checked** (HTTP Error 429: Too Many Requests)
+- property: **556948096** (data stream G-WLEEYTKV12 in this account, property "Daily Yield")
 - views in the last 7 days: **103**
 - **views per day: 14.7**
 - active users: **72**, sessions: **80**
