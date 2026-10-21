@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-21T21:56:38.273444+05:30",
+ "generatedAt": "2026-10-21T22:15:59.078816+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 20,
- "expectedPosts": 40,
+ "articles": 21,
+ "expectedPosts": 42,
  "articlesWithBothPosts": 20,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-markets",
@@ -267,11 +267,28 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-4",
+   "title": "Is ₹3 lakh enough for your emergency fund",
+   "url": "https://dailyyield.blogspot.com/2026/10/is-3-lakh-enough-for-your-emergency-fund.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T21:56:30.369430+05:30",
+ "liveVerificationSourceAt": "2026-10-21T22:15:47.944510+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 18,
  "syntheticViews": 0,
