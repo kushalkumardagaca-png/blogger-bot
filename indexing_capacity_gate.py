@@ -52,6 +52,10 @@ MAIN_PAGE_URL = re.compile(r"https://dailyyield\.blogspot\.com/p/(?!indexnow-key
 MAIN_PAGE_PRIORITY = ("daily-news", "article", "markets-today", "global-snapshot", "calculator",
                       "money-atlas", "for-corporate")
 MAIN_PAGE_CAP = 16
+# A test shaped like /p/<name>.html can never match the homepage, so the homepage was silently
+# missing from the thirteen: it was announced to no one, and it is not in either Blogger sitemap.
+# Owner instruction, 21 October 2026: "all the 13 pages including the homepage".
+MAIN_PAGE_HOME = "https://dailyyield.blogspot.com/"
 NEWS_SLUG = re.compile(r"(finance-news|markets|crypto|commodities|ipos|global-finance|news-\d{4}-)")
 
 
@@ -224,6 +228,15 @@ def main() -> int:
         key=lambda url: (MAIN_PAGE_PRIORITY.index(next((key for key in MAIN_PAGE_PRIORITY
                                                         if key in url), "")) if any(
             key in url for key in MAIN_PAGE_PRIORITY) else len(MAIN_PAGE_PRIORITY), url))
+    # The homepage is put in by hand rather than discovered: it is in no Blogger sitemap, it matches
+    # no /p/ pattern, and the queue only ever carried what a post feed produced. Search Console
+    # reported a "Redirect error" on exactly this URL, which is a reason to announce and inspect it
+    # more often, not less.
+    if MAIN_PAGE_HOME not in main_pages:
+        main_pages.insert(0, MAIN_PAGE_HOME)
+        home_forced = True
+    else:
+        home_forced = False
     if main_pages and not arguments.include_articles:
         announce = [{"url": url, "score": 1000 - index,
                      "why": ["main page: the site's own front doors, indexed before any article"]}
@@ -248,6 +261,10 @@ def main() -> int:
                            "mainPagesFound": len(main_pages), "announced": min(len(main_pages), MAIN_PAGE_CAP),
                            "articleUrlsHeld": len(suppressed) if main_pages and not arguments.include_articles else 0,
                            "pages": main_pages[:MAIN_PAGE_CAP],
+                           "homepageIncluded": MAIN_PAGE_HOME in main_pages,
+                           "homepageForcedByThisRun": home_forced,
+                           "ownerInstruction": "owner, 21 October 2026: the 13 pages including the "
+                                               "homepage, indexed by the end of November 2026",
                            "decidedBy": "owner, 20 October 2026: index the main pages first"},
         "evidenceFiles": {name: bool(path.exists()) for name, path in (
             ("INDEX_STATUS_REPORT.json", STATUS), ("AUDIENCE_GROWTH_BASELINE.json", BASELINE),

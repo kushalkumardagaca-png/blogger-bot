@@ -559,6 +559,28 @@ check('Indexing starts at the front doors: the main pages, not all 551 URLs',
       and 'mainPagePolicy' in (ROOT/'indexing_capacity_gate.py').read_text()
       and '--include-articles' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'owner decision, 20 October 2026' in (ROOT/'indexing_capacity_gate.py').read_text())
+check('The front-door list includes the homepage, which no /p/ pattern can match',
+      'MAIN_PAGE_HOME = "https://dailyyield.blogspot.com/"' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and 'if MAIN_PAGE_HOME not in main_pages:' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and '"homepageIncluded"' in (ROOT/'indexing_capacity_gate.py').read_text()
+      and 'https://dailyyield.blogspot.com/",' in (ROOT/'test_indexing_capacity_gate.py').read_text())
+watch_py=(ROOT/'main_pages_index_watch.py').read_text()
+watch_yml=(ROOT/'.github/workflows/main_pages_index_watch.yml').read_text()
+check('The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict',
+      'MAIN_PAGE_HOME' in watch_py and 'sitemap-pages.xml' in watch_py
+      and 'urlInspection/index:inspect' in watch_py
+      and 'an API error is not evidence' in watch_py and 'unreported' in watch_py
+      and 'never as "not indexed"' in watch_py and '"verdict": "UNKNOWN"' in watch_py
+      and 'Request indexing' in watch_py and 'indexing.googleapis.com' not in watch_py
+      and 'blogger.googleapis.com' not in watch_py
+      and 'python main_pages_index_watch.py --check' in watch_yml
+      and 'python main_pages_index_watch.py --apply' in watch_yml
+      and 'secrets.GSC_REFRESH_TOKEN' in watch_yml and 'BING_WEBMASTER_API_KEY' in watch_yml)
+bing_py=(ROOT/'bing_url_automation.py').read_text()
+check('Bing spends any quota it grants on the front doors first and re-offers them weekly',
+      'rank = 0 if item["kind"] == "home" else 1 if item["kind"] == "page" else 2' in bing_py
+      and 'def reoffer_due' in bing_py and 'MAIN_PAGE_REOFFER_DAYS = 7' in bing_py
+      and 'main_target and reoffer_due(record, started)' in bing_py)
 check('The milestone is counted in readers, not in pageviews',
       'engagedSessions' in (ROOT/'ga4_measurement.py').read_text()
       and 'dailyReaders' in (ROOT/'ga4_measurement.py').read_text()

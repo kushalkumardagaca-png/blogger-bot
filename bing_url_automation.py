@@ -134,6 +134,23 @@ def valid_daily_yield_url(value: str) -> bool:
     return parsed.scheme == "https" and parsed.hostname == OWN_HOST and not parsed.fragment and not parsed.query
 
 
+MAIN_PAGE_REOFFER_DAYS = 7
+
+
+def reoffer_due(record: dict, now: datetime) -> bool:
+    """A main page stays eligible for submission on a weekly drumbeat.
+
+    Submission state alone would park a front door forever: the homepage's body does not change,
+    so its fingerprint never changes, and a page that was deferred while quota sat at zero would
+    never be offered again. Re-offering every week is what turns "quota appeared" into "the page
+    went out today".
+    """
+    last = parse_time(record.get("lastSubmittedAt", ""))
+    if last is None:
+        return True
+    return (now - last) >= timedelta(days=MAIN_PAGE_REOFFER_DAYS)
+
+
 def blogger_inventory() -> list[dict]:
     token = blogger_oauth()
     headers = {"Authorization": "Bearer " + token}
@@ -312,17 +329,23 @@ def main() -> int:
             "title": item.get("title", ""), "updated": item.get("updated", ""),
             "fingerprint": item["fingerprint"], "lastSeenAt": iso(started),
         })
-        if record.get("submittedFingerprint") != item["fingerprint"]:
+        main_target = item["kind"] in ("home", "page")
+        changed = record.get("submittedFingerprint") != item["fingerprint"]
+        if changed or (main_target and reoffer_due(record, started)):
             candidates.append(item)
             record["status"] = "SUBMISSION_PENDING"
+            if main_target and not changed:
+                record["reoffered"] = True
 
-    # When quota is limited, protect new/current publications before historical
-    # backfill. The homepage remains first, then the most recently published or
-    # updated items. Deferred URLs keep their fingerprint and are retried later.
+    # Owner instruction, 21 October 2026: the thirteen front doors first. Quota is the only scarce
+    # thing in this pipeline, so the rank order is the policy - homepage, then every static page
+    # (hubs, calculators, markets, snapshot, about/contact/privacy/terms/disclaimer), and only
+    # then the article back catalogue. A day with 12 URLs of quota spends all twelve on main pages.
     def candidate_priority(item: dict):
         freshness = parse_time(item.get("published", "")) or parse_time(item.get("updated", ""))
         stamp = freshness.timestamp() if freshness else 0.0
-        return (0 if item["kind"] == "home" else 1, -stamp, item["url"])
+        rank = 0 if item["kind"] == "home" else 1 if item["kind"] == "page" else 2
+        return (rank, -stamp, item["url"])
 
     candidates.sort(key=candidate_priority)
     quota = {"dailyAvailable": 0, "monthlyAvailable": 0}

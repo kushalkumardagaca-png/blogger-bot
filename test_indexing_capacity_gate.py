@@ -138,9 +138,20 @@ class MainPagesFirst(Harness):
     def test_the_main_pages_are_announced_even_though_the_queue_never_asked_for_them(self):
         priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text()) if self._run() else None
         self.assertEqual(priority["announce"], [
+            "https://dailyyield.blogspot.com/",
             "https://dailyyield.blogspot.com/p/daily-news.html",
             "https://dailyyield.blogspot.com/p/article.html",
             "https://dailyyield.blogspot.com/p/markets-today.html"])
+
+    def test_the_homepage_is_a_main_page_even_though_it_matches_no_page_pattern(self):
+        # The owner's list is thirteen URLs "including the homepage". A /p/ regex cannot see it and
+        # no Blogger sitemap contains it, so it used to be announced to nobody.
+        report = self._run()
+        self.assertEqual(report["mainPagePolicy"]["pages"][0], "https://dailyyield.blogspot.com/")
+        self.assertTrue(report["mainPagePolicy"]["homepageIncluded"])
+        self.assertTrue(report["mainPagePolicy"]["homepageForcedByThisRun"])
+        self.assertEqual(report["mainPagePolicy"]["mainPagesFound"], 4)
+        self.assertIn("end of November 2026", report["mainPagePolicy"]["ownerInstruction"])
 
     def test_article_urls_are_held_and_say_who_decided(self):
         report = self._run()

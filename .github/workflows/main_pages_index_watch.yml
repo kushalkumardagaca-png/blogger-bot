@@ -1,0 +1,71 @@
+name: Main pages indexing scoreboard
+
+# The owner's target, 21 October 2026: every one of the 13 main pages — the homepage and the twelve
+# standing pages — present in Google's index and in Bing's, before 30 November 2026. Nothing else in
+# this repository answers that question: gsc_rebuild.py is frozen by owner decision and it is the only
+# job that ever touched sitemap registration, and index_status_report.py measures the whole 592-URL
+# inventory on the domain property where "Request indexing" does not exist.
+#
+# This job is deliberately narrow. It reads the URL-prefix property, makes sure Blogger's two
+# sitemaps are registered there, inspects thirteen URLs, asks Bing what it has, and writes the
+# scoreboard. It performs no Blogger write of any kind, so the site-change freeze is untouched.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 20 * * *'   # 01:50 IST daily, ahead of the capacity gate and the index report
+  push:
+    branches: [main]
+    paths:
+      - 'main_pages_index_watch.py'
+      - 'test_main_pages_index_watch.py'
+      - '.github/workflows/main_pages_index_watch.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-main-pages-scoreboard
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Prove the scoreboard's own rules before using them
+        run: python main_pages_index_watch.py --check
+      - name: Read the property, repair sitemap registration, inspect the 13 main pages
+        env:
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: python main_pages_index_watch.py --apply
+      - name: Persist the scoreboard
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-main
+          for f in MAIN_PAGES_INDEX_TARGET.json MAIN_PAGES_INDEX_TARGET.md MAIN_PAGES_SITEMAP_STATE.json; do
+            cp "$f" /tmp/dy-main/ 2>/dev/null || true
+          done
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-main/* . 2>/dev/null || true
+            git add MAIN_PAGES_INDEX_TARGET.json MAIN_PAGES_INDEX_TARGET.md MAIN_PAGES_SITEMAP_STATE.json 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record the main-pages indexing scoreboard [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
