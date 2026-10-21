@@ -3510,9 +3510,31 @@
       },
       "published_at": "2026-10-21T13:40:21.526774+05:30",
       "reconciled": false
+    },
+    {
+      "kind": "page",
+      "blogger_id": "1685707888914861815",
+      "title": "DAILY ARTICLE",
+      "url": "https://dailyyield.blogspot.com/p/article.html",
+      "mastodon_status_id": "117478048806114594",
+      "mastodon_url": "https://mastodon.social/@dailyyield/117478048806114594",
+      "score": 25,
+      "creative": {
+        "seed": "71c84966c0fe2263",
+        "topic": "page",
+        "style": "sky sticker",
+        "style_index": 7,
+        "hook": "USE THE TOOL, CHECK THE ASSUMPTIONS",
+        "emoji": "🧮",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 0,
+        "adaptive": false
+      },
+      "published_at": "2026-10-21T14:22:46.630189+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-21T13:40:21.526786+05:30",
-  "last_mastodon_status_id": "117477537985079358"
+  "last_success_at": "2026-10-21T14:22:46.630200+05:30",
+  "last_mastodon_status_id": "117478048806114594"
 }
