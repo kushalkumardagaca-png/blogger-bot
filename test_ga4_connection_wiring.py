@@ -19,6 +19,7 @@ import unittest
 import urllib.error
 from contextlib import redirect_stdout
 from pathlib import Path
+import unittest.mock as mock
 from unittest.mock import patch
 
 import yaml
@@ -66,9 +67,15 @@ class AdviceCoversEveryStatus(unittest.TestCase):
         """
         tree = ast.parse((ROOT / "ga4_measurement.py").read_text(encoding="utf-8"))
         found = set()
+        def names_of(target):
+            if isinstance(target, ast.Name):
+                return [target]
+            if isinstance(target, (ast.Tuple, ast.List)):
+                return [t for t in target.elts if isinstance(t, ast.Name)]
+            return []
+
         for node in ast.walk(tree):
-            if isinstance(node, ast.Assign) and any(
-                    isinstance(t, ast.Name) and t.id == "status" for t in node.targets):
+            if isinstance(node, ast.Assign) and any(t.id == "status" for t in names_of(node.targets[0])):
                 source = [node.value]
                 found |= {word.value for word in ast.walk(node.value)
                           if isinstance(word, ast.Constant) and isinstance(word.value, str)
@@ -357,6 +364,153 @@ class ScopeFailureSaysWhatIsInnocent(unittest.TestCase):
         self.assertIn("credential in force: GA4_REFRESH_TOKEN", run.stdout)
         self.assertIn("read this first: replace only GA4_REFRESH_TOKEN", run.stdout)
         self.assertNotIn("1//", run.stdout, "no credential value may reach a public log")
+
+
+class PropertyIsFoundWithoutAFilter(unittest.TestCase):
+    """Google refused our own request, after the owner's connection was already correct.
+
+    The 14:36 IST run on 21 October 2026 is the proof: `GA4_MEASUREMENT.json` recorded
+    `tokenScopes: [".../auth/analytics.readonly"]` and `credentialSource: "GA4_REFRESH_TOKEN"` - the
+    token carried the permission and the three GA4 values were the ones in force - and still the run
+    failed, on `HTTP 400 The value for the 'filter' field was empty, but must be provided`. The Admin
+    API will not answer a bare property list; the account tree has to be walked instead. That sentence
+    was also mislabelled "token refused", which is how an owner ends up re-authorising something that
+    was never broken.
+    """
+
+    def fake(self, url, *args, **kwargs):
+        if "accountSummaries" in url:
+            return {"accountSummaries": [{"displayName": "Daily Yield", "propertySummaries": [
+                {"property": "properties/123456789", "displayName": "Daily Yield"},
+                {"property": "properties/987654321", "displayName": "Spare property"}]}]}
+        if url.endswith("/dataStreams"):
+            return ({"dataStreams": [{"measurementId": "G-WLEEYTKV12", "displayName": "web"}]}
+                    if url.endswith("123456789/dataStreams") else {"dataStreams": [
+                        {"measurementId": "G-OTHER", "displayName": "app"}]})
+        if url.endswith(":runReport"):
+            return {"rows": [{"dimensionValues": [{"value": "20261020"}],
+                              "metricValues": [{"value": "412"}, {"value": "96"}, {"value": "120"},
+                                               {"value": "88"}]}]}
+        raise AssertionError(f"unexpected call: {url}")
+
+    def test_the_bare_property_list_is_never_asked_for(self):
+        calls = []
+        def spy(url, *a, **k):
+            calls.append(url.split("//")[-1].split("?")[0])
+            return self.fake(url)
+        with mock.patch.object(gm, "http", side_effect=spy):
+            numeric, source = gm.resolve_property("token", "G-WLEEYTKV12")
+        self.assertEqual(numeric, "123456789")
+        self.assertIn("G-WLEEYTKV12", source)
+        self.assertNotIn("analyticsadmin.googleapis.com/v1beta/properties", calls,
+                         "a property list without a filter is what Google refused")
+        self.assertIn("accountSummaries", calls[0])
+
+    def test_the_whole_read_succeeds_on_the_walked_path(self):
+        import io, json as _json, tempfile
+        from contextlib import redirect_stdout
+        with tempfile.TemporaryDirectory() as folder:
+            with mock.patch.object(sys, "argv", ["ga4_measurement.py"]), \
+                 mock.patch.dict(os.environ, {"GA4_CLIENT_ID": "cid", "GA4_CLIENT_SECRET": "sec",
+                                              "GA4_REFRESH_TOKEN": "1//t"}, clear=True), \
+                 mock.patch.object(gm, "OUT", Path(folder) / "GA4_MEASUREMENT.json"), \
+                 mock.patch.object(gm, "MD", Path(folder) / "GA4_MEASUREMENT.md"), \
+                 mock.patch.object(gm, "site_tag", return_value={"checked": True, "reachable": True,
+                                                                  "measurementIds": ["G-WLEEYTKV12"],
+                                                                  "installedHere": True}), \
+                 mock.patch.object(gm, "refresh_token", return_value="short-lived"), \
+                 mock.patch.object(gm, "token_scopes", return_value=[
+                     "https://www.googleapis.com/auth/analytics.readonly"]), \
+                 mock.patch.object(gm, "http", side_effect=self.fake), \
+                 redirect_stdout(io.StringIO()):
+                self.assertEqual(gm.main(), 0)
+            report = _json.loads((Path(folder) / "GA4_MEASUREMENT.json").read_text(encoding="utf-8"))
+        self.assertEqual(report["status"], "MEASURED")
+        self.assertEqual(report["propertyId"], "123456789")
+        self.assertEqual(report["totals"]["views"], 412)
+        self.assertEqual(report["totals"]["dailyReaders"], 88)
+
+    def test_a_refusal_at_the_token_endpoint_is_told_apart_from_a_refused_request(self):
+        body = b'{"error": "invalid_grant"}'
+        refused = urllib.error.HTTPError(gm.TOKEN_URL, 400, "Bad Request", {}, io.BytesIO(body))
+        with mock.patch.dict(os.environ, {"GA4_CLIENT_ID": "cid", "GA4_CLIENT_SECRET": "sec",
+                                          "GA4_REFRESH_TOKEN": "1//t"}, clear=True), \
+             mock.patch.object(gm.urllib.request, "urlopen", side_effect=refused):
+            with self.assertRaises(gm.TokenRefused) as caught:
+                gm.refresh_token()
+        self.assertIn("HTTP 400", str(caught.exception))
+        self.assertIn("different app", str(caught.exception).lower())
+
+    def test_a_rejected_request_is_not_blamed_on_the_owner_connection(self):
+        import io as _io, json as _json, tempfile
+        from contextlib import redirect_stdout
+        body = _json.dumps({"error": {"message": "The value for the 'filter' field was empty, "
+                                                  "but must be provided."}}).encode()
+        bad = urllib.error.HTTPError("https://analyticsadmin.googleapis.com/v1beta/properties",
+                                     400, "Bad Request", {}, io.BytesIO(body))
+        with tempfile.TemporaryDirectory() as folder:
+            with mock.patch.object(sys, "argv", ["ga4_measurement.py"]), \
+                 mock.patch.dict(os.environ, {"GA4_CLIENT_ID": "cid", "GA4_CLIENT_SECRET": "sec",
+                                              "GA4_REFRESH_TOKEN": "1//t"}, clear=True), \
+                 mock.patch.object(gm, "OUT", Path(folder) / "g.json"), \
+                 mock.patch.object(gm, "MD", Path(folder) / "g.md"), \
+                 mock.patch.object(gm, "site_tag", return_value={"checked": True, "reachable": True,
+                                                                  "measurementIds": ["G-WLEEYTKV12"],
+                                                                  "installedHere": True}), \
+                 mock.patch.object(gm, "refresh_token", return_value="short-lived"), \
+                 mock.patch.object(gm, "token_scopes", return_value=[
+                     "https://www.googleapis.com/auth/analytics.readonly"]), \
+                 mock.patch.object(gm, "http", side_effect=bad), \
+                 redirect_stdout(_io.StringIO()):
+                gm.main()
+            report = _json.loads((Path(folder) / "g.json").read_text(encoding="utf-8"))
+        self.assertEqual(report["status"], "REQUEST_REJECTED")
+        self.assertNotEqual(report["status"], "TOKEN_REFUSED",
+                           "our request must never be reported as the owner's credentials")
+        self.assertIn("the repair belongs in this repository", report["remedy"])
+        self.assertIn("filter", report["error"])
+
+
+class MetricCellsAreUnwrapped(unittest.TestCase):
+    """The shape Google actually answers with, taken from the Data API response itself.
+
+    A row is `{"dimensionValues": [{"value": "20261020"}], "metricValues": [{"value": "412"}]}`: the
+    numbers are strings inside an object, and a metric with nothing to say is an empty object. Both
+    forms have to survive the parser, because on 21 October 2026 the connection was authorised and
+    the read still failed on `float() argument must be ... not 'dict'`.
+    """
+
+    def test_the_wrapped_number_is_read_and_the_empty_cell_is_zero(self):
+        self.assertEqual(gm.number({"value": "412"}), 412)
+        self.assertEqual(gm.number({"value": "0"}), 0)
+        self.assertEqual(gm.number({}), 0)
+        self.assertEqual(gm.number(None), 0)
+        self.assertEqual(gm.number({"value": None}), 0)
+
+    def test_a_whole_row_of_report_rows_becomes_readable_days(self):
+        seen = []
+        def fake(url, *args, **kwargs):
+            seen.append(url)
+            return {"rows": [{"dimensionValues": [{"value": "20261020"}],
+                              "metricValues": [{"value": "412"}, {"value": "96"}, {"value": "120"},
+                                               {"value": "88"}]},
+                             {"dimensionValues": [{"value": "20261019"}],
+                              "metricValues": [{"value": "380"}, {}, {"value": "101"},
+                                               {"value": "95"}]}]}
+        with mock.patch.object(gm, "http", side_effect=fake):
+            rows = gm.daily_rows("token", "123456789")
+        self.assertEqual([r["views"] for r in rows], [412, 380])
+        self.assertEqual([r["date"] for r in rows], ["2026-10-20", "2026-10-19"])
+        self.assertEqual(rows[0]["activeUsers"], 96)
+        self.assertEqual(rows[1]["activeUsers"], 0, "an empty cell is no data, not a crash")
+        self.assertEqual(rows[1]["sessions"], 101, "the cells after it stay lined up with their metrics")
+        totals = gm.summarise(rows, {"installedHere": True}, "123456789", "test")["totals"]
+        self.assertEqual((totals["views"], totals["daysWithRows"]), (792, 2))
+        self.assertEqual(totals["sessions"], 221)
+        self.assertEqual(totals["engagedSessions"], 183)
+        self.assertEqual(totals["activeUsers"], 96)
+        self.assertEqual(totals["dailyReaders"], 88,
+                         "the newest whole day, not an average across the window")
 
 
 class NoSecretsInLogs(unittest.TestCase):

@@ -303,9 +303,17 @@ sentence, and the run goes green only if Google really returned numbers:
 | `MEASURED — … pageviews and … engaged readers` | connected | nothing further, ever |
 | `CREDENTIALS_MISSING` | a box in Step 4 is empty or mis-named | re-check the three names |
 | `SCOPE_INSUFFICIENT` | the token exists but predates Analytics | repeat Step 3, replace only `GA4_REFRESH_TOKEN` |
-| `TOKEN_REFUSED` | Google expired the token (7-day Testing rule) | repeat Step 3, replace only `GA4_REFRESH_TOKEN` |
+| `TOKEN_REFUSED` | Google refused the token itself: expired, revoked, or the 7-day Testing rule | repeat Step 3, replace only `GA4_REFRESH_TOKEN` |
+| `REQUEST_REJECTED` | **the request this job built was refused** | nothing - the repair is ours |
 | `PROPERTY_NOT_FOUND` | the token works, the property is unnamed | add the `GA4_PROPERTY_ID` variable |
 | `NO_DATA_YET` | connected, but the property has no rows in that window | nothing: it is a real answer, not a failure |
+
+`REQUEST_REJECTED` deserves one sentence of its own, because it was invented after a real confusion:
+on 21 October 2026 the reader reported `TOKEN_REFUSED` when the actual message was Google refusing a
+call *this repository* made (a property list sent without the filter the Admin API requires). The
+connection was already correct. From now on the two answers are separate, the line names which call
+failed and quotes Google's words, and this status tells you plainly to leave Google alone and let the
+repair be committed here.
 
 If the account you signed into shows no Analytics property at all, the tag belongs to the other
 Google account — sign in as `dailyyield.official@gmail.com` and repeat Step 3. The blog is unchanged

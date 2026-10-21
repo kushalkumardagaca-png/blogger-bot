@@ -36,6 +36,7 @@ TOKEN_URL = "https://oauth2.googleapis.com/token"
 DATA_API = "https://analyticsdata.googleapis.com/v1beta"
 TOKEN_INFO = "https://oauth2.googleapis.com/tokeninfo"
 ADMIN_API = "https://analyticsadmin.googleapis.com/v1alpha"
+ADMIN_API_BETA = "https://analyticsadmin.googleapis.com/v1beta"
 
 REMEDIES = {
     "CREDENTIALS_MISSING": "follow GA4_CONNECT.md - browser steps, nothing to install, or run "
@@ -56,6 +57,9 @@ REMEDIES = {
                      "Google account must be a Viewer (or Editor) on the Analytics property itself - "
                      "Analytics -> Admin -> Property Access Management -> add the account, then run the "
                      "check again; the stored token needs no change",
+    "REQUEST_REJECTED": "Google turned down the request this job built, not your authorisation: its "
+                        "own sentence is recorded above, and the repair belongs in this repository. "
+                        "Nothing on the blog is involved and no number is invented in the meantime",
     "PROPERTY_NOT_FOUND": "add a repository variable GA4_PROPERTY_ID with the numeric Property ID from "
                           "Analytics -> Admin -> Property settings",
     "TAG_NOT_OBSERVED": "the analytics tag is not on the live pages; it has to be added before any "
@@ -179,8 +183,30 @@ def refresh_token() -> str:
     form = urllib.parse.urlencode({"client_id": client_id, "client_secret": client_secret,
                                    "refresh_token": stored, "grant_type": "refresh_token"}).encode()
     request = urllib.request.Request(TOKEN_URL, data=form, method="POST")
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)["access_token"]
+    # a failure here means something entirely different from a failure on an Analytics call: the token
+    # or the client pair was refused. Until 21 October both were reported as "token refused", which
+    # sent the owner to re-authorise a connection Google had already accepted.
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            payload = json.load(response)
+    except urllib.error.HTTPError as exc:
+        detail = ""
+        try:
+            detail = str((json.loads(exc.read().decode("utf-8", "replace")).get("error") or ""))
+        except Exception:  # noqa: BLE001 - the code alone still tells the owner where to look
+            pass
+        raise TokenRefused(f"Google refused the stored token at its own endpoint (HTTP {exc.code})"
+                           + (f": {detail}" if detail else "")
+                           + ". If that is wrong and the token is fine, the client id or secret "
+                             "belongs to a different app: the three must come from one client.") from None
+    token = str(payload.get("access_token") or "")
+    if not token:
+        raise TokenRefused("Google answered the refresh request without an access token")
+    return token
+
+
+class TokenRefused(RuntimeError):
+    pass
 
 
 class MissingCredentials(RuntimeError):
@@ -192,16 +218,52 @@ def resolve_property(token: str, measurement_id: str) -> tuple[str, str]:
     configured = (os.environ.get("GA4_PROPERTY_ID") or "").strip()
     if configured and not configured.startswith("G-"):
         return configured, "GA4_PROPERTY_ID repository variable"
-    listing = http(f"{ADMIN_API}/properties?pageSize=200", token=token)
-    for row in listing.get("properties") or []:
-        name = str(row.get("name") or "")
-        numeric = name.rsplit("/", 1)[-1]
-        streams = [str(stream.get("measurementId") or "") for stream in row.get("dataStreams") or []]
-        if not numeric.isdigit():
-            continue
-        if measurement_id in streams or len(streams) == 0:
-            return numeric, "discovered through the Analytics Admin API"
-    raise LookupError("no GA4 property carries that measurement id")
+    # The account tree is walked, not the property list. A bare `properties` list is refused by the
+    # Admin API with "The value for the 'filter' field was empty, but must be provided" - which is what
+    # broke the owner's first working connection on 21 October, after the token and its scope were both
+    # already right. accountSummaries needs no filter and names every property the account holds.
+    listing = http(f"{ADMIN_API_BETA}/accountSummaries", token=token)
+    candidates: list[tuple[str, str]] = []
+    for account in listing.get("accountSummaries") or []:
+        for row in account.get("propertySummaries") or []:
+            numeric = str(row.get("property") or "").rsplit("/", 1)[-1]
+            if numeric.isdigit():
+                candidates.append((numeric, str(row.get("displayName") or "")))
+    for numeric, display in candidates:
+        try:
+            streams = http(f"{ADMIN_API_BETA}/properties/{numeric}/dataStreams", token=token)
+        except urllib.error.HTTPError:
+            continue                      # a property we may list but not open is not the one to bet on
+        ids = [str(row.get("measurementId") or "") for row in streams.get("dataStreams") or []]
+        if measurement_id in ids:
+            return numeric, f"data stream {measurement_id} in this account" + (
+                f", property \"{display}\"" if display else "")
+    if len(candidates) == 1:
+        # exactly one property and no matching stream is still an answer worth taking, but it is said
+        # out loud how it was reached, because a wrong property would report the wrong numbers
+        return candidates[0][0], ("the only property in this account, "
+                                 f"\"{candidates[0][1] or 'unnamed'}\" - its data streams do not name "
+                                 f"{measurement_id}")
+    raise LookupError("no GA4 property in this account carries that measurement id; "
+                      f"{len(candidates)} propert" + ("y" if len(candidates) == 1 else "ies") +
+                      " were listed")
+
+
+def number(cell) -> int:
+    """One cell of a GA4 metric row, turned into a whole number.
+
+    The Data API wraps a metric exactly as it wraps a dimension: the figure arrives as the *string*
+    inside `{"value": "412"}`, and a metric with nothing to report arrives as an empty object rather
+    than a zero. Until 21 October 2026 this file passed the whole object to `float()`, so a
+    correctly authorised connection still ended as "the Analytics Data API could not be reached" -
+    the failure looked like permissions and was really our own parser. Anything unreadable counts as
+    no data, never as a crash and never as a guess.
+    """
+    value = cell.get("value") if isinstance(cell, dict) else cell
+    try:
+        return int(float(value))
+    except (TypeError, ValueError):
+        return 0
 
 
 def daily_rows(token: str, property_id: str) -> list[dict]:
@@ -216,14 +278,14 @@ def daily_rows(token: str, property_id: str) -> list[dict]:
     rows = []
     for row in data.get("rows") or []:
         values = [cell.get("value") for cell in row.get("dimensionValues") or []]
-        metrics = [cell for cell in row.get("metricValues") or []]
+        metrics = [number(cell) for cell in row.get("metricValues") or []]
         day = (values[0] if values else "").replace("-", "")
         if len(day) == 8:
             day = f"{day[0:4]}-{day[4:6]}-{day[6:8]}"
-        rows.append({"date": day, "views": int(float(metrics[0])) if len(metrics) else 0,
-                     "activeUsers": int(float(metrics[1])) if len(metrics) > 1 else 0,
-                     "sessions": int(float(metrics[2])) if len(metrics) > 2 else 0,
-                     "engagedSessions": int(float(metrics[3])) if len(metrics) > 3 else 0})
+        rows.append({"date": day, "views": metrics[0] if len(metrics) else 0,
+                     "activeUsers": metrics[1] if len(metrics) > 1 else 0,
+                     "sessions": metrics[2] if len(metrics) > 2 else 0,
+                     "engagedSessions": metrics[3] if len(metrics) > 3 else 0})
     return rows
 
 
@@ -292,6 +354,8 @@ def main() -> int:
             rows = daily_rows(token, property_id)
         except MissingCredentials:
             status = "CREDENTIALS_MISSING"
+        except TokenRefused as exc:
+            status, report_error, rows = "TOKEN_REFUSED", str(exc)[:400], []
         except urllib.error.HTTPError as exc:
             # 400/401 from the token endpoint means the token itself is no longer accepted, which is a
             # different repair from a missing scope: one needs a fresh authorisation, the other needs
@@ -308,8 +372,11 @@ def main() -> int:
                     f"HTTP 403 {message}".strip(),
                     ("reasons: " + ", ".join(dict.fromkeys(reasons))) if reasons else "") if part)
             else:
+                # 400/401 here is NOT a refused token - the token was exchanged two lines up, and a
+                # refusal there now raises TokenRefused. A 400 from an API call is Google rejecting the
+                # request we built, which is our bug to fix, not the owner's connection.
                 status = "PROPERTY_NOT_FOUND" if exc.code == 404 else (
-                    "TOKEN_REFUSED" if exc.code in (400, 401) else "READ_FAILED")
+                    "REQUEST_REJECTED" if exc.code in (400, 401) else "READ_FAILED")
                 detail = str((payload.get("error") or {}).get("message") or "") if isinstance(payload, dict) else ""
                 report_error = f"HTTP {exc.code}" + (f" {detail}" if detail else "")
         except PermissionError as exc:

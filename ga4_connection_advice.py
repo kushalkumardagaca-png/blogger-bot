@@ -46,6 +46,10 @@ ADVICE = {
     "ACCESS_DENIED": ("error", "The token is fine and the API is enabled, but that Google account is "
                                "not a Viewer on the Analytics property. Analytics -> Admin -> Property "
                                "Access Management -> add the account, then run this workflow again."),
+    "REQUEST_REJECTED": ("error", "Google refused the request this job built, not your connection. "
+                                   "The sentence above is Google's own, and the fix is ours: report it "
+                                   "and the job is repaired here - nothing on the blog and no Google "
+                                   "setting of yours is involved."),
     "PROPERTY_NOT_FOUND": ("error", "The token works but no GA4 property could be matched to "
                                     "G-WLEEYTKV12. Add the numeric Property ID as a repository variable "
                                     "named GA4_PROPERTY_ID (Analytics -> Admin -> Property settings)."),
