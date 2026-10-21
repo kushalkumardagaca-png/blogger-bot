@@ -1,17 +1,16 @@
 {
-  "generatedAt": "2026-10-21T11:53:59.836607+05:30",
+  "generatedAt": "2026-10-21T12:47:52.206329+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 5,
-  "confirmedByLivePost": 5,
+  "confirmedPublications": 8,
+  "confirmedByLivePost": 8,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
     "news-russia",
-    "master-trending-1",
-    "master-evergreen-1"
+    "master-trending-1"
   ],
   "actions": [
     {
@@ -22,14 +21,26 @@
     {
       "type": "source_recovery",
       "key": "master-trending-1",
-      "attempt": 2,
+      "attempt": 3,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-europe",
+      "platform": "facebook",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-europe",
+      "platform": "bluesky",
+      "routeIndex": 1,
       "applied": true
     }
   ],
   "retryBlocked": [],
-  "masterRecoveryDeferred": [
-    "master-evergreen-1"
-  ],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
