@@ -38,6 +38,14 @@ ADVICE = {
     "TOKEN_REFUSED": ("error", "Google refused the stored token (expired or revoked). Google cuts "
                                "refresh tokens short while an OAuth app is still in Testing. Repeat the "
                                "browser step and replace the GA4_REFRESH_TOKEN secret."),
+    "API_DISABLED_IN_PROJECT": ("error", "The token is fine; Google refused because the Analytics "
+                                         "API is not switched on for the project that owns the OAuth "
+                                         "client. Press Enable on analyticsadmin and analyticsdata in "
+                                         "that project, then run this workflow again - no new "
+                                         "authorisation needed."),
+    "ACCESS_DENIED": ("error", "The token is fine and the API is enabled, but that Google account is "
+                               "not a Viewer on the Analytics property. Analytics -> Admin -> Property "
+                               "Access Management -> add the account, then run this workflow again."),
     "PROPERTY_NOT_FOUND": ("error", "The token works but no GA4 property could be matched to "
                                     "G-WLEEYTKV12. Add the numeric Property ID as a repository variable "
                                     "named GA4_PROPERTY_ID (Analytics -> Admin -> Property settings)."),

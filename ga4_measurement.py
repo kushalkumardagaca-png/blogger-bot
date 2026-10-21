@@ -46,6 +46,15 @@ REMEDIES = {
     "TOKEN_REFUSED": "Google refused the stored refresh token: it was made while the OAuth app was in "
                      "Testing (Google expires those after 7 days), or it was revoked. Repeat the browser "
                      "steps in GA4_CONNECT.md and replace only the GA4_REFRESH_TOKEN secret",
+    "API_DISABLED_IN_PROJECT": "Google refused because the Analytics API is not switched on for the "
+                               "project that owns the OAuth client: open the project that holds "
+                               "'Daily Yield Search Console Automation' and press Enable on "
+                               "analyticsadmin.googleapis.com and analyticsdata.googleapis.com, then run "
+                               "the check again - no new authorisation is needed for this",
+    "ACCESS_DENIED": "Google answered but will not show this property to that account: the signed-in "
+                     "Google account must be a Viewer (or Editor) on the Analytics property itself - "
+                     "Analytics -> Admin -> Property Access Management -> add the account, then run the "
+                     "check again; the stored token needs no change",
     "PROPERTY_NOT_FOUND": "add a repository variable GA4_PROPERTY_ID with the numeric Property ID from "
                           "Analytics -> Admin -> Property settings",
     "TAG_NOT_OBSERVED": "the analytics tag is not on the live pages; it has to be added before any "
@@ -56,6 +65,42 @@ REMEDIES = {
     "NO_DATA_YET": "the property is reachable but holds no rows: check that the tag's measurement id "
                    "matches the property and that data retention includes today",
 }
+
+
+def classify_forbidden(payload: dict) -> tuple[str, str, list[str]]:
+    """Split Google's 403 into the three things an owner can actually fix.
+
+    A 403 arrived as one label - "scope insufficient" - and that was wrong twice over: the same status
+    covers an API that is not switched on for the project, an account that is not a Viewer on the
+    property, and a token minted before Analytics was added. Each needs a different click, and only one
+    of them needs a new authorisation, so the difference is the whole value of the report.
+    """
+    error = payload.get("error") if isinstance(payload, dict) else {}
+    error = error if isinstance(error, dict) else {}
+    message = str(error.get("message") or "")
+    status = str(error.get("status") or "")
+    reasons: list[str] = []
+    for key in ("details", "errors"):
+        for row in error.get(key) or []:
+            if isinstance(row, dict):
+                for field in ("reason", "domain", "api"):
+                    value = str(row.get(field) or "")
+                    if value:
+                        reasons.append(value)
+    blob = (message + " " + status + " " + " ".join(reasons)).casefold()
+    if not blob.strip():
+        # Google refused without saying why (only ever seen from a proxy or a test): the historic
+        # default is kept, because a scope that was never asked for is by far the commonest reason a
+        # first connection is refused - and the report says plainly that no reason came back.
+        return "SCOPE_INSUFFICIENT", message, reasons
+    if "accessnotconfigured" in blob or "has not been used" in blob or "is not enabled" in blob \
+            or "service disabled" in blob or "enable it" in blob:
+        return "API_DISABLED_IN_PROJECT", message, reasons
+    if "insufficient" in blob or "scope" in blob:
+        return "SCOPE_INSUFFICIENT", message, reasons
+    if "permission" in blob or "denied" in blob or "not accessible" in blob or "viewer" in blob:
+        return "ACCESS_DENIED", message, reasons
+    return "READ_FAILED", message, reasons
 
 
 def http(url: str, token: str = "", body: dict | None = None, method: str = "") -> dict:
@@ -210,11 +255,23 @@ def main() -> int:
         except urllib.error.HTTPError as exc:
             # 400/401 from the token endpoint means the token itself is no longer accepted, which is a
             # different repair from a missing scope: one needs a fresh authorisation, the other needs
-            # the same authorisation to include Analytics.
-            status = "SCOPE_INSUFFICIENT" if exc.code == 403 else (
-                "PROPERTY_NOT_FOUND" if exc.code == 404 else (
-                    "TOKEN_REFUSED" if exc.code in (400, 401) else "READ_FAILED"))
+            # the same authorisation to include Analytics. A 403 needs splitting further still, so the
+            # body Google sent is read and kept: without it three unrelated fixes look identical.
+            try:  # a refusal with no body at all must not become an unclassified failure
+                payload = json.loads(exc.read().decode("utf-8", "replace")) if exc.fp else {}
+            except Exception:  # noqa: BLE001 - the body is a courtesy, not a guarantee
+                payload = {}
             rows = []
+            if exc.code == 403:
+                status, message, reasons = classify_forbidden(payload)
+                report_error = " ".join(part for part in (
+                    f"HTTP 403 {message}".strip(),
+                    ("reasons: " + ", ".join(dict.fromkeys(reasons))) if reasons else "") if part)
+            else:
+                status = "PROPERTY_NOT_FOUND" if exc.code == 404 else (
+                    "TOKEN_REFUSED" if exc.code in (400, 401) else "READ_FAILED")
+                detail = str((payload.get("error") or {}).get("message") or "") if isinstance(payload, dict) else ""
+                report_error = f"HTTP {exc.code}" + (f" {detail}" if detail else "")
         except Exception as exc:  # noqa: BLE001
             status, report_error = "READ_FAILED", str(exc)[:160]
         if status:
@@ -243,6 +300,8 @@ def main() -> int:
                       or "no G- id on the page that came back") + ")",
              f"- property: **{report.get('propertyId') or 'not resolved'}** "
              f"({report.get('propertyIdSource') or 'unknown'})"]
+    if report.get("error"):
+        lines.append("- google said: `" + str(report["error"])[:300] + "`")
     if report["ok"]:
         lines += [f"- views in the last {report['windowDays']} days: **{totals['views']:,}**",
                   f"- **views per day: {totals['viewsPerDay']}**",
