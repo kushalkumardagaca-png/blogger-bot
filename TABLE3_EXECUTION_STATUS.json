@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:50:50.998596+05:30",
+  "generatedAt": "2026-10-21T12:02:30.043801+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -18,7 +18,7 @@
       "id": "B3",
       "task": "Misleading reports",
       "result": "Fixed",
-      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 644."
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 648."
     },
     {
       "id": "B4",
@@ -130,9 +130,9 @@
     ]
   ],
   "sourceDates": {
-    "siteAudit": "2026-10-21T06:20:49.648766+00:00",
+    "siteAudit": "2026-10-21T06:32:28.060791+00:00",
     "slots": "2026-10-21T11:29:51.324559+05:30",
-    "social": "2026-10-21T11:50:50.952003+05:30",
+    "social": "2026-10-21T12:02:30.014073+05:30",
     "google": "2026-10-20T21:24:55.506685+00:00"
   },
   "noGrandUpdateStarted": true,

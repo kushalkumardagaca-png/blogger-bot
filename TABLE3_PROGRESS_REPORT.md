@@ -1,6 +1,6 @@
 # Daily Yield — Table 3 Work and Results
 
-**Updated: 21 October 2026, 11:50 IST. AdSense remains the first priority.**
+**Updated: 21 October 2026, 12:02 IST. AdSense remains the first priority.**
 
 **The controls and checks were carried out. This is not a claim that every requirement passed:** photo-count/evidence gaps, any owner-only settings, Analytics permissions and human fact-review limits are shown below.
 
@@ -19,7 +19,7 @@
 |---|---|---|
 | B1 — Freeze automatic edits | Implemented | 15 optional workflows and 15 CLI tools held. Three old-page tools are audit-only. Hub updates limited to existing cards/data; publishers remain active. |
 | B2 — AdSense connection and ads.txt | Checked; private account not accessible | Public source recorded publisher IDs: ca-pub-1083724733490660. ads.txt matches recorded publisher: True. Required verification is preserved; private review approval is not visible. |
-| B3 — Misleading reports | Fixed | Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 644. |
+| B3 — Misleading reports | Fixed | Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 648. |
 | B4 — Policy pages and navigation | Checked | 5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 13/13 tested routes reached HTTP 200 for both checks. No redesign. Independent source-only policy GET checks returned 200 for 5/5 pages, with no retired description wording observed. |
 | B5 — Names and honest statements | Checked | Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim. |
 | B6 — Facts and originality | Automated check done; human-review limit remains | 562 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected. |
@@ -57,7 +57,7 @@ Article-status source: 2026-10-21T11:29:51.324559+05:30.
 
 | Measure | What we can honestly say |
 |---|---|
-| Google search | Search report dated 2026-10-21T06:20:50.548572+00:00. Seven-day clicks: 0; impressions: 1. |
+| Google search | Search report dated 2026-10-21T06:32:29.631019+00:00. Seven-day clicks: 0; impressions: 1. |
 | Visitor/readership measurement | ANALYTICS_SCOPE_MISSING. Missing reporting is unknown, not zero visitors. |
 | Income and costs | Actual bills and AdSense earnings are not connected here. Profit is unknown, not assumed positive. |
 | Ranking/traffic promises | None. Sending URLs, passing code checks or publishing more articles does not promise indexing, approval or 10 million daily views. |

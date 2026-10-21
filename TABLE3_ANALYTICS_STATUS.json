@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-21T06:20:49.492916+00:00",
+  "checkedAt": "2026-10-21T06:32:27.812673+00:00",
   "siteTagsChanged": false,
   "newCollectionEnabled": false,
   "dataSubmitted": false,
@@ -12,6 +12,7 @@
   "readers": null,
   "returningReaders": null,
   "ownerStep": "Do not install tags during freeze. Only an existing collection/report permission may be connected.",
+  "credentialSource": "GSC_REFRESH_TOKEN",
   "adminReadHttpStatus": 403,
   "apiReasons": [
     "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
