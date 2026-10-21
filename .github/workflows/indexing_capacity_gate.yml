@@ -96,6 +96,10 @@ jobs:
                     f"{len(news.get('pages') or [])}")
               for row in news.get("blockersForPublisherCenter") or []:
                   print(f" - {row['gap']} on {row['urls']} URL(s): {row['meaning']}")
+              if counts.get("clippedByOurTitleCap"):
+                  print(f"::notice title=Titles sitting on our own length cap::{counts['clippedByOurTitleCap']} "
+                        "of the newest entries stop exactly at the 46-character title limit this blog sets; "
+                        "the limit is what shortens them, so raising it here - not Google - is the repair")
               if counts.get("truncatedHeadline"):
                   print(f"::warning title=Cut headlines still in the feed::{counts['truncatedHeadline']} "
                         "of the newest entries end on a fragment; headline_repair.py works through the "

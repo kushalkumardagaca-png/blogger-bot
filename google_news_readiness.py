@@ -27,9 +27,14 @@ OUT = ROOT / "GOOGLE_NEWS_READINESS.json"
 MD = ROOT / "GOOGLE_NEWS_READINESS.md"
 FEED = "https://dailyyield.blogspot.com/feeds/posts/default?alt=rss&max-results=25"
 UA = {"User-Agent": "Mozilla/5.0 (Daily Yield readiness self-check)"}
+# the limit this blog imposes on its own titles, read from the file that imposes it, so this report
+# cannot quietly disagree with the writer
+from seo_hygiene import MAX_TITLE_CHARS as CAP
 
 GAPS = {
     "truncatedHeadline": "headline ends on a fragment - a headline is what a News reader decides on",
+    "clippedByOurTitleCap": f"headline stops exactly at this blog's own {CAP}-character title limit: "
+                            "the limit, not Google, is what shortens it",
     "headlineTooLong": "headline is over 110 characters and will be cut in the listing",
     "headlineTooShort": "headline is under 20 characters and says nothing",
     "stalePubDate": "no pubDate in the feed entry, so the item cannot be dated",
@@ -53,15 +58,49 @@ def strip(value: str) -> str:
     return re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", " ", value or ""))).strip()
 
 
+# A headline that stops on a word which cannot end a sentence is unfinished, whatever its length.
+# This list is deliberately small: it holds only words that need something after them.
+DANGLING_END = re.compile(
+    r"\b(and|or|nor|but|yet|so|the|a|an|of|to|in|on|at|by|for|from|with|without|within|is|are|was|were|"
+    r"be|been|being|has|have|had|will|would|can|could|may|might|shall|should|as|if|than|then|that|this|"
+    r"which|who|whose|how|when|where|why|what|into|onto|over|under|between|including|excluding|despite|"
+    r"while|after|before|during|since|per|via|versus|vs|says|say|said|according|like|unlike|more|less|"
+    r"most|its|it|not|about|against|toward|towards|up|down|out|off|both|each|either|neither|another)\b"
+    r"[.,;:\-\u2013\u2014]?\s*$", re.I)
+TRAILING_PUNCTUATION = re.compile(r"[,;:\-\u2013\u2014]$")
+POSSESSIVE_END = re.compile(r"('s|’s)$")
 def headline_is_cut(title: str) -> bool:
+    """Whether a headline reads as though something was chopped off the end of it.
+
+    The first version of this test judged by length: anything 43 to 47 characters long without terminal
+    punctuation was called cut. That counted "Economy, Trade & Jobs News — 21 October 2026" - a complete
+    headline - as a defect, while missing "Cost of living protests hit Belgium, Italy," because it was
+    only 43 characters. A listing report that miscounts in both directions cannot be used to decide
+    whether a feed is ready for a reviewer, so the test now asks the only question that can be answered
+    from the text: does it stop somewhere a sentence cannot stop?
+    """
     text = strip(title)
     if not text:
         return False
     if text.endswith("…") or text.endswith("..."):
         return True
-    if 43 <= len(text) <= 47 and not re.search(r"[.?!:]$", text):
+    if TRAILING_PUNCTUATION.search(text) or POSSESSIVE_END.search(text):
+        return True
+    if DANGLING_END.search(text):
         return True
     return bool(re.search(r"[A-Za-z]-[A-Za-z]{1,2}$", text))
+
+
+def clipped_by_our_own_cap(title: str) -> bool:
+    """Whether the headline ends exactly where this blog's own title limit falls.
+
+    Titles are written to a 46-character cap (`seo_hygiene.MAX_TITLE_CHARS`), chosen to leave room for
+    Blogger's site-name suffix. So a headline that stops at 46 characters was bounded by us, not by
+    Google, and it is the population from which every cut headline in the feed has come. It is reported
+    separately because a full-length sentence that happens to measure 46 characters is not a defect -
+    it is a headline one character from becoming one.
+    """
+    return len(strip(title)) == CAP
 
 
 def check_feed(xml: str) -> tuple[list[dict], dict]:
@@ -78,6 +117,8 @@ def check_feed(xml: str) -> tuple[list[dict], dict]:
         issues = []
         if headline_is_cut(title):
             issues.append("truncatedHeadline")
+        if clipped_by_our_own_cap(title):
+            issues.append("clippedByOurTitleCap")
         if len(title) > 110:
             issues.append("headlineTooLong")
         if len(title) < 20:

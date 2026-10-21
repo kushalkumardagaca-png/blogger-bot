@@ -72,5 +72,51 @@ class FixtureCase(unittest.TestCase):
         self.assertNotIn("PATCH", source)
 
 
+class CutnessIsReadFromTheSentence(unittest.TestCase):
+    """A listing report that guesses at defects by length cannot decide anything for a reviewer.
+
+    The old test called every 43-to-47-character headline cut, which flagged a complete dated headline
+    and passed over "Cost of living protests hit Belgium, Italy," at 43. Both questions are separate
+    now: does the sentence stop where a sentence cannot stop, and is it sitting exactly on this blog's
+    own 46-character title limit (the thing that shortens them in the first place)?
+    """
+
+    def test_a_complete_headline_of_ordinary_length_is_not_called_cut(self):
+        for title in ("Economy, Trade & Jobs News — 21 October 2026",
+                      "What a rate cut does to an FD renewal",
+                      "A modest increase in bank taxes is not the end"):
+            self.assertFalse(news.headline_is_cut(title), title)
+
+    def test_the_four_ways_a_headline_readsunfinished(self):
+        for title in ("Cost of living protests hit Belgium, Italy,",   # trailing comma
+                      "Billionaire Mukesh Ambani launches India’s",      # dangling possessive
+                      "4 Different Types of Life Insurance & How",  # function word last
+                      "Markets open lower and …"):                     # ellipsis
+            self.assertTrue(news.headline_is_cut(title), title)
+
+    def test_the_length_cap_is_reported_as_our_own_limit_not_a_google_decision(self):
+        at_cap = "Rowan-Cabarrus Community College to Facilitate"
+        self.assertEqual(len(at_cap), news.CAP)
+        self.assertTrue(news.clipped_by_our_own_cap(at_cap))
+        self.assertFalse(news.clipped_by_our_own_cap("A headline of forty-five characters exactly"))
+
+    def test_the_two_signals_are_counted_apart(self):
+        rows, summary = news.check_feed(
+            '<rss><channel>'
+            '<item><title>Cost of living protests hit Belgium, Italy,</title>'
+            '<link>https://dailyyield.blogspot.com/2026/10/a.html</link>'
+            '<pubDate>Wed, 21 Oct 2026 05:00:00 +0000</pubDate>'
+            '<description>long enough to be shown in a listing</description>'
+            '<category>News</category><author>blob (Kushal K. Daga)</author></item>'
+            '<item><title>' + "x" * (news.CAP - 4) + ' end</title>'
+            '<link>https://dailyyield.blogspot.com/2026/10/b.html</link>'
+            '<pubDate>Wed, 21 Oct 2026 05:00:00 +0000</pubDate>'
+            '<description>long enough to be shown in a listing</description>'
+            '<category>News</category><author>blob (Kushal K. Daga)</author></item>'
+            '</channel></rss>')
+        self.assertEqual(summary["issueCounts"].get("truncatedHeadline"), 1)
+        self.assertEqual(summary["issueCounts"].get("clippedByOurTitleCap"), 1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
