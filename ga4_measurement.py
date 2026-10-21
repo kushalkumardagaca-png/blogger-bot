@@ -37,10 +37,15 @@ DATA_API = "https://analyticsdata.googleapis.com/v1beta"
 ADMIN_API = "https://analyticsadmin.googleapis.com/v1alpha"
 
 REMEDIES = {
-    "CREDENTIALS_MISSING": "run get_analytics_token.py once, then put the code it prints into the "
-                           "GA4_REFRESH_TOKEN repository secret (never into a chat)",
-    "SCOPE_INSUFFICIENT": "the stored token predates Analytics access: re-run get_analytics_token.py "
-                          "and replace GA4_REFRESH_TOKEN with the new code",
+    "CREDENTIALS_MISSING": "follow GA4_CONNECT.md - browser steps, nothing to install, or run "
+                           "get_analytics_token.py on a computer with Python - then put the code it "
+                           "prints into the GA4_REFRESH_TOKEN repository secret (never into a chat)",
+    "SCOPE_INSUFFICIENT": "the stored token predates Analytics access: repeat step 3 of "
+                          "GA4_CONNECT.md (or re-run get_analytics_token.py) and replace "
+                          "GA4_REFRESH_TOKEN with the new code",
+    "TOKEN_REFUSED": "Google refused the stored refresh token: it was made while the OAuth app was in "
+                     "Testing (Google expires those after 7 days), or it was revoked. Repeat the browser "
+                     "steps in GA4_CONNECT.md and replace only the GA4_REFRESH_TOKEN secret",
     "PROPERTY_NOT_FOUND": "add a repository variable GA4_PROPERTY_ID with the numeric Property ID from "
                           "Analytics -> Admin -> Property settings",
     "TAG_NOT_OBSERVED": "the analytics tag is not on the live pages; it has to be added before any "
@@ -203,8 +208,12 @@ def main() -> int:
         except MissingCredentials:
             status = "CREDENTIALS_MISSING"
         except urllib.error.HTTPError as exc:
+            # 400/401 from the token endpoint means the token itself is no longer accepted, which is a
+            # different repair from a missing scope: one needs a fresh authorisation, the other needs
+            # the same authorisation to include Analytics.
             status = "SCOPE_INSUFFICIENT" if exc.code == 403 else (
-                "PROPERTY_NOT_FOUND" if exc.code == 404 else "READ_FAILED")
+                "PROPERTY_NOT_FOUND" if exc.code == 404 else (
+                    "TOKEN_REFUSED" if exc.code in (400, 401) else "READ_FAILED"))
             rows = []
         except Exception as exc:  # noqa: BLE001
             status, report_error = "READ_FAILED", str(exc)[:160]

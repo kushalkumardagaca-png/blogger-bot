@@ -39,6 +39,17 @@ jobs:
       - name: Count the audience that can be counted without a secret
         run: python audience_channels.py
       - name: Read the pageviews the site already collects
+        # without this env block the step can only ever answer CREDENTIALS_MISSING, which is how the
+        # nightly file stayed red for weeks: the credentials exist in the repository, they were just
+        # never handed to this one job.
+        env:
+          GA4_CLIENT_ID: ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET: ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN: ${{ secrets.GA4_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
         run: python ga4_measurement.py
       - name: Ask what Google News and Discover would see
         run: python google_news_readiness.py

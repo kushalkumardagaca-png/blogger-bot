@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-21T11:18:37+05:30",
+  "checked_at_ist": "2026-10-21T11:48:22+05:30",
   "summary": {
-    "pass": 201,
+    "pass": 202,
     "fail": 0
   },
   "checks": [
@@ -1009,6 +1009,11 @@
       "name": "No workflow runs a Tumblr step, secret or job",
       "status": "PASS",
       "detail": "comments may explain the retirement; no step, secret or job uses it"
+    },
+    {
+      "name": "Analytics reader is handed its credentials in every job that runs it",
+      "status": "PASS",
+      "detail": "every ga4_measurement.py step receives GA4_CLIENT_ID and GA4_REFRESH_TOKEN"
     }
   ]
 }

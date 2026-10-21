@@ -47,7 +47,7 @@ def main():
     for issue in audit.get('ownerOnlyFindings',[]):owner.append(('Before approval',issue))
     owner.append(('Before approval, only if shown','Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site.'))
     if ga.get('status') not in ('EXISTING_COLLECTION_REPORT_CONNECTED',):
-        owner.append(('Optional read-only help before approval; new installation later','Analytics report access is not established. Only if you already use Analytics, check the existing property/permission. Do not install code to complete this checklist.'))
+        owner.append(('Read-only Analytics approval, 4 minutes, nothing to install','The tag is already on every page (G-WLEEYTKV12); only read permission is missing. Steps with links: GA4_CONNECT.md; then run the workflow ga4_connection_check.yml, which answers in one sentence. No new collection code is installed to turn this row green.'))
     if corpus.get('automatedPolicyFlags') or corpus.get('missingDisclosure'):
         owner.append(('Before approval, after reviewing the specific evidence','Approve only the smallest confirmed content correction if a reported issue is genuine. No bulk rewrite has been applied.'))
     owner.append(('Before high-risk advice is published','A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article.'))

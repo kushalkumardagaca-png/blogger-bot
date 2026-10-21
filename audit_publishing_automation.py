@@ -767,6 +767,34 @@ check('No workflow runs a Tumblr step, secret or job',
                          _without_comments(wf.read_text(encoding='utf-8')), re.I)],
       'comments may explain the retirement; no step, secret or job uses it')
 
+# A measurement job that is never handed its credentials reports "credentials missing" forever, and
+# that is exactly the shape of the bug found on 21 October: the nightly gate ran the Analytics reader
+# with no env block, so the file stayed red for weeks after the token instructions were written.
+try:
+    import yaml as _yaml
+except ImportError:
+    _yaml = None
+if _yaml is None:
+    check('Analytics reader is handed its credentials in every job that runs it', False,
+          'PyYAML is unavailable in this environment, so the workflow env blocks could not be read')
+else:
+    _starved = []
+    for _wf in sorted((ROOT / '.github/workflows').glob('*.yml')):
+        try:
+            _doc = _yaml.safe_load(_wf.read_text(encoding='utf-8')) or {}
+        except Exception:
+            continue
+        for _jid, _job in (_doc.get('jobs') or {}).items():
+            for _step in (_job.get('steps') or []):
+                if 'ga4_measurement.py' not in str(_step.get('run') or ''):
+                    continue
+                _env = _step.get('env') or {}
+                if 'GA4_REFRESH_TOKEN' not in _env or 'GA4_CLIENT_ID' not in _env:
+                    _starved.append(f"{_wf.name} job {_jid} step {_step.get('name') or 'run'}")
+    check('Analytics reader is handed its credentials in every job that runs it', not _starved,
+          'every ga4_measurement.py step receives GA4_CLIENT_ID and GA4_REFRESH_TOKEN'
+          + ('; missing in: ' + '; '.join(_starved) if _starved else ''))
+
 failed=[x for x in checks if x['status']=='FAIL']
 result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'summary':{'pass':len(checks)-len(failed),'fail':len(failed)},'checks':checks}
 if '--check-only' not in sys.argv:

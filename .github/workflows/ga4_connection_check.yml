@@ -1,0 +1,90 @@
+name: Connect Analytics read access
+
+# Run this right after pasting the Analytics secret, and it answers in about 25 seconds whether the
+# robots can now read the visitor counts. It reads Google and the public homepage only: it changes
+# nothing on the blog, so it cannot disturb the AdSense review that is running until ~17 November.
+# The standing instructions, with a link for every step, are in GA4_CONNECT.md.
+on:
+  workflow_dispatch:
+    inputs:
+      note:
+        description: 'Optional note recorded beside the evidence (what you changed, if anything)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ga4-connection-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      # Values are described, never printed: this repository is public and Actions logs are public.
+      - name: What the repository holds for Analytics
+        env:
+          GA4_CLIENT_ID: ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET: ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN: ${{ secrets.GA4_REFRESH_TOKEN }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+        run: |
+          describe() {
+            if [ -z "$2" ]; then
+              printf '  - %s: NOT SET\n' "$1"
+            else
+              printf '  - %s: present (%d characters)\n' "$1" "${#2}"
+            fi
+          }
+          echo "credentials the Analytics reader will use:"
+          describe "GA4_CLIENT_ID (falls back to GSC_CLIENT_ID)" "${GA4_CLIENT_ID:-$GSC_CLIENT_ID}"
+          describe "GA4_CLIENT_SECRET (falls back to GSC_CLIENT_SECRET)" "${GA4_CLIENT_SECRET:-$GSC_CLIENT_SECRET}"
+          describe "GA4_REFRESH_TOKEN (falls back to GSC_REFRESH_TOKEN)" "${GA4_REFRESH_TOKEN:-$GSC_REFRESH_TOKEN}"
+          echo "  - GA4_PROPERTY_ID variable: ${GA4_PROPERTY_ID:-not set, so the job discovers the property from G-WLEEYTKV12}"
+          if [ "$GA4_REFRESH_TOKEN" = "$GSC_REFRESH_TOKEN" ] && [ -n "$GA4_REFRESH_TOKEN" ]; then
+            echo "  - note: the Analytics secret still holds the Search Console token, which is why"
+            echo "    Google answers about scopes. That is fixed by step 3 of GA4_CONNECT.md."
+          fi
+
+      - name: Ask Google for the last seven days
+        env:
+          GA4_CLIENT_ID: ${{ secrets.GA4_CLIENT_ID }}
+          GA4_CLIENT_SECRET: ${{ secrets.GA4_CLIENT_SECRET }}
+          GA4_REFRESH_TOKEN: ${{ secrets.GA4_REFRESH_TOKEN }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GSC_CLIENT_ID: ${{ secrets.GSC_CLIENT_ID }}
+          GSC_CLIENT_SECRET: ${{ secrets.GSC_CLIENT_SECRET }}
+          GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
+        run: python ga4_measurement.py
+
+      - name: Put the answer in plain words
+        if: always()
+        run: python ga4_connection_advice.py
+
+      - name: Keep the answer where the nightly jobs can see it
+        if: always()
+        run: |
+          git config user.name "Daily Yield Bot"
+          git config user.email "bot@dailyyield.blogspot.com"
+          git add -A -- GA4_MEASUREMENT.json GA4_MEASUREMENT.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "no evidence change to keep"
+          else
+            git commit -q -m "Record the Analytics read check [skip ci]" || true
+            git pull --rebase --autostash -q origin main >/dev/null 2>&1 || true
+            git push -q origin HEAD:main || echo "the answer above stands for this run even though the evidence file could not be pushed"
+          fi

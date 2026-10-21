@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 201 PASS · 0 FAIL
+**Result:** 202 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -205,3 +205,4 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **.github/tumblr-oauth-listener is gone with the automation that used it** — no credential-shaped file is left behind
 - ✅ **TUMBLR_OAUTH_ATTEMPT.json is gone with the automation that used it** — no credential-shaped file is left behind
 - ✅ **No workflow runs a Tumblr step, secret or job** — comments may explain the retirement; no step, secret or job uses it
+- ✅ **Analytics reader is handed its credentials in every job that runs it** — every ga4_measurement.py step receives GA4_CLIENT_ID and GA4_REFRESH_TOKEN

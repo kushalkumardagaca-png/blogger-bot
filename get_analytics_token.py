@@ -38,7 +38,17 @@ Use the SAME OAuth Client ID and Client Secret as the Search Console setup
 (02:05 IST, "Indexing Capacity Gate") starts reporting real pageviews, and the growth
 ladder switches from "search clicks / 28" to measured views on its own.
 """
-from google_auth_oauthlib.flow import InstalledAppFlow
+import os
+import sys
+
+try:
+    from google_auth_oauthlib.flow import InstalledAppFlow
+except ImportError:  # the one-line remedy, printed instead of a traceback
+    sys.stderr.write(
+        "This helper needs one small library:  python -m pip install google-auth-oauthlib\n"
+        "If you would rather not install anything, use the browser steps in GA4_CONNECT.md instead:\n"
+        "they do the same authorisation on Google's own page and print the same code.\n")
+    raise SystemExit(1)
 
 # Search Console is kept in the same authorisation so the existing index reporting keeps
 # working with one token instead of two.
@@ -52,8 +62,12 @@ def main():
     print("=" * 65)
     print("  DAILY YIELD - 1-TIME ANALYTICS READ SETUP")
     print("=" * 65)
-    client_id = input("Enter your OAuth Client ID: ").strip()
-    client_secret = input("Enter your OAuth Client Secret: ").strip()
+    # already-known values are used without typing; both names are accepted because the repository
+    # keeps the Search Console pair under GSC_* and the Analytics pair under GA4_*
+    client_id = (os.environ.get("GA4_OAUTH_CLIENT_ID") or os.environ.get("GA4_CLIENT_ID")
+                 or input("Enter your OAuth Client ID: ").strip())
+    client_secret = (os.environ.get("GA4_OAUTH_CLIENT_SECRET") or os.environ.get("GA4_CLIENT_SECRET")
+                     or input("Enter your OAuth Client Secret: ").strip())
 
     client_config = {
         "installed": {
@@ -73,6 +87,10 @@ def main():
     print("SUCCESS! Now add this to GitHub as secret 'GA4_REFRESH_TOKEN':")
     print("=" * 65)
     print(creds.refresh_token)
+    if not creds.refresh_token:
+        sys.stderr.write("Google returned no refresh token: the consent did not include offline access. "
+                         "Run it again and choose Allow on the screen that lists both permissions.\n")
+        raise SystemExit(1)
     print("=" * 65)
     print("GitHub -> blogger-bot repo -> Settings -> Secrets and variables ->")
     print("Actions -> New repository secret -> Name: GA4_REFRESH_TOKEN")
