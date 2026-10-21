@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T08:51:54.902473+05:30",
+  "generatedAt": "2026-10-21T09:30:20.457465+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
@@ -15,19 +15,13 @@
     {
       "type": "source_recovery",
       "key": "master-trending-0",
-      "attempt": 4,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "master-evergreen-0",
-      "platform": "tumblr",
-      "routeIndex": 1,
+      "attempt": 5,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-21:news-india:1"
+    "social:2026-10-21:news-india:1",
+    "social:2026-10-21:master-evergreen-0:1"
   ],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
