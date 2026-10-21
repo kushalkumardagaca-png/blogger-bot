@@ -20,6 +20,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -175,7 +176,24 @@ def commit_local(message: str) -> bool:
     return False
 
 
+def control_says_stop() -> bool:
+    """Honour `mode: off` in the control file, so stopping needs no button and no token.
+
+    A running Actions job cannot be cancelled from the repository, but a push to the control file starts
+    a new run in the same concurrency group, and `cancel-in-progress` retires the old one. The new run
+    reads this and leaves immediately, which is what makes "off" mean off.
+    """
+    try:
+        text = (ROOT / ".github" / "tumblr-oauth-listener").read_text(encoding="utf-8")
+    except Exception:
+        return True  # no control file means nobody wants a watch
+    return "mode: off" in text or not re.search(r"^mode:\s*on\s*$", text, re.M)
+
+
 def main() -> int:
+    if control_says_stop():
+        print(f"[{now()}] the listener is switched off in .github/tumblr-oauth-listener; nothing to watch")
+        return 0
     minutes = window_minutes()
     deadline = time.time() + minutes * 60
     seen = ""
