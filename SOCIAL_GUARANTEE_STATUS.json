@@ -1,27 +1,13 @@
 {
- "generatedAt": "2026-10-21T07:10:59.003938+05:30",
+ "generatedAt": "2026-10-21T07:15:31.004960+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 2,
- "expectedPosts": 4,
+ "articles": 3,
+ "expectedPosts": 6,
  "articlesWithBothPosts": 2,
- "postsMissing": 0,
+ "postsMissing": 2,
  "dispatched": 0,
  "rows": [
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-21.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "tumblr": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
@@ -35,14 +21,48 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
+   "actions": [
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
+   ]
+  },
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "tumblr": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T07:10:54.829431+05:30",
+ "liveVerificationSourceAt": "2026-10-21T07:15:29.108161+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 2,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
