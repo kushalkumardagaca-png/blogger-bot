@@ -29,6 +29,10 @@ import desk_index_design as design
 ROOT = Path(__file__).parent
 SURVEY = ROOT / "DESK_INDEX_SURVEY.json"
 RESULT = ROOT / "DESK_INDEX_REDESIGN_STATUS.json"
+# A page being rewritten must be recoverable, not merely verified afterwards: the exact
+# previous copy is written first and travels with the run as an artefact, which is the one
+# thing that makes an edit on a live page reversible at all.
+BACKUP_DIR = ROOT / "DESK_INDEX_BACKUP"
 BOARD_CLASS = "dxi"
 
 # Page identity, the words shown on the new board, and the section it heads.
@@ -37,21 +41,21 @@ TARGETS = (
         "key": "corporate", "page_id": "6065205676235626846",
         "path": "/p/for-corporate_01804417406.html", "title": "FOR CORPORATE",
         "aria": "Boardroom desk index", "eyebrow": "Boardroom index", "board_title": "Pick a desk",
-        "note": "eleven tools, one board", "open": "Open desk",
+        "note": "{total} tools, one board", "open": "Open desk",
         "chips": ["Textbook formulas", "Live receipts", "Runs in your browser"],
     },
     {
         "key": "snapshot", "page_id": "8504888514217789256",
         "path": "/p/global-snapshot.html", "title": "GLOBAL SNAPSHOT",
         "aria": "Markets desk index", "eyebrow": "Markets index", "board_title": "Pick a desk",
-        "note": "seven desks, one tape", "open": "Open board",
+        "note": "{total} desks, one tape", "open": "Open board",
         "chips": ["36,000+ funds", "14 commodities", "69 one-tap charts", "41 currencies", "25 mega caps"],
     },
     {
         "key": "calculator", "page_id": "3945823007631424733" if False else "7468827438203976743",
         "path": "/p/calculator_0908148622.html", "title": "CALCULATOR",
         "aria": "Calculator desk index", "eyebrow": "Desk index", "board_title": "Pick a desk",
-        "note": "fourteen calculators, grouped by task", "open": "Open desk",
+        "note": "{total} calculators, grouped by task", "open": "Open desk",
         "chips": ["No sign-up", "Nothing stored", "Runs in your browser", "45 countries"],
     },
 )
@@ -217,7 +221,8 @@ def validate(block: str, current: dict) -> list[str]:
             issues.append(f"link lost: {item['href']}")
         if html.escape(item["title"]) not in block:
             issues.append(f"title lost: {item['title']}")
-        if item["icon"] and item["icon"] not in block:
+        # the icon tag is rebuilt to fix its geometry, so the artwork is compared, not the markup
+        if design.drawing(item["icon"]) and design.drawing(item["icon"]) not in design.drawing(block):
             issues.append(f"icon lost: {item['title']}")
     for required in ("dxi-gnum", "dxi-gcount", "dxi-gline", "dxi-open", "dyDeskIndexStyle", "data-dy-desk-index"):
         if required not in block:
@@ -274,6 +279,9 @@ def apply(tok: str, dry_run: bool = False) -> dict:
             results.append({"page": target["title"], "status": "ALREADY_DESIGNED"})
             print(f"{target['title']}: already designed")
             continue
+        backup = BACKUP_DIR / f"{target['key']}-{dt.datetime.now(dt.timezone.utc):%Y%m%dT%H%M%SZ}.html"
+        backup.parent.mkdir(exist_ok=True)
+        backup.write_text(content, encoding="utf-8")
         call(f"/pages/{page['id']}", tok, "PUT", {
             "kind": "blogger#page", "id": page["id"], "blog": {"id": _required("BLOGGER_BLOG_ID")},
             "title": page.get("title"), "content": updated,
@@ -292,7 +300,8 @@ def apply(tok: str, dry_run: bool = False) -> dict:
             "style_present": "dyDeskIndexStyle" in stored_content,
         }
         status = "PASS" if all(checks[k] for k in ("board_present", "old_index_gone", "old_nav_gone", "links_kept", "style_present")) else "FAIL"
-        results.append({"page": target["title"], "status": status, "url": page.get("url"), "checks": checks})
+        results.append({"page": target["title"], "status": status, "url": page.get("url"),
+                        "backup": str(backup.relative_to(ROOT)), "checks": checks})
         print(json.dumps({"page": target["title"], "status": status, **checks}, ensure_ascii=False))
     document = {"generated_at": dt.datetime.now(dt.timezone.utc).isoformat(), "apply": not dry_run,
                 "results": results, "zero_public_pageviews": True}
