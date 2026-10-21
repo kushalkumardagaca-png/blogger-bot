@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-21T18:58:02.181576+05:30",
+ "generatedAt": "2026-10-21T19:39:02.448124+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 19,
  "expectedPosts": 38,
- "articlesWithBothPosts": 18,
- "postsMissing": 2,
+ "articlesWithBothPosts": 19,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -246,25 +246,21 @@
    "key": "master-trending-4",
    "title": "Profit warnings from UK-listed firms",
    "url": "https://dailyyield.blogspot.com/2026/10/profit-warnings-from-uk-listed-firms.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
-    "mastodon": 0
+    "bluesky": 1,
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T18:57:55.349075+05:30",
+ "liveVerificationSourceAt": "2026-10-21T19:38:50.289041+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 16,
+ "articlesWithExactlyTwoPosts": 17,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
