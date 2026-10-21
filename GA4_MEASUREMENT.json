@@ -1,7 +1,7 @@
 {
  "status": "SCOPE_INSUFFICIENT",
  "ok": false,
- "measuredAt": "2026-10-21T07:34:19+00:00",
+ "measuredAt": "2026-10-21T07:55:32+00:00",
  "windowDays": 7,
  "measurementId": "G-WLEEYTKV12",
  "siteTag": {
@@ -19,5 +19,6 @@
  },
  "daily": [],
  "remedy": "the stored token predates Analytics access: repeat step 3 of GA4_CONNECT.md (or re-run get_analytics_token.py) and replace GA4_REFRESH_TOKEN with the new code",
- "note": "the blog is not modified by this job"
+ "note": "the blog is not modified by this job",
+ "error": "HTTP 403 Request had insufficient authentication scopes. reasons: ACCESS_TOKEN_SCOPE_INSUFFICIENT, googleapis.com"
 }
