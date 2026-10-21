@@ -1,7 +1,7 @@
 {
- "status": "TOKEN_REFUSED",
+ "status": "REQUEST_REJECTED",
  "ok": false,
- "measuredAt": "2026-10-21T09:06:43+00:00",
+ "measuredAt": "2026-10-21T09:16:08+00:00",
  "windowDays": 7,
  "measurementId": "G-WLEEYTKV12",
  "siteTag": {
@@ -18,11 +18,11 @@
   "daysWithRows": 0
  },
  "daily": [],
- "remedy": "Google refused the stored refresh token: it was made while the OAuth app was in Testing (Google expires those after 7 days), or it was revoked. Repeat the browser steps in GA4_CONNECT.md and replace only the GA4_REFRESH_TOKEN secret",
+ "remedy": "Google turned down the request this job built, not your authorisation: its own sentence is recorded above, and the repair belongs in this repository. Nothing on the blog is involved and no number is invented in the meantime",
  "credentialSource": "GA4_REFRESH_TOKEN",
  "tokenScopes": [
   "https://www.googleapis.com/auth/analytics.readonly"
  ],
  "note": "the blog is not modified by this job",
- "error": "HTTP 400 The value for the 'filter' field was empty, but must be provided."
+ "error": "HTTP 400 Invalid value at 'dimensions[0]' (type.googleapis.com/google.analytics.data.v1beta.Dimension), \"date\""
 }
