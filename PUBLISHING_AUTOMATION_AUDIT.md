@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 202 PASS · 0 FAIL
+**Result:** 205 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -91,6 +91,9 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Short section attempts accumulate instead of discarding usable prose**
 - ✅ **Fast model acceleration has a quota-independent completion path**
 - ✅ **Bounded provider waits preserve the under-thirty-minute generation target**
+- ✅ **A Master run that stops leaves its reason where the morning check reads it**
+- ✅ **Master photo pools are built after the day has a plan, not five minutes before it**
+- ✅ **The quota-independent fallback cannot raise on thin evidence, and is held to the same validator**
 - ✅ **Ten bounded sections use controlled five-worker parallel generation**
 - ✅ **Overnight pair dispatch retries each category independently**
 - ✅ **Master V3 preserves strict Blogger publication and package compilation gates**

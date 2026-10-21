@@ -130,6 +130,23 @@ jobs:
             cat MASTER_AUTOMATION_STATUS.json 2>/dev/null || echo '{}';
             echo '```';
           } >> "$GITHUB_STEP_SUMMARY"
+      # Only the one-line reason is committed, never a half-written package: the run publishes nothing
+      # on this path, so the file it records is evidence for the morning check and nothing else.
+      - name: Leave the failure reason where the morning check reads it
+        if: failure()
+        run: |
+          set -uo pipefail
+          git config user.name "Daily Yield Master Writer"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python master_failure_brief.py --workflow master_trending_writer.yml --kind trending --slot "${{ steps.slot.outputs.value }}" --run "${{ github.run_id }}" || true
+          git add MASTER_FAILURE_BRIEF.json
+          if git diff --cached --quiet; then exit 0; fi
+          for attempt in 1 2 3; do
+            git commit -q -m "Master trending writer left its failure reason [skip ci]" || exit 0
+            if git pull --rebase -q origin main && git push -q origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 0
       - name: Persist validated package and licensed photo assets first
         run: |
           set -euo pipefail

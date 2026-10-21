@@ -7,7 +7,7 @@ assembly, and builds summary/support/visual structures deterministically from th
 verified article and source records.
 """
 from __future__ import annotations
-import hashlib,html,json,os,re,time,urllib.parse,xml.etree.ElementTree as ET
+import hashlib,html,json,os,re,threading,time,urllib.parse,xml.etree.ElementTree as ET
 from pathlib import Path
 import requests
 from master_article_v2 import words
@@ -75,6 +75,47 @@ def github_text(prompt,max_tokens=1400):
  r=requests.post('https://models.github.ai/inference/chat/completions',headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'},json={'model':os.environ.get('GITHUB_MODELS_MODEL','openai/gpt-4.1-mini'),'messages':[{'role':'system','content':'Write accurate source-bounded financial journalism in plain paragraphs. Never output JSON or markdown.'},{'role':'user','content':prompt}],'temperature':0.15,'max_tokens':max_tokens},timeout=BUDGET.seconds(60))
  if not r.ok:raise RuntimeError(f'repository model HTTP {r.status_code}: {r.text[:300]}')
  return str(r.json()['choices'][0]['message'].get('content') or '')
+# A rate limit is a queue, not a refusal. The primary writer answered HTTP 429 on seven recorded
+# occasions, and in every one of them the run gave up on the section immediately and dropped the slot to
+# the quota-independent local model or to no article at all. One request per provider is therefore replaced
+# by a bounded, budget-aware retry: the wait is only ever taken while the run still has the time to use
+# the answer, so a patient retry costs seconds and never turns a 30-minute preparation into an hour.
+TRANSIENT_HTTP=re.compile(r'\b(408|409|425|429|500|502|503|504)\b')
+PROVIDER_TRIES=3
+PROVIDER_BACKOFF=(25,70)
+# Two minutes of patience for the whole preparation, shared by every section and thread, not per call: the
+# design target is an article prepared inside twenty minutes, so waiting is capped far below that and the
+# deterministic evidence path finishes the article instead of the run sleeping its way past the window. Without this total, a provider that is simply down made each section wait, ten sections waited,
+# and a run that was supposed to prepare an article in half an hour spent most of it asleep - which is how a
+# retry rule meant to save a slot can cost the next one. After the total is spent the providers are still
+# asked, once each and without waiting, and the deterministic evidence path finishes the article.
+PROVIDER_WAIT_SECONDS=120
+_waited=[0.0];_wait_lock=threading.Lock()
+
+
+def waited_enough():
+ with _wait_lock:return _waited[0]>=PROVIDER_WAIT_SECONDS
+
+
+def reset_provider_waiting():
+ with _wait_lock:_waited[0]=0.0
+
+
+def provider_looks_busy(detail):
+ return bool(TRANSIENT_HTTP.search(str(detail or '')))
+
+
+def sleep_within_budget(seconds,doing):
+ """Wait only while the run still has room to finish what it is waiting for, and only within the
+ total patience the preparation is allowed to spend."""
+ room=BUDGET.remaining()
+ if room<seconds+240 or waited_enough():return False
+ spent=min(seconds,max(0,int(room)-240))
+ time.sleep(spent)
+ with _wait_lock:_waited[0]+=spent
+ return True
+
+
 def text_call(prompt,max_tokens=1400):
  errors=[]
  # Starting a call the run has no time to finish would only delay the honest failure that lets
@@ -83,11 +124,20 @@ def text_call(prompt,max_tokens=1400):
  # Owner-authorized repository-native GitHub Models is the fast primary writer.
  # The quota-independent local model remains an emergency fallback only.
  for fn in (github_text,ollama_text):
-  for _ in range(1):
+  label=getattr(fn,'__name__','provider')  # a wrapped or partial writer must not break the reporting of why it failed
+  for try_number in range(PROVIDER_TRIES):
+   if BUDGET.out():raise BUDGET.stop('writing a section')
    try:
     text=fn(prompt,max_tokens)
     if words(text)>=120:return text
-   except Exception as exc:errors.append(f'{fn.__name__}: {exc}')
+    errors.append(f'{label}: returned {words(text)} words, fewer than 120')
+   except Exception as exc:
+    detail=f'{label}: {type(exc).__name__}: {exc}'
+    errors.append(detail)
+    # A provider that answered "too many requests" is retried; one that is broken or out of
+    # authorisation is not, because repeating it only spends the run's remaining minutes.
+    if try_number+1<PROVIDER_TRIES and provider_looks_busy(exc) and sleep_within_budget(PROVIDER_BACKOFF[try_number],fn.__name__):continue
+    break
  return (_ for _ in ()).throw(RuntimeError('all bounded section writers failed: '+' | '.join(errors)[-1000:]))
 
 def discover_sources(item,kind):
@@ -169,7 +219,12 @@ def validate_section(paragraphs,source_ids):
  if not 400<=count<=490:return False,f'{count} words; required 400-490'
  if len(paragraphs)<4:return False,'fewer than four paragraphs'
  if not all(any(f'[[S{i}|' in paragraph for i in source_ids) for paragraph in paragraphs):return False,'every paragraph needs a supplied source token'
- for number in re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',text):
+ # The numbers that have to be supported are the numbers the prose asserts. A citation's anchor text is
+ # metadata, not a claim - "Bank of America", "Publication 590-B" or a year inside a publication name -
+ # and it is already stripped before the same check runs on the way in, so checking it here only made a
+ # correctly cited section fail validation and lose the day's slot.
+ prose=re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',text)
+ for number in re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',prose):
   if not any(number in s for s in source_ids.values()):return False,f'unsupported number {number}'
  return True,''
 POLICY_TRIP=re.compile('|'.join(FAKE_EXPERIENCE_PATTERNS+DECEPTIVE_PATTERNS+REGULATED_PROMOTION_PATTERNS
@@ -196,6 +251,16 @@ def quoted_window(tokens,start,length):
     return text
   return ''
 
+def evidence_text(sources):
+ """The text a figure has to appear in to be published as fact: the record's own words, its title and its name.
+
+ A provider's name is part of what the record supplies, so a figure inside a name - CNBC-TV18,
+ Publication 590-B - is supported material rather than an invented claim. Leaving names out of the
+ basis made the validator reject correctly cited prose over a number the citation itself carries.
+ """
+ return {i:r.get('text','')+' '+str(r.get('title',''))+' '+str(r.get('name','')) for i,r in sources}
+
+
 def deterministic_section(section_heading,sources):
  """Quota-independent evidence prose with topic-specific, non-repeating syntax."""
  import hashlib
@@ -207,19 +272,41 @@ def deterministic_section(section_heading,sources):
   "A second way to test {heading} comes from {cite} and its record “{title}.” The source text states, “{excerpt}.” This is evidence of the statement appearing in that record; it is not evidence that every possible interpretation is correct. The distinction matters when policy, market prices, taxes or household circumstances can change after publication. The responsible use of {provider} is to preserve that uncertainty, cross-check the linked source and avoid turning a bounded observation into a broad financial recommendation.",
   "The decision-relevant limit around {heading} is visible in {cite}, attached to “{title}.” Its retrieved passage reads, “{excerpt}.” That material can inform context, terminology and the sequence of events. It does not remove the need to check later revisions, competing evidence or rules that differ by place and account type. In practical terms, {provider} helps identify which assumption needs verification. It does not supply certainty, personal suitability or permission to ignore downside, liquidity, tax and implementation constraints."
  )
- paragraphs=[]
- for cursor in range(10):
-  source_id,row=sources[cursor%len(sources)];tokens=tokenized(row.get('text',''));excerpt=quoted_window(tokens,(cursor*37)%max(1,len(tokens)-42),38)
-  if not excerpt:continue
-  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16]);provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider}]]"
+ # The quota-independent fallback used to be fatal in exactly the situation it exists for: a source
+ # whose retrieved text was too short to quote contributed nothing, and if fewer than four passages
+ # survived the section raised and the day's slot was lost to a provider problem the fallback was written
+ # to survive. Two things change. A record with no quotable window is still written about - the listing
+ # itself, honestly described, with its limits - and the section is built until it satisfies the same
+ # 400-490 word window the validator enforces instead of being handed over at whatever length happened to
+ # come out. Only an article with fewer than two usable source records can still fail here, because there
+ # is genuinely nothing to attribute.
+ TOO_BRIEF=("For {heading}, {cite} supplies the record “{title},” and this section says only what that listing supports: {provider} published a document on this subject at the address carried in the citation, on the date and within the scope the record itself states. Nothing about an outcome, an entitlement or an amount can be drawn from the existence of a document, so the linked text has to be read before any decision depends on it, and a later revision of it would change what follows.",
+  "The record “{title}” from {cite} is listed against {heading} without a passage long enough to quote here. That leaves one defensible statement: {provider} put a document on this subject into the public record, which makes it a source worth opening rather than evidence of anything it might conclude. A reader who cannot see the full text should not infer a figure, a rule or a deadline from the listing alone.",
+  "{cite} appears in the evidence trail for {heading} as “{title}.” The retrieved text is too short to quote, so the honest description is limited: this is {provider}’s own record on this subject, with its own publication date and jurisdiction, and its argument is only available at the linked address. Where a household decision depends on what the document says, the document itself, its date and any later correction are the three things to check before acting.")
+ def make(cursor):
+  source_id,row=sources[cursor%len(sources)]
+  tokens=tokenized(row.get('text',''));excerpt=quoted_window(tokens,(cursor*37)%max(1,len(tokens)-42),38)
+  title=' '.join(tokenized(row.get('title') or row.get('name') or 'Retrieved evidence')[:16])
+  provider=' '.join(tokenized(row.get('name') or 'the cited provider')[:7]);cite=f"[[S{source_id}|{provider}]]"
   seed=int(hashlib.sha256(f"{heading_text}|{title}|{cursor}".encode()).hexdigest()[:8],16)
-  paragraphs.append(patterns[seed%len(patterns)].format(cite=cite,heading=heading_text,title=title,excerpt=excerpt,provider=provider))
+  return (patterns[seed%len(patterns)] if excerpt else TOO_BRIEF[seed%len(TOO_BRIEF)]).format(cite=cite,heading=heading_text,title=title,excerpt=excerpt,provider=provider)
+ cursor=0;paragraphs=[];seen=set()
+ def take():
+  nonlocal cursor
+  while cursor<max(16,4*len(sources)):
+   text=clean(make(cursor));cursor+=1
+   key=' '.join(text.casefold().split())[:180]
+   if not text or key in seen:continue
+   seen.add(key);paragraphs.append(text);return True
+  return False
+ while len(paragraphs)<6:
+  if not take():break
  if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
  # Retrieved titles can contain a quarter marker or list number that is absent
  # from the two stored evidence texts. Remove only the affected sentence rather
  # than allowing the deterministic quota fallback to publish an unsupported
  # figure or fail the entire current-day slot.
- source_blob=' '.join(r['text']+' '+r['title'] for _,r in sources);cleaned=[]
+ source_blob=' '.join(evidence_text(sources).values());cleaned=[]
  for paragraph in paragraphs:
   kept=[]
   for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
@@ -239,25 +326,48 @@ def deterministic_section(section_heading,sources):
  # so it is attached first and only then is the length trimmed. Adding it afterwards is how a
  # section that looked 480 words long arrived at 504 and was rejected outright.
  primary=sources[0][0];primary_name=citation_label(sources[0][1])
- paragraphs=[p if any(f'[[S{i}|' in p for i,_ in sources) else p+f' [[S{primary}|{primary_name}]]' for p in paragraphs]
- while words(' '.join(paragraphs))>470:
-  index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]))
-  sentences=[x for x in re.split(r'(?<=[.!?])\s+',paragraphs[index]) if x.strip()]
-  if len(sentences)>1:paragraphs[index]=' '.join(sentences[:-1]).replace('  ',' ').strip()
-  elif len(paragraphs)>4:paragraphs.pop(index)
-  else:break
-  paragraphs=[x for x in paragraphs if x and x.strip()]
- ok,error=validate_section(paragraphs,{i:r['text']+' '+r['title'] for i,r in sources})
+ def retag():
+  return [x if any(f'[[S{i}|' in x for i,_ in sources) else x+f' [[S{primary}|{primary_name}]]' for x in paragraphs]
+ def shrink():
+  while words(' '.join(paragraphs))>470:
+   index=max(range(len(paragraphs)),key=lambda i:words(paragraphs[i]))
+   sentences=[x for x in re.split(r'(?<=[.!?])\s+',paragraphs[index]) if x.strip()]
+   if len(sentences)>1:paragraphs[index]=' '.join(sentences[:-1]).replace('  ',' ').strip()
+   elif len(paragraphs)>4:paragraphs.pop(index)
+   else:break
+   paragraphs[:]=[x for x in paragraphs if x and x.strip()]
+ paragraphs=retag();shrink()
+ # Trimming to fit the top of the window can drop the section below 400 words, and four paragraphs of
+ # fixed prose is not always enough to start in the window at all. Paragraphs are added from the same
+ # attributed records, never stretched or duplicated, until the count is inside the window.
+ while words(' '.join(paragraphs))<400:
+  paragraphs.append('')
+  if not take():
+   paragraphs.pop()
+   break
+  paragraphs=retag();shrink()
+  if len(paragraphs)<4:break
+ paragraphs=[x for x in paragraphs if x and x.strip()]
+ paragraphs=retag();shrink()
+ # The fallback is held to the identical validator as model-written prose - same window, same citation
+ # requirement, same number rule - because the reason it exists is to survive a provider outage, not to
+ # publish something the site would not otherwise accept.
+ ok,error=validate_section(paragraphs,evidence_text(sources))
  if not ok:raise RuntimeError('deterministic evidence section failed: '+error)
  return paragraphs
 
 def write_section(article_title,section_heading,index,sources):
- ids={i:s['text']+' '+s['title'] for i,s in sources};primary_name=citation_label(sources[0][1]);packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources);primary=min(ids)
+ ids=evidence_text(sources);primary_name=citation_label(sources[0][1]);packet='\n'.join(f'S{i} — {s["name"]}: {s["title"]}. {s["text"][:2400]}' for i,s in sources);primary=min(ids)
  base=f'''Article: {article_title}\nSection {index}: {section_heading}\nWrite source-bounded prose in a natural editorial voice. Use only the packet below. Do not invent numbers, quotations, causation, experience or advice. Vary sentence openings and paragraph rhythm; connect evidence with clear transitions; avoid stock disclaimers, repeated conclusions and formulaic phrasing. Explain evidence, jurisdiction, affected groups, mechanism, uncertainty and limits. Do not introduce the article or summarize another section.\nSOURCES:\n{packet}'''
  pool=[];seen=set();last=''
- for attempt in range(2):
+ # The attempt count is raised from two to three, and the validator's own complaint is handed back to
+ # the writer, because "400-490 words; you sent 512" is repairable information while a bare repeat of
+ # the same prompt is not. The third attempt is only made while the budget can still pay for it.
+ for attempt in range(3):
+  if attempt and BUDGET.remaining()<420:break
   have=words(' '.join(pool));need=max(120,455-have)
   instruction=(f'Write {need}-{need+25} additional words in 2-4 new paragraphs that do not repeat this accepted partial section: '+json.dumps(pool,ensure_ascii=False) if pool else 'Write 450-460 words in 4-6 paragraphs.')
+  if last and 'fix this defect' not in instruction:instruction+=f'\nFix this defect in what you send now: {last[:220]}'
   try:text=text_call(base+'\n'+instruction+f'\nAttempt {attempt+1}. Return only paragraphs.')
   except Exception as exc:last=f'{type(exc).__name__}: {exc}';continue
   candidates=parse_paragraphs(text)
@@ -427,6 +537,12 @@ def visuals(sources,sections,profile=STRUCTURE_PROFILES[0]):
  return out
 def photo_set(title,category,slug,key):
  text=(title+' '+category).casefold()
+ # The nightly pool build reads the day's Master plan, so a topic that was substituted into a slot mid
+ # -day, or one chosen after that build had already started, arrives with an empty pool and every
+ # placement has to be hunted live inside the run's own half hour. Five failed and five late articles on
+ # 21 October 2026 traced back to that. Ten minutes of the budget is now spent building and saving the
+ # pool for this exact topic first: the work happens once, it is kept for the recovery attempt as well,
+ # and a failure here changes nothing because the live search below is unchanged.
  if any(x in text for x in ('career','side hustle','income')):
   primary=['freelancer working laptop home office','small business owner bookkeeping desk','business team meeting office']
  elif any(x in text for x in ('startup','entrepreneur','small business')):
@@ -441,6 +557,15 @@ def photo_set(title,category,slug,key):
  variants=[primary,[f'{category} household decision making',f'{category} office professionals',f'{category} public institution exterior'],
            ['business meeting office table','office workers computers finance','financial district buildings'],
            ['small business shop owner working','household budgeting papers desk','city office buildings street']]
+ try:
+  from photo_library import MASTER_DIR,ensure_master_pool,slugify
+  pool_path=MASTER_DIR/f'{slugify(str(key))}.json'
+  have=0
+  if pool_path.exists():
+   try:have=len(json.loads(pool_path.read_text(encoding='utf-8')).get('entries') or [])
+   except Exception:have=0
+  if have<4 and BUDGET.remaining()>600:ensure_master_pool(str(key),title,None,4)
+ except Exception:pass
  errors=[]
  for briefs in variants:
   try:return choose_photos(briefs,slug,key)

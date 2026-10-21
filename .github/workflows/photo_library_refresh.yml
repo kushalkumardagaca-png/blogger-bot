@@ -8,7 +8,11 @@ name: Photo Library Refresh
 
 on:
   schedule:
-    - cron: '45 18 * * *'   # 00:15 IST — before the first News desk of the day
+    # 01:15 IST. This used to run at 00:15 IST, five minutes BEFORE Master Topic Discovery wrote the
+    # day's ten-topic plan at 00:20 IST, so the master pools were always built from yesterday's plan and
+    # the articles that actually ran today arrived with an empty pool (several with `entries: 0`) and had
+    # to hunt Commons inside their own half-hour preparation window. Still before the 04:15 IST news desk.
+    - cron: '45 19 * * *'
   workflow_dispatch:
     inputs:
       scope:

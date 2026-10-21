@@ -296,7 +296,11 @@ check('Master V3 uses independently validated plain-text sections, not one long 
       and 'Never output JSON or markdown' in v3_generator
       and 'prepare_master_article' not in v3_generator)
 check('Short section attempts accumulate instead of discarding usable prose',
-      'pool=[];seen=set()' in v3_generator and 'for attempt in range(2)' in v3_generator
+      'pool=[];seen=set()' in v3_generator and 'for attempt in range(3)' in v3_generator
+      # a third attempt is only allowed while the run still has seven minutes to spend on it, so
+      # persistence cannot quietly become the reason a preparation overruns its window
+      and 'if attempt and BUDGET.remaining()<420:break' in v3_generator
+      and 'Fix this defect in what you send now' in v3_generator
       and 'deterministic_section(section_heading,sources)' in v3_generator)
 check('Fast model acceleration has a quota-independent completion path',
       'for fn in (github_text,ollama_text)' in v3_generator
@@ -305,9 +309,34 @@ check('Fast model acceleration has a quota-independent completion path',
       and master_workflows.count('GITHUB_TOKEN: ${{ github.token }}')>=2)
 check('Bounded provider waits preserve the under-thirty-minute generation target',
       # the waits are no longer fixed numbers but what the run's own clock allows, so a slow
-      # network cannot spend minutes the preparation no longer has
+      # network cannot spend minutes the preparation no longer has. A rate limit is retried because
+      # a 429 is a queue and one request per provider cost ten slots on 21 October 2026; a refusal
+      # (401, 403, 404) is not retried, because repeating it only spends the remaining minutes.
       'timeout=BUDGET.seconds(60)' in v3_generator and 'timeout=BUDGET.seconds(90)' in v3_generator
-      and 'for attempt in range(2)' in v3_generator)
+      and 'for attempt in range(3)' in v3_generator
+      and 'PROVIDER_TRIES=3' in v3_generator and 'PROVIDER_BACKOFF=(25,70)' in v3_generator
+      and 'PROVIDER_WAIT_SECONDS=120' in v3_generator and 'if room<seconds+240 or waited_enough():return False' in v3_generator
+      and 'def provider_looks_busy' in v3_generator)
+check('A Master run that stops leaves its reason where the morning check reads it',
+      # the reason used to die with the failed run: the status file was written in the workspace, but the
+      # step that commits files is skipped on failure, so fifteen red runs could be counted and none could
+      # be explained without a GitHub token. Exactly one small evidence file is committed, never a package.
+      all('Leave the failure reason where the morning check reads it' in (ROOT/'.github/workflows'/name).read_text(encoding='utf-8')
+          for name in ('master_trending_writer.yml','master_evergreen_writer.yml'))
+      and (ROOT/'master_failure_brief.py').exists()
+      and 'MASTER_FAILURE_BRIEF.json' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text(encoding='utf-8')
+      and master_workflows.count('if: failure()')>=2)
+check('Master photo pools are built after the day has a plan, not five minutes before it',
+      # the nightly pool build ran at 18:45Z and Master Topic Discovery wrote the day's plan at 18:50Z,
+      # so the pools always described yesterday's ten topics; articles arrived with an empty pool and
+      # hunted Commons inside their own half hour, which is how five articles landed late and one eight
+      # hours late on 21 October 2026.
+      "cron: '45 19 * * *'" in (ROOT/'.github/workflows/photo_library_refresh.yml').read_text(encoding='utf-8')
+      and "cron: '50 18 * * *'" in (ROOT/'.github/workflows/master_topic_discovery.yml').read_text(encoding='utf-8')
+      and 'ensure_master_pool' in v3_generator)
+check('The quota-independent fallback cannot raise on thin evidence, and is held to the same validator',
+      'def evidence_text' in v3_generator and 'ok,error=validate_section(paragraphs,evidence_text(sources))' in v3_generator
+      and 'TOO_BRIEF=' in v3_generator)
 check('Ten bounded sections use controlled five-worker parallel generation',
       'ThreadPoolExecutor(max_workers=5' in v3_generator and 'as_completed(futures)' in v3_generator)
 check('Overnight pair dispatch retries each category independently',
