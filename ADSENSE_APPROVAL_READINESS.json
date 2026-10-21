@@ -1,6 +1,6 @@
 {
- "checkedAt": "2026-10-20T03:13:57.729005+00:00",
- "status": "CHECK_INCOMPLETE",
+ "checkedAt": "2026-10-21T03:14:14.046106+00:00",
+ "status": "PASS",
  "publicPagesRead": 10,
  "diagnosticReadsOnly": true,
  "pageScriptsExecuted": false,
@@ -16,16 +16,16 @@
   },
   {
    "check": "policy page /contact",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/contact-us_01883938366.html → HTTP 200",
    "blocking": true
   },
   {
    "check": "policy page /privacy",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
+   "pass": true,
+   "state": "PASS",
+   "detail": "/p/privacy-policy.html → HTTP 200",
    "blocking": true
   },
   {
@@ -99,10 +99,59 @@
    "blocking": true
   },
   {
-   "check": "contact: identity content available",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Identity could not be checked because the page read failed",
+   "check": "contact: public author name",
+   "pass": true,
+   "state": "PASS",
+   "detail": "Kushal Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's legal name",
+   "pass": true,
+   "state": "PASS",
+   "detail": "Kushal Kumar Daga",
+   "blocking": true
+  },
+  {
+   "check": "contact: name relationship explained",
+   "pass": true,
+   "state": "PASS",
+   "detail": "the site says the public author name is the short form of the legal name used on records",
+   "blocking": true
+  },
+  {
+   "check": "contact: retired initials byline gone",
+   "pass": true,
+   "state": "PASS",
+   "detail": "the retired initials byline is no longer published",
+   "blocking": true
+  },
+  {
+   "check": "contact: publication inbox",
+   "pass": true,
+   "state": "PASS",
+   "detail": "dailyyield.official@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: publisher's own address",
+   "pass": true,
+   "state": "PASS",
+   "detail": "kushalkumardaga.ca@gmail.com",
+   "blocking": true
+  },
+  {
+   "check": "contact: no contradictory reply time",
+   "pass": true,
+   "state": "PASS",
+   "detail": "one reply-time promise only",
+   "blocking": true
+  },
+  {
+   "check": "contact: no inaccurate name claim",
+   "pass": true,
+   "state": "PASS",
+   "detail": "no unrelated surname is published as an alias",
    "blocking": true
   },
   {
@@ -114,8 +163,8 @@
   },
   {
    "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": null,
-   "state": "UNKNOWN",
+   "pass": true,
+   "state": "PASS",
    "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
    "blocking": true
   },
@@ -151,7 +200,7 @@
    "check": "sitemap.xml serves URLs",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200, 542 URLs listed",
+   "detail": "HTTP 200, 561 URLs listed",
    "blocking": true
   },
   {
@@ -198,36 +247,7 @@
   }
  ],
  "blockingIssues": [],
- "unverifiedChecks": [
-  {
-   "check": "policy page /contact",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/contact-us_01883938366.html → HTTP 0; read unavailable, not proof of a missing page",
-   "blocking": true
-  },
-  {
-   "check": "policy page /privacy",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "/p/privacy-policy.html → HTTP 0; read unavailable, not proof of a missing page",
-   "blocking": true
-  },
-  {
-   "check": "contact: identity content available",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "Identity could not be checked because the page read failed",
-   "blocking": true
-  },
-  {
-   "check": "privacy page names third-party cookie vendors and the ad opt-out",
-   "pass": null,
-   "state": "UNKNOWN",
-   "detail": "third-party vendor cookie use and an opt-out route are named on the privacy page",
-   "blocking": true
-  }
- ],
+ "unverifiedChecks": [],
  "manualStepsRequired": [
   "Check the existing AdSense site status. If Getting ready, do not remove and resubmit it.",
   "Complete only the required account tasks actually shown. Legal/payment records must match official records, not necessarily the public author byline.",
