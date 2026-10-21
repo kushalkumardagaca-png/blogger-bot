@@ -1,27 +1,21 @@
 {
-  "generatedAt": "2026-10-21T13:35:12.982721+05:30",
+  "generatedAt": "2026-10-21T14:12:30.020506+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 9,
-  "confirmedByLivePost": 9,
+  "confirmedPublications": 10,
+  "confirmedByLivePost": 10,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "news-russia",
     "master-trending-1"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-russia",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
       "key": "master-trending-1",
-      "attempt": 4,
+      "attempt": 5,
       "applied": true
     }
   ],
