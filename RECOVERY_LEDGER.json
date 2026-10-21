@@ -905,13 +905,18 @@
     "lastAttempt": "2026-10-21T12:47:52.206329+05:30"
   },
   "prewarm:2026-10-21:master-evergreen-3": {
-    "revision": "d627d2aa1b1f807e",
+    "revision": "8bd417eef276b9fc",
     "attempts": 1,
-    "lastAttempt": "2026-10-21T18:50:42.863609+05:30"
+    "lastAttempt": "2026-10-21T19:33:35.528118+05:30"
   },
   "prewarm:2026-10-21:master-trending-4": {
     "revision": "d627d2aa1b1f807e",
     "attempts": 1,
     "lastAttempt": "2026-10-21T18:50:42.863609+05:30"
+  },
+  "prewarm:2026-10-21:master-evergreen-4": {
+    "revision": "8bd417eef276b9fc",
+    "attempts": 1,
+    "lastAttempt": "2026-10-21T19:33:35.528118+05:30"
   }
 }
