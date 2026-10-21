@@ -28,20 +28,23 @@ jobs:
           TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}
         run: |
           set +e
-          # The one-time code is never echoed, and neither is any token: only Tumblr's own error
-          # wording is shown, so a refused exchange can be read without log access.
+          # Neither the one-time code nor any token is echoed here: only the words Tumblr itself
+          # used, so a refused exchange can be read on the run page without log access. No
+          # apostrophes inside a ${var:-default} expansion, which bash reads as shell syntax.
           python tumblr_oauth_bootstrap.py 2>/tmp/tumblr-bootstrap.err
           code=$?
           cat /tmp/tumblr-bootstrap.err
           python social_credential_health.py --platform tumblr --code "$code" --output /tmp/tumblr-bootstrap.err || true
+          reason="$(python social_credential_health.py --platform tumblr --extract --output /tmp/tumblr-bootstrap.err 2>/dev/null)"
           if [ "$code" != "0" ]; then
-            reason="$(python social_credential_health.py --platform tumblr --extract --output /tmp/tumblr-bootstrap.err)"
-            echo "::error title=Tumblr authorisation could not be completed::${reason:-see Tumblr's message above}"
+            printf '::error title=Tumblr authorisation could not be completed::%s\n' "${reason:-see the message above}"
+            printf '%s\n' "Repair: the one-time code is single-use and Tumblr retires it in minutes, so get a fresh one, press Update on the TUMBLR_AUTHORIZATION_CODE secret, and re-run this workflow in the same sitting."
           else
-            echo "Tumblr is authorised again: the social guard will resume the Tumblr routes on its next sweep."
+            printf '%s\n' "Tumblr is authorised again: the social guard will resume the Tumblr routes on its next sweep."
           fi
           exit "$code"
       - name: Commit encrypted token bundle
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "Daily Yield Tumblr OAuth"
           git config user.email "bot@dailyyield.blogspot.com"

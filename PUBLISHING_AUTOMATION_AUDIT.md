@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 178 PASS · 0 FAIL
+**Result:** 202 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -97,7 +97,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Short section attempts accumulate instead of discarding usable prose**
 - ✅ **Fast model acceleration has a quota-independent completion path**
 - ✅ **Bounded provider waits preserve the under-thirty-minute generation target**
-- ✅ **Ten bounded sections use controlled three-worker parallel generation**
+- ✅ **Ten bounded sections use controlled five-worker parallel generation**
 - ✅ **Overnight pair dispatch retries each category independently**
 - ✅ **Master V3 preserves strict Blogger publication and package compilation gates**
 - ✅ **Master V3 permanently excludes 12/13 October and all historical backfill**
@@ -128,6 +128,29 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include continuous gesture motion**
 - ✅ **Master uses three unique licensed 16:9 placement-specific photographs**
+- ✅ **No automation may claim a professional qualification**
+- ✅ **Advice risk gate blocks publication**
+- ✅ **No Instagram route is registered, scheduled or left behind in the repository**
+- ✅ **Publishing volume is bounded by the measured index, not by ambition**
+- ✅ **Tumblr keeps its access token instead of burning a refresh grant on every run**
+- ✅ **A social network that cannot publish says so in the repository, not only in a job log**
+- ✅ **A quoted source passage cannot smuggle a rejected claim into a Master article**
+- ✅ **A Master preparation run works to a stated clock, not an open-ended timeout**
+- ✅ **A deterministic section is measured with its citations attached, not before**
+- ✅ **Master headlines are clipped on a word boundary, never inside a word**
+- ✅ **No generator or repair job may write a master title outside the validator's own 12-46 rule**
+- ✅ **Headline repair reads only the article's own words and writes only on an explicit apply**
+- ✅ **The hub pages hand out real crawlable links and the freeze rules still hold**
+- ✅ **The nightly clean-ups act by themselves but never delete, and a person must choose to delete**
+- ✅ **A duplicate is answered with fresh material, and the refresh job cannot delete anything**
+- ✅ **Google News readiness is measured from the public feed, and an unreadable feed stays unreadable**
+- ✅ **Indexing starts at the front doors: the main pages, not all 551 URLs**
+- ✅ **The milestone is counted in readers, not in pageviews**
+- ✅ **The growth ladder is judged on measured evidence and cannot invent a verdict**
+- ✅ **The audience counter is public-endpoint only and never calls an unanswered endpoint zero**
+- ✅ **The view counter reads Google numbers without touching the blog**
+- ✅ **The growth ladder names the basis of every view number it reports**
+- ✅ **The duplicate pile is audited daily and only deleted on an explicit apply**
 - ✅ **News hero image is preflight-validated**
 - ✅ **News adaptive polish can deepen sparse but sourced editions before failing**
 - ✅ **Timed News publication refreshes an expired Blogger access token once**
@@ -182,3 +205,4 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **News tracker launch/state is valid** — 11 desk edition(s) recorded
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
+- ✅ **Every workflow shell step parses before it can fail** — every run block in every workflow is valid bash

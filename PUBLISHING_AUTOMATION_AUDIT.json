@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-17T23:12:44+05:30",
+  "checked_at_ist": "2026-10-21T07:29:28+05:30",
   "summary": {
-    "pass": 178,
+    "pass": 202,
     "fail": 0
   },
   "checks": [
@@ -471,7 +471,7 @@
       "detail": ""
     },
     {
-      "name": "Ten bounded sections use controlled three-worker parallel generation",
+      "name": "Ten bounded sections use controlled five-worker parallel generation",
       "status": "PASS",
       "detail": ""
     },
@@ -622,6 +622,121 @@
     },
     {
       "name": "Master uses three unique licensed 16:9 placement-specific photographs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No automation may claim a professional qualification",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Advice risk gate blocks publication",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No Instagram route is registered, scheduled or left behind in the repository",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Publishing volume is bounded by the measured index, not by ambition",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Tumblr keeps its access token instead of burning a refresh grant on every run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A social network that cannot publish says so in the repository, not only in a job log",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A quoted source passage cannot smuggle a rejected claim into a Master article",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A Master preparation run works to a stated clock, not an open-ended timeout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A deterministic section is measured with its citations attached, not before",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master headlines are clipped on a word boundary, never inside a word",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "No generator or repair job may write a master title outside the validator's own 12-46 rule",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Headline repair reads only the article's own words and writes only on an explicit apply",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The hub pages hand out real crawlable links and the freeze rules still hold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The nightly clean-ups act by themselves but never delete, and a person must choose to delete",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A duplicate is answered with fresh material, and the refresh job cannot delete anything",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Google News readiness is measured from the public feed, and an unreadable feed stays unreadable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Indexing starts at the front doors: the main pages, not all 551 URLs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The milestone is counted in readers, not in pageviews",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The growth ladder is judged on measured evidence and cannot invent a verdict",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The audience counter is public-endpoint only and never calls an unanswered endpoint zero",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The view counter reads Google numbers without touching the blog",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The growth ladder names the basis of every view number it reports",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The duplicate pile is audited daily and only deleted on an explicit apply",
       "status": "PASS",
       "detail": ""
     },
@@ -894,6 +1009,11 @@
       "name": "No obsolete market page in production engines",
       "status": "PASS",
       "detail": ""
+    },
+    {
+      "name": "Every workflow shell step parses before it can fail",
+      "status": "PASS",
+      "detail": "every run block in every workflow is valid bash"
     }
   ]
 }

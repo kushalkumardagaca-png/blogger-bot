@@ -686,6 +686,24 @@ check('News tracker launch/state is valid',tracker_ok,f"{len(news_desks)} desk e
 check('No obsolete blog URL in production engines','financebycakushal.blogspot.com' not in ap+np)
 check('No obsolete market page in production engines','share-market_0718113516' not in ap+np and 'Market Explorer' not in ap+np)
 
+# A workflow step that bash cannot parse never reaches its error handling: it dies with
+# "unexpected EOF while looking for matching", so the refusal is reported as exit code 2 and the
+# publish result, the health record and the repair hint all vanish with it. That happened to the
+# Tumblr authorisation step on 21 October, found by nobody but the owner reading a screenshot.
+import re as _re, subprocess as _sp, yaml as _yaml
+_bad_steps=[]
+for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
+  try: _doc=_yaml.safe_load(_wf.read_text(encoding='utf-8')) or {}
+  except Exception as _exc: _bad_steps.append(f"{_wf.name}: unreadable YAML ({_exc})"); continue
+  for _jid,_job in (_doc.get('jobs') or {}).items():
+    for _st in (_job.get('steps') or []):
+      _run=_st.get('run')
+      if not isinstance(_run,str): continue
+      _r=_sp.run(['bash','-n'],input=_re.sub(r'\$\{\{.*?\}\}','zzz',_run,flags=_re.S),text=True,capture_output=True)
+      if _r.returncode: _bad_steps.append(f"{_wf.name}/{_jid}/{_st.get('name') or 'step'}: {_r.stderr.strip()[:120]}")
+check('Every workflow shell step parses before it can fail',not _bad_steps,
+      '; '.join(_bad_steps[:3]) or 'every run block in every workflow is valid bash')
+
 failed=[x for x in checks if x['status']=='FAIL']
 result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'summary':{'pass':len(checks)-len(failed),'fail':len(failed)},'checks':checks}
 if '--check-only' not in sys.argv:

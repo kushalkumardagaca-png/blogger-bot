@@ -219,3 +219,30 @@ Nothing should ever be pasted into chat: not a password, not a code, not a token
 run, the 10 withheld Tumblr posts are re-tried by the same recovery that runs every ten minutes,
 and the guard resumes the route as soon as the health record says the network works.
 
+### 21 October, morning: the repair step itself was broken
+
+The owner followed the re-authorisation steps and the job failed with `invalid_grant` / *"The
+authorization code has expired"* - the code had been generated a while before it was saved, and a
+Tumblr code is single-use and dies within minutes. Two things came out of that run:
+
+- it proved the new health record works, because `social_credential_health.py` printed
+  `{"platform":"tumblr","ok":false,...,"action":"the owner must re-authorise ..."}` on the run page,
+  which was invisible before; and
+- it exposed a bug in the step I had written the previous evening. Its bash could not be parsed
+  (`line 10: unexpected EOF while looking for matching '`) because a human apostrophe sat inside the
+  expansion `${reason:-see Tumblr's message above}`, where bash reads quotes as syntax. A step that
+  fails to parse never reaches its `::error` annotation, its repair hint or its `exit "$code"`, and
+  the commit of the token file was then skipped because it ran only on success.
+
+Fixed: the message is now phrased without quotes and the commit step carries `if: ${{ !cancelled() }}`
+so a refused authorisation is recorded too. `test_workflow_shell_syntax.py` hands **every** `run:`
+block of **every** workflow to `bash -n` (with `${{ ... }}` replaced by one safe word) and rejects an
+apostrophe or quote inside an expansion default; `audit_publishing_automation.py` gained the same
+check, so no workflow can again be unable to explain its own failure. That test found the bug in the
+repository immediately and reported nothing else wrong across all workflows. `573 passed, 76 subtests`;
+audits 202/0 and 12/0.
+
+Remaining step is the owner's alone, and it has a time limit: get a fresh code and re-run
+*Tumblr OAuth Bootstrap* in the same sitting, pressing **Update** on the `TUMBLR_AUTHORIZATION_CODE`
+secret rather than creating a second one.
+

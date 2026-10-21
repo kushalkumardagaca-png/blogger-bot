@@ -12,6 +12,8 @@ refused grant, and say what the one repair is.
 import json
 import tempfile
 import unittest
+
+import yaml
 from datetime import datetime, timedelta
 from pathlib import Path
 from unittest import mock
@@ -133,6 +135,17 @@ class ReAuthorisationRoute(unittest.TestCase):
         self.assertIn("social_credential_health.py --platform tumblr", self.TEXT)
         self.assertIn("git diff --staged --quiet", self.TEXT)
         self.assertIn("Tumblr authorisation could not be completed", self.TEXT)
+
+    def test_the_refusal_reason_and_the_repair_reach_the_run_page(self):
+        # The 21 October failure was readable only in a screenshot: the step that was supposed to
+        # explain it could not itself be parsed, and the token file it should have kept was
+        # committed only on the success path.
+        self.assertIn("--extract", self.TEXT)
+        self.assertIn("TUMBLR_AUTHORIZATION_CODE secret", self.TEXT)
+        steps = [step for step in yaml.safe_load(self.TEXT)["jobs"]["authorize"]["steps"]]
+        commit = [step for step in steps if "Commit encrypted token bundle" in str(step.get("name"))]
+        self.assertEqual(len(commit), 1)
+        self.assertEqual(commit[0].get("if"), "${{ !cancelled() }}")
 
     def test_the_bundles_obtain_their_timestamp_through_the_publisher(self):
         boot = (ROOT / "tumblr_oauth_bootstrap.py").read_text(encoding="utf-8")
