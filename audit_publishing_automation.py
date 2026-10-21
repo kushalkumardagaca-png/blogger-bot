@@ -747,6 +747,23 @@ for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
 check('No workflow references a key, permission or job that GitHub does not know',not _schema,
       '; '.join(_schema[:3]) or 'every permission, needs and step reference resolves')
 
+# The 30-to-60-second life of a one-time code is why re-authorising Tumblr kept failing: every route
+# that made a person save a code and then start a run lost the race to the queue. The listener is
+# already running and reacts to the commit, so the two properties that make that safe are pinned here:
+# the drop file holds no credential at rest, and the watch is started by a commit rather than a button.
+_tl=(ROOT/'tumblr_oauth_listener.py').read_text(encoding='utf-8') if (ROOT/'tumblr_oauth_listener.py').exists() else ''
+_tlwf=(ROOT/'.github/workflows/tumblr_oauth_listener.yml').read_text(encoding='utf-8') if (ROOT/'.github/workflows/tumblr_oauth_listener.yml').exists() else ''
+_drop=ROOT/'.github/tumblr-oauth-code'
+check('Tumblr authorisation listener exists and reacts to a commit rather than a button',
+      bool(_tl) and '.github/tumblr-oauth-listener' in _tlwf and 'cancel-in-progress: true' in _tlwf
+      and 'if: ${{ !cancelled() }}' in _tlwf, 'the watch is started by pushing mode: on')
+check('The code drop file holds comments only, so nothing secret sits in the repository',
+      _drop.exists() and all((not line.strip()) or line.startswith('#') for line in _drop.read_text(encoding='utf-8').splitlines()),
+      f"{_drop.name} present" if _drop.exists() else 'missing code file')
+check('The listener redacts the code and never re-offers a spent one',
+      'def redact(' in _tl and '[one-time code]' in _tl and 'seen = sha' in _tl
+      and 'print(f"[{now()}] a code has arrived' in _tl, 'redaction plus one attempt per blob')
+
 failed=[x for x in checks if x['status']=='FAIL']
 result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'summary':{'pass':len(checks)-len(failed),'fail':len(failed)},'checks':checks}
 if '--check-only' not in sys.argv:

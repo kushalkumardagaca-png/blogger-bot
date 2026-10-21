@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-21T10:30:18+05:30",
+  "checked_at_ist": "2026-10-21T10:53:35+05:30",
   "summary": {
-    "pass": 203,
+    "pass": 206,
     "fail": 0
   },
   "checks": [
@@ -1019,6 +1019,21 @@
       "name": "No workflow references a key, permission or job that GitHub does not know",
       "status": "PASS",
       "detail": "every permission, needs and step reference resolves"
+    },
+    {
+      "name": "Tumblr authorisation listener exists and reacts to a commit rather than a button",
+      "status": "PASS",
+      "detail": "the watch is started by pushing mode: on"
+    },
+    {
+      "name": "The code drop file holds comments only, so nothing secret sits in the repository",
+      "status": "PASS",
+      "detail": "tumblr-oauth-code present"
+    },
+    {
+      "name": "The listener redacts the code and never re-offers a spent one",
+      "status": "PASS",
+      "detail": "redaction plus one attempt per blob"
     }
   ]
 }
