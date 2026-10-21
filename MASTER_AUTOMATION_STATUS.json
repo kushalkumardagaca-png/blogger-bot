@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "138048fe05bc922c",
-  "kind": "trending",
-  "slot": 3,
-  "slot_key": "2026-10-21:trending:3",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-21",
-  "category": "Trend · Technology & Future Money",
-  "evergreen_category": "Economy Policy & Global Finance",
-  "title": "Bajaj Housing Finance Q2 Results: PAT rises",
-  "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
-  "published_at": "2026-10-21T03:45:09-07:00"
+  "kind": "evergreen",
+  "slot": 2,
+  "topic_id": "465b72142838b981",
+  "replaced_topic_id": null,
+  "title": "Colorado construction leader says local",
+  "package": "master_packages/dynamic/2026-10-21-evergreen-465b72142838b981.json",
+  "html": "scheduled_ready/2026-10-21-evergreen-2-colorado-construction-leader-says-local.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 7.3,
+  "remainingMinutes": 22.7
 }
