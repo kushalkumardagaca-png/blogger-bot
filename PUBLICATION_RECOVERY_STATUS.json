@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:18:17.070895+05:30",
+  "generatedAt": "2026-10-21T11:20:40.888411+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
@@ -21,14 +21,39 @@
     {
       "type": "source_recovery",
       "key": "master-trending-1",
-      "attempt": 1,
+      "attempt": 2,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-asia-pacific",
+      "platform": "facebook",
+      "routeIndex": 1,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-india",
+      "platform": "bluesky",
+      "routeIndex": 1,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-trending-0",
+      "platform": "bluesky",
+      "routeIndex": 1,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "master-evergreen-0",
+      "platform": "mastodon",
+      "routeIndex": 0,
       "applied": true
     }
   ],
-  "retryBlocked": [
-    "social:2026-10-21:news-india:1",
-    "social:2026-10-21:master-evergreen-0:1"
-  ],
+  "retryBlocked": [],
   "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
