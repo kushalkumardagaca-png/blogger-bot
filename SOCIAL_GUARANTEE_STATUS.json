@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-21T15:57:23.048968+05:30",
+ "generatedAt": "2026-10-21T16:15:50.473156+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 11,
- "expectedPosts": 22,
+ "articles": 12,
+ "expectedPosts": 24,
  "articlesWithBothPosts": 11,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-india",
@@ -150,11 +150,28 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-3",
+   "title": "Bajaj Housing Finance Q2 Results: PAT rises",
+   "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T15:57:15.613102+05:30",
+ "liveVerificationSourceAt": "2026-10-21T16:15:42.885126+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 9,
  "syntheticViews": 0,

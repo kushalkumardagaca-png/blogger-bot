@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-21T15:57:15.613102+05:30",
+ "generatedAt": "2026-10-21T16:15:42.885126+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 11,
- "onTime": 7,
+ "live": 12,
+ "onTime": 8,
  "late": 4,
  "early": 0,
  "pending": 0,
  "overdue": 2,
- "upcoming": 8,
+ "upcoming": 7,
  "dispatched": 2,
  "rows": [
   {
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 702,
+   "minutesFromSlot": 720,
    "publishedAt": "2026-10-20T15:37:40-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 642,
+   "minutesFromSlot": 660,
    "publishedAt": "2026-10-20T16:45:06-07:00"
   },
   {
@@ -40,7 +40,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/a-modest-increase-in-bank-taxes-is-not.html",
    "state": "late",
-   "minutesFromSlot": 582,
+   "minutesFromSlot": 600,
    "publishedAt": "2026-10-20T22:22:00-07:00",
    "minutesLate": 277
   },
@@ -51,7 +51,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 522,
+   "minutesFromSlot": 540,
    "publishedAt": "2026-10-20T18:41:34-07:00"
   },
   {
@@ -61,7 +61,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/ai-knowledge-graph-matches-university.html",
    "state": "on time",
-   "minutesFromSlot": 462,
+   "minutesFromSlot": 480,
    "publishedAt": "2026-10-20T19:48:04-07:00"
   },
   {
@@ -71,8 +71,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 402,
-   "minutesLate": 402,
+   "minutesFromSlot": 420,
+   "minutesLate": 420,
    "action": "dispatched"
   },
   {
@@ -82,7 +82,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-21.html",
    "state": "late",
-   "minutesFromSlot": 342,
+   "minutesFromSlot": 360,
    "publishedAt": "2026-10-21T01:05:55-07:00",
    "minutesLate": 200
   },
@@ -93,7 +93,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/rowan-cabarrus-community-college-to.html",
    "state": "late",
-   "minutesFromSlot": 282,
+   "minutesFromSlot": 300,
    "publishedAt": "2026-10-20T23:38:49-07:00",
    "minutesLate": 53
   },
@@ -104,7 +104,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 222,
+   "minutesFromSlot": 240,
    "publishedAt": "2026-10-20T23:38:26-07:00"
   },
   {
@@ -114,7 +114,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 192,
+   "minutesFromSlot": 210,
    "publishedAt": "2026-10-21T00:15:06-07:00"
   },
   {
@@ -124,7 +124,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 162,
+   "minutesFromSlot": 180,
    "publishedAt": "2026-10-21T00:45:04-07:00"
   },
   {
@@ -134,7 +134,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/billionaire-mukesh-ambani-launches.html",
    "state": "late",
-   "minutesFromSlot": 102,
+   "minutesFromSlot": 120,
    "publishedAt": "2026-10-21T03:08:25-07:00",
    "minutesLate": 83
   },
@@ -145,18 +145,19 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 42,
-   "minutesLate": 42,
+   "minutesFromSlot": 60,
+   "minutesLate": 60,
    "action": "dispatched"
   },
   {
    "key": "master-trending-3",
    "slot": "16:15",
    "due": "2026-10-21T16:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -18
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
+   "state": "on time",
+   "minutesFromSlot": 0,
+   "publishedAt": "2026-10-21T03:45:09-07:00"
   },
   {
    "key": "news-americas",
@@ -165,7 +166,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -78
+   "minutesFromSlot": -60
   },
   {
    "key": "news-companies",
@@ -174,7 +175,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -108
+   "minutesFromSlot": -90
   },
   {
    "key": "news-global",
@@ -183,7 +184,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -138
+   "minutesFromSlot": -120
   },
   {
    "key": "news-banking",
@@ -192,7 +193,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -168
+   "minutesFromSlot": -150
   },
   {
    "key": "master-evergreen-3",
@@ -201,7 +202,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -228
+   "minutesFromSlot": -210
   },
   {
    "key": "master-trending-4",
@@ -210,7 +211,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -288
+   "minutesFromSlot": -270
   },
   {
    "key": "master-evergreen-4",
@@ -219,13 +220,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -378
+   "minutesFromSlot": -360
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 11,
+ "actualArticlesLiveIncludingExtras": 12,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
