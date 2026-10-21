@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-21T08:06:41.567893+05:30",
+ "generatedAt": "2026-10-21T08:39:41.084058+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 3,
- "expectedPosts": 6,
+ "articles": 4,
+ "expectedPosts": 8,
  "articlesWithBothPosts": 2,
- "postsMissing": 1,
+ "postsMissing": 2,
  "dispatched": 0,
  "rows": [
   {
@@ -55,11 +55,31 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-0",
+   "title": "AI Knowledge Graph Matches University",
+   "url": "https://dailyyield.blogspot.com/2026/10/ai-knowledge-graph-matches-university.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "credentialBlocked": {
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
+   },
+   "actions": [
+    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T08:06:37.118958+05:30",
+ "liveVerificationSourceAt": "2026-10-21T08:39:37.538377+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 2,
  "syntheticViews": 0,
