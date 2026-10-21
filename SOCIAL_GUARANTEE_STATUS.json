@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-21T16:15:50.473156+05:30",
+ "generatedAt": "2026-10-21T16:31:59.372619+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 12,
- "expectedPosts": 24,
- "articlesWithBothPosts": 11,
+ "articles": 13,
+ "expectedPosts": 26,
+ "articlesWithBothPosts": 12,
  "postsMissing": 2,
  "dispatched": 2,
  "rows": [
@@ -155,6 +155,19 @@
    "key": "master-trending-3",
    "title": "Bajaj Housing Finance Q2 Results: PAT rises",
    "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-2",
+   "title": "Colorado construction leader says local",
+   "url": "https://dailyyield.blogspot.com/2026/10/colorado-construction-leader-says-local.html",
    "posts": 0,
    "byPlatform": {
     "facebook": 0,
@@ -171,9 +184,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T16:15:42.885126+05:30",
+ "liveVerificationSourceAt": "2026-10-21T16:31:50.724722+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 9,
+ "articlesWithExactlyTwoPosts": 10,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
