@@ -134,15 +134,51 @@ def text(value: str) -> str:
     return html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", value or ""))).strip()
 
 
+STYLE_TAG = '<style id="dyDeskIndexStyle">'
+SCRIPT_TAG = '<script data-dy-desk-index="1">'
+
+
+def written_before(content: str, position: int) -> int:
+    """How far back the stack of blocks a previous run wrote reaches.
+
+    A board is emitted as one style block, one script and the nav, and the replaced range used to start
+    at `<nav`. So each publish left its own style and script in front of the new pair: by the third
+    publish the calculator page carried three of each, and the abandoned oldest still applied
+    `.dxi-ico svg{width:21px;height:19px;overflow:visible}` - a rule the current design no longer
+    writes, kept alive only because nothing overrode it. Any block that ends where the next one starts
+    is therefore taken with the nav, so a re-run converges to one copy instead of adding another.
+    """
+    cut = position
+    ranges = []
+    for opening, closing in ((STYLE_TAG, "</style>"), (SCRIPT_TAG, "</script>")):
+        at = 0
+        while True:
+            at = content.find(opening, at)
+            if at < 0 or at >= cut:
+                break
+            end = content.find(closing, at)
+            if end < 0:
+                break
+            ranges.append((at, end + len(closing)))
+            at = end + len(closing)
+    moved = True
+    while moved:
+        moved = False
+        for start, end in ranges:
+            if end <= cut and not content[end:cut].strip():
+                cut, moved = start, True
+    return cut
+
+
 def find_index(content: str) -> tuple[int, int] | None:
-    """Locate the index nav, whether it is the old block or the designed one."""
+    """Locate the index nav, with any style and script the last run left in front of it."""
     for pattern in (r'<nav[^>]*class="dxi"', r'<nav[^>]*class="kc-index"'):
         match = re.search(pattern, content or "", re.I)
         if match:
             end = content.find("</nav>", match.start())
             if end < 0:
                 continue
-            return match.start(), end + len("</nav>")
+            return written_before(content, match.start()), end + len("</nav>")
     return None
 
 
@@ -152,6 +188,9 @@ def parse_index(content: str) -> dict:
     if not bounds:
         raise RuntimeError("no desk index block found on this page")
     block = content[bounds[0]:bounds[1]]
+    nav_at = block.find("<nav")
+    if nav_at > 0:
+        block = block[nav_at:]  # the range covers the previous run's style and script; parse the board
     head = re.search(r'class="(?:kc-ihead|dxi-head)">(.*?)</(?:div|header)>', block, re.S)
     hint = ""
     if head:

@@ -258,5 +258,43 @@ class IconsSurviveTheRebuild(unittest.TestCase):
         self.assertTrue(any("icon lost" in issue for issue in issues), issues)
 
 
+class PublishesDoNotStackUp(unittest.TestCase):
+    """A re-run must replace what the last run wrote, including the style and script in front of it.
+
+    The third publish of the board left three style blocks and three scroll-spy scripts on the
+    calculator page, because the replaced range began at `<nav` and the design emits its CSS and script
+    ahead of that tag. An abandoned rule from the first publish kept applying to the current markup, and
+    the page grew by about 14 KB for nothing.
+    """
+
+    def page(self) -> str:
+        block = design.render(BOARD)
+        return ("<div class=\"post-body\"><p>intro</p>" + design.CSS + design.SCRIPT
+                + design.CSS + design.SCRIPT + block + "<p>outro</p></div>")
+
+    def republish(self, page: str) -> str:
+        bounds = dx.find_index(page)
+        rebuilt = design.render(dx.board_for(next(t for t in dx.TARGETS if t["key"] == "calculator"),
+                                            dx.parse_index(page)))
+        return page[:bounds[0]] + rebuilt + page[bounds[1]:]
+
+    def test_two_abandoned_pairs_become_one(self):
+        page = self.page()
+        self.assertEqual(page.count('id="dyDeskIndexStyle"'), 3)
+        once = self.republish(page)
+        self.assertEqual(once.count('id="dyDeskIndexStyle"'), 1, "the old pairs are replaced, not stacked")
+        self.assertEqual(once.count('data-dy-desk-index="1"'), 1)
+
+    def test_the_page_around_the_board_is_untouched(self):
+        page = self.page()
+        once = self.republish(page)
+        self.assertTrue(once.startswith('<div class="post-body"><p>intro</p>'))
+        self.assertTrue(once.endswith("<p>outro</p></div>"))
+
+    def test_a_second_run_changes_nothing(self):
+        once = self.republish(self.page())
+        self.assertEqual(self.republish(once), once)
+
+
 if __name__ == "__main__":
     unittest.main()
