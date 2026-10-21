@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-21T08:39:37.538377+05:30",
+ "generatedAt": "2026-10-21T09:10:01.191176+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "toleranceMinutes": 30,
@@ -8,10 +8,10 @@
  "onTime": 4,
  "late": 0,
  "early": 0,
- "pending": 0,
+ "pending": 1,
  "overdue": 1,
- "upcoming": 16,
- "dispatched": 1,
+ "upcoming": 15,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 264,
+   "minutesFromSlot": 295,
    "publishedAt": "2026-10-20T15:37:40-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 204,
+   "minutesFromSlot": 235,
    "publishedAt": "2026-10-20T16:45:06-07:00"
   },
   {
@@ -40,8 +40,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 144,
-   "minutesLate": 144,
+   "minutesFromSlot": 175,
+   "minutesLate": 175,
    "action": "dispatched"
   },
   {
@@ -51,7 +51,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html",
    "state": "on time",
-   "minutesFromSlot": 84,
+   "minutesFromSlot": 115,
    "publishedAt": "2026-10-20T18:41:34-07:00"
   },
   {
@@ -61,7 +61,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/ai-knowledge-graph-matches-university.html",
    "state": "on time",
-   "minutesFromSlot": 24,
+   "minutesFromSlot": 55,
    "publishedAt": "2026-10-20T19:48:04-07:00"
   },
   {
@@ -70,8 +70,9 @@
    "due": "2026-10-21T09:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -36
+   "state": "pending",
+   "minutesFromSlot": -5,
+   "action": "dispatched"
   },
   {
    "key": "news-russia",
@@ -80,7 +81,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -96
+   "minutesFromSlot": -65
   },
   {
    "key": "master-evergreen-1",
@@ -89,7 +90,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -156
+   "minutesFromSlot": -125
   },
   {
    "key": "news-markets",
@@ -98,7 +99,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -216
+   "minutesFromSlot": -185
   },
   {
    "key": "news-europe",
@@ -107,7 +108,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -246
+   "minutesFromSlot": -215
   },
   {
    "key": "news-economy",
@@ -116,7 +117,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -276
+   "minutesFromSlot": -245
   },
   {
    "key": "master-trending-2",
@@ -125,7 +126,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -336
+   "minutesFromSlot": -305
   },
   {
    "key": "master-evergreen-2",
@@ -134,7 +135,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -396
+   "minutesFromSlot": -365
   },
   {
    "key": "master-trending-3",
@@ -143,7 +144,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -456
+   "minutesFromSlot": -425
   },
   {
    "key": "news-americas",
@@ -152,7 +153,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -516
+   "minutesFromSlot": -485
   },
   {
    "key": "news-companies",
@@ -161,7 +162,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -546
+   "minutesFromSlot": -515
   },
   {
    "key": "news-global",
@@ -170,7 +171,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -576
+   "minutesFromSlot": -545
   },
   {
    "key": "news-banking",
@@ -179,7 +180,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -606
+   "minutesFromSlot": -575
   },
   {
    "key": "master-evergreen-3",
@@ -188,7 +189,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -666
+   "minutesFromSlot": -635
   },
   {
    "key": "master-trending-4",
@@ -197,7 +198,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -726
+   "minutesFromSlot": -695
   },
   {
    "key": "master-evergreen-4",
@@ -206,7 +207,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -816
+   "minutesFromSlot": -785
   }
  ],
  "syntheticViews": 0,
