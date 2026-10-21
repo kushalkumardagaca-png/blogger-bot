@@ -1,39 +1,13 @@
 {
- "generatedAt": "2026-10-21T12:54:57.592303+05:30",
+ "generatedAt": "2026-10-21T13:15:48.184800+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 8,
- "expectedPosts": 16,
+ "articles": 9,
+ "expectedPosts": 18,
  "articlesWithBothPosts": 8,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
-   "posts": 3,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 3,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-india",
    "title": "india edition",
@@ -61,6 +35,32 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
+   "posts": 3,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 3,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
    "key": "news-europe",
    "title": "europe edition",
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-21.html",
@@ -72,6 +72,23 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-21.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   },
   {
    "key": "master-evergreen-0",
@@ -115,7 +132,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T12:54:51.668637+05:30",
+ "liveVerificationSourceAt": "2026-10-21T13:15:40.004424+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
