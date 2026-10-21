@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-21T10:55:23.944161+05:30",
+ "generatedAt": "2026-10-21T11:20:45.947215+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 5,
  "expectedPosts": 10,
- "articlesWithBothPosts": 2,
- "postsMissing": 4,
+ "articlesWithBothPosts": 3,
+ "postsMissing": 2,
  "dispatched": 2,
  "rows": [
   {
@@ -16,7 +16,6 @@
    "byPlatform": {
     "facebook": 0,
     "bluesky": 1,
-    "tumblr": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -30,16 +29,12 @@
    "byPlatform": {
     "facebook": 1,
     "bluesky": 0,
-    "tumblr": 0,
     "mastodon": 0
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "credentialBlocked": {
-    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
-   },
    "actions": [
-    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
+    "dispatched"
    ]
   },
   {
@@ -50,7 +45,6 @@
    "byPlatform": {
     "facebook": 0,
     "bluesky": 1,
-    "tumblr": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -64,42 +58,33 @@
    "byPlatform": {
     "facebook": 1,
     "bluesky": 0,
-    "tumblr": 0,
     "mastodon": 0
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "credentialBlocked": {
-    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
-   },
    "actions": [
-    "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
+    "dispatched"
    ]
   },
   {
    "key": "master-trending-0",
    "title": "A modest increase in bank taxes is not the end",
    "url": "https://dailyyield.blogspot.com/2026/10/a-modest-increase-in-bank-taxes-is-not.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "tumblr": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T10:55:16.319004+05:30",
+ "liveVerificationSourceAt": "2026-10-21T11:20:39.689611+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 2,
+ "articlesWithExactlyTwoPosts": 3,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
