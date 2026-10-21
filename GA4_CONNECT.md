@@ -26,35 +26,48 @@ Open <https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com
 **Enable**. Then the same for the second API the robots use to find the property:
 <https://console.cloud.google.com/apis/library/analyticsadmin.googleapis.com> → **Enable**.
 
-Use the project picker at the top of the page to select the project that holds the blog's existing
-Google keys — the one you used for Search Console in July. If you are not sure, the first project
-the console opens on is normally it; Step 2 will tell you if it was the wrong one.
+Both must be enabled **in the project that holds the blog's Google keys**. On 21 October 2026 the
+owner's screens showed that project, and it is the only one: its service accounts all end in
+`@572287903723.iam.gserviceaccount.com`, and it contains the OAuth client
+`Daily Yield Search Console Automation` (created 26 Sept 2026). Select it in the project picker at the
+top left before enabling anything. To check the enabling worked, open either link again: a button
+reading **Manage** means the API is on for that project; a button reading **Enable** means it was
+turned on somewhere else and has to be done again with the right project chosen.
 
-## Step 2 — get an OAuth client, or reuse the one you have
+## Step 2 — reuse the client you already have (nothing to create)
 
-Open <https://console.cloud.google.com/apis/credentials>. In the new interface the same list is at
-<https://console.cloud.google.com/auth/clients>.
+Open <https://console.cloud.google.com/apis/credentials>, or the same list in the newer screen:
+<https://console.cloud.google.com/auth/clients>. As seen on 21 October 2026 it holds two rows:
 
-**If an "OAuth 2.0 Client IDs" row already exists** (the Search Console one), click it and look for
-the **Client secret** line with its copy icon:
+| Client | Type | Use it? |
+| --- | --- | --- |
+| **Daily Yield Search Console Automation** (26 Sept 2026) | Web application | **yes — this one** |
+| ⚠ Blogger Web App (22 Sept 2026) | Web application | no, leave it alone; the blog's own posting key lives behind it |
 
-* If the secret is visible — copy both values and go straight to Step 3A. Nothing else to create,
-  and GitHub already knows this pair, so you paste **one** value in total.
-* If you cannot reveal it, **do not press "Reset secret"**: that would silently break the nightly
-  Search Console readings, which use that same pair. Create a client of your own instead:
-  **Create credentials → OAuth client ID → Application type: Web application**, name
-  `Daily Yield robots`, and under **Authorized redirect URIs** add exactly
-  `https://developers.google.com/oauthplayground`. Press Create and copy the Client ID and the
-  Client secret. This new pair is used only for Analytics, so the Search Console channel keeps its
-  own credentials and stays as it is.
+Being a *Web application* client is exactly what the browser route needs, because it has an editable
+redirect list. Click **Daily Yield Search Console Automation** and:
 
-Then, whichever kind of client you are using, check the consent screen once:
-<https://console.cloud.google.com/auth/audience>. If **Publishing status** says `Testing`, make sure
-`kushalkumardagaca.ca@gmail.com` is listed under **Test users** (that is the account that owns the
-blog and its Search Console property). In Testing mode Google throws refresh tokens away after
-**7 days**, so if you prefer not to publish the app, that is fine — the nightly job detects a dead
-token on its own and the morning report says `TOKEN_REFUSED`, which means "do Step 3 again", not
-"something is broken on the site".
+1. Find **Authorized redirect URIs** → **Add URI** → paste `https://developers.google.com/oauthplayground`
+   → **Save**. Adding a URI never disturbs a working authorisation: nothing that runs today stops.
+2. On the same page copy the **Client ID**, and reveal/copy the **Client secret** (web clients show it
+   with a copy icon).
+3. **Do not press "Reset secret"** or delete anything. A reset would silently break the nightly Search
+   Console readings, which use this same pair, and every job would start failing with `invalid_client`.
+
+You do **not** need to store this pair in GitHub: the repository already holds it under
+`GSC_CLIENT_ID` and `GSC_CLIENT_SECRET`, and the Analytics reader falls back to those. That is why
+Step 4 costs you one paste instead of three.
+
+*Only if* the secret cannot be revealed on that page: leave it as it is and create a second client —
+**Create credentials → OAuth client ID → Application type: Web application**, name
+`Daily Yield robots`, authorized redirect URI `https://developers.google.com/oauthplayground` — and
+then Step 4 needs its `GA4_CLIENT_ID` and `GA4_CLIENT_SECRET` added as well. The Search Console
+channel keeps its own credentials untouched either way.
+
+**Already checked, so skip it:** <https://console.cloud.google.com/auth/audience> showed
+**Publishing status: In production**, **User type: External**. That is the good state — a token minted
+now is not thrown away after 7 days, and no test-user list applies. The `TOKEN_REFUSED` warning below
+exists only for the day someone changes that page.
 
 ## Step 3A — get the token in your browser, no terminal (2 minutes)
 
@@ -102,9 +115,10 @@ other; the sequence does not matter and nothing runs while you type.
 
 | Name | Value |
 | --- | --- |
-| `GA4_REFRESH_TOKEN` | the refresh token from Step 3 — always |
-| `GA4_CLIENT_ID` | only if you created a new client in Step 2 |
-| `GA4_CLIENT_SECRET` | only if you created a new client in Step 2 |
+| `GA4_REFRESH_TOKEN` | the refresh token from Step 3 — **this is the only paste, if you reused the
+existing client as Step 2 says** |
+| `GA4_CLIENT_ID` | only if you created a second client instead |
+| `GA4_CLIENT_SECRET` | only if you created a second client instead |
 
 Optional, and you can skip it safely: <https://github.com/kushalkumardagaca-png/blogger-bot/settings/variables/actions>
 → **New repository variable** → `GA4_PROPERTY_ID` = the number under Analytics → Admin → *Property
