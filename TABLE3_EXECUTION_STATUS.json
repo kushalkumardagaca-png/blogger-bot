@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:22:28.203775+05:30",
+  "generatedAt": "2026-10-21T11:50:50.998596+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -18,7 +18,7 @@
       "id": "B3",
       "task": "Misleading reports",
       "result": "Fixed",
-      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 637."
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 644."
     },
     {
       "id": "B4",
@@ -48,7 +48,7 @@
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-21T11:20:39.689611+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
+      "proof": "Live status source 2026-10-21T11:29:51.324559+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
     },
     {
       "id": "B9",
@@ -117,8 +117,8 @@
       "Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site."
     ],
     [
-      "Optional read-only help before approval; new installation later",
-      "Analytics report access is not established. Only if you already use Analytics, check the existing property/permission. Do not install code to complete this checklist."
+      "Read-only Analytics approval, 4 minutes, nothing to install",
+      "The tag is already on every page (G-WLEEYTKV12); only read permission is missing. Steps with links: GA4_CONNECT.md; then run the workflow ga4_connection_check.yml, which answers in one sentence. No new collection code is installed to turn this row green."
     ],
     [
       "Before high-risk advice is published",
@@ -130,9 +130,9 @@
     ]
   ],
   "sourceDates": {
-    "siteAudit": "2026-10-21T05:52:26.508941+00:00",
-    "slots": "2026-10-21T11:20:39.689611+05:30",
-    "social": "2026-10-21T11:22:28.157466+05:30",
+    "siteAudit": "2026-10-21T06:20:49.648766+00:00",
+    "slots": "2026-10-21T11:29:51.324559+05:30",
+    "social": "2026-10-21T11:50:50.952003+05:30",
     "google": "2026-10-20T21:24:55.506685+00:00"
   },
   "noGrandUpdateStarted": true,

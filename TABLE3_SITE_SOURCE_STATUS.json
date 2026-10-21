@@ -1,7 +1,7 @@
 {
   "status": "OBSERVED",
   "httpStatus": 200,
-  "sourceSha256": "7ca6d2f83339ae80faa99bb2e8406d27e5c233adc47fe8fe1ab14c22c2eefdde",
+  "sourceSha256": "e7e65e7bb193d847ba1e1bdf9acfa7ccf7b84d2967c4971404b7c303a9ae3c01",
   "ga4IdsObserved": [
     "G-WLEEYTKV12"
   ],
@@ -39,13 +39,13 @@
     "httpStatus": 200,
     "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
     "readOnly": true,
-    "checkedAt": "2026-10-21T05:51:40.320878+00:00",
+    "checkedAt": "2026-10-21T06:20:03.017421+00:00",
     "matchesRecordedPublisher": true
   },
   "robotsTxt": {
     "httpStatus": 200,
     "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
     "readOnly": true,
-    "checkedAt": "2026-10-21T05:51:40.594702+00:00"
+    "checkedAt": "2026-10-21T06:20:03.222042+00:00"
   }
 }

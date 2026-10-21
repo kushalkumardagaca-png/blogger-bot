@@ -1,6 +1,6 @@
 # Daily Yield — Table 3 Work and Results
 
-**Updated: 21 October 2026, 11:22 IST. AdSense remains the first priority.**
+**Updated: 21 October 2026, 11:50 IST. AdSense remains the first priority.**
 
 **The controls and checks were carried out. This is not a claim that every requirement passed:** photo-count/evidence gaps, any owner-only settings, Analytics permissions and human fact-review limits are shown below.
 
@@ -9,7 +9,7 @@
 | When | Your task |
 |---|---|
 | Before approval, only if shown | Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site. |
-| Optional read-only help before approval; new installation later | Analytics report access is not established. Only if you already use Analytics, check the existing property/permission. Do not install code to complete this checklist. |
+| Read-only Analytics approval, 4 minutes, nothing to install | The tag is already on every page (G-WLEEYTKV12); only read permission is missing. Steps with links: GA4_CONNECT.md; then run the workflow ga4_connection_check.yml, which answers in one sentence. No new collection code is installed to turn this row green. |
 | Before high-risk advice is published | A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article. |
 | Later, not now | Review the 50-item shortlist before any ranking build. Release requires AdSense approval, the agreed earnings period and your explicit permission. |
 
@@ -19,12 +19,12 @@
 |---|---|---|
 | B1 — Freeze automatic edits | Implemented | 15 optional workflows and 15 CLI tools held. Three old-page tools are audit-only. Hub updates limited to existing cards/data; publishers remain active. |
 | B2 — AdSense connection and ads.txt | Checked; private account not accessible | Public source recorded publisher IDs: ca-pub-1083724733490660. ads.txt matches recorded publisher: True. Required verification is preserved; private review approval is not visible. |
-| B3 — Misleading reports | Fixed | Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 637. |
+| B3 — Misleading reports | Fixed | Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 644. |
 | B4 — Policy pages and navigation | Checked | 5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 13/13 tested routes reached HTTP 200 for both checks. No redesign. Independent source-only policy GET checks returned 200 for 5/5 pages, with no retired description wording observed. |
 | B5 — Names and honest statements | Checked | Stored page identity issues: 0. Blog description read through the official API. No mass rename or invented manual-review claim. |
 | B6 — Facts and originality | Automated check done; human-review limit remains | 562 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected. |
 | B7 — Photographs and rights | Metadata check done | Master photo-count mismatches: 0; figures needing fuller licence/alt/caption evidence: 0; News pools below 40: 0. Exact-file licence metadata recovered separately: 522. No copyright-ownership guarantee or old-photo replacement. |
-| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-21T11:20:39.689611+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0. |
+| B8 — 21 daily articles | Active; ongoing | Live status source 2026-10-21T11:29:51.324559+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0. |
 | B9 — Social delivery and duplicates | Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE | Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'mastodon': 0, 'tumblr': 8}); this run 0; cleanup items not verified/deleted: 0. Two networks required out of 3 live ones; resources counted separately. The count still includes tumblr 8, removed before that network's automation was retired on 21 October 2026; nothing publishes there now.  |
 | B10 — Search Console | Read existing results | Latest index evidence 2026-10-20T21:24:55.506685+00:00: 1 indexed results, 568 not indexed, 0 inspection errors. No ownership reset or manual bulk request. |
 | B11 — Old redirect warnings | Diagnosed, not blindly repaired | 10 prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence. |
@@ -39,7 +39,7 @@
 ## 3. Articles and social posts — separate counts
 
 **Missing among articles due at the saved status time: 3.** Later slots are not failures.
-Article-status source: 2026-10-21T11:20:39.689611+05:30.
+Article-status source: 2026-10-21T11:29:51.324559+05:30.
 
 | Type | Due by that time | Published among those due | Missing |
 |---|---:|---:|---:|
@@ -57,7 +57,7 @@ Article-status source: 2026-10-21T11:20:39.689611+05:30.
 
 | Measure | What we can honestly say |
 |---|---|
-| Google search | Search report dated 2026-10-21T05:52:27.616511+00:00. Seven-day clicks: 0; impressions: 1. |
+| Google search | Search report dated 2026-10-21T06:20:50.548572+00:00. Seven-day clicks: 0; impressions: 1. |
 | Visitor/readership measurement | ANALYTICS_SCOPE_MISSING. Missing reporting is unknown, not zero visitors. |
 | Income and costs | Actual bills and AdSense earnings are not connected here. Profit is unknown, not assumed positive. |
 | Ranking/traffic promises | None. Sending URLs, passing code checks or publishing more articles does not promise indexing, approval or 10 million daily views. |
