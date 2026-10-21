@@ -1,17 +1,43 @@
 {
- "checkedAt": "2026-10-21T17:33:50+00:00",
+ "checkedAt": "2026-10-21T17:40:03+00:00",
  "sitemaps": {
-  "status": "UNAVAILABLE",
-  "registered": [],
-  "missing": [
-   "https://dailyyield.blogspot.com/sitemap.xml",
-   "https://dailyyield.blogspot.com/sitemap-pages.xml"
+  "status": "MEASURED",
+  "registered": [
+   {
+    "path": "https://dailyyield.blogspot.com/sitemap-pages.xml",
+    "isPending": false,
+    "errors": "0",
+    "warnings": "0",
+    "accessed": "",
+    "indexStatus": {}
+   },
+   {
+    "path": "https://dailyyield.blogspot.com/sitemap.xml",
+    "isPending": false,
+    "errors": "0",
+    "warnings": "0",
+    "accessed": "",
+    "indexStatus": {}
+   }
   ],
-  "detail": "the URL-prefix property is not verified, and sitemaps are registered there"
+  "missing": [],
+  "detail": "",
+  "triedOn": "sc-domain:dailyyield.blogspot.com",
+  "siteProperty": "sc-domain:dailyyield.blogspot.com",
+  "otherRegistered": []
  },
  "registration": {
   "submittedNow": [],
-  "failed": []
+  "failed": [
+   {
+    "path": "https://dailyyield.blogspot.com/sitemap.xml",
+    "error": "HTTP 403"
+   },
+   {
+    "path": "https://dailyyield.blogspot.com/sitemap-pages.xml",
+    "error": "HTTP 403"
+   }
+  ]
  },
  "properties": {
   "status": "MEASURED",
