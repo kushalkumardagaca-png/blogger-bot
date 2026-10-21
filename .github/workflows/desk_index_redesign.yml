@@ -31,14 +31,20 @@ concurrency:
 
 jobs:
   redesign:
-    # Owner-approved freeze: no optional live-page/URL/tracking rebuild.
-    if: ${{ false }}
+    # The owner's freeze is the gate, not a line in this file: the job asks the versioned policy
+    # whether this action is released and, if it is not, reads the index and writes nothing. That way
+    # a granted release is visible in SITE_CHANGE_POLICY.json with the owner's own words beside it,
+    # and re-freezing needs no edit here.
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with: {python-version: '3.12'}
+      - name: Ask the freeze whether this edit is released
+        id: gate
+        run: |
+          echo "allowed=$(python site_change_control.py --allowed desk_index_redesign)" >> "$GITHUB_OUTPUT"
       - name: Validate the index design rules
         run: python -m unittest test_desk_index -v
       - name: Survey, validate or apply the designed index
@@ -67,6 +73,21 @@ jobs:
             *)       run_and_report python -u desk_index_redesign.py --survey
                      run_and_report python -u desk_index_redesign.py --apply ;;
           esac
+      - name: Say so plainly when the freeze holds the write
+        if: steps.gate.outputs.allowed != 'true'
+        run: echo "::notice title=Desk index held::the freeze is in force for this action, so the index was read and validated but no page was written; a release recorded in SITE_CHANGE_POLICY.json is what unlocks it"
+      - name: Retire the apply request so the release cannot be reused
+        if: steps.gate.outputs.allowed == 'true'
+        run: |
+          set -uo pipefail
+          if [ -f .github/desk-index-apply-request ]; then
+            git config user.name "Daily Yield Bot"
+            git config user.email "bot@dailyyield.blogspot.com"
+            git rm -q .github/desk-index-apply-request
+            git commit -q -m "Retire the desk-index apply request: the released edit is published [skip ci]" || true
+            git pull --rebase --autostash -q origin main >/dev/null 2>&1 || true
+            git push -q origin HEAD:main || echo "the pages are written; only the request file could not be retired"
+          fi
       - name: Keep the survey and result evidence
         if: always()
         uses: actions/upload-artifact@v4

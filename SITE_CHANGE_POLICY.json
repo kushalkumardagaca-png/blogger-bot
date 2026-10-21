@@ -21,7 +21,6 @@
     "deploy_markets_today": "deploy_markets_today.py",
     "solve_remaining": "solve_remaining.py",
     "identity_migration": "migrate_live_identity.py",
-    "desk_index_redesign": "desk_index_redesign.py",
     "gsc_rebuild": "gsc_rebuild.py",
     "repair_known_external_links": "repair_known_external_links.py"
   },
@@ -37,7 +36,6 @@
     "deploy_markets_today.yml",
     "solve_remaining.yml",
     "identity_migration.yml",
-    "desk_index_redesign.yml",
     "gsc_rebuild.yml",
     "repair_known_external_links.yml",
     "blogger_policy_compliance.yml"
@@ -58,5 +56,14 @@
     "Bing quota-aware submissions and unchanged sitemap feed",
     "read-only Google/Analytics/policy monitoring"
   ],
-  "essentialPublicCorrections": "Confirmed issue, smallest tested edit, retained backup and explicit approval; no batch redesign or force/env bypass."
+  "essentialPublicCorrections": "Confirmed issue, smallest tested edit, retained backup and explicit approval; no batch redesign or force/env bypass. A named release for one action is recorded in releasedCorrections; removing a name from heldCliActions without one changes nothing.",
+  "releasedCorrections": [
+    {
+      "action": "desk_index_redesign",
+      "releasedAt": "2026-10-21T11:05:00+00:00",
+      "scope": "the desk index on the three hub pages only: icon geometry and size, one column count per group so rows end square, and counts read from the board instead of memorised. No other part of those pages, and no other page.",
+      "ownerInstruction": "Owner, 21 October 2026: 'the logos at every option seems to be slightly disturbed....I want you to fix these and make sure they look perfect and attractive.... Also make the logos better and bigger..' and, when asked whether to publish it on the live pages now or hold it until AdSense approval: 'Yes - publish it now'.",
+      "limits": "one edit, this scope, retained before-copy of each page, refused unless the run's own validation passes; the rest of the freeze is untouched"
+    }
+  ]
 }

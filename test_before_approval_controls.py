@@ -52,6 +52,63 @@ class FreezeTests(unittest.TestCase):
             self.assertNotIn(name,freeze.policy()['heldWorkflows'])
             data=yaml.safe_load((ROOT/'.github/workflows'/name).read_text())
             self.assertTrue(data.get('on',data.get(True,{})).get('schedule'))
+    def test_a_release_names_one_action_one_edit_and_the_owner(self):
+        # the difference between a granted correction and a hole in the freeze is the record beside it
+        cfg=freeze.policy();released=cfg.get('releasedCorrections') or []
+        self.assertEqual([e.get('action') for e in released],['desk_index_redesign'])
+        entry=released[0]
+        for key in ('scope','ownerInstruction','releasedAt','limits'):
+            self.assertTrue(str(entry.get(key) or '').strip(),f"releasedCorrections[0].{key} is missing")
+        self.assertIn("Owner, 21 October 2026",entry['ownerInstruction'])
+        self.assertNotIn('desk_index_redesign',cfg['heldCliActions'])
+        self.assertNotIn('desk_index_redesign.yml',cfg['heldWorkflows'])
+        self.assertIs(cfg['frozen'],True)
+    def test_nothing_else_was_let_go_along_with_it(self):
+        held=freeze.policy()['heldCliActions'];workflows=freeze.policy()['heldWorkflows']
+        self.assertEqual(set(held),{'adsense_readiness','bing_seo_repair','deploy_blogger_policy_compliance',
+            'deploy_global_snapshot','deploy_markets_today','gsc_rebuild','identity_migration',
+            'motion_related_retrofit','reader_measurement_retrofit','repair_family_directory',
+            'repair_known_external_links','retrofit_live_news','solve_remaining','update_page_family'})
+        self.assertEqual(set(workflows), {
+            'adsense_readiness.yml', 'bing_seo_repair.yml', 'blogger_policy_compliance.yml',
+            'deploy_global_snapshot.yml', 'deploy_markets_today.yml', 'gsc_rebuild.yml',
+            'identity_migration.yml', 'motion_related_retrofit.yml', 'reader_measurement_retrofit.yml',
+            'repair_family_directory.yml', 'repair_known_external_links.yml', 'retrofit_live_news.yml',
+            'solve_remaining.yml', 'update_page_family.yml'})
+    def test_dropping_a_name_from_the_list_unlocks_nothing_without_a_record(self):
+        with tempfile.TemporaryDirectory() as td:
+            written=Path(td)/'p.json'
+            written.write_text(json.dumps({'frozen':True,'heldCliActions':{'other_action':'other.py'}}))
+            with patch.object(freeze,'POLICY',written),contextlib.redirect_stdout(io.StringIO()) as out:
+                with self.assertRaises(SystemExit):freeze.stop_if_frozen('desk_index_redesign')
+            self.assertIn('HELD_BY_OWNER_FREEZE',out.getvalue())
+    def test_a_released_action_reports_the_scope_it_was_given(self):
+        with contextlib.redirect_stdout(io.StringIO()) as out:freeze.stop_if_frozen('desk_index_redesign')
+        said=json.loads(out.getvalue())
+        self.assertEqual(said['status'],'OWNER_RELEASED_CORRECTION')
+        self.assertIn('desk index',said['scope'])
+    def test_the_workflow_asks_the_freeze_instead_of_being_switched_off(self):
+        text=(ROOT/'.github/workflows/desk_index_redesign.yml').read_text()
+        data=yaml.safe_load(text)
+        for name,job in data['jobs'].items():self.assertNotIn('if',job,f"{name} is still hard-disabled")
+        self.assertIn('--allowed desk_index_redesign',text)
+        self.assertIn('.github/desk-index-apply-request',text,'the intent to write is retired after use')
+        self.assertIn('DESK_INDEX_BACKUP/',text,'the previous copy travels with the evidence')
+    def test_the_released_script_still_refuses_an_unverified_board(self):
+        # released or not, the writer refuses a board that lost a link, a number or a glyph
+        import desk_index_redesign as dx
+        board = {"aria": "a", "eyebrow": "b", "title": "c", "note": "{total} desks, one tape",
+                 "chips": [], "labels": {"open": "Open desk"},
+                 "groups": [{"name": "G", "items": [{"href": "#x", "num": "01", "title": "T",
+                                                      "desc": "d",
+                                                      "icon": '<svg viewBox="0 0 24 24"><path d="M4 4 L9 9"></path></svg>'}]}]}
+        block = dx.design.render(board)
+        current = dx.parse_index("<div>" + block + "</div>")
+        self.assertEqual(dx.validate(block, current), [])
+        lost_glyph = block.replace('<path d="M4 4 L9 9"></path>', "")
+        issues = dx.validate(lost_glyph, current)
+        self.assertTrue(any("icon lost" in issue for issue in issues), issues)
+
     def test_draft_restore_does_not_authenticate(self):
         import draft_inventory_sweep as sweep
         with patch('sys.argv',['draft_inventory_sweep.py','--restore']),patch.object(sweep,'token') as token,contextlib.redirect_stdout(io.StringIO()) as output:
