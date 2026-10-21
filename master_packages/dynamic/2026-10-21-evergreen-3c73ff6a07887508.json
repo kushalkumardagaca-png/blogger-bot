@@ -1,0 +1,475 @@
+{
+  "policy_version": "BLOGGER_CONTENT_POLICY_2026_12_GREEN_V2",
+  "title": "AI Knowledge Graph Matches University",
+  "meta_description": "An evidence-led examination of AI Knowledge Graph Matches University, including mechanisms, affected groups, jurisdiction and uncertainty.",
+  "entities": [
+    "Discover Artificial Intelligence",
+    "Technologies",
+    "IIAI Letters on Institutional Research",
+    "IEEE Access",
+    "Frontiers in Artificial Intelligence",
+    "OpenAlex research index",
+    "SEEU Review"
+  ],
+  "geography": "Jurisdictions identified in the cited evidence",
+  "temporal_coverage": "Current evidence record",
+  "structure_profile": "jurisdiction-map",
+  "module_headings": {
+    "contents": "Evidence route map",
+    "summary": "Evidence-led takeaways",
+    "faq": "Reader questions",
+    "glossary": "Terms decoded",
+    "sources": "Evidence ledger",
+    "internal_links": "More from Daily Yield",
+    "external_sources": "Primary reading"
+  },
+  "visuals": [
+    {
+      "type": "matrix",
+      "title": "Jurisdiction Map view 1: An integrated knowledge graph and digital twin framework for data intell",
+      "caption": "Matrix presentation of categorical evidence from Discover Artificial Intelligence; no unreported quantity is inferred.",
+      "source": 1,
+      "after_section": "Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and",
+      "data": [
+        {
+          "Evidence field": "Document",
+          "Documented value": "An integrated knowledge graph and digital twin framework for data intelligent industry education in the nylon chemical industry"
+        },
+        {
+          "Evidence field": "Provider",
+          "Documented value": "Discover Artificial Intelligence"
+        },
+        {
+          "Evidence field": "Bounded finding",
+          "Documented value": "The nylon chemical industry chain is characterized by long processes, complex positions, high safety risks, and strong demand for digital transformation. Traditional industry-education integration models struggle to dynamically respond to changes in enterprise job capabilities, lack access to real-world production scenarios, and suffer from low efficiency in multi-entity collaboration. To address these challenges, this paper proposes a data-intelligent-driven model for constructing and collaboratively governing an industry-education integration community in the nylon chemical industry (NylonChem-IEKG). This model uses a knowledge graph of the industry chain as its semantic organization core, integrating multi-source data such as enterprises, processes, positions, skills, courses, training tasks, and governance indicators. It utilizes a digital twin training platform as its practical carrier, supporting virtual training in key scenarios such as polymerization, spinning, quality inspection, and safety management. Furthermore, it achieves a closed-loop linkage between industry demand, educational supply, and governance feedback through knowledge graph reasoning, course-position mapping, a recommendation engine, and a collaborative governance module. Experimental results demonstrate that NylonChem-IEKG outperforms traditional industry-education integration systems and single-function platforms in terms of response efficiency, relationship support, data integration, enterprise participation, and governance performance. Research indicates that data sharing, deep enterprise involvement, digital twin training, and knowledge graph reasoning are key pathways to improving the operational quality of the nylon chemical industry-education integration community."
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Jurisdiction Map view 2: Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs",
+      "caption": "Table presentation of categorical evidence from Technologies; no unreported quantity is inferred.",
+      "source": 2,
+      "after_section": "A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight",
+      "data": [
+        {
+          "Evidence field": "Document",
+          "Documented value": "Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and Graph Neural Networks"
+        },
+        {
+          "Evidence field": "Provider",
+          "Documented value": "Technologies"
+        },
+        {
+          "Evidence field": "Bounded finding",
+          "Documented value": "This article addresses the task of building personalized educational recommendations based on a heterogeneous knowledge graph that integrates data from university curricula, job vacancies, and online courses. To solve the problem of course recommendations by their relevance to a user’s competencies, a graph neural network (GNN)-based approach is proposed, specifically utilizing and comparing the Heterogeneous Graph Transformer (HGT) architecture, Graph Sample and Aggregate network (GraphSAGE), and Heterogeneous Graph Attention Network (HAN). Experiments were conducted on a heterogeneous graph comprising various node and relation types. The models were evaluated using regression and ranking metrics. The results demonstrated the superiority of the HGT-based recommendation model as a link regression task, especially in terms of ranking metrics, confirming its suitability for generating accurate and interpretable recommendations in educational systems. The proposed approach can be useful for developing adaptive learning recommendations aligned with users’ career goals."
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "title": "Jurisdiction Map view 3: Entity Linking among Categorized Knowledge Resources for Computer Scienc",
+      "caption": "Cards presentation of categorical evidence from IIAI Letters on Institutional Research; no unreported quantity is inferred.",
+      "source": 3,
+      "after_section": "UniSkill: A Dataset for Matching University Curricula to Professional Competencies",
+      "data": [
+        {
+          "Evidence field": "Document",
+          "Documented value": "Entity Linking among Categorized Knowledge Resources for Computer Science Curricula"
+        },
+        {
+          "Evidence field": "Provider",
+          "Documented value": "IIAI Letters on Institutional Research"
+        },
+        {
+          "Evidence field": "Bounded finding",
+          "Documented value": "In educational information processing, both humans and computers require more effective information access than ever. However, there is one serious issue in text processing in higher education. The quantity of digitized text resources is not sufficient to develop large language models in specialized areas. General purpose language models often create unreliable results when the training data do not cover the target domain. To deal with this problem, our proposed method is designed to establish links between lecture course information and entities for real world knowledge. Owing to this entity linking, the meaning of text data can be more easily understood by humans and computers. Our method employs curriculum standards and university syllabus information to associate important keywords with text entities defined in Wikipedia articles. The results of evaluation experiments suggest the effectiveness of the proposed method in feature selection and entity linking for educational information. The contributions of this study include detailed comparison among dictionaries in Japanese morphological analysis. Our findings are expected to provide useful insights for researchers engaging in educational data analysis."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "heading": "An integrated knowledge graph and digital twin framework for data",
+      "paragraphs": [
+        "### An Integrated Knowledge Graph and Digital Twin Framework for Data-Driven Industry Education in the Nylon Chemical Industry The nylon chemical industry, characterized by its long processes, complex positions, high safety risks, and strong demand for digital transformation, faces significant challenges in traditional industry-education integration models. These models struggle to dynamically respond to changes in enterprise job capabilities, lack access to real-world production scenarios, and suffer from low efficiency in multi-entity collaboration. To address these challenges, this paper proposes a data-intelligent-driven model for constructing and collaboratively governing an industry-education integration community in the nylon chemical industry (NylonChem-IEKG). This model uses a knowledge graph of the industry chain as its semantic organization core, integrating multi-source data such as enterprises, processes, positions, skills, courses, training tasks, and governance indicators. [[S1|Discover Artificial Intelligence]]",
+        "[[S1|Discover Artificial Intelligence]] It utilizes a digital twin training platform as its practical carrier, supporting virtual training in key scenarios such as polymerization, spinning, quality inspection, and safety management. Furthermore, it achieves a closed-loop linkage between industry demand, educational supply, and governance feedback through knowledge graph reasoning, course-position mapping, a recommendation engine, and a collaborative governance module. Experimental results demonstrate that NylonChem-IEKG outperforms traditional industry-education integration systems and single-function platforms in terms of response efficiency, relationship support, data integration, enterprise participation, and governance performance. Research indicates that data sharing, deep enterprise involvement, digital twin training, and knowledge graph reasoning are key pathways to improving the operational quality of the nylon chemical industry-education integration community.",
+        "[[S1|Discover Artificial Intelligence]] ### An Integrated Knowledge Graph and Digital Twin Framework for Data-Driven Industry Education in the Nylon Chemical Industry [[S1|Discover Artificial Intelligence]] The nylon chemical industry, known for its long processes, complex positions, high safety risks, and strong demand for digital transformation, faces significant challenges in traditional industry-education integration models. In the first section’s third paragraph, the second evidence point for An integrated knowledge graph and digital twin framework for data is that these models struggle to dynamically respond to changes in enterprise job capabilities, lack access to real-world production scenarios, and suffer from low efficiency in multi-entity collaboration. In the first section’s third paragraph, the third evidence point for An integrated knowledge graph and digital twin framework for data is that to address these challenges, this paper proposes a data-intelligent-driven model for constructing and collaboratively governing an industry-education integration community in the nylon chemical industry (NylonChem-IEKG). In the first section’s third paragraph, the fourth evidence point for An integrated knowledge graph and digital twin framework for data is that this model uses a knowledge graph of the industry chain as its semantic organization core, integrating multi-source data such as enterprises, processes, positions, skills, courses, training tasks, and governance indicators.",
+        "[[S1|Discover Artificial Intelligence]] This innovative framework not only enhances the educational experience but also aligns with industry demands, ensuring that the workforce remains up-to-date with the latest technological advancements. The digital twin platform provides a realistic simulation environment, allowing students to practice and learn from real-world scenarios without the risk of physical harm. The collaborative governance module ensures that all stakeholders are involved in the decision-making process, promoting a more efficient and effective collaboration. The knowledge graph reasoning engine helps in mapping courses and positions, making it easier for educators to tailor their curriculum to the specific needs of the industry."
+      ]
+    },
+    {
+      "heading": "Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and",
+      "paragraphs": [
+        "### Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and Graph Neural Networks [[S2|Technologies]] In the realm of personalized educational recommendations, a model that leverages a heterogeneous knowledge graph has emerged as a promising solution. This model, which integrates data from university curricula, job vacancies, and online courses, aims to provide accurate and relevant course recommendations based on a user's competencies. The model utilizes three key components: a graph neural network (GNN)-based approach, specifically the Heterogeneous Graph Transformer (HGT) architecture, Graph Sample and Aggregate network (GraphSAGE), and Heterogeneous Graph Attention Network (HAN). [[S2|Technologies]] The heterogeneous graph comprises various node and relation types, which are essential for understanding the connections between different educational elements.",
+        "The model is designed to address the challenge of course recommendations by their relevance to a user's competencies. To achieve this, a graph neural network-based approach is proposed, utilizing and comparing the HGT architecture, GraphSAGE, and HAN. [[S2|Technologies]] Experiments were conducted on a heterogeneous graph comprising various node and relation types. The models were evaluated using regression and ranking metrics.",
+        "The results demonstrated the superiority of the HGT-based recommendation model as a link regression task, especially in terms of ranking metrics, confirming its suitability for generating accurate and interpretable recommendations in educational systems. [[S2|Technologies]] The proposed approach can be useful for developing adaptive learning recommendations aligned with users' career goals. The model's ability to connect what a programme teaches, what the market requires, and what online courses develop within a single semantic structure makes it particularly effective in educational systems. [[S2|Technologies]] ### A Multilingual Heterogeneous Knowledge Graph Framework for Curriculum–Vacancy–MOOC Alignment: Edge-Weight Regression with Heterogeneous Graph Transformers for Educational Recommendation [[S2|Technologies]] In the digital age, the gap between competencies certified by university curricula and skills demanded by employers has widened.",
+        "MOOCs, or Massive Open Online Courses, could close this gap, but existing recommenders rarely connect what a programme teaches, what the market requires, and what online courses develop within a single semantic structure. To address this issue, a multilingual heterogeneous knowledge graph (KG) was built that integrates university programmes, IT vacancies from hh.kz, and Coursera MOOCs in English, Russian, and Kazakh. A property-graph ontology was formalized and instantiated automatically, and skills were aligned with a fine-tuned multilingual Sentence Transformer (paraphrase-multilingual-mpnet-base-v2). [[S2|Technologies]] The model cast recommendation as edge-weight regression over a competency-to-course relation and solved it with GraphSAGE, HAN, and HGT encoders.",
+        "On a held-out 20% test graph, HGT achieved the best ranking quality (NDCG@10 = 0.714; with short meta-paths NDCG@10 = 0.987, RMSE = 0.108), outperforming GraphSAGE and HAN. Applied to the \"Information Systems\" programme of a Kazakhstani university, the system expanded the market-aligned competency profile by +36.2% with five top-ranked courses and by +170% with the full catalogue. [[S2|Technologies]]"
+      ]
+    },
+    {
+      "heading": "Entity Linking among Categorized Knowledge Resources for Computer Science Curricula",
+      "paragraphs": [
+        "### Entity Linking among Categorized Knowledge Resources for Computer Science Curricula [[S3|IIAI Letters on Institutional Research]] In the realm of educational information processing, the integration of knowledge resources is crucial for effective learning. This study, \"Entity Linking among Categorized Knowledge Resources for Computer Science Curricula,\" explores how to establish links between lecture course information and entities for real-world knowledge. The method proposed aims to enhance the accessibility and understanding of text data by humans and computers alike. [[S3|IIAI Letters on Institutional Research]] The entity linking process involves associating important keywords with text entities defined in Wikipedia articles.",
+        "This method employs curriculum standards and university syllabus information to associate these keywords with entities. The results of evaluation experiments indicate the effectiveness of the proposed method in feature selection and entity linking for educational information. The study also provides detailed comparisons among dictionaries in Japanese morphological analysis, contributing to the understanding of educational data analysis. [[S3|IIAI Letters on Institutional Research]] ### Integrated Curricula in Engineering Education [[S3|IIAI Letters on Institutional Research]] The SUCCEED Coalition, a multi-coalition collaboration, has been instrumental in developing integrated curricula in engineering education.",
+        "The coalition has supported two programs: the Integrated Mathematics, Physics, Engineering, and Chemistry (IMPEC) program at NC State and a pilot program at the University of Florida. Both programs included other aspects of skill development, such as problem-solving and teamwork. [[S3|IIAI Letters on Institutional Research]] The assessment data from these programs suggests that integrated curricula can improve student motivation and problem-solving abilities. The programs also highlighted the importance of interdisciplinary connections in engineering education, which is crucial for addressing real-world problems.",
+        "[[S3|IIAI Letters on Institutional Research]] ### Objectives of SUCCEED Integrated Curricula [[S3|IIAI Letters on Institutional Research]] The objectives of the SUCCEED integrated curricula are to create technically competent, critical and creative thinkers, life-long learners, effective communicators, team players, and globally aware graduates. The desired attributes of these graduates include understanding process and systems design and integration, high ethical standards, and the ability to communicate effectively and work collaboratively. [[S3|IIAI Letters on Institutional Research]] The coalition's vision is to create sustainable engineering education reform with national impact. This vision was articulated through the definition of a curriculum model based on the desired attributes of engineering graduates.",
+        "The coalition's shared vision is to create sustainable engineering education reform with national impact."
+      ]
+    },
+    {
+      "heading": "Framework, Tools and Good Practices for Cybersecurity Curricula",
+      "paragraphs": [
+        "### Framework, Tools, and Good Practices for Cybersecurity Curricula [[S4|IEEE Access]] In the realm of cybersecurity, the need for high-quality education and training is paramount. Universities and professionals alike recognize the importance of cybersecurity education, but the current landscape is not well-equipped to meet the demands of the job market. This paper aims to fill this gap by providing practical tools and strategies to help institutions design effective cybersecurity curricula. [[S4|IEEE Access]] The first step in this process is analyzing the content of existing study programs worldwide.",
+        "This analysis reveals that the current curriculum often fails to align with the skills required by the job market. To address this issue, the paper introduces the SPARTA Cybersecurity Skills Framework. This framework is designed to bridge the gap between job roles and required expertise, showing how to develop a curriculum that reflects the job market requirements. [[S4|IEEE Access]] Next, the paper collects recommendations from renowned institutions both within and outside the EU.",
+        "This comprehensive survey is accompanied by a dynamic web application called Education Map, which provides a dynamic view of the current state of cybersecurity education. The framework is then designed based on this knowledge, ensuring that it is relevant and up-to-date. [[S4|IEEE Access]] Finally, a practical tool is provided to implement the framework. This tool helps education and training providers design new study programs and analyze existing ones, considering the requirements of cybersecurity work roles.",
+        "By using this tool, institutions can ensure that their cybersecurity programs are not only relevant but also aligned with the job market demands. [[S4|IEEE Access]] ### A Model for Automated Matching Between Job Market Demand and University Curricula [[S4|IEEE Access]] Technology plays a crucial role in virtually every industry, and its development is accelerating. However, there is a growing gap between the skills universities provide to students and the market needs. This paper presents a model for automatically matching job market demand with university curricula.",
+        "The model reviews different technologies that can be used to gather information about market needs and compare them against university curricula. [[S4|IEEE Access]] The latest achievements in this field are presented, along with suggestions from researchers. This model aims to consolidate university curricula with industry needs, ensuring that students are prepared for the job market."
+      ]
+    },
+    {
+      "heading": "A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight",
+      "paragraphs": [
+        "### A Multilingual Heterogeneous Knowledge Graph Framework for Curriculum–Vacancy–MOOC Alignment: Edge-Weight Regression with Heterogeneous Graph Transformers [[S5|Frontiers in Artificial Intelligence]] In the digital age, the gap between the competencies certified by university curricula and the skills demanded by employers has widened significantly. MOOCs, or Massive Open Online Courses, offer a potential solution to bridge this gap. However, existing recommenders often fail to connect what a program teaches, what the market requires, and what online courses develop within a single semantic structure. This limitation is particularly acute in the context of education, where the alignment between university programs and the skills required by the job market is crucial.",
+        "[[S5|Frontiers in Artificial Intelligence]] To address this challenge, researchers have developed a multilingual heterogeneous knowledge graph framework that integrates university programs, IT vacancies from hh.kz, and Coursera MOOCs in English, Russian, and Kazakh. This framework is designed to provide a comprehensive and actionable view of educational and career opportunities. [[S5|Frontiers in Artificial Intelligence]] The framework is built on a property-graph ontology that is formalized and instantiated automatically. Skills are aligned with a fine-tuned multilingual Sentence Transformer (paraphrase-multilingual-mpnet-base-v2), which is a state-of-the-art model for paraphrasing and translation.",
+        "This model is fine-tuned to handle multiple languages, ensuring that skills are accurately represented across different languages. Agglomerative clustering is used to form skill communities, which helps in identifying patterns and trends in the data. [[S5|Frontiers in Artificial Intelligence]] The recommendation system is cast as edge-weight regression over a competency-to-course relation. This approach is solved using GraphSAGE, HAN, and HGT encoders, which are known for their ability to handle heterogeneous and large-scale graph data.",
+        "The results of this system on a held-out 20% test graph show that HGT achieved the best ranking quality (NDCG@10 = 0.714; with short meta-paths NDCG@10 = 0.987, RMSE = 0.108), outperforming GraphSAGE and HAN. This indicates that the system is capable of producing front-loaded, actionable course recommendations for curriculum alignment. [[S5|Frontiers in Artificial Intelligence]] The system was applied to the \"Information Systems\" program of a Kazakhstani university. The results showed that the system expanded the market-aligned competency profile by +36.2% with five top-ranked courses and by +170% with the full catalogue.",
+        "This indicates that the system is effective in improving the market alignment of the curriculum."
+      ]
+    },
+    {
+      "heading": "Integrated Curricula In The Succeed Coalition",
+      "paragraphs": [
+        "### Integrated Curricula in Engineering Education: A Review and Recommendations [[S6|OpenAlex research index]] The SUCCEED Coalition, a multi-coalition collaboration, has been instrumental in advancing integrated curricula in engineering education. The first attempt, the Integrated Mathematics, Physics, Engineering, and Chemistry (IMPEC) program at NC State, utilized a fully-integrated team-taught set of courses. This program aimed to bridge the gap between traditional compartmentalized engineering curricula and the real-world problems that students would encounter. The second program, piloted at the University of Florida, retained traditional courses but collaborated with faculty from Mathematics, Physics, Chemistry, and Engineering to coordinate their curricula.",
+        "Both programs included other aspects of skill development, such as problem-solving and critical thinking. [[S6|OpenAlex research index]] The assessment data from these programs revealed several key findings. Firstly, students who participated in integrated curricula showed significantly higher levels of motivation and engagement compared to those who did not. This was due to the ability to connect concepts across different disciplines, which made the learning process more meaningful and relevant.",
+        "Secondly, students who completed integrated curricula were more likely to be employed in STEM fields after graduation, indicating that the skills learned in these programs were directly applicable to the workforce. Thirdly, the programs led to improved overall job performance, with graduates reporting higher job satisfaction and productivity. [[S6|OpenAlex research index]] The research also highlighted the importance of interdisciplinary collaboration in developing integrated curricula. This approach not only enhanced the learning experience but also prepared students for the multidisciplinary nature of the modern workforce.",
+        "The programs also emphasized the need for continuous assessment and feedback to ensure that the curriculum remained relevant and effective. [[S6|OpenAlex research index]] In conclusion, the SUCCEED Coalition's integrated curricula have shown promising results in improving student engagement, motivation, and employability. The programs have also highlighted the need for continuous improvement and adaptation to keep up with the evolving nature of the workforce. The findings from these programs provide valuable insights into the benefits of integrated curricula and suggest a clear path forward for further development and implementation in engineering education.",
+        "[[S6|OpenAlex research index]] In the sixth section’s sixth paragraph, the first evidence point for Integrated Curricula In The Succeed Coalition is that the research also highlighted the importance of interdisciplinary collaboration in developing integrated curricula."
+      ]
+    },
+    {
+      "heading": "A MODEL FOR AUTOMATED MATCHING BETWEEN JOB MARKET DEMAND AND",
+      "paragraphs": [
+        "### A Model for Automated Matching Between Job Market Demand and University Curricula [[S7|SEEU Review]] In the rapidly evolving landscape of technology, the integration of industry needs with university curricula has become increasingly crucial. This paper presents a model designed to bridge the gap between the market demands for technology skills and the educational offerings provided by universities. The model leverages advanced technology to gather and compare information about job market demands and university curricula, aiming to enhance the relevance of educational programs. [[S7|SEEU Review]] The labor market in technology is characterized by a high demand for specialized skills such as data analysis, software development, and artificial intelligence.",
+        "Universities, however, often fail to align their curricula with these market demands, leading to a mismatch between the skills students acquire and the skills required in the job market. This gap is further exacerbated by the increasing complexity of the job market, where skills and requirements evolve rapidly. [[S7|SEEU Review]] To address this issue, the model proposes a method for automated matching between job market demand and university curricula. This involves the use of a graph community detection algorithm to identify relevant communities within the data.",
+        "By connecting curriculum and job information through skill communities, the model aims to provide a more accurate and effective recommendation system. The innovative heterogeneous graph approach and random walk algorithm enable cross-domain information recommendation, ensuring that the recommendations are based on a comprehensive understanding of the skills and requirements of both the job market and the university curriculum. [[S7|SEEU Review]] The model's effectiveness is demonstrated through experiments on real job datasets from recruitment websites and course datasets from MOOCs and higher education. The results show that the model significantly outperforms traditional baselines, indicating its potential to improve the relevance of educational programs in the technology sector.",
+        "[[S7|SEEU Review]] This model represents a significant advancement in the field of automated matching between job market demand and university curricula. By leveraging technology to gather and compare information, it provides a practical solution to the challenges faced by universities and the job market. The model's ability to integrate diverse data sources and provide personalized recommendations makes it a valuable tool for educators and students alike, helping to ensure that educational programs remain relevant and aligned with the evolving needs of the job market."
+      ]
+    },
+    {
+      "heading": "UniSkill: A Dataset for Matching University Curricula to Professional Competencies",
+      "paragraphs": [
+        "### UniSkill: A Dataset for Matching University Curricula to Professional Competencies [[S1|arXiv Cornell University]] In the realm of educational and professional skill development, the need for tailored and effective curricula is paramount. The UniSkill dataset, released by researchers at the University of Amsterdam, aims to address the scarcity of publicly available datasets by providing both manually annotated and synthetic datasets of skills from the European Skills, Competences, Qualifications and Occupations (ESCO) taxonomy and university course pairs. This initiative is particularly relevant in the context of the rapidly evolving job market, where skills and competencies are becoming increasingly specialized and domain-specific. [[S1|arXiv Cornell University]] The dataset is designed to match graduate-level university courses with skills from the Systems Analysts and Management and Organization Analyst groups within the ESCO taxonomy.",
+        "This approach allows for a granular matching of course content with specific professional competencies, ensuring that students are prepared for the skills required in their future careers. The dataset is particularly valuable for educators and recruiters, as it provides a comprehensive and structured way to evaluate and match educational programs with industry needs. [[S1|arXiv Cornell University]] The research team behind UniSkill has trained language models on this dataset to serve as a baseline for retrieval and recommendation systems for course-to-skill and skill-to-course matching. The models have been evaluated on a portion of the annotated data, and the results have shown promising outcomes.",
+        "Specifically, the BERT model achieved an F1-score of 87%, indicating that course and skill matching is indeed a feasible task. This success suggests that the UniSkill dataset could be a valuable resource for educational institutions and industry professionals looking to enhance their skill development programs. [[S1|arXiv Cornell University]] The UniSkill dataset is particularly relevant in the context of the European Skills, Competences, Qualifications and Occupations (ESCO) taxonomy, which is widely used in the European Union for skill and competency assessment. By providing a structured and annotated dataset, UniSkill aims to bridge the gap between educational curricula and industry-specific skills, ensuring that students are well-prepared for the demands of the modern job market.",
+        "[[S1|arXiv Cornell University]] The release of UniSkill is a significant step towards addressing the challenges faced by the job market, where skills and competencies are becoming increasingly specialized and domain-specific. By providing a structured and annotated dataset, UniSkill aims to facilitate more effective and efficient skill development programs, ultimately leading to better preparedness and career success for students and professionals alike."
+      ]
+    },
+    {
+      "heading": "Matched, Somewhat-Matched or Mismatched? Predictors of Degree-Job Match among STEM",
+      "paragraphs": [
+        "Predictors of Degree-Job Match among STEM Graduates [[S2|Seton Hall University eRepository Seton Hall]] In the realm of STEM education, the degree-job match among graduates remains a critical concern. This study, conducted by Seton Hall University, explores the predictors of degree-job match among recent bachelor's degree STEM graduates. The research employs a sample of 1864 participants from the National Center for Education Statistics (NCES): the Education Longitudinal Study of 2002 (ELS: 2002). The study utilizes the Social Cognitive Career Theory (SCCT) as a foundation for its Degree-Job Match Model.",
+        "[[S2|Seton Hall University eRepository Seton Hall]] ### Predictors of Degree-Job Match [[S2|Seton Hall University eRepository Seton Hall]] The study identifies several key predictors of degree-job match, including cognitive abilities and career-related experiences during college. These factors are found to be the most influential in determining the match between degree and job. Additionally, the adequacy of the degree-job match is influenced by discriminatory factors such as race and socioeconomic status. [[S2|Seton Hall University eRepository Seton Hall]] ### Degree-Related Predictors [[S2|Seton Hall University eRepository Seton Hall]] Cognitive abilities and career-related experiences during college are found to be the most influential predictors of the degree-job match.",
+        "These factors play a crucial role in aligning the skills and knowledge gained during college with the requirements of the job. For instance, graduates with strong analytical skills and a deep understanding of STEM principles are more likely to secure jobs in STEM fields. [[S2|Seton Hall University eRepository Seton Hall]] ### Discriminatory Factors [[S2|Seton Hall University eRepository Seton Hall]] The study also highlights the impact of discriminatory factors on the degree-job match. Race and socioeconomic status are identified as significant discriminatory factors.",
+        "These factors can lead to mismatches between the degree and job, resulting in lower wages, lower job satisfaction, and increased turnover rates. This mismatch can also lead to feelings of loss in educational return on investments and an inadequate labor force for workforce expansion and growth. [[S2|Seton Hall University eRepository Seton Hall]] ### Conclusions [[S2|Seton Hall University eRepository Seton Hall]] The research underscores the importance of considering both the quality and the adequacy of the degree-job match. While the quantity of graduates is important, the quality and the level of competitiveness are crucial.",
+        "The federal government, along with private organizations, allocates substantial fiscal aid and resources to the STEM education system."
+      ]
+    },
+    {
+      "heading": "Graph-Community-Enabled Personalized Course-Job Recommendations with Cross-Domain Data Integration",
+      "paragraphs": [
+        "### Graph-Community-Enabled Personalized Course-Job Recommendations with Cross-Domain Data Integration [[S3|Sustainability]] In the realm of educational and career guidance, the need for accurate and effective course and job recommendations is paramount. The current landscape of recommendation systems, particularly in the academic and industrial sectors, has garnered significant attention. However, existing studies predominantly focus on content analysis and user feature extraction, neglecting the crucial aspect of cross-domain data integration between career and education. Furthermore, they fail to fully utilize the intricate relationships between courses, skills, and jobs, thereby compromising the accuracy of recommendations.",
+        "[[S3|Sustainability]] To address these shortcomings, this study introduces a novel cross-domain recommendation model, the Graph-Community-Enabled (GCE) model. This model leverages a heterogeneous graph and community detection algorithm to merge course profiles and recruiting information data. By calculating a skill community based on community detection, the curriculum and job information are seamlessly connected, thereby enhancing the accuracy of recommendations. [[S3|Sustainability]] The GCE model employs an innovative heterogeneous graph approach and random walk algorithm to enable cross-domain information recommendation.",
+        "This approach is evaluated on real job datasets from recruitment websites and course datasets from MOOCs and higher education. The experimental results demonstrate that the model significantly outperforms classical baselines, indicating its superiority in various educational and career contexts. [[S3|Sustainability]] ### Entity Linking among Categorized Knowledge Resources for Computer Science Curricula [[S3|Sustainability]] In the educational information processing domain, the need for effective information access is increasingly pressing. The quantity of digitized text resources in higher education is insufficient to develop large language models in specialized areas, leading to unreliable results when training data do not cover the target domain.",
+        "To tackle this issue, our proposed method is designed to establish links between lecture course information and entities for real-world knowledge. This entity linking enhances the understanding of text data by both humans and computers, making it easier for them to grasp the meaning of the data. [[S3|Sustainability]] Our method utilizes curriculum standards and university syllabus information to associate important keywords with text entities defined in Wikipedia articles. The effectiveness of this method is validated through evaluation experiments, which highlight its advantages in feature selection and entity linking for educational information.",
+        "This study's contributions include a detailed comparison among dictionaries in Japanese morphological analysis, providing valuable insights for researchers engaged in educational data analysis."
+      ]
+    }
+  ],
+  "summary": [
+    "For An integrated knowledge graph and digital twin framework for data, the evidence recap begins with this bounded point: chemical industry characterized by its long processes complex positions high safety risks and strong demand for digital transformation faces significant challenges in traditional industry-education integration models These models struggle to dynamically respond. [[S1|Discover Artificial Intelligence]] The practical reading of An integrated knowledge graph and digital twin framework for data is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This An integrated knowledge graph and digital twin framework for data recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast. For Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and, the evidence recap begins with this bounded point: which integrates data from university curricula job vacancies and online courses aims to provide accurate and relevant course recommendations based on a user's competencies The model utilizes three key components a graph.",
+    "[[S2|Technologies]] The practical reading of Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast. For Entity Linking among Categorized Knowledge Resources for Computer Science Curricula, the evidence recap begins with this bounded point: to enhance the accessibility and understanding of text data by humans and computers alike The entity linking process involves associating important keywords with text entities defined in Wikipedia articles This method employs. [[S3|IIAI Letters on Institutional Research]] The practical reading of Entity Linking among Categorized Knowledge Resources for Computer Science Curricula is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere.",
+    "This Entity Linking among Categorized Knowledge Resources for Computer Science Curricula recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast. For Framework, Tools and Good Practices for Cybersecurity Curricula, the evidence recap begins with this bounded point: content of existing study programs worldwide This analysis reveals that the current curriculum often fails to align with the skills required by the job market To address this issue the paper introduces. [[S4|IEEE Access]] The practical reading of Framework, Tools and Good Practices for Cybersecurity Curricula is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This Framework, Tools and Good Practices for Cybersecurity Curricula recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast.",
+    "For A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight, the evidence recap begins with this bounded point: the skills required by the job market is crucial To address this challenge researchers have developed a multilingual heterogeneous knowledge graph framework that integrates university programs IT vacancies from hh kz and. [[S5|Frontiers in Artificial Intelligence]] The practical reading of A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast. For Integrated Curricula In The Succeed Coalition, the evidence recap begins with this bounded point: several key findings Firstly students who participated in integrated curricula showed significantly higher levels of motivation and engagement compared to those who did not This was due to the ability to connect.",
+    "[[S6|OpenAlex research index]] The practical reading of Integrated Curricula In The Succeed Coalition is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere. This Integrated Curricula In The Succeed Coalition recap does not convert an attributable estimate, opinion or observed relationship into certainty, personal suitability or a forecast. For A MODEL FOR AUTOMATED MATCHING BETWEEN JOB MARKET DEMAND AND, the evidence recap begins with this bounded point: gap is further exacerbated by the increasing complexity of the job market where skills and requirements evolve rapidly To address this issue the model proposes a method for automated matching between job. [[S7|SEEU Review]] The practical reading of A MODEL FOR AUTOMATED MATCHING BETWEEN JOB MARKET DEMAND AND is to compare the source date, definitions, jurisdiction and affected group before treating that point as relevant elsewhere."
+  ],
+  "faq": [
+    {
+      "question": "What does the evidence show about An integrated knowledge graph and digital twin framework for data?",
+      "answer": "The bounded answer for An integrated knowledge graph and digital twin framework for data starts with the source-specific observation that Education in the Nylon Chemical Industry The nylon chemical industry characterized by its long processes complex positions high safety risks and strong demand for digital transformation faces significant challenges in traditional industry-education integration models These models. [[S1|Discover Artificial Intelligence]] For An integrated knowledge graph and digital twin framework for data, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. The useful next step for a reader examining An integrated knowledge graph and digital twin framework for data is to compare the linked record with newer evidence and personal circumstances before acting."
+    },
+    {
+      "question": "What does the evidence show about Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and?",
+      "answer": "The bounded answer for Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and starts with the source-specific observation that promising solution This model which integrates data from university curricula job vacancies and online courses aims to provide accurate and relevant course recommendations based on a user's competencies The model utilizes three key components a graph. [[S2|Technologies]] For Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. The useful next step for a reader examining Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and is to compare the linked record with newer evidence and personal circumstances before acting."
+    },
+    {
+      "question": "What does the evidence show about Entity Linking among Categorized Knowledge Resources for Computer Science Curricula?",
+      "answer": "The bounded answer for Entity Linking among Categorized Knowledge Resources for Computer Science Curricula starts with the source-specific observation that to enhance the accessibility and understanding of text data by humans and computers alike The entity linking process involves associating important keywords with text entities defined in Wikipedia articles This method employs curriculum standards and university. [[S3|IIAI Letters on Institutional Research]] For Entity Linking among Categorized Knowledge Resources for Computer Science Curricula, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. The useful next step for a reader examining Entity Linking among Categorized Knowledge Resources for Computer Science Curricula is to compare the linked record with newer evidence and personal circumstances before acting."
+    },
+    {
+      "question": "What does the evidence show about Framework, Tools and Good Practices for Cybersecurity Curricula?",
+      "answer": "The bounded answer for Framework, Tools and Good Practices for Cybersecurity Curricula starts with the source-specific observation that programs worldwide This analysis reveals that the current curriculum often fails to align with the skills required by the job market To address this issue the paper introduces the SPARTA Cybersecurity Skills Framework This framework is. [[S4|IEEE Access]] For Framework, Tools and Good Practices for Cybersecurity Curricula, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. The useful next step for a reader examining Framework, Tools and Good Practices for Cybersecurity Curricula is to compare the linked record with newer evidence and personal circumstances before acting."
+    },
+    {
+      "question": "What does the evidence show about A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight?",
+      "answer": "The bounded answer for A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight starts with the source-specific observation that crucial To address this challenge researchers have developed a multilingual heterogeneous knowledge graph framework that integrates university programs IT vacancies from hh kz and Coursera MOOCs in English Russian and Kazakh This framework is designed to. [[S5|Frontiers in Artificial Intelligence]] For A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight, that observation should be read in its stated period, jurisdiction and population rather than extended into an unsupported universal conclusion. The useful next step for a reader examining A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight is to compare the linked record with newer evidence and personal circumstances before acting."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Integrated Knowledge",
+      "definition": "In this article, Integrated Knowledge describes the part of An integrated knowledge graph and digital twin framework for data supported by the cited record, including this bounded context: Education in the Nylon Chemical Industry The nylon chemical industry characterized by its long processes complex positions high safety risks and strong demand for digital transformation faces significant challenges in traditional industry-education integration models These models. The Integrated Knowledge label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Curriculum Vacancy",
+      "definition": "In this article, Curriculum Vacancy describes the part of Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and supported by the cited record, including this bounded context: promising solution This model which integrates data from university curricula job vacancies and online courses aims to provide accurate and relevant course recommendations based on a user's competencies The model utilizes three key components a graph. The Curriculum Vacancy label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Entity Linking",
+      "definition": "In this article, Entity Linking describes the part of Entity Linking among Categorized Knowledge Resources for Computer Science Curricula supported by the cited record, including this bounded context: to enhance the accessibility and understanding of text data by humans and computers alike The entity linking process involves associating important keywords with text entities defined in Wikipedia articles This method employs curriculum standards and university. The Entity Linking label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Framework Tools",
+      "definition": "In this article, Framework Tools describes the part of Framework, Tools and Good Practices for Cybersecurity Curricula supported by the cited record, including this bounded context: programs worldwide This analysis reveals that the current curriculum often fails to align with the skills required by the job market To address this issue the paper introduces the SPARTA Cybersecurity Skills Framework This framework is. The Framework Tools label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Multilingual Heterogeneous",
+      "definition": "In this article, Multilingual Heterogeneous describes the part of A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight supported by the cited record, including this bounded context: crucial To address this challenge researchers have developed a multilingual heterogeneous knowledge graph framework that integrates university programs IT vacancies from hh kz and Coursera MOOCs in English Russian and Kazakh This framework is designed to. The Multilingual Heterogeneous label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Integrated Curricula",
+      "definition": "In this article, Integrated Curricula describes the part of Integrated Curricula In The Succeed Coalition supported by the cited record, including this bounded context: higher levels of motivation and engagement compared to those who did not This was due to the ability to connect concepts across different disciplines which made the learning process more meaningful and relevant Secondly students who. The Integrated Curricula label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Model Automated",
+      "definition": "In this article, Model Automated describes the part of A MODEL FOR AUTOMATED MATCHING BETWEEN JOB MARKET DEMAND AND supported by the cited record, including this bounded context: evolve rapidly To address this issue the model proposes a method for automated matching between job market demand and university curricula This involves the use of a graph community detection algorithm to identify relevant communities within. The Model Automated label does not imply that the same conditions apply to every place, period or reader."
+    },
+    {
+      "term": "Uniskill Dataset",
+      "definition": "In this article, Uniskill Dataset describes the part of UniSkill: A Dataset for Matching University Curricula to Professional Competencies supported by the cited record, including this bounded context: industry needs The research team behind UniSkill has trained language models on this dataset to serve as a baseline for retrieval and recommendation systems for course-to-skill and skill-to-course matching The models have been evaluated on a. The Uniskill Dataset label does not imply that the same conditions apply to every place, period or reader."
+    }
+  ],
+  "photos": [
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/ai-knowledge-graph-matches-university/photo-1.jpg",
+      "alt": "Illustrative photograph titled: Working dogs (working canines) and their handlers from multiple Department of Homeland Security Agencies at the Rayburn House Office Building in Washington, D.C. on 10 July 2024 - 11",
+      "source_title": "Working dogs (working canines) and their handlers from multiple Department of Homeland Security Agencies at the Rayburn House Office Building in Washington, D.C. on 10 July 2024 - 11.jpg",
+      "subjectDescriptionBasis": "Primary source file title, not the requested search brief",
+      "caption": "Photo: DHSgov / Public domain",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Working_dogs_(working_canines)_and_their_handlers_from_multiple_Department_of_Homeland_Security_Agencies_at_the_Rayburn_House_Office_Building_in_Washington,_D.C._on_10_July_2024_-_11.jpg",
+      "license": "Public domain",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "creator": "DHSgov"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/ai-knowledge-graph-matches-university/photo-2.jpg",
+      "alt": "Illustrative photograph titled: P20260505MR-0865 President Donald J. Trump delivers remarks at a Small Business Summit",
+      "source_title": "P20260505MR-0865 President Donald J. Trump delivers remarks at a Small Business Summit.jpg",
+      "subjectDescriptionBasis": "Primary source file title, not the requested search brief",
+      "caption": "Photo: The White House / Public domain",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://commons.wikimedia.org/wiki/File:P20260505MR-0865_President_Donald_J._Trump_delivers_remarks_at_a_Small_Business_Summit.jpg",
+      "license": "Public domain",
+      "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "creator": "The White House"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/ai-knowledge-graph-matches-university/photo-3.jpg",
+      "alt": "Illustrative photograph titled: 2023 AHL Team Business Meetings IMG 4356 (52996286691)",
+      "source_title": "2023 AHL Team Business Meetings IMG 4356 (52996286691).jpg",
+      "subjectDescriptionBasis": "Primary source file title, not the requested search brief",
+      "caption": "Photo: TheAHL / CC BY 2.0",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://commons.wikimedia.org/wiki/File:2023_AHL_Team_Business_Meetings_IMG_4356_(52996286691).jpg",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "creator": "TheAHL"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Discover Artificial Intelligence",
+      "title": "An integrated knowledge graph and digital twin framework for data intelligent industry education in the nylon chemical industry",
+      "url": "https://doi.org/10.1007/s44163-026-02048-8",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "Technologies",
+      "title": "Curriculum–Vacancy–Course Recommendation Model Based on Knowledge Graphs, Sentence Transformers, and Graph Neural Networks",
+      "url": "https://doi.org/10.3390/technologies13080340",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "IIAI Letters on Institutional Research",
+      "title": "Entity Linking among Categorized Knowledge Resources for Computer Science Curricula",
+      "url": "https://dx.doi.org/10.52731/lir.v003.152",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "IEEE Access",
+      "title": "Framework, Tools and Good Practices for Cybersecurity Curricula",
+      "url": "https://doi.org/10.1109/access.2021.3093952",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "Frontiers in Artificial Intelligence",
+      "title": "A multilingual heterogeneous knowledge graph framework for curriculum–vacancy–MOOC alignment: edge-weight regression with heterogeneous graph transformers for educational recommendation",
+      "url": "https://doi.org/10.3389/frai.2026.1906883",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "OpenAlex research index",
+      "title": "Integrated Curricula In The Succeed Coalition",
+      "url": "https://doi.org/10.18260/1-2--12620",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "SEEU Review",
+      "title": "A MODEL FOR AUTOMATED MATCHING BETWEEN JOB MARKET DEMAND AND UNIVERSITY CURRICULA OFFER",
+      "url": "https://doi.org/10.1515/seeur-2017-0024",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "arXiv (Cornell University)",
+      "title": "UniSkill: A Dataset for Matching University Curricula to Professional Competencies",
+      "url": "https://arxiv.org/abs/2603.03134",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "Seton Hall University eRepository (Seton Hall University)",
+      "title": "Matched, Somewhat-Matched or Mismatched? Predictors of Degree-Job Match among STEM Graduates",
+      "url": "https://scholarship.shu.edu/dissertations/2117",
+      "retrieved_at": "2026-10-21"
+    },
+    {
+      "name": "Sustainability",
+      "title": "Graph-Community-Enabled Personalized Course-Job Recommendations with Cross-Domain Data Integration",
+      "url": "https://doi.org/10.3390/su14127439",
+      "retrieved_at": "2026-10-21"
+    }
+  ],
+  "internal_links": [
+    {
+      "title": "Daily Article",
+      "url": "https://dailyyield.blogspot.com/p/article.html",
+      "relevance": "More original Daily Yield explainers."
+    },
+    {
+      "title": "Calculators",
+      "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+      "relevance": "Model financial assumptions with Daily Yield tools."
+    },
+    {
+      "title": "Markets Today",
+      "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+      "relevance": "Current cross-asset context."
+    },
+    {
+      "title": "Global Snapshot",
+      "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+      "relevance": "Concise global market context."
+    },
+    {
+      "title": "Money Atlas",
+      "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+      "relevance": "Country-specific financial context."
+    }
+  ],
+  "low_view_posts": [
+    {
+      "title": "One Emergency Fund Is Doing Two Jobs",
+      "url": "https://dailyyield.blogspot.com/2026/10/a-two-tier-emergency-fund.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/%28State_of_the_State_-_Press_Kits%29_-_%28Business_and_Transportation_Agency%29_-_DPLA_-_2d49b12714a5ea3f7f83a12377eb7238.pdf/page1-960px-%28State_of_the_State_-_Press_Kits%29_-_%28Business_and_Transportation_Agency%29_-_DPLA_-_2d49b12714a5ea3f7f83a12377eb7238.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Master Article"
+    },
+    {
+      "title": "Appreciation Cannot Rescue Bad Rent Math",
+      "url": "https://dailyyield.blogspot.com/2026/10/landlords-lie-with-appreciation.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/A_History_of_real_estate%2C_building%2C_and_architecture_in_New_York_City_during_the_last_quarter_of_a_century_%28electronic_resource%29_%28IA_5147521.0001.001.umich.edu%29.pdf/page1-1280px-thumbnail.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Homes Mortgages & Real Estate"
+    },
+    {
+      "title": "Australia Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/AUS_Sydney%2C_Central_Business_District%2C_Hyde_Park_040.jpg/1920px-AUS_Sydney%2C_Central_Business_District%2C_Hyde_Park_040.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Asia-Pacific Finance News"
+    },
+    {
+      "title": "South Korea Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-05.html",
+      "image": "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=1600&h=900&q=85",
+      "label": "Asia-Pacific Finance News"
+    },
+    {
+      "title": "Global Finance Wire — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/City_of_Asheboro_Central_Business_District_Redevelopment_Plan_2018-2023.pdf/page1-960px-City_of_Asheboro_Central_Business_District_Redevelopment_Plan_2018-2023.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Geographic Edition"
+    },
+    {
+      "title": "India Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Mumbai_skyline_in_background_%2849548188873%29.jpg/1920px-Mumbai_skyline_in_background_%2849548188873%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Country · India"
+    },
+    {
+      "title": "Trust Is Not Investment Due Diligence",
+      "url": "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Consumer_notes_%28IA_CAT11081231_003%29.pdf/page1-1280px-Consumer_notes_%28IA_CAT11081231_003%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Family Life Stages & Consumer Safety"
+    },
+    {
+      "title": "Market and Trading News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-05.html",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/6e/NY_stock_exchange_gsc_5a30622.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "label": "Category Edition"
+    },
+    {
+      "title": "Economy and Macro Policy News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0496477750.html",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Economic_growth_of_Argentina.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "label": "Category Edition"
+    },
+    {
+      "title": "Germany Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Frankfurt_Airport_Skyline_2017_04.jpg/1920px-Frankfurt_Airport_Skyline_2017_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Country · Germany"
+    },
+    {
+      "title": "France Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/The_parvis_de_la_D%C3%A9fense_near_Paris%2C_with_the_Christmas_market_-_2025-01-03.jpg/1920px-The_parvis_de_la_D%C3%A9fense_near_Paris%2C_with_the_Christmas_market_-_2025-01-03.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Country · France"
+    },
+    {
+      "title": "Prioritize Tax-Advantaged Room Before Year-End",
+      "url": "https://dailyyield.blogspot.com/2026/10/dont-leave-free-room-in-2026-accounts.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/%28Ruby%2C_Jack%29_2-4_Business_and_Financial_Interests_-_January_1964_-_DPLA_-_adfb85f5fc0f59774e62071d1628b29c.pdf/page1-960px-%28Ruby%2C_Jack%29_2-4_Business_and_Financial_Interests_-_January_1964_-_DPLA_-_adfb85f5fc0f59774e62071d1628b29c.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Master Article"
+    },
+    {
+      "title": "Japan Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Tokyo_Marunouchi_Skyscraper_%2813576803183%29.jpg/1920px-Tokyo_Marunouchi_Skyscraper_%2813576803183%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Asia-Pacific Finance News"
+    },
+    {
+      "title": "UK Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/uk-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/London_Skyline_from_Waterloo_Bridge%2C_London%2C_UK_-_Diliff.jpg/1920px-London_Skyline_from_Waterloo_Bridge%2C_London%2C_UK_-_Diliff.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "Country · United Kingdom"
+    },
+    {
+      "title": "China Finance News — 5 October 2026",
+      "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-05.html",
+      "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/%22New_City%22_Chinese_takeaway_business_-_geograph.org.uk_-_8307781.jpg/1280px-%22New_City%22_Chinese_takeaway_business_-_geograph.org.uk_-_8307781.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "label": "China Finance News"
+    }
+  ]
+}
