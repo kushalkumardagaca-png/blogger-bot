@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T12:02:30.043801+05:30",
+  "generatedAt": "2026-10-21T15:02:00.731369+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -18,13 +18,13 @@
       "id": "B3",
       "task": "Misleading reports",
       "result": "Fixed",
-      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 648."
+      "proof": "Google inspection errors are separated from unindexed pages; property labels cannot be inspected as URLs; unreadable pages are unknown rather than automatically broken. Legitimate AdSense code is not prohibited. Regression tests: 680."
     },
     {
       "id": "B4",
       "task": "Policy pages and navigation",
       "result": "Checked",
-      "proof": "5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 13/13 tested routes reached HTTP 200 for both checks. No redesign. Independent source-only policy GET checks returned 200 for 5/5 pages, with no retired description wording observed."
+      "proof": "5/5 policy routes observed in homepage links; 1 Report Abuse link(s). HEAD diagnostics: 6/13 tested routes reached HTTP 200 for both checks. No redesign. Independent source-only policy GET checks returned 200 for 5/5 pages, with no retired description wording observed."
     },
     {
       "id": "B5",
@@ -36,7 +36,7 @@
       "id": "B6",
       "task": "Facts and originality",
       "result": "Automated check done; human-review limit remains",
-      "proof": "562 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
+      "proof": "567 live posts read as actually stored. Policy flags: 0; missing disclosures: 0; exact-text duplicate groups: 0. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: 170; all numerical facts, links, scripts and styles were protected."
     },
     {
       "id": "B7",
@@ -48,7 +48,7 @@
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-21T11:29:51.324559+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
+      "proof": "Live status source 2026-10-21T14:49:50.222702+05:30: 10/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
     },
     {
       "id": "B9",
@@ -77,8 +77,8 @@
     {
       "id": "B13",
       "task": "Existing Analytics reporting",
-      "result": "Checked; cannot claim connected",
-      "proof": "Result: ANALYTICS_SCOPE_MISSING. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured."
+      "result": "Connected existing reports",
+      "proof": "Result: EXISTING_COLLECTION_REPORT_CONNECTED. Only existing authorised read access was tried. No new collection or owner permission grant was manufactured."
     },
     {
       "id": "B14",
@@ -90,7 +90,7 @@
       "id": "B15",
       "task": "Bing and IndexNow",
       "result": "Monitored; quota respected",
-      "proof": "Last Bing record 2026-10-21T05:22:37.837665+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 593. IndexNow parked: True. No indexing guarantee."
+      "proof": "Last Bing record 2026-10-21T09:12:47.313593+00:00: remaining daily allowance 0; durable URL records with accepted-submission evidence 593. IndexNow parked: True. No indexing guarantee."
     },
     {
       "id": "B16",
@@ -117,10 +117,6 @@
       "Check the private AdSense application and complete any required account task. I cannot see that screen; do not remove/resubmit a Getting ready site."
     ],
     [
-      "Read-only Analytics approval, 4 minutes, nothing to install",
-      "The tag is already on every page (G-WLEEYTKV12); only read permission is missing. Steps with links: GA4_CONNECT.md; then run the workflow ga4_connection_check.yml, which answers in one sentence. No new collection code is installed to turn this row green."
-    ],
-    [
       "Before high-risk advice is published",
       "A suitable person must genuinely review important financial claims. Automated checks do not prove expert review of every article."
     ],
@@ -130,9 +126,9 @@
     ]
   ],
   "sourceDates": {
-    "siteAudit": "2026-10-21T06:32:28.060791+00:00",
-    "slots": "2026-10-21T11:29:51.324559+05:30",
-    "social": "2026-10-21T12:02:30.014073+05:30",
+    "siteAudit": "2026-10-21T09:31:57.822004+00:00",
+    "slots": "2026-10-21T14:49:50.222702+05:30",
+    "social": "2026-10-21T15:02:00.699932+05:30",
     "google": "2026-10-20T21:24:55.506685+00:00"
   },
   "noGrandUpdateStarted": true,

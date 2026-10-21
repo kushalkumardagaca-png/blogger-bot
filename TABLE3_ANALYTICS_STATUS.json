@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-21T06:32:27.812673+00:00",
+  "checkedAt": "2026-10-21T09:31:56.817007+00:00",
   "siteTagsChanged": false,
   "newCollectionEnabled": false,
   "dataSubmitted": false,
@@ -8,15 +8,180 @@
   ],
   "observedTagManagerIds": [],
   "privatePropertyIdConfigured": false,
-  "status": "ANALYTICS_SCOPE_MISSING",
+  "status": "EXISTING_COLLECTION_REPORT_CONNECTED",
   "readers": null,
   "returningReaders": null,
   "ownerStep": "Do not install tags during freeze. Only an existing collection/report permission may be connected.",
-  "credentialSource": "GSC_REFRESH_TOKEN",
-  "adminReadHttpStatus": 403,
-  "apiReasons": [
-    "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
-  ],
-  "apiErrorStatus": "PERMISSION_DENIED",
-  "detail": "Existing authorised access could not list Analytics properties. No account/permission changes, collection installation or event submission was attempted."
+  "credentialSource": "GA4_REFRESH_TOKEN",
+  "adminReadHttpStatus": 200,
+  "dataReadHttpStatus": 200,
+  "propertyId": "556948096",
+  "measurementId": "G-WLEEYTKV12",
+  "reportedEvents": [
+    {
+      "dimensionValues": [
+        {
+          "value": "page_view"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "454"
+        },
+        {
+          "value": "127"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "user_engagement"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "422"
+        },
+        {
+          "value": "130"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "dy_web_vitals"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "249"
+        },
+        {
+          "value": "27"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "session_start"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "175"
+        },
+        {
+          "value": "127"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "first_visit"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "127"
+        },
+        {
+          "value": "127"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "scroll"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "73"
+        },
+        {
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "view_search_results"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "14"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "click"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "4"
+        },
+        {
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "form_submit"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "3"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "form_start"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "2"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "dimensionValues": [
+        {
+          "value": "article_read"
+        }
+      ],
+      "metricValues": [
+        {
+          "value": "1"
+        },
+        {
+          "value": "1"
+        }
+      ]
+    }
+  ]
 }

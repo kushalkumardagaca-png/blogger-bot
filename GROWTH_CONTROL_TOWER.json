@@ -1,27 +1,140 @@
 {
-  "generatedAt": "2026-10-21T06:32:29.673400+00:00",
+  "generatedAt": "2026-10-21T09:32:00.371820+00:00",
   "deadline": "2027-09-30",
   "targetDistinctDailyEngagedReaders": 10000000,
   "daysRemaining": 344,
   "stretchTrajectory": {
-    "verifiedBaseline": null,
+    "verifiedBaseline": 0,
     "requiredDailyGrowth": null,
     "checkpoints": [],
     "warning": "Arithmetic to an ambition, not a forecast. No trajectory is generated without a verified positive baseline."
   },
   "primaryMetric": {
-    "status": "NOT_CONFIGURED",
+    "status": "ACTIVE",
     "metricDefinition": "Distinct consented users triggering article_read after at least 30 active seconds and 50% article depth.",
-    "dau": null,
-    "average7Day": null,
-    "average28Day": null,
+    "dau": 0,
+    "average7Day": 0.1,
+    "average28Day": 0.0,
     "newUsers28Day": null,
-    "returningUsers28Day": null,
-    "daily": []
+    "returningUsers28Day": 1,
+    "daily": [
+      {
+        "date": "2026-09-23",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-24",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-25",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-26",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-27",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-28",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-29",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-09-30",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-01",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-02",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-03",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-04",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-05",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-06",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-07",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-08",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-09",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-10",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-11",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-12",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-13",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-14",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-15",
+        "engagedReaders": 1
+      },
+      {
+        "date": "2026-10-16",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-17",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-18",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-19",
+        "engagedReaders": 0
+      },
+      {
+        "date": "2026-10-20",
+        "engagedReaders": 0
+      }
+    ]
   },
   "pace": {
-    "currentVerifiedDAU": null,
-    "targetGap": null,
+    "currentVerifiedDAU": 0,
+    "targetGap": 10000000,
     "requiredDailyCompoundGrowth": null,
     "onTarget": false
   },
@@ -42,7 +155,7 @@
     "socialObservedInteractions": 2
   },
   "production": {
-    "masterPublishedTotal": 87,
+    "masterPublishedTotal": 88,
     "newsDesksTracked": 11
   },
   "integrity": {
@@ -51,5 +164,5 @@
     "impressionsAreReaders": false,
     "searchClicksAreReaders": false
   },
-  "status": "MEASUREMENT_INSTRUMENTED_REPORTING_NOT_CONFIGURED"
+  "status": "ACTIVE"
 }

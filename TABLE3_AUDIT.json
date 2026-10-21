@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-10-21T06:32:28.060791+00:00",
+  "checkedAt": "2026-10-21T09:31:57.822004+00:00",
   "status": "CHECKED_WITH_LIMITS",
   "siteWrites": 0,
   "analyticsEventsSent": 0,
   "pageScriptsExecuted": false,
   "bloggerApiReads": 15,
-  "livePosts": 562,
+  "livePosts": 567,
   "livePages": 14,
   "drafts": 0,
   "draftInventory": [],
@@ -14,7 +14,7 @@
   "sourceObservation": {
     "status": "OBSERVED",
     "httpStatus": 200,
-    "sourceSha256": "2651ed73af27e75007d12f8565021fec6c896e5447a2690a4ce956e1cfbc1214",
+    "sourceSha256": "ecf235ccf8628b6297f56c93a7cf4391453df3d12cf4a1577c0bbb1a8a9bc2b6",
     "ga4IdsObserved": [
       "G-WLEEYTKV12"
     ],
@@ -52,14 +52,14 @@
       "httpStatus": 200,
       "text": "google.com, pub-1083724733490660, DIRECT, f08c47fec0942fa0\n",
       "readOnly": true,
-      "checkedAt": "2026-10-21T06:32:04.153450+00:00",
+      "checkedAt": "2026-10-21T09:31:28.205265+00:00",
       "matchesRecordedPublisher": true
     },
     "robotsTxt": {
       "httpStatus": 200,
       "text": "User-agent: Mediapartners-Google\nDisallow:\n\nUser-agent: *\nDisallow: /search\nAllow: /\n\nSitemap: https://dailyyield.blogspot.com/sitemap.xml\nSitemap: https://dailyyield.blogspot.com/sitemap-pages.xml",
       "readOnly": true,
-      "checkedAt": "2026-10-21T06:32:04.267396+00:00"
+      "checkedAt": "2026-10-21T09:31:28.340085+00:00"
     }
   },
   "freeze": {
@@ -75,7 +75,7 @@
     "routineUpdates": "Existing article/news hub cards and JSON data only; no old-post/theme/label rebuild."
   },
   "corpusSummary": {
-    "postsScanned": 562,
+    "postsScanned": 567,
     "pagesScanned": 14,
     "automatedPolicyFlags": [],
     "missingDisclosure": [],
@@ -87,25 +87,11 @@
     "newsPoolsBelow40": [],
     "masterPoolsBelow10": [
       {
-        "pool": "photo_library/master/f1c98d1ff3f94446.json",
+        "pool": "photo_library/master/e628367f510ad86c.json",
         "type": "master",
-        "count": 8,
+        "count": 1,
         "target": 10,
-        "title": "Best Tax-Free Savings Account Rates in Canada for 2026 - NerdWallet"
-      },
-      {
-        "pool": "photo_library/master/bd1d8d0f0a19907d.json",
-        "type": "master",
-        "count": 8,
-        "target": 10,
-        "title": "ET Alpha Wealth Summit 2.0: Why next market cycle may need a new playbook - The Economic Times"
-      },
-      {
-        "pool": "photo_library/master/f36627b824852543.json",
-        "type": "master",
-        "count": 3,
-        "target": 10,
-        "title": "How to Evaluate Healthcare AI Investments Without Hype"
+        "title": "Russian ministers join board of key trade payments firm A7"
       },
       {
         "pool": "photo_library/master/291f4779e5df057c.json",
@@ -115,102 +101,25 @@
         "title": "Brazil's first-round election results trigger currency and stock rally on expectations of tighter fi"
       },
       {
-        "pool": "photo_library/master/083c2df37e074a6d.json",
+        "pool": "photo_library/master/f36627b824852543.json",
+        "type": "master",
+        "count": 3,
+        "target": 10,
+        "title": "How to Evaluate Healthcare AI Investments Without Hype"
+      },
+      {
+        "pool": "photo_library/master/026f01684d108a67.json",
+        "type": "master",
+        "count": 1,
+        "target": 10,
+        "title": "How often is Daily Yield published?"
+      },
+      {
+        "pool": "photo_library/master/975a7e318b15b228.json",
         "type": "master",
         "count": 0,
         "target": 10,
-        "title": "Payoneer: How Stablecoin is Scaling in Cross-Border Payments - FinTech Magazine"
-      },
-      {
-        "pool": "photo_library/master/059ada08d696d8a3.json",
-        "type": "master",
-        "count": 8,
-        "target": 10,
-        "title": "How to Measure Side-Hustle Profit After Costs and Time"
-      },
-      {
-        "pool": "photo_library/master/5cdade0cae61cd5e.json",
-        "type": "master",
-        "count": 3,
-        "target": 10,
-        "title": "Oil prices climb as traders weigh Saudi supply risk, Russian diesel flow"
-      },
-      {
-        "pool": "photo_library/master/26b4796ee118af45.json",
-        "type": "master",
-        "count": 5,
-        "target": 10,
-        "title": "Proposals to close Minneapolis schools aimed at reallocating funds, not saving money, leaders say - "
-      },
-      {
-        "pool": "photo_library/master/94c9cb25362ce09d.json",
-        "type": "master",
-        "count": 0,
-        "target": 10,
-        "title": "AT&T to Sell AT&T Mexico to Grupo Televisa and Fintech Holdings - PR Newswire"
-      },
-      {
-        "pool": "photo_library/master/18a6240d22247ff2.json",
-        "type": "master",
-        "count": 3,
-        "target": 10,
-        "title": "4 Different Types of Life Insurance & How to Choose in 2026 - NerdWallet"
-      },
-      {
-        "pool": "photo_library/master/bbe277ac016bdb68.json",
-        "type": "master",
-        "count": 1,
-        "target": 10,
-        "title": "Burnham Capital Gains Tax threat could disrupt market - Estate Agent Today"
-      },
-      {
-        "pool": "photo_library/master/e628367f510ad86c.json",
-        "type": "master",
-        "count": 1,
-        "target": 10,
-        "title": "Russian ministers join board of key trade payments firm A7"
-      },
-      {
-        "pool": "photo_library/master/475ff8aafbb145d8.json",
-        "type": "master",
-        "count": 1,
-        "target": 10,
-        "title": "How to Read Inflation Signals Without Guessing Rate Moves"
-      },
-      {
-        "pool": "photo_library/master/ead93a367603d402.json",
-        "type": "master",
-        "count": 7,
-        "target": 10,
-        "title": "10 Ways to Pay Off Credit Card Debt - NerdWallet"
-      },
-      {
-        "pool": "photo_library/master/a95c0e33a1c7e31c.json",
-        "type": "master",
-        "count": 1,
-        "target": 10,
-        "title": "Kremlin-backed money launderer used London fintech to make payments - Financial Times"
-      },
-      {
-        "pool": "photo_library/master/60bb07eaede8bd02.json",
-        "type": "master",
-        "count": 3,
-        "target": 10,
-        "title": "How to Build a Small-Business Cash-Flow Stress Test"
-      },
-      {
-        "pool": "photo_library/master/3d060d702c6d4402.json",
-        "type": "master",
-        "count": 6,
-        "target": 10,
-        "title": "Pension fund managers in India: A guide to performance and returns - Business Standard"
-      },
-      {
-        "pool": "photo_library/master/2981fca874eebe67.json",
-        "type": "master",
-        "count": 9,
-        "target": 10,
-        "title": "Retirement planning: Why costs, asset allocation, and compounding matter more than chasing returns -"
+        "title": "Mortgage rates: Why has long term US home loan rate hit highest level in 3 years. Check impact on ho"
       },
       {
         "pool": "photo_library/master/9aee779e8171d2df.json",
@@ -227,11 +136,95 @@
         "title": "Social Security Administration announces 3.6% cost-of-living adjustment for 2027"
       },
       {
-        "pool": "photo_library/master/026f01684d108a67.json",
+        "pool": "photo_library/master/ead93a367603d402.json",
+        "type": "master",
+        "count": 7,
+        "target": 10,
+        "title": "10 Ways to Pay Off Credit Card Debt - NerdWallet"
+      },
+      {
+        "pool": "photo_library/master/475ff8aafbb145d8.json",
         "type": "master",
         "count": 1,
         "target": 10,
-        "title": "How often is Daily Yield published?"
+        "title": "How to Read Inflation Signals Without Guessing Rate Moves"
+      },
+      {
+        "pool": "photo_library/master/bbe277ac016bdb68.json",
+        "type": "master",
+        "count": 1,
+        "target": 10,
+        "title": "Burnham Capital Gains Tax threat could disrupt market - Estate Agent Today"
+      },
+      {
+        "pool": "photo_library/master/2d019933a64e7cb1.json",
+        "type": "master",
+        "count": 6,
+        "target": 10,
+        "title": "Sold a property? Eight different ways to reduce your capital gains tax bill - Business Standard"
+      },
+      {
+        "pool": "photo_library/master/bd1d8d0f0a19907d.json",
+        "type": "master",
+        "count": 8,
+        "target": 10,
+        "title": "ET Alpha Wealth Summit 2.0: Why next market cycle may need a new playbook - The Economic Times"
+      },
+      {
+        "pool": "photo_library/master/a95c0e33a1c7e31c.json",
+        "type": "master",
+        "count": 1,
+        "target": 10,
+        "title": "Kremlin-backed money launderer used London fintech to make payments - Financial Times"
+      },
+      {
+        "pool": "photo_library/master/18a6240d22247ff2.json",
+        "type": "master",
+        "count": 3,
+        "target": 10,
+        "title": "4 Different Types of Life Insurance & How to Choose in 2026 - NerdWallet"
+      },
+      {
+        "pool": "photo_library/master/3d060d702c6d4402.json",
+        "type": "master",
+        "count": 6,
+        "target": 10,
+        "title": "Pension fund managers in India: A guide to performance and returns - Business Standard"
+      },
+      {
+        "pool": "photo_library/master/083c2df37e074a6d.json",
+        "type": "master",
+        "count": 0,
+        "target": 10,
+        "title": "Payoneer: How Stablecoin is Scaling in Cross-Border Payments - FinTech Magazine"
+      },
+      {
+        "pool": "photo_library/master/94c9cb25362ce09d.json",
+        "type": "master",
+        "count": 0,
+        "target": 10,
+        "title": "AT&T to Sell AT&T Mexico to Grupo Televisa and Fintech Holdings - PR Newswire"
+      },
+      {
+        "pool": "photo_library/master/2981fca874eebe67.json",
+        "type": "master",
+        "count": 9,
+        "target": 10,
+        "title": "Retirement planning: Why costs, asset allocation, and compounding matter more than chasing returns -"
+      },
+      {
+        "pool": "photo_library/master/60bb07eaede8bd02.json",
+        "type": "master",
+        "count": 3,
+        "target": 10,
+        "title": "How to Build a Small-Business Cash-Flow Stress Test"
+      },
+      {
+        "pool": "photo_library/master/5cdade0cae61cd5e.json",
+        "type": "master",
+        "count": 3,
+        "target": 10,
+        "title": "Oil prices climb as traders weigh Saudi supply risk, Russian diesel flow"
       },
       {
         "pool": "photo_library/master/5e521814024bcfa1.json",
@@ -241,28 +234,155 @@
         "title": "How can I declare my interest income on provident fund account for financial year 2024-2025 now? - U"
       },
       {
-        "pool": "photo_library/master/975a7e318b15b228.json",
+        "pool": "photo_library/master/f1c98d1ff3f94446.json",
         "type": "master",
-        "count": 0,
+        "count": 8,
         "target": 10,
-        "title": "Mortgage rates: Why has long term US home loan rate hit highest level in 3 years. Check impact on ho"
+        "title": "Best Tax-Free Savings Account Rates in Canada for 2026 - NerdWallet"
       },
       {
-        "pool": "photo_library/master/2d019933a64e7cb1.json",
+        "pool": "photo_library/master/26b4796ee118af45.json",
         "type": "master",
-        "count": 6,
+        "count": 5,
         "target": 10,
-        "title": "Sold a property? Eight different ways to reduce your capital gains tax bill - Business Standard"
+        "title": "Proposals to close Minneapolis schools aimed at reallocating funds, not saving money, leaders say - "
+      },
+      {
+        "pool": "photo_library/master/059ada08d696d8a3.json",
+        "type": "master",
+        "count": 8,
+        "target": 10,
+        "title": "How to Measure Side-Hustle Profit After Costs and Time"
       }
     ]
   },
   "redirectSummary": {
     "checked": 13,
-    "currentlyReachable": 13,
-    "needsRecheck": []
+    "currentlyReachable": 6,
+    "needsRecheck": [
+      {
+        "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-09-25T16:59:14Z",
+        "desktop": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:17:17Z",
+        "desktop": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-09-25T17:01:15Z",
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/article.html",
+        "oldGoogleCoverage": "Redirect error",
+        "oldLastCrawl": "2026-10-02T07:15:16Z",
+        "desktop": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/article.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/article.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+        "oldGoogleCoverage": null,
+        "oldLastCrawl": null,
+        "desktop": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+        "oldGoogleCoverage": null,
+        "oldLastCrawl": null,
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/disclaimer.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/disclaimer.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      },
+      {
+        "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+        "oldGoogleCoverage": null,
+        "oldLastCrawl": null,
+        "desktop": {
+          "httpStatus": 204,
+          "finalUrl": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+          "redirects": []
+        },
+        "crawlerUA": {
+          "httpStatus": 200,
+          "finalUrl": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+          "redirects": []
+        },
+        "status": "NEEDS_RECHECK",
+        "method": "HEAD only; no page scripts; simulated user-agent is not a real Google crawl"
+      }
+    ]
   },
   "analytics": {
-    "checkedAt": "2026-10-21T06:32:27.812673+00:00",
+    "checkedAt": "2026-10-21T09:31:56.817007+00:00",
     "siteTagsChanged": false,
     "newCollectionEnabled": false,
     "dataSubmitted": false,
@@ -271,21 +391,186 @@
     ],
     "observedTagManagerIds": [],
     "privatePropertyIdConfigured": false,
-    "status": "ANALYTICS_SCOPE_MISSING",
+    "status": "EXISTING_COLLECTION_REPORT_CONNECTED",
     "readers": null,
     "returningReaders": null,
     "ownerStep": "Do not install tags during freeze. Only an existing collection/report permission may be connected.",
-    "credentialSource": "GSC_REFRESH_TOKEN",
-    "adminReadHttpStatus": 403,
-    "apiReasons": [
-      "ACCESS_TOKEN_SCOPE_INSUFFICIENT"
-    ],
-    "apiErrorStatus": "PERMISSION_DENIED",
-    "detail": "Existing authorised access could not list Analytics properties. No account/permission changes, collection installation or event submission was attempted."
+    "credentialSource": "GA4_REFRESH_TOKEN",
+    "adminReadHttpStatus": 200,
+    "dataReadHttpStatus": 200,
+    "propertyId": "556948096",
+    "measurementId": "G-WLEEYTKV12",
+    "reportedEvents": [
+      {
+        "dimensionValues": [
+          {
+            "value": "page_view"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "454"
+          },
+          {
+            "value": "127"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "user_engagement"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "422"
+          },
+          {
+            "value": "130"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "dy_web_vitals"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "249"
+          },
+          {
+            "value": "27"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "session_start"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "175"
+          },
+          {
+            "value": "127"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "first_visit"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "127"
+          },
+          {
+            "value": "127"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "scroll"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "73"
+          },
+          {
+            "value": "3"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "view_search_results"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "14"
+          },
+          {
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "click"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "4"
+          },
+          {
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "form_submit"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "3"
+          },
+          {
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "form_start"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "2"
+          },
+          {
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "dimensionValues": [
+          {
+            "value": "article_read"
+          }
+        ],
+        "metricValues": [
+          {
+            "value": "1"
+          },
+          {
+            "value": "1"
+          }
+        ]
+      }
+    ]
   },
   "bing": {
     "lastRun": {
-      "checkedAt": "2026-10-21T05:22:37.837665+00:00",
+      "checkedAt": "2026-10-21T09:12:47.313593+00:00",
       "status": "PASS",
       "mode": "BING_AND_BLOGGER_CONTROL_PLANE_ZERO_PUBLIC_VIEWS",
       "syntheticViews": 0,
@@ -295,10 +580,10 @@
         "monthlyAvailable": 1000
       },
       "summary": {
-        "inventory": 577,
-        "candidates": 238,
+        "inventory": 582,
+        "candidates": 243,
         "submitted": 0,
-        "quotaDeferred": 238,
+        "quotaDeferred": 243,
         "inspected": 10,
         "knownToBing": 0,
         "pendingMonitoring": 339,
