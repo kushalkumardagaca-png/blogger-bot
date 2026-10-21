@@ -49,10 +49,27 @@ redirect list. Click **Daily Yield Search Console Automation** and:
 
 1. Find **Authorized redirect URIs** → **Add URI** → paste `https://developers.google.com/oauthplayground`
    → **Save**. Adding a URI never disturbs a working authorisation: nothing that runs today stops.
-2. On the same page copy the **Client ID**, and reveal/copy the **Client secret** (web clients show it
-   with a copy icon).
-3. **Do not press "Reset secret"** or delete anything. A reset would silently break the nightly Search
-   Console readings, which use this same pair, and every job would start failing with `invalid_client`.
+   Google says a settings change like that can take **5 minutes to a few hours** to take effect, so if
+   the next page answers `redirect_uri_mismatch`, wait ten minutes and press it again instead of
+   changing anything else.
+2. Copy the **Client ID**.
+3. The **Client secret is not readable anywhere on that page, and that is not a mistake you made**:
+   after Google's April 2025 change (applied to all clients from November 2025) secrets are hashed in
+   the console, and once the creation dialog closes only the **last four characters** are shown, for
+   identification. It is never displayed again.
+4. So ask Google for a *second* secret on the same client. That is Google's documented way to recover a
+   lost secret, and it is safe here because **adding** a secret does not switch the old one off: on the
+   client details page press **Add secret** on the right, and copy the value **immediately**, because it
+   is shown once. A client may hold up to two enabled secrets, so the value this repository already holds
+   keeps working for the nightly Search Console readings while Analytics uses the new one.
+5. **Never press "Disable", "Delete" or "Reset" on the older secret.** Any of those would break every job
+   that refreshes with the stored value, and they would all start failing with `invalid_client`.
+
+*If that page offers no **Add secret** button* (some accounts are read-only there): leave this client
+alone and create a second one — **Create client → Web application**, name `Daily Yield robots`,
+authorized redirect URI `https://developers.google.com/oauthplayground` — and copy **both** values from
+the popup that appears the instant it is created, since they are never shown again. Step 4 then wants
+three values instead of one, and nothing that currently works is touched.
 
 You do **not** need to store this pair in GitHub: the repository already holds it under
 `GSC_CLIENT_ID` and `GSC_CLIENT_SECRET`, and every job that reads Analytics resolves the three values
@@ -61,11 +78,10 @@ client pair. That is why Step 4 costs you one paste instead of three, and it is 
 measurement, the control tower and the Table 3 audit alike: they were fixed on 21 October 2026 after
 two of them picked a whole set of names by prefix and would have ignored a correct single paste.
 
-*Only if* the secret cannot be revealed on that page: leave it as it is and create a second client —
-**Create credentials → OAuth client ID → Application type: Web application**, name
-`Daily Yield robots`, authorized redirect URI `https://developers.google.com/oauthplayground` — and
-then Step 4 needs its `GA4_CLIENT_ID` and `GA4_CLIENT_SECRET` added as well. The Search Console
-channel keeps its own credentials untouched either way.
+*One more thing worth knowing:* the authorisation is tied to the **client**, not to which of its two
+enabled secrets was used, so the repository can go on refreshing with the secret it already holds. If
+Google ever answers `invalid_client` after you rotate, paste the new secret as `GA4_CLIENT_SECRET` too —
+that is the whole repair, and `GA4_CONNECT.md` step 4 has the box for it.
 
 **Already checked, so skip it:** <https://console.cloud.google.com/auth/audience> showed
 **Publishing status: In production**, **User type: External**. That is the good state — a token minted
