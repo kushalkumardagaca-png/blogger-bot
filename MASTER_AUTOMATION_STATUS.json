@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "3f180ea618230723",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-21",
   "kind": "evergreen",
   "slot": 4,
-  "slot_key": "2026-10-21:evergreen:4",
-  "date": "2026-10-21",
-  "category": "Family Life Stages & Consumer Safety",
-  "evergreen_category": "Family Life Stages & Consumer Safety",
+  "topic_id": "3f180ea618230723",
+  "replaced_topic_id": null,
   "title": "Is ₹3 lakh enough for your emergency fund",
-  "url": "https://dailyyield.blogspot.com/2026/10/is-3-lakh-enough-for-your-emergency-fund.html",
-  "published_at": "2026-10-21T09:45:10-07:00"
+  "package": "master_packages/dynamic/2026-10-21-evergreen-3f180ea618230723.json",
+  "html": "scheduled_ready/2026-10-21-evergreen-4-is-3-lakh-enough-for-your-emergency-fund.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 0.0,
+  "remainingMinutes": 30.0
 }
