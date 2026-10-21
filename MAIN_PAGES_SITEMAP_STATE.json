@@ -1,0 +1,24 @@
+{
+ "checkedAt": "2026-10-21T17:27:58+00:00",
+ "sitemaps": {
+  "status": "UNAVAILABLE",
+  "registered": [],
+  "missing": [
+   "https://dailyyield.blogspot.com/sitemap.xml",
+   "https://dailyyield.blogspot.com/sitemap-pages.xml"
+  ],
+  "detail": "the URL-prefix property is not verified, and sitemaps are registered there"
+ },
+ "registration": {
+  "submittedNow": [],
+  "failed": []
+ },
+ "properties": {
+  "status": "MEASURED",
+  "visible": [
+   "sc-domain:dailyyield.blogspot.com"
+  ],
+  "urlPrefixPropertyVisible": false,
+  "domainPropertyVisible": true
+ }
+}

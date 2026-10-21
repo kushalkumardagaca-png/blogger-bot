@@ -1,0 +1,569 @@
+{
+ "checkedAt": "2026-10-21T17:27:58+00:00",
+ "purpose": "the 13 front doors indexed at Google and Bing before 30 November 2026",
+ "site": "https://dailyyield.blogspot.com/",
+ "siteWrites": 0,
+ "targets": [
+  {
+   "url": "https://dailyyield.blogspot.com/",
+   "kind": "home",
+   "label": "Homepage"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+   "kind": "page",
+   "label": "terms-and-conditions"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+   "kind": "page",
+   "label": "global-snapshot"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+   "kind": "page",
+   "label": "markets-today"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+   "kind": "page",
+   "label": "privacy-policy"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+   "kind": "page",
+   "label": "daily-news"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+   "kind": "page",
+   "label": "money-atlas_01486068069"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+   "kind": "page",
+   "label": "for-corporate_01804417406"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+   "kind": "page",
+   "label": "disclaimer"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+   "kind": "page",
+   "label": "contact-us_01883938366"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+   "kind": "page",
+   "label": "calculator_0908148622"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/article.html",
+   "kind": "page",
+   "label": "article"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+   "kind": "page",
+   "label": "about-us_02080501126"
+  }
+ ],
+ "google": {
+  "status": "MEASURED",
+  "inspected": 13,
+  "indexed": 0,
+  "notIndexed": 13,
+  "unknown": 0,
+  "rows": [
+   {
+    "url": "https://dailyyield.blogspot.com/",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-10-02T07:21:19Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [
+     "https://dailyyield.blogspot.com/?m=1"
+    ],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Discovered - currently not indexed",
+    "lastCrawlTime": "",
+    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+    "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-09-25T16:57:09Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-09-25T16:59:14Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Discovered - currently not indexed",
+    "lastCrawlTime": "",
+    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+    "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-10-20T11:02:42Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-10-02T07:17:17Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-10-02T07:17:17Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "URL is unknown to Google",
+    "lastCrawlTime": "",
+    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+    "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-09-27T14:13:01Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-09-25T17:01:15Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/article.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-10-02T07:15:16Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   },
+   {
+    "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+    "verdict": "NEUTRAL",
+    "coverageState": "Redirect error",
+    "lastCrawlTime": "2026-10-20T11:00:39Z",
+    "pageFetchState": "REDIRECT_ERROR",
+    "robotsTxtState": "ALLOWED",
+    "indexingState": "INDEXING_STATE_UNSPECIFIED",
+    "googleCanonical": "",
+    "userCanonical": "",
+    "referringUrls": [],
+    "requestIndexingAvailableInUiOnly": true
+   }
+  ]
+ },
+ "properties": {
+  "status": "MEASURED",
+  "visible": [
+   "sc-domain:dailyyield.blogspot.com"
+  ],
+  "urlPrefixPropertyVisible": false,
+  "domainPropertyVisible": true
+ },
+ "sitemaps": {
+  "status": "UNAVAILABLE",
+  "registered": [],
+  "missing": [
+   "https://dailyyield.blogspot.com/sitemap.xml",
+   "https://dailyyield.blogspot.com/sitemap-pages.xml"
+  ],
+  "detail": "the URL-prefix property is not verified, and sitemaps are registered there"
+ },
+ "sitemapRegistration": {
+  "submittedNow": [],
+  "failed": []
+ },
+ "bing": {
+  "status": "UNAVAILABLE",
+  "detail": "quota read failed: HTTPError; page stats failed: HTTPError",
+  "quota": {},
+  "seen": {},
+  "notReported": [
+   "https://dailyyield.blogspot.com/",
+   "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+   "https://dailyyield.blogspot.com/p/global-snapshot.html",
+   "https://dailyyield.blogspot.com/p/markets-today.html",
+   "https://dailyyield.blogspot.com/p/privacy-policy.html",
+   "https://dailyyield.blogspot.com/p/daily-news.html",
+   "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+   "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+   "https://dailyyield.blogspot.com/p/disclaimer.html",
+   "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+   "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+   "https://dailyyield.blogspot.com/p/article.html",
+   "https://dailyyield.blogspot.com/p/about-us_02080501126.html"
+  ]
+ },
+ "pace": {
+  "deadline": "2026-11-30",
+  "today": "2026-10-21",
+  "daysLeft": 40,
+  "targets": 13,
+  "inBothPlatforms": 0,
+  "stillMissing": 13,
+  "paceRequiredPerWeek": 3,
+  "expectedByNow": 0.0,
+  "behindBy": 0,
+  "onTrack": true,
+  "note": "pace is measured from the two platforms' own answers, not from a crawl promise"
+ },
+ "byPage": [
+  {
+   "url": "https://dailyyield.blogspot.com/",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-10-02T07:21:19Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Discovered - currently not indexed",
+   "googleLastCrawl": "",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-09-25T16:57:09Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-09-25T16:59:14Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Discovered - currently not indexed",
+   "googleLastCrawl": "",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-10-20T11:02:42Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-10-02T07:17:17Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-10-02T07:17:17Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "URL is unknown to Google",
+   "googleLastCrawl": "",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-09-27T14:13:01Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-09-25T17:01:15Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/article.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-10-02T07:15:16Z",
+   "bing": "unreported",
+   "inBoth": false
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+   "google": "NEUTRAL",
+   "googleCoverage": "Redirect error",
+   "googleLastCrawl": "2026-10-20T11:00:39Z",
+   "bing": "unreported",
+   "inBoth": false
+  }
+ ],
+ "manualQueue": [
+  {
+   "url": "https://dailyyield.blogspot.com/",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/article.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Redirect error",
+   "steps": [
+    "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
+    "Paste the URL into the inspection box at the top",
+    "Run Test live URL",
+    "Press Request indexing only if the live result says the page is eligible"
+   ]
+  }
+ ],
+ "ownerActions": [
+  "Add and verify the URL-prefix property https://dailyyield.blogspot.com/ in Search Console. Sitemaps and Request indexing live on that property, and Blogger sites can be verified without touching DNS.",
+  "Register sitemap.xml and sitemap-pages.xml in Search Console — the job does this automatically once its token works; until then it is one paste each.",
+  "Bing's URL-submission quota for this property is reported as None. In Bing Webmaster Tools open Configuration → Basic settings and confirm the site is verified, then check Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.",
+  "Tap Request indexing for 13 main pages in the Search Console interface. There is no API for it; this is the one step only you can do."
+ ],
+ "verdict": "NOT_STARTED",
+ "limits": "Google's indexed-version verdict is the only indexing signal this job trusts. Bing's GetPageStats reports the pages it chose to surface, so an absent page is unreported and never counted as proof of non-indexing. No figure in this file is a promise about ranking, traffic or review.",
+ "pagesSitemapNote": "",
+ "inspectionProperty": "sc-domain:dailyyield.blogspot.com"
+}
