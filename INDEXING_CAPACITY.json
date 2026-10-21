@@ -1,16 +1,16 @@
 {
- "checkedAt": "2026-10-20T20:59:37+00:00",
+ "checkedAt": "2026-10-21T06:19:51+00:00",
  "site": "https://dailyyield.blogspot.com",
  "decision": "CONTRACT",
  "masterArticlesPerDay": 2,
  "newsWiresPerDay": 1,
  "why": [
-  "only 1 of 551 submitted URLs are indexed and none were added in the last 7 days: the property is not being trusted, so more URLs cannot become more readers",
+  "only 1 of 571 submitted URLs are indexed and none were added in the last 7 days: the property is not being trusted, so more URLs cannot become more readers",
   "publishing is held to the depth the site can get indexed, and the freed time goes into rewriting what already exists rather than adding to the pile"
  ],
  "measured": {
   "indexed": 1,
-  "submitted": 551,
+  "submitted": 571,
   "indexedShare": 0.0018,
   "indexedGrowth7d": 0,
   "impressions28d": 2
@@ -18,6 +18,10 @@
  "history": [
   {
    "day": "2026-10-20",
+   "indexed": 1
+  },
+  {
+   "day": "2026-10-21",
    "indexed": 1
   }
  ],

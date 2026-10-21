@@ -1,10 +1,10 @@
-# GA4 measurement · 2026-10-20T20:59:38+00:00
+# GA4 measurement · 2026-10-21T06:19:52+00:00
 
-Status: **CREDENTIALS_MISSING**
+Status: **SCOPE_INSUFFICIENT**
 
 - analytics tag observed on the live site: **yes** (G-WLEEYTKV12)
 - property: **not resolved** (unknown)
 
-What to do: run get_analytics_token.py once, then put the code it prints into the GA4_REFRESH_TOKEN repository secret (never into a chat)
+What to do: the stored token predates Analytics access: repeat step 3 of GA4_CONNECT.md (or re-run get_analytics_token.py) and replace GA4_REFRESH_TOKEN with the new code
 
 This job reads Google's numbers and the public homepage only. It changes nothing on the blog, so it does not touch the publisher review.

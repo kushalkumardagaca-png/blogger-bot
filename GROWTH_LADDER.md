@@ -1,8 +1,8 @@
-# Growth ladder · 2026-10-20T20:59:41+00:00
+# Growth ladder · 2026-10-21T06:19:57+00:00
 
-Measured today: **1** indexed pages of **551** submitted, **2** impressions and **1** clicks in 28 days, **12** countable social followers. Indexing gate: **CONTRACT**.
+Measured today: **1** indexed pages of **571** submitted, **2** impressions and **1** clicks in 28 days, **12** countable social followers. Indexing gate: **CONTRACT**.
 
-Views are counted as **SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28**; GA4 status: **CREDENTIALS_MISSING**.
+Views are counted as **SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28**; GA4 status: **SCOPE_INSUFFICIENT**.
 
 Readers (the milestone's own unit: people who open one or two articles a day) today: **not measurable yet** - basis **UNMEASURABLE_UNTIL_GA4_IS_READABLE**. 50,000 is counted in this unit, not in pageviews.
 
@@ -32,6 +32,6 @@ At a normal 2-3% click rate, 50,000 visits a day out of search needs **1,666,667
 
 ## Projection to 50,000 a day
 
-- status: **NOT_ENOUGH_MEASUREMENT** (linear on the blog's own measured daily gain, 1 measured points, needs 2 more)
+- status: **NOT_ENOUGH_MEASUREMENT** (linear on the blog's own measured daily gain, 2 measured points, needs 1 more)
 
 Nothing in this report is a forecast of effort. It is a record of what was measured, so that the ladder can be checked rather than argued about.

@@ -1,6 +1,6 @@
-# Google News and Discover readiness · 2026-10-20T20:59:41+00:00
+# Google News and Discover readiness · 2026-10-21T06:19:57+00:00
 
-- feed entries read: **19**, of which **9** have at least one listing defect
+- feed entries read: **20**, of which **9** have at least one listing defect
 - pages inspected: **6**
 
 | what is wrong | how many | why it matters |

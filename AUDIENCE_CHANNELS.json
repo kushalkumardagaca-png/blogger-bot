@@ -1,5 +1,5 @@
 {
- "measuredAt": "2026-10-20T20:59:38+00:00",
+ "measuredAt": "2026-10-21T06:19:52+00:00",
  "mode": "PUBLIC_OPEN_ENDPOINTS_ONLY",
  "credentialsUsed": false,
  "channels": {
@@ -8,10 +8,10 @@
    "handle": "@dailyyield.bsky.social",
    "followers": 10,
    "following": 0,
-   "posts": 195,
+   "posts": 200,
    "created": "2026-09-26",
-   "accountAgeDays": 24,
-   "followersPerPost": 0.0513,
+   "accountAgeDays": 25,
+   "followersPerPost": 0.05,
    "source": "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=dailyyield.bsky.social"
   },
   "Mastodon": {
@@ -19,28 +19,23 @@
    "handle": "@dailyyield",
    "followers": 2,
    "following": 0,
-   "posts": 182,
+   "posts": 187,
    "created": "2026-09-26",
-   "accountAgeDays": 24,
-   "followersPerPost": 0.011,
+   "accountAgeDays": 25,
+   "followersPerPost": 0.0107,
    "source": "https://mastodon.social/api/v1/accounts/lookup?acct=dailyyield"
   },
   "Facebook": {
    "ok": false,
    "reason": "needs the page token this operation is not allowed to touch; coordinated_social_publish posts through it"
-  },
-  "Tumblr": {
-   "ok": false,
-   "reason": "needs OAuth for the stats endpoint; the publisher posts through it and the count stays unknown"
   }
  },
  "totals": {
   "followers": 12,
-  "posts": 377,
+  "posts": 387,
   "channelsMeasured": 2,
   "channelsNotMeasured": [
-   "Facebook",
-   "Tumblr"
+   "Facebook"
   ]
  },
  "blogPageviews": {

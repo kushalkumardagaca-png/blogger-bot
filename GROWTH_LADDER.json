@@ -1,14 +1,14 @@
 {
- "generatedAt": "2026-10-20T20:59:41+00:00",
+ "generatedAt": "2026-10-21T06:19:57+00:00",
  "measured": {
-  "asOf": "2026-10-19",
+  "asOf": "2026-10-20",
   "indexedPages": 1,
-  "submittedPages": 551,
+  "submittedPages": 571,
   "impressions28d": 2,
   "clicks28d": 1,
   "viewsPerDay": 0.036,
   "viewsBasis": "SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28",
-  "ga4Status": "CREDENTIALS_MISSING",
+  "ga4Status": "SCOPE_INSUFFICIENT",
   "dailyReaders": null,
   "dailyReadersBasis": "UNMEASURABLE_UNTIL_GA4_IS_READABLE",
   "measurableFollowers": 12,
@@ -205,11 +205,11 @@
  ],
  "projection": {
   "method": "linear on the blog's own measured daily gain",
-  "points": 1,
+  "points": 2,
   "impressionsPerDayGain": null,
   "date50k": null,
   "status": "NOT_ENOUGH_MEASUREMENT",
-  "needsMoreDays": 2,
+  "needsMoreDays": 1,
   "subTargetOnTrack": "FUTURE"
  },
  "policy": "no number in this file is invented: a missing measurement reads as None and the verdict reads UNKNOWN"

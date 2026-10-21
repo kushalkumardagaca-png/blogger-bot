@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19",
+ "updated": "2026-10-20",
  "points": [
   {
    "date": "2026-10-19",
@@ -9,6 +9,24 @@
    "impressions28d": 2,
    "clicks28d": 1,
    "viewsPerDay": 0.036,
+   "measurableFollowers": 12,
+   "gateVerdict": "CONTRACT",
+   "declaredTarget": null,
+   "declaredDeadline": "2027-09-30",
+   "evidenceComplete": true
+  },
+  {
+   "date": "2026-10-20",
+   "asOf": "2026-10-20",
+   "indexedPages": 1,
+   "submittedPages": 571,
+   "impressions28d": 2,
+   "clicks28d": 1,
+   "viewsPerDay": 0.036,
+   "viewsBasis": "SEARCH_CONSOLE_CLICKS_DIVIDED_BY_28",
+   "ga4Status": "SCOPE_INSUFFICIENT",
+   "dailyReaders": null,
+   "dailyReadersBasis": "UNMEASURABLE_UNTIL_GA4_IS_READABLE",
    "measurableFollowers": 12,
    "gateVerdict": "CONTRACT",
    "declaredTarget": null,
