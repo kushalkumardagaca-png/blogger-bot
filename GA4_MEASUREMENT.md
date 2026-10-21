@@ -1,8 +1,8 @@
-# GA4 measurement · 2026-10-21T11:47:41+00:00
+# GA4 measurement · 2026-10-21T17:26:39+00:00
 
 Status: **MEASURED**
 
-- analytics tag observed on the live site: **not checked** (HTTP Error 429: Too Many Requests)
+- analytics tag observed on the live site: **yes** (G-WLEEYTKV12)
 - property: **556948096** (data stream G-WLEEYTKV12 in this account, property "Daily Yield")
 - views in the last 7 days: **103**
 - **views per day: 14.7**

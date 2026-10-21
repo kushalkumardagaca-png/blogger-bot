@@ -17,6 +17,6 @@ Decision: **CONTRACT**
 - publishing is held to the depth the site can get indexed, and the freed time goes into rewriting what already exists rather than adding to the pile
 
 IndexNow: 400 URLs queued, 0 ever accepted — **nothing is actually being submitted**, so the queue is only a list
-Main pages announced: **12** of 12 found; **458** article and utility URLs held back (owner decision: index the front doors first).
+Main pages announced: **13** of 13 found; **458** article and utility URLs held back (owner decision: index the front doors first).
 
-Priority list for today's announcement: 12 URLs; 458 duplicate/utility URLs held back.
+Priority list for today's announcement: 13 URLs; 458 duplicate/utility URLs held back.

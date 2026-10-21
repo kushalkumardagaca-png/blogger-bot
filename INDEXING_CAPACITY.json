@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-21T11:47:38+00:00",
+ "checkedAt": "2026-10-21T17:26:36+00:00",
  "site": "https://dailyyield.blogspot.com",
  "decision": "CONTRACT",
  "masterArticlesPerDay": 2,
@@ -29,15 +29,16 @@
   "pending": 400,
   "submittedEver": 0,
   "indexnowLooksBlocked": true,
-  "announceTop": 12,
+  "announceTop": 13,
   "suppressedDuplicatesAndUtility": 458
  },
  "mainPagePolicy": {
   "on": true,
-  "mainPagesFound": 12,
-  "announced": 12,
+  "mainPagesFound": 13,
+  "announced": 13,
   "articleUrlsHeld": 458,
   "pages": [
+   "https://dailyyield.blogspot.com/",
    "https://dailyyield.blogspot.com/p/daily-news.html",
    "https://dailyyield.blogspot.com/p/article.html",
    "https://dailyyield.blogspot.com/p/markets-today.html",
@@ -51,6 +52,9 @@
    "https://dailyyield.blogspot.com/p/privacy-policy.html",
    "https://dailyyield.blogspot.com/p/terms-and-conditions.html"
   ],
+  "homepageIncluded": true,
+  "homepageForcedByThisRun": true,
+  "ownerInstruction": "owner, 21 October 2026: the 13 pages including the homepage, indexed by the end of November 2026",
   "decidedBy": "owner, 20 October 2026: index the main pages first"
  },
  "evidenceFiles": {

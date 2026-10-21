@@ -1,55 +1,118 @@
 {
- "checkedAt": "2026-10-21T11:47:44+00:00",
+ "checkedAt": "2026-10-21T17:26:44+00:00",
  "status": "MEASURED",
  "feedUrl": "https://dailyyield.blogspot.com/feeds/posts/default?alt=rss&max-results=25",
  "feed": {
-  "feedItems": 20,
+  "feedItems": 18,
   "itemsWithIssues": 6,
   "issueCounts": {
-   "truncatedHeadline": 3,
-   "clippedByOurTitleCap": 3
+   "truncatedHeadline": 2,
+   "clippedByOurTitleCap": 5
   }
  },
  "pages": [
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-21.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/is-3-lakh-enough-for-your-emergency-fund.html",
    "issues": [
     "pageUnreadable"
    ]
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/colorado-construction-leader-says-local.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html",
    "issues": [
     "pageUnreadable"
    ]
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/profit-warnings-from-uk-listed-firms.html",
    "issues": [
     "pageUnreadable"
    ]
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/billionaire-mukesh-ambani-launches.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html",
+   "issues": [
+    "noOpenGraphImage",
+    "noHeadDescription"
+   ],
+   "pageTitle": "Banking & Personal Money — 21 October 2026"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-21.html",
    "issues": [
     "pageUnreadable"
    ]
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-21.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-21.html",
    "issues": [
-    "pageUnreadable"
-   ]
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-21.html",
-   "issues": [
-    "pageUnreadable"
-   ]
+    "noOpenGraphImage",
+    "noHeadDescription"
+   ],
+   "pageTitle": "Companies, IPOs & Deals News — 21 October 2026"
   }
  ],
- "pageIssueCounts": {},
+ "pageIssueCounts": {
+  "noOpenGraphImage": 2,
+  "noHeadDescription": 2
+ },
  "items": [
+  {
+   "title": "Is ₹3 lakh enough for your emergency fund",
+   "url": "https://dailyyield.blogspot.com/2026/10/is-3-lakh-enough-for-your-emergency-fund.html",
+   "published": "Wed, 21 Oct 2026 16:45:10 +0000",
+   "labels": 3,
+   "issues": []
+  },
+  {
+   "title": "Student Loan Interest Rates: Federal, Private,",
+   "url": "https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html",
+   "published": "Wed, 21 Oct 2026 15:41:54 +0000",
+   "labels": 3,
+   "issues": [
+    "truncatedHeadline",
+    "clippedByOurTitleCap"
+   ]
+  },
+  {
+   "title": "Profit warnings from UK-listed firms",
+   "url": "https://dailyyield.blogspot.com/2026/10/profit-warnings-from-uk-listed-firms.html",
+   "published": "Wed, 21 Oct 2026 13:23:31 +0000",
+   "labels": 4,
+   "issues": []
+  },
+  {
+   "title": "Banking & Personal Money — 21 October 2026",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html",
+   "published": "Wed, 21 Oct 2026 13:15:03 +0000",
+   "labels": 5,
+   "issues": []
+  },
+  {
+   "title": "Global Finance News — 21 October 2026",
+   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-21.html",
+   "published": "Wed, 21 Oct 2026 12:54:06 +0000",
+   "labels": 5,
+   "issues": []
+  },
+  {
+   "title": "Companies, IPOs & Deals News — 21 October 2026",
+   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-21.html",
+   "published": "Wed, 21 Oct 2026 12:10:52 +0000",
+   "labels": 5,
+   "issues": [
+    "clippedByOurTitleCap"
+   ]
+  },
+  {
+   "title": "Global Market: Japan’s Nikkei falls 2% as tech",
+   "url": "https://dailyyield.blogspot.com/2026/10/global-market-japans-nikkei-falls-2-as.html",
+   "published": "Wed, 21 Oct 2026 12:07:33 +0000",
+   "labels": 4,
+   "issues": [
+    "clippedByOurTitleCap"
+   ]
+  },
   {
    "title": "Americas Finance News — 20 October 2026",
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-21.html",
@@ -86,71 +149,28 @@
    "published": "Wed, 21 Oct 2026 08:05:55 +0000",
    "labels": 6,
    "issues": []
-  },
-  {
-   "title": "Economy, Trade & Jobs News — 21 October 2026",
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-21.html",
-   "published": "Wed, 21 Oct 2026 07:45:04 +0000",
-   "labels": 5,
-   "issues": []
-  },
-  {
-   "title": "Europe Finance News — 21 October 2026",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-21.html",
-   "published": "Wed, 21 Oct 2026 07:15:06 +0000",
-   "labels": 10,
-   "issues": []
-  },
-  {
-   "title": "Rowan-Cabarrus Community College to Facilitate",
-   "url": "https://dailyyield.blogspot.com/2026/10/rowan-cabarrus-community-college-to.html",
-   "published": "Wed, 21 Oct 2026 06:38:49 +0000",
-   "labels": 3,
-   "issues": [
-    "clippedByOurTitleCap"
-   ]
-  },
-  {
-   "title": "Markets & Commodities News — 21 October 2026",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
-   "published": "Wed, 21 Oct 2026 06:38:26 +0000",
-   "labels": 5,
-   "issues": []
-  },
-  {
-   "title": "A modest increase in bank taxes is not the end",
-   "url": "https://dailyyield.blogspot.com/2026/10/a-modest-increase-in-bank-taxes-is-not.html",
-   "published": "Wed, 21 Oct 2026 05:22:00 +0000",
-   "labels": 4,
-   "issues": [
-    "clippedByOurTitleCap"
-   ]
-  },
-  {
-   "title": "AI Knowledge Graph Matches University",
-   "url": "https://dailyyield.blogspot.com/2026/10/ai-knowledge-graph-matches-university.html",
-   "published": "Wed, 21 Oct 2026 02:48:04 +0000",
-   "labels": 3,
-   "issues": []
-  },
-  {
-   "title": "India Finance News — 21 October 2026",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html",
-   "published": "Wed, 21 Oct 2026 01:41:34 +0000",
-   "labels": 6,
-   "issues": []
   }
  ],
  "blockersForPublisherCenter": [
   {
    "gap": "truncatedHeadline",
    "meaning": "headline ends on a fragment - a headline is what a News reader decides on",
-   "urls": 3
+   "urls": 2
   },
   {
    "gap": "clippedByOurTitleCap",
    "meaning": "headline stops exactly at this blog's own 46-character title limit: the limit, not Google, is what shortens it",
-   "urls": 3
+   "urls": 5
+  },
+  {
+   "gap": "noOpenGraphImage",
+   "meaning": "the page has no og:image, so News and Discover have no picture to show",
+   "urls": 2
+  },
+  {
+   "gap": "noHeadDescription",
+   "meaning": "the page has no meta description in the head, so Google writes its own snippet",
+   "urls": 2
   }
  ],
  "policy": "read-only: this job asks the public feed and the public pages, and writes nothing to Google, Blogger or the theme"
