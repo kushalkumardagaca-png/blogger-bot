@@ -25,13 +25,13 @@ jobs:
     # value as it is by then. Press Run workflow first, approve on Tumblr, Update the secret, and stop
     # - no race against a queue.
     name: Wait for the code to be saved
-    if: ${{ inputs.wait_for_code_minutes != '0' }}
+    if: ${{ github.event.inputs.wait_for_code_minutes != '0' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - name: Hold this run while the code is approved and saved
         env:
-          LIMIT: ${{ inputs.wait_for_code_minutes }}
+          LIMIT: ${{ github.event.inputs.wait_for_code_minutes }}
         run: |
           set -u
           # A dispatch input is free text and bash arithmetic on 0.5 or hello aborts a job, so a value

@@ -53,7 +53,8 @@ class Shape(unittest.TestCase):
         self.assertIn("hold-for-code", jobs)
         self.assertEqual(jobs["authorize"]["needs"], "hold-for-code")
         self.assertEqual(jobs["authorize"]["if"], "${{ !failure() && !cancelled() }}")
-        self.assertEqual(jobs["hold-for-code"]["if"], "${{ inputs.wait_for_code_minutes != '0' }}")
+        self.assertEqual(jobs["hold-for-code"]["if"],
+                         "${{ github.event.inputs.wait_for_code_minutes != '0' }}")
 
     def test_no_job_depends_on_a_name_that_the_file_does_not_declare(self):
         for job_id, job in document()["jobs"].items():
@@ -66,6 +67,13 @@ class Shape(unittest.TestCase):
         script = hold_script()
         for forbidden in ("gh api", "secrets.", "TUMBLR_AUTHORIZATION_CODE }", "curl "):
             self.assertNotIn(forbidden, script)
+
+    def test_the_dispatch_input_is_read_the_way_this_repo_reads_others(self):
+        # `github.event.inputs.*` is the spelling already proven across this repository's workflows; an
+        # expression context GitHub would not resolve makes the whole file invalid at start-up.
+        text = WORKFLOW.read_text(encoding="utf-8")
+        self.assertEqual(text.count("github.event.inputs.wait_for_code_minutes"), 2)
+        self.assertNotIn("${{ inputs.", text)
 
     def test_the_default_hold_is_four_minutes_and_can_be_switched_off(self):
         self.assertEqual(document()["on"]["workflow_dispatch"]["inputs"]["wait_for_code_minutes"]["default"], "4")
