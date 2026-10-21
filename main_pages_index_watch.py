@@ -29,12 +29,17 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+try:      # the Bing client that already works in this repository; hand-rolling it is how 400s happen
+    import bing_url_automation as bing
+except Exception:      # noqa: BLE001 - a missing optional dependency must degrade, never crash the scoreboard
+    bing = None
+
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "MAIN_PAGES_INDEX_TARGET.json"
 MD = ROOT / "MAIN_PAGES_INDEX_TARGET.md"
 SITEMAP_EVIDENCE = ROOT / "MAIN_PAGES_SITEMAP_STATE.json"
 
-BLOG = "https://dailyyield.blogspot.com"
+BLOG = "https://dailyyield.blogspot.com"  # noqa: E501
 PREFIX_PROPERTY = BLOG + "/"
 DOMAIN_PROPERTY = "sc-domain:dailyyield.blogspot.com"
 SITEMAP_PATHS = (BLOG + "/sitemap.xml", BLOG + "/sitemap-pages.xml")
@@ -145,6 +150,66 @@ def fetch_pages_sitemap() -> tuple[list[str], str]:
         return [], f"sitemap-pages.xml could not be read: {type(exc).__name__}"
 
 
+GOOGLEBOT_UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+
+
+def extract_canonical(markup: str) -> str:
+    for tag in re.findall(r"<link\b[^>]*>", markup or ""):
+        if "canonical" in tag:
+            match = re.search(r"href=['\"]([^'\"]+)", tag)
+            if match:
+                return match.group(1)
+    return ""
+
+
+class _RedirectCounter(urllib.request.HTTPRedirectHandler):
+    def __init__(self) -> None:
+        super().__init__()
+        self.hops: list[dict] = []
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: D102
+        self.hops.append({"code": code, "to": str(newurl)})
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def live_probe(url: str) -> dict:
+    """Ask the live page, as Googlebot, what it actually does today.
+
+    The inspection API answers with Google's stored verdict for the last crawl it chose to make. On
+    this site ten front doors carry "Redirect error" from crawls of 25 September to 20 October, while
+    the same URLs answer 200 with no redirect today. Only a fresh crawl can clear a stale verdict, and
+    on a Blogger property with no IndexNow, zero Bing quota and no registered sitemap, nothing was
+    ever going to ask for one. This probe is what turns "Google says no" into "Google has not looked".
+    """
+    handler = _RedirectCounter()
+    opener = urllib.request.build_opener(handler)
+    request = urllib.request.Request(url, headers={"User-Agent": GOOGLEBOT_UA})
+    try:
+        with opener.open(request, timeout=30) as response:
+            body = response.read(200000).decode("utf-8", "ignore")
+            return {"reachable": response.status == 200, "status": int(getattr(response, "status", 200)),
+                    "hops": handler.hops, "finalUrl": response.geturl(),
+                    "canonical": extract_canonical(body)}
+    except urllib.error.HTTPError as exc:
+        return {"reachable": False, "status": int(exc.code), "hops": handler.hops,
+                "finalUrl": url, "canonical": "", "error": f"HTTP {exc.code}"}
+    except (urllib.error.URLError, OSError, ValueError) as exc:
+        return {"reachable": False, "status": 0, "hops": handler.hops, "finalUrl": url,
+                "canonical": "", "error": type(exc).__name__}
+
+
+def stale_verdict(row: dict, probe: dict) -> bool:
+    """True when the platform's complaint cannot be reproduced on the live page today."""
+    if row.get("verdict") == "PASS":
+        return False
+    if not probe.get("reachable") or probe.get("hops"):
+        return False
+    coverage = str(row.get("coverageState") or "")
+    return any(needle in coverage for needle in ("Redirect error", "Duplicate without user-selected",
+                                                 "Alternate page with proper canonical")) or bool(
+        str(row.get("lastCrawlTime") or ""))
+
+
 def list_properties(access: str) -> dict:
     try:
         entries = (gsc(access, "GET", "sites") or {}).get("siteEntry", []) or []
@@ -228,42 +293,38 @@ def inspect_one(access: str, site: str, url: str) -> dict:
 
 
 def bing_view(urls: list[str]) -> dict:
-    """Bing's own two answers: how much submission capacity we have, and which URLs it has seen."""
+    """Bing's own two answers: how much submission capacity we have, and which URLs it has seen.
+
+    Both calls go through the client in bing_url_automation.py, because that is the one whose
+    endpoint, parameter names and response unwrapping have been proven against Bing in CI. A
+    hand-rolled call to the wrong operation name returns HTTP 400 and would be read as "Bing says
+    nothing", which is the exact mistake this job exists to stop.
+    """
+    out = {"status": "UNAVAILABLE", "detail": "", "quota": {}, "seen": {},
+           "notReported": list(urls)}
     key = os.environ.get("BING_WEBMASTER_API_KEY", "").strip()
-    out = {"status": "UNAVAILABLE", "detail": "BING_WEBMASTER_API_KEY is not set",
-           "quota": {}, "seen": {}, "notReported": list(urls)}
     if not key:
+        out["detail"] = "BING_WEBMASTER_API_KEY is not set in this run"
         return out
-    site = urllib.parse.quote(PREFIX_PROPERTY, safe="")
-    def call(operation, **params):
-        query = urllib.parse.urlencode({"siteUrl": PREFIX_PROPERTY, **params})
-        return http(f"https://api.bing.com/webmaster/api/v1/{operation}?{query}", timeout=45,
-                    headers={"User-Agent": "DailyYield-MainPageWatch/1.0",
-                             "X-BingApis-Apikey": key, "accept": "text/plain"})
+    if bing is None:
+        out["detail"] = "bing_url_automation.py could not be imported"
+        return out
     try:
-        quota_rows = call("GetQuotas")
-        rows = quota_rows if isinstance(quota_rows, list) else []
-        quota = {str(row.get("Name", "")): row.get("Value") for row in rows}
-        out["quota"] = {"dailyUrlSubmission": quota.get("DailyQuota"),
-                        "monthlyUrlSubmission": quota.get("MonthlyQuota"),
-                        "index": quota.get("MIndex")}
-    except (urllib.error.URLError, OSError, ValueError) as exc:
+        quota = bing.get_quota(key)
+        out["quota"] = {"dailyUrlSubmission": quota.get("dailyAvailable"),
+                        "monthlyUrlSubmission": quota.get("monthlyAvailable")}
+    except Exception as exc:  # noqa: BLE001 - a quota outage is a fact to report, not a failure
         out["detail"] = f"quota read failed: {type(exc).__name__}"
     try:
-        stats = call("GetPageStats")
-        rows = stats if isinstance(stats, list) else []
-        by_url = {}
-        for row in rows:
-            url = str((row or {}).get("Url", ""))
-            if url in set(urls):
-                by_url[url] = {"lastCrawled": row.get("LastCrawledDate", ""),
-                               "httpStatus": row.get("HttpStatus"), "inIndex": None}
-        out["seen"] = by_url
-        out["notReported"] = [url for url in urls if url not in by_url]
-        out["status"] = "MEASURED" if out["quota"] or by_url else "PARTIAL"
-        out["detail"] = ("GetPageStats only reports the URLs Bing chose to surface; a page missing "
-                         "from it is unreported, which is not proof of non-indexing")
-    except (urllib.error.URLError, OSError, ValueError) as exc:
+        stats = bing.get_page_stats(key) or {}
+        wanted = set(urls)
+        seen = {url: {"observedAt": now_utc()} for url in wanted if url in stats}
+        out["seen"] = seen
+        out["notReported"] = [url for url in urls if url not in seen]
+        out["status"] = "MEASURED" if out["quota"] or seen else "PARTIAL"
+        out["detail"] = ((out["detail"] + "; ").lstrip("; ") + "GetPageStats surfaces only pages that "
+                         "generated a Bing impression, so absence is unreported, not unindexed").strip()
+    except Exception as exc:  # noqa: BLE001
         out["status"] = "PARTIAL" if out["quota"] else "UNAVAILABLE"
         out["detail"] = (out["detail"] + f"; page stats failed: {type(exc).__name__}").strip("; ")
     return out
@@ -323,6 +384,12 @@ def owner_actions(report: dict) -> list[str]:
                        f"{quota.get('dailyUrlSubmission')}. In Bing Webmaster Tools open "
                        "Configuration → Basic settings and confirm the site is verified, then check "
                        "Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.")
+    stale = (report.get("staleVerdicts") or {}).get("count", 0)
+    if stale:
+        actions.append(f"{stale} of those verdicts cannot be reproduced on the live page today. Do not "
+                       "delete, rebuild or rename those pages: the redirect that produced the verdict is "
+                       "already gone, and the only thing missing is a crawl. Request indexing is what "
+                       "asks for it.")
     if report.get("manualQueue"):
         actions.append(f"Tap Request indexing for {len(report['manualQueue'])} main pages in the "
                        "Search Console interface. There is no API for it; this is the one step only "
@@ -331,6 +398,7 @@ def owner_actions(report: dict) -> list[str]:
 
 
 def build_report(*, targets, properties, sitemaps, registration, rows, bing, today) -> dict:
+    stale = [row["url"] for row in rows if row.get("staleVerdict")]
     google_indexed = sum(1 for row in rows if row.get("verdict") == "PASS")
     bing_seen = bing.get("seen") or {}
     bing_known = sum(1 for row in targets if row["url"] in bing_seen)
@@ -355,9 +423,18 @@ def build_report(*, targets, properties, sitemaps, registration, rows, bing, tod
                     "google": row.get("verdict", "UNKNOWN"),
                     "googleCoverage": row.get("coverageState", ""),
                     "googleLastCrawl": row.get("lastCrawlTime", ""),
+                    "liveStatusToday": row.get("live", {}).get("status"),
+                    "liveRedirectsToday": row.get("liveHops", 0),
+                    "canonicalMatchesPage": (not row.get("live", {}).get("canonical")
+                                             or row["live"]["canonical"].rstrip("/")
+                                             == row["url"].rstrip("/")),
                     "bing": ("reported" if row["url"] in bing_seen else "unreported"),
                     "inBoth": bool(row.get("verdict") == "PASS" and row["url"] in bing_seen)}
                    for row in rows],
+        "staleVerdicts": {"count": len(stale), "urls": stale,
+                          "meaning": "the live page answers 200 with no redirect today, so the "
+                                     "platform's complaint describes an older crawl and what is "
+                                     "missing is a fresh one"},
     }
     report["manualQueue"] = manual_queue(rows)
     report["ownerActions"] = owner_actions(report)
@@ -397,6 +474,19 @@ def render_markdown(report: dict) -> str:
     if report.get("sitemapRegistration", {}).get("submittedNow"):
         lines.append(f"- registered by this run: "
                      + ", ".join(f"`{p}`" for p in report["sitemapRegistration"]["submittedNow"]))
+    stale_block = report.get("staleVerdicts") or {}
+    if stale_block.get("urls"):
+        lines += ["", "## Verdicts the live page does not reproduce", "",
+                  stale_block["meaning"], ""]
+        for row in report["byPage"]:
+            if row["url"] in stale_block["urls"]:
+                page = row['url'].replace(BLOG, '') or '/'
+                coverage = row['googleCoverage'] or row['google']
+                when = (row['googleLastCrawl'][:10] or 'a day it has not told us')
+                hops = row['liveRedirectsToday']
+                status = row['liveStatusToday']
+                lines.append(f"- `{page}` — Google said “{coverage}” on {when}; today it answers "
+                             f"{status} with {hops} redirect(s)")
     if report["ownerActions"]:
         lines += ["", "## Only you can do these", ""] + [f"1. {action}" for action in report["ownerActions"]]
     if report["manualQueue"]:
@@ -421,6 +511,14 @@ def run_check() -> int:
     assert targets[0]["url"] == PREFIX_PROPERTY, "the homepage must be target one"
     assert len(targets) == 7, f"13-page rule broken, got {len(targets)}"
     assert not any(is_utility(row["url"]) for row in targets), "utility pages must not be targets"
+    assert extract_canonical("<link href='https://dailyyield.blogspot.com/p/a.html' rel='canonical'/>") \
+        == f"{BLOG}/p/a.html"
+    assert stale_verdict({"url": targets[1]["url"], "verdict": "NEUTRAL",
+                          "coverageState": "Redirect error", "lastCrawlTime": "2026-09-25T16:57:09Z"},
+                         {"reachable": True, "status": 200, "hops": [], "canonical": ""})
+    assert not stale_verdict({"url": targets[1]["url"], "verdict": "NEUTRAL",
+                              "coverageState": "Redirect error"},
+                             {"reachable": True, "status": 200, "hops": [{"code": 301}], "canonical": ""})
     assert parse_sitemap_locations("<url><loc> https://dailyyield.blogspot.com/p/x.html </loc></url>") \
         == [f"{BLOG}/p/x.html"]
     rows = [{"url": row["url"], "verdict": "PASS" if index < 5 else "FAIL",
@@ -503,6 +601,13 @@ def main() -> int:
             if registration["submittedNow"]:
                 sitemaps = sitemap_state(access)
         rows = [inspect_one(access, site, row["url"]) for row in targets]
+    for row in rows:
+        if row.get("verdict") != "PASS" and valid_daily_yield_url(row["url"]):
+            probe = live_probe(row["url"])
+            row["live"] = {"reachable": probe["reachable"], "status": probe["status"],
+                           "canonical": probe.get("canonical", ""), "finalUrl": probe.get("finalUrl", "")}
+            row["liveHops"] = len(probe.get("hops") or [])
+            row["staleVerdict"] = stale_verdict(row, probe)
     report = build_report(targets=targets, properties=properties, sitemaps=sitemaps,
                           registration=registration, rows=rows, bing=bing_view(
                               [row["url"] for row in targets]), today=today)

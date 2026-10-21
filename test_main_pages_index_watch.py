@@ -200,18 +200,14 @@ class BingSide(unittest.TestCase):
         self.assertEqual(bing["notReported"], [HOME_URL])
         self.assertNotIn("FAIL", json.dumps(bing))
 
-    def test_page_stats_that_bing_did_not_surface_do_not_count_as_indexed(self):
-        fake = FakeHttp(bing={"quota": [{"Name": "DailyQuota", "Value": 0},
-                                        {"Name": "MonthlyQuota", "Value": 1000}],
-                             "stats": [{"Url": HOME_URL, "LastCrawledDate": "/Date(1)/",
-                                        "HttpStatus": 200}]})
-        targets = watch.main_page_targets([])
-        with mock.patch.object(watch, "http", fake), \
-                mock.patch.dict(os.environ, {"BING_WEBMASTER_API_KEY": "fake-bing-key"}, clear=False):
-            bing = watch.bing_view([row["url"] for row in targets])
-        self.assertEqual(bing["quota"]["dailyUrlSubmission"], 0)
-        self.assertIn(HOME_URL, bing["seen"])
-        self.assertEqual(bing["notReported"], [row["url"] for row in targets if row["url"] != HOME_URL])
+    def test_the_sitemap_and_scoreboard_never_build_a_bing_url_by_hand(self):
+        # The endpoint, its operation names and its unwrapping live in bing_url_automation.py, where
+        # they have been proven in CI. A second copy here is how a 400 gets read as "Bing knows
+        # nothing".
+        source = Path(__file__).with_name("main_pages_index_watch.py").read_text()
+        self.assertNotIn("api.bing.com", source)
+        self.assertIn("bing.get_quota", source)
+        self.assertIn("bing.get_page_stats", source)
 
 
 class Pace(unittest.TestCase):
@@ -265,6 +261,14 @@ class Hygiene(unittest.TestCase):
             self.assertNotIn(value, text)
         self.assertNotIn("Bearer", text)
 
+    def test_the_live_probe_is_part_of_the_guarantee(self):
+        source = Path(__file__).with_name("main_pages_index_watch.py").read_text()
+        for needle in ("def live_probe", "def stale_verdict", "staleVerdicts", "GOOGLEBOT_UA"):
+            self.assertIn(needle, source)
+        self.assertIn("live_probe", source)
+        joined = " ".join(source.split())
+        self.assertIn("delete, rebuild or rename", joined)
+
     def test_the_offline_self_test_passes(self):
         self.assertEqual(watch.run_check(), 0)
 
@@ -275,6 +279,86 @@ class Hygiene(unittest.TestCase):
             self.assertIn(needle, text)
         self.assertNotIn("indexing.googleapis.com", text,
                          "Google's Indexing API is for job postings and live streams only")
+
+
+class LiveVerdict(unittest.TestCase):
+    """The day this job earned its keep: ten pages reported "Redirect error" from a September crawl.
+
+    The live page answers 200 with no redirect. Without the probe the report would have told the owner
+    to rebuild pages that are fine, and the real missing thing - a fresh crawl - would have stayed
+    invisible. These tests pin the difference between a complaint and a stale complaint.
+    """
+
+    def test_blogger_canonical_is_found_whichever_way_the_attributes_are_ordered(self):
+        self.assertEqual(watch.extract_canonical("<link href='https://dailyyield.blogspot.com/p/a.html' "
+                                                  "rel='canonical'/>"),
+                         f"{BLOG}/p/a.html")
+        self.assertEqual(watch.extract_canonical('<link rel="canonical" href="https://x/p/a.html">'),
+                         "https://x/p/a.html")
+        self.assertEqual(watch.extract_canonical("<a href='#'>x</a>"), "")
+
+    def test_a_clean_live_answer_turns_the_verdict_into_a_stale_verdict(self):
+        row = {"url": f"{BLOG}/p/global-snapshot.html", "verdict": "NEUTRAL",
+               "coverageState": "Redirect error", "lastCrawlTime": "2026-09-25T16:57:09Z"}
+        probe = {"reachable": True, "status": 200, "hops": [], "finalUrl": row["url"],
+                 "canonical": row["url"]}
+        self.assertTrue(watch.stale_verdict(row, probe))
+        probe_with_redirect = dict(probe, hops=[{"code": 301, "to": f"{BLOG}/p/moved.html"}])
+        self.assertFalse(watch.stale_verdict(row, probe_with_redirect),
+                         "a live redirect is a real problem, never a stale verdict")
+        self.assertFalse(watch.stale_verdict(dict(row, verdict="PASS"), probe))
+        self.assertFalse(watch.stale_verdict(dict(row, coverageState="Discovered - currently not indexed",
+                                                  lastCrawlTime=""), probe),
+                         "no crawl at all is not a stale verdict")
+
+    def test_the_report_names_the_pages_the_platform_cannot_be_trusted_about(self):
+        targets = watch.main_page_targets([])
+        rows = [{"url": HOME_URL, "verdict": "NEUTRAL", "coverageState": "Redirect error",
+                 "lastCrawlTime": "2026-09-25T16:57:09Z",
+                 "live": {"reachable": True, "status": 200, "canonical": HOME_URL, "finalUrl": HOME_URL},
+                 "liveHops": 0, "staleVerdict": True}]
+        report = watch.build_report(targets=targets, properties={"status": "MEASURED", "visible": []},
+                                    sitemaps={"status": "MEASURED", "registered": [], "missing": []},
+                                    registration={"submittedNow": [], "failed": []}, rows=rows,
+                                    bing={"status": "MEASURED", "seen": {}, "quota": {}, "notReported": []},
+                                    today=dt.date(2026, 10, 21))
+        self.assertEqual(report["staleVerdicts"]["count"], 1)
+        self.assertEqual(report["byPage"][0]["liveStatusToday"], 200)
+        self.assertTrue(report["byPage"][0]["canonicalMatchesPage"])
+        self.assertIn("cannot be reproduced", " ".join(report["ownerActions"]))
+        self.assertIn("200 with 0 redirect", watch.render_markdown(report))
+
+    def test_bing_answers_come_from_the_client_that_is_already_proven_in_ci(self):
+        class FakeBing:
+            def get_quota(self, key):
+                assert key == "fake-bing-key"
+                return {"dailyAvailable": 0, "monthlyAvailable": 1000}
+
+            def get_page_stats(self, key):
+                return {HOME_URL: {"Impressions": 3}}
+
+        with mock.patch.object(watch, "bing", FakeBing()), \
+                mock.patch.dict(os.environ, {"BING_WEBMASTER_API_KEY": "fake-bing-key"}, clear=False):
+            view = watch.bing_view([HOME_URL, f"{BLOG}/p/daily-news.html"])
+        self.assertEqual(view["quota"], {"dailyUrlSubmission": 0, "monthlyUrlSubmission": 1000})
+        self.assertEqual(list(view["seen"]), [HOME_URL])
+        self.assertEqual(view["notReported"], [f"{BLOG}/p/daily-news.html"])
+        self.assertIn("unreported, not unindexed", view["detail"])
+
+    def test_a_bing_outage_degrades_to_a_note_instead_of_a_zero(self):
+        class BrokenBing:
+            def get_quota(self, key):
+                raise urllib.error.HTTPError("u", 400, "bad", {}, None)
+
+            def get_page_stats(self, key):
+                raise urllib.error.HTTPError("u", 400, "bad", {}, None)
+
+        with mock.patch.object(watch, "bing", BrokenBing()), \
+                mock.patch.dict(os.environ, {"BING_WEBMASTER_API_KEY": "fake-bing-key"}, clear=False):
+            view = watch.bing_view([HOME_URL])
+        self.assertEqual(view["status"], "UNAVAILABLE")
+        self.assertEqual(view["quota"], {})
+        self.assertIn("quota read failed", view["detail"])
 
 
 if __name__ == "__main__":
