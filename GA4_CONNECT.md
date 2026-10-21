@@ -55,8 +55,11 @@ redirect list. Click **Daily Yield Search Console Automation** and:
    Console readings, which use this same pair, and every job would start failing with `invalid_client`.
 
 You do **not** need to store this pair in GitHub: the repository already holds it under
-`GSC_CLIENT_ID` and `GSC_CLIENT_SECRET`, and the Analytics reader falls back to those. That is why
-Step 4 costs you one paste instead of three.
+`GSC_CLIENT_ID` and `GSC_CLIENT_SECRET`, and every job that reads Analytics resolves the three values
+one at a time (`google_credentials.py`) — so the new `GA4_REFRESH_TOKEN` is used with the existing
+client pair. That is why Step 4 costs you one paste instead of three, and it is true for the nightly
+measurement, the control tower and the Table 3 audit alike: they were fixed on 21 October 2026 after
+two of them picked a whole set of names by prefix and would have ignored a correct single paste.
 
 *Only if* the secret cannot be revealed on that page: leave it as it is and create a second client —
 **Create credentials → OAuth client ID → Application type: Web application**, name

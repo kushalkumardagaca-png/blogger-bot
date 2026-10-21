@@ -223,8 +223,11 @@ def analytics_audit(observed):
             'observedGa4Ids':observed.get('ga4IdsObserved',[]),'observedTagManagerIds':observed.get('tagManagerIdsObserved',[]),
             'privatePropertyIdConfigured':bool(os.environ.get('GA4_PROPERTY_ID','').strip()),'status':'NOT_CONNECTED',
             'readers':None,'returningReaders':None,'ownerStep':'Do not install tags during freeze. Only an existing collection/report permission may be connected.'}
-    prefix='GA4' if all(os.environ.get('GA4_'+x) for x in ('CLIENT_ID','CLIENT_SECRET','REFRESH_TOKEN')) else 'GSC'
-    try:access=oauth(prefix)
+    # every value resolved on its own, so a repository holding only GA4_REFRESH_TOKEN plus the
+    # existing client pair is understood as the finished setup it is
+    from google_credentials import access_token as _analytics_access, credential_source as _analytics_source
+    result['credentialSource']=_analytics_source()
+    try:access=_analytics_access()
     except Exception as exc:return {**result,'status':'NO_EXISTING_ANALYTICS_AUTH','detail':type(exc).__name__}
     headers={'Authorization':'Bearer '+access}
     response=requests.get('https://analyticsadmin.googleapis.com/v1beta/accountSummaries',headers=headers,timeout=40)

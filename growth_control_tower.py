@@ -20,12 +20,10 @@ def load(name,default):
  except (OSError,json.JSONDecodeError):return default
 
 def oauth_token():
- prefix='GA4' if all(os.getenv('GA4_'+suffix) for suffix in ('CLIENT_ID','CLIENT_SECRET','REFRESH_TOKEN')) else 'GSC'
- cid=os.getenv(prefix+'_CLIENT_ID','');secret=os.getenv(prefix+'_CLIENT_SECRET','');refresh=os.getenv(prefix+'_REFRESH_TOKEN','')
- if not all((cid,secret,refresh)):raise RuntimeError('OAuth reporting credentials are not configured')
- data=urllib.parse.urlencode({'client_id':cid,'client_secret':secret,'refresh_token':refresh,'grant_type':'refresh_token'}).encode()
- req=urllib.request.Request('https://oauth2.googleapis.com/token',data=data,method='POST')
- with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)['access_token']
+ # see google_credentials.py: one paste (GA4_REFRESH_TOKEN) plus the stored client pair is the
+ # intended setup, so the values must not be selected as an all-or-nothing set by prefix
+ from google_credentials import access_token
+ return access_token()
 
 def ga4_report(token,property_id,start,end,dimensions,metrics,event=None,limit=10000):
  body={'dateRanges':[{'startDate':start,'endDate':end}],
