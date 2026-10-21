@@ -1,28 +1,21 @@
 {
-  "generatedAt": "2026-10-21T06:20:35.071355+05:30",
+  "generatedAt": "2026-10-21T06:58:43.628945+05:30",
   "dateIST": "2026-10-21",
-  "status": "PASS",
+  "status": "DEGRADED",
   "apply": true,
   "confirmedPublications": 2,
   "confirmedByLivePost": 2,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
-  "overdueMissing": [],
+  "overdueMissing": [
+    "master-trending-0"
+  ],
   "actions": [
     {
-      "type": "preparation_recovery",
+      "type": "source_recovery",
       "key": "master-trending-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-1",
+      "attempt": 1,
       "applied": true
     }
   ],
