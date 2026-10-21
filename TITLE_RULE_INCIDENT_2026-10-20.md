@@ -294,3 +294,33 @@ minutes is capped at 9 so a queued run can never sit on a dead code. The loop re
 `updated_at`, never the value, and `if: ${{ !failure() && !cancelled() }}` keeps the exchange alive
 when the wait is skipped. Suite: **590 passed, 79 subtests**; audits 202/0 and 12/0.
 
+### 21 October, 10:15 IST: my own repair broke the repair, and what now guards against it
+
+Run #10 never started. GitHub answered *Invalid workflow file*, `Line: 14, Col: 3: Unexpected value
+'secrets'`, because the wait design I had just shipped polled the secret's save time and I asked for
+the permission `secrets: read` - **a key GitHub's workflow schema does not define**. An unparseable
+`permissions:` block is not a soft warning: it stops the whole file, so the owner could not even try.
+The same commit also left the renamed job dangling, `authorize: needs: wait-for-code` pointing at a
+job that no longer existed, which GitHub would have refused next.
+
+Both faults are the same kind of mistake - a tool changed to fix an outage and could not be run - and
+neither needed a live run to find. So:
+
+- the wait needs no permission and no API at all now. `hold-for-code` simply holds the run (default
+  four minutes, a whole number of minutes required, capped at nine), and `authorize` runs after it, so
+  its snapshot of the secret is taken once the code has been saved. `permissions:` is back to the one
+  key the file actually needs, `contents: write`.
+- `audit_publishing_automation.py` gained a schema check for **every** workflow: `permissions` keys must
+  come from GitHub's documented set; every `needs` must name a job declared in the same file; every
+  `needs.`/`steps.` reference must resolve; a job must have `runs-on`; unknown keys are rejected. Run
+  against canary copies of this file, it reports `permissions key 'secrets' is not defined by GitHub`
+  and `job authorize needs 'wait-for-code', which no job in this file declares` - the two bugs I made -
+  and reports nothing across the rest of the repository (**203 pass, 0 fail**).
+- `test_tumblr_authorisation_wait.py` rehearses the real hold loop on every input a dispatcher can
+  type (one minute, `soon`, `0.5`, `25`) and pins that the hold touches no secret value and calls no
+  API. Suite: **591 passed, 78 subtests**; zero-view policy audit 12/0.
+
+For the record, the lesson as the owner stated it in effect all day: a green-looking fix that cannot
+start is worse than the outage, so the fix is now judged by whether the workflow file is valid and the
+step can be rehearsed, not by whether the intent was right.
+

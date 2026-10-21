@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 202 PASS · 0 FAIL
+**Result:** 203 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -206,3 +206,4 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **No obsolete blog URL in production engines**
 - ✅ **No obsolete market page in production engines**
 - ✅ **Every workflow shell step parses before it can fail** — every run block in every workflow is valid bash
+- ✅ **No workflow references a key, permission or job that GitHub does not know** — every permission, needs and step reference resolves

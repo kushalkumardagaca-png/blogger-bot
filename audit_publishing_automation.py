@@ -704,6 +704,49 @@ for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
 check('Every workflow shell step parses before it can fail',not _bad_steps,
       '; '.join(_bad_steps[:3]) or 'every run block in every workflow is valid bash')
 
+# Two mistakes of 21 October, both made by me while repairing the third: a permission key GitHub's
+# schema does not define ("secrets: read") made the whole file an "Invalid workflow file", so the
+# workflow could not start at all; and renaming a job left its dependant pointing at a name that no
+# longer exists. Both are checkable without running anything, so both are checked for every workflow.
+PERMISSION_KEYS={'actions','checks','contents','deployments','discussions','id-token','issues',
+ 'packages','pages','pull-requests','repository-projects','security-events','statuses'}
+TOP_KEYS={'name','on','true','permissions','concurrency','env','defaults','jobs','run-name'}
+JOB_KEYS={'name','needs','runs-on','condition','if','env','outputs','timeout-minutes','strategy',
+ 'continue-on-error','container','services','steps','environment','permissions','concurrency'}
+STEP_KEYS={'id','if','name','uses','with','run','continue-on-error','timeout-minutes','env','defaults','shell'}
+_schema=[]
+for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
+ try: _doc=yaml.safe_load(_wf.read_text(encoding='utf-8')) or {}
+ except Exception: continue
+ if not isinstance(_doc,dict): continue
+ for _k in _doc:
+  if str(_k) not in TOP_KEYS: _schema.append(f"{_wf.name}: unknown top-level key {_k!r}")
+ _perms=_doc.get('permissions')
+ if isinstance(_perms,dict):
+  for _k in _perms:
+   if _k not in PERMISSION_KEYS: _schema.append(f"{_wf.name}: permissions key {_k!r} is not defined by GitHub")
+ _jobs=_doc.get('jobs') if isinstance(_doc.get('jobs'),dict) else {}
+ for _jid,_job in _jobs.items():
+  if not isinstance(_job,dict): _schema.append(f"{_wf.name}: job {_jid} is not a mapping"); continue
+  if _job.get('uses') is None and 'runs-on' not in _job: _schema.append(f"{_wf.name}: job {_jid} has no runs-on")
+  for _k in _job:
+   if _k not in JOB_KEYS: _schema.append(f"{_wf.name}: job {_jid} has unknown key {_k!r}")
+  for _n in ([_job['needs']] if isinstance(_job.get('needs'),str) else list(_job.get('needs') or [])):
+   if _n not in _jobs: _schema.append(f"{_wf.name}: job {_jid} needs {_n!r}, which no job in this file declares")
+  for _st in (_job.get('steps') or []):
+   if isinstance(_st,dict):
+    for _k in _st:
+     if _k not in STEP_KEYS: _schema.append(f"{_wf.name}: job {_jid} step {_st.get('name')!r} has unknown key {_k!r}")
+  _ids={_st.get('id') for _st in (_job.get('steps') or []) if isinstance(_st,dict)}
+  for _st in (_job.get('steps') or []):
+   if not isinstance(_st,dict): continue
+   for _ref in re.findall(r"needs\.([A-Za-z0-9_-]+)\.",str(_st.get('run') or '')+str(_st.get('env') or '')):
+    if _ref not in _jobs: _schema.append(f"{_wf.name}: job {_jid} refers to needs.{_ref}, which is not declared")
+   for _ref in re.findall(r"steps\.([A-Za-z0-9_-]+)\.outputs",str(_st.get('run') or '')+str(_st.get('if') or '')):
+    if _ref and _ref not in _ids: _schema.append(f"{_wf.name}: job {_jid} refers to steps.{_ref}, which has no id")
+check('No workflow references a key, permission or job that GitHub does not know',not _schema,
+      '; '.join(_schema[:3]) or 'every permission, needs and step reference resolves')
+
 failed=[x for x in checks if x['status']=='FAIL']
 result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'summary':{'pass':len(checks)-len(failed),'fail':len(failed)},'checks':checks}
 if '--check-only' not in sys.argv:
