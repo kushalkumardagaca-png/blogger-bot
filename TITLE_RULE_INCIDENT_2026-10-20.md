@@ -246,3 +246,27 @@ Remaining step is the owner's alone, and it has a time limit: get a fresh code a
 *Tumblr OAuth Bootstrap* in the same sitting, pressing **Update** on the `TUMBLR_AUTHORIZATION_CODE`
 secret rather than creating a second one.
 
+### 21 October, 09:47 IST: the second failure, and why a re-run can never fix an expired code
+
+The owner pressed *Tumblr OAuth Bootstrap* again and Tumblr again answered `invalid_grant` / *"The
+authorization code has expired"*. The run history proves the cause: attempts #6 and #7 were 2h22m
+apart (07:25 and 09:47 IST) and nothing was re-saved between them, so the job was handed the same
+spent code twice. An expired code is not a state to wait out; the only way forward is a new approval.
+
+Three changes came out of it, so the situation cannot repeat silently:
+
+- `tumblr_attempt_record.py` keeps a SHA-256 **fingerprint** of the value the job was given, never the
+  value itself, and the run page now says *"This is the SAME code as the previous attempt, which
+  Tumblr already retired"* instead of repeating a message the owner cannot act on. A reason line that
+  is nothing but a code is dropped rather than stored, so no credential can reach the history of a
+  public repository.
+- the record and the token file are committed even when the exchange fails (`if: !cancelled()`), which
+  step 6 of run #7 proved in anger: the refusal reached `SOCIAL_CREDENTIAL_HEALTH.json` at 09:47:56
+  with Tumblr's own words in it.
+- the job installs its two Python modules only when they are missing, taking about twenty seconds of
+  queue time off every attempt, because each second is a chance for the code to age out.
+
+`test_tumblr_attempt_record.py` pins all of it (nine tests, including the privacy of the record). The
+suite stands at **582 passed, 76 subtests**, with the publishing audit at 202/0 and the zero-view
+policy audit at 12/0.
+
