@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-21T10:23:27.906948+05:30",
+ "generatedAt": "2026-10-21T10:55:23.944161+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 4,
- "expectedPosts": 8,
+ "articles": 5,
+ "expectedPosts": 10,
  "articlesWithBothPosts": 2,
- "postsMissing": 2,
- "dispatched": 0,
+ "postsMissing": 4,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -36,7 +36,7 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "credentialBlocked": {
-    "tumblr": "RuntimeError: Tumblr authorization exchange failed: HTTP 400; safe error details: {'error': 'invalid_grant', 'error_description': 'The authorization code has expired'}"
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
    },
    "actions": [
     "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
@@ -70,16 +70,34 @@
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
    "credentialBlocked": {
-    "tumblr": "RuntimeError: Tumblr authorization exchange failed: HTTP 400; safe error details: {'error': 'invalid_grant', 'error_description': 'The authorization code has expired'}"
+    "tumblr": "RuntimeError: the stored Tumblr refresh token was refused (invalid_grant): it has been consumed by an earlier exchange or revoked. No Tumblr post can be published until the owner re-authorises once - run tumblr_oauth_bootstrap.py with a fresh TUMBLR_AUTHORIZATION_CODE and commit the new tumblr_token"
    },
    "actions": [
     "no post is attempted because tumblr credentials are known to be unusable; the owner must re-authorise the connection"
+   ]
+  },
+  {
+   "key": "master-trending-0",
+   "title": "A modest increase in bank taxes is not the end",
+   "url": "https://dailyyield.blogspot.com/2026/10/a-modest-increase-in-bank-taxes-is-not.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "tumblr": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-21T10:23:21.628584+05:30",
+ "liveVerificationSourceAt": "2026-10-21T10:55:16.319004+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 2,
  "syntheticViews": 0,
