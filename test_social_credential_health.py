@@ -15,11 +15,11 @@ class Recording(unittest.TestCase):
         self.path = self.tmp / "SOCIAL_CREDENTIAL_HEALTH.json"
 
     def test_a_failure_is_recorded_with_the_platforms_own_words(self):
-        row = health.record("tumblr", False, "Tumblr refresh returned no access token", self.path)
+        row = health.record("bluesky", False, "Bluesky refresh returned no access token", self.path)
         self.assertFalse(row["ok"])
         self.assertIn("re-authorise", row["action"])
-        self.assertEqual(json.loads(self.path.read_text())["tumblr"]["reason"],
-                         "Tumblr refresh returned no access token")
+        self.assertEqual(json.loads(self.path.read_text())["bluesky"]["reason"],
+                         "Bluesky refresh returned no access token")
 
     def test_a_working_network_is_recorded_as_working(self):
         health.record("bluesky", True, "", self.path)
@@ -28,11 +28,11 @@ class Recording(unittest.TestCase):
         self.assertEqual(rows["bluesky"]["action"], "none; the network is publishing")
 
     def test_previous_platforms_survive_a_single_update(self):
-        health.record("tumblr", False, "token expired", self.path)
+        health.record("bluesky", False, "token expired", self.path)
         health.record("mastodon", True, "", self.path)
         rows = json.loads(self.path.read_text())
-        self.assertEqual({"tumblr", "mastodon"}, set(rows))
-        self.assertFalse(rows["tumblr"]["ok"])
+        self.assertEqual({"bluesky", "mastodon"}, set(rows))
+        self.assertFalse(rows["bluesky"]["ok"])
 
     def test_a_token_shaped_string_never_reaches_the_repository(self):
         secret = "bearer " + "Ab3" * 20
@@ -43,13 +43,13 @@ class Recording(unittest.TestCase):
 
     def test_an_unusable_file_does_not_raise(self):
         self.path.write_text("{not json", encoding="utf-8")
-        self.assertTrue(health.record("tumblr", True, "", self.path)["ok"])
+        self.assertTrue(health.record("bluesky", True, "", self.path)["ok"])
 
 
 class ReasonExtraction(unittest.TestCase):
     def test_the_last_useful_line_is_the_one_a_human_needs(self):
         tmp = Path(tempfile.mkdtemp()) / "out.txt"
-        tmp.write_text("fetching inventory\nHTTP 429 Too Many Requests from api.tumblr.com\n", encoding="utf-8")
+        tmp.write_text("fetching inventory\nHTTP 429 Too Many Requests from mastodon.social\n", encoding="utf-8")
         self.assertIn("429", health.reason_from(tmp))
 
     def test_output_with_no_error_word_gives_no_invented_reason(self):
@@ -68,11 +68,11 @@ class GuardSeesIt(unittest.TestCase):
     def test_a_recorded_failure_blocks_that_route(self):
         root = Path(tempfile.mkdtemp())
         (root / "SOCIAL_CREDENTIAL_HEALTH.json").write_text(json.dumps(
-            {"tumblr": {"ok": False, "reason": "token revoked by the network"},
+            {"mastodon": {"ok": False, "reason": "token revoked by the network"},
              "bluesky": {"ok": True, "reason": ""}}), encoding="utf-8")
         blocked = social_guard.blocked_platforms(root)
-        self.assertEqual({"tumblr"}, set(blocked))
-        self.assertIn("revoked", blocked["tumblr"])
+        self.assertEqual({"mastodon"}, set(blocked))
+        self.assertIn("revoked", blocked["mastodon"])
 
 
 if __name__ == "__main__":

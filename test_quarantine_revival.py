@@ -128,8 +128,8 @@ class RepairGateTests(unittest.TestCase):
 
     def test_social_rotation_accepts_only_approved_platforms(self):
         import social_rotation as sr
-        plan = sr.make_plan("revive-01", "https://dailyyield.blogspot.com/2026/10/x.html", "post", "", "", route_index=2, platforms=("mastodon", "facebook", "tumblr"))
-        self.assertEqual(plan["platform"], "tumblr")
+        plan = sr.make_plan("revive-01", "https://dailyyield.blogspot.com/2026/10/x.html", "post", "", "", route_index=2, platforms=("mastodon", "facebook", "bluesky"))
+        self.assertEqual(plan["platform"], "bluesky")
         with self.assertRaises(ValueError):
             sr.make_plan("revive-01", "https://dailyyield.blogspot.com/2026/10/x.html", "post", "", "", route_index=0, platforms=("twitter", "facebook"))
 

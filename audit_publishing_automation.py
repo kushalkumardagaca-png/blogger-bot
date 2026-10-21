@@ -2,6 +2,7 @@
 """Static and template audit for active News, social, search and site automations."""
 from pathlib import Path
 import re
+from collections import Counter
 import ast, datetime as dt, json, re, sys
 
 ROOT=Path(__file__).parent
@@ -72,7 +73,7 @@ check('Trending Master articles receive one trend and one permanent label',
       "item['category'],item['evergreen_category']" in dynamic)
 check('Every article routes to two distinct networks with exact 42-post weighting',
       'DAILY_PLATFORM_PAIRS' in (ROOT/'social_rotation.py').read_text()
-      and "{'facebook':13,'bluesky':11,'mastodon':10,'tumblr':8}" in (ROOT/'test_social_rotation.py').read_text()
+      and "{'facebook':14,'bluesky':14,'mastodon':14}" in (ROOT/'test_social_rotation.py').read_text()
       and 'for route_index in (0,1)' in (ROOT/'dispatch_social_events.py').read_text())
 check('Each dynamic Master package requires three licensed photos',
       'choose_photos(briefs' in (ROOT/'prepare_master_article.py').read_text() and 'if len(briefs)!=3' in (ROOT/'photo_selector.py').read_text())
@@ -150,36 +151,35 @@ check('Bluesky deduplicates against tracker and live recent feed and reconciles 
 check('Bluesky candidate discovery makes no Daily Yield public-page request',
       'www.googleapis.com/blogger/v3' in bp and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in bp)
 
-# Tumblr official OAuth2/NPF automation, independently gated until a test passes.
-tp_path=ROOT/'tumblr_publisher.py'; tw_path=ROOT/'.github/workflows/tumblr_publisher.yml'
-to_path=ROOT/'tumblr_oauth_bootstrap.py'; tow_path=ROOT/'.github/workflows/tumblr_oauth_bootstrap.yml'
-tp=tp_path.read_text() if tp_path.exists() else ''; tw=tw_path.read_text() if tw_path.exists() else ''
-to=to_path.read_text() if to_path.exists() else ''; tow=tow_path.read_text() if tow_path.exists() else ''
-tumblr_expected=[]
-check('Tumblr publisher, OAuth bootstrap and independent tracker are deployed',
-      bool(tp) and bool(tw) and bool(to) and bool(tow) and (ROOT/'tumblr_tracker.json').exists())
-check('Tumblr legacy auto-selection schedule is disabled behind its manual activation gate',
-      crons(tw_path)==tumblr_expected and "vars.TUMBLR_AUTOMATION_ENABLED == 'true'" in tw)
-check('Tumblr credentials and encryption key are GitHub secrets or variables',
-      'vars.TUMBLR_CONSUMER_KEY' in tw+tow and 'secrets.TUMBLR_CONSUMER_SECRET' in tw+tow
-      and 'secrets.TUMBLR_TOKEN_ENCRYPTION_KEY' in tw+tow)
-check('Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens',
-      'offline_access' in to and 'Fernet(' in to and 'tumblr_token.enc' in to)
-check('Tumblr publisher rotates refresh tokens without logging plaintext credentials',
-      'grant_type":"refresh_token"' in tp and 'encrypt_bundle(new)' in tp
-      and 'access_token' not in re.sub(r'required\([^\)]*\)', '', tw))
-check('Tumblr creates modern NPF posts with shared creative media and alt text',
-      'tumblr_payload(x, summary(x))' in tp and 'daily-yield-card' in tp
-      and 'render_social_card(x, "tumblr"' in tp and '/posts' in tp)
-check('Tumblr preserves title, summary, direct link, byline and platform-native tags',
-      'def summary(' in tp and 'tumblr_payload' in tp
-      and 'By Kushal Daga' in (ROOT/'social_creative.py').read_text())
-check('Tumblr rotates Pages and posts using its own tracker',
-      '/pages"' in tp and 'PAGE_WINDOWS' in tp and 'tumblr_tracker.json' in tp)
-check('Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes',
-      'def recent_posts(' in tp and 'def reconcile(' in tp and 'seen_id' in tp)
-check('Tumblr candidate discovery creates no Daily Yield public-page requests',
-      'www.googleapis.com/blogger/v3' in tp and 'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in tp)
+# Tumblr automation was removed on 21 October 2026 at the owner's instruction - the blog does not run
+# social automation on that application. What has to stay true is the absence: no publisher, no
+# workflow, no bootstrap, no credential file, and no Tumblr name in any routing vocabulary. The
+# historical tracker is deliberately kept, because 151 posts were really made and the audit trail for
+# them must remain readable.
+_live_tumblr=[str(x.relative_to(ROOT)) for x in list(ROOT.glob('tumblr_*'))+list((ROOT/'.github/workflows').glob('*tumblr*'))
+              +list((ROOT/'.github').glob('tumblr-*'))
+              if x.name not in ('tumblr_tracker.json',)]
+check('No Tumblr publisher, workflow, bootstrap or credential file is deployed',not _live_tumblr,
+      ', '.join(sorted(_live_tumblr)) or 'nothing Tumblr-automated exists in the repository')
+# The check runs against the values the automation actually uses, not against prose: an explanatory
+# comment naming the retired network is useful documentation, while a name inside a platform tuple is a
+# route to a publisher that no longer exists.
+import social_rotation as _sr, social_credential_health as _sch, social_growth_optimizer as _sgo
+_no_tumblr=(('tumblr' not in _sr.PLATFORMS) and ('tumblr' not in _sr.ROTATION_PLATFORMS)
+            and ('tumblr' not in _sr.NEWS_PATTERN) and ('tumblr' not in _sch.PLATFORMS)
+            and ('tumblr' not in _sgo.PLATFORMS)
+            and all(set(pair)<=set(_sr.PLATFORMS) and len(set(pair))==2 for pair in _sr.DAILY_PLATFORM_PAIRS)
+            and all(platform in _sr.PLATFORMS for platform,_ in _sr.RESOURCE_SCHEDULES.values()))
+check('Tumblr cannot be named by any routing, health or dedupe decision',_no_tumblr,
+      f'live platforms are {", ".join(_sr.PLATFORMS)}; every pair and window resolves to one of them')
+check('A retired network in the health file cannot block or unblock anything',
+      'if name in TRACKERS and isinstance(row, dict)' in (ROOT/'social_guard.py').read_text()
+      and 'TRACKERS = {"facebook"' in (ROOT/'social_guard.py').read_text(),
+      'blocked_platforms is filtered to live networks')
+check('The historical Tumblr tracker is preserved rather than deleted',
+      (ROOT/'tumblr_tracker.json').exists()
+      and bool(json.loads((ROOT/'tumblr_tracker.json').read_text()).get('published')),
+      'posts already made remain auditable')
 
 # Mastodon official API automation remains independently gated and tracked.
 mp_path=ROOT/'mastodon_publisher.py'; mw_path=ROOT/'.github/workflows/mastodon_publisher.yml'
@@ -199,7 +199,7 @@ check('Mastodon uses platform-native copy, descriptive alt text and shared creat
 # Shared creative layer: deterministic retries, story/platform variety and no site views.
 creative_path=ROOT/'social_creative.py'; creative=creative_path.read_text() if creative_path.exists() else ''
 check('Shared social creative engine is deployed across all four active networks',
-      bool(creative) and all('social_creative import' in text for text in (fp,bp,tp,mp)))
+      bool(creative) and all('social_creative import' in text for text in (fp,bp,mp)))
 check('Creative system is photo-first with at least ten treatments and five compositions',
       len(re.findall(r'\{"name":',creative))>=10 and 'layout=(seed // 31) % 5' in creative
       and 'int(choice.get("layout",layout))%5' in creative
@@ -238,7 +238,7 @@ check('Exactly three rotating resource promotions per platform are scheduled dai
       and 'Audience-local global windows' in coordinated)
 check('Every social publisher accepts an exact authenticated Blogger target URL',
       all('--target-url' in text and 'Target URL was not found in authenticated Blogger inventory' in text
-          for text in (fp,bp,tp,mp)))
+          for text in (fp,bp,mp)))
 check('News publisher dispatches only confirmed live Blogger events',
       'social_events.json' in np and 'dispatch_social_events.py' in nw.read_text())
 check('Concurrent News desk writes use semantic merge and retry',
@@ -273,11 +273,16 @@ check('Daily coordinated inventory covers all 21 articles plus twelve rotating r
       'DAILY_ARTICLE_KEYS' in rotation and 'DAILY_PLATFORM_PAIRS' in rotation and 'RESOURCE_DESTINATIONS' in rotation
       and len(re.findall(r'https://dailyyield\.blogspot\.com/p/',rotation))==5
       and 'https://dailyyield.blogspot.com/#spotlight' in rotation and 'https://dailyyield.blogspot.com/' in rotation
-      and 'RESOURCE_SCHEDULES' in rotation and 'position not in (0,1,2)' in rotation)
+      and 'RESOURCE_SCHEDULES' in rotation
+      and 'position not in range(len(RESOURCE_DESTINATIONS))' in rotation)
 check('Configured article cadence is exactly 42 weighted social posts daily',
-      'Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8' in rotation
-      and 21*2==42 and all(name in rotation for name in ('facebook','bluesky','tumblr','mastodon')))
-check('Article and Page application choices rotate across all four networks by IST day',
+      # the owner's 42-post rule survived the removal intact: twenty-one articles, two distinct
+      # networks each, redistributed over three live apps rather than quietly reduced to eighteen.
+      len(_sr.DAILY_PLATFORM_PAIRS)*2==42 and len(_sr.DAILY_ARTICLE_KEYS)==21
+      and Counter(x for pair in _sr.DAILY_PLATFORM_PAIRS for x in pair)=={name:14 for name in _sr.PLATFORMS}
+      and len(_sr.RESOURCE_SCHEDULES)==12,
+      '42 article posts (14 per network) plus 12 resource windows')
+check('Article and Page application choices rotate across every live network by IST day',
       'ROTATION_PLATFORMS' in rotation and 'rotate_platform(base_platform,current.date())' in rotation
       and 'platform_pair_for(item_key,day)' in rotation)
 
@@ -427,17 +432,13 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
-check('Tumblr keeps its access token instead of burning a refresh grant on every run',
-      # the two-day outage of 18-20 October 2026: every run exchanged the refresh token, Tumblr
-      # rotates it at each exchange, and one run that failed before its state was committed left
-      # the repository holding a consumed token - after which every attempt answered invalid_grant
-      'def access_token_or_refresh' in (ROOT/'tumblr_publisher.py').read_text()
-      and 'token=access_token_or_refresh()' in (ROOT/'tumblr_publisher.py').read_text()
-      and 'retries=1' in (ROOT/'tumblr_publisher.py').read_text().split('def refresh_access')[1].split('\ndef ')[0]
-      and 'invalid_grant' in (ROOT/'tumblr_publisher.py').read_text()
-      and 'tumblr_oauth_bootstrap.py' in (ROOT/'tumblr_publisher.py').read_text()
-      and 'obtained_at' in (ROOT/'tumblr_oauth_bootstrap.py').read_text()
-      and (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text().count('if: ${{ !cancelled() }}') == 4)
+check('Every live channel persists its state even when the step before it failed',
+      # the lesson of 20-21 October 2026 is that a failure nobody can read is an outage: a refused
+      # credential or an undelivered post must reach the repository, not only the job log that
+      # expires. One persist guard per channel, each running unless the whole job was cancelled.
+      (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text().count('if: ${{ !cancelled() }}') == 3
+      and all((f'{name}_publisher.py') in [x.name for x in ROOT.glob('*_publisher.py')]
+              for name in ('facebook','bluesky','mastodon')))
 check('A social network that cannot publish says so in the repository, not only in a job log',
       # 22 social runs failed on 20 October 2026 with nothing but "exit code 1" to show for it, and
       # nine of the day's 36 posts were never delivered. The guard already refuses to dispatch to a
@@ -445,7 +446,7 @@ check('A social network that cannot publish says so in the repository, not only 
       # channel, so the reason is readable from the repository without log access.
       (ROOT/'social_credential_health.py').exists()
       and all(f'--platform {name} ' in (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
-              for name in ('facebook', 'bluesky', 'tumblr', 'mastodon'))
+              for name in ('facebook', 'bluesky', 'mastodon'))
       and 'files+=(SOCIAL_CREDENTIAL_HEALTH.json)' in (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
       and 'blocked_platforms' in (ROOT/'social_guard.py').read_text()
       and 'def reason_from' in (ROOT/'social_credential_health.py').read_text()
@@ -747,22 +748,24 @@ for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
 check('No workflow references a key, permission or job that GitHub does not know',not _schema,
       '; '.join(_schema[:3]) or 'every permission, needs and step reference resolves')
 
-# The 30-to-60-second life of a one-time code is why re-authorising Tumblr kept failing: every route
-# that made a person save a code and then start a run lost the race to the queue. The listener is
-# already running and reacts to the commit, so the two properties that make that safe are pinned here:
-# the drop file holds no credential at rest, and the watch is started by a commit rather than a button.
-_tl=(ROOT/'tumblr_oauth_listener.py').read_text(encoding='utf-8') if (ROOT/'tumblr_oauth_listener.py').exists() else ''
-_tlwf=(ROOT/'.github/workflows/tumblr_oauth_listener.yml').read_text(encoding='utf-8') if (ROOT/'.github/workflows/tumblr_oauth_listener.yml').exists() else ''
-_drop=ROOT/'.github/tumblr-oauth-code'
-check('Tumblr authorisation listener exists and reacts to a commit rather than a button',
-      bool(_tl) and '.github/tumblr-oauth-listener' in _tlwf and 'cancel-in-progress: true' in _tlwf
-      and 'if: ${{ !cancelled() }}' in _tlwf, 'the watch is started by pushing mode: on')
-check('The code drop file holds comments only, so nothing secret sits in the repository',
-      _drop.exists() and all((not line.strip()) or line.startswith('#') for line in _drop.read_text(encoding='utf-8').splitlines()),
-      f"{_drop.name} present" if _drop.exists() else 'missing code file')
-check('The listener redacts the code and never re-offers a spent one',
-      'def redact(' in _tl and '[one-time code]' in _tl and 'seen = sha' in _tl
-      and 'print(f"[{now()}] a code has arrived' in _tl, 'redaction plus one attempt per blob')
+# Why the whole affair is worth remembering in code rather than in a chat log: a Tumblr authorization
+# code lives about thirty to sixty seconds, so every design that asked a person to save one and then
+# start a run was structurally unwinnable. The rule that survives the removal is the general one - no
+# automation may depend on a human beating a queue - and nothing in this repository may now hold a
+# one-time code, a token or an authorisation helper for a retired network.
+for _name in ('.github/tumblr-oauth-code', '.github/tumblr-oauth-listener', 'TUMBLR_OAUTH_ATTEMPT.json'):
+    check(f'{_name} is gone with the automation that used it', not (ROOT/_name).exists(),
+          'no credential-shaped file is left behind')
+def _without_comments(text):
+    """YAML and Python lines with their # comments removed, so prose cannot satisfy a code check."""
+    return "\n".join(line.split("#", 1)[0] for line in text.splitlines())
+
+
+check('No workflow runs a Tumblr step, secret or job',
+      not [wf.name for wf in (ROOT/'.github/workflows').glob('*.yml')
+           if re.search("tumblr_|TUMBLR_|python tumblr|tumblr:",
+                         _without_comments(wf.read_text(encoding='utf-8')), re.I)],
+      'comments may explain the retirement; no step, secret or job uses it')
 
 failed=[x for x in checks if x['status']=='FAIL']
 result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'summary':{'pass':len(checks)-len(failed),'fail':len(failed)},'checks':checks}

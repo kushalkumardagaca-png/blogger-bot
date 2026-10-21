@@ -185,7 +185,7 @@ def reconcile(now,apply=False):
   if not may_retry(ledger,lk,now):blocked.append(lk);continue
   cmd=['gh','workflow','run','cleanup_wrong_master_post.yml','--ref','main','-f',f"duplicate_url={repair['duplicateUrl']}",'-f',f"replacement_url={replacement['url']}",'-f',f"expected_title_phrase={repair['titlePhrase']}"]
   call(cmd,apply);mark(ledger,lk,now);actions.append({'type':'wrong_publication_cleanup','key':repair['key'],'duplicateUrl':repair['duplicateUrl'],'replacementUrl':replacement['url'],'applied':apply})
- platform_urls={p:tracker_urls(p) for p in ('facebook','bluesky','tumblr','mastodon')}
+ platform_urls={p:tracker_urls(p) for p in ('facebook','bluesky','mastodon')}
  for item in inventory:
   published=parse(item.get('published_at'))
   if published and now-published.astimezone(IST)<SOCIAL_GRACE:continue

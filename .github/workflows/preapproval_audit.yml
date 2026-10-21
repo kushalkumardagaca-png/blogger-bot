@@ -55,17 +55,13 @@ jobs:
           FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
           FACEBOOK_PAGE_ID: '1303333369533572'
           FACEBOOK_GRAPH_VERSION: 'v26.0'
-          TUMBLR_BLOG_IDENTIFIER: dailyyield-official
-          TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
-          TUMBLR_CONSUMER_SECRET: ${{ secrets.TUMBLR_CONSUMER_SECRET }}
-          TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}
         run: python social_duplicate_cleanup.py --apply --since 2026-10-17
       - name: Keep verified social removals race-safely
         if: always()
         run: |
+          files=(facebook_tracker.json bluesky_tracker.json mastodon_tracker.json)
           git config user.name 'Daily Yield AdSense-first Controller'
           git config user.email 'dailyyield.official@gmail.com'
-          files=(facebook_tracker.json bluesky_tracker.json tumblr_tracker.json mastodon_tracker.json)
           if [ -f TABLE3_CONTROL_TESTS.json ]; then files+=(TABLE3_CONTROL_TESTS.json); fi
           if [ -f SOCIAL_DUPLICATE_CLEANUP_STATUS.json ]; then files+=(SOCIAL_DUPLICATE_CLEANUP_STATUS.json); fi
           bash persist_social_state.sh "${files[@]}"
@@ -100,7 +96,9 @@ jobs:
         if: always()
         run: |
           git fetch --quiet origin main
-          for file in SLOT_GUARANTEE_STATUS.json SOCIAL_GUARANTEE_STATUS.json news_tracker.json MASTER_AUTOMATION_TRACKER.json MASTER_DAILY_PLAN.json facebook_tracker.json bluesky_tracker.json tumblr_tracker.json mastodon_tracker.json; do
+          # Tumblr is no longer automated, so its tracker is not part of the evidence refresh either;
+          # the historical file stays on disk untouched and is simply not consulted here.
+          for file in SLOT_GUARANTEE_STATUS.json SOCIAL_GUARANTEE_STATUS.json news_tracker.json MASTER_AUTOMATION_TRACKER.json MASTER_DAILY_PLAN.json facebook_tracker.json bluesky_tracker.json mastodon_tracker.json; do
             git show "origin/main:$file" > "/tmp/table3-$file" && cp "/tmp/table3-$file" "$file"
           done
           python social_guard.py

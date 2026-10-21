@@ -11,7 +11,7 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 ROOT=Path(__file__).parent; SOURCE=ROOT/'SOCIAL_PERFORMANCE.json'; OUT=ROOT/'SOCIAL_OPTIMIZER_STATE.json'
-PLATFORMS=('facebook','bluesky','tumblr','mastodon')
+PLATFORMS=('facebook','bluesky','mastodon')
 
 def interactions(metrics):
  ignore={'post_impressions','post_impressions_unique'}

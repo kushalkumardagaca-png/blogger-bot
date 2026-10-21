@@ -94,3 +94,12 @@ to Google** and **how duplicates are handled** - it no longer proposes cutting o
 - No relaxing an index or quality gate to make a number look better.
 - Never paste a password, 6-digit code, token or app secret into a chat; secrets go into GitHub
   repository secrets.
+- **No social media automation for Tumblr.** It was removed on 21 October 2026 (see
+  `TUMBLR_REMOVAL_2026-10-21.md`): no publisher, no authorisation flow, no scheduled job, no route.
+  Bringing it back, or adding any network, is the owner's decision, not something to reintroduce.
+- **No procedure that depends on a human remembering steps.** If a fix needs someone to paste a value
+  into a secret, do it in a specific order, or press Run inside a short window, the fix is wrong and
+  must be rebuilt from the repository side. (This is what killed the 20-21 October Tumblr attempt:
+  an authorisation code lives 30-60 seconds, while a queued run needs two minutes to arrive.)
+- The 42-post rule survives that removal unchanged in weight: 21 articles a day, **two different**
+  destinations each, now spread over Facebook, Bluesky and Mastodon at 14 slots per network.

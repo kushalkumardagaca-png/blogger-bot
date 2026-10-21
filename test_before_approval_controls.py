@@ -209,16 +209,19 @@ class SocialSafetyTests(unittest.TestCase):
         self.assertEqual(result['published'],[]);self.assertEqual(len(result['deleted']),1)
     def test_workflow_outputs_are_not_accidentally_quoted(self):
         text=(ROOT/'.github/workflows/coordinated_social_publish.yml').read_text()
-        self.assertNotIn('already="yes"',text);self.assertEqual(text.count("echo 'already=yes'"),4)
+        self.assertNotIn('already="yes"',text);self.assertEqual(text.count("echo 'already=yes'"),3)
         # two per channel now: the dedupe guard's exit and the publish block's own exit, so a
-        # network that fails is still a failed step and recovery keeps trying
-        self.assertEqual(text.count('exit "$code"'),8)
+        # network that fails is still a failed step and recovery keeps trying. Three live networks
+        # after Tumblr's removal on 21 October 2026, so six of them.
+        self.assertEqual(text.count('exit "$code"'),6)
     def test_each_network_publishes_one_destination_at_a_time(self):
-        # The group is scoped to the network, not to network+destination: Tumblr and
-        # Facebook both rotate a single OAuth refresh token per job, so two parallel
-        # jobs for two articles invalidated each other's token on 19 October.
+        # The group is scoped to the network, not to network+destination: Facebook rotates a single
+        # OAuth refresh token per job, so two parallel jobs for two articles invalidated each other's
+        # token on 19 October. Tumblr left automation on 21 October 2026, so three networks remain.
         data=yaml.safe_load((ROOT/'.github/workflows/coordinated_social_publish.yml').read_text())
-        for platform in ('facebook','tumblr','bluesky','mastodon'):
+        self.assertEqual(tuple(data['jobs'][1:] if False else [k for k in data['jobs'] if k!='plan']),
+                         ('facebook','bluesky','mastodon'))
+        for platform in ('facebook','bluesky','mastodon'):
             group=data['jobs'][platform]['concurrency']['group']
             self.assertEqual(group,f'social-{platform}')
             self.assertNotIn('target_url',group)

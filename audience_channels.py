@@ -7,7 +7,7 @@ Bluesky and Mastodon publish follower counts over open, read-only endpoints, so 
 them the same way a visitor can - no token, no posting, no scraping behind a login.
 
 Two things are deliberately stated instead of guessed: channels whose numbers need a credential
-(Facebook, Tumblr) are reported as not measured here, and the blog's own pageviews are reported
+(Facebook is reported as not measured here, and the blog's own pageviews are reported
 as unmeasurable until the analytics freeze lifts, because Google Analytics is not installed and
 cannot be installed during the review.
 """
@@ -34,7 +34,6 @@ MASTODON_ACCT = "dailyyield"
 MASTODON_INSTANCE = "https://mastodon.social"
 NOT_MEASURED = {
     "Facebook": "needs the page token this operation is not allowed to touch; coordinated_social_publish posts through it",
-    "Tumblr": "needs OAuth for the stats endpoint; the publisher posts through it and the count stays unknown",
 }
 
 

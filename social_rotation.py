@@ -15,23 +15,28 @@ import os
 from pathlib import Path
 
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
-PLATFORMS = ("facebook", "bluesky", "tumblr", "mastodon")
-# User-approved cross-day application rotation. The anchor preserves today's
-# established routes; each following IST date advances Facebook → Tumblr →
-# Bluesky → Mastodon → Facebook. A cyclic permutation preserves the exact daily
-# post count while preventing any desk, Master slot or Page from staying on one app.
-ROTATION_PLATFORMS=("facebook","tumblr","bluesky","mastodon")
+# Tumblr was dropped from social automation on 21 October 2026 at the owner's instruction, so the live
+# destinations are these three. Every table below is derived from PLATFORMS: an entry that names a
+# retired network would route a post into a publisher that no longer exists, and the audit rejects it.
+PLATFORMS = ("facebook", "bluesky", "mastodon")
+# User-approved cross-day application rotation. The anchor preserves the established routes; each
+# following IST date advances Facebook -> Bluesky -> Mastodon -> Facebook. A cyclic permutation keeps
+# the exact daily post count while preventing any desk, Master slot or Page from staying on one app.
+ROTATION_PLATFORMS=("facebook","bluesky","mastodon")
 ROTATION_ANCHOR=dt.date(2026,10,13)
 
 def rotate_platform(platform:str,day:dt.date)->str:
  if platform not in ROTATION_PLATFORMS:raise ValueError(f'unknown social platform: {platform}')
  phase=(day-ROTATION_ANCHOR).days%len(ROTATION_PLATFORMS)
  return ROTATION_PLATFORMS[(ROTATION_PLATFORMS.index(platform)+phase)%len(ROTATION_PLATFORMS)]
+# The news-desk and Master single-slot rhythm: fifteen positions, five turns for each live network, so no
+# desk or slot is favoured as the day advances. It used to be twenty positions across four networks.
 NEWS_PATTERN = (
-    "facebook", "bluesky", "tumblr", "mastodon", "facebook",
-    "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
-    "facebook", "bluesky", "tumblr", "mastodon", "facebook",
-    "bluesky", "facebook", "tumblr", "bluesky", "mastodon",
+    "facebook", "bluesky", "mastodon",
+    "bluesky", "facebook", "mastodon",
+    "facebook", "mastodon", "bluesky",
+    "mastodon", "bluesky", "facebook",
+    "mastodon", "facebook", "bluesky",
 )
 NEWS_KEYS = (
     "americas", "global", "markets", "economy", "banking", "companies",
@@ -44,14 +49,13 @@ DAILY_ARTICLE_KEYS=(
  "master-trending-2","master-evergreen-2","master-trending-3","master-evergreen-3",
  "master-trending-4","master-evergreen-4",
 )
-# Exactly 42 daily assignments: Facebook 13, Bluesky 11, Mastodon 10, Tumblr 8.
-DAILY_PLATFORM_PAIRS=(
- ('bluesky','mastodon'),('bluesky','mastodon'),('facebook','tumblr'),('mastodon','tumblr'),('bluesky','facebook'),
- ('bluesky','mastodon'),('mastodon','facebook'),('facebook','bluesky'),('bluesky','facebook'),('facebook','mastodon'),('facebook','tumblr'),
- ('mastodon','facebook'),('facebook','tumblr'),('bluesky','facebook'),('facebook','tumblr'),
- ('bluesky','mastodon'),('facebook','tumblr'),('bluesky','mastodon'),('facebook','tumblr'),
- ('bluesky','tumblr'),('bluesky','mastodon'),
-)
+# Exactly 42 daily assignments over 21 articles, two different networks each. With Tumblr retired the
+# eight slots it held are redistributed so the three live networks carry fourteen each: seven
+# Facebook+Bluesky, seven Facebook+Mastodon and seven Bluesky+Mastodon articles. The count per article
+# is untouched, which is the point of the 42-pair rule - dropping a network must not change how much
+# each article is promoted, only where it lands.
+_DAILY_PAIR_KINDS=(("facebook", "bluesky"), ("facebook", "mastodon"), ("bluesky", "mastodon"))
+DAILY_PLATFORM_PAIRS=tuple(_DAILY_PAIR_KINDS[index % 3] for index in range(len(DAILY_ARTICLE_KEYS)))
 
 def platform_pair_for(item_key:str,day:dt.date|None=None)->tuple[str,str]:
  if item_key not in DAILY_ARTICLE_KEYS:raise ValueError(f'unknown daily article key: {item_key}')
@@ -68,21 +72,22 @@ RESOURCE_DESTINATIONS = (
     ("spotlight", "Daily Yield Spotlight", "https://dailyyield.blogspot.com/#spotlight"),
     ("website", "Daily Yield Website", "https://dailyyield.blogspot.com/"),
 )
-# Three audience-friendly resource windows per platform in IST. The 12 schedules
-# produce exactly three page/website promotions on each network every day.
+# Three audience-friendly resource windows per platform in IST, plus the three windows that belonged to
+# Tumblr and are now spread over the live networks so the site still gets nine daily promotions: the
+# 12 schedules are unchanged in number and time, only the destination of three of them moved.
 RESOURCE_SCHEDULES = {
     "15 23 * * *": ("mastodon", 0), # 04:45 IST: Asia-Pacific morning
     "15 1 * * *": ("facebook", 0),  # 06:45 IST: China/India morning
     "15 3 * * *": ("bluesky", 0),   # 08:45 IST: India commute
-    "15 5 * * *": ("tumblr", 0),    # 10:45 IST: Europe morning
+    "15 5 * * *": ("mastodon", 3),   # 10:45 IST: Europe morning - the window Tumblr held, reassigned
     "30 6 * * *": ("mastodon", 1),  # 12:00 IST: Europe lunch approach
     "15 8 * * *": ("facebook", 1),  # 13:45 IST: India/Europe overlap
     "15 10 * * *": ("bluesky", 1),  # 15:45 IST: Europe midday
-    "30 11 * * *": ("tumblr", 1),   # 17:00 IST: India evening
+    "30 11 * * *": ("bluesky", 3),   # 17:00 IST: India evening - reassigned from Tumblr
     "30 13 * * *": ("mastodon", 2), # 19:00 IST: India prime/US morning
     "30 14 * * *": ("facebook", 2), # 20:00 IST: India prime/US morning
     "0 16 * * *": ("bluesky", 2),   # 21:30 IST: US midday
-    "45 17 * * *": ("tumblr", 2),   # 23:15 IST: US afternoon
+    "45 17 * * *": ("facebook", 3),  # 23:15 IST: US afternoon - reassigned from Tumblr
 }
 
 
@@ -119,9 +124,12 @@ def platform_for(item_key: str, day: dt.date) -> str:
 
 
 def resource_destination(platform: str, position: int, day: dt.date) -> tuple[str,str,str]:
-    if platform not in PLATFORMS or position not in (0,1,2):raise ValueError('invalid resource route')
-    # Distinct offsets prevent all four networks from promoting the same page at
-    # once. Over seven days every platform promotes every destination three times.
+    if platform not in PLATFORMS or position not in range(len(RESOURCE_DESTINATIONS)):
+        raise ValueError('invalid resource route')
+    # Distinct offsets prevent every live network from promoting the same page at once. The position is
+    # the destination slot, not a fixed three-per-day quota: when Tumblr was retired its three windows
+    # were handed to the live networks, so a platform may now hold four, and each still promotes a
+    # different page in each window.
     start=(day.toordinal()*3+PLATFORMS.index(platform)*2)%len(RESOURCE_DESTINATIONS)
     return RESOURCE_DESTINATIONS[(start+position)%len(RESOURCE_DESTINATIONS)]
 

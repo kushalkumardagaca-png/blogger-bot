@@ -36,7 +36,6 @@ jobs:
           FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
           FACEBOOK_PAGE_ID: '1303333369533572'
           FACEBOOK_GRAPH_VERSION: 'v26.0'
-          TUMBLR_CONSUMER_KEY: ${{ vars.TUMBLR_CONSUMER_KEY }}
         run: python social_performance.py
       - name: Optimize creative mix without reducing exploration
         run: python social_growth_optimizer.py

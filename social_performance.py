@@ -43,7 +43,7 @@ def base(entry: dict, platform: str) -> dict:
         "platform": platform,
         "creative": creative,
         "social_id": (entry.get("facebook_post_id") or entry.get("bluesky_uri") or
-                      entry.get("mastodon_status_id") or entry.get("tumblr_post_id") or ""),
+                      entry.get("mastodon_status_id") or ""),
         "title": entry.get("title", ""),
         "destination": entry.get("url", ""),
         "published_at": entry.get("published_at", ""),
@@ -99,31 +99,6 @@ def mastodon_metrics(entries: list[dict]) -> tuple[list[dict], str]:
     return rows, status
 
 
-def tumblr_metrics(entries: list[dict]) -> tuple[list[dict], str]:
-    api_key = os.environ.get("TUMBLR_CONSUMER_KEY", "").strip()
-    if not api_key:
-        return [], "unavailable: API key not configured"
-    rows = []
-    failures = 0
-    for entry in entries[-80:]:
-        pid = str(entry.get("tumblr_post_id", ""))
-        if not pid:
-            continue
-        try:
-            data = get_json("https://api.tumblr.com/v2/blog/dailyyield-official/posts",
-                            params={"api_key": api_key, "id": pid, "npf": "true"})
-            posts = data.get("response", {}).get("posts", [])
-            if not posts:
-                failures += 1
-                continue
-            row = base(entry, "tumblr")
-            row["metrics"] = {"notes": int(posts[0].get("note_count", 0))}
-            row["impressions_available"] = False
-            rows.append(row)
-        except Exception:
-            failures += 1
-    status = "ok" if not failures else f"partial: {failures} unavailable"
-    return rows, status
 
 
 def facebook_metrics(entries: list[dict]) -> tuple[list[dict], str]:
@@ -188,7 +163,6 @@ def main() -> int:
         "facebook": facebook_metrics,
         "bluesky": bluesky_metrics,
         "mastodon": mastodon_metrics,
-        "tumblr": tumblr_metrics,
     }
     platforms, items = {}, []
     for name, collect in collectors.items():

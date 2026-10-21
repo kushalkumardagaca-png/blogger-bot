@@ -324,3 +324,18 @@ For the record, the lesson as the owner stated it in effect all day: a green-loo
 start is worse than the outage, so the fix is now judged by whether the workflow file is valid and the
 step can be rehearsed, not by whether the intent was right.
 
+---
+
+## Closing note, 21 October: the Tumblr half of this file no longer exists
+
+Everything this log says about *Tumblr* — the hold-for-code window, the standing authorisation
+listener, `tumblr_attempt_record.py`, the Exchange step, the four persist guards — was removed the
+next day on the owner's instruction ("we are not running any social media automation in that
+application"), together with the publisher, the encrypted token, the three workflows, the duplicate
+sweep and the four tests. The code above is kept as the account of what was tried and why it could
+not work; the live state is `TUMBLR_REMOVAL_2026-10-21.md`.
+
+What survived from this incident and still applies to every network: the 12-46 character title gate
+and its repair, quotations cut before citation trimming, bounded preparation time, per-network
+credential health with `::error` sentences a person can read on a phone, and the rule that a green
+run is not proof of publishing — only a row in that network's tracker is.

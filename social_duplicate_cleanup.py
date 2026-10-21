@@ -15,7 +15,9 @@ from merge_social_tracker import identity
 from preapproval_audit import BloggerReader
 
 ROOT=Path(__file__).resolve().parent
-FIELDS={'facebook':'facebook_post_id','tumblr':'tumblr_post_id','bluesky':'bluesky_uri','mastodon':'mastodon_status_id'}
+# Tumblr is no longer automated, so its posts are not part of a duplicate sweep either; the historical
+# tracker stays on disk untouched and only live networks are considered here.
+FIELDS={'facebook':'facebook_post_id','bluesky':'bluesky_uri','mastodon':'mastodon_status_id'}
 NOW=lambda:dt.datetime.now(dt.timezone.utc).isoformat()
 
 
@@ -53,27 +55,6 @@ class Facebook:
         if data is not True and not (isinstance(data,dict) and data.get('success') is True):raise RuntimeError('Facebook did not acknowledge deletion')
 
 
-class Tumblr:
-    def __init__(self):
-        from tumblr_publisher import decrypt_bundle,verify_account,API,TUMBLR_BLOG,auth,request
-        # Reuse the existing valid access token. Do not rotate a token while a
-        # normal publisher may be using it; an expired token safely defers cleanup.
-        import subprocess
-        token_bytes=subprocess.run(['git','show','origin/main:tumblr_token.enc'],cwd=ROOT,check=True,capture_output=True,timeout=20).stdout
-        (ROOT/'tumblr_token.enc').write_bytes(token_bytes)
-        self.access=decrypt_bundle()['access_token'];verify_account(self.access)
-        self.root=API+'/blog/'+TUMBLR_BLOG;self.auth=auth;self.request=request
-    def read(self,ident):
-        response=self.request('GET',self.root+'/posts',headers=self.auth(self.access),params={'id':str(ident),'npf':'true'},retries=1)
-        rows=response.json().get('response',{}).get('posts',[])
-        found=next((r for r in rows if str(r.get('id_string') or r.get('id'))==str(ident)),None)
-        if not found:raise RuntimeError('exact Tumblr post not readable; refusing an unverified deletion')
-        return found
-    def remove(self,ident):
-        response=self.request('POST',self.root+'/post/delete',headers=self.auth(self.access),data={'id':str(ident)},retries=1)
-        if response.status_code!=200:raise RuntimeError('Tumblr deletion not acknowledged')
-        data=response.json()
-        if data.get('meta',{}).get('status',200)!=200:raise RuntimeError('Tumblr did not acknowledge deletion')
 
 
 def main():
@@ -88,9 +69,9 @@ def main():
         groups=candidates(tracker.get('published',[]),args.since,live)
         result['candidates']+=sum(len(rows)-1 for _,rows in groups)
         if not groups:continue
-        if platform not in ('facebook','tumblr'):
+        if platform != 'facebook':
             result['blocked'].append({'platform':platform,'reason':'No automatic deletion adapter enabled; preserved all copies.'});continue
-        try:provider=Facebook() if platform=='facebook' else Tumblr()
+        try:provider=Facebook()
         except Exception as exc:
             result['blocked'].append({'platform':platform,'reason':'Provider authorization/read unavailable','errorType':type(exc).__name__});continue
         removed=[]

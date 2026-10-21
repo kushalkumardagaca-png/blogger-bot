@@ -48,8 +48,5 @@ def test_facebook_keeps_real_engagement_when_insights_are_unavailable(monkeypatc
 
 def test_missing_credentials_remain_unavailable_not_zero(monkeypatch):
     monkeypatch.delenv('FACEBOOK_SYSTEM_USER_TOKEN', raising=False)
-    monkeypatch.delenv('TUMBLR_CONSUMER_KEY', raising=False)
     facebook, facebook_status = sp.facebook_metrics([])
-    tumblr, tumblr_status = sp.tumblr_metrics([])
     assert facebook == [] and facebook_status.startswith('unavailable:')
-    assert tumblr == [] and tumblr_status.startswith('unavailable:')

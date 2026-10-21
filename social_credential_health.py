@@ -24,7 +24,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 HEALTH = ROOT / "SOCIAL_CREDENTIAL_HEALTH.json"
 IST = timezone(timedelta(hours=5, minutes=30), name="IST")
-PLATFORMS = ("facebook", "bluesky", "tumblr", "mastodon")
+# Tumblr left social automation on 21 October 2026, so a record for it is never written and never
+# read: a platform outside this tuple is refused rather than silently tracked as healthy.
+PLATFORMS = ("facebook", "bluesky", "mastodon")
 
 # The words that tell a human what broke, in the order they are worth reading.
 USEFUL = re.compile(

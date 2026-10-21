@@ -366,11 +366,11 @@ class CredentialHealthIsVisible(unittest.TestCase):
             root = Path(tmp)
             self.assertEqual(g.blocked_platforms(root), {})
             (root / "SOCIAL_CREDENTIAL_HEALTH.json").write_text(json.dumps(
-                {"tumblr": {"ok": False, "reason": "RuntimeError: invalid_grant"},
+                {"bluesky": {"ok": False, "reason": "RuntimeError: invalid_grant"},
                  "mastodon": {"ok": True, "reason": ""}}), encoding="utf-8")
             blocked = g.blocked_platforms(root)
-        self.assertEqual(list(blocked), ["tumblr"])
-        self.assertIn("invalid_grant", blocked["tumblr"])
+        self.assertEqual(list(blocked), ["bluesky"])
+        self.assertIn("invalid_grant", blocked["bluesky"])
 
     def test_broken_json_cannot_make_the_guard_think_a_network_is_down(self):
         import tempfile
@@ -381,23 +381,35 @@ class CredentialHealthIsVisible(unittest.TestCase):
             self.assertEqual(g.blocked_platforms(root), {})
 
     def test_the_publisher_writes_health_without_leaving_a_token_behind(self):
+        """Every channel records through one helper, and it must not archive a credential.
+
+        The Tumblr publisher was the example here because its OAuth failure text carried long
+        token-shaped strings. The guarantee is general and still worth holding: the reason line that
+        reaches a public repository is scrubbed and clipped, and the action tells the owner what to do.
+        So this drives the shared recorder with the same shape of message instead.
+        """
         import tempfile
-        import tumblr_publisher as t
+        import social_credential_health as health
         with tempfile.TemporaryDirectory() as tmp:
-            health = Path(tmp) / "SOCIAL_CREDENTIAL_HEALTH.json"
-            original = t.HEALTH_FILE
-            t.HEALTH_FILE = health
-            try:
-                t.record_health(False, "401 Client Error: unauthorized url=" + "A" * 60)
-                row = json.loads(health.read_text())["tumblr"]
-                self.assertFalse(row["ok"])
-                self.assertNotIn("A" * 60, health.read_text())
-                self.assertIn("re-authorise", row["action"])
-                t.record_health(True)
-                self.assertTrue(json.loads(health.read_text())["tumblr"]["ok"])
-            finally:
-                t.HEALTH_FILE = original
+            path = Path(tmp) / "SOCIAL_CREDENTIAL_HEALTH.json"
+            row = health.record("mastodon", False, "401 Client Error: unauthorized url=" + "A" * 60, path)
+            self.assertFalse(row["ok"])
+            self.assertNotIn("A" * 60, path.read_text(encoding="utf-8"))
+            self.assertIn("[redacted]", path.read_text(encoding="utf-8"))
+            self.assertIn("re-authorise", row["action"])
+            self.assertTrue(health.record("mastodon", True, "", path)["ok"])
+            self.assertEqual(set(json.loads(path.read_text())), {"mastodon"})
 
+    def test_a_retired_network_cannot_block_a_live_one(self):
+        """social_guard reads the health file, and Tumblr is no longer part of its vocabulary."""
+        import tempfile
+        import social_guard as g
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "SOCIAL_CREDENTIAL_HEALTH.json").write_text(json.dumps(
+                {"tumblr": {"ok": False, "reason": "RuntimeError: invalid_grant"},
+                 "mastodon": {"ok": False, "reason": "401 unauthorized"}}), encoding="utf-8")
+            blocked = g.blocked_platforms(root)
+        self.assertEqual(list(blocked), ["mastodon"],
+                         "a retired network has no routes to block; a live one still does")
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)

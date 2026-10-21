@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-21T10:57:24+05:30",
+  "checked_at_ist": "2026-10-21T11:18:37+05:30",
   "summary": {
-    "pass": 206,
+    "pass": 201,
     "fail": 0
   },
   "checks": [
@@ -271,54 +271,24 @@
       "detail": ""
     },
     {
-      "name": "Tumblr publisher, OAuth bootstrap and independent tracker are deployed",
+      "name": "No Tumblr publisher, workflow, bootstrap or credential file is deployed",
       "status": "PASS",
-      "detail": ""
+      "detail": "nothing Tumblr-automated exists in the repository"
     },
     {
-      "name": "Tumblr legacy auto-selection schedule is disabled behind its manual activation gate",
+      "name": "Tumblr cannot be named by any routing, health or dedupe decision",
       "status": "PASS",
-      "detail": ""
+      "detail": "live platforms are facebook, bluesky, mastodon; every pair and window resolves to one of them"
     },
     {
-      "name": "Tumblr credentials and encryption key are GitHub secrets or variables",
+      "name": "A retired network in the health file cannot block or unblock anything",
       "status": "PASS",
-      "detail": ""
+      "detail": "blocked_platforms is filtered to live networks"
     },
     {
-      "name": "Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens",
+      "name": "The historical Tumblr tracker is preserved rather than deleted",
       "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Tumblr publisher rotates refresh tokens without logging plaintext credentials",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Tumblr creates modern NPF posts with shared creative media and alt text",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Tumblr preserves title, summary, direct link, byline and platform-native tags",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Tumblr rotates Pages and posts using its own tracker",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Tumblr candidate discovery creates no Daily Yield public-page requests",
-      "status": "PASS",
-      "detail": ""
+      "detail": "posts already made remain auditable"
     },
     {
       "name": "Mastodon publisher files and independent tracker are deployed",
@@ -438,10 +408,10 @@
     {
       "name": "Configured article cadence is exactly 42 weighted social posts daily",
       "status": "PASS",
-      "detail": ""
+      "detail": "42 article posts (14 per network) plus 12 resource windows"
     },
     {
-      "name": "Article and Page application choices rotate across all four networks by IST day",
+      "name": "Article and Page application choices rotate across every live network by IST day",
       "status": "PASS",
       "detail": ""
     },
@@ -646,7 +616,7 @@
       "detail": ""
     },
     {
-      "name": "Tumblr keeps its access token instead of burning a refresh grant on every run",
+      "name": "Every live channel persists its state even when the step before it failed",
       "status": "PASS",
       "detail": ""
     },
@@ -1021,19 +991,24 @@
       "detail": "every permission, needs and step reference resolves"
     },
     {
-      "name": "Tumblr authorisation listener exists and reacts to a commit rather than a button",
+      "name": ".github/tumblr-oauth-code is gone with the automation that used it",
       "status": "PASS",
-      "detail": "the watch is started by pushing mode: on"
+      "detail": "no credential-shaped file is left behind"
     },
     {
-      "name": "The code drop file holds comments only, so nothing secret sits in the repository",
+      "name": ".github/tumblr-oauth-listener is gone with the automation that used it",
       "status": "PASS",
-      "detail": "tumblr-oauth-code present"
+      "detail": "no credential-shaped file is left behind"
     },
     {
-      "name": "The listener redacts the code and never re-offers a spent one",
+      "name": "TUMBLR_OAUTH_ATTEMPT.json is gone with the automation that used it",
       "status": "PASS",
-      "detail": "redaction plus one attempt per blob"
+      "detail": "no credential-shaped file is left behind"
+    },
+    {
+      "name": "No workflow runs a Tumblr step, secret or job",
+      "status": "PASS",
+      "detail": "comments may explain the retirement; no step, secret or job uses it"
     }
   ]
 }

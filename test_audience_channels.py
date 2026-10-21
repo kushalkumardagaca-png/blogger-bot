@@ -56,7 +56,12 @@ class Counting(Harness):
     def test_unmeasured_channels_are_listed_rather_than_guessed(self):
         report = self.run_with({"bluesky": {"ok": True, "handle": "@x", "followers": 1, "posts": 1,
                                             "accountAgeDays": 1, "followersPerPost": 1.0}})
-        for name in ("Facebook", "Tumblr"):
+        # Facebook and Mastodon have no public follower endpoint; a channel that is not measured is
+        # listed as unknown rather than guessed at, which is what this test guards.
+        # Facebook has no public follower endpoint. Tumblr was dropped from automation on 21 October
+        # 2026, so it must not appear as a channel at all rather than as an unmeasured one.
+        self.assertNotIn("Tumblr", report["channels"])
+        for name in ("Facebook",):
             self.assertFalse(report["channels"][name]["ok"])
             self.assertIn(name, report["totals"]["channelsNotMeasured"])
             self.assertNotIn("followers", report["channels"][name])

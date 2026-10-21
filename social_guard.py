@@ -29,7 +29,7 @@ STATUS = ROOT / "SOCIAL_GUARANTEE_STATUS.json"
 LEDGER = ROOT / "SOCIAL_GUARD_LEDGER.json"
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
 TRACKERS = {"facebook": "facebook_tracker.json", "bluesky": "bluesky_tracker.json",
-            "tumblr": "tumblr_tracker.json", "mastodon": "mastodon_tracker.json"}
+            "mastodon": "mastodon_tracker.json"}  # Tumblr retired 21 Oct; its tracker is history
 WORKFLOW = "coordinated_social_publish.yml"
 CREDENTIAL_HEALTH = ROOT / "SOCIAL_CREDENTIAL_HEALTH.json"
 
@@ -40,9 +40,11 @@ def blocked_platforms(root: Path = ROOT) -> dict[str, str]:
     health = load(path, {})
     if not isinstance(health, dict):
         return {}
+    # Only live networks can be blocked. A health file written before a network was retired must not
+    # keep influencing routing decisions forever, and a retired name in that file is history, not state.
     return {str(name): str(row.get("reason", "credentials unavailable"))
             for name, row in health.items()
-            if isinstance(row, dict) and row.get("ok") is False}
+            if name in TRACKERS and isinstance(row, dict) and row.get("ok") is False}
 REQUIRED = 2
 TOLERANCE = dt.timedelta(minutes=30)
 DISPATCH_SPACING = dt.timedelta(minutes=10)

@@ -26,7 +26,6 @@ PLATFORM_SIZES = {
     # Taller native feed assets earn more useful screen space without increasing
     # posting frequency. Bluesky retains a wide link-friendly treatment.
     "facebook": (1080, 1350),
-    "tumblr": (1080, 1350),
     "mastodon": (1080, 1080),
     "bluesky": (1200, 675),
 }
@@ -301,7 +300,6 @@ def _cta(item:dict)->str:
 # natively instead of one way everywhere:
 #   Facebook  — 3-6 mixed-case hashtags in the caption text
 #   Instagram/Pinterest-style feeds are not automated yet and use the Facebook set
-#   Tumblr    — tag list (no # needed) plus the community tags that carry discovery
 #   Mastodon  — CamelCase hashtags; the last one is the discovery tag
 #   Bluesky   — no hashtag stuffing; two tags, one brand and one subject
 # Every set names the publication and the author, which is how a search for the
@@ -314,10 +312,8 @@ TOPIC_TAGS = {
     "economy": "#Economy", "news": "#FinanceNews", "page": "#MoneyTools",
     "general": "#PersonalFinance",
 }
-# Where a platform supports a separate tag field (Tumblr), the extra discovery
-# labels go there instead of in the caption, so no caption carries more than the
-# four labels the social gate and the platforms both prefer.
-TUMBLR_FIELD_TAGS = ("moneyblr", "finance", "daily yield", "kushal daga", "ca kushal daga")
+# Tumblr had its own tag field, so its discovery labels lived outside the caption. That automation was
+# retired on 21 October 2026 and the constant with it; every live platform takes its four labels in text.
 
 
 def hashtag_list(item: dict, platform: str | None = None) -> list[str]:
@@ -326,8 +322,6 @@ def hashtag_list(item: dict, platform: str | None = None) -> list[str]:
     if platform == "bluesky":
         # Bluesky rewards relevance over volume, so the brand and the author only.
         return ["#DailyYield", "#KushalDaga"]
-    if platform == "tumblr":
-        return ["#DailyYield", "#KushalDaga", "#CAKushalDaga", TOPIC_TAGS[group]]
     # Four labels is the ceiling the social gate allows and the sweet spot the
     # platforms reward: two name the publication and the author, one names the
     # subject, one carries the audience discovery.
@@ -343,8 +337,6 @@ def brand_signature(platform: str) -> str:
     if platform == "facebook":
         return ("By Kushal Daga · Daily Yield — finance news and money guides at dailyyield.blogspot.com, "
                 "written as CA Kushal Daga.")
-    if platform == "tumblr":
-        return "By Kushal Daga · Daily Yield — finance news, money guides and calculators (CA Kushal Daga)."
     if platform == "mastodon":
         return "By Kushal Daga · Daily Yield · dailyyield.blogspot.com"
     return "Kushal Daga · Daily Yield"
@@ -390,24 +382,6 @@ def build_caption(item: dict, platform: str, summary: str, limit: int | None = N
     assert_social_compliant(text)
     return text
 
-def tumblr_payload(item: dict, summary: str) -> dict:
-    title,url=clean(item.get("title","Daily Yield")),attributed_url(item,"tumblr")
-    lead,second,third=content_highlights(item,summary)
-    tags=[x.lstrip("#") for x in hashtag_list(item,"tumblr")]+list(TUMBLR_FIELD_TAGS)
-    payload={
-        "content": [
-            {"type":"link", "url":url, "title":"Open on Daily Yield", "description":trim(title,180)},
-            {"type":"text", "text":lead, "subtype":"heading1"},
-            {"type":"image", "media":[{"type":"image/jpeg","identifier":"daily-yield-card","width":PLATFORM_SIZES["tumblr"][0],"height":PLATFORM_SIZES["tumblr"][1]}], "alt_text":image_alt(item,"tumblr")},
-            {"type":"text", "text":"• "+second+"\n• "+third},
-            {"type":"text", "text":_cta(item)},
-            {"type":"text", "text":"By Kushal Daga · Daily Yield"},
-        ],
-        "state":"published", "tags":",".join(dict.fromkeys(tags)), "source_url":url,
-        "send_to_twitter":False, "interactability_reblog":"everyone",
-    }
-    assert_social_compliant(" ".join(str(block.get('text') or block.get('title') or '') for block in payload['content']))
-    return payload
 
 
 def image_alt(item: dict, platform: str) -> str:

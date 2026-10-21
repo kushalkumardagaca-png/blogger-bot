@@ -18,9 +18,17 @@ def load(name):
 def cell(value):return str(value).replace('|','/').replace('\n',' ')
 
 
+# Facebook, Bluesky and Mastodon are what the automation publishes today. Tumblr's automation was
+# removed on 21 October 2026, but the eight duplicate copies that were really taken off it before
+# then are history, and a report that counts "cumulative verified removals" has to keep counting
+# them - otherwise deleting a network quietly rewrites what the site already did.
+LIVE_SOCIAL_PLATFORMS=('facebook','bluesky','mastodon')
+RETIRED_TRACKERS_KEPT_AS_HISTORY=('tumblr',)
+
+
 def verified_social_removals():
     counts={}
-    for platform in ('facebook','bluesky','tumblr','mastodon'):
+    for platform in LIVE_SOCIAL_PLATFORMS+RETIRED_TRACKERS_KEPT_AS_HISTORY:
         rows=load(platform+'_tracker.json').get('deleted',[])
         counts[platform]=len({identity(r) for r in rows if r.get('reason','').startswith('same live article')})
     return counts
@@ -58,7 +66,7 @@ def main():
     row('B6','Facts and originality','Automated check done; human-review limit remains',f"{corpus.get('postsScanned','unknown')} live posts read as actually stored. Policy flags: {len(corpus.get('automatedPolicyFlags',[]))}; missing disclosures: {len(corpus.get('missingDisclosure',[]))}; exact-text duplicate groups: {len(corpus.get('exactEditorialDuplicateGroups',[]))}. Source-review samples retained; not a certification of every financial fact. Legacy News posts with extra exact WHY-template copies removed: {sum(bool(x.get('applied')) for x in corrections.get('legacyNews',[]))}; all numerical facts, links, scripts and styles were protected.")
     row('B7','Photographs and rights','Checked; requirements not fully met' if photos.get('masterCountMismatches') or photos.get('licenceEvidenceNeedsReviewCount') or photos.get('newsPoolsBelow40') else 'Metadata check done',f"Master photo-count mismatches: {photos.get('masterCountMismatches','unknown')}; figures needing fuller licence/alt/caption evidence: {photos.get('licenceEvidenceNeedsReviewCount','unknown')}; News pools below 40: {len(photos.get('newsPoolsBelow40',[]))}. Exact-file licence metadata recovered separately: {len(load('IMAGE_LICENCE_EVIDENCE_SUPPLEMENT.json').get('items',[]))}. No copyright-ownership guarantee or old-photo replacement.")
     row('B8','21 daily articles','Active; ongoing',f"Live status source {slots.get('generatedAt','unavailable')}: {slots.get('live','unknown')}/21 live, {slots.get('overdue','unknown')} overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: {len(slots.get('extraLiveArticles',[]))}.")
-    row('B9','Social delivery and duplicates','Future check fixed; cleanup '+cleanup.get('status','not yet recorded'),f"Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: {sum(removed_totals.values())} ({removed_totals}); this run {len(cleanup.get('deleted',[]))}; cleanup items not verified/deleted: {len(cleanup.get('blocked',[]))}. Two networks required; resources counted separately.")
+    row('B9','Social delivery and duplicates','Future check fixed; cleanup '+cleanup.get('status','not yet recorded'),f"Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: {sum(removed_totals.values())} ({removed_totals}); this run {len(cleanup.get('deleted',[]))}; cleanup items not verified/deleted: {len(cleanup.get('blocked',[]))}. Two networks required out of {len(LIVE_SOCIAL_PLATFORMS)} live ones; resources counted separately. " + ("The count still includes "+", ".join(f"{name} {removed_totals[name]}" for name in RETIRED_TRACKERS_KEPT_AS_HISTORY if removed_totals.get(name))+", removed before that network's automation was retired on 21 October 2026; nothing publishes there now. " if any(removed_totals.get(name) for name in RETIRED_TRACKERS_KEPT_AS_HISTORY) else ""))
     row('B10','Search Console','Read existing results',f"Latest index evidence {index.get('checkedAt','unavailable')}: {index.get('indexed','unknown')} indexed results, {index.get('notIndexed','unknown')} not indexed, {index.get('inspectionErrors','unknown')} inspection errors. No ownership reset or manual bulk request.")
     row('B11','Old redirect warnings','Diagnosed, not blindly repaired',f"{len([x for x in redirect.get('rows',[]) if x.get('oldGoogleCoverage')=='Redirect error'])} prior redirect warnings rechecked with bounded HEAD requests. Current reachability does not erase an old Google result or prove rendering. Confirmed remaining issues are retained in evidence.")
     row('B12','Existing Analytics installation','Observed without changes',f"GA4 IDs in source: {len(source.get('ga4IdsObserved',[]))}; tag-manager IDs: {len(source.get('tagManagerIdsObserved',[]))}; Analytics loaders: {len(source.get('analyticsLoaderSources',[]))}. Hooks alone are not counted as working collection. No tag installed. Existing GA4 is not the same as a connected report.")
@@ -99,7 +107,7 @@ def main():
         rr=[r for r in due if r['key'].startswith(prefix)];done=sum(bool(r.get('live')) for r in rr)
         lines.append(f'| {title} | {len(rr)} | {done} | {len(rr)-done} |')
     day=now.date();article_posts=resource_posts=0;resource_networks=Counter()
-    for platform in ('facebook','bluesky','tumblr','mastodon'):
+    for platform in ('facebook','bluesky','mastodon'):
         seen=set()
         for r in load(platform+'_tracker.json').get('published',[]):
             ident=identity(r)

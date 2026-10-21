@@ -9,9 +9,8 @@ from PIL import Image, ImageChops, ImageDraw
 from social_creative import (
     PLATFORM_SIZES, _curated_entries, _photo_url, _semantic_theme, attributed_url, build_caption,
     content_highlights, creative_meta, image_alt, render_social_card,
-    select_inventory_target, tumblr_payload,
+    select_inventory_target,
 )
-
 
 def item(n=1, title=None, labels=None, kind="post"):
     return {
@@ -21,7 +20,6 @@ def item(n=1, title=None, labels=None, kind="post"):
         "labels": labels or ["Personal Finance"],
         "content": "<p>A practical breakdown of the numbers, trade-offs and next questions, based on verifiable sources rather than hype.</p>",
     }
-
 
 def test_authenticated_article_hero_is_selected_before_any_fallback():
     story = item(6)
@@ -33,7 +31,6 @@ def test_authenticated_article_hero_is_selected_before_any_fallback():
     assert _photo_url(story) == repository_hero
     story["content"] = '<img src="https://malicious.example/images.unsplash.com/photo.jpg">'
     assert _photo_url(story) == ""
-
 
 def test_global_lifestyle_library_routes_explicit_real_life_subjects():
     cases = {
@@ -51,11 +48,9 @@ def test_global_lifestyle_library_routes_explicit_real_life_subjects():
         assert _semantic_theme(story, "facebook") == expected
         assert _curated_entries(story, "facebook")[0][1]
 
-
 def test_semantic_theme_does_not_match_keywords_inside_unrelated_words():
     story=item(71,"Markets & Commodities News",["News","Financial Education","Markets, Crypto & Commodities"])
     assert _semantic_theme(story,"bluesky") != "cats"
-
 
 def test_signature_is_deterministic_and_platform_specific():
     story = item(7, "How inflation changes a monthly budget", ["Economy"])
@@ -63,7 +58,6 @@ def test_signature_is_deterministic_and_platform_specific():
     assert a == creative_meta(story, "facebook", "2026-10-02")
     assert a != creative_meta(story, "bluesky", "2026-10-02")
     assert a != creative_meta(story, "facebook", "2026-10-03")
-
 
 def test_caption_limits_platform_voice_and_cross_network_difference():
     story = item(8, "Credit card APR: what the minimum payment hides", ["Debt", "Personal Finance"])
@@ -80,7 +74,6 @@ def test_caption_limits_platform_voice_and_cross_network_difference():
     assert all(1 <= text.count("#") <= 4 for text in captions.values())
     assert all("#DailyYield" in text and "#KushalDaga" in text for text in captions.values())
 
-
 def test_many_stories_do_not_collapse_to_one_template_or_caption():
     stories = [item(n, labels=[["Markets"], ["Debt"], ["Tax"], ["Economy"], ["News"]][n % 5]) for n in range(1, 51)]
     metas = [creative_meta(story, "facebook", "2026-10-02") for story in stories]
@@ -88,23 +81,6 @@ def test_many_stories_do_not_collapse_to_one_template_or_caption():
     assert len({m["layout"] for m in metas}) == 5
     captions = [build_caption(story, "facebook", "Useful source-based context for the decision.") for story in stories]
     assert len(captions) == len(set(captions))
-
-
-def test_tumblr_is_native_npf_with_three_ideas_cta_and_descriptive_alt():
-    story = item(22, "A tax deduction checklist without the jargon", ["Tax"])
-    data = tumblr_payload(story, "A practical checklist for keeping the right records and asking better questions.")
-    block_types = [block["type"] for block in data["content"]]
-    assert block_types == ["link", "text", "image", "text", "text", "text"]
-    assert data["source_url"] == data["content"][0]["url"] == attributed_url(story,"tumblr")
-    assert data["source_url"].startswith(story["url"]+"?") and "utm_source=tumblr" in data["source_url"]
-    assert data["content"][1]["text"] == story["title"]
-    assert data["content"][3]["text"].count("•") == 2
-    assert "link above" in data["content"][4]["text"]
-    assert "Editorial photograph" in data["content"][2]["alt_text"]
-    assert "By Kushal Daga" in data["content"][5]["text"]
-    assert "moneyblr" in data["tags"]
-    assert len(data["tags"].split(",")) <= 10
-
 
 def test_news_uses_biggest_content_headline_plus_two_supporting_headlines():
     story=item(23,"India Finance News",["News"])
@@ -117,14 +93,12 @@ def test_news_uses_biggest_content_headline_plus_two_supporting_headlines():
     assert all(value in caption for value in highlights)
     assert "open the link above" in caption
 
-
 def test_spotlight_fragment_resolves_only_through_authenticated_page_inventory():
     pages=[{"id":"homepage","kind":"page","title":"Daily Yield","url":"https://dailyyield.blogspot.com/","content":"Today's featured stories and tools."}]
     chosen=select_inventory_target(pages,"https://dailyyield.blogspot.com/#spotlight")
     assert chosen["id"]=="spotlight" and chosen["kind"]=="page"
     assert chosen["title"].startswith("Daily Yield Spotlight")
     assert chosen["url"].endswith("#spotlight")
-
 
 def test_cards_are_photo_first_accessible_sized_and_visually_distinct():
     story = item(31, "Gold, rates and the market mood: what to watch", ["Markets"])
@@ -136,7 +110,7 @@ def test_cards_are_photo_first_accessible_sized_and_visually_distinct():
     with patch("social_creative._photo", return_value=(photo, "https://images.unsplash.com/test")):
         with TemporaryDirectory() as temp:
             paths = []
-            for platform in ("facebook", "bluesky", "tumblr", "mastodon"):
+            for platform in ("facebook", "bluesky", "mastodon"):
                 path = Path(temp) / f"{platform}.jpg"
                 render_social_card(story, platform, path, "A compact guide to the signals and limits behind today's market move.")
                 paths.append(path)

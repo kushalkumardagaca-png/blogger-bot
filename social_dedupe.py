@@ -41,7 +41,7 @@ def already_posted(platform,url,kind='post',now=None):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--platform',required=True,choices=('facebook','bluesky','tumblr','mastodon'))
+    parser=argparse.ArgumentParser();parser.add_argument('--platform',required=True,choices=('facebook','bluesky','mastodon'))
     parser.add_argument('--url',required=True);parser.add_argument('--content-mode',choices=('post','page'),default='post')
     args=parser.parse_args()
     try:posted=already_posted(args.platform,args.url,args.content_mode)

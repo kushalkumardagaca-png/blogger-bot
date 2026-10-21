@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 206 PASS · 0 FAIL
+**Result:** 201 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -57,16 +57,10 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Bluesky rotates Pages and posts using an independent publication history**
 - ✅ **Bluesky deduplicates against tracker and live recent feed and reconciles uncertain writes**
 - ✅ **Bluesky candidate discovery makes no Daily Yield public-page request**
-- ✅ **Tumblr publisher, OAuth bootstrap and independent tracker are deployed**
-- ✅ **Tumblr legacy auto-selection schedule is disabled behind its manual activation gate**
-- ✅ **Tumblr credentials and encryption key are GitHub secrets or variables**
-- ✅ **Tumblr OAuth bootstrap requires offline refresh access and encrypts tokens**
-- ✅ **Tumblr publisher rotates refresh tokens without logging plaintext credentials**
-- ✅ **Tumblr creates modern NPF posts with shared creative media and alt text**
-- ✅ **Tumblr preserves title, summary, direct link, byline and platform-native tags**
-- ✅ **Tumblr rotates Pages and posts using its own tracker**
-- ✅ **Tumblr deduplicates against tracker and current Tumblr posts and reconciles writes**
-- ✅ **Tumblr candidate discovery creates no Daily Yield public-page requests**
+- ✅ **No Tumblr publisher, workflow, bootstrap or credential file is deployed** — nothing Tumblr-automated exists in the repository
+- ✅ **Tumblr cannot be named by any routing, health or dedupe decision** — live platforms are facebook, bluesky, mastodon; every pair and window resolves to one of them
+- ✅ **A retired network in the health file cannot block or unblock anything** — blocked_platforms is filtered to live networks
+- ✅ **The historical Tumblr tracker is preserved rather than deleted** — posts already made remain auditable
 - ✅ **Mastodon publisher files and independent tracker are deployed**
 - ✅ **Mastodon legacy auto-selection schedule is disabled behind its manual activation gate**
 - ✅ **Mastodon uses official API, isolated credentials and zero-view discovery**
@@ -90,8 +84,8 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Every new URL is announced to the search engines without human submission**
 - ✅ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
-- ✅ **Configured article cadence is exactly 42 weighted social posts daily**
-- ✅ **Article and Page application choices rotate across all four networks by IST day**
+- ✅ **Configured article cadence is exactly 42 weighted social posts daily** — 42 article posts (14 per network) plus 12 resource windows
+- ✅ **Article and Page application choices rotate across every live network by IST day**
 - ✅ **Both live Master categories have replaced the monolithic pipeline with Master V3**
 - ✅ **Master V3 uses independently validated plain-text sections, not one long JSON response**
 - ✅ **Short section attempts accumulate instead of discarding usable prose**
@@ -132,7 +126,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Advice risk gate blocks publication**
 - ✅ **No Instagram route is registered, scheduled or left behind in the repository**
 - ✅ **Publishing volume is bounded by the measured index, not by ambition**
-- ✅ **Tumblr keeps its access token instead of burning a refresh grant on every run**
+- ✅ **Every live channel persists its state even when the step before it failed**
 - ✅ **A social network that cannot publish says so in the repository, not only in a job log**
 - ✅ **A quoted source passage cannot smuggle a rejected claim into a Master article**
 - ✅ **A Master preparation run works to a stated clock, not an open-ended timeout**
@@ -207,6 +201,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **No obsolete market page in production engines**
 - ✅ **Every workflow shell step parses before it can fail** — every run block in every workflow is valid bash
 - ✅ **No workflow references a key, permission or job that GitHub does not know** — every permission, needs and step reference resolves
-- ✅ **Tumblr authorisation listener exists and reacts to a commit rather than a button** — the watch is started by pushing mode: on
-- ✅ **The code drop file holds comments only, so nothing secret sits in the repository** — tumblr-oauth-code present
-- ✅ **The listener redacts the code and never re-offers a spent one** — redaction plus one attempt per blob
+- ✅ **.github/tumblr-oauth-code is gone with the automation that used it** — no credential-shaped file is left behind
+- ✅ **.github/tumblr-oauth-listener is gone with the automation that used it** — no credential-shaped file is left behind
+- ✅ **TUMBLR_OAUTH_ATTEMPT.json is gone with the automation that used it** — no credential-shaped file is left behind
+- ✅ **No workflow runs a Tumblr step, secret or job** — comments may explain the retirement; no step, secret or job uses it

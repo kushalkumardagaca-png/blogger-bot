@@ -22,7 +22,7 @@ class ScheduleCadenceTests(unittest.TestCase):
  def test_page_promotions_cover_global_reader_windows(self):
   values=sorted(ist_minute_from_cron(x) for x in RESOURCE_SCHEDULES)
   self.assertEqual(values,[minute(x) for x in ('04:45','06:45','08:45','10:45','12:00','13:45','15:45','17:00','19:00','20:00','21:30','23:15')])
-  self.assertEqual(Counter(p for p,_ in RESOURCE_SCHEDULES.values()),Counter({p:3 for p in PLATFORMS}))
+  self.assertEqual(Counter(p for p,_ in RESOURCE_SCHEDULES.values()),Counter({p:4 for p in PLATFORMS}))
  def test_every_article_keeps_two_distinct_social_routes(self):
   from social_rotation import DAILY_ARTICLE_KEYS,platform_pair_for,IST
   day=dt.datetime.now(IST).date()

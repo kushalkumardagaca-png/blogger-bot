@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T23:14:34.304199+05:30",
+  "generatedAt": "2026-10-21T11:19:00.694203+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -48,19 +48,19 @@
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-20T23:10:21.526368+05:30: 20/21 live, 1 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
+      "proof": "Live status source 2026-10-21T10:55:16.319004+05:30: 5/21 live, 2 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
     },
     {
       "id": "B9",
       "task": "Social delivery and duplicates",
       "result": "Future check fixed; cleanup NO_VERIFIED_DUPLICATES_TO_REMOVE",
-      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'tumblr': 8, 'mastodon': 0}); this run 0; cleanup items not verified/deleted: 0. Two networks required; resources counted separately."
+      "proof": "Fixed quoted skip output, fail-open tracker checks and same-destination races. Approved Master slot routing restored. Cumulative provider-confirmed extra article copies removed: 18 ({'facebook': 10, 'bluesky': 0, 'mastodon': 0, 'tumblr': 8}); this run 0; cleanup items not verified/deleted: 0. Two networks required out of 3 live ones; resources counted separately. The count still includes tumblr 8, removed before that network's automation was retired on 21 October 2026; nothing publishes there now. "
     },
     {
       "id": "B10",
       "task": "Search Console",
       "result": "Read existing results",
-      "proof": "Latest index evidence 2026-10-19T21:22:17.510412+00:00: 1 indexed results, 550 not indexed, 0 inspection errors. No ownership reset or manual bulk request."
+      "proof": "Latest index evidence 2026-10-20T21:24:55.506685+00:00: 1 indexed results, 568 not indexed, 0 inspection errors. No ownership reset or manual bulk request."
     },
     {
       "id": "B11",
@@ -131,9 +131,9 @@
   ],
   "sourceDates": {
     "siteAudit": "2026-10-19T14:38:37.504933+00:00",
-    "slots": "2026-10-20T23:10:21.526368+05:30",
-    "social": "2026-10-20T23:10:31.354349+05:30",
-    "google": "2026-10-19T21:22:17.510412+00:00"
+    "slots": "2026-10-21T10:55:16.319004+05:30",
+    "social": "2026-10-21T10:55:23.944161+05:30",
+    "google": "2026-10-20T21:24:55.506685+00:00"
   },
   "noGrandUpdateStarted": true,
   "analyticsCollectionInstalled": false
