@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T10:05:59.871666+05:30",
+  "generatedAt": "2026-10-21T10:40:40.677007+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
@@ -9,19 +9,31 @@
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
+    "news-russia",
     "master-trending-0",
     "master-trending-1"
   ],
   "actions": [
     {
       "type": "source_recovery",
+      "key": "news-russia",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
       "key": "master-trending-0",
-      "attempt": 6,
+      "attempt": 7,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-india",
+      "platform": "tumblr",
+      "routeIndex": 1,
       "applied": true
     }
   ],
   "retryBlocked": [
-    "social:2026-10-21:news-india:1",
     "social:2026-10-21:master-evergreen-0:1"
   ],
   "masterRecoveryDeferred": [
