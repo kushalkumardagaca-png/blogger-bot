@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T14:12:30.020506+05:30",
+  "generatedAt": "2026-10-21T14:48:52.528687+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
@@ -9,18 +9,21 @@
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "master-trending-1"
+    "master-trending-1",
+    "master-trending-2"
   ],
   "actions": [
     {
       "type": "source_recovery",
       "key": "master-trending-1",
-      "attempt": 5,
+      "attempt": 6,
       "applied": true
     }
   ],
   "retryBlocked": [],
-  "masterRecoveryDeferred": [],
+  "masterRecoveryDeferred": [
+    "master-trending-2"
+  ],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
