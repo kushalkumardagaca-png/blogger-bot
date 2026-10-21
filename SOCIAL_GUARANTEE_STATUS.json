@@ -1,13 +1,26 @@
 {
- "generatedAt": "2026-10-21T12:06:30.883914+05:30",
+ "generatedAt": "2026-10-21T12:14:50.474636+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
- "articles": 5,
- "expectedPosts": 10,
- "articlesWithBothPosts": 5,
- "postsMissing": 0,
- "dispatched": 0,
+ "articles": 7,
+ "expectedPosts": 14,
+ "articlesWithBothPosts": 6,
+ "postsMissing": 1,
+ "dispatched": 1,
  "rows": [
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
   {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
@@ -22,14 +35,14 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html",
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 1,
+    "facebook": 0,
     "bluesky": 1,
-    "mastodon": 0
+    "mastodon": 1
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -72,13 +85,29 @@
    },
    "observedDistinctPosts": 3,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-1",
+   "title": "Rowan-Cabarrus Community College to Facilitate",
+   "url": "https://dailyyield.blogspot.com/2026/10/rowan-cabarrus-community-college-to.html",
+   "posts": 1,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 1,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T12:06:22.949203+05:30",
+ "liveVerificationSourceAt": "2026-10-21T12:14:44.270374+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 3,
+ "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
