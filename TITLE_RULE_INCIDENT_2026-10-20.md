@@ -270,3 +270,27 @@ Three changes came out of it, so the situation cannot repeat silently:
 suite stands at **582 passed, 76 subtests**, with the publishing audit at 202/0 and the zero-view
 policy audit at 12/0.
 
+### 21 October, 10:00 IST: run #8, and the race that no person should have to win
+
+Run #8 (on `bfda7ae`, 23s, failed) showed the new machinery working end to end: Tumblr's own words on
+the run page, the attempt recorded (`authorisation attempt recorded: fingerprint only`), the refusal
+written to `SOCIAL_CREDENTIAL_HEALTH.json` at 10:00:05, and **Commit encrypted token bundle ✅ success**
+so the next attempt can compare. It also showed the honest limit of that design: GitHub fixes a job's
+secrets when the job *starts*, so anyone who saves the code after pressing Run is handed the *previous*
+value, and a code saved before pressing Run ages out during queue time and the install. Tumblr's
+window is minutes; the round trip was not reliably shorter than that.
+
+The repair is structural rather than instructional - **the workflow now waits for the owner instead of
+the owner racing the workflow**. `tumblr_oauth_bootstrap.yml` has two jobs: `wait-for-code` polls
+GitHub for the moment `TUMBLR_AUTHORIZATION_CODE` is *newer than this run* (default four minutes,
+0 skips it), and `authorize` - which starts only after the wait and therefore snapshots the *fresh*
+value - does the exchange. Order of operations for the owner is now: press Run, approve on Tumblr,
+Update the secret; the wait ends about five seconds later and the exchange follows at once.
+
+`test_tumblr_authorisation_wait.py` runs the real loop against a stubbed `gh`: a fresh save ends the
+wait immediately, a stale one keeps polling, a non-numeric or empty input waits the default four
+minutes instead of dying on bash arithmetic (run #8 proved how loudly that fails), and a request for 25
+minutes is capped at 9 so a queued run can never sit on a dead code. The loop reads only
+`updated_at`, never the value, and `if: ${{ !failure() && !cancelled() }}` keeps the exchange alive
+when the wait is skipped. Suite: **590 passed, 79 subtests**; audits 202/0 and 12/0.
+

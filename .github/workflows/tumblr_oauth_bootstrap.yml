@@ -2,16 +2,76 @@ name: Tumblr OAuth Bootstrap
 
 on:
   workflow_dispatch:
+    inputs:
+      wait_for_code_minutes:
+        description: "Minutes to wait for you to save a fresh code after pressing Run (0 = try whatever is saved now)"
+        required: false
+        default: '4'
 
 permissions:
   contents: write
+  actions: read
+  secrets: read
 
 concurrency:
   group: daily-yield-tumblr-oauth
   cancel-in-progress: false
 
 jobs:
+  wait-for-code:
+    # A Tumblr authorization code is single-use and worth only minutes, and GitHub fixes a job's
+    # secrets when that job starts. So waiting happens in its own job and the exchange happens in the
+    # job after it, which reads whatever value is saved at that moment. Press Run workflow first,
+    # then Approve, then Update the secret: the wait ends about five seconds after the save.
+    name: Wait for the code to be saved
+    if: ${{ inputs.wait_for_code_minutes != '0' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Hold until a newer code appears in the secret
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SECRET: TUMBLR_AUTHORIZATION_CODE
+          LIMIT: ${{ inputs.wait_for_code_minutes }}
+          STARTED: ${{ github.run_started_at }}
+        run: |
+          set -u
+          # A dispatch input is free text, and bash arithmetic on 0.5 or hello aborts the job, so a
+          # value that is not a whole number of minutes quietly becomes the default of four.
+          minutes=4
+          case "${LIMIT:-}" in
+            ''|*[!0-9]*) [ -n "${LIMIT:-}" ] && [ "$LIMIT" != "0" ] && echo "wait_for_code_minutes must be a whole number of minutes, or 0 to skip the wait, so 4 is used instead." ;;
+            *) minutes=$(( LIMIT )) ;;
+          esac
+          if [ "$minutes" -gt 9 ]; then
+            echo "the wait is capped at 9 minutes so a queued run cannot sit on a code worth minutes, so 9 is used."
+            minutes=9
+          fi
+          limit=$(( minutes * 60 ))
+          started="$(date -u -d "$STARTED" +%s 2>/dev/null || date -u +%s)"
+          echo "If you have not pressed Approve on Tumblr yet, do that now and then Update the $SECRET secret."
+          echo "The old saved value is deliberately ignored: it is worth nothing."
+          waited=0
+          while [ "$waited" -lt "$limit" ]; do
+            saved="$(gh api "repos/$REPO/actions/secrets/$SECRET" --jq .updated_at 2>/dev/null || true)"
+            if [ -n "$saved" ]; then
+              saved_at="$(date -u -d "$saved" +%s 2>/dev/null || echo 0)"
+              if [ "$saved_at" -gt "$started" ]; then
+                echo "A code was saved at $saved, $(( saved_at - started ))s after this run began. Exchanging it now."
+                exit 0
+              fi
+            fi
+            sleep 5
+            waited=$(( waited + 5 ))
+            echo "still waiting for a newer code ($waited of $limit seconds)"
+          done
+          echo "No newer code appeared within $minutes minutes, so the value already saved is tried, and Tumblr will most likely answer that it expired."
+
   authorize:
+    name: Exchange the code, encrypt the token and record the outcome
+    needs: wait-for-code
+    if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
