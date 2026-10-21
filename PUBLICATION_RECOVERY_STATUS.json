@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-21T12:47:52.206329+05:30",
+  "generatedAt": "2026-10-21T13:35:12.982721+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 8,
-  "confirmedByLivePost": 8,
+  "confirmedPublications": 9,
+  "confirmedByLivePost": 9,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -21,21 +21,7 @@
     {
       "type": "source_recovery",
       "key": "master-trending-1",
-      "attempt": 3,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "facebook",
-      "routeIndex": 0,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-europe",
-      "platform": "bluesky",
-      "routeIndex": 1,
+      "attempt": 4,
       "applied": true
     }
   ],
