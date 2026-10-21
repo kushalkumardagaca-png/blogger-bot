@@ -376,6 +376,33 @@ class LiveVerdict(unittest.TestCase):
         self.assertEqual(view["notReported"], [f"{BLOG}/p/daily-news.html"])
         self.assertIn("unreported, not unindexed", view["detail"])
 
+    def test_a_throttled_page_is_still_judged_when_the_publisher_api_answers(self):
+        # Blogger's own API is not rate limited and says the page is published. That is the second
+        # voice the scoreboard is allowed to trust when the public probe is blocked.
+        throttled = {"reachable": False, "status": 429, "hops": [], "notMeasured": "rate limited"}
+        row = {"url": f"{BLOG}/p/x.html", "verdict": "NEUTRAL", "coverageState": "Redirect error"}
+        self.assertFalse(watch.stale_verdict(row, throttled))
+        self.assertTrue(watch.stale_verdict(row, throttled, True))
+        self.assertFalse(watch.stale_verdict(
+            {"url": f"{BLOG}/p/x.html", "verdict": "NEUTRAL",
+             "coverageState": "Discovered - currently not indexed"},
+            {"reachable": True, "status": 200, "hops": []}, True),
+            "an unanswered page is not a stale verdict, however alive it is")
+
+    def test_the_probe_budget_is_bounded_and_rotates(self):
+        source = Path(__file__).with_name("main_pages_index_watch.py").read_text()
+        self.assertIn("LIVE_PROBE_CAP = 6", source)
+        self.assertIn("LIVE_PROBE_SPACING_SECONDS = 8", source)
+        self.assertIn("ordered[:LIVE_PROBE_CAP]", source)
+        self.assertNotIn("+http://www.google.com/bot.html", source,
+                         "impersonating Googlebot is what got the runner throttled")
+
+    def test_the_publisher_api_is_used_instead_of_guessing_page_state(self):
+        source = Path(__file__).with_name("main_pages_index_watch.py").read_text()
+        self.assertIn("def blogger_page_state", source)
+        self.assertIn("/pages?", source)
+        self.assertIn("publisherApiPagesLive", source)
+
     def test_a_bing_outage_degrades_to_a_note_instead_of_a_zero(self):
         class BrokenBing:
             def get_quota(self, key):

@@ -24,9 +24,9 @@ import json
 import math
 import os
 import re
+import time
 import urllib.error
 import urllib.parse
-import time
 import urllib.request
 from pathlib import Path
 
@@ -151,7 +151,54 @@ def fetch_pages_sitemap() -> tuple[list[str], str]:
         return [], f"sitemap-pages.xml could not be read: {type(exc).__name__}"
 
 
-GOOGLEBOT_UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+# A plain browser identity, on purpose. This probe exists to learn whether the URL redirects, which
+# is a fact about the host and not about Google; sending a Googlebot user-Agent made Blogger's own
+# throttle answer instead of the page (measured: HTTP 429 after 1 redirect for eleven of thirteen).
+PROBE_UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/129.0 Safari/537.36")
+GOOGLEBOT_UA = PROBE_UA           # kept as a name because the audit and the tests refer to it
+LIVE_PROBE_SPACING_SECONDS = 8
+LIVE_PROBE_CAP = 6
+REDIRECT_FAMILY = ("Redirect error", "Page with redirect", "Duplicate without user-selected canonical",
+                   "Alternate page with proper canonical")
+
+
+def blogger_page_state() -> dict:
+    """Ask Blogger itself which pages are live, without touching the public site.
+
+    The repository already holds the authenticated Blogger path for other jobs, and it is the better
+    instrument here: it cannot be rate limited, it cannot be confused by a theme, and it answers the
+    exact question - is this page published at this URL. Absence of evidence from a public probe is
+    then replaced by evidence from the publisher's own API.
+    """
+    names = ("BLOGGER_CLIENT_ID", "BLOGGER_CLIENT_SECRET", "BLOGGER_REFRESH_TOKEN", "BLOGGER_BLOG_ID")
+    if not all(os.environ.get(name) for name in names):
+        return {}
+    try:
+        form = urllib.parse.urlencode({"client_id": os.environ["BLOGGER_CLIENT_ID"],
+                                       "client_secret": os.environ["BLOGGER_CLIENT_SECRET"],
+                                       "refresh_token": os.environ["BLOGGER_REFRESH_TOKEN"],
+                                       "grant_type": "refresh_token"}).encode()
+        access = str(http("https://oauth2.googleapis.com/token", method="POST", body=form,
+                        timeout=30).get("access_token", ""))
+        if not access:
+            return {}
+        rows, token = [], ""
+        while True:
+            query = {"status": "live", "maxResults": "100", "fields": "items(url,updated),nextPageToken"}
+            if token:
+                query["pageToken"] = token
+            data = http("https://www.googleapis.com/blogger/v3/blogs/"
+                        + os.environ["BLOGGER_BLOG_ID"] + "/pages?" + urllib.parse.urlencode(query),
+                        headers={"Authorization": "Bearer " + access}, timeout=45)
+            rows.extend(data.get("items", []) or [])
+            token = data.get("nextPageToken", "")
+            if not token or len(rows) >= 200:
+                break
+        return {str(row.get("url", "")): {"live": True, "updated": row.get("updated", "")}
+                for row in rows if row.get("url")}
+    except Exception:  # noqa: BLE001 - a control-plane outage leaves the public probe as the only voice
+        return {}
 
 
 def extract_canonical(markup: str) -> str:
@@ -205,16 +252,21 @@ def live_probe(url: str) -> dict:
                 "canonical": "", "error": type(exc).__name__}
 
 
-def stale_verdict(row: dict, probe: dict) -> bool:  # noqa: C901
-    """True when the platform's complaint cannot be reproduced on the live page today."""
+def stale_verdict(row: dict, probe: dict, publisher_live: bool = False) -> bool:
+    """True when a redirect-family complaint cannot be reproduced today.
+
+    Deliberately narrow: a page Google has merely "discovered" is not a stale verdict, it is an
+    unanswered one, and calling that stale would be the same self-flattery the old automation kept
+    doing. Either the live answer or Blogger's own published-state API can carry the proof, because
+    the public probe is the part a shared host is allowed to throttle.
+    """
     if row.get("verdict") == "PASS":
         return False
-    if not probe.get("reachable") or probe.get("hops") or probe.get("notMeasured"):
+    if not any(needle in str(row.get("coverageState") or "") for needle in REDIRECT_FAMILY):
         return False
-    coverage = str(row.get("coverageState") or "")
-    return any(needle in coverage for needle in ("Redirect error", "Duplicate without user-selected",
-                                                 "Alternate page with proper canonical")) or bool(
-        str(row.get("lastCrawlTime") or ""))
+    if probe.get("hops") or (probe.get("reachable") and not probe.get("notMeasured")):
+        return not probe.get("hops")
+    return bool(publisher_live)
 
 
 def list_properties(access: str) -> dict:
@@ -617,19 +669,39 @@ def main() -> int:
             if registration["submittedNow"]:
                 sitemaps = sitemap_state(access, site)
         rows = [inspect_one(access, site, row["url"]) for row in targets]
+    day = today.toordinal()
+    published = blogger_page_state()
+    need = [row for row in rows if row.get("verdict") != "PASS"
+            and any(needle in str(row.get("coverageState") or "") for needle in REDIRECT_FAMILY)
+            and valid_daily_yield_url(row["url"])]
+    shift = day % max(1, len(need))
+    ordered = need[shift:] + need[:shift]
+    probed = set()
+    for row in ordered[:LIVE_PROBE_CAP]:
+        probe = live_probe(row["url"])
+        probed.add(row["url"])
+        row["live"] = {"reachable": probe["reachable"], "status": probe["status"],
+                       "canonical": probe.get("canonical", ""), "finalUrl": probe.get("finalUrl", "")}
+        row["liveHops"] = len(probe.get("hops") or [])
+        if probe.get("notMeasured"):
+            row["liveNote"] = probe["notMeasured"]
+        row["staleVerdict"] = stale_verdict(row, probe, row["url"] in published)
+        time.sleep(LIVE_PROBE_SPACING_SECONDS)
     for row in rows:
-        if row.get("verdict") != "PASS" and valid_daily_yield_url(row["url"]):
-            probe = live_probe(row["url"])
-            row["live"] = {"reachable": probe["reachable"], "status": probe["status"],
-                           "canonical": probe.get("canonical", ""), "finalUrl": probe.get("finalUrl", "")}
-            row["liveHops"] = len(probe.get("hops") or [])
-            row["staleVerdict"] = stale_verdict(row, probe)
-            if probe.get("notMeasured"):
-                row["liveNote"] = probe["notMeasured"]
-            time.sleep(2.0)   # thirteen polite reads, never a burst at the host
+        row.setdefault("live", {"reachable": None, "status": None, "canonical": "", "finalUrl": ""})
+        row.setdefault("liveHops", 0)
+        if row["url"] not in probed:
+            row["staleVerdict"] = stale_verdict(row, {"reachable": None, "hops": []},
+                                                row["url"] in published)
+            if row["url"] in published and row["staleVerdict"]:
+                row["liveNote"] = "not probed today; Blogger confirms the page is published live"
+    report_extra = {"liveProbes": len(probed), "liveProbeCap": LIVE_PROBE_CAP,
+                    "publisherApiPagesLive": len(published),
+                    "redirectFamilyComplaints": len(need)}
     report = build_report(targets=targets, properties=properties, sitemaps=sitemaps,
                           registration=registration, rows=rows, bing=bing_view(
                               [row["url"] for row in targets]), today=today)
+    report.update(report_extra)
     report["pagesSitemapNote"] = sitemap_note
     report["inspectionProperty"] = site
     text = json.dumps(report, indent=1, ensure_ascii=False) + "\n"
