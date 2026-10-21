@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-21T17:45:36.846670+05:30",
+ "generatedAt": "2026-10-21T18:08:21.360206+05:30",
  "dateIST": "2026-10-21",
  "apply": true,
  "articles": 16,
  "expectedPosts": 32,
- "articlesWithBothPosts": 15,
- "postsMissing": 2,
+ "articlesWithBothPosts": 16,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -64,20 +64,14 @@
    "key": "news-companies",
    "title": "companies edition",
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-21.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 1,
+    "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "credentialBlocked": {
-    "facebook": "RuntimeError: SOCIAL CONTENT POLICY GATE FAILED — excessive hashtagging"
-   },
-   "actions": [
-    "no post is attempted because facebook credentials are known to be unusable; the owner must re-authorise the connection"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-americas",
@@ -225,9 +219,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 2,
- "liveVerificationSourceAt": "2026-10-21T17:45:28.331679+05:30",
+ "liveVerificationSourceAt": "2026-10-21T18:08:11.304291+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 13,
+ "articlesWithExactlyTwoPosts": 14,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
