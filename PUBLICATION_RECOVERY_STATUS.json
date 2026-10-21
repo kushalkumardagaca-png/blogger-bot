@@ -1,16 +1,15 @@
 {
-  "generatedAt": "2026-10-21T10:40:40.677007+05:30",
+  "generatedAt": "2026-10-21T11:18:17.070895+05:30",
   "dateIST": "2026-10-21",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 4,
-  "confirmedByLivePost": 4,
+  "confirmedPublications": 5,
+  "confirmedByLivePost": 5,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
     "news-russia",
-    "master-trending-0",
     "master-trending-1"
   ],
   "actions": [
@@ -21,24 +20,16 @@
     },
     {
       "type": "source_recovery",
-      "key": "master-trending-0",
-      "attempt": 7,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-india",
-      "platform": "tumblr",
-      "routeIndex": 1,
+      "key": "master-trending-1",
+      "attempt": 1,
       "applied": true
     }
   ],
   "retryBlocked": [
+    "social:2026-10-21:news-india:1",
     "social:2026-10-21:master-evergreen-0:1"
   ],
-  "masterRecoveryDeferred": [
-    "master-trending-1"
-  ],
+  "masterRecoveryDeferred": [],
   "syntheticViews": 0,
   "publicDailyYieldRequests": 0
 }
