@@ -44,6 +44,21 @@ def now() -> str:
     return datetime.now(IST).isoformat(timespec="seconds")
 
 
+def window_minutes() -> int:
+    """How long to keep watching, whatever the trigger handed over.
+
+    A push-started run has no dispatch input at all, so the variable arrives empty, and `int("")` is a
+    ValueError that kills the watch before it begins - which is exactly what happened on 21 October at
+    10:55 IST. Anything unusable becomes the full window, and the window is clamped inside the job's
+    own three-hour limit so the run ends on its own terms rather than being cancelled mid-flight.
+    """
+    try:
+        value = int(str(os.environ.get("LISTENER_MINUTES", "")).strip())
+    except ValueError:
+        value = 170
+    return max(1, min(value, 178))
+
+
 def redact(text: str, secret: str) -> str:
     """Remove the code from anything that will be printed or committed."""
     if not secret:
@@ -161,8 +176,8 @@ def commit_local(message: str) -> bool:
 
 
 def main() -> int:
-    minutes = int(os.environ.get("LISTENER_MINUTES", "170"))
-    deadline = time.time() + max(60, min(minutes, 178) * 60)
+    minutes = window_minutes()
+    deadline = time.time() + minutes * 60
     seen = ""
     _, seen, _ = read_code_file()  # start from the current state: an old code is not worth trying
     print(f"[{now()}] listening for a pasted Tumblr authorisation code in {CODE_PATH} "
@@ -205,4 +220,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as exc:  # a watch that dies silently is worse than no watch at all
+        print(f"TUMBLR_LISTENER_ERROR: {type(exc).__name__}: {exc}")
+        raise

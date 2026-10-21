@@ -1,4 +1,6 @@
 # Control for Tumblr Authorisation Listener. Change "mode" to "on" and commit to start a watch window;
 # "off" (or deleting the file) stops it. While it is on, pasting a code into .github/tumblr-oauth-code
-# is the only thing anyone has to do. The listener also restarts itself on every commit to this file.
+# is the only thing anyone has to do. Any commit to this file restarts the watch, so the stamp below is
+# how a listener is re-armed without anyone pressing anything.
 mode: on
+restartedAtIST: 2026-10-21T10:57:35+05:30

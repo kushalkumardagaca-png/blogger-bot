@@ -129,6 +129,29 @@ class LoopBehaviour(unittest.TestCase):
         self.assertIn("window closed without a code", printed)
 
 
+class WindowSizing(unittest.TestCase):
+    """A push run has no dispatch input, and an empty one must not kill the watch."""
+
+    def window(self, value):
+        with mock.patch.dict(tl.os.environ, {"LISTENER_MINUTES": value}):
+            return tl.window_minutes()
+
+    def test_unusable_values_become_the_full_window(self):
+        for value in ("", "soon", "0.5", None):
+            with self.subTest(value=value):
+                if value is None:
+                    with mock.patch.dict(tl.os.environ, {}, clear=True):
+                        self.assertEqual(tl.window_minutes(), 170)
+                else:
+                    self.assertEqual(self.window(value), 170)
+
+    def test_a_requested_window_is_honoured_but_stays_inside_the_job_limit(self):
+        self.assertEqual(self.window("5"), 5)
+        self.assertEqual(self.window("170"), 170)
+        self.assertEqual(self.window("99999"), 178)
+        self.assertEqual(self.window("0"), 1)
+
+
 class Wiring(unittest.TestCase):
     TEXT = (ROOT / ".github" / "workflows" / "tumblr_oauth_listener.yml").read_text(encoding="utf-8")
 
@@ -149,6 +172,14 @@ class Wiring(unittest.TestCase):
     def test_the_encryption_key_reaches_only_the_listener_process(self):
         self.assertIn("TUMBLR_TOKEN_ENCRYPTION_KEY: ${{ secrets.TUMBLR_TOKEN_ENCRYPTION_KEY }}", self.TEXT)
         self.assertNotIn("echo $TUMBLR", self.TEXT)
+
+    def test_a_push_started_run_still_gets_a_window(self):
+        self.assertIn("github.event.inputs.listen_minutes || '170'", self.TEXT)
+
+    def test_the_listener_reports_its_own_crash_instead_of_silence(self):
+        source = (ROOT / "tumblr_oauth_listener.py").read_text(encoding="utf-8")
+        self.assertIn("TUMBLR_LISTENER_ERROR", source)
+        self.assertIn("def window_minutes", source)
 
     def test_the_code_file_is_empty_of_credentials_at_rest(self):
         body = (ROOT / ".github" / "tumblr-oauth-code").read_text(encoding="utf-8")
