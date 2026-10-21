@@ -26,6 +26,7 @@ import os
 import re
 import urllib.error
 import urllib.parse
+import time
 import urllib.request
 from pathlib import Path
 
@@ -186,10 +187,16 @@ def live_probe(url: str) -> dict:
     request = urllib.request.Request(url, headers={"User-Agent": GOOGLEBOT_UA})
     try:
         with opener.open(request, timeout=30) as response:
+            status = int(getattr(response, "status", 200))
             body = response.read(200000).decode("utf-8", "ignore")
-            return {"reachable": response.status == 200, "status": int(getattr(response, "status", 200)),
-                    "hops": handler.hops, "finalUrl": response.geturl(),
-                    "canonical": extract_canonical(body)}
+            final_url = response.geturl()
+        if status == 429:
+            # Blogger throttles a burst of requests. A rate limit says nothing about the page, so it
+            # is recorded as not measured instead of being read as a redirect problem.
+            return {"reachable": False, "status": 429, "hops": handler.hops,
+                    "finalUrl": final_url, "canonical": "", "notMeasured": "rate limited"}
+        return {"reachable": status == 200, "status": status, "hops": handler.hops,
+                "finalUrl": final_url, "canonical": extract_canonical(body)}
     except urllib.error.HTTPError as exc:
         return {"reachable": False, "status": int(exc.code), "hops": handler.hops,
                 "finalUrl": url, "canonical": "", "error": f"HTTP {exc.code}"}
@@ -198,11 +205,11 @@ def live_probe(url: str) -> dict:
                 "canonical": "", "error": type(exc).__name__}
 
 
-def stale_verdict(row: dict, probe: dict) -> bool:
+def stale_verdict(row: dict, probe: dict) -> bool:  # noqa: C901
     """True when the platform's complaint cannot be reproduced on the live page today."""
     if row.get("verdict") == "PASS":
         return False
-    if not probe.get("reachable") or probe.get("hops"):
+    if not probe.get("reachable") or probe.get("hops") or probe.get("notMeasured"):
         return False
     coverage = str(row.get("coverageState") or "")
     return any(needle in coverage for needle in ("Redirect error", "Duplicate without user-selected",
@@ -221,10 +228,10 @@ def list_properties(access: str) -> dict:
             "domainPropertyVisible": DOMAIN_PROPERTY in visible}
 
 
-def sitemap_state(access: str) -> dict:
+def sitemap_state(access: str, site: str = PREFIX_PROPERTY) -> dict:
     """Registered sitemaps on the property that accepts them, and what Google says about each."""
-    out = {"status": "UNAVAILABLE", "registered": [], "missing": list(SITEMAP_PATHS), "detail": ""}
-    site = PREFIX_PROPERTY
+    out = {"status": "UNAVAILABLE", "registered": [], "missing": list(SITEMAP_PATHS), "detail": "",
+           "triedOn": site}
     try:
         rows = (gsc(access, "GET", "sites/" + urllib.parse.quote(site, safe="") + "/sitemaps")
                 or {}).get("sitemap", []) or []
@@ -247,11 +254,12 @@ def sitemap_state(access: str) -> dict:
     return out
 
 
-def register_sitemaps(access: str, missing: list[str], *, apply: bool) -> dict:
+def register_sitemaps(access: str, missing: list[str], *, apply: bool,
+                     site: str = PREFIX_PROPERTY) -> dict:
     """PUT the two Blogger sitemaps. Idempotent: registering an existing sitemap is a no-op for
     Google and a re-read of the file, which is exactly what a stale sitemap needs."""
     done, failed = [], []
-    site = urllib.parse.quote(PREFIX_PROPERTY, safe="")
+    site = urllib.parse.quote(site, safe="")
     for path in missing or list(SITEMAP_PATHS):
         if not apply:
             failed.append({"path": path, "error": "not attempted: --apply was not given"})
@@ -591,15 +599,23 @@ def main() -> int:
     else:
         properties = list_properties(access)
         site = PREFIX_PROPERTY if properties.get("urlPrefixPropertyVisible") else DOMAIN_PROPERTY
-        sitemaps = sitemap_state(access) if properties.get("urlPrefixPropertyVisible") else {
-            "status": "UNAVAILABLE", "registered": [], "missing": list(SITEMAP_PATHS),
-            "detail": "the URL-prefix property is not verified, and sitemaps are registered there"}
+        if properties.get("urlPrefixPropertyVisible"):
+            sitemaps = sitemap_state(access, PREFIX_PROPERTY)
+        else:
+            # Google's documentation puts sitemap submission on the URL-prefix property, but the only
+            # property this token can see is the domain one. Ask it directly instead of assuming: if
+            # it answers, the sitemaps get registered tonight with no owner step at all.
+            sitemaps = sitemap_state(access, DOMAIN_PROPERTY)
+            if sitemaps.get("status") != "MEASURED":
+                sitemaps["detail"] = (sitemaps.get("detail") or "no answer") + (
+                    "; the URL-prefix property https://dailyyield.blogspot.com/ is not verified, and "
+                    "that is where sitemap submission officially lives")
         registration = {"submittedNow": [], "failed": []}
         if sitemaps.get("status") == "MEASURED" and (sitemaps.get("missing") or arguments.apply):
             registration = register_sitemaps(access, sitemaps.get("missing") or list(SITEMAP_PATHS),
-                                            apply=arguments.apply)
+                                            apply=arguments.apply, site=site)
             if registration["submittedNow"]:
-                sitemaps = sitemap_state(access)
+                sitemaps = sitemap_state(access, site)
         rows = [inspect_one(access, site, row["url"]) for row in targets]
     for row in rows:
         if row.get("verdict") != "PASS" and valid_daily_yield_url(row["url"]):
@@ -608,6 +624,9 @@ def main() -> int:
                            "canonical": probe.get("canonical", ""), "finalUrl": probe.get("finalUrl", "")}
             row["liveHops"] = len(probe.get("hops") or [])
             row["staleVerdict"] = stale_verdict(row, probe)
+            if probe.get("notMeasured"):
+                row["liveNote"] = probe["notMeasured"]
+            time.sleep(2.0)   # thirteen polite reads, never a burst at the host
     report = build_report(targets=targets, properties=properties, sitemaps=sitemaps,
                           registration=registration, rows=rows, bing=bing_view(
                               [row["url"] for row in targets]), today=today)

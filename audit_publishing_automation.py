@@ -573,6 +573,9 @@ check('The thirteen main pages have a scoreboard that repairs sitemap registrati
       and 'never as "not indexed"' in watch_py and '"verdict": "UNKNOWN"' in watch_py
       and 'Request indexing' in watch_py and 'indexing.googleapis.com' not in watch_py
       and 'blogger.googleapis.com' not in watch_py
+      and 'def live_probe' in watch_py and 'notMeasured' in watch_py
+      and 'time.sleep(2.0)' in watch_py
+      and 'bing.get_quota' in watch_py and 'api.bing.com' not in watch_py
       and 'python main_pages_index_watch.py --check' in watch_yml
       and 'python main_pages_index_watch.py --apply' in watch_yml
       and 'secrets.GSC_REFRESH_TOKEN' in watch_yml and 'BING_WEBMASTER_API_KEY' in watch_yml)

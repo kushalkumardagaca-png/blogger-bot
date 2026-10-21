@@ -113,7 +113,10 @@ class GoogleSide(unittest.TestCase):
         env = {"GSC_CLIENT_ID": "fake-client", "GSC_CLIENT_SECRET": "fake-client-secret",
                "GSC_REFRESH_TOKEN": "fake-refresh" if token else "",
                "BLOGGER_CLIENT_ID": "", "BLOGGER_CLIENT_SECRET": "", "BLOG_ID": ""}
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(watch, "http", fake), \
+        probe = mock.patch.object(watch, "live_probe", lambda url: {
+            "reachable": True, "status": 200, "hops": [], "finalUrl": url,
+            "canonical": url})
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(watch, "http", fake), probe, \
                 mock.patch.dict(os.environ, env, clear=False), \
                 redirect_stdout(io.StringIO()) as out:
             argv = ["main_pages_index_watch.py", "--today", today,
@@ -174,13 +177,39 @@ class GoogleSide(unittest.TestCase):
         self.assertEqual(report["verdict"], "NOT_STARTED")
         self.assertIn("GSC_REFRESH_TOKEN", " ".join(report["ownerActions"]))
 
-    def test_the_domain_property_is_used_when_the_prefix_property_is_absent(self):
+    def test_the_domain_property_is_asked_before_anyone_is_blamed(self):
+        # Google documents sitemap submission on the URL-prefix property, and the site has only the
+        # domain one. The job asks the domain property anyway, because "the API refuses" is evidence and
+        # "we never tried" is not.
         fake = FakeHttp(site_entries=[{"siteUrl": watch.DOMAIN_PROPERTY, "permissionLevel": "siteOwner"}],
+                        body_of={"sitemap": ""})
+        _, report, _ = self.run_main(fake)
+        self.assertEqual(report["sitemaps"]["triedOn"], watch.DOMAIN_PROPERTY)
+        self.assertEqual(report["sitemaps"]["status"], "MEASURED")
+        self.assertEqual(sorted(fake.put_paths), sorted(watch.SITEMAP_PATHS))
+        self.assertEqual(sorted(report["sitemapRegistration"]["submittedNow"]), sorted(watch.SITEMAP_PATHS))
+
+    def test_a_rate_limit_is_never_read_as_a_complaint_about_the_page(self):
+        row = {"url": f"{BLOG}/p/article.html", "verdict": "NEUTRAL",
+               "coverageState": "Redirect error", "lastCrawlTime": "2026-10-02T07:15:16Z"}
+        self.assertFalse(watch.stale_verdict(row, {"reachable": False, "status": 429, "hops": [1],
+                                                   "notMeasured": "rate limited"}),
+                         "a throttled probe says nothing either way")
+
+    def test_the_domain_property_is_reused_for_the_verdicts(self):
+        # Every inspection then runs against the domain property, and the owner is still told the
+        # prefix property is what unlocks the rest - one does not cancel the other.
+        fake = FakeHttp(sitemaps=[{"path": f"{BLOG}/sitemap.xml"}, {"path": f"{BLOG}/sitemap-pages.xml"}],
+                        site_entries=[{"siteUrl": watch.DOMAIN_PROPERTY, "permissionLevel": "siteOwner"}],
                         body_of={"sitemap": ""})
         _, report, _ = self.run_main(fake)
         self.assertEqual(report["inspectionProperty"], watch.DOMAIN_PROPERTY)
         self.assertIn("URL-prefix property", " ".join(report["ownerActions"]))
-        self.assertIn("not verified", report["sitemaps"]["detail"])
+        # Both sitemaps are already registered, and an --apply run re-submits them anyway: a re-read
+        # of the file is free for Google, idempotent for us, and it is the only lawful way on a
+        # blogspot property to keep asking for a fresh crawl.
+        self.assertEqual(sorted(fake.put_paths), sorted(watch.SITEMAP_PATHS))
+        self.assertEqual(report["sitemaps"]["missing"], [])
 
     def test_no_request_ever_touches_the_blogger_content_api(self):
         fake = FakeHttp(body_of={"sitemap": ""})
@@ -251,7 +280,9 @@ class Hygiene(unittest.TestCase):
                    "BING_WEBMASTER_API_KEY": "super-secret-bing"}
         fake = FakeHttp(sitemaps=[{"path": f"{BLOG}/sitemap.xml"}, {"path": f"{BLOG}/sitemap-pages.xml"}],
                         body_of={"sitemap": ""})
-        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(watch, "http", fake), \
+        probe = mock.patch.object(watch, "live_probe", lambda url: {
+            "reachable": True, "status": 200, "hops": [], "finalUrl": url, "canonical": url})
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(watch, "http", fake), probe, \
                 mock.patch.dict(os.environ, secrets, clear=False), redirect_stdout(io.StringIO()):
             with mock.patch("sys.argv", ["x", "--today", "2026-10-21",
                                           "--out", str(Path(tmp) / "r.json"), "--apply"]):
