@@ -337,6 +337,13 @@ check('Master photo pools are built after the day has a plan, not five minutes b
 check('The quota-independent fallback cannot raise on thin evidence, and is held to the same validator',
       'def evidence_text' in v3_generator and 'ok,error=validate_section(paragraphs,evidence_text(sources))' in v3_generator
       and 'TOO_BRIEF=' in v3_generator)
+check('A window may be skipped only by a named, owner-approved release file',
+      # the embargo is a promise to the reader, so no automation, tolerance or failure path may cross it;
+      # the single exception is a pushed marker that names the article and carries the owner's token, and
+      # it is skipped for that run only.
+      "def early_release(kind,slot)" in (ROOT/'publication_timing.py').read_text(encoding='utf-8')
+      and "'owner-approved' not in text:return ''" in (ROOT/'publication_timing.py').read_text(encoding='utf-8')
+      and "- '.github/master-early-release'" in (ROOT/'.github/workflows/master_trending_writer.yml').read_text(encoding='utf-8'))
 check('Ten bounded sections use controlled five-worker parallel generation',
       'ThreadPoolExecutor(max_workers=5' in v3_generator and 'as_completed(futures)' in v3_generator)
 check('Overnight pair dispatch retries each category independently',
@@ -354,7 +361,7 @@ check('Scheduled Master release reuses a complete advance package',
       'if target.exists()' in v3_pipeline and 'package=read(target,{})' in v3_pipeline
       and 'validate(package)' in v3_pipeline)
 check('Every Master publishing path enforces the public release embargo',
-      'wait_for_release(MASTER_LIVE[(kind,slot)])' in v3_pipeline
+      'wait_for_release(MASTER_LIVE[(kind,slot)],allow_early=(kind,slot))' in v3_pipeline
       and 'if timed_release:wait_for_release' not in v3_pipeline)
 check('Master retries are centrally ordered rather than self-dispatched',
       'gh workflow run master_' not in master_workflows

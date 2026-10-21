@@ -5,6 +5,9 @@ on:
     paths:
       # Repository-authenticated live recovery trigger; file contains slot 0-4.
       - '.github/master-trending-live-trigger'
+      # An owner-authorised early release for the outstanding slot: the file names the article and
+      # carries `owner-approved`, and pushing it both starts this workflow and skips the window wait.
+      - '.github/master-early-release'
   schedule:
     # Trending generation budget: 150 minutes plus 15 minutes spare.
     # Inside that lead, preparation now runs to its own 30-minute clock (see

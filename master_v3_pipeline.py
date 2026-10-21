@@ -230,7 +230,7 @@ def _publish_once(kind,slot,timed_release=False):
  # The public release time is an embargo, not merely a scheduled-workflow hint.
  # Prewarm retries and manual recovery may finish early, but every publishing
  # path waits for the exact audience-facing slot before calling Blogger.
- wait_for_release(MASTER_LIVE[(kind,slot)])
+ wait_for_release(MASTER_LIVE[(kind,slot)],allow_early=(kind,slot))
  plan,item=selected(kind,slot)
  if str(item.get('id')) in blocked_topics(plan):
   item=replace_blocked_topic(plan,kind,slot,item);plan=read(PLAN,{})
