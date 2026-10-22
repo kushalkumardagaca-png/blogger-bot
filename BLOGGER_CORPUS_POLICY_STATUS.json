@@ -1,10 +1,10 @@
 {
-  "status": "PASS",
+  "status": "WARNING",
   "apply": false,
-  "checked_at": "2026-10-21T19:26:02.550450+00:00",
-  "posts_checked": 578,
-  "automated_posts": 578,
-  "disclosures_current_before": 578,
+  "checked_at": "2026-10-22T19:26:23.470324+00:00",
+  "posts_checked": 598,
+  "automated_posts": 598,
+  "disclosures_current_before": 598,
   "duplicate_groups_found": [],
   "unresolved_duplicate_groups": [],
   "deleted_duplicate_post_ids": [],
@@ -13,6 +13,6 @@
   "quarantined_to_draft": [],
   "remaining_live_policy_flags": [],
   "unsafe_active_links": [],
-  "image_rights_gap_posts": 0,
+  "image_rights_gap_posts": 3,
   "zero_public_pageviews": true
 }
