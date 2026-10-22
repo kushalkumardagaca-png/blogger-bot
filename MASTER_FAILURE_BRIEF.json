@@ -1,0 +1,14 @@
+{
+ "at": "2026-10-22T12:40:52Z",
+ "workflow": "master_evergreen_writer.yml",
+ "kind": "evergreen",
+ "slot": "3",
+ "run": "39778341625",
+ "stage": "master-v3",
+ "status": "FAIL",
+ "error_type": "RuntimeError",
+ "error": "deterministic evidence section failed: unsupported number 5",
+ "minutes_used": "",
+ "published_after_this": false,
+ "note": "the run published nothing; the day's slot stays open for the recovery cycle"
+}
