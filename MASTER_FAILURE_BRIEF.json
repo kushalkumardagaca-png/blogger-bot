@@ -1,13 +1,13 @@
 {
- "at": "2026-10-22T15:23:07Z",
- "workflow": "master_evergreen_writer.yml",
- "kind": "evergreen",
+ "at": "2026-10-22T15:44:58Z",
+ "workflow": "master_trending_writer.yml",
+ "kind": "trending",
  "slot": "4",
- "run": "39801107957",
+ "run": "39804430047",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "deterministic evidence section failed: 395 words; required 400-490",
+ "error": "PUBLICATION PREFLIGHT FAILED — advice risk gate: tax rule stated as permanent fact with no date and no change notice",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
