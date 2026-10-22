@@ -1,13 +1,13 @@
 {
- "at": "2026-10-22T15:44:58Z",
- "workflow": "master_trending_writer.yml",
- "kind": "trending",
+ "at": "2026-10-22T17:20:28Z",
+ "workflow": "master_evergreen_writer.yml",
+ "kind": "evergreen",
  "slot": "4",
- "run": "39804430047",
+ "run": "39821501128",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "PUBLICATION PREFLIGHT FAILED — advice risk gate: tax rule stated as permanent fact with no date and no change notice",
+ "error": "V3 source gate found 2 topic-specific sources; eight required",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
