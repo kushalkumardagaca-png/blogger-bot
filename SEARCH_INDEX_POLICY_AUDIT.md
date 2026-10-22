@@ -1,6 +1,6 @@
 # Search index policy conformance
 
-**17 PASS · 10 FAIL** across 599 URLs (585 posts, 14 pages) · checked 2026-10-22T04:56:54+00:00
+**16 PASS · 11 FAIL** across 599 URLs (585 posts, 14 pages) · checked 2026-10-22T05:17:03+00:00
 
 Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria; the sources are named in the JSON. Nothing in this file edits the site.
 
@@ -13,10 +13,10 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 | `sitemap-freshness-signals` | ✅ Bing §3 (lastmod) | sitemap.xml=yes sitemap-pages.xml=yes - Blogger decides this, not us | platform |
 | `no-utility-pages-in-sitemaps` | ❌ Bing §3 §21 §11 (low-value URLs) | 3 machine page, redirect notice or template artifact(s) offered for indexing: context-httpsschema_0119702296.html, context-httpsschema.html, share-market_0718113516.html - 1 exempt because IndexNow reads its key there | blogger |
 | `homepage-duplicate-urls-consolidate` | ✅ Bing §6 (canonical consolidation) | 4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one | platform |
-| `titles-descriptive-and-complete` | ❌ Bing §13 §17; Google indexing criteria | 4 under 12 chars, 40 over 70, 0 empty, 6 cut mid-phrase (our own title clip does this) | repo |
-| `titles-not-shouted-in-caps` | ❌ Bing §13 (titles written for users) | 11 page or post title(s) are entirely upper case | blogger |
+| `titles-descriptive-and-complete` | ❌ Bing §13 §17; Google indexing criteria | 0 under its floor (12 for an article, 4 for a page), 40 over 70, 0 empty, 6 cut mid-phrase (our own title clip does this) | repo |
+| `titles-not-shouted-in-caps` | ❌ Bing §13 (titles written for users) | 12 page or post title(s) are entirely upper case | blogger |
 | `no-duplicate-titles-across-urls` | ❌ Bing §6 §13 | 4 title(s) shared by more than one URL; worst cluster is 6 URLs on one title | repo |
-| `opening-delivers-the-headline` | ✅ Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query | 0 of 592 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 6 were too short to judge and are not counted) | repo |
+| `opening-delivers-the-headline` | ✅ Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query | 0 of 590 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted) | repo |
 | `content-not-thin` | ✅ Bing §11 §15 | 0 of 598 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing) | repo |
 | `no-near-duplicate-pages` | ❌ Bing §6; abuse: duplicate content across URLs | 40 pair(s) of URLs at or above 0.42 Jaccard shingle overlap (capped scan) | repo |
 | `no-keyword-stuffing` | ✅ Bing abuse: keyword stuffing | 0 URL(s) push one word through paragraph after paragraph (4+ times in at least 45% of them), which is the abuse Bing names. A page that mentions its own subject once per paragraph is not flagged: that is what an article about a thing looks like. | repo |
@@ -24,14 +24,14 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 | `image-file-names-are-descriptive` | ✅ Bing §12 (unique, relevant file names) | 0 of 0 committed image file name(s) repeats across the site () - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 598 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image | repo |
 | `image-names-not-hidden-by-the-host` | ✅ Bing §12 | 0 URL(s) reach a crawler as an opaque id because Blogger's image proxy renames the upload - measured, not ours to change, and the alt text checked above carries the description instead | platform |
 | `no-double-published-urls` | ❌ Bing §6 §9 (duplicate or redirected URLs) | 8 article(s) were published twice; Blogger numbered the copy's slug, so both copies sit in the sitemap as separate URLs with the same text | repo |
-| `rendered-head-completeness` | ✅ Bing §13; Google indexability | 4 URL(s) rendered: 0 without a title, 0 without a meta description, 2 did not answer 200 and were not judged | platform |
-| `no-blocking-robots-meta` | ✅ Bing §10; Google: indexing allowed? | 0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 2 did not answer 200 and were not judged | blogger |
-| `exactly-one-h1` | ❌ Bing §13 (heading hierarchy) | 1 sampled URL(s) without exactly one <h1>, 2 did not answer 200 and were not judged | platform |
-| `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML, 2 did not answer 200 and were not judged | platform |
-| `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 4 URL(s) sampled, 0 markup problem(s), 2 did not answer 200 and were not judged | repo |
+| `rendered-head-completeness` | ✅ Bing §13; Google indexability | 5 URL(s) rendered: 0 without a title, 0 without a meta description, 1 did not answer 200 and were not judged | platform |
+| `no-blocking-robots-meta` | ✅ Bing §10; Google: indexing allowed? | 0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 1 did not answer 200 and were not judged | blogger |
+| `exactly-one-h1` | ❌ Bing §13 (heading hierarchy) | 1 sampled URL(s) without exactly one <h1>, 1 did not answer 200 and were not judged | platform |
+| `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML, 1 did not answer 200 and were not judged | platform |
+| `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 5 URL(s) sampled, 0 markup problem(s), 1 did not answer 200 and were not judged | repo |
 | `robots-allows-both-crawlers` | ❌ Bing §8 §10; Google: crawl allowed? | HTTP 404; neither bot is blocked; declares no sitemap | blogger |
 | `sitemaps-declared-in-robots` | ❌ Bing §2; Google: referring sitemap | robots.txt does not name both sitemaps, so a crawler that finds robots.txt may never reach the pages sitemap (Google reports 'no referring sitemap') | blogger |
-| `updated-pages-are-still-substantial` | ✅ Bing §19 | 0 URL(s) were revised and are still below the thin line | repo |
+| `updated-pages-are-still-substantial` | ❌ Bing §19 | 1 URL(s) were revised and are still below the thin line | repo |
 | `every-url-carries-a-date` | ✅ Bing §3 §19; Google structured data | 599/599 URLs publish a machine-readable date | repo |
 
 ## URLs that must change
@@ -41,21 +41,21 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 - `https://dailyyield.blogspot.com/2026/09/context-httpsschema.html`
 - `https://dailyyield.blogspot.com/p/share-market_0718113516.html`
 
-**titles-descriptive-and-complete** (50 total)
+**titles-descriptive-and-complete** (46 total)
 - `https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html`
 - `https://dailyyield.blogspot.com/2026/10/billionaire-mukesh-ambani-launches.html`
 - `https://dailyyield.blogspot.com/2026/10/cost-of-living-protests-hit-belgium.html`
 - `https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html`
 - `https://dailyyield.blogspot.com/2026/10/inside-india-newsletter-billionaire.html`
 - `https://dailyyield.blogspot.com/2026/10/how-to-evaluate-healthcare-ai.html`
-- `https://dailyyield.blogspot.com/p/daily-news.html`
-- `https://dailyyield.blogspot.com/p/money-atlas_01486068069.html`
-- `https://dailyyield.blogspot.com/p/disclaimer.html`
-- `https://dailyyield.blogspot.com/p/contact-us_01883938366.html`
 - `https://dailyyield.blogspot.com/2026/10/russia-2026-10-08.html`
 - `https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-08.html`
+- `https://dailyyield.blogspot.com/2026/10/mexico-2026-10-08.html`
+- `https://dailyyield.blogspot.com/2026/10/canada-2026-10-08.html`
+- `https://dailyyield.blogspot.com/2026/10/us-2026-10-08.html`
+- `https://dailyyield.blogspot.com/2026/10/brazil-2026-10-08.html`
 
-**titles-not-shouted-in-caps** (11 total)
+**titles-not-shouted-in-caps** (12 total)
 - `https://dailyyield.blogspot.com/2026/10/eurusd-11253-eurgbp-08438-eurjpy-177.html`
 - `https://dailyyield.blogspot.com/p/terms-and-conditions.html`
 - `https://dailyyield.blogspot.com/p/global-snapshot.html`
@@ -67,6 +67,7 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 - `https://dailyyield.blogspot.com/p/for-corporate_01804417406.html`
 - `https://dailyyield.blogspot.com/p/disclaimer.html`
 - `https://dailyyield.blogspot.com/p/contact-us_01883938366.html`
+- `https://dailyyield.blogspot.com/p/calculator_0908148622.html`
 
 **no-duplicate-titles-across-urls** (4 total)
 - `banking  personal money news (6 urls)`
@@ -102,6 +103,9 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 - `us-2026-10-01: https://dailyyield.blogspot.com/2026/10/us-2026-10-01.html, https://dailyyield.blogspot.com/2026/10/us-2026-10-01_01887906195.html`
 
 **exactly-one-h1** (1 total)
+- `https://dailyyield.blogspot.com/p/indexnow-key.html`
+
+**updated-pages-are-still-substantial** (1 total)
 - `https://dailyyield.blogspot.com/p/indexnow-key.html`
 
 ## What a feed cannot answer
