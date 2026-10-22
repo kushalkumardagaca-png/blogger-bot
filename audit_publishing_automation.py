@@ -585,6 +585,40 @@ check('The thirteen main pages have a scoreboard that repairs sitemap registrati
       and 'python main_pages_index_watch.py --check' in watch_yml
       and 'python main_pages_index_watch.py --apply' in watch_yml
       and 'secrets.GSC_REFRESH_TOKEN' in watch_yml and 'BING_WEBMASTER_API_KEY' in watch_yml)
+policy_py=(ROOT/'search_index_policy_audit.py').read_text()
+policy_yml=(ROOT/'.github/workflows/search_index_policy_audit.yml').read_text()
+check("Every URL is judged against Bing and Google indexing rules, not against a guess",
+      'def audit()' in policy_py and 'def register(' in policy_py and 'def run_check()' in policy_py
+      and 'webmaster-guidelines-30fba23a' in policy_py and 'webmasters/answer/9012289' in policy_py
+      and all(needle in policy_py for needle in (
+          'sitemap-lists-only-live-urls', 'no-utility-pages-in-sitemaps',
+          'homepage-duplicate-urls-consolidate', 'titles-descriptive-and-complete',
+          'no-duplicate-titles-across-urls', 'no-near-duplicate-pages', 'content-not-thin',
+          'no-keyword-stuffing', 'images-described-not-decorated', 'no-double-published-urls',
+          'opening-delivers-the-headline', 'structured-data-matches-the-page',
+          'no-blocking-robots-meta', 'robots-allows-both-crawlers', 'sitemaps-declared-in-robots',
+          'updated-pages-are-still-substantial', 'every-url-carries-a-date')),
+      'a guideline check was dropped from the audit')
+check('The policy audit is read-only and never counts a platform limit as our violation',
+      'method=' not in policy_py.replace('method="GET"', '')
+      and policy_py.count('urllib.request.Request(')==1
+      and 'advisory=True' in policy_py and '"advisory": bool(advisory and not ok)' in policy_py
+      and 'notAnswerableHere' in policy_py and 'did not answer 200 and were not judged' in policy_py
+      and 'blogger.googleapis.com' not in policy_py and 'access_token' not in policy_py)
+check('The policy audit keeps similarity honest and re-runs visible',
+      'overlap = len(a & b) / max(1, len(a | b))' in policy_py
+      and 'SHINGLE_MIN_SHARDS' in policy_py and 'rerun_twins' in policy_py
+      and 'SHARED_IMAGE_NAME_LIMIT' in policy_py
+      and 'title_is_cut' in policy_py)
+check('The policy audit runs daily and proves its own rules before it reports',
+      'python search_index_policy_audit.py --check' in policy_yml
+      and 'python search_index_policy_audit.py' in policy_yml
+      and 'SEARCH_INDEX_POLICY_AUDIT.json' in policy_yml
+      and 'secrets.' not in policy_yml and 'blogger_api' not in policy_yml)
+generator_py=(ROOT/'master_v3_generator.py').read_text()
+check('A clipped headline cannot be published as a headline',
+      "kept=kept.rstrip(' ,;:." in generator_py and "tail.endswith(\"'s\")" in generator_py
+      and 'Bing \u00a713' in generator_py and '12<=len(kept)<=limit' in generator_py)
 bing_py=(ROOT/'bing_url_automation.py').read_text()
 check('Bing spends any quota it grants on the front doors first and re-offers them weekly',
       'rank = 0 if item["kind"] == "home" else 1 if item["kind"] == "page" else 2' in bing_py

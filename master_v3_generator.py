@@ -592,11 +592,20 @@ def head_clip(value,limit=46):
   while kept:
     tail=kept.rsplit(' ',1)[-1].lower().strip(' ,;:.\u2014\u2013-')
     # a cut title must not end on a word that only makes sense joined to what came after it
+    if tail.endswith("'s") or tail.endswith('\u2019s'):
+      # ...nor on an apostrophe-s. "Billionaire Mukesh Ambani launches India's" was published as a
+      # headline on 21 October 2026: the clip stopped inside a possessive, so the reader never
+      # learns whose anything is, and Bing §13 counts that as a title that does not describe the page.
+      kept=kept.rsplit(' ',1)[0] if ' ' in kept else ''
+      continue
     if tail not in {'a','an','and','as','at','but','by','for','from','if','in','into','its','of',
                     'on','or','our','per','the','to','vs','with','that','this','these','those','it',
                     'is','are','was','were','be','been','after','before','over','under','between','&'}:
       break
     kept=kept.rsplit(' ',1)[0] if ' ' in kept else ''
+  # a comma the clip left behind reads as a headline that lost its second half, so it goes; the
+  # length rule is re-checked after the trim because dropping a token can land under 12 characters
+  kept=kept.rstrip(' ,;:.\u2014\u2013-\u2026')
   return kept if 12<=len(kept)<=limit else ''
 
 def build(item,kind,target):

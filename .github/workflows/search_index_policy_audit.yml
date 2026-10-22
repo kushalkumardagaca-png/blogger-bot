@@ -1,0 +1,66 @@
+name: Search index policy audit
+
+# The owner's instruction, 22 October 2026: every URL on the site — all thirteen main pages and every
+# published post — has to satisfy Bing's Webmaster Guidelines and Google's indexability rules, not just
+# ours. Those two documents are written as duties on the publisher (canonical URLs only, no utility
+# pages in a sitemap, no near-duplicate pages, titles that describe the page, images that carry alt
+# text, no blocking meta robots, facts that hold up on the URL itself). Nothing in this repository
+# measured them across the whole corpus before now: index_status_report.py counts indexed/not-indexed,
+# and audit_blogger_content_policy.py judges the writing.
+#
+# This job is a reader. It pulls the blog's own public JSON feeds, its two sitemaps and robots.txt,
+# renders a bounded six-URL sample spaced out, and writes SEARCH_INDEX_POLICY_AUDIT.json/.md. It holds
+# no credentials, performs no Blogger write, and never walks the site with a browser, so the zero-view
+# rule and the site-change freeze are both untouched. A finding it cannot clear itself is printed as an
+# advisory with the name of whoever can.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 20 * * *'   # 02:15 IST: after the scoreboard and the duplicate pile, before the daily report
+  push:
+    branches: [main]
+    paths:
+      - 'search_index_policy_audit.py'
+      - 'test_search_index_policy_audit.py'
+      - '.github/workflows/search_index_policy_audit.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-search-index-policy
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Prove the audit's own detectors before trusting a verdict
+        run: python search_index_policy_audit.py --check
+      - name: Judge every published URL against both search engines' rules
+        run: python search_index_policy_audit.py
+      - name: Persist the report
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-policy
+          cp SEARCH_INDEX_POLICY_AUDIT.json SEARCH_INDEX_POLICY_AUDIT.md /tmp/dy-policy/ 2>/dev/null || true
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-policy/* . 2>/dev/null || true
+            git add SEARCH_INDEX_POLICY_AUDIT.json SEARCH_INDEX_POLICY_AUDIT.md 2>/dev/null || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record the search index policy audit [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
