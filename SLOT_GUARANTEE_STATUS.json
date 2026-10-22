@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-22T09:02:28.358191+05:30",
+ "generatedAt": "2026-10-22T09:15:40.713363+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 5,
- "onTime": 5,
+ "live": 6,
+ "onTime": 6,
  "late": 0,
  "early": 0,
- "pending": 1,
+ "pending": 0,
  "overdue": 0,
  "upcoming": 15,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 287,
+   "minutesFromSlot": 300,
    "publishedAt": "2026-10-21T15:37:56-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 227,
+   "minutesFromSlot": 240,
    "publishedAt": "2026-10-21T16:36:56-07:00"
   },
   {
@@ -40,7 +40,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/chancellor-rejects-calls-to-raise.html",
    "state": "on time",
-   "minutesFromSlot": 167,
+   "minutesFromSlot": 180,
    "publishedAt": "2026-10-21T17:48:56-07:00"
   },
   {
@@ -50,7 +50,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 107,
+   "minutesFromSlot": 120,
    "publishedAt": "2026-10-21T18:45:04-07:00"
   },
   {
@@ -60,18 +60,18 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/how-does-lifestyle-inflation-trap-people.html",
    "state": "on time",
-   "minutesFromSlot": 47,
+   "minutesFromSlot": 60,
    "publishedAt": "2026-10-21T19:45:07-07:00"
   },
   {
    "key": "master-trending-1",
    "slot": "09:15",
    "due": "2026-10-22T09:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "pending",
-   "minutesFromSlot": -13,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/prediction-market-odds-on-tesla-spacex.html",
+   "state": "on time",
+   "minutesFromSlot": 0,
+   "publishedAt": "2026-10-21T20:45:08-07:00"
   },
   {
    "key": "news-russia",
@@ -80,7 +80,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -73
+   "minutesFromSlot": -60
   },
   {
    "key": "master-evergreen-1",
@@ -89,7 +89,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -133
+   "minutesFromSlot": -120
   },
   {
    "key": "news-markets",
@@ -98,7 +98,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -193
+   "minutesFromSlot": -180
   },
   {
    "key": "news-europe",
@@ -107,7 +107,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -223
+   "minutesFromSlot": -210
   },
   {
    "key": "news-economy",
@@ -116,7 +116,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -253
+   "minutesFromSlot": -240
   },
   {
    "key": "master-trending-2",
@@ -125,7 +125,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -313
+   "minutesFromSlot": -300
   },
   {
    "key": "master-evergreen-2",
@@ -134,7 +134,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -373
+   "minutesFromSlot": -360
   },
   {
    "key": "master-trending-3",
@@ -143,7 +143,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -433
+   "minutesFromSlot": -420
   },
   {
    "key": "news-americas",
@@ -152,7 +152,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -493
+   "minutesFromSlot": -480
   },
   {
    "key": "news-companies",
@@ -161,7 +161,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -523
+   "minutesFromSlot": -510
   },
   {
    "key": "news-global",
@@ -170,7 +170,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -553
+   "minutesFromSlot": -540
   },
   {
    "key": "news-banking",
@@ -179,7 +179,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -583
+   "minutesFromSlot": -570
   },
   {
    "key": "master-evergreen-3",
@@ -188,7 +188,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -643
+   "minutesFromSlot": -630
   },
   {
    "key": "master-trending-4",
@@ -197,7 +197,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -703
+   "minutesFromSlot": -690
   },
   {
    "key": "master-evergreen-4",
@@ -206,13 +206,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -793
+   "minutesFromSlot": -780
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 5,
+ "actualArticlesLiveIncludingExtras": 6,
  "wrongDay": 0,
  "status": "PASS"
 }
