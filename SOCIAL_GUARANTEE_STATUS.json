@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-22T08:15:42.049272+05:30",
+ "generatedAt": "2026-10-22T08:32:01.155120+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "articles": 5,
  "expectedPosts": 10,
- "articlesWithBothPosts": 4,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 5,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-china",
@@ -64,26 +64,22 @@
    "key": "master-evergreen-0",
    "title": "How does lifestyle inflation trap people",
    "url": "https://dailyyield.blogspot.com/2026/10/how-does-lifestyle-inflation-trap-people.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 1,
+    "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T08:15:38.983636+05:30",
+ "liveVerificationSourceAt": "2026-10-22T08:31:58.342498+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 4,
+ "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
