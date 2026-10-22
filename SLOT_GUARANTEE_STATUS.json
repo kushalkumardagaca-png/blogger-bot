@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T04:07:29.910289+05:30",
+ "generatedAt": "2026-10-23T04:25:05.869428+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "toleranceMinutes": 30,
@@ -20,7 +20,7 @@
    "live": false,
    "url": "",
    "state": "pending",
-   "minutesFromSlot": -8,
+   "minutesFromSlot": 10,
    "action": "dispatched"
   },
   {
@@ -30,7 +30,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -68
+   "minutesFromSlot": -50
   },
   {
    "key": "master-trending-0",
@@ -39,7 +39,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -128
+   "minutesFromSlot": -110
   },
   {
    "key": "news-india",
@@ -48,7 +48,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -188
+   "minutesFromSlot": -170
   },
   {
    "key": "master-evergreen-0",
@@ -57,7 +57,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -248
+   "minutesFromSlot": -230
   },
   {
    "key": "master-trending-1",
@@ -66,7 +66,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -308
+   "minutesFromSlot": -290
   },
   {
    "key": "news-russia",
@@ -75,7 +75,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -368
+   "minutesFromSlot": -350
   },
   {
    "key": "master-evergreen-1",
@@ -84,7 +84,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -428
+   "minutesFromSlot": -410
   },
   {
    "key": "news-markets",
@@ -93,7 +93,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -488
+   "minutesFromSlot": -470
   },
   {
    "key": "news-europe",
@@ -102,7 +102,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -518
+   "minutesFromSlot": -500
   },
   {
    "key": "news-economy",
@@ -111,7 +111,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -548
+   "minutesFromSlot": -530
   },
   {
    "key": "master-trending-2",
@@ -120,7 +120,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -608
+   "minutesFromSlot": -590
   },
   {
    "key": "master-evergreen-2",
@@ -129,7 +129,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -668
+   "minutesFromSlot": -650
   },
   {
    "key": "master-trending-3",
@@ -138,7 +138,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -728
+   "minutesFromSlot": -710
   },
   {
    "key": "news-americas",
@@ -147,7 +147,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -788
+   "minutesFromSlot": -770
   },
   {
    "key": "news-companies",
@@ -156,7 +156,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -818
+   "minutesFromSlot": -800
   },
   {
    "key": "news-global",
@@ -165,7 +165,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -848
+   "minutesFromSlot": -830
   },
   {
    "key": "news-banking",
@@ -174,7 +174,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -878
+   "minutesFromSlot": -860
   },
   {
    "key": "master-evergreen-3",
@@ -183,7 +183,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -938
+   "minutesFromSlot": -920
   },
   {
    "key": "master-trending-4",
@@ -192,7 +192,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -998
+   "minutesFromSlot": -980
   },
   {
    "key": "master-evergreen-4",
@@ -201,7 +201,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -1088
+   "minutesFromSlot": -1070
   }
  ],
  "syntheticViews": 0,
