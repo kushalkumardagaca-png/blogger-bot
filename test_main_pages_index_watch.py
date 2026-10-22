@@ -535,8 +535,11 @@ class MobileIdentity(unittest.TestCase):
                                           "notReported": [], "detail": ""},
                                     today=dt.date(2026, 10, 22))
         joined = "\n".join(report["ownerActions"])
-        self.assertIn("Mobile devices", joined, "the switch has to be named, not the symptom")
+        self.assertIn("There is nothing to toggle", joined,
+                      "the owner is told what is true about the bounce, not sent to a switch")
         self.assertIn("?m=1", joined)
+        for retired in ("One setting removes", "choose the desktop theme"):
+            self.assertNotIn(retired, joined, retired + " is the advice this project already disproved")
         rendered = watch.render_markdown(report)
         self.assertIn("What a phone is told today", rendered)
         self.assertIn("m=1", rendered)

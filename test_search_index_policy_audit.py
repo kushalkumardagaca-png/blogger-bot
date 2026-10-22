@@ -437,9 +437,123 @@ class MobileFirstFetch(unittest.TestCase):
 
     def test_the_check_is_registered_with_an_owner_and_a_guideline(self):
         source = Path(audit.__file__).read_text(encoding="utf-8")
-        block = source.split('"mobile-first-fetch-is-direct"')[1][:900]
-        self.assertIn('"blogger"', block, "the fix is the platform's setting, so it must be said so")
-        self.assertIn("Mobile devices", block, "the action has to name the switch, not just the symptom")
+        # the window has to reach the end of the register() call, where the owner and the advice live
+        block = source.split('"mobile-first-fetch-is-direct"')[1][:2600]
+        self.assertIn('"blogger"', block, "the fix is the platform's behaviour, so it must be said so")
+        self.assertIn("nothing to fix", block, "Google's own answer must be quoted, not a switch we lack")
+        self.assertIn("strips ?m=1", block, "the one self-inflicted version of this has to be named")
+        self.assertNotIn("One setting removes", block, "no single setting removes it; that claim is retired")
+
+
+
+    # ---- the 22 October correction: what this check may and may not call a violation -------------
+    # Every one of these cases was measured on the live blog the same day, so the split below is not a
+    # theory about Blogger: the phone really is bounced, the target really is the same document (one byte
+    # different), the canonical really points back, and no script on the page touches the parameter.
+
+    def test_blogger_own_bounce_is_reported_and_forgiven(self):
+        url = f"{BLOG}/p/daily-news.html"
+        answer = {"status": 200, "moved": True, "finalUrl": url + "?m=1", "canonical": url,
+                  "robotsMeta": ["follow", "index", "max-snippet:-1"], "stripsMobileParam": False}
+        got = audit.classify_mobile_answer(url, answer)
+        self.assertEqual(got["kind"], "blogger-mobile-param")
+        self.assertTrue(got["harmless"], "a platform behaviour nobody can switch off is not our violation")
+
+    def test_a_direct_answer_is_still_the_best_answer(self):
+        url = f"{BLOG}/"
+        self.assertEqual(audit.classify_mobile_answer(url, {"status": 200, "moved": False})["kind"], "direct")
+
+    def test_a_bounce_to_a_different_page_is_a_violation(self):
+        url = f"{BLOG}/p/daily-news.html"
+        got = audit.classify_mobile_answer(url, {"status": 200, "moved": True,
+                                                 "finalUrl": f"{BLOG}/p/markets-today.html?m=1",
+                                                 "canonical": url})
+        self.assertEqual(got["kind"], "self-inflicted")
+        self.assertIn("different page", got["why"])
+
+    def test_a_stray_query_string_on_the_target_is_a_violation(self):
+        url = f"{BLOG}/p/daily-news.html"
+        got = audit.classify_mobile_answer(url, {"status": 200, "moved": True,
+                                                 "finalUrl": url + "?m=1&utm_source=blogger",
+                                                 "canonical": url})
+        self.assertIn("single m parameter", got["why"])
+
+    def test_a_landing_that_does_not_answer_200_is_a_violation(self):
+        url = f"{BLOG}/p/share-market.html"
+        got = audit.classify_mobile_answer(url, {"status": 404, "moved": True,
+                                                 "finalUrl": url + "?m=1", "canonical": url})
+        self.assertIn("404", got["why"])
+
+    def test_a_mobile_page_that_lost_its_canonical_is_a_violation(self):
+        """The one thing that turns Blogger's harmless bounce into an indexing failure."""
+        url = f"{BLOG}/p/daily-news.html"
+        for canonical, needle in (("", "no canonical"), (f"{BLOG}/elsewhere.html", "elsewhere.html")):
+            got = audit.classify_mobile_answer(url, {"status": 200, "moved": True, "finalUrl": url + "?m=1",
+                                                     "canonical": canonical})
+            self.assertEqual(got["kind"], "self-inflicted", canonical)
+            self.assertIn(needle, got["why"])
+
+    def test_a_noindex_on_the_mobile_variant_is_a_violation(self):
+        url = f"{BLOG}/"
+        got = audit.classify_mobile_answer(url, {"status": 200, "moved": True, "finalUrl": url + "?m=1",
+                                                 "canonical": url, "robotsMeta": ["noindex", "follow"]})
+        self.assertIn("noindex", got["why"])
+
+    def test_the_popular_script_fix_is_caught_as_the_hazard_it_is(self):
+        """Blogger Help names this as the way to create the loop; the audit now fails it on purpose."""
+        offender = ('<html><head><script>if (location.search.indexOf("?m=1") > -1) '
+                    '{ location.href = location.href.replace("?m=1", ""); }</script></head><body>x</body></html>')
+        self.assertTrue(audit.strips_mobile_param(offender))
+        self.assertFalse(audit.strips_mobile_param(
+            '<html><head><link href="%s/?m=1" rel="alternate"/></head><body>'
+            '<script>window.__BT = "1";</script></body></html>' % BLOG),
+            "a link that merely mentions the parameter is Blogger's own markup, not a redirect")
+
+    def test_the_check_passes_while_the_only_bounce_is_bloggers_own(self):
+        net, _ = clean_setup()
+        for extra in (f"{BLOG}/p/daily-news.html", f"{BLOG}/p/indexnow-key.html"):
+            # the check samples these two paths, so a fake web has to serve them or the fake, not the
+            # judgement, is what the test is measuring
+            net.pages[extra] = page(extra, "Daily Yield - personal finance and markets", canonical=extra)
+
+        def bouncing(url, timeout=45, *, user_agent=None, trace=None):
+            code, markup = net(url, timeout)
+            if user_agent and "Mobile" in user_agent:
+                if trace is not None:
+                    trace["finalUrl"] = url + "?m=1"
+                markup = re.sub(r"<link rel=\"canonical\"[^>]*>",
+                                '<link rel="canonical" href="%s">' % url, markup)
+            return code, markup
+
+        with mock.patch.object(audit, "get", bouncing), \
+                mock.patch.object(audit.time, "sleep", lambda *_: None):
+            report = audit.audit()
+        row = next(row for row in report["checks"] if row["id"] == "mobile-first-fetch-is-direct")
+        self.assertEqual(row["status"], "PASS", json.dumps(row, indent=1))
+        self.assertIn("nothing to fix", row["detail"])
+        self.assertIn("bounce", row["detail"], "the bounce is named, not hidden because it passed")
+
+    def test_the_check_still_fails_when_we_break_the_bounce_ourselves(self):
+        net, _ = clean_setup()
+        for extra in (f"{BLOG}/p/daily-news.html", f"{BLOG}/p/indexnow-key.html"):
+            net.pages[extra] = page(extra, "Daily Yield - personal finance and markets", canonical=extra)
+
+        def broken(url, timeout=45, *, user_agent=None, trace=None):
+            code, markup = net(url, timeout)
+            if user_agent and "Mobile" in user_agent:
+                if trace is not None:
+                    trace["finalUrl"] = url + "?m=1"
+                markup = re.sub(r"<link rel=\"canonical\"[^>]*>",
+                                '<link rel="canonical" href="https://elsewhere.test/x">', markup)
+            return code, markup
+
+        with mock.patch.object(audit, "get", broken), mock.patch.object(audit.time, "sleep", lambda *_: None):
+            report = audit.audit()
+        row = next(row for row in report["checks"] if row["id"] == "mobile-first-fetch-is-direct")
+        self.assertEqual(row["status"], "FAIL")
+        self.assertFalse(row["advisory"], "a canonical we moved is ours to fix, not the platform's")
+        self.assertIn("elsewhere.test", row["detail"])
+        self.assertEqual(row["fixableBy"], "blogger")
 
 
 

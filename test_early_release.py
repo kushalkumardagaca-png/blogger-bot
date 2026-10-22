@@ -8,12 +8,31 @@ to use: someone has to push a file that names the exact article and carries the 
 """
 from __future__ import annotations
 
+import datetime as dt
 import pathlib
 import tempfile
 import unittest
 from unittest import mock
 
 import publication_timing as timing
+
+
+def frozen_clock(iso):
+    """Pin the clock for a release-window test.
+
+    `wait_for_release` decides whether to sleep by comparing the window with the IST time right now, so the
+    same test took the other branch after 20:45 than before it: the suite passed by day and failed by
+    night, which was a fault in the test rather than in the code. Pinned on 22 October 2026, when the daily
+    run reported it after the window had gone by.
+    """
+    moment = dt.datetime.fromisoformat(iso)
+
+    class Frozen:
+        @staticmethod
+        def now(tz=None):
+            return moment.astimezone(tz) if tz else moment
+
+    return mock.patch.object(timing.dt, "datetime", Frozen())
 
 
 class Marker:
@@ -59,7 +78,7 @@ class OnlyWhatTheFileNames(unittest.TestCase):
 class TheWindowIsSkippedOnce(unittest.TestCase):
     def test_an_authorised_article_is_released_without_sleeping(self):
         with Marker("trending:4 owner-approved - the desk asked for it now\n") as patched, \
-             mock.patch.object(timing.time, "sleep") as slept:
+             mock.patch.object(timing.time, "sleep") as slept, frozen_clock("2026-10-22T20:00:00+05:30"):
             patched.start()
             lateness = timing.wait_for_release("20:45", allow_early=("trending", 4))
         slept.assert_not_called()
@@ -67,11 +86,21 @@ class TheWindowIsSkippedOnce(unittest.TestCase):
 
     def test_an_unauthorised_article_still_waits_for_its_window(self):
         with Marker("trending:4 owner-approved - the desk asked for it now\n") as patched, \
-             mock.patch.object(timing.time, "sleep") as slept:
+             mock.patch.object(timing.time, "sleep") as slept, frozen_clock("2026-10-22T20:00:00+05:30"):
             patched.start()
             timing.wait_for_release("20:45", allow_early=("trending", 0))
         slept.assert_called_once()
         self.assertGreater(slept.call_args[0][0], 0)
+        self.assertEqual(round(slept.call_args[0][0]), 45 * 60,
+                         "the whole window is what it waits for, not a token amount")
+
+    def test_a_window_that_has_already_passed_is_not_waited_for(self):
+        """The other side of the same rule, and the side that used to depend on what time it was."""
+        with Marker("unrelated:9 owner-approved\n") as patched, \
+             mock.patch.object(timing.time, "sleep") as slept, frozen_clock("2026-10-22T21:30:00+05:30"):
+            patched.start()
+            timing.wait_for_release("20:45", allow_early=("trending", 0))
+        slept.assert_not_called()
 
     def test_dry_runs_never_sleep_whether_authorised_or_not(self):
         with Marker(None) as patched, mock.patch.object(timing.time, "sleep") as slept:

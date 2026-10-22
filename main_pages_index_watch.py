@@ -299,8 +299,11 @@ def redirect_cause(url: str, mobile: dict) -> str:
     A 302 to the same path with `?m=1` is Blogger's separate mobile template. The target declares the
     parameterless URL as its canonical, which is the exact shape Google reports as "Redirect error" (and,
     when it decides to keep the variant, "Alternate page with proper canonical"): the crawler is sent to a
-    page whose own markup says the URL it came from is the real one. Nothing about the content is wrong,
-    so nothing here deletes a page - the fix is a template setting.
+    page whose own markup says the URL it came from is the real one. Nothing about the content is wrong, so
+    nothing here deletes a page - and, corrected on 22 October, nothing here can be switched off either. The
+    bounce is how Blogger serves mobile on blogspot.com and on a custom domain alike, Blogger Help's answer
+    is "there is nothing to fix", and the public API has no mobile-template resource at all, so what this
+    classification buys is only that the row is not mistaken for a real move or a broken page.
     """
     location = str(mobile.get("location") or "")
     if not location or int(mobile.get("status") or 0) not in (301, 302, 303, 307, 308):
@@ -340,15 +343,17 @@ def stale_verdict(row: dict, probe: dict, publisher_live: bool = False,
 def blogger_mobile_view() -> dict:
     """What Blogger says about the mobile template, read only.
 
-    `blogs.mobileview` is the API in front of the Theme → Mobile devices setting, so this is the closest
-    the automation can come to seeing the switch. It is a GET on purpose: writing it could change what a
-    phone reader is served, and the whole reason the setting is handed to the owner rather than fixed here
-    is that a template change belongs to the person who reads the site on a phone.
+    This was written believing `blogs/{id}/mobileview` sat in front of the Theme → Mobile devices setting.
+    It does not: Blogger's public v3 discovery document (fetched 22 October 2026) offers blogs, posts,
+    pages, comments, pageviews and user info and nothing else, and the path answers HTTP 404 unauthenticated
+    - before any question of permission arises. The request is kept so that the report proves the absence
+    instead of asserting it, and it stays a GET because nothing in this job may write what a phone is served
+    - and because there is nothing to write: no automation, mine or anyone else's, can change this setting.
     """
     names = ("BLOGGER_CLIENT_ID", "BLOGGER_CLIENT_SECRET", "BLOGGER_REFRESH_TOKEN", "BLOGGER_BLOG_ID")
     if any(not os.environ.get(name) for name in names):
         return {"status": "UNAVAILABLE", "detail": "no Blogger authorisation in this environment",
-                "read": "GET only; this job never writes the mobile template"}
+                "noPublicApi": True, "read": "GET only; this job never writes the mobile template"}
     try:
         form = urllib.parse.urlencode({"client_id": os.environ["BLOGGER_CLIENT_ID"],
                                        "client_secret": os.environ["BLOGGER_CLIENT_SECRET"],
@@ -363,7 +368,7 @@ def blogger_mobile_view() -> dict:
                     headers={"Authorization": "Bearer " + access}, timeout=45) or {}
     except (urllib.error.HTTPError, urllib.error.URLError, OSError, ValueError) as exc:
         return {"status": "UNAVAILABLE", "detail": type(exc).__name__}
-    return {"status": "MEASURED",
+    return {"status": "MEASURED", "noPublicApi": True,
             "customThemeUnavailable": bool(data.get("customThemeUnavailable")),
             "mobileDefinitionSet": bool(data.get("mobileDefinitionSet")),
             "dynamicViewsEnabled": bool(data.get("dynamicViewsEnabled")),
@@ -571,12 +576,16 @@ def owner_actions(report: dict) -> list[str]:
             f"{bouncing} of the redirect complaints are real right now, and they are all the same thing: "
             "Blogger answers Google's smartphone fetch with '302 -> the same URL + ?m=1', and that target "
             "declares the parameterless URL as its canonical, which is what Google files as Redirect error. "
-            "One setting removes all of them: Blogger → Theme → the ⋮ beside Customize → **Mobile devices** "
-            "→ choose the desktop theme (do not serve a separate mobile template). The pages themselves "
-            "need no change - measured today, the ?m=1 response is byte-identical to the desktop one, so a "
-            "reader on a phone already receives this theme and only pays an extra hop for it. After the "
-            "setting is saved, this watch re-probes both identities nightly and the complaint should clear "
-            "on Google's next crawl of each URL.")
+            "There is nothing to toggle, and no page has to change. Measured on 22 October: the ?m=1 "
+            "response differs from the desktop one by a single byte, its canonical points at the clean URL, "
+            "and it carries no noindex - so a reader on a phone receives this same theme and pays one extra "
+            "hop for it. The Theme → Mobile devices switch is not the lever (this blog was measured with "
+            "the desktop theme already chosen), the same bounce happens on a custom domain, so a domain "
+            "cannot trade it away, and Blogger's public API has no resource for the mobile template at all. "
+            "Three changes make this worse rather than better, and none of them is a fix: a script that "
+            "strips ?m=1, a robots rule that blocks ?m=1, or a mobile page that canonicalises to itself. "
+            "What is left for you is the Request indexing taps on the clean URLs below; this watch re-probes "
+            "both identities nightly and will report the day the complaint stops being reproducible.")
     stale = (report.get("staleVerdicts") or {}).get("count", 0)
     if stale:
         actions.append(f"{stale} of those verdicts cannot be reproduced on the live page today, checked as "

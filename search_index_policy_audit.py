@@ -244,18 +244,89 @@ def title_is_cut(title: str) -> bool:
 
 
 def mobile_answer(url: str) -> dict:
-    """Fetch one address as a phone would and report where the client ended up.
+    """Fetch one address as a phone would and report what the phone actually received.
 
-    A search engine does not grade a page it had to be redirected to, so "the document arrived at the URL
-    that was asked for" is the fact worth measuring. Blogger with a separate mobile template answers a
-    mobile request with `302 -> the same URL + ?m=1`; the redirect is followed (one network path, as
-    everywhere in this file) and the address it landed on is what makes the finding.
+    "The document arrived at the URL that was asked for" is the fact worth measuring, but on its own it is
+    not a verdict, and treating it as one cost this project weeks. Blogger answers a mobile request with
+    `302 -> the same URL + ?m=1` on blogspot.com and on a custom domain alike (Google Search Central
+    community, Jan 2024), and Blogger Help's own standing answer to the "Redirect error" row that produces
+    is "there is nothing to fix" (updated July 2026), because the platform points the canonical back at the
+    parameterless URL. So the answer is measured here and *judged* by classify_mobile_answer() below, which
+    grades only what belongs to us.
     """
     trace: dict = {}
     code, markup = get(url, user_agent=MOBILE_PROBE_UA, trace=trace)
     final = str(trace.get("finalUrl") or url)
     return {"status": code, "finalUrl": final, "canonical": rendered_probe_head_canonical(markup),
+            "robotsMeta": rendered_probe_head_robots(markup), "stripsMobileParam": strips_mobile_param(markup),
             "moved": final.split("#", 1)[0].rstrip("/") != url.split("#", 1)[0].rstrip("/")}
+
+
+def rendered_probe_head_robots(markup: str) -> list:
+    """The meta-robots values a phone is served, so a noindex on the mobile variant cannot hide."""
+    found = []
+    for tag in re.findall(r"<meta\b[^>]*>", markup or "", flags=re.I):
+        if not re.search(r"(name|property)=['\"]robots", tag, flags=re.I):
+            continue
+        match = re.search(r"content=['\"]([^'\"]*)", tag, flags=re.I)
+        if match:
+            found.extend(value for value in re.split(r"[,\s]+", html.unescape(match.group(1))) if value)
+    return sorted(set(found))
+
+
+def strips_mobile_param(markup: str) -> bool:
+    """True when the page runs a script of its own that rewrites `?m=1` away.
+
+    This is the fix that is recommended on countless blogs and named as a hazard by Blogger Help itself:
+    forcing the desktop view from the page "deteriorates the user experience and creates redirect loops
+    that block indexing". The redirect we cannot touch; a hand-written redirect we *can*, so that is what
+    this audit is entitled to fail. A mention of the parameter is not enough - the script has to move the
+    browser, which is why the location assignment is required alongside it.
+    """
+    for script in re.findall(r"<script\b[^>]*>(.*?)</script>", markup or "", flags=re.I | re.S):
+        if "m=1" not in script:
+            continue
+        if re.search(r"location\.(href|replace|search)\s*[=(]", script, flags=re.I):
+            return True
+    return False
+
+
+def classify_mobile_answer(url: str, answer: dict) -> dict:
+    """Split "how Blogger serves mobile" from "something we broke".
+
+    Benign, and nobody's to fix, is exactly this shape: the phone is bounced to the same path with only
+    Blogger's own `m` parameter added, that address answers 200, it declares the URL we asked for as its
+    canonical, it carries no noindex, and it runs no script against the parameter. Anything else is a
+    defect of ours - a landing on another page, an extra query string, a non-200, a missing or moved
+    canonical, a noindex, or a hand-written ?m=1 stripper - and it must fail the check, because Google
+    files those as Redirect error with no canonical to rescue them.
+    """
+    if not answer.get("moved"):
+        return {"kind": "direct", "harmless": True, "why": ""}
+    asked = urllib.parse.urlsplit(url.split("#", 1)[0])._replace(query="", fragment="").geturl().rstrip("/")
+    landed_raw = str(answer.get("finalUrl") or url).split("#", 1)[0]
+    landed_parts = urllib.parse.urlsplit(landed_raw)
+    landed = landed_parts._replace(query="", fragment="").geturl().rstrip("/")
+    status = int(answer.get("status") or 0)
+    canonical = str(answer.get("canonical") or "")
+    problems: list[str] = []
+    if landed != asked:
+        problems.append(f"it lands on {landed or '(nothing)'}, which is a different page")
+    elif landed_parts.query not in ("m=1", "?m=1"):
+        problems.append(f"it lands on a query string of {landed_parts.query!r}, not Blogger's single m parameter")
+    if status != 200:
+        problems.append(f"the address a phone is sent to answers {status}, not 200")
+    if canonical.rstrip("/") != asked:
+        problems.append("the mobile page does not canonicalise back to the URL that was asked for"
+                        + (f" (it names {canonical})" if canonical else " (it declares no canonical at all)"))
+    if "noindex" in [value.lower() for value in (answer.get("robotsMeta") or [])]:
+        problems.append("the mobile page carries noindex")
+    if answer.get("stripsMobileParam"):
+        problems.append("a script on the page rewrites ?m=1 away, which is how a Blogger site creates the "
+                        "redirect loop that blocks indexing")
+    if problems:
+        return {"kind": "self-inflicted", "harmless": False, "why": "; ".join(problems)}
+    return {"kind": "blogger-mobile-param", "harmless": True, "why": ""}
 
 
 def rendered_probe_head_canonical(markup: str) -> str:
@@ -438,6 +509,7 @@ def audit() -> dict:
     # that says the URL it came from is the real one. Google files that as Redirect error on pages and as
     # Alternate page with proper canonical on posts, and keeps inventing ?m=1 URLs in "Discovered".
     bounced: list[str] = []
+    harmful: list[str] = []
     probed: list[str] = []
     rate_limited = 0
     for candidate in ([BLOG + "/", BLOG + "/p/daily-news.html", BLOG + "/p/indexnow-key.html"]
@@ -448,23 +520,32 @@ def audit() -> dict:
         answer = mobile_answer(candidate)
         if int(answer.get("status") or 0) == 429:
             rate_limited += 1
-        elif answer.get("moved"):
-            back = (f", which declares {answer['canonical']} as its canonical - the address that was "
-                    "asked for" if answer.get("canonical") and
-                    answer["canonical"].rstrip("/") == candidate.rstrip("/") else "")
-            bounced.append(f"{candidate.rsplit('/', 1)[-1] or candidate} -> "
-                           f"{answer['finalUrl'].rsplit('/', 1)[-1]}{back}")
+        else:
+            judgement = classify_mobile_answer(candidate, answer)
+            if judgement["kind"] == "blogger-mobile-param":
+                bounced.append(f"{candidate.rsplit('/', 1)[-1] or candidate} -> "
+                               f"{answer['finalUrl'].rsplit('/', 1)[-1]}, canonical back to "
+                               f"{answer['canonical'] or 'nothing'}")
+            elif judgement["kind"] == "self-inflicted":
+                harmful.append(f"{candidate}: {judgement['why']}")
         time.sleep(SAMPLE_SPACING_SECONDS)
     register(checks, "mobile-first-fetch-is-direct", "Google indexing (mobile-first), Bing §6",
-             not bounced,
-             f"{len(probed) - len(bounced)} of {len(probed)} addresses answer a mobile fetch with the "
-             "document directly"
+             not harmful,
+             f"{len(probed) - len(bounced) - len(harmful)} of {len(probed)} addresses answer a mobile fetch "
+             "with the document directly"
              + (f" ({rate_limited} rate limited, not counted)" if rate_limited else "")
-             + (": a mobile client is redirected to " + ", ".join(row.split(" -> ")[1] for row in bounced[:2])
-                + ", which canonicalises back to the URL it came from - Google's own verdict on that chain "
-                  "is Redirect error, and no content work clears it; the setting is Blogger -> Theme -> "
-                  "Mobile devices" if bounced else ""),
-             bounced, "blogger")
+             + (f"; {len(bounced)} more bounce exactly the way Blogger itself bounces and are not counted "
+                "against us, because the target is the same page, answering 200, canonicalising back to the "
+                "URL that was asked for. Blogger Help's standing answer to the 'Redirect error' row this "
+                "produces is that there is nothing to fix; there is no API for the mobile template (Blogger "
+                "v3 offers blogs, posts, pages, comments and pageviews only, and its mobileview path answers "
+                "404), and this blog was measured with the desktop theme already chosen, so the switch is "
+                "not the lever either. Keep the canonicals as they are, and never add a script that strips ?m=1 "
+                "away - that is the one way to turn this into a real crawl failure"
+                if bounced else "")
+             + (", and " if bounced and harmful else ": " if harmful else "")
+             + ("; ".join(harmful[:2]) if harmful else ""),
+             harmful, "blogger")
     time.sleep(SAMPLE_SPACING_SECONDS)
     # A variant that answers 404 or redirects is already consolidated - only a second URL that serves
     # the page itself while pointing its canonical somewhere else is the duplicate Bing §6 describes.
