@@ -275,7 +275,10 @@ def list_properties(access: str) -> dict:
     except (urllib.error.HTTPError, urllib.error.URLError, OSError, ValueError) as exc:
         return {"status": "UNAVAILABLE", "detail": type(exc).__name__, "visible": []}
     visible = [str(row.get("siteUrl", "")) for row in entries]
-    return {"status": "MEASURED", "visible": visible,
+    permission = {str(row.get("siteUrl", "")): str(row.get("permissionLevel", "")) for row in entries}
+    return {"status": "MEASURED", "visible": visible, "permission": permission,
+            "urlPrefixProperty": permission.get(PREFIX_PROPERTY, "ABSENT"),
+            "domainProperty": permission.get(DOMAIN_PROPERTY, "ABSENT"),
             "urlPrefixPropertyVisible": PREFIX_PROPERTY in visible,
             "domainPropertyVisible": DOMAIN_PROPERTY in visible}
 
@@ -440,6 +443,13 @@ def owner_actions(report: dict) -> list[str]:
                        "Search Console. Sitemaps and Request indexing live on that property, and "
                        "Blogger sites can be verified without touching DNS.")
     sitemaps = report.get("sitemaps") or {}
+    prefix_permission = (report.get("properties") or {}).get("urlPrefixProperty", "")
+    if prefix_permission and prefix_permission not in ("siteOwner", "ABSENT"):
+        actions.append(f"The URL-prefix property is visible to the automation but at permission "
+                       f"'{prefix_permission}'. Open Search Console → Settings → Users and "
+                       "permissions for https://dailyyield.blogspot.com/ and give the account this "
+                       "automation signs in as Owner (or Full) - otherwise the nightly sitemap "
+                       "repair and index reads stay second-class on that property.")
     if sitemaps.get("missing"):
         actions.append("Register sitemap.xml and sitemap-pages.xml in Search Console — the job does "
                        "this automatically once its token works; until then it is one paste each.")
@@ -532,7 +542,12 @@ def render_markdown(report: dict) -> str:
         lines.append(f"| `{row['url'].replace(BLOG, '') or '/'}` | {row['google']} | "
                      f"{row['googleCoverage'] or '—'} | {row['bing']} |")
     sitemaps = report.get("sitemaps") or {}
+    props = report.get("properties") or {}
     lines += ["", "## Sitemaps registered on the URL-prefix property", ""]
+    if props.get("status") == "MEASURED":
+        lines.append(f"- what the automation may do: `{PREFIX_PROPERTY}` → "
+                     f"**{props.get('urlPrefixProperty', 'unknown')}**, "
+                     f"`{DOMAIN_PROPERTY}` → **{props.get('domainProperty', 'unknown')}**")
     if sitemaps.get("registered"):
         for row in sitemaps["registered"]:
             submitted = (row.get("lastSubmitted") or "")[:10] or "unknown"

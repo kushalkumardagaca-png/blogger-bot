@@ -25,6 +25,7 @@ import main_pages_index_watch as watch
 
 BLOG = watch.BLOG
 HOME_URL = watch.PREFIX_PROPERTY
+PREFIX = watch.PREFIX_PROPERTY
 
 
 def http_error(url, code):
@@ -119,6 +120,27 @@ class SitemapTruth(unittest.TestCase):
         text = watch.render_markdown(report)
         self.assertIn("last read by Google: never", text)
         self.assertIn("has not reported reading", text)
+
+
+    def test_the_permission_level_of_each_property_is_part_of_the_answer(self):
+        # A property that is merely visible is not a property the automation may change. The 403 we
+        # measured on sitemap submission is only explainable with the permission level attached.
+        entries = [{"siteUrl": PREFIX, "permissionLevel": "siteOwner"},
+                   {"siteUrl": watch.DOMAIN_PROPERTY, "permissionLevel": "full"}]
+        with mock.patch.object(watch, "gsc", lambda a, m, path, body=None: {"siteEntry": entries}):
+            out = watch.list_properties("x")
+        self.assertEqual(out["urlPrefixProperty"], "siteOwner")
+        self.assertEqual(out["domainProperty"], "full")
+        self.assertEqual(out["permission"][PREFIX], "siteOwner")
+        report = watch.build_report(targets=watch.main_page_targets([]),
+                                    properties={**out, "status": "MEASURED", "urlPrefixProperty": "unverified",
+                                                  "urlPrefixPropertyVisible": True,
+                                                  "domainPropertyVisible": True},
+                                    sitemaps={"status": "MEASURED", "registered": [], "missing": []},
+                                    registration={"submittedNow": [], "failed": []}, rows=[],
+                                    bing={"status": "MEASURED", "seen": {}, "quota": {},
+                                          "notReported": []}, today=dt.date(2026, 10, 22))
+        self.assertIn("Users and permissions", " ".join(report["ownerActions"]))
 
 
 class Targets(unittest.TestCase):
