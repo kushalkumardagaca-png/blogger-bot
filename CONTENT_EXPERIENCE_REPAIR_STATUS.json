@@ -2,7 +2,7 @@
   "status": "PASS",
   "mode": "FREEZE_DATA_ONLY",
   "zero_view": true,
-  "posts_checked": 583,
+  "posts_checked": 584,
   "posts_rewritten": 0,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
@@ -19,12 +19,12 @@
     },
     {
       "path": "/p/article.html",
-      "dataBlocks": 1,
+      "dataBlocks": 3,
       "linkIndexHrefs": 12,
-      "linkIndexWritten": false,
+      "linkIndexWritten": true,
       "changed": true,
-      "beforeSha256": "54fb918f7d02178c0a0deafac1cdc60ffd8c5bedfe970734c278a9b36762e923",
-      "afterSha256": "504a60cb52501860e06a647bcc82f71f3b99fe1fbfcb7123b240d72f2bbbee3b"
+      "beforeSha256": "504a60cb52501860e06a647bcc82f71f3b99fe1fbfcb7123b240d72f2bbbee3b",
+      "afterSha256": "276f8feb379a94c301721d4f70b5cb3731cd519b92a1eb40937029d34698e5a0"
     }
   ],
   "optional_changes": "held; no full hub rebuild or old-post edits"
