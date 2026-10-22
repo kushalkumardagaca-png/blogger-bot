@@ -1065,6 +1065,42 @@ def topic_specific_context(text, topic_ref):
         out.append(transitions[index % len(transitions)].format(topic=topic_ref, sentence=lowered))
     return " ".join(out)
 
+from advice_risk_gate import (TAX_ASSERTION as _TAX_RULE, ATTRIBUTION as _SAYS_ABOUT,
+                              DATE_IN_SENTENCE as _DATE_HERE, TAX_HEDGE as _TAX_CHANGE_PLEDGE)
+
+from advice_risk_gate import (TAX_ASSERTION as _TAX_RULE, ATTRIBUTION as _SAYS_ABOUT,
+                              DATE_IN_SENTENCE as _DATE_HERE, TAX_HEDGE as _TAX_CHANGE_PLEDGE)
+
+def anchor_tax_sentences(block: str, agency: str, filed: str) -> str:
+    """Say, inside the sentence itself, whose rule-claim it is and when it was filed.
+
+    The advice gate stops an edition when a sentence states a tax rule as permanent fact with nothing
+    in that sentence saying when it was true or that rules change (advice_risk_gate, on the owner's
+    decision of 19 October 2026 that risky material is ruled rather than human-approved, because the
+    publication has no reviewer). A wire headline carried into a heading, a status line or a context
+    sentence trips that rule however well the source list reads, and on 22 October 2026 it cost the
+    global desk its edition twice over. The answer is not to loosen the rule; it is to state the true
+    thing beside the claim - that these are the agency's words, filed on such-and-such a day - and to
+    leave every sentence that makes no such claim exactly as it was.
+    """
+    tail = f", as {agency} reported on {filed}" if filed else f", as {agency} reported"
+
+    def fix(match):
+        text = match.group(1)
+        rebuilt = []
+        for sentence in re.split(r"(?<=[.!?])(?=\s)", text):
+            body = sentence.strip()
+            if (body and _TAX_RULE.search(body)
+                    and not (_SAYS_ABOUT.search(body) or _DATE_HERE.search(body)
+                             or _TAX_CHANGE_PLEDGE.search(body))):
+                bare = sentence.rstrip()
+                after = sentence[len(bare):]
+                sentence = (bare[:-1] + tail + "." if bare.endswith(".") else bare + tail + ".") + after
+            rebuilt.append(sentence)
+        return ">" + "".join(rebuilt) + "<"
+
+    return re.sub(r">([^<>]+)<", fix, block)
+
 def compose_item(it, win_end, context_target=95, summary_target=52):
     title = clean_title(it["title"])
     if len(title) > 140:
@@ -1097,7 +1133,7 @@ def compose_item(it, win_end, context_target=95, summary_target=52):
     etitle, eagency = htmlmod.escape(display), htmlmod.escape(it["agency"])
     country_name = DISCOVERY_LABELS.get(it.get("country"), it.get("region", "Global").replace("-", " ").title())
     topic_name = dict(SECTION_ORDER).get(it.get("topic"), "Economy, Trade & Jobs")
-    return f'''    <div class="fbk-item{' fbk-background' if background else ''}">
+    block = f'''    <div class="fbk-item{' fbk-background' if background else ''}">
       <span class="fbk-chip">{htmlmod.escape(chip)}</span>
       <span class="fbk-chip fbk-chip-muted">{htmlmod.escape(country_name)}</span>
       <span class="fbk-chip fbk-chip-muted">{htmlmod.escape(topic_name)}</span>
@@ -1107,6 +1143,10 @@ def compose_item(it, win_end, context_target=95, summary_target=52):
       <a class="fbk-src" href="{htmlmod.escape(it['url'])}" target="_blank" rel="noopener">{"Source:" if it.get("media") else "Official:"} {eagency}</a>
       {contextual_card(htmlmod.escape(title + ' ' + summary))}
     </div>'''
+    # the filing date is written in full because the rule reads the date inside the sentence,
+    # and so does the reader
+    filed = f"{it['date']:%d %B %Y}".lstrip("0") if it["date"] else ""
+    return anchor_tax_sentences(block, it["agency"], filed)
 
 # ---------------------------------------------------------------- daily hero imagery
 MINOR_IMAGE_TERMS=re.compile(r'\b(?:child|children|kid|kids|minor|schoolchild|schoolgirl|schoolboy|teenager|young girl|young boy|student|pupil)\b',re.I)
