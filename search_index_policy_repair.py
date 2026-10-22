@@ -66,7 +66,7 @@ JUNK_SLUG_PREFIXES = ("context-httpsschema",)
 REDIRECT_NOTICE_SLUGS = ("share-market_0718113516",)
 
 
-def title_for(item: dict, taken: set[str]) -> str:
+def title_for(item: dict, taken: set[str], *, page_minimum: int = 4) -> str:
     """The title this URL should carry, or "" when the one it has is already compliant."""
     current = " ".join((item.get("title") or "").split())
     content = item.get("content") or ""
@@ -78,14 +78,17 @@ def title_for(item: dict, taken: set[str]) -> str:
         # compact_title keeps a desk edition's date and shortens the desk name to fit, which is what
         # stops six editions of one desk publishing under one title.
         candidate = compact_title(current) or current
-    repaired = gate.publish_title(candidate, set())
+    floor = page_minimum if item.get("resource") == "pages" else gate.TITLE_MIN
+    repaired = gate.publish_title(candidate, set(), minimum=floor)
     if not repaired:
         # Refusing to invent a headline is the correct failure. Fall back to a de-dangled trim of what
-        # the site already had, and only then leave the title alone.
+        # the site already had, and only then leave the title alone. A standing page gets no padding:
+        # "About us at Daily Yield" would be a worse title than "About us", and Bing §13 does not ask
+        # for length, it asks for a title that says what the page is.
         trimmed = gate.uncut_title(gate.sentence_case(current))
-        if len(trimmed) < gate.TITLE_MIN and trimmed:
+        if item.get("resource") != "pages" and len(trimmed) < gate.TITLE_MIN and trimmed:
             trimmed = f"{trimmed} at Daily Yield"
-        repaired = gate.publish_title(trimmed, set()) or current
+        repaired = gate.publish_title(trimmed, set(), minimum=floor) or current
     if gate.key(repaired) in taken:
         for ordinal in range(2, 8):
             attempt = unique_title(repaired, ordinal)
@@ -173,13 +176,32 @@ def takedowns(items: list[dict], protected: set[str]) -> dict:
     for item in items:
         url = item.get("url", "")
         slug = url.rstrip("/").rsplit("/", 1)[-1]
-        if any(slug.startswith(row) for row in JUNK_SLUG_PREFIXES) or \
-                any(row in slug for row in REDIRECT_NOTICE_SLUGS):
-            entry = {"resource": item["resource"], "id": str(item["id"]), "url": url,
-                     "title": item.get("title", ""),
-                     "why": "a machine artifact or a redirect notice - Bing §3 keeps sitemaps for pages a "
-                            "reader was sent here to find, and this is not one"}
-            (held if url in protected else removable).append(entry)
+        if not (any(slug.startswith(row) for row in JUNK_SLUG_PREFIXES)
+                or any(row in slug for row in REDIRECT_NOTICE_SLUGS)):
+            continue
+        words = len(gate.prose(gate.strip_markup(item.get("content") or "")).split())
+        title = " ".join((item.get("title") or "").split())
+        entry = {"resource": item["resource"], "id": str(item["id"]), "url": url, "title": title,
+                 "words": words}
+        # Slug alone is not evidence. On 22 October the two /2026/09/context-httpsschema* URLs turned out
+        # to be "Your Portfolio Does Not Owe You Rent" and "Stop Maxing Your 401(k)" - real articles,
+        # 1,900 words each, published under a slug that was left over from the template that made them.
+        # Taking those down would have removed content to fix an address. A slug is corrected in Blogger's
+        # post settings, which is an owner action, so this holds the URL and says what to change instead.
+        if words >= gate.MIN_DOCUMENT_WORDS and not gate.JUNK_TITLE.search(title or "junk"):
+            entry["why"] = (f"held back: the slug looks machine-made but the page is a real article of "
+                            f"{words} words, so the defect is its permalink - a rename only the owner can "
+                            "make in Blogger (Posts → the post → settings → Custom permalink), which would "
+                            "need a 301 the platform does not offer on this host")
+            held.append(entry)
+        elif url in protected:
+            entry["why"] = ("held back: other automation links to this URL, so removing it would break a "
+                            "live reference")
+            held.append(entry)
+        else:
+            entry["why"] = ("a machine artifact or a redirect notice - Bing §3 keeps sitemaps for pages a "
+                            "reader was sent here to find, and this is not one")
+            removable.append(entry)
     return {"unpublish": removable, "heldBack": held}
 
 
@@ -197,9 +219,15 @@ def apply(patches: list[dict], unpublished: list[dict], token: str) -> dict:
                            "error": f"{type(exc).__name__}: {str(exc)[:180]}"})
         time.sleep(PATCH_SPACING_SECONDS)
     for row in unpublished:
-        endpoint = f"https://www.blogger.com/v3/blogs/{BLOG_ID}/{row['resource']}/{row['id']}/unpublish"
+        # The API host, not blogger.com: the first run of 22 October sent these to www.blogger.com/v3,
+        # which answered with HTML, and the job reported a takedown that had not happened. Verified here
+        # by requiring the entry back, so "taken down" can only mean the API said so about this post.
+        endpoint = f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}/{row['resource']}/{row['id']}/unpublish"
         try:
-            request_json(endpoint, method="POST", headers={"Authorization": "Bearer " + token}, body={})
+            answer = request_json(endpoint, method="POST", headers={"Authorization": "Bearer " + token},
+                                  body={})
+            if str(answer.get("id", "")) != str(row["id"]) or answer.get("status") not in (None, "DRAFT"):
+                raise RuntimeError(f"Blogger did not confirm the takedown: {answer.get('status')!r}")
             done.append({"action": "unpublish", "resource": row["resource"], "id": row["id"],
                          "url": row["url"], "reasons": [row["why"]]})
         except Exception as exc:
@@ -207,6 +235,51 @@ def apply(patches: list[dict], unpublished: list[dict], token: str) -> dict:
                            "error": f"{type(exc).__name__}: {str(exc)[:180]}"})
         time.sleep(PATCH_SPACING_SECONDS)
     return {"written": len(done), "applied": done, "failed": failed}
+
+
+def restore_rows(backup: list[dict]) -> list[dict]:
+    """What a revert means, item by item: the title and content as they were, and the post made live again.
+
+    Kept apart from the API calls so the rule itself is testable: every entry gets a patch (Blogger has no
+    "undo"), and every entry is published afterwards because `unpublish` is part of what a run may have
+    done and a patch alone would leave it quiet. Publishing something that is already live is a no-op, so
+    applying it to all of them is safer than trying to remember which ones needed it.
+    """
+    rows = []
+    for item in backup:
+        rows.append({"resource": item.get("resource", "posts"), "id": str(item.get("id", "")),
+                     "url": item.get("url", ""), "title": item.get("title", ""),
+                     "content": item.get("content", ""), "publish": True})
+    return rows
+
+
+def read_backup(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    return json.loads(gzip.decompress(path.read_bytes()).decode())
+
+
+def restore(rows: list[dict], token: str) -> dict:
+    """Write the backup back. Reversible by definition, because it restores the previous state."""
+    from bing_seo_repair import BLOG_ID, patch_item, request_json   # the zero-view-guarded client
+
+    done, failed = [], []
+    for row in rows:
+        item = {"id": row["id"], "resource": row["resource"]}
+        try:
+            patch_item(token, item, row["title"], row["content"])
+            if row["publish"]:
+                endpoint = (f"https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}/{row['resource']}/"
+                            f"{row['id']}/publish")
+                request_json(endpoint, method="POST", headers={"Authorization": "Bearer " + token},
+                             body={})
+            done.append({"action": "restore", "resource": row["resource"], "id": row["id"],
+                         "url": row["url"], "title": row["title"]})
+        except Exception as exc:
+            failed.append({"action": "restore", "id": row["id"], "url": row["url"],
+                           "error": f"{type(exc).__name__}: {str(exc)[:180]}"})
+        time.sleep(PATCH_SPACING_SECONDS)
+    return {"written": len(done), "failed": failed, "restored": done[:40]}
 
 
 def render_markdown(payload: dict) -> str:
@@ -308,12 +381,39 @@ def main() -> int:
     parser.add_argument("--only", default="all", choices=("all", "titles", "alts", "junk"))
     parser.add_argument("--fixture", default="", help="JSON inventory file for tests and offline review")
     parser.add_argument("--check", action="store_true", help="offline self-test: no network, no writes")
+    parser.add_argument("--restore", nargs="?", const="auto", default="",
+                        help="write BACKUP (or this path) back over the site: the undo of a bad run")
     arguments = parser.parse_args()
 
     if arguments.check:
         report = self_test()
         print(json.dumps(report))
         return 0 if report["status"] == "OK" else 1
+
+    if arguments.restore != "":
+        # The owner's release covers correcting titles, alt text and takedowns; putting those URLs back
+        # exactly as the run found them is the same scope run in reverse, and it is the only honest answer
+        # to a batch that was applied before it was reviewed.
+        source = BACKUP if arguments.restore in ("", "auto") else Path(arguments.restore)
+        rows = restore_rows(read_backup(source))
+        outcome = {"written": 0, "failed": [], "restored": [], "backup": source.name}
+        if rows:
+            from bing_seo_repair import oauth
+            outcome.update(restore(rows, oauth()))
+        payload = {"ranAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                   "mode": "RESTORE", "inventory": len(rows),
+                   "planned": {"patches": len(rows), "unpublish": 0, "heldBack": 0,
+                               "titlesOnly": len(rows), "altsOnly": 0},
+                   "preview": [{"url": row["url"], "reasons": ["restored from the run's own backup"],
+                                "title": row["title"]} for row in outcome.get("restored", [])],
+                   "unpublishPreview": [], "heldPreview": [],
+                   "gate": "the plan this reverted was a policy repair; the repaired titles are gone",
+                   **outcome}
+        OUT.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        MD.write_text(render_markdown(payload), encoding="utf-8")
+        print(json.dumps({"mode": "RESTORE", "restored": payload["written"],
+                          "failed": len(payload["failed"]), "siteWrites": payload["written"]}))
+        return 0 if not payload["failed"] else 1
 
     if arguments.fixture:
         items = json.loads(Path(arguments.fixture).read_text(encoding="utf-8"))
@@ -336,6 +436,10 @@ def main() -> int:
     patches = patches[: arguments.max_patches]
     unpublished = (outcomes["unpublish"] if arguments.only in ("all", "junk")
                    else [])[: arguments.max_unpublish]
+    going_down = {row["url"] for row in unpublished}
+    # No point polishing the title of a URL that is about to answer 404: one write per URL, ever.
+    skipped = [row for row in patches if row["url"] in going_down]
+    patches = [row for row in patches if row["url"] not in going_down]
 
     payload = {"ranAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                "mode": "APPLY" if arguments.apply else "AUDIT_ONLY",
@@ -344,6 +448,7 @@ def main() -> int:
                            "heldBack": len(outcomes["heldBack"]),
                            "titlesOnly": sum(1 for row in patches if row["toTitle"] != row["fromTitle"]),
                            "altsOnly": sum(1 for row in patches if row["toTitle"] == row["fromTitle"])},
+               "alsoTakenDown": [row["url"] for row in skipped],
                "preview": [{"url": row["url"], "reasons": row["reasons"], "title": row["toTitle"]}
                            for row in patches[:40]],
                "unpublishPreview": unpublished[:20], "heldPreview": outcomes["heldBack"][:20],

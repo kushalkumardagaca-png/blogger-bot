@@ -11,9 +11,10 @@ name: Search index policy repair
 # so each one is a click to reverse; nothing is deleted, no photo is added or removed, and no sourced
 # sentence is rewritten.
 #
-# It runs on push to its own paths and on demand, and on a push it only reports the plan: applying needs
-# the marker file SEARCH_INDEX_POLICY_REPAIR_APPLY to be committed, which is a reviewable act, and the
-# applying run deletes it so the next push is a report again. The first pass is capped: 150 title or alt repairs and
+# It runs on push to its own paths and on demand, and on a push it only reports the plan. Writing needs a
+# committed SEARCH_INDEX_POLICY_REPAIR_APPLY file whose content names the mode - "apply" to write the
+# plan, "restore" to put the previous state back from the run's own backup - and the run that obeys the
+# marker deletes it, so a later push cannot repeat a batch nobody re-approved. The first pass is capped: 150 title or alt repairs and
 # 12 URL takedowns per run, one request per URL, spaced, with a gzip backup of every item touched written
 # before the first write. The nightly audit then re-measures the whole corpus, so "fixed" is a number
 # from an independent run rather than a claim from the job that made the change.
@@ -24,7 +25,7 @@ on:
         description: "audit reports the plan, apply writes it"
         required: true
         type: choice
-        options: ['audit', 'apply']
+        options: ['audit', 'apply', 'restore']
         default: 'audit'
       maxPatches:
         description: "how many URLs this run may rewrite (0 for the default 150)"
@@ -73,7 +74,7 @@ jobs:
       - name: Plan or apply, under the owner's recorded release
         shell: bash
         env:
-          ACTION: ${{ github.event.inputs.action || 'apply' }}
+          ACTION: ${{ github.event.inputs.action || 'audit' }}
           MAXPATCH: ${{ github.event.inputs.maxPatches || '0' }}
           ONLY: ${{ github.event.inputs.only || 'all' }}
         run: |
@@ -81,10 +82,15 @@ jobs:
           ARGS=(--only "${ONLY}")
           if [ "${MAXPATCH}" != "0" ] && [ -n "${MAXPATCH}" ]; then ARGS+=(--max-patches "${MAXPATCH}"); fi
           # A push never writes to the blog. The go-ahead is a commit that adds the marker file
-          # SEARCH_INDEX_POLICY_REPAIR_APPLY, which is the diff a reviewer can see and revert; the run
-          # that consumes it removes it again, so the next push plans without applying.
-          if [ -f SEARCH_INDEX_POLICY_REPAIR_APPLY ]; then ACTION=apply; fi
+          # SEARCH_INDEX_POLICY_REPAIR_APPLY, whose only content is the mode to run in - "apply" or
+          # "restore" - so the diff a reviewer reads is also the instruction. The run that consumes the
+          # marker deletes it, which is what stops the next push repeating a batch nobody re-approved.
+          if [ -f SEARCH_INDEX_POLICY_REPAIR_APPLY ]; then
+            ACTION="$(tr -cd 'a-z' < SEARCH_INDEX_POLICY_REPAIR_APPLY)"
+            case "${ACTION}" in apply|restore) ;; *) ACTION=audit ;; esac
+          fi
           if [ "${ACTION}" = "apply" ]; then ARGS+=(--apply); fi
+          if [ "${ACTION}" = "restore" ]; then ARGS+=(--restore); fi
           python search_index_policy_repair.py "${ARGS[@]}"
       - name: Persist the plan, the report and the evidence
         if: always()

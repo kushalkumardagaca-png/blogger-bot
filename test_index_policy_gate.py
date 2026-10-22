@@ -28,6 +28,37 @@ SENTENCES = varied(400)
 BODY = f"<p>{SENTENCES}</p>"
 
 
+class NoWorseThanWhatItFound(unittest.TestCase):
+    """A repair that cannot improve a title must leave it alone.
+
+    The first run of 22 October rewrote "Build Your Layoff Plan Before You Need It" into
+    "Build Your Layoff Plan Before You Need" and turned "ABOUT US" into a run-on of the words in the
+    page's own banner. Both were the tool making a live page worse, which is the one outcome a
+    compliance script is never allowed to produce.
+    """
+
+    def test_a_finished_title_is_not_trimmed_to_look_finished(self):
+        title = "Build Your Layoff Plan Before You Need It"
+        self.assertEqual(gate.publish_title(title), title)
+        self.assertEqual(gate.title_problems(title), [])
+        self.assertEqual(gate.uncut_title(title, gate.TITLE_MAX), title)
+
+    def test_a_heading_too_long_for_a_title_is_not_clipped_into_one(self):
+        long_banner = ("<h1>Money, explained with clarity, evidence, numbers, honesty, context, "
+                       "maths</h1><p>" + SENTENCES + "</p>")
+        self.assertEqual(gate.page_title(long_banner), "",
+                         "borrowing the banner and cutting it mid-list is not a title")
+
+    def test_a_page_keeps_a_sane_title_when_its_banner_is_unusable(self):
+        self.assertEqual(gate.publish_title("ABOUT US", set(), minimum=4), "About us")
+        self.assertEqual(gate.publish_title("CONTACT US", set(), minimum=4), "Contact us")
+
+    def test_a_title_that_really_is_clipped_is_still_repaired(self):
+        cut = "Billionaire Mukesh Ambani launches India's"
+        self.assertTrue(gate.title_is_cut(cut))
+        self.assertNotEqual(gate.publish_title(cut, set()), cut)
+
+
 class Stuffing(unittest.TestCase):
     def test_a_word_hammered_through_every_paragraph_is_held(self):
         body = "<p>" + "best loan best loan best loan best loan at the counter</p>" * 8

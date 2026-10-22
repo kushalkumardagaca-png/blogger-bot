@@ -644,7 +644,9 @@ check("The whole-corpus repair can only run under the owner's recorded release",
       and 'protected_urls()' in repair_py and 'unpublish' in repair_py
       and '"--check" not in _sys.argv' in repair_py)
 check('A push reports the repair plan; applying it takes a committed go-ahead that is then consumed',
-      "if [ -f SEARCH_INDEX_POLICY_REPAIR_APPLY ]; then ACTION=apply; fi" in repair_yml
+      "if [ -f SEARCH_INDEX_POLICY_REPAIR_APPLY ]; then" in repair_yml
+      and "ACTION: ${{ github.event.inputs.action || 'audit' }}" in repair_yml
+      and "if [ \"${ACTION}\" = \"restore\" ]; then ARGS+=(--restore); fi" in repair_yml
       and "git rm --quiet --ignore-unmatch SEARCH_INDEX_POLICY_REPAIR_APPLY" in repair_yml
       and "ARGS+=(--apply)" in repair_yml
       and "if arguments.apply and (patches or unpublished):" in repair_py)

@@ -119,8 +119,15 @@ def uncut_title(title: str, limit: int = TITLE_MAX) -> str:
     This is the shape our own 46-character master-title clip used to produce - `Billionaire Mukesh
     Ambani launches India's` - so the rule lives in one place and both the clip and this gate share it.
     """
-    kept = ""
     tokens = " ".join((title or "").split()).split()
+    whole = " ".join(tokens)
+    if len(whole) <= limit:
+        # Nothing had to be cut, so nothing can be dangling. An earlier version trimmed here anyway and
+        # turned a finished headline - "Build Your Layoff Plan Before You Need It" - into a truncated one
+        # by treating the closing "It" as an orphan. Only a title that this function actually clipped can
+        # be left ending on a preposition, and only then is the trim the right medicine.
+        return whole.rstrip(" ,;:.—–-…")
+    kept = ""
     for token in tokens:
         trial = f"{kept} {token}".strip()
         if len(trial) > limit:
@@ -211,7 +218,13 @@ def page_title(body: str, fallback: str = "", *, limit: int = TITLE_MAX) -> str:
         for match in re.finditer(pattern, body or "", flags=re.I):
             text = sentence_case(strip_markup(match.group(1))).strip(" \u00b7-\u2014\u2013:,.")
             text = re.sub(r"^\W{0,3}", "", text)
-            text = uncut_title(text, limit)
+            if len(text) > limit:
+                # The heading is the page's own words, but a heading too long for a title stays a
+                # heading. Clipping one to 70 characters is how "ABOUT US" came back as
+                # "Money, explained with clarity evidence numbers honesty context maths" on the first
+                # repair run of 22 October: every comma belonged to markup, and the tail was severed
+                # mid-list. A title must read finished or not be borrowed at all.
+                continue
             if len(text) >= TITLE_MIN and not title_is_cut(text) and not JUNK_TITLE.search(text):
                 return text
     return ""

@@ -102,11 +102,34 @@ class Fixture(unittest.TestCase):
         self.assertIn("held back", outcomes["heldBack"][0]["why"])
 
     def test_machine_artifacts_leave_the_sitemap(self):
-        items = [item("12", "http://schema.org", "https://x/2026/09/context-httpsschema.html"),
+        thin = "<p>Global Snapshot has moved to /p/global-snapshot.html.</p>"
+        items = [item("12", "http://schema.org", "https://x/2026/09/context-httpsschema.html",
+                      content=thin),
                  item("13", "GLOBAL SNAPSHOT — MOVED", "https://x/p/share-market_0718113516.html",
-                      resource="pages")]
+                      resource="pages", content=thin)]
         outcomes = repair.takedowns(items, protected=set())
         self.assertEqual(len(outcomes["unpublish"]), 2)
+
+    def test_a_real_article_with_a_machine_slug_is_never_taken_down(self):
+        # found on 22 October: /2026/09/context-httpsschema.html was "Stop Maxing Your 401(k)", a full
+        # article whose slug was left over from the template that made it. The address is the defect;
+        # the content is not, and only the owner can rename a permalink.
+        items = [item("14", "Stop Maxing Your 401(k)", "https://x/2026/09/context-httpsschema.html")]
+        outcomes = repair.takedowns(items, protected=set())
+        self.assertEqual(outcomes["unpublish"], [])
+        self.assertIn("permalink", outcomes["heldBack"][0]["why"])
+        self.assertGreaterEqual(outcomes["heldBack"][0]["words"], 120)
+
+    def test_a_url_being_taken_down_is_not_polished_first(self):
+        items = [item("1", "TERMS AND CONDITIONS", "https://x/p/share-market_0718113516.html",
+                      resource="pages", content="<p>Global Snapshot has moved elsewhere.</p>")]
+        outcomes = repair.takedowns(items, protected=set())
+        self.assertEqual(len(outcomes["unpublish"]), 1)
+        # main() drops any patch whose URL is going down, so a URL is written to once. Prove the lists
+        # reconcile: everything the plan wanted to touch here is already on the takedown list.
+        going_down = {row["url"] for row in outcomes["unpublish"]}
+        self.assertTrue(all(row["url"] in going_down for row in repair.plan(items)))
+        self.assertTrue(going_down, "a thin redirect notice is exactly what a takedown is for")
 
     def test_the_indexnow_key_page_is_never_a_takedown(self):
         # taking that URL down would stop every IndexNow submission working
@@ -135,6 +158,41 @@ class RunModes(Fixture):
         path = pathlib.Path(tempfile.mkdtemp()) / "inventory.json"
         path.write_text(json.dumps(items), encoding="utf-8")
         return path
+
+
+class Revert(Fixture):
+    def test_the_backup_round_trips_into_a_restore_plan(self):
+        import gzip
+        items = [item("1", "ABOUT US", "https://x/p/about.html", resource="pages"),
+                 item("2", "Gold rate today in India", "https://x/2026/10/gold.html")]
+        blob = gzip.compress(json.dumps(items).encode())
+        path = self.tmp / "backup.json.gz"
+        path.write_bytes(blob)
+        rows = repair.restore_rows(repair.read_backup(path))
+        self.assertEqual([row["title"] for row in rows], ["ABOUT US", "Gold rate today in India"])
+        self.assertEqual([row["content"] for row in rows], [BODY, BODY])
+        self.assertTrue(all(row["publish"] for row in rows),
+                        "a restore must also undo any takedown, and publishing a live post is a no-op")
+
+    def test_a_restore_with_no_backup_is_a_clean_no_op(self):
+        self.assertEqual(repair.read_backup(self.tmp / "missing.json.gz"), [])
+        self.assertEqual(repair.restore_rows([]), [])
+        with mock.patch("sys.argv", ["search_index_policy_repair.py", "--restore",
+                                     str(self.tmp / "missing.json.gz")]):
+            self.assertEqual(repair.main(), 0)
+        payload = json.loads(repair.OUT.read_text(encoding="utf-8"))
+        self.assertEqual(payload["mode"], "RESTORE")
+        self.assertEqual(payload["written"], 0)
+        self.assertEqual(payload["inventory"], 0,
+                         "with nothing to revert there must be no API call at all")
+
+    def test_the_api_host_is_the_one_that_actually_changes_a_post(self):
+        src = pathlib.Path(repair.__file__).read_text(encoding="utf-8")
+        self.assertIn("https://www.googleapis.com/blogger/v3/blogs/", src)
+        self.assertNotIn("https://www.blogger.com/v3", src,
+                         "the Blogger web host answers takedowns with HTML and a job must not report "
+                         "success for a call the API never made")
+        self.assertIn("answer.get(\"status\") not in (None, \"DRAFT\")", src)
 
 
 class Boundaries(unittest.TestCase):
