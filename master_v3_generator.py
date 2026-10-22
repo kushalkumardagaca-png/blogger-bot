@@ -10,7 +10,7 @@ from __future__ import annotations
 import hashlib,html,json,os,re,threading,time,urllib.parse,xml.etree.ElementTree as ET
 from pathlib import Path
 import requests
-from master_article_v2 import words
+from master_article_v2 import SECTION_MAX, SECTION_MIN, words
 from photo_selector import choose_photos
 from time_budget import BUDGET
 from content_policy_guard import (DANGEROUS_PATTERNS, DECEPTIVE_PATTERNS, FAKE_EXPERIENCE_PATTERNS,
@@ -608,6 +608,32 @@ def head_clip(value,limit=46):
   kept=kept.rstrip(' ,;:.\u2014\u2013-\u2026')
   return kept if 12<=len(kept)<=limit else ''
 
+def core_window(section_count):
+    """The only document lengths an assembly of this many sections can honestly have."""
+    return SECTION_MIN*section_count,SECTION_MAX*section_count
+
+
+def fit_core_to_contract(sections):
+    """Trim a too-long assembly back inside its own window, a whole section at a time.
+
+    Returns the sections and the final word count. A section is only ever shortened to the floor it must
+    keep (400 words), so this can never 'fix' the document by breaking a section - the guard it replaces
+    accepted 300-word sections, which traded one contract violation for another.
+    """
+    floor,ceiling=core_window(len(sections))
+    core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
+    if core<=ceiling:return sections,core
+    excess=core-(ceiling-80)
+    for s in reversed(sections):
+        if excess<=0:break
+        before=words(' '.join(s['paragraphs']))
+        trimmed=parse_paragraphs(sentence_trim(' '.join(s['paragraphs']),max(SECTION_MIN,before-excess)))
+        after=words(' '.join(trimmed))
+        if after>=SECTION_MIN:
+            s['paragraphs']=trimmed;excess-=before-after
+    return sections,words(' '.join(' '.join(x['paragraphs']) for x in sections))
+
+
 def build(item,kind,target):
  sources=discover_sources(item,kind);title=clean(re.sub(r'\s[-–—|:]\s.*$','',item['title']));title=re.sub(r'\b(?:19|20)\d{2}\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b','',title,flags=re.I);title=head_clip(clean(title).strip(' -:'))
  profile=structure_profile(item.get('_structure_slot',item.get('id','')),title)
@@ -630,15 +656,10 @@ def build(item,kind,target):
   for future in as_completed(futures):
    index,section=future.result();sections[index]=section
  sections=contextualize_repeated_sentences(sections)
- core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
- if core>4200:
-  excess=core-4150
-  for s in reversed(sections):
-   if excess<=0:break
-   before=words(' '.join(s['paragraphs']));trimmed=parse_paragraphs(sentence_trim(' '.join(s['paragraphs']),max(400,before-excess)));after=words(' '.join(trimmed))
-   if after>=300:s['paragraphs']=trimmed;excess-=before-after
- core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
- if not 4000<=core<=4200:raise RuntimeError(f'V3 assembled core is {core}; section-level contract did not converge')
+ sections,core=fit_core_to_contract(sections)
+ floor,ceiling=core_window(len(sections))
+ if not floor<=core<=ceiling:raise RuntimeError(f'V3 assembled core is {core} words; {len(sections)} '
+  f'sections of {SECTION_MIN}-{SECTION_MAX} words allow {floor}-{ceiling} and the trim did not converge')
  summary=extracted_summary(sections)
  # Run the same uniqueness repair once more after article trimming and summary
  # assembly. This catches cross-module repetition that cannot be visible while

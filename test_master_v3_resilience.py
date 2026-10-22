@@ -9,7 +9,10 @@ yesterday's plan because the nightly build ran five minutes before today's plan 
 
 Each test here pins one of those failure shapes. None of them lowers a standard: the window, the citation
 rule, the number rule and the three-photograph rule are all still enforced, and one is asserted to still
-reject bad prose.
+reject bad prose. The window is now *derived* from the section rule it was contradicting (see
+TheDocumentWindowMatchesItsSections below), which is a consistency repair, not a concession: the per-section
+floor of 400 words, the four-paragraph rule and the three-photograph rule are unchanged, and the assembly
+check became harder to satisfy for short articles, not easier.
 """
 from __future__ import annotations
 
@@ -22,6 +25,7 @@ from unittest import mock
 
 import master_failure_brief
 import master_v3_generator as gen
+from pathlib import Path
 
 ROOT = pathlib.Path(__file__).resolve().parent
 
@@ -205,7 +209,9 @@ class TheWorkflowsCarryTheFix(unittest.TestCase):
             self.assertIn("- name: Leave the failure reason where the morning check reads it\n        if: failure()",
                         text, f"{name}: the brief must be written only when the run failed")
             self.assertIn("master_failure_brief.py", block, name)
-            self.assertIn("git add MASTER_FAILURE_BRIEF.json", block, name)
+            # -f, and see the test below for why: the file is untracked by design, and the run's own
+            # dirty files blocked the rebase, so the reason never reached git at all.
+            self.assertIn("git add -f MASTER_FAILURE_BRIEF.json", block, name)
             self.assertIn("git diff --cached --quiet", block, name)
             self.assertTrue(block.rstrip().endswith("exit 0"), f"{name}: reporting must never fail the run")
             self.assertNotIn("master_packages", block, f"{name}: only the brief is committed on failure")
@@ -216,10 +222,109 @@ class TheWorkflowsCarryTheFix(unittest.TestCase):
         self.assertNotIn("cron: '45 18 * * *'", text)
         self.assertIn("Master Topic Discovery", text)
 
+    def test_a_failed_run_actually_lands_its_reason_in_git(self):
+        # The brief was written and never committed, because the pull that follows it ran against a
+        # tree the run itself had dirtied: `git pull --rebase` refuses that, all three attempts
+        # failed, and the step ended quietly. That is why 21 October left fifteen red runs and no
+        # explanation. -f matters for the same reason: the file is untracked by design.
+        for name in ("master_trending_writer.yml", "master_evergreen_writer.yml"):
+            text = (ROOT / ".github" / "workflows" / name).read_text(encoding="utf-8")
+            self.assertIn("--autostash", text, name + " must rebase over its own dirty files")
+            self.assertIn("git add -f MASTER_FAILURE_BRIEF.json", text, name + " must force the brief in")
+
     def test_the_preparation_budget_rule_is_untouched(self):
         for text in self.writers.values():
             self.assertIn("MASTER_PREPARATION_BUDGET_MINUTES: '30'", text)
             self.assertIn("1800-second budget", text)
+
+
+class TheDocumentWindowMatchesItsSections(unittest.TestCase):
+    """The 4340-word article that was thrown away on 21 October 2026.
+
+    Ten sections of 400-490 words assemble to 4000-4900 words; the assembler demanded 4000-4200, so an
+    article whose sections averaged 434 was perfect by the section rule and fatal by the document rule, and
+    Trending, Evergreen and the Prewarmer all failed at the same step for the same arithmetic. The window is
+    now computed from the section bounds, which also makes a 7-section article possible for the first time.
+
+    The fixtures are written in sentences on purpose: `sentence_trim` moves whole sentences, so a block of
+    text with no full stops would prove nothing about whether trimming can actually converge.
+    """
+
+    @staticmethod
+    def sentences(count):
+        """Exactly `count` words, in sentences of ten, so a trim has something to remove."""
+        out, made = [], 0
+        while made < count:
+            size = min(10, count - made)
+            out.append(" ".join(f"alpha{index + made}" for index in range(size)) + ".")
+            made += size
+        return " ".join(out)
+
+    @classmethod
+    def block(cls, sections, words_each):
+        rows = []
+        for index in range(sections):
+            parts, left = [], words_each
+            for part in range(4):
+                share = (left + 3 - part) // (4 - part)
+                parts.append(cls.sentences(share))
+                left -= share
+            rows.append({"heading": f"Section {index + 1} evidence", "paragraphs": parts})
+        return rows
+
+    def test_fixture_words_are_counted_the_way_the_generator_counts_them(self):
+        for total in (400, 434, 490):
+            rows = self.block(1, total)
+            self.assertEqual(gen.words(" ".join(rows[0]["paragraphs"])), total,
+                             f"a {total}-word section must measure {total} words here")
+
+    def test_a_full_length_assembly_is_left_alone(self):
+        sections = self.block(10, 434)
+        fitted, core = gen.fit_core_to_contract(sections)
+        self.assertEqual(core, 4340, "4340 words is inside the contract and must not be trimmed at all")
+        self.assertEqual(fitted[0]["paragraphs"], sections[0]["paragraphs"])
+
+    def test_an_over_long_assembly_is_trimmed_inside_the_ceiling(self):
+        sections = self.block(10, 560)
+        fitted, core = gen.fit_core_to_contract(sections)
+        self.assertLessEqual(core, 4900, f"a 10-section document must be brought under 4900, got {core}")
+        floor, _ = gen.core_window(len(fitted))
+        self.assertGreaterEqual(core, floor, "trimming may not rescue the ceiling by breaking the floor")
+        for row in fitted:
+            self.assertGreaterEqual(gen.words(" ".join(row["paragraphs"])), 400,
+                                    "no section may be trimmed below its own 400-word floor")
+
+    def test_the_window_is_derived_from_the_number_of_sections(self):
+        self.assertEqual(gen.core_window(10), (4000, 4900))
+        self.assertEqual(gen.core_window(7), (2800, 3430),
+                         "a 7-section article used to be impossible: it could never reach 4000")
+        self.assertEqual(gen.core_window(14), (5600, 6860))
+
+    def test_the_validator_applies_the_same_derived_rule(self):
+        import master_article_v2 as v2
+        good = self.block(10, 434)
+        with self.assertRaises(ValueError) as refused:
+            v2.validate({"policy_version": v2.POLICY_VERSION, "title": "Gold rate evidence guide",
+                         "sections": good})
+        self.assertNotIn("main article is", str(refused.exception),
+                         "the document rule must not reject an assembly the section rule allows")
+        thin = self.block(10, 380)
+        with self.assertRaises(ValueError) as refused:
+            v2.validate({"policy_version": v2.POLICY_VERSION, "title": "Gold rate evidence guide",
+                         "sections": thin})
+        message = str(refused.exception)
+        self.assertIn("main article is 3800 words across 10 sections", message,
+                      "a thin assembly is still refused, and the reason names the sections: " + message)
+        self.assertIn("400\u2013490 words per section allows 4000\u20134900", message.replace("–", "\u2013"))
+
+    def test_the_old_impossible_pair_cannot_come_back(self):
+        import master_article_v2 as v2
+        source = Path(v2.__file__).read_text(encoding="utf-8")
+        self.assertNotIn("CORE_MIN,CORE_MAX=4000,4200", source,
+                         "a document window has to be a multiple of the section window it is built from")
+        generator_source = Path(gen.__file__).read_text(encoding="utf-8")
+        self.assertNotIn("4200", generator_source, "the assembler must not hard-code a second ceiling")
+        self.assertNotIn("4000<=", generator_source)
 
 
 if __name__ == "__main__":

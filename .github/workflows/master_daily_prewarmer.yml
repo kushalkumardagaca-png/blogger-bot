@@ -52,11 +52,26 @@ jobs:
           slot='${{ steps.slot.outputs.value }}'
           dispatch() {
             local workflow="$1"
+            # A run already queued or in progress for this workflow IS the dispatch we came to make.
+            # Both Master writers hold a 20-minute preparation and share a concurrency group, so a
+            # rejected "workflow_dispatch: too many runs in the queue" used to fail this job after five
+            # tries - two red emails (here and in the child) for work that was already running. The
+            # queue is checked first, and the answer is reused instead of fought.
+            if [ "$(gh run list --workflow "$workflow" --branch main --status queued --status in_progress \
+                    --json databaseId -q 'length' 2>/dev/null || echo 0)" != "0" ]; then
+              echo "$workflow already has a queued or running attempt for slot $slot; nothing to dispatch."
+              return 0
+            fi
             for attempt in 1 2 3 4 5; do
               if gh workflow run "$workflow" --ref main -f slot="$slot" -f publish=false -f retry_attempt=0; then return 0; fi
               sleep $((attempt * 5))
             done
-            echo "Unable to dispatch $workflow after five attempts" >&2
+            if [ "$(gh run list --workflow "$workflow" --branch main --status queued --status in_progress \
+                    --json databaseId -q 'length' 2>/dev/null || echo 0)" != "0" ]; then
+              echo "::notice title=Dispatch already covered::$workflow picked up a queued attempt; the five rejections were the queue, not the API"
+              return 0
+            fi
+            echo "Unable to dispatch $workflow after five attempts, and no run of it is queued or in progress" >&2
             return 1
           }
           # Dispatch independently so a transient API failure for one category

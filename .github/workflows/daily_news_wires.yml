@@ -115,20 +115,42 @@ jobs:
           path: NEWS_PIPELINE_STATUS.json
           if-no-files-found: warn
           retention-days: 30
-      - name: Commit only confirmed successful News state
-        if: success()
+      - name: Commit confirmed News state, and always the reason a run failed
+        # On a successful run the tracker and the status go together. On a failed run the status goes
+        # alone: it holds the per-desk error the annotation was too small to carry, and a red run whose
+        # reason dies with the runner is how a desk stayed broken for two days without anyone reading why.
+        # The tracker is never committed from a failed run, because a half-written day must not be merged.
+        if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
+          status_only=""
+          if [ "${{ job.status }}" != "success" ]; then status_only=yes; fi
           git config user.name "Daily Yield News Bot"
           git config user.email "bot@dailyyield.blogspot.com"
           mkdir -p /tmp/news-state
-          cp news_tracker.json NEWS_PIPELINE_STATUS.json /tmp/news-state/
+          # Either file can be missing on a run that died early, and a persistence step that fails
+          # because the failure was too early to leave evidence would be its own new red email.
+          cp news_tracker.json /tmp/news-state/ 2>/dev/null || true
+          cp NEWS_PIPELINE_STATUS.json /tmp/news-state/ 2>/dev/null || true
+          if [ ! -f /tmp/news-state/news_tracker.json ] && [ ! -f /tmp/news-state/NEWS_PIPELINE_STATUS.json ]; then
+            echo "Nothing to persist: the run stopped before it wrote a tracker or a status."
+            exit 0
+          fi
           # The prepared photo pools and their rotation state travel with the
           # pipeline state, so a repaired or republished desk keeps using fresh
           # photographs rather than starting its rotation again.
           git restore social_events.json 2>/dev/null || true
           for attempt in 1 2 3 4 5; do
             git fetch origin main && git reset --hard FETCH_HEAD
+            if [ -n "$status_only" ]; then
+              if [ ! -f /tmp/news-state/NEWS_PIPELINE_STATUS.json ]; then echo "No status file to record."; exit 0; fi
+              cp /tmp/news-state/NEWS_PIPELINE_STATUS.json .
+              git add NEWS_PIPELINE_STATUS.json
+              if git diff --staged --quiet; then echo "No failure state to record."; exit 0; fi
+              git commit -q -m "Record why the news run failed [skip ci]"
+              if git push origin HEAD:main; then exit 0; fi
+              sleep $((attempt * 2)); continue
+            fi
             python merge_news_state.py news_tracker.json /tmp/news-state/news_tracker.json news_tracker.merged.json
             mv news_tracker.merged.json news_tracker.json
             cp /tmp/news-state/NEWS_PIPELINE_STATUS.json .

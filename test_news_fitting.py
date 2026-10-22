@@ -2,6 +2,7 @@
 """A wide desk must fit the edition budget instead of failing the whole slot."""
 from __future__ import annotations
 
+import sys
 import unittest
 
 import news_pipeline as np
@@ -20,6 +21,88 @@ def article(sections, items_each, words_each=120):
                 '<a class="fbk-src" href="https://example.com/x">Official source</a></div>')
     body.append("</article>")
     return "".join(body)
+
+
+class QuietDeskIsSkippedNotFailed(unittest.TestCase):
+    """A news hour with nothing new is a skip, not a red run and not an email.
+
+    Seven of the failing runs on 21-22 October were recovery dispatches that landed between two wire
+    bursts: the desk had only background context, `no current sourced items available` raised, and the
+    whole workflow was marked failed for a site that correctly had nothing to report. The pipeline now
+    records that desk as SKIPPED and leaves the run green - while a fit that genuinely cannot be found,
+    a refused Blogger post or a wrong edition fingerprint still fails exactly as loudly as before.
+    """
+
+    def test_only_background_items_raise_the_quiet_condition(self):
+        with self.assertRaises(np.NothingToReport) as seen:
+            np.build_fitted_news_article(
+                "markets", [{"background": True, "title": "Older context", "summary": "context",
+                             "url": "https://wires.test/old", "agency": "reuters", "item_time": None}],
+                [], __import__("datetime").date(2026, 10, 22), None, None, {}, [], [], None)
+        self.assertIn("no current sourced item", str(seen.exception))
+
+    def test_the_quiet_condition_is_still_a_value_error_for_older_callers(self):
+        self.assertTrue(issubclass(np.NothingToReport, ValueError),
+                        "anything that already handled a failed fit must keep handling it")
+
+    def test_main_reports_a_quiet_desk_as_skipped_and_exits_zero(self):
+        import json
+        import os
+        import pathlib
+        import tempfile
+        from unittest import mock
+
+        with tempfile.TemporaryDirectory() as work:
+            handle = open(pathlib.Path(work) / "NEWS_PIPELINE_STATUS.json", "w")
+            previous = os.getcwd()
+            os.chdir(work)
+            try:
+                def raise_quiet(desk, tracker, dry, token, **_):
+                    raise np.NothingToReport(f"{desk}: no current sourced item in this window")
+
+                argv = ["news_pipeline.py", "--desks", "markets", "--dry-run"]
+                with mock.patch.object(np, "run_desk", raise_quiet), \
+                        mock.patch.object(np, "load_tracker", lambda *a, **k: {"desks": {}}), \
+                        mock.patch.object(np, "load_today_story_keys", lambda *a, **k: (set(), set())), \
+                        mock.patch.object(np, "SOCIAL_EVENTS_FILE", str(pathlib.Path(work) / "social_events.json")), \
+                        mock.patch.object(sys, "argv", argv):
+                    np.main()
+            finally:
+                handle.close()
+                os.chdir(previous)
+            report = json.loads((pathlib.Path(work) / "NEWS_PIPELINE_STATUS.json").read_text())
+            self.assertEqual(report["failed"], 0, report)
+            self.assertEqual(report["status"], "PASS", report)
+            self.assertEqual(report["results"][0]["status"], "SKIPPED", report)
+            self.assertIn("no current sourced item", report["results"][0]["reason"])
+
+    def test_a_real_defect_still_fails_the_run(self):
+        import os
+        import pathlib
+        import tempfile
+        from unittest import mock
+
+        with tempfile.TemporaryDirectory() as work:
+            handle = open(pathlib.Path(work) / "NEWS_PIPELINE_STATUS.json", "w")
+            previous = os.getcwd()
+            os.chdir(work)
+            try:
+                def broken(desk, tracker, dry, token, **_):
+                    raise RuntimeError("EDITION IDENTITY FAILED")
+
+                argv = ["news_pipeline.py", "--desks", "markets", "--dry-run"]
+                with mock.patch.object(np, "run_desk", broken), \
+                        mock.patch.object(np, "load_tracker", lambda *a, **k: {"desks": {}}), \
+                        mock.patch.object(np, "load_today_story_keys", lambda *a, **k: (set(), set())), \
+                        mock.patch.object(np, "SOCIAL_EVENTS_FILE", str(pathlib.Path(work) / "social_events.json")), \
+                        mock.patch.object(sys, "argv", argv):
+                    with self.assertRaises(SystemExit) as exit_seen:
+                        np.main()
+                    self.assertEqual(exit_seen.exception.code, 1)
+            finally:
+                handle.close()
+                os.chdir(previous)
+
 
 
 class TrimNewsItemsTests(unittest.TestCase):

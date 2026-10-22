@@ -639,6 +639,20 @@ check('A new article names its photographs after its own subject (Bing §12)',
       'name=index_policy_gate.asset_file_name(slug,placement)' in (ROOT/'photo_selector.py').read_text()
       and "assets/master/{slug}/{name}" in (ROOT/'photo_selector.py').read_text()
       and 'def asset_file_name(' in gate_py)
+check('A scheduled job that has nothing to do says so instead of sending an email',
+      # The owner was receiving 50+ GitHub mails a day and most of them were not defects: a deferral
+      # that only needed patience, a dispatch the queue had already answered, and red runs that left
+      # no reason behind. Each of those is now a recorded outcome; a real failure still fails loudly.
+      (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text().count('already=deferred') == 3
+      and (ROOT/'.github/workflows/coordinated_social_publish.yml').read_text().count(
+          "steps.dupe.outputs.already == 'no'") == 3
+      and 'already has a queued or running attempt' in (ROOT/'.github/workflows/master_daily_prewarmer.yml').read_text()
+      and 'if: ${{ !cancelled() }}' in (ROOT/'.github/workflows/daily_news_wires.yml').read_text()
+      and 'Record why the news run failed' in (ROOT/'.github/workflows/daily_news_wires.yml').read_text()
+      and all('--autostash' in (ROOT/f'.github/workflows/{name}').read_text()
+              and 'git add -f MASTER_FAILURE_BRIEF.json' in (ROOT/f'.github/workflows/{name}').read_text()
+              for name in ('master_trending_writer.yml', 'master_evergreen_writer.yml')),
+      'a held route, a queued child and a failed run all have a quieter and more informative answer now')
 check('A phone is asked directly, and no URL leaves the site in a parameterised form',
       'def mobile_answer(' in policy_py and 'MOBILE_PROBE_UA' in policy_py
       and 'user_agent=MOBILE_PROBE_UA' in policy_py and policy_py.count('urllib.request.Request(')==1

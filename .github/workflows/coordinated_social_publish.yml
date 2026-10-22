@@ -106,12 +106,20 @@ jobs:
             echo 'already=yes' >> "$GITHUB_OUTPUT"
           elif [ "$code" = "0" ]; then
             echo 'already=no' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "75" ]; then
+            # 75 is social_dedupe's own "I could not read the durable history" answer, and its rule
+            # is to post nothing rather than risk posting the same article twice. That is a safe
+            # deferral, not a defect - but the run used to exit non-zero on it, so one git-fetch
+            # hiccup or one busy raw.githubusercontent.com page turned into a fresh email every
+            # cycle until history was readable again. Recovery re-plans this item on its own.
+            echo '::notice title=Social route deferred::facebook: durable history unreadable, nothing posted, recovery will retry'
+            echo 'already=deferred' >> "$GITHUB_OUTPUT"
           else
             echo "Cannot verify dedupe history; defer this route safely."
             exit "$code"
           fi
       - name: Publish exact assigned destination to Facebook
-        if: steps.dupe.outputs.already != 'yes'
+        if: steps.dupe.outputs.already == 'no'
         env:
           FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
           FACEBOOK_PAGE_ID: '1303333369533572'
@@ -179,12 +187,20 @@ jobs:
             echo 'already=yes' >> "$GITHUB_OUTPUT"
           elif [ "$code" = "0" ]; then
             echo 'already=no' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "75" ]; then
+            # 75 is social_dedupe's own "I could not read the durable history" answer, and its rule
+            # is to post nothing rather than risk posting the same article twice. That is a safe
+            # deferral, not a defect - but the run used to exit non-zero on it, so one git-fetch
+            # hiccup or one busy raw.githubusercontent.com page turned into a fresh email every
+            # cycle until history was readable again. Recovery re-plans this item on its own.
+            echo '::notice title=Social route deferred::bluesky: durable history unreadable, nothing posted, recovery will retry'
+            echo 'already=deferred' >> "$GITHUB_OUTPUT"
           else
             echo "Cannot verify dedupe history; defer this route safely."
             exit "$code"
           fi
       - name: Publish exact assigned destination to Bluesky
-        if: steps.dupe.outputs.already != 'yes'
+        if: steps.dupe.outputs.already == 'no'
         env:
           BLUESKY_HANDLE: 'dailyyield.bsky.social'
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
@@ -251,12 +267,20 @@ jobs:
             echo 'already=yes' >> "$GITHUB_OUTPUT"
           elif [ "$code" = "0" ]; then
             echo 'already=no' >> "$GITHUB_OUTPUT"
+          elif [ "$code" = "75" ]; then
+            # 75 is social_dedupe's own "I could not read the durable history" answer, and its rule
+            # is to post nothing rather than risk posting the same article twice. That is a safe
+            # deferral, not a defect - but the run used to exit non-zero on it, so one git-fetch
+            # hiccup or one busy raw.githubusercontent.com page turned into a fresh email every
+            # cycle until history was readable again. Recovery re-plans this item on its own.
+            echo '::notice title=Social route deferred::mastodon: durable history unreadable, nothing posted, recovery will retry'
+            echo 'already=deferred' >> "$GITHUB_OUTPUT"
           else
             echo "Cannot verify dedupe history; defer this route safely."
             exit "$code"
           fi
       - name: Publish exact assigned destination to Mastodon
-        if: steps.dupe.outputs.already != 'yes'
+        if: steps.dupe.outputs.already == 'no'
         env:
           MASTODON_INSTANCE: https://mastodon.social
           MASTODON_TOKEN_KEY: ${{ secrets.MASTODON_TOKEN_KEY }}

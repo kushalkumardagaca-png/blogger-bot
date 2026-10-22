@@ -12,7 +12,15 @@ from content_policy_guard import POLICY_VERSION,automation_disclosure,audit_text
 BLOG="https://dailyyield.blogspot.com"
 AUTHOR="Kushal Daga"
 MASTER_V2_VERSION="2.0"
-CORE_MIN,CORE_MAX=4000,4200
+# The document rule is derived from the section rule, never written beside it. A Master article is
+# assembled from sections of 400-490 words, so N sections can only ever land in [400N, 490N]: the fixed
+# 4000-4200 window this file used to require was reachable only if every section fell between 400 and 420
+# - and a 7-section article could never reach 4000 at all. On 21-22 October 2026 that contradiction cost
+# 23 red runs (Trending, Evergreen and the Prewarmer all threw away a finished 4340-word article because
+# its sections averaged 434). The floors are unchanged: no section under 400 words, no article under
+# 400N, and now the ceiling is the one the sections can actually honour.
+SECTION_MIN,SECTION_MAX=400,490
+CORE_MIN=SECTION_MIN*10          # the 10-section default: 4000 words of body, as before
 SUMMARY_MIN,SUMMARY_MAX=600,800
 
 
@@ -33,7 +41,10 @@ def validate(package):
     if len(headings)!=len(set(headings)): errors.append("duplicate main headings")
     core=" ".join(" ".join(x.get("paragraphs") or []) for x in sections)
     count=words(core)
-    if not CORE_MIN<=count<=CORE_MAX: errors.append(f"main article is {count} words; required {CORE_MIN}–{CORE_MAX}")
+    floor,ceiling=SECTION_MIN*len(sections),SECTION_MAX*len(sections)
+    if not floor<=count<=ceiling:
+        errors.append(f"main article is {count} words across {len(sections)} sections; "
+                      f"{SECTION_MIN}–{SECTION_MAX} words per section allows {floor}–{ceiling}")
     summary=package.get("summary") or []
     summary_count=words(" ".join(summary))
     if not SUMMARY_MIN<=summary_count<=SUMMARY_MAX: errors.append(f"summary is {summary_count} words; required {SUMMARY_MIN}–{SUMMARY_MAX}")
@@ -176,7 +187,7 @@ def render(package,topic,pub_date,pub_time,canonical_url=None,modified_date=None
         extra=""
         while visuals and visuals[0]['_after_section']<=i: extra+=visual(visuals.pop(0),sources,len(package["visuals"])-len(visuals))
         if cumulative>=2000 and not second: extra+=photo(package["photos"][1],2);second=True
-        if cumulative>=4000 and not third: extra+=photo(package["photos"][2],3);third=True
+        if cumulative>=CORE_MIN and not third: extra+=photo(package["photos"][2],3);third=True
         section_html.append(f'<section id="dy2-{i}"><h2>{esc(s["heading"])}</h2>{paragraphs}{extra}</section>')
     summary="".join(f'<p>{linked_text(p,sources,internals)}</p>' for p in package["summary"])
     faq="".join(f'<details><summary><span>{esc(x["question"])}</span></summary><div><p>{linked_text(x["answer"],sources,internals)}</p></div></details>' for x in package["faq"])

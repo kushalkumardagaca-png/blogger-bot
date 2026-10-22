@@ -1561,13 +1561,25 @@ def finish_news_article(art, related_candidates):
     return art
 
 
+class NothingToReport(ValueError):
+    """The desk's wires carried no current item this hour, so there is no edition to write.
+
+    This is a fact about a quiet news hour, not a defect in the pipeline: the desk is recorded as skipped,
+    the next scheduled run picks it up again, and the owner is not mailed. On 21-22 October 2026 a
+    recovery dispatch that landed between two wire bursts failed seven runs this way - seven red rows and
+    seven emails for a site that had nothing new to say, which is exactly the noise that buries the
+    failures worth reading about. It subclasses ValueError because that is what this function already
+    raised, so every caller that knew how to handle a fit that could not be found still handles this.
+    """
+
+
 def build_fitted_news_article(desk, candidate_items, upcoming, edition_date, win_start,
                               win_end, fx, related, related_candidates, hero):
     """Adapt headline count and detail, then sentence-trim context into the hard range."""
     current = [item for item in candidate_items if not item.get("background")]
     background = [item for item in candidate_items if item.get("background")]
     if not current:
-        raise ValueError("no current sourced items available")
+        raise NothingToReport(f"{desk}: no current sourced item in this window, only background context")
     is_category = desk in CATEGORY_DESKS
     maximum = 34 if is_category else 28
     desired = 30 if is_category else 24
@@ -2279,6 +2291,10 @@ def main():
                 results.append({"desk": desk, "status": "PASS", "published": not dry, "dry_run": dry})
             else:
                 results.append({"desk": desk, "status": "SKIPPED", "published": False, "dry_run": dry})
+        except NothingToReport as quiet:
+            print(f"  [{desk}] skipped: {quiet}")
+            results.append({"desk": desk, "status": "SKIPPED", "reason": str(quiet)[:300],
+                            "published": False, "dry_run": dry})
         except Exception as e:
             print(f"  [{desk}] ERROR: {type(e).__name__}: {e}")
             results.append({"desk": desk, "status": "FAIL", "error_type": type(e).__name__,
