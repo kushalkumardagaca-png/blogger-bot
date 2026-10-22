@@ -103,6 +103,12 @@ def title_for(item: dict, taken: set[str], *, page_minimum: int = 4) -> str:
             if gate.key(attempt) not in taken:
                 repaired = attempt
                 break
+    if (repaired and not gate.title_problems(current, minimum=floor)
+            and repaired.rstrip(" .:;,") == current.rstrip(" .:;,")):
+        # Nothing a reader or a crawler would notice has changed - only a trailing dot the title clip
+        # leaves behind - and the title standing was not in violation to begin with. A headline ending on
+        # a comma is a different case and is still rewritten, because that one the audit counts as cut.
+        return ""
     return repaired if repaired and repaired != current else ""
 
 

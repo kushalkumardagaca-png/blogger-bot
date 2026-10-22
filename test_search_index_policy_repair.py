@@ -80,6 +80,15 @@ class Fixture(unittest.TestCase, TempPaths):
         self.assertIn(SENTENCES[:60], planned["https://x/2026/10/gold.html"]["content"])
         self.assertIn('alt="', planned["https://x/2026/10/gold.html"]["content"])
 
+    def test_a_title_that_differs_by_one_trailing_dot_is_not_touched(self):
+        # found on the pass of 22 October: a currency ticker title ending "EUR/JPY 177." was going to be
+        # rewritten as "EUR/JPY 177" - the same words, and a write nobody would notice. An ALL-CAPS title
+        # is different: the caps are the change, so that one must still be written.
+        self.assertEqual(repair.plan([item("21", "EUR/USD 1.1253 · EUR/GBP 0.8438 · EUR/JPY 177.",
+                                            "https://x/2026/10/fx.html")]), [])
+        self.assertEqual(len(repair.plan([item("22", "DAILY NEWS", "https://x/p/news.html",
+                                               resource="pages", content="<p>News</p>" + BODY)])), 1)
+
     def test_a_compliant_url_is_left_alone_entirely(self):
         items = [item("9", "Gold rate today in India", "https://x/2026/10/gold.html")]
         self.assertEqual(repair.plan(items), [],
