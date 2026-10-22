@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "c67806db52c90e56",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-22",
   "kind": "evergreen",
   "slot": 1,
-  "slot_key": "2026-10-22:evergreen:1",
-  "date": "2026-10-22",
-  "category": "Saving & Emergency Planning",
-  "evergreen_category": "Saving & Emergency Planning",
+  "topic_id": "c67806db52c90e56",
+  "replaced_topic_id": null,
   "title": "5 ETFs to Help Build Your Emergency Fund",
-  "url": "https://dailyyield.blogspot.com/2026/10/5-etfs-to-help-build-your-emergency-fund.html",
-  "published_at": "2026-10-21T22:45:10-07:00"
+  "package": "master_packages/dynamic/2026-10-22-evergreen-c67806db52c90e56.json",
+  "html": "scheduled_ready/2026-10-22-evergreen-1-5-etfs-to-help-build-your-emergency-fund.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 0.0,
+  "remainingMinutes": 30.0
 }
