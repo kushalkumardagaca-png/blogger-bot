@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-21T20:56:14+00:00",
+ "checkedAt": "2026-10-22T02:13:18+00:00",
  "purpose": "the 13 front doors indexed at Google and Bing before 30 November 2026",
  "site": "https://dailyyield.blogspot.com/",
  "siteWrites": 0,
@@ -92,18 +92,18 @@
     ],
     "requestIndexingAvailableInUiOnly": true,
     "live": {
-     "reachable": true,
-     "status": 200,
-     "canonical": "https://dailyyield.blogspot.com/",
-     "finalUrl": "https://dailyyield.blogspot.com/"
+     "reachable": null,
+     "status": null,
+     "canonical": "",
+     "finalUrl": ""
     },
     "liveHops": 0,
-    "staleVerdict": true
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
     "verdict": "NEUTRAL",
-    "coverageState": "Discovered - currently not indexed",
+    "coverageState": "URL is unknown to Google",
     "lastCrawlTime": "",
     "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
     "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
@@ -281,14 +281,13 @@
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
     "live": {
-     "reachable": null,
-     "status": null,
-     "canonical": "",
-     "finalUrl": ""
+     "reachable": true,
+     "status": 200,
+     "canonical": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+     "finalUrl": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html"
     },
     "liveHops": 0,
-    "staleVerdict": true,
-    "liveNote": "not probed today; Blogger confirms the page is published live"
+    "staleVerdict": true
    },
    {
     "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
@@ -361,9 +360,10 @@
  "properties": {
   "status": "MEASURED",
   "visible": [
-   "sc-domain:dailyyield.blogspot.com"
+   "sc-domain:dailyyield.blogspot.com",
+   "https://dailyyield.blogspot.com/"
   ],
-  "urlPrefixPropertyVisible": false,
+  "urlPrefixPropertyVisible": true,
   "domainPropertyVisible": true
  },
  "sitemaps": {
@@ -374,22 +374,26 @@
     "isPending": false,
     "errors": "0",
     "warnings": "0",
-    "accessed": "",
-    "indexStatus": {}
+    "lastSubmitted": "2026-09-25T16:49:53.274Z",
+    "lastDownloaded": "2026-10-20T23:40:31.721Z",
+    "indexStatus": [],
+    "indexStatusRaw": []
    },
    {
     "path": "https://dailyyield.blogspot.com/sitemap.xml",
     "isPending": false,
     "errors": "0",
     "warnings": "0",
-    "accessed": "",
-    "indexStatus": {}
+    "lastSubmitted": "2026-09-25T16:49:00.596Z",
+    "lastDownloaded": "2026-10-21T17:49:44.120Z",
+    "indexStatus": [],
+    "indexStatusRaw": []
    }
   ],
   "missing": [],
   "detail": "",
-  "triedOn": "sc-domain:dailyyield.blogspot.com",
-  "siteProperty": "sc-domain:dailyyield.blogspot.com",
+  "triedOn": "https://dailyyield.blogspot.com/",
+  "siteProperty": "https://dailyyield.blogspot.com/",
   "otherRegistered": []
  },
  "sitemapRegistration": {
@@ -410,7 +414,7 @@
   "detail": "GetPageStats surfaces only pages that generated a Bing impression, so absence is unreported, not unindexed",
   "quota": {
    "dailyUrlSubmission": 0,
-   "monthlyUrlSubmission": 1000
+   "monthlyUrlSubmission": 900
   },
   "seen": {},
   "notReported": [
@@ -431,15 +435,15 @@
  },
  "pace": {
   "deadline": "2026-11-30",
-  "today": "2026-10-21",
-  "daysLeft": 40,
+  "today": "2026-10-22",
+  "daysLeft": 39,
   "targets": 13,
   "inBothPlatforms": 0,
   "stillMissing": 13,
   "paceRequiredPerWeek": 3,
-  "expectedByNow": 0.0,
-  "behindBy": 0,
-  "onTrack": true,
+  "expectedByNow": 0.33,
+  "behindBy": 1,
+  "onTrack": false,
   "note": "pace is measured from the two platforms' own answers, not from a crawl promise"
  },
  "byPage": [
@@ -448,7 +452,7 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-10-02T07:21:19Z",
-   "liveStatusToday": 200,
+   "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
    "bing": "unreported",
@@ -457,7 +461,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "google": "NEUTRAL",
-   "googleCoverage": "Discovered - currently not indexed",
+   "googleCoverage": "URL is unknown to Google",
    "googleLastCrawl": "",
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
@@ -547,7 +551,7 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-09-27T14:13:01Z",
-   "liveStatusToday": null,
+   "liveStatusToday": 200,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
    "bing": "unreported",
@@ -588,9 +592,8 @@
   }
  ],
  "staleVerdicts": {
-  "count": 10,
+  "count": 9,
   "urls": [
-   "https://dailyyield.blogspot.com/",
    "https://dailyyield.blogspot.com/p/global-snapshot.html",
    "https://dailyyield.blogspot.com/p/markets-today.html",
    "https://dailyyield.blogspot.com/p/daily-news.html",
@@ -618,7 +621,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "steps": [
     "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
     "Paste the URL into the inspection box at the top",
@@ -749,9 +752,8 @@
   }
  ],
  "ownerActions": [
-  "Add and verify the URL-prefix property https://dailyyield.blogspot.com/ in Search Console. Sitemaps and Request indexing live on that property, and Blogger sites can be verified without touching DNS.",
   "Bing's URL-submission quota for this property is reported as 0. In Bing Webmaster Tools open Configuration → Basic settings and confirm the site is verified, then check Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.",
-  "10 of those verdicts cannot be reproduced on the live page today. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
+  "9 of those verdicts cannot be reproduced on the live page today. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
   "Tap Request indexing for 13 main pages in the Search Console interface. There is no API for it; this is the one step only you can do."
  ],
  "verdict": "NOT_STARTED",
@@ -761,5 +763,5 @@
  "publisherApiPagesLive": 14,
  "redirectFamilyComplaints": 10,
  "pagesSitemapNote": "",
- "inspectionProperty": "sc-domain:dailyyield.blogspot.com"
+ "inspectionProperty": "https://dailyyield.blogspot.com/"
 }

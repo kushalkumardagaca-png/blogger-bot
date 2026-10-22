@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-21T20:56:14+00:00",
+ "checkedAt": "2026-10-22T02:13:18+00:00",
  "sitemaps": {
   "status": "MEASURED",
   "registered": [
@@ -8,22 +8,26 @@
     "isPending": false,
     "errors": "0",
     "warnings": "0",
-    "accessed": "",
-    "indexStatus": {}
+    "lastSubmitted": "2026-09-25T16:49:53.274Z",
+    "lastDownloaded": "2026-10-20T23:40:31.721Z",
+    "indexStatus": [],
+    "indexStatusRaw": []
    },
    {
     "path": "https://dailyyield.blogspot.com/sitemap.xml",
     "isPending": false,
     "errors": "0",
     "warnings": "0",
-    "accessed": "",
-    "indexStatus": {}
+    "lastSubmitted": "2026-09-25T16:49:00.596Z",
+    "lastDownloaded": "2026-10-21T17:49:44.120Z",
+    "indexStatus": [],
+    "indexStatusRaw": []
    }
   ],
   "missing": [],
   "detail": "",
-  "triedOn": "sc-domain:dailyyield.blogspot.com",
-  "siteProperty": "sc-domain:dailyyield.blogspot.com",
+  "triedOn": "https://dailyyield.blogspot.com/",
+  "siteProperty": "https://dailyyield.blogspot.com/",
   "otherRegistered": []
  },
  "registration": {
@@ -42,9 +46,10 @@
  "properties": {
   "status": "MEASURED",
   "visible": [
-   "sc-domain:dailyyield.blogspot.com"
+   "sc-domain:dailyyield.blogspot.com",
+   "https://dailyyield.blogspot.com/"
   ],
-  "urlPrefixPropertyVisible": false,
+  "urlPrefixPropertyVisible": true,
   "domainPropertyVisible": true
  }
 }
