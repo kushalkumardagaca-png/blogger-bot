@@ -1,10 +1,10 @@
 {
- "checkedAt": "2026-10-22T05:40:12+00:00",
+ "checkedAt": "2026-10-22T05:49:48+00:00",
  "corpus": {
-  "posts": 585,
+  "posts": 586,
   "pages": 14,
-  "urls": 599,
-  "words": 2374359
+  "urls": 600,
+  "words": 2382218
  },
  "sources": {
   "bing": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
@@ -12,12 +12,12 @@
  },
  "summary": {
   "checks": 27,
-  "pass": 23,
-  "fail": 4,
+  "pass": 24,
+  "fail": 3,
   "advisory": 0,
   "failuresByOwner": {
    "blogger": 1,
-   "repo": 3
+   "repo": 2
   }
  },
  "checks": [
@@ -26,7 +26,7 @@
    "guideline": "Bing §2 §3",
    "status": "PASS",
    "advisory": false,
-   "detail": "HTTP 200 with 585 <loc> entries",
+   "detail": "HTTP 200 with 586 <loc> entries",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -130,7 +130,7 @@
    "guideline": "Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 590 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
+   "detail": "0 of 591 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -140,7 +140,7 @@
    "guideline": "Bing §11 §15",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 598 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
+   "detail": "0 of 599 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -181,13 +181,11 @@
   {
    "id": "images-described-not-decorated",
    "guideline": "Bing §5 §12 (alt text, captions)",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "1 URL(s) contain an <img> with no usable alt text",
-   "offenders": [
-    "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html (1 of 9 image(s) undescribed)"
-   ],
-   "offenderCount": 1,
+   "detail": "0 URL(s) contain an <img> with no usable alt text",
+   "offenders": [],
+   "offenderCount": 0,
    "fixableBy": "repo"
   },
   {
@@ -195,7 +193,7 @@
    "guideline": "Bing §12 (unique, relevant file names)",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 0 committed image file name(s) repeats across the site () - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 598 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
+   "detail": "0 of 0 committed image file name(s) repeats across the site () - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 599 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -314,7 +312,7 @@
    "guideline": "Bing §3 §19; Google structured data",
    "status": "PASS",
    "advisory": false,
-   "detail": "599/599 URLs publish a machine-readable date",
+   "detail": "600/600 URLs publish a machine-readable date",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
