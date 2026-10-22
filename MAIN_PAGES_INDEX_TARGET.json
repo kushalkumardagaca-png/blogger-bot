@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T02:17:28+00:00",
+ "checkedAt": "2026-10-22T08:35:31+00:00",
  "purpose": "the 13 front doors indexed at Google and Bing before 30 November 2026",
  "site": "https://dailyyield.blogspot.com/",
  "siteWrites": 0,
@@ -81,7 +81,7 @@
     "url": "https://dailyyield.blogspot.com/",
     "verdict": "NEUTRAL",
     "coverageState": "Redirect error",
-    "lastCrawlTime": "2026-10-02T07:21:19Z",
+    "lastCrawlTime": "2026-10-22T03:06:32Z",
     "pageFetchState": "REDIRECT_ERROR",
     "robotsTxtState": "ALLOWED",
     "indexingState": "INDEXING_STATE_UNSPECIFIED",
@@ -133,13 +133,19 @@
     "userCanonical": "",
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
+    "mobileFetch": {
+     "status": 302,
+     "location": "https://dailyyield.blogspot.com/p/global-snapshot.html?m=1",
+     "canonical": ""
+    },
+    "redirectCause": "blogger-mobile-template",
     "live": {
-     "reachable": false,
-     "status": 429,
-     "canonical": "",
+     "reachable": true,
+     "status": 200,
+     "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
      "finalUrl": "https://dailyyield.blogspot.com/p/global-snapshot.html"
     },
-    "liveHops": 1,
+    "liveHops": 0,
     "staleVerdict": false
    },
    {
@@ -154,19 +160,25 @@
     "userCanonical": "",
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
+    "mobileFetch": {
+     "status": 302,
+     "location": "https://dailyyield.blogspot.com/p/markets-today.html?m=1",
+     "canonical": ""
+    },
+    "redirectCause": "blogger-mobile-template",
     "live": {
-     "reachable": false,
-     "status": 429,
-     "canonical": "",
+     "reachable": true,
+     "status": 200,
+     "canonical": "https://dailyyield.blogspot.com/p/markets-today.html",
      "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html"
     },
-    "liveHops": 1,
+    "liveHops": 0,
     "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
     "verdict": "NEUTRAL",
-    "coverageState": "URL is unknown to Google",
+    "coverageState": "Discovered - currently not indexed",
     "lastCrawlTime": "",
     "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
     "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
@@ -196,6 +208,12 @@
     "userCanonical": "",
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
+    "mobileFetch": {
+     "status": 302,
+     "location": "https://dailyyield.blogspot.com/p/daily-news.html?m=1",
+     "canonical": ""
+    },
+    "redirectCause": "blogger-mobile-template",
     "live": {
      "reachable": true,
      "status": 200,
@@ -203,7 +221,7 @@
      "finalUrl": "https://dailyyield.blogspot.com/p/daily-news.html"
     },
     "liveHops": 0,
-    "staleVerdict": true
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
@@ -217,6 +235,12 @@
     "userCanonical": "",
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
+    "mobileFetch": {
+     "status": 302,
+     "location": "https://www.google.com/sorry/index?continue=https://dailyyield.blogspot.com/p/money-atlas_01486068069.html&q=EgQ5mgXxGLWV59YGIi3Vr5zci3JQrMK8lF4R-FbmPXXE55nvdQWlqG0Ar3CzXpic3SC6ft92idyCHzIyAnJSWgFDYMCisKi6jtnh0gE",
+     "canonical": ""
+    },
+    "redirectCause": "redirect",
     "live": {
      "reachable": true,
      "status": 200,
@@ -224,7 +248,7 @@
      "finalUrl": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html"
     },
     "liveHops": 0,
-    "staleVerdict": true
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
@@ -238,6 +262,12 @@
     "userCanonical": "",
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
+    "mobileFetch": {
+     "status": 302,
+     "location": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html?m=1",
+     "canonical": ""
+    },
+    "redirectCause": "blogger-mobile-template",
     "live": {
      "reachable": true,
      "status": 200,
@@ -245,7 +275,7 @@
      "finalUrl": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html"
     },
     "liveHops": 0,
-    "staleVerdict": true
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
@@ -280,6 +310,12 @@
     "userCanonical": "",
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
+    "mobileFetch": {
+     "status": 302,
+     "location": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html?m=1",
+     "canonical": ""
+    },
+    "redirectCause": "blogger-mobile-template",
     "live": {
      "reachable": true,
      "status": 200,
@@ -287,7 +323,7 @@
      "finalUrl": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html"
     },
     "liveHops": 0,
-    "staleVerdict": true
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
@@ -457,10 +493,12 @@
    "url": "https://dailyyield.blogspot.com/",
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
-   "googleLastCrawl": "2026-10-02T07:21:19Z",
+   "googleLastCrawl": "2026-10-22T03:06:32Z",
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   },
@@ -472,6 +510,8 @@
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   },
@@ -480,9 +520,15 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-09-25T16:57:09Z",
-   "liveStatusToday": 429,
-   "liveRedirectsToday": 1,
+   "liveStatusToday": 200,
+   "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {
+    "status": 302,
+    "location": "https://dailyyield.blogspot.com/p/global-snapshot.html?m=1",
+    "canonical": ""
+   },
+   "redirectCause": "blogger-mobile-template",
    "bing": "unreported",
    "inBoth": false
   },
@@ -491,20 +537,28 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-09-25T16:59:14Z",
-   "liveStatusToday": 429,
-   "liveRedirectsToday": 1,
+   "liveStatusToday": 200,
+   "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {
+    "status": 302,
+    "location": "https://dailyyield.blogspot.com/p/markets-today.html?m=1",
+    "canonical": ""
+   },
+   "redirectCause": "blogger-mobile-template",
    "bing": "unreported",
    "inBoth": false
   },
   {
    "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
    "google": "NEUTRAL",
-   "googleCoverage": "URL is unknown to Google",
+   "googleCoverage": "Discovered - currently not indexed",
    "googleLastCrawl": "",
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   },
@@ -516,6 +570,12 @@
    "liveStatusToday": 200,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {
+    "status": 302,
+    "location": "https://dailyyield.blogspot.com/p/daily-news.html?m=1",
+    "canonical": ""
+   },
+   "redirectCause": "blogger-mobile-template",
    "bing": "unreported",
    "inBoth": false
   },
@@ -527,6 +587,12 @@
    "liveStatusToday": 200,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {
+    "status": 302,
+    "location": "https://www.google.com/sorry/index?continue=https://dailyyield.blogspot.com/p/money-atlas_01486068069.html&q=EgQ5mgXxGLWV59YGIi3Vr5zci3JQrMK8lF4R-FbmPXXE55nvdQWlqG0Ar3CzXpic3SC6ft92idyCHzIyAnJSWgFDYMCisKi6jtnh0gE",
+    "canonical": ""
+   },
+   "redirectCause": "redirect",
    "bing": "unreported",
    "inBoth": false
   },
@@ -538,6 +604,12 @@
    "liveStatusToday": 200,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {
+    "status": 302,
+    "location": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html?m=1",
+    "canonical": ""
+   },
+   "redirectCause": "blogger-mobile-template",
    "bing": "unreported",
    "inBoth": false
   },
@@ -549,6 +621,8 @@
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   },
@@ -560,6 +634,12 @@
    "liveStatusToday": 200,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {
+    "status": 302,
+    "location": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html?m=1",
+    "canonical": ""
+   },
+   "redirectCause": "blogger-mobile-template",
    "bing": "unreported",
    "inBoth": false
   },
@@ -571,6 +651,8 @@
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   },
@@ -582,6 +664,8 @@
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   },
@@ -593,22 +677,20 @@
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
    "canonicalMatchesPage": true,
+   "mobileFetchToday": {},
+   "redirectCause": "",
    "bing": "unreported",
    "inBoth": false
   }
  ],
  "staleVerdicts": {
-  "count": 7,
+  "count": 3,
   "urls": [
-   "https://dailyyield.blogspot.com/p/daily-news.html",
-   "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-   "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
-   "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
    "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
    "https://dailyyield.blogspot.com/p/article.html",
    "https://dailyyield.blogspot.com/p/about-us_02080501126.html"
   ],
-  "meaning": "the live page answers 200 with no redirect today, so the platform's complaint describes an older crawl and what is missing is a fresh one"
+  "meaning": "the live page answers 200 with no redirect today, asked as a desktop client and as a mobile one, so the platform's complaint describes an older crawl and what is missing is a fresh one"
  },
  "manualQueue": [
   {
@@ -658,7 +740,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "steps": [
     "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
     "Paste the URL into the inspection box at the top",
@@ -757,7 +839,8 @@
  ],
  "ownerActions": [
   "Bing's URL-submission quota for this property is reported as 0. In Bing Webmaster Tools open Configuration → Basic settings and confirm the site is verified, then check Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.",
-  "7 of those verdicts cannot be reproduced on the live page today. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
+  "5 of the redirect complaints are real right now, and they are all the same thing: Blogger answers Google's smartphone fetch with '302 -> the same URL + ?m=1', and that target declares the parameterless URL as its canonical, which is what Google files as Redirect error. One setting removes all of them: Blogger → Theme → the ⋮ beside Customize → **Mobile devices** → choose the desktop theme (do not serve a separate mobile template). The pages themselves need no change - measured today, the ?m=1 response is byte-identical to the desktop one, so a reader on a phone already receives this theme and only pays an extra hop for it. After the setting is saved, this watch re-probes both identities nightly and the complaint should clear on Google's next crawl of each URL.",
+  "3 of those verdicts cannot be reproduced on the live page today, checked as a desktop fetch and as Google's smartphone fetch. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
   "Tap Request indexing for 13 main pages in the Search Console interface. There is no API for it; this is the one step only you can do."
  ],
  "verdict": "NOT_STARTED",
@@ -766,6 +849,11 @@
  "liveProbeCap": 6,
  "publisherApiPagesLive": 14,
  "redirectFamilyComplaints": 10,
+ "mobileTemplateRedirects": 5,
+ "mobileView": {
+  "status": "UNAVAILABLE",
+  "detail": "HTTPError"
+ },
  "pagesSitemapNote": "",
  "inspectionProperty": "https://dailyyield.blogspot.com/"
 }
