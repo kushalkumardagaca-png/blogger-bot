@@ -1,21 +1,38 @@
 {
- "generatedAt": "2026-10-22T09:43:29.859206+05:30",
+ "generatedAt": "2026-10-22T10:15:39.738947+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 6,
- "expectedPosts": 12,
+ "articles": 7,
+ "expectedPosts": 14,
  "articlesWithBothPosts": 6,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-22.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
+    "facebook": 0,
+    "bluesky": 1,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -35,13 +52,13 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-22.html",
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
+    "facebook": 1,
+    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -89,10 +106,10 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T09:43:26.597903+05:30",
+ "liveVerificationSourceAt": "2026-10-22T10:15:36.913123+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
