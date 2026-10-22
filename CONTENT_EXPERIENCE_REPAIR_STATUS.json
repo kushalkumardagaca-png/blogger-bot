@@ -2,7 +2,7 @@
   "status": "PASS",
   "mode": "FREEZE_DATA_ONLY",
   "zero_view": true,
-  "posts_checked": 591,
+  "posts_checked": 592,
   "posts_rewritten": 0,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
@@ -14,16 +14,16 @@
       "linkIndexHrefs": 12,
       "linkIndexWritten": true,
       "changed": true,
-      "beforeSha256": "a870ecfbe066bae9b435c4b090690bf20cec453c009d8e49169755be7e11eee8",
-      "afterSha256": "7b3c732f2f60294b70b268dccd32ac7bfa4a3047f810c8c8376007d0ff83a7c1"
+      "beforeSha256": "7b3c732f2f60294b70b268dccd32ac7bfa4a3047f810c8c8376007d0ff83a7c1",
+      "afterSha256": "d794b513ba933644da3c91195f7b144a7b5822539398502eff79e9678dfdde5e"
     },
     {
       "path": "/p/article.html",
-      "dataBlocks": 1,
+      "dataBlocks": 0,
       "linkIndexHrefs": 12,
       "linkIndexWritten": false,
-      "changed": true,
-      "beforeSha256": "337477ad7c9d0c1e83367c0f99d319e07a7fe741ffe7365ff8dd0e58f9c1b4aa",
+      "changed": false,
+      "beforeSha256": "8e3f65da4a73a1f16e582aada67289c7fa16b9d8217a1adc167ddb89a04ead3d",
       "afterSha256": "8e3f65da4a73a1f16e582aada67289c7fa16b9d8217a1adc167ddb89a04ead3d"
     }
   ],
