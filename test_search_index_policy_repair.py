@@ -186,6 +186,21 @@ class Revert(Fixture):
         self.assertEqual(payload["inventory"], 0,
                          "with nothing to revert there must be no API call at all")
 
+    def test_the_report_is_readable_whichever_mode_wrote_it(self):
+        payload = {"ranAt": "2026-10-22T05:00:00+00:00", "mode": "RESTORE", "inventory": 79,
+                   "planned": {"patches": 79, "unpublish": 0, "heldBack": 0, "titlesOnly": 79,
+                               "altsOnly": 0},
+                   "preview": [{"url": "https://x/p/about.html", "reasons": ["restored"], "title": "ABOUT US"}],
+                   "unpublishPreview": [], "heldPreview": [], "alsoTakenDown": ["https://x/junk.html"],
+                   "backup": "SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz", "written": 79, "failed": [],
+                   "restored": [], "applied": []}
+        text = repair.render_markdown(payload)
+        self.assertIn("RESTORE", text)
+        self.assertIn("written back to the state the previous run found", text)
+        self.assertIn("Titles deliberately not polished first", text)
+        payload["mode"] = "AUDIT_ONLY"
+        self.assertIn("deliberately left alone", repair.render_markdown(payload))
+
     def test_the_api_host_is_the_one_that_actually_changes_a_post(self):
         src = pathlib.Path(repair.__file__).read_text(encoding="utf-8")
         self.assertIn("https://www.googleapis.com/blogger/v3/blogs/", src)

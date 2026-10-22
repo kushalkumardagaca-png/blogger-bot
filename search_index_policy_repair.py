@@ -283,11 +283,16 @@ def restore(rows: list[dict], token: str) -> dict:
 
 
 def render_markdown(payload: dict) -> str:
+    head = (f"{payload['planned']['patches']} title and alt-text repairs planned · "
+            f"{payload['planned']['unpublish']} URL(s) to take down · {payload['planned']['heldBack']} "
+            "deliberately left alone")
+    if payload["mode"] == "RESTORE":
+        # A revert report has to be readable on its own: the number of URLs put back is the only thing a
+        # person needs to check before they move on.
+        head = (f"{payload['inventory']} URL(s) written back to the state the previous run found, with "
+                "each one republished in case it had been taken down")
     lines = ["# Search index policy repair", "",
-             f"**{payload['mode']}** · inventory {payload['inventory']} live URLs · "
-             f"{payload['planned']['patches']} title and alt-text repairs planned · "
-             f"{payload['planned']['unpublish']} URL(s) to take down · {payload['planned']['heldBack']} "
-             "deliberately left alone",
+             f"**{payload['mode']}** · inventory {payload['inventory']} live URLs · {head}",
              f"- written this run: **{payload.get('written', 0)}** · failed: "
              f"{len(payload.get('failed', []))} · backup of everything touched: "
              f"`{payload['backup'] or 'none (audit only)'}`", "",
@@ -300,6 +305,11 @@ def render_markdown(payload: dict) -> str:
     if payload["heldPreview"]:
         lines += ["", "## Left alone on purpose", ""]
         lines += [f"- `{row.get('url', '')}` — {row.get('why', '')[:150]}" for row in payload["heldPreview"]]
+    if payload.get("alsoTakenDown"):
+        lines += ["", "## Titles deliberately not polished first", "",
+                  "These URLs are on the takedown list, so no title patch was spent on them: a page a "
+                  "crawler is being told to forget does not need a better headline.", ""]
+        lines += [f"- `{row}`" for row in payload["alsoTakenDown"][:20]]
     lines += ["", "## The limit of a repair like this", "",
               "Titles, alt attributes and the removal of junk URLs are all mechanical, so they are fixed "
               "here. Two findings in the audit are content decisions and stay with the desk: the country "
