@@ -1,29 +1,25 @@
 {
- "generatedAt": "2026-10-22T10:15:39.738947+05:30",
+ "generatedAt": "2026-10-22T10:23:45.703153+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "articles": 7,
  "expectedPosts": 14,
- "articlesWithBothPosts": 6,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 7,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-russia",
    "title": "russia edition",
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 1,
+    "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-india",
@@ -106,10 +102,10 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T10:15:36.913123+05:30",
+ "liveVerificationSourceAt": "2026-10-22T10:23:41.805399+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 6,
+ "articlesWithExactlyTwoPosts": 7,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
