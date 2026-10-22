@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-22T20:53:50.103960+05:30",
+ "generatedAt": "2026-10-22T23:27:51.228486+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 18,
- "expectedPosts": 36,
- "articlesWithBothPosts": 18,
+ "articles": 19,
+ "expectedPosts": 38,
+ "articlesWithBothPosts": 19,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
@@ -241,13 +241,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-3",
+   "title": "Sponsor Banks, BaaS, and Plugging Digital",
+   "url": "https://dailyyield.blogspot.com/2026/10/sponsor-banks-baas-and-plugging-digital.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T20:53:37.103160+05:30",
+ "liveVerificationSourceAt": "2026-10-22T23:27:33.857509+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 18,
+ "articlesWithExactlyTwoPosts": 19,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
