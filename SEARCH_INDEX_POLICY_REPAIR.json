@@ -1,6 +1,6 @@
 {
- "ranAt": "2026-10-22T05:11:46+00:00",
- "mode": "AUDIT_ONLY",
+ "ranAt": "2026-10-22T05:15:35+00:00",
+ "mode": "APPLY",
  "inventory": 599,
  "planned": {
   "patches": 73,
@@ -14,93 +14,93 @@
   {
    "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
    "reasons": [
-    "title 'ABOUT US' -> 'Money, explained with clarity evidence numbers honesty context maths'"
+    "title 'ABOUT US' -> 'About us'"
    ],
-   "title": "Money, explained with clarity evidence numbers honesty context maths"
+   "title": "About us"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/article.html",
    "reasons": [
-    "title 'DAILY ARTICLE' -> 'Good money questions. Better answers'"
+    "title 'DAILY ARTICLE' -> 'Daily article'"
    ],
-   "title": "Good money questions. Better answers"
+   "title": "Daily article"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
    "reasons": [
-    "title 'CALCULATOR' -> 'Loan EMI calculator — every loan type'"
+    "title 'CALCULATOR' -> 'Calculator'"
    ],
-   "title": "Loan EMI calculator — every loan type"
+   "title": "Calculator"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
    "reasons": [
-    "title 'CONTACT US' -> 'Say hello namaste bonjour hola ciao salaam'"
+    "title 'CONTACT US' -> 'Contact us'"
    ],
-   "title": "Say hello namaste bonjour hola ciao salaam"
+   "title": "Contact us"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
    "reasons": [
-    "title 'DISCLAIMER' -> 'Purpose of this blog'"
+    "title 'DISCLAIMER' -> 'Disclaimer'"
    ],
-   "title": "Purpose of this blog"
+   "title": "Disclaimer"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
    "reasons": [
-    "title 'FOR CORPORATE' -> 'Break-even analysis'"
+    "title 'FOR CORPORATE' -> 'For corporate'"
    ],
-   "title": "Break-even analysis"
+   "title": "For corporate"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
    "reasons": [
-    "title 'MONEY ATLAS' -> 'The Country Money Atlas'"
+    "title 'MONEY ATLAS' -> 'Money atlas'"
    ],
-   "title": "The Country Money Atlas"
+   "title": "Money atlas"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/daily-news.html",
    "reasons": [
-    "title 'DAILY NEWS' -> 'Financial news, filed'"
+    "title 'DAILY NEWS' -> 'Daily news'"
    ],
-   "title": "Financial news, filed"
+   "title": "Daily news"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
    "reasons": [
-    "title 'PRIVACY POLICY' -> 'What is—and is not— enabled'"
+    "title 'PRIVACY POLICY' -> 'Privacy policy'"
    ],
-   "title": "What is—and is not— enabled"
+   "title": "Privacy policy"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
    "reasons": [
-    "title 'GLOBAL SNAPSHOT — MOVED' -> 'Global Snapshot has moved'"
+    "title 'GLOBAL SNAPSHOT — MOVED' -> 'Global snapshot — moved'"
    ],
-   "title": "Global Snapshot has moved"
+   "title": "Global snapshot — moved"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/markets-today.html",
    "reasons": [
-    "title 'MARKETS TODAY' -> 'World markets. One command centre'"
+    "title 'MARKETS TODAY' -> 'Markets today'"
    ],
-   "title": "World markets. One command centre"
+   "title": "Markets today"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
    "reasons": [
-    "title 'GLOBAL SNAPSHOT' -> 'Global top 25 — the shares the whole world watches'"
+    "title 'GLOBAL SNAPSHOT' -> 'Global snapshot'"
    ],
-   "title": "Global top 25 — the shares the whole world watches"
+   "title": "Global snapshot"
   },
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "reasons": [
-    "title 'TERMS AND CONDITIONS' -> 'Terms & Conditions'"
+    "title 'TERMS AND CONDITIONS' -> 'Terms and conditions'"
    ],
-   "title": "Terms & Conditions"
+   "title": "Terms and conditions"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html",
@@ -496,5 +496,739 @@
   }
  ],
  "gate": "index_policy_gate.py keeps every one of these rules on future publications",
- "backup": ""
+ "backup": "SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz",
+ "written": 73,
+ "applied": [
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "2716668129166401912",
+   "url": "https://dailyyield.blogspot.com/p/about-us_02080501126.html",
+   "title": "About us",
+   "reasons": [
+    "title 'ABOUT US' -> 'About us'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "1685707888914861815",
+   "url": "https://dailyyield.blogspot.com/p/article.html",
+   "title": "Daily article",
+   "reasons": [
+    "title 'DAILY ARTICLE' -> 'Daily article'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "7468827438203976743",
+   "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
+   "title": "Calculator",
+   "reasons": [
+    "title 'CALCULATOR' -> 'Calculator'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "4698688245681185879",
+   "url": "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
+   "title": "Contact us",
+   "reasons": [
+    "title 'CONTACT US' -> 'Contact us'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "3945823007631424733",
+   "url": "https://dailyyield.blogspot.com/p/disclaimer.html",
+   "title": "Disclaimer",
+   "reasons": [
+    "title 'DISCLAIMER' -> 'Disclaimer'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "6065205676235626846",
+   "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+   "title": "For corporate",
+   "reasons": [
+    "title 'FOR CORPORATE' -> 'For corporate'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "8572476015753638755",
+   "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
+   "title": "Money atlas",
+   "reasons": [
+    "title 'MONEY ATLAS' -> 'Money atlas'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "9217579601621666930",
+   "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+   "title": "Daily news",
+   "reasons": [
+    "title 'DAILY NEWS' -> 'Daily news'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "304220949515133754",
+   "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
+   "title": "Privacy policy",
+   "reasons": [
+    "title 'PRIVACY POLICY' -> 'Privacy policy'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "5512428640739964675",
+   "url": "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
+   "title": "Global snapshot — moved",
+   "reasons": [
+    "title 'GLOBAL SNAPSHOT — MOVED' -> 'Global snapshot — moved'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "5236051989054453802",
+   "url": "https://dailyyield.blogspot.com/p/markets-today.html",
+   "title": "Markets today",
+   "reasons": [
+    "title 'MARKETS TODAY' -> 'Markets today'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "8504888514217789256",
+   "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+   "title": "Global snapshot",
+   "reasons": [
+    "title 'GLOBAL SNAPSHOT' -> 'Global snapshot'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "3254393081257151974",
+   "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
+   "title": "Terms and conditions",
+   "reasons": [
+    "title 'TERMS AND CONDITIONS' -> 'Terms and conditions'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1504093871376035088",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html",
+   "title": "Corporate Finance and Industry News (2)",
+   "reasons": [
+    "title 'Corporate Finance and Industry News' -> 'Corporate Finance and Industry News (2)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "9150949963237525136",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html",
+   "title": "Corporate Finance and Industry News (3)",
+   "reasons": [
+    "title 'Corporate Finance and Industry News' -> 'Corporate Finance and Industry News (3)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3853953066895570500",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01760479359.html",
+   "title": "Corporate Finance and Industry News (4)",
+   "reasons": [
+    "title 'Corporate Finance and Industry News' -> 'Corporate Finance and Industry News (4)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3979313414915210815",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0978730797.html",
+   "title": "Corporate Finance and Industry News (5)",
+   "reasons": [
+    "title 'Corporate Finance and Industry News' -> 'Corporate Finance and Industry News (5)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "5944176563098972409",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0259378603.html",
+   "title": "Corporate Finance and Industry News (6)",
+   "reasons": [
+    "title 'Corporate Finance and Industry News' -> 'Corporate Finance and Industry News (6)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6338924420211395140",
+   "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-07.html",
+   "title": "Australia Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Australia Finance News · 7 October 2026 · Coverage October 6 to 7 — Australia’s housing market is definitely in a downturn – but let’s put that in perspective…' -> 'Australia Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8424036406237802934",
+   "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-07.html",
+   "title": "South Korea Finance News — 7 October 2026",
+   "reasons": [
+    "title 'South Korea Finance News · 7 October 2026 · Coverage October 6 to 7 — (2nd LD) Seoul shares end lower on tech losses amid rising bond yields; S. Korean won…' -> 'South Korea Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "2500756184123204747",
+   "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-07.html",
+   "title": "Global Finance News — 7 October 2026",
+   "reasons": [
+    "title \"Global Finance Wire · 7 October 2026 · Coverage October 6 to 7 — Market Operations by the Bank of Japan (Sept.)[XLSX 37KB]; Bank of Japan's Transactions…\" -> 'Global Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3819542896221889448",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-07.html",
+   "title": "India Finance News — 7 October 2026",
+   "reasons": [
+    "title 'India Finance News · 7 October 2026 · Coverage October 6 to 7 — Bank stocks lift indices ahead of RBI policy; Jefferies favours Indian largecap stocks…' -> 'India Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "2078401247278256120",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-07.html",
+   "title": "Market News — 7 October 2026",
+   "reasons": [
+    "title 'Market and Trading News · 7 October 2026 · Coverage October 6 to 7 — Australians Are Less Vulnerable to Rate Hikes, Deutsche Says Opens in new window; Gold…' -> 'Market News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8974318104922843334",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0694295104.html",
+   "title": "Macro Policy News — 7 October 2026",
+   "reasons": [
+    "title 'Economy and Macro Policy News · 7 October 2026 · Coverage October 6 to 7 — Bank of Japan Accounts (September 30); QatarEnergy Secures $3 Billion Loan From Four…' -> 'Macro Policy News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3109300077794838580",
+   "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-07.html",
+   "title": "Germany Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Germany Finance News · 7 October 2026 · Coverage October 6 to 7 — German bank board member to leave despite clean brothel loan probe; Germany’s pivot on…' -> 'Germany Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6144789579006508886",
+   "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-07.html",
+   "title": "France Finance News — 7 October 2026",
+   "reasons": [
+    "title \"France Finance News · 7 October 2026 · Coverage October 6 to 7 — Le Pen vows drastic budget cuts to prevent French 'default' on debt; France: between the…\" -> 'France Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6864184901007014403",
+   "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-07.html",
+   "title": "Japan Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Japan Finance News · 7 October 2026 · Coverage October 6 to 7 — Australia’s largest pension fund eyes India, Japan for private equity; Japan’s real wages…' -> 'Japan Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8655037016349971031",
+   "url": "https://dailyyield.blogspot.com/2026/10/uk-2026-10-07.html",
+   "title": "UK Finance News — 7 October 2026",
+   "reasons": [
+    "title 'UK Finance News · 7 October 2026 · Coverage October 6 to 7 — Reforming UK capital markets to ensure they work well for our economy 05/10/2026…' -> 'UK Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6406555063724104861",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-07.html",
+   "title": "China Finance News — 7 October 2026",
+   "reasons": [
+    "title 'China Finance News · 7 October 2026 · Coverage October 6 to 7 — Last chance saloon: EU presses China for a sign to prove trade talks can work; Chinese…' -> 'China Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8195532941961466665",
+   "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-07.html",
+   "title": "Spain Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Spain Finance News · 7 October 2026 · Coverage October 6 to 7 — Spain approves housing decrees that triggered snap election; What to know about Pedro…' -> 'Spain Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3906642234484602271",
+   "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-07.html",
+   "title": "Italy Finance News — 7 October 2026",
+   "reasons": [
+    "title \"Italy Finance News · 7 October 2026 · Coverage October 6 to 7 — Italy's Tax Evasion Rises in 2023, Treasury Reports Higher Estimates; Italy’s tax evasion…\" -> 'Italy Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8373179465591875563",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02075404004.html",
+   "title": "Corporate Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Corporate Finance and Industry News · 7 October 2026 · Coverage October 6 to 7 — Results of the September 2026 survey on credit terms and conditions in euro-denominated…' -> 'Corporate Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "7567295669208024780",
+   "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-07.html",
+   "title": "Brazil Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Brazil Finance News · 7 October 2026 · Coverage October 6 to 7 — Brazil’s fertilizer imports and production decline; Opinion: Brazil’s presidential…' -> 'Brazil Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "403244398836150074",
+   "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-07.html",
+   "title": "US Finance News — 7 October 2026",
+   "reasons": [
+    "title 'US Finance News · 7 October 2026 · Coverage October 6 to 7 — Iraq devalues dinar to 1,520 per US dollar, state news agency says; Heading into midterms…' -> 'US Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "7805587522923081516",
+   "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-07.html",
+   "title": "Canada Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Canada Finance News · 7 October 2026 · Coverage October 6 to 7 — Canada’s trade surplus widens substantially in August; Days after launch, Canadian…' -> 'Canada Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1267822633016363240",
+   "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-07.html",
+   "title": "Mexico Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Mexico Finance News · 7 October 2026 · Coverage October 6 to 7 — CTE Technology Advertising Co Ltd Expands into the Mexican Market, Driving the…' -> 'Mexico Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6928555553102007726",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-07.html",
+   "title": "Personal Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Personal Finance News · 7 October 2026 · Coverage October 6 to 7 — France is caught between angry students and unforgiving bond markets; IMF chief urges…' -> 'Personal Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6126351177979088020",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-07.html",
+   "title": "Russia Finance News — 7 October 2026",
+   "reasons": [
+    "title 'Russia Finance News · 7 October 2026 · Coverage October 6 to 7 — Russia budgets nearly $468 mln for farm machinery programs in 2027-2029; Russia on guard…' -> 'Russia Finance News — 7 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8091879574722465162",
+   "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-08.html",
+   "title": "Australia Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Australia Finance News · 8 October 2026 · Coverage October 7 to 8 — Major Australian gambling companies face restrictions if NT bill passes; Top 3 Australian…' -> 'Australia Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1588416772214254069",
+   "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-08.html",
+   "title": "South Korea Finance News — 8 October 2026",
+   "reasons": [
+    "title 'South Korea Finance News · 8 October 2026 · Coverage October 7 to 8 — (2nd LD) Seoul stocks down for 2nd day amid rising bond yields; S. Korean won keeps…' -> 'South Korea Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1506964555052672098",
+   "url": "https://dailyyield.blogspot.com/2026/10/global-wire-top15-2026-10-08.html",
+   "title": "Global Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Global Finance Wire · 8 October 2026 · Coverage October 7 to 8 — Amounts Outstanding in the Call Money Market (Sept.)[XLSX 33KB]; Bank of England announces…' -> 'Global Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8188495491336954127",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-08.html",
+   "title": "India Finance News — 8 October 2026",
+   "reasons": [
+    "title 'India Finance News · 8 October 2026 · Coverage October 7 to 8 — RBI raises repo rate to 5.5% in first hike under Governor Sanjay Malhotra, shifts stance…' -> 'India Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "4659526555789622713",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-08.html",
+   "title": "Market News — 8 October 2026",
+   "reasons": [
+    "title 'Market and Trading News · 8 October 2026 · Coverage October 7 to 8 — Ukraine’s losses from port downtime exceed five billion dollars; Major share market float…' -> 'Market News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1146781738200323490",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01862474054.html",
+   "title": "Macro Policy News — 8 October 2026",
+   "reasons": [
+    "title 'Economy and Macro Policy News · 8 October 2026 · Coverage October 7 to 8 — Seoul shares extend losses late Thurs. morning amid inflation worries; Budget minister…' -> 'Macro Policy News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3719754414711676298",
+   "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-08.html",
+   "title": "Germany Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Germany Finance News · 8 October 2026 · Coverage October 7 to 8 — German spy scandal threatens national security; France, Germany Call for a New Weapon…' -> 'Germany Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6464871470548798984",
+   "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-08.html",
+   "title": "France Finance News — 8 October 2026",
+   "reasons": [
+    "title \"France Finance News · 8 October 2026 · Coverage October 7 to 8 — Emmanuel Roman, head of finance giant Pimco: 'Markets are sending France a serious signal.…\" -> 'France Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6519938804499910889",
+   "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-08.html",
+   "title": "Japan Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Japan Finance News · 8 October 2026 · Coverage October 7 to 8 — IMF chief concerned about high Japan and U.S. long-term rates; Japan and Ukraine further…' -> 'Japan Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6046828668896748547",
+   "url": "https://dailyyield.blogspot.com/2026/10/uk-2026-10-08.html",
+   "title": "UK Finance News — 8 October 2026",
+   "reasons": [
+    "title 'UK Finance News · 8 October 2026 · Coverage October 7 to 8 — Wyseforte Bank /wyseforte.co.uk (new); Next UK banknotes to feature barn owls, bumblebees…' -> 'UK Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "5213255900658508187",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-08.html",
+   "title": "China Finance News — 8 October 2026",
+   "reasons": [
+    "title 'China Finance News · 8 October 2026 · Coverage October 7 to 8 — International trade in goods and services of China (BPM6, fr; German President Steinmeier…' -> 'China Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "9204978929483913360",
+   "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-08.html",
+   "title": "Spain Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Spain Finance News · 8 October 2026 · Coverage October 7 to 8 — Maricarmen, the woman who became a symbol of Spain’s housing crisis, dies at 87; Spanish…' -> 'Spain Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1243917476458440522",
+   "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-08.html",
+   "title": "Italy Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Italy Finance News · 8 October 2026 · Coverage October 7 to 8 — Building energy efficiency in Italy: one in two homes rated F or G; Companies expect…' -> 'Italy Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "4518309045726699028",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0777916234.html",
+   "title": "Corporate Finance News — 8 October 2026",
+   "reasons": [
+    "title \"Corporate Finance and Industry News · 8 October 2026 · Coverage October 7 to 8 — After a yearslong slump, China's real estate market may be set for a turnaround; Oil and…\" -> 'Corporate Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "7088831973636579413",
+   "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-08.html",
+   "title": "Brazil Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Brazil Finance News · 8 October 2026 · Coverage October 7 to 8 — Brazil boosts exports, doubles trade surplus; Flávio Bolsonaro’s plan to ‘wield the big…' -> 'Brazil Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "5976976945670049457",
+   "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-08.html",
+   "title": "US Finance News — 8 October 2026",
+   "reasons": [
+    "title 'US Finance News · 8 October 2026 · Coverage October 7 to 8 — Oil prices are jumping again. Here’s how the S&P 500 has performed on days when crude has…' -> 'US Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1124459578583235421",
+   "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-08.html",
+   "title": "Canada Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Canada Finance News · 8 October 2026 · Coverage October 7 to 8 — Canada’s oil and gas emissions dropped in 2025 despite increased production: report; SPAR…' -> 'Canada Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1987294778846987824",
+   "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-08.html",
+   "title": "Mexico Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Mexico Finance News · 8 October 2026 · Coverage October 7 to 8 — Latest Citi poll of Mexico-based analysts sees weakened peso through 2027; The MND…' -> 'Mexico Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "2086402769837356848",
+   "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-08.html",
+   "title": "Personal Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Personal Finance News · 8 October 2026 · Coverage October 7 to 8 — Amazon overhauls aging devices lineup with higher-priced Alexa tablet, dumping the budget…' -> 'Personal Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3642714645055323544",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-08.html",
+   "title": "Russia Finance News — 8 October 2026",
+   "reasons": [
+    "title 'Russia Finance News · 8 October 2026 · Coverage October 7 to 8 — IT share in Russian GDP double over six years — PM; Lack of crypto infrastructure costs…' -> 'Russia Finance News — 8 October 2026'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6416571193713380748",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
+   "title": "Banking & Personal Money News (2)",
+   "reasons": [
+    "title 'Banking & Personal Money News' -> 'Banking & Personal Money News (2)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6615935574461620333",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html",
+   "title": "Banking & Personal Money News (3)",
+   "reasons": [
+    "title 'Banking & Personal Money News' -> 'Banking & Personal Money News (3)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "4653367058767878921",
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12.html",
+   "title": "Americas Finance News — 11 October 2026 (2)",
+   "reasons": [
+    "title 'Americas Finance News — 11 October 2026' -> 'Americas Finance News — 11 October 2026 (2)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "4182636857771329459",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html",
+   "title": "Banking & Personal Money News (4)",
+   "reasons": [
+    "title 'Banking & Personal Money News' -> 'Banking & Personal Money News (4)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6440924687029284362",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_02014784419.html",
+   "title": "Banking & Personal Money News (5)",
+   "reasons": [
+    "title 'Banking & Personal Money News' -> 'Banking & Personal Money News (5)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6875432953247800043",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html",
+   "title": "Banking & Personal Money News (6)",
+   "reasons": [
+    "title 'Banking & Personal Money News' -> 'Banking & Personal Money News (6)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "2421318385064853324",
+   "url": "https://dailyyield.blogspot.com/2026/10/how-to-evaluate-healthcare-ai.html",
+   "title": "How to Evaluate Healthcare AI",
+   "reasons": [
+    "title 'How to Evaluate Healthcare AI Investments With' -> 'How to Evaluate Healthcare AI'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "5507964045091284860",
+   "url": "https://dailyyield.blogspot.com/2026/10/social-security-to-adjust-cost-of.html",
+   "title": "Social Security to Adjust Cost of Living by 3",
+   "reasons": [
+    "title 'Social Security to Adjust Cost of Living by 3.' -> 'Social Security to Adjust Cost of Living by 3'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "1603299896743938486",
+   "url": "https://dailyyield.blogspot.com/2026/10/inside-india-newsletter-billionaire.html",
+   "title": "Inside India newsletter: Billionaire",
+   "reasons": [
+    "title 'Inside India newsletter: Billionaire Ambani’s' -> 'Inside India newsletter: Billionaire'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "pages",
+   "id": "6759300713044575985",
+   "url": "https://dailyyield.blogspot.com/p/indexnow-key.html",
+   "title": "About this page — Daily Yield and Kushal Daga",
+   "reasons": [
+    "title 'indexnow-key' -> 'About this page — Daily Yield and Kushal Daga'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "3046344212324826316",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18.html",
+   "title": "Asia-Pacific Finance News — 18 October… (2)",
+   "reasons": [
+    "title 'Asia-Pacific Finance News — 18 October 2026' -> 'Asia-Pacific Finance News — 18 October… (2)'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "2274700424288194259",
+   "url": "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
+   "title": "Proposals to close Minneapolis schools",
+   "reasons": [
+    "title 'Proposals to close Minneapolis schools aimed a' -> 'Proposals to close Minneapolis schools'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "6636779080409235472",
+   "url": "https://dailyyield.blogspot.com/2026/10/cost-of-living-protests-hit-belgium.html",
+   "title": "Cost of living protests hit Belgium, Italy",
+   "reasons": [
+    "title 'Cost of living protests hit Belgium, Italy,' -> 'Cost of living protests hit Belgium, Italy'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "4156442135494572049",
+   "url": "https://dailyyield.blogspot.com/2026/10/billionaire-mukesh-ambani-launches.html",
+   "title": "Billionaire Mukesh Ambani launches",
+   "reasons": [
+    "title 'Billionaire Mukesh Ambani launches India’s' -> 'Billionaire Mukesh Ambani launches'"
+   ]
+  },
+  {
+   "action": "patch",
+   "resource": "posts",
+   "id": "8694775490549012497",
+   "url": "https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html",
+   "title": "Student Loan Interest Rates: Federal, Private",
+   "reasons": [
+    "title 'Student Loan Interest Rates: Federal, Private,' -> 'Student Loan Interest Rates: Federal, Private'"
+   ]
+  }
+ ],
+ "failed": []
 }
