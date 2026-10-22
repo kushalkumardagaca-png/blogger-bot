@@ -1,14 +1,14 @@
 {
   "status": "PASS",
-  "generated_at": "2026-10-22T07:45:06.312838+00:00",
+  "generated_at": "2026-10-22T08:45:53.688224+00:00",
   "dry_run": false,
-  "published": 1,
+  "published": 0,
   "failed": 0,
   "results": [
     {
-      "desk": "economy",
-      "status": "PASS",
-      "published": true,
+      "desk": "russia",
+      "status": "SKIPPED",
+      "published": false,
       "dry_run": false
     }
   ]
