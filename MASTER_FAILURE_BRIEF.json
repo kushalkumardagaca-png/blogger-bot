@@ -1,13 +1,13 @@
 {
- "at": "2026-10-22T18:18:24Z",
+ "at": "2026-10-22T21:04:15Z",
  "workflow": "master_trending_writer.yml",
  "kind": "trending",
  "slot": "4",
- "run": "39827221835",
+ "run": "39851917625",
  "stage": "master-v3",
  "status": "FAIL",
- "error_type": "RuntimeError",
- "error": "PUBLICATION PREFLIGHT FAILED — advice risk gate: tax rule stated as permanent fact with no date and no change notice",
+ "error_type": "ValueError",
+ "error": "MASTER V2 REJECTED — content policy: possible exposed payment-card-like number",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
