@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T08:35:31+00:00",
+ "checkedAt": "2026-10-22T20:56:22+00:00",
  "purpose": "the 13 front doors indexed at Google and Bing before 30 November 2026",
  "site": "https://dailyyield.blogspot.com/",
  "siteWrites": 0,
@@ -237,7 +237,7 @@
     "requestIndexingAvailableInUiOnly": true,
     "mobileFetch": {
      "status": 302,
-     "location": "https://www.google.com/sorry/index?continue=https://dailyyield.blogspot.com/p/money-atlas_01486068069.html&q=EgQ5mgXxGLWV59YGIi3Vr5zci3JQrMK8lF4R-FbmPXXE55nvdQWlqG0Ar3CzXpic3SC6ft92idyCHzIyAnJSWgFDYMCisKi6jtnh0gE",
+     "location": "https://www.google.com/sorry/index?continue=https://dailyyield.blogspot.com/p/money-atlas_01486068069.html&q=EgQUd2c0GNnw6dYGIi3pTMOdTFf6JlstZwXU4jf34L2IL1SYsf0JChT2u3g9cRnFe6dUuIETZWdXyLkyAnJSWgFDYI-GhYHr37ixsgE",
      "canonical": ""
     },
     "redirectCause": "redirect",
@@ -269,12 +269,12 @@
     },
     "redirectCause": "blogger-mobile-template",
     "live": {
-     "reachable": true,
-     "status": 200,
-     "canonical": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
+     "reachable": false,
+     "status": 429,
+     "canonical": "",
      "finalUrl": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html"
     },
-    "liveHops": 0,
+    "liveHops": 1,
     "staleVerdict": false
    },
    {
@@ -396,12 +396,12 @@
  "properties": {
   "status": "MEASURED",
   "visible": [
-   "sc-domain:dailyyield.blogspot.com",
-   "https://dailyyield.blogspot.com/"
+   "https://dailyyield.blogspot.com/",
+   "sc-domain:dailyyield.blogspot.com"
   ],
   "permission": {
-   "sc-domain:dailyyield.blogspot.com": "siteOwner",
-   "https://dailyyield.blogspot.com/": "siteOwner"
+   "https://dailyyield.blogspot.com/": "siteOwner",
+   "sc-domain:dailyyield.blogspot.com": "siteOwner"
   },
   "urlPrefixProperty": "siteOwner",
   "domainProperty": "siteOwner",
@@ -416,8 +416,8 @@
     "isPending": false,
     "errors": "0",
     "warnings": "0",
-    "lastSubmitted": "2026-09-25T16:49:53.274Z",
-    "lastDownloaded": "2026-10-20T23:40:31.721Z",
+    "lastSubmitted": "2026-10-22T10:02:30.517Z",
+    "lastDownloaded": "2026-10-22T10:02:31.235Z",
     "indexStatus": [],
     "indexStatusRaw": []
    },
@@ -426,8 +426,8 @@
     "isPending": false,
     "errors": "0",
     "warnings": "0",
-    "lastSubmitted": "2026-09-25T16:49:00.596Z",
-    "lastDownloaded": "2026-10-21T17:49:44.120Z",
+    "lastSubmitted": "2026-10-22T10:01:49.225Z",
+    "lastDownloaded": "2026-10-22T10:01:50.498Z",
     "indexStatus": [],
     "indexStatusRaw": []
    }
@@ -589,7 +589,7 @@
    "canonicalMatchesPage": true,
    "mobileFetchToday": {
     "status": 302,
-    "location": "https://www.google.com/sorry/index?continue=https://dailyyield.blogspot.com/p/money-atlas_01486068069.html&q=EgQ5mgXxGLWV59YGIi3Vr5zci3JQrMK8lF4R-FbmPXXE55nvdQWlqG0Ar3CzXpic3SC6ft92idyCHzIyAnJSWgFDYMCisKi6jtnh0gE",
+    "location": "https://www.google.com/sorry/index?continue=https://dailyyield.blogspot.com/p/money-atlas_01486068069.html&q=EgQUd2c0GNnw6dYGIi3pTMOdTFf6JlstZwXU4jf34L2IL1SYsf0JChT2u3g9cRnFe6dUuIETZWdXyLkyAnJSWgFDYI-GhYHr37ixsgE",
     "canonical": ""
    },
    "redirectCause": "redirect",
@@ -601,8 +601,8 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-10-02T07:17:17Z",
-   "liveStatusToday": 200,
-   "liveRedirectsToday": 0,
+   "liveStatusToday": 429,
+   "liveRedirectsToday": 1,
    "canonicalMatchesPage": true,
    "mobileFetchToday": {
     "status": 302,
@@ -839,7 +839,7 @@
  ],
  "ownerActions": [
   "Bing's URL-submission quota for this property is reported as 0. In Bing Webmaster Tools open Configuration → Basic settings and confirm the site is verified, then check Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.",
-  "5 of the redirect complaints are real right now, and they are all the same thing: Blogger answers Google's smartphone fetch with '302 -> the same URL + ?m=1', and that target declares the parameterless URL as its canonical, which is what Google files as Redirect error. One setting removes all of them: Blogger → Theme → the ⋮ beside Customize → **Mobile devices** → choose the desktop theme (do not serve a separate mobile template). The pages themselves need no change - measured today, the ?m=1 response is byte-identical to the desktop one, so a reader on a phone already receives this theme and only pays an extra hop for it. After the setting is saved, this watch re-probes both identities nightly and the complaint should clear on Google's next crawl of each URL.",
+  "5 of the redirect complaints are real right now, and they are all the same thing: Blogger answers Google's smartphone fetch with '302 -> the same URL + ?m=1', and that target declares the parameterless URL as its canonical, which is what Google files as Redirect error. There is nothing to toggle, and no page has to change. Measured on 22 October: the ?m=1 response differs from the desktop one by a single byte, its canonical points at the clean URL, and it carries no noindex - so a reader on a phone receives this same theme and pays one extra hop for it. The Theme → Mobile devices switch is not the lever (this blog was measured with the desktop theme already chosen), the same bounce happens on a custom domain, so a domain cannot trade it away, and Blogger's public API has no resource for the mobile template at all. Three changes make this worse rather than better, and none of them is a fix: a script that strips ?m=1, a robots rule that blocks ?m=1, or a mobile page that canonicalises to itself. What is left for you is the Request indexing taps on the clean URLs below; this watch re-probes both identities nightly and will report the day the complaint stops being reproducible.",
   "3 of those verdicts cannot be reproduced on the live page today, checked as a desktop fetch and as Google's smartphone fetch. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
   "Tap Request indexing for 13 main pages in the Search Console interface. There is no API for it; this is the one step only you can do."
  ],
