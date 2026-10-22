@@ -3,7 +3,7 @@
  "ok": true,
  "credentialSource": "GA4_REFRESH_TOKEN",
  "measurementId": "G-WLEEYTKV12",
- "measuredAt": "2026-10-21T21:00:11+00:00",
+ "measuredAt": "2026-10-22T21:00:48+00:00",
  "windowDays": 7,
  "propertyId": "556948096",
  "propertyIdSource": "data stream G-WLEEYTKV12 in this account, property \"Daily Yield\"",
@@ -17,18 +17,25 @@
   "installedHere": true
  },
  "totals": {
-  "views": 103,
-  "viewsPerDay": 14.7,
-  "activeUsers": 72,
-  "sessions": 80,
-  "engagedSessions": 74,
-  "dailyReaders": 8,
+  "views": 120,
+  "viewsPerDay": 17.1,
+  "activeUsers": 83,
+  "sessions": 91,
+  "engagedSessions": 86,
+  "dailyReaders": 22,
   "readersBasis": "GA4_ENGAGED_SESSIONS_LATEST_DAY",
   "readersDefinition": "engaged sessions on the most recent whole day: people who opened at least one article and did not bounce",
   "droppedFields": [],
   "daysWithRows": 7
  },
  "daily": [
+  {
+   "date": "2026-10-21",
+   "views": 32,
+   "activeUsers": 21,
+   "sessions": 22,
+   "engagedSessions": 22
+  },
   {
    "date": "2026-10-20",
    "views": 8,
@@ -70,21 +77,14 @@
    "activeUsers": 19,
    "sessions": 20,
    "engagedSessions": 19
-  },
-  {
-   "date": "2026-10-14",
-   "views": 15,
-   "activeUsers": 10,
-   "sessions": 11,
-   "engagedSessions": 10
   }
  ],
  "peak": {
-  "date": "2026-10-15",
-  "views": 31,
-  "activeUsers": 19,
-  "sessions": 20,
-  "engagedSessions": 19
+  "date": "2026-10-21",
+  "views": 32,
+  "activeUsers": 21,
+  "sessions": 22,
+  "engagedSessions": 22
  },
  "remedy": null,
  "note": "views are GA4 screenPageViews for the last 7 whole days; the blog is not modified by this job and no tag is installed by it"
