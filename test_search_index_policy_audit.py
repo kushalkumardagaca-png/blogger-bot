@@ -218,13 +218,19 @@ class WholeAudit(unittest.TestCase):
         self.assertEqual(report["summary"]["fail"], 0)
         self.assertIn("every-url-carries-a-date", [row["id"] for row in report["checks"]])
 
+    def test_the_indexnow_key_page_is_exempt_because_the_submission_needs_it(self):
+        # unpublishing this URL makes every IndexNow batch fail, so the audit may not nag about it
+        self.assertIn("indexnow-key", audit.EXEMPT_UTILITY_SLUGS)
+        self.assertNotIn("indexnow-key", audit.UTILITY_SLUGS - audit.EXEMPT_UTILITY_SLUGS)
+
     def test_the_defects_we_actually_had_are_all_seen(self):
         post = f"{BLOG}/2026/10/gold-rate-october.html"
         cut = f"{BLOG}/2026/10/student-loan-interest-rates-federal.html"
         twin_a = f"{BLOG}/2026/10/asia-news-2026-10-18.html"
         twin_b = f"{BLOG}/2026/10/asia-news-2026-10-18_01443792159.html"
         about = f"{BLOG}/p/about.html"
-        utility = f"{BLOG}/p/indexnow-key.html"
+        utility = f"{BLOG}/p/indexnow-key.html"           # exempt: IndexNow reads its key here
+        notice = f"{BLOG}/p/share-market_0718113516.html"  # a redirect notice that must not be listed
         filler = "<p>" + BODY + "</p>"
         photo = {**one(post, "Gold rate today in India"),
                  "content": {"$t": filler + '<p><img src="https://bp.blogspot.com/x/photo-1.jpg"></p>'}}
@@ -236,14 +242,17 @@ class WholeAudit(unittest.TestCase):
                 one(twin_b, "Asia Pacific Finance News — 18 October 2026")),
             "pages": entries(
                 one(about, "ABOUT US", "<p>one two three</p>"),
-                one(utility, "IndexNow key", "<p>key</p>")),
-            "/sitemap.xml": (None, sitemap([post, cut, twin_a, twin_b, utility, about])),
-            "/sitemap-pages.xml": (None, sitemap([about, utility, f"{BLOG}/"])),
+                one(utility, "IndexNow key", "<p>key</p>"),
+                one(notice, "GLOBAL SNAPSHOT - MOVED",
+                    "<p>This page moved to /p/global-snapshot.html.</p>")),
+            "/sitemap.xml": (None, sitemap([post, cut, twin_a, twin_b, utility, notice, about])),
+            "/sitemap-pages.xml": (None, sitemap([about, utility, notice, f"{BLOG}/"])),
         }
         pages = {f"{BLOG}/": page(f"{BLOG}/", "Daily Yield - personal finance and markets"),
                  post: page(post, images='<img src="https://bp.blogspot.com/q/hash0000aaaa1111bbbb.jpg">'),
                  cut: page(cut, "Student Loan Interest Rates: Federal, Private,"),
                  utility: page(utility, "IndexNow key", robots="noindex"),
+                 notice: page(notice, "GLOBAL SNAPSHOT - MOVED"),
                  about: page(about, "ABOUT US")}
         net = FakeNet(pages, feeds, robots=f"User-agent: *\nAllow: /\nSitemap: {BLOG}/sitemap.xml\n"
                       f"Sitemap: {BLOG}/sitemap-pages.xml\n")
@@ -255,7 +264,10 @@ class WholeAudit(unittest.TestCase):
                          "images-described-not-decorated", "no-blocking-robots-meta"):
             self.assertEqual(seen[check_id]["status"], "FAIL",
                              f"{check_id} missed the defect it exists to find: {seen[check_id]['detail']}")
-        self.assertIn(utility, "".join(seen["no-utility-pages-in-sitemaps"]["offenders"]))
+        offenders = "".join(seen["no-utility-pages-in-sitemaps"]["offenders"])
+        self.assertIn(notice, offenders, "a redirect notice in a sitemap must be reported")
+        self.assertNotIn("indexnow-key", offenders, "the IndexNow key page must not be reported: "
+                         "unpublishing it breaks every IndexNow submission")
         self.assertIn(cut, "".join(seen["titles-descriptive-and-complete"]["offenders"]))
         # an advisory is shown without pretending the site failed a rule it cannot change
         self.assertEqual(seen["sitemap-freshness-signals"]["fixableBy"], "platform")

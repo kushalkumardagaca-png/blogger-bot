@@ -61,6 +61,11 @@ why how what when where which who whose and""".split())
 # redirect notice that replaced an old post, and one post that a publishing bug created out of the
 # string "http://schema.org" in a JSON-LD block. All three sit in a sitemap right now.
 UTILITY_SLUGS = {"indexnow-key", "robots", "share-market_0718113516", "context-httpsschema"}
+# One of them has to stay: indexnow_submit.py sends keyLocation at {site}/p/indexnow-key.html, and
+# IndexNow rejects the whole batch when that URL stops answering. Blogger offers no way to drop a
+# single page from sitemap-pages.xml, so the key page is a documented exception, printed as one here
+# instead of being re-reported as a violation every night.
+EXEMPT_UTILITY_SLUGS = {"indexnow-key"}
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/129.0 Safari/537.36 DailyYieldPolicyAudit/1.0")
 
@@ -280,11 +285,15 @@ def audit() -> dict:
 
     # §6 §21 low-value and duplicate URLs, including the ones the platform itself publishes
     utility = [url for urls in sitemap_urls.values() for url in urls
-               if any(slug in url for slug in UTILITY_SLUGS)]
+               if any(slug in url for slug in UTILITY_SLUGS - EXEMPT_UTILITY_SLUGS)]
+    exempt = [url for urls in sitemap_urls.values() for url in urls
+              if any(slug in url for slug in EXEMPT_UTILITY_SLUGS)]
     register(checks, "no-utility-pages-in-sitemaps", "Bing §3 §21 §11 (low-value URLs)", not utility,
              f"{len(utility)} machine page, redirect notice or template artifact(s) offered for "
              "indexing: "
-             + ", ".join(url.rsplit('/', 1)[-1] for url in utility), utility, "blogger")
+             + ", ".join(url.rsplit('/', 1)[-1] for url in utility)
+             + (f" - {len(exempt)} exempt because IndexNow reads its key there" if exempt else ""),
+             utility, "blogger")
     variants = {}
     for probe, label in ((BLOG + "/", "root"), (BLOG, "root-no-slash"), (BLOG + "/index.html", "index-html"),
                          (BLOG + "/?m=1", "mobile-param")):
@@ -599,6 +608,10 @@ def run_check() -> int:
     assert UTILITY_SLUGS & {"indexnow-key"}, "utility pages must be named so they can be kept out"
     assert "context-httpsschema" in UTILITY_SLUGS, \
         "the post a publishing bug made out of a schema URL string must stay visible in the report"
+    assert UTILITY_SLUGS - EXEMPT_UTILITY_SLUGS == {"robots", "share-market_0718113516",
+                                                    "context-httpsschema"}, \
+        "the IndexNow key page must be exempt, and nothing else may join it"
+    assert "keyLocation" in Path(__file__).read_text(), "the exemption has to name the reason"
     assert MIN_WORDS > 0 and TITLE_MAX > TITLE_MIN
     pair = [{"url": BLOG + "/2026/10/india-news-2026-10-18.html", "slug": "india-news-2026-10-18.html"},
             {"url": BLOG + "/2026/10/india-news-2026-10-18_01443792159.html",

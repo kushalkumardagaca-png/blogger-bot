@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T03:37:18+00:00",
+ "checkedAt": "2026-10-22T03:38:01+00:00",
  "corpus": {
   "posts": 583,
   "pages": 14,
@@ -12,11 +12,11 @@
  },
  "summary": {
   "checks": 27,
-  "pass": 14,
-  "fail": 13,
+  "pass": 16,
+  "fail": 11,
   "advisory": 0,
   "failuresByOwner": {
-   "blogger": 4,
+   "blogger": 2,
    "repo": 8,
    "platform": 1
   }
@@ -77,14 +77,13 @@
    "guideline": "Bing §3 §21 §11 (low-value URLs)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "4 machine page, redirect notice or template artifact(s) offered for indexing: context-httpsschema_0119702296.html, context-httpsschema.html, indexnow-key.html, share-market_0718113516.html",
+   "detail": "3 machine page, redirect notice or template artifact(s) offered for indexing: context-httpsschema_0119702296.html, context-httpsschema.html, share-market_0718113516.html - 1 exempt because IndexNow reads its key there",
    "offenders": [
     "https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html",
     "https://dailyyield.blogspot.com/2026/09/context-httpsschema.html",
-    "https://dailyyield.blogspot.com/p/indexnow-key.html",
     "https://dailyyield.blogspot.com/p/share-market_0718113516.html"
    ],
-   "offenderCount": 4,
+   "offenderCount": 3,
    "fixableBy": "blogger"
   },
   {
@@ -92,7 +91,7 @@
    "guideline": "Bing §6 (canonical consolidation)",
    "status": "PASS",
    "advisory": false,
-   "detail": "1 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
+   "detail": "4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -275,7 +274,7 @@
    "guideline": "Bing §13; Google indexability",
    "status": "PASS",
    "advisory": false,
-   "detail": "5 URL(s) rendered: 0 without a title, 0 without a meta description, 1 did not answer 200 and were not judged",
+   "detail": "6 URL(s) rendered: 0 without a title, 0 without a meta description",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -285,7 +284,7 @@
    "guideline": "Bing §10; Google: indexing allowed?",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 1 did not answer 200 and were not judged",
+   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -295,7 +294,7 @@
    "guideline": "Bing §13 (heading hierarchy)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "1 sampled URL(s) without exactly one <h1>, 1 did not answer 200 and were not judged",
+   "detail": "1 sampled URL(s) without exactly one <h1>",
    "offenders": [
     "https://dailyyield.blogspot.com/p/indexnow-key.html"
    ],
@@ -307,7 +306,7 @@
    "guideline": "Bing §8 (no client-side-only content)",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) whose body text is not in the served HTML, 1 did not answer 200 and were not judged",
+   "detail": "0 sampled URL(s) whose body text is not in the served HTML",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -317,7 +316,7 @@
    "guideline": "Bing §14; Google: enhancement issues",
    "status": "PASS",
    "advisory": false,
-   "detail": "5 URL(s) sampled, 0 markup problem(s), 1 did not answer 200 and were not judged",
+   "detail": "6 URL(s) sampled, 0 markup problem(s)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -325,9 +324,9 @@
   {
    "id": "robots-allows-both-crawlers",
    "guideline": "Bing §8 §10; Google: crawl allowed?",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "HTTP 404; neither bot is blocked; declares no sitemap",
+   "detail": "HTTP 200; neither bot is blocked; declares sitemap",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -335,9 +334,9 @@
   {
    "id": "sitemaps-declared-in-robots",
    "guideline": "Bing §2; Google: referring sitemap",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "robots.txt does not name both sitemaps, so a crawler that finds robots.txt may never reach the pages sitemap (Google reports 'no referring sitemap')",
+   "detail": "both Blogger sitemaps are named in robots.txt",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
