@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T02:13:18+00:00",
+ "checkedAt": "2026-10-22T02:17:28+00:00",
  "purpose": "the 13 front doors indexed at Google and Bing before 30 November 2026",
  "site": "https://dailyyield.blogspot.com/",
  "siteWrites": 0,
@@ -103,7 +103,7 @@
    {
     "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
     "verdict": "NEUTRAL",
-    "coverageState": "URL is unknown to Google",
+    "coverageState": "Discovered - currently not indexed",
     "lastCrawlTime": "",
     "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
     "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
@@ -134,13 +134,13 @@
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
     "live": {
-     "reachable": true,
-     "status": 200,
-     "canonical": "https://dailyyield.blogspot.com/p/global-snapshot.html",
+     "reachable": false,
+     "status": 429,
+     "canonical": "",
      "finalUrl": "https://dailyyield.blogspot.com/p/global-snapshot.html"
     },
-    "liveHops": 0,
-    "staleVerdict": true
+    "liveHops": 1,
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/markets-today.html",
@@ -155,18 +155,18 @@
     "referringUrls": [],
     "requestIndexingAvailableInUiOnly": true,
     "live": {
-     "reachable": true,
-     "status": 200,
-     "canonical": "https://dailyyield.blogspot.com/p/markets-today.html",
+     "reachable": false,
+     "status": 429,
+     "canonical": "",
      "finalUrl": "https://dailyyield.blogspot.com/p/markets-today.html"
     },
-    "liveHops": 0,
-    "staleVerdict": true
+    "liveHops": 1,
+    "staleVerdict": false
    },
    {
     "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
     "verdict": "NEUTRAL",
-    "coverageState": "Discovered - currently not indexed",
+    "coverageState": "URL is unknown to Google",
     "lastCrawlTime": "",
     "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
     "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
@@ -363,6 +363,12 @@
    "sc-domain:dailyyield.blogspot.com",
    "https://dailyyield.blogspot.com/"
   ],
+  "permission": {
+   "sc-domain:dailyyield.blogspot.com": "siteOwner",
+   "https://dailyyield.blogspot.com/": "siteOwner"
+  },
+  "urlPrefixProperty": "siteOwner",
+  "domainProperty": "siteOwner",
   "urlPrefixPropertyVisible": true,
   "domainPropertyVisible": true
  },
@@ -461,7 +467,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "google": "NEUTRAL",
-   "googleCoverage": "URL is unknown to Google",
+   "googleCoverage": "Discovered - currently not indexed",
    "googleLastCrawl": "",
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
@@ -474,8 +480,8 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-09-25T16:57:09Z",
-   "liveStatusToday": 200,
-   "liveRedirectsToday": 0,
+   "liveStatusToday": 429,
+   "liveRedirectsToday": 1,
    "canonicalMatchesPage": true,
    "bing": "unreported",
    "inBoth": false
@@ -485,8 +491,8 @@
    "google": "NEUTRAL",
    "googleCoverage": "Redirect error",
    "googleLastCrawl": "2026-09-25T16:59:14Z",
-   "liveStatusToday": 200,
-   "liveRedirectsToday": 0,
+   "liveStatusToday": 429,
+   "liveRedirectsToday": 1,
    "canonicalMatchesPage": true,
    "bing": "unreported",
    "inBoth": false
@@ -494,7 +500,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
    "google": "NEUTRAL",
-   "googleCoverage": "Discovered - currently not indexed",
+   "googleCoverage": "URL is unknown to Google",
    "googleLastCrawl": "",
    "liveStatusToday": null,
    "liveRedirectsToday": 0,
@@ -592,10 +598,8 @@
   }
  ],
  "staleVerdicts": {
-  "count": 9,
+  "count": 7,
   "urls": [
-   "https://dailyyield.blogspot.com/p/global-snapshot.html",
-   "https://dailyyield.blogspot.com/p/markets-today.html",
    "https://dailyyield.blogspot.com/p/daily-news.html",
    "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
    "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
@@ -621,7 +625,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "steps": [
     "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
     "Paste the URL into the inspection box at the top",
@@ -654,7 +658,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/privacy-policy.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "steps": [
     "Open Search Console on the URL-prefix property https://dailyyield.blogspot.com/",
     "Paste the URL into the inspection box at the top",
@@ -753,7 +757,7 @@
  ],
  "ownerActions": [
   "Bing's URL-submission quota for this property is reported as 0. In Bing Webmaster Tools open Configuration → Basic settings and confirm the site is verified, then check Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.",
-  "9 of those verdicts cannot be reproduced on the live page today. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
+  "7 of those verdicts cannot be reproduced on the live page today. Do not delete, rebuild or rename those pages: the redirect that produced the verdict is already gone, and the only thing missing is a crawl. Request indexing is what asks for it.",
   "Tap Request indexing for 13 main pages in the Search Console interface. There is no API for it; this is the one step only you can do."
  ],
  "verdict": "NOT_STARTED",
