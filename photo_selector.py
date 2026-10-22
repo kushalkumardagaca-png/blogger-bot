@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Licence-safe, placement-aware, globally non-repeating editorial photography."""
 from __future__ import annotations
+import index_policy_gate
 import hashlib,html,json,re,urllib.parse
 from datetime import datetime,timezone
 from pathlib import Path
@@ -148,8 +149,14 @@ def choose_photos(briefs,slug,article_key):
   c,image,sha,ph,score=winner;w,h=image.size;target=16/9
   if w/h>target:nw=int(h*target);image=image.crop(((w-nw)//2,0,(w+nw)//2,h))
   else:nh=int(w/target);image=image.crop((0,(h-nh)//2,w,(h+nh)//2))
-  image=image.resize((1600,900),Image.Resampling.LANCZOS);path=folder/f'photo-{placement}.jpg';image.save(path,'JPEG',quality=90,optimize=True)
-  url=f'https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/{slug}/photo-{placement}.jpg';credit=f"Photo: {c['creator']} / {c['license']}"
+  image=image.resize((1600,900),Image.Resampling.LANCZOS)
+  # Bing §12 asks for unique, relevant image file names. 'photo-1.jpg' was the same string on 473 URLs,
+  # so a new article's photos now carry the slug that describes them. Posts already published keep
+  # pointing at the files they were published with, which stay in the repository: nothing here can
+  # break a live image.
+  name=index_policy_gate.asset_file_name(slug,placement)
+  path=folder/name;image.save(path,'JPEG',quality=90,optimize=True)
+  url=f'https://raw.githubusercontent.com/kushalkumardagaca-png/blogger-bot/main/assets/master/{slug}/{name}';credit=f"Photo: {c['creator']} / {c['license']}"
   # The validator rejects a photo whose rights ledger is incomplete, and a borrowed
   # pool entry spells its fields the way the pool stores them. Normalise here, in the
   # one place every path passes, so a picture either carries complete evidence or the

@@ -619,6 +619,45 @@ generator_py=(ROOT/'master_v3_generator.py').read_text()
 check('A clipped headline cannot be published as a headline',
       "kept=kept.rstrip(' ,;:." in generator_py and "tail.endswith(\"'s\")" in generator_py
       and 'Bing \u00a713' in generator_py and '12<=len(kept)<=limit' in generator_py)
+gate_py=(ROOT/'index_policy_gate.py').read_text()
+repair_py=(ROOT/'search_index_policy_repair.py').read_text()
+repair_yml=(ROOT/'.github/workflows/search_index_policy_repair.yml').read_text()
+check("The indexing-policy gate is wired into both publishers, not just documented",
+      'title = index_policy_gate.publish_title(title) or title' in (ROOT/'news_pipeline.py').read_text()
+      and 'index_policy_gate.publish_title(title)' in (ROOT/'auto_blogger_publisher.py').read_text()
+      and 'indexing policy gate held this article' in (ROOT/'auto_blogger_publisher.py').read_text()
+      and 'repair_image_alts(html, title)' in (ROOT/'auto_blogger_publisher.py').read_text()
+      and 'import index_policy_gate' in (ROOT/'news_pipeline.py').read_text()
+      and 'def check_article(' in gate_py and 'def publish_title(' in gate_py
+      and 'def alt_failures(' in gate_py and 'def near_duplicate(' in gate_py
+      and 'urllib' not in gate_py and 'requests' not in gate_py)
+check('A new article names its photographs after its own subject (Bing §12)',
+      'name=index_policy_gate.asset_file_name(slug,placement)' in (ROOT/'photo_selector.py').read_text()
+      and "assets/master/{slug}/{name}" in (ROOT/'photo_selector.py').read_text()
+      and 'def asset_file_name(' in gate_py)
+check("The whole-corpus repair can only run under the owner's recorded release",
+      "_dy_stop_if_frozen('search_index_policy_repair')" in repair_py
+      and '"search_index_policy_repair"' in (ROOT/'SITE_CHANGE_POLICY.json').read_text()
+      and '"frozen": true' in (ROOT/'SITE_CHANGE_POLICY.json').read_text()
+      and 'from bing_seo_repair import' in repair_py and 'import urllib.request' not in repair_py
+      and 'BACKUP.write_bytes' in repair_py and 'PATCH_SPACING_SECONDS' in repair_py
+      and 'protected_urls()' in repair_py and 'unpublish' in repair_py
+      and '"--check" not in _sys.argv' in repair_py)
+check('A push reports the repair plan; applying it takes a committed go-ahead that is then consumed',
+      "if [ -f SEARCH_INDEX_POLICY_REPAIR_APPLY ]; then ACTION=apply; fi" in repair_yml
+      and "git rm --quiet --ignore-unmatch SEARCH_INDEX_POLICY_REPAIR_APPLY" in repair_yml
+      and "ARGS+=(--apply)" in repair_yml
+      and "if arguments.apply and (patches or unpublished):" in repair_py)
+check('The repair proves its own plan before it is allowed near the site',
+      'python index_policy_gate.py --check' in repair_yml
+      and 'python search_index_policy_repair.py --check' in repair_yml
+      and 'python -m unittest test_index_policy_gate test_search_index_policy_repair' in repair_yml
+      and 'SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz' in repair_yml
+      and "if arguments.apply and (patches or unpublished):" in repair_py)
+check('The anti-dangling headline rule is shared, so the clip and the gate cannot drift',
+      "kept=kept.rstrip(' ,;:." in (ROOT/'master_v3_generator.py').read_text()
+      and 'def uncut_title(' in gate_py and "tail.endswith(\"'s\")" in generator_py
+      and 'MIN_DOCUMENT_WORDS' in gate_py)
 bing_py=(ROOT/'bing_url_automation.py').read_text()
 check('Bing spends any quota it grants on the front doors first and re-offers them weekly',
       'rank = 0 if item["kind"] == "home" else 1 if item["kind"] == "page" else 2' in bing_py

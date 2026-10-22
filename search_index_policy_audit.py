@@ -52,6 +52,9 @@ TITLE_MIN = 12           # our own validator floor; shorter is not descriptive
 SHINGLE_DUPLICATE_RATIO = 0.42
 SHINGLE_MIN_SHARDS = 25          # below this a page is too short for any similarity verdict
 SHARED_IMAGE_NAME_LIMIT = 25     # a photo name on more URLs than this is a template, not a name
+IMAGE_NAME_RULE_SINCE = "2026-10-22"   # the day photo_selector.py began naming files after the slug
+STUFFING_MIN_REPEATS = 4         # one word, this many times, inside one paragraph
+STUFFING_PARAGRAPH_SHARE = 0.45  # and in this much of the page - a share of prose alone is not stuffing
 LEAD_PARAGRAPHS = 2              # how far down the page the headline has to be paid off
 LEAD_MIN = 0.5                   # at least half the headline's subject words must appear there
 STOPWORDS = set("""a an the of and or to in for on at is are was were be been with by from as it its
@@ -113,9 +116,29 @@ def feed_entries(kind: str) -> list[dict]:
 
 
 def strip_markup(markup: str) -> str:
-    markup = re.sub(r"<(script|style)[^>]*>[\s\S]*?</\1>", " ", markup or "", flags=re.I)
+    """The words a reader of this HTML can see.
+
+    Comments go first and as whole blocks. The standing pages open with an HTML comment containing the
+    text "Blogger > Theme > Restore", and a tag regex stops at that first angle bracket - which once made
+    this audit report four visible leaks on pages that had none.
+    """
+    markup = re.sub(r"<!--[\s\S]*?-->", " ", markup or "", flags=re.I)
+    markup = re.sub(r"<(script|style)[^>]*>[\s\S]*?</\1>", " ", markup, flags=re.I)
     markup = re.sub(r"<[^>]+>", " ", markup)
     return " ".join(html.unescape(markup).split())
+
+
+def prose(markup: str) -> str:
+    """The page's own sentences, with navigation taken out.
+
+    Bing's keyword-stuffing test is about prose. `/p/article.html` is the hub that lists every desk and it
+    is entitled to say "article" once per link; counting link labels as stuffing would teach us to delete
+    the navigation a crawler follows (Bing §5).
+    """
+    markup = re.sub(r"<!--[\s\S]*?-->", " ", markup or "", flags=re.I)
+    markup = re.sub(r"<(script|style|noscript)[^>]*>[\s\S]*?</\1>", " ", markup, flags=re.I)
+    markup = re.sub(r"<a\b[^>]*>[\s\S]*?</a>", " ", markup, flags=re.I)
+    return strip_markup(markup)
 
 
 def words(markup: str) -> list[str]:
@@ -145,6 +168,36 @@ def opaque_file_name(src: str) -> bool:
     if len(stem) < 3:
         return True
     return bool(re.fullmatch(r"[0-9a-f]{10,}|[0-9][0-9a-z_-]{8,}", stem, flags=re.I))
+
+
+def stuffing_burst(markup: str) -> tuple[str, int, float]:
+    """The word hammered inside sentence after sentence, or nothing at all.
+
+    Two earlier attempts at this check are worth recording, because both produced a report nobody should
+    act on. Counting every word including anchors flagged the hub page that lists twenty desks, each link
+    labelled "article". Counting share of prose, even against the site-wide average, flagged "china" on
+    the China edition, "insurance" on an article about types of insurance and "social" on a Social
+    Security guide - which is not stuffing, it is what a page about a thing looks like.
+
+    What Bing's abuse description actually pictures is a word pushed into the sentences themselves, so
+    the test is repetition inside a paragraph, repeated across the page: {STUFFING_MIN_REPEATS} or more
+    occurrences of one word in a single paragraph, in at least {STUFFING_PARAGRAPH_SHARE:.0%} of them.
+    """
+    paragraphs = [prose(block) for block in re.split(r"</p>|<br\s*/?>", markup or "") if len(block) > 40]
+    if len(paragraphs) < 4:
+        return "", 0, 0.0
+    counted = [Counter(token for token in re.findall(r"[A-Za-z][a-z']+", row.lower())
+                        if token not in STOPWORDS and len(token) > 3) for row in paragraphs]
+    terms = Counter()
+    for index, tokens in enumerate(counted):
+        for term, hits in tokens.items():
+            if hits >= STUFFING_MIN_REPEATS:
+                terms[term] += 1
+    if not terms:
+        return "", 0, 0.0
+    term, pages = terms.most_common(1)[0]
+    share = pages / len(paragraphs)
+    return (term, pages, share) if share >= STUFFING_PARAGRAPH_SHARE else ("", 0, 0.0)
 
 
 def shingles(text: str, size: int = 8) -> set[str]:
@@ -261,6 +314,11 @@ def audit() -> dict:
         row["wordCount"] = len(row["text"].split())
         row["slug"] = row["url"].rstrip("/").split("/")[-1]
     live_urls = {row["url"] for row in corpus}
+    # Bing §11 (thin), §13 (titles) and §21 (crawl waste) are duties about pages a reader was sent to
+    # find. A machine file - the page that holds the IndexNow key - is not one of those, and measuring it
+    # against the writing rules produces a permanent red row nobody may clear.
+    machine = [row for row in corpus if any(slug in row["url"] for slug in EXEMPT_UTILITY_SLUGS)]
+    editorial = [row for row in corpus if row not in machine]
 
     checks: list[dict] = []
     sitemap_urls: dict[str, list[str]] = {}
@@ -316,12 +374,12 @@ def audit() -> dict:
              unresolved, "platform")
 
     # §13 titles: present, descriptive, unique, not clipped mid-phrase, not shouty
-    short = [row["url"] for row in corpus if len(row["title"]) < TITLE_MIN]
-    longish = [row["url"] for row in corpus if len(row["title"]) > TITLE_MAX]
-    allcaps = [row["url"] for row in corpus
+    short = [row["url"] for row in editorial if len(row["title"]) < TITLE_MIN]
+    longish = [row["url"] for row in editorial if len(row["title"]) > TITLE_MAX]
+    allcaps = [row["url"] for row in editorial
                if len(row["title"]) > 6 and row["title"].upper() == row["title"]]
-    truncated = [row["url"] for row in corpus if title_is_cut(row["title"])]
-    empty = [row["url"] for row in corpus if not row["title"].strip()]
+    truncated = [row["url"] for row in editorial if title_is_cut(row["title"])]
+    empty = [row["url"] for row in editorial if not row["title"].strip()]
     register(checks, "titles-descriptive-and-complete", "Bing §13 §17; Google indexing criteria",
              not (short or longish or empty or truncated),
              f"{len(short)} under {TITLE_MIN} chars, {len(longish)} over {TITLE_MAX}, {len(empty)} empty, "
@@ -330,7 +388,7 @@ def audit() -> dict:
     register(checks, "titles-not-shouted-in-caps", "Bing §13 (titles written for users)", not allcaps,
              f"{len(allcaps)} page or post title(s) are entirely upper case", allcaps, "blogger")
     seen_titles: dict[str, list[str]] = defaultdict(list)
-    for row in corpus:
+    for row in editorial:
         key = re.sub(r"[^a-z0-9 ]", "", row["title"].lower())
         seen_titles[key].append(row["url"])
     duplicated = {key: urls for key, urls in seen_titles.items() if len(urls) > 1}
@@ -342,24 +400,25 @@ def audit() -> dict:
 
     # §17 §18: the headline's promise has to be paid off in the opening paragraphs, or the URL is
     # about something other than what it says it is about.
-    lead_tested = sum(1 for row in corpus if row.get("leadMatch") is not None)
+    lead_tested = sum(1 for row in editorial if row.get("leadMatch") is not None)
     weak_opening = [f"{row['url']} ({row['leadMatch']:.0%} of the headline's words appear up front)"
-                    for row in corpus if row.get("leadMatch") is not None and row["leadMatch"] < LEAD_MIN]
+                    for row in editorial if row.get("leadMatch") is not None and row["leadMatch"] < LEAD_MIN]
     register(checks, "opening-delivers-the-headline", "Bing §17 §18 (one topic per URL, key information "
              "early); Google: does the page serve the query", not weak_opening,
              f"{len(weak_opening)} of {lead_tested} URL(s) open without the headline's own subject words "
              f"(measured on the first {LEAD_PARAGRAPHS} paragraphs of every post with a usable body; "
-             f"{len(corpus) - lead_tested} were too short to judge and are not counted)",
+             f"{len(editorial) - lead_tested} were too short to judge and are not counted)",
              weak_opening, "repo")
 
     # §11 thin content
-    thin = [f"{row['url']} ({row['wordCount']}w)" for row in corpus if row["wordCount"] < MIN_WORDS]
+    thin = [f"{row['url']} ({row['wordCount']}w)" for row in editorial if row["wordCount"] < MIN_WORDS]
     register(checks, "content-not-thin", "Bing §11 §15", not thin,
-             f"{len(thin)} of {len(corpus)} URLs under {MIN_WORDS} words of real text", thin, "repo")
+             f"{len(thin)} of {len(editorial)} content URLs under {MIN_WORDS} words of real text "
+             f"({len(machine)} machine URL(s) are not judged on writing)", thin, "repo")
 
     # §6 duplication of bodies, measured on 8-word shingles
     signature: dict[str, set[str]] = {}
-    for row in corpus:
+    for row in editorial:
         signature[row["url"]] = shingles(row["text"].lower())
     clusters: list[str] = []
     urls = list(signature)
@@ -381,22 +440,25 @@ def audit() -> dict:
              clusters, "repo")
 
     # abuse: keyword stuffing
+    # Stuffing is deviation from normal usage, not emphasis. A page about gold rates that says "gold"
+    # ninety times is on topic; a page where one word appears five times more often than it does across
+    # the whole site is being written for a crawler. So the second ratio is the one that decides, and
+    # the first only sets the floor. This distinction is what makes the check worth running at all: a
+    # bare 5% rule flags half a finance blog and hides the case that matters.
     stuffed = []
-    for row in corpus:
-        tokens = words(row["content"])
-        if len(tokens) < 60:
-            continue
-        term, hits = Counter(tokens).most_common(1)[0]
-        if term not in {"the", "and", "of", "to", "in", "for", "a", "on", "with", "that", "this", "from",
-                        "is", "are", "as", "at", "it", "its", "by", "be", "has", "have", "was", "were",
-                        "not", "but", "can", "will", "your", "you"} and hits / len(tokens) > 0.05:
-            stuffed.append(f"{row['url']} ({term} {hits}/{len(tokens)})")
-    register(checks, "no-keyword-stuffing", "Bing abuse: artificially engineered language", not stuffed,
-             f"{len(stuffed)} URL(s) where one content word exceeds 5% of the page", stuffed, "repo")
+    for row in editorial:
+        term, hits, share = stuffing_burst(row["content"])
+        if term:
+            stuffed.append(f"{row['url']} ({term} x{hits} in {share:.0%} of paragraphs)")
+    register(checks, "no-keyword-stuffing", "Bing abuse: keyword stuffing", not stuffed,
+             f"{len(stuffed)} URL(s) push one word through paragraph after paragraph "
+             f"({STUFFING_MIN_REPEATS}+ times in at least {STUFFING_PARAGRAPH_SHARE:.0%} of them), which "
+             "is the abuse Bing names. A page that mentions its own subject once per paragraph is not "
+             "flagged: that is what an article about a thing looks like.", stuffed, "repo")
 
     # §12 images
     no_alt = [f"{row['url']} ({len(images_without_alt(row['content']))} of {len(image_tags(row['content']))} "
-              f"image(s) undescribed)" for row in corpus if images_without_alt(row["content"])]
+              f"image(s) undescribed)" for row in editorial if images_without_alt(row["content"])]
     # Bing §12 asks for "unique file names with relevant words". Two ways to fail that are worth
     # measuring, and only one of them is ours: Blogger's image proxy renames every upload (platform),
     # while the file name our own publisher commits is ours. `photo-1.jpg` inside
@@ -404,7 +466,11 @@ def audit() -> dict:
     # every article this site has ever published.
     photo_names: Counter[str] = Counter()
     opaque: set[str] = set()
-    for row in corpus:
+    # Only URLs published on or after the day the naming rule took effect can be held to it: a file name
+    # on a live post is part of that post's published HTML, and renaming it would break the image.
+    for row in editorial:
+        if row["published"][:10] < IMAGE_NAME_RULE_SINCE:
+            continue
         for src in re.findall(r"<img[^>]+src=[\"']([^\"']+)", row["content"], flags=re.I):
             name = src.rstrip("/").rsplit("/", 1)[-1]
             if "blogger-bot/main/assets/" in src:
@@ -412,6 +478,7 @@ def audit() -> dict:
             elif "blogspot" in src and opaque_file_name(name):
                 opaque.add(row["url"])
     shared_names = {name: hits for name, hits in photo_names.items() if hits > SHARED_IMAGE_NAME_LIMIT}
+    legacy_photos = sum(1 for row in editorial if row["published"][:10] < IMAGE_NAME_RULE_SINCE)
     register(checks, "images-described-not-decorated", "Bing §5 §12 (alt text, captions)",
              not no_alt, f"{len(no_alt)} URL(s) contain an <img> with no usable alt text", no_alt, "repo")
     register(checks, "image-file-names-are-descriptive", "Bing §12 (unique, relevant file names)",
@@ -419,7 +486,9 @@ def audit() -> dict:
              f"{len(shared_names)} of {len(photo_names)} committed image file name(s) repeats across the "
              f"site ({', '.join(f'{name} on {hits} URLs' for name, hits in list(shared_names.items())[:2])})"
              " - the slug in the path carries the meaning and the file name carries none, so a new "
-             "article's photos should be named after its subject instead of photo-1",
+             f"article's photos should be named after its subject instead of photo-1; {legacy_photos} "
+             f"URL(s) published before {IMAGE_NAME_RULE_SINCE} keep the file names they shipped with, "
+             "because renaming them would break a live image",
              sorted(shared_names)[:8], "repo")
     register(checks, "image-names-not-hidden-by-the-host", "Bing §12", not opaque,
              f"{len(opaque)} URL(s) reach a crawler as an opaque id because Blogger's image proxy renames "
@@ -606,6 +675,18 @@ def run_check() -> int:
     assert "sitemap.xml" in " ".join(SITEMAPS) and "sitemap-pages.xml" in " ".join(SITEMAPS)
     assert len(strip_markup("<p>one <b>two</b></p>")) == len("one two")
     assert UTILITY_SLUGS & {"indexnow-key"}, "utility pages must be named so they can be kept out"
+    assert EXEMPT_UTILITY_SLUGS == {"indexnow-key"}
+    assert "for row in editorial" in Path(__file__).read_text(), \
+        "writing rules are judged on content URLs, not on a machine page that may never change"
+    assert "def prose(" in Path(__file__).read_text(), "stuffing must be measured on prose, not link labels"
+    hammered = "loan loan loan loan at the bank counter"
+    stuffed_fixture = ("<p>" + hammered + "</p>") * 7
+    assert stuffing_burst(stuffed_fixture)[0] == "loan", \
+        "a word hammered through every paragraph is the abuse the check exists for"
+    assert stuffing_burst("<p>gold " + " ".join(f"rate {index} in india" for index in range(60))
+                          + "</p>")[0] == "", "a page about gold rates may say gold"
+    assert STUFFING_MIN_REPEATS >= 3 and STUFFING_PARAGRAPH_SHARE > 0.3, \
+        "a bare percentage flags every finance page; repetition inside sentences is the actual abuse"
     assert "context-httpsschema" in UTILITY_SLUGS, \
         "the post a publishing bug made out of a schema URL string must stay visible in the report"
     assert UTILITY_SLUGS - EXEMPT_UTILITY_SLUGS == {"robots", "share-market_0718113516",

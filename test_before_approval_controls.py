@@ -55,13 +55,26 @@ class FreezeTests(unittest.TestCase):
     def test_a_release_names_one_action_one_edit_and_the_owner(self):
         # the difference between a granted correction and a hole in the freeze is the record beside it
         cfg=freeze.policy();released=cfg.get('releasedCorrections') or []
-        self.assertEqual([e.get('action') for e in released],['desk_index_redesign'])
-        entry=released[0]
-        for key in ('scope','ownerInstruction','releasedAt','limits'):
-            self.assertTrue(str(entry.get(key) or '').strip(),f"releasedCorrections[0].{key} is missing")
-        self.assertIn("Owner, 21 October 2026",entry['ownerInstruction'])
+        # Two releases exist now, and the list is still exact: a third name appearing here without the
+        # owner's sentence beside it fails this test, which is the whole point of keeping it pinned.
+        self.assertEqual([e.get('action') for e in released],
+                         ['search_index_policy_repair','desk_index_redesign'])
+        for index,entry in enumerate(released):
+            for key in ('scope','ownerInstruction','releasedAt','limits'):
+                self.assertTrue(str(entry.get(key) or '').strip(),f"releasedCorrections[{index}].{key} is missing")
+            self.assertIn('October 2026',entry['ownerInstruction'])
+            self.assertIn('Owner,',entry['ownerInstruction'])
+        repair=[e for e in released if e['action']=='search_index_policy_repair'][0]
+        self.assertIn('frozen',json.dumps(cfg))
+        self.assertIs(cfg['frozen'],True,'a release must never unfreeze the site')
+        self.assertEqual(repair['limits']['publicDailyYieldRequests'],0)
+        self.assertEqual(repair['limits']['maxTakedownsPerRun'],12)
+        self.assertIn('title',repair['limits']['allowedFields'])
+        self.assertIn('body sentences',repair['limits']['forbidden'])
         self.assertNotIn('desk_index_redesign',cfg['heldCliActions'])
         self.assertNotIn('desk_index_redesign.yml',cfg['heldWorkflows'])
+        self.assertNotIn('search_index_policy_repair',cfg['heldCliActions'])
+        self.assertNotIn('search_index_policy_repair.yml',cfg['heldWorkflows'])
         self.assertIs(cfg['frozen'],True)
     def test_nothing_else_was_let_go_along_with_it(self):
         held=freeze.policy()['heldCliActions'];workflows=freeze.policy()['heldWorkflows']

@@ -42,6 +42,7 @@ from publication_timing import NEWS_LIVE, wait_for_release
 from page_family import ensure_family
 from seo_meta import ensure_seo_meta
 from seo_hygiene import compact_title, repair_image_alts
+import index_policy_gate
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -1258,6 +1259,11 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
     # Coverage and headlines remain in the description/body; the document title
     # stays compact enough for Bing even while Blogger appends the site name.
     title = compact_title(f"{desk_title_prefix(desk)} — {publish_lead}")
+    # Bing §13 and §6, enforced where the title is built rather than hoped for: an all-caps edition
+    # line, one clipped onto a comma, or one past the length both engines truncate at is corrected here.
+    # publish_title returns the same string when the title already complies, so this is a no-op for
+    # every edition that was already right, and it can never pad a headline to fit.
+    title = index_policy_gate.publish_title(title) or title
     meta = (f"{desk_title_prefix(desk)}, coverage {coverage_lead}: "
             + "; ".join(t for t in top[:3])).strip()
     if len(meta) > 158:

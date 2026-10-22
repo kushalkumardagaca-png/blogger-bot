@@ -1,0 +1,116 @@
+name: Search index policy repair
+
+# The fix half of the 22 October 2026 instruction: the audit found 11 violations across 597 URLs and the
+# owner said to fix them all, noting that nothing is indexed yet - the one moment these edits are free.
+#
+# This job writes to the blog through the authenticated Blogger API only, and only three kinds of change:
+# a document title that breaks Bing §13 (all caps, clipped onto a comma, too long for a results page, or
+# shared with another live URL), an image with no alt text (§5 §12), and the taking-down of URLs a
+# crawler should never have been offered - machine artifacts, a redirect notice, and exact numbered
+# copies of an article that keeps its own address (§3 §6 §9). Takedowns use Blogger's own `unpublish`,
+# so each one is a click to reverse; nothing is deleted, no photo is added or removed, and no sourced
+# sentence is rewritten.
+#
+# It runs on push to its own paths and on demand, and on a push it only reports the plan: applying needs
+# the marker file SEARCH_INDEX_POLICY_REPAIR_APPLY to be committed, which is a reviewable act, and the
+# applying run deletes it so the next push is a report again. The first pass is capped: 150 title or alt repairs and
+# 12 URL takedowns per run, one request per URL, spaced, with a gzip backup of every item touched written
+# before the first write. The nightly audit then re-measures the whole corpus, so "fixed" is a number
+# from an independent run rather than a claim from the job that made the change.
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "audit reports the plan, apply writes it"
+        required: true
+        type: choice
+        options: ['audit', 'apply']
+        default: 'audit'
+      maxPatches:
+        description: "how many URLs this run may rewrite (0 for the default 150)"
+        required: false
+        type: string
+        default: '0'
+      only:
+        description: "all, or one class of fix"
+        required: false
+        type: choice
+        options: ['all', 'titles', 'alts', 'junk']
+        default: 'all'
+  push:
+    branches: [main]
+    paths:
+      - 'search_index_policy_repair.py'
+      - 'index_policy_gate.py'
+      - '.github/workflows/search_index_policy_repair.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-search-index-policy-repair
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Prove the gate and the plan builder before either is trusted
+        run: |
+          python index_policy_gate.py --check
+          python search_index_policy_repair.py --check
+          python -m unittest test_index_policy_gate test_search_index_policy_repair
+      - name: Plan or apply, under the owner's recorded release
+        shell: bash
+        env:
+          ACTION: ${{ github.event.inputs.action || 'apply' }}
+          MAXPATCH: ${{ github.event.inputs.maxPatches || '0' }}
+          ONLY: ${{ github.event.inputs.only || 'all' }}
+        run: |
+          set -euo pipefail
+          ARGS=(--only "${ONLY}")
+          if [ "${MAXPATCH}" != "0" ] && [ -n "${MAXPATCH}" ]; then ARGS+=(--max-patches "${MAXPATCH}"); fi
+          # A push never writes to the blog. The go-ahead is a commit that adds the marker file
+          # SEARCH_INDEX_POLICY_REPAIR_APPLY, which is the diff a reviewer can see and revert; the run
+          # that consumes it removes it again, so the next push plans without applying.
+          if [ -f SEARCH_INDEX_POLICY_REPAIR_APPLY ]; then ACTION=apply; fi
+          if [ "${ACTION}" = "apply" ]; then ARGS+=(--apply); fi
+          python search_index_policy_repair.py "${ARGS[@]}"
+      - name: Persist the plan, the report and the evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Arena Controller"
+          git config user.email "dailyyield.official@gmail.com"
+          mkdir -p /tmp/dy-repair
+          for f in SEARCH_INDEX_POLICY_REPAIR.json SEARCH_INDEX_POLICY_REPAIR.md \
+                   SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz; do
+            cp "$f" /tmp/dy-repair/ 2>/dev/null || true
+          done
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/dy-repair/* . 2>/dev/null || true
+            git add SEARCH_INDEX_POLICY_REPAIR.json SEARCH_INDEX_POLICY_REPAIR.md \
+                    SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz 2>/dev/null || true
+            # Consume the go-ahead in the same commit that records the writes: delete the marker file
+            # itself (not just the index entry, which a following add would put back), so the next push
+            # to these paths reports a plan instead of applying another batch nobody reviewed.
+            git rm --quiet --ignore-unmatch SEARCH_INDEX_POLICY_REPAIR_APPLY >/dev/null 2>&1 || true
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record the search index policy repair [skip ci]" || true
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          exit 1

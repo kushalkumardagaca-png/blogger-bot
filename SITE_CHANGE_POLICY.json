@@ -58,6 +58,17 @@
   ],
   "essentialPublicCorrections": "Confirmed issue, smallest tested edit, retained backup and explicit approval; no batch redesign or force/env bypass. A named release for one action is recorded in releasedCorrections; removing a name from heldCliActions without one changes nothing.",
   "releasedCorrections": [
+  {
+   "action": "search_index_policy_repair",
+   "releasedAt": "2026-10-22T03:58:00+00:00",
+   "scope": "document titles, image alt attributes, and taking down machine-artifact or exact-twin URLs only, on the authenticated Blogger API, batch-capped, with a full backup written before the first change. No photo is added or removed, no sourced sentence is rewritten, no theme, no label set, no schedule, and no bulk deletion.",
+   "ownerInstruction": "Owner, 22 October 2026: 'Fix everything in all the current pages and post ...I know you can do it ... Don't worry I have not indexed any of the pages or post ...so once you fix everything..solve each and every issues.. make sure every page and post complies both the policies page ... Also make to make nessasary changes in the automotion so that these policies are complied in future post, article etc'",
+   "limits": {"maxPatchesPerRun": 150, "maxTakedownsPerRun": 12, "requestSpacingSeconds": 1.5,
+              "backupBeforeFirstWrite": true, "endpoint": "www.googleapis.com/blogger/v3 only",
+              "publicDailyYieldRequests": 0, "allowedFields": ["title", "content (alt attributes only)"],
+              "forbidden": ["body sentences", "photos", "labels", "theme", "schedules", "bulk delete"]},
+   "evidence": "SEARCH_INDEX_POLICY_AUDIT.json (11 violations over 597 URLs, 22 Oct 2026) and SEARCH_INDEX_POLICY_REPAIR.json for what was written"
+  },
     {
       "action": "desk_index_redesign",
       "releasedAt": "2026-10-21T11:05:00+00:00",

@@ -65,6 +65,7 @@ from publication_preflight import assert_publishable
 from editorial_integrity import assert_green_operating_state,assert_saved_green,find_duplicate,stamp
 from page_family import ensure_family
 from seo_hygiene import compact_title, repair_image_alts
+import index_policy_gate
 from seo_meta import ensure_seo_meta
 from reader_value_article import build as build_reader_value_article
 
@@ -211,6 +212,12 @@ def main():
     article_topic["Category"] = category
     title, slug, meta_desc, labels, html = build_reader_value_article(article_topic, pub_date_str, pub_time_str)
 
+    # Indexing-policy gate, 22 October 2026 (Bing §13). The title is corrected where it is still just a
+    # string: a document title in caps, cut onto a comma, or longer than a results page shows is fixed
+    # here so every later step - the family block, the related shelf, the ledger - sees the same headline
+    # the reader and the crawler will. publish_title returns the input unchanged when it already complies.
+    title = index_policy_gate.publish_title(title) or title
+
     # Master V2 already contains contextual links, a measured 10–15-item discovery
     # shelf, a separate follow section and the family directory in the required order.
     master_v2 = '<!-- DY_MASTER_V2 -->' in html
@@ -232,6 +239,20 @@ def main():
         html = ensure_related_articles(html, current_post, related_candidates)
         html = ensure_family(html)
     html = ensure_continuous_motion(html)
+    # The rest of the gate runs on the finished document, because this is the last moment it is still
+    # local: related-article cards, the family page and the motion block each add markup after the
+    # builder returns, and an image that arrives through one of them must be measured before the URL
+    # exists rather than after. Anything repairable is repaired here; what survives is a reason not to
+    # publish - a held slot costs one edition, a live post costs a correction on a crawler's record.
+    html, _alts_repaired = repair_image_alts(html, title)
+    _blocking = list(index_policy_gate.title_problems(title))
+    _missing_alts = index_policy_gate.alt_failures(html)
+    if _missing_alts:
+        _blocking.append(f"{_missing_alts} image(s) still without alt text after repair")
+    # Thinness is not re-measured here: assert_publishable and the master validator already enforce the
+    # per-section word floor, and a second copy of that rule in the publisher only ever fires on a stub.
+    if _blocking:
+        raise RuntimeError("indexing policy gate held this article: " + "; ".join(_blocking))
     assert_publishable(title, html, labels)
 
     # Always rebuild with the current date, identity and schema. Old precompiled

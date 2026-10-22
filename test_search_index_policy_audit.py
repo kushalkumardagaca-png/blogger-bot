@@ -21,7 +21,19 @@ from unittest import mock
 import search_index_policy_audit as audit
 
 BLOG = audit.BLOG
-BODY = " ".join(f"settlement figure {index} moved on the desk before the bell" for index in range(90))
+
+
+def varied(count: int) -> str:
+    """Distinct words, so a fixture is not accidentally 'stuffed' by its own filler.
+
+    The stuffing rule counts one word's share of the prose, and any repeated template sentence crosses
+    5% immediately. A clean fixture has to be clean for every reason at once, or the test that says "no
+    violations" is really testing the wrong thing.
+    """
+    return " ".join(f"{chr(97 + (i // 26) % 26)}{chr(97 + i % 26)}tion" for i in range(count))
+
+
+BODY = varied(420)
 
 
 def entries(*items: dict) -> dict:
@@ -105,15 +117,11 @@ def clean_setup() -> tuple[FakeNet, dict]:
     # long enough to clear the thin line on purpose: a clean fixture has to be clean, or the test for
     # "no violations" proves nothing
     gold = ("<p>Gold rate today in India rose with bullion in London and the rupee eased against the "
-            "dollar, so the MCX contract settled higher while the premium over spot narrowed to a "
-            "dollar and a half per ten grams, and jewellers reported the wedding order book filling "
-            "faster than the previous month.</p>")
+            "dollar.</p><p>" + varied(300) + "</p>")
     about = ("<p>Daily Yield is written by a chartered accountant who covers rates, funds and household "
-             "money, every claim is tied to a named source, the desk publishes no sponsored posts, and "
-             "the correction policy sits on this page so a reader can see what was wrong and when it was "
-             "fixed rather than trusting an unmarked rewrite.</p>")
-    feeds = {"posts": entries(one(post, "Gold rate today in India", gold * 10)),
-             "pages": entries(one(f"{BLOG}/p/about.html", "About Daily Yield", about * 10))}
+             "money.</p><p>" + varied(300).replace("tion", "ment") + "</p>")
+    feeds = {"posts": entries(one(post, "Gold rate today in India", gold)),
+             "pages": entries(one(f"{BLOG}/p/about.html", "About Daily Yield", about))}
     feeds["/sitemap.xml"] = (None, sitemap([post]))
     # the pages sitemap lists only the page: Blogger never offers the homepage in a sitemap, and a
     # URL listed but not published is itself a violation the audit has to catch
@@ -168,6 +176,15 @@ class Detectors(unittest.TestCase):
     def test_opaque_file_names_are_named_not_assumed(self):
         self.assertTrue(audit.opaque_file_name("https://bp.blogspot.com/abcd1234ef567890.jpg"))
         self.assertFalse(audit.opaque_file_name("https://cdn.example.com/gold-rate-october-2026.png"))
+
+    def test_a_word_normal_for_this_site_is_not_stuffing(self):
+        # a markets desk says "market" a lot; that is subject matter, not keyword stuffing
+        self.assertGreaterEqual(audit.STUFFING_MIN_REPEATS, 3)
+        self.assertTrue(callable(audit.prose))
+        hub = ("<p>" + " ".join(f"gold {index} rate settled higher" for index in range(60)) + "</p>"
+               + "".join(f'<a href="/x{i}">article {i} here</a>' for i in range(200)))
+        self.assertNotIn("article", audit.prose(hub).lower(),
+                        "link labels are navigation and must not be counted as prose")
 
     def test_sitemap_entries_are_read_as_urls(self):
         raw = sitemap([f"{BLOG}/a.html", f"{BLOG}/b.html"])
