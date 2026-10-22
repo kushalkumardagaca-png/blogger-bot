@@ -1,12 +1,12 @@
-# Headline repair · 2026-10-21T20:54:32+00:00
+# Headline repair · 2026-10-22T20:54:40+00:00
 
 Mode: **APPLIED**
 
-- live posts scanned: **578**
-- titles cut off by the old 46-character cap: **1**
+- live posts scanned: **598**
+- titles cut off by the old 46-character cap: **0**
 - recoverable from the article's own heading: **0**
-- held back because the recovered title already exists: **1**
-- posts showing a heading the site could carry as a title untouched: **578** (a longer heading is trimmed to its longest whole-word opening inside 12-46 characters rather than published as-is)
+- held back because the recovered title already exists: **0**
+- posts showing a heading the site could carry as a title untouched: **598** (a longer heading is trimmed to its longest whole-word opening inside 12-46 characters rather than published as-is)
 - selected for this run: **0** (cap 40)
 - headlines written back: **0**
 
