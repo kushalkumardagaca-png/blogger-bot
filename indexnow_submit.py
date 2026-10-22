@@ -19,6 +19,8 @@ from __future__ import annotations
 import argparse
 import json
 import os
+
+import index_policy_gate
 import time
 import urllib.error
 import urllib.request
@@ -93,8 +95,21 @@ def sitemap_urls() -> list[str]:
 def submit(urls: list[str], apply: bool) -> dict:
     state = load(STATE, {"submitted": {}, "pending": [], "history": []})
     key = os.environ.get("INDEXNOW_KEY", "").strip()
-    clean = [u for u in dict.fromkeys(urls) if u.startswith(SITE)]
-    result = {"requested": len(clean), "sent": 0, "results": []}
+    # One normalisation, applied to every URL before it leaves: the ?m=1 and #fragment variants of a page
+    # are the same document behind a redirect, and submitting them spends quota to tell a crawler to fetch
+    # a 302. index_policy_gate.canonical_url is the shared rule, so the gate, Bing and IndexNow cannot
+    # disagree about which address a page has.
+    normalised, corrected = [], 0
+    for candidate in dict.fromkeys(urls):
+        clean_url, changed = index_policy_gate.canonical_url(candidate)
+        if not clean_url.startswith(SITE):
+            continue
+        if changed:
+            corrected += 1
+        if clean_url not in normalised:
+            normalised.append(clean_url)
+    clean = normalised
+    result = {"requested": len(clean), "sent": 0, "results": [], "normalised": corrected}
     if not clean:
         # Keep the queue on disk even on a quiet run, so a later run (or a missing
         # secret) can still see what is waiting.

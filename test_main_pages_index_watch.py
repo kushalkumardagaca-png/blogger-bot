@@ -487,5 +487,72 @@ class LiveVerdict(unittest.TestCase):
         self.assertIn("quota read failed", view["detail"])
 
 
+class MobileIdentity(unittest.TestCase):
+    """The mistake these tests exist to prevent: one identity, one answer, wrong advice.
+
+    For six weeks the watch reported that Google's redirect complaints could not be reproduced. They
+    could, every day - a desktop fetch gets the document while a mobile fetch gets `302 -> the same URL
+    + ?m=1`, and mobile-first Google asks as a phone. So a redirect-family verdict is only stale when
+    both answers are clean, and when the mobile answer bounces the watch has to name the setting behind
+    it instead of telling the owner to wait for a crawl.
+    """
+
+    url = f"{BLOG}/p/daily-news.html"
+
+    def test_a_bounce_only_a_phone_sees_is_not_a_stale_verdict(self):
+        row = {"url": self.url, "verdict": "NEUTRAL", "coverageState": "Redirect error",
+               "lastCrawlTime": "2026-10-20T02:00:00Z"}
+        clean_desktop = {"reachable": True, "status": 200, "hops": [], "canonical": self.url}
+        self.assertTrue(watch.stale_verdict(row, clean_desktop, True),
+                        "with both identities clean it is a crawl that is missing")
+        bounce = {"status": 302, "location": self.url + "?m=1", "canonical": self.url}
+        self.assertFalse(watch.stale_verdict(row, clean_desktop, True, bounce),
+                         "Google still hits the redirect, so it may not be called stale")
+
+    def test_the_cause_is_named_so_the_action_can_point_at_a_switch(self):
+        bounce = {"status": 302, "location": self.url + "?m=1", "canonical": self.url}
+        self.assertEqual(watch.redirect_cause(self.url, bounce), "blogger-mobile-template")
+        direct = {"status": 200, "location": "", "canonical": self.url}
+        self.assertEqual(watch.redirect_cause(self.url, direct), "")
+        away = {"status": 301, "location": "https://elsewhere.test/x", "canonical": ""}
+        self.assertEqual(watch.redirect_cause(self.url, away), "redirect",
+                         "a real move is not the template setting and must not get that advice")
+
+    def test_the_owner_is_told_what_to_turn_and_why_it_is_safe(self):
+        targets = watch.main_page_targets([self.url])
+        rows = [{"url": row["url"], "verdict": "NEUTRAL", "coverageState": "Redirect error",
+                 "redirectCause": "blogger-mobile-template" if row["url"] == self.url else "",
+                 "mobileFetch": {"status": 302, "location": self.url + "?m=1", "canonical": self.url}}
+                for row in targets]
+        report = watch.build_report(targets=targets,
+                                    properties={"status": "MEASURED", "visible": [BLOG + "/"],
+                                                "urlPrefixPropertyVisible": True,
+                                                "domainPropertyVisible": True},
+                                    sitemaps={"status": "MEASURED", "registered": [], "missing": []},
+                                    registration={"submittedNow": [], "failed": []},
+                                    rows=rows,
+                                    bing={"status": "MEASURED", "seen": {}, "quota": {},
+                                          "notReported": [], "detail": ""},
+                                    today=dt.date(2026, 10, 22))
+        joined = "\n".join(report["ownerActions"])
+        self.assertIn("Mobile devices", joined, "the switch has to be named, not the symptom")
+        self.assertIn("?m=1", joined)
+        rendered = watch.render_markdown(report)
+        self.assertIn("What a phone is told today", rendered)
+        self.assertIn("m=1", rendered)
+
+    def test_the_mobile_identity_is_a_browser_and_never_a_crawler(self):
+        self.assertIn("Mobile", watch.MOBILE_PROBE_UA)
+        for needle in ("Googlebot", "bot.html", "BingPreview"):
+            self.assertNotIn(needle, watch.MOBILE_PROBE_UA,
+                             needle + " would impersonate a service, which is what got us throttled")
+
+    def test_the_mobile_probe_refuses_to_follow_the_redirect(self):
+        source = Path(watch.__file__).read_text(encoding="utf-8")
+        body = source.split("def mobile_probe")[1].split("def redirect_cause")[0]
+        self.assertIn("_NoRedirect", body, "the first hop is the answer; following it hides the defect")
+        self.assertIn("MOBILE_PROBE_UA", body, "an honest browser identity, never a crawler's")
+
+
 if __name__ == "__main__":
     unittest.main()

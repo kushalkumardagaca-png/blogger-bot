@@ -76,12 +76,30 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/129.0 Safari/537.36 DailyYieldPolicyAudit/1.0")
 
 
-def get(url: str, timeout: int = 45) -> tuple[int, str]:
-    request = urllib.request.Request(url, headers={"User-Agent": UA})
+# A reader on a phone, and nothing grander: Blogger's behaviour differs by identity, so the identity has
+# to be named for the difference to be measured. Never a crawler's user-agent - this audit reads the site
+# as a reader does, and impersonating Google or Bing to prove a point is how a runner gets throttled.
+MOBILE_PROBE_UA = ("Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) "
+                   "Chrome/120.0.0.0 Mobile Safari/537.36")
+
+
+def get(url: str, timeout: int = 45, *, user_agent: str = UA, trace: dict | None = None) -> tuple[int, str]:
+    """The only place in this file that opens a connection, on purpose.
+
+    `user_agent` is a read-only option, so a check can ask the same address as a different kind of client.
+    `trace` is an optional dict the caller hands in and this function fills with the address the redirect
+    chain actually ended on: the audit's rule is one network path, and learning "was I moved?" has to come
+    through it rather than through a second opener that a test could not intercept.
+    """
+    request = urllib.request.Request(url, headers={"User-Agent": user_agent})
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
+            if trace is not None:
+                trace["finalUrl"] = str(getattr(response, "geturl", lambda: url)())
             return int(getattr(response, "status", 200)), response.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as exc:
+        if trace is not None:
+            trace["finalUrl"] = str(getattr(exc, "url", "") or url)
         return int(exc.code), ""
     except (urllib.error.URLError, OSError, ValueError):
         return 0, ""
@@ -225,6 +243,30 @@ def title_is_cut(title: str) -> bool:
     return bool(CUT_TAIL.search((title or "").strip()))
 
 
+def mobile_answer(url: str) -> dict:
+    """Fetch one address as a phone would and report where the client ended up.
+
+    A search engine does not grade a page it had to be redirected to, so "the document arrived at the URL
+    that was asked for" is the fact worth measuring. Blogger with a separate mobile template answers a
+    mobile request with `302 -> the same URL + ?m=1`; the redirect is followed (one network path, as
+    everywhere in this file) and the address it landed on is what makes the finding.
+    """
+    trace: dict = {}
+    code, markup = get(url, user_agent=MOBILE_PROBE_UA, trace=trace)
+    final = str(trace.get("finalUrl") or url)
+    return {"status": code, "finalUrl": final, "canonical": rendered_probe_head_canonical(markup),
+            "moved": final.split("#", 1)[0].rstrip("/") != url.split("#", 1)[0].rstrip("/")}
+
+
+def rendered_probe_head_canonical(markup: str) -> str:
+    for tag in re.findall(r"<link\b[^>]*>", markup or "", flags=re.I):
+        if "canonical" in tag.lower():
+            match = re.search(r"href=['\"]([^'\"]+)", tag)
+            if match:
+                return html.unescape(match.group(1))
+    return ""
+
+
 def image_tags(markup: str) -> list[str]:
     return re.findall(r"<img\b[^>]*>", markup or "", flags=re.I)
 
@@ -361,6 +403,41 @@ def audit() -> dict:
         result = rendered_probe(probe)
         variants[label] = {"url": probe, "status": result["status"], "canonical": result["canonical"],
                            "sameContentAs": None}
+    # Mobile-first indexing, measured rather than assumed: since Google renders and canonicalises the
+    # smartphone response, a URL that only answers a *desktop* fetch directly is not indexable, however
+    # clean its markup is. This is how 453 of 455 URLs on this blog were reported on 22 October: Blogger
+    # with a separate mobile template answers every mobile request with "302 -> the same URL + ?m=1", and
+    # that target declares the parameterless URL as its canonical, so the crawler is redirected to a page
+    # that says the URL it came from is the real one. Google files that as Redirect error on pages and as
+    # Alternate page with proper canonical on posts, and keeps inventing ?m=1 URLs in "Discovered".
+    bounced: list[str] = []
+    probed: list[str] = []
+    rate_limited = 0
+    for candidate in ([BLOG + "/", BLOG + "/p/daily-news.html", BLOG + "/p/indexnow-key.html"]
+                      + ([str(posts[0]["url"])] if posts else [])):
+        if not candidate:
+            continue
+        probed.append(candidate)
+        answer = mobile_answer(candidate)
+        if int(answer.get("status") or 0) == 429:
+            rate_limited += 1
+        elif answer.get("moved"):
+            back = (f", which declares {answer['canonical']} as its canonical - the address that was "
+                    "asked for" if answer.get("canonical") and
+                    answer["canonical"].rstrip("/") == candidate.rstrip("/") else "")
+            bounced.append(f"{candidate.rsplit('/', 1)[-1] or candidate} -> "
+                           f"{answer['finalUrl'].rsplit('/', 1)[-1]}{back}")
+        time.sleep(SAMPLE_SPACING_SECONDS)
+    register(checks, "mobile-first-fetch-is-direct", "Google indexing (mobile-first), Bing §6",
+             not bounced,
+             f"{len(probed) - len(bounced)} of {len(probed)} addresses answer a mobile fetch with the "
+             "document directly"
+             + (f" ({rate_limited} rate limited, not counted)" if rate_limited else "")
+             + (": a mobile client is redirected to " + ", ".join(row.split(" -> ")[1] for row in bounced[:2])
+                + ", which canonicalises back to the URL it came from - Google's own verdict on that chain "
+                  "is Redirect error, and no content work clears it; the setting is Blogger -> Theme -> "
+                  "Mobile devices" if bounced else ""),
+             bounced, "blogger")
     time.sleep(SAMPLE_SPACING_SECONDS)
     # A variant that answers 404 or redirects is already consolidated - only a second URL that serves
     # the page itself while pointing its canonical somewhere else is the duplicate Bing §6 describes.

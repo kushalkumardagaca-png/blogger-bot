@@ -578,6 +578,9 @@ check('The thirteen main pages have a scoreboard that repairs sitemap registrati
       and 'Request indexing' in watch_py and 'indexing.googleapis.com' not in watch_py
       and 'blogger.googleapis.com' not in watch_py
       and 'def live_probe' in watch_py and 'notMeasured' in watch_py
+      and 'def mobile_probe' in watch_py and 'def redirect_cause' in watch_py
+      and 'MOBILE_PROBE_UA' in watch_py and 'row["url"] in published, mobile)' in watch_py
+      and 'blogger-mobile-template' in watch_py
       and 'time.sleep(LIVE_PROBE_SPACING_SECONDS)' in watch_py
       and 'LIVE_PROBE_CAP = 6' in watch_py and 'def blogger_page_state' in watch_py
       and '+http://www.google.com/bot.html' not in watch_py
@@ -597,7 +600,8 @@ check("Every URL is judged against Bing and Google indexing rules, not against a
           'no-keyword-stuffing', 'images-described-not-decorated', 'no-double-published-urls',
           'opening-delivers-the-headline', 'structured-data-matches-the-page',
           'no-blocking-robots-meta', 'robots-allows-both-crawlers', 'sitemaps-declared-in-robots',
-          'updated-pages-are-still-substantial', 'every-url-carries-a-date')),
+          'updated-pages-are-still-substantial', 'every-url-carries-a-date',
+          'mobile-first-fetch-is-direct')),
       'a guideline check was dropped from the audit')
 check('The policy audit is read-only and never counts a platform limit as our violation',
       'method=' not in policy_py.replace('method="GET"', '')
@@ -635,6 +639,15 @@ check('A new article names its photographs after its own subject (Bing §12)',
       'name=index_policy_gate.asset_file_name(slug,placement)' in (ROOT/'photo_selector.py').read_text()
       and "assets/master/{slug}/{name}" in (ROOT/'photo_selector.py').read_text()
       and 'def asset_file_name(' in gate_py)
+check('A phone is asked directly, and no URL leaves the site in a parameterised form',
+      'def mobile_answer(' in policy_py and 'MOBILE_PROBE_UA' in policy_py
+      and 'user_agent=MOBILE_PROBE_UA' in policy_py and policy_py.count('urllib.request.Request(')==1
+      and 'def canonical_url(' in gate_py and 'index_policy_gate.canonical_url' in
+      (ROOT/'indexnow_submit.py').read_text()
+      and 'Googlebot' not in policy_py.split('MOBILE_PROBE_UA')[1][:600]
+      and 'Googlebot' not in watch_py.split('MOBILE_PROBE_UA')[1][:600],
+      'mobile-first indexing means the smartphone answer is the indexable one: a page that only answers a '
+      'desktop fetch is reported by Google as a redirect, and a submitted ?m=1 URL asks for that redirect')
 check("The whole-corpus repair can only run under the owner's recorded release",
       "_dy_stop_if_frozen('search_index_policy_repair')" in repair_py
       and '"search_index_policy_repair"' in (ROOT/'SITE_CHANGE_POLICY.json').read_text()

@@ -345,6 +345,46 @@ def most_used_word(markup: str) -> tuple[str, float]:
     return (word, share) if share >= STUFFING_PARAGRAPH_SHARE else ("", 0.0)
 
 
+def canonical_url(value: str) -> tuple[str, bool]:
+    """The one address a Blogger URL has, and whether this one had to be corrected.
+
+    Blogger serves the same document at `?m=1` and declares the parameterless URL as its canonical, which
+    is right for readers and wrong to submit: an IndexNow or Bing submission of a parameterised URL asks a
+    crawler to fetch a redirect, and Google answers that pattern with "Redirect error" or "Alternate page
+    with proper canonical" instead of indexing anything. So every URL leaving this repository for a search
+    engine is normalised here first - https where it has a host, no mobile parameter, no fragment - and
+    the second value says whether a change was made, so the run can report it instead of silently editing.
+
+    Parsed by hand, deliberately: this module imports nothing but html, json, re and collections, which is
+    what lets a source scan prove the gate never reaches the network (test_index_policy_gate.Boundaries),
+    and the rule only has to tell a scheme, a host, a path, a query and a fragment apart. A query parameter
+    we do not recognise is left alone: this is a de-duplicator, not a cleaner with opinions about analytics.
+    """
+    raw = str(value or "").strip()
+    if not raw:
+        return "", False
+    scheme, sep, rest = raw.partition("://")
+    if not sep:
+        scheme, rest = "", raw
+    rest = rest.split("#", 1)[0]
+    query = ""
+    if "?" in rest:
+        rest, _, query = rest.partition("?")
+    keep = [pair for pair in query.split("&") if pair and not re.fullmatch(r"m=[01]", pair)]
+    if not sep:
+        path = rest
+        netloc = ""
+    else:
+        netloc = rest.split("/", 1)[0]
+        path = rest[len(netloc):]
+    if sep and scheme.lower() == "http":
+        scheme = "https"
+    out = (f"{scheme}://{netloc}" if sep else "") + (path or ("/" if sep else ""))
+    if keep:
+        out += "?" + "&".join(keep)
+    return out, out != raw
+
+
 def asset_file_name(slug: str, placement: int) -> str:
     """Name a photo after its subject, in its own words (Bing §12: unique, relevant file names).
 
@@ -433,6 +473,21 @@ def self_test() -> dict:
     if most_used_word(hammered)[0] not in ("best", "loan"):
         failures.append({"value": most_used_word(hammered),
                          "wanted": "a term pushed through every paragraph must be caught"})
+    normalised, changed = canonical_url("http://dailyyield.blogspot.com/p/daily-news.html?m=1#top")
+    if normalised != "https://dailyyield.blogspot.com/p/daily-news.html" or not changed:
+        failures.append({"value": [normalised, changed],
+                         "wanted": "a search-engine submission must carry the canonical address only - "
+                                    "the ?m=1 variant is a redirect away from the page Google indexes"})
+    kept, _ = canonical_url("https://dailyyield.blogspot.com/2026/10/x.html?utm_source=rss&m=1")
+    if kept != "https://dailyyield.blogspot.com/2026/10/x.html?utm_source=rss":
+        failures.append({"value": kept,
+                         "wanted": "only the mobile parameter goes; another query is not ours to judge"})
+    relative, changed = canonical_url("/p/about-us.html#frag")
+    if relative != "/p/about-us.html" or not changed:
+        # the fragment really was dropped, so it counts as a change; what must not happen is inventing
+        # a host for an address that never had one, because that is how a path becomes a wrong URL
+        failures.append({"value": [relative, changed],
+                         "wanted": "a hostless address stays hostless, fragment removed"})
     if page_title("<h1>Say hello namaste bonjour hola ciao salaam</h1>"):
         failures.append({"value": page_title("<h1>Say hello namaste bonjour hola ciao salaam</h1>"),
                          "wanted": "a punctuation-free list of six words is a banner, not a title"})
@@ -447,7 +502,7 @@ def self_test() -> dict:
         failures.append({"value": problems, "wanted": "a three-word page must not pass as content"})
 
     return {"status": "OK" if not failures else "FAIL", "mode": "offline self-test",
-            "cases": len(cases) + 6, "fail": len(failures), "details": failures[:5], "siteWrites": 0,
+            "cases": len(cases) + 8, "fail": len(failures), "details": failures[:5], "siteWrites": 0,
             "networkRequests": 0}
 
 

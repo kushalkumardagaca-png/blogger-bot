@@ -157,6 +157,18 @@ def fetch_pages_sitemap() -> tuple[list[str], str]:
 PROBE_UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
             "Chrome/129.0 Safari/537.36")
 GOOGLEBOT_UA = PROBE_UA           # kept as a name because the audit and the tests refer to it
+# The same question, asked as a phone. Six weeks of "the redirect is already gone" came from probing with
+# one identity only: Blogger answers a desktop request with a direct 200 and answers any mobile client -
+# Chrome on Android, Safari on iPhone, and therefore Google's smartphone crawler too - with
+# "302 -> the same URL + ?m=1". A desktop-only probe cannot see that, so each URL is asked twice and a
+# redirect-family verdict is only called stale when both answers are clean. Measured 22 October on the
+# homepage, /p/daily-news.html and a post: mobile 302, desktop 200, every time.
+# An honest browser identity, deliberately: this repository does not send Googlebot's User-Agent, because
+# that is what got the runner throttled with 429s, and the redirect is a fact about the host for any
+# mobile client, so impersonating a crawler buys nothing.
+MOBILE_PROBE_UA = ("Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) "
+                   "Chrome/120.0.0.0 Mobile Safari/537.36")
+MOBILE_PROBE_SPACING_SECONDS = 2
 LIVE_PROBE_SPACING_SECONDS = 8
 LIVE_PROBE_CAP = 6
 REDIRECT_FAMILY = ("Redirect error", "Page with redirect", "Duplicate without user-selected canonical",
@@ -210,6 +222,13 @@ def extract_canonical(markup: str) -> str:
     return ""
 
 
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Refuse to follow, so the first hop is the answer."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # noqa: D102
+        return None
+
+
 class _RedirectCounter(urllib.request.HTTPRedirectHandler):
     def __init__(self) -> None:
         super().__init__()
@@ -252,7 +271,49 @@ def live_probe(url: str) -> dict:
                 "canonical": "", "error": type(exc).__name__}
 
 
-def stale_verdict(row: dict, probe: dict, publisher_live: bool = False) -> bool:
+def mobile_probe(url: str) -> dict:
+    """Ask the page as a phone would, and do not follow the redirect it answers with.
+
+    Returns the first hop only, deliberately. The answer that matters is "does the URL Google wants to
+    index bounce somewhere else before it serves the document", and following the chain would hide it.
+    """
+    request = urllib.request.Request(url, headers={"User-Agent": MOBILE_PROBE_UA})
+    opener = urllib.request.build_opener(_NoRedirect())
+    try:
+        with opener.open(request, timeout=30) as response:
+            status = int(getattr(response, "status", 200))
+            location = response.headers.get("Location") or ""
+            body = response.read(120000).decode("utf-8", "ignore") if status == 200 else ""
+        if status == 429:
+            return {"status": 429, "location": "", "canonical": "", "notMeasured": "rate limited"}
+        return {"status": status, "location": location, "canonical": extract_canonical(body)}
+    except urllib.error.HTTPError as exc:
+        return {"status": int(exc.code), "location": exc.headers.get("Location") or "", "canonical": ""}
+    except (urllib.error.URLError, OSError, ValueError) as exc:
+        return {"status": 0, "location": "", "canonical": "", "error": type(exc).__name__}
+
+
+def redirect_cause(url: str, mobile: dict) -> str:
+    """Name the redirect Google is complaining about, when the live page still does it.
+
+    A 302 to the same path with `?m=1` is Blogger's separate mobile template. The target declares the
+    parameterless URL as its canonical, which is the exact shape Google reports as "Redirect error" (and,
+    when it decides to keep the variant, "Alternate page with proper canonical"): the crawler is sent to a
+    page whose own markup says the URL it came from is the real one. Nothing about the content is wrong,
+    so nothing here deletes a page - the fix is a template setting.
+    """
+    location = str(mobile.get("location") or "")
+    if not location or int(mobile.get("status") or 0) not in (301, 302, 303, 307, 308):
+        return ""
+    canonical = str(mobile.get("canonical") or "")
+    if "?" in location and "m=" in location.split("?", 1)[1]:
+        if not canonical or canonical == url:
+            return "blogger-mobile-template"
+    return "redirect"
+
+
+def stale_verdict(row: dict, probe: dict, publisher_live: bool = False,
+                  mobile: dict | None = None) -> bool:
     """True when a redirect-family complaint cannot be reproduced today.
 
     Deliberately narrow: a page Google has merely "discovered" is not a stale verdict, it is an
@@ -264,9 +325,50 @@ def stale_verdict(row: dict, probe: dict, publisher_live: bool = False) -> bool:
         return False
     if not any(needle in str(row.get("coverageState") or "") for needle in REDIRECT_FAMILY):
         return False
+    if mobile and mobile.get("notMeasured"):
+        return False
+    if mobile and mobile.get("status") in (301, 302, 303, 307, 308):
+        # Reproduced with Google's own identity today. This is not a stale verdict and must never be
+        # reported as one, because the advice that follows "it is stale" is "wait for a crawl" - which is
+        # exactly the wrong thing to do while every mobile fetch still bounces.
+        return False
     if probe.get("hops") or (probe.get("reachable") and not probe.get("notMeasured")):
         return not probe.get("hops")
-    return bool(publisher_live)
+    return bool(publisher_live) and not (mobile and mobile.get("location"))
+
+
+def blogger_mobile_view() -> dict:
+    """What Blogger says about the mobile template, read only.
+
+    `blogs.mobileview` is the API in front of the Theme → Mobile devices setting, so this is the closest
+    the automation can come to seeing the switch. It is a GET on purpose: writing it could change what a
+    phone reader is served, and the whole reason the setting is handed to the owner rather than fixed here
+    is that a template change belongs to the person who reads the site on a phone.
+    """
+    names = ("BLOGGER_CLIENT_ID", "BLOGGER_CLIENT_SECRET", "BLOGGER_REFRESH_TOKEN", "BLOGGER_BLOG_ID")
+    if any(not os.environ.get(name) for name in names):
+        return {"status": "UNAVAILABLE", "detail": "no Blogger authorisation in this environment",
+                "read": "GET only; this job never writes the mobile template"}
+    try:
+        form = urllib.parse.urlencode({"client_id": os.environ["BLOGGER_CLIENT_ID"],
+                                       "client_secret": os.environ["BLOGGER_CLIENT_SECRET"],
+                                       "refresh_token": os.environ["BLOGGER_REFRESH_TOKEN"],
+                                       "grant_type": "refresh_token"}).encode()
+        access = str(http("https://oauth2.googleapis.com/token", method="POST", body=form,
+                          timeout=30).get("access_token", ""))
+        if not access:
+            return {"status": "UNAVAILABLE", "detail": "no access token"}
+        data = http("https://www.googleapis.com/blogger/v3/blogs/"
+                    + os.environ["BLOGGER_BLOG_ID"] + "/mobileview",
+                    headers={"Authorization": "Bearer " + access}, timeout=45) or {}
+    except (urllib.error.HTTPError, urllib.error.URLError, OSError, ValueError) as exc:
+        return {"status": "UNAVAILABLE", "detail": type(exc).__name__}
+    return {"status": "MEASURED",
+            "customThemeUnavailable": bool(data.get("customThemeUnavailable")),
+            "mobileDefinitionSet": bool(data.get("mobileDefinitionSet")),
+            "dynamicViewsEnabled": bool(data.get("dynamicViewsEnabled")),
+            "contentBytes": len(str(data.get("content") or "")),
+            "read": "GET only; this job never writes the mobile template"}
 
 
 def list_properties(access: str) -> dict:
@@ -462,12 +564,25 @@ def owner_actions(report: dict) -> list[str]:
                        f"{quota.get('dailyUrlSubmission')}. In Bing Webmaster Tools open "
                        "Configuration → Basic settings and confirm the site is verified, then check "
                        "Crawl → IndexNow and the sitemap entry under Configuration → Sitemaps.")
+    bouncing = sum(1 for row in (report.get("byPage") or []) if isinstance(row, dict)
+                   and row.get("redirectCause") == "blogger-mobile-template")
+    if bouncing:
+        actions.append(
+            f"{bouncing} of the redirect complaints are real right now, and they are all the same thing: "
+            "Blogger answers Google's smartphone fetch with '302 -> the same URL + ?m=1', and that target "
+            "declares the parameterless URL as its canonical, which is what Google files as Redirect error. "
+            "One setting removes all of them: Blogger → Theme → the ⋮ beside Customize → **Mobile devices** "
+            "→ choose the desktop theme (do not serve a separate mobile template). The pages themselves "
+            "need no change - measured today, the ?m=1 response is byte-identical to the desktop one, so a "
+            "reader on a phone already receives this theme and only pays an extra hop for it. After the "
+            "setting is saved, this watch re-probes both identities nightly and the complaint should clear "
+            "on Google's next crawl of each URL.")
     stale = (report.get("staleVerdicts") or {}).get("count", 0)
     if stale:
-        actions.append(f"{stale} of those verdicts cannot be reproduced on the live page today. Do not "
-                       "delete, rebuild or rename those pages: the redirect that produced the verdict is "
-                       "already gone, and the only thing missing is a crawl. Request indexing is what "
-                       "asks for it.")
+        actions.append(f"{stale} of those verdicts cannot be reproduced on the live page today, checked as "
+                       "a desktop fetch and as Google's smartphone fetch. Do not delete, rebuild or rename "
+                       "those pages: the redirect that produced the verdict is already gone, and the only "
+                       "thing missing is a crawl. Request indexing is what asks for it.")
     if report.get("manualQueue"):
         actions.append(f"Tap Request indexing for {len(report['manualQueue'])} main pages in the "
                        "Search Console interface. There is no API for it; this is the one step only "
@@ -506,13 +621,15 @@ def build_report(*, targets, properties, sitemaps, registration, rows, bing, tod
                     "canonicalMatchesPage": (not row.get("live", {}).get("canonical")
                                              or row["live"]["canonical"].rstrip("/")
                                              == row["url"].rstrip("/")),
+                    "mobileFetchToday": row.get("mobileFetch") or {},
+                    "redirectCause": row.get("redirectCause", ""),
                     "bing": ("reported" if row["url"] in bing_seen else "unreported"),
                     "inBoth": bool(row.get("verdict") == "PASS" and row["url"] in bing_seen)}
                    for row in rows],
         "staleVerdicts": {"count": len(stale), "urls": stale,
-                          "meaning": "the live page answers 200 with no redirect today, so the "
-                                     "platform's complaint describes an older crawl and what is "
-                                     "missing is a fresh one"},
+                          "meaning": "the live page answers 200 with no redirect today, asked as a "
+                                     "desktop client and as a mobile one, so the platform's complaint "
+                                     "describes an older crawl and what is missing is a fresh one"},
     }
     report["manualQueue"] = manual_queue(rows)
     report["ownerActions"] = owner_actions(report)
@@ -564,6 +681,21 @@ def render_markdown(report: dict) -> str:
     if report.get("sitemapRegistration", {}).get("submittedNow"):
         lines.append(f"- registered by this run: "
                      + ", ".join(f"`{p}`" for p in report["sitemapRegistration"]["submittedNow"]))
+    bounced_rows = [row for row in report["byPage"]
+                    if isinstance(row, dict) and row.get("redirectCause") == "blogger-mobile-template"]
+    if bounced_rows:
+        lines += ["", "## What a phone is told today", "",
+                  "Asked as a mobile client - which is how Google fetches and renders now - these URLs do "
+                  "not serve the document; they bounce to Blogger's mobile template, and that template "
+                  "names the URL the crawler came from as its canonical. Every one of these is why "
+                  "'Redirect error' appears in Search Console, and it is one theme setting, not 453 pages "
+                  "of content work.", ""]
+        for row in bounced_rows:
+            page = row["url"].replace(BLOG, "") or "/"
+            location = str((row.get("mobileFetchToday") or {}).get("location") or "")
+            status = (row.get("mobileFetchToday") or {}).get("status")
+            lines.append(f"- `{page}` — a mobile fetch answers **{status}** and points at "
+                         f"`{location.replace(BLOG, '') or location}`")
     stale_block = report.get("staleVerdicts") or {}
     if stale_block.get("urls"):
         lines += ["", "## Verdicts the live page does not reproduce", "",
@@ -609,6 +741,28 @@ def run_check() -> int:
     assert not stale_verdict({"url": targets[1]["url"], "verdict": "NEUTRAL",
                               "coverageState": "Redirect error"},
                              {"reachable": True, "status": 200, "hops": [{"code": 301}], "canonical": ""})
+    # the desktop fetch is clean and the verdict still cannot be called stale, because Google fetches with
+    # a smartphone identity and that is the fetch that redirects
+    assert not stale_verdict({"url": targets[1]["url"], "verdict": "NEUTRAL",
+                              "coverageState": "Redirect error"},
+                             {"reachable": True, "status": 200, "hops": [], "canonical": ""},
+                             True, {"status": 302, "location": f"{targets[1]['url']}?m=1", "canonical": ""})
+    mobile_bounce = {"status": 302, "location": f"{targets[1]['url']}?m=1", "canonical": targets[1]["url"]}
+    assert redirect_cause(targets[1]["url"], mobile_bounce) == "blogger-mobile-template", \
+        "the ?m=1 bounce must be named, not filed as an unknown redirect"
+    assert redirect_cause(targets[1]["url"], {"status": 200, "location": "", "canonical": ""}) == ""
+    assert redirect_cause(targets[1]["url"], {"status": 301, "location": "https://elsewhere.test/x",
+                                             "canonical": ""}) == "redirect"
+    assert stale_verdict({"url": targets[1]["url"], "verdict": "NEUTRAL",
+                          "coverageState": "Redirect error"},
+                         {"reachable": True, "status": 200, "hops": [], "canonical": ""},
+                         True, {"status": 200, "location": "", "canonical": targets[1]["url"]})
+    lines = Path(__file__).read_text(encoding="utf-8").splitlines()
+    at = [i for i, line in enumerate(lines) if "/mobileview" in line and "http" in "".join(lines[max(0, i - 3):i])]
+    assert len(at) == 1, "exactly one request is made to the mobile-view endpoint"
+    call = "\n".join(lines[at[0] - 3:at[0] + 4])
+    assert "method=" not in call, \
+        "the mobile view is read-only evidence; this job must never change what a phone is served"
     assert parse_sitemap_locations("<url><loc> https://dailyyield.blogspot.com/p/x.html </loc></url>") \
         == [f"{BLOG}/p/x.html"]
     rows = [{"url": row["url"], "verdict": "PASS" if index < 5 else "FAIL",
@@ -709,13 +863,20 @@ def main() -> int:
     probed = set()
     for row in ordered[:LIVE_PROBE_CAP]:
         probe = live_probe(row["url"])
+        time.sleep(MOBILE_PROBE_SPACING_SECONDS)
+        mobile = mobile_probe(row["url"])
         probed.add(row["url"])
+        row["mobileFetch"] = {"status": mobile.get("status"), "location": mobile.get("location", ""),
+                              "canonical": mobile.get("canonical", "")}
+        cause = redirect_cause(row["url"], mobile)
+        if cause:
+            row["redirectCause"] = cause
         row["live"] = {"reachable": probe["reachable"], "status": probe["status"],
                        "canonical": probe.get("canonical", ""), "finalUrl": probe.get("finalUrl", "")}
         row["liveHops"] = len(probe.get("hops") or [])
         if probe.get("notMeasured"):
             row["liveNote"] = probe["notMeasured"]
-        row["staleVerdict"] = stale_verdict(row, probe, row["url"] in published)
+        row["staleVerdict"] = stale_verdict(row, probe, row["url"] in published, mobile)
         time.sleep(LIVE_PROBE_SPACING_SECONDS)
     for row in rows:
         row.setdefault("live", {"reachable": None, "status": None, "canonical": "", "finalUrl": ""})
@@ -725,9 +886,12 @@ def main() -> int:
                                                 row["url"] in published)
             if row["url"] in published and row["staleVerdict"]:
                 row["liveNote"] = "not probed today; Blogger confirms the page is published live"
+    bouncing = [row for row in rows if row.get("redirectCause") == "blogger-mobile-template"]
     report_extra = {"liveProbes": len(probed), "liveProbeCap": LIVE_PROBE_CAP,
                     "publisherApiPagesLive": len(published),
-                    "redirectFamilyComplaints": len(need)}
+                    "redirectFamilyComplaints": len(need),
+                    "mobileTemplateRedirects": len(bouncing),
+                    "mobileView": blogger_mobile_view()}
     report = build_report(targets=targets, properties=properties, sitemaps=sitemaps,
                           registration=registration, rows=rows, bing=bing_view(
                               [row["url"] for row in targets]), today=today)

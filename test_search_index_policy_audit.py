@@ -91,7 +91,7 @@ class FakeNet:
         self.robots = robots
         self.seen: list[str] = []
 
-    def __call__(self, url: str, timeout: int = 45) -> tuple[int, str]:
+    def __call__(self, url: str, timeout: int = 45, **_) -> tuple[int, str]:
         self.seen.append(url)
         if url.endswith("/robots.txt"):
             return 200, self.robots or "User-agent: *\nAllow: /\n"
@@ -340,6 +340,57 @@ class Mapping(unittest.TestCase):
 
     def test_the_offline_self_test_still_guards_the_detectors(self):
         self.assertEqual(audit.run_check(), 0)
+
+
+class MobileFirstFetch(unittest.TestCase):
+    """The 453-URL lesson: a page that only answers a desktop fetch is not an indexable page.
+
+    These are offline on purpose. `first_hop` is replaced by a table of answers, so what is under test is
+    the judgement - a 302 to the mobile template is a finding, a 200 is not, and a rate limit is never
+    allowed to become one - plus the rule that this audit reads the site as a reader and never borrows a
+    crawler's identity to prove a point.
+    """
+
+    def test_a_direct_answer_is_not_a_finding(self):
+        url = f"{BLOG}/p/daily-news.html"
+        with mock.patch.object(audit, "get", lambda *a, **k: (200, "<html></html>")):
+            self.assertFalse(audit.mobile_answer(url)["moved"])
+
+    def test_a_mobile_bounce_is_measured_as_the_address_it_landed_on(self):
+        url = f"{BLOG}/"
+
+        def bounced(_url, timeout=45, *, user_agent=None, trace=None):
+            self.assertIn("Mobile", user_agent, "the check must ask as a phone")
+            if trace is not None:
+                trace["finalUrl"] = _url + "?m=1"
+            return 200, "<link href='%s' rel='canonical'/>" % _url
+
+        with mock.patch.object(audit, "get", bounced):
+            answer = audit.mobile_answer(url)
+        self.assertTrue(answer["moved"])
+        self.assertEqual(answer["finalUrl"], url + "?m=1")
+        self.assertEqual(answer["canonical"], url, "the target canonicalises back to the URL asked for")
+
+    def test_a_throttle_is_not_reported_as_a_defect(self):
+        with mock.patch.object(audit, "get", lambda *a, **k: (429, "")):
+            self.assertEqual(audit.mobile_answer(f"{BLOG}/")["status"], 429)
+
+    def test_the_mobile_identity_is_a_browser_not_a_crawler(self):
+        self.assertIn("Mobile", audit.MOBILE_PROBE_UA)
+        for needle in ("Googlebot", "bot.html", "BingPreview", "Lighthouse"):
+            self.assertNotIn(needle, audit.MOBILE_PROBE_UA, needle + " would be impersonating a service")
+
+    def test_the_probe_refuses_to_follow_the_redirect(self):
+        source = Path(audit.__file__).read_text(encoding="utf-8")
+        body = source.split("def mobile_answer")[1].split("def rendered_probe_head_canonical")[0]
+        self.assertIn("get(", body, "one network path, so a test can intercept it"
+                       " and the audit never opens its own connection")
+
+    def test_the_check_is_registered_with_an_owner_and_a_guideline(self):
+        source = Path(audit.__file__).read_text(encoding="utf-8")
+        block = source.split('"mobile-first-fetch-is-direct"')[1][:900]
+        self.assertIn('"blogger"', block, "the fix is the platform's setting, so it must be said so")
+        self.assertIn("Mobile devices", block, "the action has to name the switch, not just the symptom")
 
 
 if __name__ == "__main__":
