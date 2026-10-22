@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-22T09:15:43.807991+05:30",
+ "generatedAt": "2026-10-22T09:43:29.859206+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "articles": 6,
  "expectedPosts": 12,
- "articlesWithBothPosts": 5,
- "postsMissing": 2,
- "dispatched": 2,
+ "articlesWithBothPosts": 6,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-china",
@@ -77,26 +77,22 @@
    "key": "master-trending-1",
    "title": "Prediction market odds on Tesla-SpaceX merger",
    "url": "https://dailyyield.blogspot.com/2026/10/prediction-market-odds-on-tesla-spacex.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T09:15:40.713363+05:30",
+ "liveVerificationSourceAt": "2026-10-22T09:43:26.597903+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 5,
+ "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
