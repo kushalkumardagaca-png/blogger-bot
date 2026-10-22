@@ -296,9 +296,17 @@ def sitemap_state(access: str, site: str = PREFIX_PROPERTY) -> dict:
     registered = {str(row.get("path", "")): row for row in rows}
     out.update({
         "status": "MEASURED", "siteProperty": site,
+        # "accessed" is not a field of sitemaps.list - Google answers lastSubmitted and
+        # lastDownloaded. Reading a key that does not exist is how a sitemap that Google downloads
+        # twice a day got reported as "last read never".
         "registered": [{"path": path, "isPending": bool(row.get("isPending")),
                         "errors": row.get("errors", 0), "warnings": row.get("warnings", 0),
-                        "accessed": row.get("accessed", ""), "indexStatus": row.get("indexStatus", {})}
+                        "lastSubmitted": row.get("lastSubmitted", ""),
+                        "lastDownloaded": row.get("lastDownloaded", ""),
+                        "indexStatus": [
+                            {"state": str(entry.get("indexStatus", "")), "urls": entry.get("urlCount")}
+                            for entry in (row.get("indexStatus") or []) if isinstance(entry, dict)],
+                        "indexStatusRaw": row.get("indexStatus", [])}
                        for path, row in registered.items()],
         "missing": [path for path in SITEMAP_PATHS if path not in registered],
         "otherRegistered": [path for path in registered if path not in SITEMAP_PATHS],
@@ -527,8 +535,15 @@ def render_markdown(report: dict) -> str:
     lines += ["", "## Sitemaps registered on the URL-prefix property", ""]
     if sitemaps.get("registered"):
         for row in sitemaps["registered"]:
-            lines.append(f"- `{row['path']}` — pending {row['isPending']}, errors {row['errors']}, "
-                         f"warnings {row['warnings']}, last read {row['accessed'] or 'never'}")
+            submitted = (row.get("lastSubmitted") or "")[:10] or "unknown"
+            downloaded = (row.get("lastDownloaded") or "")[:10] or "never"
+            found = ", ".join(f"{entry['state']} {entry['urls']}" for entry in row.get("indexStatus") or [])
+            lines.append(f"- `{row['path'].replace(BLOG + '/', '')}` — submitted {submitted}, "
+                         f"**last read by Google: {downloaded}**, errors {row['errors']}, "
+                         f"warnings {row['warnings']}"
+                         + (f", URLs {found}" if found else "")
+                         + (" *(Google has not reported reading this file once)*"
+                            if downloaded == "never" else ""))
     else:
         lines.append(f"- none readable ({sitemaps.get('detail') or 'not measured'})")
     if report.get("sitemapRegistration", {}).get("submittedNow"):

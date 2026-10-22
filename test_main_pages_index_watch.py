@@ -75,6 +75,52 @@ class FakeHttp:
         raise AssertionError(f"unexpected request: {method} {url}")
 
 
+class SitemapTruth(unittest.TestCase):
+    """Google reports lastSubmitted and lastDownloaded. It has no "accessed" field.
+
+    This test exists because the first version of the scoreboard asked for a key that does not
+    exist, and the report then printed "last read never" about a sitemap Google reads daily. A
+    missing field and an unanswered question look the same unless something pins the difference.
+    """
+
+    def test_google_sitemap_dates_are_read_from_the_fields_that_exist(self):
+        rows = [{"path": f"{BLOG}/sitemap-pages.xml", "isPending": False, "errors": "0",
+                 "warnings": "0", "lastSubmitted": "2026-10-18T04:00:00Z",
+                 "lastDownloaded": "2026-10-22T01:50:00Z",
+                 "indexStatus": [{"indexStatus": "success", "urlCount": "14"}]}]
+        access = "fake"
+        with mock.patch.object(watch, "gsc", lambda a, m, path, body=None: {"sitemap": rows}):
+            state = watch.sitemap_state(access, watch.DOMAIN_PROPERTY)
+        self.assertEqual(state["status"], "MEASURED")
+        row = state["registered"][0]
+        self.assertEqual(row["lastDownloaded"], "2026-10-22T01:50:00Z")
+        self.assertEqual(row["lastSubmitted"], "2026-10-18T04:00:00Z")
+        self.assertEqual(row["indexStatus"], [{"state": "success", "urls": "14"}])
+        self.assertNotIn("accessed", row)
+        rendered = watch.render_markdown(watch.build_report(
+            targets=watch.main_page_targets([]), properties={"status": "MEASURED", "visible": []},
+            sitemaps=state, registration={"submittedNow": [], "failed": []},
+            rows=[{"url": row2["url"], "verdict": "UNKNOWN"} for row2 in watch.main_page_targets([])],
+            bing={"status": "MEASURED", "seen": {}, "quota": {}, "notReported": []},
+            today=dt.date(2026, 10, 22))
+        )
+        self.assertIn("last read by Google: 2026-10-22", rendered)
+        self.assertIn("URLs success 14", rendered)
+
+    def test_a_sitemap_google_never_downloaded_is_called_out_loudly(self):
+        rows = [{"path": f"{BLOG}/sitemap.xml", "isPending": False, "errors": "0", "warnings": "0"}]
+        with mock.patch.object(watch, "gsc", lambda a, m, path, body=None: {"sitemap": rows}):
+            state = watch.sitemap_state("x")
+        report = watch.build_report(targets=watch.main_page_targets([]),
+                                    properties={"status": "MEASURED", "visible": []}, sitemaps=state,
+                                    registration={"submittedNow": [], "failed": []}, rows=[],
+                                    bing={"status": "MEASURED", "seen": {}, "quota": {},
+                                          "notReported": []}, today=dt.date(2026, 10, 22))
+        text = watch.render_markdown(report)
+        self.assertIn("last read by Google: never", text)
+        self.assertIn("has not reported reading", text)
+
+
 class Targets(unittest.TestCase):
     def test_the_homepage_leads_and_the_machine_pages_are_left_out(self):
         pages = [f"{BLOG}/p/indexnow-key.html", f"{BLOG}/p/terms-and-conditions.html",
