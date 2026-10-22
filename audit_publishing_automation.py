@@ -5,11 +5,25 @@ import re
 from collections import Counter
 import ast, datetime as dt, json, re, sys
 
+# PyYAML is optional *here*, and it has to stay optional: not every runner that executes this audit
+# installs it. On 21 October a lint of the workflow files was added with a bare `import yaml`, and from
+# that commit onward Growth Control Tower - whose runner installs requests and Pillow only - died on
+# the import line every night. A library missing from a runner is not a fault in the site, so the
+# checks that need it now report "not measured" and the run stays green.
+try:
+    import yaml as _yaml
+except ImportError:
+    _yaml = None
+
 ROOT=Path(__file__).parent
 IST=dt.timezone(dt.timedelta(hours=5,minutes=30))
 checks=[]
-def check(name,ok,detail=""):
- checks.append({"name":name,"status":"PASS" if ok else "FAIL","detail":detail})
+def check(name,ok,detail="",measured=True):
+ # `measured=False` records "this environment could not answer the question". An optional library on a
+ # runner is not a defect in the site, and a nightly gate that reports one every night is how a real
+ # failure stops being read: the Growth Control Tower failed three nights running on 21-22 October
+ # because its runner had no PyYAML, and the check below answered False instead of "not measured".
+ checks.append({"name":name,"status":("PASS" if ok else "FAIL") if measured else "NOT_MEASURED","detail":detail})
 
 def crons(path):
  return re.findall(r"cron:\s*['\"]([^'\"]+)",Path(path).read_text())
@@ -860,9 +874,9 @@ check('No obsolete market page in production engines','share-market_0718113516' 
 # "unexpected EOF while looking for matching", so the refusal is reported as exit code 2 and the
 # publish result, the health record and the repair hint all vanish with it. That happened to the
 # Tumblr authorisation step on 21 October, found by nobody but the owner reading a screenshot.
-import re as _re, subprocess as _sp, yaml as _yaml
+import re as _re, subprocess as _sp
 _bad_steps=[]
-for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
+for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')) if _yaml is not None else []:
   try: _doc=_yaml.safe_load(_wf.read_text(encoding='utf-8')) or {}
   except Exception as _exc: _bad_steps.append(f"{_wf.name}: unreadable YAML ({_exc})"); continue
   for _jid,_job in (_doc.get('jobs') or {}).items():
@@ -872,25 +886,37 @@ for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
       _r=_sp.run(['bash','-n'],input=_re.sub(r'\$\{\{.*?\}\}','zzz',_run,flags=_re.S),text=True,capture_output=True)
       if _r.returncode: _bad_steps.append(f"{_wf.name}/{_jid}/{_st.get('name') or 'step'}: {_r.stderr.strip()[:120]}")
 check('Every workflow shell step parses before it can fail',not _bad_steps,
-      '; '.join(_bad_steps[:3]) or 'every run block in every workflow is valid bash')
+      '; '.join(_bad_steps[:3]) or 'every run block in every workflow is valid bash',
+      measured=_yaml is not None)
 
 # Two mistakes of 21 October, both made by me while repairing the third: a permission key GitHub's
 # schema does not define ("secrets: read") made the whole file an "Invalid workflow file", so the
 # workflow could not start at all; and renaming a job left its dependant pointing at a name that no
 # longer exists. Both are checkable without running anything, so both are checked for every workflow.
-PERMISSION_KEYS={'actions','checks','contents','deployments','discussions','id-token','issues',
- 'packages','pages','pull-requests','repository-projects','security-events','statuses'}
+# 'models' is a real scope (it grants the GitHub Models inference API) and the two writer workflows ask
+# for it; the list was written before that scope existed. Kept current on purpose: when this check was
+# still dead it could not say anything, and the day it started reading it reported a valid permission as
+# a defect - which is a nightly failure for a non-defect, the exact thing being retired.
+PERMISSION_KEYS={'actions','attestations','checks','contents','deployments','discussions','id-token','issues',
+ 'models','packages','pages','pull-requests','repository-projects','security-events','statuses'}
+# 'on' arrives from PyYAML as the boolean True, because that is how YAML 1.1 reads the bare word; every
+# workflow in this repository declares its schedule that way and GitHub accepts it. The key set has to
+# know, or the gate reports a defect in a file that is fine. This check was silently unread until
+# 23 October, when the audit stopped crashing without PyYAML and started using a name it had imported.
 TOP_KEYS={'name','on','true','permissions','concurrency','env','defaults','jobs','run-name'}
 JOB_KEYS={'name','needs','runs-on','condition','if','env','outputs','timeout-minutes','strategy',
  'continue-on-error','container','services','steps','environment','permissions','concurrency'}
 STEP_KEYS={'id','if','name','uses','with','run','continue-on-error','timeout-minutes','env','defaults','shell'}
 _schema=[]
-for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
- try: _doc=yaml.safe_load(_wf.read_text(encoding='utf-8')) or {}
+for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')) if _yaml is not None else []:
+ try: _doc=_yaml.safe_load(_wf.read_text(encoding='utf-8')) or {}
  except Exception: continue
  if not isinstance(_doc,dict): continue
  for _k in _doc:
-  if str(_k) not in TOP_KEYS: _schema.append(f"{_wf.name}: unknown top-level key {_k!r}")
+  # PyYAML reads a bare `on:` as the boolean True - YAML 1.1's quirk - and every workflow in this
+  # repository declares its schedule under `on`, so the key is translated before it is judged.
+  _key='on' if _k is True or str(_k).lower() in ('true','on') else str(_k)
+  if _key not in TOP_KEYS: _schema.append(f"{_wf.name}: unknown top-level key {_k!r}")
  _perms=_doc.get('permissions')
  if isinstance(_perms,dict):
   for _k in _perms:
@@ -915,7 +941,8 @@ for _wf in sorted((ROOT/'.github/workflows').glob('*.yml')):
    for _ref in re.findall(r"steps\.([A-Za-z0-9_-]+)\.outputs",str(_st.get('run') or '')+str(_st.get('if') or '')):
     if _ref and _ref not in _ids: _schema.append(f"{_wf.name}: job {_jid} refers to steps.{_ref}, which has no id")
 check('No workflow references a key, permission or job that GitHub does not know',not _schema,
-      '; '.join(_schema[:3]) or 'every permission, needs and step reference resolves')
+      '; '.join(_schema[:3]) or 'every permission, needs and step reference resolves',
+      measured=_yaml is not None)
 
 # Why the whole affair is worth remembering in code rather than in a chat log: a Tumblr authorization
 # code lives about thirty to sixty seconds, so every design that asked a person to save one and then
@@ -925,6 +952,30 @@ check('No workflow references a key, permission or job that GitHub does not know
 for _name in ('.github/tumblr-oauth-code', '.github/tumblr-oauth-listener', 'TUMBLR_OAUTH_ATTEMPT.json'):
     check(f'{_name} is gone with the automation that used it', not (ROOT/_name).exists(),
           'no credential-shaped file is left behind')
+def _takedown_guarded():
+    """Every script that can delete or unpublish a Blogger post must pass the owner's freeze first.
+
+    The owner's instruction of 23 October is blunt: no article is to go offline because of a workflow
+    failure, for any reason. Reports and audits may run unattended; a take-down may not. So the rule is
+    checked here rather than remembered in a chat: a file that calls Blogger's DELETE or /unpublish
+    endpoint has to consult site_change_control, and the duplicate purge additionally needs a typed
+    confirmation word that no schedule can supply.
+    """
+    offenders = []
+    for path in sorted(ROOT.glob("*.py")):
+        if path.name.startswith("test_") or path.name == "site_change_control.py":
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        reaches = re.search(r"""method\s*=\s*["']DELETE["']|/unpublish\b""", text)
+        if not reaches:
+            continue
+        if "stop_if_frozen" not in text:
+            offenders.append(f"{path.name} can take a URL down without the owner's freeze")
+        elif path.name == "blogger_duplicate_purge.py" and "--confirm" not in text:
+            offenders.append("blogger_duplicate_purge.py deletes without a typed confirmation word")
+    return not offenders
+
+
 def _without_comments(text):
     """YAML and Python lines with their # comments removed, so prose cannot satisfy a code check."""
     return "\n".join(line.split("#", 1)[0] for line in text.splitlines())
@@ -939,13 +990,13 @@ check('No workflow runs a Tumblr step, secret or job',
 # A measurement job that is never handed its credentials reports "credentials missing" forever, and
 # that is exactly the shape of the bug found on 21 October: the nightly gate ran the Analytics reader
 # with no env block, so the file stayed red for weeks after the token instructions were written.
-try:
-    import yaml as _yaml
-except ImportError:
-    _yaml = None
+check("Every path that can take a live URL down is held by the owner's freeze and needs a typed word",
+      _takedown_guarded(),
+      'a workflow failure must never be able to unpublish or delete a published article')
 if _yaml is None:
     check('Analytics reader is handed its credentials in every job that runs it', False,
-          'PyYAML is unavailable in this environment, so the workflow env blocks could not be read')
+          'not measured: PyYAML is unavailable in this environment, so the workflow env blocks could not '
+          "be read - this says nothing about the site and must not fail a nightly gate", measured=False)
 else:
     _starved = []
     for _wf in sorted((ROOT / '.github/workflows').glob('*.yml')):
@@ -965,12 +1016,17 @@ else:
           + ('; missing in: ' + '; '.join(_starved) if _starved else ''))
 
 failed=[x for x in checks if x['status']=='FAIL']
-result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),'summary':{'pass':len(checks)-len(failed),'fail':len(failed)},'checks':checks}
+unmeasured=[x for x in checks if x['status']=='NOT_MEASURED']
+result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),
+        'summary':{'pass':len(checks)-len(failed)-len(unmeasured),'fail':len(failed),
+                   'notMeasured':len(unmeasured),'checks':len(checks)},'checks':checks}
 if '--check-only' not in sys.argv:
  (ROOT/'PUBLISHING_AUTOMATION_AUDIT.json').write_text(json.dumps(result,indent=2))
- lines=['# Daily Yield Publishing Automation — Final Audit','',f"**Result:** {len(checks)-len(failed)} PASS · {len(failed)} FAIL",'',
+ lines=['# Daily Yield Publishing Automation — Final Audit','',f"**Result:** {len(checks)-len(failed)-len(unmeasured)} PASS · {len(failed)} FAIL · {len(unmeasured)} not measured here",'',
  'Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.','']
- for x in checks:lines.append(f"- {'✅' if x['status']=='PASS' else '❌'} **{x['name']}**"+(f" — {x['detail']}" if x['detail'] else ''))
+ for x in checks:
+  mark={'PASS':'✅','FAIL':'❌'}.get(x['status'],'⚪')
+  lines.append(f"- {mark} **{x['name']}**"+(f" — {x['detail']}" if x['detail'] else ''))
  (ROOT/'PUBLISHING_AUTOMATION_AUDIT.md').write_text('\n'.join(lines)+'\n')
 print(json.dumps(result['summary']))
 if failed:

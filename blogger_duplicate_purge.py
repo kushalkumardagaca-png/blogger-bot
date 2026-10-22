@@ -24,6 +24,17 @@ Safety, because this deletes live blog content:
 """
 from __future__ import annotations
 
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+# Owner's instruction of 23 October 2026, enforced here rather than in a workflow file: not one
+# published article may go offline because of a workflow - a failed one, a scheduled one, any one. The
+# nightly job that maintains this file uses the separate refresh tool and never deletes, but --apply is
+# one dispatch away and --delete is one keystroke away, so while the site is frozen the whole program
+# stops here, before it reads a single argument, with a held line and exit code 0 (a held action is not
+# a failure, and a nightly red for an owner's own freeze is the noise that was retired on 22 October).
+# The module's functions stay importable so the tests and an offline review of a saved pile can run.
+if __name__ == "__main__":
+    _dy_stop_if_frozen("blogger_duplicate_purge")
+
 import argparse
 import json
 import os
@@ -46,6 +57,7 @@ EVIDENCE_FILES = ("SLOT_GUARANTEE_STATUS.json", "LIVE_EDITION_VERIFICATION.json"
                   "tumblr_tracker.json", "mastodon_tracker.json", "instagram_tracker.json")
 DUPLICATE_SLUG = re.compile(r"_\d{6,}\.html?$")
 MAX_PER_RUN_DEFAULT = 25
+CONFIRM_PHRASE = "DELETE-CONFIRMED-DUPLICATES"   # typed by a person, never by a schedule
 
 
 def load(path: Path, default):
@@ -159,7 +171,20 @@ def main() -> int:
                         help="actually delete the duplicates; without this the run only reports")
     parser.add_argument("--max", type=int, default=MAX_PER_RUN_DEFAULT, help="batch cap for one run")
     parser.add_argument("--fixture", default="", help="JSON file of posts, for tests and offline review")
+    parser.add_argument("--confirm", default="",
+                        help=f"type {CONFIRM_PHRASE} to allow deletions; nothing else does")
     arguments = parser.parse_args()
+
+    # Owner's instruction of 23 October 2026, enforced here rather than in a workflow file: not one
+    # published article may go offline because of a workflow - a failed one, a scheduled one, any one.
+    # The nightly job that runs this file uses `refresh` and never passes --apply, but --apply is one
+    # dispatch away, so deletion now needs the owner's recorded release AND a word no schedule can type.
+    if arguments.apply and arguments.confirm != CONFIRM_PHRASE:
+            print(json.dumps({"ok": False, "mode": "REFUSED", "siteWrites": 0,
+                             "error": f"deleting needs --confirm {CONFIRM_PHRASE}; duplicates are "
+                                      "differentiated by the nightly refresh, and nothing is ever "
+                                      "deleted by a run that did not have to type the word"}))
+            return 0
 
     if arguments.fixture:
         posts = json.loads(Path(arguments.fixture).read_text(encoding="utf-8"))

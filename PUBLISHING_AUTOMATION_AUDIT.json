@@ -1,7 +1,7 @@
 {
-  "checked_at_ist": "2026-10-21T16:29:25+05:30",
+  "checked_at_ist": "2026-10-22T17:20:01+05:30",
   "summary": {
-    "pass": 202,
+    "pass": 223,
     "fail": 0
   },
   "checks": [
@@ -441,6 +441,26 @@
       "detail": ""
     },
     {
+      "name": "A Master run that stops leaves its reason where the morning check reads it",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Master photo pools are built after the day has a plan, not five minutes before it",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The quota-independent fallback cannot raise on thin evidence, and is held to the same validator",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A window may be skipped only by a named, owner-approved release file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "Ten bounded sections use controlled five-worker parallel generation",
       "status": "PASS",
       "detail": ""
@@ -677,6 +697,91 @@
     },
     {
       "name": "Indexing starts at the front doors: the main pages, not all 551 URLs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The front-door list includes the homepage, which no /p/ pattern can match",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing is offered both Blogger sitemaps, not only the archive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Every URL is judged against Bing and Google indexing rules, not against a guess",
+      "status": "PASS",
+      "detail": "a guideline check was dropped from the audit"
+    },
+    {
+      "name": "The policy audit is read-only and never counts a platform limit as our violation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The policy audit keeps similarity honest and re-runs visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The policy audit runs daily and proves its own rules before it reports",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A clipped headline cannot be published as a headline",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The indexing-policy gate is wired into both publishers, not just documented",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A new article names its photographs after its own subject (Bing \u00a712)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A scheduled job that has nothing to do says so instead of sending an email",
+      "status": "PASS",
+      "detail": "a held route, a queued child and a failed run all have a quieter and more informative answer now"
+    },
+    {
+      "name": "A phone is asked directly, and no URL leaves the site in a parameterised form",
+      "status": "PASS",
+      "detail": "mobile-first indexing means the smartphone answer is the indexable one: a page that only answers a desktop fetch is reported by Google as a redirect, and a submitted ?m=1 URL asks for that redirect"
+    },
+    {
+      "name": "The whole-corpus repair can only run under the owner's recorded release",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A push reports the repair plan; applying it takes a committed go-ahead that is then consumed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The repair proves its own plan before it is allowed near the site",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The anti-dangling headline rule is shared, so the clip and the gate cannot drift",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Bing spends any quota it grants on the front doors first and re-offers them weekly",
       "status": "PASS",
       "detail": ""
     },

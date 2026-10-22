@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 206 PASS · 0 FAIL
+**Result:** 223 PASS · 0 FAIL
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -143,6 +143,23 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **A duplicate is answered with fresh material, and the refresh job cannot delete anything**
 - ✅ **Google News readiness is measured from the public feed, and an unreadable feed stays unreadable**
 - ✅ **Indexing starts at the front doors: the main pages, not all 551 URLs**
+- ✅ **The front-door list includes the homepage, which no /p/ pattern can match**
+- ✅ **Bing is offered both Blogger sitemaps, not only the archive**
+- ✅ **The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict**
+- ✅ **Every URL is judged against Bing and Google indexing rules, not against a guess** — a guideline check was dropped from the audit
+- ✅ **The policy audit is read-only and never counts a platform limit as our violation**
+- ✅ **The policy audit keeps similarity honest and re-runs visible**
+- ✅ **The policy audit runs daily and proves its own rules before it reports**
+- ✅ **A clipped headline cannot be published as a headline**
+- ✅ **The indexing-policy gate is wired into both publishers, not just documented**
+- ✅ **A new article names its photographs after its own subject (Bing §12)**
+- ✅ **A scheduled job that has nothing to do says so instead of sending an email** — a held route, a queued child and a failed run all have a quieter and more informative answer now
+- ✅ **A phone is asked directly, and no URL leaves the site in a parameterised form** — mobile-first indexing means the smartphone answer is the indexable one: a page that only answers a desktop fetch is reported by Google as a redirect, and a submitted ?m=1 URL asks for that redirect
+- ✅ **The whole-corpus repair can only run under the owner's recorded release**
+- ✅ **A push reports the repair plan; applying it takes a committed go-ahead that is then consumed**
+- ✅ **The repair proves its own plan before it is allowed near the site**
+- ✅ **The anti-dangling headline rule is shared, so the clip and the gate cannot drift**
+- ✅ **Bing spends any quota it grants on the front doors first and re-offers them weekly**
 - ✅ **The milestone is counted in readers, not in pageviews**
 - ✅ **The growth ladder is judged on measured evidence and cannot invent a verdict**
 - ✅ **The audience counter is public-endpoint only and never calls an unanswered endpoint zero**

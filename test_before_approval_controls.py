@@ -78,7 +78,12 @@ class FreezeTests(unittest.TestCase):
         self.assertIs(cfg['frozen'],True)
     def test_nothing_else_was_let_go_along_with_it(self):
         held=freeze.policy()['heldCliActions'];workflows=freeze.policy()['heldWorkflows']
-        self.assertEqual(set(held),{'adsense_readiness','bing_seo_repair','deploy_blogger_policy_compliance',
+        # Exact on purpose: a name leaving this list quietly un-freezes a script that writes the site.
+        # 'blogger_duplicate_purge' and 'cleanup_wrong_master_post' were added on 23 October 2026 when
+        # the owner ruled that no published article may come down because of a workflow; both can call
+        # Blogger's DELETE, so both are now held by the freeze like everything else that writes.
+        self.assertEqual(set(held),{'adsense_readiness','bing_seo_repair','blogger_duplicate_purge',
+            'cleanup_wrong_master_post','deploy_blogger_policy_compliance',
             'deploy_global_snapshot','deploy_markets_today','gsc_rebuild','identity_migration',
             'motion_related_retrofit','reader_measurement_retrofit','repair_family_directory',
             'repair_known_external_links','retrofit_live_news','solve_remaining','update_page_family'})

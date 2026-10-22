@@ -23,6 +23,14 @@ def by_url(url,access):
  path=urllib.parse.urlparse(url).path
  query=urllib.parse.urlencode({'path':path,'fields':'id,title,url,status'})
  return call('/posts/bypath?'+query,access)
+from site_change_control import stop_if_frozen as _dy_stop_if_frozen
+# The owner's rule of 23 October, placed at the program's entry point so that no combination of flags
+# can reach the DELETE: a workflow, however it fails, must not take a published article down. A held
+# run prints HELD_BY_OWNER_FREEZE and exits 0, because a held action is not a failure. Importing the
+# module is left open so the tests and a dry read of the two addresses keep working.
+if __name__ == '__main__':
+ _dy_stop_if_frozen('cleanup_wrong_master_post')
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--duplicate-url',required=True);p.add_argument('--replacement-url',required=True);p.add_argument('--expected-title-phrase',required=True);a=p.parse_args()
  if a.duplicate_url.rstrip('/')==a.replacement_url.rstrip('/'):raise RuntimeError('duplicate and replacement URLs are identical')
