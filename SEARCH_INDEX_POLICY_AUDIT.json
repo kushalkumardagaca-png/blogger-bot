@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T05:17:03+00:00",
+ "checkedAt": "2026-10-22T05:40:12+00:00",
  "corpus": {
   "posts": 585,
   "pages": 14,
@@ -12,13 +12,12 @@
  },
  "summary": {
   "checks": 27,
-  "pass": 16,
-  "fail": 11,
+  "pass": 23,
+  "fail": 4,
   "advisory": 0,
   "failuresByOwner": {
-   "blogger": 4,
-   "repo": 6,
-   "platform": 1
+   "blogger": 1,
+   "repo": 3
   }
  },
  "checks": [
@@ -99,62 +98,31 @@
   {
    "id": "titles-descriptive-and-complete",
    "guideline": "Bing §13 §17; Google indexing criteria",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "0 under its floor (12 for an article, 4 for a page), 40 over 70, 0 empty, 6 cut mid-phrase (our own title clip does this)",
-   "offenders": [
-    "https://dailyyield.blogspot.com/2026/10/student-loan-interest-rates-federal.html",
-    "https://dailyyield.blogspot.com/2026/10/billionaire-mukesh-ambani-launches.html",
-    "https://dailyyield.blogspot.com/2026/10/cost-of-living-protests-hit-belgium.html",
-    "https://dailyyield.blogspot.com/2026/10/proposals-to-close-minneapolis-schools.html",
-    "https://dailyyield.blogspot.com/2026/10/inside-india-newsletter-billionaire.html",
-    "https://dailyyield.blogspot.com/2026/10/how-to-evaluate-healthcare-ai.html",
-    "https://dailyyield.blogspot.com/2026/10/russia-2026-10-08.html",
-    "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-08.html",
-    "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-08.html",
-    "https://dailyyield.blogspot.com/2026/10/canada-2026-10-08.html",
-    "https://dailyyield.blogspot.com/2026/10/us-2026-10-08.html",
-    "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-08.html"
-   ],
-   "offenderCount": 46,
+   "detail": "0 under its floor (12 for an article, 4 for a page), 0 over 70, 0 empty, 0 cut mid-phrase (our own title clip does this)",
+   "offenders": [],
+   "offenderCount": 0,
    "fixableBy": "repo"
   },
   {
    "id": "titles-not-shouted-in-caps",
    "guideline": "Bing §13 (titles written for users)",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "12 page or post title(s) are entirely upper case",
-   "offenders": [
-    "https://dailyyield.blogspot.com/2026/10/eurusd-11253-eurgbp-08438-eurjpy-177.html",
-    "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
-    "https://dailyyield.blogspot.com/p/global-snapshot.html",
-    "https://dailyyield.blogspot.com/p/markets-today.html",
-    "https://dailyyield.blogspot.com/p/share-market_0718113516.html",
-    "https://dailyyield.blogspot.com/p/privacy-policy.html",
-    "https://dailyyield.blogspot.com/p/daily-news.html",
-    "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
-    "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
-    "https://dailyyield.blogspot.com/p/disclaimer.html",
-    "https://dailyyield.blogspot.com/p/contact-us_01883938366.html",
-    "https://dailyyield.blogspot.com/p/calculator_0908148622.html"
-   ],
-   "offenderCount": 12,
+   "detail": "0 page or post title(s) are entirely upper case",
+   "offenders": [],
+   "offenderCount": 0,
    "fixableBy": "blogger"
   },
   {
    "id": "no-duplicate-titles-across-urls",
    "guideline": "Bing §6 §13",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "4 title(s) shared by more than one URL; worst cluster is 6 URLs on one title",
-   "offenders": [
-    "banking  personal money news (6 urls)",
-    "corporate finance and industry news (6 urls)",
-    "asiapacific finance news  18 october 2026 (2 urls)",
-    "americas finance news  11 october 2026 (2 urls)"
-   ],
-   "offenderCount": 4,
+   "detail": "0 title(s) shared by more than one URL; worst cluster is none",
+   "offenders": [],
+   "offenderCount": 0,
    "fixableBy": "repo"
   },
   {
@@ -266,7 +234,7 @@
    "guideline": "Bing §13; Google indexability",
    "status": "PASS",
    "advisory": false,
-   "detail": "5 URL(s) rendered: 0 without a title, 0 without a meta description, 1 did not answer 200 and were not judged",
+   "detail": "6 URL(s) rendered: 0 without a title, 0 without a meta description",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -276,7 +244,7 @@
    "guideline": "Bing §10; Google: indexing allowed?",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 1 did not answer 200 and were not judged",
+   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -284,13 +252,11 @@
   {
    "id": "exactly-one-h1",
    "guideline": "Bing §13 (heading hierarchy)",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "1 sampled URL(s) without exactly one <h1>, 1 did not answer 200 and were not judged",
-   "offenders": [
-    "https://dailyyield.blogspot.com/p/indexnow-key.html"
-   ],
-   "offenderCount": 1,
+   "detail": "0 sampled URL(s) without exactly one <h1>; machine endpoints are exempt, as they are from every other writing rule",
+   "offenders": [],
+   "offenderCount": 0,
    "fixableBy": "platform"
   },
   {
@@ -298,7 +264,7 @@
    "guideline": "Bing §8 (no client-side-only content)",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) whose body text is not in the served HTML, 1 did not answer 200 and were not judged",
+   "detail": "0 sampled URL(s) whose body text is not in the served HTML",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -308,7 +274,7 @@
    "guideline": "Bing §14; Google: enhancement issues",
    "status": "PASS",
    "advisory": false,
-   "detail": "5 URL(s) sampled, 0 markup problem(s), 1 did not answer 200 and were not judged",
+   "detail": "6 URL(s) sampled, 0 markup problem(s)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -316,9 +282,9 @@
   {
    "id": "robots-allows-both-crawlers",
    "guideline": "Bing §8 §10; Google: crawl allowed?",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "HTTP 404; neither bot is blocked; declares no sitemap",
+   "detail": "HTTP 200; neither bot is blocked; declares sitemap",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -326,9 +292,9 @@
   {
    "id": "sitemaps-declared-in-robots",
    "guideline": "Bing §2; Google: referring sitemap",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "robots.txt does not name both sitemaps, so a crawler that finds robots.txt may never reach the pages sitemap (Google reports 'no referring sitemap')",
+   "detail": "both Blogger sitemaps are named in robots.txt",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -336,13 +302,11 @@
   {
    "id": "updated-pages-are-still-substantial",
    "guideline": "Bing §19",
-   "status": "FAIL",
+   "status": "PASS",
    "advisory": false,
-   "detail": "1 URL(s) were revised and are still below the thin line",
-   "offenders": [
-    "https://dailyyield.blogspot.com/p/indexnow-key.html"
-   ],
-   "offenderCount": 1,
+   "detail": "0 URL(s) were revised and are still below the thin line",
+   "offenders": [],
+   "offenderCount": 0,
    "fixableBy": "repo"
   },
   {
