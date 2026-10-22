@@ -2,7 +2,7 @@
   "status": "PASS",
   "mode": "FREEZE_DATA_ONLY",
   "zero_view": true,
-  "posts_checked": 597,
+  "posts_checked": 598,
   "posts_rewritten": 0,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
@@ -23,8 +23,8 @@
       "linkIndexHrefs": 12,
       "linkIndexWritten": true,
       "changed": true,
-      "beforeSha256": "07a9887d1eaba7f3a7cf8b86f14d2f7eaf1ab91e8a4d557214eec1f79892a416",
-      "afterSha256": "e0e9a138c4ce3d5947a4117b9e1030b5fb02e90d01a75843f231b5284329e6d3"
+      "beforeSha256": "e0e9a138c4ce3d5947a4117b9e1030b5fb02e90d01a75843f231b5284329e6d3",
+      "afterSha256": "c6ccdf71365286dd2263ee29e69a391b89964f7d78ab333ddde341a1c49117dd"
     }
   ],
   "optional_changes": "held; no full hub rebuild or old-post edits"
