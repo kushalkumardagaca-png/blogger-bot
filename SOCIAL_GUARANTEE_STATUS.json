@@ -1,26 +1,13 @@
 {
- "generatedAt": "2026-10-22T15:15:53.066164+05:30",
+ "generatedAt": "2026-10-22T17:15:53.759028+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 12,
- "expectedPosts": 24,
- "articlesWithBothPosts": 11,
+ "articles": 13,
+ "expectedPosts": 26,
+ "articlesWithBothPosts": 12,
  "postsMissing": 2,
  "dispatched": 2,
  "rows": [
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-india",
    "title": "india edition",
@@ -29,19 +16,6 @@
    "byPlatform": {
     "facebook": 0,
     "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -74,6 +48,23 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-americas",
+   "title": "americas edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-22.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
    "key": "news-russia",
    "title": "russia edition",
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html",
@@ -82,6 +73,32 @@
     "facebook": 1,
     "bluesky": 1,
     "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -155,25 +172,21 @@
    "key": "master-evergreen-2",
    "title": "Trump and Student Loans: What’s Happening",
    "url": "https://dailyyield.blogspot.com/2026/10/trump-and-student-loans-whats-happening.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T15:15:44.409203+05:30",
+ "liveVerificationSourceAt": "2026-10-22T17:15:44.875252+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 11,
+ "articlesWithExactlyTwoPosts": 12,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"

@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-22T15:15:44.409203+05:30",
+ "generatedAt": "2026-10-22T17:15:44.875252+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 12,
- "onTime": 12,
+ "live": 13,
+ "onTime": 13,
  "late": 0,
  "early": 0,
  "pending": 0,
- "overdue": 1,
- "upcoming": 8,
- "dispatched": 1,
+ "overdue": 2,
+ "upcoming": 6,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -20,7 +20,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 660,
+   "minutesFromSlot": 780,
    "publishedAt": "2026-10-21T15:37:56-07:00"
   },
   {
@@ -30,7 +30,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 600,
+   "minutesFromSlot": 720,
    "publishedAt": "2026-10-21T16:36:56-07:00"
   },
   {
@@ -40,7 +40,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/chancellor-rejects-calls-to-raise.html",
    "state": "on time",
-   "minutesFromSlot": 540,
+   "minutesFromSlot": 660,
    "publishedAt": "2026-10-21T17:48:56-07:00"
   },
   {
@@ -50,7 +50,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 480,
+   "minutesFromSlot": 600,
    "publishedAt": "2026-10-21T18:45:04-07:00"
   },
   {
@@ -60,7 +60,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/how-does-lifestyle-inflation-trap-people.html",
    "state": "on time",
-   "minutesFromSlot": 420,
+   "minutesFromSlot": 540,
    "publishedAt": "2026-10-21T19:45:07-07:00"
   },
   {
@@ -70,7 +70,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/prediction-market-odds-on-tesla-spacex.html",
    "state": "on time",
-   "minutesFromSlot": 360,
+   "minutesFromSlot": 480,
    "publishedAt": "2026-10-21T20:45:08-07:00"
   },
   {
@@ -80,7 +80,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 300,
+   "minutesFromSlot": 420,
    "publishedAt": "2026-10-21T21:45:04-07:00"
   },
   {
@@ -90,7 +90,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/5-etfs-to-help-build-your-emergency-fund.html",
    "state": "on time",
-   "minutesFromSlot": 240,
+   "minutesFromSlot": 360,
    "publishedAt": "2026-10-21T22:45:10-07:00"
   },
   {
@@ -100,7 +100,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 180,
+   "minutesFromSlot": 300,
    "publishedAt": "2026-10-21T23:45:02-07:00"
   },
   {
@@ -110,8 +110,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 150,
-   "minutesLate": 150,
+   "minutesFromSlot": 270,
+   "minutesLate": 270,
    "action": "dispatched"
   },
   {
@@ -121,7 +121,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-22.html",
    "state": "on time",
-   "minutesFromSlot": 120,
+   "minutesFromSlot": 240,
    "publishedAt": "2026-10-22T00:45:04-07:00"
   },
   {
@@ -131,7 +131,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/why-is-elon-musk-plotting-mega-merger.html",
    "state": "on time",
-   "minutesFromSlot": 60,
+   "minutesFromSlot": 180,
    "publishedAt": "2026-10-22T01:45:07-07:00"
   },
   {
@@ -141,7 +141,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/trump-and-student-loans-whats-happening.html",
    "state": "on time",
-   "minutesFromSlot": 0,
+   "minutesFromSlot": 120,
    "publishedAt": "2026-10-22T02:45:06-07:00"
   },
   {
@@ -150,17 +150,20 @@
    "due": "2026-10-22T16:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -60
+   "state": "overdue",
+   "minutesFromSlot": 60,
+   "minutesLate": 60,
+   "action": "dispatched"
   },
   {
    "key": "news-americas",
    "slot": "17:15",
    "due": "2026-10-22T17:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -120
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-22.html",
+   "state": "on time",
+   "minutesFromSlot": 0,
+   "publishedAt": "2026-10-22T04:45:05-07:00"
   },
   {
    "key": "news-companies",
@@ -169,7 +172,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -150
+   "minutesFromSlot": -30
   },
   {
    "key": "news-global",
@@ -178,7 +181,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -180
+   "minutesFromSlot": -60
   },
   {
    "key": "news-banking",
@@ -187,7 +190,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -210
+   "minutesFromSlot": -90
   },
   {
    "key": "master-evergreen-3",
@@ -196,7 +199,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -270
+   "minutesFromSlot": -150
   },
   {
    "key": "master-trending-4",
@@ -205,7 +208,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -330
+   "minutesFromSlot": -210
   },
   {
    "key": "master-evergreen-4",
@@ -214,13 +217,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -420
+   "minutesFromSlot": -300
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 12,
+ "actualArticlesLiveIncludingExtras": 13,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
