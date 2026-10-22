@@ -72,8 +72,16 @@ def title_for(item: dict, taken: set[str], *, page_minimum: int = 4) -> str:
     content = item.get("content") or ""
     candidate = current
     if item.get("resource") == "pages":
-        # A standing page usually already shows a better headline than its own title field does.
-        candidate = gate.page_title(content) or current
+        # A standing page's title field is the label the site's own navigation shows - "About us",
+        # "Contact us", "Privacy policy" - so sentence-casing it fixes the only defect the audit found
+        # (all caps) and keeps the title matched to the URL it describes. Borrowing the page's banner
+        # instead is what turned "ABOUT US" into "Money, explained with clarity evidence numbers honesty
+        # context maths" on the first run of 22 October: the commas in that headline live in markup, and
+        # stripping the tags ate them. So the banner is used only when the title field itself is empty or
+        # is not a title at all.
+        base = gate.sentence_case(current)
+        candidate = (base if base and not gate.JUNK_TITLE.search(base)
+                     else (gate.page_title(content) or base))
     else:
         # compact_title keeps a desk edition's date and shortens the desk name to fit, which is what
         # stops six editions of one desk publishing under one title.
@@ -351,9 +359,18 @@ def self_test() -> dict:
     if "one.html" not in "".join(planned):
         problems.append("a title ending on a comma must be re-cut on whole words")
     if "calculator" not in "".join(planned):
-        problems.append("an ALL-CAPS page title must be replaced by the heading the page already shows")
-    elif "EMI, SIP and loan calculators" not in planned["https://x.blogspot.com/p/calculator.html"]["toTitle"]:
-        problems.append("the page's own heading should be the new title")
+        problems.append("an ALL-CAPS page title must be sentence-cased into the label readers see")
+    elif planned["https://x.blogspot.com/p/calculator.html"]["toTitle"] != "Calculator":
+        problems.append(f"a page label is sentence-cased, never invented: "
+                        f"{planned['https://x.blogspot.com/p/calculator.html']['toTitle']!r}")
+    # The page's own heading is borrowed only when there is no usable title to fix. The first run of
+    # 22 October took "ABOUT US" from its banner and lost the commas that lived in markup, which read as
+    # a word list; a page's own name is the safer title and still satisfies Bing 13.
+    blank = plan([{"resource": "pages", "id": "7", "title": "", "labels": [], "status": "LIVE",
+                   "content": "<h1>EMI, SIP and loan calculators</h1>" + body,
+                   "url": "https://x.blogspot.com/p/blank.html", "published": "2026-10-01T01:00:00Z"}])
+    if not blank or "calculators" not in blank[0]["toTitle"]:
+        problems.append("a page with no title at all must be named from its own heading")
     if not any("alt text" in " ".join(row["reasons"]) for row in patches):
         problems.append("an image with no alt text must be repaired")
     outcomes = takedowns(items, protected=set())

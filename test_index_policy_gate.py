@@ -52,6 +52,8 @@ class NoWorseThanWhatItFound(unittest.TestCase):
     def test_a_page_keeps_a_sane_title_when_its_banner_is_unusable(self):
         self.assertEqual(gate.publish_title("ABOUT US", set(), minimum=4), "About us")
         self.assertEqual(gate.publish_title("CONTACT US", set(), minimum=4), "Contact us")
+        self.assertEqual(gate.page_title("<h1>Say hello namaste bonjour hola ciao salaam</h1>"), "",
+                         "a greeting strip is not a page title")
 
     def test_a_title_that_really_is_clipped_is_still_repaired(self):
         cut = "Billionaire Mukesh Ambani launches India's"

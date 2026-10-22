@@ -27,7 +27,9 @@ def item(pid: str, title: str, url: str, *, resource: str = "posts", content: st
             "published": published, "labels": ["Markets"], "status": "LIVE"}
 
 
-class Fixture(unittest.TestCase):
+class TempPaths:
+    """Every artefact a run writes goes to a temporary directory, never into the repository."""
+
     def setUp(self):
         self.tmp = pathlib.Path(tempfile.mkdtemp())
         self.saved = (repair.OUT, repair.MD, repair.BACKUP)
@@ -36,6 +38,11 @@ class Fixture(unittest.TestCase):
 
     def tearDown(self):
         repair.OUT, repair.MD, repair.BACKUP = self.saved
+
+
+class Fixture(unittest.TestCase, TempPaths):
+    def setUp(self):
+        TempPaths.setUp(self)
 
     def test_the_plan_fixes_the_three_defects_and_invents_nothing(self):
         items = [
@@ -48,8 +55,8 @@ class Fixture(unittest.TestCase):
         ]
         planned = {row["url"]: row for row in repair.plan(items)}
         self.assertIn("https://x/p/terms.html", planned, "an ALL-CAPS page title must be repaired")
-        self.assertEqual(planned["https://x/p/terms.html"]["toTitle"],
-                         "Terms and conditions for Daily Yield")
+        self.assertEqual(planned["https://x/p/terms.html"]["toTitle"], "Terms and conditions",
+                         "a page is sentence-cased into its own label; its banner text is not a title")
         self.assertIn("https://x/2026/10/loans.html", planned, "a headline ending on a comma must be re-cut")
         self.assertFalse(planned["https://x/2026/10/loans.html"]["toTitle"].endswith(","))
         self.assertIn("https://x/2026/10/gold.html", planned, "an image with no alt text must be repaired")
@@ -137,7 +144,10 @@ class Fixture(unittest.TestCase):
         self.assertEqual(repair.takedowns(items, protected=set())["unpublish"], [])
 
 
-class RunModes(Fixture):
+class RunModes(unittest.TestCase, TempPaths):
+    def setUp(self):
+        TempPaths.setUp(self)
+
     """Audit mode must redirect every artefact it writes: a test that scribbles in the repo is a bug."""
     def test_audit_mode_writes_nothing_to_the_site(self):
         items = [item("2", "Student Loan Interest Rates: Federal, Private,", "https://x/loans.html")]
@@ -160,7 +170,10 @@ class RunModes(Fixture):
         return path
 
 
-class Revert(Fixture):
+class Revert(unittest.TestCase, TempPaths):
+    def setUp(self):
+        TempPaths.setUp(self)
+
     def test_the_backup_round_trips_into_a_restore_plan(self):
         import gzip
         items = [item("1", "ABOUT US", "https://x/p/about.html", resource="pages"),

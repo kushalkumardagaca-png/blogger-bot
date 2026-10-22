@@ -186,6 +186,14 @@ class Detectors(unittest.TestCase):
         self.assertNotIn("article", audit.prose(hub).lower(),
                         "link labels are navigation and must not be counted as prose")
 
+    def test_a_short_page_label_is_not_reported_as_a_violation(self):
+        # "Disclaimer" and "Calculator" are the site's own navigation labels. The 12-character floor is
+        # the rule this repository applies to an article headline; a standing page is not a headline, and
+        # reporting the correct title as a violation is how a fixer ends up padding it.
+        self.assertLess(audit.PAGE_TITLE_MIN, audit.TITLE_MIN)
+        rows = [{"url": f"{BLOG}/p/calculator.html", "title": "Calculator", "resource": "pages"}]
+        self.assertTrue(all(len(row["title"]) >= audit.PAGE_TITLE_MIN for row in rows))
+
     def test_sitemap_entries_are_read_as_urls(self):
         raw = sitemap([f"{BLOG}/a.html", f"{BLOG}/b.html"])
         self.assertEqual(audit.sitemap_locations(raw), [f"{BLOG}/a.html", f"{BLOG}/b.html"])

@@ -43,7 +43,8 @@ RENDER_SAMPLE = 6
 SAMPLE_SPACING_SECONDS = 5
 MIN_WORDS = 300          # below this Bing §11 calls the page thin
 TITLE_MAX = 70           # both engines truncate past this and §13 wants a readable title
-TITLE_MIN = 12           # our own validator floor; shorter is not descriptive
+TITLE_MIN = 12           # our own validator floor for an article headline; shorter is not descriptive
+PAGE_TITLE_MIN = 4       # a standing page is labelled, not headlined: "Disclaimer", "Calculator"
 # Jaccard overlap of 8-word shingles. Containment (overlap / smaller document) was the first choice
 # and it was wrong: every short page shares the site's standing disclaimer paragraph, so a 60-word
 # page scored 1.00 against a 2,000-word article and the report cried duplicate 40 times over. This
@@ -374,7 +375,13 @@ def audit() -> dict:
              unresolved, "platform")
 
     # §13 titles: present, descriptive, unique, not clipped mid-phrase, not shouty
-    short = [row["url"] for row in editorial if len(row["title"]) < TITLE_MIN]
+    # The floor belongs to article headlines. A standing page carries the label the site's own
+    # navigation shows - "Disclaimer", "Calculator" - and Bing §13's complaint is about a title that does
+    # not describe the page, not about a short one, so applying the article floor to pages would report a
+    # violation on the correct title and push someone to pad it. Pages keep a real phrase (PAGE_TITLE_MIN)
+    # and the same truncation ceiling as everything else.
+    short = [row["url"] for row in editorial
+             if len(row["title"]) < (PAGE_TITLE_MIN if "/p/" in row["url"] else TITLE_MIN)]
     longish = [row["url"] for row in editorial if len(row["title"]) > TITLE_MAX]
     allcaps = [row["url"] for row in editorial
                if len(row["title"]) > 6 and row["title"].upper() == row["title"]]
@@ -382,7 +389,8 @@ def audit() -> dict:
     empty = [row["url"] for row in editorial if not row["title"].strip()]
     register(checks, "titles-descriptive-and-complete", "Bing §13 §17; Google indexing criteria",
              not (short or longish or empty or truncated),
-             f"{len(short)} under {TITLE_MIN} chars, {len(longish)} over {TITLE_MAX}, {len(empty)} empty, "
+             f"{len(short)} under its floor ({TITLE_MIN} for an article, {PAGE_TITLE_MIN} for a page), "
+             f"{len(longish)} over {TITLE_MAX}, {len(empty)} empty, "
              f"{len(truncated)} cut mid-phrase (our own title clip does this)",
              truncated + short + longish, "repo")
     register(checks, "titles-not-shouted-in-caps", "Bing §13 (titles written for users)", not allcaps,
@@ -693,7 +701,7 @@ def run_check() -> int:
                                                     "context-httpsschema"}, \
         "the IndexNow key page must be exempt, and nothing else may join it"
     assert "keyLocation" in Path(__file__).read_text(), "the exemption has to name the reason"
-    assert MIN_WORDS > 0 and TITLE_MAX > TITLE_MIN
+    assert MIN_WORDS > 0 and TITLE_MAX > TITLE_MIN > PAGE_TITLE_MIN > 0
     pair = [{"url": BLOG + "/2026/10/india-news-2026-10-18.html", "slug": "india-news-2026-10-18.html"},
             {"url": BLOG + "/2026/10/india-news-2026-10-18_01443792159.html",
              "slug": "india-news-2026-10-18_01443792159.html"},

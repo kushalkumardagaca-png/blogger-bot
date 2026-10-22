@@ -225,6 +225,11 @@ def page_title(body: str, fallback: str = "", *, limit: int = TITLE_MAX) -> str:
                 # repair run of 22 October: every comma belonged to markup, and the tail was severed
                 # mid-list. A title must read finished or not be borrowed at all.
                 continue
+            if len(text.split()) >= 6 and not re.search(r"[,.;:—–]", text):
+                # A run of six words with no punctuation anywhere is not a headline somebody wrote, it is
+                # a list of items or a row of buttons - the shape that made the first repair pass borrow
+                # a page's greeting strip ("Say hello namaste bonjour hola ciao salaam") as its title.
+                continue
             if len(text) >= TITLE_MIN and not title_is_cut(text) and not JUNK_TITLE.search(text):
                 return text
     return ""
@@ -394,6 +399,15 @@ def self_test() -> dict:
     if most_used_word(hammered)[0] not in ("best", "loan"):
         failures.append({"value": most_used_word(hammered),
                          "wanted": "a term pushed through every paragraph must be caught"})
+    if page_title("<h1>Say hello namaste bonjour hola ciao salaam</h1>"):
+        failures.append({"value": page_title("<h1>Say hello namaste bonjour hola ciao salaam</h1>"),
+                         "wanted": "a punctuation-free list of six words is a banner, not a title"})
+    if page_title("<h1>" + " ".join(f"word{index}" for index in range(9)) + "</h1>"):
+        failures.append({"value": "borrowed a nine-word list",
+                         "wanted": "the same, whatever the words are"})
+    if page_title("<h1>The Country Money Atlas</h1>") != "The Country Money Atlas":
+        failures.append({"value": page_title("<h1>The Country Money Atlas</h1>"),
+                         "wanted": "a page's own short name is a title and should be used"})
     problems = check_article("Gold rate today in India", "<p>one two three</p>")
     if not any("thin" in row for row in problems):
         failures.append({"value": problems, "wanted": "a three-word page must not pass as content"})
