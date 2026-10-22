@@ -33,6 +33,8 @@ import urllib.request
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import index_policy_gate as gate
+
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "SEARCH_INDEX_POLICY_AUDIT.json"
 MD = ROOT / "SEARCH_INDEX_POLICY_AUDIT.md"
@@ -383,8 +385,10 @@ def audit() -> dict:
     short = [row["url"] for row in editorial
              if len(row["title"]) < (PAGE_TITLE_MIN if "/p/" in row["url"] else TITLE_MIN)]
     longish = [row["url"] for row in editorial if len(row["title"]) > TITLE_MAX]
-    allcaps = [row["url"] for row in editorial
-               if len(row["title"]) > 6 and row["title"].upper() == row["title"]]
+    # The gate decides what counts as shouting, so the audit and the publisher can never disagree: a
+    # currency or index headline ("EURUSD 1.1253 EURGBP 0.8438", "NIFTY 50 SENSEX 78,000") is caps
+    # because the symbols have no lowercase form, and asking for it to be rewritten would be the defect.
+    allcaps = [row["url"] for row in editorial if gate.is_shouting(row["title"])]
     truncated = [row["url"] for row in editorial if title_is_cut(row["title"])]
     empty = [row["url"] for row in editorial if not row["title"].strip()]
     register(checks, "titles-descriptive-and-complete", "Bing §13 §17; Google indexing criteria",
@@ -523,7 +527,11 @@ def audit() -> dict:
     missing_title = [url for url, data in rendered_pages.items() if not data["title"]]
     missing_desc = [url for url, data in rendered_pages.items() if not data["description"]]
     blocked = [url for url, data in rendered_pages.items() if data["robotsMeta"]]
-    no_h1 = [url for url, data in rendered_pages.items() if data["h1Count"] != 1]
+    # A machine endpoint is exempt here too. /p/indexnow-key.html exists so IndexNow can read a key; the
+    # Blogger theme gives it no <h1> and it needs none, and reporting it made the one finding this check
+    # had left look like a heading defect on a page that is not a page.
+    no_h1 = [url for url, data in rendered_pages.items()
+             if data["h1Count"] != 1 and not any(slug in url for slug in EXEMPT_UTILITY_SLUGS)]
     client_side = [url for url, data in rendered_pages.items() if not data["bodyTextPresent"]]
     reach_note = f", {len(unreachable)} did not answer 200 and were not judged" if unreachable else ""
     register(checks, "rendered-head-completeness", "Bing §13; Google indexability",
@@ -535,7 +543,8 @@ def audit() -> dict:
              f"{len(blocked)} sampled URL(s) carry noindex/nocache/noarchive/nosnippet{reach_note}",
              blocked, "blogger")
     register(checks, "exactly-one-h1", "Bing §13 (heading hierarchy)", not no_h1,
-             f"{len(no_h1)} sampled URL(s) without exactly one <h1>{reach_note}", no_h1, "platform")
+             f"{len(no_h1)} sampled URL(s) without exactly one <h1>{reach_note}; machine endpoints are "
+             "exempt, as they are from every other writing rule", no_h1, "platform")
     register(checks, "content-present-without-scripts", "Bing §8 (no client-side-only content)",
              not client_side,
              f"{len(client_side)} sampled URL(s) whose body text is not in the served HTML{reach_note}",
@@ -585,7 +594,10 @@ def audit() -> dict:
                   "reach the pages sitemap (Google reports 'no referring sitemap')", [], "blogger")
 
     # §19 §20 freshness and URL stability
-    stale = [row["url"] for row in corpus if row["published"][:10] != row["updated"][:10]
+    # editorial, not corpus: a machine endpoint that gets refreshed keeps its updated date and has never
+     # been meant to be substantial, and the first pass of the repair retitling /p/indexnow-key.html made
+     # that page look like a thin rewrite. It is exempt from the writing rules everywhere else.
+    stale = [row["url"] for row in editorial if row["published"][:10] != row["updated"][:10]
              and row["wordCount"] < MIN_WORDS]
     register(checks, "updated-pages-are-still-substantial", "Bing §19", not stale,
              f"{len(stale)} URL(s) were revised and are still below the thin line", stale, "repo")
@@ -684,6 +696,10 @@ def run_check() -> int:
     assert len(strip_markup("<p>one <b>two</b></p>")) == len("one two")
     assert UTILITY_SLUGS & {"indexnow-key"}, "utility pages must be named so they can be kept out"
     assert EXEMPT_UTILITY_SLUGS == {"indexnow-key"}
+    assert EXEMPT_UTILITY_SLUGS == set(gate.MACHINE_ONLY_SLUGS), \
+        "the audit and the repair must exempt the same machine endpoints, or one of them polishes them"
+    assert gate.is_shouting("DAILY NEWS") and not gate.is_shouting("EURUSD 1.1253 EURGBP 0.8438"), \
+        "a ticker headline is caps because the symbols are, not because someone is shouting"
     assert "for row in editorial" in Path(__file__).read_text(), \
         "writing rules are judged on content URLs, not on a machine page that may never change"
     assert "def prose(" in Path(__file__).read_text(), "stuffing must be measured on prose, not link labels"

@@ -186,6 +186,12 @@ class Detectors(unittest.TestCase):
         self.assertNotIn("article", audit.prose(hub).lower(),
                         "link labels are navigation and must not be counted as prose")
 
+    def test_a_ticker_headline_is_not_shouting(self):
+        self.assertTrue(callable(audit.gate.is_shouting))
+        self.assertFalse(audit.gate.is_shouting("EURUSD 1.1253 EURGBP 0.8438 EURJPY 177.4"),
+                         "ISO 4217 codes have no lowercase form; that title is correct as written")
+        self.assertTrue(audit.gate.is_shouting("DAILY NEWS"))
+
     def test_a_short_page_label_is_not_reported_as_a_violation(self):
         # "Disclaimer" and "Calculator" are the site's own navigation labels. The 12-character floor is
         # the rule this repository applies to an article headline; a standing page is not a headline, and

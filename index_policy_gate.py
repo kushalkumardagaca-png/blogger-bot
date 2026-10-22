@@ -84,6 +84,39 @@ def title_is_cut(title: str) -> bool:
     return bool(CUT_TAIL.search((title or "").strip()))
 
 
+# A ticker is not a shout. "EURUSD 1.1253 EURGBP 0.8438 EURJPY 177.4" is how the currency desk writes a
+# headline, because ISO 4217 codes have no lowercase form, and "NIFTY 50" is the name of an index. Reading
+# either as an all-caps display defect would hold a good post in CI and send the audit to demand a retitle
+# of a page that should be left alone, so a token counts as a symbol only on shapes we can name.
+FX_PAIR = re.compile(r"[A-Z]{6}")                # EURUSD, GBPJPY
+CURRENCY = re.compile(r"[A-Z]{3}")               # USD, INR, EUR
+INDEX_SYMBOL = frozenset(("NIFTY", "SENSEX", "BANKNIFTY", "FINNIFTY", "MIDCPNIFTY", "NIFTY50", "VIX",
+                          "DXY", "HSI", "NIKKEI", "KOSPI", "STOXX50E", "FTSE100", "DAX40", "CAC40",
+                          "IBEX35", "NIFTYBANK", "GIFTNIFTY", "BTC", "ETH", "GOLD", "SILVER", "CRUDE"))
+MACHINE_ONLY_SLUGS = ("indexnow-key",)   # the audit's EXEMPT_UTILITY_SLUGS: an endpoint, not a page
+
+
+def is_symbol(token: str) -> bool:
+    token = token.strip(" .:;,()")
+    return bool(token) and (token in INDEX_SYMBOL or bool(FX_PAIR.fullmatch(token))
+                            or bool(CURRENCY.fullmatch(token))
+                            or bool(re.fullmatch(r"[A-Z]{3,6}\d{1,3}", token)))
+
+
+def is_shouting(title: str) -> bool:
+    """True when the title is written in caps as an act of shouting, not because its words are symbols.
+
+    Known limitation, stated rather than hidden: a four or five-letter exchange ticker that is not in
+    INDEX_SYMBOL (a company code on its own, say) still reads as shouting here and would be sentence-cased.
+    That is the safe direction to be wrong in - the code lowers a word a reader can still read, where
+    lowering "EURUSD" would have broken the page.
+    """
+    if not is_all_caps(title):
+        return False
+    letters = [token for token in re.findall(r"[A-Za-z][A-Za-z0-9]*", title or "") if not token.isdigit()]
+    return any(not is_symbol(token.upper()) for token in letters)
+
+
 def is_all_caps(title: str) -> bool:
     letters = [ch for ch in title or "" if ch.isalpha()]
     return len(letters) > 5 and all(ch.isupper() for ch in letters)
@@ -98,7 +131,8 @@ def sentence_case(title: str) -> str:
     title = re.sub(r"\s+", " ", html.unescape((title or "").strip()))
     if not title:
         return ""
-    if not is_all_caps(title):
+    if not is_shouting(title):
+        # leave a ticker headline exactly as written: lowercasing "EURUSD" would be the real defect
         return title
     lowered = title.lower()
     for token in KEEP_CAPS:
@@ -158,7 +192,7 @@ def title_problems(title: str, *, minimum: int = TITLE_MIN, maximum: int = TITLE
     if len(clean) > maximum:
         problems.append(f"title is {len(clean)} characters, past the {maximum}-character limit both "
                         "engines truncate at")
-    if is_all_caps(clean):
+    if is_shouting(clean):
         problems.append("title is written entirely in upper case")
     if title_is_cut(clean):
         problems.append("title stops mid-phrase")
@@ -180,7 +214,7 @@ def publish_title(title: str, taken: set[str] | None = None, *, limit: int = TIT
     padding a headline to clear a check is how two URLs end up sharing one.
     """
     candidate = uncut_title(sentence_case(title).strip(" -–—:,.,"), limit)
-    if not candidate or is_all_caps(candidate) or JUNK_TITLE.search(candidate.strip(" .:")):
+    if not candidate or is_shouting(candidate) or JUNK_TITLE.search(candidate.strip(" .:")):
         return ""
     if title_is_cut(candidate):
         candidate = uncut_title(candidate, max(minimum, len(candidate) - 8))

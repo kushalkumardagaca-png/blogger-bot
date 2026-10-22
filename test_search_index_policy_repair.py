@@ -15,6 +15,7 @@ import tempfile
 import unittest
 from unittest import mock
 
+import index_policy_gate
 import search_index_policy_repair as repair
 
 SENTENCES = " ".join(f"desk note {index} settled higher before the bell today" for index in range(60))
@@ -43,6 +44,20 @@ class TempPaths:
 class Fixture(unittest.TestCase, TempPaths):
     def setUp(self):
         TempPaths.setUp(self)
+
+    def test_an_image_whose_alt_says_nothing_is_described(self):
+        # what the shared repair left behind on 22 October: the attribute exists, the description does not
+        body = "<p>" + SENTENCES + '</p><p><img src="https://bp.blogspot.com/a/x.jpg" alt="photo">'
+        body += '</p><p><img src="https://bp.blogspot.com/a/y.jpg" alt="a jeweller weighing gold in Mumbai">'
+        items = [item("20", "Gold rate today in India", "https://x/2026/10/rate.html", content=body + "</p>")]
+        planned = repair.plan(items)
+        self.assertEqual(len(planned), 1, "an undescribed image is a repairable violation (Bing §5 §12)")
+        self.assertIn("usable alt text", " ".join(planned[0]["reasons"]))
+        self.assertIn('alt="Gold rate today in India"', planned[0]["content"])
+        self.assertIn('alt="a jeweller weighing gold in Mumbai"', planned[0]["content"],
+                      "an image that is already described must not be overwritten")
+        self.assertEqual(index_policy_gate.alt_failures(planned[0]["content"]), 0,
+                         "the repaired document must satisfy the gate it was held to")
 
     def test_the_plan_fixes_the_three_defects_and_invents_nothing(self):
         items = [
@@ -137,6 +152,15 @@ class Fixture(unittest.TestCase, TempPaths):
         going_down = {row["url"] for row in outcomes["unpublish"]}
         self.assertTrue(all(row["url"] in going_down for row in repair.plan(items)))
         self.assertTrue(going_down, "a thin redirect notice is exactly what a takedown is for")
+
+    def test_a_machine_endpoint_is_never_retitled(self):
+        # /p/indexnow-key.html answers a crawler with a key. The first pass borrowed its banner and
+        # renamed it "About this page - Daily Yield and Kushal Daga", which reads badly in a log and made
+        # a deliberately short page look like a thin rewrite in the audit.
+        items = [item("15", "indexnow-key", "https://x/p/indexnow-key.html", resource="pages",
+                     content="<h1>About this page — Daily Yield and Kushal Daga</h1><p>key</p>")]
+        self.assertEqual(repair.plan(items), [])
+        self.assertIn("indexnow-key", "".join(index_policy_gate.MACHINE_ONLY_SLUGS))
 
     def test_the_indexnow_key_page_is_never_a_takedown(self):
         # taking that URL down would stop every IndexNow submission working

@@ -119,6 +119,12 @@ def plan(items: list[dict]) -> list[dict]:
     assigned: set[str] = set()
     patches = []
     for item in ordered:
+        url = item.get("url", "")
+        if any(slug in url for slug in gate.MACHINE_ONLY_SLUGS):
+            # An endpoint that exists to answer a crawler with a key is not a page. Retitling it changes
+            # nothing a reader sees, freshens its crawl date for no reason, and - as the 22 October pass
+            # found - makes a deliberately short machine page look like a thin rewrite in the audit.
+            continue
         current = " ".join((item.get("title") or "").split())
         own = gate.key(current)
         pending[own] -= 1
@@ -135,6 +141,23 @@ def plan(items: list[dict]) -> list[dict]:
         if alts:
             reasons.append(f"{alts} image(s) given alt text")
             content = repaired
+        # What the shared repair leaves behind is the finding the audit still had after it ran: an
+        # attribute that exists but says nothing - alt="" on a photograph, or alt="photo", or a file name.
+        # Bing §12 asks for a description, and the gate's line is six usable characters, so anything under
+        # that gets the headline the image sits under. Good alts are never overwritten: this only rewrites
+        # tags the gate would still call undescribed.
+        weak = [tag for tag in re.findall(r"<img\b[^>]*>", content or "", flags=re.I)
+                if not (re.search(r"alt=['\"]([^'\"]{6,})['\"]", tag) or not re.search(r"alt=", tag))]
+        if weak:
+            label = re.sub(r"\s+", " ", title).strip() or "Daily Yield illustration"
+            for tag in weak:
+                if re.search(r"alt=['\"][^'\"]*['\"]", tag):
+                    fixed = re.sub(r"alt=['\"][^'\"]*['\"]", f'alt="{label}"', tag, count=1)
+                else:
+                    fixed = tag[:-1] + f' alt="{label}">'
+                content = content.replace(tag, fixed, 1)
+            reasons.append(f"{len(weak)} image(s) carrying no usable alt text, given the headline")
+            alts += len(weak)
         if reasons:
             patches.append({"resource": item["resource"], "id": str(item["id"]), "url": item.get("url", ""),
                             "fromTitle": current, "toTitle": title, "reasons": reasons, "content": content,
