@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-22T18:45:53.544622+05:30",
+ "generatedAt": "2026-10-22T19:00:17.266470+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 17,
- "expectedPosts": 34,
- "articlesWithBothPosts": 16,
- "postsMissing": 2,
- "dispatched": 2,
+ "articles": 18,
+ "expectedPosts": 36,
+ "articlesWithBothPosts": 18,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
-   "key": "news-economy",
-   "title": "economy edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-22.html",
+   "key": "news-global",
+   "title": "global edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-22.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
@@ -22,73 +22,17 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-22.html",
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-22.html",
    "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-americas",
-   "title": "americas edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-banking",
-   "title": "banking edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
-   "posts": 0,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
-    "mastodon": 0
+    "bluesky": 1,
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-companies",
@@ -117,13 +61,65 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-22.html",
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
     "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-americas",
+   "title": "americas edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -137,6 +133,19 @@
    "byPlatform": {
     "facebook": 0,
     "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-banking",
+   "title": "banking edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -236,10 +245,10 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T18:45:41.035512+05:30",
+ "liveVerificationSourceAt": "2026-10-22T19:00:06.583384+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 16,
+ "articlesWithExactlyTwoPosts": 18,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
