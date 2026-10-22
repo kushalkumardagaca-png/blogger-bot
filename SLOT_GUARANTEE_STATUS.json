@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-22T12:08:08.241086+05:30",
+ "generatedAt": "2026-10-22T12:08:58.293297+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "toleranceMinutes": 30,
@@ -11,7 +11,7 @@
  "pending": 1,
  "overdue": 0,
  "upcoming": 12,
- "dispatched": 1,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -100,8 +100,7 @@
    "live": false,
    "url": "",
    "state": "pending",
-   "minutesFromSlot": -7,
-   "action": "dispatched"
+   "minutesFromSlot": -7
   },
   {
    "key": "news-europe",
