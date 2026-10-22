@@ -1,11 +1,10 @@
 # Search index policy repair
 
-**APPLY** · inventory 600 live URLs · 1 title and alt-text repairs planned · 0 URL(s) to take down · 42 deliberately left alone
-- written this run: **1** · failed: 0 · backup of everything touched: `SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz`
+**AUDIT_ONLY** · inventory 602 live URLs · 0 title and alt-text repairs planned · 0 URL(s) to take down · 42 deliberately left alone
+- written this run: **0** · failed: 0 · backup of everything touched: `none (audit only)`
 
 | url | why |
 |---|---|
-| `https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html` | 1 image(s) carrying no usable alt text, given the headline |
 
 ## Left alone on purpose
 
@@ -33,7 +32,3 @@
 ## The limit of a repair like this
 
 Titles, alt attributes and the removal of junk URLs are all mechanical, so they are fixed here. Two findings in the audit are content decisions and stay with the desk: the country editions that share one template, and the evergreen library's photo file names. Both have a gate in `index_policy_gate.py` now, so new posts cannot make the mistake again.
-
-## Written
-
-- patch `https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html` — 1 image(s) carrying no usable alt text, given the headline

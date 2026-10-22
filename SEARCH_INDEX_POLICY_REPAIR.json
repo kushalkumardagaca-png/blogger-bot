@@ -1,24 +1,16 @@
 {
- "ranAt": "2026-10-22T05:47:21+00:00",
- "mode": "APPLY",
- "inventory": 600,
+ "ranAt": "2026-10-22T08:33:09+00:00",
+ "mode": "AUDIT_ONLY",
+ "inventory": 602,
  "planned": {
-  "patches": 1,
+  "patches": 0,
   "unpublish": 0,
   "heldBack": 42,
   "titlesOnly": 0,
-  "altsOnly": 1
+  "altsOnly": 0
  },
  "alsoTakenDown": [],
- "preview": [
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html",
-   "reasons": [
-    "1 image(s) carrying no usable alt text, given the headline"
-   ],
-   "title": "Market News — 1 October 2026"
-  }
- ],
+ "preview": [],
  "unpublishPreview": [],
  "heldPreview": [
   {
@@ -223,19 +215,5 @@
   }
  ],
  "gate": "index_policy_gate.py keeps every one of these rules on future publications",
- "backup": "SEARCH_INDEX_POLICY_REPAIR_BACKUP.json.gz",
- "written": 1,
- "applied": [
-  {
-   "action": "patch",
-   "resource": "posts",
-   "id": "3794916987021150590",
-   "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html",
-   "title": "Market News — 1 October 2026",
-   "reasons": [
-    "1 image(s) carrying no usable alt text, given the headline"
-   ]
-  }
- ],
- "failed": []
+ "backup": ""
 }
