@@ -1,13 +1,13 @@
 {
- "at": "2026-10-22T21:04:15Z",
+ "at": "2026-10-22T22:37:03Z",
  "workflow": "master_trending_writer.yml",
  "kind": "trending",
- "slot": "4",
- "run": "39851917625",
+ "slot": "0",
+ "run": "39864550435",
  "stage": "master-v3",
  "status": "FAIL",
- "error_type": "ValueError",
- "error": "MASTER V2 REJECTED — content policy: possible exposed payment-card-like number",
+ "error_type": "RuntimeError",
+ "error": "GREEN OPERATING GATE FAILED — live Blogger corpus status is not PASS; live corpus has image-rights gaps",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
