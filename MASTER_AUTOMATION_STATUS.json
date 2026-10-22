@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "742e5f299c3fecae",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-22",
   "kind": "trending",
   "slot": 2,
-  "slot_key": "2026-10-22:trending:2",
-  "date": "2026-10-22",
-  "category": "Trend · Companies & Deals Trending",
-  "evergreen_category": "Economy Policy & Global Finance",
+  "topic_id": "742e5f299c3fecae",
+  "replaced_topic_id": null,
   "title": "Why is Elon Musk plotting a mega-merger",
-  "url": "https://dailyyield.blogspot.com/2026/10/why-is-elon-musk-plotting-mega-merger.html",
-  "published_at": "2026-10-22T01:45:07-07:00"
+  "package": "master_packages/dynamic/2026-10-22-trending-742e5f299c3fecae.json",
+  "html": "scheduled_ready/2026-10-22-trending-2-why-is-elon-musk-plotting-a-mega-merger.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 0.0,
+  "remainingMinutes": 30.0
 }
