@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T03:38:01+00:00",
+ "checkedAt": "2026-10-22T03:42:09+00:00",
  "corpus": {
   "posts": 583,
   "pages": 14,
@@ -274,7 +274,7 @@
    "guideline": "Bing §13; Google indexability",
    "status": "PASS",
    "advisory": false,
-   "detail": "6 URL(s) rendered: 0 without a title, 0 without a meta description",
+   "detail": "4 URL(s) rendered: 0 without a title, 0 without a meta description, 2 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -284,7 +284,7 @@
    "guideline": "Bing §10; Google: indexing allowed?",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet",
+   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 2 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -294,7 +294,7 @@
    "guideline": "Bing §13 (heading hierarchy)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "1 sampled URL(s) without exactly one <h1>",
+   "detail": "1 sampled URL(s) without exactly one <h1>, 2 did not answer 200 and were not judged",
    "offenders": [
     "https://dailyyield.blogspot.com/p/indexnow-key.html"
    ],
@@ -306,7 +306,7 @@
    "guideline": "Bing §8 (no client-side-only content)",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) whose body text is not in the served HTML",
+   "detail": "0 sampled URL(s) whose body text is not in the served HTML, 2 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -316,7 +316,7 @@
    "guideline": "Bing §14; Google: enhancement issues",
    "status": "PASS",
    "advisory": false,
-   "detail": "6 URL(s) sampled, 0 markup problem(s)",
+   "detail": "4 URL(s) sampled, 0 markup problem(s), 2 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"

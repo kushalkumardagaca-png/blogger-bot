@@ -1,6 +1,6 @@
 # Search index policy conformance
 
-**16 PASS · 11 FAIL** across 597 URLs (583 posts, 14 pages) · checked 2026-10-22T03:38:01+00:00
+**16 PASS · 11 FAIL** across 597 URLs (583 posts, 14 pages) · checked 2026-10-22T03:42:09+00:00
 
 Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria; the sources are named in the JSON. Nothing in this file edits the site.
 
@@ -24,11 +24,11 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 | `image-file-names-are-descriptive` | ❌ Bing §12 (unique, relevant file names) | 3 of 31 committed image file name(s) repeats across the site (photo-1.jpg on 473 URLs, photo-2.jpg on 149 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1 | repo |
 | `image-names-not-hidden-by-the-host` | ✅ Bing §12 | 0 URL(s) reach a crawler as an opaque id because Blogger's image proxy renames the upload - measured, not ours to change, and the alt text checked above carries the description instead | platform |
 | `no-double-published-urls` | ❌ Bing §6 §9 (duplicate or redirected URLs) | 8 article(s) were published twice; Blogger numbered the copy's slug, so both copies sit in the sitemap as separate URLs with the same text | repo |
-| `rendered-head-completeness` | ✅ Bing §13; Google indexability | 6 URL(s) rendered: 0 without a title, 0 without a meta description | platform |
-| `no-blocking-robots-meta` | ✅ Bing §10; Google: indexing allowed? | 0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet | blogger |
-| `exactly-one-h1` | ❌ Bing §13 (heading hierarchy) | 1 sampled URL(s) without exactly one <h1> | platform |
-| `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML | platform |
-| `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 6 URL(s) sampled, 0 markup problem(s) | repo |
+| `rendered-head-completeness` | ✅ Bing §13; Google indexability | 4 URL(s) rendered: 0 without a title, 0 without a meta description, 2 did not answer 200 and were not judged | platform |
+| `no-blocking-robots-meta` | ✅ Bing §10; Google: indexing allowed? | 0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 2 did not answer 200 and were not judged | blogger |
+| `exactly-one-h1` | ❌ Bing §13 (heading hierarchy) | 1 sampled URL(s) without exactly one <h1>, 2 did not answer 200 and were not judged | platform |
+| `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML, 2 did not answer 200 and were not judged | platform |
+| `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 4 URL(s) sampled, 0 markup problem(s), 2 did not answer 200 and were not judged | repo |
 | `robots-allows-both-crawlers` | ✅ Bing §8 §10; Google: crawl allowed? | HTTP 200; neither bot is blocked; declares sitemap | blogger |
 | `sitemaps-declared-in-robots` | ✅ Bing §2; Google: referring sitemap | both Blogger sitemaps are named in robots.txt | blogger |
 | `updated-pages-are-still-substantial` | ✅ Bing §19 | 0 URL(s) were revised and are still below the thin line | repo |
