@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-22T06:46:57.211186+05:30",
+ "generatedAt": "2026-10-22T07:15:38.526467+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 3,
- "expectedPosts": 6,
+ "articles": 4,
+ "expectedPosts": 8,
  "articlesWithBothPosts": 3,
- "postsMissing": 0,
- "dispatched": 0,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-china",
@@ -35,6 +35,23 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-22.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
    "key": "master-trending-0",
    "title": "Chancellor rejects calls to raise Capital",
    "url": "https://dailyyield.blogspot.com/2026/10/chancellor-rejects-calls-to-raise.html",
@@ -50,10 +67,10 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T06:46:55.308104+05:30",
+ "liveVerificationSourceAt": "2026-10-22T07:15:36.785946+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 3,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
