@@ -186,30 +186,87 @@ def reuse_completed_slot(plan,kind,slot,emit_social=False):
  return True
 
 
+# A refusal by a content gate and a broken run are different events, and the pipeline used to treat them
+# the same way: the plan kept the same topic, the retry rebuilt it, and the same gate refused it again.
+# On 22 October that is how one Evergreen slot collected 80 failure files while its 30-minute budget ran
+# out, and how tonight's 20:45 trending slot died on a reused sentence instead of moving to another topic.
+GATE_REFUSALS = ("source gate", "originality gate", "photo search exhausted", "no evidence-ready")
+
+
+def gate_refusal(exc) -> bool:
+    """True when a quality gate refused *this topic*, which is a reason to change topic and nothing more.
+
+    A plan that is not READY, a Blogger call that failed or an embargo that has not lifted is not a
+    refusal, and the slot must not be quietly reassigned because of one.
+    """
+    text = str(exc).casefold()
+    return any(needle in text for needle in GATE_REFUSALS)
+
+
+def block_topic(plan, kind, slot, item, error) -> None:
+    """Record in the day's plan that this topic could not be made publishable today, and why.
+
+    The publish path has always blocked a topic it could not honour; the prepare path never did, so the
+    rotation the plan supports was invisible to the failures that most needed it. The reason is stored
+    beside the id so the next run, and anyone reading the plan afterwards, can see which gate refused.
+    """
+    blocked = plan.setdefault('blockedTopics', {})
+    blocked[str(item.get('id') or item.get('title') or 'unknown')] = {
+        'kind': kind, 'slot': slot, 'title': str(item.get('title') or '')[:120],
+        'error': str(error)[:300], 'at': dt.datetime.now(IST).isoformat(timespec='seconds')}
+    write(PLAN, plan)
+
+
+def build_candidate(kind, slot, candidate):
+    """Generate, validate and render one topic into today's package, or raise the gate's refusal."""
+    import master_v3_generator as generator
+    candidate = dict(candidate); candidate['_structure_slot'] = slot + (0 if kind == 'trending' else 5)
+    target = package_path(kind, candidate)
+    if target.exists():
+        package = read(target, {})
+        # Policy-versioned packages are immutable and reusable; older automated
+        # prose is rebuilt rather than grandfathered into publication.
+        if package.get('policy_version') != POLICY_VERSION: package = generator.build(candidate, kind, target)
+        else: validate(package)
+    else: package = generator.build(candidate, kind, target)
+    validate(package)
+    title, slug, meta, labels, body = build_html(kind, candidate, package, check_remote_images=False)
+    return candidate, target, title, slug, meta, labels, body
+
+
 def prepare(kind,slot):
  plan,item=selected(kind,slot)
  if str(item.get('id')) in blocked_topics(plan):item=replace_blocked_topic(plan,kind,slot,item);plan=read(PLAN,{})
  if reuse_completed_slot(plan,kind,slot):return
- import master_v3_generator as generator
- original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None
+ original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None;built=None
  for candidate in attempts:
   try:
-   candidate=dict(candidate);candidate['_structure_slot']=slot+(0 if kind=='trending' else 5)
-   target=package_path(kind,candidate)
-   if target.exists():
-    package=read(target,{})
-    # Policy-versioned packages are immutable and reusable; older automated
-    # prose is rebuilt rather than grandfathered into publication.
-    if package.get('policy_version')!=POLICY_VERSION:package=generator.build(candidate,kind,target)
-    else:validate(package)
-   else:package=generator.build(candidate,kind,target)
-   validate(package);title,slug,meta,labels,body=build_html(kind,candidate,package,check_remote_images=False);item=candidate;break
+   built=build_candidate(kind,slot,candidate);break
   except RuntimeError as exc:
    last=exc
-   if kind!='trending' or 'source gate' not in str(exc):raise
- else:raise last or RuntimeError('no evidence-ready trending candidate remained')
+   if not gate_refusal(exc):raise
+ if built is None:
+  # Every topic the plan offered for this slot was refused by a gate, so this is the moment to block the
+  # day's own choice and let the substitution machinery - the one publication already trusts - pick
+  # another approved topic in the same category. The substitute faces the identical gates: eight
+  # topic-specific sources, three subject-named photographs, the originality rule, the word limits.
+  block_topic(plan,kind,slot,original,last or RuntimeError('no candidate was offered for this slot'))
+  try:
+   substitute=replace_blocked_topic(read(PLAN,{}),kind,slot,original)
+   built=build_candidate(kind,slot,substitute);item=substitute
+  except RuntimeError as exc:
+   raise RuntimeError(f"{last or 'no evidence-ready candidate remained'}; and the substitute topic was "
+                      f"refused too - {exc}") from exc
+ item,target,title,slug,meta,labels,body=built
  if item.get('id')!=original.get('id'):
-  plan['trending'][slot]=item;write(PLAN,plan)
+  # Keyed by kind. The line before this wrote into plan['trending'] whatever the kind was, so an
+  # Evergreen substitution overwrote the trending row for the same slot number. The in-memory plan is
+  # the complete one for this call, so it is the base, and only the block list is taken back from disk
+  # - reading the file alone used to lose the blocks written a moment earlier, and could raise IndexError
+  # for a slot whose row had not been written yet.
+  stored=read(PLAN,{}) or {}
+  if stored.get('blockedTopics'):plan['blockedTopics']=stored['blockedTopics']
+  plan.setdefault(kind,[])[slot]=item;write(PLAN,plan)
  out=ROOT/'scheduled_ready'/f'{plan["date"]}-{kind}-{slot}-{slug}.html';out.parent.mkdir(exist_ok=True);out.write_text(body)
  write(STATUS,{'status':'PREPARED','publication_enabled':False,'date':plan['date'],'kind':kind,'slot':slot,'topic_id':item['id'],'replaced_topic_id':original.get('id') if item.get('id')!=original.get('id') else None,'title':title,'package':str(target.relative_to(ROOT)),'html':str(out.relative_to(ROOT)),**BUDGET.note()});print(f"Preparation used {BUDGET.elapsed_minutes()} of {BUDGET.minutes:.0f} budgeted minutes");print(target)
 

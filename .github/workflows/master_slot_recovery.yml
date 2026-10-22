@@ -10,6 +10,13 @@ on:
     branches: [main]
     paths:
       - '.github/master-recovery-request'
+  schedule:
+    # A push whose commit message carries a skip marker never reaches this workflow, and on 22 October
+    # that silently swallowed two recovery requests for over an hour while two Master slots stayed empty.
+    # The same request is therefore also read on a timer; master_recovery_request.py answers "dispatch"
+    # only when the slot has no confirmed live article, no writer run is active, and the request is under
+    # 90 minutes old, so the timer cannot start a second article for a slot that is already being written.
+    - cron: '*/20 * * * *'
 
 permissions:
   actions: write
@@ -20,22 +27,25 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - name: Requested slot
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Decide whether the request still needs a writer
         id: want
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUNS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/actions/runs
         run: |
-          value="$(tr -d '[:space:]' < .github/master-recovery-request)"
-          case "$value" in
-            evergreen:[0-4]) file=master_evergreen_writer.yml ;;
-            trending:[0-4])  file=master_trending_writer.yml ;;
-            *) echo "::error title=Unusable request::write evergreen:0-4 or trending:0-4 into .github/master-recovery-request"; exit 1 ;;
-          esac
-          echo "kind=${value%%:*}" >> "$GITHUB_OUTPUT"
-          echo "slot=${value##*:}" >> "$GITHUB_OUTPUT"
-          echo "file=$file" >> "$GITHUB_OUTPUT"
+          when="$(git log -1 --format=%ct -- .github/master-recovery-request 2>/dev/null || echo 0)"
+          python master_recovery_request.py --runs-url "$RUNS_URL" --requested-at "$when"
       - name: Write and release the article
+        if: steps.want.outputs.dispatch == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh workflow run "${{ steps.want.outputs.file }}" --ref main \
             -f slot="${{ steps.want.outputs.slot }}" -f publish=true -f retry_attempt=0
           echo "Requested ${{ steps.want.outputs.kind }} slot ${{ steps.want.outputs.slot }}"
+      - name: Nothing to do
+        if: steps.want.outputs.dispatch != 'true'
+        run: echo "::notice title=Recovery request already satisfied::${{ steps.want.outputs.note }}"
