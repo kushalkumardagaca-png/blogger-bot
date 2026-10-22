@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-10-22T11:15:45.404842+05:30",
+ "generatedAt": "2026-10-22T11:30:47.708360+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "articles": 8,
  "expectedPosts": 16,
- "articlesWithBothPosts": 7,
- "postsMissing": 2,
+ "articlesWithBothPosts": 8,
+ "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
@@ -103,28 +103,22 @@
    "key": "master-evergreen-1",
    "title": "5 ETFs to Help Build Your Emergency Fund",
    "url": "https://dailyyield.blogspot.com/2026/10/5-etfs-to-help-build-your-emergency-fund.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
     "facebook": 0,
-    "bluesky": 0,
-    "mastodon": 0
+    "bluesky": 1,
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "credentialBlocked": {
-    "mastodon": "RuntimeError: SOCIAL CONTENT POLICY GATE FAILED — excessive hashtagging"
-   },
-   "actions": [
-    "no post is attempted because mastodon credentials are known to be unusable; the owner must re-authorise the connection"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T11:15:42.113499+05:30",
+ "liveVerificationSourceAt": "2026-10-22T11:30:42.995750+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 7,
+ "articlesWithExactlyTwoPosts": 8,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
