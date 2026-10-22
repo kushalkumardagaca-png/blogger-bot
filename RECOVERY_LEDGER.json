@@ -931,12 +931,22 @@
   },
   "prewarm:2026-10-22:master-evergreen-0": {
     "revision": "8bd417eef276b9fc",
-    "attempts": 3,
-    "lastAttempt": "2026-10-22T06:38:41.881831+05:30"
+    "attempts": 4,
+    "lastAttempt": "2026-10-22T07:19:31.940569+05:30"
   },
   "prewarm:2026-10-22:master-trending-1": {
     "revision": "8bd417eef276b9fc",
+    "attempts": 2,
+    "lastAttempt": "2026-10-22T07:19:31.940569+05:30"
+  },
+  "social:2026-10-22:news-india:0": {
+    "revision": "8bd417eef276b9fc",
     "attempts": 1,
-    "lastAttempt": "2026-10-22T06:38:41.881831+05:30"
+    "lastAttempt": "2026-10-22T07:19:31.940569+05:30"
+  },
+  "social:2026-10-22:news-india:1": {
+    "revision": "8bd417eef276b9fc",
+    "attempts": 1,
+    "lastAttempt": "2026-10-22T07:19:31.940569+05:30"
   }
 }

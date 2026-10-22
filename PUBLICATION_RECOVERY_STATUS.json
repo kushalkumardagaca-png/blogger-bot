@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-22T06:38:41.881831+05:30",
+  "generatedAt": "2026-10-22T07:19:31.940569+05:30",
   "dateIST": "2026-10-22",
   "status": "PASS",
   "apply": true,
-  "confirmedPublications": 3,
-  "confirmedByLivePost": 3,
+  "confirmedPublications": 4,
+  "confirmedByLivePost": 4,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
@@ -18,6 +18,20 @@
     {
       "type": "preparation_recovery",
       "key": "master-trending-1",
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-india",
+      "platform": "bluesky",
+      "routeIndex": 0,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-india",
+      "platform": "mastodon",
+      "routeIndex": 1,
       "applied": true
     }
   ],
