@@ -1,13 +1,13 @@
 {
- "at": "2026-10-22T22:37:03Z",
- "workflow": "master_trending_writer.yml",
- "kind": "trending",
+ "at": "2026-10-22T23:51:58Z",
+ "workflow": "master_evergreen_writer.yml",
+ "kind": "evergreen",
  "slot": "0",
- "run": "39864550435",
+ "run": "39874287262",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "GREEN OPERATING GATE FAILED — live Blogger corpus status is not PASS; live corpus has image-rights gaps",
+ "error": "V3 source gate found 0 topic-specific sources; eight required; and the substitute topic was refused too - V3 source gate found 5 topic-specific sources; eight required",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
