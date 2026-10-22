@@ -323,6 +323,55 @@ class WholeAudit(unittest.TestCase):
             self.assertTrue(url.startswith(BLOG), url)
 
 
+
+
+    def test_a_full_article_under_a_leftover_slug_is_not_offered_as_a_page_to_delete(self):
+        """An odd address with a real article behind it is a naming problem, and nothing more.
+
+        This is the false positive that reached the owner as a to-do on 22 October: two published
+        pieces, "Stop Maxing Your 401(k)" and "Your Portfolio Does Not Owe You Rent", were called
+        machine artifacts because their slugs read "context-httpsschema" - a September bug that let a
+        schema fragment be used as a title, which Blogger then froze into the permalink. Acting on that
+        report would have deleted published work, the one thing forbidden the same day. The check now
+        reads the page, so the article is not an offender and the odd address is still shown, as advice.
+        """
+        odd = f"{BLOG}/2026/09/context-httpsschema.html"
+        home = f"{BLOG}/"
+        body = ("<p>Stop maxing your 401(k) before the tax answer moves underneath you.</p><p>"
+                + varied(420) + "</p>")
+        pages = {home: page(home, "Daily Yield - personal finance and markets"),
+                 odd: page(odd, "Stop Maxing Your 401(k)")}
+        feeds = {"posts": entries(one(odd, "Stop Maxing Your 401(k)", body)), "pages": entries()}
+        feeds["/sitemap.xml"] = (None, sitemap([odd]))
+        feeds["/sitemap-pages.xml"] = (None, sitemap([f"{BLOG}/p/about.html"]))
+        net = FakeNet(pages, feeds, robots=f"User-agent: *\nAllow: /\nSitemap: {BLOG}/sitemap.xml\n"
+                      f"Sitemap: {BLOG}/sitemap-pages.xml\n")
+        seen = {row["id"]: row for row in self.run_audit(net)["checks"]}
+        self.assertEqual("PASS", seen["no-utility-pages-in-sitemaps"]["status"],
+                         "an article is not a low-value page: " + seen["no-utility-pages-in-sitemaps"]["detail"])
+        self.assertEqual("FAIL", seen["odd-address-holds-real-article"]["status"],
+                         "the odd address itself must stay visible in the report")
+        self.assertTrue(seen["odd-address-holds-real-article"]["advisory"],
+                        "naming an article's permalink is advice to a person, not a site that failed a rule")
+        self.assertIn(odd, seen["odd-address-holds-real-article"]["offenders"])
+
+
+        def test_a_page_carrying_only_the_stray_fragment_is_still_reported_as_low_value(self):
+            """The other half of the same rule: nothing was softened for the two articles."""
+            stray = f"{BLOG}/2026/09/context-httpsschema_0119702296.html"
+            home = f"{BLOG}/"
+            pages = {home: page(home, "Daily Yield - personal finance and markets"),
+                     stray: page(stray, "context-httpsschema")}
+            feeds = {"posts": entries(one(stray, "context-httpsschema",
+                                          "<p>{'@context': 'https://schema.org'}</p>")), "pages": entries()}
+            feeds["/sitemap.xml"] = (None, sitemap([stray]))
+            feeds["/sitemap-pages.xml"] = (None, sitemap([]))
+            net = FakeNet(pages, feeds, robots=f"User-agent: *\nAllow: /\nSitemap: {BLOG}/sitemap.xml\n"
+                          f"Sitemap: {BLOG}/sitemap-pages.xml\n")
+            seen = {row["id"]: row for row in self.run_audit(net)["checks"]}
+            self.assertIn(stray, seen["no-utility-pages-in-sitemaps"]["offenders"],
+                          "a page carrying nothing but the escaped fragment must still be named")
+
 class Mapping(unittest.TestCase):
     """The guideline numbers have to stay attached to the rules, or the report stops meaning anything."""
 
@@ -391,6 +440,7 @@ class MobileFirstFetch(unittest.TestCase):
         block = source.split('"mobile-first-fetch-is-direct"')[1][:900]
         self.assertIn('"blogger"', block, "the fix is the platform's setting, so it must be said so")
         self.assertIn("Mobile devices", block, "the action has to name the switch, not just the symptom")
+
 
 
 if __name__ == "__main__":

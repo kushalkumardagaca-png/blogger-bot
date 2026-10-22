@@ -328,6 +328,18 @@ def rendered_probe(url: str) -> dict:
 # --------------------------------------------------------------------- checks
 
 
+def grade_suspects(urls, words_by_url: dict) -> tuple:
+    """Split suspicious addresses into (genuinely thin pages, full articles at odd addresses).
+
+    `words_by_url` is what the crawl measured, in words, per address; an address the crawl could not
+    measure is treated as thin, because a page nobody can read is exactly what the rule exists to catch.
+    """
+    low_value, misnamed = [], []
+    for url in sorted(urls):
+        (misnamed if words_by_url.get(url, 0) >= MIN_WORDS else low_value).append(url)
+    return low_value, misnamed
+
+
 def register(checks: list, check_id: str, guideline: str, ok: bool, detail: str, offenders=None,
              fix_owner: str = "repo", cap: int = 12, advisory: bool = False) -> None:
     """Record one verdict.
@@ -387,16 +399,31 @@ def audit() -> dict:
              [], "platform")
 
     # §6 §21 low-value and duplicate URLs, including the ones the platform itself publishes
-    utility = [url for urls in sitemap_urls.values() for url in urls
-               if any(slug in url for slug in UTILITY_SLUGS - EXEMPT_UTILITY_SLUGS)]
+    suspect = {url for urls in sitemap_urls.values() for url in urls
+               if any(slug in url for slug in UTILITY_SLUGS - EXEMPT_UTILITY_SLUGS)}
     exempt = [url for urls in sitemap_urls.values() for url in urls
               if any(slug in url for slug in EXEMPT_UTILITY_SLUGS)]
-    register(checks, "no-utility-pages-in-sitemaps", "Bing §3 §21 §11 (low-value URLs)", not utility,
-             f"{len(utility)} machine page, redirect notice or template artifact(s) offered for "
-             "indexing: "
-             + ", ".join(url.rsplit('/', 1)[-1] for url in utility)
+    # Grading is by content, not by address. Reading the page is the only honest way to tell a machine
+    # artifact from an article: on 22 October this check named two published articles as artifacts
+    # because their slugs read "context-httpsschema" - "Stop Maxing Your 401(k)" and "Your Portfolio
+    # Does Not Owe You Rent", born in September when a schema fragment was used as a title and Blogger
+    # froze it into the permalink. Acting on that report would have meant deleting published work,
+    # which the owner forbade the same day. A full article at a silly address is a naming problem, so
+    # it is reported as one, without failing; a page carrying the stray fragment still fails.
+    words = {row["url"]: int(row.get("wordCount") or 0) for row in corpus}
+    low_value, misnamed = grade_suspects(suspect, words)
+    register(checks, "no-utility-pages-in-sitemaps", "Bing §3 §21 §11 (low-value URLs)", not low_value,
+             f"{len(low_value)} machine page, redirect notice or template artifact(s) offered for "
+             "indexing"
+             + (": " + ", ".join(url.rsplit('/', 1)[-1] for url in low_value) if low_value else "")
              + (f" - {len(exempt)} exempt because IndexNow reads its key there" if exempt else ""),
-             utility, "blogger")
+             low_value, "blogger")
+    register(checks, "odd-address-holds-real-article", "Bing §11 (a URL should describe its page)",
+             not misnamed,
+             f"{len(misnamed)} address(es) carry a full article under a leftover slug. Nothing here needs "
+             "deleting or re-titling: a Blogger permalink does not follow a title change, and rewriting "
+             "the address would break every link already pointing at the article for no indexing gain",
+             misnamed, "repo", advisory=True)
     variants = {}
     for probe, label in ((BLOG + "/", "root"), (BLOG, "root-no-slash"), (BLOG + "/index.html", "index-html"),
                          (BLOG + "/?m=1", "mobile-param")):
@@ -790,6 +817,17 @@ def run_check() -> int:
         "a bare percentage flags every finance page; repetition inside sentences is the actual abuse"
     assert "context-httpsschema" in UTILITY_SLUGS, \
         "the post a publishing bug made out of a schema URL string must stay visible in the report"
+    # an address is not a verdict: the same slug is an artifact or an article depending on the page
+    junk, real = grade_suspects({BLOG + "/2026/09/context-httpsschema.html",
+                                 BLOG + "/2026/09/context-httpsschema_2.html"},
+                                {BLOG + "/2026/09/context-httpsschema.html": 40,
+                                 BLOG + "/2026/09/context-httpsschema_2.html": 1200})
+    assert junk == [BLOG + "/2026/09/context-httpsschema.html"], \
+        "a page carrying the stray schema fragment must still be reported"
+    assert real == [BLOG + "/2026/09/context-httpsschema_2.html"], \
+        "a full article at an odd address must never be counted as a page to delete"
+    assert grade_suspects({BLOG + "/x.html"}, {}) == ([BLOG + "/x.html"], []), \
+        "an unmeasurable suspect is thin by default, never silently passed"
     assert UTILITY_SLUGS - EXEMPT_UTILITY_SLUGS == {"robots", "share-market_0718113516",
                                                     "context-httpsschema"}, \
         "the IndexNow key page must be exempt, and nothing else may join it"
