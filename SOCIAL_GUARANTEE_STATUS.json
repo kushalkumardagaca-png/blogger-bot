@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-22T13:15:49.867349+05:30",
+ "generatedAt": "2026-10-22T14:15:45.610259+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
  "articles": 10,
@@ -51,18 +51,14 @@
    "key": "news-economy",
    "title": "economy edition",
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-22.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 1,
+    "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-china",
@@ -73,19 +69,6 @@
     "facebook": 1,
     "bluesky": 0,
     "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -141,12 +124,34 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-2",
+   "title": "Why is Elon Musk plotting a mega-merger",
+   "url": "https://dailyyield.blogspot.com/2026/10/why-is-elon-musk-plotting-mega-merger.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T13:15:44.419329+05:30",
- "awaitingLiveVerification": [],
+ "liveVerificationSourceAt": "2026-10-22T14:15:37.653864+05:30",
+ "awaitingLiveVerification": [
+  {
+   "key": "news-russia",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html"
+  }
+ ],
  "articlesWithExactlyTwoPosts": 9,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
