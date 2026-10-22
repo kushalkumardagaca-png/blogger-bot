@@ -1,26 +1,13 @@
 {
- "generatedAt": "2026-10-22T14:15:45.610259+05:30",
+ "generatedAt": "2026-10-22T14:19:23.527724+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 10,
- "expectedPosts": 20,
- "articlesWithBothPosts": 9,
+ "articles": 11,
+ "expectedPosts": 22,
+ "articlesWithBothPosts": 10,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
-  {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-22.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
   {
    "key": "news-markets",
    "title": "markets edition",
@@ -48,6 +35,32 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-22.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
    "key": "news-economy",
    "title": "economy edition",
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-22.html",
@@ -61,14 +74,14 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-22.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
+    "bluesky": 1,
+    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -138,21 +151,16 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T14:15:37.653864+05:30",
- "awaitingLiveVerification": [
-  {
-   "key": "news-russia",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-22.html"
-  }
- ],
- "articlesWithExactlyTwoPosts": 9,
+ "liveVerificationSourceAt": "2026-10-22T14:19:17.720256+05:30",
+ "awaitingLiveVerification": [],
+ "articlesWithExactlyTwoPosts": 10,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
