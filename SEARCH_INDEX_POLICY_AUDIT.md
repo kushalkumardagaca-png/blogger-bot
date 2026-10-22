@@ -1,6 +1,6 @@
 # Search index policy conformance
 
-**16 PASS · 11 FAIL** across 597 URLs (583 posts, 14 pages) · checked 2026-10-22T03:34:58+00:00
+**14 PASS · 13 FAIL** across 597 URLs (583 posts, 14 pages) · checked 2026-10-22T03:37:18+00:00
 
 Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria; the sources are named in the JSON. Nothing in this file edits the site.
 
@@ -12,7 +12,7 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 | `sitemap-lists-only-live-urls:sitemap-pages.xml` | ✅ Bing §3 §9 | 0 listed URL(s) not in Blogger's published feed | blogger |
 | `sitemap-freshness-signals` | ✅ Bing §3 (lastmod) | sitemap.xml=yes sitemap-pages.xml=yes - Blogger decides this, not us | platform |
 | `no-utility-pages-in-sitemaps` | ❌ Bing §3 §21 §11 (low-value URLs) | 4 machine page, redirect notice or template artifact(s) offered for indexing: context-httpsschema_0119702296.html, context-httpsschema.html, indexnow-key.html, share-market_0718113516.html | blogger |
-| `homepage-duplicate-urls-consolidate` | ✅ Bing §6 (canonical consolidation) | 4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one | platform |
+| `homepage-duplicate-urls-consolidate` | ✅ Bing §6 (canonical consolidation) | 1 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one | platform |
 | `titles-descriptive-and-complete` | ❌ Bing §13 §17; Google indexing criteria | 6 under 12 chars, 40 over 70, 0 empty, 6 cut mid-phrase (our own title clip does this) | repo |
 | `titles-not-shouted-in-caps` | ❌ Bing §13 (titles written for users) | 14 page or post title(s) are entirely upper case | blogger |
 | `no-duplicate-titles-across-urls` | ❌ Bing §6 §13 | 4 title(s) shared by more than one URL; worst cluster is 6 URLs on one title | repo |
@@ -24,13 +24,13 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 | `image-file-names-are-descriptive` | ❌ Bing §12 (unique, relevant file names) | 3 of 31 committed image file name(s) repeats across the site (photo-1.jpg on 473 URLs, photo-2.jpg on 149 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1 | repo |
 | `image-names-not-hidden-by-the-host` | ✅ Bing §12 | 0 URL(s) reach a crawler as an opaque id because Blogger's image proxy renames the upload - measured, not ours to change, and the alt text checked above carries the description instead | platform |
 | `no-double-published-urls` | ❌ Bing §6 §9 (duplicate or redirected URLs) | 8 article(s) were published twice; Blogger numbered the copy's slug, so both copies sit in the sitemap as separate URLs with the same text | repo |
-| `rendered-head-completeness` | ✅ Bing §13; Google indexability | 6 URL(s) rendered: 0 without a title, 0 without a meta description | platform |
-| `no-blocking-robots-meta` | ✅ Bing §10; Google: indexing allowed? | 0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet | blogger |
-| `exactly-one-h1` | ❌ Bing §13 (heading hierarchy) | 1 sampled URL(s) without exactly one <h1> | platform |
-| `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML | platform |
-| `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 6 URL(s) sampled, 0 markup problem(s) | repo |
-| `robots-allows-both-crawlers` | ✅ Bing §8 §10; Google: crawl allowed? | HTTP 200; neither bot is blocked; declares sitemap | blogger |
-| `sitemaps-declared-in-robots` | ✅ Bing §2; Google: referring sitemap | both Blogger sitemaps are named in robots.txt | blogger |
+| `rendered-head-completeness` | ✅ Bing §13; Google indexability | 5 URL(s) rendered: 0 without a title, 0 without a meta description, 1 did not answer 200 and were not judged | platform |
+| `no-blocking-robots-meta` | ✅ Bing §10; Google: indexing allowed? | 0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 1 did not answer 200 and were not judged | blogger |
+| `exactly-one-h1` | ❌ Bing §13 (heading hierarchy) | 1 sampled URL(s) without exactly one <h1>, 1 did not answer 200 and were not judged | platform |
+| `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML, 1 did not answer 200 and were not judged | platform |
+| `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 5 URL(s) sampled, 0 markup problem(s), 1 did not answer 200 and were not judged | repo |
+| `robots-allows-both-crawlers` | ❌ Bing §8 §10; Google: crawl allowed? | HTTP 404; neither bot is blocked; declares no sitemap | blogger |
+| `sitemaps-declared-in-robots` | ❌ Bing §2; Google: referring sitemap | robots.txt does not name both sitemaps, so a crawler that finds robots.txt may never reach the pages sitemap (Google reports 'no referring sitemap') | blogger |
 | `updated-pages-are-still-substantial` | ✅ Bing §19 | 0 URL(s) were revised and are still below the thin line | repo |
 | `every-url-carries-a-date` | ✅ Bing §3 §19; Google structured data | 597/597 URLs publish a machine-readable date | repo |
 

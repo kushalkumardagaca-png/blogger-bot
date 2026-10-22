@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-22T03:34:58+00:00",
+ "checkedAt": "2026-10-22T03:37:18+00:00",
  "corpus": {
   "posts": 583,
   "pages": 14,
@@ -12,11 +12,11 @@
  },
  "summary": {
   "checks": 27,
-  "pass": 16,
-  "fail": 11,
+  "pass": 14,
+  "fail": 13,
   "advisory": 0,
   "failuresByOwner": {
-   "blogger": 2,
+   "blogger": 4,
    "repo": 8,
    "platform": 1
   }
@@ -92,7 +92,7 @@
    "guideline": "Bing §6 (canonical consolidation)",
    "status": "PASS",
    "advisory": false,
-   "detail": "4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
+   "detail": "1 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -275,7 +275,7 @@
    "guideline": "Bing §13; Google indexability",
    "status": "PASS",
    "advisory": false,
-   "detail": "6 URL(s) rendered: 0 without a title, 0 without a meta description",
+   "detail": "5 URL(s) rendered: 0 without a title, 0 without a meta description, 1 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -285,7 +285,7 @@
    "guideline": "Bing §10; Google: indexing allowed?",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet",
+   "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet, 1 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -295,7 +295,7 @@
    "guideline": "Bing §13 (heading hierarchy)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "1 sampled URL(s) without exactly one <h1>",
+   "detail": "1 sampled URL(s) without exactly one <h1>, 1 did not answer 200 and were not judged",
    "offenders": [
     "https://dailyyield.blogspot.com/p/indexnow-key.html"
    ],
@@ -307,7 +307,7 @@
    "guideline": "Bing §8 (no client-side-only content)",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 sampled URL(s) whose body text is not in the served HTML",
+   "detail": "0 sampled URL(s) whose body text is not in the served HTML, 1 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -317,7 +317,7 @@
    "guideline": "Bing §14; Google: enhancement issues",
    "status": "PASS",
    "advisory": false,
-   "detail": "6 URL(s) sampled, 0 markup problem(s)",
+   "detail": "5 URL(s) sampled, 0 markup problem(s), 1 did not answer 200 and were not judged",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -325,9 +325,9 @@
   {
    "id": "robots-allows-both-crawlers",
    "guideline": "Bing §8 §10; Google: crawl allowed?",
-   "status": "PASS",
+   "status": "FAIL",
    "advisory": false,
-   "detail": "HTTP 200; neither bot is blocked; declares sitemap",
+   "detail": "HTTP 404; neither bot is blocked; declares no sitemap",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -335,9 +335,9 @@
   {
    "id": "sitemaps-declared-in-robots",
    "guideline": "Bing §2; Google: referring sitemap",
-   "status": "PASS",
+   "status": "FAIL",
    "advisory": false,
-   "detail": "both Blogger sitemaps are named in robots.txt",
+   "detail": "robots.txt does not name both sitemaps, so a crawler that finds robots.txt may never reach the pages sitemap (Google reports 'no referring sitemap')",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
