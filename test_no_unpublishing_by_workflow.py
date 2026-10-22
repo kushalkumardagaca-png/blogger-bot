@@ -1,4 +1,4 @@
-"""The owner's rule of 23 October 2026: not one published article may go offline because of a workflow.
+"""The owner's rule of 22 October 2026: not one published article may go offline because of a workflow.
 
 Nothing here grades writing. These tests hold the machinery to two promises that were made in plain
 words and are worth more than the promise:
@@ -85,7 +85,7 @@ class GatesDoNotCryWolf(unittest.TestCase):
     def test_a_missing_library_is_reported_as_not_measured_and_never_as_a_defect(self):
         """Run the capability audit where `import yaml` fails: it must exit clean and say "not measured".
 
-        Before 23 October this branch answered `False`, so Growth Control Tower - whose runner installs
+        Before 22 October this branch answered `False`, so Growth Control Tower - whose runner installs
         requests and Pillow only - failed every night for a reason that had nothing to do with the site.
         """
         with tempfile.TemporaryDirectory() as tmp:

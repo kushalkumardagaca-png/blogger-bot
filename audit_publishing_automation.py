@@ -902,7 +902,7 @@ PERMISSION_KEYS={'actions','attestations','checks','contents','deployments','dis
 # 'on' arrives from PyYAML as the boolean True, because that is how YAML 1.1 reads the bare word; every
 # workflow in this repository declares its schedule that way and GitHub accepts it. The key set has to
 # know, or the gate reports a defect in a file that is fine. This check was silently unread until
-# 23 October, when the audit stopped crashing without PyYAML and started using a name it had imported.
+# 22 October, when the audit stopped crashing without PyYAML and started using a name it had imported.
 TOP_KEYS={'name','on','true','permissions','concurrency','env','defaults','jobs','run-name'}
 JOB_KEYS={'name','needs','runs-on','condition','if','env','outputs','timeout-minutes','strategy',
  'continue-on-error','container','services','steps','environment','permissions','concurrency'}
@@ -955,7 +955,7 @@ for _name in ('.github/tumblr-oauth-code', '.github/tumblr-oauth-listener', 'TUM
 def _takedown_guarded():
     """Every script that can delete or unpublish a Blogger post must pass the owner's freeze first.
 
-    The owner's instruction of 23 October is blunt: no article is to go offline because of a workflow
+    The owner's instruction of 22 October is blunt: no article is to go offline because of a workflow
     failure, for any reason. Reports and audits may run unattended; a take-down may not. So the rule is
     checked here rather than remembered in a chat: a file that calls Blogger's DELETE or /unpublish
     endpoint has to consult site_change_control, and the duplicate purge additionally needs a typed

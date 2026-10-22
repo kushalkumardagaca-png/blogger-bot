@@ -57,7 +57,7 @@ def canonical_path(url:str)->str:
  # Blogger never overwrites a taken permalink: when a post is created twice - typically because the
  # first creation succeeded and the response was lost in a retry - the second copy lands beside the
  # first with the day's number glued to its slug, e.g. banking-...-2026-10_01450325346.html beside
- # banking-...-2026-10.html. Eight of those pairs were live on 23 October, both copies offered for
+ # banking-...-2026-10.html. Eight of those pairs were live on 22 October, both copies offered for
  # indexing. Stripping the glue here is what lets the publisher recognise its own lost response as the
  # post it should have updated, so it recovers the existing article instead of adding a second URL.
  try:

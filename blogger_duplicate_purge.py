@@ -25,7 +25,7 @@ Safety, because this deletes live blog content:
 from __future__ import annotations
 
 from site_change_control import stop_if_frozen as _dy_stop_if_frozen
-# Owner's instruction of 23 October 2026, enforced here rather than in a workflow file: not one
+# Owner's instruction of 22 October 2026, enforced here rather than in a workflow file: not one
 # published article may go offline because of a workflow - a failed one, a scheduled one, any one. The
 # nightly job that maintains this file uses the separate refresh tool and never deletes, but --apply is
 # one dispatch away and --delete is one keystroke away, so while the site is frozen the whole program
@@ -175,7 +175,7 @@ def main() -> int:
                         help=f"type {CONFIRM_PHRASE} to allow deletions; nothing else does")
     arguments = parser.parse_args()
 
-    # Owner's instruction of 23 October 2026, enforced here rather than in a workflow file: not one
+    # Owner's instruction of 22 October 2026, enforced here rather than in a workflow file: not one
     # published article may go offline because of a workflow - a failed one, a scheduled one, any one.
     # The nightly job that runs this file uses `refresh` and never passes --apply, but --apply is one
     # dispatch away, so deletion now needs the owner's recorded release AND a word no schedule can type.

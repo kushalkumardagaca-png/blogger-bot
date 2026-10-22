@@ -3,7 +3,7 @@
 Blogger will not overwrite a permalink that is taken, so a second creation of the same post lands
 beside the first with a number glued onto the slug. Each pair is one article offered to Google and Bing
 as two URLs with identical text, which is the single clearest thing both webmasters' guidelines tell a
-publisher not to do - and on 23 October 2026 eight articles were in exactly that state.
+publisher not to do - and on 22 October 2026 eight articles were in exactly that state.
 """
 from __future__ import annotations
 
