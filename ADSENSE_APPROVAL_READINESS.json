@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-10-21T03:14:14.046106+00:00",
+ "checkedAt": "2026-10-22T03:14:28.468090+00:00",
  "status": "PASS",
  "publicPagesRead": 10,
  "diagnosticReadsOnly": true,
@@ -179,7 +179,7 @@
    "check": "robots.txt readable",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200",
+   "detail": "HTTP 200 after 3 reads; the first answer was a 404 that the re-probe disproved",
    "blocking": true
   },
   {
@@ -200,7 +200,7 @@
    "check": "sitemap.xml serves URLs",
    "pass": true,
    "state": "PASS",
-   "detail": "HTTP 200, 561 URLs listed",
+   "detail": "HTTP 200, 583 URLs listed",
    "blocking": true
   },
   {
