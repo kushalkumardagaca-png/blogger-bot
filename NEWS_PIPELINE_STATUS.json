@@ -1,15 +1,15 @@
 {
-  "status": "PASS",
-  "generated_at": "2026-10-22T11:46:50.971656+00:00",
+  "status": "FAIL",
+  "generated_at": "2026-10-22T12:04:32.689802+00:00",
   "dry_run": false,
-  "published": 1,
-  "failed": 0,
+  "published": 0,
+  "failed": 1,
   "results": [
     {
-      "desk": "europe",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
+      "desk": "global",
+      "status": "FAIL",
+      "error_type": "RuntimeError",
+      "error": "PUBLICATION PREFLIGHT FAILED — advice risk gate: tax rule stated as permanent fact with no date and no change notice"
     }
   ]
 }
