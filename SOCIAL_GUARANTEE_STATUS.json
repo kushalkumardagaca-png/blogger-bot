@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-22T06:09:39.499663+05:30",
+ "generatedAt": "2026-10-22T06:46:57.211186+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 2,
- "expectedPosts": 4,
- "articlesWithBothPosts": 2,
+ "articles": 3,
+ "expectedPosts": 6,
+ "articlesWithBothPosts": 3,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
@@ -33,13 +33,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-0",
+   "title": "Chancellor rejects calls to raise Capital",
+   "url": "https://dailyyield.blogspot.com/2026/10/chancellor-rejects-calls-to-raise.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T06:09:36.908453+05:30",
+ "liveVerificationSourceAt": "2026-10-22T06:46:55.308104+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 2,
+ "articlesWithExactlyTwoPosts": 3,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
