@@ -1,27 +1,28 @@
 # Search index policy conformance
 
-**24 PASS · 3 FAIL** across 600 URLs (586 posts, 14 pages) · checked 2026-10-22T05:49:48+00:00
+**22 PASS · 6 FAIL** across 602 URLs (588 posts, 14 pages) · checked 2026-10-22T08:35:05+00:00
 
 Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria; the sources are named in the JSON. Nothing in this file edits the site.
 
 | check | verdict | what we found | who can change it |
 |---|---|---|---|
-| `sitemap-readable:sitemap.xml` | ✅ Bing §2 §3 | HTTP 200 with 586 <loc> entries | platform |
+| `sitemap-readable:sitemap.xml` | ✅ Bing §2 §3 | HTTP 200 with 588 <loc> entries | platform |
 | `sitemap-lists-only-live-urls:sitemap.xml` | ✅ Bing §3 §9 | 0 listed URL(s) not in Blogger's published feed | blogger |
 | `sitemap-readable:sitemap-pages.xml` | ✅ Bing §2 §3 | HTTP 200 with 14 <loc> entries | platform |
 | `sitemap-lists-only-live-urls:sitemap-pages.xml` | ✅ Bing §3 §9 | 0 listed URL(s) not in Blogger's published feed | blogger |
 | `sitemap-freshness-signals` | ✅ Bing §3 (lastmod) | sitemap.xml=yes sitemap-pages.xml=yes - Blogger decides this, not us | platform |
 | `no-utility-pages-in-sitemaps` | ❌ Bing §3 §21 §11 (low-value URLs) | 3 machine page, redirect notice or template artifact(s) offered for indexing: context-httpsschema_0119702296.html, context-httpsschema.html, share-market_0718113516.html - 1 exempt because IndexNow reads its key there | blogger |
+| `mobile-first-fetch-is-direct` | ❌ Google indexing (mobile-first), Bing §6 | 0 of 4 addresses answer a mobile fetch with the document directly: a mobile client is redirected to ?m=1, which declares https://dailyyield.blogspot.com/ as its canonical - the address that was asked for, daily-news.html?m=1, which declares https://dailyyield.blogspot.com/p/daily-news.html as its canonical - the address that was asked for, which canonicalises back to the URL it came from - Google's own verdict on that chain is Redirect error, and no content work clears it; the setting is Blogger -> Theme -> Mobile devices | blogger |
 | `homepage-duplicate-urls-consolidate` | ✅ Bing §6 (canonical consolidation) | 4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one | platform |
 | `titles-descriptive-and-complete` | ✅ Bing §13 §17; Google indexing criteria | 0 under its floor (12 for an article, 4 for a page), 0 over 70, 0 empty, 0 cut mid-phrase (our own title clip does this) | repo |
 | `titles-not-shouted-in-caps` | ✅ Bing §13 (titles written for users) | 0 page or post title(s) are entirely upper case | blogger |
 | `no-duplicate-titles-across-urls` | ✅ Bing §6 §13 | 0 title(s) shared by more than one URL; worst cluster is none | repo |
-| `opening-delivers-the-headline` | ✅ Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query | 0 of 591 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted) | repo |
-| `content-not-thin` | ✅ Bing §11 §15 | 0 of 599 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing) | repo |
+| `opening-delivers-the-headline` | ✅ Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query | 0 of 593 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted) | repo |
+| `content-not-thin` | ✅ Bing §11 §15 | 0 of 601 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing) | repo |
 | `no-near-duplicate-pages` | ❌ Bing §6; abuse: duplicate content across URLs | 40 pair(s) of URLs at or above 0.42 Jaccard shingle overlap (capped scan) | repo |
 | `no-keyword-stuffing` | ✅ Bing abuse: keyword stuffing | 0 URL(s) push one word through paragraph after paragraph (4+ times in at least 45% of them), which is the abuse Bing names. A page that mentions its own subject once per paragraph is not flagged: that is what an article about a thing looks like. | repo |
 | `images-described-not-decorated` | ✅ Bing §5 §12 (alt text, captions) | 0 URL(s) contain an <img> with no usable alt text | repo |
-| `image-file-names-are-descriptive` | ✅ Bing §12 (unique, relevant file names) | 0 of 0 committed image file name(s) repeats across the site () - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 599 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image | repo |
+| `image-file-names-are-descriptive` | ✅ Bing §12 (unique, relevant file names) | 0 of 1 committed image file name(s) repeats across the site () - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image | repo |
 | `image-names-not-hidden-by-the-host` | ✅ Bing §12 | 0 URL(s) reach a crawler as an opaque id because Blogger's image proxy renames the upload - measured, not ours to change, and the alt text checked above carries the description instead | platform |
 | `no-double-published-urls` | ❌ Bing §6 §9 (duplicate or redirected URLs) | 8 article(s) were published twice; Blogger numbered the copy's slug, so both copies sit in the sitemap as separate URLs with the same text | repo |
 | `rendered-head-completeness` | ✅ Bing §13; Google indexability | 6 URL(s) rendered: 0 without a title, 0 without a meta description | platform |
@@ -29,10 +30,10 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 | `exactly-one-h1` | ✅ Bing §13 (heading hierarchy) | 0 sampled URL(s) without exactly one <h1>; machine endpoints are exempt, as they are from every other writing rule | platform |
 | `content-present-without-scripts` | ✅ Bing §8 (no client-side-only content) | 0 sampled URL(s) whose body text is not in the served HTML | platform |
 | `structured-data-matches-the-page` | ✅ Bing §14; Google: enhancement issues | 6 URL(s) sampled, 0 markup problem(s) | repo |
-| `robots-allows-both-crawlers` | ✅ Bing §8 §10; Google: crawl allowed? | HTTP 200; neither bot is blocked; declares sitemap | blogger |
-| `sitemaps-declared-in-robots` | ✅ Bing §2; Google: referring sitemap | both Blogger sitemaps are named in robots.txt | blogger |
+| `robots-allows-both-crawlers` | ❌ Bing §8 §10; Google: crawl allowed? | HTTP 404; neither bot is blocked; declares no sitemap | blogger |
+| `sitemaps-declared-in-robots` | ❌ Bing §2; Google: referring sitemap | robots.txt does not name both sitemaps, so a crawler that finds robots.txt may never reach the pages sitemap (Google reports 'no referring sitemap') | blogger |
 | `updated-pages-are-still-substantial` | ✅ Bing §19 | 0 URL(s) were revised and are still below the thin line | repo |
-| `every-url-carries-a-date` | ✅ Bing §3 §19; Google structured data | 600/600 URLs publish a machine-readable date | repo |
+| `every-url-carries-a-date` | ✅ Bing §3 §19; Google structured data | 602/602 URLs publish a machine-readable date | repo |
 
 ## URLs that must change
 
@@ -40,6 +41,12 @@ Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria;
 - `https://dailyyield.blogspot.com/2026/09/context-httpsschema_0119702296.html`
 - `https://dailyyield.blogspot.com/2026/09/context-httpsschema.html`
 - `https://dailyyield.blogspot.com/p/share-market_0718113516.html`
+
+**mobile-first-fetch-is-direct** (4 total)
+- `https://dailyyield.blogspot.com/ -> ?m=1, which declares https://dailyyield.blogspot.com/ as its canonical - the address that was asked for`
+- `daily-news.html -> daily-news.html?m=1, which declares https://dailyyield.blogspot.com/p/daily-news.html as its canonical - the address that was asked for`
+- `indexnow-key.html -> indexnow-key.html?m=1, which declares https://dailyyield.blogspot.com/p/indexnow-key.html as its canonical - the address that was asked for`
+- `economy-trade-jobs-2026-10-22.html -> economy-trade-jobs-2026-10-22.html?m=1, which declares https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-22.html as its canonical - the address that was asked for`
 
 **no-near-duplicate-pages** (40 total)
 - `https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html ≈ https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18.html (0.84)`
