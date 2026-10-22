@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-22T14:19:23.527724+05:30",
+ "generatedAt": "2026-10-22T15:15:53.066164+05:30",
  "dateIST": "2026-10-22",
  "apply": true,
- "articles": 11,
- "expectedPosts": 22,
- "articlesWithBothPosts": 10,
+ "articles": 12,
+ "expectedPosts": 24,
+ "articlesWithBothPosts": 11,
  "postsMissing": 2,
- "dispatched": 0,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-markets",
@@ -142,6 +142,19 @@
    "key": "master-trending-2",
    "title": "Why is Elon Musk plotting a mega-merger",
    "url": "https://dailyyield.blogspot.com/2026/10/why-is-elon-musk-plotting-mega-merger.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-2",
+   "title": "Trump and Student Loans: What’s Happening",
+   "url": "https://dailyyield.blogspot.com/2026/10/trump-and-student-loans-whats-happening.html",
    "posts": 0,
    "byPlatform": {
     "facebook": 0,
@@ -151,16 +164,16 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
+    "dispatched",
+    "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-22T14:19:17.720256+05:30",
+ "liveVerificationSourceAt": "2026-10-22T15:15:44.409203+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 10,
+ "articlesWithExactlyTwoPosts": 11,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
