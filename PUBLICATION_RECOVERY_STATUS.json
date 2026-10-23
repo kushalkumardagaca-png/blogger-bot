@@ -1,28 +1,21 @@
 {
-  "generatedAt": "2026-10-23T19:17:16.283656+05:30",
+  "generatedAt": "2026-10-23T23:28:25.126085+05:30",
   "dateIST": "2026-10-23",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 17,
-  "confirmedByLivePost": 17,
+  "confirmedPublications": 20,
+  "confirmedByLivePost": 20,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "master-evergreen-0"
+    "master-evergreen-4"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "master-evergreen-0",
-      "attempt": 2,
-      "applied": true
-    },
-    {
-      "type": "social_replay",
-      "key": "news-americas",
-      "platform": "facebook",
-      "routeIndex": 1,
+      "key": "master-evergreen-4",
+      "attempt": 1,
       "applied": true
     }
   ],
