@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "ca7f0dbdbca85e62",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-23",
   "kind": "evergreen",
   "slot": 0,
-  "slot_key": "2026-10-23:evergreen:0",
-  "date": "2026-10-23",
-  "category": "Markets Trading & Crypto",
-  "evergreen_category": "Markets Trading & Crypto",
+  "topic_id": "ca7f0dbdbca85e62",
+  "replaced_topic_id": null,
   "title": "F.N.B (FNB) Stock Be 39% Undervalued",
-  "url": "https://dailyyield.blogspot.com/2026/10/fnb-fnb-stock-be-39-undervalued.html",
-  "published_at": "2026-10-23T08:41:10-07:00"
+  "package": "master_packages/dynamic/2026-10-23-evergreen-ca7f0dbdbca85e62.json",
+  "html": "scheduled_ready/2026-10-23-evergreen-0-f-n-b-fnb-stock-be-39-undervalued.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 0.0,
+  "remainingMinutes": 30.0
 }
