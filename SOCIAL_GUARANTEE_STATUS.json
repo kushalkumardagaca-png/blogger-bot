@@ -1,18 +1,71 @@
 {
- "generatedAt": "2026-10-23T08:22:16.130960+05:30",
+ "generatedAt": "2026-10-23T09:29:16.755215+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
- "articles": 0,
- "expectedPosts": 0,
- "articlesWithBothPosts": 0,
+ "articles": 4,
+ "expectedPosts": 8,
+ "articlesWithBothPosts": 4,
  "postsMissing": 0,
  "dispatched": 0,
- "rows": [],
+ "rows": [
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-0",
+   "title": "Meta strikes deal to keep Zuckerberg",
+   "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  }
+ ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T08:22:07.129173+05:30",
+ "liveVerificationSourceAt": "2026-10-23T09:29:11.549485+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 0,
+ "articlesWithExactlyTwoPosts": 4,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
