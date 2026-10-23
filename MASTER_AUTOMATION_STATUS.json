@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "6c12a9e71d1a3c0e",
-  "kind": "evergreen",
-  "slot": 3,
-  "slot_key": "2026-10-23:evergreen:3",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-23",
-  "category": "Insurance & Risk Protection",
-  "evergreen_category": "Insurance & Risk Protection",
-  "title": "Your Guide to Open Enrollment and Health",
-  "url": "https://dailyyield.blogspot.com/2026/10/your-guide-to-open-enrollment-and-health.html",
-  "published_at": "2026-10-23T08:35:55-07:00"
+  "kind": "evergreen",
+  "slot": 0,
+  "topic_id": "ca7f0dbdbca85e62",
+  "replaced_topic_id": "9605b60248bd009a",
+  "title": "F.N.B (FNB) Stock Be 39% Undervalued",
+  "package": "master_packages/dynamic/2026-10-23-evergreen-ca7f0dbdbca85e62.json",
+  "html": "scheduled_ready/2026-10-23-evergreen-0-f-n-b-fnb-stock-be-39-undervalued.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 24.4,
+  "remainingMinutes": 5.6
 }
