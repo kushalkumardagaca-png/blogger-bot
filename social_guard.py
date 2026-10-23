@@ -52,6 +52,12 @@ DISPATCH_SPACING = dt.timedelta(minutes=10)
 # seventh attempt, and the retries burn runner minutes. The row stays reported as
 # missing so the day is never marked green because of the pause.
 MAX_ROUTE_ATTEMPTS = 4
+# A pause that never lifts is how a share stays missing forever. On 23 October the Americas edition's
+# Facebook route spent its fourth attempt at 6:37 pm, the network was healthy again by 7:32 pm, and
+# nothing asked it for the rest of the day. The pause is a spacing, not a verdict: after this many
+# minutes the route gets one more bounded attempt, with its history intact so a genuinely broken
+# network still cannot spin.
+PAUSE_RESUME_AFTER = dt.timedelta(minutes=90)
 
 
 def load(path: Path, default):
@@ -109,8 +115,9 @@ def covered_by(article: dict, trackers: dict[str, list[dict]]) -> dict[str, int]
 def route_state(entry, now: dt.datetime):
     """(waiting, paused, attempts) for one route's ledger entry.
 
-    A plain timestamp is an older entry written before attempts were counted, so it
-    is read as one attempt; that keeps an existing day's ledger usable.
+    A plain timestamp is an older entry written before attempts were counted, so it is read as one
+    attempt; that keeps an existing day's ledger usable. `paused` means "spent its fast attempts and is
+    inside the resume window" - never "given up for the day".
     """
     entry = entry or ""
     if isinstance(entry, dict):
@@ -120,10 +127,36 @@ def route_state(entry, now: dt.datetime):
     if not stamp:
         return False, False, attempts
     try:
-        waiting = now - dt.datetime.fromisoformat(stamp) < DISPATCH_SPACING
+        age = now - dt.datetime.fromisoformat(stamp)
     except ValueError:
-        waiting = False
-    return waiting, (not waiting and attempts >= MAX_ROUTE_ATTEMPTS), attempts
+        return False, attempts >= MAX_ROUTE_ATTEMPTS, attempts
+    waiting = age < DISPATCH_SPACING
+    paused = not waiting and attempts >= MAX_ROUTE_ATTEMPTS and age < PAUSE_RESUME_AFTER
+    return waiting, paused, attempts
+
+
+def paused_note(attempts: int) -> str:
+    """What the guard says when a route has spent its fast attempts."""
+    return (f"route paused after {attempts} attempts today; it is offered one more bounded attempt after "
+            f"{int(PAUSE_RESUME_AFTER.total_seconds() // 60)} minutes, and until then the share stays "
+            "counted as missing")
+
+
+def blocked_note(platforms, blocked: dict) -> str:
+    """What the guard says when a network is held back - reading the cause the publisher recorded.
+
+    The reason already sits in SOCIAL_CREDENTIAL_HEALTH.json. Saying it here is the difference between
+    "re-authorise the connection", which the owner has to disprove, and the truth of 23 October: our own
+    caption rule declined the copy, so the copy needed attention and the token did not.
+    """
+    detail = " ".join(blocked.get(name, "") for name in platforms)
+    if "POLICY GATE" in detail.upper():
+        return ("no post is attempted because " + ", ".join(platforms) + " refused this copy under our own "
+                "content rules; the caption needs the rule answered and the connection needs nothing - the "
+                "share stays counted as missing until it goes out")
+    return ("no post is attempted because " + ", ".join(platforms) +
+            " credentials are known to be unusable; the owner must re-authorise the connection")
+
 
 
 def dispatch(article: dict, route_index: int, apply: bool) -> str:
@@ -188,9 +221,7 @@ def main() -> int:
                 down = sorted({pair[index] for index in route_indexes if index < len(pair) and pair[index] in blocked})
                 if down:
                     record["credentialBlocked"] = {name: blocked[name] for name in down}
-                    record.setdefault("actions", []).append(
-                        "no post is attempted because " + ", ".join(down) +
-                        " credentials are known to be unusable; the owner must re-authorise the connection")
+                    record.setdefault("actions", []).append(blocked_note(down, blocked))
                     rows.append(record)
                     continue
             for route_index in route_indexes:
@@ -202,9 +233,7 @@ def main() -> int:
                 if paused:
                     record["paused"] = True
                     record["attemptsToday"] = attempts
-                    record.setdefault("actions", []).append(
-                        f"route paused after {attempts} attempts today: the network or its "
-                        "credentials need attention; the post is still counted as missing")
+                    record.setdefault("actions", []).append(paused_note(attempts))
                     continue
                 record.setdefault("actions", []).append(dispatch(article, route_index, args.apply))
                 if args.apply:

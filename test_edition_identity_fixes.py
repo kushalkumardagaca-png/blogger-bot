@@ -337,9 +337,15 @@ class RouteAttemptCap(unittest.TestCase):
     def test_a_repeatedly_failing_route_is_paused_not_spammed(self):
         import social_guard as g
         now = dt.datetime(2026, 10, 19, 13, 0, tzinfo=IST)
-        waiting, paused, attempts = g.route_state({"at": (now - dt.timedelta(hours=3)).isoformat(), "n": 4}, now)
+        recent = (now - dt.timedelta(minutes=30)).isoformat()
+        waiting, paused, attempts = g.route_state({"at": recent, "n": 4}, now)
         self.assertEqual((waiting, paused, attempts), (False, True, 4))
-
+        # 23 October: the cap is a spacing, not a verdict for the day. A route that has been quiet for
+        # longer than the resume window gets one more bounded attempt, because a share nobody re-tries
+        # again is a share that was never delivered - and the network may have recovered an hour ago.
+        older = (now - g.PAUSE_RESUME_AFTER - dt.timedelta(minutes=5)).isoformat()
+        waiting, paused, attempts = g.route_state({"at": older, "n": 4}, now)
+        self.assertEqual((waiting, paused, attempts), (False, False, 4))
     def test_a_recent_dispatch_is_simply_still_waiting(self):
         import social_guard as g
         now = dt.datetime(2026, 10, 19, 13, 0, tzinfo=IST)

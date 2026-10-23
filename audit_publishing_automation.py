@@ -532,6 +532,13 @@ check('A social refusal from our own policy gate is not blamed on the owner\'s c
 # prefix must be recognised as a gate refusing *this topic*, and the topic search must apply the same
 # headline rule the compiler does instead of offering a question it must answer no to.
 _v3=(ROOT/'master_v3_pipeline.py').read_text(encoding='utf-8')
+# The evening of 23 October, social side: a cap turned into a verdict and a policy refusal was filed as a
+# broken token. Both are watched, because a missing share that nobody re-tries is a silent defect.
+_sg=(ROOT/'social_guard.py').read_text(encoding='utf-8')
+check('A paused social share is offered again instead of being abandoned for the day',
+      'PAUSE_RESUME_AFTER = dt.timedelta(minutes=90)' in _sg and 'age < PAUSE_RESUME_AFTER' in _sg)
+check('A social route held back by our own content rule does not blame the owner\'s token',
+      'def blocked_note' in _sg and 'POLICY GATE' in _sg and 'append(paused_note(attempts))' in _sg)
 check('A strict-compiler refusal rotates the slot instead of ending the run',
       '"master v2 rejected"' in _v3 and 'except (RuntimeError,ValueError) as exc:' in _v3
       and 'def gate_refusal' in _v3)
