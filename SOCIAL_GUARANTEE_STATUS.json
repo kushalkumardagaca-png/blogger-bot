@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-23T09:29:16.755215+05:30",
+ "generatedAt": "2026-10-23T10:03:05.604946+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
- "articles": 4,
- "expectedPosts": 8,
- "articlesWithBothPosts": 4,
+ "articles": 5,
+ "expectedPosts": 10,
+ "articlesWithBothPosts": 5,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
@@ -59,13 +59,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-1",
+   "title": "Nasdaq slides 2% Friday to post worst week",
+   "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T09:29:11.549485+05:30",
+ "liveVerificationSourceAt": "2026-10-23T10:03:00.094992+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 4,
+ "articlesWithExactlyTwoPosts": 5,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"

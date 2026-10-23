@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-23T09:29:11.549485+05:30",
+ "generatedAt": "2026-10-23T10:03:00.094992+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 4,
+ "live": 5,
  "onTime": 0,
- "late": 4,
+ "late": 5,
  "early": 0,
  "pending": 1,
  "overdue": 1,
- "upcoming": 15,
+ "upcoming": 14,
  "dispatched": 2,
  "publicationGate": "green",
  "gateRepair": null,
@@ -22,7 +22,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 314,
+   "minutesFromSlot": 348,
    "publishedAt": "2026-10-22T20:01:57-07:00",
    "minutesLate": 256
   },
@@ -33,7 +33,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 254,
+   "minutesFromSlot": 288,
    "publishedAt": "2026-10-22T19:59:49-07:00",
    "minutesLate": 194
   },
@@ -44,7 +44,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
    "state": "late",
-   "minutesFromSlot": 194,
+   "minutesFromSlot": 228,
    "publishedAt": "2026-10-22T20:23:09-07:00",
    "minutesLate": 158
   },
@@ -55,7 +55,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 134,
+   "minutesFromSlot": 168,
    "publishedAt": "2026-10-22T20:00:03-07:00",
    "minutesLate": 75
   },
@@ -66,19 +66,20 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 74,
-   "minutesLate": 74,
+   "minutesFromSlot": 108,
+   "minutesLate": 108,
    "action": "dispatched"
   },
   {
    "key": "master-trending-1",
    "slot": "09:15",
    "due": "2026-10-23T09:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "pending",
-   "minutesFromSlot": 14,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
+   "state": "late",
+   "minutesFromSlot": 48,
+   "publishedAt": "2026-10-22T21:15:47-07:00",
+   "minutesLate": 30
   },
   {
    "key": "news-russia",
@@ -86,8 +87,9 @@
    "due": "2026-10-23T10:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -46
+   "state": "pending",
+   "minutesFromSlot": -12,
+   "action": "dispatched"
   },
   {
    "key": "master-evergreen-1",
@@ -96,7 +98,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -106
+   "minutesFromSlot": -72
   },
   {
    "key": "news-markets",
@@ -105,7 +107,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -166
+   "minutesFromSlot": -132
   },
   {
    "key": "news-europe",
@@ -114,7 +116,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -196
+   "minutesFromSlot": -162
   },
   {
    "key": "news-economy",
@@ -123,7 +125,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -226
+   "minutesFromSlot": -192
   },
   {
    "key": "master-trending-2",
@@ -132,7 +134,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -286
+   "minutesFromSlot": -252
   },
   {
    "key": "master-evergreen-2",
@@ -141,7 +143,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -346
+   "minutesFromSlot": -312
   },
   {
    "key": "master-trending-3",
@@ -150,7 +152,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -406
+   "minutesFromSlot": -372
   },
   {
    "key": "news-americas",
@@ -159,7 +161,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -466
+   "minutesFromSlot": -432
   },
   {
    "key": "news-companies",
@@ -168,7 +170,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -496
+   "minutesFromSlot": -462
   },
   {
    "key": "news-global",
@@ -177,7 +179,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -526
+   "minutesFromSlot": -492
   },
   {
    "key": "news-banking",
@@ -186,7 +188,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -556
+   "minutesFromSlot": -522
   },
   {
    "key": "master-evergreen-3",
@@ -195,7 +197,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -616
+   "minutesFromSlot": -582
   },
   {
    "key": "master-trending-4",
@@ -204,7 +206,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -676
+   "minutesFromSlot": -642
   },
   {
    "key": "master-evergreen-4",
@@ -213,13 +215,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -766
+   "minutesFromSlot": -732
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 4,
+ "actualArticlesLiveIncludingExtras": 5,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
