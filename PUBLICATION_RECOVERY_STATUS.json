@@ -1,39 +1,28 @@
 {
-  "generatedAt": "2026-10-23T13:57:30.268031+05:30",
+  "generatedAt": "2026-10-23T19:17:16.283656+05:30",
   "dateIST": "2026-10-23",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 7,
-  "confirmedByLivePost": 7,
+  "confirmedPublications": 17,
+  "confirmedByLivePost": 17,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "news-markets",
-    "news-europe",
-    "news-economy",
     "master-evergreen-0"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-markets",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "news-europe",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
-      "key": "news-economy",
-      "applied": true
-    },
-    {
-      "type": "source_recovery",
       "key": "master-evergreen-0",
-      "attempt": 1,
+      "attempt": 2,
+      "applied": true
+    },
+    {
+      "type": "social_replay",
+      "key": "news-americas",
+      "platform": "facebook",
+      "routeIndex": 1,
       "applied": true
     }
   ],
