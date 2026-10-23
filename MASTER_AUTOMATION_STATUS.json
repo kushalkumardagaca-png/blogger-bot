@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "4bbb84662c8d2ef4",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-23",
   "kind": "trending",
   "slot": 3,
-  "slot_key": "2026-10-23:trending:3",
-  "date": "2026-10-23",
-  "category": "Trend · Technology & Future Money",
-  "evergreen_category": "Banking Payments & Fintech",
+  "topic_id": "4bbb84662c8d2ef4",
+  "replaced_topic_id": null,
   "title": "Payment fintech funding doubles in H1",
-  "url": "https://dailyyield.blogspot.com/2026/10/payment-fintech-funding-doubles-in-h1.html",
-  "published_at": "2026-10-23T05:20:11-07:00"
+  "package": "master_packages/dynamic/2026-10-23-trending-4bbb84662c8d2ef4.json",
+  "html": "scheduled_ready/2026-10-23-trending-3-payment-fintech-funding-doubles-in-h1.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 18.6,
+  "remainingMinutes": 11.4
 }
