@@ -1,13 +1,13 @@
 {
- "at": "2026-10-23T17:58:32Z",
+ "at": "2026-10-23T18:38:14Z",
  "workflow": "master_evergreen_writer.yml",
  "kind": "evergreen",
  "slot": "4",
- "run": "39994695584",
+ "run": "40004666635",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "3 substitute topic(s) tried for this slot and refused (Mortgage rates: Why has long term US h; How to Build Passive Income With Real ; Declining loan amounts push new mortga) - MASTER V2 REJECTED — content policy: unsupported first-person product or investment experience; policy text that tripped the gate: We bought; last: V3 photo search exhausted every independently broadened search: time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 33.2 minutes); the slot is retried by recovery | time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 33.2 minutes); the slot is retried by recovery | time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 33.2 minutes); the slot is retried by recovery | time budget of 30 minutes exhausted while searching Commons for an editor",
+ "error": "Master V3 publishes only the current IST date; historical backfill is disabled",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
