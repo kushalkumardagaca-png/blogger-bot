@@ -108,11 +108,21 @@ PHOTOS_PER_MASTER_ARTICLE = 3
 
 def photo(p,index):
     from source_photography import source_alt
+    from photo_credit import caption_is_visible, credit_text, rights_for
     # A search brief is not evidence of what the chosen picture actually shows.
     verified_alt=source_alt(p)
-    credit=esc(p['caption'])
-    if p.get('source_page'): credit=f'<a href="{esc(p["source_page"])}" rel="noopener" target="_blank">{credit}</a>'
-    if p.get('license_url'): credit+=f' · <a href="{esc(p["license_url"])}" rel="license noopener" target="_blank">Licence</a>'
+    # The rights row is completed from the site's own photo registry before the figure is rendered,
+    # because a package a publisher re-reads can carry fewer fields than the selector wrote. What is
+    # never allowed is a figcaption with no words in it: on 22 October 2026 two figures on each of
+    # three live articles were reduced to a bare link, the whole-site image-rights audit recorded that
+    # as a gap, and on 23 October the green operating gate held every desk and every Master slot on the
+    # strength of it. A picture either carries a credit a reader can read, or it is not published.
+    rights=rights_for(p)
+    credit=esc(' '.join(str(p.get('caption') or '').split())) or esc(credit_text(rights))
+    if not caption_is_visible(credit):
+        raise ValueError(f'photo {index} has no visible rights line; it is not published with a blank credit')
+    if rights.get('source_page'): credit=f'<a href="{esc(rights["source_page"])}" rel="noopener" target="_blank">{credit}</a>'
+    if rights.get('license_url'): credit+=f' · <a href="{esc(rights["license_url"])}" rel="license noopener" target="_blank">Licence</a>'
     return f'''<figure class="dy2-photo"><img src="{esc(p['url'])}" alt="{esc(verified_alt)}" width="{int(p['width'])}" height="{int(p['height'])}" loading="{'eager' if index==1 else 'lazy'}" decoding="async"{' fetchpriority="high"' if index==1 else ''}><figcaption>{credit}</figcaption></figure>'''
 
 def visual(v,sources,index):

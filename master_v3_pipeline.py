@@ -190,7 +190,13 @@ def reuse_completed_slot(plan,kind,slot,emit_social=False):
 # the same way: the plan kept the same topic, the retry rebuilt it, and the same gate refused it again.
 # On 22 October that is how one Evergreen slot collected 80 failure files while its 30-minute budget ran
 # out, and how tonight's 20:45 trending slot died on a reused sentence instead of moving to another topic.
-GATE_REFUSALS = ("source gate", "originality gate", "photo search exhausted", "no evidence-ready")
+# The shapes a writer can walk away from by choosing another topic, because the refusal belongs to the
+# topic and not to the pipeline. A deterministic section that cannot be built, or that runs short of
+# usable records, is a property of the sources behind that one topic - which is precisely what the
+# next candidate in the same category exists to replace. Anything else (a 503, an embargo, an edition
+# identity failure, a plan that is not READY) stays a loud red run: those are not a topic's fault.
+GATE_REFUSALS = ("source gate", "originality gate", "photo search exhausted", "no evidence-ready",
+                 "evidence section failed", "usable source passages")
 
 
 def gate_refusal(exc) -> bool:

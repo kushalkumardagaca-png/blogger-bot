@@ -131,8 +131,14 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  # Seamless carousels may contain an accessibility-hidden clone of visible cards.
  # Scan the full text for harmful material, but do not count that non-reader clone
  # as repeated editorial prose.
+ # A licence credit is not editorial prose either: the same photographer, licence and source sentence
+ # belong on every figure of a series by design, and the first article scrubbed to satisfy this
+ # measurement shipped with two empty captions (22 October 2026). That blank credit failed the
+ # whole-site image-rights audit, and the green operating gate then held every desk and every Master
+ # slot on 23 October. Harmful-language patterns are still read across the whole page - only the
+ # repetition count stops treating an attribution as duplicated reporting.
  repetition_content=content or ''
- for pattern in (r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>',r'<a\b[^>]*class=["\'][^"\']*\b(?:fbk-src|dy-context|dy-related)\b[^"\']*["\'][^>]*>.*?</a>'):
+ for pattern in (r'<figcaption\b[^>]*>.*?</figcaption\s*>',r'<div\b[^>]*aria-hidden=["\']true["\'][^>]*>.*?</div>',r'<div\b[^>]*class=["\'][^"\']*\bdy2-data\b[^"\']*["\'][^>]*>.*?</div>',r'<section\b[^>]*class=["\'][^"\']*\bdy2-links\b[^"\']*["\'][^>]*>.*?</section>',r'<a\b[^>]*class=["\'][^"\']*\b(?:fbk-src|dy-context|dy-related)\b[^"\']*["\'][^>]*>.*?</a>'):
   repetition_content=re.sub(pattern,' ',repetition_content,flags=re.I|re.S)
  seq=[normalize_sentence(x) for x in sentences(repetition_content)];seq=[x for x in seq if len(x.split())>=10]
  # This is an explicit background/date label, not substantive reporting. It

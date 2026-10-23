@@ -15,7 +15,18 @@ from bs4 import BeautifulSoup,Comment
 from content_policy_guard import DISCLOSURE_MARKER,audit_text,automation_disclosure
 from editorial_integrity import language_similarity,normalized_title
 
-BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}";APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true' and not __import__('site_change_control').is_frozen()
+BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID']}"
+# Two modes, deliberately. `full` is the whole-site remediation this file was written for: it removes
+# exact twins, upgrades stale disclosures and reverts unresolved legacy posts to drafts, and it stays
+# closed while the owner's freeze stands. `rights` is the narrow repair the owner released on
+# 23 October 2026: it writes only the licence credit inside a photo figure, and it can never delete a
+# post, revert a post to draft or rewrite a sentence - because a blank caption, not deleted content, is
+# what held every desk that morning. The policy audit still runs either way, so a PASS reported from the
+# narrow mode is a measured fact and not a narrowed definition.
+SCOPE=(os.environ.get('CORPUS_REPAIR_SCOPE','full') or 'full').strip().casefold()
+ACTION='corpus_figure_rights_repair'
+_CONTROL=__import__('site_change_control')
+APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true' and (not _CONTROL.is_frozen() or (SCOPE=='rights' and _CONTROL.allowed(ACTION)))
 REPORT=Path('BLOGGER_CORPUS_POLICY_STATUS.json');RIGHTS=Path('BLOGGER_IMAGE_RIGHTS_LEDGER.json')
 UTILITY_SELECTORS=('.dy2-summary','.dy2-faq','.dy2-glossary','.dy2-links','.dy2-low','.dy2-follow','#dyPageFamily','.dy-policy-disclosure','.dy-related','.dy-context','script','style','noscript','template')
 
@@ -86,20 +97,64 @@ def editorial_only(post,content):
  if article:
   return str(article)
  return str(soup)
+def commons_page(candidate):
+ """The Wikimedia file page an address refers to, when it refers to one."""
+ from urllib.parse import unquote as _unquote
+ value=_unquote(str(candidate or ''))
+ match=re.search(r'/wiki/(?:File|Image):([^?#]+)',value,re.I)
+ if match:return 'https://commons.wikimedia.org/wiki/File:'+match.group(1)
+ match=re.search(r'/commons/[0-9a-f]/[0-9a-f]{2}/([^/?#]+)',value,re.I) or re.search(r'/thumb/[0-9a-f]/[0-9a-f]{2}/([^/]+)/',value,re.I)
+ if match:return 'https://commons.wikimedia.org/wiki/File:'+_unquote(match.group(1))
+ return ''
+
+
+def figure_credit_markup(src,links):
+ """The words a figure's credit has to carry, taken from the site's own rights records.
+
+ Nothing is invented. The photo registry written when the picture was chosen is read first, because it
+ holds the creator, the licence and both source addresses verified at selection time; a picture that
+ predates that registry is credited by naming the source record its own figure already links to.
+ """
+ from photo_credit import caption_is_visible, figure_html, rights_for
+ markup=figure_html(rights_for({'url':src}))
+ if markup and caption_is_visible(markup):return markup
+ for candidate in [x for x in links if x]+[src]:
+  page=commons_page(candidate)
+  label='Editorial image · Wikimedia Commons source and licence record'
+  if not page:
+   host=(urlparse(candidate).hostname or '').lower()
+   if not host.endswith('unsplash.com'):continue
+   page=candidate;label='Editorial photograph · Unsplash source record'
+  return f'<a href="{html.escape(page,quote=True)}" rel="noopener license" target="_blank">{label}</a>'
+ return ''
+
+
 def ensure_figure_rights(content):
- soup=BeautifulSoup(content,'html.parser');changed=False
+ """Give every photo figure a credit line a reader can actually read.
+
+ On 22 October 2026 three articles went live whose second and third photographs kept their source link
+ but lost their words, because an anti-repetition repair deleted the licence credit it mistook for
+ duplicated prose. The whole-site image-rights audit read those empty captions as missing attribution
+ and reported a gap, and the green operating gate refused every publication the next morning on the
+ strength of that single field. So a caption that exists but says nothing is treated here exactly as it
+ reads: as no caption at all.
+ """
+ soup=BeautifulSoup(content,'html.parser');changed=False;repaired=0
  for figure in soup.select('figure'):
-  if figure.select_one('figcaption'):continue
   image=figure.select_one('img[src]')
   if not image:continue
-  src=html.unescape(image.get('src',''));host=(urlparse(src).hostname or '').lower();source='';label=''
-  if host.endswith('wikimedia.org'):
-   path=urlparse(src).path;match=re.search(r'/thumb/[0-9a-f]/[0-9a-f]{2}/([^/]+)/',path,re.I) or re.search(r'/commons/[0-9a-f]/[0-9a-f]{2}/([^/]+)$',path,re.I)
-   if match:source='https://commons.wikimedia.org/wiki/File:'+quote(unquote(match.group(1)));label='Editorial image · Wikimedia Commons source and licence record'
-  elif host.endswith('unsplash.com'):source=src;label='Editorial photograph · Unsplash source record'
-  if source:
-   caption=soup.new_tag('figcaption');link=soup.new_tag('a',href=source,rel='noopener license',target='_blank');link.string=label;caption.append(link);figure.append(caption);changed=True
- return str(soup) if changed else content
+  caption=figure.select_one('figcaption')
+  text='' if caption is None else caption.get_text(' ',strip=True)
+  if caption is not None and len(text)>=12:continue
+  src=html.unescape(image.get('src','') or '')
+  links=[html.unescape(a.get('href','') or '') for a in figure.select('a[href]')]
+  markup=figure_credit_markup(src,links)
+  if not markup:continue
+  if caption is None:
+   caption=soup.new_tag('figcaption');figure.append(caption)
+  caption.clear();caption.append(BeautifulSoup(markup,'html.parser'))
+  changed=True;repaired+=1
+ return (str(soup),repaired) if changed else (content,0)
 
 def rights_entry(post,content):
  soup=BeautifulSoup(content,'html.parser');assets=[]
@@ -112,8 +167,8 @@ def rights_entry(post,content):
  return {'post_id':post['id'],'url':post.get('url'),'assets':assets,'complete':all(x['alt_present'] and x['rights_evidence'] for x in assets) if assets else True}
 
 def main():
- h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);duplicates=exact_duplicate_groups(rows,h);deleted=[];updated=[];quarantined=[];unsafe=[];rights=[];news_sentences_removed=0;remaining=[]
- if APPLY:
+ h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);duplicates=exact_duplicate_groups(rows,h);deleted=[];updated=[];quarantined=[];unsafe=[];rights=[];news_sentences_removed=0;remaining=[];captions_restored=0
+ if APPLY and SCOPE!='rights':
   for group in duplicates:
    for ident in group['remove_ids']:call('DELETE','/posts/'+ident,h);deleted.append(ident)
  removed=set(deleted)
@@ -122,16 +177,22 @@ def main():
   # Audit the real stored copy, not a cleaned hypothetical copy.
   content=p.get('content','')
   if APPLY:
-   content=clean_legacy_promises(content)
-   if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
-   content=ensure_figure_rights(content)
-   if automated(p):content=upgrade_disclosure(content)
+   if SCOPE!='rights':
+    content=clean_legacy_promises(content)
+    if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
+   if len(updated)>=60:
+    # The released scope is capped at sixty posts per run; a backlog waits for the next run rather than
+    # spending the whole hour on one pass, and the audit below still measures every post in this one.
+    rights.append(rights_entry(p,content))
+    continue
+   content,repaired=ensure_figure_rights(content);captions_restored+=repaired
+   if automated(p) and SCOPE!='rights':content=upgrade_disclosure(content)
   audit_content=editorial_only(p,content);issues=[x for x in audit_text(p.get('title',''),audit_content,'historical',require_disclosure=False) if x!='insufficient sentence-level originality']
   bad_links=[]
   for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content,re.I):
    if re.match(r'\s*(?:javascript|vbscript|data):',html.unescape(href),re.I):bad_links.append(href)
   issues+=['unsafe active link scheme'] if bad_links else []
-  if APPLY and issues:
+  if APPLY and issues and SCOPE!='rights':
    # Keep the content recoverable as a Blogger draft. No unsafe or materially
    # repetitive legacy item remains publicly distributed merely to preserve count.
    call('POST','/posts/'+p['id']+'/revert',h);quarantined.append({'post_id':p['id'],'url':p.get('url'),'issues':sorted(set(issues))});continue
@@ -144,6 +205,6 @@ def main():
   rights.append(rights_entry(p,content))
  rights_gaps=[x for x in rights if not x['complete']]
  rights_doc={'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows)-len(removed),'posts_with_figure_rights_gaps':len(rights_gaps),'gaps':rights_gaps,'ledger_hash':hashlib.sha256(json.dumps(rights,sort_keys=True).encode()).hexdigest()};RIGHTS.write_text(json.dumps(rights_doc,indent=2)+'\n')
- unresolved_duplicates=[] if APPLY else duplicates;status='PASS' if not unresolved_duplicates and not remaining and not unsafe and not rights_gaps else ('REMEDIATED' if APPLY and not remaining and not unsafe and not rights_gaps else 'WARNING')
- report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_current_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups_found':duplicates,'unresolved_duplicate_groups':unresolved_duplicates,'deleted_duplicate_post_ids':deleted,'posts_updated':len(updated),'historical_news_sentences_deduplicated':news_sentences_removed,'quarantined_to_draft':quarantined,'remaining_live_policy_flags':remaining,'unsafe_active_links':unsafe,'image_rights_gap_posts':len(rights_gaps),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
+ unresolved_duplicates=[] if (APPLY and SCOPE!='rights') else duplicates;status='PASS' if not unresolved_duplicates and not remaining and not unsafe and not rights_gaps else ('REMEDIATED' if APPLY and not remaining and not unsafe and not rights_gaps else 'WARNING')
+ report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_current_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups_found':duplicates,'unresolved_duplicate_groups':unresolved_duplicates,'deleted_duplicate_post_ids':deleted,'posts_updated':len(updated),'historical_news_sentences_deduplicated':news_sentences_removed,'quarantined_to_draft':quarantined,'remaining_live_policy_flags':remaining,'unsafe_active_links':unsafe,'image_rights_gap_posts':len(rights_gaps),'figure_captions_restored':captions_restored,'repair_scope':SCOPE,'site_writes':len(updated),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','figure_captions_restored','repair_scope','site_writes','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
 if __name__=='__main__':main()

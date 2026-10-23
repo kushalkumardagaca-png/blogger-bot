@@ -55,16 +55,26 @@ class FreezeTests(unittest.TestCase):
     def test_a_release_names_one_action_one_edit_and_the_owner(self):
         # the difference between a granted correction and a hole in the freeze is the record beside it
         cfg=freeze.policy();released=cfg.get('releasedCorrections') or []
-        # Two releases exist now, and the list is still exact: a third name appearing here without the
+        # Three releases exist now, and the list is still exact: a fourth name appearing here without the
         # owner's sentence beside it fails this test, which is the whole point of keeping it pinned.
         self.assertEqual([e.get('action') for e in released],
-                         ['search_index_policy_repair','desk_index_redesign'])
+                         ['search_index_policy_repair','desk_index_redesign','corpus_figure_rights_repair'])
         for index,entry in enumerate(released):
             for key in ('scope','ownerInstruction','releasedAt','limits'):
                 self.assertTrue(str(entry.get(key) or '').strip(),f"releasedCorrections[{index}].{key} is missing")
             self.assertIn('October 2026',entry['ownerInstruction'])
             self.assertIn('Owner,',entry['ownerInstruction'])
         repair=[e for e in released if e['action']=='search_index_policy_repair'][0]
+        # The 23 October release is the narrowest the freeze has ever carried: it writes the words inside an
+        # existing figure caption and nothing else, and its own forbidden list says so.
+        rights=[e for e in released if e['action']=='corpus_figure_rights_repair'][0]
+        self.assertIn('figcaption',rights['scope'])
+        for forbidden in ('delete','revert to draft','title','labels','schedules'):
+            self.assertIn(forbidden,json.dumps(rights['limits']['forbidden']))
+        self.assertNotIn('corpus_figure_rights_repair',cfg.get('heldCliActions') or {})
+        # Nothing that can now write is still described as audit-only: a file whose own release lets it
+        # repair a caption cannot also be listed as never writing, or the list has become decoration.
+        self.assertNotIn('harden_live_corpus',cfg.get('auditOnlyActions') or [])
         self.assertIn('frozen',json.dumps(cfg))
         self.assertIs(cfg['frozen'],True,'a release must never unfreeze the site')
         self.assertEqual(repair['limits']['publicDailyYieldRequests'],0)

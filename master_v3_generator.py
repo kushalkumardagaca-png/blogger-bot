@@ -264,7 +264,11 @@ def evidence_text(sources):
 def deterministic_section(section_heading,sources):
  """Quota-independent evidence prose with topic-specific, non-repeating syntax."""
  import hashlib
- heading_text=' '.join(tokenized(section_heading)[:14])
+ # The planned heading is quoted inside this prose, so a number that came from the heading and from no
+ # evidence record would be asserted as fact by the section. It is dropped at the source rather than
+ # caught later: the wording that survives names the same subject, and the validator's rule - a figure
+ # has to appear in a cited record - is left exactly as strict as it was.
+ heading_text=' '.join(token for token in tokenized(section_heading)[:14] if not re.fullmatch(r'\d[\d,.]*%?',token))
  patterns=(
   "{cite} approaches {heading} through the document titled “{title}.” The retrieved passage says, “{excerpt}.” Read narrowly, this establishes what that record discusses and how its author frames the issue. It does not establish a universal outcome, and it should not be stretched beyond the jurisdiction, period, definitions and population described by {provider}. For a reader comparing decisions, the practical task is to separate the documented observation from any later forecast, recommendation or causal claim.",
   "The useful starting point for {heading} is {cite}, whose source record is “{title}.” Its available text includes, “{excerpt}.” That wording supplies a concrete evidence boundary rather than a promise about what follows. Differences in timing, measurement, eligibility and local rules can change how the finding applies. {provider} therefore supports a question to investigate, not a personalised instruction. A careful interpretation checks the original record, its date and scope before connecting it with another source or a household decision.",
@@ -291,10 +295,29 @@ def deterministic_section(section_heading,sources):
   seed=int(hashlib.sha256(f"{heading_text}|{title}|{cursor}".encode()).hexdigest()[:8],16)
   return (patterns[seed%len(patterns)] if excerpt else TOO_BRIEF[seed%len(TOO_BRIEF)]).format(cite=cite,heading=heading_text,title=title,excerpt=excerpt,provider=provider)
  cursor=0;paragraphs=[];seen=set()
+ # A number this section asserts has to be a number a cited record carries, measured exactly the way
+ # `validate_section` measures it. Retrieved titles hold quarter markers, list numbers and dates that the
+ # stored texts do not, so a sentence is removed - never the section - when only it is unsupported. This
+ # runs on every candidate as it is admitted rather than once over the finished draft: the top-up loop
+ # below adds more prose after that point, and on 23 October 2026 a section that had been scrubbed once
+ # was refilled with an unscrubbed paragraph and died at validation with 'unsupported number 9', which
+ # cost the trending slot a fourth time for a defect the 20 October repair had only half covered.
+ source_blob=' '.join(evidence_text(sources).values())
+ def numbers_supported(text):
+  prose=re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',text)
+  return all(number in source_blob for number in re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',prose))
+ def scrub_one(text):
+  return ' '.join(x for x in (s for s in re.split(r'(?<=[.!?])\s+',text) if numbers_supported(s)) if x.strip())
+ def scrub_all(rows):
+  cleaned=[]
+  for paragraph in rows:
+   kept=scrub_one(paragraph)
+   if kept:cleaned.append(kept)
+  return cleaned
  def take():
   nonlocal cursor
   while cursor<max(16,4*len(sources)):
-   text=clean(make(cursor));cursor+=1
+   text=scrub_one(clean(make(cursor)));cursor+=1
    key=' '.join(text.casefold().split())[:180]
    if not text or key in seen:continue
    seen.add(key);paragraphs.append(text);return True
@@ -302,18 +325,10 @@ def deterministic_section(section_heading,sources):
  while len(paragraphs)<6:
   if not take():break
  if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
- # Retrieved titles can contain a quarter marker or list number that is absent
- # from the two stored evidence texts. Remove only the affected sentence rather
- # than allowing the deterministic quota fallback to publish an unsupported
- # figure or fail the entire current-day slot.
- source_blob=' '.join(evidence_text(sources).values());cleaned=[]
- for paragraph in paragraphs:
-  kept=[]
-  for sentence in re.split(r'(?<=[.!?])\s+',paragraph):
-   nums=re.findall(r'(?<![SI])\b\d[\d,.]*%?\b',re.sub(r'\[\[S\d+\|[^]]+\]\]',' ',sentence))
-   if not nums or all(number in source_blob for number in nums):kept.append(sentence)
-  if kept:cleaned.append(' '.join(kept))
- paragraphs=cleaned
+ paragraphs=scrub_all(paragraphs)
+ # Re-measured after the merges below can add or join prose, so nothing unsupported is handed on to the
+ # validator at all; the validator itself is unchanged and still refuses four paragraphs of padding.
+ if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
  if len(paragraphs)>6:
   paragraphs=[' '.join(paragraphs[i:i+2]) for i in range(0,len(paragraphs),2)]
  # The section has to land in the 400-490 word window the validator enforces. The loop below used

@@ -4,13 +4,30 @@ on:
   workflow_dispatch:
     inputs:
       apply:
-        description: 'Apply exact-duplicate removal and missing disclosure retrofit'
+        description: 'Apply the released repair: with "rights" scope, licence credits on photo figures only'
         required: true
         type: boolean
         default: false
+      scope:
+        description: 'rights = photo credits only (owner-released); full = whole-site remediation (stays held by the freeze)'
+        required: true
+        type: choice
+        options: ['rights','full']
+        default: 'rights'
   schedule:
     # Daily whole-site verification finishes before the main IST publication day.
     - cron: '55 18 * * *'
+    # The figure-credit check, and the only self-healing write the owner has released.
+    #
+    # Why this exists at all: on 22 October 2026 an anti-plagiarism repair deleted the licence credit out
+    # of two of three photographs on three live articles. The whole-site audit measured that as an
+    # image-rights gap, the corpus status fell to WARNING, and the green operating gate - correctly -
+    # refused every publication that depended on it. Nothing retried the repair, so the gap sat until the
+    # next nightly audit and the whole of 23 October's morning was held behind it: 0 of 21 articles.
+    # A gate that can shut the day down has to be paired with the narrow fix that reopens it, on a clock.
+    # The ledger this job itself writes says whether any caption is still blank, so an unneeded pass is a
+    # few seconds of reading a committed file rather than an authenticated walk over 598 posts.
+    - cron: '17,47 * * * *'
 
 permissions:
   contents: write
@@ -20,7 +37,53 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  decide:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      needed: ${{ steps.look.outputs.needed }}
+      repair: ${{ steps.look.outputs.repair }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Is a repair owed today
+        id: look
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          CRON: ${{ github.event.schedule }}
+          REQUESTED_APPLY: ${{ inputs.apply }}
+          REQUESTED_SCOPE: ${{ inputs.scope }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          HEAL = "17,47 * * * *"
+          event = os.environ.get("EVENT_NAME", "")
+          cron = os.environ.get("CRON", "")
+          requested = os.environ.get("REQUESTED_APPLY", "").casefold() == "true"
+          scope = os.environ.get("REQUESTED_SCOPE", "") or "rights"
+
+          gaps = 0
+          try:
+              gaps = int(json.loads(Path("BLOGGER_IMAGE_RIGHTS_LEDGER.json").read_text())
+                         .get("posts_with_figure_rights_gaps") or 0)
+          except Exception:
+              # An unreadable ledger is not evidence that nothing is owed: the run proceeds and measures
+              # the live corpus for itself, which is the safer answer when a status file is the trigger.
+              gaps = 1
+          needed = True
+          if event == "schedule" and cron == HEAL:
+              needed = gaps > 0
+          repair = needed and (requested or (event == "schedule" and cron == HEAL))
+          print(f"ledger gaps: {gaps}; audit needed: {needed}; released rights repair runs: {repair}")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"needed={'true' if needed else 'false'}\n")
+              out.write(f"repair={'true' if repair and scope == 'rights' else 'false'}\n")
+          PY
+
   audit-and-remediate:
+    needs: decide
+    if: needs.decide.outputs.needed == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -29,13 +92,19 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4
-      - name: Audit authenticated live corpus and apply only safe idempotent repairs
+      - name: Audit authenticated live corpus and apply only the released, idempotent repair
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-          APPLY_CORPUS_REMEDIATION: 'false' # audit the stored corpus; no bulk repairs during freeze
+          # Until 23 October 2026 this line read 'false' unconditionally, so the `apply` input the form
+          # offered did nothing at all: a control that cannot be turned on is not a control, it is a
+          # decoration, and the morning's desks were held for hours by a gap this job could have closed.
+          # What is honoured now is only the scope the owner released - site_change_control answers for
+          # that inside harden_live_corpus.py, where every other write this script knows stays frozen.
+          APPLY_CORPUS_REMEDIATION: ${{ needs.decide.outputs.repair == 'true' && 'true' || 'false' }}
+          CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && 'rights' || 'audit' }}
         run: python harden_live_corpus.py
       - name: Persist compact policy and image-rights evidence
         run: |

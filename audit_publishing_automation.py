@@ -458,6 +458,38 @@ check('Master articles include continuous gesture motion','ensure_continuous_mot
 # instead of a duplicated literal that a refactor can silently orphan.
 _pf=(ROOT/'publication_preflight.py').read_text(encoding='utf-8')
 check('Master uses three unique licensed 16:9 placement-specific photographs','choose_photos' in prep and "image.resize((1600,900)" in (ROOT/'photo_selector.py').read_text() and 'PHOTOS_PER_MASTER_ARTICLE = 3' in mv2 and 'len(photos)!=PHOTOS_PER_MASTER_ARTICLE' in mv2 and '{PHOTOS_PER_MASTER_ARTICLE} distinct' in mv2 and "content.count('class=\"dy2-photo\"')!=PHOTOS_PER_MASTER_ARTICLE" in _pf and 'PHOTO_USAGE_REGISTRY.json' in (ROOT/'photo_selector.py').read_text())
+# A photograph's licence credit is the one sentence on a master page that is *meant* to repeat: three
+# photographs from one event share one photographer and one licence. On 22 October 2026 the anti-plagiarism
+# repair deleted the second and third copies as duplicates, three articles shipped with an empty anchor
+# where the credit should read, the whole-site image-rights audit reported a gap, and the green operating
+# gate held every news desk and every Master slot on 23 October behind that one field. Four places have to
+# hold for that not to recur, and all four are measured here.
+_ei=(ROOT/'editorial_integrity.py').read_text(encoding='utf-8');_cpg=(ROOT/'content_policy_guard.py').read_text(encoding='utf-8')
+_hl=(ROOT/'harden_live_corpus.py').read_text(encoding='utf-8');_gen=(ROOT/'master_v3_generator.py').read_text(encoding='utf-8')
+check('A photo licence credit is protected from repetition repair and from the repetition measure',
+      "figcaption" in _ei.split('PROTECTED_BLOCKS=re.compile(')[1].split('def _visible_text')[0]
+      and "figcaption" in _cpg.split('repetition_content=content')[1].split('seq=[normalize_sentence')[0])
+check('A master figure is never rendered or published with a blank credit',
+      'caption_is_visible' in mv2 and 'no visible rights line' in mv2
+      and 'def uncaptioned_photo_figures(content)' in _pf and 'uncaptioned_photo_figures(content)' in _pf)
+check('Blank live captions are repaired from the site\u2019s own rights registry in a released narrow scope only',
+      'figure_credit_markup' in _hl and 'CORPUS_REPAIR_SCOPE' in _hl
+      and "SCOPE!='rights'" in _hl and 'corpus_figure_rights_repair' in _hl
+      and 'corpus_figure_rights_repair' in (ROOT/'SITE_CHANGE_POLICY.json').read_text(encoding='utf-8')
+      and 'APPLY_CORPUS_REMEDIATION: ${{' in (ROOT/'.github/workflows/blogger_corpus_hardening.yml').read_text(encoding='utf-8'))
+# The trending slot lost on 23 October died on a figure the fallback re-added after it had been measured,
+# for the second time: the same class of hole as the 20 October fix. Measuring each candidate as it is
+# admitted is the guarantee; the validator itself is untouched and still refuses an unsupported number.
+check('A deterministic section is measured for supported figures as each paragraph is admitted',
+      'text=scrub_one(clean(make(cursor)))' in _gen and 'paragraphs=scrub_all(paragraphs)' in _gen
+      and 'unsupported number' in _gen and 'evidence section failed' in (ROOT/'master_v3_pipeline.py').read_text(encoding='utf-8'))
+# A gate that can hold the whole day has to be paired with the narrow repair that reopens it, on a clock:
+# on 23 October the image-rights gap sat until the next nightly audit while every desk stayed shut.
+_bh=(ROOT/'.github/workflows/blogger_corpus_hardening.yml').read_text(encoding='utf-8')
+check('The released figure-credit repair is also watched on a clock, so a gap cannot hold the day',
+      "17,47 * * * *" in _bh and "posts_with_figure_rights_gaps" in _bh
+      and "APPLY_CORPUS_REMEDIATION: ${{ needs.decide.outputs.repair" in _bh
+      and "CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && 'rights' || 'audit' }}" in _bh)
 # The owner is a CA articleship student, not a Chartered Accountant (answer of 19
 # October 2026). The qualification guard can only be switched off by an environment
 # variable, so no scheduled job may ever set it.

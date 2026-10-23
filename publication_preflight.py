@@ -2,6 +2,7 @@
 import html,json,re
 from urllib.parse import urlsplit
 from image_safety import image_works
+from photo_credit import caption_is_visible as photo_caption_is_readable
 from content_policy_guard import assert_policy_compliant,normalize_sentence,sentences
 from editorial_integrity import assert_green_operating_state
 
@@ -23,6 +24,21 @@ def _source_domains(content):
   host=(urlsplit(html.unescape(url)).hostname or '').lower()
   if host and host!=own and host not in ignore:out.add(host)
  return out
+
+def uncaptioned_photo_figures(content):
+    """How many master photo figures carry no credit a reader can read.
+
+    A link to a source file is not an attribution: on 22 October 2026 the licence credit inside the
+    second and third figure of three articles was deleted by a repetition repair, leaving exactly that -
+    an empty anchor - and the morning's publication then died behind the gap it reported. The count is
+    measured here so both the door and its tests read the same number.
+    """
+    missing=0
+    for figure in re.findall(r'<figure\b[^>]*class="dy2-photo"[^>]*>.*?</figure\s*>',content or '',re.I|re.S):
+        caption=re.search(r'<figcaption\b[^>]*>(.*?)</figcaption\s*>',figure,re.I|re.S)
+        if not caption or not photo_caption_is_readable(caption.group(1)):missing+=1
+    return missing
+
 
 def assert_publishable(title,content,labels,check_remote_images=True):
  # Generation, manual publication, retries, recovery and repair routes all stop
@@ -62,6 +78,12 @@ def assert_publishable(title,content,labels,check_remote_images=True):
    if marker not in content:issues.append(name+' missing')
   from master_article_v2 import PHOTOS_PER_MASTER_ARTICLE
   if content.count('class="dy2-photo"')!=PHOTOS_PER_MASTER_ARTICLE:issues.append(f'exactly {PHOTOS_PER_MASTER_ARTICLE} editorial landscape photos required')
+  # A photo whose credit line has no words in it is an unattributed picture with a link on it, and it
+  # is the single defect that cost a whole morning's publication on 23 October 2026: three live articles
+  # carried two empty captions each, the corpus audit reported image-rights gaps, and every desk was
+  # held behind that status. The count of photos was checked here for months; now their credits are too.
+  uncaptioned=uncaptioned_photo_figures(content)
+  if uncaptioned:issues.append(f'{uncaptioned} of {PHOTOS_PER_MASTER_ARTICLE} photo figures carry no readable rights credit')
   if content.count('class="dy2-data ')<3:issues.append('at least three evidence-based data representations required')
   order=[content.find(x) for x in ('class="dy2-summary"','class="dy2-faq"','class="dy2-glossary"','class="dy2-low"','class="dy2-follow"','DY_PAGE_FAMILY_START')]
   if any(x<0 for x in order) or order!=sorted(order):issues.append('Master V2 closing-section order is invalid')

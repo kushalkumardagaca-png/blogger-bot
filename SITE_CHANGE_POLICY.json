@@ -43,7 +43,6 @@
     "blogger_policy_compliance.yml"
   ],
   "auditOnlyActions": [
-    "harden_live_corpus",
     "contextual_links_retrofit",
     "site_content_audit_cleanup"
   ],
@@ -93,6 +92,33 @@
       "scope": "the desk index on the three hub pages only: icon geometry and size, one column count per group so rows end square, and counts read from the board instead of memorised. No other part of those pages, and no other page.",
       "ownerInstruction": "Owner, 21 October 2026: 'the logos at every option seems to be slightly disturbed....I want you to fix these and make sure they look perfect and attractive.... Also make the logos better and bigger..' and, when asked whether to publish it on the live pages now or hold it until AdSense approval: 'Yes - publish it now'.",
       "limits": "one edit, this scope, retained before-copy of each page, refused unless the run's own validation passes; the rest of the freeze is untouched"
+    },
+    {
+      "action": "corpus_figure_rights_repair",
+      "releasedAt": "2026-10-23T02:35:00+00:00",
+      "scope": "the words inside an existing photo figure's <figcaption>, on the authenticated Blogger API only, for the posts the image-rights ledger reports as a gap: a credit taken from this repository's own PHOTO_USAGE_REGISTRY.json (creator, licence, licence URL, source file page). Nothing else in a post is rewritten. The script this release covers was listed as audit-only until now; it is removed from that list because this narrow scope is the one write the owner released for it, while its full whole-site mode stays behind the freeze.",
+      "ownerInstruction": "Owner, 23 October 2026, on the two options put to them - (a) complete the rights records from the registry and (b) add the missing credit line to the three live posts whose figures carried a link with no words: 'Go for both ...fix them'",
+      "limits": {
+        "maxPostsWrittenPerRun": 60,
+        "fieldsTouched": [
+          "content (figcaption markup inside existing <figure> elements only)"
+        ],
+        "forbidden": [
+          "delete",
+          "revert to draft",
+          "title",
+          "labels",
+          "body sentences",
+          "photos added or removed",
+          "schedules",
+          "theme",
+          "writer schedules",
+          "embargo"
+        ],
+        "verification": "after every write the stored post is re-read and the run fails unless the credit is present and readable; the whole-site policy audit still runs and still has to pass for the status to read PASS",
+        "publicDailyYieldRequests": 0
+      },
+      "evidence": "BLOGGER_IMAGE_RIGHTS_LEDGER.json (3 posts, 6 figures with an empty caption, checked 22 Oct 2026 19:26 UTC), the six live figures, and the repetition-repair commit that caused it"
     }
   ]
 }

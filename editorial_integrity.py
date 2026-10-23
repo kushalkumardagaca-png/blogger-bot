@@ -169,6 +169,12 @@ PROTECTED_BLOCKS=re.compile('|'.join((
  r'<!--\s*DY_CONTINUOUS_MOTION_START.*?<!--\s*DY_CONTINUOUS_MOTION_END\s*-->',
  r'<!--\s*DY_PAGE_FAMILY_START.*',
  r'<aside\b[^>]*dy-policy-disclosure.*?</aside\s*>',
+ # A photo's licence credit is functional attribution, not editorial prose. Three photographs taken at
+ # one event by one photographer under one licence legitimately repeat the same sentence, and on
+ # 22 October 2026 the repetition repair treated the second and third copies as plagiarism and deleted
+ # their words out of the figcaption, leaving a link with nothing to read. Protected here like the rest
+ # of the controlled furniture: the reader still sees it, this repair never rewrites it.
+ r'<figcaption\b[^>]*>.*?</figcaption\s*>',
 )),re.I|re.S)
 
 def _visible_text(segment:str)->tuple[str,list[int]]:
