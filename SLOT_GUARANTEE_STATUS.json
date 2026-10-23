@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-23T11:15:39.596054+05:30",
+ "generatedAt": "2026-10-23T15:03:28.957538+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 6,
+ "live": 9,
  "onTime": 1,
- "late": 5,
+ "late": 8,
  "early": 0,
- "pending": 0,
- "overdue": 2,
- "upcoming": 13,
- "dispatched": 2,
+ "pending": 1,
+ "overdue": 3,
+ "upcoming": 8,
+ "dispatched": 4,
  "publicationGate": "green",
  "gateRepair": null,
  "rows": [
@@ -22,7 +22,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 420,
+   "minutesFromSlot": 648,
    "publishedAt": "2026-10-22T20:01:57-07:00",
    "minutesLate": 256
   },
@@ -33,7 +33,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 360,
+   "minutesFromSlot": 588,
    "publishedAt": "2026-10-22T19:59:49-07:00",
    "minutesLate": 194
   },
@@ -44,7 +44,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
    "state": "late",
-   "minutesFromSlot": 300,
+   "minutesFromSlot": 528,
    "publishedAt": "2026-10-22T20:23:09-07:00",
    "minutesLate": 158
   },
@@ -55,7 +55,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 240,
+   "minutesFromSlot": 468,
    "publishedAt": "2026-10-22T20:00:03-07:00",
    "minutesLate": 75
   },
@@ -66,8 +66,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 180,
-   "minutesLate": 180,
+   "minutesFromSlot": 408,
+   "minutesLate": 408,
    "action": "dispatched"
   },
   {
@@ -77,7 +77,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
    "state": "late",
-   "minutesFromSlot": 120,
+   "minutesFromSlot": 348,
    "publishedAt": "2026-10-22T21:15:47-07:00",
    "minutesLate": 30
   },
@@ -85,12 +85,12 @@
    "key": "news-russia",
    "slot": "10:15",
    "due": "2026-10-23T10:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "overdue",
-   "minutesFromSlot": 60,
-   "minutesLate": 60,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
+   "state": "late",
+   "minutesFromSlot": 288,
+   "publishedAt": "2026-10-22T22:46:13-07:00",
+   "minutesLate": 61
   },
   {
    "key": "master-evergreen-1",
@@ -99,26 +99,30 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/need-money-in-emergency-take-loan.html",
    "state": "on time",
-   "minutesFromSlot": 0,
+   "minutesFromSlot": 228,
    "publishedAt": "2026-10-22T22:45:10-07:00"
   },
   {
    "key": "news-markets",
    "slot": "12:15",
    "due": "2026-10-23T12:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -60
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
+   "state": "late",
+   "minutesFromSlot": 168,
+   "publishedAt": "2026-10-23T01:31:15-07:00",
+   "minutesLate": 106
   },
   {
    "key": "news-europe",
    "slot": "12:45",
    "due": "2026-10-23T12:45:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -90
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
+   "state": "late",
+   "minutesFromSlot": 138,
+   "publishedAt": "2026-10-23T01:28:46-07:00",
+   "minutesLate": 73
   },
   {
    "key": "news-economy",
@@ -126,8 +130,10 @@
    "due": "2026-10-23T13:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -120
+   "state": "overdue",
+   "minutesFromSlot": 108,
+   "minutesLate": 108,
+   "action": "dispatched"
   },
   {
    "key": "master-trending-2",
@@ -135,8 +141,10 @@
    "due": "2026-10-23T14:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -180
+   "state": "overdue",
+   "minutesFromSlot": 48,
+   "minutesLate": 48,
+   "action": "dispatched"
   },
   {
    "key": "master-evergreen-2",
@@ -144,8 +152,9 @@
    "due": "2026-10-23T15:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -240
+   "state": "pending",
+   "minutesFromSlot": -12,
+   "action": "dispatched"
   },
   {
    "key": "master-trending-3",
@@ -154,7 +163,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -300
+   "minutesFromSlot": -72
   },
   {
    "key": "news-americas",
@@ -163,7 +172,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -360
+   "minutesFromSlot": -132
   },
   {
    "key": "news-companies",
@@ -172,7 +181,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -390
+   "minutesFromSlot": -162
   },
   {
    "key": "news-global",
@@ -181,7 +190,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -420
+   "minutesFromSlot": -192
   },
   {
    "key": "news-banking",
@@ -190,7 +199,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -450
+   "minutesFromSlot": -222
   },
   {
    "key": "master-evergreen-3",
@@ -199,7 +208,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -510
+   "minutesFromSlot": -282
   },
   {
    "key": "master-trending-4",
@@ -208,7 +217,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -570
+   "minutesFromSlot": -342
   },
   {
    "key": "master-evergreen-4",
@@ -217,13 +226,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -660
+   "minutesFromSlot": -432
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 6,
+ "actualArticlesLiveIncludingExtras": 9,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
