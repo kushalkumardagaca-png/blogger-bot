@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-23",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "faa521af98e1a6fb",
   "kind": "trending",
   "slot": 0,
-  "topic_id": "faa521af98e1a6fb",
-  "replaced_topic_id": null,
+  "slot_key": "2026-10-23:trending:0",
+  "date": "2026-10-23",
+  "category": "Trend · Money & Policy Now",
+  "evergreen_category": "Banking Payments & Fintech",
   "title": "Meta strikes deal to keep Zuckerberg",
-  "package": "master_packages/dynamic/2026-10-23-trending-faa521af98e1a6fb.json",
-  "html": "scheduled_ready/2026-10-23-trending-0-meta-strikes-deal-to-keep-zuckerberg.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 14.3,
-  "remainingMinutes": 15.7
+  "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
+  "published_at": "2026-10-22T20:23:09-07:00"
 }
