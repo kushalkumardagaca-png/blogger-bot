@@ -1,15 +1,15 @@
 {
-  "status": "PASS",
-  "generated_at": "2026-10-23T08:31:17.118325+00:00",
+  "status": "FAIL",
+  "generated_at": "2026-10-23T08:31:55.160044+00:00",
   "dry_run": false,
-  "published": 1,
-  "failed": 0,
+  "published": 0,
+  "failed": 1,
   "results": [
     {
-      "desk": "markets",
-      "status": "PASS",
-      "published": true,
-      "dry_run": false
+      "desk": "economy",
+      "status": "FAIL",
+      "error_type": "RuntimeError",
+      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: rc9307 of 2026 notice of demand in respect of sri salasar suppliers pvt"
     }
   ]
 }
