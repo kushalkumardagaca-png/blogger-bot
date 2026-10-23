@@ -1,10 +1,10 @@
-# Growth ladder · 2026-10-22T21:00:51+00:00
+# Growth ladder · 2026-10-23T23:21:18+00:00
 
-Measured today: **1** indexed pages of **592** submitted, **2** impressions and **1** clicks in 28 days, **12** countable social followers. Indexing gate: **CONTRACT**.
+Measured today: **1** indexed pages of **612** submitted, **3** impressions and **1** clicks in 28 days, **12** countable social followers. Indexing gate: **CONTRACT**.
 
 Views are counted as **GA4_PAGEVIEWS_7_DAY_AVERAGE**; GA4 status: **MEASURED**.
 
-Readers (the milestone's own unit: people who open one or two articles a day) today: **22** - basis **GA4_ENGAGED_SESSIONS_LATEST_DAY**. 50,000 is counted in this unit, not in pageviews.
+Readers (the milestone's own unit: people who open one or two articles a day) today: **18** - basis **GA4_ENGAGED_SESSIONS_LATEST_DAY**. 50,000 is counted in this unit, not in pageviews.
 
 Committed by 31 Dec 2026: indexed pages 150-400, 150-1500 views a day.
 
@@ -26,13 +26,13 @@ Committed by 31 Dec 2026: indexed pages 150-400, 150-1500 views a day.
 
 At a normal 2-3% click rate, 50,000 visits a day out of search needs **1,666,667-2,500,000 impressions a day**.
 
-- one indexed page currently earns **0.071429** impressions a day
-- at that rate the ask would need about **23,333,338 indexed pages**
-- with the indexed count at the top of the committed range, each page would have to earn **58,333×** today's yield
+- one indexed page currently earns **0.107143** impressions a day
+- at that rate the ask would need about **15,555,559 indexed pages**
+- with the indexed count at the top of the committed range, each page would have to earn **38,889×** today's yield
 
 ## Projection to 50,000 a day
 
-- status: **PROJECTED** (linear on the blog's own measured daily gain, 3 measured points)
-- at the measured daily gain: **2042-11-05**
+- status: **PROJECTED** (linear on the blog's own measured daily gain, 4 measured points)
+- at the measured daily gain: **2053-01-07**
 
 Nothing in this report is a forecast of effort. It is a record of what was measured, so that the ladder can be checked rather than argued about.
