@@ -62,10 +62,20 @@ class TwinDetection(unittest.TestCase):
         self.assertEqual([g for g in corpus.twin_groups(rows, {}) if g["kind"] == "title"], [],
                          "a desk reuses its headline every day; the prose decides, not the title")
 
-    def test_similar_title_and_different_prose_is_not_a_twin(self):
+    def test_the_measured_23_october_pair_is_a_slot_collision_not_a_copy(self):
+        """Same dated headline, ~40% shared prose: two different articles for one slot.
+
+        They must be found - a slot published twice is a defect the owner has to see - and they
+        must not be resolved by a machine, because either copy holds stories the other does not.
+        """
         rows = [post("1", TITLE, "americas-a", body=BODY),
                 post("2", TITLE, "americas-b", body="<p>" + " ".join(f"other text {i}" for i in range(90)) + "</p>")]
-        self.assertEqual([g for g in corpus.twin_groups(rows, {}) if g["kind"] == "title"], [])
+        groups = [g for g in corpus.twin_groups(rows, {}) if g["kind"] == "title"]
+        self.assertEqual(len(groups), 1, groups)
+        group = groups[0]
+        self.assertTrue(group["slotCollision"] and group["recent"])
+        self.assertFalse(group["twin"], "a near-match is not a copy, so no retire is owed")
+        self.assertLess(group["similarity"], 0.985)
 
     def test_identical_addresses_still_group_as_before(self):
         rows = [post("1", TITLE, "americas-finance-news-2026-10-23"),

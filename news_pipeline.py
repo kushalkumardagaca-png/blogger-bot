@@ -2013,29 +2013,35 @@ def live_copies_of_this_edition(art, token, my_id):
 def reconcile_same_edition_twins(art, token, my_id, my_url):
     """Resolve a twin created by a second run publishing the same desk.
 
-    Whichever copy reached the blog first is kept; this run gives up its own copy and
-    reverts it to a draft, where it can be inspected and deleted by hand. A run never
-    touches a post it did not create, so the losing side of a race is always the side
+    Only a *copy* is given up. The measured pair of 23 October - two articles of ~4,850 words for
+    one slot, sharing 40% of their wording - is not a copy of anything: each carries stories the
+    other does not, and deciding which of two real articles the blog keeps is an editorial call, not
+    a cleanup. So the rule is: identical prose, retire the newer copy; different prose, keep both and
+    report the collision, loudly, to the committed tracker.
+
+    A run never touches a post it did not create, so the losing side of a race is always the side
     that can prove what it did to its own article.
     """
     others = live_copies_of_this_edition(art, token, my_id)
     if not others:
         return my_url, None
-    mine_stamp = str((blogger_call(f"/posts/{my_id}", token).get("published") or ""))
+    similarity = max(editorial_integrity.language_similarity(other.get("content", ""), art.get("html", ""))
+                     for other in others)
+    mine_stamp = str(blogger_call(f"/posts/{my_id}", token).get("published") or "")
     oldest = sorted(others, key=lambda p: (str(p.get("published") or p.get("updated") or ""), str(p.get("id"))))[0]
     oldest_stamp = str(oldest.get("published") or oldest.get("updated") or "")
-    event = {"edition": art.get("title", ""), "kept_url": oldest.get("url", ""),
-             "retired_url": my_url, "mine": mine_stamp, "theirs": oldest_stamp}
-    if mine_stamp and oldest_stamp and mine_stamp > oldest_stamp:
+    event = {"edition": art.get("title", ""), "kept_url": oldest.get("url", ""), "this_copy": my_url,
+             "mine": mine_stamp, "theirs": oldest_stamp, "similarity": round(similarity, 4)}
+    if similarity >= 0.985 and mine_stamp and oldest_stamp and mine_stamp > oldest_stamp:
         blogger_call(f"/posts/{my_id}/revert", token, "POST")
         event["action"] = "this run's duplicate copy was reverted to a draft"
-        print(f"    !! same edition was published twice in one minute; keeping {oldest.get('url')} "
+        print(f"    !! the same edition was published twice in one minute; keeping {oldest.get('url')} "
               f"and reverting this run's copy to a draft")
         return oldest.get("url", my_url), event
-    # Ours is the elder copy: the other run's reconciliation reverts it. If that run died
-    # mid-flight the corpus audit retires the newer copy on its own schedule.
-    event["action"] = "left as the earlier copy; the newer one is retired by its own run or the audit"
-    print(f"    !! a second live copy of this edition exists at {oldest.get('url')}; this run published it first")
+    event["action"] = ("the pair carries different prose, so both were left live and the owner was told"
+                       if similarity < 0.985 else "this run published first; the audit resolves the newer copy")
+    print(f"    !! a second live copy of this slot exists at {oldest.get('url')} "
+          f"(prose similarity {similarity:.0%}); nothing was unpublished by this run")
     return my_url, event
 
 

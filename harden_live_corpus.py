@@ -33,6 +33,8 @@ TWIN_ACTION='duplicate_twin_retirement'
 RECENT_TWIN_HOURS=float(os.environ.get('CORPUS_TWIN_WINDOW_HOURS','48'))
 TWIN_LIMIT=int(os.environ.get('CORPUS_TWIN_LIMIT','5'))
 TWIN_BACKUP_DIR=Path('duplicate_twin_backups')
+# The date inside a dated desk's title *is* the slot: one address per desk per day.
+EDITION_DATE_RE=re.compile(r'\d{1,2} (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{4}',re.I)
 _CONTROL=__import__('site_change_control')
 APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true' and (not _CONTROL.is_frozen() or ((SCOPE=='rights' and _CONTROL.allowed(ACTION)) or (SCOPE=='duplicates' and _CONTROL.allowed(TWIN_ACTION))))
 # 'duplicates' is the only twin-side release: it retires one copy to a draft. `full` is NOT unlocked
@@ -85,15 +87,20 @@ def twin_groups(rows,h):
   for value,items in bucket.items():
    if len(items)<2:continue
    if kind=='title' and len(re.sub(r'[^a-z0-9]','',str(value)))<24:continue
-   matched={}
+   pairs=[]
    for i,a in enumerate(items):
     for b in items[i+1:]:
-     # Same title *and* the same prose. A matching title alone is how a country
-     # desk names itself every day, and grading that as a duplicate would put
-     # yesterday's edition in the way of today's.
-     if normalized_title(a.get('title','') or '')==normalized_title(b.get('title','') or '') and language_similarity(a.get('content',''),b.get('content',''))>=.985:
-      matched[a['id']]=a;matched[b['id']]=b
-   if len(matched)<2:continue
+     ratio=language_similarity(a.get('content',''),b.get('content',''))
+     dated=bool(EDITION_DATE_RE.search(str(value)))
+     # A pair is a *twin* when the prose is the same document twice; that is safe to retire, because
+     # the copy that goes is a copy and nothing else. A pair with the same dated headline and
+     # different prose is a *slot collision*: one slot filled twice with two different articles,
+     # which is measured and reported, and never resolved by a cron.
+     if ratio>=.985 or (kind=='title' and dated):pairs.append((ratio,a,b))
+   if not pairs:continue
+   matched={}
+   for ratio,a,b in pairs:matched[a['id']]=a;matched[b['id']]=b
+   similarity=round(max(r for r,_,_ in pairs),4)
    times=[t for t in (published_at(p) for p in matched.values()) if t]
    age=round((dt.datetime.now(dt.timezone.utc)-max(times)).total_seconds()/3600,1) if times else None
    ordered=sorted(matched.values(),key=lambda q:(str(q.get('published') or ''),str(q['id'])))
@@ -102,8 +109,9 @@ def twin_groups(rows,h):
     cid=canonical_id(value,h)
     if cid:keep=next((q for q in ordered if str(q['id'])==cid),keep)
    groups.append({'kind':kind,'key':value,'keep_id':keep['id'],'keep_url':keep.get('url',''),
-    'remove_ids':sorted(x for x in matched if x!=keep['id']),'similarity_floor':.985,
-    'newest_age_hours':age,'recent':age is not None and age<=RECENT_TWIN_HOURS})
+    'remove_ids':sorted(x for x in matched if x!=keep['id']),'similarity':similarity,'similarity_floor':.985,
+    'newest_age_hours':age,'recent':age is not None and age<=RECENT_TWIN_HOURS,
+    'twin':similarity>=.985,'slotCollision':kind=='title' and similarity<.985})
  return groups
 def exact_duplicate_groups(rows,h):
  return [g for g in twin_groups(rows,h) if g['kind']=='url']
@@ -210,7 +218,8 @@ def rights_entry(post,content):
 def main():
  h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);groups=twin_groups(rows,h)
  duplicates=[g for g in groups if g['kind']=='url'];title_twins=[g for g in groups if g['kind']=='title']
- recent_twins=[g for g in title_twins if g['recent']]
+ recent_twins=[g for g in title_twins if g['recent'] and g['twin']]
+ slot_collisions=[g for g in title_twins if g['recent'] and g['slotCollision']]
  deleted=[];updated=[];quarantined=[];unsafe=[];rights=[];news_sentences_removed=0;remaining=[];captions_restored=0;twins_retired=[];twins_pending=[]
  if APPLY and SCOPE=='full':
   # Whole-site deletion stays exactly as closed as the freeze left it: the duplicates
@@ -240,23 +249,26 @@ def main():
   if p['id'] in removed:continue
   # Audit the real stored copy, not a cleaned hypothetical copy.
   content=p.get('content','')
-  if APPLY:
-   if SCOPE!='rights':
-    content=clean_legacy_promises(content)
-    if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
+  if APPLY and SCOPE=='full':
+   # A scope is not a preference. `duplicates` clears one extra copy and nothing else: 23 October
+   # saw it rewrite 60 posts through the `!= 'rights'` test below, which is the whole-site
+   # remediation arriving sideways under a name that promised a revert.
+   content=clean_legacy_promises(content)
+   if 'News' in set(p.get('labels') or []):content,count=dedupe_news_context(content);news_sentences_removed+=count
    if len(updated)>=60:
     # The released scope is capped at sixty posts per run; a backlog waits for the next run rather than
     # spending the whole hour on one pass, and the audit below still measures every post in this one.
     rights.append(rights_entry(p,content))
     continue
+  if APPLY and SCOPE in ('rights','full'):
    content,repaired=ensure_figure_rights(content);captions_restored+=repaired
-   if automated(p) and SCOPE!='rights':content=upgrade_disclosure(content)
+  if APPLY and automated(p) and SCOPE=='full':content=upgrade_disclosure(content)
   audit_content=editorial_only(p,content);issues=[x for x in audit_text(p.get('title',''),audit_content,'historical',require_disclosure=False) if x!='insufficient sentence-level originality']
   bad_links=[]
   for href in re.findall(r'<a\b[^>]*href=["\']([^"\']+)',content,re.I):
    if re.match(r'\s*(?:javascript|vbscript|data):',html.unescape(href),re.I):bad_links.append(href)
   issues+=['unsafe active link scheme'] if bad_links else []
-  if APPLY and issues and SCOPE!='rights':
+  if APPLY and issues and SCOPE=='full':  # quarantining a post to a draft is whole-site work: no narrow scope reaches it
    # Keep the content recoverable as a Blogger draft. No unsafe or materially
    # repetitive legacy item remains publicly distributed merely to preserve count.
    call('POST','/posts/'+p['id']+'/revert',h);quarantined.append({'post_id':p['id'],'url':p.get('url'),'issues':sorted(set(issues))});continue
@@ -271,5 +283,8 @@ def main():
  rights_doc={'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows)-len(removed),'posts_with_figure_rights_gaps':len(rights_gaps),'gaps':rights_gaps,'ledger_hash':hashlib.sha256(json.dumps(rights,sort_keys=True).encode()).hexdigest()};RIGHTS.write_text(json.dumps(rights_doc,indent=2)+'\n')
  unresolved_duplicates=[] if (APPLY and SCOPE=='full') else duplicates;status='PASS' if not unresolved_duplicates and not remaining and not unsafe and not rights_gaps else ('REMEDIATED' if APPLY and not remaining and not unsafe and not rights_gaps else 'WARNING')
  report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_current_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups_found':duplicates,'unresolved_duplicate_groups':unresolved_duplicates,'deleted_duplicate_post_ids':deleted,'posts_updated':len(updated),'historical_news_sentences_deduplicated':news_sentences_removed,'quarantined_to_draft':quarantined,'remaining_live_policy_flags':remaining,'unsafe_active_links':unsafe,'image_rights_gap_posts':len(rights_gaps),'figure_captions_restored':captions_restored,'repair_scope':SCOPE,
-'title_twin_groups_open':len(title_twins),'recent_title_twins':len(recent_twins),'twins_retired':twins_retired,'twins_pending':twins_pending,'open_title_twins':[{'title':g['key'],'urls':[x.get('url','') for x in rows if normalized_title(x.get('title','') or '')==g['key']],'age_hours':g['newest_age_hours']} for g in title_twins if not g['recent']][:25],'site_writes':len(updated),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','figure_captions_restored','repair_scope','site_writes','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
+'title_twin_groups_open':len(title_twins),'recent_title_twins':len(recent_twins),
+'slot_collisions_open':len(slot_collisions),'slot_collisions':[{'title':g['key'],'similarity':g['similarity'],'kept_url':g['keep_url'],
+  'other_url':next((x.get('url','') for x in rows if x['id'] in g['remove_ids']),''),
+  'age_hours':g['newest_age_hours']} for g in (slot_collisions+[g for g in title_twins if not g['recent']])][:25],'twins_retired':twins_retired,'twins_pending':twins_pending,'open_title_twins':[{'title':g['key'],'urls':[x.get('url','') for x in rows if normalized_title(x.get('title','') or '')==g['key']],'age_hours':g['newest_age_hours']} for g in title_twins if not g['recent']][:25],'site_writes':len(updated),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','figure_captions_restored','repair_scope','site_writes','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
 if __name__=='__main__':main()

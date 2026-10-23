@@ -493,7 +493,7 @@ check('A master figure is never rendered or published with a blank credit',
       and 'def uncaptioned_photo_figures(content)' in _pf and 'uncaptioned_photo_figures(content)' in _pf)
 check('Blank live captions are repaired from the site\u2019s own rights registry in a released narrow scope only',
       'figure_credit_markup' in _hl and 'CORPUS_REPAIR_SCOPE' in _hl
-      and "SCOPE!='rights'" in _hl and 'corpus_figure_rights_repair' in _hl
+      and "SCOPE in ('rights','full')" in _hl and 'corpus_figure_rights_repair' in _hl
       and 'corpus_figure_rights_repair' in (ROOT/'SITE_CHANGE_POLICY.json').read_text(encoding='utf-8')
       and 'APPLY_CORPUS_REMEDIATION: ${{' in (ROOT/'.github/workflows/blogger_corpus_hardening.yml').read_text(encoding='utf-8'))
 # The trending slot lost on 23 October died on a figure the fallback re-added after it had been measured,
@@ -520,6 +520,15 @@ check('A fresh same-edition twin is found across addresses and retired, never er
       and "/revert" in _hl_twin and "SCOPE=='full'" in _hl_twin
       and 'duplicate_twin_retirement' in _pol_twin and 'recent_title_twins' in _hl_twin
       and 'title_twin_groups_open' in _hl_twin)
+# A scope that clears a duplicate may not also rewrite prose: 23 October's `duplicates` run wrote
+# 60 posts through a `!= 'rights'` test, which is whole-site remediation arriving under the wrong
+# name. Every content write now sits behind `full`, and a twin run can only revert.
+check('The twins scope cannot rewrite anything, only revert a copy',
+      "if APPLY and SCOPE=='full':" in _hl_twin and "if APPLY and SCOPE in ('rights','full'):" in _hl_twin
+      and "SCOPE!='rights'" not in _hl_twin)
+check('A slot published twice is measured even when its two articles differ',
+      "'slotCollision'" in _hl_twin and "slot_collisions_open" in _hl_twin and "EDITION_DATE_RE" in _hl_twin
+      and "similarity >= 0.985" in (ROOT/'news_pipeline.py').read_text(encoding='utf-8'))
 check('A double publication is resolved by the run that caused it, keeping the first copy',
       'def reconcile_same_edition_twins(' in _np_twin and 'def live_copies_of_this_edition(' in _np_twin
       and '/revert' in _np_twin and 'twin_resolved' in _np_twin

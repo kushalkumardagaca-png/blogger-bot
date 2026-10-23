@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT))
 import news_pipeline as pipeline  # noqa: E402
 
 TITLE = "Americas Finance News \u2014 22 October 2026"
+ART_HTML = "<article>markets</article>"
 CANON = "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23.html"
 TWIN = "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23_0361840868.html"
 
@@ -46,7 +47,7 @@ class FakeBlogger:
 
 
 def art():
-    return {"title": TITLE, "html": "<article>markets</article>", "slug": "americas-finance-news-2026-10-23"}
+    return {"title": TITLE, "html": ART_HTML, "slug": "americas-finance-news-2026-10-23"}
 
 
 class Reconciliation(unittest.TestCase):
@@ -60,14 +61,14 @@ class Reconciliation(unittest.TestCase):
         pipeline.blogger_call = self._call
 
     def test_a_second_copy_of_the_same_edition_is_found(self):
-        fake = FakeBlogger([{"id": "100", "title": TITLE, "url": CANON,
+        fake = FakeBlogger([{"id": "100", "title": TITLE, "url": CANON, "content": ART_HTML,
                              "published": "2026-10-22T23:15:02Z"}], "2026-10-22T23:15:40Z")
         pipeline.blogger_call = fake
         copies = pipeline.live_copies_of_this_edition(art(), "t", "900")
         self.assertEqual([c["id"] for c in copies], ["100"])
 
     def test_the_later_copy_is_the_one_this_run_gives_up(self):
-        fake = FakeBlogger([{"id": "100", "title": TITLE, "url": CANON,
+        fake = FakeBlogger([{"id": "100", "title": TITLE, "url": CANON, "content": ART_HTML,
                              "published": "2026-10-22T23:15:02Z"}], "2026-10-22T23:15:40Z")
         pipeline.blogger_call = fake
         url, event = pipeline.reconcile_same_edition_twins(art(), "t", "900", TWIN)
@@ -77,13 +78,27 @@ class Reconciliation(unittest.TestCase):
         self.assertNotIn("DELETE", [m for m, _ in fake.calls], "a twin is retired, never erased")
 
     def test_the_first_copy_keeps_what_it_published(self):
-        fake = FakeBlogger([{"id": "100", "title": TITLE, "url": CANON,
+        fake = FakeBlogger([{"id": "100", "title": TITLE, "url": CANON, "content": ART_HTML,
                              "published": "2026-10-22T23:19:02Z"}], "2026-10-22T23:15:40Z")
         pipeline.blogger_call = fake
         url, event = pipeline.reconcile_same_edition_twins(art(), "t", "900", TWIN)
         self.assertEqual(url, TWIN, "this run published first; the other run gives its copy up")
         self.assertNotIn("POST", [m for m, _ in fake.calls], "a run never reverts a post it did not create")
-        self.assertIn("earlier copy", event["action"])
+        self.assertIn("the audit resolves the newer copy", event["action"])
+        self.assertGreaterEqual(event["similarity"], 0.985, "these are one document twice, which the audit may settle")
+
+    def test_two_different_articles_in_one_slot_are_left_for_the_owner(self):
+        """The 23 October pair shares a headline and a date but only ~40% of its prose. Retiring
+        either copy would withdraw stories the blog has nowhere else, so the run reports and keeps."""
+        other = {"id": "100", "title": TITLE, "url": CANON, "published": "2026-10-22T23:15:02Z",
+                 "content": "<article>rates, the bond market and a completely different selection</article>"}
+        fake = FakeBlogger([other], "2026-10-22T23:15:40Z")
+        pipeline.blogger_call = fake
+        url, event = pipeline.reconcile_same_edition_twins(art(), "t", "900", TWIN)
+        self.assertEqual(url, TWIN, "this run's article stays published; a slot collision is not a copy")
+        self.assertNotIn("POST", [m for m, _ in fake.calls], "nothing is unpublished by a run on a near-match")
+        self.assertLess(event["similarity"], 0.985)
+        self.assertIn("owner was told", event["action"])
 
     def test_a_solitary_edition_changes_nothing(self):
         fake = FakeBlogger([], "2026-10-22T23:15:40Z")
