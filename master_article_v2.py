@@ -81,12 +81,44 @@ def validate(package):
     if not 10<=len(low)<=15: errors.append("low-view shelf requires 10–15 genuinely measured Posts")
     policy_issues=audit_text(title,core+' '+" ".join(summary),'master-package',False)
     errors.extend('content policy: '+x for x in policy_issues)
+    # A rule name alone cannot be acted on: on 23 October three slots were refused for hours while nobody
+    # could see which line tripped. So the offending text travels with the refusal, with long digit runs
+    # masked - a genuinely exposed number must never be copied into a public status file.
+    evidence = policy_evidence(title, core + ' ' + " ".join(summary), policy_issues)
+    if evidence:
+        errors.append('policy text that tripped the gate: ' + evidence)
     if 'repeated substantive sentence within the content' in policy_issues:
         normalized=[normalize_sentence(x) for x in sentences(core+' '+" ".join(summary))];seen=set()
         duplicate=next((x for x in normalized if len(x.split())>=12 and (x in seen or seen.add(x))), '')
         if duplicate:errors.append('duplicate diagnostic: '+duplicate[:180])
     if errors: raise ValueError("MASTER V2 REJECTED — "+"; ".join(errors))
     return {"core_words":count,"summary_words":summary_count}
+
+def policy_evidence(title, text, issues):
+    """Quote back the phrase a content rule caught - masked, short, and decided elsewhere.
+
+    Only the publisher's own pattern lists are consulted, so nothing here can let an article through; it
+    explains a decision the gate already made.
+    """
+    from content_policy_guard import DECEPTIVE_PATTERNS, FAKE_EXPERIENCE_PATTERNS, plain
+    body = plain(text)
+    wanted = {str(issue) for issue in issues}
+    patterns = list(DECEPTIVE_PATTERNS) + list(FAKE_EXPERIENCE_PATTERNS)
+    if any('payment-card' in issue for issue in wanted):
+        patterns = [r"\d[\d -]{11,22}\d"] + patterns
+    if any('ranking or fake-review' in issue for issue in wanted):
+        patterns = [r"\bbest\b.{0,45}\b(?:compan(?:y|ies)|bank|broker|insurer|card|loan|app|platform|fund)s?"] + patterns
+    for pattern in patterns:
+        match = re.search(pattern, body, re.I | re.S)
+        if not match:
+            continue
+        snippet = re.sub(r"\s+", " ", match.group(0)).strip()[:170]
+        snippet = re.sub(r"\d{5,}", lambda m: m.group(0)[:2] + "…" + m.group(0)[-2:], snippet)
+        if snippet:
+            return snippet
+    return ""
+
+
 
 def linked_text(text,sources,internals):
     refs={f"S{i+1}":x for i,x in enumerate(sources)}|{f"I{i+1}":x for i,x in enumerate(internals)}

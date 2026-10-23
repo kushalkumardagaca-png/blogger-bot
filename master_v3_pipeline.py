@@ -18,7 +18,7 @@ from publication_preflight import assert_publishable
 from publication_timing import MASTER_LIVE, wait_for_release
 from seo_meta import ensure_seo_meta
 from social_identity import ensure_social_identity
-from content_policy_guard import POLICY_VERSION
+from content_policy_guard import POLICY_VERSION, title_needs_ranking_methodology
 from editorial_integrity import assert_unique_plan,stamp
 from master_topic_discovery import used_topic_ids
 from master_taxonomy import EVERGREEN_CATEGORIES
@@ -51,6 +51,18 @@ def blocked_topics(plan):
     return {str(key) for key in (plan.get("blockedTopics") or {})}
 
 
+def publishable_candidates(rows):
+    """Drop topics whose headline shape the content gate can never accept from this pipeline.
+
+    A superlative product or institution ranking needs a stated selection method and a disclosure of any
+    commercial relationship; the automated writer has neither. Offering such a topic guarantees a refusal
+    and burns the slot's one chance at an article, so the search applies the same rule the compiler
+    applies. Nothing is relaxed: a human-edited ranking article with a method still passes.
+    """
+    return [row for row in rows if not title_needs_ranking_methodology(row.get("title"))]
+
+
+
 def replace_blocked_topic(plan, kind, slot, item):
     """Swap a blocked topic for another same-category topic and persist the plan."""
     excluded = used_topic_ids(read(ROOT / "MASTER_TOPIC_HISTORY.json", {"items": []}),
@@ -58,8 +70,8 @@ def replace_blocked_topic(plan, kind, slot, item):
     excluded |= {str(row.get("id")) for row in plan.get(kind, []) if row.get("id")}
     replacement = None
     pool = read(POOL, {}).get("topics", [])
-    same_category = [row for row in pool
-                     if row.get("category") == item.get("category") and str(row.get("id")) not in excluded]
+    same_category = publishable_candidates([row for row in pool
+                     if row.get("category") == item.get("category") and str(row.get("id")) not in excluded])
     if kind == "trending":
         same_category = [row for row in same_category if row.get("discovered_from_live_internet")]
         if same_category:
@@ -164,7 +176,7 @@ def trending_candidates(plan,item):
  """Use only live-internet reserves from the same approved category."""
  published_ids=used_topic_ids(read(ROOT/'MASTER_TOPIC_HISTORY.json',{'items':[]}),read(TRACKER,{}))
  used={x.get('id') for x in plan.get('trending',[])} | published_ids
- rows=[x for x in read(POOL,{}).get('topics',[]) if x.get('category')==item.get('category') and x.get('id') not in used and x.get('discovered_from_live_internet')]
+ rows=publishable_candidates([x for x in read(POOL,{}).get('topics',[]) if x.get('category')==item.get('category') and x.get('id') not in used and x.get('discovered_from_live_internet')])
  def evidence_rank(row):
   names=' '.join(str(x.get('name','')) for x in row.get('sources',[])).casefold()
   newsroom=4 if 'reuters' in names else 3 if 'bbc' in names else 2 if 'bloomberg' in names else 0
@@ -201,7 +213,14 @@ def reuse_completed_slot(plan,kind,slot,emit_social=False):
 # next candidate in the same category exists to replace. Anything else (a 503, an embargo, an edition
 # identity failure, a plan that is not READY) stays a loud red run: those are not a topic's fault.
 GATE_REFUSALS = ("source gate", "originality gate", "photo search exhausted", "no evidence-ready",
-                 "evidence section failed", "usable source passages")
+                 "evidence section failed", "usable source passages",
+                 # The strict compiler's own prefix. On 23 October three slots stayed empty for hours
+                 # because a refusal that named the *draft* - a superlative headline the pipeline cannot
+                 # evidence, a promise phrase, a bare sixteen-digit number the writer invented - was not
+                 # read as a gate refusing this topic. The run stopped at its first topic, blocked
+                 # nothing, and the next run measured the same refusal again. Recognising it changes the
+                 # topic; it never changes the rule the topic was refused under.
+                 "master v2 rejected", "unsupported financial ranking")
 
 
 def gate_refusal(exc) -> bool:
@@ -250,10 +269,21 @@ def prepare(kind,slot):
  if str(item.get('id')) in blocked_topics(plan):item=replace_blocked_topic(plan,kind,slot,item);plan=read(PLAN,{})
  if reuse_completed_slot(plan,kind,slot):return
  original=item;attempts=trending_candidates(plan,item) if kind=='trending' else [item];last=None;built=None
+ # 23 October: a headline that ranks a product or institution in superlative terms ("best banks for
+ # fixed deposits") is publishable only with a stated selection method and a disclosure of any
+ # commercial relationship, which this pipeline does not have. Such a topic is set aside before it costs
+ # a build, a photo search and a red run. The gate is untouched - an article that did state a method
+ # would still answer it - and the block is recorded so the next run starts where this one stopped.
+ if title_needs_ranking_methodology(item.get('title')):
+  block_topic(read(PLAN,{}) or plan,kind,slot,item,RuntimeError('content gate: this headline ranks a product or institution without a stated selection method'))
+  item=replace_blocked_topic(read(PLAN,{}),kind,slot,item);plan=read(PLAN,{}) or plan
+  original=item;attempts=[item] if kind!='trending' else trending_candidates(plan,item)
  for candidate in attempts:
   try:
    built=build_candidate(kind,slot,candidate);break
-  except RuntimeError as exc:
+  except (RuntimeError,ValueError) as exc:
+   # The strict compiler raises ValueError for a content refusal; catching only RuntimeError let it walk
+   # past the rotation that exists for exactly this case.
    last=exc
    if not gate_refusal(exc):raise
  if built is None:
@@ -272,17 +302,24 @@ def prepare(kind,slot):
   for spare in range(3):
    try:
     substitute=replace_blocked_topic(read(PLAN,{}),kind,slot,refused[-1])
-   except RuntimeError as exc:
+   except (RuntimeError,ValueError) as exc:
     last_error=exc;break
    if str(substitute.get('id')) in {str(r.get('id')) for r in refused}:
     # The block list is the reason a substitute is a different subject. If the search hands back a
     # topic this run already watched fail, the third attempt would be the first attempt again.
     last_error=RuntimeError(f"the topic search returned {substitute.get('id')!r} after it was already refused;"
                             " refusing to spend another attempt on it");break
+   if title_needs_ranking_methodology(substitute.get('title')):
+    # The same rule as the day's own choice: skip it, block it, and keep the rest of the attempt budget
+    # for a topic that can answer the gate instead of spending a build on a certain refusal.
+    refused.append(substitute)
+    block_topic(read(PLAN,{}) or plan,kind,slot,substitute,RuntimeError('content gate: this headline ranks a product or institution without a stated selection method'))
+    last_error=RuntimeError(f"topic {substitute.get('id')} ranks a product without a stated method; skipped before a build")
+    continue
    refused.append(substitute)
    try:
     built=build_candidate(kind,slot,substitute);item=substitute;break
-   except RuntimeError as exc:
+   except (RuntimeError,ValueError) as exc:
     last_error=exc
     if not gate_refusal(exc):raise
     block_topic(read(PLAN,{}),kind,slot,substitute,exc)

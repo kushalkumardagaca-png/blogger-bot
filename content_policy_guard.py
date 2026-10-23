@@ -93,6 +93,20 @@ def _luhn_valid(value:str)->bool:
   total+=number
  return total%10==0
 
+RANKING_TITLE=re.compile(r"\bbest\b.{0,45}\b(?:compan(?:y|ies)|bank|broker|insurer|insurance|card|loan|app|platform|fund)s?\b",re.I)
+
+
+def title_needs_ranking_methodology(title:str)->bool:
+ """True for a headline that ranks a product or institution in superlative terms.
+
+ The publisher's rule is that such a claim must carry a stated selection method and a disclosure of any
+ commercial relationship. The test is exposed as a function so the topic search applies the same rule the
+ compiler does, instead of building an article that is certain to be refused.
+ """
+ return bool(RANKING_TITLE.search(str(title or "")))
+
+
+
 def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=False)->list[str]:
  text=plain(content);issues=[]
  for pattern in DECEPTIVE_PATTERNS:
@@ -119,7 +133,7 @@ def audit_text(title:str,content:str,channel:str="blog",require_disclosure:bool=
  # Rankings and testimonials are unusually risky in finance. A superlative
  # product/company title must include a visible methodology and commercial-
  # relationship statement; otherwise it can resemble a fake review.
- if re.search(r"\bbest\b.{0,45}\b(?:compan(?:y|ies)|bank|broker|insurer|insurance|card|loan|app|platform|fund)s?\b",title or '',re.I):
+ if title_needs_ranking_methodology(title):
   if not re.search(r"\b(?:selection|comparison|ranking) methodology\b",text,re.I) or not re.search(r"\b(?:no paid placement|not a paid ranking|commercial relationship|affiliate compensation)\b",text,re.I):issues.append("unsupported financial ranking or fake-review risk")
  # Encoded Google News IDs can coincidentally contain "affid". Only actual
  # parsed affiliate query parameters establish this mechanical signal.

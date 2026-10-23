@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-23",
+  "status": "READY",
+  "evergreen": [
+    {
+      "id": "next",
+      "title": "Another explainer",
+      "category": "Banking"
+    }
+  ],
+  "trending": [
+    {
+      "id": "rank",
+      "title": "Best banks for fixed deposits in 2026",
+      "category": "Banking"
+    }
+  ],
+  "blockedTopics": {
+    "bad": {
+      "kind": "evergreen",
+      "slot": 0
+    }
+  }
+}

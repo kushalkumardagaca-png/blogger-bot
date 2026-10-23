@@ -528,6 +528,19 @@ check('A hash inside prose is not counted as hashtagging, and the four-tag ceili
       and '>4:issues.append("excessive hashtagging")' in _cpg)
 check('A social refusal from our own policy gate is not blamed on the owner\'s connection',
       'POLICY GATE' in _sch and 'needs no re-authorisation' in _sch)
+# 23 October, evening: three slots were emptied by a refusal nobody rotated away from. The compiler's own
+# prefix must be recognised as a gate refusing *this topic*, and the topic search must apply the same
+# headline rule the compiler does instead of offering a question it must answer no to.
+_v3=(ROOT/'master_v3_pipeline.py').read_text(encoding='utf-8')
+check('A strict-compiler refusal rotates the slot instead of ending the run',
+      '"master v2 rejected"' in _v3 and 'except (RuntimeError,ValueError) as exc:' in _v3
+      and 'def gate_refusal' in _v3)
+check('A headline that ranks a product is not offered to a slot it cannot pass',
+      'def publishable_candidates' in _v3 and 'title_needs_ranking_methodology' in _v3
+      and 'def title_needs_ranking_methodology' in (ROOT/'content_policy_guard.py').read_text(encoding='utf-8'))
+check('A content refusal says which words tripped it, with long numbers masked',
+      'def policy_evidence' in (ROOT/'master_article_v2.py').read_text(encoding='utf-8')
+      and "re.sub(r\"\\d{5,}\"" in (ROOT/'master_article_v2.py').read_text(encoding='utf-8'))
 check('A News recovery request is honoured only for the editions still missing',
       (ROOT/'news_recovery_request.py').exists()
       and 'already live' in (ROOT/'news_recovery_request.py').read_text(encoding='utf-8')
