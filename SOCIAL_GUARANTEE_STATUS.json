@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-23T17:46:01.486087+05:30",
+ "generatedAt": "2026-10-23T18:15:13.969604+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
- "articles": 14,
- "expectedPosts": 28,
- "articlesWithBothPosts": 12,
- "postsMissing": 3,
- "dispatched": 3,
+ "articles": 15,
+ "expectedPosts": 30,
+ "articlesWithBothPosts": 14,
+ "postsMissing": 1,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-china",
@@ -106,18 +106,14 @@
    "key": "news-companies",
    "title": "companies edition",
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-23.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 0,
-    "mastodon": 0
+    "mastodon": 1
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched",
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "news-russia",
@@ -196,13 +192,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-3",
+   "title": "Payment fintech funding doubles in H1",
+   "url": "https://dailyyield.blogspot.com/2026/10/payment-fintech-funding-doubles-in-h1.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T17:45:39.732812+05:30",
+ "liveVerificationSourceAt": "2026-10-23T18:15:03.966741+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 12,
+ "articlesWithExactlyTwoPosts": 14,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
