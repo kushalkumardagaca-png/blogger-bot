@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T05:30:38.761828+05:30",
+ "generatedAt": "2026-10-23T06:43:34.692208+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "toleranceMinutes": 30,
@@ -9,9 +9,9 @@
  "late": 0,
  "early": 0,
  "pending": 1,
- "overdue": 1,
- "upcoming": 19,
- "dispatched": 2,
+ "overdue": 2,
+ "upcoming": 18,
+ "dispatched": 3,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -20,8 +20,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 75,
-   "minutesLate": 75,
+   "minutesFromSlot": 148,
+   "minutesLate": 148,
    "action": "dispatched"
   },
   {
@@ -30,8 +30,9 @@
    "due": "2026-10-23T05:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "pending",
-   "minutesFromSlot": 15,
+   "state": "overdue",
+   "minutesFromSlot": 88,
+   "minutesLate": 88,
    "action": "dispatched"
   },
   {
@@ -40,8 +41,9 @@
    "due": "2026-10-23T06:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -45
+   "state": "pending",
+   "minutesFromSlot": 28,
+   "action": "dispatched"
   },
   {
    "key": "news-india",
@@ -50,7 +52,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -105
+   "minutesFromSlot": -32
   },
   {
    "key": "master-evergreen-0",
@@ -59,7 +61,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -165
+   "minutesFromSlot": -92
   },
   {
    "key": "master-trending-1",
@@ -68,7 +70,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -225
+   "minutesFromSlot": -152
   },
   {
    "key": "news-russia",
@@ -77,7 +79,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -285
+   "minutesFromSlot": -212
   },
   {
    "key": "master-evergreen-1",
@@ -86,7 +88,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -345
+   "minutesFromSlot": -272
   },
   {
    "key": "news-markets",
@@ -95,7 +97,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -405
+   "minutesFromSlot": -332
   },
   {
    "key": "news-europe",
@@ -104,7 +106,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -435
+   "minutesFromSlot": -362
   },
   {
    "key": "news-economy",
@@ -113,7 +115,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -465
+   "minutesFromSlot": -392
   },
   {
    "key": "master-trending-2",
@@ -122,7 +124,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -525
+   "minutesFromSlot": -452
   },
   {
    "key": "master-evergreen-2",
@@ -131,7 +133,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -585
+   "minutesFromSlot": -512
   },
   {
    "key": "master-trending-3",
@@ -140,7 +142,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -645
+   "minutesFromSlot": -572
   },
   {
    "key": "news-americas",
@@ -149,7 +151,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -705
+   "minutesFromSlot": -632
   },
   {
    "key": "news-companies",
@@ -158,7 +160,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -735
+   "minutesFromSlot": -662
   },
   {
    "key": "news-global",
@@ -167,7 +169,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -765
+   "minutesFromSlot": -692
   },
   {
    "key": "news-banking",
@@ -176,7 +178,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -795
+   "minutesFromSlot": -722
   },
   {
    "key": "master-evergreen-3",
@@ -185,7 +187,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -855
+   "minutesFromSlot": -782
   },
   {
    "key": "master-trending-4",
@@ -194,7 +196,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -915
+   "minutesFromSlot": -842
   },
   {
    "key": "master-evergreen-4",
@@ -203,7 +205,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -1005
+   "minutesFromSlot": -932
   }
  ],
  "syntheticViews": 0,
