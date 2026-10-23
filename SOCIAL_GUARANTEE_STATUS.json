@@ -1,35 +1,22 @@
 {
- "generatedAt": "2026-10-23T15:03:40.300884+05:30",
+ "generatedAt": "2026-10-23T16:42:42.212026+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
- "articles": 9,
- "expectedPosts": 18,
- "articlesWithBothPosts": 9,
+ "articles": 12,
+ "expectedPosts": 24,
+ "articlesWithBothPosts": 12,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
+    "bluesky": 0,
+    "mastodon": 1
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -61,6 +48,32 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
@@ -74,13 +87,13 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
+    "facebook": 0,
+    "bluesky": 1,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -124,13 +137,39 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-2",
+   "title": "Tesla beats earnings projections after Musk",
+   "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-2",
+   "title": "Property Capital Gains Tax Changes Could",
+   "url": "https://dailyyield.blogspot.com/2026/10/property-capital-gains-tax-changes-could.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T15:03:28.957538+05:30",
+ "liveVerificationSourceAt": "2026-10-23T16:42:33.515050+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 9,
+ "articlesWithExactlyTwoPosts": 12,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"

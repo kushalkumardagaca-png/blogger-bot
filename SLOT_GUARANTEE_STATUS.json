@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-10-23T15:03:28.957538+05:30",
+ "generatedAt": "2026-10-23T16:42:33.515050+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "toleranceMinutes": 30,
  "slots": 21,
- "live": 9,
- "onTime": 1,
- "late": 8,
+ "live": 12,
+ "onTime": 2,
+ "late": 10,
  "early": 0,
  "pending": 1,
- "overdue": 3,
- "upcoming": 8,
- "dispatched": 4,
+ "overdue": 1,
+ "upcoming": 7,
+ "dispatched": 2,
  "publicationGate": "green",
  "gateRepair": null,
  "rows": [
@@ -22,7 +22,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 648,
+   "minutesFromSlot": 747,
    "publishedAt": "2026-10-22T20:01:57-07:00",
    "minutesLate": 256
   },
@@ -33,7 +33,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 588,
+   "minutesFromSlot": 687,
    "publishedAt": "2026-10-22T19:59:49-07:00",
    "minutesLate": 194
   },
@@ -44,7 +44,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
    "state": "late",
-   "minutesFromSlot": 528,
+   "minutesFromSlot": 627,
    "publishedAt": "2026-10-22T20:23:09-07:00",
    "minutesLate": 158
   },
@@ -55,7 +55,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 468,
+   "minutesFromSlot": 567,
    "publishedAt": "2026-10-22T20:00:03-07:00",
    "minutesLate": 75
   },
@@ -66,8 +66,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 408,
-   "minutesLate": 408,
+   "minutesFromSlot": 507,
+   "minutesLate": 507,
    "action": "dispatched"
   },
   {
@@ -77,7 +77,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
    "state": "late",
-   "minutesFromSlot": 348,
+   "minutesFromSlot": 447,
    "publishedAt": "2026-10-22T21:15:47-07:00",
    "minutesLate": 30
   },
@@ -88,7 +88,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 288,
+   "minutesFromSlot": 387,
    "publishedAt": "2026-10-22T22:46:13-07:00",
    "minutesLate": 61
   },
@@ -99,7 +99,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/need-money-in-emergency-take-loan.html",
    "state": "on time",
-   "minutesFromSlot": 228,
+   "minutesFromSlot": 327,
    "publishedAt": "2026-10-22T22:45:10-07:00"
   },
   {
@@ -109,7 +109,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 168,
+   "minutesFromSlot": 267,
    "publishedAt": "2026-10-23T01:31:15-07:00",
    "minutesLate": 106
   },
@@ -120,7 +120,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 138,
+   "minutesFromSlot": 237,
    "publishedAt": "2026-10-23T01:28:46-07:00",
    "minutesLate": 73
   },
@@ -128,33 +128,33 @@
    "key": "news-economy",
    "slot": "13:15",
    "due": "2026-10-23T13:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "overdue",
-   "minutesFromSlot": 108,
-   "minutesLate": 108,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
+   "state": "late",
+   "minutesFromSlot": 207,
+   "publishedAt": "2026-10-23T03:01:03-07:00",
+   "minutesLate": 136
   },
   {
    "key": "master-trending-2",
    "slot": "14:15",
    "due": "2026-10-23T14:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "overdue",
-   "minutesFromSlot": 48,
-   "minutesLate": 48,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
+   "state": "late",
+   "minutesFromSlot": 147,
+   "publishedAt": "2026-10-23T02:58:12-07:00",
+   "minutesLate": 73
   },
   {
    "key": "master-evergreen-2",
    "slot": "15:15",
    "due": "2026-10-23T15:15:00+05:30",
-   "live": false,
-   "url": "",
-   "state": "pending",
-   "minutesFromSlot": -12,
-   "action": "dispatched"
+   "live": true,
+   "url": "https://dailyyield.blogspot.com/2026/10/property-capital-gains-tax-changes-could.html",
+   "state": "on time",
+   "minutesFromSlot": 87,
+   "publishedAt": "2026-10-23T03:05:10-07:00"
   },
   {
    "key": "master-trending-3",
@@ -162,8 +162,9 @@
    "due": "2026-10-23T16:15:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -72
+   "state": "pending",
+   "minutesFromSlot": 27,
+   "action": "dispatched"
   },
   {
    "key": "news-americas",
@@ -172,7 +173,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -132
+   "minutesFromSlot": -33
   },
   {
    "key": "news-companies",
@@ -181,7 +182,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -162
+   "minutesFromSlot": -63
   },
   {
    "key": "news-global",
@@ -190,7 +191,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -192
+   "minutesFromSlot": -93
   },
   {
    "key": "news-banking",
@@ -199,7 +200,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -222
+   "minutesFromSlot": -123
   },
   {
    "key": "master-evergreen-3",
@@ -208,7 +209,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -282
+   "minutesFromSlot": -183
   },
   {
    "key": "master-trending-4",
@@ -217,7 +218,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -342
+   "minutesFromSlot": -243
   },
   {
    "key": "master-evergreen-4",
@@ -226,13 +227,13 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -432
+   "minutesFromSlot": -333
   }
  ],
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "extraLiveArticles": [],
- "actualArticlesLiveIncludingExtras": 9,
+ "actualArticlesLiveIncludingExtras": 12,
  "wrongDay": 0,
  "status": "ATTENTION"
 }
