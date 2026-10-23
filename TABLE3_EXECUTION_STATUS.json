@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T23:15:47.194806+05:30",
+  "generatedAt": "2026-10-24T01:59:59.906256+05:30",
   "status": "EXECUTED_WITH_RECORDED_LIMITS",
   "rows": [
     {
@@ -48,7 +48,7 @@
       "id": "B8",
       "task": "21 daily articles",
       "result": "Active; ongoing",
-      "proof": "Live status source 2026-10-22T20:53:37.103160+05:30: 18/21 live, 1 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
+      "proof": "Live status source 2026-10-24T00:08:40.936031+05:30: 0/21 live, 0 overdue. News timing now uses Blogger's publication time, not the source-gathering time. No slot is cancelled merely for being late. Completed Master slots are now locked by date/kind/category, so retries cannot swap in a second topic. Earlier extra live articles are retained and reported separately: 0."
     },
     {
       "id": "B9",
@@ -60,7 +60,7 @@
       "id": "B10",
       "task": "Search Console",
       "result": "Read existing results",
-      "proof": "Latest index evidence 2026-10-21T21:24:57.267837+00:00: 1 indexed results, 551 not indexed, 1 inspection errors. No ownership reset or manual bulk request."
+      "proof": "Latest index evidence 2026-10-22T21:26:09.000543+00:00: 1 indexed results, 556 not indexed, 3 inspection errors. No ownership reset or manual bulk request."
     },
     {
       "id": "B11",
@@ -127,9 +127,9 @@
   ],
   "sourceDates": {
     "siteAudit": "2026-10-21T09:31:57.822004+00:00",
-    "slots": "2026-10-22T20:53:37.103160+05:30",
-    "social": "2026-10-22T20:53:50.103960+05:30",
-    "google": "2026-10-21T21:24:57.267837+00:00"
+    "slots": "2026-10-24T00:08:40.936031+05:30",
+    "social": "2026-10-24T00:08:41.129393+05:30",
+    "google": "2026-10-22T21:26:09.000543+00:00"
   },
   "noGrandUpdateStarted": true,
   "analyticsCollectionInstalled": false
