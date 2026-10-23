@@ -1,38 +1,38 @@
 {
-  "generatedAt": "2026-10-23T08:28:54.657508+05:30",
+  "generatedAt": "2026-10-23T13:57:30.268031+05:30",
   "dateIST": "2026-10-23",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 0,
-  "confirmedByLivePost": 0,
+  "confirmedPublications": 7,
+  "confirmedByLivePost": 7,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "news-asia-pacific",
-    "news-china",
-    "news-india",
-    "master-trending-0"
+    "news-markets",
+    "news-europe",
+    "news-economy",
+    "master-evergreen-0"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-asia-pacific",
+      "key": "news-markets",
       "applied": true
     },
     {
       "type": "source_recovery",
-      "key": "news-china",
+      "key": "news-europe",
       "applied": true
     },
     {
       "type": "source_recovery",
-      "key": "news-india",
+      "key": "news-economy",
       "applied": true
     },
     {
       "type": "source_recovery",
-      "key": "master-trending-0",
+      "key": "master-evergreen-0",
       "attempt": 1,
       "applied": true
     }
