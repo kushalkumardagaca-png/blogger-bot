@@ -1,20 +1,20 @@
 # Bing URL Submission and Index-Status Automation
 
-- **Status:** PASS
-- **Checked:** 2026-10-23T15:59:26.135525+00:00
+- **Status:** ATTENTION
+- **Checked:** 2026-10-23T16:22:58.593129+00:00
 - **Mode:** authenticated control-plane, zero public Daily Yield requests
 - **Synthetic Daily Yield views:** 0
 
 ## Current run
 
-- Blogger inventory: **634**
-- Submission candidates: **223**
+- Blogger inventory: **633**
+- Submission candidates: **222**
 - URLs submitted: **0**
-- Quota deferred: **223**
+- Quota deferred: **222**
 - Performance-monitor records checked: **0**
 - Known/crawled by Bing: **0**
 - Pending monitoring: **411**
-- Removed inventory alerts: **19**
+- Removed inventory alerts: **20**
 
 ## Guardrails
 
@@ -23,6 +23,6 @@
 - Unchanged URLs are not resubmitted.
 - Submission does not guarantee crawling, indexing, ranking or traffic.
 
-## Provider warnings
+## Errors
 
-- sitemap feed not refreshed: /sitemap.xml: SafeApiError; /sitemap-pages.xml: SafeApiError
+- Bing quota API error 400: provider returned a JSON error
