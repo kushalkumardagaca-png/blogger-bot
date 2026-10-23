@@ -1,13 +1,13 @@
 {
- "at": "2026-10-23T13:09:52Z",
+ "at": "2026-10-23T14:21:14Z",
  "workflow": "master_evergreen_writer.yml",
  "kind": "evergreen",
  "slot": "0",
- "run": "39958671200",
+ "run": "39964124963",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "V3 source gate found 0 topic-specific sources; eight required; and the substitute topic was refused too - V3 source gate found 5 topic-specific sources; eight required",
+ "error": "3 substitute topic(s) tried for this slot and refused (Bulgaria's Postbank to add stock, cryp; Weinstein Stage Analysis: The Four-Pha; F.N.B (FNB) Stock May Be 39% Undervalu) - V3 source gate found 0 topic-specific sources; eight required; last: V3 photo search exhausted every independently broadened search: time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 32.5 minutes); the slot is retried by recovery | time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 32.5 minutes); the slot is retried by recovery | time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 32.5 minutes); the slot is retried by recovery | time budget of 30 minutes exhausted while searching Commons for an editorial photograph (elapsed 32.5 minutes); the slot is retried by recovery",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
