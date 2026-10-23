@@ -980,9 +980,9 @@
     "lastAttempt": "2026-10-22T23:05:58.502044+05:30"
   },
   "source:2026-10-23:news-asia-pacific": {
-    "revision": "93315e4e2e531ce6",
+    "revision": "41e2d51f6c320465",
     "attempts": 1,
-    "lastAttempt": "2026-10-23T05:19:28.363041+05:30"
+    "lastAttempt": "2026-10-23T08:28:54.657508+05:30"
   },
   "prewarm:2026-10-23:master-trending-0": {
     "revision": "93315e4e2e531ce6",
@@ -993,5 +993,20 @@
     "revision": "93315e4e2e531ce6",
     "attempts": 1,
     "lastAttempt": "2026-10-23T05:19:28.363041+05:30"
+  },
+  "source:2026-10-23:news-china": {
+    "revision": "41e2d51f6c320465",
+    "attempts": 1,
+    "lastAttempt": "2026-10-23T08:28:54.657508+05:30"
+  },
+  "source:2026-10-23:news-india": {
+    "revision": "41e2d51f6c320465",
+    "attempts": 1,
+    "lastAttempt": "2026-10-23T08:28:54.657508+05:30"
+  },
+  "source:2026-10-23:master-trending-0": {
+    "revision": "41e2d51f6c320465",
+    "attempts": 1,
+    "lastAttempt": "2026-10-23T08:28:54.657508+05:30"
   }
 }

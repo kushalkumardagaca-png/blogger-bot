@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T05:19:28.363041+05:30",
+  "generatedAt": "2026-10-23T08:28:54.657508+05:30",
   "dateIST": "2026-10-23",
   "status": "DEGRADED",
   "apply": true,
@@ -9,7 +9,10 @@
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "news-asia-pacific"
+    "news-asia-pacific",
+    "news-china",
+    "news-india",
+    "master-trending-0"
   ],
   "actions": [
     {
@@ -18,13 +21,19 @@
       "applied": true
     },
     {
-      "type": "preparation_recovery",
-      "key": "master-trending-0",
+      "type": "source_recovery",
+      "key": "news-china",
       "applied": true
     },
     {
-      "type": "preparation_recovery",
-      "key": "master-evergreen-0",
+      "type": "source_recovery",
+      "key": "news-india",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-trending-0",
+      "attempt": 1,
       "applied": true
     }
   ],
