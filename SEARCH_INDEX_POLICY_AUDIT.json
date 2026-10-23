@@ -1,10 +1,10 @@
 {
- "checkedAt": "2026-10-22T21:12:19+00:00",
+ "checkedAt": "2026-10-23T23:31:20+00:00",
  "corpus": {
-  "posts": 598,
+  "posts": 619,
   "pages": 14,
-  "urls": 612,
-  "words": 2454209
+  "urls": 633,
+  "words": 2587513
  },
  "sources": {
   "bing": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
@@ -25,7 +25,7 @@
    "guideline": "Bing §2 §3",
    "status": "PASS",
    "advisory": false,
-   "detail": "HTTP 200 with 598 <loc> entries",
+   "detail": "HTTP 200 with 619 <loc> entries",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -149,7 +149,7 @@
    "guideline": "Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 603 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
+   "detail": "0 of 624 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -159,7 +159,7 @@
    "guideline": "Bing §11 §15",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 611 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
+   "detail": "0 of 632 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -212,7 +212,7 @@
    "guideline": "Bing §12 (unique, relevant file names)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "1 of 17 committed image file name(s) repeats across the site (photo-1.jpg on 38 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
+   "detail": "1 of 47 committed image file name(s) repeats across the site (photo-1.jpg on 100 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
    "offenders": [
     "photo-1.jpg"
    ],
@@ -238,7 +238,7 @@
    "offenders": [
     "americas-finance-news-2026-10-12: https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12.html, https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12_01065225874.html",
     "asia-pacific-finance-news-2026-10-18: https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18.html, https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
-    "banking-fintech-personal-money-2026-10: https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01450325346.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_02014784419.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
+    "banking-fintech-personal-money-2026-10: https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01450325346.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_02014784419.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
     "canada-2026-10-01: https://dailyyield.blogspot.com/2026/10/canada-2026-10-01.html, https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
     "category-corporate-finance-and-industry: https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01348401010.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01446121781.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_0629962340.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01760479359.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02023327578.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02075404004.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0259378603.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0777916234.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0978730797.html",
     "category-economy-and-macro-policy-2026: https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01001893817.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_017346688.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01743986716.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01962741990.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0527246697.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01679841755.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01862474054.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01900447569.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0496477750.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0526097754.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0623923357.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0694295104.html",
@@ -333,7 +333,7 @@
    "guideline": "Bing §3 §19; Google structured data",
    "status": "PASS",
    "advisory": false,
-   "detail": "612/612 URLs publish a machine-readable date",
+   "detail": "633/633 URLs publish a machine-readable date",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
