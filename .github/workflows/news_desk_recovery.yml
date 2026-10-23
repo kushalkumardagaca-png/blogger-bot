@@ -1,4 +1,6 @@
 name: News Desk Recovery
+# 23 October: the decision is made in news_recovery_request.py against the day's board, so a
+# request that has already been honoured is a notice, not a fresh dispatch and not a red run.
 
 # Re-runs a single News desk on demand without leaving the repository tooling:
 # write the desk slug into .github/news-recovery-request (for example "banking")

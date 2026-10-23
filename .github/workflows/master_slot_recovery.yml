@@ -1,4 +1,6 @@
 name: Master Slot Recovery
+# 23 October: an empty or stale request must end this job as a notice. A recovery that has nothing
+# to do is not an error, and an error nobody reads becomes a muted alarm.
 
 # Recovers a Master article that today's schedule did not deliver.
 # Put "evergreen:3" or "trending:3" (kind:slot) into
