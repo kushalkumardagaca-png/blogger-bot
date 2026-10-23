@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-23T21:45:12.365432+05:30",
+ "generatedAt": "2026-10-23T21:53:06.188147+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "articles": 20,
  "expectedPosts": 40,
- "articlesWithBothPosts": 19,
- "postsMissing": 1,
- "dispatched": 1,
+ "articlesWithBothPosts": 20,
+ "postsMissing": 0,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-india",
@@ -142,17 +142,14 @@
    "key": "news-americas",
    "title": "americas edition",
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23.html",
-   "posts": 1,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 1,
-   "duplicatePosts": 0,
-   "actions": [
-    "dispatched"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   },
   {
    "key": "master-trending-0",
@@ -274,10 +271,10 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T21:45:04.384272+05:30",
+ "liveVerificationSourceAt": "2026-10-23T21:52:57.903020+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 19,
+ "articlesWithExactlyTwoPosts": 20,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "ATTENTION"
+ "status": "PASS"
 }
