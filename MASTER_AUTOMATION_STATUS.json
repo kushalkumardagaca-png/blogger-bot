@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "09da2f3abac8c1f5",
-  "kind": "trending",
-  "slot": 2,
-  "slot_key": "2026-10-23:trending:2",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-23",
-  "category": "Trend · Companies & Deals Trending",
-  "evergreen_category": "Economy Policy & Global Finance",
-  "title": "Tesla beats earnings projections after Musk",
-  "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
-  "published_at": "2026-10-23T02:58:12-07:00"
+  "kind": "evergreen",
+  "slot": 2,
+  "topic_id": "9d01a2e50b11c8ef",
+  "replaced_topic_id": "a4b1f3cf699324cb",
+  "title": "Property Capital Gains Tax Changes Could",
+  "package": "master_packages/dynamic/2026-10-23-evergreen-9d01a2e50b11c8ef.json",
+  "html": "scheduled_ready/2026-10-23-evergreen-2-property-capital-gains-tax-changes-could.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 30.1,
+  "remainingMinutes": 0.0
 }
