@@ -1,17 +1,95 @@
 {
- "generatedAt": "2026-10-23T20:45:17.515891+05:30",
+ "generatedAt": "2026-10-23T21:11:18.437241+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
- "articles": 17,
- "expectedPosts": 34,
- "articlesWithBothPosts": 16,
+ "articles": 18,
+ "expectedPosts": 36,
+ "articlesWithBothPosts": 17,
  "postsMissing": 1,
  "dispatched": 0,
  "rows": [
   {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-companies",
+   "title": "companies edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 0,
@@ -54,71 +132,6 @@
    ]
   },
   {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-companies",
-   "title": "companies edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-economy",
-   "title": "economy edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
    "key": "news-banking",
    "title": "banking edition",
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html",
@@ -139,19 +152,6 @@
    "byPlatform": {
     "facebook": 1,
     "bluesky": 0,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -234,13 +234,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-3",
+   "title": "Your Guide to Open Enrollment and Health",
+   "url": "https://dailyyield.blogspot.com/2026/10/your-guide-to-open-enrollment-and-health.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T20:45:04.827274+05:30",
+ "liveVerificationSourceAt": "2026-10-23T21:11:07.964378+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 16,
+ "articlesWithExactlyTwoPosts": 17,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
