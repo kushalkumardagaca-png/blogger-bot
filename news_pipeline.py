@@ -1992,6 +1992,53 @@ def edition_marker(title, html=""):
     return found[:3]
 
 
+def live_copies_of_this_edition(art, token, my_id):
+    """Every live post carrying this edition, newest excluded. Uses the same proof the
+    publish path uses - the editorial-integrity stamp, not the headline - because a
+    desk title is shared by every edition of that desk."""
+    query = urllib.parse.urlencode({"status": "live", "fetchBodies": "true", "maxResults": "50",
+                                    "fields": "items(id,title,url,content,published,updated,labels)"})
+    others = []
+    for post in blogger_call("/posts?" + query, token).get("items", []):
+        if str(post.get("id", "")) == str(my_id):
+            continue
+        if editorial_integrity.normalized_title(post.get("title", "") or "") != \
+           editorial_integrity.normalized_title(art.get("title", "") or ""):
+            continue
+        if stored_is_this_edition(post, art):
+            others.append(post)
+    return others
+
+
+def reconcile_same_edition_twins(art, token, my_id, my_url):
+    """Resolve a twin created by a second run publishing the same desk.
+
+    Whichever copy reached the blog first is kept; this run gives up its own copy and
+    reverts it to a draft, where it can be inspected and deleted by hand. A run never
+    touches a post it did not create, so the losing side of a race is always the side
+    that can prove what it did to its own article.
+    """
+    others = live_copies_of_this_edition(art, token, my_id)
+    if not others:
+        return my_url, None
+    mine_stamp = str((blogger_call(f"/posts/{my_id}", token).get("published") or ""))
+    oldest = sorted(others, key=lambda p: (str(p.get("published") or p.get("updated") or ""), str(p.get("id"))))[0]
+    oldest_stamp = str(oldest.get("published") or oldest.get("updated") or "")
+    event = {"edition": art.get("title", ""), "kept_url": oldest.get("url", ""),
+             "retired_url": my_url, "mine": mine_stamp, "theirs": oldest_stamp}
+    if mine_stamp and oldest_stamp and mine_stamp > oldest_stamp:
+        blogger_call(f"/posts/{my_id}/revert", token, "POST")
+        event["action"] = "this run's duplicate copy was reverted to a draft"
+        print(f"    !! same edition was published twice in one minute; keeping {oldest.get('url')} "
+              f"and reverting this run's copy to a draft")
+        return oldest.get("url", my_url), event
+    # Ours is the elder copy: the other run's reconciliation reverts it. If that run died
+    # mid-flight the corpus audit retires the newer copy on its own schedule.
+    event["action"] = "left as the earlier copy; the newer one is retired by its own run or the audit"
+    print(f"    !! a second live copy of this edition exists at {oldest.get('url')}; this run published it first")
+    return my_url, event
+
+
 def publish_post(art, token, dry=False):
     if dry:
         print(f"    [DRY] would publish: '{art['title'][:80]}' slug={art['slug']} labels={art['labels']}")
@@ -2098,7 +2145,18 @@ def publish_post(art, token, dry=False):
     stored=blogger_call(f"/posts/{draft['id']}?fetchBody=true",token)
     assert_saved_green(stored)
     assert_edition_identity(stored, art)
-    return upd.get("url", url)
+    published_url = upd.get("url", url)
+    # A twin is only visible once the other run has finished its own publish, so the
+    # check belongs here, at the end, and not in the pre-flight scan that missed it.
+    try:
+        published_url, twin_event = reconcile_same_edition_twins(art, token, draft['id'], published_url)
+        if twin_event:
+            art['twinEvent'] = twin_event
+    except Exception as exc:  # noqa: BLE001
+        # An edition that is live and correct is not unpublished because the
+        # reconciliation call failed. The audit finds the pair instead.
+        print(f"    !! twin reconciliation unavailable ({str(exc)[:140]}); the corpus audit will resolve it")
+    return published_url
 
 # ---------------------------------------------------------------- orchestration
 def load_tracker():
@@ -2266,7 +2324,11 @@ def run_desk(desk, tracker, dry=False, token=None, timed_release=False):
                                       "url": url or prev.get("url", ""),
                                       "hero_url": art["hero_url"],
                                       "hero_credit": art["hero_credit"],
-                                      "hero_source": art["hero_source"]}
+                                      "hero_source": art["hero_source"],
+                                      # Present only when this edition was published twice and one
+                                      # copy was reverted to a draft: the pair is then evidence in the
+                                      # committed state instead of a line in a log nobody re-reads.
+                                      **({"twin_resolved": art["twinEvent"]} if art.get("twinEvent") else {})}
             save_tracker(tracker)
             append_social_event(desk, url)
         print(f"  [{desk}] PUBLISHED: {url or '(dry-run)'}")

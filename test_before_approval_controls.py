@@ -55,10 +55,13 @@ class FreezeTests(unittest.TestCase):
     def test_a_release_names_one_action_one_edit_and_the_owner(self):
         # the difference between a granted correction and a hole in the freeze is the record beside it
         cfg=freeze.policy();released=cfg.get('releasedCorrections') or []
-        # Three releases exist now, and the list is still exact: a fourth name appearing here without the
-        # owner's sentence beside it fails this test, which is the whole point of keeping it pinned.
+        # Four releases exist now, and the list is still exact: a name appearing in the policy without the
+        # owner's sentence beside it fails this test, which is the whole point of keeping it pinned. The
+        # fourth is 23 October's twin retirement - clearing the extra copy of an article published twice -
+        # granted by the owner in the same breath as the report of it, and no wider.
         self.assertEqual([e.get('action') for e in released],
-                         ['search_index_policy_repair','desk_index_redesign','corpus_figure_rights_repair'])
+                         ['search_index_policy_repair','desk_index_redesign','corpus_figure_rights_repair',
+                          'duplicate_twin_retirement'])
         for index,entry in enumerate(released):
             for key in ('scope','ownerInstruction','releasedAt','limits'):
                 self.assertTrue(str(entry.get(key) or '').strip(),f"releasedCorrections[{index}].{key} is missing")

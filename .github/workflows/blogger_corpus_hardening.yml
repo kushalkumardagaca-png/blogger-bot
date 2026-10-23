@@ -1,6 +1,14 @@
 name: Blogger Corpus Policy Hardening
 
 on:
+  # A request file is how a repair is started from a push, which is the only lever this
+  # repository has from the desk (there is no API token here, only a deploy key). The
+  # contents pick the scope; the script still refuses anything the freeze has not released,
+  # so an unauthorised request is a no-op with a printed reason rather than a write.
+  push:
+    branches: [main]
+    paths:
+      - '.github/corpus-repair-request'
   workflow_dispatch:
     inputs:
       apply:
@@ -9,10 +17,10 @@ on:
         type: boolean
         default: false
       scope:
-        description: 'rights = photo credits only (owner-released); full = whole-site remediation (stays held by the freeze)'
+        description: 'rights = photo credits only (owner-released); duplicates = retire the newer copy of an edition published twice (owner-released 23 Oct); full = whole-site remediation (stays held by the freeze)'
         required: true
         type: choice
-        options: ['rights','full']
+        options: ['rights','duplicates','full']
         default: 'rights'
   schedule:
     # Daily whole-site verification finishes before the main IST publication day.
@@ -43,6 +51,7 @@ jobs:
     outputs:
       needed: ${{ steps.look.outputs.needed }}
       repair: ${{ steps.look.outputs.repair }}
+      scope: ${{ steps.look.outputs.scope }}
     steps:
       - uses: actions/checkout@v5
       - name: Is a repair owed today
@@ -71,14 +80,51 @@ jobs:
               # An unreadable ledger is not evidence that nothing is owed: the run proceeds and measures
               # the live corpus for itself, which is the safer answer when a status file is the trigger.
               gaps = 1
+          # A twin is measured from the corpus audit's own report. It does not hold the day
+          # behind the green gate - one duplicate article is a correction, not a danger - but
+          # it is repaired on the same clock, because a duplicate left up is a duplicate that
+          # the owner has to notice by eye.
+          twins = 0
+          try:
+              twins = int(json.loads(Path("BLOGGER_CORPUS_POLICY_STATUS.json").read_text())
+                          .get("recent_title_twins") or 0)
+          except Exception:
+              twins = 0
+          # A push of the request file means "look now, and repair if the release covers it".
+          requested_scope = ""
+          if event == "push":
+              try:
+                  requested_scope = Path(".github/corpus-repair-request").read_text().strip().casefold()
+              except OSError:
+                  requested_scope = ""
+              if requested_scope in ("", "audit"):
+                  requested_scope = "rights"
+              scope = requested_scope
+              requested = True
           needed = True
           if event == "schedule" and cron == HEAL:
-              needed = gaps > 0
-          repair = needed and (requested or (event == "schedule" and cron == HEAL))
-          print(f"ledger gaps: {gaps}; audit needed: {needed}; released rights repair runs: {repair}")
+              needed = gaps > 0 or twins > 0
+          auto = event == "schedule" and cron == HEAL
+          repair = needed and (requested or auto)
+          if event == "push":
+              # The push route carries its own scope, so a `duplicates` request is not silently
+              # narrowed to the rights repair by the `scope` input the dispatch form defaulted to.
+              repair = True
+          chosen = "duplicates" if (twins > 0 and scope in ("duplicates", "full")) or (auto and twins > 0) else scope
+          if auto and gaps > 0 and twins > 0:
+              # Both repairs are owed: credits first, because a caption gap is what held the
+              # whole day on 23 October, and a twin can wait thirty minutes for the next pass.
+              chosen = "rights"
+          elif auto and twins > 0:
+              chosen = "duplicates"
+          elif auto:
+              chosen = "rights"
+          print(f"ledger gaps: {gaps}; recent twins: {twins}; audit needed: {needed}; "
+                f"released repair: {repair}; scope: {chosen}")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
               out.write(f"needed={'true' if needed else 'false'}\n")
-              out.write(f"repair={'true' if repair and scope == 'rights' else 'false'}\n")
+              out.write(f"repair={'true' if repair and chosen in ('rights', 'duplicates') else 'false'}\n")
+              out.write(f"scope={chosen}\n")
           PY
 
   audit-and-remediate:
@@ -104,7 +150,7 @@ jobs:
           # What is honoured now is only the scope the owner released - site_change_control answers for
           # that inside harden_live_corpus.py, where every other write this script knows stays frozen.
           APPLY_CORPUS_REMEDIATION: ${{ needs.decide.outputs.repair == 'true' && 'true' || 'false' }}
-          CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && 'rights' || 'audit' }}
+          CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && needs.decide.outputs.scope || 'audit' }}
         run: python harden_live_corpus.py
       - name: Persist compact policy and image-rights evidence
         run: |
@@ -118,6 +164,11 @@ jobs:
             cp /tmp/corpus-status.json BLOGGER_CORPUS_POLICY_STATUS.json
             cp /tmp/rights-status.json BLOGGER_IMAGE_RIGHTS_LEDGER.json
             git add BLOGGER_CORPUS_POLICY_STATUS.json BLOGGER_IMAGE_RIGHTS_LEDGER.json
+          # A retirement is only honest with its before-image: the full post is kept in the
+          # repository, so a copy reverted to a draft can be restored without Blogger's help.
+          if compgen -G "duplicate_twin_backups/*.json" > /dev/null; then
+            git add duplicate_twin_backups
+          fi
             git commit -m "Record live Blogger corpus policy audit [skip ci]" || true
             git push origin HEAD:main && exit 0
             sleep $((attempt * 2))
@@ -130,4 +181,5 @@ jobs:
           path: |
             BLOGGER_CORPUS_POLICY_STATUS.json
             BLOGGER_IMAGE_RIGHTS_LEDGER.json
+            duplicate_twin_backups
           if-no-files-found: error

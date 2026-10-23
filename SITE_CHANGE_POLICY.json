@@ -119,6 +119,13 @@
         "publicDailyYieldRequests": 0
       },
       "evidence": "BLOGGER_IMAGE_RIGHTS_LEDGER.json (3 posts, 6 figures with an empty caption, checked 22 Oct 2026 19:26 UTC), the six live figures, and the repetition-repair commit that caused it"
+    },
+    {
+      "action": "duplicate_twin_retirement",
+      "releasedAt": "2026-10-23T11:56:47Z",
+      "scope": "For a live pair carrying the same edition twice - same title, same content fingerprint, two addresses - revert the NEWER copy to a Blogger draft and commit its full before-image to duplicate_twin_backups/. Applies only to a pair whose newest post is less than 48 hours old, at most five copies a day, never a DELETE, never the earlier copy, and never a post this run did not publish. Historical same-title pages, numbered or otherwise, are listed in open_title_twins and left untouched: bulk removal of real editorial content stays the owner's own act. No theme, no schedule, no title rewrite, no sentence change.",
+      "ownerInstruction": "Owner, 23 October 2026, on seeing two copies of one article side by side in the Blogger post list: \"I noticed a problem..I can see 2 duplicate of articles on same topic ..that to after each other\". Clearing the extra copy is the request; nothing broader was granted.",
+      "limits": "At most 5 copies retired per run and one pass per 30-minute clock; only a pair whose newest copy is under 48 hours old; only the newer copy of the pair; revert to draft, never DELETE; a full before-image committed to duplicate_twin_backups/ before the revert; the same run may only undo a post it created itself; historical same-title pages are listed in open_title_twins and left for the owner."
     }
   ]
 }

@@ -25,8 +25,19 @@ BASE=f"https://www.googleapis.com/blogger/v3/blogs/{os.environ['BLOGGER_BLOG_ID'
 # narrow mode is a measured fact and not a narrowed definition.
 SCOPE=(os.environ.get('CORPUS_REPAIR_SCOPE','full') or 'full').strip().casefold()
 ACTION='corpus_figure_rights_repair'
+TWIN_ACTION='duplicate_twin_retirement'
+# A double publication is a fresh, dated, same-title pair. Older same-title pairs are the
+# site's own history (a country edition refreshed the next day, a renamed legacy post) and
+# bulk editorial deletion is the owner's call alone, so the window is the whole difference
+# between fixing an accident and quietly emptying the blog.
+RECENT_TWIN_HOURS=float(os.environ.get('CORPUS_TWIN_WINDOW_HOURS','48'))
+TWIN_LIMIT=int(os.environ.get('CORPUS_TWIN_LIMIT','5'))
+TWIN_BACKUP_DIR=Path('duplicate_twin_backups')
 _CONTROL=__import__('site_change_control')
-APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true' and (not _CONTROL.is_frozen() or (SCOPE=='rights' and _CONTROL.allowed(ACTION)))
+APPLY=os.environ.get('APPLY_CORPUS_REMEDIATION','').casefold()=='true' and (not _CONTROL.is_frozen() or ((SCOPE=='rights' and _CONTROL.allowed(ACTION)) or (SCOPE=='duplicates' and _CONTROL.allowed(TWIN_ACTION))))
+# 'duplicates' is the only twin-side release: it retires one copy to a draft. `full` is NOT unlocked
+# by it - whole-site remediation stays held until the owner lifts the freeze, and a release for one
+# narrow write must not be read as a release for every write the file knows how to do.
 REPORT=Path('BLOGGER_CORPUS_POLICY_STATUS.json');RIGHTS=Path('BLOGGER_IMAGE_RIGHTS_LEDGER.json')
 UTILITY_SELECTORS=('.dy2-summary','.dy2-faq','.dy2-glossary','.dy2-links','.dy2-low','.dy2-follow','#dyPageFamily','.dy-policy-disclosure','.dy-related','.dy-context','script','style','noscript','template')
 
@@ -51,21 +62,51 @@ def automated(post):
 def canonical_id(url,h):
  try:return str(call('GET','/posts/bypath',h,params={'path':urlparse(url).path,'fields':'id'}).json().get('id',''))
  except Exception:return ''
-def exact_duplicate_groups(rows,h):
- by_url=defaultdict(list)
- for p in rows:by_url[(p.get('url') or '').rstrip('/')].append(p)
- groups=[]
- for url,items in by_url.items():
-  if not url or len(items)<2:continue
-  exact=[]
-  for i,p in enumerate(items):
-   for q in items[i+1:]:
-    if normalized_title(p.get('title',''))==normalized_title(q.get('title','')) and language_similarity(p.get('content',''),q.get('content',''))>=.985:exact.extend((p,q))
-  unique={p['id']:p for p in exact}
-  if len(unique)>1:
-   keep=canonical_id(url,h) or sorted(unique.values(),key=lambda x:x.get('published',''))[0]['id'];groups.append({'url':url,'keep_id':keep,'remove_ids':sorted(x for x in unique if x!=keep),'similarity_floor':.985})
- return groups
+def published_at(post):
+ try:return dt.datetime.fromisoformat((post.get('published') or post.get('updated') or '').replace('Z','+00:00'))
+ except Exception:return None
+def collision_suffixed(url):
+ # Blogger marks a permalink it had to make room for: `name_1234567890.html`.
+ return bool(re.search(r'_\d{6,}\.html?$',(url or '').rstrip('/')))
+def twin_groups(rows,h):
+ """Every pair of live posts carrying the same edition twice, by URL and by title.
 
+ `by_url` is the original check and its semantics are unchanged, because the green
+ operating gate reads it: it must not start holding the day for a new reason.
+ `by_title` is what a double publication actually looks like - same date in the title,
+ same prose, two addresses - and it is reported and repaired, never deleted en masse.
+ """
+ groups=[]
+ for kind,keyfn in (('url',lambda p:(p.get('url') or '').rstrip('/')),('title',lambda p:normalized_title(p.get('title','') or ''))):
+  bucket=defaultdict(list)
+  for post in rows:
+   value=keyfn(post)
+   if value:bucket[value].append(post)
+  for value,items in bucket.items():
+   if len(items)<2:continue
+   if kind=='title' and len(re.sub(r'[^a-z0-9]','',str(value)))<24:continue
+   matched={}
+   for i,a in enumerate(items):
+    for b in items[i+1:]:
+     # Same title *and* the same prose. A matching title alone is how a country
+     # desk names itself every day, and grading that as a duplicate would put
+     # yesterday's edition in the way of today's.
+     if normalized_title(a.get('title','') or '')==normalized_title(b.get('title','') or '') and language_similarity(a.get('content',''),b.get('content',''))>=.985:
+      matched[a['id']]=a;matched[b['id']]=b
+   if len(matched)<2:continue
+   times=[t for t in (published_at(p) for p in matched.values()) if t]
+   age=round((dt.datetime.now(dt.timezone.utc)-max(times)).total_seconds()/3600,1) if times else None
+   ordered=sorted(matched.values(),key=lambda q:(str(q.get('published') or ''),str(q['id'])))
+   keep=next((q for q in ordered if not collision_suffixed(q.get('url'))),ordered[0])
+   if kind=='url':
+    cid=canonical_id(value,h)
+    if cid:keep=next((q for q in ordered if str(q['id'])==cid),keep)
+   groups.append({'kind':kind,'key':value,'keep_id':keep['id'],'keep_url':keep.get('url',''),
+    'remove_ids':sorted(x for x in matched if x!=keep['id']),'similarity_floor':.985,
+    'newest_age_hours':age,'recent':age is not None and age<=RECENT_TWIN_HOURS})
+ return groups
+def exact_duplicate_groups(rows,h):
+ return [g for g in twin_groups(rows,h) if g['kind']=='url']
 def upgrade_disclosure(content):
  content=re.sub(r'<!--\s*DY_AUTOMATION_DISCLOSURE[^>]*-->\s*<aside\b[^>]*class=["\'][^"\']*dy-policy-disclosure[^"\']*["\'][^>]*>.*?</aside>','',content or '',flags=re.I|re.S)
  return content.rstrip()+'\n'+automation_disclosure('automated publication')
@@ -167,11 +208,34 @@ def rights_entry(post,content):
  return {'post_id':post['id'],'url':post.get('url'),'assets':assets,'complete':all(x['alt_present'] and x['rights_evidence'] for x in assets) if assets else True}
 
 def main():
- h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);duplicates=exact_duplicate_groups(rows,h);deleted=[];updated=[];quarantined=[];unsafe=[];rights=[];news_sentences_removed=0;remaining=[];captions_restored=0
- if APPLY and SCOPE!='rights':
+ h={'Authorization':'Bearer '+token(),'Content-Type':'application/json'};rows=posts(h);groups=twin_groups(rows,h)
+ duplicates=[g for g in groups if g['kind']=='url'];title_twins=[g for g in groups if g['kind']=='title']
+ recent_twins=[g for g in title_twins if g['recent']]
+ deleted=[];updated=[];quarantined=[];unsafe=[];rights=[];news_sentences_removed=0;remaining=[];captions_restored=0;twins_retired=[];twins_pending=[]
+ if APPLY and SCOPE=='full':
+  # Whole-site deletion stays exactly as closed as the freeze left it: the duplicates
+  # scope retires a copy to a draft, it does not erase a post.
   for group in duplicates:
    for ident in group['remove_ids']:call('DELETE','/posts/'+ident,h);deleted.append(ident)
- removed=set(deleted)
+ if APPLY and SCOPE in ('duplicates','full') and _CONTROL.allowed(TWIN_ACTION):
+  for group in recent_twins[:TWIN_LIMIT]:
+   for ident in group['remove_ids']:
+    try:
+     saved=call('GET','/posts/'+ident,h,params={'fetchBody':'true'}).json()
+     TWIN_BACKUP_DIR.mkdir(parents=True,exist_ok=True)
+     backup=TWIN_BACKUP_DIR/f"{dt.datetime.now(dt.timezone.utc):%Y-%m-%d}-{ident}.json"
+     backup.write_text(json.dumps(saved,indent=2)+'\n')
+     if normalized_title(saved.get('title','') or '')!=normalized_title(group['key'] or ''):
+      raise RuntimeError('post changed under us; nothing was reverted')
+     call('POST','/posts/'+ident+'/revert',h)
+     twins_retired.append({'post_id':ident,'url':saved.get('url',''),'kept_url':group['keep_url'],'backup':str(backup)})
+    except Exception as exc:
+     # A twin that cannot be retired safely is reported, never forced. Losing the
+     # repair is a visible duplicate; a wrong revert is a lost article.
+     twins_pending.append({'post_id':ident,'error':str(exc)[:180]})
+  for group in recent_twins[TWIN_LIMIT:]:
+   twins_pending.append({'title':group['key'],'pending':'over the per-run cap of '+str(TWIN_LIMIT)})
+ removed=set(deleted)|{x['post_id'] for x in twins_retired}
  for p in rows:
   if p['id'] in removed:continue
   # Audit the real stored copy, not a cleaned hypothetical copy.
@@ -205,6 +269,7 @@ def main():
   rights.append(rights_entry(p,content))
  rights_gaps=[x for x in rights if not x['complete']]
  rights_doc={'generated_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows)-len(removed),'posts_with_figure_rights_gaps':len(rights_gaps),'gaps':rights_gaps,'ledger_hash':hashlib.sha256(json.dumps(rights,sort_keys=True).encode()).hexdigest()};RIGHTS.write_text(json.dumps(rights_doc,indent=2)+'\n')
- unresolved_duplicates=[] if (APPLY and SCOPE!='rights') else duplicates;status='PASS' if not unresolved_duplicates and not remaining and not unsafe and not rights_gaps else ('REMEDIATED' if APPLY and not remaining and not unsafe and not rights_gaps else 'WARNING')
- report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_current_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups_found':duplicates,'unresolved_duplicate_groups':unresolved_duplicates,'deleted_duplicate_post_ids':deleted,'posts_updated':len(updated),'historical_news_sentences_deduplicated':news_sentences_removed,'quarantined_to_draft':quarantined,'remaining_live_policy_flags':remaining,'unsafe_active_links':unsafe,'image_rights_gap_posts':len(rights_gaps),'figure_captions_restored':captions_restored,'repair_scope':SCOPE,'site_writes':len(updated),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','figure_captions_restored','repair_scope','site_writes','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
+ unresolved_duplicates=[] if (APPLY and SCOPE=='full') else duplicates;status='PASS' if not unresolved_duplicates and not remaining and not unsafe and not rights_gaps else ('REMEDIATED' if APPLY and not remaining and not unsafe and not rights_gaps else 'WARNING')
+ report={'status':status,'apply':APPLY,'checked_at':dt.datetime.now(dt.timezone.utc).isoformat(),'posts_checked':len(rows),'automated_posts':sum(automated(x) for x in rows),'disclosures_current_before':sum(DISCLOSURE_MARKER in x.get('content','') for x in rows if automated(x)),'duplicate_groups_found':duplicates,'unresolved_duplicate_groups':unresolved_duplicates,'deleted_duplicate_post_ids':deleted,'posts_updated':len(updated),'historical_news_sentences_deduplicated':news_sentences_removed,'quarantined_to_draft':quarantined,'remaining_live_policy_flags':remaining,'unsafe_active_links':unsafe,'image_rights_gap_posts':len(rights_gaps),'figure_captions_restored':captions_restored,'repair_scope':SCOPE,
+'title_twin_groups_open':len(title_twins),'recent_title_twins':len(recent_twins),'twins_retired':twins_retired,'twins_pending':twins_pending,'open_title_twins':[{'title':g['key'],'urls':[x.get('url','') for x in rows if normalized_title(x.get('title','') or '')==g['key']],'age_hours':g['newest_age_hours']} for g in title_twins if not g['recent']][:25],'site_writes':len(updated),'zero_public_pageviews':True};REPORT.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k] for k in ('status','posts_checked','automated_posts','deleted_duplicate_post_ids','posts_updated','figure_captions_restored','repair_scope','site_writes','historical_news_sentences_deduplicated','quarantined_to_draft','remaining_live_policy_flags','image_rights_gap_posts')}))
 if __name__=='__main__':main()

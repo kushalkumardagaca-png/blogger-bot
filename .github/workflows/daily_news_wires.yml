@@ -24,7 +24,13 @@ permissions:
   contents: write
   actions: write
 concurrency:
-  group: daily-yield-news-${{ github.event.schedule || inputs.desks || github.run_id }}
+  # Keyed by the trigger, which is how two runs publishing the SAME desk ended up side by
+  # side on 23 October: the 04:45 IST Americas edition was written twice, one minute apart,
+  # because a scheduled run sits in a different group from a dispatched one and an empty
+  # `inputs.desks` fell through to `github.run_id` - a group unique to every run, which is
+  # not a lock at all. Every manual/recovery dispatch now queues behind the one before it;
+  # a scheduled desk keeps its own group so the eleven daily slots never wait on each other.
+  group: ${{ github.event_name == 'schedule' && format('daily-yield-news-{0}', github.event.schedule) || 'daily-yield-news-dispatch' }}
   cancel-in-progress: false
 jobs:
   publish:

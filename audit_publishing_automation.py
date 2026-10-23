@@ -54,7 +54,26 @@ check('Dynamic Master publication has both code gate and explicit live workflow 
       and "!='true'" in (ROOT/'master_dynamic_pipeline.py').read_text()
       and all("MASTER_PUBLICATION_ENABLED: 'true'" in (ROOT/'.github/workflows'/name).read_text() for name in new_master))
 check('Eleven news preflight runs',crons(nw)==news_expected,str(crons(nw)))
-check('News desks have independent non-cancelling precision runs','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-${{' in nw.read_text() and 'timeout-minutes: 180' in nw.read_text())
+check('News desks have independent non-cancelling precision runs','cancel-in-progress: false' in nw.read_text() and 'daily-yield-news-' in nw.read_text() and 'timeout-minutes: 180' in nw.read_text())
+# Two runs chose the same desk inside the same minute on 23 October and the edition was published twice;
+# the lock they each sat behind was keyed by `github.run_id`, which is unique to every run and so locks
+# nothing. Scheduled desks still run independently of one another; every manual or recovery dispatch now
+# queues behind the dispatch before it.
+_nw_text = nw.read_text(encoding='utf-8')
+_conc_block = _nw_text.split('concurrency:')[1].split('jobs:')[0] if 'concurrency:' in _nw_text else ''
+_group_line = next((line for line in _conc_block.splitlines() if line.strip().startswith('group:')), '')
+# The line that decides the group is what matters, not the prose beside it: a group name that
+# differs per run locks nothing, and a group name that is the same for every run would make the
+# eleven daily desks wait on each other. It has to be per scheduled desk AND shared by dispatches.
+check('A news-desk lock cannot be defeated by its own run id','github.run_id' not in _group_line,
+      'a concurrency group keyed by the run id is a decoration, not a lock')
+check('Scheduled news desks keep their own groups while manual runs share one',
+      "format('daily-yield-news-{0}', github.event.schedule)" in _group_line
+      and 'daily-yield-news-dispatch' in _group_line, _group_line.strip()[:120])
+check('Recovery routes hold the same lock',
+      all('cancel-in-progress: false' in (ROOT/'.github/workflows'/n).read_text(encoding='utf-8')
+          and 'concurrency:' in (ROOT/'.github/workflows'/n).read_text(encoding='utf-8')
+          for n in ('news_desk_recovery.yml','master_slot_recovery.yml')))
 
 bing_py=(ROOT/'bing_url_automation.py').read_text()
 bing_workflow=(ROOT/'.github/workflows/bing_url_automation.yml').read_text()
@@ -489,7 +508,22 @@ _bh=(ROOT/'.github/workflows/blogger_corpus_hardening.yml').read_text(encoding='
 check('The released figure-credit repair is also watched on a clock, so a gap cannot hold the day',
       "17,47 * * * *" in _bh and "posts_with_figure_rights_gaps" in _bh
       and "APPLY_CORPUS_REMEDIATION: ${{ needs.decide.outputs.repair" in _bh
-      and "CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && 'rights' || 'audit' }}" in _bh)
+      and "CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && needs.decide.outputs.scope || 'audit' }}" in _bh
+      and "recent_title_twins" in _bh and "['rights','duplicates','full']" in _bh)
+# ...and the twin itself: found by title across two addresses, repaired only inside the 48-hour window,
+# retired to a draft with a committed before-image, and never deleted by a clock nobody is watching.
+_hl_twin=(ROOT/'harden_live_corpus.py').read_text(encoding='utf-8')
+_np_twin=(ROOT/'news_pipeline.py').read_text(encoding='utf-8')
+_pol_twin=(ROOT/'SITE_CHANGE_POLICY.json').read_text(encoding='utf-8')
+check('A fresh same-edition twin is found across addresses and retired, never erased',
+      'def twin_groups(' in _hl_twin and 'RECENT_TWIN_HOURS' in _hl_twin and 'TWIN_BACKUP_DIR' in _hl_twin
+      and "/revert" in _hl_twin and "SCOPE=='full'" in _hl_twin
+      and 'duplicate_twin_retirement' in _pol_twin and 'recent_title_twins' in _hl_twin
+      and 'title_twin_groups_open' in _hl_twin)
+check('A double publication is resolved by the run that caused it, keeping the first copy',
+      'def reconcile_same_edition_twins(' in _np_twin and 'def live_copies_of_this_edition(' in _np_twin
+      and '/revert' in _np_twin and 'twin_resolved' in _np_twin
+      and 'twin reconciliation unavailable' in _np_twin)
 check('A day held by a missing photo credit is reopened by the guard that watches the day',
       'def gate_blocked_by_figure_credits(' in (ROOT/'slot_guard.py').read_text(encoding='utf-8')
       and 'blogger_corpus_hardening.yml' in (ROOT/'slot_guard.py').read_text(encoding='utf-8')

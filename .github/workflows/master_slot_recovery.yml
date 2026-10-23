@@ -18,7 +18,12 @@ on:
     # 90 minutes old, so the timer cannot start a second article for a slot that is already being written.
     - cron: '*/20 * * * *'
 
-permissions:
+# Two pushes carrying a recovery request could each dispatch the same desk, and the desk
+# then publishes twice. Queued, never cancelled: a recovery that is skipped is a missing
+# edition, and a recovery that is delayed is still an edition.
+concurrency:
+  group: master-slot-recovery
+  cancel-in-progress: false
   actions: write
   contents: read
 
