@@ -19,12 +19,12 @@
     },
     {
       "path": "/p/article.html",
-      "dataBlocks": 2,
+      "dataBlocks": 1,
       "linkIndexHrefs": 12,
-      "linkIndexWritten": true,
+      "linkIndexWritten": false,
       "changed": true,
-      "beforeSha256": "fc36c41726f4693a318ea177e13a5fcde04e34af40e5fa0cd47fe6bddad8d7d0",
-      "afterSha256": "fc0476e97b62690b20bcd776e5e30e97c2afb9cdf46f9e9214e8795b1f8e9875"
+      "beforeSha256": "fc0476e97b62690b20bcd776e5e30e97c2afb9cdf46f9e9214e8795b1f8e9875",
+      "afterSha256": "aa602a0d56b2495bd9b0e444c54bf1b5f9de129a22cb4d49cf9847f9ddd1c700"
     }
   ],
   "optional_changes": "held; no full hub rebuild or old-post edits"
