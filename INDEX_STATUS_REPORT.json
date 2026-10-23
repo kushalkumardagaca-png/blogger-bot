@@ -1,24 +1,24 @@
 {
- "checkedAt": "2026-10-22T21:26:09.000543+00:00",
+ "checkedAt": "2026-10-23T23:44:56.363306+00:00",
  "property": "sc-domain:dailyyield.blogspot.com",
  "status": "PARTIAL",
- "urls": 612,
+ "urls": 633,
  "indexed": 1,
  "notIndexed": 556,
- "inspectionErrors": 3,
- "unknown": 52,
+ "inspectionErrors": 0,
+ "unknown": 76,
  "byCoverageState": [
   [
    "Discovered - currently not indexed",
-   455
+   470
   ],
   [
    "URL is unknown to Google",
-   91
+   76
   ],
   [
    "unknown",
-   52
+   76
   ],
   [
    "Redirect error",
@@ -34,7 +34,7 @@
    "url": "https://dailyyield.blogspot.com/",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-22T03:06:32Z",
+   "lastCrawlTime": "2026-10-23T10:02:07Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -49,7 +49,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -58,7 +58,7 @@
    "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-09-25T16:57:09Z",
+   "lastCrawlTime": "2026-10-23T09:57:52Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -66,7 +66,7 @@
    "url": "https://dailyyield.blogspot.com/p/markets-today.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-09-25T16:59:14Z",
+   "lastCrawlTime": "2026-10-23T09:57:52Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -82,7 +82,7 @@
    "url": "https://dailyyield.blogspot.com/p/daily-news.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-20T11:02:42Z",
+   "lastCrawlTime": "2026-10-23T09:56:06Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -90,7 +90,7 @@
    "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-02T07:17:17Z",
+   "lastCrawlTime": "2026-10-23T10:00:01Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -98,7 +98,7 @@
    "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-02T07:17:17Z",
+   "lastCrawlTime": "2026-10-23T10:00:01Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -122,7 +122,7 @@
    "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-09-25T17:01:15Z",
+   "lastCrawlTime": "2026-10-23T09:56:06Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -130,7 +130,7 @@
    "url": "https://dailyyield.blogspot.com/p/article.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-02T07:15:16Z",
+   "lastCrawlTime": "2026-10-23T09:53:55Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -143,7 +143,7 @@
    "pageFetchState": "REDIRECT_ERROR"
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/understanding-total-portfolio-approach.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/declining-loan-amounts-push-new-mortgage.html",
    "verdict": "NEUTRAL",
    "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
@@ -151,9 +151,177 @@
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/sponsor-banks-baas-and-plugging-digital.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/ipsos-cost-of-living-monitor.html",
    "verdict": "NEUTRAL",
    "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/fnb-fnb-stock-be-39-undervalued.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/your-guide-to-open-enrollment-and-health.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/payment-fintech-funding-doubles-in-h1.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/property-capital-gains-tax-changes-could.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/need-money-in-emergency-take-loan.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/understanding-total-portfolio-approach.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/sponsor-banks-baas-and-plugging-digital.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -177,7 +345,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-22.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -185,7 +353,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/chinas-offshore-tax-crackdown-could.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -193,7 +361,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-22.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -201,7 +369,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-22.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -281,7 +449,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/chancellor-rejects-calls-to-raise.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -337,7 +505,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-21.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -353,7 +521,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-market-japans-nikkei-falls-2-as.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -369,7 +537,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/colorado-construction-leader-says-local.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -377,7 +545,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -425,7 +593,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -465,7 +633,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -489,7 +657,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -505,7 +673,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -513,7 +681,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -529,7 +697,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/payoneer-how-stablecoin-is-scaling-in.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -545,7 +713,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -577,7 +745,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -593,7 +761,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/could-indias-stock-market-tax-cuts.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -665,7 +833,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-19.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -713,7 +881,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -737,7 +905,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -801,7 +969,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/chinas-central-bank-to-boost-support.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -825,7 +993,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-18.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -833,7 +1001,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/lead-s-korea-us-hold-first-22-meeting-o.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -841,7 +1009,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -889,7 +1057,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/small-business-cash-flow-tips-for-peak.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -921,7 +1089,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-18.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -945,7 +1113,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -961,7 +1129,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-17.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -993,7 +1161,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-17.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1065,7 +1233,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1129,7 +1297,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/social-security-to-adjust-cost-of.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1153,7 +1321,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-16.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1161,7 +1329,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-16.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1225,7 +1393,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-16.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1233,7 +1401,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spanish-stock-market-pays-out-35716.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1265,7 +1433,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/eu-eyes-160-billion-cut-from-initial.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1353,7 +1521,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/how-to-measure-side-hustle-profit-after.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1377,7 +1545,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-15.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1433,7 +1601,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/cost-of-living-struggles-inspire.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1457,7 +1625,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1481,7 +1649,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1497,7 +1665,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1513,7 +1681,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1537,7 +1705,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1553,7 +1721,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1585,7 +1753,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1593,7 +1761,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1601,13 +1769,21 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-13.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-12.html",
    "verdict": "NEUTRAL",
    "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
@@ -1681,7 +1857,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-12.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1697,7 +1873,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-12.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1713,7 +1889,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/high-yield-single-day-gigs.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1753,7 +1929,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/balancing-budgets-and-cost-pressures.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1785,7 +1961,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1809,7 +1985,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1841,7 +2017,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1849,7 +2025,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/fuel-surcharges-hit-lowcost-airlines.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1857,7 +2033,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1865,7 +2041,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1873,7 +2049,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1881,7 +2057,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1969,7 +2145,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -1993,7 +2169,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-10.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2049,7 +2225,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02023327578.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2065,7 +2241,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2089,7 +2265,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2097,7 +2273,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2153,7 +2329,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2161,7 +2337,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-08.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2193,7 +2369,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-08.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2225,7 +2401,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-08.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2329,7 +2505,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2337,7 +2513,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2441,7 +2617,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2465,7 +2641,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2537,7 +2713,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-06.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2601,7 +2777,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-06.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2657,7 +2833,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2745,7 +2921,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2777,7 +2953,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2801,7 +2977,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2809,7 +2985,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2865,7 +3041,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2881,7 +3057,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/put-money-on-calendar-not-your-mood.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2897,7 +3073,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2921,7 +3097,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2937,7 +3113,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2953,7 +3129,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -2993,7 +3169,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3025,7 +3201,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3049,7 +3225,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/the-rule-of-5-before-you-buy.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3057,7 +3233,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3065,7 +3241,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3081,7 +3257,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3129,7 +3305,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3145,7 +3321,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3153,7 +3329,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/buy-term-skip-whole-life-pitch.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3313,7 +3489,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3345,7 +3521,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-02.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3353,7 +3529,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/s-500-vs-global-pick-one.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3361,7 +3537,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-02.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3401,7 +3577,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3409,7 +3585,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/your-secret-money-script-explained.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3425,7 +3601,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3457,7 +3633,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3497,7 +3673,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3529,7 +3705,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3561,7 +3737,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3569,7 +3745,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3585,7 +3761,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3601,7 +3777,15 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-30.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3609,7 +3793,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3625,7 +3809,15 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-30.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3673,7 +3865,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3681,7 +3873,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3705,7 +3897,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3729,7 +3921,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3769,7 +3961,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3777,7 +3969,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3793,7 +3985,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3817,7 +4009,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3833,7 +4025,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3905,7 +4097,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3937,7 +4129,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3953,7 +4145,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -3961,7 +4153,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4017,7 +4209,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4025,7 +4217,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4057,7 +4249,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4097,7 +4289,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4137,7 +4329,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4153,7 +4345,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4177,7 +4369,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4249,7 +4441,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-27.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4273,7 +4465,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-27.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4285,232 +4477,15 @@
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   }
  ],
- "errors": [
-  {
-   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-12.html",
-   "verdict": "ERROR",
-   "coverageState": "",
-   "errorType": "TimeoutError",
-   "httpStatus": null,
-   "error": "inspection could not be completed"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-30.html",
-   "verdict": "ERROR",
-   "coverageState": "",
-   "errorType": "TimeoutError",
-   "httpStatus": null,
-   "error": "inspection could not be completed"
-  },
-  {
-   "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-30.html",
-   "verdict": "ERROR",
-   "coverageState": "",
-   "errorType": "HTTPError",
-   "httpStatus": 500,
-   "error": "HTTP 500"
-  }
- ],
+ "errors": [],
  "rows": [
   {
    "url": "https://dailyyield.blogspot.com/",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-22T03:06:32Z",
+   "lastCrawlTime": "2026-10-23T10:02:07Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4525,7 +4500,7 @@
   {
    "url": "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4534,7 +4509,7 @@
    "url": "https://dailyyield.blogspot.com/p/global-snapshot.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-09-25T16:57:09Z",
+   "lastCrawlTime": "2026-10-23T09:57:52Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4542,7 +4517,7 @@
    "url": "https://dailyyield.blogspot.com/p/markets-today.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-09-25T16:59:14Z",
+   "lastCrawlTime": "2026-10-23T09:57:52Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4558,7 +4533,7 @@
    "url": "https://dailyyield.blogspot.com/p/daily-news.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-20T11:02:42Z",
+   "lastCrawlTime": "2026-10-23T09:56:06Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4566,7 +4541,7 @@
    "url": "https://dailyyield.blogspot.com/p/money-atlas_01486068069.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-02T07:17:17Z",
+   "lastCrawlTime": "2026-10-23T10:00:01Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4574,7 +4549,7 @@
    "url": "https://dailyyield.blogspot.com/p/for-corporate_01804417406.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-02T07:17:17Z",
+   "lastCrawlTime": "2026-10-23T10:00:01Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4598,7 +4573,7 @@
    "url": "https://dailyyield.blogspot.com/p/calculator_0908148622.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-09-25T17:01:15Z",
+   "lastCrawlTime": "2026-10-23T09:56:06Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4606,7 +4581,7 @@
    "url": "https://dailyyield.blogspot.com/p/article.html",
    "verdict": "NEUTRAL",
    "coverageState": "Redirect error",
-   "lastCrawlTime": "2026-10-02T07:15:16Z",
+   "lastCrawlTime": "2026-10-23T09:53:55Z",
    "googleCanonical": "",
    "pageFetchState": "REDIRECT_ERROR"
   },
@@ -4619,7 +4594,7 @@
    "pageFetchState": "REDIRECT_ERROR"
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/understanding-total-portfolio-approach.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/declining-loan-amounts-push-new-mortgage.html",
    "verdict": "NEUTRAL",
    "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
@@ -4627,9 +4602,177 @@
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
-   "url": "https://dailyyield.blogspot.com/2026/10/sponsor-banks-baas-and-plugging-digital.html",
+   "url": "https://dailyyield.blogspot.com/2026/10/ipsos-cost-of-living-monitor.html",
    "verdict": "NEUTRAL",
    "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/fnb-fnb-stock-be-39-undervalued.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/your-guide-to-open-enrollment-and-health.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/payment-fintech-funding-doubles-in-h1.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/property-capital-gains-tax-changes-could.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/need-money-in-emergency-take-loan.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/understanding-total-portfolio-approach.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+  },
+  {
+   "url": "https://dailyyield.blogspot.com/2026/10/sponsor-banks-baas-and-plugging-digital.html",
+   "verdict": "NEUTRAL",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4653,7 +4796,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-22.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4661,7 +4804,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/chinas-offshore-tax-crackdown-could.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4669,7 +4812,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-22.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4677,7 +4820,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-22.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4757,7 +4900,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/chancellor-rejects-calls-to-raise.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4813,7 +4956,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-21.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4829,7 +4972,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-market-japans-nikkei-falls-2-as.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4845,7 +4988,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/colorado-construction-leader-says-local.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4853,7 +4996,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/bajaj-housing-finance-q2-results-pat.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4901,7 +5044,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-21.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4941,7 +5084,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-21.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4965,7 +5108,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4981,7 +5124,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -4989,7 +5132,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5005,7 +5148,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/payoneer-how-stablecoin-is-scaling-in.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5021,7 +5164,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5053,7 +5196,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-20.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5069,7 +5212,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/could-indias-stock-market-tax-cuts.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5141,7 +5284,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-19.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5189,7 +5332,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-19.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5213,7 +5356,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-19.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5277,7 +5420,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/chinas-central-bank-to-boost-support.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5301,7 +5444,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-18.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5309,7 +5452,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/lead-s-korea-us-hold-first-22-meeting-o.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5317,7 +5460,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/x-money-is-here-what-elon-musks.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5365,7 +5508,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/small-business-cash-flow-tips-for-peak.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5397,7 +5540,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-18.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5421,7 +5564,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5437,7 +5580,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-17.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5469,7 +5612,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-17.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5541,7 +5684,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-17.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5605,7 +5748,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/social-security-to-adjust-cost-of.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5629,7 +5772,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-16.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5637,7 +5780,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-16.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5701,7 +5844,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-16.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5709,7 +5852,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spanish-stock-market-pays-out-35716.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5741,7 +5884,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/eu-eyes-160-billion-cut-from-initial.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5837,7 +5980,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/how-to-measure-side-hustle-profit-after.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5861,7 +6004,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-15.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5917,7 +6060,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/cost-of-living-struggles-inspire.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5941,7 +6084,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5965,7 +6108,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5981,7 +6124,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -5997,7 +6140,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-14.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6021,7 +6164,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6037,7 +6180,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6069,7 +6212,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6077,7 +6220,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6085,7 +6228,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-13.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6100,11 +6243,11 @@
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-12.html",
-   "verdict": "ERROR",
-   "coverageState": "",
-   "errorType": "TimeoutError",
-   "httpStatus": null,
-   "error": "inspection could not be completed"
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html",
@@ -6173,7 +6316,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-12.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6189,7 +6332,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-12.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6205,7 +6348,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/high-yield-single-day-gigs.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6245,7 +6388,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/balancing-budgets-and-cost-pressures.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6277,7 +6420,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6301,7 +6444,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6333,7 +6476,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6341,7 +6484,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/fuel-surcharges-hit-lowcost-airlines.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6349,7 +6492,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6357,7 +6500,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6365,7 +6508,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6373,7 +6516,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-11.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6461,7 +6604,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6485,7 +6628,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-10.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6541,7 +6684,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02023327578.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6557,7 +6700,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6581,7 +6724,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6589,7 +6732,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6645,7 +6788,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-09.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6653,7 +6796,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/russia-2026-10-08.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6685,7 +6828,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/us-2026-10-08.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6717,7 +6860,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-08.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6821,7 +6964,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6829,7 +6972,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6933,7 +7076,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -6957,7 +7100,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-07.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7029,7 +7172,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/italy-2026-10-06.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7093,7 +7236,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-06.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7149,7 +7292,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7237,7 +7380,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/france-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7269,7 +7412,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/the-investment-your-new-friend-found.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7293,7 +7436,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/south-korea-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7301,7 +7444,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/australia-2026-10-05.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7357,7 +7500,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7373,7 +7516,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/put-money-on-calendar-not-your-mood.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7389,7 +7532,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7413,7 +7556,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/china-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7429,7 +7572,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/japan-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7445,7 +7588,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7485,7 +7628,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-04.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7517,7 +7660,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/mexico-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7541,7 +7684,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/the-rule-of-5-before-you-buy.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7549,7 +7692,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/brazil-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7557,7 +7700,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7573,7 +7716,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7621,7 +7764,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/germany-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7637,7 +7780,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-03.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7645,7 +7788,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/buy-term-skip-whole-life-pitch.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7805,7 +7948,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/coast-vs-barista-vs-fat-fire.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7837,7 +7980,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-market-and-trading-2026-10-02.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7845,7 +7988,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/s-500-vs-global-pick-one.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7853,7 +7996,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/india-2026-10-02.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7893,7 +8036,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/category-personal-finance-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7901,7 +8044,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/your-secret-money-script-explained.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7917,7 +8060,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7949,7 +8092,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/a-private-ai-advisor-on-your-data.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -7989,7 +8132,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/10/spain-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8021,7 +8164,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/the-12-tab-personal-cfo-spreadsheet.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8053,7 +8196,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8061,7 +8204,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/your-car-payment-is-wealth-killer.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8077,7 +8220,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8093,23 +8236,23 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-10-01.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-30.html",
-   "verdict": "ERROR",
-   "coverageState": "",
-   "errorType": "TimeoutError",
-   "httpStatus": null,
-   "error": "inspection could not be completed"
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8125,18 +8268,18 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-30.html",
-   "verdict": "ERROR",
-   "coverageState": "",
-   "errorType": "HTTPError",
-   "httpStatus": 500,
-   "error": "HTTP 500"
+   "verdict": "NEUTRAL",
+   "coverageState": "Discovered - currently not indexed",
+   "lastCrawlTime": "",
+   "googleCanonical": "",
+   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-30.html",
@@ -8181,7 +8324,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/90-days-of-passive-income-truth.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8189,7 +8332,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8213,7 +8356,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8237,7 +8380,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8277,7 +8420,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8285,7 +8428,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-30.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8301,7 +8444,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8325,7 +8468,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8341,7 +8484,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8413,7 +8556,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8445,7 +8588,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8461,7 +8604,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-29.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8469,7 +8612,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8525,7 +8668,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8533,7 +8676,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8565,7 +8708,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8605,7 +8748,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8645,7 +8788,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8661,7 +8804,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-28.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8685,7 +8828,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/500-extra-overtime-hustle-or-skill.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8757,7 +8900,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-27.html",
    "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
+   "coverageState": "URL is unknown to Google",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8781,7 +8924,7 @@
   {
    "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-27.html",
    "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
+   "coverageState": "Discovered - currently not indexed",
    "lastCrawlTime": "",
    "googleCanonical": "",
    "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
@@ -8796,195 +8939,171 @@
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-market-and-trading-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/india-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/global-wire-top15-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/south-korea-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/australia-2026-09-27.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/russia-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-personal-finance-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/mexico-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/canada-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/us-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/brazil-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/italy-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/dont-panic-pay-cheap-student-loans.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/spain-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/china-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/uk-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/japan-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "URL is unknown to Google",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/freelance-money-on-autopilot.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/france-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/germany-2026-09-26.html",
-   "verdict": "NEUTRAL",
-   "coverageState": "Discovered - currently not indexed",
-   "lastCrawlTime": "",
-   "googleCanonical": "",
-   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+   "verdict": "UNKNOWN",
+   "coverageState": "",
+   "inspectionDeferred": true,
+   "reason": "Not inspected within this bounded run yet"
   },
   {
    "url": "https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01001893817.html",
@@ -9355,7 +9474,7 @@
  "limits": "Not indexed is not an AdSense refusal. An API error is unknown, never evidence of non-indexing. Redirect results may describe an old crawl.",
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "completedInspections": 560,
- "deferredInspections": 52,
+ "completedInspections": 557,
+ "deferredInspections": 76,
  "runComplete": false
 }
