@@ -1,11 +1,15 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-23",
   "kind": "trending",
-  "slot": 2,
-  "topic_id": "09da2f3abac8c1f5",
-  "title": "Tesla beats earnings projections after Musk",
-  "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
-  "published_at": "2026-10-23T02:58:12-07:00"
+  "slot": 3,
+  "topic_id": "4bbb84662c8d2ef4",
+  "replaced_topic_id": null,
+  "title": "Payment fintech funding doubles in H1",
+  "package": "master_packages/dynamic/2026-10-23-trending-4bbb84662c8d2ef4.json",
+  "html": "scheduled_ready/2026-10-23-trending-3-payment-fintech-funding-doubles-in-h1.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 17.6,
+  "remainingMinutes": 12.4
 }
