@@ -169,7 +169,10 @@ def automation_disclosure(kind:str="article")->str:
 
 def assert_social_compliant(text:str)->bool:
  issues=audit_text("social post",text,"social",False)
- if len(re.findall(r"#[A-Za-z0-9_]+",text))>4:issues.append("excessive hashtagging")
+ # A hashtag is a word, not any hash-shaped token: an ordinal inside a quoted line ("the #1 buyer of
+ # wheat") or a colour code is prose, and prose must not silently cost the day its share. Four real
+ # tags is still the ceiling the platforms reward - that number has not moved.
+ if len(re.findall(r"#(?=[A-Za-z0-9_]*[A-Za-z])(?!([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b)[A-Za-z0-9_]+",text))>4:issues.append("excessive hashtagging")
  if re.search(r"\b(?:act now|limited time|don['’]t miss out|must buy)\b",text,re.I):issues.append("manufactured urgency")
  if issues:raise RuntimeError("SOCIAL CONTENT POLICY GATE FAILED — "+"; ".join(sorted(set(issues))))
  return True

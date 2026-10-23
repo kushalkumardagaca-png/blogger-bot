@@ -518,6 +518,16 @@ _pol_twin=(ROOT/'SITE_CHANGE_POLICY.json').read_text(encoding='utf-8')
 # Two 23 October repairs, watched: a recovery request that has already been honoured must not be
 # re-run on the next push, and a slot a gate refused must be given its three substitutes inside one
 # run rather than one per run across a whole day of red emails.
+# 23 October, from the social side: a share that our own caption rule declined was filed as a broken
+# connection. Both halves are watched - what counts as a hashtag, and what the health file tells the owner.
+_cpg=(ROOT/'content_policy_guard.py').read_text(encoding='utf-8')
+_sch=(ROOT/'social_credential_health.py').read_text(encoding='utf-8')
+check('A hash inside prose is not counted as hashtagging, and the four-tag ceiling holds',
+      'def assert_social_compliant' in _cpg
+      and '(?=[A-Za-z0-9_]*[A-Za-z])' in _cpg.split('def assert_social_compliant',1)[1][:600]
+      and '>4:issues.append("excessive hashtagging")' in _cpg)
+check('A social refusal from our own policy gate is not blamed on the owner\'s connection',
+      'POLICY GATE' in _sch and 'needs no re-authorisation' in _sch)
 check('A News recovery request is honoured only for the editions still missing',
       (ROOT/'news_recovery_request.py').exists()
       and 'already live' in (ROOT/'news_recovery_request.py').read_text(encoding='utf-8')

@@ -70,6 +70,13 @@ def record(platform: str, ok: bool, reason: str = "", path: Path = HEALTH) -> di
            "reason": scrub(reason)}
     if ok:
         row["action"] = "none; the network is publishing"
+    elif "POLICY GATE" in reason.upper():
+        # 23 October: a refusal from our own copy rules was reported as a broken connection, which sent
+        # the owner to re-authorise a token that was never the problem. The network is fine; the caption
+        # is what the gate declined, and the guard keeps the share counted as missing until it is fixed.
+        row["action"] = ("our own content policy refused this caption, so nothing was posted; the network "
+                         "connection is not at fault and needs no re-authorisation, and the guard re-plans "
+                         "the share until the copy answers the rule")
     else:
         row["action"] = ("the owner must re-authorise this network's connection; the social guard "
                          "will hold its posts back and keep counting them as missing until then")
