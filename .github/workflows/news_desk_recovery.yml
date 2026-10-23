@@ -27,18 +27,25 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - name: Requested desk
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Decide whether any requested edition is still missing
         id: want
         run: |
-          value="$(tr -d '[:space:]' < .github/news-recovery-request)"
-          if [ -z "$value" ]; then
-            echo "::error title=Nothing requested::.github/news-recovery-request is empty"
-            exit 1
-          fi
-          echo "value=$value" >> "$GITHUB_OUTPUT"
-      - name: Re-run the desk
+          # Two fixes in one step. An empty request file used to be reported as an error, which is a red
+          # email for nothing having been asked; and a request pushed in the morning was re-honoured on
+          # every later push that touched the file, dispatching a run for editions that had been live for
+          # hours. The decision now comes from the day's own board: ask only for what is missing, and say
+          # plainly when there is nothing left to ask for.
+          python3 news_recovery_request.py
+      - name: Re-run the desks that are still missing
+        if: steps.want.outputs.dispatch == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh workflow run daily_news_wires.yml --ref main -f desks="${{ steps.want.outputs.value }}"
-          echo "Requested immediate republication of: ${{ steps.want.outputs.value }}"
+          gh workflow run daily_news_wires.yml --ref main -f desks="${{ steps.want.outputs.desks }}"
+          echo "Requested immediate republication of: ${{ steps.want.outputs.desks }} (${{ steps.want.outputs.note }})"
+      - name: Nothing to re-run
+        if: steps.want.outputs.dispatch != 'true'
+        run: echo "::notice title=No edition is missing::${{ steps.want.outputs.note }}"

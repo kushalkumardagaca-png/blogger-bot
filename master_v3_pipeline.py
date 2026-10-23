@@ -81,6 +81,11 @@ def replace_blocked_topic(plan, kind, slot, item):
             from master_topic_discovery import evergreen_candidates
             found = evergreen_candidates([cat], excluded)
             if found:
+                # Deepest evidence first. The gate asks a topic for eight topic-specific sources, so the
+                # candidate worth spending the slot on is the one that already shows the most collected
+                # sources - which is a choice about *which* topic to attempt, never about the bar.
+                found = sorted(found, key=lambda row: (min(len(row.get('sources') or []), 8),
+                                                        float(row.get('overall_score') or 0)), reverse=True)
                 replacement = dict(found[0]); replacement["evergreen_category"] = label
         except Exception as exc:  # recorded below, never hidden
             discovery_error = exc
@@ -256,13 +261,35 @@ def prepare(kind,slot):
   # day's own choice and let the substitution machinery - the one publication already trusts - pick
   # another approved topic in the same category. The substitute faces the identical gates: eight
   # topic-specific sources, three subject-named photographs, the originality rule, the word limits.
-  block_topic(plan,kind,slot,original,last or RuntimeError('no candidate was offered for this slot'))
-  try:
-   substitute=replace_blocked_topic(read(PLAN,{}),kind,slot,original)
-   built=build_candidate(kind,slot,substitute);item=substitute
-  except RuntimeError as exc:
-   raise RuntimeError(f"{last or 'no evidence-ready candidate remained'}; and the substitute topic was "
-                      f"refused too - {exc}") from exc
+  # One second chance is what made 23 October's Evergreen slot red fifteen times: every run measured two
+  # topics, both thin on sources, and spent the day re-asking the same question. Three substitutes are
+  # tried now, each refusal blocking its topic so the next is a genuinely different subject. Nothing is
+  # lowered - every candidate still answers the same eight-source gate, three licensed photographs and
+  # the originality rule; what changed is how many topics get to answer it inside one run.
+  refused=[original]
+  last_error=last or RuntimeError('no candidate was offered for this slot')
+  block_topic(plan,kind,slot,original,last_error)
+  for spare in range(3):
+   try:
+    substitute=replace_blocked_topic(read(PLAN,{}),kind,slot,refused[-1])
+   except RuntimeError as exc:
+    last_error=exc;break
+   if str(substitute.get('id')) in {str(r.get('id')) for r in refused}:
+    # The block list is the reason a substitute is a different subject. If the search hands back a
+    # topic this run already watched fail, the third attempt would be the first attempt again.
+    last_error=RuntimeError(f"the topic search returned {substitute.get('id')!r} after it was already refused;"
+                            " refusing to spend another attempt on it");break
+   refused.append(substitute)
+   try:
+    built=build_candidate(kind,slot,substitute);item=substitute;break
+   except RuntimeError as exc:
+    last_error=exc
+    if not gate_refusal(exc):raise
+    block_topic(read(PLAN,{}),kind,slot,substitute,exc)
+  if built is None:
+   titles='; '.join(str(r.get('title',''))[:38] for r in refused[1:]) or 'none offered'
+   raise RuntimeError(f"{len(refused)-1} substitute topic(s) tried for this slot and refused ({titles}) - "
+                      f"{last or 'no evidence-ready candidate remained'}; last: {last_error}") from last_error
  item,target,title,slug,meta,labels,body=built
  if item.get('id')!=original.get('id'):
   # Keyed by kind. The line before this wrote into plan['trending'] whatever the kind was, so an

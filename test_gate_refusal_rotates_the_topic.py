@@ -155,7 +155,8 @@ class GateRefusalSpendsTheTopic(unittest.TestCase):
                     pipe.prepare("evergreen", 0)
         message = str(caught.exception)
         self.assertIn("photo search exhausted", message)
-        self.assertIn("substitute topic was refused too", message)
+        # 23 October: the run names every substitute it spent, not just the one it tried.
+        self.assertIn("substitute topic(s) tried for this slot and refused", message)
 
 
 class TheRefusalVocabulary(unittest.TestCase):

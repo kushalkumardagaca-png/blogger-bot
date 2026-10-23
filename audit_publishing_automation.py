@@ -515,6 +515,18 @@ check('The released figure-credit repair is also watched on a clock, so a gap ca
 _hl_twin=(ROOT/'harden_live_corpus.py').read_text(encoding='utf-8')
 _np_twin=(ROOT/'news_pipeline.py').read_text(encoding='utf-8')
 _pol_twin=(ROOT/'SITE_CHANGE_POLICY.json').read_text(encoding='utf-8')
+# Two 23 October repairs, watched: a recovery request that has already been honoured must not be
+# re-run on the next push, and a slot a gate refused must be given its three substitutes inside one
+# run rather than one per run across a whole day of red emails.
+check('A News recovery request is honoured only for the editions still missing',
+      (ROOT/'news_recovery_request.py').exists()
+      and 'already live' in (ROOT/'news_recovery_request.py').read_text(encoding='utf-8')
+      and 'python3 news_recovery_request.py' in (ROOT/'.github/workflows/news_desk_recovery.yml').read_text(encoding='utf-8')
+      and 'Nothing requested' not in (ROOT/'.github/workflows/news_desk_recovery.yml').read_text(encoding='utf-8'))
+check('A Master slot refused by a gate is given three substitutes in the same run',
+      'for spare in range(3):' in (ROOT/'master_v3_pipeline.py').read_text(encoding='utf-8')
+      and 'substitute topic(s) tried' in (ROOT/'master_v3_pipeline.py').read_text(encoding='utf-8')
+      and 'if not gate_refusal(exc):raise' in (ROOT/'master_v3_pipeline.py').read_text(encoding='utf-8'))
 check('A fresh same-edition twin is found across addresses and retired, never erased',
       'def twin_groups(' in _hl_twin and 'RECENT_TWIN_HOURS' in _hl_twin and 'TWIN_BACKUP_DIR' in _hl_twin
       and "/revert" in _hl_twin and "SCOPE=='full'" in _hl_twin
