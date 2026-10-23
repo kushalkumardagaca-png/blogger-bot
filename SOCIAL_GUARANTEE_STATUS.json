@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-23T21:29:24.707231+05:30",
+ "generatedAt": "2026-10-23T21:45:12.365432+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "articles": 20,
  "expectedPosts": 40,
- "articlesWithBothPosts": 18,
- "postsMissing": 3,
- "dispatched": 0,
+ "articlesWithBothPosts": 19,
+ "postsMissing": 1,
+ "dispatched": 1,
  "rows": [
   {
    "key": "news-india",
@@ -150,11 +150,8 @@
    },
    "observedDistinctPosts": 1,
    "duplicatePosts": 0,
-   "credentialBlocked": {
-    "facebook": "RuntimeError: SOCIAL CONTENT POLICY GATE FAILED — excessive hashtagging"
-   },
    "actions": [
-    "no post is attempted because facebook credentials are known to be unusable; the owner must re-authorise the connection"
+    "dispatched"
    ]
   },
   {
@@ -265,27 +262,21 @@
    "key": "master-trending-4",
    "title": "Ipsos Cost of Living Monitor",
    "url": "https://dailyyield.blogspot.com/2026/10/ipsos-cost-of-living-monitor.html",
-   "posts": 0,
+   "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 0,
+    "facebook": 1,
+    "bluesky": 1,
     "mastodon": 0
    },
-   "observedDistinctPosts": 0,
-   "duplicatePosts": 0,
-   "credentialBlocked": {
-    "facebook": "RuntimeError: SOCIAL CONTENT POLICY GATE FAILED — excessive hashtagging"
-   },
-   "actions": [
-    "no post is attempted because facebook credentials are known to be unusable; the owner must re-authorise the connection"
-   ]
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-23T21:29:16.921166+05:30",
+ "liveVerificationSourceAt": "2026-10-23T21:45:04.384272+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 18,
+ "articlesWithExactlyTwoPosts": 19,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
