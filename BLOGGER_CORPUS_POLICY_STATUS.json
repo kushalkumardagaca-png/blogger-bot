@@ -1,26 +1,36 @@
 {
   "status": "PASS",
   "apply": true,
-  "checked_at": "2026-10-23T12:04:21.518624+00:00",
+  "checked_at": "2026-10-23T12:13:42.473410+00:00",
   "posts_checked": 612,
   "automated_posts": 612,
   "disclosures_current_before": 612,
   "duplicate_groups_found": [],
   "unresolved_duplicate_groups": [],
   "deleted_duplicate_post_ids": [],
-  "posts_updated": 60,
+  "posts_updated": 0,
   "historical_news_sentences_deduplicated": 0,
   "quarantined_to_draft": [],
   "remaining_live_policy_flags": [],
   "unsafe_active_links": [],
   "image_rights_gap_posts": 0,
   "figure_captions_restored": 0,
-  "repair_scope": "duplicates",
-  "title_twin_groups_open": 0,
+  "repair_scope": "rights",
+  "title_twin_groups_open": 1,
   "recent_title_twins": 0,
+  "slot_collisions_open": 1,
+  "slot_collisions": [
+    {
+      "title": "americas finance news 22 october 2026",
+      "similarity": 0.0724,
+      "kept_url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23.html",
+      "other_url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23_0361840868.html",
+      "age_hours": 0.5
+    }
+  ],
   "twins_retired": [],
   "twins_pending": [],
   "open_title_twins": [],
-  "site_writes": 60,
+  "site_writes": 0,
   "zero_public_pageviews": true
 }
