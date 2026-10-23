@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-23T02:54:48.787936+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-23T02:59:51.023830+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
-      "desk": "asia-pacific",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "GREEN OPERATING GATE FAILED — live Blogger corpus status is not PASS; live corpus has image-rights gaps"
+      "desk": "china",
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
