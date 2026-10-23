@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T19:55:39.109226+05:30",
+ "generatedAt": "2026-10-23T20:45:04.827274+05:30",
  "dateIST": "2026-10-23",
  "apply": true,
  "toleranceMinutes": 30,
@@ -9,9 +9,9 @@
  "late": 11,
  "early": 0,
  "pending": 1,
- "overdue": 1,
- "upcoming": 2,
- "dispatched": 2,
+ "overdue": 2,
+ "upcoming": 1,
+ "dispatched": 3,
  "publicationGate": "green",
  "gateRepair": null,
  "rows": [
@@ -22,7 +22,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 940,
+   "minutesFromSlot": 990,
    "publishedAt": "2026-10-22T20:01:57-07:00",
    "minutesLate": 256
   },
@@ -33,7 +33,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 880,
+   "minutesFromSlot": 930,
    "publishedAt": "2026-10-22T19:59:49-07:00",
    "minutesLate": 194
   },
@@ -44,7 +44,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/meta-strikes-deal-to-keep-zuckerberg.html",
    "state": "late",
-   "minutesFromSlot": 820,
+   "minutesFromSlot": 870,
    "publishedAt": "2026-10-22T20:23:09-07:00",
    "minutesLate": 158
   },
@@ -55,7 +55,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 760,
+   "minutesFromSlot": 810,
    "publishedAt": "2026-10-22T20:00:03-07:00",
    "minutesLate": 75
   },
@@ -66,8 +66,8 @@
    "live": false,
    "url": "",
    "state": "overdue",
-   "minutesFromSlot": 700,
-   "minutesLate": 700,
+   "minutesFromSlot": 750,
+   "minutesLate": 750,
    "action": "dispatched"
   },
   {
@@ -77,7 +77,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/nasdaq-slides-2-friday-to-post-worst.html",
    "state": "late",
-   "minutesFromSlot": 640,
+   "minutesFromSlot": 690,
    "publishedAt": "2026-10-22T21:15:47-07:00",
    "minutesLate": 30
   },
@@ -88,7 +88,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 580,
+   "minutesFromSlot": 630,
    "publishedAt": "2026-10-22T22:46:13-07:00",
    "minutesLate": 61
   },
@@ -99,7 +99,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/need-money-in-emergency-take-loan.html",
    "state": "on time",
-   "minutesFromSlot": 520,
+   "minutesFromSlot": 570,
    "publishedAt": "2026-10-22T22:45:10-07:00"
   },
   {
@@ -109,7 +109,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 460,
+   "minutesFromSlot": 510,
    "publishedAt": "2026-10-23T01:31:15-07:00",
    "minutesLate": 106
   },
@@ -120,7 +120,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 430,
+   "minutesFromSlot": 480,
    "publishedAt": "2026-10-23T01:28:46-07:00",
    "minutesLate": 73
   },
@@ -131,7 +131,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-23.html",
    "state": "late",
-   "minutesFromSlot": 400,
+   "minutesFromSlot": 450,
    "publishedAt": "2026-10-23T03:01:03-07:00",
    "minutesLate": 136
   },
@@ -142,7 +142,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/tesla-beats-earnings-projections-after.html",
    "state": "late",
-   "minutesFromSlot": 340,
+   "minutesFromSlot": 390,
    "publishedAt": "2026-10-23T02:58:12-07:00",
    "minutesLate": 73
   },
@@ -153,7 +153,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/property-capital-gains-tax-changes-could.html",
    "state": "on time",
-   "minutesFromSlot": 280,
+   "minutesFromSlot": 330,
    "publishedAt": "2026-10-23T03:05:10-07:00"
   },
   {
@@ -163,7 +163,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/payment-fintech-funding-doubles-in-h1.html",
    "state": "late",
-   "minutesFromSlot": 220,
+   "minutesFromSlot": 270,
    "publishedAt": "2026-10-23T05:20:11-07:00",
    "minutesLate": 95
   },
@@ -174,7 +174,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-23.html",
    "state": "on time",
-   "minutesFromSlot": 160,
+   "minutesFromSlot": 210,
    "publishedAt": "2026-10-23T04:45:05-07:00"
   },
   {
@@ -184,7 +184,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-23.html",
    "state": "on time",
-   "minutesFromSlot": 130,
+   "minutesFromSlot": 180,
    "publishedAt": "2026-10-23T05:15:03-07:00"
   },
   {
@@ -194,7 +194,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-23.html",
    "state": "on time",
-   "minutesFromSlot": 100,
+   "minutesFromSlot": 150,
    "publishedAt": "2026-10-23T05:47:42-07:00"
   },
   {
@@ -204,7 +204,7 @@
    "live": true,
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html",
    "state": "on time",
-   "minutesFromSlot": 70,
+   "minutesFromSlot": 120,
    "publishedAt": "2026-10-23T06:13:49-07:00"
   },
   {
@@ -213,8 +213,9 @@
    "due": "2026-10-23T19:45:00+05:30",
    "live": false,
    "url": "",
-   "state": "pending",
-   "minutesFromSlot": 10,
+   "state": "overdue",
+   "minutesFromSlot": 60,
+   "minutesLate": 60,
    "action": "dispatched"
   },
   {
@@ -223,8 +224,9 @@
    "due": "2026-10-23T20:45:00+05:30",
    "live": false,
    "url": "",
-   "state": "upcoming",
-   "minutesFromSlot": -50
+   "state": "pending",
+   "minutesFromSlot": 0,
+   "action": "dispatched"
   },
   {
    "key": "master-evergreen-4",
@@ -233,7 +235,7 @@
    "live": false,
    "url": "",
    "state": "upcoming",
-   "minutesFromSlot": -140
+   "minutesFromSlot": -90
   }
  ],
  "syntheticViews": 0,
