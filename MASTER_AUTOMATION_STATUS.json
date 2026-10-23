@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-23",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "368fb522c0dec26d",
   "kind": "evergreen",
   "slot": 4,
-  "topic_id": "368fb522c0dec26d",
-  "replaced_topic_id": "975a7e318b15b228",
+  "slot_key": "2026-10-23:evergreen:4",
+  "date": "2026-10-23",
+  "category": "Homes Mortgages & Real Estate",
+  "evergreen_category": "Homes Mortgages & Real Estate",
   "title": "Declining loan amounts push new mortgage",
-  "package": "master_packages/dynamic/2026-10-23-evergreen-368fb522c0dec26d.json",
-  "html": "scheduled_ready/2026-10-23-evergreen-4-declining-loan-amounts-push-new-mortgage.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 27.9,
-  "remainingMinutes": 2.1
+  "url": "https://dailyyield.blogspot.com/2026/10/declining-loan-amounts-push-new-mortgage.html",
+  "published_at": "2026-10-23T11:28:32-07:00"
 }
