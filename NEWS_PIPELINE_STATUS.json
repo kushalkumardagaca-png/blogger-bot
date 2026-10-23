@@ -1,15 +1,15 @@
 {
-  "status": "FAIL",
-  "generated_at": "2026-10-23T04:33:33.598278+00:00",
+  "status": "PASS",
+  "generated_at": "2026-10-23T05:46:14.952083+00:00",
   "dry_run": false,
-  "published": 0,
-  "failed": 1,
+  "published": 1,
+  "failed": 0,
   "results": [
     {
       "desk": "russia",
-      "status": "FAIL",
-      "error_type": "RuntimeError",
-      "error": "PUBLICATION PREFLIGHT FAILED — BLOGGER CONTENT POLICY GATE FAILED — repeated substantive sentence within the content; rendered duplicate diagnostic: investing com s oct 22 report concerns russia stocks lower at close of trade moex possible consequences remain conditional not certain"
+      "status": "PASS",
+      "published": true,
+      "dry_run": false
     }
   ]
 }
