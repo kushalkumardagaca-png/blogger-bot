@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-23",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "9d01a2e50b11c8ef",
   "kind": "evergreen",
   "slot": 2,
-  "topic_id": "9d01a2e50b11c8ef",
-  "replaced_topic_id": "a4b1f3cf699324cb",
+  "slot_key": "2026-10-23:evergreen:2",
+  "date": "2026-10-23",
+  "category": "Taxes Benefits & Financial Planning",
+  "evergreen_category": "Taxes Benefits & Financial Planning",
   "title": "Property Capital Gains Tax Changes Could",
-  "package": "master_packages/dynamic/2026-10-23-evergreen-9d01a2e50b11c8ef.json",
-  "html": "scheduled_ready/2026-10-23-evergreen-2-property-capital-gains-tax-changes-could.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 30.1,
-  "remainingMinutes": 0.0
+  "url": "https://dailyyield.blogspot.com/2026/10/property-capital-gains-tax-changes-could.html",
+  "published_at": "2026-10-23T03:05:10-07:00"
 }
