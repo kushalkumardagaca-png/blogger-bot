@@ -14,11 +14,13 @@ on:
 # Two pushes carrying a recovery request could each dispatch the same desk, and the desk
 # then publishes twice. Queued, never cancelled: a recovery that is skipped is a missing
 # edition, and a recovery that is delayed is still an edition.
+permissions:
+  actions: write
+  contents: read
+
 concurrency:
   group: news-desk-recovery
   cancel-in-progress: false
-  actions: write
-  contents: read
 
 jobs:
   dispatch:
