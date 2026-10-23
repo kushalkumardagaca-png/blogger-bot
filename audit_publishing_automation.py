@@ -490,6 +490,11 @@ check('The released figure-credit repair is also watched on a clock, so a gap ca
       "17,47 * * * *" in _bh and "posts_with_figure_rights_gaps" in _bh
       and "APPLY_CORPUS_REMEDIATION: ${{ needs.decide.outputs.repair" in _bh
       and "CORPUS_REPAIR_SCOPE: ${{ needs.decide.outputs.repair == 'true' && 'rights' || 'audit' }}" in _bh)
+check('A day held by a missing photo credit is reopened by the guard that watches the day',
+      'def gate_blocked_by_figure_credits(' in (ROOT/'slot_guard.py').read_text(encoding='utf-8')
+      and 'blogger_corpus_hardening.yml' in (ROOT/'slot_guard.py').read_text(encoding='utf-8')
+      and '"publicationGate"' in (ROOT/'slot_guard.py').read_text(encoding='utf-8')
+      and '"gateRepair"' in (ROOT/'slot_guard.py').read_text(encoding='utf-8'))
 # The owner is a CA articleship student, not a Chartered Accountant (answer of 19
 # October 2026). The qualification guard can only be switched off by an environment
 # variable, so no scheduled job may ever set it.
