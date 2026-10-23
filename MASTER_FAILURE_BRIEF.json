@@ -1,13 +1,13 @@
 {
- "at": "2026-10-23T01:48:19Z",
+ "at": "2026-10-23T02:01:05Z",
  "workflow": "master_trending_writer.yml",
  "kind": "trending",
- "slot": "1",
- "run": "39884205228",
+ "slot": "0",
+ "run": "39886103599",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "deterministic evidence section failed: unsupported number 9",
+ "error": "GREEN OPERATING GATE FAILED — live Blogger corpus status is not PASS; live corpus has image-rights gaps",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
