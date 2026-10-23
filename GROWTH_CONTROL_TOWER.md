@@ -3,7 +3,7 @@
 - **Status:** ACTIVE
 - **Verified distinct daily engaged readers:** 0
 - **Target:** 10,000,000 by 2027-09-30
-- **Days remaining:** 344
+- **Days remaining:** 342
 - **Synthetic views:** 0
 
 ## Primary metric
@@ -14,7 +14,7 @@ Search clicks, impressions, social reach and Blogger pageviews are deliberately 
 
 ## Acquisition evidence
 
-- Search, last 7 days: `{"clicks": 0, "impressions": 1, "ctr": 0.0, "averagePosition": 4.0}`
-- Search, last 28 days: `{"clicks": 1, "impressions": 2, "ctr": 0.5, "averagePosition": 2.5}`
-- Official social observations: 260
-- Observed social interactions: 2
+- Search, last 7 days: `{"clicks": 0, "impressions": 2, "ctr": 0.0, "averagePosition": 6.5}`
+- Search, last 28 days: `{"clicks": 1, "impressions": 3, "ctr": 0.333333, "averagePosition": 4.67}`
+- Official social observations: 180
+- Observed social interactions: 4
