@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-23",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "6c12a9e71d1a3c0e",
   "kind": "evergreen",
   "slot": 3,
-  "topic_id": "6c12a9e71d1a3c0e",
-  "replaced_topic_id": "a7c9958ed965dcf2",
+  "slot_key": "2026-10-23:evergreen:3",
+  "date": "2026-10-23",
+  "category": "Insurance & Risk Protection",
+  "evergreen_category": "Insurance & Risk Protection",
   "title": "Your Guide to Open Enrollment and Health",
-  "package": "master_packages/dynamic/2026-10-23-evergreen-6c12a9e71d1a3c0e.json",
-  "html": "scheduled_ready/2026-10-23-evergreen-3-your-guide-to-open-enrollment-and-health.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 19.3,
-  "remainingMinutes": 10.7
+  "url": "https://dailyyield.blogspot.com/2026/10/your-guide-to-open-enrollment-and-health.html",
+  "published_at": "2026-10-23T08:35:55-07:00"
 }
