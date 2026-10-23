@@ -1,19 +1,54 @@
 {
- "generatedAt": "2026-10-24T03:09:17.457090+05:30",
+ "generatedAt": "2026-10-24T05:27:38.073939+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 0,
- "expectedPosts": 0,
+ "articles": 2,
+ "expectedPosts": 4,
  "articlesWithBothPosts": 0,
- "postsMissing": 0,
- "dispatched": 0,
- "rows": [],
+ "postsMissing": 4,
+ "dispatched": 4,
+ "rows": [
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-24.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-24.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  }
+ ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T03:09:17.316772+05:30",
+ "liveVerificationSourceAt": "2026-10-24T05:27:37.210775+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 0,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
