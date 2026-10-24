@@ -1,11 +1,15 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-24",
   "kind": "trending",
-  "slot": 3,
-  "topic_id": "9fd76656aa338748",
-  "title": "War in Ukraine: Europe stands united behind",
-  "url": "https://dailyyield.blogspot.com/2026/10/war-in-ukraine-europe-stands-united.html",
-  "published_at": "2026-10-24T03:55:42-07:00"
+  "slot": 4,
+  "topic_id": "ea42142389123e57",
+  "replaced_topic_id": null,
+  "title": "UK consumer confidence falls at fastest rate",
+  "package": "master_packages/dynamic/2026-10-24-trending-ea42142389123e57.json",
+  "html": "scheduled_ready/2026-10-24-trending-4-uk-consumer-confidence-falls-at-fastest-rate.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 16.1,
+  "remainingMinutes": 13.9
 }
