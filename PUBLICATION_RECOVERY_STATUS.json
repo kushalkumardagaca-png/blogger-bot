@@ -1,20 +1,38 @@
 {
-  "generatedAt": "2026-10-24T09:03:02.865714+05:30",
+  "generatedAt": "2026-10-24T13:52:58.827255+05:30",
   "dateIST": "2026-10-24",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 4,
-  "confirmedByLivePost": 4,
+  "confirmedPublications": 7,
+  "confirmedByLivePost": 7,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "master-evergreen-0"
+    "news-markets",
+    "news-europe",
+    "news-economy",
+    "master-evergreen-1"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "master-evergreen-0",
+      "key": "news-markets",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "news-europe",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "news-economy",
+      "applied": true
+    },
+    {
+      "type": "source_recovery",
+      "key": "master-evergreen-1",
       "attempt": 1,
       "applied": true
     }
