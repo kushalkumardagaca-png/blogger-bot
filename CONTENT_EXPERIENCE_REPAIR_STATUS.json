@@ -12,19 +12,19 @@
       "path": "/p/daily-news.html",
       "dataBlocks": 2,
       "linkIndexHrefs": 12,
-      "linkIndexWritten": true,
-      "changed": true,
-      "beforeSha256": "e7a02f9977f99e9497c0d0142b1f9e35c89ee5761fd2666c927cc636f7fb9b77",
+      "linkIndexWritten": false,
+      "changed": false,
+      "beforeSha256": "2a9abbb864e2bcd09fca80d036cd0459bc190cdf6e27cf95fe3e1515dfe17764",
       "afterSha256": "2a9abbb864e2bcd09fca80d036cd0459bc190cdf6e27cf95fe3e1515dfe17764"
     },
     {
       "path": "/p/article.html",
-      "dataBlocks": 0,
+      "dataBlocks": 1,
       "linkIndexHrefs": 12,
       "linkIndexWritten": false,
-      "changed": false,
+      "changed": true,
       "beforeSha256": "0b97990111cb582ac6fdca6f730a20b259cd9cd6c7b8034f8cdc4b5a8c74547d",
-      "afterSha256": "0b97990111cb582ac6fdca6f730a20b259cd9cd6c7b8034f8cdc4b5a8c74547d"
+      "afterSha256": "bc55b410f34fdb89c8471f81661eb075b37f8e3ccde968f32fad3644746b8dd8"
     }
   ],
   "optional_changes": "held; no full hub rebuild or old-post edits"
