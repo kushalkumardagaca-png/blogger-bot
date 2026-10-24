@@ -1,11 +1,15 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-24",
-  "kind": "evergreen",
-  "slot": 3,
-  "topic_id": "dffd538b870f6a3c",
-  "title": "Current U.S. Inflation Rate Is 3.7%: Chart",
-  "url": "https://dailyyield.blogspot.com/2026/10/current-us-inflation-rate-is-37-chart.html",
-  "published_at": "2026-10-24T07:45:30-07:00"
+  "kind": "trending",
+  "slot": 4,
+  "topic_id": "ea42142389123e57",
+  "replaced_topic_id": null,
+  "title": "UK consumer confidence falls at fastest rate",
+  "package": "master_packages/dynamic/2026-10-24-trending-ea42142389123e57.json",
+  "html": "scheduled_ready/2026-10-24-trending-4-uk-consumer-confidence-falls-at-fastest-rate.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 0.0,
+  "remainingMinutes": 30.0
 }
