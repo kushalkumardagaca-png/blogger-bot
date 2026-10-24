@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-24T05:31:17.474424+05:30",
+ "generatedAt": "2026-10-24T06:15:47.343110+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 2,
- "expectedPosts": 4,
- "articlesWithBothPosts": 1,
+ "articles": 3,
+ "expectedPosts": 6,
+ "articlesWithBothPosts": 2,
  "postsMissing": 2,
- "dispatched": 0,
+ "dispatched": 2,
  "rows": [
   {
    "key": "news-asia-pacific",
@@ -25,6 +25,19 @@
    "key": "news-china",
    "title": "china edition",
    "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-0",
+   "title": "Cyprus police investigate financial and tax",
+   "url": "https://dailyyield.blogspot.com/2026/10/cyprus-police-investigate-financial-and.html",
    "posts": 0,
    "byPlatform": {
     "facebook": 0,
@@ -34,16 +47,16 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "waiting for the last attempt",
-    "waiting for the last attempt"
+    "dispatched",
+    "dispatched"
    ]
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T05:31:16.219635+05:30",
+ "liveVerificationSourceAt": "2026-10-24T06:15:45.725890+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 1,
+ "articlesWithExactlyTwoPosts": 2,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "ATTENTION"
