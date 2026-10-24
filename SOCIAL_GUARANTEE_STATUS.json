@@ -1,22 +1,48 @@
 {
- "generatedAt": "2026-10-24T10:43:17.402563+05:30",
+ "generatedAt": "2026-10-24T14:17:13.165009+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 7,
- "expectedPosts": 14,
- "articlesWithBothPosts": 7,
+ "articles": 9,
+ "expectedPosts": 18,
+ "articlesWithBothPosts": 9,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-24.html",
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -35,22 +61,22 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-24.html",
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
-    "bluesky": 0,
-    "mastodon": 1
+    "bluesky": 1,
+    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
   },
   {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-24.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
@@ -102,9 +128,9 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T10:43:13.519447+05:30",
+ "liveVerificationSourceAt": "2026-10-24T14:17:03.043697+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 7,
+ "articlesWithExactlyTwoPosts": 9,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
