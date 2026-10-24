@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-24",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "6be5d517c93f9bbb",
   "kind": "trending",
   "slot": 1,
-  "topic_id": "6be5d517c93f9bbb",
-  "replaced_topic_id": "7b8222d84a84df45",
+  "slot_key": "2026-10-24:trending:1",
+  "date": "2026-10-24",
+  "category": "Trend · Markets & Assets in Motion",
+  "evergreen_category": "Markets Trading & Crypto",
   "title": "Rupee posts best week in seven months",
-  "package": "master_packages/dynamic/2026-10-24-trending-6be5d517c93f9bbb.json",
-  "html": "scheduled_ready/2026-10-24-trending-1-rupee-posts-best-week-in-seven-months.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 19.1,
-  "remainingMinutes": 10.9
+  "url": "https://dailyyield.blogspot.com/2026/10/rupee-posts-best-week-in-seven-months.html",
+  "published_at": "2026-10-23T21:44:57-07:00"
 }
