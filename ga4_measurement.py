@@ -373,8 +373,89 @@ def daily_rows(token: str, property_id: str) -> tuple[list[dict], list[str]]:
         return ask(CORE_METRICS), [field for field in FULL_METRICS if field not in CORE_METRICS]
 
 
+# The owner's question of 23 October 2026 - how many readers are in Delhi, which countries the rest
+# come from, and how the traffic splits between finance topics and everything else - cannot be answered
+# from the seven-day daily table, which has no place or page in it. These three extra reports ask GA4
+# the same question in the same window, and the topic split is computed from the pages it names.
+BREAKDOWN_QUERIES = {
+    "countries": (["country"], ["screenPageViews", "activeUsers"]),
+    "cities": (["city"], ["screenPageViews", "activeUsers"]),
+    "pages": (["landingPage"], ["screenPageViews"]),
+}
+TOPIC_FAMILIES = (
+    ("daily news editions", ("/2026/",)),
+    ("standing pages and tools", ("/p/",)),
+    ("banking and loans", ("banking", "loan", "fd-", "interest-rate")),
+    ("personal money and tax", ("tax", "salary", "retirement", "insurance", "personal-money", "budget")),
+    ("markets and investing", ("market", "invest", "share", "ipo", "gold", "sensex", "nifty", "bond")),
+    ("business and economy", ("economy", "gdp", "business", "startup", "employment", "inflation")),
+    ("global and geopolitics", ("global", "americas", "china", "europe", "asia", "crude", "fed")),
+)
+
+
+def topic_of(label: str) -> str:
+    """Which family a landing page belongs to, read from the address alone.
+
+    This is a label on a measurement, not a verdict about an article: a page that matches no family is
+    reported as "other places on the site", never forced into a finance bucket to make the split look
+    tidier.
+    """
+    text = (label or "").lower()
+    for family, needles in TOPIC_FAMILIES:
+        if any(needle in text for needle in needles):
+            return family
+    return "other places on the site"
+
+
+def breakdown(token: str, property_id: str, days: int = DAYS) -> dict:
+    """Where the readers were and what they came for, from the same window and the same one report API.
+
+    Every query is fail-soft: a report Google would not answer becomes NOT_MEASURED with the reason, and
+    the rest of the file is still written. A missing breakdown is a gap in the measurement, not a defect
+    in the site, and it must never take the daily totals down with it.
+    """
+    today = datetime.now(timezone.utc).date()
+    out: dict[str, dict] = {}
+    for name, (dims, metrics) in BREAKDOWN_QUERIES.items():
+        body = {"dimensions": [named(field) for field in dims], "metrics": [named(field) for field in metrics],
+                "dateRanges": [{"startDate": (today - timedelta(days=days)).isoformat(),
+                                "endDate": (today - timedelta(days=1)).isoformat()}],
+                "orderBys": [{"metric": {"metricName": metrics[0]}, "desc": True}], "limit": "12"}
+        try:
+            data = http(f"{DATA_API}/properties/{property_id}:runReport", token=token, body=body, method="POST")
+            rows = []
+            for row in data.get("rows") or []:
+                first = (row.get("dimensionValues") or [{}])[0]
+                label = first.get("value") if isinstance(first, dict) else str(first)
+                values = [number(cell) for cell in row.get("metricValues") or []]
+                rows.append({"name": label or "(not shown by Google)",
+                             **{ROW_KEYS.get(field, field): (values[i] if i < len(values) else 0)
+                                for i, field in enumerate(metrics)}})
+            out[name] = {"status": "MEASURED", "rows": rows}
+        except (urllib.error.HTTPError, urllib.error.URLError, OSError) as exc:
+            out[name] = {"status": "NOT_MEASURED",
+                         "detail": f"{type(exc).__name__}: Google did not answer this report. It is a gap "
+                                   "in the measurement, not a defect in the site, and the daily totals "
+                                   "beside it are still the measured ones"}
+    total = sum(row.get("views") or 0 for row in (out.get("pages") or {}).get("rows") or [])
+    families: dict[str, int] = {}
+    for row in (out.get("pages") or {}).get("rows") or []:
+        families[topic_of(row.get("name"))] = families.get(topic_of(row.get("name")), 0) + (row.get("views") or 0)
+    out["topicSplit"] = {
+        "basis": "GA4 landingPage views over the same seven whole days, grouped by the address of the page",
+        "viewsAccountedFor": total,
+        "families": sorted(({"topic": k, "views": v} for k, v in families.items()),
+                           key=lambda item: -item["views"]),
+        "limits": "GA4 withholds rows below its own reporting threshold, so a small topic can read as "
+                  "absent rather than small. This is a description of who arrived, not a verdict on quality."}
+    out["window"] = {"start": (today - timedelta(days=days)).isoformat(),
+                     "end": (today - timedelta(days=1)).isoformat(), "days": days}
+    return out
+
+
 def summarise(rows: list[dict], tag: dict, property_id: str, property_source: str,
-              dropped: list[str] | None = None, verification: str = "not read") -> dict:
+              dropped: list[str] | None = None, verification: str = "not read",
+              detail: dict | None = None) -> dict:
     views = sum(row.get("views") or 0 for row in rows)
     users = sum(row.get("activeUsers") or 0 for row in rows)
     # a field nobody asked for is not a zero: it is unknown, and printing 0 there would invent a
@@ -428,6 +509,9 @@ def summarise(rows: list[dict], tag: dict, property_id: str, property_source: st
                        "daysWithRows": len(rows)},
             "daily": rows[:DAYS],
             "peak": max((row for row in rows), key=lambda row: row.get("views") or 0, default=None),
+            "geography": {k: detail[k] for k in ("countries", "cities") if detail and k in detail} or None,
+            "topics": (detail or {}).get("topicSplit") or None,
+            "breakdownWindow": (detail or {}).get("window") or None,
             "remedy": REMEDIES.get(status, "") or None,
             "note": "views are GA4 screenPageViews for the last 7 whole days; the blog is not "
                     "modified by this job and no tag is installed by it"}
@@ -442,10 +526,12 @@ def main() -> int:
         payload = json.loads(Path(arguments.fixture).read_text(encoding="utf-8"))
         report = summarise(payload.get("rows") or [], payload.get("siteTag") or {"checked": False},
                            str(payload.get("propertyId") or ""), "fixture",
-                           verification="fixture")
+                           verification="fixture", detail=payload.get("breakdown") or None)
     else:
         tag = site_tag()
         rows, property_id, source, verification, status, report_error = [], "", "not read", "not read", None, ""
+        detail: dict | None = None
+        dropped: list[str] = []
         scopes: list[str] = []
         try:
             token = refresh_token()
@@ -456,6 +542,13 @@ def main() -> int:
                 raise PermissionError("the stored token carries only: " + ", ".join(scopes))
             property_id, source, verification = resolve_property(token, MEASUREMENT_ID)
             rows, dropped = daily_rows(token, property_id)
+            # the breakdown is a courtesy on top of the totals: it is fetched after them, and a failure
+            # here is recorded and carried, never allowed to replace a number that was measured
+            try:
+                detail = breakdown(token, property_id)
+            except Exception as exc:  # noqa: BLE001 - measured totals outrank a missing breakdown
+                detail = {"countries": {"status": "NOT_MEASURED", "detail": type(exc).__name__},
+                          "cities": {"status": "NOT_MEASURED", "detail": type(exc).__name__}}
         except MissingCredentials:
             status = "CREDENTIALS_MISSING"
         except TokenRefused as exc:

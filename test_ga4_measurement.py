@@ -131,3 +131,58 @@ def raise_forbidden(*_args, **_kwargs):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class AudienceDistribution(unittest.TestCase):
+    """The owner's question of 23 October 2026: Delhi, the other countries, and finance against the rest.
+
+    These tests exist so the breakdown can never become a second-class part of the report: the daily
+    totals must survive a Google refusal, and a place GA4 withholds must read as withheld, not as zero.
+    """
+
+    ROWS = [{"date": "2026-10-21", "views": 30, "activeUsers": 18, "engagedSessions": 18, "sessions": 20}]
+    TAG = {"checked": True, "reachable": True, "measurementIds": ["G-WLEEYTKV12"], "installedHere": True}
+
+    def test_geography_and_topics_reach_the_report_when_google_answers(self):
+        detail = {"countries": {"status": "MEASURED", "rows": [{"name": "India", "views": 96}]},
+                  "cities": {"status": "MEASURED", "rows": [{"name": "Delhi", "views": 41},
+                                                            {"name": "Bhopal", "views": 7}]},
+                  "topicSplit": {"viewsAccountedFor": 105,
+                                 "families": [{"topic": "daily news editions", "views": 80}]},
+                  "window": {"start": "2026-10-16", "end": "2026-10-22", "days": 7}}
+        report = ga4.summarise(self.ROWS, self.TAG, "444", "test", detail=detail)
+        self.assertEqual(report["totals"]["views"], 30, "the measured totals are untouched by the extra reports")
+        self.assertEqual(report["geography"]["cities"]["rows"][0]["name"], "Delhi")
+        self.assertEqual(report["topics"]["families"][0]["topic"], "daily news editions")
+        self.assertEqual(report["breakdownWindow"]["days"], 7)
+
+    def test_a_report_with_no_breakdown_says_so_instead_of_printing_empty_places(self):
+        report = ga4.summarise(self.ROWS, self.TAG, "444", "test")
+        self.assertIsNone(report["geography"])
+        self.assertIsNone(report["topics"])
+
+    def test_a_page_is_sorted_by_its_address_and_unmatched_pages_are_not_invented_into_finance(self):
+        self.assertEqual(ga4.topic_of("https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-21.html"),
+                         "daily news editions")
+        self.assertEqual(ga4.topic_of("https://dailyyield.blogspot.com/p/markets-today.html"),
+                         "standing pages and tools")
+        self.assertEqual(ga4.topic_of("https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10-18.html"),
+                         "daily news editions", "the date in the address decides: it is a daily edition")
+        self.assertEqual(ga4.topic_of("https://dailyyield.blogspot.com/p/gold-rate-by-city.html"),
+                         "standing pages and tools")
+        self.assertEqual(ga4.topic_of("https://dailyyield.blogspot.com/author/kushal.html"),
+                         "other places on the site")
+
+    def test_a_refused_report_is_recorded_as_not_measured_and_keeps_the_totals_alive(self):
+        def refused(*args, **kwargs):
+            raise urllib.error.HTTPError("https://example.invalid", 403, "Forbidden", {}, None)
+        with mock.patch.object(ga4, "http", refused):
+            detail = ga4.breakdown("token", "properties/1")
+        for key in ("countries", "cities", "pages"):
+            self.assertEqual(detail[key]["status"], "NOT_MEASURED", key)
+            self.assertIn("not a defect", detail[key]["detail"],
+                          "a Google refusal must read as a gap in the measurement, not as a site fault")
+        self.assertEqual(detail["topicSplit"]["viewsAccountedFor"], 0)
+        self.assertLess(detail["window"]["start"], detail["window"]["end"])
+        report = ga4.summarise(self.ROWS, self.TAG, "444", "test", detail=detail)
+        self.assertEqual(report["totals"]["views"], 30, "the measured totals survive a refused breakdown")
