@@ -1,10 +1,10 @@
 {
- "checkedAt": "2026-10-24T07:59:11+00:00",
+ "checkedAt": "2026-10-24T15:35:19+00:00",
  "corpus": {
-  "posts": 626,
+  "posts": 639,
   "pages": 14,
-  "urls": 640,
-  "words": 2630851
+  "urls": 653,
+  "words": 2713128
  },
  "sources": {
   "bing": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
@@ -22,17 +22,17 @@
  "checks": [
   {
    "id": "sitemap-readable:sitemap.xml",
-   "guideline": "Bing §2 §3",
+   "guideline": "Search rules §2 §3",
    "status": "PASS",
    "advisory": false,
-   "detail": "HTTP 200 with 626 <loc> entries",
+   "detail": "HTTP 200 with 639 <loc> entries",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
   },
   {
    "id": "sitemap-lists-only-live-urls:sitemap.xml",
-   "guideline": "Bing §3 §9",
+   "guideline": "Search rules §3 §9",
    "status": "PASS",
    "advisory": false,
    "detail": "0 listed URL(s) not in Blogger's published feed",
@@ -42,7 +42,7 @@
   },
   {
    "id": "sitemap-readable:sitemap-pages.xml",
-   "guideline": "Bing §2 §3",
+   "guideline": "Search rules §2 §3",
    "status": "PASS",
    "advisory": false,
    "detail": "HTTP 200 with 14 <loc> entries",
@@ -52,7 +52,7 @@
   },
   {
    "id": "sitemap-lists-only-live-urls:sitemap-pages.xml",
-   "guideline": "Bing §3 §9",
+   "guideline": "Search rules §3 §9",
    "status": "PASS",
    "advisory": false,
    "detail": "0 listed URL(s) not in Blogger's published feed",
@@ -62,7 +62,7 @@
   },
   {
    "id": "sitemap-freshness-signals",
-   "guideline": "Bing §3 (lastmod)",
+   "guideline": "Search rules §3 (lastmod)",
    "status": "PASS",
    "advisory": false,
    "detail": "sitemap.xml=yes sitemap-pages.xml=yes - Blogger decides this, not us",
@@ -72,7 +72,7 @@
   },
   {
    "id": "no-utility-pages-in-sitemaps",
-   "guideline": "Bing §3 §21 §11 (low-value URLs)",
+   "guideline": "Search rules §3 §21 §11 (low-value URLs)",
    "status": "PASS",
    "advisory": false,
    "detail": "0 machine page, redirect notice or template artifact(s) offered for indexing - 1 exempt because IndexNow reads its key there",
@@ -82,7 +82,7 @@
   },
   {
    "id": "odd-address-holds-real-article",
-   "guideline": "Bing §11 (a URL should describe its page)",
+   "guideline": "Search rules §11 (a URL should describe its page)",
    "status": "FAIL",
    "advisory": true,
    "detail": "3 address(es) carry a full article under a leftover slug. Nothing here needs deleting or re-titling: a Blogger permalink does not follow a title change, and rewriting the address would break every link already pointing at the article for no indexing gain",
@@ -96,27 +96,27 @@
   },
   {
    "id": "mobile-first-fetch-is-direct",
-   "guideline": "Google indexing (mobile-first), Bing §6",
+   "guideline": "Google indexing (mobile-first), Search rules §6",
    "status": "PASS",
    "advisory": false,
-   "detail": "1 of 4 addresses answer a mobile fetch with the document directly (1 rate limited, not counted); 3 more bounce exactly the way Blogger itself bounces and are not counted against us, because the target is the same page, answering 200, canonicalising back to the URL that was asked for. Blogger Help's standing answer to the 'Redirect error' row this produces is that there is nothing to fix; there is no API for the mobile template (Blogger v3 offers blogs, posts, pages, comments and pageviews only, and its mobileview path answers 404), and this blog was measured with the desktop theme already chosen, so the switch is not the lever either. Keep the canonicals as they are, and never add a script that strips ?m=1 away - that is the one way to turn this into a real crawl failure",
+   "detail": "0 of 4 addresses answer a mobile fetch with the document directly; 4 more bounce exactly the way Blogger itself bounces and are not counted against us, because the target is the same page, answering 200, canonicalising back to the URL that was asked for. Blogger Help's standing answer to the 'Redirect error' row this produces is that there is nothing to fix; there is no API for the mobile template (Blogger v3 offers blogs, posts, pages, comments and pageviews only, and its mobileview path answers 404), and this blog was measured with the desktop theme already chosen, so the switch is not the lever either. Keep the canonicals as they are, and never add a script that strips ?m=1 away - that is the one way to turn this into a real crawl failure",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
   },
   {
    "id": "homepage-duplicate-urls-consolidate",
-   "guideline": "Bing §6 (canonical consolidation)",
+   "guideline": "Search rules §6 (canonical consolidation)",
    "status": "PASS",
    "advisory": false,
-   "detail": "2 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
+   "detail": "4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
   },
   {
    "id": "titles-descriptive-and-complete",
-   "guideline": "Bing §13 §17; Google indexing criteria",
+   "guideline": "Search rules §13 §17; Google indexing criteria",
    "status": "PASS",
    "advisory": false,
    "detail": "0 under its floor (12 for an article, 4 for a page), 0 over 70, 0 empty, 0 cut mid-phrase (our own title clip does this)",
@@ -126,7 +126,7 @@
   },
   {
    "id": "titles-not-shouted-in-caps",
-   "guideline": "Bing §13 (titles written for users)",
+   "guideline": "Search rules §13 (titles written for users)",
    "status": "PASS",
    "advisory": false,
    "detail": "0 page or post title(s) are entirely upper case",
@@ -136,7 +136,7 @@
   },
   {
    "id": "no-duplicate-titles-across-urls",
-   "guideline": "Bing §6 §13",
+   "guideline": "Search rules §6 §13",
    "status": "PASS",
    "advisory": false,
    "detail": "0 title(s) shared by more than one URL; worst cluster is none",
@@ -146,27 +146,27 @@
   },
   {
    "id": "opening-delivers-the-headline",
-   "guideline": "Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query",
+   "guideline": "Search rules §17 §18 (one topic per URL, key information early); Google: does the page serve the query",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 631 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
+   "detail": "0 of 644 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
   },
   {
    "id": "content-not-thin",
-   "guideline": "Bing §11 §15",
+   "guideline": "Search rules §11 §15",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 639 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
+   "detail": "0 of 652 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
   },
   {
    "id": "no-near-duplicate-pages",
-   "guideline": "Bing §6; abuse: duplicate content across URLs",
+   "guideline": "Search rules §6; abuse: duplicate content across URLs",
    "status": "FAIL",
    "advisory": false,
    "detail": "40 pair(s) of URLs at or above 0.42 Jaccard shingle overlap (capped scan)",
@@ -189,7 +189,7 @@
   },
   {
    "id": "no-keyword-stuffing",
-   "guideline": "Bing abuse: keyword stuffing",
+   "guideline": "Search rules abuse: keyword stuffing",
    "status": "PASS",
    "advisory": false,
    "detail": "0 URL(s) push one word through paragraph after paragraph (4+ times in at least 45% of them), which is the abuse Bing names. A page that mentions its own subject once per paragraph is not flagged: that is what an article about a thing looks like.",
@@ -199,7 +199,7 @@
   },
   {
    "id": "images-described-not-decorated",
-   "guideline": "Bing §5 §12 (alt text, captions)",
+   "guideline": "Search rules §5 §12 (alt text, captions)",
    "status": "PASS",
    "advisory": false,
    "detail": "0 URL(s) contain an <img> with no usable alt text",
@@ -209,10 +209,10 @@
   },
   {
    "id": "image-file-names-are-descriptive",
-   "guideline": "Bing §12 (unique, relevant file names)",
+   "guideline": "Search rules §12 (unique, relevant file names)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "1 of 56 committed image file name(s) repeats across the site (photo-1.jpg on 116 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
+   "detail": "1 of 74 committed image file name(s) repeats across the site (photo-1.jpg on 126 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
    "offenders": [
     "photo-1.jpg"
    ],
@@ -221,7 +221,7 @@
   },
   {
    "id": "image-names-not-hidden-by-the-host",
-   "guideline": "Bing §12",
+   "guideline": "Search rules §12",
    "status": "PASS",
    "advisory": false,
    "detail": "0 URL(s) reach a crawler as an opaque id because Blogger's image proxy renames the upload - measured, not ours to change, and the alt text checked above carries the description instead",
@@ -231,14 +231,14 @@
   },
   {
    "id": "no-double-published-urls",
-   "guideline": "Bing §6 §9 (duplicate or redirected URLs)",
+   "guideline": "Search rules §6 §9 (duplicate or redirected URLs)",
    "status": "FAIL",
    "advisory": false,
    "detail": "8 article(s) were published twice; Blogger numbered the copy's slug, so both copies sit in the sitemap as separate URLs with the same text",
    "offenders": [
     "americas-finance-news-2026-10-12: https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12.html, https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12_01065225874.html",
     "asia-pacific-finance-news-2026-10-18: https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18.html, https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html",
-    "banking-fintech-personal-money-2026-10: https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01450325346.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_02014784419.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
+    "banking-fintech-personal-money-2026-10: https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01450325346.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01559215980.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01893468813.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_02014784419.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0512615699.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0558819666.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0812342773.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html, https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
     "canada-2026-10-01: https://dailyyield.blogspot.com/2026/10/canada-2026-10-01.html, https://dailyyield.blogspot.com/2026/10/canada-2026-10-01_0922194937.html",
     "category-corporate-finance-and-industry: https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01348401010.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01395999271.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01446121781.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_061642693.html, https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_0629962340.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01760479359.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02023327578.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_02075404004.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0259378603.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0777916234.html, https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0978730797.html",
     "category-economy-and-macro-policy-2026: https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01001893817.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_017346688.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01743986716.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_01962741990.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0527246697.html, https://dailyyield.blogspot.com/2026/09/category-economy-and-macro-policy-2026_0624211380.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01679841755.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01862474054.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_01900447569.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0496477750.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0526097754.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0623923357.html, https://dailyyield.blogspot.com/2026/10/category-economy-and-macro-policy-2026_0694295104.html",
@@ -250,7 +250,7 @@
   },
   {
    "id": "rendered-head-completeness",
-   "guideline": "Bing §13; Google indexability",
+   "guideline": "Search rules §13; Google indexability",
    "status": "PASS",
    "advisory": false,
    "detail": "6 URL(s) rendered: 0 without a title, 0 without a meta description",
@@ -260,7 +260,7 @@
   },
   {
    "id": "no-blocking-robots-meta",
-   "guideline": "Bing §10; Google: indexing allowed?",
+   "guideline": "Search rules §10; Google: indexing allowed?",
    "status": "PASS",
    "advisory": false,
    "detail": "0 sampled URL(s) carry noindex/nocache/noarchive/nosnippet",
@@ -270,7 +270,7 @@
   },
   {
    "id": "exactly-one-h1",
-   "guideline": "Bing §13 (heading hierarchy)",
+   "guideline": "Search rules §13 (heading hierarchy)",
    "status": "PASS",
    "advisory": false,
    "detail": "0 sampled URL(s) without exactly one <h1>; machine endpoints are exempt, as they are from every other writing rule",
@@ -280,7 +280,7 @@
   },
   {
    "id": "content-present-without-scripts",
-   "guideline": "Bing §8 (no client-side-only content)",
+   "guideline": "Search rules §8 (no client-side-only content)",
    "status": "PASS",
    "advisory": false,
    "detail": "0 sampled URL(s) whose body text is not in the served HTML",
@@ -290,7 +290,7 @@
   },
   {
    "id": "structured-data-matches-the-page",
-   "guideline": "Bing §14; Google: enhancement issues",
+   "guideline": "Search rules §14; Google: enhancement issues",
    "status": "PASS",
    "advisory": false,
    "detail": "6 URL(s) sampled, 0 markup problem(s)",
@@ -300,7 +300,7 @@
   },
   {
    "id": "robots-allows-both-crawlers",
-   "guideline": "Bing §8 §10; Google: crawl allowed?",
+   "guideline": "Search rules §8 §10; Google: crawl allowed?",
    "status": "PASS",
    "advisory": false,
    "detail": "HTTP 200; neither bot is blocked; declares sitemap",
@@ -310,7 +310,7 @@
   },
   {
    "id": "sitemaps-declared-in-robots",
-   "guideline": "Bing §2; Google: referring sitemap",
+   "guideline": "Search rules §2; Google: referring sitemap",
    "status": "PASS",
    "advisory": false,
    "detail": "both Blogger sitemaps are named in robots.txt",
@@ -320,7 +320,7 @@
   },
   {
    "id": "updated-pages-are-still-substantial",
-   "guideline": "Bing §19",
+   "guideline": "Search rules §19",
    "status": "PASS",
    "advisory": false,
    "detail": "0 URL(s) were revised and are still below the thin line",
@@ -330,10 +330,10 @@
   },
   {
    "id": "every-url-carries-a-date",
-   "guideline": "Bing §3 §19; Google structured data",
+   "guideline": "Search rules §3 §19; Google structured data",
    "status": "PASS",
    "advisory": false,
-   "detail": "640/640 URLs publish a machine-readable date",
+   "detail": "653/653 URLs publish a machine-readable date",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
