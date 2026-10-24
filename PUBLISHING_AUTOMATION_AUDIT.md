@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 235 PASS · 1 FAIL · 0 not measured here
+**Result:** 238 PASS · 0 FAIL · 0 not measured here
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -157,7 +157,7 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Google News readiness is measured from the public feed, and an unreadable feed stays unreadable**
 - ✅ **Indexing starts at the front doors: the main pages, not all 551 URLs**
 - ✅ **The front-door list includes the homepage, which no /p/ pattern can match**
-- ❌ **The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict**
+- ✅ **The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict**
 - ✅ **The policy audit is read-only and never counts a platform limit as our violation**
 - ✅ **The policy audit keeps similarity honest and re-runs visible**
 - ✅ **The policy audit runs daily and proves its own rules before it reports**
@@ -240,3 +240,5 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Nothing hands a Bing key to a run any more** — no workflow asks for the key, which makes the repository secret dead on arrival
 - ✅ **The main-page index target is judged on Google alone, and says why**
 - ✅ **The Blogger repair client kept its job through the rename** — what was called bing_seo_repair.py only ever wrote to Blogger, so it was renamed rather than deleted
+- ✅ **Both themes name the share card type that Blogger does not write itself** — measured 24 October 2026: Blogger already supplies og:image on every page checked, in content-first order, so the theme must not repeat it - a second og:image would replace a post picture with a brand card, which is the opposite of the fix. What was missing is the card type X reads.
+- ✅ **The page reader does not mistake an attribute order for a missing picture**

@@ -30,6 +30,29 @@ class Harness(unittest.TestCase):
         return json.loads(channels.OUT.read_text(encoding="utf-8"))
 
 
+class ViewCounters(Harness):
+    def test_the_reconciled_view_ledger_is_carried_into_the_audience_report(self):
+        (self.tmp / "BLOGGER_VIEWS_LEDGER.json").write_text(json.dumps({
+            "bloggerCounter": {"status": "MEASURED", "last7Days": 2200, "perDayFrom7DayWindow": 314.3},
+            "humanCount": {"viewsPerDay": 16.4, "basis": "GA4_PAGEVIEWS_7_DAY_AVERAGE"}}), encoding="utf-8")
+        report = self.run_with({"bluesky": {"ok": True, "handle": "@x", "followers": 1, "posts": 1,
+                                          "accountAgeDays": 1, "followersPerPost": 1.0}})
+        views = report["blogPageviews"]
+        self.assertTrue(views["measurable"], "Blogger's own counter was read, so it must be reported")
+        self.assertEqual(314.3, views["bloggerPerDay"])
+        self.assertEqual(16.4, views["humanViewsPerDay"], "the human number stays beside Blogger's")
+        self.assertIn("requests, not readers", views["warning"])
+
+    def test_a_ledger_that_could_not_read_blogger_stays_an_honest_gap(self):
+        (self.tmp / "BLOGGER_VIEWS_LEDGER.json").write_text(json.dumps(
+            {"bloggerCounter": {"status": "NOT_MEASURED", "reason": "Blogger credentials unavailable"}}),
+            encoding="utf-8")
+        report = self.run_with({"bluesky": {"ok": True, "handle": "@x", "followers": 1, "posts": 1,
+                                          "accountAgeDays": 1, "followersPerPost": 1.0}})
+        self.assertFalse(report["blogPageviews"]["measurable"])
+        self.assertIn("credentials", report["blogPageviews"]["why"])
+
+
 class Counting(Harness):
     def test_two_public_channels_are_added_up(self):
         report = self.run_with({
@@ -43,7 +66,10 @@ class Counting(Harness):
         self.assertEqual(report["totals"]["channelsMeasured"], 2)
         self.assertEqual(report["channels"]["Bluesky"]["followers"], 10)
         self.assertFalse(report["credentialsUsed"])
-        self.assertFalse(report["blogPageviews"]["measurable"], "no pageview counter exists during the freeze")
+        # Blogger does publish a page-view counter and the nightly view ledger reads it. Until that
+        # ledger exists, the honest answer here is "not measured", with the job that fills it named.
+        self.assertFalse(report["blogPageviews"]["measurable"])
+        self.assertIn("BLOGGER_VIEWS_LEDGER.json", report["blogPageviews"]["why"])
         self.assertIn("0.0114", (channels.MD.read_text(encoding="utf-8")))
 
     def test_an_endpoint_that_did_not_answer_is_never_reported_as_zero_followers(self):

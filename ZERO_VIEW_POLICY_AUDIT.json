@@ -1,6 +1,6 @@
 {
   "policy": "ZERO_SYNTHETIC_VIEWS",
-  "pass": 12,
+  "pass": 15,
   "fail": 0,
   "checks": [
     {
@@ -49,6 +49,18 @@
     },
     {
       "name": "Real-user metrics are consented non-pageview events",
+      "status": "PASS"
+    },
+    {
+      "name": "Both view counters are recorded together, so a gap between them is explained and not argued",
+      "status": "PASS"
+    },
+    {
+      "name": "The view ledger reads Blogger through the API and cannot add a view to the counter it reports",
+      "status": "PASS"
+    },
+    {
+      "name": "Blogger's counter never becomes the reader count",
       "status": "PASS"
     }
   ]

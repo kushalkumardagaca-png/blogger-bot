@@ -1,10 +1,10 @@
 {
-  "checked_at_ist": "2026-10-24T13:24:29+05:30",
+  "checked_at_ist": "2026-10-24T17:17:35+05:30",
   "summary": {
-    "pass": 235,
-    "fail": 1,
+    "pass": 238,
+    "fail": 0,
     "notMeasured": 0,
-    "checks": 236
+    "checks": 238
   },
   "checks": [
     {
@@ -774,7 +774,7 @@
     },
     {
       "name": "The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict",
-      "status": "FAIL",
+      "status": "PASS",
       "detail": ""
     },
     {
@@ -1186,6 +1186,16 @@
       "name": "The Blogger repair client kept its job through the rename",
       "status": "PASS",
       "detail": "what was called bing_seo_repair.py only ever wrote to Blogger, so it was renamed rather than deleted"
+    },
+    {
+      "name": "Both themes name the share card type that Blogger does not write itself",
+      "status": "PASS",
+      "detail": "measured 24 October 2026: Blogger already supplies og:image on every page checked, in content-first order, so the theme must not repeat it - a second og:image would replace a post picture with a brand card, which is the opposite of the fix. What was missing is the card type X reads."
+    },
+    {
+      "name": "The page reader does not mistake an attribute order for a missing picture",
+      "status": "PASS",
+      "detail": ""
     }
   ]
 }

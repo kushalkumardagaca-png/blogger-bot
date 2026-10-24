@@ -31,6 +31,18 @@ check("Theme declares reader-navigation-only policy", "data-dy-navigation-policy
 check("Theme accelerator is restricted to non-document feed paths", "data-dy-safe-accelerator','feed-and-assets-only'" in theme and "/^\\/feeds\\//.test(u.pathname)" in theme and "DYFeedCache.get('/p/" not in theme and "DYFeedCache.get('/search/" not in theme)
 check("Real-user metrics are consented non-pageview events", "data-dy-rum-policy','consent-only-non-pageview'" in theme and "gtag('event','dy_web_vitals'" in theme and "gtag('event','page_view'" not in theme)
 
+ledger = (ROOT / "blogger_view_ledger.py").read_text() if (ROOT / "blogger_view_ledger.py").exists() else ""
+ledger_workflow = (ROOT / ".github/workflows/blogger_view_ledger.yml").read_text() if (ROOT / ".github/workflows/blogger_view_ledger.yml").exists() else ""
+ladder_source = (ROOT / "growth_ladder.py").read_text() if (ROOT / "growth_ladder.py").exists() else ""
+check("Both view counters are recorded together, so a gap between them is explained and not argued",
+      bool(ledger) and "bloggerCounter" in ledger and "humanCount" in ledger and bool(ledger_workflow)
+      and "test_blogger_view_ledger" in ledger_workflow)
+check("The view ledger reads Blogger through the API and cannot add a view to the counter it reports",
+      "urlopen" not in ledger and "requests.get" not in ledger and "dailyyield.blogspot.com" not in ledger
+      and "pageviews?" in ledger)
+check("Blogger's counter never becomes the reader count",
+      '"usedForGrowthProjection": False' in ledger and "GA4_PAGEVIEWS_7_DAY_AVERAGE" in ladder_source)
+
 failed = [item for item in checks if item["status"] == "FAIL"]
 report = {"policy": "ZERO_SYNTHETIC_VIEWS", "pass": len(checks) - len(failed), "fail": len(failed), "checks": checks}
 Path("ZERO_VIEW_POLICY_AUDIT.json").write_text(json.dumps(report, indent=2) + "\n")

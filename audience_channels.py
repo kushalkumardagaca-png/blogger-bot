@@ -7,9 +7,11 @@ Bluesky and Mastodon publish follower counts over open, read-only endpoints, so 
 them the same way a visitor can - no token, no posting, no scraping behind a login.
 
 Two things are deliberately stated instead of guessed: channels whose numbers need a credential
-(Facebook is reported as not measured here, and the blog's own pageviews are reported
-as unmeasurable until the analytics freeze lifts, because Google Analytics is not installed and
-cannot be installed during the review.
+(Facebook is reported as not measured here), and the blog's own pageviews, which are counted by two
+instruments at once - Google Analytics, which needs a real browser, and Blogger's own counter, read
+through the authenticated API by the nightly Blogger View Ledger job. Blogger's figure counts every
+page its servers hand over, crawlers and scripts included, so it is reported beside the Google number
+and never used as the reader count.
 """
 from __future__ import annotations
 
@@ -80,6 +82,33 @@ def mastodon(instance: str, acct: str) -> dict:
             "source": url}
 
 
+def blog_pageviews() -> dict:
+    """What the blog's own page count looks like, from the file that reconciles both counters.
+
+    BLOGGER_VIEWS_LEDGER.json is written nightly by blogger_view_ledger.py, which reads Blogger's
+    counter through the API. When that file is absent or Blogger did not answer, the honest answer
+    here is "not measured" - never a stale number and never a zero.
+    """
+    path = OUT.parent / "BLOGGER_VIEWS_LEDGER.json"
+    try:
+        ledger = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"measurable": False,
+                "why": "BLOGGER_VIEWS_LEDGER.json has not been written yet - the nightly "
+                       "Blogger View Ledger job writes it"}
+    blogger = ledger.get("bloggerCounter") or {}
+    human = ledger.get("humanCount") or {}
+    measured = blogger.get("status") == "MEASURED"
+    return {"measurable": measured,
+            "bloggerLast7Days": blogger.get("last7Days"),
+            "bloggerPerDay": blogger.get("perDayFrom7DayWindow"),
+            "humanViewsPerDay": human.get("viewsPerDay"),
+            "humanBasis": human.get("basis"),
+            "warning": "Blogger's counter measures requests, not readers; the reader count is the "
+                       "Google figure - see BLOGGER_VIEWS_LEDGER.json",
+            "why": None if measured else str(blogger.get("reason") or "Blogger did not answer")}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--fixture", default="", help="JSON of channel payloads, for tests and offline review")
@@ -112,12 +141,7 @@ def main() -> int:
         "channels": rows,
         "totals": {"followers": followers if counted else None, "posts": posts if counted else None,
                    "channelsMeasured": len(counted), "channelsNotMeasured": sorted(NOT_MEASURED)},
-        "blogPageviews": {
-            "measurable": False,
-            "why": "Google Analytics is not installed and may not be installed during the "
-                   "publisher review, and Blogger exposes no pageview API - so only search "
-                   "traffic can be counted, from Search Console",
-        },
+        "blogPageviews": blog_pageviews(),
         "note": "followers per post is the honest reach test: it is what a published post has "
                 "historically converted into on that network",
     }

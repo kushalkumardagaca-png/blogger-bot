@@ -1,0 +1,68 @@
+name: Blogger View Ledger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blogger_view_ledger.py'
+      - 'test_blogger_view_ledger.py'
+      - '.github/workflows/blogger_view_ledger.yml'
+  schedule:
+    - cron: '30 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-blogger-view-ledger
+  cancel-in-progress: false
+
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify the two counters are reported honestly
+        run: python -m unittest test_blogger_view_ledger -v
+      - name: Read Blogger's own counter through the API
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+        run: python blogger_view_ledger.py
+      - name: Upload ledger evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blogger-view-ledger-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            BLOGGER_VIEWS_LEDGER.json
+            BLOGGER_VIEWS_LEDGER.md
+      - name: Persist the ledger safely
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield View Reconciliation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp BLOGGER_VIEWS_LEDGER.json /tmp/BLOGGER_VIEWS_LEDGER.json
+          cp BLOGGER_VIEWS_LEDGER.md /tmp/BLOGGER_VIEWS_LEDGER.md
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+            cp /tmp/BLOGGER_VIEWS_LEDGER.json .
+            cp /tmp/BLOGGER_VIEWS_LEDGER.md .
+            git add BLOGGER_VIEWS_LEDGER.json BLOGGER_VIEWS_LEDGER.md
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record Blogger and Google view counters together [skip ci]"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1
