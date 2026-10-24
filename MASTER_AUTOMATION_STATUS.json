@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-24",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "c21883bacb282258",
   "kind": "trending",
   "slot": 0,
-  "topic_id": "c21883bacb282258",
-  "replaced_topic_id": null,
+  "slot_key": "2026-10-24:trending:0",
+  "date": "2026-10-24",
+  "category": "Trend · Money & Policy Now",
+  "evergreen_category": "Economy Policy & Global Finance",
   "title": "Cyprus police investigate financial and tax",
-  "package": "master_packages/dynamic/2026-10-24-trending-c21883bacb282258.json",
-  "html": "scheduled_ready/2026-10-24-trending-0-cyprus-police-investigate-financial-and-tax.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 23.9,
-  "remainingMinutes": 6.1
+  "url": "https://dailyyield.blogspot.com/2026/10/cyprus-police-investigate-financial-and.html",
+  "published_at": "2026-10-23T17:45:13-07:00"
 }
