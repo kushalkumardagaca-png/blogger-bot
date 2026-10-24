@@ -1,7 +1,7 @@
 # Daily Yield — AdSense approval readiness (live site check)
 
 - **Status:** PASS
-- **Checked:** 2026-10-23T03:14:56.899940+00:00
+- **Checked:** 2026-10-24T07:37:04.565559+00:00
 - **Public pages read:** 10 (ordinary HTTP, no synthetic views)
 
 ## Checks
@@ -32,7 +32,7 @@
 - **PASS** — robots.txt readable: HTTP 200
 - **PASS** — AdSense crawler access allowed: Evaluated effective robots rules; an explicit agent name is not mandatory
 - **PASS** — sitemap declared: sitemap line checked in existing robots.txt
-- **PASS** — sitemap.xml serves URLs: HTTP 200, 601 URLs listed
+- **PASS** — sitemap.xml serves URLs: HTTP 200, 626 URLs listed
 - **PASS** — no raw code shown to readers: no CSS text leaks outside style blocks on the homepage
 - **PASS** — no inaccurate name claim on the homepage: the homepage does not present an unrelated surname as an alias of the author
 - **PASS** — no retired byline on the homepage: the homepage carries the public author name, not the retired initials form
