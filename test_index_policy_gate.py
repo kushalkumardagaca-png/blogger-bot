@@ -167,7 +167,7 @@ class TheWholeGate(unittest.TestCase):
 
     def test_a_duplicate_of_a_sibling_is_held(self):
         problems = gate.check_article("Gold rate today in India", BODY, siblings=[BODY])
-        self.assertTrue(any("Bing §6" in row for row in problems), problems)
+        self.assertTrue(any("Search rules §6" in row for row in problems), problems)
 
 
 class Boundaries(unittest.TestCase):

@@ -2,7 +2,8 @@
 """The indexing-policy gate every publisher must pass before a URL is written to Blogger.
 
 Why this file exists: on 22 October 2026 the first whole-corpus audit (search_index_policy_audit.py)
-judged all 597 published URLs against Bing's Webmaster Guidelines and Google's indexability rules and
+judged all 597 published URLs against the published webmaster rules both engines share and Google's
+indexability rules and
 found five classes of defect that our own quality gates never looked at - a title in ALL CAPS, a title
 clipped onto a comma, six URLs sharing one title, an image with no alt text, and posts created out of a
 raw schema URL string. Repairing them once is not compliance. Compliance is a publisher being unable to
@@ -10,7 +11,7 @@ ship them, so every rule the audit measures is enforced here, at the point of wr
 
 The rules are deliberate about what they may not do. A title is normalised and, when it cannot be made
 to fit, the *candidate* is rejected and the caller's own fallback applies: nothing here invents copy,
-pads a headline, or edits an article's sourced sentences - which is also what Bing §14 asks of structured
+pads a headline, or edits an article's sourced sentences - which is also what Search rules §14 asks of structured
 data and what the per-paragraph source rule asks of the body.
 
 Nothing in this module touches the network. Run ``--check`` for the offline proof.
@@ -22,7 +23,7 @@ import json
 import re
 from collections import Counter
 
-# Both engines truncate a title in the search results at roughly this width, and Bing §13 asks for a
+# Both engines truncate a title in the search results at roughly this width, and Search rules §13 asks for a
 # title that describes the page rather than a sentence about it.
 TITLE_MIN = 12
 TITLE_MAX = 70
@@ -41,7 +42,7 @@ STOPWORDS = frozenset(("a an the of and or to in for on at is are was were be be
                        "over under between why how what when where which who whose and").split())
 
 # A page whose title is one of these is not an article, it is a mistake: a URL, a schema token, or a
-# bare generic word that describes nothing. Bing §11 and §21 both push such URLs out of the eligibility
+# bare generic word that describes nothing. Search rules §11 and §21 both push such URLs out of the eligibility
 # pool, and §21 says they slow down the crawling of everything else.
 JUNK_TITLE = re.compile(r"^(?:https?://|www\.|/p/|/\d{4}/)|\b(?:n/?a|null|untitled|indexnow-key)\b|"
                         r"^(?:article|post \d+|\d{1,4}|test|draft)$", re.I)
@@ -126,7 +127,7 @@ def sentence_case(title: str) -> str:
     """TERMS AND CONDITIONS -> Terms and conditions, without wrecking acronyms or proper names.
 
     Google's display-quality guidance treats an all-caps title as something we should not be shipping,
-    and Bing §13 wants the title written for the person reading the results page.
+    and Search rules §13 wants the title written for the person reading the results page.
     """
     title = re.sub(r"\s+", " ", html.unescape((title or "").strip()))
     if not title:
@@ -242,7 +243,7 @@ def page_title(body: str, fallback: str = "", *, limit: int = TITLE_MAX) -> str:
     """A page's title should be the heading the page already shows.
 
     The standing pages carry titles like `DAILY NEWS` and `CALCULATOR` while their own markup contains
-    a line such as "EMI, SIP and loan calculators". Bing §13 wants the title to describe the page, and
+    a line such as "EMI, SIP and loan calculators". Search rules §13 wants the title to describe the page, and
     the sentence the page already displays is a better description than anything a script could invent -
     it is the site's own words, which is also the rule this repository applies to headlines.
     """
@@ -291,7 +292,7 @@ def similarity(left: str, right: str) -> float:
 def near_duplicate(text: str, published: list[str], ratio: float = NEAR_DUPLICATE_RATIO) -> tuple[float, int]:
     """Worst similarity of this article against the recent ones, and which index it matched.
 
-    -1 means no match. Bing §6 and the abuse list both name the same thing - the same content at several
+    -1 means no match. Search rules §6 and the abuse list both name the same thing - the same content at several
     URLs - and the desk templates make it easy to reproduce by accident: two country editions, one day,
     one template, four swapped numbers. The publisher measures it before the URL exists.
     """
@@ -308,7 +309,7 @@ def near_duplicate(text: str, published: list[str], ratio: float = NEAR_DUPLICAT
 
 
 def alt_failures(content: str, minimum: int = 6) -> int:
-    """Images with no usable alt text (Bing §5 §12)."""
+    """Images with no usable alt text (Search rules §5 §12)."""
     failures = 0
     for tag in re.findall(r"<img\b[^>]*>", content or "", flags=re.I):
         match = re.search(r"alt=['\"]([^'\"]*)['\"]", tag, flags=re.I)
@@ -386,7 +387,7 @@ def canonical_url(value: str) -> tuple[str, bool]:
 
 
 def asset_file_name(slug: str, placement: int) -> str:
-    """Name a photo after its subject, in its own words (Bing §12: unique, relevant file names).
+    """Name a photo after its subject, in its own words (Search rules §12: unique, relevant file names).
 
     `assets/master/gold-rate-in-india/gold-rate-in-india-1.jpg` is what a crawler reads. `photo-1.jpg`
     inside that folder was the same string on 473 URLs. Posts already published keep pointing at files
@@ -404,10 +405,10 @@ def check_article(title: str, content: str, *, taken_titles: set[str] | None = N
     body = strip_markup(content)
     if len(body.split()) < minimum_words:
         problems.append(f"page carries {len(body.split())} words of visible text, under the "
-                        f"{minimum_words}-word line Bing §11 calls thin")
+                        f"{minimum_words}-word line Search rules §11 calls thin")
     missing = alt_failures(content)
     if missing:
-        problems.append(f"{missing} image(s) without usable alt text (Bing §5 §12)")
+        problems.append(f"{missing} image(s) without usable alt text (Search rules §5 §12)")
     word, share = most_used_word(content)
     if word:
         problems.append(f"{word!r} appears {STUFFING_MIN_REPEATS}+ times in {share:.0%} of paragraphs, "
@@ -415,10 +416,10 @@ def check_article(title: str, content: str, *, taken_titles: set[str] | None = N
     if siblings:
         score, index = near_duplicate(body, siblings, ratio)
         if index >= 0:
-            problems.append(f"this is {score:.0%} the same document as another published URL (Bing §6); "
+            problems.append(f"this is {score:.0%} the same document as another published URL (Search rules §6); "
                             "it needs its own facts, not the shared template")
     if taken_titles and key(title) in {key(row) for row in taken_titles}:
-        problems.append("another live URL already carries this exact title (Bing §6 §13)")
+        problems.append("another live URL already carries this exact title (Search rules §6 §13)")
     return problems
 
 

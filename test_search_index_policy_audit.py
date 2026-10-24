@@ -379,7 +379,7 @@ class Mapping(unittest.TestCase):
         src = Path(audit.__file__).read_text(encoding="utf-8")
         for section in ("§2", "§3", "§5", "§6", "§8", "§9", "§10", "§11", "§12", "§13", "§14",
                         "§15", "§17", "§18", "§19", "§20", "§21"):
-            self.assertIn(section, src, f"Bing {section} is no longer cited by any check")
+            self.assertIn(section, src, f"the {section} duty is no longer cited by any check")
         self.assertIn("support.google.com/webmasters/answer/9012289", src)
 
     def test_the_report_names_what_a_feed_cannot_answer(self):

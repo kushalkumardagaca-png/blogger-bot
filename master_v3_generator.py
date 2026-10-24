@@ -322,6 +322,26 @@ def deterministic_section(section_heading,sources):
    if not text or key in seen:continue
    seen.add(key);paragraphs.append(text);return True
   return False
+ def take_sentence():
+  """Admit one sentence at a time, so a top-up can stop inside the window instead of stepping over it.
+
+  Each fallback paragraph is roughly a hundred words and the validator's window is only ninety wide
+  (400-490), so whole-paragraph growth can pass straight over it: on 24 October 2026 an evergreen slot
+  reached 392 words, could not add a paragraph without overshooting 470, and three substitute topics
+  died the same way. The sentences below are drawn from the same candidate records the paragraph loop
+  would have used, scrubbed by the identical number rule and deduplicated by the same 'seen' set, so
+  nothing is stretched, repeated or invented - the section simply stops at a length it can be validated
+  at. The window itself is untouched: a section that still cannot reach 400 words is refused exactly as
+  before, which is what keeps the fallback honest when a topic genuinely has no evidence.
+  """
+  nonlocal cursor
+  while cursor<max(24,6*len(sources)):
+   text=scrub_one(clean(make(cursor)));cursor+=1
+   for sentence in [x for x in re.split(r'(?<=[.!?])\s+',text) if x.strip()]:
+    key=' '.join(sentence.casefold().split())[:180]
+    if not sentence or key in seen:continue
+    seen.add(key);paragraphs.append(sentence);return True
+  return False
  while len(paragraphs)<6:
   if not take():break
  if len(paragraphs)<4:raise RuntimeError('deterministic evidence section lacked four usable source passages')
@@ -362,6 +382,13 @@ def deterministic_section(section_heading,sources):
    break
   paragraphs=retag();shrink()
   if len(paragraphs)<4:break
+ # Whole paragraphs could not land the count inside the window, so the remaining words are taken as
+ # single sentences from the next fresh passages and then folded back into paired paragraphs, which is
+ # the shape the rest of the article uses. Only done when the section is still short of 400 words.
+ while words(' '.join(paragraphs))<400:
+  if not take_sentence():break
+ if len(paragraphs)>6:
+  paragraphs=[' '.join(paragraphs[i:i+2]) for i in range(0,len(paragraphs),2)]
  paragraphs=[x for x in paragraphs if x and x.strip()]
  paragraphs=retag();shrink()
  # The fallback is held to the identical validator as model-written prose - same window, same citation

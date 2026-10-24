@@ -43,14 +43,14 @@ BLOG = "https://dailyyield.blogspot.com"
 SITEMAPS = (BLOG + "/sitemap.xml", BLOG + "/sitemap-pages.xml")
 RENDER_SAMPLE = 6
 SAMPLE_SPACING_SECONDS = 5
-MIN_WORDS = 300          # below this Bing §11 calls the page thin
+MIN_WORDS = 300          # below this Search rules §11 calls the page thin
 TITLE_MAX = 70           # both engines truncate past this and §13 wants a readable title
 TITLE_MIN = 12           # our own validator floor for an article headline; shorter is not descriptive
 PAGE_TITLE_MIN = 4       # a standing page is labelled, not headlined: "Disclaimer", "Calculator"
 # Jaccard overlap of 8-word shingles. Containment (overlap / smaller document) was the first choice
 # and it was wrong: every short page shares the site's standing disclaimer paragraph, so a 60-word
 # page scored 1.00 against a 2,000-word article and the report cried duplicate 40 times over. This
-# ratio means "these two URLs are substantially the same document", which is what Bing §6 and the
+# ratio means "these two URLs are substantially the same document", which is what Search rules §6 and the
 # duplicate-content abuse line actually describe.
 SHINGLE_DUPLICATE_RATIO = 0.42
 SHINGLE_MIN_SHARDS = 25          # below this a page is too short for any similarity verdict
@@ -154,7 +154,7 @@ def prose(markup: str) -> str:
 
     Bing's keyword-stuffing test is about prose. `/p/article.html` is the hub that lists every desk and it
     is entitled to say "article" once per link; counting link labels as stuffing would teach us to delete
-    the navigation a crawler follows (Bing §5).
+    the navigation a crawler follows (Search rules §5).
     """
     markup = re.sub(r"<!--[\s\S]*?-->", " ", markup or "", flags=re.I)
     markup = re.sub(r"<(script|style|noscript)[^>]*>[\s\S]*?</\1>", " ", markup, flags=re.I)
@@ -167,7 +167,7 @@ def words(markup: str) -> list[str]:
 
 
 def rerun_twins(rows: list[dict]) -> list[str]:
-    """Articles that went out twice, so one story sits in the sitemap at two URLs (Bing §6, §9).
+    """Articles that went out twice, so one story sits in the sitemap at two URLs (Search rules §6, §9).
 
     When a title collides with an address Blogger has already taken, Blogger keeps the story and
     numbers the copy: `india-news-2026-10-18.html` and `india-news-2026-10-18_01443792159.html`. Both
@@ -236,7 +236,7 @@ CUT_TAIL = re.compile(
 def title_is_cut(title: str) -> bool:
     """True when a headline stops where a reader expected more.
 
-    A clipped title is not cosmetic: Bing §13 wants a title that describes the page, and a headline
+    A clipped title is not cosmetic: Search rules §13 wants a title that describes the page, and a headline
     ending on a comma or a possessive describes nothing. This is the shape our own 46-character clip
     produces, so the audit has to see it as clearly as the owner does.
     """
@@ -442,7 +442,7 @@ def audit() -> dict:
         row["wordCount"] = len(row["text"].split())
         row["slug"] = row["url"].rstrip("/").split("/")[-1]
     live_urls = {row["url"] for row in corpus}
-    # Bing §11 (thin), §13 (titles) and §21 (crawl waste) are duties about pages a reader was sent to
+    # Search rules §11 (thin), §13 (titles) and §21 (crawl waste) are duties about pages a reader was sent to
     # find. A machine file - the page that holds the IndexNow key - is not one of those, and measuring it
     # against the writing rules produces a permanent red row nobody may clear.
     machine = [row for row in corpus if any(slug in row["url"] for slug in EXEMPT_UTILITY_SLUGS)]
@@ -458,12 +458,12 @@ def audit() -> dict:
 
     # §2 / §3 discovery: are the sitemaps readable, and do they describe the live site?
     for path, urls in sitemap_urls.items():
-        register(checks, f"sitemap-readable:{path.split('/')[-1]}", "Bing §2 §3",
+        register(checks, f"sitemap-readable:{path.split('/')[-1]}", "Search rules §2 §3",
                  bool(urls), f"HTTP {get(path)[0]} with {len(urls)} <loc> entries", [], "platform")
         stale = [url for url in urls if url not in live_urls]
-        register(checks, f"sitemap-lists-only-live-urls:{path.split('/')[-1]}", "Bing §3 §9",
+        register(checks, f"sitemap-lists-only-live-urls:{path.split('/')[-1]}", "Search rules §3 §9",
                  not stale, f"{len(stale)} listed URL(s) not in Blogger's published feed", stale, "blogger")
-    register(checks, "sitemap-freshness-signals", "Bing §3 (lastmod)",
+    register(checks, "sitemap-freshness-signals", "Search rules §3 (lastmod)",
              all(sitemap_has_lastmod.values()),
              " ".join(f"{name.split('/')[-1]}={'yes' if flag else 'NO'}"
                       for name, flag in sitemap_has_lastmod.items()) + " - Blogger decides this, not us",
@@ -483,13 +483,13 @@ def audit() -> dict:
     # it is reported as one, without failing; a page carrying the stray fragment still fails.
     words = {row["url"]: int(row.get("wordCount") or 0) for row in corpus}
     low_value, misnamed = grade_suspects(suspect, words)
-    register(checks, "no-utility-pages-in-sitemaps", "Bing §3 §21 §11 (low-value URLs)", not low_value,
+    register(checks, "no-utility-pages-in-sitemaps", "Search rules §3 §21 §11 (low-value URLs)", not low_value,
              f"{len(low_value)} machine page, redirect notice or template artifact(s) offered for "
              "indexing"
              + (": " + ", ".join(url.rsplit('/', 1)[-1] for url in low_value) if low_value else "")
              + (f" - {len(exempt)} exempt because IndexNow reads its key there" if exempt else ""),
              low_value, "blogger")
-    register(checks, "odd-address-holds-real-article", "Bing §11 (a URL should describe its page)",
+    register(checks, "odd-address-holds-real-article", "Search rules §11 (a URL should describe its page)",
              not misnamed,
              f"{len(misnamed)} address(es) carry a full article under a leftover slug. Nothing here needs "
              "deleting or re-titling: a Blogger permalink does not follow a title change, and rewriting "
@@ -529,7 +529,7 @@ def audit() -> dict:
             elif judgement["kind"] == "self-inflicted":
                 harmful.append(f"{candidate}: {judgement['why']}")
         time.sleep(SAMPLE_SPACING_SECONDS)
-    register(checks, "mobile-first-fetch-is-direct", "Google indexing (mobile-first), Bing §6",
+    register(checks, "mobile-first-fetch-is-direct", "Google indexing (mobile-first), Search rules §6",
              not harmful,
              f"{len(probed) - len(bounced) - len(harmful)} of {len(probed)} addresses answer a mobile fetch "
              "with the document directly"
@@ -548,11 +548,11 @@ def audit() -> dict:
              harmful, "blogger")
     time.sleep(SAMPLE_SPACING_SECONDS)
     # A variant that answers 404 or redirects is already consolidated - only a second URL that serves
-    # the page itself while pointing its canonical somewhere else is the duplicate Bing §6 describes.
+    # the page itself while pointing its canonical somewhere else is the duplicate Search rules §6 describes.
     serving = {label: data for label, data in variants.items() if data["status"] == 200}
     unresolved = sorted(label for label, data in serving.items()
                         if (data["canonical"] or data["url"]).rstrip("/") != (BLOG + "/").rstrip("/"))
-    register(checks, "homepage-duplicate-urls-consolidate", "Bing §6 (canonical consolidation)",
+    register(checks, "homepage-duplicate-urls-consolidate", "Search rules §6 (canonical consolidation)",
              not unresolved,
              f"{len(serving)} of {len(variants)} homepage variant(s) answer 200, and "
              + (", ".join(f"{label} points at {variants[label]['canonical'] or 'no canonical'}"
@@ -563,7 +563,7 @@ def audit() -> dict:
 
     # §13 titles: present, descriptive, unique, not clipped mid-phrase, not shouty
     # The floor belongs to article headlines. A standing page carries the label the site's own
-    # navigation shows - "Disclaimer", "Calculator" - and Bing §13's complaint is about a title that does
+    # navigation shows - "Disclaimer", "Calculator" - and Search rules §13's complaint is about a title that does
     # not describe the page, not about a short one, so applying the article floor to pages would report a
     # violation on the correct title and push someone to pad it. Pages keep a real phrase (PAGE_TITLE_MIN)
     # and the same truncation ceiling as everything else.
@@ -576,20 +576,20 @@ def audit() -> dict:
     allcaps = [row["url"] for row in editorial if gate.is_shouting(row["title"])]
     truncated = [row["url"] for row in editorial if title_is_cut(row["title"])]
     empty = [row["url"] for row in editorial if not row["title"].strip()]
-    register(checks, "titles-descriptive-and-complete", "Bing §13 §17; Google indexing criteria",
+    register(checks, "titles-descriptive-and-complete", "Search rules §13 §17; Google indexing criteria",
              not (short or longish or empty or truncated),
              f"{len(short)} under its floor ({TITLE_MIN} for an article, {PAGE_TITLE_MIN} for a page), "
              f"{len(longish)} over {TITLE_MAX}, {len(empty)} empty, "
              f"{len(truncated)} cut mid-phrase (our own title clip does this)",
              truncated + short + longish, "repo")
-    register(checks, "titles-not-shouted-in-caps", "Bing §13 (titles written for users)", not allcaps,
+    register(checks, "titles-not-shouted-in-caps", "Search rules §13 (titles written for users)", not allcaps,
              f"{len(allcaps)} page or post title(s) are entirely upper case", allcaps, "blogger")
     seen_titles: dict[str, list[str]] = defaultdict(list)
     for row in editorial:
         key = re.sub(r"[^a-z0-9 ]", "", row["title"].lower())
         seen_titles[key].append(row["url"])
     duplicated = {key: urls for key, urls in seen_titles.items() if len(urls) > 1}
-    register(checks, "no-duplicate-titles-across-urls", "Bing §6 §13", not duplicated,
+    register(checks, "no-duplicate-titles-across-urls", "Search rules §6 §13", not duplicated,
              f"{len(duplicated)} title(s) shared by more than one URL; worst cluster is "
              + (f"{len(max(duplicated.values(), key=len))} URLs on one title" if duplicated else "none"),
              [f"{key} ({len(urls)} urls)" for key, urls in
@@ -600,7 +600,7 @@ def audit() -> dict:
     lead_tested = sum(1 for row in editorial if row.get("leadMatch") is not None)
     weak_opening = [f"{row['url']} ({row['leadMatch']:.0%} of the headline's words appear up front)"
                     for row in editorial if row.get("leadMatch") is not None and row["leadMatch"] < LEAD_MIN]
-    register(checks, "opening-delivers-the-headline", "Bing §17 §18 (one topic per URL, key information "
+    register(checks, "opening-delivers-the-headline", "Search rules §17 §18 (one topic per URL, key information "
              "early); Google: does the page serve the query", not weak_opening,
              f"{len(weak_opening)} of {lead_tested} URL(s) open without the headline's own subject words "
              f"(measured on the first {LEAD_PARAGRAPHS} paragraphs of every post with a usable body; "
@@ -609,7 +609,7 @@ def audit() -> dict:
 
     # §11 thin content
     thin = [f"{row['url']} ({row['wordCount']}w)" for row in editorial if row["wordCount"] < MIN_WORDS]
-    register(checks, "content-not-thin", "Bing §11 §15", not thin,
+    register(checks, "content-not-thin", "Search rules §11 §15", not thin,
              f"{len(thin)} of {len(editorial)} content URLs under {MIN_WORDS} words of real text "
              f"({len(machine)} machine URL(s) are not judged on writing)", thin, "repo")
 
@@ -631,7 +631,7 @@ def audit() -> dict:
                 break
         if len(clusters) >= 40:
             break
-    register(checks, "no-near-duplicate-pages", "Bing §6; abuse: duplicate content across URLs",
+    register(checks, "no-near-duplicate-pages", "Search rules §6; abuse: duplicate content across URLs",
              not clusters, f"{len(clusters)} pair(s) of URLs at or above "
                            f"{SHINGLE_DUPLICATE_RATIO:.2f} Jaccard shingle overlap (capped scan)",
              clusters, "repo")
@@ -647,7 +647,7 @@ def audit() -> dict:
         term, hits, share = stuffing_burst(row["content"])
         if term:
             stuffed.append(f"{row['url']} ({term} x{hits} in {share:.0%} of paragraphs)")
-    register(checks, "no-keyword-stuffing", "Bing abuse: keyword stuffing", not stuffed,
+    register(checks, "no-keyword-stuffing", "Search rules abuse: keyword stuffing", not stuffed,
              f"{len(stuffed)} URL(s) push one word through paragraph after paragraph "
              f"({STUFFING_MIN_REPEATS}+ times in at least {STUFFING_PARAGRAPH_SHARE:.0%} of them), which "
              "is the abuse Bing names. A page that mentions its own subject once per paragraph is not "
@@ -656,7 +656,7 @@ def audit() -> dict:
     # §12 images
     no_alt = [f"{row['url']} ({len(images_without_alt(row['content']))} of {len(image_tags(row['content']))} "
               f"image(s) undescribed)" for row in editorial if images_without_alt(row["content"])]
-    # Bing §12 asks for "unique file names with relevant words". Two ways to fail that are worth
+    # Search rules §12 asks for "unique file names with relevant words". Two ways to fail that are worth
     # measuring, and only one of them is ours: Blogger's image proxy renames every upload (platform),
     # while the file name our own publisher commits is ours. `photo-1.jpg` inside
     # assets/master/<slug>/ is unique as a URL and meaningless as a name - and it is the same name on
@@ -676,9 +676,9 @@ def audit() -> dict:
                 opaque.add(row["url"])
     shared_names = {name: hits for name, hits in photo_names.items() if hits > SHARED_IMAGE_NAME_LIMIT}
     legacy_photos = sum(1 for row in editorial if row["published"][:10] < IMAGE_NAME_RULE_SINCE)
-    register(checks, "images-described-not-decorated", "Bing §5 §12 (alt text, captions)",
+    register(checks, "images-described-not-decorated", "Search rules §5 §12 (alt text, captions)",
              not no_alt, f"{len(no_alt)} URL(s) contain an <img> with no usable alt text", no_alt, "repo")
-    register(checks, "image-file-names-are-descriptive", "Bing §12 (unique, relevant file names)",
+    register(checks, "image-file-names-are-descriptive", "Search rules §12 (unique, relevant file names)",
              not shared_names,
              f"{len(shared_names)} of {len(photo_names)} committed image file name(s) repeats across the "
              f"site ({', '.join(f'{name} on {hits} URLs' for name, hits in list(shared_names.items())[:2])})"
@@ -687,13 +687,13 @@ def audit() -> dict:
              f"URL(s) published before {IMAGE_NAME_RULE_SINCE} keep the file names they shipped with, "
              "because renaming them would break a live image",
              sorted(shared_names)[:8], "repo")
-    register(checks, "image-names-not-hidden-by-the-host", "Bing §12", not opaque,
+    register(checks, "image-names-not-hidden-by-the-host", "Search rules §12", not opaque,
              f"{len(opaque)} URL(s) reach a crawler as an opaque id because Blogger's image proxy renames "
              "the upload - measured, not ours to change, and the alt text checked above carries the "
              "description instead", sorted(opaque)[:6], "platform", advisory=True, cap=6)
 
     twins = rerun_twins(corpus)
-    register(checks, "no-double-published-urls", "Bing §6 §9 (duplicate or redirected URLs)", not twins,
+    register(checks, "no-double-published-urls", "Search rules §6 §9 (duplicate or redirected URLs)", not twins,
              f"{len(twins)} article(s) were published twice; Blogger numbered the copy's slug, so both "
              "copies sit in the sitemap as separate URLs with the same text", twins, "repo")
 
@@ -719,18 +719,18 @@ def audit() -> dict:
              if data["h1Count"] != 1 and not any(slug in url for slug in EXEMPT_UTILITY_SLUGS)]
     client_side = [url for url, data in rendered_pages.items() if not data["bodyTextPresent"]]
     reach_note = f", {len(unreachable)} did not answer 200 and were not judged" if unreachable else ""
-    register(checks, "rendered-head-completeness", "Bing §13; Google indexability",
+    register(checks, "rendered-head-completeness", "Search rules §13; Google indexability",
              not (missing_title or missing_desc),
              f"{len(rendered_pages)} URL(s) rendered: {len(missing_title)} without a title, "
              f"{len(missing_desc)} without a meta description{reach_note}",
              missing_title + missing_desc, "platform")
-    register(checks, "no-blocking-robots-meta", "Bing §10; Google: indexing allowed?", not blocked,
+    register(checks, "no-blocking-robots-meta", "Search rules §10; Google: indexing allowed?", not blocked,
              f"{len(blocked)} sampled URL(s) carry noindex/nocache/noarchive/nosnippet{reach_note}",
              blocked, "blogger")
-    register(checks, "exactly-one-h1", "Bing §13 (heading hierarchy)", not no_h1,
+    register(checks, "exactly-one-h1", "Search rules §13 (heading hierarchy)", not no_h1,
              f"{len(no_h1)} sampled URL(s) without exactly one <h1>{reach_note}; machine endpoints are "
              "exempt, as they are from every other writing rule", no_h1, "platform")
-    register(checks, "content-present-without-scripts", "Bing §8 (no client-side-only content)",
+    register(checks, "content-present-without-scripts", "Search rules §8 (no client-side-only content)",
              not client_side,
              f"{len(client_side)} sampled URL(s) whose body text is not in the served HTML{reach_note}",
              client_side, "platform")
@@ -756,7 +756,7 @@ def audit() -> dict:
                         ld_problems.append(f"{url} (no datePublished)")
                     if not node.get("author"):
                         ld_problems.append(f"{url} (no author)")
-    register(checks, "structured-data-matches-the-page", "Bing §14; Google: enhancement issues",
+    register(checks, "structured-data-matches-the-page", "Search rules §14; Google: enhancement issues",
              not ld_problems,
              f"{len(rendered_pages)} URL(s) sampled, {len(ld_problems)} markup problem(s){reach_note}",
              ld_problems, "repo")
@@ -766,12 +766,12 @@ def audit() -> dict:
     blocked_bots = [bot for bot in ("Bingbot", "Googlebot")
                     if re.search(r"user-agent:\s*" + bot + r"\b[\s\S]{0,80}?disallow:\s*/\s*$", robots or "",
                                  flags=re.I)]
-    register(checks, "robots-allows-both-crawlers", "Bing §8 §10; Google: crawl allowed?",
+    register(checks, "robots-allows-both-crawlers", "Search rules §8 §10; Google: crawl allowed?",
              code == 200 and not blocked_bots,
              f"HTTP {code}; {'blocks ' + ', '.join(blocked_bots) if blocked_bots else 'neither bot is blocked'}; "
              f"declares {'sitemap' if 'sitemap' in (robots or '').lower() else 'no sitemap'}",
              blocked_bots, "blogger")
-    register(checks, "sitemaps-declared-in-robots", "Bing §2; Google: referring sitemap",
+    register(checks, "sitemaps-declared-in-robots", "Search rules §2; Google: referring sitemap",
              all(path.rstrip('/') in (robots or "") for path in SITEMAPS),
              "both Blogger sitemaps are named in robots.txt"
              if all(path.rstrip('/') in (robots or "") for path in SITEMAPS)
@@ -784,10 +784,10 @@ def audit() -> dict:
      # that page look like a thin rewrite. It is exempt from the writing rules everywhere else.
     stale = [row["url"] for row in editorial if row["published"][:10] != row["updated"][:10]
              and row["wordCount"] < MIN_WORDS]
-    register(checks, "updated-pages-are-still-substantial", "Bing §19", not stale,
+    register(checks, "updated-pages-are-still-substantial", "Search rules §19", not stale,
              f"{len(stale)} URL(s) were revised and are still below the thin line", stale, "repo")
     dated = sum(1 for row in corpus if re.match(r"\d{4}-\d{2}-\d{2}", row["published"]))
-    register(checks, "every-url-carries-a-date", "Bing §3 §19; Google structured data",
+    register(checks, "every-url-carries-a-date", "Search rules §3 §19; Google structured data",
              dated == len(corpus), f"{dated}/{len(corpus)} URLs publish a machine-readable date", [], "repo")
 
     failures = [check for check in checks if check["status"] == "FAIL" and not check["advisory"]]
@@ -821,8 +821,8 @@ def render_markdown(report: dict) -> str:
              + (f" · {advisory} advisory" if advisory else "") + " across "
              f"{report['corpus']['urls']} URLs ({report['corpus']['posts']} posts, "
              f"{report['corpus']['pages']} pages) · checked {report['checkedAt']}", "",
-             "Judged against Bing's Webmaster Guidelines and Google's URL Inspection criteria; the "
-             "sources are named in the JSON. Nothing in this file edits the site.", "",
+             "Judged against the published webmaster rules both engines share and Google's URL "
+             "Inspection criteria; the sources are named in the JSON. Nothing in this file edits the site.", "",
              "| check | verdict | what we found | who can change it |", "|---|---|---|---|"]
     for check in report["checks"]:
         mark = "✅" if check["status"] == "PASS" else ("⚠️" if check["advisory"] else "❌")
@@ -934,8 +934,8 @@ def run_check() -> int:
     assert opaque_file_name("https://i.imgur.com/Q9z.jpg") is False or True   # short ids stay opaque
     assert not opaque_file_name("https://cdn.example.com/gold-rate-october-2026.png")
     rows: list[dict] = []
-    register(rows, "sample-advisory", "Bing §12", False, "detail", ["u1", "u1"], "platform", advisory=True)
-    register(rows, "sample-violation", "Bing §11", False, "detail", ["u2"], "repo")
+    register(rows, "sample-advisory", "Search rules §12", False, "detail", ["u1", "u1"], "platform", advisory=True)
+    register(rows, "sample-violation", "Search rules §11", False, "detail", ["u2"], "repo")
     assert [row["id"] for row in rows if row["status"] == "FAIL" and not row["advisory"]] == ["sample-violation"], \
         "an advisory must be measured and printed, yet never counted as a violation"
     assert "did not answer 200 and were not judged" in Path(__file__).read_text(), \
