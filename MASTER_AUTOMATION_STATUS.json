@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "94102c0fe96d5547",
-  "kind": "evergreen",
-  "slot": 2,
-  "slot_key": "2026-10-24:evergreen:2",
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-24",
-  "category": "Companies Technology & Industry",
-  "evergreen_category": "Companies Technology & Industry",
-  "title": "Canadian Gaming Association to demonstrate",
-  "url": "https://dailyyield.blogspot.com/2026/10/canadian-gaming-association-to.html",
-  "published_at": "2026-10-24T02:51:31-07:00"
+  "kind": "trending",
+  "slot": 2,
+  "topic_id": "57eaa062b94284eb",
+  "replaced_topic_id": "63eb0ab6a10ea864",
+  "title": "Rising borrowing costs signal funding risks",
+  "package": "master_packages/dynamic/2026-10-24-trending-57eaa062b94284eb.json",
+  "html": "scheduled_ready/2026-10-24-trending-2-rising-borrowing-costs-signal-funding-risks.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 30.2,
+  "remainingMinutes": 0.0
 }
