@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-24T22:12:27.179056+05:30",
+ "generatedAt": "2026-10-24T23:04:35.013210+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 20,
- "expectedPosts": 40,
- "articlesWithBothPosts": 20,
+ "articles": 21,
+ "expectedPosts": 42,
+ "articlesWithBothPosts": 21,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
@@ -267,13 +267,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-4",
+   "title": "Time, labour and cost of caring for ageing",
+   "url": "https://dailyyield.blogspot.com/2026/10/time-labour-and-cost-of-caring-for.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T22:12:13.668565+05:30",
+ "liveVerificationSourceAt": "2026-10-24T23:04:26.002522+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 20,
+ "articlesWithExactlyTwoPosts": 21,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
