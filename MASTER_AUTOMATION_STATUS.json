@@ -1,11 +1,15 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-24",
-  "kind": "trending",
+  "kind": "evergreen",
   "slot": 4,
-  "topic_id": "ea42142389123e57",
-  "title": "UK consumer confidence falls at fastest rate",
-  "url": "https://dailyyield.blogspot.com/2026/10/uk-consumer-confidence-falls-at-fastest.html",
-  "published_at": "2026-10-24T08:21:49-07:00"
+  "topic_id": "56f785a24f5cede5",
+  "replaced_topic_id": null,
+  "title": "Time, labour and cost of caring for ageing",
+  "package": "master_packages/dynamic/2026-10-24-evergreen-56f785a24f5cede5.json",
+  "html": "scheduled_ready/2026-10-24-evergreen-4-time-labour-and-cost-of-caring-for-ageing.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 8.8,
+  "remainingMinutes": 21.2
 }
