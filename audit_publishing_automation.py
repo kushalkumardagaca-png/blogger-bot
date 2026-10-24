@@ -1102,6 +1102,17 @@ check('The Blogger repair client kept its job through the rename', (ROOT/'blogge
       and 'from blogger_seo_repair import' in (ROOT/'search_index_policy_repair.py').read_text(encoding='utf-8'),
       'what was called bing_seo_repair.py only ever wrote to Blogger, so it was renamed rather than deleted')
 
+# A shared link with no picture is a lost reader, and the fix lives in the theme, which no API can write.
+_v4 = (ROOT/'theme/Daily-Yield-Theme-v4-2026-10-01.xml').read_text(encoding='utf-8')
+_sub = (ROOT/'theme/Daily-Yield-Theme-Subscription.xml').read_text(encoding='utf-8')
+check('Both theme files name a share picture, and the picture exists in this repository',
+      all('og:image' in t and 'twitter:card' in t and 'summary_large_image' in t for t in (_v4, _sub))
+      and (ROOT/'assets/brand/dailyyield-share-card-1200x630.png').exists(),
+      'the picture line sits first in the head of each theme; the file it points at is committed in assets/brand')
+check('The share picture is a size social apps accept',
+      _v4.count("property='og:image:width'>") + _v4.count("property='og:image:width'/>") >= 1
+      and "content='1200'" in _v4 and "content='630'" in _v4)
+
 failed=[x for x in checks if x['status']=='FAIL']
 unmeasured=[x for x in checks if x['status']=='NOT_MEASURED']
 result={'checked_at_ist':dt.datetime.now(IST).isoformat(timespec='seconds'),

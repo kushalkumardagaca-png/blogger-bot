@@ -4,6 +4,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 import gzip
 import json
+import re as _re
 
 ROOT=Path(__file__).parent
 THEMES=[ROOT/'theme/Daily-Yield-Theme-Subscription.xml',ROOT/'theme/Daily-Yield-Theme-v4-2026-10-01.xml']
@@ -73,12 +74,18 @@ all_workflows='\n'.join(path.read_text() for path in workflow_root.glob('*.yml')
 search=(ROOT/'search_reach.py').read_text()
 check('malfunctioning scheduled watchdog is removed',not (workflow_root/'health_monitor.yml').exists())
 check('retained workflows do not invoke removed watchdog','zero_view_watchdog' not in all_workflows and 'ZERO_VIEW_WATCHDOG' not in all_workflows)
-check('Bing sitemap integration implemented','BING_WEBMASTER_API_KEY' in search and 'SubmitFeed' in search)
-check('Bing SubmitFeed uses required JSON body','json.dumps({"siteUrl":SITE,"feedUrl":sitemap})' in search and 'application/json; charset=utf-8' in search)
+# 23 October 2026: the owner deleted the property in Bing Webmaster Tools, so the two checks above were
+# flipped. They used to demand that a sitemap be submitted to Bing; demanding that again would re-arm
+# automation the owner has retired, and a green run here must never be a reason to do it.
+check('no Bing submission survives in the search companion',
+      'SubmitFeed' not in search and 'BING_WEBMASTER_API_KEY' not in search
+      and 'bing.com/webmasters' not in search)
 related=(ROOT/'related_articles.py').read_text()
 check('future related-article photographs have descriptive alt text','alt="Article preview:' in related and 'alt=""' not in related)
-check('Bing integration is optional and fail-safe','status":"READY' in search)
-check('search reach creates zero views','ZERO_SYNTHETIC_VIEWS' in search and 'syntheticViews":0' in search)
+check('the retired engine is recorded as retired rather than quietly blank',
+      'retired by the owner on 23 October 2026' in search)
+check('search reach creates zero views','ZERO_SYNTHETIC_VIEWS' in search
+      and _re.search(r'"syntheticViews"\s*:\s*0', search) is not None)
 check('Google Search Console remains automated',(ROOT/'gsc_rebuild.py').exists())
 check('Blogger remains server rendered','Blogger theme' in THEMES[0].read_text())
 check('zero-view policy remains enforced',(ROOT/'audit_zero_view_policy.py').exists())

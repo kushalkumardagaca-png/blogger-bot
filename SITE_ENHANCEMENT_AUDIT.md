@@ -1,7 +1,7 @@
 # Daily Yield Site Enhancement Audit
 
-- Pass: **200**
-- Fail: **0**
+- Pass: **195**
+- Fail: **4**
 - Public Daily Yield pageviews: **0**
 
 - ✅ Daily-Yield-Theme-Subscription.xml: valid Blogger XML
@@ -42,7 +42,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: content language declaration
 - ✅ Daily-Yield-Theme-Subscription.xml: descriptive homepage title
 - ✅ Daily-Yield-Theme-Subscription.xml: Bing-safe single-item titles
-- ✅ Daily-Yield-Theme-Subscription.xml: server-rendered description fallback
+- ❌ Daily-Yield-Theme-Subscription.xml: server-rendered description fallback
 - ✅ Daily-Yield-Theme-Subscription.xml: robots index policy
 - ✅ Daily-Yield-Theme-Subscription.xml: Googlebot policy
 - ✅ Daily-Yield-Theme-Subscription.xml: Bingbot policy
@@ -94,7 +94,7 @@
 - ✅ Daily-Yield-Theme-Subscription.xml: contact desk icons retain compact established geometry
 - ✅ Daily-Yield-Theme-Subscription.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-Subscription.xml: dark mode fully removed
-- ✅ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
+- ❌ Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating
 - ✅ Daily-Yield-Theme-Subscription.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-Subscription.xml: no Google Business Profile
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: valid Blogger XML
@@ -135,7 +135,7 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: content language declaration
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: descriptive homepage title
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Bing-safe single-item titles
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: server-rendered description fallback
+- ❌ Daily-Yield-Theme-v4-2026-10-01.xml: server-rendered description fallback
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: robots index policy
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Googlebot policy
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: Bingbot policy
@@ -187,15 +187,14 @@
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: contact desk icons retain compact established geometry
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: every Theme image has nonempty alt
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: dark mode fully removed
-- ✅ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating
+- ❌ Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating
 - ✅ Daily-Yield-Theme-v4-2026-10-01.xml: no Google Business Profile
 - ✅ malfunctioning scheduled watchdog is removed
 - ✅ retained workflows do not invoke removed watchdog
-- ✅ Bing sitemap integration implemented
-- ✅ Bing SubmitFeed uses required JSON body
+- ✅ no Bing submission survives in the search companion
 - ✅ future related-article photographs have descriptive alt text
-- ✅ Bing integration is optional and fail-safe
+- ✅ the retired engine is recorded as retired rather than quietly blank
 - ✅ search reach creates zero views
 - ✅ Google Search Console remains automated
 - ✅ Blogger remains server rendered

@@ -1,8 +1,8 @@
 {
   "standard": "DAILY_YIELD_SITE_V4",
   "mode": "STATIC_ZERO_VIEW",
-  "pass": 200,
-  "fail": 0,
+  "pass": 195,
+  "fail": 4,
   "checks": [
     {
       "name": "Daily-Yield-Theme-Subscription.xml: valid Blogger XML",
@@ -158,7 +158,7 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: server-rendered description fallback",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: robots index policy",
@@ -366,7 +366,7 @@
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: description fallback is conditional and non-duplicating",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "name": "Daily-Yield-Theme-Subscription.xml: privacy control is not floating",
@@ -530,7 +530,7 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: server-rendered description fallback",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: robots index policy",
@@ -738,7 +738,7 @@
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: description fallback is conditional and non-duplicating",
-      "status": "PASS"
+      "status": "FAIL"
     },
     {
       "name": "Daily-Yield-Theme-v4-2026-10-01.xml: privacy control is not floating",
@@ -757,11 +757,7 @@
       "status": "PASS"
     },
     {
-      "name": "Bing sitemap integration implemented",
-      "status": "PASS"
-    },
-    {
-      "name": "Bing SubmitFeed uses required JSON body",
+      "name": "no Bing submission survives in the search companion",
       "status": "PASS"
     },
     {
@@ -769,7 +765,7 @@
       "status": "PASS"
     },
     {
-      "name": "Bing integration is optional and fail-safe",
+      "name": "the retired engine is recorded as retired rather than quietly blank",
       "status": "PASS"
     },
     {
