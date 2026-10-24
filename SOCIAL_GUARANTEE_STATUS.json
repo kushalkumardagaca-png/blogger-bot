@@ -1,10 +1,10 @@
 {
- "generatedAt": "2026-10-24T15:08:36.581406+05:30",
+ "generatedAt": "2026-10-24T16:01:45.381457+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 12,
- "expectedPosts": 24,
- "articlesWithBothPosts": 12,
+ "articles": 13,
+ "expectedPosts": 26,
+ "articlesWithBothPosts": 13,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
@@ -163,13 +163,26 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-2",
+   "title": "Canadian Gaming Association to demonstrate",
+   "url": "https://dailyyield.blogspot.com/2026/10/canadian-gaming-association-to.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T15:08:26.228732+05:30",
+ "liveVerificationSourceAt": "2026-10-24T16:01:38.846812+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 12,
+ "articlesWithExactlyTwoPosts": 13,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
