@@ -1,34 +1,21 @@
 {
- "generatedAt": "2026-10-24T14:31:05.962789+05:30",
+ "generatedAt": "2026-10-24T15:08:36.581406+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 10,
- "expectedPosts": 20,
- "articlesWithBothPosts": 10,
+ "articles": 12,
+ "expectedPosts": 24,
+ "articlesWithBothPosts": 12,
  "postsMissing": 0,
  "dispatched": 0,
  "rows": [
   {
-   "key": "news-china",
-   "title": "china edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-24.html",
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 0,
     "bluesky": 1,
-    "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-economy",
-   "title": "economy edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-24.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -48,6 +35,19 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-china",
+   "title": "china edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/china-finance-news-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
    "key": "news-europe",
    "title": "europe edition",
    "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-24.html",
@@ -61,9 +61,9 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-russia",
-   "title": "russia edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-24.html",
+   "key": "news-economy",
+   "title": "economy edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/economy-trade-jobs-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
@@ -74,13 +74,13 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-24.html",
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 0,
-    "bluesky": 1,
+    "facebook": 1,
+    "bluesky": 0,
     "mastodon": 1
    },
    "observedDistinctPosts": 2,
@@ -137,13 +137,39 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-2",
+   "title": "European shares close out best week since",
+   "url": "https://dailyyield.blogspot.com/2026/10/european-shares-close-out-best-week.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "master-evergreen-1",
+   "title": "How to convert Crypto to cash without",
+   "url": "https://dailyyield.blogspot.com/2026/10/how-to-convert-crypto-to-cash-without.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T14:30:59.108695+05:30",
+ "liveVerificationSourceAt": "2026-10-24T15:08:26.228732+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 10,
+ "articlesWithExactlyTwoPosts": 12,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
  "status": "PASS"
