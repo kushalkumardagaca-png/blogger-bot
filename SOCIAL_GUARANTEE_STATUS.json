@@ -1,13 +1,26 @@
 {
- "generatedAt": "2026-10-24T09:54:17.701877+05:30",
+ "generatedAt": "2026-10-24T10:22:45.838199+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 5,
- "expectedPosts": 10,
- "articlesWithBothPosts": 5,
- "postsMissing": 0,
- "dispatched": 0,
+ "articles": 7,
+ "expectedPosts": 14,
+ "articlesWithBothPosts": 6,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
+  {
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
   {
    "key": "news-china",
    "title": "china edition",
@@ -22,6 +35,23 @@
    "duplicatePosts": 0
   },
   {
+   "key": "news-russia",
+   "title": "russia edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/russia-finance-news-2026-10-24.html",
+   "posts": 0,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 0,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
+  },
+  {
    "key": "news-asia-pacific",
    "title": "asia-pacific edition",
    "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-24.html",
@@ -30,19 +60,6 @@
     "facebook": 1,
     "bluesky": 0,
     "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-24.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -72,14 +89,27 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-1",
+   "title": "Rupee posts best week in seven months",
+   "url": "https://dailyyield.blogspot.com/2026/10/rupee-posts-best-week-in-seven-months.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T09:54:13.310601+05:30",
+ "liveVerificationSourceAt": "2026-10-24T10:22:42.244429+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 5,
+ "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
