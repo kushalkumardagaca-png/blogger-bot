@@ -1,30 +1,21 @@
 {
-  "generatedAt": "2026-10-24T05:24:30.160732+05:30",
+  "generatedAt": "2026-10-24T09:03:02.865714+05:30",
   "dateIST": "2026-10-24",
   "status": "DEGRADED",
   "apply": true,
-  "confirmedPublications": 0,
-  "confirmedByLivePost": 0,
+  "confirmedPublications": 4,
+  "confirmedByLivePost": 4,
   "liveVerification": "each record checked against the live post",
   "recordsThatFailedLiveVerification": [],
   "expiredSlots": [],
   "overdueMissing": [
-    "news-asia-pacific"
+    "master-evergreen-0"
   ],
   "actions": [
     {
       "type": "source_recovery",
-      "key": "news-asia-pacific",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
-      "key": "master-trending-0",
-      "applied": true
-    },
-    {
-      "type": "preparation_recovery",
       "key": "master-evergreen-0",
+      "attempt": 1,
       "applied": true
     }
   ],
