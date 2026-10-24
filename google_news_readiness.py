@@ -141,6 +141,22 @@ def check_feed(xml: str) -> tuple[list[dict], dict]:
     return rows, summary
 
 
+
+def meta_tag(document: str, name: str) -> str:
+    """The one <meta> tag that carries this property or name, however its attributes are ordered."""
+    for tag in re.finditer(r"<meta\b[^>]*>", document):
+        if re.search(r"""(?:property|name)=["']%s["']""" % re.escape(name), tag.group(0)):
+            return tag.group(0)
+    return ""
+
+
+def meta_value(document: str, name: str) -> str:
+    """The content= of that tag, or an empty string when the page carries no such line."""
+    tag = meta_tag(document, name)
+    found = re.search(r"""content=["'](.*?)["']""", tag, re.S) if tag else None
+    return found.group(1) if found else ""
+
+
 def check_pages(urls: list[str], read, limit: int = 6) -> list[dict]:
     """Look at the pages themselves. ``read`` is what makes this testable offline."""
     rows = []
@@ -153,10 +169,14 @@ def check_pages(urls: list[str], read, limit: int = 6) -> list[dict]:
             row["issues"].append("pageUnreadable")
             rows.append(row)
             continue
-        if not re.search(r'property=["\']og:image["\'][^>]*content=["\']https?://', page, re.I):
+        # Whichever order the two attributes are written in, the tag is the same fact. This was measured
+        # wrong until 24 October 2026: the job demanded property= before content=, Blogger writes it the
+        # other way round, and six pages that already carried a picture were reported as carrying none.
+        image = meta_value(page, "og:image")
+        if not image.startswith(("http://", "https://")):
             row["issues"].append("noOpenGraphImage")
         head = page[:page.lower().find("<body") if "<body" in page.lower() else 20000]
-        if not re.search(r'name=["\']description["\'][^>]*content=["\'][^"\']{30,}', head, re.I):
+        if len(meta_value(head, "description").strip()) < 30:
             row["issues"].append("noHeadDescription")
         page_title = strip((re.search(r"<title>(.*?)</title>", page, re.S) or [None, ""])[1])
         row["pageTitle"] = page_title[:90]

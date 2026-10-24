@@ -1105,13 +1105,14 @@ check('The Blogger repair client kept its job through the rename', (ROOT/'blogge
 # A shared link with no picture is a lost reader, and the fix lives in the theme, which no API can write.
 _v4 = (ROOT/'theme/Daily-Yield-Theme-v4-2026-10-01.xml').read_text(encoding='utf-8')
 _sub = (ROOT/'theme/Daily-Yield-Theme-Subscription.xml').read_text(encoding='utf-8')
-check('Both theme files name a share picture, and the picture exists in this repository',
-      all('og:image' in t and 'twitter:card' in t and 'summary_large_image' in t for t in (_v4, _sub))
-      and (ROOT/'assets/brand/dailyyield-share-card-1200x630.png').exists(),
-      'the picture line sits first in the head of each theme; the file it points at is committed in assets/brand')
-check('The share picture is a size social apps accept',
-      _v4.count("property='og:image:width'>") + _v4.count("property='og:image:width'/>") >= 1
-      and "content='1200'" in _v4 and "content='630'" in _v4)
+check('Both themes name the share card type that Blogger does not write itself',
+      all("name='twitter:card'" in t and 'summary_large_image' in t for t in (_v4, _sub)),
+      'measured 24 October 2026: Blogger already supplies og:image on every page checked, in content-first '
+      'order, so the theme must not repeat it - a second og:image would replace a post picture with a brand '
+      'card, which is the opposite of the fix. What was missing is the card type X reads.')
+check('The page reader does not mistake an attribute order for a missing picture',
+      'def meta_value(' in (ROOT/'google_news_readiness.py').read_text(encoding='utf-8')
+      and "property=[\"']og:image" not in (ROOT/'google_news_readiness.py').read_text(encoding='utf-8'))
 
 failed=[x for x in checks if x['status']=='FAIL']
 unmeasured=[x for x in checks if x['status']=='NOT_MEASURED']

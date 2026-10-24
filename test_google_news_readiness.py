@@ -120,3 +120,45 @@ class CutnessIsReadFromTheSentence(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class MetaLinesAreReadInEitherOrder(unittest.TestCase):
+    """A page whose picture line reads `content=` first is not a page without a picture.
+
+    On 24 October 2026 this job reported six pages as carrying no share picture and no description. The
+    pages carried both: Blogger writes `content=` before `property=`, and the two searches here demanded
+    the other order. These cases lock the reading to the fact rather than to the spelling.
+    """
+
+    HEAD_CONTENT_FIRST = ("<head><meta content='https://lh3.googleusercontent.com/a/photo=w544' property='og:image'/>"
+                          "<meta content='A real summary of the page, long enough to be worth showing' name='description'/>"
+                          "</head><body>x</body>")
+    HEAD_PROPERTY_FIRST = ("<head><meta property='og:image' content='https://lh3.googleusercontent.com/a/photo=w544'/>"
+                           "<meta name='description' content='A real summary of the page, long enough to be worth showing'/>"
+                           "</head><body>x</body>")
+    HEAD_WITH_NOTHING = "<head><title>nothing here</title></head><body>x</body>"
+
+    def _issues(self, head):
+        rows = news.check_pages(["https://dailyyield.blogspot.com/p/a.html"],
+                                     lambda key, url: head)
+        return rows[0]["issues"]
+
+    def test_a_picture_written_the_way_blogger_writes_it_is_seen(self):
+        self.assertEqual(self._issues(self.HEAD_CONTENT_FIRST), [])
+        self.assertEqual(self._issues(self.HEAD_PROPERTY_FIRST), [])
+
+    def test_a_page_that_really_has_no_picture_is_still_reported(self):
+        issues = self._issues(self.HEAD_WITH_NOTHING)
+        self.assertIn("noOpenGraphImage", issues)
+        self.assertIn("noHeadDescription", issues)
+
+    def test_a_short_description_is_not_counted_as_a_description(self):
+        head = self.HEAD_CONTENT_FIRST.replace(
+            "A real summary of the page, long enough to be worth showing", "Too short")
+        self.assertIn("noHeadDescription", self._issues(head))
+
+    def test_the_reader_returns_the_value_not_the_position(self):
+        for head in (self.HEAD_CONTENT_FIRST, self.HEAD_PROPERTY_FIRST):
+            self.assertEqual(news.meta_value(head, "og:image"),
+                             "https://lh3.googleusercontent.com/a/photo=w544")
+        self.assertEqual(news.meta_value(self.HEAD_WITH_NOTHING, "og:image"), "")
