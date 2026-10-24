@@ -284,15 +284,37 @@ class TheDocumentWindowMatchesItsSections(unittest.TestCase):
         self.assertEqual(core, 4340, "4340 words is inside the contract and must not be trimmed at all")
         self.assertEqual(fitted[0]["paragraphs"], sections[0]["paragraphs"])
 
-    def test_an_over_long_assembly_is_trimmed_inside_the_ceiling(self):
+    def test_an_over_long_assembly_is_divided_before_any_word_is_cut(self):
+        """5,600 words across ten sections is over the ten-section ceiling and under the twelve-section one.
+
+        The old fitter answered that by cutting 700 words of sourced text to keep a section count nobody
+        had asked for, and refused the slot when the floor stopped it. The contract allows 7 to 14
+        sections, so the honest answer is to divide the same words into twelve sections of 466.
+        """
         sections = self.block(10, 560)
         fitted, core = gen.fit_core_to_contract(sections)
-        self.assertLessEqual(core, 4900, f"a 10-section document must be brought under 4900, got {core}")
-        floor, _ = gen.core_window(len(fitted))
-        self.assertGreaterEqual(core, floor, "trimming may not rescue the ceiling by breaking the floor")
+        self.assertEqual(len(sections), 10)
+        self.assertNotEqual(len(fitted), 10, "a document over its window may be given more sections")
+        self.assertLessEqual(len(fitted), 14, "the division must stay inside the contract's own ceiling")
+        floor, ceiling = gen.core_window(len(fitted))
+        self.assertTrue(floor <= core <= ceiling, f"{core} words across {len(fitted)} sections must sit in {floor}-{ceiling}")
+        self.assertGreater(core, 490 * 10, "dividing must keep words that trimming alone had to cut away")
+        self.assertLessEqual(core, 490 * len(fitted), "and the document must still sit inside its own window")
+        for row in fitted:
+            size = gen.words(" ".join(row["paragraphs"]))
+            self.assertTrue(400 <= size <= 490, f"a divided section measured {size} words")
+        headings = [row["heading"].casefold() for row in fitted]
+        self.assertEqual(len(headings), len(set(headings)), "new sections cannot borrow a heading already used")
+
+    def test_a_shape_that_cannot_be_divided_is_still_trimmed_not_accepted(self):
+        """Fourteen sections of 600 words is over the widest window the contract allows, so trimming is the only answer."""
+        sections = self.block(14, 600)
+        fitted, core = gen.fit_core_to_contract(sections)
+        self.assertLessEqual(len(fitted), 14)
+        self.assertLessEqual(core, 490 * len(fitted), f"{core} words must be inside the ceiling of {len(fitted)} sections")
         for row in fitted:
             self.assertGreaterEqual(gen.words(" ".join(row["paragraphs"])), 400,
-                                    "no section may be trimmed below its own 400-word floor")
+                                    "trimming may not rescue the ceiling by breaking a section's own floor")
 
     def test_the_window_is_derived_from_the_number_of_sections(self):
         self.assertEqual(gen.core_window(10), (4000, 4900))

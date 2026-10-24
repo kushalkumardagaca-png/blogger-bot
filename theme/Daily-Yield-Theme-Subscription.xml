@@ -45,11 +45,9 @@
   <meta content='The terms for using Daily Yield: acceptable use, original work and sources, third-party services, availability, liability and how to reach the desk.' name='twitter:description'/>
 </b:if>
 <b:if cond='data:view.isHomepage'>
-  <meta content='Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' name='description'/>
   <meta content='Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' property='og:description'/>
   <meta content='Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' name='twitter:description'/>
 <b:else/>
-  <meta content='Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' name='description'/>
   <meta content='Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' property='og:description'/>
   <meta content='Daily Yield publishes finance news, practical money guides, market insights and transparent calculations, written by Kushal Daga. Contact dailyyield.official@gmail.com or kushalkumardaga.ca@gmail.com.' name='twitter:description'/>
 </b:if>

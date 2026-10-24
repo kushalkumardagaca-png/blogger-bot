@@ -151,7 +151,14 @@ Google.
    listing defects is the only proof that matters.
 
 **One warning so you are not surprised.** Reviewers reject publications whose headlines are cut off
-or whose pages carry no image or description. The cut headlines are being repaired nightly already;
-the `og:image` and head-description gaps are theme-head items waiting for the review to end. If a
-first submission is rejected, that is normal, and it is fixed by the same files, not by a new
-account.
+or whose pages carry no image or description. The cut headlines are being repaired nightly already.
+The share picture was measured on 24 October 2026 and is already correct - Blogger writes a picture
+line on the homepage, on articles and on the front pages, so nothing was added: a fixed `og:image`
+in the theme would have overridden every article's own photograph. What *was* wrong, and is now
+fixed in the theme files waiting in `/home/user/THEME-FIX/`, is that the theme wrote a generic
+description line of its own, so the homepage and `/p/article.html` each carried two descriptions and
+the vague one came first. The theme now writes none and leaves descriptions to Blogger, which costs
+nothing - and a conditional fallback is not affordable, because one guard line costs 194 of the 214
+compressed bytes the 111,000-byte theme limit leaves. Per-page text is therefore written where it
+belongs: Blogger → Pages → a page → the gear/**Search description** box. If a first submission is
+rejected, that is normal, and it is fixed by the same files, not by a new account.

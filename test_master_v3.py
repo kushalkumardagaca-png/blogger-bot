@@ -70,4 +70,7 @@ def test_v3_full_package_satisfies_existing_strict_compiler(tmp_path):
     with patch('master_v3_generator.discover_sources',return_value=sources),patch('master_v3_generator.write_section',side_effect=distinct_section),patch('master_v3_generator.photo_set',return_value=photos),patch('master_v3_generator.low_exposure_posts',return_value=low):
         package=build(item,'evergreen',tmp_path/'package.json')
     result=validate(package)
-    assert 4000<=result['core_words']<=4200 and 600<=result['summary_words']<=800
+    counts=len(package['sections'])
+    assert 7<=counts<=14, 'an over-long assembly may be divided, but only inside the 7-14 band'
+    assert 400*counts<=result['core_words']<=490*counts, 'the core must sit in the window its own sections allow'
+    assert 600<=result['summary_words']<=800

@@ -1,0 +1,72 @@
+name: Instagram Publisher
+
+# Built and reviewed, but deliberately asleep until the owner connects the Instagram professional
+# account to the Facebook Page and names it in repository variables. `if:` keeps an unarmed channel from
+# producing a daily red run, which would hide the alarms that matter; the job itself records
+# NOT_CONFIGURED honestly in INSTAGRAM_STATUS.json when it is switched on too early.
+
+on:
+  schedule:
+    - cron: '25 5 * * *'   # 10:55 IST, after the morning article is live
+    - cron: '25 11 * * *'  # 16:55 IST, after the afternoon article is live
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-yield-instagram-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.INSTAGRAM_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify the Instagram invariants
+        run: python -m unittest test_instagram_publisher -v
+      - name: Publish today's article once
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          FACEBOOK_SYSTEM_USER_TOKEN: ${{ secrets.FACEBOOK_SYSTEM_USER_TOKEN }}
+          INSTAGRAM_BUSINESS_ACCOUNT_ID: ${{ secrets.INSTAGRAM_BUSINESS_ACCOUNT_ID }}
+          GRAPH_API_VERSION: ${{ vars.GRAPH_API_VERSION || 'v23.0' }}
+        run: python instagram_publisher.py
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-status-${{ github.run_id }}
+          retention-days: 30
+          path: |
+            INSTAGRAM_STATUS.json
+            instagram_tracker.json
+      - name: Persist status safely
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Daily Yield Instagram Publisher"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp INSTAGRAM_STATUS.json /tmp/INSTAGRAM_STATUS.json
+          cp instagram_tracker.json /tmp/instagram_tracker.json
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+            cp /tmp/INSTAGRAM_STATUS.json .
+            cp /tmp/instagram_tracker.json .
+            git add INSTAGRAM_STATUS.json instagram_tracker.json
+            if git diff --staged --quiet; then exit 0; fi
+            git commit -m "Record Instagram channel status [skip ci]"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 2))
+          done
+          exit 1

@@ -623,30 +623,115 @@ def head_clip(value,limit=46):
   kept=kept.rstrip(' ,;:.\u2014\u2013-\u2026')
   return kept if 12<=len(kept)<=limit else ''
 
+SECTION_COUNT_MIN, SECTION_COUNT_MAX = 7, 14   # the compiler's own section-count band, named once here
+
+
 def core_window(section_count):
     """The only document lengths an assembly of this many sections can honestly have."""
     return SECTION_MIN*section_count,SECTION_MAX*section_count
 
 
-def fit_core_to_contract(sections):
-    """Trim a too-long assembly back inside its own window, a whole section at a time.
+def count_window():
+    """The section counts the document contract allows - the same 7 to 14 the compiler checks."""
+    return SECTION_COUNT_MIN, SECTION_COUNT_MAX
+
+
+def total_words(sections):
+    return words(' '.join(' '.join(x['paragraphs']) for x in sections))
+
+
+def reflow_sections(sections, new_heading=None):
+    """Divide an over-long assembly into more sections before a single word is cut.
+
+    The contract reads 7 to 14 sections of 400-490 words each, so the length a document may honestly
+    have grows with its section count: 6,520 words do not fit ten sections, but they fit fourteen at
+    465 words each. The fitter this replaces was pinned to the ten sections the writer had been asked
+    for and tried to reach the window by trimming, which the 400-word floor refused - so the slot died
+    with "the trim did not converge" while thousands of words of sourced, cited text sat there needing
+    nothing but a better division. Reflow keeps every paragraph and its source tokens; it only moves
+    paragraph boundaries, and gives any new section its own heading.
+    """
+    floor_n, ceiling_n = count_window()
+    def size(rows):
+        return words(' '.join(rows))
+    in_band = all(SECTION_MIN <= size(s['paragraphs']) <= SECTION_MAX for s in sections)
+    core = size([' '.join(s['paragraphs']) for s in sections].__iter__().__next__() and
+                [para for s in sections for para in s['paragraphs']])
+    if in_band and floor_n <= len(sections) <= ceiling_n:
+        return sections
+    paras = [para for para in (clean(x) for s in sections for x in s['paragraphs']) if para]
+    if len(paras) < floor_n:
+        return sections                      # fewer paragraphs than the smallest legal article needs
+    groups, current, current_words = [], [], 0
+    for para in paras:
+        if current and current_words + words(para) > SECTION_MAX:
+            groups.append(current); current, current_words = [para], words(para)
+        else:
+            current.append(para); current_words += words(para)
+    if current:
+        groups.append(current)
+    # A tail too short to be a section of its own is folded into the last full section, which is then
+    # brought back under the ceiling. Content is never left dangling as a 60-word "section".
+    while len(groups) > 1 and size(groups[-1]) < SECTION_MIN:
+        tail = groups.pop()
+        merged = ' '.join(groups[-1] + tail)
+        trimmed = parse_paragraphs(sentence_trim(merged, SECTION_MAX))
+        groups[-1] = trimmed if size(trimmed) >= SECTION_MIN else [merged]
+    # Too many sections: merge the smallest neighbours, then let the caller trim what is left over.
+    while len(groups) > ceiling_n:
+        sizes = [size(g) for g in groups]
+        pair = min(range(len(groups) - 1), key=lambda i: sizes[i] + sizes[i + 1])
+        merged = ' '.join(groups[pair] + groups[pair + 1])
+        trimmed = parse_paragraphs(sentence_trim(merged, SECTION_MAX))
+        groups[pair:pair + 2] = [trimmed if size(trimmed) >= SECTION_MIN else groups[pair] + groups[pair + 1]]
+    if len(groups) < floor_n or any(size(g) < 1 for g in groups):
+        return sections
+    headings = [s['heading'] for s in sections]
+    extras = [{k: v for k, v in s.items() if k not in ('heading', 'paragraphs')} for s in sections]
+    out, used = [], {str(h).casefold() for h in headings}
+    for index, paras_in_group in enumerate(groups):
+        if index < len(headings):
+            heading_text = str(headings[index])
+        elif new_heading:
+            heading_text = clean(str(new_heading(index, paras_in_group[0])))[:120] or f'Further evidence {index + 1}'
+        else:
+            heading_text = clean(re.split(r'(?<=[.!?])\s+', paras_in_group[0])[0])[:90] or f'Further evidence {index + 1}'
+        if heading_text.casefold() in used:
+            heading_text = f'{heading_text}: continued evidence {index + 1}'
+        used.add(heading_text.casefold())
+        carry = extras[index] if index < len(extras) else {}
+        out.append({'heading': heading_text, 'paragraphs': paras_in_group, **carry})
+    return out
+
+
+def fit_core_to_contract(sections, new_heading=None):
+    """Bring an assembly inside its own window: divide it first, trim it second, never break a section.
 
     Returns the sections and the final word count. A section is only ever shortened to the floor it must
-    keep (400 words), so this can never 'fix' the document by breaking a section - the guard it replaces
-    accepted 300-word sections, which traded one contract violation for another.
+    keep (400 words), so this can never 'fix' a document by breaking it - the guard it replaced accepted
+    300-word sections, which traded one contract violation for another. Trimming runs in rounds aimed at
+    the per-section ceiling instead of at a global deficit, which is what let it stall and refuse a slot.
     """
-    floor,ceiling=core_window(len(sections))
-    core=words(' '.join(' '.join(x['paragraphs']) for x in sections))
-    if core<=ceiling:return sections,core
-    excess=core-(ceiling-80)
-    for s in reversed(sections):
-        if excess<=0:break
-        before=words(' '.join(s['paragraphs']))
-        trimmed=parse_paragraphs(sentence_trim(' '.join(s['paragraphs']),max(SECTION_MIN,before-excess)))
-        after=words(' '.join(trimmed))
-        if after>=SECTION_MIN:
-            s['paragraphs']=trimmed;excess-=before-after
-    return sections,words(' '.join(' '.join(x['paragraphs']) for x in sections))
+    sections = reflow_sections(sections, new_heading)
+    floor, ceiling = core_window(len(sections))
+    core = total_words(sections)
+    if floor <= core <= ceiling and all(words(' '.join(s['paragraphs'])) <= SECTION_MAX for s in sections):
+        return sections, core
+    for _ in range(6):
+        over = [s for s in sections if words(' '.join(s['paragraphs'])) > SECTION_MAX]
+        if not over:
+            break
+        progress = False
+        for s in sorted(over, key=lambda x: -words(' '.join(x['paragraphs']))):
+            before = words(' '.join(s['paragraphs']))
+            trimmed = parse_paragraphs(sentence_trim(' '.join(s['paragraphs']), SECTION_MAX))
+            after = words(' '.join(trimmed))
+            if SECTION_MIN <= after < before:
+                s['paragraphs'] = trimmed
+                progress = True
+        if not progress:
+            break
+    return sections, total_words(sections)
 
 
 def build(item,kind,target):
@@ -671,10 +756,11 @@ def build(item,kind,target):
   for future in as_completed(futures):
    index,section=future.result();sections[index]=section
  sections=contextualize_repeated_sentences(sections)
- sections,core=fit_core_to_contract(sections)
+ sections,core=fit_core_to_contract(sections,new_heading=lambda index,para: heading(sources[index%len(sources)],index+1))
  floor,ceiling=core_window(len(sections))
  if not floor<=core<=ceiling:raise RuntimeError(f'V3 assembled core is {core} words; {len(sections)} '
-  f'sections of {SECTION_MIN}-{SECTION_MAX} words allow {floor}-{ceiling} and the trim did not converge')
+  f'sections of {SECTION_MIN}-{SECTION_MAX} words allow {floor}-{ceiling} even after reflow - the text is '
+  'either too short for the smallest legal assembly or still over-long after trimming')
  summary=extracted_summary(sections)
  # Run the same uniqueness repair once more after article trimming and summary
  # assembly. This catches cross-module repetition that cannot be visible while

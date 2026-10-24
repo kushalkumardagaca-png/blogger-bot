@@ -139,6 +139,28 @@ check('Facebook candidate discovery creates no Daily Yield public-page requests'
       'www.googleapis.com/blogger/v3' in fp and 'requests.get(item["url"]' not in fp
       and 'requests.get(post["url"]' not in fp)
 
+# Instagram: built to the Graph API's two-step flow, deliberately asleep until the owner arms it.
+ip_path=ROOT/'instagram_publisher.py'; iw_path=ROOT/'.github/workflows/instagram_publisher.yml'
+ip=ip_path.read_text() if ip_path.exists() else ''; iw=iw_path.read_text() if iw_path.exists() else ''
+check('Instagram publisher and its own tracker are deployed', bool(ip) and bool(iw))
+check('Instagram stays unarmed until the owner connects the account, so a sleeping channel cannot fail red',
+      "vars.INSTAGRAM_AUTOMATION_ENABLED == 'true'" in iw)
+check('Instagram reads candidates through the Blogger API and creates no pageview',
+      'blogger/v3' in ip and 'requests.get(post["url"]' not in ip and 'requests.get(item["url"]' not in ip)
+check('Instagram publishes only a container it has confirmed finished',
+      'status_code' in ip and 'FINISHED' in ip and 'PUBLISHING' not in ip.split('def graph')[1][:1200])
+# The token is only ever sent to graph.facebook.com over TLS; the property worth enforcing is that it
+# never lands in a file this job owns, because files in this repository are read by everyone with access.
+_ig_writes = [line for line in ip.split('\n') if 'write_text' in line or 'json.dump' in line or '.open(' in line]
+check('Instagram never writes the page token into a file it owns',
+      'instagram_token' not in ip and 'token.enc' not in ip
+      and all('SYSTEM_USER_TOKEN' not in line for line in _ig_writes))
+check('Instagram carries the article photograph and never a substitute image',
+      'def editorial_photo(' in ip and 'SKIPPED' in ip and 'generate' not in ip.split('def editorial_photo')[1][:400])
+check('Instagram ships with its own invariants test run before the job',
+      (ROOT/'test_instagram_publisher.py').exists() and 'test_instagram_publisher' in iw)
+
+
 # Bluesky official AT Protocol publishing invariants, isolated from Facebook.
 bp_path=ROOT/'bluesky_publisher.py'; bw_path=ROOT/'.github/workflows/bluesky_publisher.yml'
 bp=bp_path.read_text() if bp_path.exists() else ''; bw=bw_path.read_text() if bw_path.exists() else ''

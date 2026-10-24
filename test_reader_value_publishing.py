@@ -10,9 +10,11 @@ from prepare_master_article import _compact_evidence_packet,_evidence_bridge_sec
 
 def package():
     sections=[]
-    for i in range(8):
-        paragraph=f'Section {i+1} '+('evidence context decision risk alternative source limitation application '*63)+' [[S1|official evidence]].'
-        sections.append({'heading':f'Topic-specific section {i+1}','paragraphs':[paragraph]})
+    for i in range(10):
+        # ten sections of 430 words: inside the 400-490 band the compiler enforces per section, over
+        # the 4,000-word reading-value floor the renderer needs before it places the third photograph
+        paragraph=f'Part {i+1} '+('evidence context decision risk alternative source limitation application '*53)+' [[S1|official evidence]].'
+        sections.append({'heading':f'Topic-specific part {i+1}','paragraphs':[paragraph]})
     summary=[
         'Summary one '+('evidence context decision limitation '*87),
         'Summary two '+('application alternative risk source '*87),
@@ -31,7 +33,8 @@ def topic():return {'#':'1','Category':'Cash Savings and Emergency Funds','Punch
 
 def test_master_v2_separates_core_and_summary_word_requirements():
     p=package();metrics=validate(p)
-    assert 4000<=metrics['core_words']<=4200
+    # the contract is per section, so the test states it the same way instead of a magic total
+    assert 400*len(p['sections'])<=metrics['core_words']<=490*len(p['sections'])
     assert 600<=metrics['summary_words']<=800
     title,slug,meta,labels,body=render(p,topic(),'2026-10-05','08:00')
     assert body.count('class="dy2-photo"')==3

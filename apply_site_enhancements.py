@@ -2,8 +2,14 @@
 """Idempotently add Daily Yield's accessibility, privacy and SEO experience layer."""
 from pathlib import Path
 import json
+import gzip
 import re
 
+
+# Blogger's theme uploader refuses a theme larger than 111,000 compressed bytes (measured 24 October 2026:
+# the committed v4 file is 110,786). Anything that writes a theme file has to respect that or it produces a
+# file Blogger will not accept, which is worse than doing nothing.
+BLOGGER_THEME_GZIP_LIMIT = 111000
 THEMES = [
     Path("theme/Daily-Yield-Theme-Subscription.xml"),
     Path("theme/Daily-Yield-Theme-v4-2026-10-01.xml"),
@@ -209,20 +215,13 @@ def inject(text: str) -> str:
     if 'Daily Yield | Finance, Markets, News &amp; Calculators' not in text:
         text = text.replace(old_title, title_package, 1)
     text = text.replace("<b:if cond='data:blog.metaDescription'>\n<meta expr:content='data:blog.metaDescription' name='description'/>\n</b:if>\n", "", 1)
-    if "Bing-safe server-rendered fallback" not in text:
-        fallback = """<b:include data='blog' name='all-head-content'/>
-<!-- Bing-safe server-rendered fallback. Blogger's all-head-content remains the
-     sole standard-description source when an editor-provided value exists. -->
-<b:if cond='!data:blog.metaDescription'>
- <b:if cond='data:view.isHomepage'>
-  <meta content='Daily Yield explains finance, markets and money with sourced news, practical calculators, clear analysis and educational tools for global readers.' name='description'/>
- <b:elseif cond='data:view.isSingleItem'/>
-  <meta expr:content='data:blog.pageName + &quot; — Sourced financial context, practical explanations and clear takeaways from Daily Yield.&quot;' name='description'/>
- <b:else/>
-  <meta content='Explore Daily Yield finance education, market coverage, practical money guides, calculators and sourced financial analysis.' name='description'/>
- </b:if>
-</b:if>"""
-        text = text.replace("<b:include data='blog' name='all-head-content'/>", fallback, 1)
+    # 24 October 2026: this used to insert a description fallback. Live measurement showed the theme's
+    # generic line landing next to Blogger's own per-page description on the homepage and on /p/article.html,
+    # so the first text a search result reads was the tagline rather than the page's own. A conditional
+    # replacement is not affordable either - one guard line costs 194 of the 198 compressed bytes Blogger
+    # allows. The theme therefore writes no generic description at all, and any older copy that still carries
+    # one is repaired here, which also gives the budget back.
+    text = re.sub(r"\n *<meta content='Daily Yield publishes finance news[^']*' name='description'/>", "", text)
     viewport = "<meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'/>"
     if "http-equiv='Content-Language'" not in text:
         text = text.replace(viewport, viewport + "\n<meta content='en' http-equiv='Content-Language'/>", 1)
@@ -371,6 +370,14 @@ def main():
     for path in THEMES:
         original = path.read_text(encoding="utf-8")
         updated = inject(original)
+        budget = len(gzip.compress(updated.encode("utf-8"), compresslevel=9))
+        if budget >= BLOGGER_THEME_GZIP_LIMIT:
+            raise SystemExit(
+                f"{path.name}: the enhanced file would be {budget} compressed bytes, "
+                f"{budget - BLOGGER_THEME_GZIP_LIMIT + 1} over the {BLOGGER_THEME_GZIP_LIMIT} that Blogger's "
+                "uploader accepts, so nothing was written. The committed theme already contains these "
+                "enhancement blocks; running this script on it appends a second copy of each one."
+            )
         path.write_text(updated, encoding="utf-8")
         print(path, "updated" if updated != original else "already current")
 

@@ -23,8 +23,14 @@ is the list, with the honest blocker beside each entry.
   day's work, and no one can promise which.
 
 ### 2. Instagram automation
-- **Status in the code today:** deliberately absent. The route was removed on your instruction and
-  a guard in `audit_publishing_automation.py` fails the build if it comes back.
+- **Status in the code today (changed 24 October 2026):** built, tested, and deliberately **not armed**.
+  `instagram_publisher.py` reads the day's published articles from the Blogger API, writes a caption of
+  at most 2200 characters ending in "link in bio", sends the article's own approved photograph (never a
+  generated card), publishes through the two-step container flow, records what it posted in
+  `instagram_tracker.json` so a URL is never posted twice, takes at most two articles per run, writes
+  `INSTAGRAM_STATUS.json`, and exits quietly with status 0 when no account is connected. The workflow
+  `.github/workflows/instagram_publisher.yml` stays inert until `INSTAGRAM_AUTOMATION_ENABLED` is set to
+  `true`. 11 tests cover it and 7 checks in `audit_publishing_automation.py` keep it honest.
 - **The real blocker, unchanged:** not the blog, not the caption, not the image. The last
   diagnostic read `Error validating access token: The user has not authorized application
   1086897220785233` - the app you were logged into on the Meta side (personal profile) is not the
@@ -34,10 +40,12 @@ is the list, with the honest blocker beside each entry.
   and websites → Invites (accept the pending app invite), or add the account to the business
   portfolio that owns the app and generate a long-lived token from that app. Nothing in the repo
   can do this, and asking for your password or a 6-digit code is not how this project works.
-- **What I would rebuild once that is true:** the publisher, the container/publish flow
-  (`media` → poll `FINISHED` → `media_publish`), the single-image rule (the article's own JPEG,
-  4:5, under 8 MB, no substituted images), the caption limit of 2200 characters with the alt text,
-  and the quota guard that refuses to post when `content_publishing_limit` is exhausted.
+- **What is waiting on that one thing:** the two GitHub secrets (a long-lived token from the app that the
+  @daily_yield login authorised) and flipping `INSTAGRAM_AUTOMATION_ENABLED` to `true`. There is nothing
+  left to write: the publisher, the container/publish flow (`media` → poll `FINISHED` → `media_publish`),
+  the single-image rule (the article's own JPEG, 4:5, under 8 MB, no substituted images), the caption limit
+  of 2200 characters with the alt text, and the quota guard that refuses to post when
+  `content_publishing_limit` is exhausted are all in the file and under test.
 
 ## Parked, with the reason written down
 
