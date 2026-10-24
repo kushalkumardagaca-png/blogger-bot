@@ -2,14 +2,14 @@
   "status": "PREPARED",
   "publication_enabled": false,
   "date": "2026-10-24",
-  "kind": "trending",
-  "slot": 4,
-  "topic_id": "ea42142389123e57",
-  "replaced_topic_id": null,
-  "title": "UK consumer confidence falls at fastest rate",
-  "package": "master_packages/dynamic/2026-10-24-trending-ea42142389123e57.json",
-  "html": "scheduled_ready/2026-10-24-trending-4-uk-consumer-confidence-falls-at-fastest-rate.html",
+  "kind": "evergreen",
+  "slot": 3,
+  "topic_id": "dffd538b870f6a3c",
+  "replaced_topic_id": "2be37dd6bb8eb707",
+  "title": "Current U.S. Inflation Rate Is 3.7%: Chart",
+  "package": "master_packages/dynamic/2026-10-24-evergreen-dffd538b870f6a3c.json",
+  "html": "scheduled_ready/2026-10-24-evergreen-3-current-u-s-inflation-rate-is-3-7-chart.html",
   "budgetMinutes": 30.0,
-  "elapsedMinutes": 16.1,
-  "remainingMinutes": 13.9
+  "elapsedMinutes": 24.9,
+  "remainingMinutes": 5.1
 }
