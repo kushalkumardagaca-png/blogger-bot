@@ -11,7 +11,7 @@ is not the missing ingredient; trust is, and trust is spent per URL, not earned 
 So this script turns the measured index into two live things:
 
 * a **cap** - how many new URLs the site should be creating per day right now;
-* a **priority list** - which URLs are worth announcing to IndexNow today, and which
+* a **priority list** - which URLs are worth asking Google about today, and which
   duplicates and utility pages must stop being announced at all, because each one spends
   crawl budget that a real article needs.
 
@@ -31,8 +31,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 STATUS = ROOT / "INDEX_STATUS_REPORT.json"
 BASELINE = ROOT / "AUDIENCE_GROWTH_BASELINE.json"
-INDEXNOW = ROOT / "INDEXNOW_STATE.json"
 DEMAND = ROOT / "SEARCH_DEMAND_TRENDS.json"
+QUEUE = ROOT / "ASK_GOOGLE_QUEUE.json"
 OUT = ROOT / "INDEXING_CAPACITY.json"
 MD = ROOT / "INDEXING_CAPACITY.md"
 PRIORITY = ROOT / "INDEX_PRIORITY.json"
@@ -186,7 +186,6 @@ def main() -> int:
         timezone.utc).date()
     status = load(STATUS, {})
     baseline = load(BASELINE, {})
-    indexnow = load(INDEXNOW, {})
     previous = load(OUT, {})
 
     indexed = status.get("indexed") if status else None
@@ -200,7 +199,11 @@ def main() -> int:
                      impressions if isinstance(impressions, int) else None)
 
     words = lexicon()
-    pool = list(dict.fromkeys(list(indexnow.get("pending") or []) + list((indexnow.get("submitted") or {}).keys())))
+    # The queue used to be an IndexNow hand-off. Since 23 October 2026 it is this file only: a list of URLs
+    # the site would like Google to look at, written by the gate itself and read by no engine. Empty file,
+    # empty queue - which is the truth since the owner retired Bing, not a queue that pretends to be stuck.
+    queue = load(QUEUE, {})
+    pool = list(dict.fromkeys(list(queue.get("pending") or []) + list((queue.get("asked") or {}).keys())))
     ranked, suppressed = [], []
     for url in pool:
         points, why = score(url, words, today)
@@ -246,17 +249,16 @@ def main() -> int:
                        for _points, url, _why in ranked]
         ranked = [(row["score"], row["url"], row["why"]) for row in announce]
 
-    # IndexNow that never actually submits is the failure mode this replaced: the queue grew
-    # while nothing left it, and the workflow printed a line and stayed green.
-    submitted_total = len(indexnow.get("submitted") or {})
+    # The queue was retired the same evening. It stays retired on purpose: a list of URLs that nothing
+    # submits is a report that lies about itself, which is exactly why this gate replaced it.
     report = {
         "checkedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "site": "https://dailyyield.blogspot.com",
         **verdict,
         "history": history,
-        "announcementQueue": {"pending": len(indexnow.get("pending") or []), "submittedEver": submitted_total,
-                             "indexnowLooksBlocked": submitted_total == 0 and bool(indexnow.get("pending")),
-                             "announceTop": len(announce), "suppressedDuplicatesAndUtility": len(suppressed)},
+        "askList": {"announceTop": len(announce), "suppressedDuplicatesAndUtility": len(suppressed),
+                    "queueFile": QUEUE.name, "pendingInQueue": len(queue.get("pending") or []),
+                    "note": "a Google-side priority list only: no engine submission is made from this file"},
         "mainPagePolicy": {"on": bool(main_pages) and not arguments.include_articles,
                            "mainPagesFound": len(main_pages), "announced": min(len(main_pages), MAIN_PAGE_CAP),
                            "articleUrlsHeld": len(suppressed) if main_pages and not arguments.include_articles else 0,
@@ -268,7 +270,7 @@ def main() -> int:
                            "decidedBy": "owner, 20 October 2026: index the main pages first"},
         "evidenceFiles": {name: bool(path.exists()) for name, path in (
             ("INDEX_STATUS_REPORT.json", STATUS), ("AUDIENCE_GROWTH_BASELINE.json", BASELINE),
-            ("INDEXNOW_STATE.json", INDEXNOW), ("SEARCH_DEMAND_TRENDS.json", DEMAND))},
+            (QUEUE.name, QUEUE), ("SEARCH_DEMAND_TRENDS.json", DEMAND))},
     }
     save(OUT, report)
     save(PRIORITY, {"day": today.isoformat(), "decision": verdict["decision"],
@@ -293,18 +295,14 @@ def main() -> int:
     lines += [f"- new Master articles per day: **{verdict['masterArticlesPerDay']}**",
               f"- news wires per day: **{verdict['newsWiresPerDay']}**", ""]
     lines += ["**Why**", ""] + [f"- {row}" for row in verdict["why"]] + ["",
-              f"IndexNow: {report['announcementQueue']['pending']} URLs queued, "
-              f"{report['announcementQueue']['submittedEver']} ever accepted"
-              + (" — **nothing is actually being submitted**, so the queue is only a list"
-                 if report['announcementQueue']['indexnowLooksBlocked'] else ""),
               ("Main pages announced: **%d** of %d found; **%d** article and utility URLs held back "
               "(owner decision: index the front doors first)."
               % (report["mainPagePolicy"]["announced"], report["mainPagePolicy"]["mainPagesFound"],
                  report["mainPagePolicy"]["articleUrlsHeld"])
               if report["mainPagePolicy"]["on"] else
               "Main-page-first policy is off for this run: ranked article URLs are being announced."), "",
-             f"Priority list for today's announcement: {report['announcementQueue']['announceTop']} URLs; "
-              f"{report['announcementQueue']['suppressedDuplicatesAndUtility']} duplicate/utility URLs held back.",
+             f"Priority list for Google: {report['askList']['announceTop']} URLs; "
+              f"{report['askList']['suppressedDuplicatesAndUtility']} duplicate/utility URLs held back.",
               ""]
     MD.write_text("\n".join(lines), encoding="utf-8")
     if not arguments.quiet:
@@ -312,9 +310,8 @@ def main() -> int:
                                                                   "newsWiresPerDay": report["newsWiresPerDay"]},
                           "indexed": (verdict.get("measured") or {}).get("indexed"),
                           "submitted": (verdict.get("measured") or {}).get("submitted"),
-                          "announce": report["announcementQueue"]["announceTop"],
-                          "suppressed": report["announcementQueue"]["suppressedDuplicatesAndUtility"],
-                          "indexnowLooksBlocked": report["announcementQueue"]["indexnowLooksBlocked"]},
+                          "announce": report["askList"]["announceTop"],
+                          "suppressed": report["askList"]["suppressedDuplicatesAndUtility"]},
                          ensure_ascii=False))
     return 0
 

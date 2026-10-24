@@ -1,6 +1,6 @@
 # Daily Yield Publishing Automation — Final Audit
 
-**Result:** 223 PASS · 0 FAIL
+**Result:** 235 PASS · 1 FAIL · 0 not measured here
 
 Scope: retained Master production code and eleven daily News editions, including branding, timing, trackers, taxonomy, social routing, schema, sources, labels and current market-page links.
 
@@ -12,14 +12,9 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Dynamic Master publication has both code gate and explicit live workflow enablement**
 - ✅ **Eleven news preflight runs** — ['30 21 * * *', '30 22 * * *', '30 0 * * *', '30 3 * * *', '30 5 * * *', '0 6 * * *', '30 6 * * *', '30 10 * * *', '0 11 * * *', '30 11 * * *', '0 12 * * *']
 - ✅ **News desks have independent non-cancelling precision runs**
-- ✅ **Bing URL automation reconciles every two hours**
-- ✅ **News publisher triggers Bing reconciliation without schedule changes**
-- ✅ **Bing URL submission is quota-aware and capped at 500 per batch**
-- ✅ **Bing URL automation suppresses unchanged duplicate submissions**
-- ✅ **Bing index monitoring uses GetUrlInfo with bounded stages**
-- ✅ **Bing URL automation creates no public Daily Yield requests or Live URL fetches**
-- ✅ **Bing API-key errors are redacted rather than stringified**
-- ✅ **Bing URL evidence and state are persisted without secrets**
+- ✅ **A news-desk lock cannot be defeated by its own run id** — a concurrency group keyed by the run id is a decoration, not a lock
+- ✅ **Scheduled news desks keep their own groups while manual runs share one** — group: ${{ github.event_name == 'schedule' && format('daily-yield-news-{0}', github.event.schedule) || 'daily-yield-news
+- ✅ **Recovery routes hold the same lock**
 - ✅ **Master taxonomy is exactly five trending plus fifteen evergreen categories**
 - ✅ **Historical evergreen references are never a blind topic queue**
 - ✅ **Dynamic Master daily plan is five trending plus five evergreen topics**
@@ -81,7 +76,6 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Concurrent News desk writes use semantic merge and retry**
 - ✅ **Both article social routes release within five minutes after publication**
 - ✅ **Coordinated tracker writes use semantic race-safe persistence retries**
-- ✅ **Every new URL is announced to the search engines without human submission**
 - ✅ **Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow**
 - ✅ **Daily coordinated inventory covers all 21 articles plus twelve rotating resource posts**
 - ✅ **Configured article cadence is exactly 42 weighted social posts daily** — 42 article posts (14 per network) plus 12 resource windows
@@ -126,6 +120,25 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Master posts cannot enter News hub**
 - ✅ **Master articles include continuous gesture motion**
 - ✅ **Master uses three unique licensed 16:9 placement-specific photographs**
+- ✅ **A photo licence credit is protected from repetition repair and from the repetition measure**
+- ✅ **A master figure is never rendered or published with a blank credit**
+- ✅ **Blank live captions are repaired from the site’s own rights registry in a released narrow scope only**
+- ✅ **A deterministic section is measured for supported figures as each paragraph is admitted**
+- ✅ **The released figure-credit repair is also watched on a clock, so a gap cannot hold the day**
+- ✅ **A hash inside prose is not counted as hashtagging, and the four-tag ceiling holds**
+- ✅ **A social refusal from our own policy gate is not blamed on the owner's connection**
+- ✅ **A paused social share is offered again instead of being abandoned for the day**
+- ✅ **A social route held back by our own content rule does not blame the owner's token**
+- ✅ **A strict-compiler refusal rotates the slot instead of ending the run**
+- ✅ **A headline that ranks a product is not offered to a slot it cannot pass**
+- ✅ **A content refusal says which words tripped it, with long numbers masked**
+- ✅ **A News recovery request is honoured only for the editions still missing**
+- ✅ **A Master slot refused by a gate is given three substitutes in the same run**
+- ✅ **A fresh same-edition twin is found across addresses and retired, never erased**
+- ✅ **The twins scope cannot rewrite anything, only revert a copy**
+- ✅ **A slot published twice is measured even when its two articles differ**
+- ✅ **A double publication is resolved by the run that caused it, keeping the first copy**
+- ✅ **A day held by a missing photo credit is reopened by the guard that watches the day**
 - ✅ **No automation may claim a professional qualification**
 - ✅ **Advice risk gate blocks publication**
 - ✅ **No Instagram route is registered, scheduled or left behind in the repository**
@@ -144,22 +157,18 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **Google News readiness is measured from the public feed, and an unreadable feed stays unreadable**
 - ✅ **Indexing starts at the front doors: the main pages, not all 551 URLs**
 - ✅ **The front-door list includes the homepage, which no /p/ pattern can match**
-- ✅ **Bing is offered both Blogger sitemaps, not only the archive**
-- ✅ **The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict**
-- ✅ **Every URL is judged against Bing and Google indexing rules, not against a guess** — a guideline check was dropped from the audit
+- ❌ **The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict**
 - ✅ **The policy audit is read-only and never counts a platform limit as our violation**
 - ✅ **The policy audit keeps similarity honest and re-runs visible**
 - ✅ **The policy audit runs daily and proves its own rules before it reports**
 - ✅ **A clipped headline cannot be published as a headline**
 - ✅ **The indexing-policy gate is wired into both publishers, not just documented**
-- ✅ **A new article names its photographs after its own subject (Bing §12)**
 - ✅ **A scheduled job that has nothing to do says so instead of sending an email** — a held route, a queued child and a failed run all have a quieter and more informative answer now
 - ✅ **A phone is asked directly, and no URL leaves the site in a parameterised form** — mobile-first indexing means the smartphone answer is the indexable one: a page that only answers a desktop fetch is reported by Google as a redirect, and a submitted ?m=1 URL asks for that redirect
 - ✅ **The whole-corpus repair can only run under the owner's recorded release**
 - ✅ **A push reports the repair plan; applying it takes a committed go-ahead that is then consumed**
 - ✅ **The repair proves its own plan before it is allowed near the site**
 - ✅ **The anti-dangling headline rule is shared, so the clip and the gate cannot drift**
-- ✅ **Bing spends any quota it grants on the front doors first and re-offers them weekly**
 - ✅ **The milestone is counted in readers, not in pageviews**
 - ✅ **The growth ladder is judged on measured evidence and cannot invent a verdict**
 - ✅ **The audience counter is public-endpoint only and never calls an unanswered endpoint zero**
@@ -212,7 +221,6 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **News publisher brand is Daily Yield**
 - ✅ **News schema uses actual build/publish time**
 - ✅ **News meta description capped**
-- ✅ **News titles are Bing-safe while exact coverage remains in description/body**
 - ✅ **Older dates never alter the stated current coverage window**
 - ✅ **News links both market desks**
 - ✅ **Trusted links disclose source type**
@@ -226,4 +234,9 @@ Scope: retained Master production code and eleven daily News editions, including
 - ✅ **.github/tumblr-oauth-listener is gone with the automation that used it** — no credential-shaped file is left behind
 - ✅ **TUMBLR_OAUTH_ATTEMPT.json is gone with the automation that used it** — no credential-shaped file is left behind
 - ✅ **No workflow runs a Tumblr step, secret or job** — comments may explain the retirement; no step, secret or job uses it
+- ✅ **Every path that can take a live URL down is held by the owner's freeze and needs a typed word** — a workflow failure must never be able to unpublish or delete a published article
 - ✅ **Analytics reader is handed its credentials in every job that runs it** — every ga4_measurement.py step receives GA4_CLIENT_ID and GA4_REFRESH_TOKEN
+- ✅ **No Bing or IndexNow automation remains anywhere in this repository** — the property was deleted by the owner, so the automations were deleted with it on purpose
+- ✅ **Nothing hands a Bing key to a run any more** — no workflow asks for the key, which makes the repository secret dead on arrival
+- ✅ **The main-page index target is judged on Google alone, and says why**
+- ✅ **The Blogger repair client kept its job through the rename** — what was called bing_seo_repair.py only ever wrote to Blogger, so it was renamed rather than deleted

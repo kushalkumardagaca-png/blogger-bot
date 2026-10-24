@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Zero-view search reach readiness and optional Bing sitemap submission.
+"""Zero-view search reach readiness, Google side only since 23 October 2026.
 
 No Daily Yield public page is opened. Google state is handled by gsc_rebuild.py;
-this companion records crawler policy and uses Bing's official API only when the
+this companion records crawler policy. Bing was dropped on 23 October 2026 when the owner
 repository owner has configured BING_WEBMASTER_API_KEY. The secret is consumed only
 as an environment value and is never written to status evidence or logs.
 """
@@ -12,29 +12,6 @@ import json, os, urllib.error, urllib.parse, urllib.request
 
 SITE="https://dailyyield.blogspot.com/"
 SITEMAPS=[SITE+"sitemap.xml",SITE+"sitemap-pages.xml"]
-
-
-def bing_submit(key, sitemap):
-    # Bing accepts the API key in the query string, but SubmitFeed's site and
-    # feed values must be a wrapped JSON POST body. Never place the key in logs.
-    query=urllib.parse.urlencode({"apikey":key})
-    payload=json.dumps({"siteUrl":SITE,"feedUrl":sitemap}).encode("utf-8")
-    req=urllib.request.Request(
-        "https://ssl.bing.com/webmaster/api.svc/json/SubmitFeed?"+query,
-        data=payload,
-        method="POST",
-        headers={"User-Agent":"DailyYield-SearchReach/1.0","Content-Type":"application/json; charset=utf-8"},
-    )
-    try:
-        with urllib.request.urlopen(req,timeout=30) as response:
-            return response.status
-    except urllib.error.HTTPError as exc:
-        # Never stringify the request/exception: Bing requires the key in the
-        # query string and urllib's exception URL would otherwise expose it.
-        exc.read()
-        raise RuntimeError(f"Bing SubmitFeed returned HTTP {exc.code}") from exc
-    except (urllib.error.URLError, TimeoutError) as exc:
-        raise RuntimeError(f"Bing SubmitFeed network failure: {exc.__class__.__name__}") from exc
 
 
 def main():
@@ -52,7 +29,7 @@ def main():
             try: rows.append({"sitemap":sitemap,"status":"SUBMITTED","http":bing_submit(key,sitemap)})
             except Exception as exc: rows.append({"sitemap":sitemap,"status":"ERROR","detail":str(exc)[:180]})
     else:
-        rows=[{"sitemap":x,"status":"READY","detail":"Set repository secret BING_WEBMASTER_API_KEY after site ownership is verified in Bing Webmaster Tools."} for x in SITEMAPS]
+        rows=[{"sitemap":x,"status":"READY","detail":"Google side only: Bing was retired by the owner on 23 October 2026."} for x in SITEMAPS]
     report={"checkedAt":datetime.now(timezone.utc).isoformat(),"mode":"ZERO_SYNTHETIC_VIEWS","syntheticViews":0,"site":SITE,"bingConfigured":bool(key),"sitemaps":rows,"crawlerPolicy":{"Googlebot":"allow public indexable content","bingbot":"allow public indexable content","ChatGPT-User":"allow discovery","OAI-SearchBot":"allow discovery","GPTBot":"publisher choice; not required for ChatGPT search"},"notes":["Blogger controls robots.txt from its Search preferences; this job never requests the public robots.txt URL.","No crawler permission guarantees indexing, citation, ranking or traffic."]}
     Path("SEARCH_REACH_STATUS.json").write_text(json.dumps(report,indent=2)+"\n")
     lines=["# Daily Yield Search Reach","",f"- Checked: {report['checkedAt']}","- Mode: zero synthetic views","- Google Search Console: managed by the dedicated authenticated `gsc_rebuild.py` workflow",f"- Bing API configured: {'yes' if key else 'no — implementation ready for the owner API key'}","","## Sitemaps"]+[f"- `{x['sitemap']}` — {x['status']}" for x in rows]+["","## Responsible crawler policy","- Permit Googlebot and bingbot on public indexable content.","- Permit ChatGPT-User and OAI-SearchBot for discovery if the publisher wants AI-search visibility.","- Keep private, duplicate, internal-search and administrative URLs out of the index.","- Crawler access does not guarantee reach or citation.",""]

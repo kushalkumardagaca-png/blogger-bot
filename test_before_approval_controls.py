@@ -95,13 +95,13 @@ class FreezeTests(unittest.TestCase):
         # 'blogger_duplicate_purge' and 'cleanup_wrong_master_post' were added on 22 October 2026 when
         # the owner ruled that no published article may come down because of a workflow; both can call
         # Blogger's DELETE, so both are now held by the freeze like everything else that writes.
-        self.assertEqual(set(held),{'adsense_readiness','bing_seo_repair','blogger_duplicate_purge',
+        self.assertEqual(set(held),{'adsense_readiness','blogger_seo_repair','blogger_duplicate_purge',
             'cleanup_wrong_master_post','deploy_blogger_policy_compliance',
             'deploy_global_snapshot','deploy_markets_today','gsc_rebuild','identity_migration',
             'motion_related_retrofit','reader_measurement_retrofit','repair_family_directory',
             'repair_known_external_links','retrofit_live_news','solve_remaining','update_page_family'})
         self.assertEqual(set(workflows), {
-            'adsense_readiness.yml', 'bing_seo_repair.yml', 'blogger_policy_compliance.yml',
+            'adsense_readiness.yml', 'blogger_seo_repair.yml', 'blogger_policy_compliance.yml',
             'deploy_global_snapshot.yml', 'deploy_markets_today.yml', 'gsc_rebuild.yml',
             'identity_migration.yml', 'motion_related_retrofit.yml', 'reader_measurement_retrofit.yml',
             'repair_family_directory.yml', 'repair_known_external_links.yml', 'retrofit_live_news.yml',

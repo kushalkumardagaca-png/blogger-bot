@@ -259,9 +259,9 @@ class Revert(unittest.TestCase, TempPaths):
 class Boundaries(unittest.TestCase):
     def test_the_client_is_the_shared_zero_view_one_and_no_public_page_is_ever_fetched(self):
         src = pathlib.Path(repair.__file__).read_text(encoding="utf-8")
-        self.assertIn("from bing_seo_repair import", src)
+        self.assertIn("from blogger_seo_repair import", src)
         self.assertNotIn("import urllib.request", src,
-                         "only bing_seo_repair.request_json may open a connection: it is the one that "
+                         "only blogger_seo_repair.request_json may open a connection: it is the one that "
                          "refuses a public Daily Yield URL")
         self.assertIn("from site_change_control import stop_if_frozen", src)
         self.assertNotIn("theme", src.split('"""')[2], "this job may not touch the theme")

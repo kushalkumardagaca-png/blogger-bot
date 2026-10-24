@@ -90,24 +90,6 @@ jobs:
             exit 1
           fi
           tail -40 /tmp/news.log
-      - name: Tell the search engines the new edition is live
-        if: success()
-        env:
-          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
-          INDEXNOW_KEY_LOCATION: ${{ secrets.INDEXNOW_KEY_LOCATION }}
-        run: |
-          set -uo pipefail
-          # Every edition published by this run is pinged to Bing and Yandex at
-          # once. No quota, no hand submission; a failure here never blocks a
-          # successful publication.
-          python - <<'PY'
-          import json, pathlib, subprocess
-          tracker = json.loads(pathlib.Path("news_tracker.json").read_text(encoding="utf-8")).get("desks", {})
-          urls = [row.get("url", "") for row in tracker.values() if row.get("url")]
-          if urls:
-              subprocess.run(["python", "indexnow_submit.py", "--apply",
-                              *sum([["--url", u] for u in urls], [])], check=False)
-          PY
       - name: Route each live News edition to two different social platforms
         if: success()
         env:
@@ -174,8 +156,3 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run content_experience_repair.yml --ref main
-      - name: Trigger Bing URL submission reconciliation
-        if: success()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run bing_url_automation.yml --ref main

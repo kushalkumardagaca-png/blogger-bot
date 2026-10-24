@@ -15,8 +15,7 @@ live in GitHub Actions or has a file in this repository that runs it.
 | Redirect errors | 10 |
 | Clicks in the last 28 days | **1** |
 | Impressions in the last 28 days | 2 |
-| Bing daily quota | 0 |
-| IndexNow URLs ever accepted | 0 (400 sitting in the queue) |
+| Bing daily quota | closed on 23 October 2026: you deleted the property and every Bing automation was deleted with it |
 
 The blog does not have a traffic problem. It has a *visibility* problem: Google knows the
 pages exist and has decided not to index them. So the plan below is not "publish more".
@@ -39,7 +38,7 @@ The repository's own control tower already agrees: it sets `TARGET = 10_000_000`
    20:35 UTC daily and writes `INDEXING_CAPACITY.md`. Today's verdict is **CONTRACT**: 2 master
    articles and 1 news wire a day. It also ranks which 40 URLs get announced to Google and holds
    back 89 that would only prove the pile is a template farm. `search_indexing.yml` now announces
-   that ranked list instead of the whole sitemap, and shouts a visible warning whenever IndexNow
+   that ranked list instead of the whole sitemap, and records which addresses are worth asking Google about, and says in the same line that no engine submission is made from this file (IndexNow and Bing were retired by the owner on 23 October 2026) - it no longer shouts
    accepts nothing, which is the failure that used to hide inside a green checkmark.
 2. **Cut the duplicate pile - live now, audit every night.** `blogger_duplicate_purge.py` finds
    posts published twice under the same title (`...sold-property-eight-different-ways-to_0586614503.html`

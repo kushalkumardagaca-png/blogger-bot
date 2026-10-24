@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Scoreboard and plumbing for the owner's target: every main page indexed at Google AND Bing
+"""Scoreboard and plumbing for the owner's target: every main page indexed at Google
+
+Bing was part of this target until 23 October 2026, when the owner removed the property from Bing
+Webmaster Tools. The target is now Google alone, and no call in this file goes anywhere else.
 before 30 November 2026, starting with the front doors instead of the 578 article URLs.
 
 Why this file exists. gsc_rebuild.py is the only job that ever registered Blogger's two sitemaps in
@@ -30,10 +33,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-try:      # the Bing client that already works in this repository; hand-rolling it is how 400s happen
-    import bing_url_automation as bing
-except Exception:      # noqa: BLE001 - a missing optional dependency must degrade, never crash the scoreboard
-    bing = None
+bing = None   # the Bing client was deleted on 23 October 2026 with the owner's instruction; never revived
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "MAIN_PAGES_INDEX_TARGET.json"
@@ -245,7 +245,7 @@ def live_probe(url: str) -> dict:
     The inspection API answers with Google's stored verdict for the last crawl it chose to make. On
     this site ten front doors carry "Redirect error" from crawls of 25 September to 20 October, while
     the same URLs answer 200 with no redirect today. Only a fresh crawl can clear a stale verdict, and
-    on a Blogger property with no IndexNow, zero Bing quota and no registered sitemap, nothing was
+    on a Blogger property with no announcement queue and no registered sitemap, nothing was
     ever going to ask for one. This probe is what turns "Google says no" into "Google has not looked".
     """
     handler = _RedirectCounter()
@@ -471,50 +471,26 @@ def inspect_one(access: str, site: str, url: str) -> dict:
 
 
 def bing_view(urls: list[str]) -> dict:
-    """Bing's own two answers: how much submission capacity we have, and which URLs it has seen.
+    """Bing is no longer asked anything, and that is a decision, not a gap.
 
-    Both calls go through the client in bing_url_automation.py, because that is the one whose
-    endpoint, parameter names and response unwrapping have been proven against Bing in CI. A
-    hand-rolled call to the wrong operation name returns HTTP 400 and would be read as "Bing says
-    nothing", which is the exact mistake this job exists to stop.
+    The property was deleted from Bing Webmaster Tools by the owner on 23 October 2026 and every Bing
+    automation in this repository was removed the same evening. The field stays in the report so anyone
+    reading an older copy can see what happened to it, and so no run ever reports a Bing failure again.
     """
-    out = {"status": "UNAVAILABLE", "detail": "", "quota": {}, "seen": {},
-           "notReported": list(urls)}
-    key = os.environ.get("BING_WEBMASTER_API_KEY", "").strip()
-    if not key:
-        out["detail"] = "BING_WEBMASTER_API_KEY is not set in this run"
-        return out
-    if bing is None:
-        out["detail"] = "bing_url_automation.py could not be imported"
-        return out
-    try:
-        quota = bing.get_quota(key)
-        out["quota"] = {"dailyUrlSubmission": quota.get("dailyAvailable"),
-                        "monthlyUrlSubmission": quota.get("monthlyAvailable")}
-    except Exception as exc:  # noqa: BLE001 - a quota outage is a fact to report, not a failure
-        out["detail"] = f"quota read failed: {type(exc).__name__}"
-    try:
-        stats = bing.get_page_stats(key) or {}
-        wanted = set(urls)
-        seen = {url: {"observedAt": now_utc()} for url in wanted if url in stats}
-        out["seen"] = seen
-        out["notReported"] = [url for url in urls if url not in seen]
-        out["status"] = "MEASURED" if out["quota"] or seen else "PARTIAL"
-        out["detail"] = ((out["detail"] + "; ").lstrip("; ") + "GetPageStats surfaces only pages that "
-                         "generated a Bing impression, so absence is unreported, not unindexed").strip()
-    except Exception as exc:  # noqa: BLE001
-        out["status"] = "PARTIAL" if out["quota"] else "UNAVAILABLE"
-        out["detail"] = (out["detail"] + f"; page stats failed: {type(exc).__name__}").strip("; ")
-    return out
+    return {"retired": True,
+            "detail": "retired by the owner on 23 October 2026; no Bing calls are made or needed",
+            "quota": {}, "knownToBing": 0, "checkedUrls": len(urls)}
 
 
-# --------------------------------------------------------------------------- report
+def pace(targets: list[dict], google_indexed: int, today: dt.date) -> dict:
+    """Linear expectation against the deadline, computed from Google's own answer and nothing else.
 
-
-def pace(targets: list[dict], google_indexed: int, bing_known: int, today: dt.date) -> dict:
-    """Linear expectation against the deadline, computed only from what the platforms reported."""
+    Bing was one of the two numbers here until 23 October 2026, when the owner deleted the property in
+    Bing Webmaster Tools. Counting a page as done only once a retired engine also agreed would have
+    frozen this scoreboard at one of thirteen forever, so the target is Google alone.
+    """
     total = len(targets)
-    in_both = min(google_indexed, bing_known)
+    in_both = google_indexed
     remaining = max(0, total - in_both)
     days_left = (DEADLINE - today).days
     weeks_left = max(1, -(-days_left // 7)) if days_left > 0 else 0
@@ -522,13 +498,13 @@ def pace(targets: list[dict], google_indexed: int, bing_known: int, today: dt.da
     elapsed = max(0, (today - START).days)
     expected = total * min(1.0, elapsed / window)
     return {"deadline": DEADLINE.isoformat(), "today": today.isoformat(), "daysLeft": days_left,
-            "targets": total, "inBothPlatforms": in_both, "stillMissing": remaining,
+            "targets": total, "indexedInGoogle": in_both, "stillMissing": remaining,
             "paceRequiredPerWeek": (0 if remaining == 0 or weeks_left == 0
                                     else -(-remaining // weeks_left)),
             "expectedByNow": round(expected, 2),
             "behindBy": max(0, math.ceil(expected) - in_both),
             "onTrack": bool(in_both >= expected),
-            "note": "pace is measured from the two platforms' own answers, not from a crawl promise"}
+            "note": "pace is measured from Google's own verdict, not from a crawl promise"}
 
 
 def manual_queue(rows: list[dict]) -> list[dict]:
@@ -602,11 +578,10 @@ def owner_actions(report: dict) -> list[str]:
 def build_report(*, targets, properties, sitemaps, registration, rows, bing, today) -> dict:
     stale = [row["url"] for row in rows if row.get("staleVerdict")]
     google_indexed = sum(1 for row in rows if row.get("verdict") == "PASS")
-    bing_seen = bing.get("seen") or {}
-    bing_known = sum(1 for row in targets if row["url"] in bing_seen)
+    retired = bool(bing.get("retired"))
     report = {
         "checkedAt": now_utc(),
-        "purpose": "the 13 front doors indexed at Google and Bing before 30 November 2026",
+        "purpose": "the 13 front doors indexed in Google before 30 November 2026",
         "site": PREFIX_PROPERTY,
         "siteWrites": 0,
         "targets": targets,
@@ -620,7 +595,7 @@ def build_report(*, targets, properties, sitemaps, registration, rows, bing, tod
         "sitemaps": sitemaps,
         "sitemapRegistration": registration,
         "bing": bing,
-        "pace": pace(targets, google_indexed, bing_known, today),
+        "pace": pace(targets, google_indexed, today),
         "byPage": [{"url": row["url"],
                     "google": row.get("verdict", "UNKNOWN"),
                     "googleCoverage": row.get("coverageState", ""),
@@ -632,8 +607,8 @@ def build_report(*, targets, properties, sitemaps, registration, rows, bing, tod
                                              == row["url"].rstrip("/")),
                     "mobileFetchToday": row.get("mobileFetch") or {},
                     "redirectCause": row.get("redirectCause", ""),
-                    "bing": ("reported" if row["url"] in bing_seen else "unreported"),
-                    "inBoth": bool(row.get("verdict") == "PASS" and row["url"] in bing_seen)}
+                    "bing": "retired with the owner's property on 23 October 2026",
+                    "googleIndexed": row.get("verdict") == "PASS"}
                    for row in rows],
         "staleVerdicts": {"count": len(stale), "urls": stale,
                           "meaning": "the live page answers 200 with no redirect today, asked as a "
@@ -645,11 +620,12 @@ def build_report(*, targets, properties, sitemaps, registration, rows, bing, tod
     report["verdict"] = (
         "ALL_MAIN_PAGES_INDEXED" if report["pace"]["stillMissing"] == 0 else
         ("OFF_TRACK" if report["pace"]["daysLeft"] <= 0 else
-         ("PARTIAL" if google_indexed or bing_known else "NOT_STARTED")))
-    report["limits"] = ("Google's indexed-version verdict is the only indexing signal this job "
-                        "trusts. Bing's GetPageStats reports the pages it chose to surface, so an "
-                        "absent page is unreported and never counted as proof of non-indexing. No "
-                        "figure in this file is a promise about ranking, traffic or review.")
+         ("PARTIAL" if google_indexed else "NOT_STARTED")))
+    report["limits"] = ("Google's indexed-version verdict is the only indexing signal this job trusts. "
+                        "Bing is no longer asked anything: the property was deleted by the owner on "
+                        "23 October 2026, and that retirement is recorded here so an older copy of this "
+                        "report can be read against it. No figure in this file is a promise about ranking, "
+                        "traffic or review."    ) if retired else ("Google's indexed-version verdict is the only indexing signal this job trusts.")
     return report
 
 
@@ -659,14 +635,13 @@ def render_markdown(report: dict) -> str:
              f"**{report['verdict']}** · checked {report['checkedAt']}", "",
              f"- Targets: **{pace_block['targets']}** main pages (homepage first)",
              f"- In Google's index: **{report['google']['indexed']}**",
-             f"- Reported by Bing: **{(report['bing'].get('seen') or {}).__len__()}**",
-             f"- Still missing from at least one platform: **{pace_block['stillMissing']}**",
+             f"- Not yet in Google's index: **{pace_block['stillMissing']}**",
              f"- Days to 30 November 2026: **{pace_block['daysLeft']}** · pace needed: "
              f"**{pace_block['paceRequiredPerWeek']} page(s) a week**", "",
-             "## Every page", "", "| page | Google | coverage | Bing |", "|---|---|---|---|"]
+             "## Every page", "", "| page | Google | coverage |", "|---|---|---|"]
     for row in report["byPage"]:
         lines.append(f"| `{row['url'].replace(BLOG, '') or '/'}` | {row['google']} | "
-                     f"{row['googleCoverage'] or '—'} | {row['bing']} |")
+                     f"{row['googleCoverage'] or '—'} |")
     sitemaps = report.get("sitemaps") or {}
     props = report.get("properties") or {}
     lines += ["", "## Sitemaps registered on the URL-prefix property", ""]
@@ -777,8 +752,7 @@ def run_check() -> int:
     rows = [{"url": row["url"], "verdict": "PASS" if index < 5 else "FAIL",
              "coverageState": "" if index < 5 else "Discovered - currently not indexed"}
             for index, row in enumerate(targets)]
-    bing = {"status": "MEASURED", "seen": {row["url"]: {} for row in targets[:6]}, "quota": {},
-            "notReported": [], "detail": ""}
+    bing = bing_view([row["url"] for row in targets])   # the retired record, exactly as a live run builds it
     report = build_report(targets=targets, properties={"status": "MEASURED", "visible": [PREFIX_PROPERTY],
                         "urlPrefixPropertyVisible": True, "domainPropertyVisible": True},
                         sitemaps={"status": "MEASURED", "registered": [], "missing": list(SITEMAP_PATHS)},

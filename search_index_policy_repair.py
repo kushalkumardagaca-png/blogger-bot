@@ -243,7 +243,7 @@ def takedowns(items: list[dict], protected: set[str]) -> dict:
 
 
 def apply(patches: list[dict], unpublished: list[dict], token: str) -> dict:
-    from bing_seo_repair import BLOG_ID, patch_item, request_json   # the zero-view-guarded client
+    from blogger_seo_repair import BLOG_ID, patch_item, request_json   # the zero-view-guarded client
 
     done, failed = [], []
     for row in patches:
@@ -298,7 +298,7 @@ def read_backup(path: Path) -> list[dict]:
 
 def restore(rows: list[dict], token: str) -> dict:
     """Write the backup back. Reversible by definition, because it restores the previous state."""
-    from bing_seo_repair import BLOG_ID, patch_item, request_json   # the zero-view-guarded client
+    from blogger_seo_repair import BLOG_ID, patch_item, request_json   # the zero-view-guarded client
 
     done, failed = [], []
     for row in rows:
@@ -454,7 +454,7 @@ def main() -> int:
         rows = restore_rows(read_backup(source))
         outcome = {"written": 0, "failed": [], "restored": [], "backup": source.name}
         if rows:
-            from bing_seo_repair import oauth
+            from blogger_seo_repair import oauth
             outcome.update(restore(rows, oauth()))
         payload = {"ranAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
                    "mode": "RESTORE", "inventory": len(rows),
@@ -475,7 +475,7 @@ def main() -> int:
         items = json.loads(Path(arguments.fixture).read_text(encoding="utf-8"))
         token, protected = "", set()
     else:
-        from bing_seo_repair import inventory, oauth
+        from blogger_seo_repair import inventory, oauth
         from blogger_duplicate_purge import protected_urls
         token = oauth()
         items = inventory(token)

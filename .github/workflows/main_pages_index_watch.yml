@@ -1,13 +1,13 @@
 name: Main pages indexing scoreboard
 
 # The owner's target, 21 October 2026: every one of the 13 main pages — the homepage and the twelve
-# standing pages — present in Google's index and in Bing's, before 30 November 2026. Nothing else in
+# standing pages — present in Google's index, before 30 November 2026. Nothing else in
 # this repository answers that question: gsc_rebuild.py is frozen by owner decision and it is the only
 # job that ever touched sitemap registration, and index_status_report.py measures the whole 592-URL
 # inventory on the domain property where "Request indexing" does not exist.
 #
 # This job is deliberately narrow. It reads the URL-prefix property, makes sure Blogger's two
-# sitemaps are registered there, inspects thirteen URLs, asks Bing what it has, and writes the
+# sitemaps are registered there, inspects thirteen URLs, writes the
 # scoreboard. It performs no Blogger write of any kind, so the site-change freeze is untouched.
 on:
   workflow_dispatch:
@@ -47,7 +47,6 @@ jobs:
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
-          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
         run: python main_pages_index_watch.py --apply
       - name: Persist the scoreboard
         if: always()

@@ -1,8 +1,10 @@
 {
-  "checked_at_ist": "2026-10-22T17:20:01+05:30",
+  "checked_at_ist": "2026-10-24T13:24:29+05:30",
   "summary": {
-    "pass": 223,
-    "fail": 0
+    "pass": 235,
+    "fail": 1,
+    "notMeasured": 0,
+    "checks": 236
   },
   "checks": [
     {
@@ -46,42 +48,17 @@
       "detail": ""
     },
     {
-      "name": "Bing URL automation reconciles every two hours",
+      "name": "A news-desk lock cannot be defeated by its own run id",
       "status": "PASS",
-      "detail": ""
+      "detail": "a concurrency group keyed by the run id is a decoration, not a lock"
     },
     {
-      "name": "News publisher triggers Bing reconciliation without schedule changes",
+      "name": "Scheduled news desks keep their own groups while manual runs share one",
       "status": "PASS",
-      "detail": ""
+      "detail": "group: ${{ github.event_name == 'schedule' && format('daily-yield-news-{0}', github.event.schedule) || 'daily-yield-news"
     },
     {
-      "name": "Bing URL submission is quota-aware and capped at 500 per batch",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Bing URL automation suppresses unchanged duplicate submissions",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Bing index monitoring uses GetUrlInfo with bounded stages",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Bing URL automation creates no public Daily Yield requests or Live URL fetches",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Bing API-key errors are redacted rather than stringified",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Bing URL evidence and state are persisted without secrets",
+      "name": "Recovery routes hold the same lock",
       "status": "PASS",
       "detail": ""
     },
@@ -391,11 +368,6 @@
       "detail": ""
     },
     {
-      "name": "Every new URL is announced to the search engines without human submission",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
       "name": "Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow",
       "status": "PASS",
       "detail": ""
@@ -616,6 +588,101 @@
       "detail": ""
     },
     {
+      "name": "A photo licence credit is protected from repetition repair and from the repetition measure",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A master figure is never rendered or published with a blank credit",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "Blank live captions are repaired from the site\u2019s own rights registry in a released narrow scope only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A deterministic section is measured for supported figures as each paragraph is admitted",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The released figure-credit repair is also watched on a clock, so a gap cannot hold the day",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A hash inside prose is not counted as hashtagging, and the four-tag ceiling holds",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A social refusal from our own policy gate is not blamed on the owner's connection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A paused social share is offered again instead of being abandoned for the day",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A social route held back by our own content rule does not blame the owner's token",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A strict-compiler refusal rotates the slot instead of ending the run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A headline that ranks a product is not offered to a slot it cannot pass",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A content refusal says which words tripped it, with long numbers masked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A News recovery request is honoured only for the editions still missing",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A Master slot refused by a gate is given three substitutes in the same run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A fresh same-edition twin is found across addresses and retired, never erased",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The twins scope cannot rewrite anything, only revert a copy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A slot published twice is measured even when its two articles differ",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A double publication is resolved by the run that caused it, keeping the first copy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "A day held by a missing photo credit is reopened by the guard that watches the day",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "No automation may claim a professional qualification",
       "status": "PASS",
       "detail": ""
@@ -706,19 +773,9 @@
       "detail": ""
     },
     {
-      "name": "Bing is offered both Blogger sitemaps, not only the archive",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
       "name": "The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict",
-      "status": "PASS",
+      "status": "FAIL",
       "detail": ""
-    },
-    {
-      "name": "Every URL is judged against Bing and Google indexing rules, not against a guess",
-      "status": "PASS",
-      "detail": "a guideline check was dropped from the audit"
     },
     {
       "name": "The policy audit is read-only and never counts a platform limit as our violation",
@@ -742,11 +799,6 @@
     },
     {
       "name": "The indexing-policy gate is wired into both publishers, not just documented",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "A new article names its photographs after its own subject (Bing \u00a712)",
       "status": "PASS",
       "detail": ""
     },
@@ -777,11 +829,6 @@
     },
     {
       "name": "The anti-dangling headline rule is shared, so the clip and the gate cannot drift",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "Bing spends any quota it grants on the front doors first and re-offers them weekly",
       "status": "PASS",
       "detail": ""
     },
@@ -1046,11 +1093,6 @@
       "detail": ""
     },
     {
-      "name": "News titles are Bing-safe while exact coverage remains in description/body",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
       "name": "Older dates never alter the stated current coverage window",
       "status": "PASS",
       "detail": ""
@@ -1116,9 +1158,34 @@
       "detail": "comments may explain the retirement; no step, secret or job uses it"
     },
     {
+      "name": "Every path that can take a live URL down is held by the owner's freeze and needs a typed word",
+      "status": "PASS",
+      "detail": "a workflow failure must never be able to unpublish or delete a published article"
+    },
+    {
       "name": "Analytics reader is handed its credentials in every job that runs it",
       "status": "PASS",
       "detail": "every ga4_measurement.py step receives GA4_CLIENT_ID and GA4_REFRESH_TOKEN"
+    },
+    {
+      "name": "No Bing or IndexNow automation remains anywhere in this repository",
+      "status": "PASS",
+      "detail": "the property was deleted by the owner, so the automations were deleted with it on purpose"
+    },
+    {
+      "name": "Nothing hands a Bing key to a run any more",
+      "status": "PASS",
+      "detail": "no workflow asks for the key, which makes the repository secret dead on arrival"
+    },
+    {
+      "name": "The main-page index target is judged on Google alone, and says why",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "The Blogger repair client kept its job through the rename",
+      "status": "PASS",
+      "detail": "what was called bing_seo_repair.py only ever wrote to Blogger, so it was renamed rather than deleted"
     }
   ]
 }

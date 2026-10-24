@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Judge every Daily Yield URL against Bing's Webmaster Guidelines and Google's indexability rules.
+"""Judge every Daily Yield URL against the published search rules a Blogger site can actually meet.
 
-Why this file exists: both search engines now publish the same four-part demand in different words -
+Why this file exists: search engines all publish the same four-part demand in different words -
 discover through sitemaps and links, consolidate duplicates, keep every URL worth crawling, and
-describe it honestly (title, structure, alt text, structured data). Bing's guidelines
-(bing.com/webmasters/help/webmaster-guidelines-30fba23a) add the crawl-waste and grounding framing;
-Google's URL Inspection rules (support.google.com/webmasters/answer/9012289) add the canonical,
-"indexing allowed?" and "no referring sitemap" mechanics. This audit turns those into checks that can
-be answered from data we are allowed to read, and says plainly which checks a Blogger property cannot
-answer at all.
+describe it honestly (title, structure, alt text, structured data). Google's URL Inspection rules
+(support.google.com/webmasters/answer/9012289) are the ones this site is judged by, because the owner
+retired the Bing property on 23 October 2026; the section numbers in the comments below still name the
+document each threshold came from, which is provenance and not a request to that engine. This audit
+turns those rules into checks that can be answered from data we are allowed to read, and says plainly
+which checks a Blogger property cannot answer at all.
 
 Deliberate boundaries:
 - Read-only. Nothing here edits the blog, the theme, or a robots rule.

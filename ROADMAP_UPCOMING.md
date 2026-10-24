@@ -53,8 +53,8 @@ dated table per topic, a chart made from measured numbers only, the source line 
 page, so other sites can quote it.
 
 ### Custom domain (dailyyield.in / .com)
-You said no money. Everything the blog lacks - crawl trust, News acceptance, a root file for
-IndexNow - would be easier on a domain we control, and none of it is possible on `blogspot.com`
+You said no money, and on 22 October 2026 you decided to wait until about 500,000 views a day.
+Everything the blog lacks - crawl trust and News acceptance - would be easier on a domain we control, and none of it is possible on `blogspot.com`
 without the free-but-registered domain. Parked, and named in the reports where it blocks us.
 
 ### Theme head metadata: `og:image`, `canonical`, `meta description`
@@ -79,9 +79,12 @@ review closes:
 Backup the current theme before pasting, and check one article page afterwards: the `og:image` line
 should appear in the head.
 
-### IndexNow / Bing verification file
-`blogspot.com` cannot host `/{key}.txt` at the root, so IndexNow stays half-broken here; Bing
-verification by `<meta>` tag works, but that is also a theme edit → same queue as above.
+### Bing and IndexNow — retired on 23 October 2026
+Not parked: **closed**. You deleted this blog from Bing Webmaster Tools on 23 October 2026 and asked
+for every automation that served that tool to be deleted permanently. It is done - the scripts, the
+two-hourly reconciler, the IndexNow submitter, the sitemap hand-off and their state files are gone,
+and the nightly reports no longer list Bing as something outstanding. The only thing left is to delete
+three now-useless secrets in GitHub's Settings, which is a click for you and needs no repair.
 
 ### The five explained items, in the order we are doing them (least time first)
 Written down on 21 October 2026 so the sequence is not something to remember. The owner's own two
@@ -94,7 +97,7 @@ order below is only the five explained concepts.
 | 2 | Publisher Center submission | about 15 minutes, once | steps are item 5 of `CONCEPTS_FOR_MILESTONE.md`; nothing on the site changes |
 | 3 | Google News and Discover | ours, nightly, plus a review that takes days to weeks | measured nightly by `google_news_readiness.py`; cut headlines repaired nightly; `og:image` and head description wait for the theme edit after the AdSense review |
 | 4 | Citable data pages (rate tables, gold by city) | ours, days of building | parked deliberately until the 13 front doors are indexed, so the indexing decision is not fought |
-| 5 | Bing quota and IndexNow | blocked until ~17 November | `DailyQuota 0`; the verification tag is a theme-head change, so it queues behind the publisher review |
+| 5 | ~~Bing quota and IndexNow~~ | nobody's time | **closed by you on 23 October 2026** - the property was deleted and every Bing automation with it | `DailyQuota 0`; the verification tag is a theme-head change, so it queues behind the publisher review |
 
 ### Publishing cadence
 The 21 a day stands, exactly as you decided. The capacity gate now only decides **what is announced

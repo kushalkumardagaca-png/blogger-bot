@@ -87,29 +87,31 @@ a chat.
 
 ---
 
-## 4. Bing quota
+## 4. Bing quota — closed by the owner on 23 October 2026
 
-**What it is.** Bing Webmaster Tools is Microsoft's version of Search Console. It gives every
-verified site a *daily quota* - a number of addresses it is willing to look at. Our measured number
-is `DailyQuota 0`, in `INDEXING_HEALTH.json`. Quota zero means Bing will not accept our submissions.
+**What it was.** Bing Webmaster Tools is Microsoft's version of Search Console. A verified site gets a
+*daily quota* - a number of addresses it is willing to look at. Ours was measured at `DailyQuota 0`,
+which meant Bing would not accept our submissions at all. IndexNow was the side channel that told
+Bing (and through it Yandex, Seznam and Naver) "this page changed, come now"; on `blogspot.com` the
+key file cannot sit at the root, so that channel was shut as well: 400 addresses queued, 0 ever
+accepted.
 
-**What it is used for.** IndexNow is the mechanism that tells Bing (and, through it, Yandex,
-Seznam, Naver and others) "this page changed, come now". With a zero quota and an IndexNow key the
-blogspot domain cannot host at its root, that channel is shut: measured today, IndexNow has
-**queued 400 URLs and had 0 ever accepted**.
+**What you decided.** On 23 October 2026 you deleted this blog from Bing Webmaster Tools and told me
+to stop and delete every automation that worked for it, permanently.
 
-**Why it matters - and how much.** Bing is a genuine second opinion on indexing and in India carries
-a modest share of finance searches; it is free capacity, not the road to 50,000. The honest weight:
-useful, second-tier, and it does not need money - it needs a verification tag in the page head,
-which is a theme change and therefore waits for the review to finish.
+**What I did the same evening.** Nine files whose only job was that tool were deleted, four more
+workflows lost their Bing and IndexNow steps, the nightly scoreboard now judges the thirteen front
+doors on Google alone, and the health audit gained four checks that fail loudly if any of it ever
+creeps back. One file kept its job but lost its name: `bing_seo_repair.py` only ever wrote to Blogger,
+so it is now `blogger_seo_repair.py`.
 
-**Where we stand.** Nothing is being faked: the nightly report already prints
-`indexnowLooksBlocked` as a visible warning whenever the queue grows and nothing is accepted. The
-verification snippet is written in `ROADMAP_UPCOMING.md` for after ~17 November.
+**What is left.** Three dead secrets in GitHub (Settings → Secrets and variables → Actions):
+`BING_WEBMASTER_API_KEY`, `INDEXNOW_KEY`, `INDEXNOW_KEY_LOCATION`. Deleting them is one click each;
+I cannot press it because they are account settings, not files. Nothing in the repository asks for
+them any more, so they do no harm while they sit there.
 
-**What you have to do.** Nothing today. After the review: sign in at Bing Webmaster Tools with the
-blog's Google account, add the site, paste the verification `<meta>` tag into Blogger → Theme →
-Edit HTML, just above `</head>`.
+**Weight on the plan.** Zero. The 50,000-a-day target was never a Bing target: it was always Google
+Search, Google News and Discover. This change removes a second opinion, not a growth engine.
 
 ---
 

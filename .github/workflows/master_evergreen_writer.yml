@@ -186,23 +186,6 @@ jobs:
           GSC_REFRESH_TOKEN: ${{ secrets.GSC_REFRESH_TOKEN }}
           GSC_SITE_PROPERTY: ${{ secrets.GSC_SITE_PROPERTY }}
         run: python master_v3_pipeline.py --kind evergreen --slot "${{ steps.slot.outputs.value }}" --publish ${{ github.event_name == 'schedule' && '--timed-release' || '' }}
-      - name: Tell the search engines the new article is live
-        if: success()
-        env:
-          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
-          INDEXNOW_KEY_LOCATION: ${{ secrets.INDEXNOW_KEY_LOCATION }}
-        run: |
-          set -uo pipefail
-          python - <<'PY'
-          import json, pathlib, subprocess, datetime
-          ist = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
-          today = datetime.datetime.now(ist).date().isoformat()
-          rows = json.loads(pathlib.Path("MASTER_AUTOMATION_TRACKER.json").read_text(encoding="utf-8")).get("published", [])
-          urls = [r.get("url", "") for r in rows if r.get("date") == today and r.get("url")]
-          if urls:
-              subprocess.run(["python", "indexnow_submit.py", "--apply",
-                              *sum([["--url", u] for u in urls], [])], check=False)
-          PY
       - name: Persist confirmed publication before downstream routing
         if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         run: |
@@ -231,12 +214,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python dispatch_social_events.py
-      - name: Trigger page refresh and Bing reconciliation
+      - name: Trigger page refresh
         if: ${{ (github.event_name == 'schedule' || inputs.publish) && success() }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          for workflow in content_experience_repair.yml bing_url_automation.yml; do
+          for workflow in content_experience_repair.yml; do
             completed=false
             for attempt in 1 2 3; do
               if gh workflow run "$workflow" --ref main; then completed=true; break; fi

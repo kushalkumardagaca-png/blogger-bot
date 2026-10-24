@@ -75,23 +75,6 @@ check('Recovery routes hold the same lock',
           and 'concurrency:' in (ROOT/'.github/workflows'/n).read_text(encoding='utf-8')
           for n in ('news_desk_recovery.yml','master_slot_recovery.yml')))
 
-bing_py=(ROOT/'bing_url_automation.py').read_text()
-bing_workflow=(ROOT/'.github/workflows/bing_url_automation.yml').read_text()
-check('Bing URL automation reconciles every two hours', "cron: '35 */2 * * *'" in bing_workflow)
-check('News publisher triggers Bing reconciliation without schedule changes',
-      'gh workflow run bing_url_automation.yml --ref main' in nw.read_text())
-check('Bing URL submission is quota-aware and capped at 500 per batch',
-      'GetUrlSubmissionQuota' in bing_py and 'range(0, len(selected), 500)' in bing_py)
-check('Bing URL automation suppresses unchanged duplicate submissions',
-      'submittedFingerprint' in bing_py and '!= item["fingerprint"]' in bing_py)
-check('Bing index monitoring uses GetUrlInfo with bounded stages',
-      'GetUrlInfo' in bing_py and 'INSPECTION_DELAYS = (6, 24, 72, 168)' in bing_py)
-check('Bing URL automation creates no public Daily Yield requests or Live URL fetches',
-      'ZERO-VIEW POLICY BLOCKED public Daily Yield request' in bing_py and 'FetchUrl' not in bing_py)
-check('Bing API-key errors are redacted rather than stringified',
-      'safe_detail' in bing_py and 'apikey' not in bing_py.split('def safe_detail',1)[1].split('def json_request',1)[0])
-check('Bing URL evidence and state are persisted without secrets',
-      'BING_URL_AUTOMATION_STATE.json' in bing_workflow and 'BING_WEBMASTER_API_KEY' in bing_workflow)
 
 ap=(ROOT/'auto_blogger_publisher.py').read_text(); np=(ROOT/'news_pipeline.py').read_text()
 taxonomy=(ROOT/'master_taxonomy.py').read_text(); discovery=(ROOT/'master_topic_discovery.py').read_text(); dynamic=(ROOT/'master_dynamic_pipeline.py').read_text()
@@ -285,14 +268,6 @@ check('Coordinated tracker writes use semantic race-safe persistence retries',
       and (ROOT/'merge_social_tracker.py').exists())
 recovery_path=ROOT/'.github/workflows/publishing_recovery.yml';recovery_script=ROOT/'publishing_recovery.py'
 recovery=recovery_path.read_text() if recovery_path.exists() else '';recovery_code=recovery_script.read_text() if recovery_script.exists() else ''
-check('Every new URL is announced to the search engines without human submission',
-      (ROOT/'indexnow_submit.py').exists()
-      and 'indexnow_submit.py' in (ROOT/'.github/workflows/daily_news_wires.yml').read_text(encoding='utf-8')
-      and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_evergreen_writer.yml').read_text(encoding='utf-8')
-      and 'indexnow_submit.py' in (ROOT/'.github/workflows/master_trending_writer.yml').read_text(encoding='utf-8')
-      and 'submit_feed' in (ROOT/'bing_url_automation.py').read_text(encoding='utf-8')
-      and 'blocked' in (ROOT/'indexnow_submit.py').read_text(encoding='utf-8')
-      and 'pending' in (ROOT/'indexnow_submit.py').read_text(encoding='utf-8'))
 
 check('Permanent all-slot and social dead-letter recovery replaces the one-time recovery workflow',
       not (ROOT/'.github/workflows/missed_publication_recovery.yml').exists()
@@ -603,7 +578,7 @@ check('Publishing volume is bounded by the measured index, not by ambition',
       (ROOT/'indexing_capacity_gate.py').exists()
       and 'currently not indexed' in (ROOT/'indexing_capacity_gate.py').read_text()
       and 'def template_of' in (ROOT/'indexing_capacity_gate.py').read_text()
-      and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/search_indexing.yml').read_text())
+      and 'INDEX_PRIORITY.json' in (ROOT/'.github/workflows/indexing_capacity_gate.yml').read_text())
 check('Every live channel persists its state even when the step before it failed',
       # the lesson of 20-21 October 2026 is that a failure nobody can read is an outage: a refused
       # credential or an undelivered post must reach the repository, not only the job log that
@@ -702,14 +677,10 @@ check('The front-door list includes the homepage, which no /p/ pattern can match
       and 'https://dailyyield.blogspot.com/",' in (ROOT/'test_indexing_capacity_gate.py').read_text())
 watch_py=(ROOT/'main_pages_index_watch.py').read_text()
 watch_yml=(ROOT/'.github/workflows/main_pages_index_watch.yml').read_text()
-check('Bing is offered both Blogger sitemaps, not only the archive',
-      'SITEMAP_FEEDS = ("/sitemap.xml", "/sitemap-pages.xml")' in (ROOT/'bing_url_automation.py').read_text()
-      and 'for feed_path in SITEMAP_FEEDS:' in (ROOT/'bing_url_automation.py').read_text()
-      and 'sitemap feed not refreshed' in (ROOT/'bing_url_automation.py').read_text())
 check('The thirteen main pages have a scoreboard that repairs sitemap registration and never invents a verdict',
       'MAIN_PAGE_HOME' in watch_py and 'sitemap-pages.xml' in watch_py
       and 'urlInspection/index:inspect' in watch_py
-      and 'an API error is not evidence' in watch_py and 'unreported' in watch_py
+      and 'an API error is not evidence' in watch_py and 'retired with the owner' in watch_py
       and 'never as "not indexed"' in watch_py and '"verdict": "UNKNOWN"' in watch_py
       and 'Request indexing' in watch_py and 'indexing.googleapis.com' not in watch_py
       and 'blogger.googleapis.com' not in watch_py
@@ -720,25 +691,12 @@ check('The thirteen main pages have a scoreboard that repairs sitemap registrati
       and 'time.sleep(LIVE_PROBE_SPACING_SECONDS)' in watch_py
       and 'LIVE_PROBE_CAP = 6' in watch_py and 'def blogger_page_state' in watch_py
       and '+http://www.google.com/bot.html' not in watch_py
-      and 'bing.get_quota' in watch_py and 'api.bing.com' not in watch_py
+      and 'api.bing.com' not in watch_py
       and 'python main_pages_index_watch.py --check' in watch_yml
       and 'python main_pages_index_watch.py --apply' in watch_yml
-      and 'secrets.GSC_REFRESH_TOKEN' in watch_yml and 'BING_WEBMASTER_API_KEY' in watch_yml)
+      and 'secrets.GSC_REFRESH_TOKEN' in watch_yml and 'BING_WEBMASTER_API_KEY' not in watch_yml)
 policy_py=(ROOT/'search_index_policy_audit.py').read_text()
 policy_yml=(ROOT/'.github/workflows/search_index_policy_audit.yml').read_text()
-check("Every URL is judged against Bing and Google indexing rules, not against a guess",
-      'def audit()' in policy_py and 'def register(' in policy_py and 'def run_check()' in policy_py
-      and 'webmaster-guidelines-30fba23a' in policy_py and 'webmasters/answer/9012289' in policy_py
-      and all(needle in policy_py for needle in (
-          'sitemap-lists-only-live-urls', 'no-utility-pages-in-sitemaps',
-          'homepage-duplicate-urls-consolidate', 'titles-descriptive-and-complete',
-          'no-duplicate-titles-across-urls', 'no-near-duplicate-pages', 'content-not-thin',
-          'no-keyword-stuffing', 'images-described-not-decorated', 'no-double-published-urls',
-          'opening-delivers-the-headline', 'structured-data-matches-the-page',
-          'no-blocking-robots-meta', 'robots-allows-both-crawlers', 'sitemaps-declared-in-robots',
-          'updated-pages-are-still-substantial', 'every-url-carries-a-date',
-          'mobile-first-fetch-is-direct')),
-      'a guideline check was dropped from the audit')
 check('The policy audit is read-only and never counts a platform limit as our violation',
       'method=' not in policy_py.replace('method="GET"', '')
       and policy_py.count('urllib.request.Request(')==1
@@ -758,7 +716,7 @@ check('The policy audit runs daily and proves its own rules before it reports',
 generator_py=(ROOT/'master_v3_generator.py').read_text()
 check('A clipped headline cannot be published as a headline',
       "kept=kept.rstrip(' ,;:." in generator_py and "tail.endswith(\"'s\")" in generator_py
-      and 'Bing \u00a713' in generator_py and '12<=len(kept)<=limit' in generator_py)
+      and '12<=len(kept)<=limit' in generator_py)
 gate_py=(ROOT/'index_policy_gate.py').read_text()
 repair_py=(ROOT/'search_index_policy_repair.py').read_text()
 repair_yml=(ROOT/'.github/workflows/search_index_policy_repair.yml').read_text()
@@ -771,10 +729,6 @@ check("The indexing-policy gate is wired into both publishers, not just document
       and 'def check_article(' in gate_py and 'def publish_title(' in gate_py
       and 'def alt_failures(' in gate_py and 'def near_duplicate(' in gate_py
       and 'urllib' not in gate_py and 'requests' not in gate_py)
-check('A new article names its photographs after its own subject (Bing §12)',
-      'name=index_policy_gate.asset_file_name(slug,placement)' in (ROOT/'photo_selector.py').read_text()
-      and "assets/master/{slug}/{name}" in (ROOT/'photo_selector.py').read_text()
-      and 'def asset_file_name(' in gate_py)
 check('A scheduled job that has nothing to do says so instead of sending an email',
       # The owner was receiving 50+ GitHub mails a day and most of them were not defects: a deferral
       # that only needed patience, a dispatch the queue had already answered, and red runs that left
@@ -792,8 +746,7 @@ check('A scheduled job that has nothing to do says so instead of sending an emai
 check('A phone is asked directly, and no URL leaves the site in a parameterised form',
       'def mobile_answer(' in policy_py and 'MOBILE_PROBE_UA' in policy_py
       and 'user_agent=MOBILE_PROBE_UA' in policy_py and policy_py.count('urllib.request.Request(')==1
-      and 'def canonical_url(' in gate_py and 'index_policy_gate.canonical_url' in
-      (ROOT/'indexnow_submit.py').read_text()
+      and 'def canonical_url(' in gate_py
       and 'Googlebot' not in policy_py.split('MOBILE_PROBE_UA')[1][:600]
       and 'Googlebot' not in watch_py.split('MOBILE_PROBE_UA')[1][:600],
       'mobile-first indexing means the smartphone answer is the indexable one: a page that only answers a '
@@ -802,7 +755,7 @@ check("The whole-corpus repair can only run under the owner's recorded release",
       "_dy_stop_if_frozen('search_index_policy_repair')" in repair_py
       and '"search_index_policy_repair"' in (ROOT/'SITE_CHANGE_POLICY.json').read_text()
       and '"frozen": true' in (ROOT/'SITE_CHANGE_POLICY.json').read_text()
-      and 'from bing_seo_repair import' in repair_py and 'import urllib.request' not in repair_py
+      and 'from blogger_seo_repair import' in repair_py and 'import urllib.request' not in repair_py
       and 'BACKUP.write_bytes' in repair_py and 'PATCH_SPACING_SECONDS' in repair_py
       and 'protected_urls()' in repair_py and 'unpublish' in repair_py
       and '"--check" not in _sys.argv' in repair_py)
@@ -823,11 +776,6 @@ check('The anti-dangling headline rule is shared, so the clip and the gate canno
       "kept=kept.rstrip(' ,;:." in (ROOT/'master_v3_generator.py').read_text()
       and 'def uncut_title(' in gate_py and "tail.endswith(\"'s\")" in generator_py
       and 'MIN_DOCUMENT_WORDS' in gate_py)
-bing_py=(ROOT/'bing_url_automation.py').read_text()
-check('Bing spends any quota it grants on the front doors first and re-offers them weekly',
-      'rank = 0 if item["kind"] == "home" else 1 if item["kind"] == "page" else 2' in bing_py
-      and 'def reoffer_due' in bing_py and 'MAIN_PAGE_REOFFER_DAYS = 7' in bing_py
-      and 'main_target and reoffer_due(record, started)' in bing_py)
 check('The milestone is counted in readers, not in pageviews',
       'engagedSessions' in (ROOT/'ga4_measurement.py').read_text()
       and 'dailyReaders' in (ROOT/'ga4_measurement.py').read_text()
@@ -965,10 +913,6 @@ check('News byline is current','By Kushal Daga' in np and 'By CA Kushal Daga' no
 check('News publisher brand is Daily Yield','"name": "Daily Yield"' in np and '"name": "Finance by CA Kushal"' not in np)
 check('News schema uses actual build/publish time','win_end.isoformat(timespec="seconds")' in np)
 check('News meta description capped','if len(meta) > 158' in np)
-check('News titles are Bing-safe while exact coverage remains in description/body',
-      'title = compact_title(f"{desk_title_prefix(desk)} — {publish_lead}")' in np
-      and 'coverage_lead = coverage_window_text(win_start, win_end)' in np
-      and 'coverage {coverage_lead}' in np)
 check('Older dates never alter the stated current coverage window',
       'background_items = [i for i in items if i.get("background")]' in np
       and 'coverage_lead = coverage_window_text(win_start, win_end)' in np
@@ -1136,6 +1080,27 @@ else:
     check('Analytics reader is handed its credentials in every job that runs it', not _starved,
           'every ga4_measurement.py step receives GA4_CLIENT_ID and GA4_REFRESH_TOKEN'
           + ('; missing in: ' + '; '.join(_starved) if _starved else ''))
+
+# 23 October 2026: the owner removed this site from Bing Webmaster Tools; Bing must stay out for good.
+_retired_engine = re.compile(r"(?<![A-Za-z])(?:bing|indexnow)(?![A-Za-z])", re.I)
+_nww = (ROOT/'.github/workflows/daily_news_wires.yml').read_text(encoding='utf-8')
+_watch = (ROOT/'main_pages_index_watch.py').read_text(encoding='utf-8')
+_watchwf = (ROOT/'.github/workflows/main_pages_index_watch.yml').read_text(encoding='utf-8')
+_healthwf = (ROOT/'.github/workflows/indexing_health.yml').read_text(encoding='utf-8')
+check('No Bing or IndexNow automation remains anywhere in this repository',
+      not any((ROOT/n).exists() for n in ('bing_url_automation.py', 'indexnow_submit.py', 'INDEXNOW_STATE.json',
+          'BING_URL_AUTOMATION_STATUS.json', 'BING_SEO_REPAIR_REPORT.json',
+          '.github/workflows/bing_url_automation.yml', '.github/workflows/search_indexing.yml',
+          '.github/workflows/bing_seo_repair.yml')) and not _retired_engine.search(_nww),
+      'the property was deleted by the owner, so the automations were deleted with it on purpose')
+check('Nothing hands a Bing key to a run any more', 'BING_WEBMASTER_API_KEY' not in _watchwf
+      and 'BING_WEBMASTER_API_KEY' not in _healthwf,
+      'no workflow asks for the key, which makes the repository secret dead on arrival')
+check('The main-page index target is judged on Google alone, and says why',
+      'retired by the owner on 23 October 2026' in _watch and 'import bing_url_automation' not in _watch)
+check('The Blogger repair client kept its job through the rename', (ROOT/'blogger_seo_repair.py').exists()
+      and 'from blogger_seo_repair import' in (ROOT/'search_index_policy_repair.py').read_text(encoding='utf-8'),
+      'what was called bing_seo_repair.py only ever wrote to Blogger, so it was renamed rather than deleted')
 
 failed=[x for x in checks if x['status']=='FAIL']
 unmeasured=[x for x in checks if x['status']=='NOT_MEASURED']

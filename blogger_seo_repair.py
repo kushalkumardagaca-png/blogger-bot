@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""One-time and repeat-safe Bing SEO repair for every live Blogger Post and Page.
+"""One-time and repeat-safe SEO repair for every live Blogger Post and Page.
+
+This file was called bing_seo_repair.py until 23 October 2026, when the owner retired the
+Bing Webmaster Tools property. Nothing in it talked to Bing: it reads and writes Blogger.
 
 Uses only authenticated Blogger API calls. It never requests a public Daily
 Yield URL and writes a complete pre-change backup before applying updates.
@@ -8,7 +11,7 @@ from __future__ import annotations
 
 from site_change_control import stop_if_frozen as _dy_stop_if_frozen
 if __name__ == "__main__":
-    _dy_stop_if_frozen('bing_seo_repair')
+    _dy_stop_if_frozen('blogger_seo_repair')
 
 
 import gzip
@@ -27,9 +30,9 @@ from seo_hygiene import (
 from seo_meta import ensure_seo_meta
 
 BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "8911514070006792465")
-BACKUP = Path("BING_SEO_REPAIR_BACKUP.json.gz")
-REPORT_JSON = Path("BING_SEO_REPAIR_REPORT.json")
-REPORT_MD = Path("BING_SEO_REPAIR_REPORT.md")
+BACKUP = Path("SEO_REPAIR_BACKUP.json.gz")
+REPORT_JSON = Path("SEO_REPAIR_REPORT.json")
+REPORT_MD = Path("SEO_REPAIR_REPORT.md")
 
 
 def required(name: str) -> str:
@@ -43,7 +46,7 @@ def request_json(url: str, *, method="GET", headers=None, body=None) -> dict:
     if "dailyyield.blogspot.com" in url.lower():
         raise RuntimeError("ZERO-VIEW POLICY BLOCKED public Daily Yield request")
     data = json.dumps(body).encode() if body is not None else None
-    merged = {"User-Agent": "DailyYield-BingSEORepair/1.0", **(headers or {})}
+    merged = {"User-Agent": "DailyYield-ContentRepair/1.0", **(headers or {})}
     if body is not None:
         merged["Content-Type"] = "application/json"
     request = urllib.request.Request(url, data=data, headers=merged, method=method)
@@ -173,7 +176,7 @@ def main() -> int:
     }
     REPORT_JSON.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n")
     lines = [
-        "# Bing SEO Full-Inventory Repair", "",
+        "# Blogger Full-Inventory SEO Repair", "",
         f"- Inventory: **{report['inventory']['total']}** ({report['inventory']['posts']} Posts · {report['inventory']['pages']} Pages)",
         f"- Updated items: **{report['updatedItems']}**",
         f"- Titles shortened: **{report['titlesChanged']}**",
@@ -186,7 +189,7 @@ def main() -> int:
     REPORT_MD.write_text("\n".join(lines) + "\n")
     print(json.dumps({key: report[key] for key in ("inventory", "updatedItems", "titlesChanged", "imageAltsRepaired", "descriptionPackagesPresent")}, indent=2))
     if failures:
-        raise RuntimeError(f"Bing SEO repair left {len(failures)} authenticated inventory failure(s)")
+        raise RuntimeError(f"Content repair left {len(failures)} authenticated inventory failure(s)")
     return 0
 
 

@@ -290,55 +290,83 @@ class GoogleSide(unittest.TestCase):
                 self.assertTrue(path.startswith("/webmasters/v3/sites"), path)
 
 
-class BingSide(unittest.TestCase):
-    def test_absence_from_bing_is_recorded_as_unreported(self):
-        bing = watch.bing_view([HOME_URL])
-        self.assertEqual(bing["status"], "UNAVAILABLE")
-        self.assertEqual(bing["notReported"], [HOME_URL])
-        self.assertNotIn("FAIL", json.dumps(bing))
+class RetiredEngine(unittest.TestCase):
+    """Bing was deleted from the plan by the owner on 23 October 2026; these tests keep it deleted.
 
-    def test_the_sitemap_and_scoreboard_never_build_a_bing_url_by_hand(self):
-        # The endpoint, its operation names and its unwrapping live in bing_url_automation.py, where
-        # they have been proven in CI. A second copy here is how a 400 gets read as "Bing knows
-        # nothing".
+    They replace two tests that checked how a Bing answer was recorded. There is no answer to record any
+    more, so what matters is the opposite: the job must never call that engine again, and a report must
+    say plainly that the engine was retired rather than leave a blank that reads like a failure.
+    """
+
+    def test_the_retired_engine_is_recorded_as_retired_not_as_failed(self):
+        view = watch.bing_view([HOME_URL])
+        self.assertTrue(view["retired"])
+        self.assertIn("23 October 2026", view["detail"])
+        self.assertNotIn("FAIL", json.dumps(view))
+
+    def test_the_scoreboard_builds_no_bing_request_at_all(self):
         source = Path(__file__).with_name("main_pages_index_watch.py").read_text()
         self.assertNotIn("api.bing.com", source)
-        self.assertIn("bing.get_quota", source)
-        self.assertIn("bing.get_page_stats", source)
+        self.assertNotIn("import bing_url_automation", source)
+        self.assertNotIn("BING_WEBMASTER_API_KEY",
+                         Path(__file__).with_name(".github").name + "")   # placeholder, see the workflow test
+
+    def test_the_workflow_no_longer_hands_over_a_bing_key(self):
+        workflow = Path(__file__).with_name(".github")
+        text = (workflow.parent / ".github/workflows/main_pages_index_watch.yml").read_text()
+        self.assertNotIn("BING_WEBMASTER_API_KEY", text)
 
 
 class Pace(unittest.TestCase):
     def test_the_arithmetic_of_the_deadline(self):
         targets = watch.main_page_targets([])
-        block = watch.pace(targets, 1, 1, dt.date(2026, 10, 21))
+        block = watch.pace(targets, 1, dt.date(2026, 10, 21))
         self.assertEqual((block["targets"], block["daysLeft"], block["stillMissing"]), (1, 40, 0))
         self.assertEqual(block["expectedByNow"], 0.0)
         self.assertTrue(block["onTrack"])
-        block = watch.pace(targets * 4, 2, 3, dt.date(2026, 11, 20))
-        self.assertEqual(block["stillMissing"], 2)
-        self.assertEqual((block["expectedByNow"], block["behindBy"]), (3.0, 1))
-        self.assertFalse(block["onTrack"])
-        late = watch.pace(targets, 0, 0, dt.date(2026, 12, 5))
+        # three of four front doors in Google's index, with three expected by now: on pace, nothing behind
+        block = watch.pace(targets * 4, 3, dt.date(2026, 11, 20))
+        self.assertEqual(block["stillMissing"], 1)
+        self.assertEqual((block["expectedByNow"], block["behindBy"]), (3.0, 0))
+        self.assertTrue(block["onTrack"])
+        late = watch.pace(targets, 0, dt.date(2026, 12, 5))
         self.assertLess(late["daysLeft"], 0)
         self.assertEqual(late["paceRequiredPerWeek"], 0)
 
-    def test_both_platforms_are_required_before_a_page_counts(self):
+    def test_a_page_counts_when_google_says_it_is_indexed(self):
+        # Until 23 October 2026 a page counted only when Google AND Bing agreed. The owner deleted the
+        # Bing property that evening, so this pins the new rule: Google's verdict alone decides, and the
+        # retired engine is named in the report instead of silently dropping out of the arithmetic.
         targets = watch.main_page_targets([f"{BLOG}/p/daily-news.html"])
         report = watch.build_report(targets=targets, properties={"status": "MEASURED", "visible": []},
                                     sitemaps={"status": "MEASURED", "registered": [], "missing": []},
                                     registration={"submittedNow": [], "failed": []},
                                     rows=[{"url": row["url"], "verdict": "PASS"} for row in targets],
-                                    bing={"status": "MEASURED", "seen": {}, "quota": {},
-                                          "notReported": [row["url"] for row in targets]},
+                                    bing=watch.bing_view([row["url"] for row in targets]),
                                     today=dt.date(2026, 10, 21))
-        self.assertEqual(report["pace"]["inBothPlatforms"], 0)
-        self.assertTrue(all(row["inBoth"] is False for row in report["byPage"]))
-        self.assertEqual(report["verdict"], "PARTIAL", "one platform alone is never 'done'")
-        self.assertEqual(report["byPage"][0]["bing"], "unreported")
-        report["bing"]["seen"] = {row["url"]: {} for row in targets}
-        report["pace"] = watch.pace(targets, 2, 2, dt.date(2026, 10, 21))
-        report["verdict"] = "ALL_MAIN_PAGES_INDEXED"
+        self.assertEqual(report["pace"]["indexedInGoogle"], 2, "the home page and the desk page")
         self.assertEqual(report["pace"]["stillMissing"], 0)
+        self.assertTrue(report["byPage"][0]["googleIndexed"])
+        self.assertEqual(report["verdict"], "ALL_MAIN_PAGES_INDEXED")
+        self.assertIn("23 October 2026", report["limits"])
+        unindexed = watch.build_report(
+            targets=targets, properties={"status": "MEASURED", "visible": []},
+            sitemaps={"status": "MEASURED", "registered": [], "missing": []},
+            registration={"submittedNow": [], "failed": []},
+            rows=[{"url": row["url"], "verdict": "FAIL",
+                   "coverageState": "Discovered - currently not indexed"} for row in targets],
+            bing=watch.bing_view([row["url"] for row in targets]), today=dt.date(2026, 10, 21))
+        self.assertEqual(unindexed["verdict"], "NOT_STARTED",
+                         "no front door in Google's index is not a partial success, whatever Bing did")
+        half = watch.build_report(
+            targets=targets, properties={"status": "MEASURED", "visible": []},
+            sitemaps={"status": "MEASURED", "registered": [], "missing": []},
+            registration={"submittedNow": [], "failed": []},
+            rows=[{"url": targets[0]["url"], "verdict": "PASS"},
+                  {"url": targets[1]["url"], "verdict": "FAIL"}],
+            bing=watch.bing_view([row["url"] for row in targets]), today=dt.date(2026, 10, 21))
+        self.assertEqual(half["verdict"], "PARTIAL", "one of two is exactly what partial means")
+        self.assertEqual(half["pace"]["stillMissing"], 1)
 
 
 class Hygiene(unittest.TestCase):
@@ -427,22 +455,6 @@ class LiveVerdict(unittest.TestCase):
         self.assertIn("cannot be reproduced", " ".join(report["ownerActions"]))
         self.assertIn("200 with 0 redirect", watch.render_markdown(report))
 
-    def test_bing_answers_come_from_the_client_that_is_already_proven_in_ci(self):
-        class FakeBing:
-            def get_quota(self, key):
-                assert key == "fake-bing-key"
-                return {"dailyAvailable": 0, "monthlyAvailable": 1000}
-
-            def get_page_stats(self, key):
-                return {HOME_URL: {"Impressions": 3}}
-
-        with mock.patch.object(watch, "bing", FakeBing()), \
-                mock.patch.dict(os.environ, {"BING_WEBMASTER_API_KEY": "fake-bing-key"}, clear=False):
-            view = watch.bing_view([HOME_URL, f"{BLOG}/p/daily-news.html"])
-        self.assertEqual(view["quota"], {"dailyUrlSubmission": 0, "monthlyUrlSubmission": 1000})
-        self.assertEqual(list(view["seen"]), [HOME_URL])
-        self.assertEqual(view["notReported"], [f"{BLOG}/p/daily-news.html"])
-        self.assertIn("unreported, not unindexed", view["detail"])
 
     def test_a_throttled_page_is_still_judged_when_the_publisher_api_answers(self):
         # Blogger's own API is not rate limited and says the page is published. That is the second
@@ -470,21 +482,6 @@ class LiveVerdict(unittest.TestCase):
         self.assertIn("def blogger_page_state", source)
         self.assertIn("/pages?", source)
         self.assertIn("publisherApiPagesLive", source)
-
-    def test_a_bing_outage_degrades_to_a_note_instead_of_a_zero(self):
-        class BrokenBing:
-            def get_quota(self, key):
-                raise urllib.error.HTTPError("u", 400, "bad", {}, None)
-
-            def get_page_stats(self, key):
-                raise urllib.error.HTTPError("u", 400, "bad", {}, None)
-
-        with mock.patch.object(watch, "bing", BrokenBing()), \
-                mock.patch.dict(os.environ, {"BING_WEBMASTER_API_KEY": "fake-bing-key"}, clear=False):
-            view = watch.bing_view([HOME_URL])
-        self.assertEqual(view["status"], "UNAVAILABLE")
-        self.assertEqual(view["quota"], {})
-        self.assertIn("quota read failed", view["detail"])
 
 
 class MobileIdentity(unittest.TestCase):

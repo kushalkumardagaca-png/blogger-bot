@@ -1,12 +1,12 @@
-name: Bing Full-Inventory SEO Repair
+name: Blogger Full-Inventory SEO Repair
 
 on:
   push:
     branches: [main]
     paths:
-      - 'bing_seo_repair.py'
+      - 'blogger_seo_repair.py'
       - 'seo_hygiene.py'
-      - '.github/workflows/bing_seo_repair.yml'
+      - '.github/workflows/blogger_seo_repair.yml'
   workflow_dispatch:
 
 permissions:
@@ -37,38 +37,38 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-        run: python bing_seo_repair.py
+        run: python blogger_seo_repair.py
 
       - name: Preserve pre-change recovery backup and repair evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: bing-seo-repair-${{ github.run_id }}
+          name: blogger-seo-repair-${{ github.run_id }}
           retention-days: 30
           if-no-files-found: ignore
           path: |
-            BING_SEO_REPAIR_BACKUP.json.gz
-            BING_SEO_REPAIR_REPORT.json
-            BING_SEO_REPAIR_REPORT.md
+            SEO_REPAIR_BACKUP.json.gz
+            SEO_REPAIR_REPORT.json
+            SEO_REPAIR_REPORT.md
 
       - name: Persist repair evidence
         if: success()
         shell: bash
         run: |
-          git config user.name "Daily Yield Bing SEO Repair"
+          git config user.name "Daily Yield Content Repair"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mkdir -p /tmp/dy-bing-state
-          cp BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md /tmp/dy-bing-state/
+          mkdir -p /tmp/dy-seo-repair
+          cp SEO_REPAIR_REPORT.json SEO_REPAIR_REPORT.md /tmp/dy-seo-repair/
           for attempt in 1 2 3; do
             git fetch origin main
             git reset --hard origin/main
-            cp /tmp/dy-bing-state/* .
-            git add BING_SEO_REPAIR_REPORT.json BING_SEO_REPAIR_REPORT.md
+            cp /tmp/dy-seo-repair/* .
+            git add SEO_REPAIR_REPORT.json SEO_REPAIR_REPORT.md
             if git diff --staged --quiet; then
               echo "No repair-state change."
               exit 0
             fi
-            git commit -m "Record Bing full-inventory SEO repair [skip ci]"
+            git commit -m "Record full-inventory content repair [skip ci]"
             if git push origin HEAD:main; then
               exit 0
             fi

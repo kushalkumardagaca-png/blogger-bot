@@ -20,7 +20,7 @@ class Harness(unittest.TestCase):
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp())
         self.paths = {}
-        for name in ("STATUS", "BASELINE", "INDEXNOW", "DEMAND", "OUT", "MD", "PRIORITY"):
+        for name in ("STATUS", "BASELINE", "QUEUE", "DEMAND", "OUT", "MD", "PRIORITY"):
             self.paths[name] = getattr(gate, name)
             setattr(gate, name, self.tmp / self.paths[name].name)
         (self.tmp / "SEARCH_DEMAND_TRENDS.json").write_text(json.dumps(
@@ -85,7 +85,7 @@ class AnnouncementPriority(Harness):
             "https://dailyyield.blogspot.com/p/terms-and-conditions.html",
             "https://dailyyield.blogspot.com/?m=1",
         ]
-        self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": pending})
+        self.write("ASK_GOOGLE_QUEUE.json", {"asked": {}, "pending": pending})
 
     def test_duplicate_and_utility_urls_are_held_back_not_announced(self):
         self.run_gate("2026-10-20", "--include-articles")
@@ -103,18 +103,19 @@ class AnnouncementPriority(Harness):
         self.assertIn("india-finance-news", priority["announce"][0])
         self.assertIn("how-rate-cuts-move-gold-price", priority["announce"][1])
 
-    def test_a_queue_that_has_never_been_submitted_is_called_out(self):
+    def test_the_queue_is_recorded_as_a_list_and_claims_no_submission(self):
+        # The old test here demanded a warning that a queue had never been submitted to. That warning was
+        # the site's way of catching a broken IndexNow key. The key is gone for good (owner, 23 October
+        # 2026), so what matters now is the opposite: the report must not imply that anything was submitted.
         report = self.run_gate()
-        self.assertTrue(report["announcementQueue"]["indexnowLooksBlocked"],
-                        "URLs queued with nothing ever accepted is a broken key, not a full queue")
-        report2 = self.run_gate()
-        self.assertIn("submittedEver", report2["announcementQueue"])
-
+        self.assertEqual(report["askList"]["queueFile"], "ASK_GOOGLE_QUEUE.json")
+        self.assertNotIn("announcementQueue", report)
+        self.assertIn("no engine submission is made", report["askList"]["note"])
 
     def test_a_daily_template_is_not_announced_more_than_twice(self):
         pending = [f"https://dailyyield.blogspot.com/2026/10/companies-ipos-deals-2026-10-{day:02d}.html"
                    for day in range(1, 13)]
-        self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": pending})
+        self.write("ASK_GOOGLE_QUEUE.json", {"asked": {}, "pending": pending})
         self.run_gate("2026-10-20", "--include-articles")
         priority = json.loads((self.tmp / "INDEX_PRIORITY.json").read_text())
         self.assertEqual(len(priority["announce"]), 2, "twelve copies of one template must not take twelve slots")
@@ -132,7 +133,7 @@ class MainPagesFirst(Harness):
             {"url": "https://dailyyield.blogspot.com/p/markets-today.html"},
             {"url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html"},
             {"url": "https://dailyyield.blogspot.com/p/indexnow-key.html"}]})
-        self.write("INDEXNOW_STATE.json", {"submitted": {}, "pending": [
+        self.write("ASK_GOOGLE_QUEUE.json", {"asked": {}, "pending": [
             "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-20.html"]})
 
     def test_the_main_pages_are_announced_even_though_the_queue_never_asked_for_them(self):
