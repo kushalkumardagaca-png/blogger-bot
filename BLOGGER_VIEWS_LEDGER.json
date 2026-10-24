@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-10-24T11:49:02.038275+00:00",
+  "policy": "two instruments recorded together, neither one silenced",
+  "bloggerCounter": {
+    "status": "MEASURED",
+    "allTime": 20976,
+    "last30Days": 18979,
+    "last7Days": 9154,
+    "source": "Blogger API v3 pageViews.get - the same figure Blogger's Stats page shows",
+    "perDayFrom7DayWindow": 1307.7,
+    "whatItCounts": "every page Blogger hands over: people, crawlers, AI readers, scripts and the owner's own browser"
+  },
+  "humanCount": {
+    "viewsPerDay": 16.4,
+    "basis": "GA4_PAGEVIEWS_7_DAY_AVERAGE",
+    "status": "MEASURED",
+    "dailyReaders": 12,
+    "asOf": "2026-10-23",
+    "source": "Google Analytics 4 report, carried into GROWTH_LADDER.json",
+    "whatItCounts": "a browser that ran the analytics script, which needs a person looking at a screen"
+  },
+  "automationSelfRequests": {
+    "syntheticViews": 0,
+    "source": "AUDIENCE_GROWTH_BASELINE.json",
+    "note": "the nightly measurement jobs read the blog through the authenticated Blogger API only, so they do not hand Blogger a page request to count"
+  },
+  "verdict": {
+    "bloggerToHumanRatio": 79.7,
+    "expectedNormalRatioOnSmallBlogs": "5 to 10 times, because every blog gets crawled",
+    "plainEnglish": "Blogger answers 1308 pages a day while Google Analytics sees 16.4 readers a day (80 times apart). A small blog normally sits at 5 to 10 times, so the excess is machines reading the site - search engines, AI readers and checkers - not people.",
+    "whichOneIsReal": "Both count honestly; only the Google number can be read as an audience, because a page a machine fetched was never seen by anyone and carried no ad",
+    "revenueEffect": "none - an advert is only counted when a browser draws it, and a script that fetches the text runs no JavaScript, so the extra pages can neither earn money nor create invalid ad traffic",
+    "usedForGrowthProjection": false,
+    "guard": "GROWTH_LADDER.json keeps its human viewsPerDay; this file records the second instrument and never replaces the first"
+  }
+}
