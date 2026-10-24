@@ -1,11 +1,11 @@
 {
- "ranAt": "2026-10-22T08:33:09+00:00",
+ "ranAt": "2026-10-24T07:57:09+00:00",
  "mode": "AUDIT_ONLY",
- "inventory": 602,
+ "inventory": 640,
  "planned": {
   "patches": 0,
   "unpublish": 0,
-  "heldBack": 42,
+  "heldBack": 44,
   "titlesOnly": 0,
   "altsOnly": 0
  },
@@ -35,11 +35,31 @@
   },
   {
    "resource": "posts",
+   "id": "8726414175300377007",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html",
+   "title": "Banking & Personal Money — 23 October 2026",
+   "base": "banking-fintech-personal-money-2026-10",
+   "similarity": 0.2,
+   "original": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
+   "why": "held back: other automation links to this URL, so taking it down would break a live reference"
+  },
+  {
+   "resource": "posts",
+   "id": "1599425060762981230",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html",
+   "title": "Banking & Personal Money — 22 October 2026",
+   "base": "banking-fintech-personal-money-2026-10",
+   "similarity": 0.23,
+   "original": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
+   "why": "held back: other automation links to this URL, so taking it down would break a live reference"
+  },
+  {
+   "resource": "posts",
    "id": "6108867866347636203",
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html",
    "title": "Banking & Personal Money — 21 October 2026",
    "base": "banking-fintech-personal-money-2026-10",
-   "similarity": 0.19,
+   "similarity": 0.23,
    "original": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
    "why": "held back: other automation links to this URL, so taking it down would break a live reference"
   },
@@ -49,7 +69,7 @@
    "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_01140619784.html",
    "title": "Banking & Personal Money — 20 October 2026",
    "base": "banking-fintech-personal-money-2026-10",
-   "similarity": 0.19,
+   "similarity": 0.23,
    "original": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
    "why": "held back: other automation links to this URL, so taking it down would break a live reference"
   },
@@ -192,26 +212,6 @@
    "similarity": 0.41,
    "original": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
    "why": "held back: other automation links to this URL, so taking it down would break a live reference"
-  },
-  {
-   "resource": "posts",
-   "id": "1504093871376035088",
-   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01660061060.html",
-   "title": "Corporate Finance and Industry News (2)",
-   "base": "category-corporate-finance-and-industry",
-   "similarity": 0.44,
-   "original": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
-   "why": "held back: other automation links to this URL, so taking it down would break a live reference"
-  },
-  {
-   "resource": "posts",
-   "id": "5019452690942245047",
-   "url": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry_01348401010.html",
-   "title": "Corporate Finance News — 30 September 2026",
-   "base": "category-corporate-finance-and-industry",
-   "similarity": 0.45,
-   "original": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
-   "why": "left alone: the two copies no longer say the same thing (45% alike), so this is an edition rather than a duplicate"
   }
  ],
  "gate": "index_policy_gate.py keeps every one of these rules on future publications",
