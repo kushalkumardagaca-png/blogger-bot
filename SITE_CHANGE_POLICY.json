@@ -1,144 +1,146 @@
 {
- "version": 1,
- "frozen": true,
- "setAt": "2026-10-18T08:17:09.499069+00:00",
- "ownerInstruction": "Execute Table 3 before-approval tasks; AdSense first. Preserve freeze until approval plus agreed earnings period and explicit release.",
- "releaseRequires": [
-  "AdSense Ready confirmed by owner",
-  "Agreed few months of real earnings",
-  "Explicit owner approval and tested release"
- ],
- "heldCliActions": {
-  "reader_measurement_retrofit": "reader_measurement_retrofit.py",
-  "motion_related_retrofit": "motion_related_retrofit.py",
-  "blogger_seo_repair": "blogger_seo_repair.py",
-  "adsense_readiness": "adsense_readiness.py",
-  "retrofit_live_news": "retrofit_live_news.py",
-  "repair_family_directory": "repair_family_directory.py",
-  "update_page_family": "update_page_family.py",
-  "deploy_blogger_policy_compliance": "deploy_blogger_policy_compliance.py",
-  "deploy_global_snapshot": "deploy_global_snapshot.py",
-  "deploy_markets_today": "deploy_markets_today.py",
-  "solve_remaining": "solve_remaining.py",
-  "identity_migration": "migrate_live_identity.py",
-  "gsc_rebuild": "gsc_rebuild.py",
-  "repair_known_external_links": "repair_known_external_links.py",
-  "blogger_duplicate_purge": "blogger_duplicate_purge.py",
-  "cleanup_wrong_master_post": "cleanup_wrong_master_post.py"
- },
- "heldWorkflows": [
-  "reader_measurement_retrofit.yml",
-  "motion_related_retrofit.yml",
-  "blogger_seo_repair.yml",
-  "adsense_readiness.yml",
-  "retrofit_live_news.yml",
-  "repair_family_directory.yml",
-  "update_page_family.yml",
-  "deploy_global_snapshot.yml",
-  "deploy_markets_today.yml",
-  "solve_remaining.yml",
-  "identity_migration.yml",
-  "gsc_rebuild.yml",
-  "repair_known_external_links.yml",
-  "blogger_policy_compliance.yml"
- ],
- "auditOnlyActions": [
-  "contextual_links_retrofit",
-  "site_content_audit_cleanup"
- ],
- "dataOnlyActions": [
-  "content_experience_repair"
- ],
- "preserved": [
-  "21 daily article slots and their safety gates",
-  "42 article social assignments plus existing 12 resource promotions",
-  "late same-day delivery",
-  "draft hygiene (no restore)",
-  "Bing quota-aware submissions and unchanged sitemap feed",
-  "read-only Google/Analytics/policy monitoring"
- ],
- "essentialPublicCorrections": "Confirmed issue, smallest tested edit, retained backup and explicit approval; no batch redesign or force/env bypass. A named release for one action is recorded in releasedCorrections; removing a name from heldCliActions without one changes nothing.",
- "releasedCorrections": [
-  {
-   "action": "search_index_policy_repair",
-   "releasedAt": "2026-10-22T03:58:00+00:00",
-   "scope": "document titles, image alt attributes, and taking down machine-artifact or exact-twin URLs only, on the authenticated Blogger API, batch-capped, with a full backup written before the first change. No photo is added or removed, no sourced sentence is rewritten, no theme, no label set, no schedule, and no bulk deletion.",
-   "ownerInstruction": "Owner, 22 October 2026: 'Fix everything in all the current pages and post ...I know you can do it ... Don't worry I have not indexed any of the pages or post ...so once you fix everything..solve each and every issues.. make sure every page and post complies both the policies page ... Also make to make nessasary changes in the automotion so that these policies are complied in future post, article etc'",
-   "limits": {
-    "maxPatchesPerRun": 150,
-    "maxTakedownsPerRun": 12,
-    "requestSpacingSeconds": 1.5,
-    "backupBeforeFirstWrite": true,
-    "endpoint": "www.googleapis.com/blogger/v3 only",
-    "publicDailyYieldRequests": 0,
-    "allowedFields": [
-     "title",
-     "content (alt attributes only)"
-    ],
-    "forbidden": [
-     "body sentences",
-     "photos",
-     "labels",
-     "theme",
-     "schedules",
-     "bulk delete"
-    ]
-   },
-   "evidence": "SEARCH_INDEX_POLICY_AUDIT.json (11 violations over 597 URLs, 22 Oct 2026) and SEARCH_INDEX_POLICY_REPAIR.json for what was written"
+  "version": 1,
+  "frozen": true,
+  "setAt": "2026-10-18T08:17:09.499069+00:00",
+  "ownerInstruction": "Execute Table 3 before-approval tasks; AdSense first. Preserve freeze until approval plus agreed earnings period and explicit release.",
+  "releaseRequires": [
+    "AdSense Ready confirmed by owner",
+    "Agreed few months of real earnings",
+    "Explicit owner approval and tested release"
+  ],
+  "heldCliActions": {
+    "reader_measurement_retrofit": "reader_measurement_retrofit.py",
+    "motion_related_retrofit": "motion_related_retrofit.py",
+    "blogger_seo_repair": "blogger_seo_repair.py",
+    "adsense_readiness": "adsense_readiness.py",
+    "retrofit_live_news": "retrofit_live_news.py",
+    "repair_family_directory": "repair_family_directory.py",
+    "update_page_family": "update_page_family.py",
+    "deploy_blogger_policy_compliance": "deploy_blogger_policy_compliance.py",
+    "deploy_global_snapshot": "deploy_global_snapshot.py",
+    "deploy_markets_today": "deploy_markets_today.py",
+    "solve_remaining": "solve_remaining.py",
+    "identity_migration": "migrate_live_identity.py",
+    "gsc_rebuild": "gsc_rebuild.py",
+    "repair_known_external_links": "repair_known_external_links.py",
+    "blogger_duplicate_purge": "blogger_duplicate_purge.py",
+    "cleanup_wrong_master_post": "cleanup_wrong_master_post.py"
   },
-  {
-   "action": "desk_index_redesign",
-   "releasedAt": "2026-10-21T11:05:00+00:00",
-   "scope": "the desk index on the three hub pages only: icon geometry and size, one column count per group so rows end square, and counts read from the board instead of memorised. No other part of those pages, and no other page.",
-   "ownerInstruction": "Owner, 21 October 2026: 'the logos at every option seems to be slightly disturbed....I want you to fix these and make sure they look perfect and attractive.... Also make the logos better and bigger..' and, when asked whether to publish it on the live pages now or hold it until AdSense approval: 'Yes - publish it now'.",
-   "limits": "one edit, this scope, retained before-copy of each page, refused unless the run's own validation passes; the rest of the freeze is untouched"
-  },
-  {
-   "action": "corpus_figure_rights_repair",
-   "releasedAt": "2026-10-23T02:35:00+00:00",
-   "scope": "the words inside an existing photo figure's <figcaption>, on the authenticated Blogger API only, for the posts the image-rights ledger reports as a gap: a credit taken from this repository's own PHOTO_USAGE_REGISTRY.json (creator, licence, licence URL, source file page). Nothing else in a post is rewritten. The script this release covers was listed as audit-only until now; it is removed from that list because this narrow scope is the one write the owner released for it, while its full whole-site mode stays behind the freeze.",
-   "ownerInstruction": "Owner, 23 October 2026, on the two options put to them - (a) complete the rights records from the registry and (b) add the missing credit line to the three live posts whose figures carried a link with no words: 'Go for both ...fix them'",
-   "limits": {
-    "maxPostsWrittenPerRun": 60,
-    "fieldsTouched": [
-     "content (figcaption markup inside existing <figure> elements only)"
-    ],
-    "forbidden": [
-     "delete",
-     "revert to draft",
-     "title",
-     "labels",
-     "body sentences",
-     "photos added or removed",
-     "schedules",
-     "theme",
-     "writer schedules",
-     "embargo"
-    ],
-    "verification": "after every write the stored post is re-read and the run fails unless the credit is present and readable; the whole-site policy audit still runs and still has to pass for the status to read PASS",
-    "publicDailyYieldRequests": 0
-   },
-   "evidence": "BLOGGER_IMAGE_RIGHTS_LEDGER.json (3 posts, 6 figures with an empty caption, checked 22 Oct 2026 19:26 UTC), the six live figures, and the repetition-repair commit that caused it"
-  },
-  {
-   "action": "duplicate_twin_retirement",
-   "releasedAt": "2026-10-23T11:56:47Z",
-   "scope": "For a live pair carrying the same edition twice - same title, same content fingerprint, two addresses - revert the NEWER copy to a Blogger draft and commit its full before-image to duplicate_twin_backups/. Applies only to a pair whose newest post is less than 48 hours old, at most five copies a day, never a DELETE, never the earlier copy, and never a post this run did not publish. Historical same-title pages, numbered or otherwise, are listed in open_title_twins and left untouched: bulk removal of real editorial content stays the owner's own act. No theme, no schedule, no title rewrite, no sentence change.",
-   "ownerInstruction": "Owner, 23 October 2026, on seeing two copies of one article side by side in the Blogger post list: \"I noticed a problem..I can see 2 duplicate of articles on same topic ..that to after each other\". Clearing the extra copy is the request; nothing broader was granted.",
-   "limits": "At most 5 copies retired per run and one pass per 30-minute clock; only a pair whose newest copy is under 48 hours old; only the newer copy of the pair; revert to draft, never DELETE; a full before-image committed to duplicate_twin_backups/ before the revert; the same run may only undo a post it created itself; historical same-title pages are listed in open_title_twins and left for the owner."
-  },
-  {
-   "action": "front_page_compaction",
-   "releasedAt": "2026-10-24T15:52:00Z",
-   "ownerInstruction": "Owner, 24 October 2026, 9:21 pm IST: 'So let's do the first 2 things as per plan - rebuild the four pages / yes, date in desk names'. The rebuild named in the to-do list is this one: the hub pages that measure 0.5-0.9 megabytes.",
-   "scope": "the inline story list inside the six hub pages listed in front_page_compaction.PAGES: duplicate payload copies collapsed to one, minified, limited to the items the page links plus the 30 most recent. No anchor, heading, paragraph, table or figure may be removed.",
-   "limits": {
-    "maxPagesPerRun": 3,
-    "requireByteExactBackupBeforeWrite": true,
-    "refuseUnless": "every reader link survives, the script-tag counts are unchanged, the widget bindings `var items` and `window.ENH_NEWS_SNAPSHOT` still exist, the payload reads back as the same list, and compressed size falls by at least 15%",
-    "undo": "restore the backup copy from FRONT_PAGE_BACKUP through Blogger's own pages API"
-   },
-   "evidence": "measured as served on 24 October 2026: /p/daily-news.html 941,540 bytes of which 714,032 are inline scripts and two blocks (230,192 and 222,800) carry the same list"
-  }
- ]
+  "heldWorkflows": [
+    "reader_measurement_retrofit.yml",
+    "motion_related_retrofit.yml",
+    "blogger_seo_repair.yml",
+    "adsense_readiness.yml",
+    "retrofit_live_news.yml",
+    "repair_family_directory.yml",
+    "update_page_family.yml",
+    "deploy_global_snapshot.yml",
+    "deploy_markets_today.yml",
+    "solve_remaining.yml",
+    "identity_migration.yml",
+    "gsc_rebuild.yml",
+    "repair_known_external_links.yml",
+    "blogger_policy_compliance.yml"
+  ],
+  "auditOnlyActions": [
+    "contextual_links_retrofit",
+    "site_content_audit_cleanup"
+  ],
+  "dataOnlyActions": [
+    "content_experience_repair"
+  ],
+  "preserved": [
+    "21 daily article slots and their safety gates",
+    "42 article social assignments plus existing 12 resource promotions",
+    "late same-day delivery",
+    "draft hygiene (no restore)",
+    "Bing quota-aware submissions and unchanged sitemap feed",
+    "read-only Google/Analytics/policy monitoring"
+  ],
+  "essentialPublicCorrections": "Confirmed issue, smallest tested edit, retained backup and explicit approval; no batch redesign or force/env bypass. A named release for one action is recorded in releasedCorrections; removing a name from heldCliActions without one changes nothing.",
+  "releasedCorrections": [
+    {
+      "action": "search_index_policy_repair",
+      "releasedAt": "2026-10-22T03:58:00+00:00",
+      "scope": "document titles, image alt attributes, and taking down machine-artifact or exact-twin URLs only, on the authenticated Blogger API, batch-capped, with a full backup written before the first change. No photo is added or removed, no sourced sentence is rewritten, no theme, no label set, no schedule, and no bulk deletion.",
+      "ownerInstruction": "Owner, 22 October 2026: 'Fix everything in all the current pages and post ...I know you can do it ... Don't worry I have not indexed any of the pages or post ...so once you fix everything..solve each and every issues.. make sure every page and post complies both the policies page ... Also make to make nessasary changes in the automotion so that these policies are complied in future post, article etc'",
+      "limits": {
+        "maxPatchesPerRun": 150,
+        "maxTakedownsPerRun": 12,
+        "requestSpacingSeconds": 1.5,
+        "backupBeforeFirstWrite": true,
+        "endpoint": "www.googleapis.com/blogger/v3 only",
+        "publicDailyYieldRequests": 0,
+        "allowedFields": [
+          "title",
+          "content (alt attributes only)"
+        ],
+        "forbidden": [
+          "body sentences",
+          "photos",
+          "labels",
+          "theme",
+          "schedules",
+          "bulk delete"
+        ]
+      },
+      "evidence": "SEARCH_INDEX_POLICY_AUDIT.json (11 violations over 597 URLs, 22 Oct 2026) and SEARCH_INDEX_POLICY_REPAIR.json for what was written"
+    },
+    {
+      "action": "desk_index_redesign",
+      "releasedAt": "2026-10-21T11:05:00+00:00",
+      "scope": "the desk index on the three hub pages only: icon geometry and size, one column count per group so rows end square, and counts read from the board instead of memorised. No other part of those pages, and no other page.",
+      "ownerInstruction": "Owner, 21 October 2026: 'the logos at every option seems to be slightly disturbed....I want you to fix these and make sure they look perfect and attractive.... Also make the logos better and bigger..' and, when asked whether to publish it on the live pages now or hold it until AdSense approval: 'Yes - publish it now'.",
+      "limits": "one edit, this scope, retained before-copy of each page, refused unless the run's own validation passes; the rest of the freeze is untouched"
+    },
+    {
+      "action": "corpus_figure_rights_repair",
+      "releasedAt": "2026-10-23T02:35:00+00:00",
+      "scope": "the words inside an existing photo figure's <figcaption>, on the authenticated Blogger API only, for the posts the image-rights ledger reports as a gap: a credit taken from this repository's own PHOTO_USAGE_REGISTRY.json (creator, licence, licence URL, source file page). Nothing else in a post is rewritten. The script this release covers was listed as audit-only until now; it is removed from that list because this narrow scope is the one write the owner released for it, while its full whole-site mode stays behind the freeze.",
+      "ownerInstruction": "Owner, 23 October 2026, on the two options put to them - (a) complete the rights records from the registry and (b) add the missing credit line to the three live posts whose figures carried a link with no words: 'Go for both ...fix them'",
+      "limits": {
+        "maxPostsWrittenPerRun": 60,
+        "fieldsTouched": [
+          "content (figcaption markup inside existing <figure> elements only)"
+        ],
+        "forbidden": [
+          "delete",
+          "revert to draft",
+          "title",
+          "labels",
+          "body sentences",
+          "photos added or removed",
+          "schedules",
+          "theme",
+          "writer schedules",
+          "embargo"
+        ],
+        "verification": "after every write the stored post is re-read and the run fails unless the credit is present and readable; the whole-site policy audit still runs and still has to pass for the status to read PASS",
+        "publicDailyYieldRequests": 0
+      },
+      "evidence": "BLOGGER_IMAGE_RIGHTS_LEDGER.json (3 posts, 6 figures with an empty caption, checked 22 Oct 2026 19:26 UTC), the six live figures, and the repetition-repair commit that caused it"
+    },
+    {
+      "action": "duplicate_twin_retirement",
+      "releasedAt": "2026-10-23T11:56:47Z",
+      "scope": "For a live pair carrying the same edition twice - same title, same content fingerprint, two addresses - revert the NEWER copy to a Blogger draft and commit its full before-image to duplicate_twin_backups/. Applies only to a pair whose newest post is less than 48 hours old, at most five copies a day, never a DELETE, never the earlier copy, and never a post this run did not publish. Historical same-title pages, numbered or otherwise, are listed in open_title_twins and left untouched: bulk removal of real editorial content stays the owner's own act. No theme, no schedule, no title rewrite, no sentence change.",
+      "ownerInstruction": "Owner, 23 October 2026, on seeing two copies of one article side by side in the Blogger post list: \"I noticed a problem..I can see 2 duplicate of articles on same topic ..that to after each other\". Clearing the extra copy is the request; nothing broader was granted.",
+      "limits": "At most 5 copies retired per run and one pass per 30-minute clock; only a pair whose newest copy is under 48 hours old; only the newer copy of the pair; revert to draft, never DELETE; a full before-image committed to duplicate_twin_backups/ before the revert; the same run may only undo a post it created itself; historical same-title pages are listed in open_title_twins and left for the owner."
+    },
+    {
+      "action": "front_page_compaction",
+      "releasedAt": "2026-10-24T15:52:00Z",
+      "ownerInstruction": "Owner, 24 October 2026, 9:21 pm IST: 'So let's do the first 2 things as per plan - rebuild the four pages / yes, date in desk names'. The rebuild named in the to-do list is this one: the hub pages that measure 0.5-0.9 megabytes.",
+      "scope": "the inline story list inside the six hub pages listed in front_page_compaction.PAGES: duplicate payload copies collapsed to one, minified, limited to the items the page links plus the 30 most recent. No anchor, heading, paragraph, table or figure may be removed.",
+      "limits": {
+        "maxPagesPerRun": 3,
+        "requireByteExactBackupBeforeWrite": true,
+        "refuseUnless": "every reader link survives, the script and style tag counts are unchanged, the container tags still balance, the widget bindings `var items` and `window.ENH_NEWS_SNAPSHOT` still exist, the payload reads back as the same list of items, the page's raw bytes fall by at least 25%, and the transferred size does not rise",
+        "undo": "restore the backup copy from FRONT_PAGE_BACKUP through Blogger's own pages API",
+        "minRawSaving": 0.25,
+        "noteOnGzip": "transfer size is recorded before and after, and only a rise refuses the edit: two copies of one long list compress nearly as well as one, so a compressed-size test alone would have thrown this repair away"
+      },
+      "evidence": "measured as served on 24 October 2026: /p/daily-news.html 941,540 bytes of which 714,032 are inline scripts and two blocks (230,192 and 222,800) carry the same list"
+    }
+  ]
 }
