@@ -1,10 +1,10 @@
 {
- "checkedAt": "2026-10-23T23:31:20+00:00",
+ "checkedAt": "2026-10-24T07:59:11+00:00",
  "corpus": {
-  "posts": 619,
+  "posts": 626,
   "pages": 14,
-  "urls": 633,
-  "words": 2587513
+  "urls": 640,
+  "words": 2630851
  },
  "sources": {
   "bing": "https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a",
@@ -25,7 +25,7 @@
    "guideline": "Bing §2 §3",
    "status": "PASS",
    "advisory": false,
-   "detail": "HTTP 200 with 619 <loc> entries",
+   "detail": "HTTP 200 with 626 <loc> entries",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -99,7 +99,7 @@
    "guideline": "Google indexing (mobile-first), Bing §6",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 4 addresses answer a mobile fetch with the document directly; 4 more bounce exactly the way Blogger itself bounces and are not counted against us, because the target is the same page, answering 200, canonicalising back to the URL that was asked for. Blogger Help's standing answer to the 'Redirect error' row this produces is that there is nothing to fix; there is no API for the mobile template (Blogger v3 offers blogs, posts, pages, comments and pageviews only, and its mobileview path answers 404), and this blog was measured with the desktop theme already chosen, so the switch is not the lever either. Keep the canonicals as they are, and never add a script that strips ?m=1 away - that is the one way to turn this into a real crawl failure",
+   "detail": "1 of 4 addresses answer a mobile fetch with the document directly (1 rate limited, not counted); 3 more bounce exactly the way Blogger itself bounces and are not counted against us, because the target is the same page, answering 200, canonicalising back to the URL that was asked for. Blogger Help's standing answer to the 'Redirect error' row this produces is that there is nothing to fix; there is no API for the mobile template (Blogger v3 offers blogs, posts, pages, comments and pageviews only, and its mobileview path answers 404), and this blog was measured with the desktop theme already chosen, so the switch is not the lever either. Keep the canonicals as they are, and never add a script that strips ?m=1 away - that is the one way to turn this into a real crawl failure",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "blogger"
@@ -109,7 +109,7 @@
    "guideline": "Bing §6 (canonical consolidation)",
    "status": "PASS",
    "advisory": false,
-   "detail": "4 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
+   "detail": "2 of 4 homepage variant(s) answer 200, and all of them declare the same root canonical - the variants that answer 404 are not duplicates, they are the absence of one",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "platform"
@@ -149,7 +149,7 @@
    "guideline": "Bing §17 §18 (one topic per URL, key information early); Google: does the page serve the query",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 624 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
+   "detail": "0 of 631 URL(s) open without the headline's own subject words (measured on the first 2 paragraphs of every post with a usable body; 8 were too short to judge and are not counted)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -159,7 +159,7 @@
    "guideline": "Bing §11 §15",
    "status": "PASS",
    "advisory": false,
-   "detail": "0 of 632 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
+   "detail": "0 of 639 content URLs under 300 words of real text (1 machine URL(s) are not judged on writing)",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
@@ -212,7 +212,7 @@
    "guideline": "Bing §12 (unique, relevant file names)",
    "status": "FAIL",
    "advisory": false,
-   "detail": "1 of 47 committed image file name(s) repeats across the site (photo-1.jpg on 100 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
+   "detail": "1 of 56 committed image file name(s) repeats across the site (photo-1.jpg on 116 URLs) - the slug in the path carries the meaning and the file name carries none, so a new article's photos should be named after its subject instead of photo-1; 600 URL(s) published before 2026-10-22 keep the file names they shipped with, because renaming them would break a live image",
    "offenders": [
     "photo-1.jpg"
    ],
@@ -333,7 +333,7 @@
    "guideline": "Bing §3 §19; Google structured data",
    "status": "PASS",
    "advisory": false,
-   "detail": "633/633 URLs publish a machine-readable date",
+   "detail": "640/640 URLs publish a machine-readable date",
    "offenders": [],
    "offenderCount": 0,
    "fixableBy": "repo"
