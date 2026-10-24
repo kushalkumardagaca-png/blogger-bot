@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-24",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "cb6d5600531f6742",
   "kind": "evergreen",
   "slot": 1,
-  "topic_id": "cb6d5600531f6742",
-  "replaced_topic_id": null,
+  "slot_key": "2026-10-24:evergreen:1",
+  "date": "2026-10-24",
+  "category": "Business Startups & Entrepreneurship",
+  "evergreen_category": "Business Startups & Entrepreneurship",
   "title": "How to convert Crypto to cash without",
-  "package": "master_packages/dynamic/2026-10-24-evergreen-cb6d5600531f6742.json",
-  "html": "scheduled_ready/2026-10-24-evergreen-1-how-to-convert-crypto-to-cash-without.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 12.6,
-  "remainingMinutes": 17.4
+  "url": "https://dailyyield.blogspot.com/2026/10/how-to-convert-crypto-to-cash-without.html",
+  "published_at": "2026-10-24T02:20:42-07:00"
 }
