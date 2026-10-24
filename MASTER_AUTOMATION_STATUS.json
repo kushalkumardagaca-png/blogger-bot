@@ -1,14 +1,15 @@
 {
-  "status": "PASS",
-  "publication_enabled": true,
-  "topic_id": "368fb522c0dec26d",
+  "status": "PREPARED",
+  "publication_enabled": false,
+  "date": "2026-10-24",
   "kind": "evergreen",
-  "slot": 4,
-  "slot_key": "2026-10-23:evergreen:4",
-  "date": "2026-10-23",
-  "category": "Homes Mortgages & Real Estate",
-  "evergreen_category": "Homes Mortgages & Real Estate",
-  "title": "Declining loan amounts push new mortgage",
-  "url": "https://dailyyield.blogspot.com/2026/10/declining-loan-amounts-push-new-mortgage.html",
-  "published_at": "2026-10-23T11:28:32-07:00"
+  "slot": 0,
+  "topic_id": "b6571ffcdd866504",
+  "replaced_topic_id": null,
+  "title": "The latest university side hustle?",
+  "package": "master_packages/dynamic/2026-10-24-evergreen-b6571ffcdd866504.json",
+  "html": "scheduled_ready/2026-10-24-evergreen-0-the-latest-university-side-hustle.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 12.2,
+  "remainingMinutes": 17.8
 }
