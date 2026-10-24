@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-24T10:22:45.838199+05:30",
+ "generatedAt": "2026-10-24T10:23:50.387432+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
  "articles": 7,
  "expectedPosts": 14,
  "articlesWithBothPosts": 6,
  "postsMissing": 2,
- "dispatched": 2,
+ "dispatched": 0,
  "rows": [
   {
    "key": "news-india",
@@ -47,8 +47,8 @@
    "observedDistinctPosts": 0,
    "duplicatePosts": 0,
    "actions": [
-    "dispatched",
-    "dispatched"
+    "waiting for the last attempt",
+    "waiting for the last attempt"
    ]
   },
   {
@@ -106,7 +106,7 @@
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T10:22:42.244429+05:30",
+ "liveVerificationSourceAt": "2026-10-24T10:23:46.856987+05:30",
  "awaitingLiveVerification": [],
  "articlesWithExactlyTwoPosts": 6,
  "syntheticViews": 0,
