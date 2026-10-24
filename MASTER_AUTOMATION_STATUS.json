@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-24",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "94102c0fe96d5547",
   "kind": "evergreen",
   "slot": 2,
-  "topic_id": "94102c0fe96d5547",
-  "replaced_topic_id": null,
+  "slot_key": "2026-10-24:evergreen:2",
+  "date": "2026-10-24",
+  "category": "Companies Technology & Industry",
+  "evergreen_category": "Companies Technology & Industry",
   "title": "Canadian Gaming Association to demonstrate",
-  "package": "master_packages/dynamic/2026-10-24-evergreen-94102c0fe96d5547.json",
-  "html": "scheduled_ready/2026-10-24-evergreen-2-canadian-gaming-association-to-demonstrate.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 11.4,
-  "remainingMinutes": 18.6
+  "url": "https://dailyyield.blogspot.com/2026/10/canadian-gaming-association-to.html",
+  "published_at": "2026-10-24T02:51:31-07:00"
 }
