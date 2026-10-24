@@ -1,38 +1,42 @@
 {
- "generatedAt": "2026-10-24T16:01:45.381457+05:30",
+ "generatedAt": "2026-10-24T17:15:43.180023+05:30",
  "dateIST": "2026-10-24",
  "apply": true,
- "articles": 13,
- "expectedPosts": 26,
- "articlesWithBothPosts": 13,
- "postsMissing": 0,
- "dispatched": 0,
+ "articles": 15,
+ "expectedPosts": 30,
+ "articlesWithBothPosts": 14,
+ "postsMissing": 2,
+ "dispatched": 2,
  "rows": [
   {
-   "key": "news-markets",
-   "title": "markets edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-24.html",
+   "key": "news-india",
+   "title": "india edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
-    "facebook": 0,
+    "facebook": 1,
     "bluesky": 1,
-    "mastodon": 1
+    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
   },
   {
-   "key": "news-asia-pacific",
-   "title": "asia-pacific edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-24.html",
-   "posts": 2,
+   "key": "news-americas",
+   "title": "americas edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-24_01348029101.html",
+   "posts": 0,
    "byPlatform": {
-    "facebook": 1,
+    "facebook": 0,
     "bluesky": 0,
-    "mastodon": 1
+    "mastodon": 0
    },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
+   "observedDistinctPosts": 0,
+   "duplicatePosts": 0,
+   "actions": [
+    "dispatched",
+    "dispatched"
+   ]
   },
   {
    "key": "news-china",
@@ -43,19 +47,6 @@
     "facebook": 0,
     "bluesky": 1,
     "mastodon": 1
-   },
-   "observedDistinctPosts": 2,
-   "duplicatePosts": 0
-  },
-  {
-   "key": "news-europe",
-   "title": "europe edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-24.html",
-   "posts": 2,
-   "byPlatform": {
-    "facebook": 1,
-    "bluesky": 1,
-    "mastodon": 0
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
@@ -87,9 +78,35 @@
    "duplicatePosts": 0
   },
   {
-   "key": "news-india",
-   "title": "india edition",
-   "url": "https://dailyyield.blogspot.com/2026/10/india-finance-news-2026-10-24.html",
+   "key": "news-asia-pacific",
+   "title": "asia-pacific edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 0,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-markets",
+   "title": "markets edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/markets-crypto-commodities-2026-10-24.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 0,
+    "bluesky": 1,
+    "mastodon": 1
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
+  },
+  {
+   "key": "news-europe",
+   "title": "europe edition",
+   "url": "https://dailyyield.blogspot.com/2026/10/europe-finance-news-2026-10-24.html",
    "posts": 2,
    "byPlatform": {
     "facebook": 1,
@@ -176,14 +193,27 @@
    },
    "observedDistinctPosts": 2,
    "duplicatePosts": 0
+  },
+  {
+   "key": "master-trending-3",
+   "title": "War in Ukraine: Europe stands united behind",
+   "url": "https://dailyyield.blogspot.com/2026/10/war-in-ukraine-europe-stands-united.html",
+   "posts": 2,
+   "byPlatform": {
+    "facebook": 1,
+    "bluesky": 1,
+    "mastodon": 0
+   },
+   "observedDistinctPosts": 2,
+   "duplicatePosts": 0
   }
  ],
  "duplicatePosts": 0,
  "extraNetworks": 0,
- "liveVerificationSourceAt": "2026-10-24T16:01:38.846812+05:30",
+ "liveVerificationSourceAt": "2026-10-24T17:15:37.840091+05:30",
  "awaitingLiveVerification": [],
- "articlesWithExactlyTwoPosts": 13,
+ "articlesWithExactlyTwoPosts": 14,
  "syntheticViews": 0,
  "publicDailyYieldRequests": 0,
- "status": "PASS"
+ "status": "ATTENTION"
 }
