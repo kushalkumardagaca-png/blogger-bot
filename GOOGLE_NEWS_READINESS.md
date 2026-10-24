@@ -1,13 +1,13 @@
-# Google News and Discover readiness · 2026-10-23T23:21:18+00:00
+# Google News and Discover readiness · 2026-10-24T07:57:03+00:00
 
-- feed entries read: **18**, of which **3** have at least one listing defect
+- feed entries read: **19**, of which **2** have at least one listing defect
 - pages inspected: **6**
 
 | what is wrong | how many | why it matters |
 | --- | --- | --- |
 | noOpenGraphImage | 6 | the page has no og:image, so News and Discover have no picture to show |
 | noHeadDescription | 6 | the page has no meta description in the head, so Google writes its own snippet |
-| truncatedHeadline | 2 | headline ends on a fragment - a headline is what a News reader decides on |
+| truncatedHeadline | 1 | headline ends on a fragment - a headline is what a News reader decides on |
 | clippedByOurTitleCap | 1 | headline stops exactly at this blog's own 46-character title limit: the limit, not Google, is what shortens it |
 
 ## What to do with this

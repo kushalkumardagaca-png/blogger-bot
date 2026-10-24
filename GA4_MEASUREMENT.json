@@ -3,7 +3,7 @@
  "ok": true,
  "credentialSource": "GA4_REFRESH_TOKEN",
  "measurementId": "G-WLEEYTKV12",
- "measuredAt": "2026-10-23T23:21:15+00:00",
+ "measuredAt": "2026-10-24T07:57:00+00:00",
  "windowDays": 7,
  "propertyId": "556948096",
  "propertyIdSource": "data stream G-WLEEYTKV12 in this account, property \"Daily Yield\"",
@@ -17,18 +17,25 @@
   "installedHere": true
  },
  "totals": {
-  "views": 110,
-  "viewsPerDay": 15.7,
-  "activeUsers": 82,
-  "sessions": 94,
-  "engagedSessions": 85,
-  "dailyReaders": 18,
+  "views": 115,
+  "viewsPerDay": 16.4,
+  "activeUsers": 87,
+  "sessions": 97,
+  "engagedSessions": 89,
+  "dailyReaders": 12,
   "readersBasis": "GA4_ENGAGED_SESSIONS_LATEST_DAY",
   "readersDefinition": "engaged sessions on the most recent whole day: people who opened at least one article and did not bounce",
   "droppedFields": [],
   "daysWithRows": 7
  },
  "daily": [
+  {
+   "date": "2026-10-23",
+   "views": 14,
+   "activeUsers": 13,
+   "sessions": 13,
+   "engagedSessions": 12
+  },
   {
    "date": "2026-10-22",
    "views": 21,
@@ -70,13 +77,6 @@
    "activeUsers": 13,
    "sessions": 17,
    "engagedSessions": 15
-  },
-  {
-   "date": "2026-10-16",
-   "views": 9,
-   "activeUsers": 8,
-   "sessions": 10,
-   "engagedSessions": 8
   }
  ],
  "peak": {

@@ -1,5 +1,5 @@
 {
- "measuredAt": "2026-10-23T23:21:13+00:00",
+ "measuredAt": "2026-10-24T07:56:59+00:00",
  "mode": "PUBLIC_OPEN_ENDPOINTS_ONLY",
  "credentialsUsed": false,
  "channels": {
@@ -8,10 +8,10 @@
    "handle": "@dailyyield.bsky.social",
    "followers": 10,
    "following": 0,
-   "posts": 246,
+   "posts": 251,
    "created": "2026-09-26",
-   "accountAgeDays": 27,
-   "followersPerPost": 0.0407,
+   "accountAgeDays": 28,
+   "followersPerPost": 0.0398,
    "source": "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=dailyyield.bsky.social"
   },
   "Mastodon": {
@@ -19,10 +19,10 @@
    "handle": "@dailyyield",
    "followers": 2,
    "following": 0,
-   "posts": 234,
+   "posts": 240,
    "created": "2026-09-26",
-   "accountAgeDays": 27,
-   "followersPerPost": 0.0085,
+   "accountAgeDays": 28,
+   "followersPerPost": 0.0083,
    "source": "https://mastodon.social/api/v1/accounts/lookup?acct=dailyyield"
   },
   "Facebook": {
@@ -32,7 +32,7 @@
  },
  "totals": {
   "followers": 12,
-  "posts": 480,
+  "posts": 491,
   "channelsMeasured": 2,
   "channelsNotMeasured": [
    "Facebook"

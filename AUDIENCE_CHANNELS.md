@@ -1,11 +1,11 @@
-# Measurable audience · 2026-10-23T23:21:13+00:00
+# Measurable audience · 2026-10-24T07:56:59+00:00
 
 - channels counted: **2** of 3 (public endpoints, no tokens)
 - followers across the counted channels: **12**
-- posts published on them: **480**
+- posts published on them: **491**
 
-- **Bluesky** @dailyyield.bsky.social: 10 followers from 246 posts in 27 days (that is 0.0407 followers per published post)
-- **Mastodon** @dailyyield: 2 followers from 234 posts in 27 days (that is 0.0085 followers per published post)
+- **Bluesky** @dailyyield.bsky.social: 10 followers from 251 posts in 28 days (that is 0.0398 followers per published post)
+- **Mastodon** @dailyyield: 2 followers from 240 posts in 28 days (that is 0.0083 followers per published post)
 - **Facebook**: not measured - needs the page token this operation is not allowed to touch; coordinated_social_publish posts through it
 
 ## What cannot be counted yet

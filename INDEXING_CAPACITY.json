@@ -1,19 +1,19 @@
 {
- "checkedAt": "2026-10-23T23:21:12+00:00",
+ "checkedAt": "2026-10-24T07:56:59+00:00",
  "site": "https://dailyyield.blogspot.com",
  "decision": "CONTRACT",
  "masterArticlesPerDay": 2,
  "newsWiresPerDay": 1,
  "why": [
-  "only 1 of 612 submitted URLs are indexed and none were added in the last 7 days: the property is not being trusted, so more URLs cannot become more readers",
+  "only 1 of 633 submitted URLs are indexed and none were added in the last 7 days: the property is not being trusted, so more URLs cannot become more readers",
   "publishing is held to the depth the site can get indexed, and the freed time goes into rewriting what already exists rather than adding to the pile"
  ],
  "measured": {
   "indexed": 1,
-  "submitted": 612,
+  "submitted": 633,
   "indexedShare": 0.0016,
   "indexedGrowth7d": 0,
-  "impressions28d": 3
+  "impressions28d": 4
  },
  "history": [
   {
@@ -31,20 +31,24 @@
   {
    "day": "2026-10-23",
    "indexed": 1
+  },
+  {
+   "day": "2026-10-24",
+   "indexed": 1
   }
  ],
- "announcementQueue": {
-  "pending": 400,
-  "submittedEver": 0,
-  "indexnowLooksBlocked": true,
+ "askList": {
   "announceTop": 13,
-  "suppressedDuplicatesAndUtility": 458
+  "suppressedDuplicatesAndUtility": 0,
+  "queueFile": "ASK_GOOGLE_QUEUE.json",
+  "pendingInQueue": 0,
+  "note": "a Google-side priority list only: no engine submission is made from this file"
  },
  "mainPagePolicy": {
   "on": true,
   "mainPagesFound": 13,
   "announced": 13,
-  "articleUrlsHeld": 458,
+  "articleUrlsHeld": 0,
   "pages": [
    "https://dailyyield.blogspot.com/",
    "https://dailyyield.blogspot.com/p/daily-news.html",
@@ -68,7 +72,7 @@
  "evidenceFiles": {
   "INDEX_STATUS_REPORT.json": true,
   "AUDIENCE_GROWTH_BASELINE.json": true,
-  "INDEXNOW_STATE.json": true,
+  "ASK_GOOGLE_QUEUE.json": false,
   "SEARCH_DEMAND_TRENDS.json": true
  }
 }
