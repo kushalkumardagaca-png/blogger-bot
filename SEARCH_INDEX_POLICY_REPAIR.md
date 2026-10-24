@@ -1,6 +1,6 @@
 # Search index policy repair
 
-**AUDIT_ONLY** · inventory 640 live URLs · 0 title and alt-text repairs planned · 0 URL(s) to take down · 44 deliberately left alone
+**AUDIT_ONLY** · inventory 653 live URLs · 0 title and alt-text repairs planned · 0 URL(s) to take down · 45 deliberately left alone
 - written this run: **0** · failed: 0 · backup of everything touched: `none (audit only)`
 
 | url | why |
@@ -10,6 +10,7 @@
 
 - `https://dailyyield.blogspot.com/2026/10/americas-finance-news-2026-10-12_01065225874.html` — held back: other automation links to this URL, so taking it down would break a live reference
 - `https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18_01443792159.html` — held back: other automation links to this URL, so taking it down would break a live reference
+- `https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0812342773.html` — held back: other automation links to this URL, so taking it down would break a live reference
 - `https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_092740615.html` — held back: other automation links to this URL, so taking it down would break a live reference
 - `https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0950223734.html` — held back: other automation links to this URL, so taking it down would break a live reference
 - `https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0271866575.html` — held back: other automation links to this URL, so taking it down would break a live reference
@@ -27,7 +28,6 @@
 - `https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0259378603.html` — held back: other automation links to this URL, so taking it down would break a live reference
 - `https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_0978730797.html` — held back: other automation links to this URL, so taking it down would break a live reference
 - `https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01760479359.html` — held back: other automation links to this URL, so taking it down would break a live reference
-- `https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html` — held back: other automation links to this URL, so taking it down would break a live reference
 
 ## The limit of a repair like this
 

@@ -1,11 +1,11 @@
 {
- "ranAt": "2026-10-24T07:57:09+00:00",
+ "ranAt": "2026-10-24T15:32:57+00:00",
  "mode": "AUDIT_ONLY",
- "inventory": 640,
+ "inventory": 653,
  "planned": {
   "patches": 0,
   "unpublish": 0,
-  "heldBack": 44,
+  "heldBack": 45,
   "titlesOnly": 0,
   "altsOnly": 0
  },
@@ -31,6 +31,16 @@
    "base": "asia-pacific-finance-news-2026-10-18",
    "similarity": 0.84,
    "original": "https://dailyyield.blogspot.com/2026/10/asia-pacific-finance-news-2026-10-18.html",
+   "why": "held back: other automation links to this URL, so taking it down would break a live reference"
+  },
+  {
+   "resource": "posts",
+   "id": "6285560956596515987",
+   "url": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10_0812342773.html",
+   "title": "Banking & Personal Money — 24 October 2026",
+   "base": "banking-fintech-personal-money-2026-10",
+   "similarity": 0.2,
+   "original": "https://dailyyield.blogspot.com/2026/10/banking-fintech-personal-money-2026-10.html",
    "why": "held back: other automation links to this URL, so taking it down would break a live reference"
   },
   {
@@ -200,16 +210,6 @@
    "title": "Corporate Finance and Industry News (4)",
    "base": "category-corporate-finance-and-industry",
    "similarity": 0.4,
-   "original": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
-   "why": "held back: other automation links to this URL, so taking it down would break a live reference"
-  },
-  {
-   "resource": "posts",
-   "id": "9150949963237525136",
-   "url": "https://dailyyield.blogspot.com/2026/10/category-corporate-finance-and-industry_01971481127.html",
-   "title": "Corporate Finance and Industry News (3)",
-   "base": "category-corporate-finance-and-industry",
-   "similarity": 0.41,
    "original": "https://dailyyield.blogspot.com/2026/09/category-corporate-finance-and-industry.html",
    "why": "held back: other automation links to this URL, so taking it down would break a live reference"
   }
