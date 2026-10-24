@@ -4588,9 +4588,31 @@
       },
       "published_at": "2026-10-24T10:26:31.507721+05:30",
       "reconciled": false
+    },
+    {
+      "kind": "page",
+      "blogger_id": "9217579601621666930",
+      "title": "Daily news",
+      "url": "https://dailyyield.blogspot.com/p/daily-news.html",
+      "mastodon_status_id": "117494326301557996",
+      "mastodon_url": "https://mastodon.social/@dailyyield/117494326301557996",
+      "score": 28,
+      "creative": {
+        "seed": "cb1ee9b230777c1e",
+        "topic": "page",
+        "style": "acid ledger",
+        "style_index": 0,
+        "hook": "A PRACTICAL MONEY RESOURCE",
+        "emoji": "📊",
+        "question": "What useful tool should Daily Yield improve next?",
+        "layout": 2,
+        "adaptive": false
+      },
+      "published_at": "2026-10-24T11:22:21.379383+05:30",
+      "reconciled": false
     }
   ],
   "pending": null,
-  "last_success_at": "2026-10-24T10:26:31.507733+05:30",
-  "last_mastodon_status_id": "117494078415459513"
+  "last_success_at": "2026-10-24T11:22:21.379395+05:30",
+  "last_mastodon_status_id": "117494326301557996"
 }
