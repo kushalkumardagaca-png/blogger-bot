@@ -1,13 +1,13 @@
 {
- "at": "2026-10-23T18:38:14Z",
+ "at": "2026-10-24T08:46:41Z",
  "workflow": "master_evergreen_writer.yml",
  "kind": "evergreen",
- "slot": "4",
- "run": "40004666635",
+ "slot": "1",
+ "run": "40077718826",
  "stage": "master-v3",
  "status": "FAIL",
  "error_type": "RuntimeError",
- "error": "Master V3 publishes only the current IST date; historical backfill is disabled",
+ "error": "3 substitute topic(s) tried for this slot and refused (5 Best Small Business Loans of October; Small business grants 2026: Where to f; Nuclear Startup Funding Is Up, But The) - deterministic evidence section failed: 392 words; required 400-490; last: deterministic evidence section failed: 392 words; required 400-490",
  "minutes_used": "",
  "published_after_this": false,
  "note": "the run published nothing; the day's slot stays open for the recovery cycle"
