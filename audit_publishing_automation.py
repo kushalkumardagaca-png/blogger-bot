@@ -140,6 +140,27 @@ check('Facebook candidate discovery creates no Daily Yield public-page requests'
       and 'requests.get(post["url"]' not in fp)
 
 # Instagram: built to the Graph API's two-step flow, deliberately asleep until the owner arms it.
+# 24 October 2026, the owner's two answers in the same breath - "rebuild the four pages" and "yes, date in
+# desk names". The first is a live-page edit, so what is checked here is the part that makes such an edit
+# survivable: the owner's freeze in front of it, a byte-exact before-copy behind it, and a refusal unless
+# every reader link the page had is still there afterwards. The second is a naming rule, so it is checked
+# where the name and the address are built, not in a document nobody reads.
+hub=(ROOT/'front_page_compaction.py').read_text(encoding='utf-8')
+check('the hub-page rebuild is guarded by the owner freeze',"_dy_stop_if_frozen('front_page_compaction')" in hub)
+check('the hub-page rebuild keeps every reader link or writes nothing',
+      'a reader link would have been lost' in hub and 'backup_page' in hub and 'read back byte-for-byte' in hub)
+hub_workflow=ROOT/'.github/workflows/front_page_compaction.yml'
+check('the hub-page rebuild is scheduled and its before-copies travel with the run',
+      hub_workflow.exists() and 'FRONT_PAGE_BACKUP/' in hub_workflow.read_text(encoding='utf-8'))
+news=(ROOT/'news_pipeline.py').read_text(encoding='utf-8')
+check('a desk edition cannot be published without its day in the name and address',
+      'edition_identity_is_dated' in news and 'lost its day' in news)
+page_creators=[path.name for path in sorted(ROOT.glob('*.py'))
+               if re.search(r"requests\.post\(\s*BASE\s*\+\s*['\"]/pages['\"]", path.read_text(encoding='utf-8'))]
+check('every job that can create a page refuses a numbered address',
+      all('numbered_slug' in (ROOT/name).read_text(encoding='utf-8') for name in page_creators),
+      'creators: ' + (', '.join(page_creators) or 'none'))
+
 ip_path=ROOT/'instagram_publisher.py'; iw_path=ROOT/'.github/workflows/instagram_publisher.yml'
 ip=ip_path.read_text() if ip_path.exists() else ''; iw=iw_path.read_text() if iw_path.exists() else ''
 check('Instagram publisher and its own tracker are deployed', bool(ip) and bool(iw))

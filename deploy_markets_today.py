@@ -8,6 +8,7 @@ if __name__ == "__main__":
 from pathlib import Path
 import json, os, requests
 from page_family import ensure_family
+from page_identity import numbered_slug
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID']
 BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
@@ -40,6 +41,10 @@ def main():
   body={'kind':'blogger#page','title':'MARKETS TODAY','content':HTML}
   r=requests.post(BASE+'/pages',headers=H,params={'isDraft':'false'},json=body,timeout=90);r.raise_for_status();result=r.json();actions.append('created MARKETS TODAY')
  url=result.get('url','')
+ if numbered_slug(url):
+  # A `_0123456789` tail is Blogger telling us the name was already taken, so this create should have
+  # been an update; leaving the numbered copy is how five hub pages ended up at addresses nobody chose.
+  raise RuntimeError(f'markets today was created at a numbered address: {url}')
  if url and url!='https://dailyyield.blogspot.com/p/markets-today.html':
   fixed=HTML.replace('https://dailyyield.blogspot.com/p/markets-today.html',url)
   result=put(H,result['id'],'MARKETS TODAY',fixed);actions.append('aligned structured canonical to '+url)

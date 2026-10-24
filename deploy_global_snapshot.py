@@ -8,6 +8,7 @@ if __name__ == "__main__":
 from pathlib import Path
 import json, os, requests
 from page_family import ensure_family
+from page_identity import numbered_slug
 
 BLOG_ID=os.environ['BLOGGER_BLOG_ID']
 BASE=f'https://www.googleapis.com/blogger/v3/blogs/{BLOG_ID}'
@@ -60,6 +61,10 @@ def main():
   body={'kind':'blogger#page','title':'GLOBAL SNAPSHOT','content':snapshot_content(source,EXPECTED_NEW)}
   r=requests.post(BASE+'/pages',headers=H,params={'isDraft':'false'},json=body,timeout=90);r.raise_for_status();snapshot=r.json();actions.append('created GLOBAL SNAPSHOT from former summary page')
  new_url=snapshot.get('url') or EXPECTED_NEW
+ if numbered_slug(new_url):
+  # See deploy_markets_today: a numbered tail means the name was taken and a create should have been an
+  # update, which is precisely how the hub pages came to sit at addresses nobody chose.
+  raise RuntimeError(f'global snapshot was created at a numbered address: {new_url}')
  if new_url != EXPECTED_NEW:
   raise RuntimeError(f'Blogger created unexpected Global Snapshot URL: {new_url}; expected {EXPECTED_NEW}')
  snapshot=put(H,snapshot['id'],'GLOBAL SNAPSHOT',snapshot_content(source,new_url));actions.append('aligned Global Snapshot identity and links')

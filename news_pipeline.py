@@ -43,6 +43,7 @@ from page_family import ensure_family
 from seo_meta import ensure_seo_meta
 from seo_hygiene import compact_title, repair_image_alts
 import index_policy_gate
+import page_identity
 
 # ---------------------------------------------------------------- constants
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30), name="IST")
@@ -1476,7 +1477,15 @@ def build_article(desk, items, upcoming, edition_date, win_start, win_end, fx, r
         country_labels = [COUNTRY_LABELS[country] for country in DESK_COUNTRIES.get(desk, ())]
         labels = ["News", "Geographic Edition", GEOGRAPHY_LABELS[desk], *country_labels,
                   "Daily Yield", "Kushal Daga"]
-    return {"title": title, "slug": f"{slug}-{edition_date.isoformat()}",
+    # Owner's instruction, 24 October 2026 - "date in desk names". Every edition carries its day in the
+    # reader-facing name and in the address, which is what makes a daily edition its own document rather
+    # than a second copy of yesterday's, and what stops Blogger stamping `_0123456789` on a page created
+    # under a name that was already taken. It is checked where the identity is built, not after it, so an
+    # edition that lost its day never reaches the publish call and never has to be repaired on the live blog.
+    slug = f"{slug}-{edition_date.isoformat()}"
+    if not page_identity.edition_identity_is_dated(title, slug, title_date, edition_date):
+        raise RuntimeError(f"desk edition {desk!r} lost its day: title {title!r}, slug {slug!r}")
+    return {"title": title, "slug": slug,
             "meta": meta, "labels": labels, "html": full_html,
             "canonical": canonical, "n_items": len(items),
             "hero_url": hero_url, "hero_alt": hero_alt,

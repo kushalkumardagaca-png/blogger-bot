@@ -1,0 +1,77 @@
+name: Front Page Compaction
+
+# Owner's instruction, 24 October 2026: "rebuild the four pages". The desk hub pages measured 0.5-0.9
+# megabytes each as served, and the bulk of one of them was the same list of stories embedded twice. This
+# job collapses the duplicate, minifies it, keeps only what the page links plus the 30 most recent items,
+# and refuses the edit unless every reader link, script tag and widget binding still measures the same
+# afterwards. It writes nothing when the freeze holds it or when the saving is under 25%, and it copies
+# each page exactly as found to FRONT_PAGE_BACKUP/ before it touches it, so any single page can be put
+# back the way it was.
+
+on:
+  schedule:
+    - cron: '20 21 * * *'   # 02:50 IST, after the news wires and before the daily report
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Measure and validate, write nothing'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: front-page-compaction
+  cancel-in-progress: false
+
+jobs:
+  compact:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install the two packages this job needs
+        run: python -m pip install --quiet requests lxml
+      - name: Prove the compaction rules before touching a live page
+        run: python -m unittest test_front_page_compaction test_page_identity -v
+      - name: Rebuild the hub pages
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          set -euo pipefail
+          if [ "$DRY_RUN" = "true" ]; then python3 front_page_compaction.py --dry-run;
+          else python3 front_page_compaction.py --apply; fi
+      - name: Keep the before-copies
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-page-before-copies-${{ github.run_id }}
+          retention-days: 30
+          path: FRONT_PAGE_BACKUP/
+      - name: Commit the status record
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Front Page Compaction"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp FRONT_PAGE_COMPACTION_STATUS.json /tmp/status.json 2>/dev/null || exit 0
+          git pull --rebase --quiet origin main
+          cp /tmp/status.json FRONT_PAGE_COMPACTION_STATUS.json
+          git add FRONT_PAGE_COMPACTION_STATUS.json
+          git diff --staged --quiet && exit 0
+          git commit -q -m "Record front page compaction evidence [skip ci]"
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase --quiet origin main || true
+            sleep $((attempt * 12))
+          done
+          exit 1

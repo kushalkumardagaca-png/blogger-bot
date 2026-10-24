@@ -8,6 +8,7 @@ if __name__ == "__main__":
 from pathlib import Path
 import html, json, os, re, requests
 from page_family import ACTIVE_PAGES, BLOG, END, START, ensure_family
+from page_identity import numbered_slug
 from social_identity import SOCIAL_PROFILES
 from seo_hygiene import image_alt_failures
 from policy_hero_scale import ensure_policy_hero_scale
@@ -79,8 +80,14 @@ def create_terms(h):
     r = requests.post(BASE + "/pages", headers=h, params={"isDraft": "false"}, json=body, timeout=120)
     r.raise_for_status()
     page = r.json()
+    url = page.get("url", "")
+    if numbered_slug(url):
+        # The `_0123456789` tail is Blogger's own note that a page called "Terms and Conditions" already
+        # existed, which means this should have been an update. A numbered hub address is what five of the
+        # site's pages carry today, so a create that produces one is stopped here rather than published.
+        raise RuntimeError(f"Blogger created Terms at a numbered address: {url}")
     if page_path(page) != TERMS_PATH:
-        raise RuntimeError(f"Blogger created unexpected Terms URL: {page.get('url', '')}")
+        raise RuntimeError(f"Blogger created unexpected Terms URL: {url}")
     return page
 
 
