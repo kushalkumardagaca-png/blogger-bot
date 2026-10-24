@@ -1,15 +1,14 @@
 {
-  "status": "PREPARED",
-  "publication_enabled": false,
-  "date": "2026-10-24",
+  "status": "PASS",
+  "publication_enabled": true,
+  "topic_id": "e02a4e2739930f82",
   "kind": "trending",
   "slot": 2,
-  "topic_id": "e02a4e2739930f82",
-  "replaced_topic_id": "63eb0ab6a10ea864",
+  "slot_key": "2026-10-24:trending:2",
+  "date": "2026-10-24",
+  "category": "Trend · Companies & Deals Trending",
+  "evergreen_category": "Companies Technology & Industry",
   "title": "European shares close out best week since",
-  "package": "master_packages/dynamic/2026-10-24-trending-e02a4e2739930f82.json",
-  "html": "scheduled_ready/2026-10-24-trending-2-european-shares-close-out-best-week-since.html",
-  "budgetMinutes": 30.0,
-  "elapsedMinutes": 30.6,
-  "remainingMinutes": 0.0
+  "url": "https://dailyyield.blogspot.com/2026/10/european-shares-close-out-best-week.html",
+  "published_at": "2026-10-24T02:19:16-07:00"
 }
