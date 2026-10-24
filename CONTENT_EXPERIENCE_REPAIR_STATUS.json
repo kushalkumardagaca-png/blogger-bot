@@ -2,7 +2,7 @@
   "status": "PASS",
   "mode": "FREEZE_DATA_ONLY",
   "zero_view": true,
-  "posts_checked": 629,
+  "posts_checked": 630,
   "posts_rewritten": 0,
   "labels_normalized": 0,
   "duplicate_heroes_replaced": 0,
@@ -12,19 +12,19 @@
       "path": "/p/daily-news.html",
       "dataBlocks": 2,
       "linkIndexHrefs": 12,
-      "linkIndexWritten": true,
-      "changed": true,
-      "beforeSha256": "eb4704089ce6e41fe1b7073ac7584a42211a0658b49ee2ce58d4acb2a77f9117",
+      "linkIndexWritten": false,
+      "changed": false,
+      "beforeSha256": "aace4da5fc5518b6c70139636e50d0806ce9b4771d78051297e227d015eb0e5d",
       "afterSha256": "aace4da5fc5518b6c70139636e50d0806ce9b4771d78051297e227d015eb0e5d"
     },
     {
       "path": "/p/article.html",
-      "dataBlocks": 0,
+      "dataBlocks": 3,
       "linkIndexHrefs": 12,
-      "linkIndexWritten": false,
-      "changed": false,
+      "linkIndexWritten": true,
+      "changed": true,
       "beforeSha256": "af28a54ecfe0c28498e4fc6052f35976cebf5d9e1018ae89bb5551aba93f53cf",
-      "afterSha256": "af28a54ecfe0c28498e4fc6052f35976cebf5d9e1018ae89bb5551aba93f53cf"
+      "afterSha256": "3d77d0d5f408774396d4b6297112ba7b2602e0256d92156ea257f3279319470e"
     }
   ],
   "optional_changes": "held; no full hub rebuild or old-post edits"
