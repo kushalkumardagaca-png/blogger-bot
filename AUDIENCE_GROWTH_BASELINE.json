@@ -1,43 +1,43 @@
 {
-  "checkedAt": "2026-10-23T03:18:06.251201+00:00",
+  "checkedAt": "2026-10-24T06:24:37.355494+00:00",
   "mode": "AUTHENTICATED_SEARCH_CONSOLE_ZERO_PUBLIC_VIEWS",
   "syntheticViews": 0,
   "property": "sc-domain:dailyyield.blogspot.com",
-  "requestedThrough": "2026-10-22",
-  "availableThrough": "2026-10-20",
+  "requestedThrough": "2026-10-23",
+  "availableThrough": "2026-10-21",
   "searchAcquisition": {
     "last7Days": {
       "clicks": 0,
       "impressions": 2,
       "ctr": 0.0,
-      "averagePosition": 6.5
+      "averagePosition": 5.0
     },
     "last28Days": {
       "clicks": 1,
-      "impressions": 3,
-      "ctr": 0.333333,
-      "averagePosition": 4.67
+      "impressions": 4,
+      "ctr": 0.25,
+      "averagePosition": 3.75
     },
     "last90Days": {
       "clicks": 1,
-      "impressions": 3,
-      "ctr": 0.333333,
-      "averagePosition": 4.67
+      "impressions": 4,
+      "ctr": 0.25,
+      "averagePosition": 3.75
     },
     "topPages28Days": [
       {
         "page": "https://dailyyield.blogspot.com/?m=1",
         "clicks": 1,
-        "impressions": 1,
-        "ctr": 1.0,
+        "impressions": 2,
+        "ctr": 0.5,
         "averagePosition": 1.0
       },
       {
         "page": "https://dailyyield.blogspot.com/2026/10/global-finance-news-2026-10-15.html",
         "clicks": 0,
-        "impressions": 2,
+        "impressions": 3,
         "ctr": 0.0,
-        "averagePosition": 6.5
+        "averagePosition": 5.0
       }
     ],
     "topQueries28Days": [],
@@ -46,9 +46,9 @@
       {
         "country": "ind",
         "clicks": 1,
-        "impressions": 2,
-        "ctr": 0.5,
-        "averagePosition": 5.0
+        "impressions": 3,
+        "ctr": 0.333333,
+        "averagePosition": 3.67
       },
       {
         "country": "bel",
@@ -69,9 +69,9 @@
       {
         "device": "DESKTOP",
         "clicks": 0,
-        "impressions": 2,
+        "impressions": 3,
         "ctr": 0.0,
-        "averagePosition": 6.5
+        "averagePosition": 4.67
       }
     ]
   },
