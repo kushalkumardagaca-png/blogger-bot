@@ -1,11 +1,15 @@
 {
-  "status": "ALREADY_PUBLISHED",
-  "publication_enabled": true,
+  "status": "PREPARED",
+  "publication_enabled": false,
   "date": "2026-10-24",
   "kind": "trending",
-  "slot": 2,
-  "topic_id": "e02a4e2739930f82",
-  "title": "European shares close out best week since",
-  "url": "https://dailyyield.blogspot.com/2026/10/european-shares-close-out-best-week.html",
-  "published_at": "2026-10-24T02:19:16-07:00"
+  "slot": 3,
+  "topic_id": "9fd76656aa338748",
+  "replaced_topic_id": "57efb461753d1105",
+  "title": "War in Ukraine: Europe stands united behind",
+  "package": "master_packages/dynamic/2026-10-24-trending-9fd76656aa338748.json",
+  "html": "scheduled_ready/2026-10-24-trending-3-war-in-ukraine-europe-stands-united-behind.html",
+  "budgetMinutes": 30.0,
+  "elapsedMinutes": 22.5,
+  "remainingMinutes": 7.5
 }
